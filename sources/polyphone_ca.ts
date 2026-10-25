@@ -60,7 +60,7 @@
     <message>
         <location filename="core/types/attribute.cpp" line="497"/>
         <source>Sample end offset (× 32768)</source>
-        <translation>Desplaçament del final de la mostra( × 32768)</translation>
+        <translation>Desplaçament del final de la mostra (× 32768)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="500"/>
@@ -431,7 +431,7 @@
     <message>
         <location filename="editor/widgets/styledlineeditwithcalendar.cpp" line="31"/>
         <source>&amp;Ok</source>
-        <translation></translation>
+        <translation>&amp;Ok</translation>
     </message>
 </context>
 <context>
@@ -804,12 +804,12 @@
         <source>When importing a sample, data located after the end of loop are automatically removed.
 (same effect as the tool &quot;Trim to end of loop&quot;)</source>
         <translation>Quan s&apos;importa una mostra, les dades situades després del final del bucle s&apos;eliminen automàticament.
-(té el mateix efecte que l&apos;eina &quot;Retallar fins al final del bucle&quot;)</translation>
+(té el mateix efecte que l&apos;eina &quot;Retalla fins al final del bucle&quot;)</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="126"/>
         <source>trim to loop</source>
-        <translation>retallar el bucle</translation>
+        <translation>retalla fins al final del bucle</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="145"/>
@@ -1225,7 +1225,7 @@ Premium!</translation>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="180"/>
         <source>Room</source>
-        <translation>Profunditat</translation>
+        <translation>Sala</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="223"/>
@@ -1235,7 +1235,7 @@ Premium!</translation>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="238"/>
         <source>Damp</source>
-        <translation>Atenuació</translation>
+        <translation>Esmorteïment</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="329"/>
@@ -1328,7 +1328,7 @@ en línia</translation>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="56"/>
         <source>cannot create directory &quot;%1&quot;</source>
-        <translation>no es pot crear el directory &quot;%1&quot;</translation>
+        <translation>no es pot crear el directori &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="241"/>
@@ -1622,7 +1622,7 @@ en línia</translation>
     <message>
         <location filename="dialogs/dialogchangelog.cpp" line="48"/>
         <source>Thank you for having installed</source>
-        <translation>Gràcies per instal·lar-lo</translation>
+        <translation>Gràcies per haver instal·lat</translation>
     </message>
     <message>
         <location filename="dialogs/dialogchangelog.cpp" line="49"/>
@@ -2487,7 +2487,7 @@ en línia</translation>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="71"/>
         <source>Cancel</source>
-        <translation>Cancel·la</translation>
+        <translation>Desfés</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="72"/>
@@ -2614,7 +2614,7 @@ en línia</translation>
     <message>
         <location filename="editor/footers/footerlinkedto.cpp" line="79"/>
         <source>Instrument linked to presets:</source>
-        <translation>Instrument enllaçat als presest:</translation>
+        <translation>Instrument enllaçat als presets:</translation>
     </message>
 </context>
 <context>
@@ -2754,7 +2754,7 @@ en línia</translation>
     <message>
         <location filename="core/input/not_supported/inputparsernotsupported.cpp" line="38"/>
         <source>This file format is not supported.</source>
-        <translation>Aquest format de fitxer no està permès.</translation>
+        <translation>Aquest format de fitxer no és compatible.</translation>
     </message>
 </context>
 <context>
@@ -2999,7 +2999,7 @@ en línia</translation>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="99"/>
         <source>Default mod.</source>
-        <translation>Modulador per defecte.</translation>
+        <translation>Modulador per defecte</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="156"/>
@@ -3011,14 +3011,14 @@ en línia</translation>
         <source>disabling
 default mod.</source>
         <translation>desactivant
-modulador per defecte.</translation>
+modulador per defecte</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="165"/>
         <source>overriding
 default mod.</source>
         <translation>sobreescrivint
-modulador per defecte.</translation>
+modulador per defecte</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="384"/>
@@ -3175,7 +3175,7 @@ modulador per defecte.</translation>
     <message>
         <location filename="core/output/csv/outputcsv.cpp" line="52"/>
         <source>cannot create directory &quot;%1&quot;</source>
-        <translation>no es pot crear el directory &quot;%1&quot;</translation>
+        <translation>no es pot crear el directori &quot;%1&quot;</translation>
     </message>
 </context>
 <context>
@@ -3183,7 +3183,7 @@ modulador per defecte.</translation>
     <message>
         <location filename="core/output/not_supported/outputnotsupported.cpp" line="39"/>
         <source>this file format is not supported</source>
-        <translation>aquest format de fitxer no està permès</translation>
+        <translation>aquest format de fitxer no és compatible</translation>
     </message>
 </context>
 <context>
@@ -3310,17 +3310,17 @@ modulador per defecte.</translation>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="39"/>
         <source>Sample number</source>
-        <translation>Número de mostra</translation>
+        <translation>Nombre de mostres</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="40"/>
         <source>Parameter number</source>
-        <translation>Número de paràmetre</translation>
+        <translation>Nombre de paràmetres</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="41"/>
         <source>Modulator number</source>
-        <translation>Número de modulador</translation>
+        <translation>Nombre de moduladors</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="42"/>
@@ -3378,17 +3378,17 @@ modulador per defecte.</translation>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="39"/>
         <source>Instrument number</source>
-        <translation>Número d&apos;instrument</translation>
+        <translation>Nombre d&apos;instruments</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="40"/>
         <source>Parameter number</source>
-        <translation>Número de paràmetre</translation>
+        <translation>Nombre de paràmetres</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="41"/>
         <source>Modulator number</source>
-        <translation>Número de modulador</translation>
+        <translation>Nombre de moduladors</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="42"/>
@@ -3869,7 +3869,7 @@ Avís: la qualitat es reduirà i el bucle podria ser alterat</translation>
     <message>
         <location filename="editor/pagesmpl.cpp" line="1107"/>
         <source>Are you sure to cut the sample from &lt;b&gt;%1&lt;/b&gt; to &lt;b&gt;%2&lt;/b&gt;?</source>
-        <translation>N&apos;esteu segurs que voleu retallar la mostra de &lt;b&gt;%1&lt;/b&gt; a &lt;b&gt;%2&lt;/b&gt;?</translation>
+        <translation>Esteu segur que voleu retallar la mostra de &lt;b&gt;%1&lt;/b&gt; a &lt;b&gt;%2&lt;/b&gt;?</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="1109"/>
@@ -3942,7 +3942,7 @@ Avís: la qualitat es reduirà i el bucle podria ser alterat</translation>
     <message>
         <location filename="player/player.ui" line="181"/>
         <source>Selection by keys</source>
-        <translation>Selecció per note</translation>
+        <translation>Selecció per notes</translation>
     </message>
     <message>
         <location filename="player/player.ui" line="199"/>
@@ -4138,7 +4138,7 @@ Ambdues divisions han de compartir la mateixa nota i rang de velocitat.</transla
     <message>
         <location filename="core/input/grandorgue/inputgrandorgue.h" line="35"/>
         <source>GrandOrgue sample sets</source>
-        <translation>Conjunt de mostres d&apos;orgue</translation>
+        <translation>Conjunts de mostres GrandOrgue</translation>
     </message>
     <message>
         <location filename="core/input/inputfactory.cpp" line="108"/>
@@ -4491,7 +4491,7 @@ Ambdues divisions han de compartir la mateixa nota i rang de velocitat.</transla
     <message>
         <location filename="repository/repositorymanager.cpp" line="90"/>
         <source>distorted</source>
-        <translation>distorcionat</translation>
+        <translation>distorsionat</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="91"/>
@@ -4536,12 +4536,12 @@ Ambdues divisions han de compartir la mateixa nota i rang de velocitat.</transla
     <message>
         <location filename="repository/repositorymanager.cpp" line="99"/>
         <source>soft</source>
-        <translation>tou</translation>
+        <translation>suau</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="100"/>
         <source>muted</source>
-        <translation>silenciat</translation>
+        <translation>esmorteït</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="101"/>
@@ -4753,7 +4753,7 @@ Ambdues divisions han de compartir la mateixa nota i rang de velocitat.</transla
         <location filename="repository/repositorymanager.cpp" line="147"/>
         <location filename="repository/repositorymanager.cpp" line="148"/>
         <source>ethnic / world</source>
-        <translation>Ètnic / universal</translation>
+        <translation>ètnic / del món</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="165"/>
@@ -4883,7 +4883,7 @@ Ambdues divisions han de compartir la mateixa nota i rang de velocitat.</transla
     <message>
         <location filename="repository/repositorymanager.cpp" line="440"/>
         <source>unclassifiable</source>
-        <translation>No classificable</translation>
+        <translation>no classificable</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="447"/>
@@ -4917,7 +4917,8 @@ Ambdues divisions han de compartir la mateixa nota i rang de velocitat.</transla
         <location filename="repository/daily/showsoundfonts.ui" line="217"/>
         <source>Oops! Cannot
 download the list</source>
-        <translation>No es pot baixar la llista</translation>
+        <translation>No es pot
+baixar la llista</translation>
     </message>
 </context>
 <context>
@@ -5391,7 +5392,7 @@ baixar el contingut</translation>
         <location filename="editor/pageinst.cpp" line="132"/>
         <source>Values on this row are expressed in real dB.
 Other soundfont editors might display other units.</source>
-        <translation>Els valors d&apos;aquesta fila s&apos;expresen en dB reals.
+        <translation>Els valors d&apos;aquesta fila s&apos;expressen en dB reals.
 Altres editors de soundfont poden mostrar altres unitats.</translation>
     </message>
 </context>
@@ -5401,7 +5402,7 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
         <location filename="editor/pageprst.cpp" line="103"/>
         <source>Values on this row are expressed in real dB.
 Other soundfont editors might display other units.</source>
-        <translation>Els valors d&apos;aquesta fila s&apos;expresen en dB reals.
+        <translation>Els valors d&apos;aquesta fila s&apos;expressen en dB reals.
 Altres editors de soundfont poden mostrar altres unitats.</translation>
     </message>
 </context>
@@ -5703,7 +5704,7 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="39"/>
         <source>Sample creation:</source>
-        <translation>Mostra creada:</translation>
+        <translation>Creació de la mostra:</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="47"/>
@@ -5758,7 +5759,7 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="184"/>
         <source>Fifth</source>
-        <translation>Cinquena</translation>
+        <translation>Quinta</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="221"/>
@@ -5791,23 +5792,23 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="335"/>
         <source>Inversion number</source>
-        <translation>Número d&apos;inversió</translation>
+        <translation>Nombre d&apos;inversions</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="363"/>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="411"/>
         <source>diminished</source>
-        <translation>disminuït</translation>
+        <translation>disminuïda</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="406"/>
         <source>perfect</source>
-        <translation>perfecte</translation>
+        <translation>justa</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="416"/>
         <source>augmented</source>
-        <translation>augmentat</translation>
+        <translation>augmentada</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="656"/>
@@ -5831,7 +5832,7 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
         <location filename="editor/tools/clean_unused_elements/toolcleanunused.cpp" line="108"/>
         <source>%1 and %2 have been deleted.</source>
         <comment>[X sample(s)] and [Y instrument(s)] have been deleted.</comment>
-        <translation>S&apos;ha eliminat %1 i %2.</translation>
+        <translation>S&apos;han eliminat %1 i %2.</translation>
     </message>
     <message numerus="yes">
         <location filename="editor/tools/clean_unused_elements/toolcleanunused.cpp" line="109"/>
@@ -6080,7 +6081,7 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
     <message>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter.h" line="61"/>
         <source>Filter frequencies</source>
-        <translation>Freqüències del filtre</translation>
+        <translation>Filtra les freqüències</translation>
     </message>
 </context>
 <context>
@@ -6540,7 +6541,7 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="39"/>
         <source>Sample creation:</source>
-        <translation>Mostra creada:</translation>
+        <translation>Creació de la mostra:</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="47"/>
@@ -6595,7 +6596,7 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="351"/>
         <source>fifth</source>
-        <translation>cinquena</translation>
+        <translation>quinta</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="356"/>
@@ -6866,7 +6867,7 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization.h" line="63"/>
         <source>Sound spatialization</source>
-        <translation>Espaiament del so</translation>
+        <translation>Espacialització del so</translation>
     </message>
 </context>
 <context>
@@ -6904,7 +6905,7 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="66"/>
         <source>Division number</source>
-        <translation>Número de divisió</translation>
+        <translation>Nombre de divisions</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="88"/>

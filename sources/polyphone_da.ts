@@ -362,7 +362,7 @@
     <message>
         <location filename="core/types/attribute.cpp" line="633"/>
         <source>Attenuation (dB)</source>
-        <translation>Forstærkning (dB)</translation>
+        <translation>Dæmpning (dB)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="654"/>
@@ -402,7 +402,7 @@
     <message>
         <location filename="core/types/attribute.cpp" line="639"/>
         <source>Tuning (cents)</source>
-        <translation>Tuning (procent)</translation>
+        <translation>Tuning (cents)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="642"/>
@@ -811,7 +811,7 @@
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="103"/>
         <source>Input / Output</source>
-        <translation>Input / Udgang</translation>
+        <translation>Indgang / Udgang</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="172"/>
@@ -915,7 +915,7 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="163"/>
         <source>Middle C → C4, then C♯4</source>
-        <translation>Middel C → C3, derefter C♯3</translation>
+        <translation>Middel C → C4, derefter C♯4</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="168"/>
@@ -940,12 +940,12 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="642"/>
         <source>sample list</source>
-        <translation>prøveliste</translation>
+        <translation>sample-liste</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="647"/>
         <source>first sample</source>
-        <translation>første prøve</translation>
+        <translation>første sample</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="652"/>
@@ -1057,7 +1057,7 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="509"/>
         <source>List and table</source>
-        <translation>Rækker og tabeller</translation>
+        <translation>Lister og tabeller</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="20"/>
@@ -1165,7 +1165,7 @@ Premiummedlem!</translation>
     <message>
         <location filename="context/interface/configsectionrepository.ui" line="192"/>
         <source>Banned account</source>
-        <translation>Kontoen er banned</translation>
+        <translation>Kontoen er spærret</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionrepository.ui" line="278"/>
@@ -1267,7 +1267,7 @@ Premiummedlem!</translation>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="238"/>
         <source>Damp</source>
-        <translation>Dæmp</translation>
+        <translation>Dæmpning</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="180"/>
@@ -1329,8 +1329,8 @@ Premiummedlem!</translation>
         <location filename="context/interface/configtoc.ui" line="111"/>
         <source>Online
 repository</source>
-        <translation>Onlive
-oversigt</translation>
+        <translation>Online
+filoversigt</translation>
     </message>
 </context>
 <context>
@@ -1387,7 +1387,7 @@ oversigt</translation>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="678"/>
         <source>Chromatic percussion</source>
-        <translation>Cromatisk slagtøj</translation>
+        <translation>Kromatisk slagtøj</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="680"/>
@@ -1412,7 +1412,7 @@ oversigt</translation>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="688"/>
         <source>Ensemble</source>
-        <translation>Emsamble</translation>
+        <translation>Ensemble</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="690"/>
@@ -1755,7 +1755,7 @@ oversigt</translation>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="88"/>
         <source>Create a preset comprising the instrument %1?</source>
-        <translation>Opret presett som indeholder instrumentet %1?</translation>
+        <translation>Opret preset som indeholder instrumentet %1?</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="94"/>
@@ -1798,7 +1798,7 @@ oversigt</translation>
     <message>
         <location filename="dialogs/dialogkeyboard.ui" line="162"/>
         <source>128 keys (full)</source>
-        <translation>128 tangenter (piano)</translation>
+        <translation>128 tangenter (fuld)</translation>
     </message>
     <message>
         <location filename="dialogs/dialogkeyboard.ui" line="188"/>
@@ -1951,22 +1951,22 @@ oversigt</translation>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="56"/>
         <source>Overwrite existing name with key name as suffix</source>
-        <translation>Overskrif eksisterende navn med tangentnavn som suffiks</translation>
+        <translation>Overskriv eksisterende navn med tangentnavn som suffiks</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="61"/>
         <source>Overwrite existing name with key name and velocity as suffix</source>
-        <translation>Overskrif eksisterende navn med tangentnavn og anslagsstyrke som suffiks</translation>
+        <translation>Overskriv eksisterende navn med tangentnavn og anslagsstyrke som suffiks</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="66"/>
         <source>Overwrite existing name with numerical ascending suffix</source>
-        <translation>Overskrif eksisterende navn med nummerrækkefølge som forvalg</translation>
+        <translation>Overskriv eksisterende navn med stigende tal som suffiks</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="71"/>
         <source>Replace characters</source>
-        <translation>Overskriv tegn</translation>
+        <translation>Erstat tegn</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="76"/>
@@ -2071,7 +2071,7 @@ oversigt</translation>
     <message>
         <location filename="directory/directorybrowser.ui" line="399"/>
         <source>Samples</source>
-        <translation>Samplinger</translation>
+        <translation>Samples</translation>
     </message>
     <message>
         <location filename="directory/directorybrowser.ui" line="695"/>
@@ -2161,7 +2161,7 @@ oversigt</translation>
     <message>
         <location filename="directory/directoryfiledata.cpp" line="296"/>
         <source>Invalid link</source>
-        <translation>Ubrugeligt link</translation>
+        <translation>Ugyldigt link</translation>
     </message>
     <message>
         <location filename="directory/directoryfiledata.cpp" line="299"/>
@@ -2316,7 +2316,7 @@ oversigt</translation>
     <message>
         <location filename="repository/downloadmanager.cpp" line="153"/>
         <source>Couldn&apos;t download file &quot;%1&quot;: %2</source>
-        <translation>Kunne ikke downloade filer &quot;%1&quot;: %2</translation>
+        <translation>Kunne ikke downloade filen &quot;%1&quot;: %2</translation>
     </message>
 </context>
 <context>
@@ -2324,7 +2324,7 @@ oversigt</translation>
     <message>
         <location filename="repository/widgets/downloadprogressbutton.cpp" line="45"/>
         <source>Clear completed downloads</source>
-        <translation>Fjern filer der er downloaded</translation>
+        <translation>Ryd fuldførte downloads</translation>
     </message>
 </context>
 <context>
@@ -2342,7 +2342,7 @@ oversigt</translation>
     <message>
         <location filename="repository/widgets/downloadprogresscell.cpp" line="86"/>
         <source>Couldn&apos;t open file &quot;%1&quot;. If this is an archive, you may have to extract it first.</source>
-        <translation>Kunne ikke åbne filen &quot;%1&quot;.hvis dette er et arkiv, skal du måske udpakke dette først.</translation>
+        <translation>Kunne ikke åbne filen &quot;%1&quot;. Hvis dette er et arkiv, skal du måske udpakke det først.</translation>
     </message>
     <message>
         <location filename="repository/widgets/downloadprogresscell.cpp" line="115"/>
@@ -2375,7 +2375,7 @@ oversigt</translation>
     <message>
         <location filename="core/duplicator.cpp" line="304"/>
         <source>The sample &quot;%1&quot; already exists.&lt;br /&gt;Replace?</source>
-        <translation>Samlen &quot;%1&quot; findes allerede.&lt;br /&gt;Udskift?</translation>
+        <translation>Samplen &quot;%1&quot; findes allerede.&lt;br /&gt;Udskift?</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="452"/>
@@ -2439,7 +2439,7 @@ oversigt</translation>
     <message>
         <location filename="editor/editor.ui" line="268"/>
         <source>Opening file...</source>
-        <translation>Åben fil...</translation>
+        <translation>Åbner fil...</translation>
     </message>
     <message>
         <location filename="editor/editor.ui" line="383"/>
@@ -2485,7 +2485,7 @@ oversigt</translation>
     <message>
         <location filename="repository/soundfont/editor/editordialoginsertlink.ui" line="31"/>
         <source>Link</source>
-        <translation>Genvej</translation>
+        <translation>Link</translation>
     </message>
 </context>
 <context>
@@ -2539,7 +2539,7 @@ oversigt</translation>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="71"/>
         <source>Cancel</source>
-        <translation>Afbryd</translation>
+        <translation>Fortryd</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="72"/>
@@ -2628,7 +2628,7 @@ oversigt</translation>
     <message>
         <location filename="repository/browser/filtertag.ui" line="32"/>
         <source>Tag name...</source>
-        <translation>Kaldenavn...</translation>
+        <translation>Tagnavn...</translation>
     </message>
 </context>
 <context>
@@ -2661,7 +2661,7 @@ oversigt</translation>
     <message>
         <location filename="editor/footers/footerlinkedto.cpp" line="79"/>
         <source>Instrument linked to presets:</source>
-        <translation>Instrumentet er forbundet til følgendende forvalg:</translation>
+        <translation>Instrumentet er forbundet til følgende forvalg:</translation>
     </message>
 </context>
 <context>
@@ -2801,7 +2801,7 @@ oversigt</translation>
     <message>
         <location filename="core/input/not_supported/inputparsernotsupported.cpp" line="38"/>
         <source>This file format is not supported.</source>
-        <translation>Dette filformet understøttes ikke.</translation>
+        <translation>Dette filformat understøttes ikke.</translation>
     </message>
 </context>
 <context>
@@ -2929,7 +2929,7 @@ oversigt</translation>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="222"/>
         <source>The following files have been modified:</source>
-        <translation>Følgende fil er blevet ændret:</translation>
+        <translation>Følgende filer er blevet ændret:</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="229"/>
@@ -2966,7 +2966,7 @@ oversigt</translation>
         <location filename="mainwindow/mainwindow.ui" line="312"/>
         <source>  Documentation</source>
         <extracomment>prefixed with 2 spaces</extracomment>
-        <translation>  Documentation</translation>
+        <translation>  Dokumentation</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="66"/>
@@ -2998,7 +2998,7 @@ oversigt</translation>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="249"/>
         <source>Daily soundfonts</source>
-        <translation>Daglige soundfonte</translation>
+        <translation>Daglige soundfonts</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="259"/>
@@ -3037,7 +3037,7 @@ oversigt</translation>
     <message>
         <location filename="editor/modulator/modulatorcell.ui" line="132"/>
         <source>absolute value</source>
-        <translation>nøjagtig værdi</translation>
+        <translation>absolut værdi</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="58"/>
@@ -3118,7 +3118,7 @@ standardmod.</translation>
     <message>
         <location filename="editor/modulator/modulatorcombosrc.cpp" line="64"/>
         <source>Link</source>
-        <translation>Genvej</translation>
+        <translation>Link</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcombosrc.cpp" line="93"/>
@@ -3182,7 +3182,7 @@ standardmod.</translation>
     <message>
         <location filename="editor/modulator/modulatoreditor.cpp" line="345"/>
         <source>Duplicate the selection toward...</source>
-        <translation>Kopiér alle sektioner til...</translation>
+        <translation>Kopiér markeringen til...</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatoreditor.cpp" line="346"/>
@@ -3218,7 +3218,7 @@ standardmod.</translation>
     <message>
         <location filename="editor/modulator/modulatoreditor.cpp" line="657"/>
         <source>%1 cannot be modulated in a preset.</source>
-        <translation>%1  kan ikke moduleres i et forvalg.</translation>
+        <translation>%1 kan ikke moduleres i et forvalg.</translation>
     </message>
 </context>
 <context>
@@ -3265,7 +3265,7 @@ standardmod.</translation>
     <message>
         <location filename="editor/pageenvelope.ui" line="128"/>
         <source>Decay</source>
-        <translation>Dæmpning</translation>
+        <translation>Decay</translation>
     </message>
     <message>
         <location filename="editor/pageenvelope.ui" line="138"/>
@@ -3285,7 +3285,7 @@ standardmod.</translation>
     <message>
         <location filename="editor/pageenvelope.ui" line="181"/>
         <source>Key → Decay</source>
-        <translation>Tangent → Dæmpning</translation>
+        <translation>Tangent → Decay</translation>
     </message>
     <message>
         <location filename="editor/pageenvelope.ui" line="263"/>
@@ -3300,7 +3300,7 @@ standardmod.</translation>
     <message>
         <location filename="editor/pageenvelope.ui" line="329"/>
         <source>Attack</source>
-        <translation>Stejlhed</translation>
+        <translation>Attack</translation>
     </message>
     <message>
         <location filename="editor/pageenvelope.ui" line="372"/>
@@ -3316,17 +3316,17 @@ standardmod.</translation>
     <message>
         <location filename="editor/pageenvelope.ui" line="420"/>
         <source>Sustain</source>
-        <translation>Udtoning</translation>
+        <translation>Sustain</translation>
     </message>
     <message>
         <location filename="editor/pageenvelope.ui" line="458"/>
         <source>Volume envelope</source>
-        <translation>Styrke kurve</translation>
+        <translation>Volumenkurve</translation>
     </message>
     <message>
         <location filename="editor/pageenvelope.ui" line="477"/>
         <source>Modulation envelope</source>
-        <translation>Moduæerings kurve</translation>
+        <translation>Moduleringskurve</translation>
     </message>
     <message>
         <location filename="editor/pageenvelope.cpp" line="93"/>
@@ -3361,17 +3361,17 @@ standardmod.</translation>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="39"/>
         <source>Sample number</source>
-        <translation>Sample nummer</translation>
+        <translation>Antal samples</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="40"/>
         <source>Parameter number</source>
-        <translation>Parameter nummer</translation>
+        <translation>Antal parametre</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="41"/>
         <source>Modulator number</source>
-        <translation>Modulations nummer</translation>
+        <translation>Antal modulatorer</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="42"/>
@@ -3429,17 +3429,17 @@ standardmod.</translation>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="39"/>
         <source>Instrument number</source>
-        <translation>Instrument nummer</translation>
+        <translation>Antal instrumenter</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="40"/>
         <source>Parameter number</source>
-        <translation>Parameter nummer</translation>
+        <translation>Antal parametre</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="41"/>
         <source>Modulator number</source>
-        <translation>Modulerings nummer</translation>
+        <translation>Antal modulatorer</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="42"/>
@@ -3472,7 +3472,7 @@ standardmod.</translation>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="33"/>
         <source>Samples</source>
-        <translation>Samplinger</translation>
+        <translation>Samples</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="39"/>
@@ -3497,8 +3497,8 @@ varighed</translation>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="42"/>
         <source>Root
 key</source>
-        <translation>Oprindelig
-tangent værdi</translation>
+        <translation>Grund-
+tangent</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="43"/>
@@ -3515,8 +3515,8 @@ type</source>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="45"/>
         <source>Linked
 sample</source>
-        <translation>Linked
-sampling</translation>
+        <translation>Linket
+sample</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="46"/>
@@ -3552,7 +3552,7 @@ frekvens</translation>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="226"/>
         <source>Invalid link</source>
-        <translation>Ubrugeligt link</translation>
+        <translation>Ugyldigt link</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="230"/>
@@ -3581,7 +3581,7 @@ frekvens</translation>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="276"/>
         <source>invalid</source>
-        <translation>ubrugelig</translation>
+        <translation>ugyldig</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="282"/>
@@ -3688,7 +3688,7 @@ for at vise dets divisionsområder</translation>
     <message>
         <location filename="editor/pagesf2.ui" line="449"/>
         <source>Samples</source>
-        <translation>Samplinger</translation>
+        <translation>Samples</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="524"/>
@@ -3820,7 +3820,7 @@ for at vise dets divisionsområder</translation>
     <message>
         <location filename="editor/pagesmpl.ui" line="615"/>
         <source>Link</source>
-        <translation>Genvej</translation>
+        <translation>Link</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="228"/>
@@ -3876,7 +3876,7 @@ for at vise dets divisionsområder</translation>
         <location filename="editor/pagesmpl.cpp" line="260"/>
         <location filename="editor/pagesmpl.cpp" line="807"/>
         <source>link</source>
-        <translation>genvej</translation>
+        <translation>link</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="312"/>
@@ -3950,7 +3950,7 @@ Advarsel: kvaliteten vil blive reduceret, og loopet kan blive ændret</translati
     <message>
         <location filename="editor/pagetable.cpp" line="1224"/>
         <source>absolute value</source>
-        <translation>nøjagtig værdi</translation>
+        <translation>absolut værdi</translation>
     </message>
     <message>
         <location filename="editor/pagetable.h" line="41"/>
@@ -4005,7 +4005,7 @@ Advarsel: kvaliteten vil blive reduceret, og loopet kan blive ændret</translati
     <message>
         <location filename="player/player.ui" line="278"/>
         <source>Opening file...</source>
-        <translation>Åben fil...</translation>
+        <translation>Åbner fil...</translation>
     </message>
     <message>
         <location filename="player/player.ui" line="356"/>
@@ -4080,17 +4080,17 @@ Advarsel: kvaliteten vil blive reduceret, og loopet kan blive ændret</translati
     <message>
         <location filename="core/sample/sampleloader.cpp" line="84"/>
         <source>Sample &quot;%1L&quot; already exists.&lt;br /&gt;Replace?</source>
-        <translation>Sample &quot;%1L&quot; eksiterer allerede.&lt;br /&gt;Erstat?</translation>
+        <translation>Sample &quot;%1L&quot; eksisterer allerede.&lt;br /&gt;Erstat?</translation>
     </message>
     <message>
         <location filename="core/sample/sampleloader.cpp" line="89"/>
         <source>Sample &quot;%1R&quot; already exists.&lt;br /&gt;Replace?</source>
-        <translation>Sample &quot;%1R&quot; eksiterer allerede.&lt;br /&gt;Erstat?</translation>
+        <translation>Sample &quot;%1R&quot; eksisterer allerede.&lt;br /&gt;Erstat?</translation>
     </message>
     <message>
         <location filename="core/sample/sampleloader.cpp" line="97"/>
         <source>Sample &quot;%1&quot; already exists.&lt;br /&gt;Replace?</source>
-        <translation>Sample &quot;%1&quot; eksiterer allerede.&lt;br /&gt;Erstat?</translation>
+        <translation>Sample &quot;%1&quot; eksisterer allerede.&lt;br /&gt;Erstat?</translation>
     </message>
     <message>
         <location filename="core/sample/sampleloader.cpp" line="110"/>
@@ -4135,7 +4135,7 @@ Advarsel: kvaliteten vil blive reduceret, og loopet kan blive ændret</translati
     <message>
         <location filename="core/sample/sound.cpp" line="77"/>
         <source>Cannot open file &quot;%1&quot;</source>
-        <translation>Kan kke åbne filen &quot;%1&quot;</translation>
+        <translation>Kan ikke åbne filen &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="core/sample/sound.cpp" line="80"/>
@@ -4194,7 +4194,7 @@ Advarsel: kvaliteten vil blive reduceret, og loopet kan blive ændret</translati
     <message>
         <location filename="repository/soundfontinformation.cpp" line="46"/>
         <source>Unknown author</source>
-        <translation>Ukendt udgiver</translation>
+        <translation>Ukendt forfatter</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="64"/>
@@ -4277,7 +4277,7 @@ Advarsel: kvaliteten vil blive reduceret, og loopet kan blive ændret</translati
         <location filename="context/keynamemanager.cpp" line="158"/>
         <source>B♭</source>
         <comment>key name</comment>
-        <translation>H♭</translation>
+        <translation>B</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="75"/>
@@ -4391,7 +4391,7 @@ Begge divisioner skal dele de samme note- og anslagsstyrkeområder.</translation
         <location filename="context/tuningprogrammanager.cpp" line="85"/>
         <source>Equal</source>
         <comment>Equal musical temperament</comment>
-        <translation>Lige</translation>
+        <translation>Ligesvævende</translation>
     </message>
     <message>
         <location filename="context/tuningprogrammanager.cpp" line="121"/>
@@ -4497,42 +4497,42 @@ Begge divisioner skal dele de samme note- og anslagsstyrkeområder.</translation
     <message>
         <location filename="repository/repositorymanager.cpp" line="78"/>
         <source>additive synthesis</source>
-        <translation>additiv synthese</translation>
+        <translation>additiv syntese</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="79"/>
         <source>subtrative synthesis</source>
-        <translation>substrativ synthese</translation>
+        <translation>subtraktiv syntese</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="80"/>
         <source>wavetable synthesis</source>
-        <translation>wavetable synthese</translation>
+        <translation>wavetable-syntese</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="81"/>
         <source>model synthesis</source>
-        <translation>model synthese</translation>
+        <translation>modelsyntese</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="82"/>
         <source>FM synthesis</source>
-        <translation>FM synthese</translation>
+        <translation>FM-syntese</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="83"/>
         <source>vector synthesis</source>
-        <translation>vektor synthese</translation>
+        <translation>vektorsyntese</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="84"/>
         <source>granular synthesis</source>
-        <translation>granular synthese</translation>
+        <translation>granulær syntese</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="85"/>
         <source>other synthesis</source>
-        <translation>anden synthese</translation>
+        <translation>anden syntese</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="88"/>
@@ -4552,7 +4552,7 @@ Begge divisioner skal dele de samme note- og anslagsstyrkeområder.</translation
     <message>
         <location filename="repository/repositorymanager.cpp" line="91"/>
         <source>clean</source>
-        <translation>ryd</translation>
+        <translation>ren</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="92"/>
@@ -4597,7 +4597,7 @@ Begge divisioner skal dele de samme note- og anslagsstyrkeområder.</translation
     <message>
         <location filename="repository/repositorymanager.cpp" line="100"/>
         <source>muted</source>
-        <translation>muted</translation>
+        <translation>dæmpet</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="101"/>
@@ -4607,7 +4607,7 @@ Begge divisioner skal dele de samme note- og anslagsstyrkeområder.</translation
     <message>
         <location filename="repository/repositorymanager.cpp" line="102"/>
         <source>dissonant</source>
-        <translation>dissonans</translation>
+        <translation>dissonant</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="103"/>
@@ -4627,7 +4627,7 @@ Begge divisioner skal dele de samme note- og anslagsstyrkeområder.</translation
     <message>
         <location filename="repository/repositorymanager.cpp" line="106"/>
         <source>exotic</source>
-        <translation>exsotisk</translation>
+        <translation>eksotisk</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="109"/>
@@ -4702,7 +4702,7 @@ Begge divisioner skal dele de samme note- og anslagsstyrkeområder.</translation
     <message>
         <location filename="repository/repositorymanager.cpp" line="123"/>
         <source>arpeggiated</source>
-        <translation>arpeggiato</translation>
+        <translation>arpeggieret</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="124"/>
@@ -4783,7 +4783,7 @@ Begge divisioner skal dele de samme note- og anslagsstyrkeområder.</translation
     <message>
         <location filename="repository/repositorymanager.cpp" line="142"/>
         <source>pop / rock</source>
-        <translation>pop /rock</translation>
+        <translation>pop / rock</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="143"/>
@@ -4814,7 +4814,7 @@ Begge divisioner skal dele de samme note- og anslagsstyrkeområder.</translation
     <message>
         <location filename="repository/repositorymanager.cpp" line="165"/>
         <source>public domain</source>
-        <translation>hjemmeside</translation>
+        <translation>public domain</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="166"/>
@@ -4824,7 +4824,7 @@ Begge divisioner skal dele de samme note- og anslagsstyrkeområder.</translation
     <message>
         <location filename="repository/repositorymanager.cpp" line="167"/>
         <source>give credit, don&apos;t distribute with more restrictions</source>
-        <translation>oplys forfatter, må ikke distribueres samt andre regler</translation>
+        <translation>oplys forfatter, må ikke distribueres med yderligere begrænsninger</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="168"/>
@@ -4839,7 +4839,7 @@ Begge divisioner skal dele de samme note- og anslagsstyrkeområder.</translation
     <message>
         <location filename="repository/repositorymanager.cpp" line="170"/>
         <source>personal use, don&apos;t distribute with more restrictions</source>
-        <translation>kun til personligt brug, må ikke distribueres samt andre regler</translation>
+        <translation>kun til personligt brug, må ikke distribueres med yderligere begrænsninger</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="171"/>
@@ -4864,7 +4864,7 @@ Begge divisioner skal dele de samme note- og anslagsstyrkeområder.</translation
     <message>
         <location filename="repository/repositorymanager.cpp" line="395"/>
         <source>harpsichord</source>
-        <translation>spinette / harpsichord</translation>
+        <translation>cembalo</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="398"/>
@@ -4884,7 +4884,7 @@ Begge divisioner skal dele de samme note- og anslagsstyrkeområder.</translation
     <message>
         <location filename="repository/repositorymanager.cpp" line="407"/>
         <source>bowed strings</source>
-        <translation>buede strenge</translation>
+        <translation>strøgne strenge</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="410"/>
@@ -5016,7 +5016,7 @@ download the list</source>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="482"/>
         <source>Tags</source>
-        <translation>Tags / kaldenavn</translation>
+        <translation>Tags</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="214"/>
@@ -5169,7 +5169,7 @@ downloade listen</translation>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="184"/>
         <source>Website...</source>
-        <translation>Internet side...</translation>
+        <translation>Hjemmeside...</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="197"/>
@@ -5244,7 +5244,7 @@ downloade listen</translation>
     <message>
         <location filename="repository/soundfont/editor/soundfontfilecell.ui" line="44"/>
         <source>Remove</source>
-        <translation>Fjerne</translation>
+        <translation>Fjern</translation>
     </message>
 </context>
 <context>
@@ -5266,7 +5266,7 @@ downloade listen</translation>
         <location filename="repository/soundfont/soundfontviewer.ui" line="360"/>
         <source>Oops! Cannot
 download content</source>
-        <translation>Oops! kan ikke
+        <translation>Oops! Kan ikke
 downloade indholdet</translation>
     </message>
     <message>
@@ -5476,7 +5476,7 @@ Andre soundfont-editorer kan vise andre enheder.</translation>
     <message>
         <location filename="context/thememanager.cpp" line="488"/>
         <source>Gnome</source>
-        <translation>Gnom</translation>
+        <translation>Gnome</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="501"/>
@@ -5627,7 +5627,7 @@ Andre soundfont-editorer kan vise andre enheder.</translation>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.cpp" line="50"/>
         <source>Number of beats per second</source>
-        <translation>Antal slag per sekund</translation>
+        <translation>Antal svævninger per sekund</translation>
     </message>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.cpp" line="50"/>
@@ -5849,7 +5849,7 @@ Andre soundfont-editorer kan vise andre enheder.</translation>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="335"/>
         <source>Inversion number</source>
-        <translation>Inversionsnummer</translation>
+        <translation>Antal omvendinger</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="363"/>
@@ -5860,7 +5860,7 @@ Andre soundfont-editorer kan vise andre enheder.</translation>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="406"/>
         <source>perfect</source>
-        <translation>perfekt</translation>
+        <translation>ren</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="416"/>
@@ -6143,7 +6143,7 @@ Andre soundfont-editorer kan vise andre enheder.</translation>
     <message>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter.h" line="61"/>
         <source>Filter frequencies</source>
-        <translation>Filter frekvenser</translation>
+        <translation>Filtrér frekvenser</translation>
     </message>
 </context>
 <context>
@@ -6596,7 +6596,7 @@ Andre soundfont-editorer kan vise andre enheder.</translation>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation.h" line="63"/>
         <source>Mixture creation</source>
-        <translation>Oprettelse af blanding</translation>
+        <translation>Oprettelse af mikstur</translation>
     </message>
 </context>
 <context>
@@ -6604,7 +6604,7 @@ Andre soundfont-editorer kan vise andre enheder.</translation>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="25"/>
         <source>Name of the mixture:</source>
-        <translation>Navn på blandingen:</translation>
+        <translation>Navn på miksturen:</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="39"/>
@@ -6649,7 +6649,7 @@ Andre soundfont-editorer kan vise andre enheder.</translation>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="265"/>
         <source>Ranks</source>
-        <translation>Rangeringer</translation>
+        <translation>Kor</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="338"/>
@@ -6684,7 +6684,7 @@ Andre soundfont-editorer kan vise andre enheder.</translation>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="371"/>
         <source>eleventh</source>
-        <translation>ellevt</translation>
+        <translation>ellevte</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="376"/>
@@ -6750,7 +6750,7 @@ Andre soundfont-editorer kan vise andre enheder.</translation>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="586"/>
         <source>At least one rank must be specified.</source>
-        <translation>Mindst én rangering skal angives.</translation>
+        <translation>Mindst ét kor skal angives.</translation>
     </message>
 </context>
 <context>
@@ -6993,7 +6993,7 @@ Andre soundfont-editorer kan vise andre enheder.</translation>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="66"/>
         <source>Division number</source>
-        <translation>Divisionsnummer</translation>
+        <translation>Antal divisioner</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="121"/>
@@ -7054,7 +7054,7 @@ Andre soundfont-editorer kan vise andre enheder.</translation>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="71"/>
         <source>General MIDI classification</source>
-        <translation>Generel MIDI-klassifikation</translation>
+        <translation>General MIDI-klassifikation</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="142"/>
@@ -7392,7 +7392,7 @@ Andre soundfont-editorer kan vise andre enheder.</translation>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="172"/>
         <source>Bulk re&amp;name...</source>
-        <translation>Massiv om&amp;døbning...</translation>
+        <translation>Masseom&amp;døbning...</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="260"/>

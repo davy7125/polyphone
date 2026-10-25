@@ -85,12 +85,12 @@
     <message>
         <location filename="core/types/attribute.cpp" line="521"/>
         <source>Filter, cutoff (×)</source>
-        <translation>Филтар, искључење (×)</translation>
+        <translation>Филтар, гранична учестаност (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="522"/>
         <source>Filter, cutoff (Hz)</source>
-        <translation>Филтар, искључење (Hz)</translation>
+        <translation>Филтар, гранична учестаност (Hz)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="525"/>
@@ -440,7 +440,7 @@
         <location filename="context/confmanager.cpp" line="219"/>
         <source>Z</source>
         <comment>first key mapping for bottom left C</comment>
-        <translation>З</translation>
+        <translation>Ѕ</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="220"/>
@@ -452,7 +452,7 @@
         <location filename="context/confmanager.cpp" line="221"/>
         <source>X</source>
         <comment>first key mapping for bottom D</comment>
-        <translation>Х</translation>
+        <translation>Џ</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="222"/>
@@ -518,7 +518,7 @@
         <location filename="context/confmanager.cpp" line="237"/>
         <source>Q</source>
         <comment>first key mapping for upper left C</comment>
-        <translation>К</translation>
+        <translation>Љ</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="238"/>
@@ -530,7 +530,7 @@
         <location filename="context/confmanager.cpp" line="239"/>
         <source>W</source>
         <comment>first key mapping for upper D</comment>
-        <translation>В</translation>
+        <translation>Њ</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="240"/>
@@ -572,7 +572,7 @@
         <location filename="context/confmanager.cpp" line="246"/>
         <source>Y</source>
         <comment>first key mapping for upper A</comment>
-        <translation>Ј</translation>
+        <translation>З</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="247"/>
@@ -596,7 +596,7 @@
         <location filename="context/confmanager.cpp" line="255"/>
         <source>Shift+Z</source>
         <comment>second key mapping for bottom left C</comment>
-        <translation>Shift+З</translation>
+        <translation>Shift+Ѕ</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="256"/>
@@ -608,7 +608,7 @@
         <location filename="context/confmanager.cpp" line="257"/>
         <source>Shift+X</source>
         <comment>second key mapping for bottom D</comment>
-        <translation>Shift+Х</translation>
+        <translation>Shift+Џ</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="258"/>
@@ -668,25 +668,25 @@
         <location filename="context/confmanager.cpp" line="267"/>
         <source>Shift+&lt;</source>
         <comment>second key mapping for bottom right C</comment>
-        <translation>Shift+&lt;</translation>
+        <translation>Shift+;</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="273"/>
         <source>Shift+Q</source>
         <comment>second key mapping for upper left C</comment>
-        <translation>Shift+К</translation>
+        <translation>Shift+Љ</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="274"/>
         <source>Shift+@</source>
         <comment>second key mapping for upper C#</comment>
-        <translation>Shift+@</translation>
+        <translation>Shift+&quot;</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="275"/>
         <source>Shift+W</source>
         <comment>second key mapping for upper D</comment>
-        <translation>Shift+В</translation>
+        <translation>Shift+Њ</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="276"/>
@@ -722,19 +722,19 @@
         <location filename="context/confmanager.cpp" line="281"/>
         <source>Shift+^</source>
         <comment>second key mapping for upper G#</comment>
-        <translation>Shift+^</translation>
+        <translation>Shift+&amp;</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="282"/>
         <source>Shift+Y</source>
         <comment>second key mapping for upper A</comment>
-        <translation>Shift+Ј</translation>
+        <translation>Shift+З</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="283"/>
         <source>Shift+&amp;</source>
         <comment>second key mapping for upper A#</comment>
-        <translation>Shift+&amp;</translation>
+        <translation>Shift+/</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="284"/>
@@ -769,7 +769,7 @@
     <message>
         <location filename="context/interface/configpanel.ui" line="186"/>
         <source>Keyboard</source>
-        <translation>Патворена клавијатура</translation>
+        <translation>Клавијатура</translation>
     </message>
     <message>
         <location filename="context/interface/configpanel.ui" line="219"/>
@@ -811,7 +811,7 @@
         <source>When importing a sample, data located after the end of loop are automatically removed.
 (same effect as the tool &quot;Trim to end of loop&quot;)</source>
         <translation>Приликом увоза узорка, подаци који се налазе након краја вртње аутоматски се уклањају.
-(исти ефекат као алат „Подеси до краја вртње”)</translation>
+(исти ефекат као алат „Скрати до краја вртње”)</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="186"/>
@@ -836,7 +836,7 @@
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="126"/>
         <source>trim to loop</source>
-        <translation>подеси до вртње</translation>
+        <translation>скрати до вртње</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="218"/>
@@ -1057,22 +1057,22 @@
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="209"/>
         <source>Octave #1</source>
-        <translation>1. oктава</translation>
+        <translation>1. октава</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="214"/>
         <source>Octave #2</source>
-        <translation>2. oктава</translation>
+        <translation>2. октава</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="219"/>
         <source>Octave #3</source>
-        <translation>3. oктава</translation>
+        <translation>3. октава</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="224"/>
         <source>Octave #4</source>
-        <translation>4. oктава</translation>
+        <translation>4. октава</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="297"/>
@@ -1285,7 +1285,7 @@ Premium!</source>
     <message>
         <location filename="context/interface/configtoc.ui" line="98"/>
         <source>Keyboard</source>
-        <translation>Патворена клавијатура</translation>
+        <translation>Клавијатура</translation>
     </message>
     <message>
         <location filename="context/interface/configtoc.ui" line="111"/>
@@ -1328,7 +1328,7 @@ repository</source>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="56"/>
         <source>cannot create directory &quot;%1&quot;</source>
-        <translation>hе могу да направим директоријум „%1”</translation>
+        <translation>не могу да направим директоријум „%1”</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="241"/>
@@ -1540,19 +1540,19 @@ repository</source>
         <location filename="dialogs/dialog_about.cpp" line="74"/>
         <source>David Surroca</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation>Давид Сурроца (David Surroca)</translation>
+        <translation>Давид Сурока (David Surroca)</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="76"/>
         <source>F.J. Martínez Murcia</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation>Ф.Ј. Мартинез Мурција (F.J. Martínez Murcia)</translation>
+        <translation>Ф.Ј. Мартинез Мурсија (F.J. Martínez Murcia)</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="77"/>
         <source>Georg Gergull</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation>Георг Гергулл (Georg Gergull)</translation>
+        <translation>Георг Гергул (Georg Gergull)</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="78"/>
@@ -1622,7 +1622,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialogchangelog.cpp" line="48"/>
         <source>Thank you for having installed</source>
-        <translation>Хвала Вам што сте инсталиран</translation>
+        <translation>Хвала Вам што сте инсталирали</translation>
     </message>
     <message>
         <location filename="dialogs/dialogchangelog.cpp" line="49"/>
@@ -1632,17 +1632,17 @@ repository</source>
     <message>
         <location filename="dialogs/dialogchangelog.cpp" line="94"/>
         <source>What is new</source>
-        <translation>Новост</translation>
+        <translation>Шта је ново</translation>
     </message>
     <message>
         <location filename="dialogs/dialogchangelog.cpp" line="97"/>
         <source>What has improved</source>
-        <translation>Побољшање</translation>
+        <translation>Шта је побољшано</translation>
     </message>
     <message>
         <location filename="dialogs/dialogchangelog.cpp" line="100"/>
         <source>What is fixed</source>
-        <translation>Резолуција</translation>
+        <translation>Шта је исправљено</translation>
     </message>
 </context>
 <context>
@@ -1736,7 +1736,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialogkeyboard.ui" line="14"/>
         <source>Virtual keyboard</source>
-        <translation>Патворена клавијатура</translation>
+        <translation>Виртуелна клавијатура</translation>
     </message>
     <message>
         <location filename="dialogs/dialogkeyboard.ui" line="147"/>
@@ -2313,7 +2313,7 @@ repository</source>
     <message>
         <location filename="core/duplicator.cpp" line="269"/>
         <source>The global division will not be copied.</source>
-        <translation>Укупни део неће бити умножен.</translation>
+        <translation>Глобална подела неће бити копирана.</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="271"/>
@@ -2491,7 +2491,7 @@ repository</source>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="71"/>
         <source>Cancel</source>
-        <translation>Поништи</translation>
+        <translation>Опозови</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="72"/>
@@ -2511,7 +2511,7 @@ repository</source>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="84"/>
         <source>Virtual keyboard</source>
-        <translation>Патворена клавијатура</translation>
+        <translation>Виртуелна клавијатура</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="279"/>
@@ -3185,7 +3185,7 @@ default mod.</source>
     <message>
         <location filename="core/output/not_supported/outputnotsupported.cpp" line="39"/>
         <source>this file format is not supported</source>
-        <translation>oвај формат датотеке није подржан</translation>
+        <translation>овај формат датотеке није подржан</translation>
     </message>
 </context>
 <context>
@@ -3193,7 +3193,7 @@ default mod.</source>
     <message>
         <location filename="core/output/sf/outputsf.cpp" line="62"/>
         <source>please close the file before overriding it</source>
-        <translation>mолимо затворите датотеку пре него што је препишете</translation>
+        <translation>молимо затворите датотеку пре него што је препишете</translation>
     </message>
     <message>
         <location filename="core/output/sf/outputsf.cpp" line="91"/>
@@ -3272,12 +3272,12 @@ default mod.</source>
     <message>
         <location filename="editor/pageenvelope.ui" line="458"/>
         <source>Volume envelope</source>
-        <translation>Коверта гласноће</translation>
+        <translation>Анвелопа гласноће</translation>
     </message>
     <message>
         <location filename="editor/pageenvelope.ui" line="477"/>
         <source>Modulation envelope</source>
-        <translation>Коверта модулација</translation>
+        <translation>Анвелопа модулације</translation>
     </message>
     <message>
         <location filename="editor/pageenvelope.cpp" line="93"/>
@@ -3294,7 +3294,7 @@ default mod.</source>
     <message>
         <location filename="editor/pageenvelope.h" line="46"/>
         <source>Envelopes</source>
-        <translation>Коверте</translation>
+        <translation>Анвелопе</translation>
     </message>
 </context>
 <context>
@@ -3767,7 +3767,7 @@ to display its division ranges</source>
     <message>
         <location filename="editor/pagesmpl.ui" line="549"/>
         <source>Use the full length of the sample as loop</source>
-        <translation>Употреби узорак за пуно трајање вртње</translation>
+        <translation>Употреби целу дужину узорка као вртњу</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="594"/>
@@ -4243,7 +4243,7 @@ Warning: quality will be reduced and the loop may be altered</source>
         <location filename="context/keynamemanager.cpp" line="161"/>
         <source>B</source>
         <comment>key name</comment>
-        <translation>Ти</translation>
+        <translation>Си</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="83"/>
@@ -5788,14 +5788,14 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="293"/>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="358"/>
         <source>major</source>
-        <translation>дур</translation>
+        <translation>велика</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="231"/>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="298"/>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="353"/>
         <source>minor</source>
-        <translation>мол</translation>
+        <translation>мала</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="250"/>
@@ -5805,23 +5805,23 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="335"/>
         <source>Inversion number</source>
-        <translation>Број инверзија</translation>
+        <translation>Број обртаја</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="363"/>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="411"/>
         <source>diminished</source>
-        <translation>уманјен</translation>
+        <translation>умањена</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="406"/>
         <source>perfect</source>
-        <translation>савршен</translation>
+        <translation>чиста</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="416"/>
         <source>augmented</source>
-        <translation>повећан</translation>
+        <translation>прекомерна</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="656"/>
@@ -5932,7 +5932,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication.h" line="63"/>
         <source>Division duplication</source>
-        <translation>Удвостручавање делова</translation>
+        <translation>Удвостручавање подела</translation>
     </message>
 </context>
 <context>
@@ -5940,7 +5940,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="30"/>
         <source>A division for each velocity range</source>
-        <translation>Један део за сваки опсег јачине удара</translation>
+        <translation>Једна подела за сваки опсег јачине удара</translation>
     </message>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="143"/>
@@ -5955,7 +5955,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="20"/>
         <source>A division for each key</source>
-        <translation>Један део за сваку ноту</translation>
+        <translation>Једна подела за сваку ноту</translation>
     </message>
 </context>
 <context>
@@ -6371,7 +6371,7 @@ Other soundfont editors might display other units.</source>
         <translation>
             <numerusform>Није успело конфигурисање %n узорка.</numerusform>
             <numerusform>Није успело конфигурисање %n узорка.</numerusform>
-            <numerusform>Није успело конфигурисање %n узорка.</numerusform>
+            <numerusform>Није успело конфигурисање %n узорака.</numerusform>
         </translation>
     </message>
 </context>
@@ -6418,7 +6418,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade.h" line="61"/>
         <source>Cross-fade loop</source>
-        <translation>Унакрсна вртња</translation>
+        <translation>Вртња с претапањем</translation>
     </message>
 </context>
 <context>
@@ -6426,7 +6426,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="20"/>
         <source>Crossfade duration</source>
-        <translation>Трајање унакрсне вртње</translation>
+        <translation>Трајање претапања</translation>
     </message>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="29"/>
@@ -6485,7 +6485,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="59"/>
         <source>Sustain duration</source>
-        <translation>Трајање одржавања</translation>
+        <translation>Трајање задршке</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="66"/>
@@ -6586,7 +6586,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="89"/>
         <source>Divisions</source>
-        <translation>Делови</translation>
+        <translation>Поделе</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="242"/>
@@ -6596,7 +6596,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="265"/>
         <source>Ranks</source>
-        <translation>Редослед</translation>
+        <translation>Редови</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="338"/>
@@ -6631,47 +6631,47 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="371"/>
         <source>eleventh</source>
-        <translation>једанаестина</translation>
+        <translation>једанаеста</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="376"/>
         <source>thirteenth</source>
-        <translation>тринаестина</translation>
+        <translation>тринаеста</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="381"/>
         <source>fifteenth</source>
-        <translation>петнаестина</translation>
+        <translation>петнаеста</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="386"/>
         <source>seventeenth</source>
-        <translation>седамнаестина</translation>
+        <translation>седамнаеста</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="391"/>
         <source>nineteenth</source>
-        <translation>деветнаестина</translation>
+        <translation>деветнаеста</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="396"/>
         <source>twenty-first</source>
-        <translation>двадесетједнина</translation>
+        <translation>двадесет прва</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="401"/>
         <source>twenty-third</source>
-        <translation>двадесеттрећина</translation>
+        <translation>двадесет трећа</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="406"/>
         <source>twenty-fifth</source>
-        <translation>двадесетпетина</translation>
+        <translation>двадесет пета</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="411"/>
         <source>twenty-seventh</source>
-        <translation>двадесетседмина</translation>
+        <translation>двадесет седма</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="498"/>
@@ -6697,7 +6697,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="586"/>
         <source>At least one rank must be specified.</source>
-        <translation>Мора бити наведен барем један ранг.</translation>
+        <translation>Мора бити наведен барем један ред.</translation>
     </message>
 </context>
 <context>
@@ -7002,7 +7002,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="71"/>
         <source>General MIDI classification</source>
-        <translation>Општа MIDI класификација</translation>
+        <translation>General MIDI класификација</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="142"/>
@@ -7175,7 +7175,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/trim_end/tooltrimend.h" line="64"/>
         <source>Trim to end of loop</source>
-        <translation>Подеси до краја вртње</translation>
+        <translation>Скрати до краја вртње</translation>
     </message>
 </context>
 <context>

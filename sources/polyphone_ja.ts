@@ -801,7 +801,8 @@
 (same effect as the tool &quot;Remove blank at start&quot;)</source>
         <oldsource>When importing a sample, any blank area located before the beginning of the attack is automatically removed.
 (same effect as the tool “Remove blank at start”)</oldsource>
-        <translation>サンプルをインポートする際、アタック開始前にある空白領域は自動的に削除されます。(「開始時の空白を削除」ツールと同じ効果です)</translation>
+        <translation>サンプルをインポートする際、アタック開始前にある空白領域は自動的に削除されます。
+(「先頭の空白を削除」ツールと同じ効果です)</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="44"/>
@@ -815,7 +816,8 @@
 (same effect as the tool &quot;Trim to end of loop&quot;)</source>
         <oldsource>When importing a sample, data located after the end of loop are automatically removed.
 (same effect as the tool “Trim to end of loop”)</oldsource>
-        <translation>サンプルをインポートする際、ループ終了後に位置するデータは自動的に削除されます。(「ループの最後までトリム」ツールと同じ効果です)</translation>
+        <translation>サンプルをインポートする際、ループ終了後に位置するデータは自動的に削除されます。
+(「ループの終点までトリム」ツールと同じ効果です)</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="186"/>
@@ -842,7 +844,7 @@
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="126"/>
         <source>trim to loop</source>
-        <translation>ループの最後までトリム</translation>
+        <translation>ループの終点までトリム</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="218"/>
@@ -852,7 +854,7 @@
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="149"/>
         <source>remove blank at start</source>
-        <translation>開始時の空白を削除</translation>
+        <translation>先頭の空白を削除</translation>
     </message>
 </context>
 <context>
@@ -920,12 +922,12 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="652"/>
         <source>instrument list</source>
-        <translation>楽器リスト</translation>
+        <translation>インストゥルメントリスト</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="657"/>
         <source>first instrument</source>
-        <translation>最初の楽器</translation>
+        <translation>最初のインストゥルメント</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="662"/>
@@ -986,7 +988,7 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="106"/>
         <source>Unique instance</source>
-        <translation>ユニークインスタンス</translation>
+        <translation>単一インスタンス</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="45"/>
@@ -1027,7 +1029,7 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="509"/>
         <source>List and table</source>
-        <translation>リスト 及び テーブル</translation>
+        <translation>リストとテーブル</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="20"/>
@@ -1129,7 +1131,8 @@
         <location filename="context/interface/configsectionrepository.ui" line="112"/>
         <source>Become
 Premium!</source>
-        <translation>プレミアムになろう！</translation>
+        <translation>プレミアム
+になろう！</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionrepository.ui" line="192"/>
@@ -1154,7 +1157,7 @@ Premium!</source>
     <message>
         <location filename="context/interface/configsectionrepository.ui" line="367"/>
         <source>Downloads</source>
-        <translation>ダウンロード数</translation>
+        <translation>ダウンロード</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionrepository.cpp" line="113"/>
@@ -1474,7 +1477,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="49"/>
         <source>Copyright</source>
-        <translation>著作権 / コピーライト</translation>
+        <translation>著作権</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="53"/>
@@ -1886,7 +1889,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialogrecorder.ui" line="26"/>
         <source>Recorder</source>
-        <translation>録音</translation>
+        <translation>レコーダー</translation>
     </message>
     <message>
         <location filename="dialogs/dialogrecorder.cpp" line="92"/>
@@ -1915,17 +1918,17 @@ repository</source>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="56"/>
         <source>Overwrite existing name with key name as suffix</source>
-        <translation>既存の名前をキー名をサフィックスとして上書き</translation>
+        <translation>キー名をサフィックスとして既存の名前を上書き</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="61"/>
         <source>Overwrite existing name with key name and velocity as suffix</source>
-        <translation>既存の名前をキー名とベロシティをサフィックスとして上書き</translation>
+        <translation>キー名とベロシティをサフィックスとして既存の名前を上書き</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="66"/>
         <source>Overwrite existing name with numerical ascending suffix</source>
-        <translation>既存の名前を数値昇順のサフィックスとして上書き</translation>
+        <translation>昇順の数値をサフィックスとして既存の名前を上書き</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="71"/>
@@ -1974,7 +1977,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialog_rename.cpp" line="104"/>
         <source>And replace by:</source>
-        <translation>そして置換:</translation>
+        <translation>置換後の文字列:</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_rename.cpp" line="114"/>
@@ -2052,7 +2055,7 @@ repository</source>
     <message>
         <location filename="directory/directorybrowser.cpp" line="132"/>
         <source>The directory &quot;%1&quot; is not readable.</source>
-        <translation>ディレクトリ「%1」は読み取り可能ではありません。</translation>
+        <translation>ディレクトリ「%1」を読み取れません。</translation>
     </message>
     <message>
         <location filename="directory/directorybrowser.cpp" line="248"/>
@@ -2497,7 +2500,7 @@ repository</source>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="71"/>
         <source>Cancel</source>
-        <translation>キャンセル</translation>
+        <translation>元に戻す</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="72"/>
@@ -2512,7 +2515,7 @@ repository</source>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="81"/>
         <source>Recorder</source>
-        <translation>録音</translation>
+        <translation>レコーダー</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="84"/>
@@ -2718,7 +2721,7 @@ repository</source>
     <message>
         <location filename="editor/graphics/graphicsfourier.cpp" line="602"/>
         <source>Png file</source>
-        <translation>Pngファイル</translation>
+        <translation>PNGファイル</translation>
     </message>
 </context>
 <context>
@@ -2837,7 +2840,7 @@ repository</source>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="101"/>
         <source>Online &amp;manual</source>
-        <translation>オンライン マニュアル(&amp;M)</translation>
+        <translation>オンラインマニュアル(&amp;M)</translation>
     </message>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="107"/>
@@ -2891,7 +2894,7 @@ repository</source>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="229"/>
         <source>File &quot;%1&quot; has been modified.</source>
-        <translation>ファイル &quot;%1&quot; は変更されています。</translation>
+        <translation>ファイル「%1」は変更されています。</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="233"/>
@@ -2923,7 +2926,7 @@ repository</source>
         <location filename="mainwindow/mainwindow.ui" line="312"/>
         <source>  Documentation</source>
         <extracomment>prefixed with 2 spaces</extracomment>
-        <translation>  資料</translation>
+        <translation>  ドキュメント</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="66"/>
@@ -3004,27 +3007,27 @@ repository</source>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="99"/>
         <source>Default mod.</source>
-        <translation>デフォルトのモジュレーション</translation>
+        <translation>デフォルトモジュレーター</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="156"/>
         <source>overwritten by %1</source>
         <oldsource>overriden by %1</oldsource>
-        <translation>%1によって上書きされました</translation>
+        <translation>%1によって上書き</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="163"/>
         <source>disabling
 default mod.</source>
-        <translation>デフォルトの
-モジュレーションを無効にする</translation>
+        <translation>デフォルトモジュレーター
+を無効化</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="165"/>
         <source>overriding
 default mod.</source>
-        <translation>デフォルトの
-モジュレーションを上書きする</translation>
+        <translation>デフォルトモジュレーター
+を上書き</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="384"/>
@@ -3047,18 +3050,18 @@ default mod.</source>
         <location filename="editor/modulator/modulatorcell.cpp" line="406"/>
         <source>Add from:</source>
         <oldsource>Add from: </oldsource>
-        <translation>から加算:</translation>
+        <translation>加算 下限:</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="407"/>
         <source>Multiply from:</source>
-        <translation>から乗算:</translation>
+        <translation>乗算 下限:</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="409"/>
         <source>To:</source>
         <oldsource>To: </oldsource>
-        <translation>へ:</translation>
+        <translation>上限:</translation>
     </message>
 </context>
 <context>
@@ -3559,7 +3562,8 @@ rate</source>
         <source>Select a single instrument or preset
 to display its division ranges</source>
         <oldsource>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select a single instrument or preset&lt;/p&gt;&lt;p&gt;to display its division ranges&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</oldsource>
-        <translation>ディビジョン範囲を表示するには、単一のインストゥルメントまたはプリセットを選択してください</translation>
+        <translation>ディビジョンの範囲を表示するには、
+単一のインストゥルメントまたはプリセットを選択してください</translation>
     </message>
 </context>
 <context>
@@ -3986,7 +3990,7 @@ Warning: quality will be reduced and the loop may be altered</source>
     <message>
         <location filename="player/player.cpp" line="51"/>
         <source>Recorder</source>
-        <translation>録音</translation>
+        <translation>レコーダー</translation>
     </message>
 </context>
 <context>
@@ -4101,7 +4105,7 @@ Warning: quality will be reduced and the loop may be altered</source>
     <message>
         <location filename="core/model/soundfont.cpp" line="44"/>
         <source>General</source>
-        <translation>概要</translation>
+        <translation>一般</translation>
     </message>
     <message>
         <location filename="core/model/soundfont.cpp" line="45"/>
@@ -4577,7 +4581,7 @@ Both divisions must share the same note and velocity ranges.</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="105"/>
         <source>wooden</source>
-        <translation>ウッドの</translation>
+        <translation>ウッディな</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="106"/>
@@ -4597,7 +4601,7 @@ Both divisions must share the same note and velocity ranges.</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="111"/>
         <source>sustained</source>
-        <translation>サステイン</translation>
+        <translation>持続音</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="112"/>
@@ -4864,7 +4868,7 @@ Both divisions must share the same note and velocity ranges.</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="422"/>
         <source>unpitched percussion</source>
-        <translation>非音程パーカッション</translation>
+        <translation>音程のないパーカッション</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="425"/>
@@ -4942,12 +4946,12 @@ download the list</source>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="392"/>
         <source>License</source>
-        <translation>使用許諾 / ライセンス</translation>
+        <translation>ライセンス</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="407"/>
         <source>Sample source</source>
-        <translation>サンプル元</translation>
+        <translation>サンプルの出典</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="422"/>
@@ -5130,7 +5134,7 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="197"/>
         <source>Sample source</source>
-        <translation>サンプル元</translation>
+        <translation>サンプルの出典</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="245"/>
@@ -5264,7 +5268,7 @@ download content</source>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewercenter.ui" line="93"/>
         <source>Downloads</source>
-        <translation>ダウンロード数</translation>
+        <translation>ダウンロード</translation>
     </message>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewercenter.ui" line="129"/>
@@ -5282,7 +5286,7 @@ download content</source>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewerleft.ui" line="177"/>
         <source>Sample source</source>
-        <translation>サンプル元</translation>
+        <translation>サンプルの出典</translation>
     </message>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewerleft.ui" line="193"/>
@@ -5331,7 +5335,7 @@ download content</source>
     <message>
         <location filename="mainwindow/tabmanager.cpp" line="245"/>
         <source>Online repository</source>
-        <translation>オンライン リポジトリ</translation>
+        <translation>オンラインリポジトリ</translation>
     </message>
     <message>
         <location filename="mainwindow/tabmanager.cpp" line="283"/>
@@ -5346,7 +5350,7 @@ download content</source>
     <message>
         <location filename="mainwindow/tabmanager.cpp" line="287"/>
         <source>File &quot;%1&quot; has been modified.</source>
-        <translation>ファイル &quot;%1&quot; は変更されています。</translation>
+        <translation>ファイル「%1」は変更されています。</translation>
     </message>
     <message>
         <location filename="mainwindow/tabmanager.cpp" line="290"/>
@@ -5573,7 +5577,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="97"/>
         <source>Division to the next octave</source>
-        <translation>次のオクターブへの分割</translation>
+        <translation>次のオクターブへの除数</translation>
     </message>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="58"/>
@@ -5583,7 +5587,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.cpp" line="50"/>
         <source>Number of beats per second</source>
-        <translation>1秒あたりの拍数</translation>
+        <translation>1秒あたりのうなりの数</translation>
     </message>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.cpp" line="50"/>
@@ -5656,7 +5660,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="56"/>
         <source>Add</source>
-        <translation>追加</translation>
+        <translation>加算</translation>
     </message>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="108"/>
@@ -5931,7 +5935,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication.h" line="63"/>
         <source>Division duplication</source>
-        <translation>分割複製</translation>
+        <translation>ディビジョンの複製</translation>
     </message>
 </context>
 <context>
@@ -5939,7 +5943,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="30"/>
         <source>A division for each velocity range</source>
-        <translation>各ベロシティ範囲ごとの分割</translation>
+        <translation>ベロシティ範囲ごとに1つのディビジョン</translation>
     </message>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="143"/>
@@ -5954,7 +5958,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="20"/>
         <source>A division for each key</source>
-        <translation>各キーごとの分割</translation>
+        <translation>キーごとに1つのディビジョン</translation>
     </message>
 </context>
 <context>
@@ -6073,7 +6077,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.ui" line="67"/>
         <source>Add</source>
-        <translation>追加</translation>
+        <translation>加算</translation>
     </message>
     <message>
         <location filename="editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.ui" line="74"/>
@@ -6591,7 +6595,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="89"/>
         <source>Divisions</source>
-        <translation>分割</translation>
+        <translation>ディビジョン</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="242"/>
@@ -6738,7 +6742,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="174"/>
         <source>Defined value in the global division</source>
-        <translation>グローバル分割で定義された値</translation>
+        <translation>グローバルディビジョンで定義された値</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="189"/>
@@ -6748,7 +6752,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="201"/>
         <source>Defined value in a division</source>
-        <translation>分割で定義された値</translation>
+        <translation>ディビジョンで定義された値</translation>
     </message>
 </context>
 <context>
@@ -6820,7 +6824,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/release/toolrelease_gui.ui" line="70"/>
         <source>Division to the next octave</source>
-        <translation>次のオクターブへの分割</translation>
+        <translation>次のオクターブへの除数</translation>
     </message>
     <message>
         <location filename="editor/tools/release/toolrelease_gui.ui" line="116"/>
@@ -7045,7 +7049,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="178"/>
         <source>raw values</source>
-        <translation>生のデータ</translation>
+        <translation>生の値</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="209"/>
@@ -7240,7 +7244,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="mainwindow/toprightwidget.cpp" line="147"/>
         <source>Welcome %1</source>
-        <translation>ようこそ %1</translation>
+        <translation>ようこそ、%1</translation>
     </message>
     <message>
         <location filename="mainwindow/toprightwidget.cpp" line="152"/>
@@ -7343,7 +7347,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="172"/>
         <source>Bulk re&amp;name...</source>
-        <translation>一括リネーム(&amp;N)...</translation>
+        <translation>一括リネーム...(&amp;N)</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="260"/>

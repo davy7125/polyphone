@@ -70,22 +70,22 @@
     <message>
         <location filename="core/types/attribute.cpp" line="512"/>
         <source>Mod LFO → pitch (c)</source>
-        <translation>LFO 모듈레이션 → 피치 (c)</translation>
+        <translation>모듈레이션 LFO → 피치 (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="515"/>
         <source>Vib LFO → pitch (c)</source>
-        <translation>LFO 바이브레이터 → 피치 (c)</translation>
+        <translation>비브라토 LFO → 피치 (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="518"/>
         <source>Mod env → pitch (c)</source>
-        <translation>엔벨로프 모듈레이션 → 피치 (c)</translation>
+        <translation>모듈레이션 엔벨로프 → 피치 (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="521"/>
         <source>Filter, cutoff (×)</source>
-        <translation>필터, 컷오프 (x)</translation>
+        <translation>필터, 컷오프 (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="522"/>
@@ -95,17 +95,17 @@
     <message>
         <location filename="core/types/attribute.cpp" line="525"/>
         <source>Filter, resonance (dB)</source>
-        <translation>필터, 반향 (dB)</translation>
+        <translation>필터, 레조넌스 (dB)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="528"/>
         <source>Mod LFO → filter (c)</source>
-        <translation>LFO 모듈레이션 → 필터 (c)</translation>
+        <translation>모듈레이션 LFO → 필터 (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="531"/>
         <source>Mod env → filter (c)</source>
-        <translation>엔벨로프 모듈레이션 → 필터 (c)</translation>
+        <translation>모듈레이션 엔벨로프 → 필터 (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="497"/>
@@ -120,7 +120,7 @@
     <message>
         <location filename="core/types/attribute.cpp" line="534"/>
         <source>Mod LFO → volume (dB)</source>
-        <translation>LFO 모듈레이션 → 볼륨 (dB)</translation>
+        <translation>모듈레이션 LFO → 볼륨 (dB)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="537"/>
@@ -140,177 +140,177 @@
     <message>
         <location filename="core/types/attribute.cpp" line="544"/>
         <source>Pan [-50;50]</source>
-        <translation>팬 [-100;100]</translation>
+        <translation>팬 [-50;50]</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="547"/>
         <source>Mod LFO delay (×)</source>
-        <translation>LFO 모듈레이션 딜레이 (×)</translation>
+        <translation>모듈레이션 LFO 딜레이 (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="548"/>
         <source>Mod LFO delay (s)</source>
-        <translation>LFO 모듈레이션 딜레이 (s)</translation>
+        <translation>모듈레이션 LFO 딜레이 (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="551"/>
         <source>Mod LFO freq (×)</source>
-        <translation>LFO 모듈레이션 주파수 (x)</translation>
+        <translation>모듈레이션 LFO 주파수 (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="552"/>
         <source>Mod LFO freq (Hz)</source>
-        <translation>LFO 모듈레이션 주파수 (Hz)</translation>
+        <translation>모듈레이션 LFO 주파수 (Hz)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="555"/>
         <source>Vib LFO delay (×)</source>
-        <translation>LFO 바이브레이터 딜레이 (x)</translation>
+        <translation>비브라토 LFO 딜레이 (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="556"/>
         <source>Vib LFO delay (s)</source>
-        <translation>LFO 바이브레이터 딜레이 (s)</translation>
+        <translation>비브라토 LFO 딜레이 (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="559"/>
         <source>Vib LFO freq (×)</source>
-        <translation>LFO 바이브레이터 주파수 (x)</translation>
+        <translation>비브라토 LFO 주파수 (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="560"/>
         <source>Vib LFO freq (Hz)</source>
-        <translation>LFO 바이브레이터 주파수 (Hz)</translation>
+        <translation>비브라토 LFO 주파수 (Hz)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="563"/>
         <source>Mod env delay (×)</source>
-        <translation>엔벨로프 모듈레이션 딜레이 (x)</translation>
+        <translation>모듈레이션 엔벨로프 딜레이 (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="564"/>
         <source>Mod env delay (s)</source>
-        <translation>엔벨로프 모듈레이션 딜레이 (s)</translation>
+        <translation>모듈레이션 엔벨로프 딜레이 (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="567"/>
         <source>Mod env attack (×)</source>
-        <translation>엔벨로프 모듈레이션 어택 (x)</translation>
+        <translation>모듈레이션 엔벨로프 어택 (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="568"/>
         <source>Mod env attack (s)</source>
-        <translation>엔벨로프 모듈레이션 어택 (s)</translation>
+        <translation>모듈레이션 엔벨로프 어택 (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="571"/>
         <source>Mod env hold (×)</source>
-        <translation>엔벨로프 모듈레이션 홀드 (x)</translation>
+        <translation>모듈레이션 엔벨로프 홀드 (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="572"/>
         <source>Mod env hold (s)</source>
-        <translation>엔벨로프 모듈레이션 홀드 (s)</translation>
+        <translation>모듈레이션 엔벨로프 홀드 (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="575"/>
         <source>Mod env decay (×)</source>
-        <translation>엔벨로프 모듈레이션 디케이 (x)</translation>
+        <translation>모듈레이션 엔벨로프 디케이 (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="576"/>
         <source>Mod env decay (s)</source>
-        <translation>엔벨로프 모듈레이션 디케이 (s)</translation>
+        <translation>모듈레이션 엔벨로프 디케이 (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="579"/>
         <source>Mod env sustain (%)</source>
-        <translation>엔벨로프 모듈레이션 서스테인 (%)</translation>
+        <translation>모듈레이션 엔벨로프 서스테인 (%)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="582"/>
         <source>Mod env release (×)</source>
-        <translation>엔벨로프 모듈레이션 릴리즈 (×)</translation>
+        <translation>모듈레이션 엔벨로프 릴리즈 (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="583"/>
         <source>Mod env release (s)</source>
-        <translation>엔벨로프 모듈레이션 릴리즈 (s)</translation>
+        <translation>모듈레이션 엔벨로프 릴리즈 (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="586"/>
         <source>Key → Mod env hold (c)</source>
-        <translation>키 → 엔벨로프 모듈레이션 홀드 (c)</translation>
+        <translation>키 → 모듈레이션 엔벨로프 홀드 (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="589"/>
         <source>Key → Mod env decay (c)</source>
-        <translation>키 → 엔벨로프 모듈레이션 디케이 (c)</translation>
+        <translation>키 → 모듈레이션 엔벨로프 디케이 (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="592"/>
         <source>Vol env delay (×)</source>
-        <translation>엔벨로프 볼륨 딜레이 (x)</translation>
+        <translation>볼륨 엔벨로프 딜레이 (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="593"/>
         <source>Vol env delay (s)</source>
-        <translation>엔벨로프 볼륨 딜레이 (s)</translation>
+        <translation>볼륨 엔벨로프 딜레이 (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="596"/>
         <source>Vol env attack (×)</source>
-        <translation>엔벨로프 볼륨 어택 (x)</translation>
+        <translation>볼륨 엔벨로프 어택 (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="597"/>
         <source>Vol env attack (s)</source>
-        <translation>엔벨로프 볼륨 어택 (s)</translation>
+        <translation>볼륨 엔벨로프 어택 (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="600"/>
         <source>Vol env hold (×)</source>
-        <translation>엔벨로프 볼륨 홀드 (x)</translation>
+        <translation>볼륨 엔벨로프 홀드 (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="601"/>
         <source>Vol env hold (s)</source>
-        <translation>엔벨로프 볼륨 홀드 (s)</translation>
+        <translation>볼륨 엔벨로프 홀드 (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="604"/>
         <source>Vol env decay (×)</source>
-        <translation>엔벨로프 볼륨 디케이 (x)</translation>
+        <translation>볼륨 엔벨로프 디케이 (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="605"/>
         <source>Vol env decay (s)</source>
-        <translation>엔벨로프 볼륨 디케이 (s)</translation>
+        <translation>볼륨 엔벨로프 디케이 (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="608"/>
         <source>Vol env sustain (dB)</source>
-        <translation>엔벨로프 볼륨 서스테인 (dB)</translation>
+        <translation>볼륨 엔벨로프 서스테인 (dB)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="611"/>
         <source>Vol env release (×)</source>
-        <translation>엔벨로프 볼륨 릴리즈 (x)</translation>
+        <translation>볼륨 엔벨로프 릴리즈 (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="612"/>
         <source>Vol env release (s)</source>
-        <translation>엔벨로프 볼륨 릴리즈 (s)</translation>
+        <translation>볼륨 엔벨로프 릴리즈 (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="615"/>
         <source>Key → Vol env hold (c)</source>
-        <translation>키 → 엔벨로프 볼륨 홀드 (c)</translation>
+        <translation>키 → 볼륨 엔벨로프 홀드 (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="618"/>
         <source>Key → Vol env decay (c)</source>
-        <translation>키 → 엔벨로프 볼륨 디케이 (c)</translation>
+        <translation>키 → 볼륨 엔벨로프 디케이 (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="621"/>
@@ -325,12 +325,12 @@
     <message>
         <location filename="core/types/attribute.cpp" line="627"/>
         <source>Fixed key</source>
-        <translation>결정된 키</translation>
+        <translation>고정 키</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="630"/>
         <source>Fixed velocity</source>
-        <translation>결정된 벨로시티</translation>
+        <translation>고정 벨로시티</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="633"/>
@@ -446,7 +446,7 @@
         <location filename="context/confmanager.cpp" line="220"/>
         <source>S</source>
         <comment>first key mapping for bottom C#</comment>
-        <translation>C</translation>
+        <translation>S</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="221"/>
@@ -596,157 +596,157 @@
         <location filename="context/confmanager.cpp" line="255"/>
         <source>Shift+Z</source>
         <comment>second key mapping for bottom left C</comment>
-        <translation>쉬프트+Z</translation>
+        <translation>Shift+Z</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="256"/>
         <source>Shift+S</source>
         <comment>second key mapping for bottom C#</comment>
-        <translation>쉬프트+S</translation>
+        <translation>Shift+S</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="257"/>
         <source>Shift+X</source>
         <comment>second key mapping for bottom D</comment>
-        <translation>쉬프트+X</translation>
+        <translation>Shift+X</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="258"/>
         <source>Shift+D</source>
         <comment>second key mapping for bottom D#</comment>
-        <translation>쉬프트+D</translation>
+        <translation>Shift+D</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="259"/>
         <source>Shift+C</source>
         <comment>second key mapping for bottom E</comment>
-        <translation>쉬프트+C</translation>
+        <translation>Shift+C</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="260"/>
         <source>Shift+V</source>
         <comment>second key mapping for bottom F</comment>
-        <translation>쉬프트+V</translation>
+        <translation>Shift+V</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="261"/>
         <source>Shift+G</source>
         <comment>second key mapping for bottom F#</comment>
-        <translation>쉬프트+G</translation>
+        <translation>Shift+G</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="262"/>
         <source>Shift+B</source>
         <comment>second key mapping for bottom G</comment>
-        <translation>쉬프트+B</translation>
+        <translation>Shift+B</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="263"/>
         <source>Shift+H</source>
         <comment>second key mapping for bottom G#</comment>
-        <translation>쉬프트+H</translation>
+        <translation>Shift+H</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="264"/>
         <source>Shift+N</source>
         <comment>second key mapping for bottom A</comment>
-        <translation>쉬프트+N</translation>
+        <translation>Shift+N</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="265"/>
         <source>Shift+J</source>
         <comment>second key mapping for bottom A#</comment>
-        <translation>쉬프트+J</translation>
+        <translation>Shift+J</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="266"/>
         <source>Shift+M</source>
         <comment>second key mapping for bottom B</comment>
-        <translation>쉬프트+M</translation>
+        <translation>Shift+M</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="267"/>
         <source>Shift+&lt;</source>
         <comment>second key mapping for bottom right C</comment>
-        <translation>쉬프트+&lt;</translation>
+        <translation>Shift+&lt;</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="273"/>
         <source>Shift+Q</source>
         <comment>second key mapping for upper left C</comment>
-        <translation>쉬프트+Q</translation>
+        <translation>Shift+Q</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="274"/>
         <source>Shift+@</source>
         <comment>second key mapping for upper C#</comment>
-        <translation>쉬프트+@</translation>
+        <translation>Shift+@</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="275"/>
         <source>Shift+W</source>
         <comment>second key mapping for upper D</comment>
-        <translation>쉬프트+W</translation>
+        <translation>Shift+W</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="276"/>
         <source>Shift+#</source>
         <comment>second key mapping for upper D#</comment>
-        <translation>쉬프트+#</translation>
+        <translation>Shift+#</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="277"/>
         <source>Shift+E</source>
         <comment>second key mapping for upper E</comment>
-        <translation>쉬프트+E</translation>
+        <translation>Shift+E</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="278"/>
         <source>Shift+R</source>
         <comment>second key mapping for upper F</comment>
-        <translation>쉬프트+R</translation>
+        <translation>Shift+R</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="279"/>
         <source>Shift+%</source>
         <comment>second key mapping for upper F#</comment>
-        <translation>쉬프트+%</translation>
+        <translation>Shift+%</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="280"/>
         <source>Shift+T</source>
         <comment>second key mapping for upper G</comment>
-        <translation>쉬프트+T</translation>
+        <translation>Shift+T</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="281"/>
         <source>Shift+^</source>
         <comment>second key mapping for upper G#</comment>
-        <translation>쉬프트+^</translation>
+        <translation>Shift+^</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="282"/>
         <source>Shift+Y</source>
         <comment>second key mapping for upper A</comment>
-        <translation>쉬프트+Y</translation>
+        <translation>Shift+Y</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="283"/>
         <source>Shift+&amp;</source>
         <comment>second key mapping for upper A#</comment>
-        <translation>쉬프트+&amp;</translation>
+        <translation>Shift+&amp;</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="284"/>
         <source>Shift+U</source>
         <comment>second key mapping for upper B</comment>
-        <translation>쉬프트+U</translation>
+        <translation>Shift+U</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="285"/>
         <source>Shift+I</source>
         <comment>second key mapping for upper right C</comment>
-        <translation>쉬프트+I</translation>
+        <translation>Shift+I</translation>
     </message>
 </context>
 <context>
@@ -770,12 +770,12 @@
         <location filename="context/interface/configpanel.ui" line="186"/>
         <source>Keyboard</source>
         <oldsource>Virtual keyboard</oldsource>
-        <translation>가상 건반</translation>
+        <translation>키보드</translation>
     </message>
     <message>
         <location filename="context/interface/configpanel.ui" line="219"/>
         <source>Online repository</source>
-        <translation>온라인 레퍼지토리</translation>
+        <translation>온라인 저장소</translation>
     </message>
 </context>
 <context>
@@ -872,12 +872,12 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="148"/>
         <source>Middle C → 60, then 61</source>
-        <translation>중간 C → 61 그다음 60</translation>
+        <translation>중간 C → 60, 그다음 61</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="153"/>
         <source>Middle C → C3, then C♯3</source>
-        <translation>중간 C → C3, 그다음 C#3</translation>
+        <translation>중간 C → C3, 그다음 C♯3</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="158"/>
@@ -887,7 +887,7 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="163"/>
         <source>Middle C → C4, then C♯4</source>
-        <translation>중간 C → C4, 그다음 C#4</translation>
+        <translation>중간 C → C4, 그다음 C♯4</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="168"/>
@@ -1029,7 +1029,7 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="509"/>
         <source>List and table</source>
-        <translation>테이블 목록</translation>
+        <translation>목록 및 테이블</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="20"/>
@@ -1295,14 +1295,14 @@ Premium!</source>
         <location filename="context/interface/configtoc.ui" line="98"/>
         <source>Keyboard</source>
         <oldsource>Virtual keyboard</oldsource>
-        <translation>가상 건반</translation>
+        <translation>키보드</translation>
     </message>
     <message>
         <location filename="context/interface/configtoc.ui" line="111"/>
         <source>Online
 repository</source>
         <translation>온라인
-레퍼지토리</translation>
+저장소</translation>
     </message>
 </context>
 <context>
@@ -1820,7 +1820,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialog_list.ui" line="73"/>
         <source>Search...</source>
-        <translation>찾는 중...</translation>
+        <translation>검색...</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_list.ui" line="41"/>
@@ -1956,12 +1956,12 @@ repository</source>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="56"/>
         <source>Overwrite existing name with key name as suffix</source>
-        <translation>키 이름으로 기존 이름을 덮어쓰기</translation>
+        <translation>키 이름을 접미사로 사용하여 기존 이름 덮어쓰기</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="66"/>
         <source>Overwrite existing name with numerical ascending suffix</source>
-        <translation>숫자 오름차순으로 기존 이름을 덮어쓰기</translation>
+        <translation>오름차순 숫자를 접미사로 사용하여 기존 이름 덮어쓰기</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_rename.cpp" line="79"/>
@@ -2050,7 +2050,7 @@ repository</source>
         <location filename="directory/directorybrowser.cpp" line="125"/>
         <source>The directory &quot;%1&quot; does not exist.</source>
         <oldsource>The directory &quot;%1&quot; doesn&apos;t exist.</oldsource>
-        <translation>ディレクトリ「%1」は存在しません。</translation>
+        <translation>디렉터리 &quot;%1&quot;이(가) 존재하지 않습니다.</translation>
     </message>
     <message>
         <location filename="directory/directorybrowser.cpp" line="132"/>
@@ -2094,7 +2094,7 @@ repository</source>
     <message>
         <location filename="directory/directorybrowser.cpp" line="268"/>
         <source>Cannot rename file &quot;%1&quot;.</source>
-        <translation>&quot;%1&quot; 파일 이름을 변경할 수 없습니다。</translation>
+        <translation>&quot;%1&quot; 파일 이름을 변경할 수 없습니다.</translation>
     </message>
     <message>
         <location filename="directory/directorybrowser.cpp" line="276"/>
@@ -2121,7 +2121,7 @@ repository</source>
     <message>
         <location filename="directory/directorybrowser.cpp" line="286"/>
         <source>Cannot delete file &quot;%1&quot;.</source>
-        <translation>&quot;%1&quot; 파일을 삭제할 수 없습니다。</translation>
+        <translation>&quot;%1&quot; 파일을 삭제할 수 없습니다.</translation>
     </message>
 </context>
 <context>
@@ -2286,7 +2286,7 @@ repository</source>
     <message>
         <location filename="repository/widgets/downloadprogressbutton.cpp" line="45"/>
         <source>Clear completed downloads</source>
-        <translation>완료된 다운로드</translation>
+        <translation>완료된 다운로드 지우기</translation>
     </message>
 </context>
 <context>
@@ -2322,7 +2322,7 @@ repository</source>
     <message>
         <location filename="core/duplicator.cpp" line="269"/>
         <source>The global division will not be copied.</source>
-        <translation>전역 분류는 복사될 수 없습니다.</translation>
+        <translation>전역 분할은 복사되지 않습니다.</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="271"/>
@@ -2395,7 +2395,7 @@ repository</source>
     <message>
         <location filename="editor/editor.ui" line="183"/>
         <source>Search...</source>
-        <translation>찾는 중...</translation>
+        <translation>검색...</translation>
     </message>
     <message>
         <location filename="editor/editor.ui" line="268"/>
@@ -2428,7 +2428,7 @@ repository</source>
     <message>
         <location filename="repository/soundfont/editor/editordialoginsertimage.ui" line="37"/>
         <source>URL of the image to insert...</source>
-        <translation>삽일할 그림의 URL...</translation>
+        <translation>삽입할 그림의 URL...</translation>
     </message>
 </context>
 <context>
@@ -2500,7 +2500,7 @@ repository</source>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="71"/>
         <source>Cancel</source>
-        <translation>취소</translation>
+        <translation>실행 취소</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="72"/>
@@ -2810,7 +2810,7 @@ repository</source>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="57"/>
         <source>&amp;Open...</source>
-        <translation>열기(&amp;O)</translation>
+        <translation>열기(&amp;O)...</translation>
     </message>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="66"/>
@@ -2820,12 +2820,12 @@ repository</source>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="71"/>
         <source>Save &amp;as...</source>
-        <translation>다른 이름으로 저장(&amp;A)</translation>
+        <translation>다른 이름으로 저장(&amp;A)...</translation>
     </message>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="76"/>
         <source>&amp;Export soundfonts...</source>
-        <translation>사운드폰트 내보내기(&amp;E)</translation>
+        <translation>사운드폰트 내보내기(&amp;E)...</translation>
     </message>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="89"/>
@@ -2938,7 +2938,8 @@ repository</source>
         <source>  New
   soundfont</source>
         <extracomment>prefixed with 2 spaces for each line</extracomment>
-        <translation>  새 사운드폰트</translation>
+        <translation>  새
+  사운드폰트</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="152"/>
@@ -2964,7 +2965,8 @@ repository</source>
         <source>  Online
   repository</source>
         <extracomment>prefixed with 2 spaces for each line</extracomment>
-        <translation>  온라인 레퍼지토리</translation>
+        <translation>  온라인
+  저장소</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="198"/>
@@ -2977,12 +2979,12 @@ repository</source>
   soundfont</source>
         <extracomment>prefixed with 2 spaces for each line</extracomment>
         <translation>  사운드폰트
-열기</translation>
+  열기</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="281"/>
         <source>History</source>
-        <translation>역사</translation>
+        <translation>기록</translation>
     </message>
 </context>
 <context>
@@ -2990,7 +2992,7 @@ repository</source>
     <message>
         <location filename="editor/modulator/modulatorcell.ui" line="127"/>
         <source>no operation</source>
-        <translation>작동하지 않음</translation>
+        <translation>연산 없음</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.ui" line="132"/>
@@ -3011,7 +3013,7 @@ repository</source>
         <location filename="editor/modulator/modulatorcell.cpp" line="156"/>
         <source>overwritten by %1</source>
         <oldsource>overriden by %1</oldsource>
-        <translation>%1 덮어쓰기</translation>
+        <translation>%1에 의해 덮어써짐</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="163"/>
@@ -3024,8 +3026,8 @@ default mod.</source>
         <location filename="editor/modulator/modulatorcell.cpp" line="165"/>
         <source>overriding
 default mod.</source>
-        <translation>기본 모듈레이터를
-덮어씁니다.</translation>
+        <translation>기본 모듈레이터
+덮어쓰기</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="384"/>
@@ -3042,7 +3044,7 @@ default mod.</source>
         <location filename="editor/modulator/modulatorcell.cpp" line="395"/>
         <source>cents</source>
         <comment>hundredth of semi-tones</comment>
-        <translation>반음의 100 분의 1</translation>
+        <translation>센트</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="406"/>
@@ -3120,7 +3122,7 @@ default mod.</source>
         <location filename="editor/modulator/modulatoreditor.ui" line="234"/>
         <location filename="editor/modulator/modulatoreditor.cpp" line="162"/>
         <source>Select a single division to display the modulator list</source>
-        <translation>단일 분류를 선택해 모듈레이터 목록 표시</translation>
+        <translation>단일 분할을 선택해 모듈레이터 목록 표시</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatoreditor.ui" line="320"/>
@@ -3137,7 +3139,7 @@ default mod.</source>
     <message>
         <location filename="editor/modulator/modulatoreditor.cpp" line="345"/>
         <source>Duplicate the selection toward...</source>
-        <translation>선택영역으로 복제...</translation>
+        <translation>선택 항목을 다음으로 복제...</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatoreditor.cpp" line="346"/>
@@ -3147,7 +3149,7 @@ default mod.</source>
     <message>
         <location filename="editor/modulator/modulatoreditor.cpp" line="351"/>
         <source>Duplicate modulators toward...</source>
-        <translation>모듈레이터로 복제...</translation>
+        <translation>모듈레이터를 다음으로 복제...</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatoreditor.cpp" line="352"/>
@@ -3173,7 +3175,7 @@ default mod.</source>
     <message>
         <location filename="editor/modulator/modulatoreditor.cpp" line="657"/>
         <source>%1 cannot be modulated in a preset.</source>
-        <translation>프리셋 %1은(는) 변조될 수 없습니다.</translation>
+        <translation>%1은(는) 프리셋에서 변조할 수 없습니다.</translation>
     </message>
 </context>
 <context>
@@ -3277,12 +3279,12 @@ default mod.</source>
     <message>
         <location filename="editor/pageenvelope.ui" line="458"/>
         <source>Volume envelope</source>
-        <translation>엔벨로프 볼륨</translation>
+        <translation>볼륨 엔벨로프</translation>
     </message>
     <message>
         <location filename="editor/pageenvelope.ui" line="477"/>
         <source>Modulation envelope</source>
-        <translation>엔벨로프 모듈레이션</translation>
+        <translation>모듈레이션 엔벨로프</translation>
     </message>
     <message>
         <location filename="editor/pageenvelope.cpp" line="93"/>
@@ -3317,17 +3319,17 @@ default mod.</source>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="39"/>
         <source>Sample number</source>
-        <translation>샘플 번호</translation>
+        <translation>샘플 개수</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="40"/>
         <source>Parameter number</source>
-        <translation>매개변수 번호</translation>
+        <translation>매개변수 개수</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="41"/>
         <source>Modulator number</source>
-        <translation>모듈레이터 번호</translation>
+        <translation>모듈레이터 개수</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="42"/>
@@ -3385,17 +3387,17 @@ default mod.</source>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="39"/>
         <source>Instrument number</source>
-        <translation>악기 번호</translation>
+        <translation>악기 개수</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="40"/>
         <source>Parameter number</source>
-        <translation>매개변수 번호</translation>
+        <translation>매개변수 개수</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="41"/>
         <source>Modulator number</source>
-        <translation>모듈레이터 번호</translation>
+        <translation>모듈레이터 개수</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="42"/>
@@ -3434,7 +3436,8 @@ default mod.</source>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="40"/>
         <source>Total
 duration</source>
-        <translation>전체 지속시간</translation>
+        <translation>전체
+지속시간</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="43"/>
@@ -3445,7 +3448,8 @@ duration</source>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="41"/>
         <source>Loop
 duration</source>
-        <translation>루프 지속시간</translation>
+        <translation>루프
+지속시간</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="33"/>
@@ -3719,7 +3723,7 @@ to display its division ranges</source>
     <message>
         <location filename="editor/pagesmpl.ui" line="284"/>
         <source>sine</source>
-        <translation>기음</translation>
+        <translation>사인파</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="187"/>
@@ -3779,7 +3783,7 @@ to display its division ranges</source>
     <message>
         <location filename="editor/pagesmpl.ui" line="608"/>
         <source>Channel</source>
-        <translation type="unfinished">채널</translation>
+        <translation>채널</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="669"/>
@@ -3891,7 +3895,7 @@ Warning: quality will be reduced and the loop may be altered</source>
         <location filename="editor/pagesmpl.cpp" line="1111"/>
         <source>Yes and &amp;create another sample</source>
         <oldsource>Yes and create another &amp;sample</oldsource>
-        <translation>예, 다른 샘플을 &amp;생성합니다.</translation>
+        <translation>예, 다른 샘플 생성(&amp;C)</translation>
     </message>
 </context>
 <context>
@@ -4331,7 +4335,10 @@ Warning: quality will be reduced and the loop may be altered</source>
 This rule applies at the sample level and also when editing a division of an instrument:
 the division corresponding to the other channel, if any, is edited the same.
 Both divisions must share the same note and velocity ranges.</source>
-        <translation>스테레오 샘플의 한쪽을 편집할 때, 다른 쪽은 자동으로 동일하게 편집됩니다. 이 규칙은 샘플 수준과 악기의 분할을 편집할 때도 적용됩니다. 즉, 다른 채널에 해당하는 분할(있는 경우)도 동일하게 편집됩니다. 두 분할 모두 동일한 음표 및 벨로시티 범위를 공유해야 합니다.</translation>
+        <translation>스테레오 샘플의 한쪽을 편집할 때, 다른 쪽은 자동으로 동일하게 편집됩니다.
+이 규칙은 샘플 수준과 악기의 분할을 편집할 때도 적용됩니다.
+다른 채널에 해당하는 분할(있는 경우)도 동일하게 편집됩니다.
+두 분할 모두 동일한 음표 및 벨로시티 범위를 공유해야 합니다.</translation>
     </message>
     <message>
         <location filename="core/input/sf/inputsf.h" line="35"/>
@@ -4342,7 +4349,7 @@ Both divisions must share the same note and velocity ranges.</source>
         <location filename="context/tuningprogrammanager.cpp" line="85"/>
         <source>Equal</source>
         <comment>Equal musical temperament</comment>
-        <translation>균등</translation>
+        <translation>평균율</translation>
     </message>
     <message>
         <location filename="context/tuningprogrammanager.cpp" line="121"/>
@@ -4357,75 +4364,75 @@ Both divisions must share the same note and velocity ranges.</source>
     <message>
         <location filename="main.cpp" line="107"/>
         <source>The file &quot;%1&quot; does not exist.</source>
-        <translation>ファイル「%1」は存在しません。</translation>
+        <translation>파일 &quot;%1&quot;이(가) 존재하지 않습니다.</translation>
     </message>
     <message>
         <location filename="main.cpp" line="115"/>
         <source>The directory &quot;%1&quot; does not exist.</source>
-        <translation>ディレクトリ「%1」は存在しません。</translation>
+        <translation>디렉터리 &quot;%1&quot;이(가) 존재하지 않습니다.</translation>
     </message>
     <message>
         <location filename="main.cpp" line="120"/>
         <source>The file &quot;%1&quot; already exists.</source>
-        <translation>ファイル「%1」は既に存在します。</translation>
+        <translation>파일 &quot;%1&quot;이(가) 이미 존재합니다.</translation>
     </message>
     <message>
         <location filename="main.cpp" line="125"/>
         <source>Loading file &quot;%1&quot;...</source>
-        <translation>ファイル「%1」を読み込み中...</translation>
+        <translation>파일 &quot;%1&quot;을(를) 불러오는 중...</translation>
     </message>
     <message>
         <location filename="main.cpp" line="130"/>
         <source>Couldn&apos;t load file &quot;%1&quot;: %2.</source>
         <oldsource>Couldn&apos;t load &quot;%1&quot;: %2.</oldsource>
-        <translation>ファイル「%1」を読み込めませんでした: %2。</translation>
+        <translation>파일 &quot;%1&quot;을(를) 불러올 수 없습니다: %2.</translation>
     </message>
     <message>
         <location filename="main.cpp" line="136"/>
         <source>File successfully loaded!</source>
-        <translation>ファイルの読み込みに成功しました！</translation>
+        <translation>파일을 성공적으로 불러왔습니다!</translation>
     </message>
     <message>
         <location filename="main.cpp" line="143"/>
         <location filename="main.cpp" line="147"/>
         <source>Writing file &quot;%1&quot;...</source>
-        <translation>ファイル「%1」を書き込み中...</translation>
+        <translation>파일 &quot;%1&quot;을(를) 쓰는 중...</translation>
     </message>
     <message>
         <location filename="main.cpp" line="153"/>
         <location filename="main.cpp" line="157"/>
         <source>Writing files in directory &quot;%1&quot;...</source>
-        <translation>ディレクトリ「%1」にファイルを書き込み中...</translation>
+        <translation>디렉터리 &quot;%1&quot;에 파일을 쓰는 중...</translation>
     </message>
     <message>
         <location filename="main.cpp" line="160"/>
         <source>Unknown mode &quot;%1&quot;.</source>
-        <translation>不明なモード「%1」。</translation>
+        <translation>알 수 없는 모드 &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="main.cpp" line="168"/>
         <source>An error occurred: %1.</source>
-        <translation>エラーが発生しました: %1。</translation>
+        <translation>오류가 발생했습니다: %1.</translation>
     </message>
     <message>
         <location filename="main.cpp" line="173"/>
         <source>File successfully converted!</source>
-        <translation>ファイルの変換に成功しました！</translation>
+        <translation>파일을 성공적으로 변환했습니다!</translation>
     </message>
     <message>
         <location filename="main.cpp" line="186"/>
         <source>Previous configuration is now cleared.</source>
-        <translation>以前の設定は消去されました。</translation>
+        <translation>이전 설정이 초기화되었습니다.</translation>
     </message>
     <message>
         <location filename="main.cpp" line="195"/>
         <source>See &quot;%1&quot; for more information.</source>
-        <translation>詳細については「%1」を参照してください。</translation>
+        <translation>자세한 내용은 &quot;%1&quot;을(를) 참조하십시오.</translation>
     </message>
     <message>
         <location filename="main.cpp" line="197"/>
         <source>Write &quot;%1&quot; to show usage.</source>
-        <translation>使用法を表示するには「%1」と入力してください。</translation>
+        <translation>사용법을 보려면 &quot;%1&quot;을(를) 입력하십시오.</translation>
     </message>
 </context>
 <context>
@@ -4478,7 +4485,7 @@ Both divisions must share the same note and velocity ranges.</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="84"/>
         <source>granular synthesis</source>
-        <translation>세분화 합성</translation>
+        <translation>그래뉼러 합성</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="85"/>
@@ -4548,7 +4555,7 @@ Both divisions must share the same note and velocity ranges.</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="100"/>
         <source>muted</source>
-        <translation>음소거된</translation>
+        <translation>약음된</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="101"/>
@@ -4953,7 +4960,7 @@ download the list</source>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="437"/>
         <source>Articulation</source>
-        <translation>조음</translation>
+        <translation>아티큘레이션</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="452"/>
@@ -5106,7 +5113,7 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="94"/>
         <source>Articulation</source>
-        <translation>조음</translation>
+        <translation>아티큘레이션</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="113"/>
@@ -5288,7 +5295,7 @@ download content</source>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewerleft.ui" line="209"/>
         <source>Articulation</source>
-        <translation>조음</translation>
+        <translation>아티큘레이션</translation>
     </message>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewerleft.ui" line="225"/>
@@ -5510,7 +5517,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="213"/>
         <source>Possible reasons: too short or too turbulent.</source>
-        <translation>가능성: 너무 짧거나 난해합니다.</translation>
+        <translation>가능한 원인: 너무 짧거나 너무 불안정합니다.</translation>
     </message>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.h" line="47"/>
@@ -5579,7 +5586,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.cpp" line="50"/>
         <source>Number of beats per second</source>
-        <translation>초당 비트 수</translation>
+        <translation>초당 맥놀이 수</translation>
     </message>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.cpp" line="50"/>
@@ -5748,17 +5755,17 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="112"/>
         <source>Seventh</source>
-        <translation>7화음</translation>
+        <translation>7도</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="124"/>
         <source>Ninth</source>
-        <translation>9화음</translation>
+        <translation>9도</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="136"/>
         <source>Third</source>
-        <translation>3화음</translation>
+        <translation>3도</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="172"/>
@@ -5768,7 +5775,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="184"/>
         <source>Fifth</source>
-        <translation>5화음</translation>
+        <translation>5도</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="221"/>
@@ -5801,7 +5808,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="335"/>
         <source>Inversion number</source>
-        <translation>전위 번호</translation>
+        <translation>전위 수</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="363"/>
@@ -5865,7 +5872,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/clean_unused_elements/toolcleanunused.h" line="48"/>
         <source>Clean up</source>
-        <translation>클린 업</translation>
+        <translation>정리</translation>
     </message>
 </context>
 <context>
@@ -5979,7 +5986,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.h" line="66"/>
         <source>External command</source>
-        <translation>확장 명령</translation>
+        <translation>외부 명령</translation>
     </message>
 </context>
 <context>
@@ -5997,7 +6004,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="94"/>
         <source>Authorize stereo editing</source>
-        <translation>스테레오 편집 권한 부여</translation>
+        <translation>스테레오 편집 허용</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="118"/>
@@ -6545,7 +6552,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation.h" line="63"/>
         <source>Mixture creation</source>
-        <translation>혼합물 생성</translation>
+        <translation>믹스처 생성</translation>
     </message>
 </context>
 <context>
@@ -6553,7 +6560,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="25"/>
         <source>Name of the mixture:</source>
-        <translation>혼합물의 이름:</translation>
+        <translation>믹스처 이름:</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="39"/>
@@ -6598,7 +6605,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="265"/>
         <source>Ranks</source>
-        <translation>등급</translation>
+        <translation>랭크</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="338"/>
@@ -6613,67 +6620,67 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="351"/>
         <source>fifth</source>
-        <translation>5화음</translation>
+        <translation>5도</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="356"/>
         <source>third</source>
-        <translation>3화음</translation>
+        <translation>3도</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="361"/>
         <source>seventh</source>
-        <translation>7화음</translation>
+        <translation>7도</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="366"/>
         <source>ninth</source>
-        <translation>9화음</translation>
+        <translation>9도</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="371"/>
         <source>eleventh</source>
-        <translation>11화음</translation>
+        <translation>11도</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="376"/>
         <source>thirteenth</source>
-        <translation>13화음</translation>
+        <translation>13도</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="381"/>
         <source>fifteenth</source>
-        <translation>15화음</translation>
+        <translation>15도</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="386"/>
         <source>seventeenth</source>
-        <translation>17화음</translation>
+        <translation>17도</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="391"/>
         <source>nineteenth</source>
-        <translation>19화음</translation>
+        <translation>19도</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="396"/>
         <source>twenty-first</source>
-        <translation>21화음</translation>
+        <translation>21도</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="401"/>
         <source>twenty-third</source>
-        <translation>23화음</translation>
+        <translation>23도</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="406"/>
         <source>twenty-fifth</source>
-        <translation>25화음</translation>
+        <translation>25도</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="411"/>
         <source>twenty-seventh</source>
-        <translation>27화음</translation>
+        <translation>27도</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="498"/>
@@ -6699,7 +6706,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="586"/>
         <source>At least one rank must be specified.</source>
-        <translation>하나 이상의 등급을 지정해야 합니다.</translation>
+        <translation>하나 이상의 랭크를 지정해야 합니다.</translation>
     </message>
 </context>
 <context>
@@ -6720,7 +6727,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="80"/>
         <source>Display options</source>
-        <translation>옵션 표시</translation>
+        <translation>표시 옵션</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="121"/>
@@ -6730,7 +6737,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="142"/>
         <source>Legend</source>
-        <translation>레전드</translation>
+        <translation>범례</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="174"/>
@@ -6941,7 +6948,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="66"/>
         <source>Division number</source>
-        <translation>분할 번호</translation>
+        <translation>분할 수</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="121"/>
@@ -7007,7 +7014,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="142"/>
         <source>one directory per bank</source>
-        <translation>뱅크당 경로</translation>
+        <translation>뱅크당 디렉터리 하나</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="104"/>
@@ -7042,7 +7049,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="178"/>
         <source>raw values</source>
-        <translation>生のデータ</translation>
+        <translation>원시 값</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="209"/>
@@ -7087,7 +7094,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="203"/>
         <source>The maximal number of soundfont to export is 127.</source>
-        <translation>내보낼 사운드 폰트의 최대 수는 127입니다.</translation>
+        <translation>내보낼 사운드폰트의 최대 수는 127입니다.</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="212"/>
@@ -7100,7 +7107,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/transpose/tooltranspose.cpp" line="159"/>
         <source>An instrument comprising no samples is not compatible with this tool:</source>
-        <translation>샘플이없는 악기는 이 도구와 호환되지 않습니다:</translation>
+        <translation>샘플이 없는 악기는 이 도구와 호환되지 않습니다:</translation>
     </message>
     <message>
         <location filename="editor/tools/transpose/tooltranspose.h" line="45"/>
@@ -7286,12 +7293,12 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="47"/>
         <source>&amp;Bind to...</source>
-        <translation>악기에 바인딩하기(&amp;B)...</translation>
+        <translation>다음에 연결(&amp;B)...</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="52"/>
         <source>&amp;Replace by...</source>
-        <translation>다음으로 바꾸기... (&amp;R)</translation>
+        <translation>다음으로 바꾸기(&amp;R)...</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="62"/>
@@ -7335,12 +7342,12 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tree/treeviewmenu.cpp" line="176"/>
         <source>Re&amp;name...</source>
         <oldsource>&amp;Rename...</oldsource>
-        <translation>이름변경(&amp;N)</translation>
+        <translation>이름변경(&amp;N)...</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="172"/>
         <source>Bulk re&amp;name...</source>
-        <translation>대량 이름변경(&amp;N)</translation>
+        <translation>대량 이름변경(&amp;N)...</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="260"/>

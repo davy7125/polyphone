@@ -65,7 +65,7 @@
     <message>
         <location filename="core/types/attribute.cpp" line="503"/>
         <source>Loop start offset (× 32768)</source>
-        <translation>Start-offset sample (× 32768)</translation>
+        <translation>Start-offset loop (× 32768)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="512"/>
@@ -205,12 +205,12 @@
     <message>
         <location filename="core/types/attribute.cpp" line="571"/>
         <source>Mod env hold (×)</source>
-        <translation>Mod env sustain (×)</translation>
+        <translation>Mod env hold (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="572"/>
         <source>Mod env hold (s)</source>
-        <translation>Mod env sustain (s)</translation>
+        <translation>Mod env hold (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="575"/>
@@ -240,7 +240,7 @@
     <message>
         <location filename="core/types/attribute.cpp" line="586"/>
         <source>Key → Mod env hold (c)</source>
-        <translation>Toonhoogte → Mod env sustain (c)</translation>
+        <translation>Toonhoogte → Mod env hold (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="589"/>
@@ -270,12 +270,12 @@
     <message>
         <location filename="core/types/attribute.cpp" line="600"/>
         <source>Vol env hold (×)</source>
-        <translation>Vol env sustain (×)</translation>
+        <translation>Vol env hold (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="601"/>
         <source>Vol env hold (s)</source>
-        <translation>Vol env sustain (s)</translation>
+        <translation>Vol env hold (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="604"/>
@@ -305,7 +305,7 @@
     <message>
         <location filename="core/types/attribute.cpp" line="615"/>
         <source>Key → Vol env hold (c)</source>
-        <translation>Toonhoogte → Vol env sustain (c)</translation>
+        <translation>Toonhoogte → Vol env hold (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="618"/>
@@ -440,7 +440,7 @@
         <location filename="context/confmanager.cpp" line="219"/>
         <source>Z</source>
         <comment>first key mapping for bottom left C</comment>
-        <translation>W</translation>
+        <translation>Z</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="220"/>
@@ -596,7 +596,7 @@
         <location filename="context/confmanager.cpp" line="255"/>
         <source>Shift+Z</source>
         <comment>second key mapping for bottom left C</comment>
-        <translation>Shift+W</translation>
+        <translation>Shift+Z</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="256"/>
@@ -2505,12 +2505,12 @@ repository</translation>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="71"/>
         <source>Cancel</source>
-        <translation>Annuleren</translation>
+        <translation>Ongedaan maken</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="72"/>
         <source>Redo</source>
-        <translation>Ongedaan maken</translation>
+        <translation>Opnieuw uitvoeren</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="73"/>
@@ -3105,7 +3105,7 @@ overschrijven</translation>
     <message>
         <location filename="editor/modulator/modulatoreditor.ui" line="103"/>
         <source>Paste the copied modulators</source>
-        <translation>Geplakte modulatoren plakken</translation>
+        <translation>Gekopieerde modulatoren plakken</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatoreditor.ui" line="132"/>
@@ -3325,17 +3325,17 @@ overschrijven</translation>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="39"/>
         <source>Sample number</source>
-        <translation>Sample aantal</translation>
+        <translation>Aantal samples</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="40"/>
         <source>Parameter number</source>
-        <translation>Parameter aantal</translation>
+        <translation>Aantal parameters</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="41"/>
         <source>Modulator number</source>
-        <translation>Modulator aantal</translation>
+        <translation>Aantal modulatoren</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="42"/>
@@ -3393,17 +3393,17 @@ overschrijven</translation>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="39"/>
         <source>Instrument number</source>
-        <translation>Instrument aantal</translation>
+        <translation>Aantal instrumenten</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="40"/>
         <source>Parameter number</source>
-        <translation>Parameter aantal</translation>
+        <translation>Aantal parameters</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="41"/>
         <source>Modulator number</source>
-        <translation>Modulator aantal</translation>
+        <translation>Aantal modulatoren</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="42"/>
@@ -3486,8 +3486,8 @@ sample</translation>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="46"/>
         <source>Sample
 rate</source>
-        <translation>Sample
-snelheid</translation>
+        <translation>Sample-
+frequentie</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="47"/>
@@ -3774,7 +3774,7 @@ om de divisiebereiken weer te geven</translation>
     <message>
         <location filename="editor/pagesmpl.ui" line="601"/>
         <source>Sample rate</source>
-        <translation>Sample rate</translation>
+        <translation>Samplefrequentie</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="615"/>
@@ -3901,7 +3901,7 @@ Waarschuwing: kwaliteit wordt verminderd en de loop kan worden gewijzigd</transl
         <location filename="editor/pagesmpl.cpp" line="1111"/>
         <source>Yes and &amp;create another sample</source>
         <oldsource>Yes and create another &amp;sample</oldsource>
-        <translation>Ja en &amp;maak een andere sample</translation>
+        <translation>Ja en &amp;maak nog een sample</translation>
     </message>
 </context>
 <context>
@@ -4342,7 +4342,7 @@ This rule applies at the sample level and also when editing a division of an ins
 the division corresponding to the other channel, if any, is edited the same.
 Both divisions must share the same note and velocity ranges.</source>
         <translation>Bij het bewerken van één kant van een stereosample wordt de andere kant automatisch op dezelfde manier bewerkt.
-Deze regel geldt op sampeleniveau en ook bij het bewerken van een divisie van een instrument:
+Deze regel geldt op sampleniveau en ook bij het bewerken van een divisie van een instrument:
 de divisie die overeenkomt met het andere kanaal, indien aanwezig, wordt op dezelfde manier bewerkt.
 Beide divisies moeten hetzelfde toonhoogte- en snelheidsbereik delen.</translation>
     </message>
@@ -4355,7 +4355,7 @@ Beide divisies moeten hetzelfde toonhoogte- en snelheidsbereik delen.</translati
         <location filename="context/tuningprogrammanager.cpp" line="85"/>
         <source>Equal</source>
         <comment>Equal musical temperament</comment>
-        <translation>Gelijk</translation>
+        <translation>Gelijkzwevend</translation>
     </message>
     <message>
         <location filename="context/tuningprogrammanager.cpp" line="121"/>
@@ -4476,7 +4476,7 @@ Beide divisies moeten hetzelfde toonhoogte- en snelheidsbereik delen.</translati
     <message>
         <location filename="repository/repositorymanager.cpp" line="81"/>
         <source>model synthesis</source>
-        <translation>modale synthese</translation>
+        <translation>modelsynthese</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="82"/>
@@ -4576,17 +4576,17 @@ Beide divisies moeten hetzelfde toonhoogte- en snelheidsbereik delen.</translati
     <message>
         <location filename="repository/repositorymanager.cpp" line="103"/>
         <source>noisy</source>
-        <translation>ruis</translation>
+        <translation>ruisend</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="104"/>
         <source>metallic</source>
-        <translation>metaal</translation>
+        <translation>metaalachtig</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="105"/>
         <source>wooden</source>
-        <translation>hout</translation>
+        <translation>houtachtig</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="106"/>
@@ -4601,7 +4601,7 @@ Beide divisies moeten hetzelfde toonhoogte- en snelheidsbereik delen.</translati
     <message>
         <location filename="repository/repositorymanager.cpp" line="110"/>
         <source>decaying</source>
-        <translation>vervallend</translation>
+        <translation>uitstervend</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="111"/>
@@ -5398,7 +5398,7 @@ inhoud niet downloaden</translation>
     <message>
         <location filename="editor/widgets/tableheaderview.cpp" line="63"/>
         <source>unmute all</source>
-        <translation>alles dempen</translation>
+        <translation>alle demping opheffen</translation>
     </message>
 </context>
 <context>
@@ -5486,7 +5486,7 @@ Andere soundfont-editors kunnen andere eenheden weergeven.</translation>
     <message>
         <location filename="context/thememanager.cpp" line="605"/>
         <source>Good night</source>
-        <translation>Goede nacht</translation>
+        <translation>Goedenacht</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="618"/>
@@ -5592,7 +5592,7 @@ Andere soundfont-editors kunnen andere eenheden weergeven.</translation>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.cpp" line="50"/>
         <source>Number of beats per second</source>
-        <translation>Aantal beats per seconde</translation>
+        <translation>Aantal zwevingen per seconde</translation>
     </message>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.cpp" line="50"/>
@@ -5797,14 +5797,14 @@ Andere soundfont-editors kunnen andere eenheden weergeven.</translation>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="293"/>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="358"/>
         <source>major</source>
-        <translation>majeur</translation>
+        <translation>groot</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="231"/>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="298"/>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="353"/>
         <source>minor</source>
-        <translation>mineur</translation>
+        <translation>klein</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="250"/>
@@ -5814,7 +5814,7 @@ Andere soundfont-editors kunnen andere eenheden weergeven.</translation>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="335"/>
         <source>Inversion number</source>
-        <translation>Inversie nummer</translation>
+        <translation>Aantal omkeringen</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="363"/>
@@ -5825,12 +5825,12 @@ Andere soundfont-editors kunnen andere eenheden weergeven.</translation>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="406"/>
         <source>perfect</source>
-        <translation>perfect</translation>
+        <translation>rein</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="416"/>
         <source>augmented</source>
-        <translation>verhoogd</translation>
+        <translation>overmatig</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="656"/>
@@ -6012,7 +6012,7 @@ Andere soundfont-editors kunnen andere eenheden weergeven.</translation>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="94"/>
         <source>Authorize stereo editing</source>
-        <translation>Stereo bewerking autoriseren</translation>
+        <translation>Stereobewerking toestaan</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="118"/>
@@ -6108,7 +6108,7 @@ Andere soundfont-editors kunnen andere eenheden weergeven.</translation>
     <message>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter.h" line="61"/>
         <source>Filter frequencies</source>
-        <translation>Frequentie filteren</translation>
+        <translation>Frequenties filteren</translation>
     </message>
 </context>
 <context>
@@ -6958,7 +6958,7 @@ Andere soundfont-editors kunnen andere eenheden weergeven.</translation>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="66"/>
         <source>Division number</source>
-        <translation>Divisienummer</translation>
+        <translation>Aantal divisies</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="121"/>
@@ -7019,7 +7019,7 @@ Andere soundfont-editors kunnen andere eenheden weergeven.</translation>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="71"/>
         <source>General MIDI classification</source>
-        <translation>Algemene MIDI-classificatie</translation>
+        <translation>General MIDI-classificatie</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="142"/>

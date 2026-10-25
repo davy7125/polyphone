@@ -95,7 +95,7 @@
     <message>
         <location filename="core/types/attribute.cpp" line="525"/>
         <source>Filter, resonance (dB)</source>
-        <translation>Filtr, ozvěna (dB)</translation>
+        <translation>Filtr, rezonance (dB)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="528"/>
@@ -110,7 +110,7 @@
     <message>
         <location filename="core/types/attribute.cpp" line="497"/>
         <source>Sample end offset (× 32768)</source>
-        <translation>Posun konce smyčky (× 32768)</translation>
+        <translation>Posun konce vzorku (× 32768)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="491"/>
@@ -160,7 +160,7 @@
     <message>
         <location filename="core/types/attribute.cpp" line="552"/>
         <source>Mod LFO freq (Hz)</source>
-        <translation>Mod LFO knitočet (Hz)</translation>
+        <translation>Mod LFO kmitočet (Hz)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="555"/>
@@ -180,7 +180,7 @@
     <message>
         <location filename="core/types/attribute.cpp" line="560"/>
         <source>Vib LFO freq (Hz)</source>
-        <translation>Vib LFO knitočet (Hz)</translation>
+        <translation>Vib LFO kmitočet (Hz)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="563"/>
@@ -265,7 +265,7 @@
     <message>
         <location filename="core/types/attribute.cpp" line="597"/>
         <source>Vol env attack (s)</source>
-        <translation>Vol env náběh(s)</translation>
+        <translation>Vol env náběh (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="600"/>
@@ -844,7 +844,7 @@
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="126"/>
         <source>trim to loop</source>
-        <translation>Ořezat na smyčce</translation>
+        <translation>Ořezat na konec smyčky</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="218"/>
@@ -887,7 +887,7 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="163"/>
         <source>Middle C → C4, then C♯4</source>
-        <translation>Jednočárkované C (C1) C → C4, pak C♯4</translation>
+        <translation>Jednočárkované C (C1) → C4, pak C♯4</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="168"/>
@@ -1212,7 +1212,7 @@ prémiový!</translation>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="223"/>
         <source>Width</source>
-        <translation>Hustota</translation>
+        <translation>Šířka</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="22"/>
@@ -1234,7 +1234,7 @@ prémiový!</translation>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="136"/>
         <source>disabled</source>
-        <translation>zakázat</translation>
+        <translation>zakázáno</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="238"/>
@@ -1244,7 +1244,7 @@ prémiový!</translation>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="180"/>
         <source>Room</source>
-        <translation>Hloubka</translation>
+        <translation>Místnost</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="357"/>
@@ -1761,12 +1761,12 @@ repository</source>
     <message>
         <location filename="dialogs/dialogkeyboard.ui" line="157"/>
         <source>88 keys (piano)</source>
-        <translation>88 noty (klavír)</translation>
+        <translation>88 kláves (klavír)</translation>
     </message>
     <message>
         <location filename="dialogs/dialogkeyboard.ui" line="162"/>
         <source>128 keys (full)</source>
-        <translation>128 noty (úplná)</translation>
+        <translation>128 kláves (úplná)</translation>
     </message>
     <message>
         <location filename="dialogs/dialogkeyboard.ui" line="188"/>
@@ -2343,7 +2343,7 @@ repository</source>
     <message>
         <location filename="core/duplicator.cpp" line="272"/>
         <source>Ok, &amp;disable this message</source>
-        <translation>OK, &amp;nezobrazovzat tuto zprávu znovu</translation>
+        <translation>OK, &amp;nezobrazovat tuto zprávu znovu</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="304"/>
@@ -2511,7 +2511,7 @@ repository</source>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="71"/>
         <source>Cancel</source>
-        <translation>Zrušit</translation>
+        <translation>Zpět</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="72"/>
@@ -2951,7 +2951,7 @@ repository</source>
         <source>  New
   soundfont</source>
         <extracomment>prefixed with 2 spaces for each line</extracomment>
-        <translation>  Nová  
+        <translation>  Nová
   zvuková banka</translation>
     </message>
     <message>
@@ -2971,14 +2971,14 @@ repository</source>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="249"/>
         <source>Daily soundfonts</source>
-        <translation>Denně zvukové banky</translation>
+        <translation>Denní zvukové banky</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="259"/>
         <source>  Online
   repository</source>
         <extracomment>prefixed with 2 spaces for each line</extracomment>
-        <translation>  Internetovéé
+        <translation>  Internetové
   úložiště</translation>
     </message>
     <message>
@@ -3015,7 +3015,7 @@ repository</source>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="58"/>
         <source>Modulator</source>
-        <translation>Vlnový modulátor</translation>
+        <translation>Modulátor</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="99"/>
@@ -3083,7 +3083,7 @@ výchozího mod.</translation>
         <location filename="editor/modulator/modulatorcombodest.cpp" line="86"/>
         <location filename="editor/modulator/modulatorcombodest.cpp" line="115"/>
         <source>Modulator</source>
-        <translation>Vlnový modulátor</translation>
+        <translation>Modulátor</translation>
     </message>
 </context>
 <context>
@@ -3101,7 +3101,7 @@ výchozího mod.</translation>
     <message>
         <location filename="editor/modulator/modulatorcombosrc.cpp" line="96"/>
         <source>Modulator</source>
-        <translation>Vlnový modulátor</translation>
+        <translation>Modulátor</translation>
     </message>
 </context>
 <context>
@@ -3295,7 +3295,7 @@ výchozího mod.</translation>
     <message>
         <location filename="editor/pageenvelope.ui" line="458"/>
         <source>Volume envelope</source>
-        <translation>Hlasitost obálka</translation>
+        <translation>Obálka hlasitosti</translation>
     </message>
     <message>
         <location filename="editor/pageenvelope.ui" line="477"/>
@@ -3365,7 +3365,7 @@ modulátorů</translation>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="44"/>
         <source>Attenuation</source>
-        <translation>Ztlumení</translation>
+        <translation>Zeslabení</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="45"/>
@@ -3405,8 +3405,7 @@ ve smyčce</translation>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="38"/>
         <source>Bank - Preset</source>
-        <translation>Banka
-přednastavení</translation>
+        <translation>Banka - přednastavení</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="39"/>
@@ -3441,7 +3440,7 @@ modulátorů</translation>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="44"/>
         <source>Attenuation</source>
-        <translation>Ztlumení</translation>
+        <translation>Zeslabení</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="45"/>
@@ -3504,14 +3503,15 @@ vzorku</translation>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="45"/>
         <source>Linked
 sample</source>
-        <translation>Vzorek
-spojen</translation>
+        <translation>Spojený
+vzorek</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="46"/>
         <source>Sample
 rate</source>
-        <translation>Vzorkovací kmitočet</translation>
+        <translation>Vzorkovací
+kmitočet</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="47"/>
@@ -3719,7 +3719,7 @@ pro zobrazení rozsahů jeho divizí</translation>
         <location filename="editor/pagesf2.ui" line="613"/>
         <location filename="editor/pagesf2.ui" line="711"/>
         <source>Modulators</source>
-        <translation>Vlnové modulátory</translation>
+        <translation>Modulátory</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="641"/>
@@ -3899,7 +3899,7 @@ Upozornění: kvalita bude snížena a smyčka může být změněna</translatio
     <message>
         <location filename="editor/pagesmpl.cpp" line="1087"/>
         <source>Stop</source>
-        <translation>Zastavení</translation>
+        <translation>Zastavit</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="1106"/>
@@ -4551,12 +4551,12 @@ Obě divize musí sdílet stejné rozsahy not a dynamiky.</translation>
     <message>
         <location filename="repository/repositorymanager.cpp" line="93"/>
         <source>dark</source>
-        <translation>pochmurný</translation>
+        <translation>tmavý</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="94"/>
         <source>warm</source>
-        <translation>vřelý</translation>
+        <translation>teplý</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="95"/>
@@ -4576,12 +4576,12 @@ Obě divize musí sdílet stejné rozsahy not a dynamiky.</translation>
     <message>
         <location filename="repository/repositorymanager.cpp" line="98"/>
         <source>hard</source>
-        <translation>hrubý</translation>
+        <translation>tvrdý</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="99"/>
         <source>soft</source>
-        <translation>příjemný</translation>
+        <translation>měkký</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="100"/>
@@ -4641,7 +4641,7 @@ Obě divize musí sdílet stejné rozsahy not a dynamiky.</translation>
     <message>
         <location filename="repository/repositorymanager.cpp" line="113"/>
         <source>percussive</source>
-        <translation>bubnový</translation>
+        <translation>perkusivní</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="114"/>
@@ -4661,7 +4661,7 @@ Obě divize musí sdílet stejné rozsahy not a dynamiky.</translation>
     <message>
         <location filename="repository/repositorymanager.cpp" line="117"/>
         <source>pad</source>
-        <translation>vycpávka</translation>
+        <translation>pad</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="118"/>
@@ -4721,18 +4721,18 @@ Obě divize musí sdílet stejné rozsahy not a dynamiky.</translation>
     <message>
         <location filename="repository/repositorymanager.cpp" line="131"/>
         <source>trance</source>
-        <translation>polospánková</translation>
+        <translation>trance</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="132"/>
         <location filename="repository/repositorymanager.cpp" line="133"/>
         <source>ambient music</source>
-        <translation>uklidňující hudba</translation>
+        <translation>ambientní hudba</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="134"/>
         <source>house</source>
-        <translation>domácí</translation>
+        <translation>house</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="135"/>
@@ -4747,12 +4747,12 @@ Obě divize musí sdílet stejné rozsahy not a dynamiky.</translation>
     <message>
         <location filename="repository/repositorymanager.cpp" line="137"/>
         <source>industrial</source>
-        <translation>průmyslová</translation>
+        <translation>industriální</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="138"/>
         <source>experimental</source>
-        <translation>pokusná</translation>
+        <translation>experimentální</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="139"/>
@@ -4803,7 +4803,7 @@ Obě divize musí sdílet stejné rozsahy not a dynamiky.</translation>
     <message>
         <location filename="repository/repositorymanager.cpp" line="165"/>
         <source>public domain</source>
-        <translation>veřejně dostupné</translation>
+        <translation>volné dílo</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="166"/>
@@ -4976,7 +4976,7 @@ Nelze stáhnout seznam</translation>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="392"/>
         <source>License</source>
-        <translation>Povolení</translation>
+        <translation>Licence</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="407"/>
@@ -4986,12 +4986,12 @@ Nelze stáhnout seznam</translation>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="422"/>
         <source>Timbre</source>
-        <translation>Zabarvení hlasu</translation>
+        <translation>Barva zvuku</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="437"/>
         <source>Articulation</source>
-        <translation>Článkování slov</translation>
+        <translation>Artikulace</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="452"/>
@@ -5026,7 +5026,7 @@ Nelze stáhnout seznam</translation>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="316"/>
         <source>Subscribe to a Premium account to get all the features!</source>
-        <translation>Předplaťte si prémiový účet a dostat všechny funkce!</translation>
+        <translation>Předplaťte si prémiový účet a dostaňte všechny funkce!</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="165"/>
@@ -5134,7 +5134,7 @@ Nelze stáhnout seznam</translation>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="36"/>
         <source>Timbre</source>
-        <translation>Zabarvení hlasu</translation>
+        <translation>Barva zvuku</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="62"/>
@@ -5144,7 +5144,7 @@ Nelze stáhnout seznam</translation>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="94"/>
         <source>Articulation</source>
-        <translation>Článkování slov</translation>
+        <translation>Artikulace</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="113"/>
@@ -5321,12 +5321,12 @@ Nelze stáhnout obsah</translation>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewerleft.ui" line="193"/>
         <source>Timbre</source>
-        <translation>Zabarvení hlasu</translation>
+        <translation>Barva zvuku</translation>
     </message>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewerleft.ui" line="209"/>
         <source>Articulation</source>
-        <translation>Článkování slov</translation>
+        <translation>Artikulace</translation>
     </message>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewerleft.ui" line="225"/>
@@ -5530,7 +5530,7 @@ Jiné editory soundfontů mohou zobrazovat jiné jednotky.</translation>
         <location filename="editor/tools/auto_distribution/toolautodistribution.h" line="60"/>
         <source>Sample auto-positioning</source>
         <oldsource>Automatically link the samples</oldsource>
-        <translation>Vzorku auto-polohování</translation>
+        <translation>Automatické umístění vzorků</translation>
     </message>
 </context>
 <context>
@@ -5617,7 +5617,7 @@ Jiné editory soundfontů mohou zobrazovat jiné jednotky.</translation>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.cpp" line="50"/>
         <source>Number of beats per second</source>
-        <translation>Počet úderů za sekundu</translation>
+        <translation>Počet záznějů za sekundu</translation>
     </message>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.cpp" line="50"/>
@@ -5839,7 +5839,7 @@ Jiné editory soundfontů mohou zobrazovat jiné jednotky.</translation>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="335"/>
         <source>Inversion number</source>
-        <translation>Číslo převratu</translation>
+        <translation>Počet obratů</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="363"/>
@@ -5886,9 +5886,9 @@ Jiné editory soundfontů mohou zobrazovat jiné jednotky.</translation>
         <location filename="editor/tools/clean_unused_elements/toolcleanunused.cpp" line="109"/>
         <source>%n sample(s)</source>
         <translation>
-            <numerusform>Byl smazán %n vzorek</numerusform>
-            <numerusform>Byly smazány %n vzorky</numerusform>
-            <numerusform>Bylo smazáno %n vzorků</numerusform>
+            <numerusform>%n vzorek</numerusform>
+            <numerusform>%n vzorky</numerusform>
+            <numerusform>%n vzorků</numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -5916,7 +5916,7 @@ Jiné editory soundfontů mohou zobrazovat jiné jednotky.</translation>
     <message>
         <location filename="editor/tools/default_mod/tooldefaultmod.h" line="45"/>
         <source>Modulators</source>
-        <translation>Vlnové modulátory</translation>
+        <translation>Modulátory</translation>
     </message>
     <message>
         <location filename="editor/tools/default_mod/tooldefaultmod.h" line="60"/>
@@ -6389,7 +6389,7 @@ Jiné editory soundfontů mohou zobrazovat jiné jednotky.</translation>
     <message>
         <location filename="editor/tools/link_sample/toollinksample.h" line="67"/>
         <source>Find a link</source>
-        <translation>Najít odkaz</translation>
+        <translation>Najít spojení</translation>
     </message>
 </context>
 <context>
@@ -6590,7 +6590,7 @@ Jiné editory soundfontů mohou zobrazovat jiné jednotky.</translation>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation.h" line="63"/>
         <source>Mixture creation</source>
-        <translation>Vytvoření směsi</translation>
+        <translation>Vytvoření mixtury</translation>
     </message>
 </context>
 <context>
@@ -6598,7 +6598,7 @@ Jiné editory soundfontů mohou zobrazovat jiné jednotky.</translation>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="25"/>
         <source>Name of the mixture:</source>
-        <translation>Název směsi:</translation>
+        <translation>Název mixtury:</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="39"/>
@@ -6872,7 +6872,7 @@ Jiné editory soundfontů mohou zobrazovat jiné jednotky.</translation>
     <message>
         <location filename="editor/tools/release/toolrelease_gui.cpp" line="51"/>
         <source>Release time (key %1)</source>
-        <translation>Čas vyloudění tónu (nota %1)</translation>
+        <translation>Čas uvolnění (nota %1)</translation>
     </message>
 </context>
 <context>
@@ -6894,7 +6894,7 @@ Jiné editory soundfontů mohou zobrazovat jiné jednotky.</translation>
     <message>
         <location filename="editor/tools/remove_mods/toolremovemods.h" line="45"/>
         <source>Modulators</source>
-        <translation>Vlnové modulátory</translation>
+        <translation>Modulátory</translation>
     </message>
     <message>
         <location filename="editor/tools/remove_mods/toolremovemods.h" line="63"/>
@@ -6988,7 +6988,7 @@ Jiné editory soundfontů mohou zobrazovat jiné jednotky.</translation>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="66"/>
         <source>Division number</source>
-        <translation>Číslo dělení</translation>
+        <translation>Počet dělení</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="121"/>
@@ -7049,7 +7049,7 @@ Jiné editory soundfontů mohou zobrazovat jiné jednotky.</translation>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="71"/>
         <source>General MIDI classification</source>
-        <translation>Zařazení všeobecného MIDI</translation>
+        <translation>Zařazení podle General MIDI</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="142"/>
@@ -7225,7 +7225,7 @@ Jiné editory soundfontů mohou zobrazovat jiné jednotky.</translation>
     <message>
         <location filename="editor/tools/trim_end/tooltrimend.h" line="64"/>
         <source>Trim to end of loop</source>
-        <translation>Ořezat na konci smyčky</translation>
+        <translation>Ořezat na konec smyčky</translation>
     </message>
 </context>
 <context>
@@ -7441,7 +7441,7 @@ Jiné editory soundfontů mohou zobrazovat jiné jednotky.</translation>
     <message>
         <location filename="repository/soundfont/uploadingdialog.cpp" line="76"/>
         <source>Canceling...</source>
-        <translation>Ruší se....</translation>
+        <translation>Ruší se...</translation>
     </message>
 </context>
 <context>
@@ -7470,7 +7470,7 @@ Jiné editory soundfontů mohou zobrazovat jiné jednotky.</translation>
     <message>
         <location filename="editor/tools/waitingtooldialog.cpp" line="77"/>
         <source>Canceling...</source>
-        <translation>Ruší se....</translation>
+        <translation>Ruší se...</translation>
     </message>
 </context>
 <context>
