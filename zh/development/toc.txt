@@ -1,0 +1,7 @@
+index.md=技术文档
+|building-polyphone-for-windows.md=在 Windows 上编译 Polyphone
+|building-polyphone-for-mac-os-x.md=在 Mac OS X 上编译 Polyphone
+|building-polyphone-for-fedora.md=在 Fedora 上编译 Polyphone
+|building-polyphone-for-ubuntu.md=在 Ubuntu 上编译 Polyphone
+|using-qt-creator-to-build-polyphone.md=使用 Qt Creator 编译 Polyphone
+|translate-polyphone.md=翻译 Polyphone

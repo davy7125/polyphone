@@ -1,0 +1,7 @@
+index.md=Tutorials
+|create-a-soundfont-from-scratch.md=Einen Soundfont von Grund auf erstellen
+|how-to-prepare-a-sample.md=Ein Sample vorbereiten
+|using-custom-releases-in-an-instrument.md=Eigene Releases in einem Instrument verwenden
+|use-polyphone-as-a-synthesizer.md=Polyphone als Synthesizer verwenden
+|create-a-synthesizer-with-raspberry-pi.md=Einen Synthesizer mit einem Raspberry Pi bauen
+|read-midi-file-with-soundfont.md=Eine MIDI-Datei mit einem Soundfont abspielen

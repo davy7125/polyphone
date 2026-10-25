@@ -1,0 +1,3 @@
+documentation_name=Documentazione
+language_name=Italiano
+download_prompt=Versione PDF

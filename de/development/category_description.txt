@@ -1,0 +1,5 @@
+Hier finden sich verschiedene Informationen zur Entwicklung von Polyphone:
+
+* wie man kompiliert,
+* wie man übersetzt,
+* ...

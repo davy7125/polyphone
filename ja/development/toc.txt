@@ -1,0 +1,7 @@
+index.md=技術ドキュメント
+|building-polyphone-for-windows.md=Windows向けにPolyphoneをビルドする
+|building-polyphone-for-mac-os-x.md=Mac OS X向けにPolyphoneをビルドする
+|building-polyphone-for-fedora.md=Fedora向けにPolyphoneをビルドする
+|building-polyphone-for-ubuntu.md=Ubuntu向けにPolyphoneをビルドする
+|using-qt-creator-to-build-polyphone.md=Qt CreatorでPolyphoneをビルドする
+|translate-polyphone.md=Polyphoneを翻訳する

@@ -1,0 +1,3 @@
+documentation_name=Documentação
+language_name=Português (Brasil)
+download_prompt=Versão em PDF

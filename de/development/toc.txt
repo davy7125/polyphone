@@ -1,0 +1,7 @@
+index.md=Technische Dokumentation
+|building-polyphone-for-windows.md=Polyphone für Windows kompilieren
+|building-polyphone-for-mac-os-x.md=Polyphone für Mac OS X kompilieren
+|building-polyphone-for-fedora.md=Polyphone für Fedora kompilieren
+|building-polyphone-for-ubuntu.md=Polyphone für Ubuntu kompilieren
+|using-qt-creator-to-build-polyphone.md=Polyphone mit Qt Creator kompilieren
+|translate-polyphone.md=Polyphone übersetzen

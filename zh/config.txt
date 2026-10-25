@@ -1,0 +1,3 @@
+documentation_name=文档
+language_name=简体中文
+download_prompt=PDF 版本

@@ -1,0 +1,6 @@
+Esta sección contiene la descripción del programa Polyphone:
+
+* el editor de soundfonts,
+* el explorador de soundfonts,
+* el repositorio de soundfonts en línea,
+* la configuración.

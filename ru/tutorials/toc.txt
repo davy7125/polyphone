@@ -1,0 +1,7 @@
+index.md=Учебные руководства
+|create-a-soundfont-from-scratch.md=Создание SoundFont с нуля
+|how-to-prepare-a-sample.md=Как подготовить семпл
+|using-custom-releases-in-an-instrument.md=Собственное затухание в инструменте
+|use-polyphone-as-a-synthesizer.md=Polyphone как синтезатор
+|create-a-synthesizer-with-raspberry-pi.md=Синтезатор на Raspberry Pi
+|read-midi-file-with-soundfont.md=Воспроизведение MIDI-файла с SoundFont

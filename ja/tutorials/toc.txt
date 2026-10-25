@@ -1,0 +1,7 @@
+index.md=チュートリアル
+|create-a-soundfont-from-scratch.md=SoundFontを一から作成する
+|how-to-prepare-a-sample.md=サンプルの準備方法
+|using-custom-releases-in-an-instrument.md=インストゥルメントでカスタムリリースを使う
+|use-polyphone-as-a-synthesizer.md=Polyphoneをシンセサイザーとして使う
+|create-a-synthesizer-with-raspberry-pi.md=Raspberry Piでシンセサイザーを作る
+|read-midi-file-with-soundfont.md=SoundFontでMIDIファイルを再生する

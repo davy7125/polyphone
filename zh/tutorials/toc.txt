@@ -1,0 +1,7 @@
+index.md=教程
+|create-a-soundfont-from-scratch.md=从零开始创建音色库
+|how-to-prepare-a-sample.md=如何准备采样
+|using-custom-releases-in-an-instrument.md=在乐器中使用自定义释音
+|use-polyphone-as-a-synthesizer.md=将 Polyphone 用作合成器
+|create-a-synthesizer-with-raspberry-pi.md=用树莓派制作合成器
+|read-midi-file-with-soundfont.md=用音色库播放 MIDI 文件

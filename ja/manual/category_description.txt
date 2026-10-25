@@ -1,0 +1,6 @@
+このセクションでは、Polyphoneソフトウェアについて説明します。
+
+* SoundFontエディター
+* SoundFontエクスプローラー
+* オンラインのSoundFontリポジトリ
+* 設定
