@@ -728,6 +728,13 @@ void Synth::readData(float * dataL, float * dataR, quint32 maxlen)
     _recorder.process(dataL, dataR, maxlen);
 }
 
+void Synth::waitForComputation()
+{
+    for (int i = 0; i < _soundEngineCount; i++)
+        while (!_soundEngines[i]->isIdle())
+            QThread::yieldCurrentThread();
+}
+
 void Synth::applyChoRev(float * dataL, float * dataR, quint32 maxlen)
 {
     // Copy the data rev + chorus

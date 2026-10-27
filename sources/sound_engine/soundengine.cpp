@@ -128,6 +128,12 @@ void SoundEngine::endCurrentProcessing()
     _runningState.testAndSetRelaxed(1, 2);
 }
 
+bool SoundEngine::isIdle()
+{
+    // The release store in generateData makes the computed data visible
+    return _runningState.loadAcquire() == 0;
+}
+
 void SoundEngine::generateData(quint32 len)
 {
     bool leftInitialized = false;
@@ -140,7 +146,7 @@ void SoundEngine::generateData(quint32 len)
         voice = s_voices->getNextVoiceToCompute();
         if (voice == nullptr)
         {
-            _runningState.storeRelaxed(0);
+            _runningState.storeRelease(0);
             break;
         }
         else

@@ -39,7 +39,8 @@ public:
         MODE_CONVERSION_TO_SF2 = 100,
         MODE_CONVERSION_TO_SF3 = 101,
         MODE_CONVERSION_TO_SFZ = 102,
-        MODE_CONVERSION_TO_CSV = 103
+        MODE_CONVERSION_TO_CSV = 103,
+        MODE_RENDER = 104
     };
 
     Options(int argc, char *argv[]);
@@ -77,6 +78,9 @@ public:
 
     /// Csv option: write raw values
     bool csvRawValues() { return _csvRawValues; }
+
+    /// Render option: file describing the events to play
+    QString renderEventFile() { return _renderEventFile; }
 
     /// Player options
     PlayerOptions * playerOptions() { return _playerOptions; }
@@ -118,6 +122,9 @@ private:
 
     // Csv option
     bool _csvRawValues;
+
+    // Render option
+    QString _renderEventFile;
 
     // Player options
     PlayerOptions * _playerOptions;

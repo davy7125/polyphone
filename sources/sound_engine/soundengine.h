@@ -44,6 +44,9 @@ public:
     void prepareData(quint32 len);
     void endCurrentProcessing();
 
+    // True when the data generation is over (offline rendering)
+    bool isIdle();
+
     // Get the result
     void setData(float * dataL, float * dataR, float * dataChoL, float * dataChoR,
                  float * dataRevL, float * dataRevR, float * dataChoRevL, float * dataChoRevR, quint32 len);

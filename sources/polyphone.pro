@@ -203,6 +203,7 @@ INCLUDEPATH += clavier \
     core/input \
     core/output \
     core/model \
+    core/render \
     core/sample \
     core/types \
     dialogs \
@@ -529,6 +530,7 @@ SOURCES	+= main.cpp \
     editor/tools/abstracttoolonestep.cpp \
     core/output/abstractoutput.cpp \
     core/output/outputfactory.cpp \
+    core/render/offlinerenderer.cpp \
     core/output/empty/outputdummy.cpp \
     core/output/sfz/outputsfz.cpp \
     core/output/not_supported/outputnotsupported.cpp \
@@ -923,6 +925,7 @@ HEADERS += \
     editor/tools/abstracttoolonestep.h \
     core/output/abstractoutput.h \
     core/output/outputfactory.h \
+    core/render/offlinerenderer.h \
     core/output/empty/outputdummy.h \
     core/output/sfz/outputsfz.h \
     core/output/not_supported/outputnotsupported.h \

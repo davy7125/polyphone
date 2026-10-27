@@ -106,6 +106,9 @@ void Options::processType1(QString arg)
     case '4':
         _mode = MODE_CONVERSION_TO_CSV;
         break;
+    case '5':
+        _mode = MODE_RENDER;
+        break;
     case 'd':
         _currentState = STATE_OUTPUT_DIRECTORY;
         break;
@@ -206,6 +209,10 @@ void Options::processType2(QString arg)
                 _error = true;
             _csvRawValues = configurations[0] == "raw";
             break;
+        case MODE_RENDER:
+            // The whole argument is the path of the event file
+            _renderEventFile = arg;
+            break;
         case MODE_SYNTHESIZER:
             if (_playerOptions == nullptr)
             {
@@ -255,6 +262,10 @@ void Options::checkErrors()
         if (_inputFiles.count() != 1)
             _error = true;
         break;
+    case MODE_RENDER:
+        if (_inputFiles.count() != 1 || _renderEventFile.isEmpty())
+            _error = true;
+        break;
     }
 }
 
@@ -270,6 +281,14 @@ void Options::postTreatment()
         // By default, the output file name is the same than the input file name
         if (_outputFile == "")
             _outputFile = QFileInfo(_inputFiles[0]).completeBaseName();
+    }
+    else if (_mode == MODE_RENDER)
+    {
+        // By default, the output is next to the event file, with the same name
+        if (_outputDirectory == "")
+            _outputDirectory = QFileInfo(_renderEventFile).dir().absolutePath();
+        if (_outputFile == "")
+            _outputFile = QFileInfo(_renderEventFile).completeBaseName();
     }
 }
 
@@ -294,6 +313,9 @@ QString Options::getOutputFileFullPath()
         break;
     case MODE_CONVERSION_TO_CSV:
         extension = ".csv";
+        break;
+    case MODE_RENDER:
+        extension = ".wav";
         break;
     default:
         break;

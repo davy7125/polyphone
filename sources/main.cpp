@@ -40,6 +40,7 @@
 #include "modulatordata.h"
 #include "fastmaths.h"
 #include "voice.h"
+#include "offlinerenderer.h"
 #include "tools/merge_samples/runnablemerger.h"
 
 
@@ -171,6 +172,67 @@ int convert(Options &options)
     }
     delete output;
     writeLine(QObject::tr("File successfully converted!"));
+
+    // Destroy a singleton that has been silently created
+    SoundfontManager::kill();
+    return 0;
+}
+
+/// Error codes
+/// 1: input file or output directory does not exist, or the file cannot be opened
+/// 2: wrong event file
+/// 4: the events cannot be played with this soundfont (missing preset or program), or the output file cannot be saved
+int render(Options &options)
+{
+    // Check the input file and the output directory (an existing output file is replaced)
+    QFileInfo inputFile(options.getInputFiles()[0]);
+    if (!inputFile.exists())
+    {
+        writeLine(QObject::tr("The file \"%1\" does not exist.").arg(inputFile.filePath()));
+        return 1;
+    }
+    if (!QDir(options.getOutputDirectory()).exists())
+    {
+        writeLine(QObject::tr("The directory \"%1\" does not exist.").arg(options.getOutputDirectory()));
+        return 1;
+    }
+
+    // Prepare arrays
+    SFModulator::prepareConversionTables();
+    FastMaths::initialize();
+    Voice::prepareTables();
+
+    // Events are read before loading the soundfont, which sets the default values of the controllers
+    OfflineRenderer renderer;
+    if (!renderer.readEvents(options.renderEventFile()))
+    {
+        writeLine(QObject::tr("An error occurred: %1.").arg(renderer.getError()));
+        return 2;
+    }
+
+    // Load input file
+    writeLine(QObject::tr("Loading file \"%1\"...").arg(inputFile.filePath()));
+    AbstractInputParser * input = InputFactory::getInput(inputFile.filePath());
+    input->process(false);
+    if (!input->isSuccess())
+    {
+        writeLine(QObject::tr("Couldn't load file \"%1\": %2.").arg(inputFile.filePath()).arg(input->getError()));
+        delete input;
+        return 1;
+    }
+    int sf2Index = input->getSf2Index();
+    delete input;
+    writeLine(QObject::tr("File successfully loaded!"));
+
+    // Render
+    QString outputFile = options.getOutputFileFullPath();
+    writeLine(QObject::tr("Writing file \"%1\"...").arg(outputFile));
+    if (!renderer.render(sf2Index, outputFile))
+    {
+        writeLine(QObject::tr("An error occurred: %1.").arg(renderer.getError()));
+        return 4;
+    }
+    writeLine(QObject::tr("File successfully rendered!"));
 
     // Destroy a singleton that has been silently created
     SoundfontManager::kill();
@@ -318,6 +380,8 @@ int main(int argc, char *argv[])
         valRet = displayHelp(options);
     else if (options.mode() == Options::MODE_RESET_CONFIG)
         valRet = resetConfig(options);
+    else if (options.mode() == Options::MODE_RENDER)
+        valRet = render(options);
     else
         valRet = convert(options);
 

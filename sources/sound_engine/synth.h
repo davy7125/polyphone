@@ -159,6 +159,10 @@ public:
     void setSampleRateAndBufferSize(quint32 sampleRate, quint32 bufferSize);
     void readData(float *dataL, float *dataR, quint32 maxlen);
 
+    // Offline rendering: wait until all voices of the next buffer are computed, before readData
+    // (in real time, the voices not computed in time are skipped)
+    void waitForComputation();
+
 signals:
     void currentPosChanged(quint32 pos);
     void readFinished(int token);

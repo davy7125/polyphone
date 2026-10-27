@@ -1,0 +1,34 @@
+# soundfont: FluidR3_GM.sf2
+# Piano: velocity layers, extreme registers, a held chord and release tails
+samplerate 48000
+duration 6
+
+0     program 0 0 0
+
+# Same key at increasing velocities
+0.00  on 0 60 20
+0.40  off 0 60
+0.50  on 0 60 60
+0.90  off 0 60
+1.00  on 0 60 100
+1.40  off 0 60
+1.50  on 0 60 127
+1.90  off 0 60
+
+# Lowest and highest keys
+2.00  on 0 21 90
+2.00  on 0 108 90
+2.80  off 0 21
+2.80  off 0 108
+
+# Chord held, then released
+3.00  on 0 48 80
+3.00  on 0 55 85
+3.00  on 0 64 90
+3.00  on 0 67 95
+3.00  on 0 72 100
+4.50  off 0 48
+4.50  off 0 55
+4.50  off 0 64
+4.50  off 0 67
+4.50  off 0 72

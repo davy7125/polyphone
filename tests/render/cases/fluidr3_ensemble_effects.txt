@@ -1,0 +1,115 @@
+# soundfont: FluidR3_GM.sf2
+# Several channels with the reverb and the chorus (sent by CC 91 and CC 93), and their tails
+samplerate 48000
+duration 7
+reverb 40 70 80 30
+chorus 50 40 30
+gain -6
+
+# Piano, strings, bass, flute and drums, placed in the stereo field
+0     program 0 0 0
+0     program 1 0 48
+0     program 2 0 33
+0     program 3 0 73
+0     program 9 128 0
+0     cc 0 10 40
+0     cc 1 10 90
+0     cc 3 10 70
+0     cc 0 91 80
+0     cc 1 91 127
+0     cc 1 93 100
+0     cc 3 91 60
+0     cc 3 93 127
+0     cc 9 91 40
+
+# C
+0.5   on 1 48 70
+0.5   on 1 55 70
+0.5   on 1 64 70
+0.5   on 2 36 100
+0.5   on 0 60 90
+0.5   on 0 64 85
+0.5   on 0 67 85
+0.5   on 3 72 90
+0.5   on 9 36 110
+0.75  on 9 42 70
+1.0   on 9 38 100
+1.0   off 3 72
+1.0   on 3 76 90
+1.25  on 9 42 70
+1.45  off 0 60
+1.45  off 0 64
+1.45  off 0 67
+1.5   off 1 48
+1.5   off 1 55
+1.5   off 1 64
+1.5   off 2 36
+1.5   off 3 76
+
+# A minor
+1.5   on 1 45 70
+1.5   on 1 52 70
+1.5   on 1 60 70
+1.5   on 2 33 100
+1.5   on 0 57 90
+1.5   on 0 60 85
+1.5   on 0 64 85
+1.5   on 3 74 90
+1.5   on 9 36 110
+1.75  on 9 42 70
+2.0   on 9 38 100
+2.0   off 3 74
+2.0   on 3 72 90
+2.25  on 9 42 70
+2.45  off 0 57
+2.45  off 0 60
+2.45  off 0 64
+2.5   off 1 45
+2.5   off 1 52
+2.5   off 1 60
+2.5   off 2 33
+2.5   off 3 72
+
+# F
+2.5   on 1 41 70
+2.5   on 1 53 70
+2.5   on 1 60 70
+2.5   on 2 29 100
+2.5   on 0 53 90
+2.5   on 0 57 85
+2.5   on 0 60 85
+2.5   on 3 69 90
+2.5   on 9 36 110
+2.75  on 9 42 70
+3.0   on 9 38 100
+3.0   off 3 69
+3.0   on 3 72 90
+3.25  on 9 42 70
+3.45  off 0 53
+3.45  off 0 57
+3.45  off 0 60
+3.5   off 1 41
+3.5   off 1 53
+3.5   off 1 60
+3.5   off 2 29
+3.5   off 3 72
+
+# G, held, then everything rings out
+3.5   on 1 43 70
+3.5   on 1 50 70
+3.5   on 1 59 70
+3.5   on 2 31 100
+3.5   on 0 55 90
+3.5   on 0 59 85
+3.5   on 0 62 85
+3.5   on 3 74 90
+3.5   on 9 36 110
+3.5   on 9 49 110
+4.8   off 0 55
+4.8   off 0 59
+4.8   off 0 62
+4.8   off 1 43
+4.8   off 1 50
+4.8   off 1 59
+4.8   off 2 31
+4.8   off 3 74
