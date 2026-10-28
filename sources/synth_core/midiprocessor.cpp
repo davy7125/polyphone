@@ -320,11 +320,13 @@ void MidiProcessor::processKeyOn(int channel, int key, int vel)
     // Initialize the poly pressure value
     _midiStates[channel + 1]._polyPressureValues[key] = vel;
 
+    // Possibly stop the sound if the key is already on: still pressed (as FluidSynth, otherwise the notes would pile
+    // up), or held by the sustain or the sostenuto pedal
+    bool stopFirst = sustainState->_currentKeys[key] || sustainState->_sustainedKeys[key] ||
+                     sustainState->_sostenutoMemoryKeys[key];
+
     // Key currently activated
     sustainState->_currentKeys[key] = true;
-
-    // Possibly stop the sound if the key is already on
-    bool stopFirst = sustainState->_sustainedKeys[key] || sustainState->_sostenutoMemoryKeys[key];
 
     // Possibly add it to the sustain
     if (sustainState->_isSustainOn)

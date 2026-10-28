@@ -42,7 +42,8 @@ public:
         return false;
     }
 
-    // Key pressed again while its note is held by the sustain or the sostenuto pedal: stopped, then played again
+    // Key pressed again while its note is still on (key not released, or held by the sustain or the sostenuto pedal):
+    // stopped, then played again
     virtual bool processKeyRestarted(int channel, int key, int vel)
     {
         processKey(channel, key, 0);

@@ -72,6 +72,9 @@ public:
     float getCurrentFloat(AttributeType type);
     int32_t getCurrentInteger(AttributeType type);
 
+    // Version of the parameters, changing with them: values computed from them can be kept for a version
+    uint32_t getVersion() { return _version.load(std::memory_order_acquire); }
+
     // Identification
     int8_t getChannel() { return _channel; }
     int8_t getKey() { return _key; }

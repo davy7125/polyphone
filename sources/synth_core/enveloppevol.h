@@ -70,6 +70,14 @@ private:
     bool _isMod;
     bool _quickRelease;
     float _quickAttackTarget;
+
+    // Durations (in chunks) and coefficients for a version of the parameters and a note
+    void updateParameters(uint32_t version, int note, VoiceParam * voiceParam);
+    uint32_t _parameterVersion;
+    int _parameterNote;
+    uint32_t _timeDelay, _timeAttack, _timeHold, _timeDecay, _timeRelease, _timeQuick;
+    float _levelSustain;
+    float _attackCoef, _decayCoef, _releaseCoef, _releaseCoefQuick;
 };
 
 #endif // ENVELOPPEVOL_H

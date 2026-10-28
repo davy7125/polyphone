@@ -139,6 +139,7 @@ samples and zones are their order in the soundfont, from 0.
   as the first one, which would test nothing.
 - The pedals are checked without reference: `pedal_sustain` must sound exactly like
   `pedal_sustain_equivalent`, where each note is released when the pedal releases it (same for the
-  sostenuto, and a key pressed again while it is held).
+  sostenuto, and a key pressed again while it is held). Likewise `key_restarted` must sound like
+  `key_restarted_equivalent`: a key pressed again before being released stops its note first.
 - Not covered: what `MidiDevice` adds to `MidiProcessor` (the input of a device and the listeners of
   the editor), the relative values of the controllers of a device.

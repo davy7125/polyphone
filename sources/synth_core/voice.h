@@ -104,8 +104,11 @@ private:
     uint64_t _lastDistanceFraction; // Fixed point, 32 bits for the fraction
     int32_t _moreAvailable;
 
-    // Save state for the low pass filter
+    // Save state for the low pass filter, and its coefficients for a frequency and a resonance
     float _x1, _x2, _y1, _y2;
+    float _filterFrequency, _filterInvQ;
+    float _filterCoeffs[3];
+    bool _isFilterOn;
 
     // Evolving volume coefficient
     float _volumeCoeff;

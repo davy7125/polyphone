@@ -129,6 +129,9 @@ void Voice::initialize(int sf2Id, ISynthInstPrst * prst, ISynthZone * prstZone, 
     _x2 = 0;
     _y1 = 0;
     _y2 = 0;
+    _filterFrequency = -1.0f; // Coefficients not computed yet
+    _filterInvQ = -1.0f;
+    _isFilterOn = false;
     _volumeCoeff = 0;
 
     float sampleRateForChunks = static_cast<float>(_audioSmplRate) * static_cast<float>(COMPUTATION_CHUNK_INVERT);
@@ -233,6 +236,10 @@ bool Voice::generateData(float * data, uint32_t len)
         // If v_filterQ is 0, inv_q_lin is sqrt(2)
         float inv_q_lin = FastMaths::fastPow10(-0.05f * (v_filterQ - 3.01f));
 
+        // In the loops below, the members are copied into local variables: the compiler could not keep them in
+        // registers, since the data written might be one of them
+        float (*sincWindow)[RESAMPLING_ORDER] = _sincWindow;
+
         bool wasFinished = _isFinished;
         for (uint32_t chunk = 0; chunk < chunkCount; ++chunk)
         {
@@ -262,40 +269,44 @@ bool Voice::generateData(float * data, uint32_t len)
 
 resample_fast:
             // Fast extraction, if possible
-            while (true)
             {
-                _lastDistanceFraction += fixedGap;
-                if ((int32_t)(nextPosition = static_cast<uint32_t>(_lastDistanceFraction >> 32)) > _moreAvailable)
+                uint64_t distanceFraction = _lastDistanceFraction;
+                int32_t moreAvailable = _moreAvailable;
+                while (true)
                 {
-                    // Revert the last jump and update the current position
-                    _lastDistanceFraction -= fixedGap;
-                    _currentSmplPos += static_cast<uint32_t>(_lastDistanceFraction >> 32);
-                    _lastDistanceFraction &= 0xFFFFFFFF;
-                    goto resample_slow;
-                }
+                    distanceFraction += fixedGap;
+                    if ((int32_t)(nextPosition = static_cast<uint32_t>(distanceFraction >> 32)) > moreAvailable)
+                    {
+                        // Revert the last jump and update the current position
+                        distanceFraction -= fixedGap;
+                        _currentSmplPos += static_cast<uint32_t>(distanceFraction >> 32);
+                        _lastDistanceFraction = distanceFraction & 0xFFFFFFFF;
+                        goto resample_slow;
+                    }
 
-                (*pData++) = FastMaths::multiply8(_sincWindow[(_lastDistanceFraction >> 24) & 0xFF], &srcData16[nextPosition], &srcData24[nextPosition]);
-                            // + FastMaths::multiply8(&_sincWindow[(_lastDistanceFraction >> 24) & 0xFF][8], &srcData16[nextPosition + 8], &srcData24[nextPosition + 8]);
+                    (*pData++) = FastMaths::multiply8(sincWindow[(distanceFraction >> 24) & 0xFF], &srcData16[nextPosition], &srcData24[nextPosition]);
+                                // + FastMaths::multiply8(&sincWindow[(distanceFraction >> 24) & 0xFF][8], &srcData16[nextPosition + 8], &srcData24[nextPosition + 8]);
 
-                if (pData >= pDataEnd)
-                {
-                    // Update the current position
-                    _currentSmplPos += nextPosition;
-                    _moreAvailable -= nextPosition;
-                    _lastDistanceFraction &= 0xFFFFFFFF;
-                    goto resample_end;
+                    if (pData >= pDataEnd)
+                    {
+                        // Update the current position
+                        _currentSmplPos += nextPosition;
+                        _moreAvailable = moreAvailable - static_cast<int32_t>(nextPosition);
+                        _lastDistanceFraction = distanceFraction & 0xFFFFFFFF;
+                        goto resample_end;
+                    }
                 }
             }
 
 resample_slow:
-            // First data extraction or complex extraction
+            // First data extraction or complex extraction (the members are modified by the extraction functions)
             while (true)
             {
                 _lastDistanceFraction += fixedGap;
                 (*this.*slowExtractFunction)(static_cast<uint32_t>(_lastDistanceFraction >> 32), loopStart, loopEnd, srcData16, srcData24);
                 _lastDistanceFraction &= 0xFFFFFFFF;
-                (*pData++) = FastMaths::multiply8(_sincWindow[(_lastDistanceFraction >> 24) & 0xFF], srcData16, srcData24);
-                            // + FastMaths::multiply8(&_sincWindow[(_lastDistanceFraction >> 24) & 0xFF][8], &srcData16[8], &srcData24[8]);
+                (*pData++) = FastMaths::multiply8(sincWindow[(_lastDistanceFraction >> 24) & 0xFF], srcData16, srcData24);
+                            // + FastMaths::multiply8(&sincWindow[(_lastDistanceFraction >> 24) & 0xFF][8], &srcData16[8], &srcData24[8]);
 
                 if (pData >= pDataEnd)
                     goto resample_end;
@@ -318,40 +329,54 @@ resample_end:
             if (_volumeCoeff != 0.0f || deltaCoeff != 0.0f)
                 isAudible = true;
 
-            // Low-pass filter
+            // Low-pass filter, its coefficients being computed again only if the frequency or the resonance changes
             pData = &data[sampleStart];
             float valTmp = v_filterFreq * FastMaths::fastPow2(
                          (v_modEnvToFilterFc * _dataModArray[chunk] + v_modLfoToFilterFreq * _modLfoArray[chunk]) * 0.000833333f /* 1:1200 */);
-            float coeffs[3];
-            if (biQuadCoefficients(coeffs, valTmp, inv_q_lin))
+            if (valTmp != _filterFrequency || inv_q_lin != _filterInvQ)
             {
+                _filterFrequency = valTmp;
+                _filterInvQ = inv_q_lin;
+                _isFilterOn = biQuadCoefficients(_filterCoeffs, valTmp, inv_q_lin);
+            }
+            float volumeCoeff = _volumeCoeff;
+            if (_isFilterOn)
+            {
+                const float c0 = _filterCoeffs[0], c1 = _filterCoeffs[1], c2 = _filterCoeffs[2];
+                float x1 = _x1, x2 = _x2, y1 = _y1, y2 = _y2, x;
                 while (pData < pDataEnd)
                 {
-                    _volumeCoeff += deltaCoeff;
-                    valTmp = coeffs[0] * ((*pData) + _x1 + _x1 + _x2) + coeffs[1] * _y1 + coeffs[2] * _y2;
-                    _x2 = _x1;
-                    _x1 = (*pData);
-                    _y2 = _y1;
-                    _y1 = valTmp;
-                    (*pData++) = _volumeCoeff * valTmp;
+                    volumeCoeff += deltaCoeff;
+                    x = *pData;
+                    valTmp = c0 * (x + x1 + x1 + x2) + c1 * y1 + c2 * y2;
+                    x2 = x1;
+                    x1 = x;
+                    y2 = y1;
+                    y1 = valTmp;
+                    (*pData++) = volumeCoeff * valTmp;
                 }
+                _x1 = x1;
+                _x2 = x2;
+                _y1 = y1;
+                _y2 = y2;
             }
             else
             {
                 if (deltaCoeff == 0)
                 {
                     while (pData < pDataEnd)
-                        (*pData++) *= _volumeCoeff;
+                        (*pData++) *= volumeCoeff;
                 }
                 else
                 {
                     while (pData < pDataEnd)
                     {
-                        _volumeCoeff += deltaCoeff;
-                        (*pData++) *= _volumeCoeff;
+                        volumeCoeff += deltaCoeff;
+                        (*pData++) *= volumeCoeff;
                     }
                 }
             }
+            _volumeCoeff = volumeCoeff;
         }
     }
 

@@ -27,6 +27,10 @@
 #include "voiceparam.h"
 #include "fastmaths.h"
 
+// Convex attack of the modulation envelope
+static const float STIFFNESS = 0.000001f;
+static const float s_attackCorrection = static_cast<float>(std::pow(static_cast<double>(STIFFNESS), 0.4));
+
 void EnveloppeVol::initialize(float chunkRate, bool isMod)
 {
     _currentChunk = 0;
@@ -35,49 +39,87 @@ void EnveloppeVol::initialize(float chunkRate, bool isMod)
     _chunkRate = chunkRate;
     _isMod = isMod;
     _quickRelease = false;
+
+    // Durations and coefficients computed at the first call
+    _parameterVersion = 0; // The versions of VoiceParam start at 1
+    _parameterNote = 0;
+    _timeQuick = static_cast<uint32_t>(0.04f * _chunkRate);
+    _releaseCoefQuick = static_cast<float>(std::pow(0.00001585, 1. / _timeQuick));
 }
 
-bool EnveloppeVol::getEnvelope(float * data, uint32_t chunkCount, bool release, int note, float gain, VoiceParam * voiceParam)
+void EnveloppeVol::updateParameters(uint32_t version, int note, VoiceParam * voiceParam)
 {
     // Load parameters
-    uint32_t v_timeDelay;
-    uint32_t v_timeAttack;
     uint32_t v_timeHold;
     uint32_t v_timeDecay;
     float v_levelSustain;
-    uint32_t v_timeRelease;
     float v_noteToHold, v_noteToDecay;
 
     if (_isMod)
     {
-        v_timeDelay = voiceParam->getFloat(champ_delayModEnv) * _chunkRate;
-        v_timeAttack = voiceParam->getFloat(champ_attackModEnv) * _chunkRate;
+        _timeDelay = voiceParam->getFloat(champ_delayModEnv) * _chunkRate;
+        _timeAttack = voiceParam->getFloat(champ_attackModEnv) * _chunkRate;
         v_timeHold = voiceParam->getFloat(champ_holdModEnv) * _chunkRate;
         v_timeDecay = voiceParam->getFloat(champ_decayModEnv) * _chunkRate;
         v_levelSustain = voiceParam->getFloat(champ_sustainModEnv);
-        v_timeRelease = voiceParam->getFloat(champ_releaseModEnv) * _chunkRate;
+        _timeRelease = voiceParam->getFloat(champ_releaseModEnv) * _chunkRate;
         v_noteToHold = static_cast<float>(voiceParam->getInteger(champ_keynumToModEnvHold)) * 0.000833333f /* 1:1200 */;
         v_noteToDecay = static_cast<float>(voiceParam->getInteger(champ_keynumToModEnvDecay)) * 0.000833333f /* 1:1200 */;
     }
     else
     {
-        v_timeDelay = voiceParam->getFloat(champ_delayVolEnv) * _chunkRate;
-        v_timeAttack = voiceParam->getFloat(champ_attackVolEnv) * _chunkRate;
+        _timeDelay = voiceParam->getFloat(champ_delayVolEnv) * _chunkRate;
+        _timeAttack = voiceParam->getFloat(champ_attackVolEnv) * _chunkRate;
         v_timeHold = voiceParam->getFloat(champ_holdVolEnv) * _chunkRate;
         v_timeDecay = voiceParam->getFloat(champ_decayVolEnv) * _chunkRate;
         v_levelSustain = voiceParam->getFloat(champ_sustainVolEnv);
-        v_timeRelease = voiceParam->getFloat(champ_releaseVolEnv) * _chunkRate;
+        _timeRelease = voiceParam->getFloat(champ_releaseVolEnv) * _chunkRate;
         v_noteToHold = static_cast<float>(voiceParam->getInteger(champ_keynumToVolEnvHold)) * 0.000833333f /* 1:1200 */;
         v_noteToDecay = static_cast<float>(voiceParam->getInteger(champ_keynumToVolEnvDecay)) * 0.000833333f /* 1:1200 */;
     }
 
+    // Compute the sustain level
+    _levelSustain = _isMod ?
+                (1.f - 0.01f * v_levelSustain) : // percentage
+                FastMaths::fastPow10(-0.05f * v_levelSustain); // decrease in dB
+
+    // Update hold / decay time and volume according to the key
+    _timeHold = static_cast<uint32_t>(v_timeHold * FastMaths::fastPow2(v_noteToHold * static_cast<float>(60 - note)));
+    _timeDecay = static_cast<uint32_t>(v_timeDecay * FastMaths::fastPow2(v_noteToDecay * static_cast<float>(60 - note)));
+
+    // Coefficients of the convex attack (mod), of the exponential decay and of the exponential release (vol)
+    if (_isMod)
+        _attackCoef = static_cast<float>(std::pow(static_cast<double>(STIFFNESS), 0.4 / _timeAttack));
+    else
+    {
+        _decayCoef = static_cast<float>(std::pow(0.00001585 / (1. - static_cast<double>(_levelSustain) + 0.00001585), 1. / _timeDecay));
+        _releaseCoef = static_cast<float>(std::pow(0.00001585, 1. / _timeRelease));
+    }
+
+    _parameterVersion = version;
+    _parameterNote = note;
+}
+
+bool EnveloppeVol::getEnvelope(float * data, uint32_t chunkCount, bool release, int note, float gain, VoiceParam * voiceParam)
+{
+    // Durations and coefficients, computed again only if the parameters changed
+    uint32_t version = voiceParam->getVersion();
+    if (version != _parameterVersion || note != _parameterNote)
+        updateParameters(version, note, voiceParam);
+    uint32_t v_timeDelay = _timeDelay;
+    uint32_t v_timeAttack = _timeAttack;
+    uint32_t v_timeRelease = _timeRelease;
+    uint32_t timeHold = _timeHold;
+    uint32_t timeDecay = _timeDecay;
+    float levelSustain = _levelSustain;
+
     // Duration of a quick release
     if (_quickRelease)
-        v_timeRelease = static_cast<uint32_t>(0.04f * _chunkRate);
+        v_timeRelease = _timeQuick;
 
     // Duration of the attack for the release mode
     if (_currentPhase == phase6quickAttack)
-        v_timeAttack = static_cast<uint32_t>(0.04f * _chunkRate);
+        v_timeAttack = _timeQuick;
 
     // Beginning of the release phase?
     if (release && _currentPhase != phase7off && _currentPhase != phase6release && _currentPhase != phase6quickAttack)
@@ -85,15 +127,6 @@ bool EnveloppeVol::getEnvelope(float * data, uint32_t chunkCount, bool release, 
         _currentPhase = phase6release;
         _currentChunk = 0;
     }
-
-    // Compute the sustain level
-    float levelSustain = _isMod ?
-                (1.f - 0.01f * v_levelSustain) : // percentage
-                FastMaths::fastPow10(-0.05f * v_levelSustain); // decrease in dB
-
-    // Update hold / decay time and volume according to the key
-    uint32_t timeHold = static_cast<uint32_t>(v_timeHold * FastMaths::fastPow2(v_noteToHold * static_cast<float>(60 - note)));
-    uint32_t timeDecay = static_cast<uint32_t>(v_timeDecay * FastMaths::fastPow2(v_noteToDecay * static_cast<float>(60 - note)));
 
     // Avancement
     bool end = false;
@@ -139,12 +172,10 @@ bool EnveloppeVol::getEnvelope(float * data, uint32_t chunkCount, bool release, 
             if (_isMod)
             {
                 // Convex attack
-                float stiffness = 0.000001f;
-                coef = static_cast<float>(std::pow(static_cast<double>(stiffness), 0.4 / v_timeAttack));
-                float correction = static_cast<float>(std::pow(static_cast<double>(stiffness), 0.4));
+                coef = _attackCoef;
                 for (uint32_t i = 0; i < duration; i++)
                 {
-                    _lastValue = 1.0f - coef * (1.0f - _lastValue + stiffness + correction) + stiffness + correction;
+                    _lastValue = 1.0f - coef * (1.0f - _lastValue + STIFFNESS + s_attackCorrection) + STIFFNESS + s_attackCorrection;
                     data[chunk++] = gain * _lastValue;
                 }
             }
@@ -206,7 +237,7 @@ bool EnveloppeVol::getEnvelope(float * data, uint32_t chunkCount, bool release, 
             else
             {
                 // Exponential decay
-                coef = static_cast<float>(std::pow(0.00001585 / (1. - static_cast<double>(levelSustain) + 0.00001585), 1. / timeDecay));
+                coef = _decayCoef;
                 for (uint32_t i = 0; i < duration; i++)
                 {
                     _lastValue = (_lastValue - levelSustain) * coef + levelSustain;
@@ -271,7 +302,7 @@ bool EnveloppeVol::getEnvelope(float * data, uint32_t chunkCount, bool release, 
             else
             {
                 // Exponential decay
-                coef = static_cast<float>(std::pow(0.00001585, 1. / v_timeRelease));
+                coef = _quickRelease ? _releaseCoefQuick : _releaseCoef;
                 for (uint32_t i = 0; i < duration; i++)
                 {
                     _lastValue *= coef;

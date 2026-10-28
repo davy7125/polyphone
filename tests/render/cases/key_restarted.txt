@@ -1,0 +1,14 @@
+# soundfont: polyphone-test.sf2
+# same as: key_restarted_equivalent
+# A key pressed again before being released stops its note, which is played again (as FluidSynth), instead of adding
+# a second note
+samplerate 48000
+duration 3
+
+0     program 0 0 0
+0.0   on 0 60 100
+0.5   on 0 60 80
+1.0   on 0 64 100
+1.2   on 0 64 100
+1.5   off 0 60
+1.6   off 0 64
