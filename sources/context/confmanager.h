@@ -87,6 +87,9 @@ public:
     /// Gather all configurations for the synth
     SynthCoreConfig getSynthConfig();
 
+    /// Velocity to filter cutoff among the default modulators: the one of the version 2.01 (0), 2.04 (1) or none (2)
+    int getModulatorVelToFilterType();
+
 signals:
     /// Emitted when the chorus or reverb configuration changed or the buffer size
     void soundEngineConfigurationChanged();

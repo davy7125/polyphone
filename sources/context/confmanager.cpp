@@ -25,7 +25,6 @@
 #include "confmanager.h"
 #include <QFileInfo>
 #include <QDir>
-#include "modulatordata.h"
 #include "pushstereoediting.h"
 
 ConfManager::ConfManager(): QObject(),
@@ -100,9 +99,6 @@ ConfManager::ConfManager(): QObject(),
             _settings.remove("synth/tuning");
         }
     }
-
-    // Special initialization here (for more speed when reading modulator_vel_to_filter)
-    ModulatorData::setModulatorVelToFilterType(this->getValue(ConfManager::SECTION_SOUND_ENGINE, "modulator_vel_to_filter", 1).toInt());
 }
 
 ConfManager::~ConfManager()
@@ -143,8 +139,6 @@ void ConfManager::setValue(Section section, QString subSection, QString key, QVa
         break;
     case Section::SECTION_SOUND_ENGINE:
         emit soundEngineConfigurationChanged();
-        if (key == "modulator_vel_to_filter")
-            ModulatorData::setModulatorVelToFilterType(value.toInt());
         break;
     case Section::SECTION_AUDIO:
         if (key != "stereo_playback")
@@ -318,6 +312,12 @@ SynthCoreConfig ConfManager::getSynthConfig()
             configuration.temperament[i - 1] = temperament[i].toFloat();
         configuration.temperamentRelativeKey = temperament[13].toInt() % 12;
     }
+    configuration.modulatorVelToFilterType = getModulatorVelToFilterType();
 
     return configuration;
+}
+
+int ConfManager::getModulatorVelToFilterType()
+{
+    return this->getValue(ConfManager::SECTION_SOUND_ENGINE, "modulator_vel_to_filter", 1).toInt();
 }

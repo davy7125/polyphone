@@ -24,16 +24,10 @@
 
 #include "parametermodulator.h"
 #include "modulatedparameter.h"
-#include "imidivalues.h"
+#include "voicecontext.h"
 
-IMidiValues * ParameterModulator::s_midiValues = new DummyMidiDevice();
-void ParameterModulator::setIMidiValues(IMidiValues * midiValues)
-{
-    delete s_midiValues;
-    s_midiValues = midiValues;
-}
-
-void ParameterModulator::initialize(const ModulatorData &modData, bool isPrst, int channel, int initialKey, int keyForComputation, int velForComputation)
+void ParameterModulator::initialize(const ModulatorData &modData, bool isPrst, const VoiceContext * context,
+                                    int channel, int initialKey, int keyForComputation, int velForComputation)
 {
     _data.srcOper = modData.srcOper;
     _data.destOper = modData.destOper;
@@ -44,6 +38,7 @@ void ParameterModulator::initialize(const ModulatorData &modData, bool isPrst, i
 
     _inputNumber = 0;
     _isPrst = isPrst;
+    _context = context;
     _channel = channel;
     _initialKey = initialKey;
     _input1 = 0.0;
@@ -240,11 +235,12 @@ double ParameterModulator::getValue(SFModulator sfMod)
 {
     // Default value
     double value = -1;
+    IMidiValues * midiValues = _context->getMidiValues();
 
     if (sfMod.CC)
     {
         // Midi controllers
-        value = s_midiValues->getControllerValue(_channel, sfMod.Index);
+        value = midiValues->getControllerValue(_channel, sfMod.Index);
     }
     else
     {
@@ -263,17 +259,17 @@ double ParameterModulator::getValue(SFModulator sfMod)
             break;
         case GC_polypressure:
             // After touch by key
-            value = (_initialKey >= 0 ? s_midiValues->getPolyPressure(_channel, _initialKey) : 0);
+            value = (_initialKey >= 0 ? midiValues->getPolyPressure(_channel, _initialKey) : 0);
             break;
         case GC_channelPressure:
             // After touch for the whole keyboard
-            value = s_midiValues->getMonoPressure(_channel);
+            value = midiValues->getMonoPressure(_channel);
             break;
         case GC_pitchWheel:
-            value = 64.0 * (static_cast<double>(s_midiValues->getBendValue(_channel)) + 1.0);
+            value = 64.0 * (static_cast<double>(midiValues->getBendValue(_channel)) + 1.0);
             break;
         case GC_pitchWheelSensitivity:
-            value = static_cast<double>(s_midiValues->getBendSensitivityValue(_channel));
+            value = static_cast<double>(midiValues->getBendSensitivityValue(_channel));
             break;
         case GC_link: default:
             // Link (the value will come later)

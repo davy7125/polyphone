@@ -24,6 +24,7 @@
 
 #include "sfzparameterregion.h"
 #include "soundfontmanager.h"
+#include "contextmanager.h"
 
 QList<int> SfzParameterRegion::getSampleIndex(SoundfontManager *sf2, EltID idElt, QString pathSfz) const
 {
@@ -857,7 +858,8 @@ void SfzParameterRegion::saveModulator(SoundfontManager * sf2, EltID idElt, Modu
     if (idElt.typeElement == elementInst)
     {
         int defaultModulatorCount;
-        ModulatorData * defaultModulators = ModulatorData::getDefaultModulators(defaultModulatorCount);
+        const ModulatorData * defaultModulators = ModulatorData::getDefaultModulators(
+            ContextManager::configuration()->getModulatorVelToFilterType(), defaultModulatorCount);
         for (int i = 0; i < defaultModulatorCount; i++)
         {
             if (defaultModulators[i] == modData && defaultModulators[i].amount == modData.amount)

@@ -32,13 +32,14 @@
 class Voice;
 class VoiceParam;
 class ISynthListener;
+class VoiceContext;
 
 class VoiceList
 {
 public:
     VoiceList();
     ~VoiceList();
-    void initialize(ISynthListener * listener);
+    void initialize(ISynthListener * listener, const VoiceContext * context);
     void setThreadCount(int threadCount) { _threadCount = threadCount; }
     void setMaxPolyphony(int maxPolyphony);
 

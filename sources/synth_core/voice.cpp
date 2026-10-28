@@ -23,12 +23,10 @@
 ***************************************************************************/
 
 #include "voice.h"
+#include "voicecontext.h"
 #include "fastmaths.h"
 #include "synthmath.h"
 
-volatile int Voice::s_referencePitch = 4400;
-volatile float Voice::s_temperament[12] = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
-volatile int Voice::s_temperamentRelativeKey = 0;
 float Voice::s_sinc_tables[8][RESAMPLING_SUBDIVISION][RESAMPLING_ORDER];
 float Voice::s_floatConversionCoef24;
 
@@ -47,6 +45,7 @@ void Voice::prepareTables()
 
 Voice::Voice(VoiceParam * voiceParam, ISynthListener * listener) :
     _listener(listener),
+    _context(voiceParam->getContext()),
     _dataSmpl16(nullptr),
     _dataSmpl24(nullptr),
     _voiceParam(voiceParam)
@@ -198,10 +197,9 @@ void Voice::generateData(float * data, uint32_t len)
         int32_t v_scaleTune = _voiceParam->getInteger(champ_scaleTuning);
         int32_t v_fineTune = _voiceParam->getInteger(champ_fineTune);
         int32_t v_coarseTune = _voiceParam->getInteger(champ_coarseTune);
-        float temperamentFineTune = _voiceParam->getKey() < 0 ? 0.0f : (s_temperament[(playedNote - s_temperamentRelativeKey + 12) % 12] -
-                                                                        s_temperament[(21 - s_temperamentRelativeKey) % 12]); // Correction so that the reference pitch is accurate
+        float temperamentFineTune = _voiceParam->getKey() < 0 ? 0.0f : _context->getTemperamentFineTune(playedNote);
         float deltaPitchFixed = -1731.234f /* -1200 / ln(2) */ *
-                                    std::log(static_cast<double>(_audioSmplRate) * 4400.f / (_smplRate * s_referencePitch)) +
+                                    std::log(static_cast<double>(_audioSmplRate) * 4400.f / (_smplRate * _context->getReferencePitch())) +
                                 (playedNote - v_rootkey) * v_scaleTune + (temperamentFineTune + static_cast<float>(v_fineTune)) + 100.0f * v_coarseTune;
         if (_sincWindow == nullptr)
             _sincWindow = s_sinc_tables[whichSincTable(_sampleRootKey, deltaPitchFixed)];
@@ -446,20 +444,6 @@ void Voice::release(bool quick)
 void Voice::setGain(float gain)
 {
     _gain = gain;
-}
-
-void Voice::setReferencePitch(int referencePitch)
-{
-    // Atomic operation
-    s_referencePitch = referencePitch;
-}
-
-void Voice::setTemperament(float temperament[12], int relativeKey)
-{
-    // Atomic operations
-    for (int i = 0; i < 12; i++)
-        s_temperament[i] = temperament[i];
-    s_temperamentRelativeKey = relativeKey;
 }
 
 bool Voice::biQuadCoefficients(float * coeffs, float freq, float inv_Q)

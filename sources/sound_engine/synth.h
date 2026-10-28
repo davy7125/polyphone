@@ -46,7 +46,7 @@ public:
 
     // Executed by the main thread (thread 1)
     void configure(const SynthCoreConfig &configuration);
-    void setIMidiValues(IMidiValues * midiValues);
+    void setIMidiValues(IMidiValues * midiValues); // Not deleted by the synth (null: default values)
     int play(EltID id, int channel, int key, int velocity);
     void stop(bool allChannels, bool fast);
 

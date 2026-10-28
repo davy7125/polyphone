@@ -26,6 +26,7 @@ add_library(polyphone_synth_core STATIC
     midiprocessor.cpp
     synthmidi.cpp
     voice.cpp
+    voicecontext.cpp
     voicelist.cpp
     voiceparam.cpp
     ${STK_DIR}/stk/Stk.cpp

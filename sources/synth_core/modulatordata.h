@@ -110,9 +110,8 @@ public:
         index(0)
     {}
 
-    // Default modulators
-    static void setModulatorVelToFilterType(int type); // Modified by confmanager
-    static ModulatorData * getDefaultModulators(int &number);
+    // Default modulators, the velocity to filter cutoff being the one of the version 2.01 (0), 2.04 (1) or none (2)
+    static const ModulatorData * getDefaultModulators(int velToFilterType, int &number);
 
     SFModulator srcOper;
     uint16_t destOper; // One of the AttributeType if < 32768, otherwise the index of another modulator
@@ -134,10 +133,7 @@ public:
     }
 
 private:
-    void loadDefaultModulator(uint16_t num);
-
-    static int s_modulatorVelToFilterType;
-    static ModulatorData s_defaultMods[10];
+    void loadDefaultModulator(uint16_t num, int velToFilterType);
 };
 
 #endif // MODULATORDATA_H

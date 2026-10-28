@@ -27,6 +27,7 @@
 
 #include "abstracttool.h"
 #include "waitingtooldialog.h"
+#include "voicecontext.h"
 
 class ToolMergeSamples: public AbstractTool
 {
@@ -74,8 +75,6 @@ protected:
 private slots:
     void onElementProcessed(EltID idSmplR, EltID idSmplL, quint32 key, quint32 minKey);
     void onCancel();
-    void initVoices();
-    void restoreVoices();
 
 private:
     static RangesType getPresetRange(SoundfontManager * sm, EltID idPrst);
@@ -86,6 +85,7 @@ private:
     quint32 _steps;
     quint32 _currentStep;
     bool _canceled;
+    VoiceContext _voiceContext; // Settings of the voices computed by the runnables
 
     EltID _idNewInst;
     QString _presetName;

@@ -133,7 +133,11 @@ ContextManager::~ContextManager()
 {
     // Delete everything in the reverse order
     if (_audio)
+    {
+        // The voices still computed no longer read the MIDI values
         _midi->removeListener(_audio->getSynth());
+        _audio->getSynth()->setIMidiValues(nullptr);
+    }
     delete _midi;
     delete _audio;
     delete _translation;

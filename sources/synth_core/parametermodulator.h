@@ -28,17 +28,16 @@
 #include "attributetypes.h"
 #include "synthconstants.h"
 class ModulatedParameter;
-class IMidiValues;
+class VoiceContext;
 
 class ParameterModulator
 {
 public:
-    static void setIMidiValues(IMidiValues * midiValues);
-
     ParameterModulator() {}
 
-    // Initialize a modulator
-    void initialize(const ModulatorData &modData, bool isPrst, int channel, int initialKey, int keyForComputation, int velForComputation);
+    // Initialize a modulator, the context giving the values of the MIDI controllers
+    void initialize(const ModulatorData &modData, bool isPrst, const VoiceContext * context,
+                    int channel, int initialKey, int keyForComputation, int velForComputation);
 
     // Try to merge an existing modulator with another one, return true if success
     bool merge(const ModulatorData &modData);
@@ -87,12 +86,11 @@ private:
     ModulatedParameter * _outputParameter;
     ParameterModulator * _outputModulator;
     bool _isPrst;
+    const VoiceContext * _context;
 
     // Distinction between the initial key that triggered the sound (still useful for the aftertouch)
     // and the value used for the modulators (keynum and velocity might be overridden)
     int _channel, _initialKey, _keyForComputation, _velForComputation;
-
-    static IMidiValues * s_midiValues;
 };
 
 #endif // PARAMETERMODULATOR_H

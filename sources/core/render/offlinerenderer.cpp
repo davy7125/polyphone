@@ -28,6 +28,7 @@
 #include <QDataStream>
 #include <QRegularExpression>
 #include <algorithm>
+#include <cstring>
 #include "soundfontmanager.h"
 #include "soundfonts.h"
 #include "soundfont.h"
@@ -40,7 +41,6 @@
 
 OfflineRenderer::OfflineRenderer() :
     _midiProcessor(new MidiProcessor()),
-    _midiProcessorOwned(true),
     _sampleRate(48000),
     _blockSize(COMPUTATION_CHUNK),
     _duration(0),
@@ -65,8 +65,7 @@ OfflineRenderer::OfflineRenderer() :
 OfflineRenderer::~OfflineRenderer()
 {
     QObject::disconnect(_modulatorConnection);
-    if (_midiProcessorOwned)
-        delete _midiProcessor;
+    delete _midiProcessor;
 }
 
 bool OfflineRenderer::readEvents(QString filePath)
@@ -516,7 +515,7 @@ static void playElement(SynthCore * core, ElementType type, int sf2Index, int in
         core->playSample(sf2Index, index, -1, key, velocity);
 }
 
-bool OfflineRenderer::render(int sf2Index, QString outputFilePath, bool threaded)
+bool OfflineRenderer::render(int sf2Index, QString outputFilePath, SynthType synthType)
 {
     if (!applyModelChanges(sf2Index) || !resolveElements(sf2Index))
         return false;
@@ -524,10 +523,10 @@ bool OfflineRenderer::render(int sf2Index, QString outputFilePath, bool threaded
     quint32 frameCount = static_cast<quint32>(qRound64(_duration * _sampleRate));
     quint32 blockCount = (frameCount + _blockSize - 1) / _blockSize;
     QVector<float> data(2 * static_cast<int>(blockCount * _blockSize), 0.f);
-    if (threaded)
+    if (synthType == SYNTH_THREADED)
         renderWithThreads(sf2Index, data, blockCount);
-    else
-        renderWithCore(sf2Index, data, blockCount);
+    else if (!renderWithCore(sf2Index, data, blockCount, synthType == SYNTH_TWO_CORES))
+        return false;
 
     return writeWavFile(outputFilePath, data, frameCount);
 }
@@ -547,12 +546,12 @@ SynthCoreConfig OfflineRenderer::getSynthConfig()
     return configuration;
 }
 
-void OfflineRenderer::renderWithCore(int sf2Index, QVector<float> &data, quint32 blockCount)
+bool OfflineRenderer::renderWithCore(int sf2Index, QVector<float> &data, quint32 blockCount, bool withOtherCore)
 {
-    SynthCore * core = new SynthCore(SoundfontManager::getInstance()->getSoundfonts());
+    ISynthSoundfonts * soundfonts = SoundfontManager::getInstance()->getSoundfonts();
+    SynthCore * core = new SynthCore(soundfonts);
     core->setMidiValues(_midiProcessor);
-    _midiProcessorOwned = false; // Deleted by the synth from now on, still used here
-    SynthMidi synthMidi(core, SoundfontManager::getInstance()->getSoundfonts(), sf2Index);
+    SynthMidi synthMidi(core, soundfonts, sf2Index);
     _midiProcessor->setListener(&synthMidi);
     core->configure(getSynthConfig());
     core->setSampleRate(_sampleRate);
@@ -560,24 +559,85 @@ void OfflineRenderer::renderWithCore(int sf2Index, QVector<float> &data, quint32
     core->setStereo(_sampleStereo);
     core->setSampleGain(_sampleGain);
 
+    // Possibly a second synth computed in the same thread, with another tuning, other default modulators and other
+    // values of the controllers: the settings read by the voices belong to each synth, as for instances of a plugin
+    SynthCore * otherCore = nullptr;
+    MidiProcessor * otherMidiProcessor = nullptr;
+    SynthMidi * otherSynthMidi = nullptr;
+    if (withOtherCore)
+    {
+        SynthCoreConfig otherConfiguration = getSynthConfig();
+        otherConfiguration.referencePitch = 4150;
+        for (int i = 0; i < 12; i++)
+            otherConfiguration.temperament[i] = static_cast<float>(3 * i - 15);
+        otherConfiguration.temperamentRelativeKey = 2;
+        otherConfiguration.modulatorVelToFilterType = 0;
+
+        otherCore = new SynthCore(soundfonts);
+        otherMidiProcessor = new MidiProcessor();
+        otherCore->setMidiValues(otherMidiProcessor);
+        otherSynthMidi = new SynthMidi(otherCore, soundfonts, sf2Index);
+        otherMidiProcessor->setListener(otherSynthMidi);
+        otherCore->configure(otherConfiguration);
+        otherCore->setSampleRate(_sampleRate);
+        otherCore->setLoopEnabled(_sampleLoop);
+        otherCore->setStereo(_sampleStereo);
+        otherCore->setSampleGain(_sampleGain);
+        for (int channel = -1; channel < 16; channel++)
+        {
+            otherMidiProcessor->processControllerChanged(false, channel, 1, 90); // Vibrato
+            otherMidiProcessor->processControllerChanged(false, channel, 7, 60); // Volume
+        }
+    }
+
     // The synth of the editor applies the effects on a first block of silence (skipped in renderWithThreads):
     // the same is done here so that the modulation of the chorus has the same phase
     float * dataL = new float[_blockSize];
     float * dataR = new float[_blockSize];
+    float * otherDataL = new float[_blockSize];
+    float * otherDataR = new float[_blockSize];
     core->render(dataL, dataR, _blockSize);
+    if (otherCore != nullptr)
+        otherCore->render(otherDataL, otherDataR, _blockSize);
 
     // The events of a block are heard from its beginning
+    // The second synth is computed between the events and the computation of the first one
     int eventIndex = 0;
+    int otherEventIndex = 0;
+    bool otherRenderingDiffers = false;
     for (quint32 block = 0; block < blockCount; block++)
     {
-        processEvents(core, sf2Index, static_cast<quint64>(block + 1) * _blockSize, eventIndex);
+        quint64 blockEnd = static_cast<quint64>(block + 1) * _blockSize;
+        processEvents(core, _midiProcessor, sf2Index, blockEnd, eventIndex);
+        if (otherCore != nullptr)
+        {
+            processEvents(otherCore, otherMidiProcessor, sf2Index, blockEnd, otherEventIndex);
+            otherCore->render(otherDataL, otherDataR, _blockSize);
+        }
         core->render(dataL, dataR, _blockSize);
         storeBlock(data, block, dataL, dataR);
+
+        if (otherCore != nullptr && !otherRenderingDiffers)
+            otherRenderingDiffers = memcmp(dataL, otherDataL, _blockSize * sizeof(float)) != 0 ||
+                                    memcmp(dataR, otherDataR, _blockSize * sizeof(float)) != 0;
     }
     _midiProcessor->setListener(nullptr);
     delete [] dataL;
     delete [] dataR;
+    delete [] otherDataL;
+    delete [] otherDataR;
     delete core;
+    delete otherSynthMidi;
+    delete otherCore;
+    delete otherMidiProcessor;
+
+    // Otherwise the second synth did not test anything
+    if (withOtherCore && !otherRenderingDiffers)
+    {
+        _error = "the second synth gives the same rendering as the first one";
+        return false;
+    }
+    return true;
 }
 
 void OfflineRenderer::renderWithThreads(int sf2Index, QVector<float> &data, quint32 blockCount)
@@ -586,7 +646,6 @@ void OfflineRenderer::renderWithThreads(int sf2Index, QVector<float> &data, quin
     SoundfontManager * sm = SoundfontManager::getInstance();
     Synth * synth = new Synth(sm->getSoundfonts(), sm->getMutex());
     synth->setIMidiValues(_midiProcessor);
-    _midiProcessorOwned = false; // Deleted by the synth from now on, still used here
     EditorSynthListener listener(synth, sm->getSoundfonts()->getSynthSoundfont(sf2Index), sf2Index);
     _midiProcessor->setListener(&listener);
     synth->configure(getSynthConfig());
@@ -604,7 +663,7 @@ void OfflineRenderer::renderWithThreads(int sf2Index, QVector<float> &data, quin
     {
         // Events are processed while no voice is being computed
         synth->waitForComputation();
-        processEvents(synth, sf2Index, static_cast<quint64>(block + 1) * _blockSize, eventIndex);
+        processEvents(synth, _midiProcessor, sf2Index, static_cast<quint64>(block + 1) * _blockSize, eventIndex);
 
         synth->readData(dataL, dataR, _blockSize);
         if (block > 0)
@@ -627,7 +686,7 @@ void OfflineRenderer::storeBlock(QVector<float> &data, quint32 block, const floa
 }
 
 template <class T>
-void OfflineRenderer::processEvents(T * synth, int sf2Index, quint64 blockEnd, int &eventIndex)
+void OfflineRenderer::processEvents(T * synth, MidiProcessor * midiProcessor, int sf2Index, quint64 blockEnd, int &eventIndex)
 {
     // The MIDI events go through MidiProcessor, the instruments and samples played alone directly to the synth
     for (; eventIndex < _events.count() && _events[eventIndex].frame < blockEnd; eventIndex++)
@@ -638,40 +697,40 @@ void OfflineRenderer::processEvents(T * synth, int sf2Index, quint64 blockEnd, i
         case EVENT_PROGRAM:
             // Bank select (the bank of the channel 10 is 128), then program change
             if (event.channel != 9)
-                _midiProcessor->processControllerChanged(false, event.channel, 0, event.number);
-            _midiProcessor->processProgramChanged(event.channel, static_cast<uint8_t>(event.value));
+                midiProcessor->processControllerChanged(false, event.channel, 0, event.number);
+            midiProcessor->processProgramChanged(event.channel, static_cast<uint8_t>(event.value));
             break;
         case EVENT_NOTE_ON:
             if (event.value > 0)
             {
-                _midiProcessor->processKeyOn(event.channel, event.number, event.value);
+                midiProcessor->processKeyOn(event.channel, event.number, event.value);
                 break;
             }
             // A velocity of 0 is a note off
             Q_FALLTHROUGH();
         case EVENT_NOTE_OFF:
-            _midiProcessor->processKeyOff(event.channel, event.number);
+            midiProcessor->processKeyOff(event.channel, event.number);
             break;
         case EVENT_CONTROLLER:
-            _midiProcessor->processControllerChanged(false, event.channel, event.number, event.value);
+            midiProcessor->processControllerChanged(false, event.channel, event.number, event.value);
             break;
         case EVENT_BEND:
-            _midiProcessor->processBendChanged(event.channel, event.floatValue);
+            midiProcessor->processBendChanged(event.channel, event.floatValue);
             break;
         case EVENT_BEND_RANGE: {
             // RPN 0 (controllers 101 and 100), semitones (controller 6) and cents (controller 38)
             int semitones = static_cast<int>(event.floatValue);
             int cents = qRound(100.f * (event.floatValue - static_cast<float>(semitones)));
-            _midiProcessor->processControllerChanged(false, event.channel, 101, 0);
-            _midiProcessor->processControllerChanged(false, event.channel, 100, 0);
-            _midiProcessor->processControllerChanged(false, event.channel, 6, semitones);
-            _midiProcessor->processControllerChanged(false, event.channel, 38, cents);
+            midiProcessor->processControllerChanged(false, event.channel, 101, 0);
+            midiProcessor->processControllerChanged(false, event.channel, 100, 0);
+            midiProcessor->processControllerChanged(false, event.channel, 6, semitones);
+            midiProcessor->processControllerChanged(false, event.channel, 38, cents);
         } break;
         case EVENT_PRESSURE:
-            _midiProcessor->processMonoPressureChanged(event.channel, event.value);
+            midiProcessor->processMonoPressureChanged(event.channel, event.value);
             break;
         case EVENT_POLY_PRESSURE:
-            _midiProcessor->processPolyPressureChanged(event.channel, event.number, event.value);
+            midiProcessor->processPolyPressureChanged(event.channel, event.number, event.value);
             break;
         case EVENT_INSTRUMENT:
             playElement(synth, elementInst, sf2Index, event.index, event.number, event.value);

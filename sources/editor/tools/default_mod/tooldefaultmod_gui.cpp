@@ -26,6 +26,7 @@
 #include "ui_tooldefaultmod_gui.h"
 #include "tooldefaultmod_parameters.h"
 #include "modulatorcell.h"
+#include "contextmanager.h"
 
 ToolDefaultMod_gui::ToolDefaultMod_gui(QWidget *parent) :
     AbstractToolGui(parent),
@@ -48,7 +49,8 @@ void ToolDefaultMod_gui::updateInterface(AbstractToolParameters * parameters, Id
     // Fill the list with all default modulators
     ui->listWidget->clear();
     int number;
-    const ModulatorData * const modData = ModulatorData::getDefaultModulators(number);
+    const ModulatorData * const modData = ModulatorData::getDefaultModulators(
+        ContextManager::configuration()->getModulatorVelToFilterType(), number);
     for (quint16 i = 0; i < number; i++)
     {
         // Add a new cell

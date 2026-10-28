@@ -49,11 +49,11 @@ VoiceList::~VoiceList()
         delete _voiceParameters[i];
 }
 
-void VoiceList::initialize(ISynthListener * listener)
+void VoiceList::initialize(ISynthListener * listener, const VoiceContext * context)
 {
     for (int i = 0; i < MAX_NUMBER_OF_VOICES; ++i)
     {
-        _voiceParameters[i] = new VoiceParam();
+        _voiceParameters[i] = new VoiceParam(context);
         _voices[i] = new Voice(_voiceParameters[i], listener);
     }
 }

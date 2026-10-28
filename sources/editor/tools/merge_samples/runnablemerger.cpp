@@ -37,8 +37,10 @@ quint32 RunnableMerger::SAMPLE_RATE = 48000;
 quint32 RunnableMerger::BUFFER_LENGTH = 1024;
 
 
-RunnableMerger::RunnableMerger(ToolMergeSamples * tool, EltID idPrst, quint32 key, quint32 minKey, bool loop, bool stereo, quint32 sustainDuration, quint32 releaseDuration) : QRunnable(),
+RunnableMerger::RunnableMerger(ToolMergeSamples * tool, const VoiceContext * context, EltID idPrst, quint32 key, quint32 minKey,
+                               bool loop, bool stereo, quint32 sustainDuration, quint32 releaseDuration) : QRunnable(),
     _tool(tool),
+    _context(context),
     _idPrst(idPrst),
     _key(key),
     _minKey(minKey),
@@ -205,7 +207,7 @@ void RunnableMerger::playInst(float * dataR, float * dataL, Soundfont * soundfon
 void RunnableMerger::playSmpl(float * dataR, float * dataL, InstPrst * prst, Division * prstDiv, InstPrst * inst, Division * instDiv, Smpl * smpl)
 {
     // Initialize a voice
-    VoiceParam * voiceParam = new VoiceParam();
+    VoiceParam * voiceParam = new VoiceParam(_context);
     Voice * voice = new Voice(voiceParam);
     voice->initialize(_idPrst.indexSf2, prst, prstDiv, inst, instDiv, smpl, 0, _key, 127, 0, SAMPLE_RATE, 0);
 

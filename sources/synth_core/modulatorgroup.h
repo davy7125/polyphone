@@ -29,11 +29,13 @@
 #include "synthconstants.h"
 #include "parametermodulator.h"
 class ModulatedParameter;
+class VoiceContext;
 
 class ModulatorGroup
 {
 public:
-    ModulatorGroup(ModulatedParameter * parameters, bool isPrst);
+    // The context gives the default modulators and the values of the MIDI controllers
+    ModulatorGroup(ModulatedParameter * parameters, bool isPrst, const VoiceContext * context);
 
     // Remove all modulators (sample level)
     void clear();
@@ -62,6 +64,7 @@ private:
 
     ModulatedParameter * _parameters;
     bool _isPrst;
+    const VoiceContext * _context;
     int _channel, _initialKey, _keyForComputation, _velForComputation;
     ParameterModulator _modulators[MAX_NUMBER_OF_PARAMETER_MODULATORS];
     int _numberOfParameterModulators;

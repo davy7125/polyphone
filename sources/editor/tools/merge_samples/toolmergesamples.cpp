@@ -27,8 +27,8 @@
 #include "toolmergesamples_gui.h"
 #include "soundfontmanager.h"
 #include "runnablemerger.h"
-#include "voice.h"
 #include "contextmanager.h"
+#include "mididevice.h"
 
 ToolMergeSamples::ToolMergeSamples() : AbstractTool(new ToolMergeSamples_parameters(), new ToolMergeSamples_gui()),
     _waitingDialog(nullptr)
@@ -94,7 +94,9 @@ void ToolMergeSamples::runInternal(SoundfontManager * sm, QWidget * parent, IdLi
     _waitingDialog->show();
     connect(_waitingDialog, SIGNAL(canceled()), this, SLOT(onCancel()));
 
-    initVoices();
+    // The voices have no temperament and a reference pitch of 440 Hz, without changing the settings of the synth
+    _voiceContext.setMidiValues(ContextManager::midi());
+    _voiceContext.setModulatorVelToFilterType(ContextManager::configuration()->getModulatorVelToFilterType());
 
     // For each key / division
     quint32 noteStart2 = range.byLo;
@@ -107,7 +109,7 @@ void ToolMergeSamples::runInternal(SoundfontManager * sm, QWidget * parent, IdLi
     for (quint32 key = noteStart; key <= noteEnd; key += keyNumber)
     {
         RunnableMerger * rcc = new RunnableMerger(
-            this, idPrst, key,
+            this, &_voiceContext, idPrst, key,
             (key + 1 < noteStart2 + keyNumber) ? noteStart2 : (key - keyNumber + 1), // min key
             loopEnabled, stereoSamples,
             sustainDuration, releaseDuration);
@@ -178,7 +180,6 @@ void ToolMergeSamples::onElementProcessed(EltID idSmplR, EltID idSmplL, quint32 
     _waitingDialog->setValue(static_cast<int>(++_currentStep));
     if (_currentStep >= _steps)
     {
-        restoreVoices();
         delete _waitingDialog;
         _waitingDialog = nullptr;
         if (_canceled)
@@ -342,21 +343,4 @@ EltID ToolMergeSamples::createInstrumentInPreset(SoundfontManager * sm, QString 
     sm->set(idNewPrstInst, champ_keyRange, val);
 
     return idNewInst;
-}
-
-void ToolMergeSamples::initVoices()
-{
-    // Remove the temperament and the reference pitch
-    float temperament[12];
-    memset(temperament, 0, 12 * sizeof(float));
-    Voice::setTemperament(temperament, 0);
-    Voice::setReferencePitch(4400);
-}
-
-void ToolMergeSamples::restoreVoices()
-{
-    // Restore the temperament (no temperament is 0 everywhere) and the reference pitch
-    SynthCoreConfig configuration = ContextManager::configuration()->getSynthConfig();
-    Voice::setTemperament(configuration.temperament, configuration.temperamentRelativeKey);
-    Voice::setReferencePitch(configuration.referencePitch);
 }

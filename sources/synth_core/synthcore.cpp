@@ -26,12 +26,10 @@
 #include <cstring>
 #include <thread>
 #include <chrono>
-#include "parametermodulator.h"
+#include <mutex>
 #include "modulatordata.h"
 #include "voice.h"
 #include "fastmaths.h"
-
-int SynthCore::s_sampleVoiceTokenCounter = 0;
 
 // Value of an attribute in a zone, 0 if it is not set
 static AttributeValue getAttribute(ISynthZone * zone, AttributeType champ)
@@ -64,9 +62,10 @@ SynthCore::SynthCore(ISynthSoundfonts * soundfonts, ISynthListener * listener) :
     _smplGain(0),
     _smplIsStereoEnabled(false),
     _smplIsLoopEnabled(true),
+    _sampleVoiceTokenCounter(0),
     _effectsInUse(0)
 {
-    _voices.initialize(listener);
+    _voices.initialize(listener, &_context);
 }
 
 SynthCore::~SynthCore()
@@ -76,9 +75,13 @@ SynthCore::~SynthCore()
 
 void SynthCore::prepareTables()
 {
-    SFModulator::prepareConversionTables();
-    FastMaths::initialize();
-    Voice::prepareTables();
+    // Synths can be created by several threads at the same time
+    static std::once_flag once;
+    std::call_once(once, []() {
+        SFModulator::prepareConversionTables();
+        FastMaths::initialize();
+        Voice::prepareTables();
+    });
 }
 
 int SynthCore::playSample(int sf2Id, int sampleIndex, int channel, int key, int velocity)
@@ -210,7 +213,7 @@ int SynthCore::playSmpl(int sf2Id, ISynthSample * smpl, int channel, int key, in
     // Load the sound
     smpl->loadData();
 
-    int currentToken = s_sampleVoiceTokenCounter++;
+    int currentToken = _sampleVoiceTokenCounter.fetch_add(1, std::memory_order_relaxed);
 
     // Get a new voice to prepare
     Voice * voice = _voices.getVoiceToPrepare();
@@ -349,14 +352,14 @@ void SynthCore::configure(const SynthCoreConfig &configuration)
     _chorusR.setModFrequency(0.06667 * _configuration.choFrequency);
     _effectsInUse.store(0, std::memory_order_relaxed);
 
-    // Update the reference pitch and temperament
-    Voice::setReferencePitch(_configuration.referencePitch);
-    Voice::setTemperament(_configuration.temperament, _configuration.temperamentRelativeKey);
+    // Settings read by the voices
+    _context.setTuning(_configuration.referencePitch, _configuration.temperament, _configuration.temperamentRelativeKey);
+    _context.setModulatorVelToFilterType(_configuration.modulatorVelToFilterType);
 }
 
 void SynthCore::setMidiValues(IMidiValues * midiValues)
 {
-    ParameterModulator::setIMidiValues(midiValues);
+    _context.setMidiValues(midiValues);
 }
 
 void SynthCore::setSampleRate(uint32_t sampleRate)

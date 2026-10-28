@@ -11,11 +11,14 @@ before the change are kept as references, and the renderings of the new version 
    ```bash
    tests/render/render.sh <polyphone executable> <soundfont directory> ~/polyphone-render/reference
    ```
-3. After a change, render again and compare, with the synth core (`sources/synth_core`) and with the
-   synth of the editor, which computes the voices with several threads:
+3. After a change, render again and compare, with the synth core (`sources/synth_core`), with the
+   synth core next to a second one, and with the synth of the editor, which computes the voices with
+   several threads:
    ```bash
    tests/render/render.sh <polyphone executable> <soundfont directory> ~/polyphone-render/core
    tests/render/compare.py ~/polyphone-render/reference ~/polyphone-render/core
+   tests/render/render.sh <polyphone executable> <soundfont directory> ~/polyphone-render/two two_cores
+   tests/render/compare.py ~/polyphone-render/reference ~/polyphone-render/two
    tests/render/render.sh <polyphone executable> <soundfont directory> ~/polyphone-render/threaded threaded
    tests/render/compare.py ~/polyphone-render/reference ~/polyphone-render/threaded
    ```
@@ -52,13 +55,15 @@ level. Its samples are computed, so the file is the same on every machine.
 ## The command
 
 ```bash
-polyphone -5 -i <soundfont> -c <event file>[|threaded] [-d <output directory>] [-o <output name>]
+polyphone -5 -i <soundfont> -c <event file>[|two_cores|threaded] [-d <output directory>] [-o <output name>]
 ```
 
-The synth core renders the events, or the synth of the editor if `|threaded` follows the event file.
+The synth core renders the events, next to a second synth core if `|two_cores` follows the event
+file (see below), or the synth of the editor if `|threaded` follows it.
 The output is a stereo 32-bit float wav file, next to the event file by default. An existing file
 is replaced. Exit codes: 1 for a missing input file or output directory, 2 for a wrong event file,
-4 when a preset or a program is missing or the output cannot be written.
+4 when a preset or a program is missing, the output cannot be written or the second synth core gives
+the same rendering as the first one.
 
 ## Event files
 
@@ -119,6 +124,14 @@ samples and zones are their order in the soundfont, from 0.
   voice before the data is read, and the first block is skipped so that an event at 0 s is heard at
   0 s. The effects of the synth of the editor process this first block of silence: the core renders
   one too before the events, otherwise the modulation of the chorus would start with another phase.
+- With `two_cores`, a second synth core plays the same events in the same thread, with another
+  reference pitch (415 Hz), a temperament, the velocity to filter cutoff of the version 2.01 and other
+  values of the controllers (vibrato and volume). It is computed between the events and the
+  computation of the first one, and only the first one is written: its rendering must stay the one of
+  the reference. The settings read by the voices (tuning, values of the controllers, default
+  modulators) belong to each synth, as for instances of a plugin in the same process: when they were
+  shared, every case failed. The rendering fails (exit code 4) if the second synth gives the same data
+  as the first one, which would test nothing.
 - The pedals are checked without reference: `pedal_sustain` must sound exactly like
   `pedal_sustain_equivalent`, where each note is released when the pedal releases it (same for the
   sostenuto, and a key pressed again while it is held).

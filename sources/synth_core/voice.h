@@ -29,11 +29,13 @@
 #include "enveloppevol.h"
 #include "osctriangle.h"
 #include "isynthlistener.h"
+class VoiceContext;
 
 class Voice
 {
 public:
     // The listener (possibly null) is notified when a sample is played alone
+    // The tuning is read in the context of the parameters
     Voice(VoiceParam * voiceParam, ISynthListener * listener = nullptr);
     ~Voice();
 
@@ -60,15 +62,12 @@ public:
     // Generate data (pan, chorus and reverb not done)
     void generateData(float *data, uint32_t len);
 
-    // Configuration
-    static void setReferencePitch(int referencePitch);
-    static void setTemperament(float temperament[12], int relativeKey);
-
     // Maths
     static void prepareTables();
 
 private:
     ISynthListener * _listener;
+    const VoiceContext * _context;
 
     // Oscillators and envelopes
     OscTriangle _modLFO, _vibLFO;
@@ -112,9 +111,6 @@ private:
     float * _modLfoArray;
     float * _vibLfoArray;
 
-    static volatile int s_referencePitch;
-    static volatile float s_temperament[12]; // Fine tune in cents from each key from C to B
-    static volatile int s_temperamentRelativeKey;
     static float s_sinc_tables[8][RESAMPLING_SUBDIVISION][RESAMPLING_ORDER];
     static float s_floatConversionCoef24;
 

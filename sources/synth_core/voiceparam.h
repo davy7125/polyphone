@@ -28,13 +28,15 @@
 #include "modulatorgroup.h"
 #include "modulatedparameter.h"
 #include "isynthsoundfont.h"
+class VoiceContext;
 
 // Class gathering all parameters useful to create a sound
 // Parameters can evolve in real-time depending on the modulators
 class VoiceParam
 {
 public:
-    VoiceParam();
+    // The context (settings of the synth) is read by the modulators
+    VoiceParam(const VoiceContext * context);
     ~VoiceParam();
 
     // Initialize a set of parameters (prst and inst can be unknown)
@@ -58,6 +60,7 @@ public:
     int8_t getType() { return _type; }
     int getSf2Id() { return _sf2Id; }
     int getPresetId() { return _presetId; }
+    const VoiceContext * getContext() { return _context; }
 
     // Update modulators with MIDI events
     void processPolyPressureChanged(int pressure);
@@ -67,6 +70,8 @@ public:
     void processBendSensitivityChanged(float semitones);
 
 private:
+    const VoiceContext * _context;
+
     // Identification
     int8_t _channel;
     int8_t _key;

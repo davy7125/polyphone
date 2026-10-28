@@ -38,9 +38,6 @@
 #include "qtsingleapplication.h"
 #include "mainwindow.h"
 #include "translationmanager.h"
-#include "modulatordata.h"
-#include "fastmaths.h"
-#include "voice.h"
 #include "synthcore.h"
 #include "offlinerenderer.h"
 #include "tools/merge_samples/runnablemerger.h"
@@ -59,9 +56,7 @@ void writeLine(QString line)
 int launchApplication(QtSingleApplication * app, Options &options)
 {
     // Prepare arrays
-    SFModulator::prepareConversionTables();
-    FastMaths::initialize();
-    Voice::prepareTables();
+    SynthCore::prepareTables();
 
     // Application style
     QSettings settings;
@@ -227,7 +222,12 @@ int render(Options &options)
     // Render
     QString outputFile = options.getOutputFileFullPath();
     writeLine(QObject::tr("Writing file \"%1\"...").arg(outputFile));
-    if (!renderer.render(sf2Index, outputFile, options.renderThreaded()))
+    OfflineRenderer::SynthType synthType = OfflineRenderer::SYNTH_CORE;
+    if (options.renderSynth() == "two_cores")
+        synthType = OfflineRenderer::SYNTH_TWO_CORES;
+    else if (options.renderSynth() == "threaded")
+        synthType = OfflineRenderer::SYNTH_THREADED;
+    if (!renderer.render(sf2Index, outputFile, synthType))
     {
         writeLine(QObject::tr("An error occurred: %1.").arg(renderer.getError()));
         return 4;
@@ -280,11 +280,13 @@ int testVoice()
     writeLine("File loaded");
 
     // Launch a tool
+    VoiceContext context;
     for (int key = 36; key <= 40; key++)
     {
         writeLine("Key: " + QString::number(key));
         RunnableMerger merger(
             nullptr,
+            &context,
             EltID(elementPrst, sf2Index, 0),  // The first preset is used
             key, key,
             false, // No loop

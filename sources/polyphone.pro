@@ -389,6 +389,7 @@ SOURCES	+= main.cpp \
     synth_core/synthcore.cpp \
     synth_core/midiprocessor.cpp \
     synth_core/synthmidi.cpp \
+    synth_core/voicecontext.cpp \
     synth_core/voicelist.cpp \
     synth_core/voiceparam.cpp \
     sound_engine/soundengine.cpp \
@@ -790,6 +791,7 @@ HEADERS += \
     synth_core/synthcoreconfig.h \
     synth_core/midiprocessor.h \
     synth_core/synthmidi.h \
+    synth_core/voicecontext.h \
     synth_core/voicelist.h \
     synth_core/voiceparam.h \
     sound_engine/soundengine.h \

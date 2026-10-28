@@ -80,9 +80,10 @@ public:
     bool csvRawValues() { return _csvRawValues; }
 
     /// Render options: file describing the events to play, and synth used
-    /// (false: the synth core in the calling thread, true: the synth of the editor with its threads)
+    /// (empty: the synth core in the calling thread, "two_cores": the same next to another one,
+    /// "threaded": the synth of the editor with its threads)
     QString renderEventFile() { return _renderEventFile; }
-    bool renderThreaded() { return _renderThreaded; }
+    QString renderSynth() { return _renderSynth; }
 
     /// Player options
     PlayerOptions * playerOptions() { return _playerOptions; }
@@ -127,7 +128,7 @@ private:
 
     // Render options
     QString _renderEventFile;
-    bool _renderThreaded;
+    QString _renderSynth;
 
     // Player options
     PlayerOptions * _playerOptions;

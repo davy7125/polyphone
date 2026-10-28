@@ -32,11 +32,14 @@ class Soundfont;
 class InstPrst;
 class Division;
 class Smpl;
+class VoiceContext;
 
 class RunnableMerger: public QRunnable
 {
 public:
-    RunnableMerger(ToolMergeSamples * tool, EltID idPrst, quint32 key, quint32 minKey, bool loop, bool stereo, quint32 sustainDuration, quint32 releaseDuration);
+    // The context gives the settings of the voices (tuning, values of the MIDI controllers, default modulators)
+    RunnableMerger(ToolMergeSamples * tool, const VoiceContext * context, EltID idPrst, quint32 key, quint32 minKey,
+                   bool loop, bool stereo, quint32 sustainDuration, quint32 releaseDuration);
     ~RunnableMerger() override;
     void run() override;
 
@@ -48,6 +51,7 @@ private:
     static quint32 BUFFER_LENGTH;
 
     ToolMergeSamples * _tool;
+    const VoiceContext * _context;
     EltID _idPrst;
     quint32 _key, _minKey;
     bool _loop;

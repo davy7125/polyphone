@@ -39,7 +39,6 @@ Options::Options(int argc, char *argv[]) :
     _sfzOneDirPerBank(false),
     _sfzGeneralMidi(false),
     _csvRawValues(false),
-    _renderThreaded(false),
     _playerOptions(nullptr)
 {
     _appPath = QFileInfo(QCoreApplication::applicationFilePath()).path();
@@ -211,10 +210,10 @@ void Options::processType2(QString arg)
             _csvRawValues = configurations[0] == "raw";
             break;
         case MODE_RENDER:
-            // Path of the event file, possibly followed by "threaded"
+            // Path of the event file, possibly followed by "two_cores" or "threaded"
             _renderEventFile = configurations[0];
-            if (configurations.count() == 2 && configurations[1] == "threaded")
-                _renderThreaded = true;
+            if (configurations.count() == 2 && (configurations[1] == "two_cores" || configurations[1] == "threaded"))
+                _renderSynth = configurations[1];
             else if (configurations.count() > 1)
                 _error = true;
             break;

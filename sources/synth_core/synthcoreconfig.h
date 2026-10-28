@@ -38,7 +38,8 @@ public:
         revDamping(0),
         masterGain(0),
         referencePitch(4400),
-        temperamentRelativeKey(0)
+        temperamentRelativeKey(0),
+        modulatorVelToFilterType(1)
     {
         for (int i = 0; i < 12; i++)
             temperament[i] = 0;
@@ -61,6 +62,9 @@ public:
     // Fine tune in cents of each key from C to B, relative to the key temperamentRelativeKey
     float temperament[12];
     int temperamentRelativeKey;
+
+    // Velocity to filter cutoff among the default modulators: the one of the version 2.01 (0), 2.04 (1) or none (2)
+    int modulatorVelToFilterType;
 };
 
 #endif // SYNTHCORECONFIG_H

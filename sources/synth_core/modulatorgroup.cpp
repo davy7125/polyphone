@@ -25,10 +25,12 @@
 #include "modulatorgroup.h"
 #include "modulatedparameter.h"
 #include "parametermodulator.h"
+#include "voicecontext.h"
 
-ModulatorGroup::ModulatorGroup(ModulatedParameter *parameters, bool isPrst) :
+ModulatorGroup::ModulatorGroup(ModulatedParameter *parameters, bool isPrst, const VoiceContext * context) :
     _parameters(parameters),
-    _isPrst(isPrst)
+    _isPrst(isPrst),
+    _context(context)
 {
 }
 
@@ -53,7 +55,7 @@ void ModulatorGroup::initialize(int channel, int initialKey, int keyForComputati
 void ModulatorGroup::loadDefaultModulators()
 {
     int number;
-    const ModulatorData * const defaultModData = ModulatorData::getDefaultModulators(number);
+    const ModulatorData * const defaultModData = _context->getDefaultModulators(number);
     loadModulators(defaultModData, number);
 }
 
@@ -77,7 +79,7 @@ void ModulatorGroup::loadModulators(const ModulatorData * const modData, int mod
 
         // Or create another one
         if (!overwritten && _numberOfParameterModulators < MAX_NUMBER_OF_PARAMETER_MODULATORS)
-            _modulators[_numberOfParameterModulators++].initialize(modData[i], _isPrst, _channel, _initialKey, _keyForComputation, _velForComputation);
+            _modulators[_numberOfParameterModulators++].initialize(modData[i], _isPrst, _context, _channel, _initialKey, _keyForComputation, _velForComputation);
     }
 
     // Link the outputs of the newly created modulators

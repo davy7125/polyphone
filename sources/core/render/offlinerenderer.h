@@ -44,9 +44,20 @@ public:
     /// Read the settings and the events, return false in case of error (see getError)
     bool readEvents(QString filePath);
 
+    /// Synth playing the events:
+    /// * SYNTH_CORE: SynthCore computing in the calling thread,
+    /// * SYNTH_TWO_CORES: the same, next to a second SynthCore with other settings whose rendering must not change the
+    ///   first one (as two instances of a plugin) and is not written,
+    /// * SYNTH_THREADED: Synth (editor) with its threads.
+    enum SynthType
+    {
+        SYNTH_CORE,
+        SYNTH_TWO_CORES,
+        SYNTH_THREADED
+    };
+
     /// Play the events with the soundfont loaded at sf2Index and write a stereo 32-bit float wav file
-    /// The synth is SynthCore computing in the calling thread, or Synth (editor) with its threads if threaded is true
-    bool render(int sf2Index, QString outputFilePath, bool threaded);
+    bool render(int sf2Index, QString outputFilePath, SynthType synthType);
 
     QString getError() { return _error; }
 
@@ -93,9 +104,9 @@ private:
     bool applyModelChanges(int sf2Index);
     bool resolveElements(int sf2Index);
     SynthCoreConfig getSynthConfig();
-    void renderWithCore(int sf2Index, QVector<float> &data, quint32 blockCount);
+    bool renderWithCore(int sf2Index, QVector<float> &data, quint32 blockCount, bool withOtherCore);
     void renderWithThreads(int sf2Index, QVector<float> &data, quint32 blockCount);
-    template <class T> void processEvents(T * synth, int sf2Index, quint64 blockEnd, int &eventIndex);
+    template <class T> void processEvents(T * synth, MidiProcessor * midiProcessor, int sf2Index, quint64 blockEnd, int &eventIndex);
     void storeBlock(QVector<float> &data, quint32 block, const float * dataL, const float * dataR);
     bool writeWavFile(QString filePath, const QVector<float> &data, quint32 frameCount);
     bool readInt(QString word, int min, int max, int &value, int line);
@@ -103,7 +114,6 @@ private:
 
     QString _error;
     MidiProcessor * _midiProcessor; // Events processed as MidiDevice does, values read by the modulators
-    bool _midiProcessorOwned; // False once given to the synth
     QMetaObject::Connection _modulatorConnection;
 
     // Settings

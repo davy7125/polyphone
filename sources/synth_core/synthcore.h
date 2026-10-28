@@ -31,6 +31,7 @@
 #include "isynthsoundfont.h"
 #include "isynthlistener.h"
 #include "imidivalues.h"
+#include "voicecontext.h"
 #include "synthcoreconfig.h"
 #include "stk/FreeVerb.h"
 #include "stk/Chorus.h"
@@ -44,12 +45,12 @@ public:
     SynthCore(ISynthSoundfonts * soundfonts, ISynthListener * listener = nullptr);
     ~SynthCore();
 
-    // Tables used by the computation, to prepare once before using a synth
+    // Tables shared by all the synths, to prepare before using one (only computed the first time)
     static void prepareTables();
 
     // Configuration (not by the audio thread)
     void configure(const SynthCoreConfig &configuration);
-    void setMidiValues(IMidiValues * midiValues); // Deleted by the synth
+    void setMidiValues(IMidiValues * midiValues); // Not deleted by the synth (null: default values)
     void setSampleRate(uint32_t sampleRate);
     uint32_t getSampleRate() { return _sampleRate; }
 
@@ -114,11 +115,12 @@ private:
     double _smplGain;
     bool _smplIsStereoEnabled;
     bool _smplIsLoopEnabled;
+    VoiceContext _context; // Read by the voices
 
     // Voices
     VoiceList _voices;
     SynthBuses _buses;
-    static int s_sampleVoiceTokenCounter;
+    std::atomic<int> _sampleVoiceTokenCounter;
 
     // Effects
     stk::FreeVerb _reverb;

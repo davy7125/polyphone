@@ -27,9 +27,10 @@
 #include <cstdio>
 #include "synthmath.h"
 
-VoiceParam::VoiceParam() :
-    _modulatorGroupInst(_parameters, false),
-    _modulatorGroupPrst(_parameters, true)
+VoiceParam::VoiceParam(const VoiceContext * context) :
+    _context(context),
+    _modulatorGroupInst(_parameters, false, context),
+    _modulatorGroupPrst(_parameters, true, context)
 {
     // Prepare the parameters (everything to default)
     prepareParameters();

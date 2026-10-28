@@ -278,7 +278,8 @@ void ModulatorEditor::checkOverrides()
 {
     // List of default mods
     int defModCount;
-    const ModulatorData * defaultMods = ModulatorData::getDefaultModulators(defModCount);
+    const ModulatorData * defaultMods = ModulatorData::getDefaultModulators(
+        ContextManager::configuration()->getModulatorVelToFilterType(), defModCount);
 
     // Browse all cells
     QList<ModulatorCell*> cells;
