@@ -82,6 +82,8 @@ a setting or an event, `#` starts a comment.
 | `sampleloop <0 or 1>` | loop of a sample played alone | 1 |
 | `samplestereo <0 or 1>` | stereo for a sample played alone (otherwise its linked part is silent) | 0 |
 | `samplegain <dB>` | gain of a sample played alone | 0 |
+| `polyphony <voices>` | maximum number of voices, from 16 to 4096, the quietest notes fading out above it | 1024 |
+| `cpubudget <percent>` | real time: the quietest notes fade out if the voices take more than this share of the duration of the audio (the rendering depends on the speed of the computer and is not reproducible, for manual tests only) | offline |
 | `mute instrument\|preset <index> <zone>` | zone muted, as in the editor | |
 | `alwaysplayed instrument\|preset <index>` | element played with any other one of its kind, as in the editor | |
 
@@ -141,5 +143,9 @@ samples and zones are their order in the soundfont, from 0.
   `pedal_sustain_equivalent`, where each note is released when the pedal releases it (same for the
   sostenuto, and a key pressed again while it is held). Likewise `key_restarted` must sound like
   `key_restarted_equivalent`: a key pressed again before being released stops its note first.
+- `polyphony_limit` plays more notes than a polyphony of 16 voices: the quietest notes fade out in 10 ms
+  (`FADE_OUT_DURATION`), the lowest and the highest keys held on a channel and the notes just started being kept
+  (`VoiceList::prepareComputation`). The same happens in real time when the voices take too long to compute: the
+  renderer is offline (the computation time does not limit the voices) unless `cpubudget` is given.
 - Not covered: what `MidiDevice` adds to `MidiProcessor` (the input of a device and the listeners of
   the editor), the relative values of the controllers of a device.

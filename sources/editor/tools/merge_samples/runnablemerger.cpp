@@ -32,6 +32,7 @@
 #include "smpl.h"
 #include "voice.h"
 #include "fastmaths.h"
+#include "synthmath.h"
 
 quint32 RunnableMerger::SAMPLE_RATE = 48000;
 quint32 RunnableMerger::BUFFER_LENGTH = 1024;
@@ -209,7 +210,7 @@ void RunnableMerger::playSmpl(float * dataR, float * dataL, InstPrst * prst, Div
     // Initialize a voice
     VoiceParam * voiceParam = new VoiceParam(_context);
     Voice * voice = new Voice(voiceParam);
-    voice->initialize(_idPrst.indexSf2, prst, prstDiv, inst, instDiv, smpl, 0, _key, 127, 0, SAMPLE_RATE, 0);
+    voice->initialize(_idPrst.indexSf2, prst, prstDiv, inst, instDiv, smpl, 0, _key, 127, 0, SAMPLE_RATE, 0, 0);
 
     // Pan coeffs
     float tmp = 0.005f * (voiceParam->getFloat(champ_pan) + 50.f); // Between 0 and 1/2 for [0; PI/2]
@@ -230,8 +231,9 @@ void RunnableMerger::playSmpl(float * dataR, float * dataL, InstPrst * prst, Div
         if (len > BUFFER_LENGTH)
             len = BUFFER_LENGTH;
 
-        // Compute data in the sustain phase
-        voice->generateData(buffer, len);
+        // Compute data in the sustain phase (whole chunks, a silent voice not writing them)
+        if (!voice->generateData(buffer, SynthMath::roundToChunks(len)))
+            memset(buffer, 0, len * sizeof(float));
 
         // Merge
         for (quint32 i = 0; i < len; i++)
@@ -254,8 +256,9 @@ void RunnableMerger::playSmpl(float * dataR, float * dataL, InstPrst * prst, Div
         if (len > BUFFER_LENGTH)
             len = BUFFER_LENGTH;
 
-        // Compute data in the release phase
-        voice->generateData(buffer, len);
+        // Compute data in the release phase (whole chunks, a silent voice not writing them)
+        if (!voice->generateData(buffer, SynthMath::roundToChunks(len)))
+            memset(buffer, 0, len * sizeof(float));
 
         // Merge
         for (quint32 i = 0; i < len; i++)

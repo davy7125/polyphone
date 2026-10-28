@@ -46,11 +46,14 @@ public:
     // * 1 for a sample
     // * 2 for its stereo part
     // * 0 otherwise (instrument / preset)
+    // The note id is shared by all voices started by a same key (stereo parts, layers)
     void initialize(int sf2Id, ISynthInstPrst * prst, ISynthZone * prstZone, ISynthInstPrst * inst, ISynthZone * instZone,
-                    ISynthSample * smpl, int8_t channel, int8_t key, int8_t vel, int8_t type, uint32_t audioSmplRate, int token);
+                    ISynthSample * smpl, int8_t channel, int8_t key, int8_t vel, int8_t type, uint32_t audioSmplRate, int token,
+                    int noteId);
 
     // Get the parameter object, for setting or retrieving values
     VoiceParam * getParam() { return _voiceParam; }
+    int getNoteId() { return _noteId; }
 
     // Allocate the arrays for computing up to chunkCount chunks at once (not in the audio thread)
     void reserve(uint32_t chunkCount);
@@ -59,6 +62,14 @@ public:
     void finish();
     bool isInRelease() { return _release || _loopMode == 2; }
     bool isFinished() { return _isFinished; }
+
+    // Stop the voice with a linear fade (FADE_OUT_DURATION) whatever its state, to free the polyphony or the processor
+    void fadeOut();
+    bool isFadingOut() { return _fadeOutLength > 0; }
+
+    // Current amplitude (relative, for comparing the voices), and whether the voice has just started
+    float getAmplitude() { return _volumeCoeff * _smplPeak; }
+    bool isYoung() { return _computedChunks < _youngChunkCount; }
 
     void setGain(float gain);
 
@@ -88,11 +99,14 @@ private:
     float _gain;
     VoiceParam * _voiceParam;
     int _token;
+    int _noteId;
     char _loopMode;
 
     // Sample playback
     bool _release;
     bool _isFinished;
+    uint32_t _computedChunks, _youngChunkCount;
+    uint32_t _fadeOutLength, _fadeOutPosition, _fadeOutChunkCount; // Chunks
     unsigned char _sampleRootKey;
     uint32_t _currentSmplPos, _elapsedSmplPos;
     double _time;

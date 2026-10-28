@@ -28,6 +28,7 @@
 
 #include <QMutex>
 #include <QObject>
+#include <atomic>
 #include "synthbuses.h"
 class VoiceList;
 
@@ -52,6 +53,9 @@ public:
     void copyData(SynthBuses &buses, quint32 len);
     void addData(SynthBuses &buses, quint32 len);
 
+    // Time spent computing the voices since the last preparation, and number of voices times the number of chunks
+    void getComputationTime(double &seconds, uint32_t &voiceChunkCount);
+
 public slots:
     void start();
 
@@ -64,6 +68,8 @@ private:
     QAtomicInt _runningState; // 0: ready (waiting), 1: running, 2: pause required, 3: pause and continue
     QMutex _mutexSynchro;
     volatile quint32 _lenToPrepare;
+    std::atomic<int64_t> _computationTime; // ns
+    std::atomic<uint32_t> _computedVoiceChunkCount;
 
     static VoiceList * s_voices;
 };

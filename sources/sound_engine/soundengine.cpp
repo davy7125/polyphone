@@ -28,12 +28,15 @@
 #include "voice.h"
 #include "fastmaths.h"
 #include <QThread>
+#include <chrono>
 
 VoiceList * SoundEngine::s_voices = nullptr;
 
 SoundEngine::SoundEngine(quint32 bufferSize) : QObject(),
     _interrupted(false),
-    _runningState(0)
+    _runningState(0),
+    _computationTime(0),
+    _computedVoiceChunkCount(0)
 {
     _buses.reserve(bufferSize);
     _mutexSynchro.lock();
@@ -80,6 +83,8 @@ void SoundEngine::prepareData(quint32 len)
 {
     _lenToPrepare = len;
     _buses.clear(len);
+    _computationTime.store(0, std::memory_order_relaxed);
+    _computedVoiceChunkCount.store(0, std::memory_order_relaxed);
     if (_runningState.testAndSetRelaxed(2, 3))
     {
         // Nothing else to do, unlock not needed since the mutex will not be locked
@@ -105,12 +110,22 @@ void SoundEngine::generateData(quint32 len)
     bool leftInitialized = false;
     bool rightInitialized = false;
 
+    // Time spent and voices computed, for limiting the voices in real time
+    std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
+    uint32_t voiceCount = 0;
+    auto storeComputationTime = [&]() {
+        _computationTime.fetch_add(std::chrono::duration_cast<std::chrono::nanoseconds>(
+                                       std::chrono::steady_clock::now() - start).count(), std::memory_order_relaxed);
+        _computedVoiceChunkCount.fetch_add(voiceCount * (len >> COMPUTATION_CHUNK_SHIFT), std::memory_order_relaxed);
+    };
+
     Voice * voice;
     while (true)
     {
         voice = s_voices->getNextVoiceToCompute();
         if (voice == nullptr)
         {
+            storeComputationTime();
             _runningState.storeRelease(0);
             break;
         }
@@ -118,15 +133,23 @@ void SoundEngine::generateData(quint32 len)
         {
             // If paused, go to the ready state et quit the loop
             int currentValue;
-            if (_runningState.testAndSetRelaxed(2, 0, currentValue))
+            if (_runningState.testAndSetRelaxed(2, 0, currentValue) || currentValue == 3)
+            {
+                storeComputationTime();
                 return;
-            if (currentValue == 3)
-                return;
+            }
         }
 
         // Compute the voice and mix it
         _buses.addVoice(voice, len, leftInitialized, rightInitialized);
+        voiceCount++;
     }
+}
+
+void SoundEngine::getComputationTime(double &seconds, uint32_t &voiceChunkCount)
+{
+    seconds = 1e-9 * static_cast<double>(_computationTime.load(std::memory_order_relaxed));
+    voiceChunkCount = _computedVoiceChunkCount.load(std::memory_order_relaxed);
 }
 
 void SoundEngine::copyData(SynthBuses &buses, quint32 len)

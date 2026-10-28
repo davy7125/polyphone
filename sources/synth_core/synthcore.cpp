@@ -64,6 +64,7 @@ SynthCore::SynthCore(ISynthSoundfonts * soundfonts, ISynthListener * listener) :
     _smplIsStereoEnabled(false),
     _smplIsLoopEnabled(true),
     _sampleVoiceTokenCounter(0),
+    _noteId(0),
     _outputL(nullptr),
     _outputR(nullptr),
     _outputPosition(0),
@@ -98,6 +99,17 @@ void SynthCore::setMaxBlockSize(uint32_t maxBlockSize)
     _outputAvailable = 0;
 }
 
+void SynthCore::setMaxPolyphony(int maxPolyphony)
+{
+    std::lock_guard<std::recursive_mutex> lock(_voicesMutex);
+    _voices.setMaxPolyphony(maxPolyphony);
+}
+
+void SynthCore::setRealTime(bool isRealTime)
+{
+    _voices.setRealTime(isRealTime);
+}
+
 void SynthCore::prepareTables()
 {
     // Synths can be created by several threads at the same time
@@ -111,6 +123,9 @@ void SynthCore::prepareTables()
 
 int SynthCore::playSample(int sf2Id, int sampleIndex, int channel, int key, int velocity)
 {
+    std::lock_guard<std::recursive_mutex> lock(_voicesMutex);
+    _noteId++; // Shared by all voices started here
+
     ISynthSoundfont * soundfont = _soundfonts->getSynthSoundfont(sf2Id);
     if (soundfont == nullptr)
         return -1;
@@ -135,6 +150,9 @@ int SynthCore::playSample(int sf2Id, int sampleIndex, int channel, int key, int 
 
 void SynthCore::playInstrument(int sf2Id, int instrumentIndex, int channel, int key, int velocity)
 {
+    std::lock_guard<std::recursive_mutex> lock(_voicesMutex);
+    _noteId++; // Shared by all voices started here
+
     ISynthSoundfont * soundfont = _soundfonts->getSynthSoundfont(sf2Id);
     if (soundfont == nullptr)
         return;
@@ -153,6 +171,9 @@ void SynthCore::playInstrument(int sf2Id, int instrumentIndex, int channel, int 
 
 void SynthCore::playPreset(int sf2Id, int presetIndex, int channel, int key, int velocity)
 {
+    std::lock_guard<std::recursive_mutex> lock(_voicesMutex);
+    _noteId++; // Shared by all voices started here
+
     ISynthSoundfont * soundfont = _soundfonts->getSynthSoundfont(sf2Id);
     if (soundfont == nullptr)
         return;
@@ -248,7 +269,7 @@ int SynthCore::playSmpl(int sf2Id, ISynthSample * smpl, int channel, int key, in
     // Configure it
     voice->initialize(sf2Id, prst, prstZone, inst, instZone, smpl,
                       channel, key, velocity, inst == nullptr ? (other ? 2 : 1) : 0,
-                      _sampleRate, currentToken);
+                      _sampleRate, currentToken, _noteId);
     configureVoice(voice);
 
     return currentToken;
@@ -292,6 +313,7 @@ void SynthCore::configureVoice(Voice * voice)
 
 void SynthCore::configureVoices()
 {
+    std::lock_guard<std::recursive_mutex> lock(_voicesMutex);
     Voice ** voices1, ** voices2;
     int count1, count2;
     _voices.getVoices(voices1, count1, voices2, count2);
@@ -306,6 +328,7 @@ void SynthCore::configureVoices()
 
 void SynthCore::releaseVoices(int sf2Id, int presetId, int channel, int key, bool fast)
 {
+    std::lock_guard<std::recursive_mutex> lock(_voicesMutex);
     Voice ** voices1, ** voices2;
     int count1, count2;
     _voices.getVoices(voices1, count1, voices2, count2);
@@ -377,6 +400,9 @@ void SynthCore::configure(const SynthCoreConfig &configuration)
     _chorusR.setModFrequency(0.06667 * _configuration.choFrequency);
     _effectsInUse.store(0, std::memory_order_relaxed);
 
+    // Share of the duration of the audio that computing the voices can take in real time
+    _voices.setCpuBudget(_configuration.cpuBudget);
+
     // Settings read by the voices
     _context.setTuning(_configuration.referencePitch, _configuration.temperament, _configuration.temperamentRelativeKey);
     _context.setModulatorVelToFilterType(_configuration.modulatorVelToFilterType);
@@ -395,6 +421,7 @@ void SynthCore::setSampleRate(uint32_t sampleRate)
     // Reset, the frames computed with the previous sample rate are not returned
     this->stop(true, true);
     _outputAvailable = 0;
+    _voices.setSampleRate(sampleRate);
 
     // Sample rate update
     stk::Chorus::setSampleRate(sampleRate);
@@ -423,6 +450,7 @@ void SynthCore::setLoopEnabled(bool isEnabled)
 
 void SynthCore::setStartLoop(uint32_t startLoop, bool withLinkedSample)
 {
+    std::lock_guard<std::recursive_mutex> lock(_voicesMutex);
     Voice ** voices1, ** voices2;
     int count1, count2;
     _voices.getVoices(voices1, count1, voices2, count2);
@@ -438,6 +466,7 @@ void SynthCore::setStartLoop(uint32_t startLoop, bool withLinkedSample)
 
 void SynthCore::setEndLoop(uint32_t endLoop, bool withLinkedSample)
 {
+    std::lock_guard<std::recursive_mutex> lock(_voicesMutex);
     Voice ** voices1, ** voices2;
     int count1, count2;
     _voices.getVoices(voices1, count1, voices2, count2);
@@ -453,6 +482,7 @@ void SynthCore::setEndLoop(uint32_t endLoop, bool withLinkedSample)
 
 void SynthCore::setPitchCorrection(int16_t correction, bool withLinkedSample)
 {
+    std::lock_guard<std::recursive_mutex> lock(_voicesMutex);
     Voice ** voices1, ** voices2;
     int count1, count2;
     _voices.getVoices(voices1, count1, voices2, count2);
@@ -468,6 +498,7 @@ void SynthCore::setPitchCorrection(int16_t correction, bool withLinkedSample)
 
 void SynthCore::processPolyPressureChanged(int channel, int key, int pressure)
 {
+    std::lock_guard<std::recursive_mutex> lock(_voicesMutex);
     Voice ** voices1, ** voices2;
     int count1, count2;
     _voices.getVoices(voices1, count1, voices2, count2);
@@ -483,6 +514,7 @@ void SynthCore::processPolyPressureChanged(int channel, int key, int pressure)
 
 void SynthCore::processMonoPressureChanged(int channel, int value)
 {
+    std::lock_guard<std::recursive_mutex> lock(_voicesMutex);
     Voice ** voices1, ** voices2;
     int count1, count2;
     _voices.getVoices(voices1, count1, voices2, count2);
@@ -498,6 +530,7 @@ void SynthCore::processMonoPressureChanged(int channel, int value)
 
 void SynthCore::processControllerChanged(int channel, int num, int value)
 {
+    std::lock_guard<std::recursive_mutex> lock(_voicesMutex);
     Voice ** voices1, ** voices2;
     int count1, count2;
     _voices.getVoices(voices1, count1, voices2, count2);
@@ -519,6 +552,7 @@ void SynthCore::processControllerChanged(int channel, int num, int value)
 
 void SynthCore::processBendChanged(int channel, float value)
 {
+    std::lock_guard<std::recursive_mutex> lock(_voicesMutex);
     Voice ** voices1, ** voices2;
     int count1, count2;
     _voices.getVoices(voices1, count1, voices2, count2);
@@ -534,6 +568,7 @@ void SynthCore::processBendChanged(int channel, float value)
 
 void SynthCore::processRPNChanged(int channel, int parameter, int value, bool isRegistered, int trigger)
 {
+    std::lock_guard<std::recursive_mutex> lock(_voicesMutex);
     if (isRegistered && parameter == 0 && trigger == 4)
     {
         // Bend sensitivity changed
@@ -581,21 +616,33 @@ void SynthCore::render(float * dataL, float * dataR, uint32_t len)
 
 void SynthCore::renderChunks(uint32_t len)
 {
-    // Include the voices added and remove the voices that are finished
+    // Include the voices added and remove the voices that are finished (or fade out some of them)
     _voices.prepareComputation();
 
     // Compute all voices
+    std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
     _buses.clear(len);
     bool leftInitialized = false;
     bool rightInitialized = false;
     Voice * voice;
+    uint32_t voiceCount = 0;
     while ((voice = _voices.getNextVoiceToCompute()) != nullptr)
+    {
         _buses.addVoice(voice, len, leftInitialized, rightInitialized);
+        voiceCount++;
+    }
+    std::chrono::steady_clock::time_point voicesComputed = std::chrono::steady_clock::now();
 
     // Effects and clipping
     applyEffects(_outputL, _outputR, _buses, len);
     FastMaths::clamp(_outputL, len);
     FastMaths::clamp(_outputR, len);
+
+    // Measures for limiting the voices in real time
+    uint32_t chunkCount = len >> COMPUTATION_CHUNK_SHIFT;
+    _voices.addComputationTime(std::chrono::duration<double>(voicesComputed - start).count(), voiceCount * chunkCount,
+                               std::chrono::duration<double>(std::chrono::steady_clock::now() - voicesComputed).count(),
+                               chunkCount);
 }
 
 void SynthCore::applyEffects(float * dataL, float * dataR, SynthBuses &buses, uint32_t len)

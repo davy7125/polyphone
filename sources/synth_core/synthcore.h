@@ -26,6 +26,7 @@
 #define SYNTHCORE_H
 
 #include <atomic>
+#include <mutex>
 #include "voicelist.h"
 #include "synthbuses.h"
 #include "isynthsoundfont.h"
@@ -89,6 +90,15 @@ public:
     // The default is DEFAULT_MAX_BLOCK_SIZE, render accepts more but computes them in several times
     void setMaxBlockSize(uint32_t maxBlockSize);
 
+    // Maximum number of voices that are not fading out (DEFAULT_POLYPHONY by default), the quietest notes fading out
+    // above it. The voices are allocated for it: if the number changes all notes are stopped, and no audio must be
+    // computed meanwhile.
+    void setMaxPolyphony(int maxPolyphony);
+
+    // In real time (default), the quietest notes fade out if computing the voices takes more than a share of the
+    // duration of the audio (configuration). Offline (a rendering to a file), the computation time is not limited.
+    void setRealTime(bool isRealTime);
+
     // Compute len frames in the calling thread, any length: voices, effects and clipping
     // The voices are computed by whole chunks (COMPUTATION_CHUNK): the frames computed and not asked are returned
     // first by the next call, and an event (note, controller...) is heard from the next chunk computed
@@ -122,10 +132,12 @@ private:
     bool _smplIsLoopEnabled;
     VoiceContext _context; // Read by the voices
 
-    // Voices
+    // Voices, the other threads than the audio one using them one at a time
     VoiceList _voices;
     SynthBuses _buses;
     std::atomic<int> _sampleVoiceTokenCounter;
+    std::recursive_mutex _voicesMutex;
+    int _noteId; // Shared by the voices started by a key
 
     // Result of the last chunks computed, aligned as the buses
     float * _outputL, * _outputR;

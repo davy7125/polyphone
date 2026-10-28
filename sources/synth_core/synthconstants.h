@@ -27,10 +27,6 @@
 
 #define DB_SF2_TO_REAL_DB 0.4
 
-// In soundengine.h
-#define MAX_NUMBER_OF_VOICES 2048
-#define VOICE_INDEX_MASK 0x7FF
-
 // In voice.h
 #define COMPUTATION_CHUNK 64
 #define COMPUTATION_CHUNK_SHIFT 6
@@ -38,6 +34,8 @@
 #define RESAMPLING_ORDER 8
 #define RESAMPLING_SUBDIVISION 256
 #define NOISE_FLOOR 0.000001f // -120 dBFS: a voice in its release is stopped under this amplitude
+#define FADE_OUT_DURATION 0.01f // Seconds: fade of a voice stopped to free the polyphony or the processor
+#define YOUNG_VOICE_DURATION 0.05f // Seconds: a voice starting is not stopped to free the polyphony or the processor
 
 // In synthcore.h: frames computed at once if no other maximum is given (setMaxBlockSize)
 #define DEFAULT_MAX_BLOCK_SIZE 4096
@@ -50,10 +48,12 @@
 // In fastmaths.h: alignment of the buffers, in bytes
 #define BUFFER_ALIGNMENT 64
 
-// In voicelist.h
+// In voicelist.h: maximum number of voices that are not fading out, and default share of the duration of the audio
+// that the computation can take in real time
 #define MIN_POLYPHONY 16
 #define MAX_POLYPHONY 4096
 #define DEFAULT_POLYPHONY 1024
+#define DEFAULT_CPU_BUDGET 60 // %
 
 // In modulatorgroup.h
 #define MAX_NUMBER_OF_PARAMETER_MODULATORS 64

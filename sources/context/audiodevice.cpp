@@ -234,6 +234,9 @@ void AudioDevice::initAudio()
     // Stop the possible existing connection
     closeConnections();
 
+    // Polyphony, the voices being allocated while there is no audio
+    _synth->setMaxPolyphony(_configuration->getValue(ConfManager::SECTION_AUDIO, "polyphony", DEFAULT_POLYPHONY).toInt());
+
     // Read the configuration
     QString audioType = _configuration->getValue(ConfManager::SECTION_AUDIO, "type", "").toString();
     if (audioType == "none")

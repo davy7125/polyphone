@@ -319,6 +319,19 @@ void Synth::readData(float * dataL, float * dataR, quint32 len)
         _soundEngines[0]->copyData(_buses, computedLength);
         for (int i = 1; i < _soundEngineCount; i++)
             _soundEngines[i]->addData(_buses, computedLength);
+
+        // Time spent by the sound engines, for limiting the voices in real time
+        double totalSeconds = 0;
+        uint32_t totalVoiceChunkCount = 0;
+        for (int i = 0; i < _soundEngineCount; i++)
+        {
+            double seconds;
+            uint32_t voiceChunkCount;
+            _soundEngines[i]->getComputationTime(seconds, voiceChunkCount);
+            totalSeconds += seconds;
+            totalVoiceChunkCount += voiceChunkCount;
+        }
+        voices->addComputationTime(totalSeconds, totalVoiceChunkCount, 0, 0);
     }
 
     // Frames that will remain after this call, the chunks missing now being silent (first call or longer length)
@@ -396,6 +409,25 @@ void Synth::appendOutput(quint32 len)
     FastMaths::clamp(dataR, len);
 
     _outputAvailable += len;
+}
+
+void Synth::setMaxPolyphony(int maxPolyphony)
+{
+    if (maxPolyphony == _core.getVoiceList()->getMaxPolyphony())
+        return;
+
+    // The voices are allocated again: the sound engines must not use them meanwhile
+    bool hasSoundEngines = _soundEngineCount > 0;
+    if (hasSoundEngines)
+        destroySoundEngines();
+    _core.setMaxPolyphony(maxPolyphony);
+    if (hasSoundEngines)
+        createSoundEngines();
+}
+
+void Synth::setRealTime(bool isRealTime)
+{
+    _core.setRealTime(isRealTime);
 }
 
 void Synth::waitForComputation()

@@ -313,6 +313,7 @@ SynthCoreConfig ConfManager::getSynthConfig()
         configuration.temperamentRelativeKey = temperament[13].toInt() % 12;
     }
     configuration.modulatorVelToFilterType = getModulatorVelToFilterType();
+    configuration.cpuBudget = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "cpu_budget", DEFAULT_CPU_BUDGET).toInt();
 
     return configuration;
 }

@@ -38,6 +38,8 @@ ConfigSectionGeneral::ConfigSectionGeneral(QWidget *parent) :
 
     // Tool tip
     ui->checkRepercussionStereo->setToolTip(ContextManager::translation()->getTranslation(TranslationManager::TRANSLATION_STEREO_EDITING_HELP));
+    ui->comboPolyphony->setToolTip(tr("Maximum number of voices, the quietest notes fading out above it"));
+    ui->comboCpuBudget->setToolTip(tr("Maximum share of the processor time used by the voices, the quietest notes fading out above it"));
 }
 
 ConfigSectionGeneral::~ConfigSectionGeneral()
@@ -83,6 +85,8 @@ void ConfigSectionGeneral::initializeAudio()
 {
     ui->comboAudioOuput->blockSignals(true);
     ui->comboBufferSize->blockSignals(true);
+    ui->comboPolyphony->blockSignals(true);
+    ui->comboCpuBudget->blockSignals(true);
 
     // Current hosts with devices
     QList<AudioDevice::HostInfo> hosts = ContextManager::audio()->getAllHosts();
@@ -117,8 +121,20 @@ void ConfigSectionGeneral::initializeAudio()
     case 0: default: ui->comboBufferSize->setCurrentIndex(0); break;
     }
 
+    // Polyphony from 64 to 4096 (powers of 2), processor load from 20 to 100% (by 10%)
+    int polyphony = ContextManager::configuration()->getValue(ConfManager::SECTION_AUDIO, "polyphony", DEFAULT_POLYPHONY).toInt();
+    int polyphonyIndex = 0;
+    while (polyphonyIndex < ui->comboPolyphony->count() - 1 && (64 << polyphonyIndex) < polyphony)
+        polyphonyIndex++;
+    ui->comboPolyphony->setCurrentIndex(polyphonyIndex);
+
+    int cpuBudget = ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "cpu_budget", DEFAULT_CPU_BUDGET).toInt();
+    ui->comboCpuBudget->setCurrentIndex(qBound(0, (cpuBudget + 5) / 10 - 2, ui->comboCpuBudget->count() - 1));
+
     ui->comboAudioOuput->blockSignals(false);
     ui->comboBufferSize->blockSignals(false);
+    ui->comboPolyphony->blockSignals(false);
+    ui->comboCpuBudget->blockSignals(false);
 }
 
 void ConfigSectionGeneral::on_comboAudioOuput_currentIndexChanged(int index)
@@ -143,6 +159,16 @@ void ConfigSectionGeneral::on_comboBufferSize_currentIndexChanged(int index)
     }
 
     ContextManager::configuration()->setValue(ConfManager::SECTION_AUDIO, "buffer_size", bufferSize);
+}
+
+void ConfigSectionGeneral::on_comboPolyphony_currentIndexChanged(int index)
+{
+    ContextManager::configuration()->setValue(ConfManager::SECTION_AUDIO, "polyphony", 64 << index);
+}
+
+void ConfigSectionGeneral::on_comboCpuBudget_currentIndexChanged(int index)
+{
+    ContextManager::configuration()->setValue(ConfManager::SECTION_SOUND_ENGINE, "cpu_budget", 10 * (index + 2));
 }
 
 void ConfigSectionGeneral::initializeMidi()

@@ -49,7 +49,9 @@ OfflineRenderer::OfflineRenderer() :
     _referencePitch(4400),
     _sampleLoop(true),
     _sampleStereo(false),
-    _sampleGain(0)
+    _sampleGain(0),
+    _polyphony(DEFAULT_POLYPHONY),
+    _cpuBudget(0)
 {
     for (int i = 0; i < 4; i++)
         _reverb[i] = 0;
@@ -185,6 +187,19 @@ bool OfflineRenderer::readSetting(QStringList words, int line)
         if (!readFloat(words[0], -50.f, 50.f, floatValue, line))
             return false;
         _sampleGain = static_cast<double>(floatValue);
+    }
+    else if (name == "polyphony" && words.count() == 1)
+    {
+        if (!readInt(words[0], MIN_POLYPHONY, MAX_POLYPHONY, value, line))
+            return false;
+        _polyphony = value;
+    }
+    else if (name == "cpubudget" && words.count() == 1)
+    {
+        // Real time: the quietest notes fade out if the computation is too long (not reproducible)
+        if (!readInt(words[0], 1, 100, value, line))
+            return false;
+        _cpuBudget = value;
     }
     else if (((name == "mute" && words.count() == 3) || (name == "alwaysplayed" && words.count() == 2)) &&
              (words[0] == "instrument" || words[0] == "preset"))
@@ -539,6 +554,8 @@ SynthCoreConfig OfflineRenderer::getSynthConfig()
     configuration.choLevel = _chorus[0];
     configuration.choDepth = _chorus[1];
     configuration.choFrequency = _chorus[2];
+    if (_cpuBudget > 0)
+        configuration.cpuBudget = _cpuBudget;
     return configuration;
 }
 
@@ -552,6 +569,8 @@ bool OfflineRenderer::renderWithCore(int sf2Index, QVector<float> &data, quint32
     core->configure(getSynthConfig());
     core->setSampleRate(_sampleRate);
     core->setMaxBlockSize(_blockSize);
+    core->setMaxPolyphony(_polyphony);
+    core->setRealTime(_cpuBudget > 0);
     core->setLoopEnabled(_sampleLoop);
     core->setStereo(_sampleStereo);
     core->setSampleGain(_sampleGain);
@@ -578,6 +597,8 @@ bool OfflineRenderer::renderWithCore(int sf2Index, QVector<float> &data, quint32
         otherCore->configure(otherConfiguration);
         otherCore->setSampleRate(_sampleRate);
         otherCore->setMaxBlockSize(_blockSize);
+        otherCore->setMaxPolyphony(_polyphony);
+        otherCore->setRealTime(_cpuBudget > 0);
         otherCore->setLoopEnabled(_sampleLoop);
         otherCore->setStereo(_sampleStereo);
         otherCore->setSampleGain(_sampleGain);
@@ -650,6 +671,8 @@ void OfflineRenderer::renderWithThreads(int sf2Index, QVector<float> &data, quin
     EditorSynthListener listener(synth, sm->getSoundfonts()->getSynthSoundfont(sf2Index), sf2Index);
     _midiProcessor->setListener(&listener);
     synth->configure(getSynthConfig());
+    synth->setMaxPolyphony(_polyphony);
+    synth->setRealTime(_cpuBudget > 0);
     synth->setSampleRateAndBufferSize(_sampleRate, _blockSize);
     synth->setLoopEnabled(_sampleLoop);
     synth->setStereo(_sampleStereo);

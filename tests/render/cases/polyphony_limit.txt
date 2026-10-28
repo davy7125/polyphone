@@ -1,0 +1,66 @@
+# soundfont: FluidR3_GM.sf2
+# Polyphony of 16 voices: above it the quietest notes fade out in 10 ms, the lowest and the highest keys held
+# being kept as well as the notes just started
+samplerate 48000
+duration 5
+polyphony 16
+
+0     program 0 0 0
+
+# Lowest and highest keys held all along
+0.00  on 0 36 90
+0.00  on 0 96 90
+
+# Notes in between, a new one every 0.15 s
+0.15  on 0 52 60
+0.30  on 0 53 67
+0.45  on 0 54 74
+0.60  on 0 55 81
+0.75  on 0 56 88
+0.90  on 0 57 95
+1.05  on 0 58 102
+1.20  on 0 59 109
+1.35  on 0 60 66
+1.50  on 0 61 73
+1.65  on 0 62 80
+1.80  on 0 63 87
+1.95  on 0 64 94
+2.10  on 0 65 101
+2.25  on 0 66 108
+2.40  on 0 67 65
+2.55  on 0 68 72
+2.70  on 0 69 79
+2.85  on 0 70 86
+3.00  on 0 71 93
+3.15  on 0 72 100
+3.30  on 0 73 107
+3.45  on 0 74 64
+3.60  on 0 75 71
+
+# Everything released
+4.00  off 0 36
+4.00  off 0 96
+4.00  off 0 52
+4.00  off 0 53
+4.00  off 0 54
+4.00  off 0 55
+4.00  off 0 56
+4.00  off 0 57
+4.00  off 0 58
+4.00  off 0 59
+4.00  off 0 60
+4.00  off 0 61
+4.00  off 0 62
+4.00  off 0 63
+4.00  off 0 64
+4.00  off 0 65
+4.00  off 0 66
+4.00  off 0 67
+4.00  off 0 68
+4.00  off 0 69
+4.00  off 0 70
+4.00  off 0 71
+4.00  off 0 72
+4.00  off 0 73
+4.00  off 0 74
+4.00  off 0 75

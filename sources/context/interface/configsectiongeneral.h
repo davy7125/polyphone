@@ -47,6 +47,8 @@ protected:
 private slots:
     void on_comboAudioOuput_currentIndexChanged(int index);
     void on_comboBufferSize_currentIndexChanged(int index);
+    void on_comboPolyphony_currentIndexChanged(int index);
+    void on_comboCpuBudget_currentIndexChanged(int index);
     void on_comboMidiInput_currentIndexChanged(int index);
 
     void on_checkBoucle_toggled(bool checked);

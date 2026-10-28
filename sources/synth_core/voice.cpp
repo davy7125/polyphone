@@ -94,7 +94,8 @@ void Voice::reserve(uint32_t chunkCount)
 }
 
 void Voice::initialize(int sf2Id, ISynthInstPrst * prst, ISynthZone * prstZone, ISynthInstPrst * inst, ISynthZone * instZone,
-                       ISynthSample * smpl, int8_t channel, int8_t key, int8_t vel, int8_t type, uint32_t audioSmplRate, int token)
+                       ISynthSample * smpl, int8_t channel, int8_t key, int8_t vel, int8_t type, uint32_t audioSmplRate, int token,
+                       int noteId)
 {
     // Possibly delete previous sample data that has been copied
     if (_voiceParam->getType() != 0 && _dataSmpl16 != nullptr)
@@ -120,6 +121,8 @@ void Voice::initialize(int sf2Id, ISynthInstPrst * prst, ISynthZone * prstZone, 
     _audioSmplRateInv = 1.0f / _audioSmplRate;
     _gain = 0.0f;
     _token = token;
+    _noteId = noteId;
+    _loopMode = 0; // Read at the first computation
     _currentSmplPos = 0xFFFFFFFF;
     _elapsedSmplPos = 0;
     _time = 0;
@@ -139,6 +142,15 @@ void Voice::initialize(int sf2Id, ISynthInstPrst * prst, ISynthZone * prstZone, 
     _vibLFO.initialize(sampleRateForChunks);
     _volEnvelope.initialize(sampleRateForChunks, false);
     _modEnvelope.initialize(sampleRateForChunks, true);
+
+    // Durations in chunks for the stop of a voice (polyphony, processor)
+    _computedChunks = 0;
+    _youngChunkCount = static_cast<uint32_t>(YOUNG_VOICE_DURATION * sampleRateForChunks + 0.5f);
+    _fadeOutLength = 0;
+    _fadeOutPosition = 0;
+    _fadeOutChunkCount = static_cast<uint32_t>(FADE_OUT_DURATION * sampleRateForChunks + 0.5f);
+    if (_fadeOutChunkCount < 1)
+        _fadeOutChunkCount = 1;
 
     // Resampling initialization
     memset(_srcData16, 0, sizeof(_srcData16));
@@ -197,7 +209,9 @@ bool Voice::generateData(float * data, uint32_t len)
     }
     else if (_loopMode == 2 && !_release)
     {
-        // Blank until the release
+        // Blank until the release, nothing to fade
+        if (_fadeOutLength > 0)
+            _isFinished = true;
     }
     else
     {
@@ -320,10 +334,19 @@ resample_end:
             // * the volume envelope
             // * the volume modulation with values from the mod LFO converted to dB
             // The conversion from int16 to float is included here
-            float deltaCoeff = (s_floatConversionCoef24 *
-                                    _dataVolArray[chunk] *
-                                    FastMaths::fastPow10(0.05f * v_modLfoToVolume * _modLfoArray[chunk])
-                                - _volumeCoeff) * COMPUTATION_CHUNK_INVERT;
+            float targetCoeff = s_floatConversionCoef24 *
+                                _dataVolArray[chunk] *
+                                FastMaths::fastPow10(0.05f * v_modLfoToVolume * _modLfoArray[chunk]);
+
+            // Possibly a linear fade until 0, the voice being finished after the last chunk of the fade
+            if (_fadeOutLength > 0)
+            {
+                _fadeOutPosition++;
+                targetCoeff *= static_cast<float>(_fadeOutLength - _fadeOutPosition) / static_cast<float>(_fadeOutLength);
+                if (_fadeOutPosition >= _fadeOutLength)
+                    _isFinished = true;
+            }
+            float deltaCoeff = (targetCoeff - _volumeCoeff) * COMPUTATION_CHUNK_INVERT;
 
             // Silent chunk if the volume stays at 0 (delay of the envelope, end of the release)
             if (_volumeCoeff != 0.0f || deltaCoeff != 0.0f)
@@ -399,6 +422,7 @@ resample_end:
         }
     }
 
+    _computedChunks += chunkCount;
     return isAudible;
 }
 
@@ -530,6 +554,15 @@ bool Voice::biQuadCoefficients(float * coeffs, float freq, float inv_Q)
     return true;
 }
 
+
+void Voice::fadeOut()
+{
+    if (_fadeOutLength == 0)
+    {
+        _fadeOutLength = _fadeOutChunkCount;
+        _fadeOutPosition = 0;
+    }
+}
 
 void Voice::finish()
 {

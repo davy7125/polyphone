@@ -25,6 +25,8 @@
 #ifndef SYNTHCORECONFIG_H
 #define SYNTHCORECONFIG_H
 
+#include "synthconstants.h"
+
 class SynthCoreConfig
 {
 public:
@@ -39,7 +41,8 @@ public:
         masterGain(0),
         referencePitch(4400),
         temperamentRelativeKey(0),
-        modulatorVelToFilterType(1)
+        modulatorVelToFilterType(1),
+        cpuBudget(DEFAULT_CPU_BUDGET)
     {
         for (int i = 0; i < 12; i++)
             temperament[i] = 0;
@@ -65,6 +68,10 @@ public:
 
     // Velocity to filter cutoff among the default modulators: the one of the version 2.01 (0), 2.04 (1) or none (2)
     int modulatorVelToFilterType;
+
+    // Share of the duration of the audio (%) that computing the voices can take in real time, above which the quietest
+    // notes fade out
+    int cpuBudget;
 };
 
 #endif // SYNTHCORECONFIG_H

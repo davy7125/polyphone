@@ -126,6 +126,8 @@ private:
     int _chorus[3]; // Level, depth, frequency
     bool _sampleLoop, _sampleStereo; // Samples played alone
     double _sampleGain;
+    int _polyphony;
+    int _cpuBudget; // 0: offline, the computation time not limiting the voices
     QList<ModelChange> _modelChanges;
 
     QList<Event> _events;
