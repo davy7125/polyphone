@@ -26,27 +26,12 @@ DEFINES += SOFT_VERSION=\\\"2.6.0\\\"
 DEFINES += IDENTIFIER=\\\"\\\"
 DEFINES += CURRENT_YEAR=\\\"2026\\\"
 
-# List to be completed if other translations are desired
+# All translations in resources/translations are compiled and embedded
 # Format: polyphone_XX.ts, XX being the language code
-TRANSLATIONS = polyphone_en.ts \
-    polyphone_fr.ts \
-    polyphone_es.ts \
-    polyphone_it.ts \
-    polyphone_sr.ts \
-    polyphone_pt.ts \
-    polyphone_cs.ts \
-    polyphone_de.ts \
-    polyphone_ja.ts \
-    polyphone_zh.ts \
-    polyphone_nl.ts \
-    polyphone_da.ts \
-    polyphone_ru.ts \
-    polyphone_ko.ts \
-    polyphone_ca.ts \
-    polyphone_pl.ts
+TRANSLATIONS = $$files(resources/translations/polyphone_*.ts)
 
 PRECOMPILED_HEADER = precompiled_header.h
-CONFIG += lrelease embed_translations precompiled_header
+CONFIG += lrelease embed_translations precompile_header
 QMAKE_LRELEASE_FLAGS = -nounfinished -removeidentical
 
 CONFIG(debug, debug|release) {

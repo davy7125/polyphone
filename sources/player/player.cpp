@@ -25,6 +25,7 @@
 #include "player.h"
 #include "ui_player.h"
 #include "contextmanager.h"
+#include "synth.h"
 #include "soundfontmanager.h"
 #include "playertreeproxymodel.h"
 #include "playeroptions.h"

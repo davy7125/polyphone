@@ -26,7 +26,6 @@
 #define AUDIODEVICE_H
 
 #include <QObject>
-#include "synth.h"
 
 class Synth;
 class ConfManager;

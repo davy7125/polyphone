@@ -23,6 +23,7 @@
 ***************************************************************************/
 
 #include "audiodevice.h"
+#include "synth.h"
 #include "rtaudio/RtAudio.h"
 #include "confmanager.h"
 #include "soundfontmanager.h"

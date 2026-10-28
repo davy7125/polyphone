@@ -38,6 +38,7 @@
 #include "qtsingleapplication.h"
 #include "mainwindow.h"
 #include "translationmanager.h"
+#include "synth.h"
 #include "synthcore.h"
 #include "offlinerenderer.h"
 #include "tools/merge_samples/runnablemerger.h"
