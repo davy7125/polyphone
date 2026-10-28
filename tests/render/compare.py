@@ -90,17 +90,30 @@ def main():
         print('No reference rendering in %s' % arguments.reference_dir)
         return 1
 
+    # Each rendering compared with its reference
+    checks = [(os.path.join(arguments.reference_dir, name), os.path.join(arguments.output_dir, name), name)
+              for name in names]
+
+    # A case with the line "# same as: <other case>" must give the rendering of the other case
+    cases_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'cases')
+    for case in sorted(os.listdir(cases_dir)):
+        with open(os.path.join(cases_dir, case)) as f:
+            same = [line.split(':', 1)[1].strip() for line in f if line.startswith('# same as:')]
+        if same and case.endswith('.txt'):
+            name = case[:-4] + '.wav'
+            checks.append((os.path.join(arguments.output_dir, same[0] + '.wav'),
+                           os.path.join(arguments.output_dir, name), '%s = %s' % (case[:-4], same[0])))
+
     failures = 0
-    for name in names:
+    for expected, rendered, label in checks:
         try:
-            passed, message = compare(os.path.join(arguments.reference_dir, name),
-                                      os.path.join(arguments.output_dir, name), arguments.threshold)
-        except ValueError as error:
+            passed, message = compare(expected, rendered, arguments.threshold)
+        except (ValueError, OSError) as error:
             passed, message = False, str(error)
-        print('%-8s%-36s%s' % ('OK' if passed else 'FAILED', name, message))
+        print('%-8s%-48s%s' % ('OK' if passed else 'FAILED', label, message))
         failures += 0 if passed else 1
 
-    print('%d of %d renderings differ' % (failures, len(names)) if failures else 'All %d renderings match' % len(names))
+    print('%d of %d checks failed' % (failures, len(checks)) if failures else 'All %d checks passed' % len(checks))
     return 1 if failures else 0
 
 

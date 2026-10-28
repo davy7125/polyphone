@@ -23,6 +23,7 @@
 ***************************************************************************/
 
 #include "utils.h"
+#include "synthmath.h"
 #include <QStringList>
 #include <QFile>
 #include <QRegularExpression>
@@ -216,17 +217,18 @@ QString Utils::removeSuffix(QString txt)
 
 qint8 Utils::round8(double value)
 {
-    return static_cast<qint8>(value > 0 ? (value + 0.5) : (value - 0.5));
+    // Shared with the synth
+    return SynthMath::round8(value);
 }
 
 qint16 Utils::round16(double value)
 {
-    return static_cast<qint16>(value > 0 ? (value + 0.5) : (value - 0.5));
+    return SynthMath::round16(value);
 }
 
 qint32 Utils::round32(double value)
 {
-    return static_cast<qint32>(value > 0 ? (value + 0.5) : (value - 0.5));
+    return SynthMath::round32(value);
 }
 
 qint32 Utils::floatToInt24(float f)

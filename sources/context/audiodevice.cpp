@@ -26,6 +26,7 @@
 #include "rtaudio/RtAudio.h"
 #include "confmanager.h"
 #include "soundfontmanager.h"
+#include "soundfonts.h"
 
 #ifndef RT_AUDIO_5_2
 class RtAudioError {

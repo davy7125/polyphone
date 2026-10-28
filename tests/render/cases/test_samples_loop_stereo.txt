@@ -1,0 +1,19 @@
+# soundfont: polyphone-test.sf2
+# Samples played alone, looped, in stereo, with a gain
+samplerate 48000
+duration 5
+sampleloop 1
+samplestereo 1
+samplegain -6
+
+# Sample at its root key (-1), then released
+0.0   sample 0 -1 127
+1.0   sample 0 -1 0
+
+# Linked stereo pair: the right part is played with the left one
+1.5   sample 2 -1 127
+2.5   sample 2 -1 0
+
+# Sample at another key
+3.0   sample 5 72 100
+4.0   sample 5 72 0

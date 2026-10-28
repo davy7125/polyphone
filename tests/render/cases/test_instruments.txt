@@ -1,0 +1,24 @@
+# soundfont: polyphone-test.sf2
+# Instruments played alone (channel of the editor), a muted zone and an instrument always played
+samplerate 48000
+duration 5
+mute instrument 0 1
+alwaysplayed instrument 2
+
+# Instrument "loop modes": its zone of keys 60 to 71 is muted
+0.0   instrument 0 50 100
+0.0   instrument 0 65 100
+1.0   instrument 0 50 0
+1.0   instrument 0 65 0
+
+# Instrument "stereo", with the instrument "exclusive" always played along (keys 60 and 62)
+1.5   instrument 1 60 100
+1.8   instrument 1 62 100
+2.5   instrument 1 60 0
+2.5   instrument 1 62 0
+
+# Instrument "velocity layers"
+3.0   instrument 4 64 30
+3.0   instrument 4 76 120
+4.0   instrument 4 64 0
+4.0   instrument 4 76 0

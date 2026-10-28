@@ -33,91 +33,17 @@
 void midiCallback(double deltatime, std::vector<unsigned char> *message, void *userData)
 {
     Q_UNUSED(deltatime);
-    MidiDevice * instance = static_cast<MidiDevice*>(userData);
-    switch (message->at(0) & 0xF0)
-    {
-    case 0x80: // NOTE OFF
-        // First message is the note
-        instance->processKeyOff(message->at(0) & 0x0F, message->at(1));
-        break;
-    case 0x90: // NOTE ON
-        // First message is the note, second is velocity
-        if (message->at(2) == 0)
-            instance->processKeyOff(message->at(0) & 0x0F, message->at(1));
-        else
-            instance->processKeyOn(message->at(0) & 0x0F, message->at(1), message->at(2));
-        break;
-    case 0xA0: // AFTERTOUCH
-        // First message is the note, second is the pressure
-        instance->processPolyPressureChanged(message->at(0) & 0x0F, message->at(1), message->at(2));
-        break;
-    case 0xB0: // CONTROLLER CHANGE
-        // First message is the controller number, second is its value
-        instance->processControllerChanged(true, message->at(0) & 0x0F, message->at(1), message->at(2));
-        break;
-    case 0xC0: // PROGRAM CHANGED
-        // First message is the program number
-        instance->processProgramChanged(message->at(0) & 0x0F, message->at(1));
-        break;
-    case 0xD0: // MONO PRESSURE
-        // First message is the global pressure
-        instance->processMonoPressureChanged(message->at(0) & 0x0F, message->at(1));
-        break;
-    case 0xE0: // BEND
-        // First message is the value
-        instance->processBendChanged(message->at(0) & 0x0F, (static_cast<float>((message->at(2) << 7) | message->at(1)) - 8192.0f) / 8192.0f);
-        break;
-    default:
-        // qDebug() << "unknown MIDI event" << (message->at(0) & 0xF0) << "for channel" << (message->at(0) & 0x0F);
-        // for (unsigned int i = 0; i < message->size(); i++)
-        //     qDebug() << "data #" << i << "=" << message->at(i);
-        break;
-    }
+    static_cast<MidiDevice*>(userData)->processMidiMessage(message->data(), message->size());
 }
 
 MidiDevice::MidiDevice(ConfManager * configuration) :
     _configuration(configuration),
-    _midiIn(nullptr)
+    _midiIn(nullptr),
+    _dispatcher(_listeners)
 {
-    memset((MIDI_State *)_midiStates, 0, 17 * sizeof(MIDI_State));
-    memset((Sustain_State *)_sustainStates, 0, 17 * sizeof(Sustain_State));
-
-    // Initialize MIDI values
-    for (int channel = 0; channel <= 16; channel++)
-    {
-        _midiStates[channel]._bendSensitivityValue =
-            (channel == 0) ? _configuration->getValue(ConfManager::SECTION_MIDI, "wheel_sensitivity", 2.0f).toFloat() : 2.0f;
-        for (int i = 0; i < 128; i++)
-        {
-            // Default value, depending on the CC number
-            int defaultValue = 0;
-            switch (i)
-            {
-            case 0: // Bank number
-                // Default bank is 128 for channel 10 (percussions)
-                if (channel == 10)
-                    defaultValue = 128;
-                break;
-            case 8: // Balance
-            case 10: // Pan position
-                defaultValue = 64;
-                break;
-            case 4: case 64: case 65: case 66: case 67: case 68: case 69: // Pedals
-                defaultValue = 0;
-                break;
-            case 7: case 11: // Main volume, expression
-                defaultValue = 127;
-                break;
-            default:
-                break;
-            }
-
-            _midiStates[channel]._controllerValues[i] = defaultValue;
-            _midiStates[channel]._controllerValueSpecified[i] = false;
-            _midiStates[channel]._controllerValueIsRelative[i] = true; // Default is true, until an "absolute" value is encountered
-            _midiStates[channel]._controllerValueIsRelativeCounter[i] = 0;
-        }
-    }
+    // The events are processed before reaching the listeners, the bend sensitivity of the channel -1 is restored
+    _processor.setListener(&_dispatcher);
+    _processor.setBendSensitivityValue(-1, _configuration->getValue(ConfManager::SECTION_MIDI, "wheel_sensitivity", 2.0f).toFloat());
 
     // Initialize the connection
     this->openMidiPort(_configuration->getValue(ConfManager::SECTION_MIDI, "index_port", "-1#-1").toString());
@@ -133,7 +59,7 @@ MidiDevice::MidiDevice(ConfManager * configuration) :
 MidiDevice::~MidiDevice()
 {
     // Store the wheel sensitivity from channel -1
-    _configuration->setValue(ConfManager::SECTION_MIDI, "wheel_sensitivity", _midiStates[0]._bendSensitivityValue);
+    _configuration->setValue(ConfManager::SECTION_MIDI, "wheel_sensitivity", _processor.getBendSensitivityValue(-1));
 
     if (_midiIn != nullptr)
     {
@@ -180,10 +106,7 @@ bool MidiDevice::readConfiguration(QString config)
 
 void MidiDevice::onInputModulatorChanged(int controllerNumber, bool isBipolar, bool isDescending)
 {
-    int defaultValue = isBipolar ? 64 : (isDescending ? 127 : 0);
-    for (int channel = 0; channel <= 16; channel++)
-        if (!_midiStates[channel]._controllerValueSpecified[controllerNumber])
-            _midiStates[channel]._controllerValues[controllerNumber] = defaultValue;
+    _processor.setDefaultControllerValue(controllerNumber, isBipolar, isDescending);
 }
 
 QMap<QString, QString> MidiDevice::getMidiList()
@@ -299,358 +222,80 @@ void MidiDevice::check()
     }
 }
 
-void MidiDevice::processControllerChanged(bool external, int channel, int numController, int value)
+void MidiDevice::processMidiMessage(const unsigned char * message, size_t length)
 {
-    int initialValue = value;
-    MIDI_State * midiState = &_midiStates[channel + 1];
-    Sustain_State * sustainState = &_sustainStates[channel + 1];
-
-    if (numController == 0 && channel == 9)
-        return; // Ignored: keep bank 128 on channel 10 (percussions)
-
-    if (external)
-    {
-        if (midiState->_controllerValueIsRelative[numController])
-        {
-            // Convert a possible relative value
-            if (value == 126 || value == 62) // -2
-                value = midiState->_controllerValues[numController] - 2;
-            else if (value == 127 || value == 63) // -1
-                value = midiState->_controllerValues[numController] - 1;
-            else if (value == 1 || value == 65) // +1
-                value = midiState->_controllerValues[numController] + 1;
-            else if (value == 2 || value == 66) // +2
-                value = midiState->_controllerValues[numController] + 2;
-            else
-            {
-                // Not a relative value
-                midiState->_controllerValueIsRelative[numController] = false;
-                midiState->_controllerValueIsRelativeCounter[numController] = 0;
-            }
-        }
-        else
-        {
-            // Possibly switch to the relative mode
-            if (value == 127 || value == 126 || value == 63 || value == 62 ||
-                value == 1 || value == 2 || value == 65 || value == 66)
-            {
-                midiState->_controllerValueIsRelativeCounter[numController]++;
-                if (midiState->_controllerValueIsRelativeCounter[numController] > 3)
-                {
-                    // Following values will be considered relative
-                    midiState->_controllerValueIsRelative[numController] = true;
-                }
-            }
-            else
-                midiState->_controllerValueIsRelativeCounter[numController] = 0;
-        }
-    }
-
-    // Limits
-    if (value < 0)
-        value = 0;
-    if (value > 127)
-        value = 127;
-
-    // Update the current channel
-    midiState->_controllerValues[numController] = value;
-    midiState->_controllerValueSpecified[numController] = true;
-
-    if ((numController >= 96 && numController <= 101) || numController == 6 || numController == 38)
-    {
-        // (N)RPN reception
-        if (numController == 101 || numController == 99)
-        {
-            // Full parameter not known yet
-            midiState->_rpnIsRegistered = (numController == 101);
-            midiState->_rpnMSBparameter = value;
-        }
-        else if (numController == 100 || numController == 98)
-        {
-            // No value yet
-            midiState->_rpnIsRegistered = (numController == 100);
-            midiState->_rpnLSBparameter = value;
-            processRPNChanged(channel,
-                              midiState->_rpnMSBparameter << 7 | midiState->_rpnLSBparameter,
-                              0, midiState->_rpnIsRegistered, 2);
-        }
-        else if (numController == 6)
-        {
-            // Coarse value
-            midiState->_rpnMSBvalue = value;
-            processRPNChanged(channel,
-                              midiState->_rpnMSBparameter << 7 | midiState->_rpnLSBparameter,
-                              value, midiState->_rpnIsRegistered, 3);
-        }
-        else if (numController == 38)
-        {
-            // Fine value
-            processRPNChanged(channel,
-                              midiState->_rpnMSBparameter << 7 | midiState->_rpnLSBparameter,
-                              midiState->_rpnMSBvalue << 7 | value,
-                              midiState->_rpnIsRegistered, 4);
-        }
-        else if (numController == 96)
-        {
-            // Increment
-            processRPNChanged(channel,
-                              midiState->_rpnMSBparameter << 7 | midiState->_rpnLSBparameter,
-                              value, midiState->_rpnIsRegistered, 5);
-        }
-        else if (numController == 97)
-        {
-            // Decrement
-            processRPNChanged(channel,
-                              midiState->_rpnMSBparameter << 7 | midiState->_rpnLSBparameter,
-                              value, midiState->_rpnIsRegistered, 6);
-        }
-        return;
-    }
-    else if (numController == 64)
-    {
-        // Sustain pedal
-        if (value >= 64 && !sustainState->_isSustainOn)
-        {
-            sustainState->_isSustainOn = true;
-            
-            // All current keys are now sustained
-            for (int key = 0; key < 128; key++)
-                sustainState->_sustainedKeys[key] = sustainState->_currentKeys[key] || sustainState->_sostenutoMemoryKeys[key];
-        }
-        else if (value < 64 && sustainState->_isSustainOn)
-        {
-            sustainState->_isSustainOn = false;
-            
-            // Remove all keys that have been previously sustained
-            for (int key = 0; key < 128; key++)
-            {
-                if (sustainState->_sustainedKeys[key])
-                {
-                    sustainState->_sustainedKeys[key] = false;
-
-                    // And release them if they are not currently triggered or held by the sostenuto
-                    if (!sustainState->_currentKeys[key] && !sustainState->_sostenutoMemoryKeys[key])
-                        processKeyOff(channel, key);
-                }
-            }
-        }
-    }
-    else if (numController == 66)
-    {
-        // Sostenuto pedal
-        if (value >= 64 && !sustainState->_isSostenutoOn)
-        {
-            sustainState->_isSostenutoOn = true;
-
-            // All current keys are now held by the sostenuto
-            for (int key = 0; key < 128; key++)
-                sustainState->_sostenutoMemoryKeys[key] = sustainState->_currentKeys[key] || sustainState->_sustainedKeys[key];
-        }
-        else if (value < 64 && sustainState->_isSostenutoOn)
-        {
-            sustainState->_isSostenutoOn = false;
-            
-            // Remove all keys that have been held by the sostenuto pedal
-            for (int key = 0; key < 128; key++)
-            {
-                if (sustainState->_sostenutoMemoryKeys[key])
-                {
-                    sustainState->_sostenutoMemoryKeys[key] = false;
-
-                    // And release them if they are not currently triggered or activated by the sustain
-                    if (!sustainState->_currentKeys[key] && !sustainState->_sustainedKeys[key])
-                        processKeyOff(channel, key);
-                }
-            }
-        }
-    }
-    else if (numController == 120)
-    {
-        // All sound off: clear the sustain state
-        memset(sustainState, 0, sizeof(Sustain_State));
-    }
-
-    // Process the controller change for the current channel
-    bool consumed = false;
-    for (int i = 0; i < _listeners.size(); ++i)
-        consumed |= _listeners[i]->processControllerChanged(channel, numController, value);
-
-    // And possibly update channel -1 if the change has not been consumed
-    if (channel != -1 && !consumed)
-        processControllerChanged(external, -1, numController, initialValue);
-
-    // In case not all MIDI listeners support CC120 / CC123
-    if (numController == 120)
-    {
-        // All sound off: clear the sustain state and stop all notes
-        for (int key = 0; key < 128; key++)
-            processKeyOff(channel, key);
-    }
-    else if (numController == 123)
-    {
-        // All notes off: stop all keys that are not held by the sustain or sostenuto pedal
-        for (int key = 0; key < 128; key++)
-        {
-            if (!sustainState->_sostenutoMemoryKeys[key] && !sustainState->_sustainedKeys[key])
-                processKeyOff(channel, key);
-        }
-    }
+    _processor.processMidiMessage(message, length);
 }
 
 void MidiDevice::processKeyOn(int channel, int key, int vel)
 {
-    Sustain_State * sustainState = &_sustainStates[channel + 1];
-
-    // Initialize the poly pressure value
-    _midiStates[channel + 1]._polyPressureValues[key] = vel;
-
-    // Key currently activated
-    sustainState->_currentKeys[key] = true;
-
-    // Possibly stop the sound if the key is already on
-    bool stopFirst = sustainState->_sustainedKeys[key] || sustainState->_sostenutoMemoryKeys[key];
-
-    // Possibly add it to the sustain
-    if (sustainState->_isSustainOn)
-        sustainState->_sustainedKeys[key] = true;
-
-    // Process the change for the current channel
-    bool consumed = false;
-    for (int i = 0; i < _listeners.size(); ++i)
-    {
-        if (stopFirst)
-            _listeners[i]->processKey(channel, key, 0);
-        consumed |= _listeners[i]->processKey(channel, key, vel);
-    }
-
-    // And possibly update channel -1 if the change has not been consumed
-    if (channel != -1 && !consumed)
-        processKeyOn(-1, key, vel);
+    _processor.processKeyOn(channel, key, vel);
 }
 
 void MidiDevice::processKeyOff(int channel, int key)
 {
-    Sustain_State * sustainState = &_sustainStates[channel + 1];
-
-    // Key currently deactivated
-    sustainState->_currentKeys[key] = false;
-
-    // Release the key if it is not currently sustained or held by the sostenuto
-    bool consumed = false;
-    if (!sustainState->_sostenutoMemoryKeys[key] && !sustainState->_sustainedKeys[key])
-    {
-        for (int i = 0; i < _listeners.size(); ++i)
-            consumed |= _listeners[i]->processKey(channel, key, 0);
-    }
-
-    // And possibly update channel -1 if the change has not been consumed
-    if (channel != -1 && !consumed)
-        processKeyOff(-1, key);
+    _processor.processKeyOff(channel, key);
 }
 
 void MidiDevice::processPolyPressureChanged(int channel, int key, int pressure)
 {
-    // Update the current channel state
-    _midiStates[channel + 1]._polyPressureValues[key] = pressure;
-
-    bool consumed = false;
-    for (int i = 0; i < _listeners.size(); ++i)
-        consumed |= _listeners[i]->processPolyPressureChanged(channel, key, pressure);
-
-    // And possibly update channel -1 if the change has not been consumed
-    if (channel != -1 && !consumed)
-        processPolyPressureChanged(-1, key, pressure);
+    _processor.processPolyPressureChanged(channel, key, pressure);
 }
 
 void MidiDevice::processMonoPressureChanged(int channel, int value)
 {
-    // Update the current channel state
-    _midiStates[channel + 1]._monoPressureValue = value;
+    _processor.processMonoPressureChanged(channel, value);
+}
 
-    bool consumed = false;
-    for (int i = 0; i < _listeners.size(); ++i)
-        consumed |= _listeners[i]->processMonoPressureChanged(channel, value);
-
-    // And possibly update channel -1 if the change has not been consumed
-    if (channel != -1 && !consumed)
-        processMonoPressureChanged(-1, value);
+void MidiDevice::processControllerChanged(bool external, int channel, int num, int value)
+{
+    _processor.processControllerChanged(external, channel, num, value);
 }
 
 void MidiDevice::processBendChanged(int channel, float value)
 {
-    // Update the current channel state
-    _midiStates[channel + 1]._bendValue = value;
-
-    bool consumed = false;
-    for (int i = 0; i < _listeners.size(); ++i)
-        consumed |= _listeners[i]->processBendChanged(channel, value);
-
-    // And possibly update channel -1 if the change has not been consumed
-    if (channel != -1 && !consumed)
-        processBendChanged(-1, value);
+    _processor.processBendChanged(channel, value);
 }
 
 void MidiDevice::processRPNChanged(int channel, int parameter, int value, bool isRegistered, int trigger)
 {
-    // Possibly update the bend sensitivity value
-    if (isRegistered && parameter == 0 && trigger == 4)
-        _midiStates[channel + 1]._bendSensitivityValue = static_cast<float>(value >> 7) + 0.01f * static_cast<float>(value & 0x7F);
-
-    bool consumed = false;
-    for (int i = 0; i < _listeners.size(); ++i)
-        consumed |= _listeners[i]->processRPNChanged(channel, parameter, value, isRegistered, trigger);
-
-    // And possibly update channel -1 if the change has not been consumed
-    if (channel != -1 && !consumed)
-        processRPNChanged(-1, parameter, value, isRegistered, trigger);
+    _processor.processRPNChanged(channel, parameter, value, isRegistered, trigger);
 }
 
 void MidiDevice::processProgramChanged(int channel, quint8 preset)
 {
-    // Compute the corresponding bank for the current channel
-    quint16 bankNumber = 256 * _midiStates[channel + 1]._controllerValues[32] +
-                         _midiStates[channel + 1]._controllerValues[0];
-
-    bool consumed = false;
-    for (int i = 0; i < _listeners.size(); ++i)
-        consumed |= _listeners[i]->processProgramChanged(channel, bankNumber, preset);
-
-    // And possibly update channel -1 if the change has not been consumed
-    if (channel != -1 && !consumed)
-        processProgramChanged(-1, preset);
+    _processor.processProgramChanged(channel, preset);
 }
 
 void MidiDevice::stopAll()
 {
     // Release all keys sustained or held by the sostenuto
-    memset((Sustain_State *)_sustainStates, 0, 17 * sizeof(Sustain_State));
-    for (int key = 0; key < 128; key++)
-        processKeyOff(-1, key);
+    _processor.stopAll();
 }
 
 int MidiDevice::getControllerValue(int channel, int controllerNumber)
 {
-    return _midiStates[channel + 1]._controllerValues[controllerNumber];
+    return _processor.getControllerValue(channel, controllerNumber);
 }
 
 float MidiDevice::getBendValue(int channel)
 {
-    return _midiStates[channel + 1]._bendValue;
+    return _processor.getBendValue(channel);
 }
 
 float MidiDevice::getBendSensitivityValue(int channel)
 {
-    return _midiStates[channel + 1]._bendSensitivityValue;
+    return _processor.getBendSensitivityValue(channel);
 }
 
 int MidiDevice::getMonoPressure(int channel)
 {
-    return _midiStates[channel + 1]._monoPressureValue;
+    return _processor.getMonoPressure(channel);
 }
 
 int MidiDevice::getPolyPressure(int channel, int key)
 {
-    return _midiStates[channel + 1]._polyPressureValues[key];
+    return _processor.getPolyPressure(channel, key);
 }
 
 void MidiDevice::addListener(IMidiListener * listener, int priority)
@@ -679,4 +324,72 @@ void MidiDevice::removeListener(IMidiListener * listener)
         _listenerPriorities.removeAt(pos);
         _listeners.removeAt(pos);
     }
+}
+
+bool MidiDevice::ListenerDispatcher::processKey(int channel, int key, int vel)
+{
+    bool consumed = false;
+    for (int i = 0; i < _listeners.size(); ++i)
+        consumed |= _listeners[i]->processKey(channel, key, vel);
+    return consumed;
+}
+
+bool MidiDevice::ListenerDispatcher::processKeyRestarted(int channel, int key, int vel)
+{
+    // Each listener stops the key, then plays it again
+    bool consumed = false;
+    for (int i = 0; i < _listeners.size(); ++i)
+    {
+        _listeners[i]->processKey(channel, key, 0);
+        consumed |= _listeners[i]->processKey(channel, key, vel);
+    }
+    return consumed;
+}
+
+bool MidiDevice::ListenerDispatcher::processPolyPressureChanged(int channel, int key, int pressure)
+{
+    bool consumed = false;
+    for (int i = 0; i < _listeners.size(); ++i)
+        consumed |= _listeners[i]->processPolyPressureChanged(channel, key, pressure);
+    return consumed;
+}
+
+bool MidiDevice::ListenerDispatcher::processMonoPressureChanged(int channel, int value)
+{
+    bool consumed = false;
+    for (int i = 0; i < _listeners.size(); ++i)
+        consumed |= _listeners[i]->processMonoPressureChanged(channel, value);
+    return consumed;
+}
+
+bool MidiDevice::ListenerDispatcher::processControllerChanged(int channel, int num, int value)
+{
+    bool consumed = false;
+    for (int i = 0; i < _listeners.size(); ++i)
+        consumed |= _listeners[i]->processControllerChanged(channel, num, value);
+    return consumed;
+}
+
+bool MidiDevice::ListenerDispatcher::processBendChanged(int channel, float value)
+{
+    bool consumed = false;
+    for (int i = 0; i < _listeners.size(); ++i)
+        consumed |= _listeners[i]->processBendChanged(channel, value);
+    return consumed;
+}
+
+bool MidiDevice::ListenerDispatcher::processProgramChanged(int channel, uint16_t bank, uint8_t preset)
+{
+    bool consumed = false;
+    for (int i = 0; i < _listeners.size(); ++i)
+        consumed |= _listeners[i]->processProgramChanged(channel, bank, preset);
+    return consumed;
+}
+
+bool MidiDevice::ListenerDispatcher::processRPNChanged(int channel, int parameter, int value, bool isRegistered, int trigger)
+{
+    bool consumed = false;
+    for (int i = 0; i < _listeners.size(); ++i)
+        consumed |= _listeners[i]->processRPNChanged(channel, parameter, value, isRegistered, trigger);
+    return consumed;
 }

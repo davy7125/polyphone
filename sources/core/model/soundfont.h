@@ -29,6 +29,7 @@
 #include <QList>
 #include <QMap>
 #include "indexedelementlist.h"
+#include "isynthsoundfont.h"
 class Smpl;
 class InstPrst;
 class Soundfonts;
@@ -36,11 +37,11 @@ class QAbstractItemModel;
 class TreeItem;
 class TreeItemRoot;
 
-class Soundfont
+class Soundfont: public ISynthSoundfont
 {
 public:
     Soundfont(EltID id);
-    ~Soundfont();
+    ~Soundfont() override;
 
     // Add, get or delete a sample
     int addSample();
@@ -62,6 +63,15 @@ public:
 
     // Tree model associated to the soundfont
     QAbstractItemModel * getModel() { return _model; }
+
+    // ISynthSoundfont implementation
+    ISynthSample * getSynthSample(int index) override;
+    ISynthInstPrst * getSynthInstrument(int index) override;
+    ISynthInstPrst * getSynthPreset(int index) override;
+    int getInstrumentCount() override { return _inst.positionCount(); }
+    ISynthInstPrst * getInstrumentAt(int position) override;
+    int getPresetCount() override { return _prst.positionCount(); }
+    ISynthInstPrst * getPresetAt(int position) override;
 
     // Doc: "max 255 characters except for "comments", ended by 1 or 2 \0 for an even number of bits"
     SfVersionTag _IFIL; // version of the Sound Font RIFF file     e.g. 2.01                                MANDATORY

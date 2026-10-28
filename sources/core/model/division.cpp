@@ -184,3 +184,9 @@ void Division::setMute(bool mute)
     _mute = mute;
     notifyUpdate();
 }
+
+ModulatorData * Division::getModulatorData(int position)
+{
+    Modulator * modulator = _modulators.atPosition(position);
+    return modulator->isHidden() ? nullptr : &modulator->_data;
+}

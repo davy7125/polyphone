@@ -1,0 +1,13 @@
+# soundfont: polyphone-test.sf2
+# Preset with a muted zone, and another preset always played along
+samplerate 48000
+duration 3
+gain -6
+mute preset 4 1
+alwaysplayed preset 1
+
+0     program 0 0 4
+0.0   on 0 57 110
+0.5   on 0 64 90
+1.5   off 0 57
+1.5   off 0 64

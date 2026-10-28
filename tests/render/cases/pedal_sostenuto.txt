@@ -1,0 +1,23 @@
+# soundfont: polyphone-test.sf2
+# same as: pedal_sostenuto_equivalent
+# Sostenuto pedal: only the keys down when it is pressed are held, then the sustain pedal holds the others too
+samplerate 48000
+duration 4
+
+0     program 0 0 0
+0.0   on 0 48 100
+0.0   on 0 52 100
+0.3   cc 0 66 127
+0.5   off 0 48
+0.5   off 0 52
+0.7   on 0 55 100
+1.0   off 0 55
+1.5   cc 0 66 0
+2.0   on 0 50 100
+2.2   cc 0 64 127
+2.3   cc 0 66 127
+2.4   off 0 50
+2.6   on 0 57 100
+2.8   off 0 57
+3.0   cc 0 64 0
+3.4   cc 0 66 0

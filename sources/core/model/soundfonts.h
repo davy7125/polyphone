@@ -26,14 +26,15 @@
 #define MODELSOUNDFONTS_H
 
 #include <QMap>
+#include "isynthsoundfont.h"
 class QAbstractItemModel;
 class Soundfont;
 
-class Soundfonts
+class Soundfonts: public ISynthSoundfonts
 {
 public:
     Soundfonts();
-    ~Soundfonts();
+    ~Soundfonts() override;
 
     int addSoundfont();
     Soundfont * getSoundfont(int index);
@@ -43,6 +44,9 @@ public:
 
     // Get a tree model associated to a soundfont
     QAbstractItemModel *getModel(int indexSf2);
+
+    // ISynthSoundfonts implementation
+    ISynthSoundfont * getSynthSoundfont(int index) override;
 
 private:
     int _soundfontCounter;

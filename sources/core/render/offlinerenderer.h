@@ -29,8 +29,8 @@
 #include <QList>
 #include <QVector>
 #include <QMetaObject>
-class RenderMidiValues;
-class Synth;
+class MidiProcessor;
+class SynthCoreConfig;
 
 /// Play a list of timed events with the synth, faster than real time, and write the result in a wav file.
 /// Used for comparing the sound before and after a change of the sound engine (see tests/render).
@@ -45,7 +45,8 @@ public:
     bool readEvents(QString filePath);
 
     /// Play the events with the soundfont loaded at sf2Index and write a stereo 32-bit float wav file
-    bool render(int sf2Index, QString outputFilePath);
+    /// The synth is SynthCore computing in the calling thread, or Synth (editor) with its threads if threaded is true
+    bool render(int sf2Index, QString outputFilePath, bool threaded);
 
     QString getError() { return _error; }
 
@@ -59,7 +60,9 @@ private:
         EVENT_BEND,
         EVENT_BEND_RANGE,
         EVENT_PRESSURE,
-        EVENT_POLY_PRESSURE
+        EVENT_POLY_PRESSURE,
+        EVENT_INSTRUMENT,
+        EVENT_SAMPLE
     };
 
     struct Event
@@ -71,21 +74,36 @@ private:
         int number; // Bank, key or controller
         int value;  // Preset, velocity, controller value or pressure
         float floatValue; // Bend or bend range
-        int presetIndex; // Preset to play for EVENT_PROGRAM, resolved before rendering
+        int index; // Instrument or sample played alone
+        int line;
+    };
+
+    // Change of the soundfont made after loading it: a muted zone, or an element always played
+    struct ModelChange
+    {
+        bool mute;
+        bool isPreset;
+        int index;
+        int zone;
         int line;
     };
 
     bool readSetting(QStringList words, int line);
     bool readEvent(double time, QStringList words, int line);
-    bool resolvePrograms(int sf2Index);
-    void processEvent(Synth * synth, int sf2Index, Event &event);
+    bool applyModelChanges(int sf2Index);
+    bool resolveElements(int sf2Index);
+    SynthCoreConfig getSynthConfig();
+    void renderWithCore(int sf2Index, QVector<float> &data, quint32 blockCount);
+    void renderWithThreads(int sf2Index, QVector<float> &data, quint32 blockCount);
+    template <class T> void processEvents(T * synth, int sf2Index, quint64 blockEnd, int &eventIndex);
+    void storeBlock(QVector<float> &data, quint32 block, const float * dataL, const float * dataR);
     bool writeWavFile(QString filePath, const QVector<float> &data, quint32 frameCount);
     bool readInt(QString word, int min, int max, int &value, int line);
     bool readFloat(QString word, float min, float max, float &value, int line);
 
     QString _error;
-    RenderMidiValues * _midiValues;
-    bool _midiValuesOwned; // False once given to the synth
+    MidiProcessor * _midiProcessor; // Events processed as MidiDevice does, values read by the modulators
+    bool _midiProcessorOwned; // False once given to the synth
     QMetaObject::Connection _modulatorConnection;
 
     // Settings
@@ -96,9 +114,11 @@ private:
     int _referencePitch;
     int _reverb[4]; // Level, size, width, damping
     int _chorus[3]; // Level, depth, frequency
+    bool _sampleLoop, _sampleStereo; // Samples played alone
+    double _sampleGain;
+    QList<ModelChange> _modelChanges;
 
     QList<Event> _events;
-    int _channelPresetIndexes[16];
 };
 
 #endif // OFFLINERENDERER_H

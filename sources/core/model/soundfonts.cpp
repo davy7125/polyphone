@@ -51,6 +51,11 @@ Soundfont * Soundfonts::getSoundfont(int index)
     return nullptr;
 }
 
+ISynthSoundfont * Soundfonts::getSynthSoundfont(int index)
+{
+    return getSoundfont(index);
+}
+
 bool Soundfonts::deleteSoundfont(int index)
 {
     if (_soundfonts.contains(index))

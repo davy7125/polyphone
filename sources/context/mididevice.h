@@ -27,10 +27,12 @@
 
 #include <QString>
 #include <QObject>
-#include "imidivalues.h"
+#include <QVector>
+#include "midiprocessor.h"
 class ConfManager;
 class RtMidiIn;
 
+// MIDI input of the editor: the events are processed by MidiProcessor (synth core) and given to the listeners
 class MidiDevice: public QObject, public IMidiValues
 {
     Q_OBJECT
@@ -58,6 +60,7 @@ public:
     int getPolyPressure(int channel, int key) override;
 
     // Process MIDI signals
+    void processMidiMessage(const unsigned char * message, size_t length);
     void processKeyOn(int channel, int key, int vel);
     void processKeyOff(int channel, int key);
     void processPolyPressureChanged(int channel, int key, int pressure);
@@ -73,33 +76,22 @@ private slots:
     void check();
 
 private:
-    struct MIDI_State
+    // Gives the processed events to all listeners, by priority (an event is consumed if a listener consumes it)
+    class ListenerDispatcher: public IMidiListener
     {
-        // Configuration of a channel, the values being written and read by different threads
-        volatile int _controllerValues[128];
-        volatile bool _controllerValueSpecified[128];
-        volatile bool _controllerValueIsRelative[128];
-        volatile quint8 _controllerValueIsRelativeCounter[128];
-        volatile float _bendValue;
-        volatile float _bendSensitivityValue;
-        volatile int _monoPressureValue;
-        volatile int _polyPressureValues[128];
+    public:
+        ListenerDispatcher(QVector<IMidiListener *> &listeners) : _listeners(listeners) {}
+        bool processKey(int channel, int key, int vel) override;
+        bool processKeyRestarted(int channel, int key, int vel) override;
+        bool processPolyPressureChanged(int channel, int key, int pressure) override;
+        bool processMonoPressureChanged(int channel, int value) override;
+        bool processControllerChanged(int channel, int num, int value) override;
+        bool processBendChanged(int channel, float value) override;
+        bool processProgramChanged(int channel, uint16_t bank, uint8_t preset) override;
+        bool processRPNChanged(int channel, int parameter, int value, bool isRegistered, int trigger) override;
 
-        // RPN memory
-        unsigned char _rpnMSBparameter;
-        unsigned char _rpnLSBparameter;
-        unsigned char _rpnMSBvalue;
-        unsigned char _rpnLSBvalue;
-        bool _rpnIsRegistered;
-    };
-
-    struct Sustain_State
-    {
-        bool _currentKeys[128];
-        bool _sustainedKeys[128];
-        bool _sostenutoMemoryKeys[128];
-        bool _isSustainOn;
-        bool _isSostenutoOn;
+    private:
+        QVector<IMidiListener *> &_listeners;
     };
 
     void openMidiPort();
@@ -109,15 +101,13 @@ private:
     ConfManager * _configuration;
     RtMidiIn * _midiIn;
 
-    // Last values, first is channel -1 (for the editor) then channel 1 to 16
-    MIDI_State _midiStates[17];
-
-    // Sustain / Sostenuto pedals
-    Sustain_State _sustainStates[17];
-
     // MIDI listeners
     QVector<IMidiListener *> _listeners;
     QVector<int> _listenerPriorities;
+
+    // Channel states, pedals and (N)RPN
+    MidiProcessor _processor;
+    ListenerDispatcher _dispatcher;
 
     // Current api and port number
     int _api;

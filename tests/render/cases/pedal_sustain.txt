@@ -1,0 +1,17 @@
+# soundfont: polyphone-test.sf2
+# same as: pedal_sustain_equivalent
+# Sustain pedal: the keys released while it is down ring until it is up, a key pressed again is restarted
+samplerate 48000
+duration 3
+
+0     program 0 0 0
+0.0   on 0 48 100
+0.2   cc 0 64 127
+0.4   off 0 48
+0.6   on 0 52 100
+0.8   off 0 52
+1.0   on 0 48 100
+1.2   off 0 48
+1.6   cc 0 64 0
+2.0   on 0 55 100
+2.2   off 0 55

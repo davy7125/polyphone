@@ -33,89 +33,40 @@
 #include "soundfont.h"
 #include "instprst.h"
 #include "synth.h"
-#include "imidivalues.h"
+#include "synthcore.h"
+#include "midiprocessor.h"
+#include "synthmidi.h"
 #include "basetypes.h"
 
-/// MIDI values read by the modulators, with the same defaults as MidiDevice
-class RenderMidiValues: public IMidiValues
-{
-public:
-    RenderMidiValues()
-    {
-        for (int channel = 0; channel < 16; channel++)
-        {
-            for (int i = 0; i < 128; i++)
-            {
-                _controllerValues[channel][i] = 0;
-                _polyPressureValues[channel][i] = 0;
-            }
-            _controllerValues[channel][7] = 127; // Main volume
-            _controllerValues[channel][8] = 64; // Balance
-            _controllerValues[channel][10] = 64; // Pan position
-            _controllerValues[channel][11] = 127; // Expression
-            _bendValues[channel] = 0.f;
-            _bendSensitivityValues[channel] = 2.f;
-            _monoPressureValues[channel] = 0;
-        }
-    }
-
-    // Same as MidiDevice::onInputModulatorChanged, called while the soundfont is loaded
-    void setDefaultControllerValue(int controllerNumber, bool isBipolar, bool isDescending)
-    {
-        for (int channel = 0; channel < 16; channel++)
-            _controllerValues[channel][controllerNumber] = isBipolar ? 64 : (isDescending ? 127 : 0);
-    }
-
-    void setControllerValue(int channel, int controllerNumber, int value) { _controllerValues[channel][controllerNumber] = value; }
-    void setBendValue(int channel, float value) { _bendValues[channel] = value; }
-    void setBendSensitivityValue(int channel, float value) { _bendSensitivityValues[channel] = value; }
-    void setMonoPressure(int channel, int value) { _monoPressureValues[channel] = value; }
-    void setPolyPressure(int channel, int key, int value) { _polyPressureValues[channel][key] = value; }
-
-    int getControllerValue(int channel, int controllerNumber) override { return isValid(channel) ? _controllerValues[channel][controllerNumber] : 0; }
-    float getBendValue(int channel) override { return isValid(channel) ? _bendValues[channel] : 0.f; }
-    float getBendSensitivityValue(int channel) override { return isValid(channel) ? _bendSensitivityValues[channel] : 2.f; }
-    int getMonoPressure(int channel) override { return isValid(channel) ? _monoPressureValues[channel] : 0; }
-    int getPolyPressure(int channel, int key) override { return isValid(channel) ? _polyPressureValues[channel][key] : 0; }
-
-private:
-    bool isValid(int channel) { return channel >= 0 && channel < 16; }
-
-    int _controllerValues[16][128];
-    float _bendValues[16];
-    float _bendSensitivityValues[16];
-    int _monoPressureValues[16];
-    int _polyPressureValues[16][128];
-};
-
 OfflineRenderer::OfflineRenderer() :
-    _midiValues(new RenderMidiValues()),
-    _midiValuesOwned(true),
+    _midiProcessor(new MidiProcessor()),
+    _midiProcessorOwned(true),
     _sampleRate(48000),
     _blockSize(COMPUTATION_CHUNK),
     _duration(0),
     _masterGain(0),
-    _referencePitch(4400)
+    _referencePitch(4400),
+    _sampleLoop(true),
+    _sampleStereo(false),
+    _sampleGain(0)
 {
     for (int i = 0; i < 4; i++)
         _reverb[i] = 0;
     for (int i = 0; i < 3; i++)
         _chorus[i] = 0;
-    for (int i = 0; i < 16; i++)
-        _channelPresetIndexes[i] = -1;
 
     // The parser emits this signal for each modulator source that is a MIDI controller
     _modulatorConnection = QObject::connect(SoundfontManager::getInstance(), &SoundfontManager::inputModulatorChanged,
                                             [this](int controllerNumber, bool isBipolar, bool isDescending) {
-        _midiValues->setDefaultControllerValue(controllerNumber, isBipolar, isDescending);
+        _midiProcessor->setDefaultControllerValue(controllerNumber, isBipolar, isDescending);
     });
 }
 
 OfflineRenderer::~OfflineRenderer()
 {
     QObject::disconnect(_modulatorConnection);
-    if (_midiValuesOwned)
-        delete _midiValues;
+    if (_midiProcessorOwned)
+        delete _midiProcessor;
 }
 
 bool OfflineRenderer::readEvents(QString filePath)
@@ -225,6 +176,35 @@ bool OfflineRenderer::readSetting(QStringList words, int line)
             if (!readInt(words[i], 0, 100, _chorus[i], line))
                 return false;
     }
+    else if ((name == "sampleloop" || name == "samplestereo") && words.count() == 1)
+    {
+        if (!readInt(words[0], 0, 1, value, line))
+            return false;
+        if (name == "sampleloop")
+            _sampleLoop = (value == 1);
+        else
+            _sampleStereo = (value == 1);
+    }
+    else if (name == "samplegain" && words.count() == 1)
+    {
+        if (!readFloat(words[0], -50.f, 50.f, floatValue, line))
+            return false;
+        _sampleGain = static_cast<double>(floatValue);
+    }
+    else if (((name == "mute" && words.count() == 3) || (name == "alwaysplayed" && words.count() == 2)) &&
+             (words[0] == "instrument" || words[0] == "preset"))
+    {
+        // A zone of an instrument or a preset muted, or an instrument or a preset always played
+        ModelChange change;
+        change.mute = (name == "mute");
+        change.isPreset = (words[0] == "preset");
+        change.zone = -1;
+        change.line = line;
+        if (!readInt(words[1], 0, 65535, change.index, line) ||
+            (change.mute && !readInt(words[2], 0, 65535, change.zone, line)))
+            return false;
+        _modelChanges << change;
+    }
     else
     {
         _error = QString("line %1: unknown setting \"%2\" or wrong number of values").arg(line).arg(name);
@@ -249,10 +229,27 @@ bool OfflineRenderer::readEvent(double time, QStringList words, int line)
     event.number = 0;
     event.value = 0;
     event.floatValue = 0;
-    event.presetIndex = -1;
+    event.index = -1;
     event.line = line;
 
     QString name = words.isEmpty() ? "" : words.takeFirst();
+    if (name == "instrument" || name == "sample")
+    {
+        // Played alone on the channel of the editor: index, key (-1: a sample at its root key) and velocity
+        event.type = (name == "instrument" ? EVENT_INSTRUMENT : EVENT_SAMPLE);
+        event.channel = -1;
+        if (words.count() != 3)
+        {
+            _error = QString("line %1: 3 values expected after \"%2\"").arg(line).arg(name);
+            return false;
+        }
+        if (!readInt(words[0], 0, 65535, event.index, line) || !readInt(words[1], -1, 127, event.number, line) ||
+            !readInt(words[2], 0, 127, event.value, line))
+            return false;
+        _events << event;
+        return true;
+    }
+
     int expectedCount;
     if (name == "program")
     {
@@ -330,6 +327,8 @@ bool OfflineRenderer::readEvent(double time, QStringList words, int line)
     case EVENT_PRESSURE:
         ok = readInt(words[1], 0, 127, event.value, line);
         break;
+    case EVENT_INSTRUMENT: case EVENT_SAMPLE:
+        break;
     }
     if (!ok)
         return false;
@@ -362,7 +361,37 @@ bool OfflineRenderer::readFloat(QString word, float min, float max, float &value
     return true;
 }
 
-bool OfflineRenderer::resolvePrograms(int sf2Index)
+bool OfflineRenderer::applyModelChanges(int sf2Index)
+{
+    SoundfontManager * sm = SoundfontManager::getInstance();
+    Soundfont * soundfont = sm->getSoundfonts()->getSoundfont(sf2Index);
+    if (soundfont == nullptr)
+    {
+        _error = "the soundfont is not loaded";
+        return false;
+    }
+
+    AttributeValue value;
+    value.bValue = 1;
+    foreach (ModelChange change, _modelChanges)
+    {
+        InstPrst * element = change.isPreset ? soundfont->getPreset(change.index) : soundfont->getInstrument(change.index);
+        if (element == nullptr || (change.mute && element->getDivision(change.zone) == nullptr))
+        {
+            _error = QString("line %1: no such element in the soundfont").arg(change.line);
+            return false;
+        }
+
+        if (change.mute)
+            sm->set(EltID(change.isPreset ? elementPrstInst : elementInstSmpl, sf2Index, change.index, change.zone), champ_mute, value);
+        else
+            sm->set(EltID(change.isPreset ? elementPrst : elementInst, sf2Index, change.index), champ_alwaysPlayed, value);
+    }
+
+    return true;
+}
+
+bool OfflineRenderer::resolveElements(int sf2Index)
 {
     Soundfont * soundfont = SoundfontManager::getInstance()->getSoundfonts()->getSoundfont(sf2Index);
     if (soundfont == nullptr)
@@ -371,24 +400,26 @@ bool OfflineRenderer::resolvePrograms(int sf2Index)
         return false;
     }
 
-    // Find the preset of each program change, and check that the notes have one
+    // Check that each program change has a preset, that the notes have one and that the elements played alone exist
     bool channelHasPreset[16] = {};
-    QVector<InstPrst *> presets = soundfont->getPresets().values();
     for (int i = 0; i < _events.count(); i++)
     {
         Event &event = _events[i];
-        if (event.type == EVENT_PROGRAM)
+        if ((event.type == EVENT_INSTRUMENT && soundfont->getInstrument(event.index) == nullptr) ||
+            (event.type == EVENT_SAMPLE && soundfont->getSample(event.index) == nullptr))
         {
-            for (int j = 0; j < presets.count(); j++)
+            _error = QString("line %1: no such element in the soundfont").arg(event.line);
+            return false;
+        }
+        else if (event.type == EVENT_PROGRAM)
+        {
+            // The bank is selected by the controller 0, except on the channel 10 whose bank is 128
+            if ((event.channel == 9) != (event.number == 128))
             {
-                if (presets[j]->getExtraField(champ_wBank) == event.number &&
-                    presets[j]->getExtraField(champ_wPreset) == event.value)
-                {
-                    event.presetIndex = presets[j]->getId().indexElt;
-                    break;
-                }
+                _error = QString("line %1: the bank is 128 on the channel 9 and from 0 to 127 on the others").arg(event.line);
+                return false;
             }
-            if (event.presetIndex == -1)
+            if (SynthMidi::findPreset(soundfont, event.number, event.value) == -1)
             {
                 _error = QString("line %1: no preset %2 in bank %3").arg(event.line).arg(event.value).arg(event.number);
                 return false;
@@ -405,18 +436,105 @@ bool OfflineRenderer::resolvePrograms(int sf2Index)
     return true;
 }
 
-bool OfflineRenderer::render(int sf2Index, QString outputFilePath)
+// Receiver of the MIDI events for the synth of the editor, playing the preset chosen by the program change of a channel
+// (the editor does the same with its listeners)
+class EditorSynthListener: public IMidiListener
 {
-    if (!resolvePrograms(sf2Index))
+public:
+    EditorSynthListener(Synth * synth, ISynthSoundfont * soundfont, int sf2Index) :
+        _synth(synth),
+        _soundfont(soundfont),
+        _sf2Index(sf2Index)
+    {
+        for (int i = 0; i < 16; i++)
+            _presetIndexes[i] = -1;
+    }
+
+    bool processKey(int channel, int key, int vel) override
+    {
+        // The key is released whatever the preset (-1)
+        _synth->play(EltID(elementPrst, _sf2Index, vel > 0 ? _presetIndexes[channel] : -1), channel, key, vel);
+        return true;
+    }
+
+    bool processProgramChanged(int channel, uint16_t bank, uint8_t preset) override
+    {
+        _presetIndexes[channel] = SynthMidi::findPreset(_soundfont, bank, preset);
+        return true;
+    }
+
+    bool processPolyPressureChanged(int channel, int key, int pressure) override
+    {
+        _synth->processPolyPressureChanged(channel, key, pressure);
+        return true;
+    }
+
+    bool processMonoPressureChanged(int channel, int value) override
+    {
+        _synth->processMonoPressureChanged(channel, value);
+        return true;
+    }
+
+    bool processControllerChanged(int channel, int num, int value) override
+    {
+        _synth->processControllerChanged(channel, num, value);
+        return true;
+    }
+
+    bool processBendChanged(int channel, float value) override
+    {
+        _synth->processBendChanged(channel, value);
+        return true;
+    }
+
+    bool processRPNChanged(int channel, int parameter, int value, bool isRegistered, int trigger) override
+    {
+        _synth->processRPNChanged(channel, parameter, value, isRegistered, trigger);
+        return true;
+    }
+
+private:
+    Synth * _synth;
+    ISynthSoundfont * _soundfont;
+    int _sf2Index;
+    int _presetIndexes[16];
+};
+
+// Instruments and samples played alone on the channel of the editor (-1), as the editor does
+static void playElement(Synth * synth, ElementType type, int sf2Index, int index, int key, int velocity)
+{
+    synth->play(EltID(type, sf2Index, index), -1, key, velocity);
+}
+
+static void playElement(SynthCore * core, ElementType type, int sf2Index, int index, int key, int velocity)
+{
+    if (velocity == 0)
+        core->releaseVoices(sf2Index, index, -1, key, false);
+    else if (type == elementInst)
+        core->playInstrument(sf2Index, index, -1, key, velocity);
+    else
+        core->playSample(sf2Index, index, -1, key, velocity);
+}
+
+bool OfflineRenderer::render(int sf2Index, QString outputFilePath, bool threaded)
+{
+    if (!applyModelChanges(sf2Index) || !resolveElements(sf2Index))
         return false;
 
-    // Same order as the application: creation, configuration, then sample rate
-    SoundfontManager * sm = SoundfontManager::getInstance();
-    Synth * synth = new Synth(sm->getSoundfonts(), sm->getMutex());
-    synth->setIMidiValues(_midiValues);
-    _midiValuesOwned = false; // Deleted by the synth from now on, still updated here
+    quint32 frameCount = static_cast<quint32>(qRound64(_duration * _sampleRate));
+    quint32 blockCount = (frameCount + _blockSize - 1) / _blockSize;
+    QVector<float> data(2 * static_cast<int>(blockCount * _blockSize), 0.f);
+    if (threaded)
+        renderWithThreads(sf2Index, data, blockCount);
+    else
+        renderWithCore(sf2Index, data, blockCount);
 
-    SynthConfig configuration;
+    return writeWavFile(outputFilePath, data, frameCount);
+}
+
+SynthCoreConfig OfflineRenderer::getSynthConfig()
+{
+    SynthCoreConfig configuration;
     configuration.masterGain = _masterGain;
     configuration.referencePitch = _referencePitch;
     configuration.revLevel = _reverb[0];
@@ -426,14 +544,59 @@ bool OfflineRenderer::render(int sf2Index, QString outputFilePath)
     configuration.choLevel = _chorus[0];
     configuration.choDepth = _chorus[1];
     configuration.choFrequency = _chorus[2];
-    synth->configure(&configuration);
+    return configuration;
+}
+
+void OfflineRenderer::renderWithCore(int sf2Index, QVector<float> &data, quint32 blockCount)
+{
+    SynthCore * core = new SynthCore(SoundfontManager::getInstance()->getSoundfonts());
+    core->setMidiValues(_midiProcessor);
+    _midiProcessorOwned = false; // Deleted by the synth from now on, still used here
+    SynthMidi synthMidi(core, SoundfontManager::getInstance()->getSoundfonts(), sf2Index);
+    _midiProcessor->setListener(&synthMidi);
+    core->configure(getSynthConfig());
+    core->setSampleRate(_sampleRate);
+    core->setLoopEnabled(_sampleLoop);
+    core->setStereo(_sampleStereo);
+    core->setSampleGain(_sampleGain);
+
+    // The synth of the editor applies the effects on a first block of silence (skipped in renderWithThreads):
+    // the same is done here so that the modulation of the chorus has the same phase
+    float * dataL = new float[_blockSize];
+    float * dataR = new float[_blockSize];
+    core->render(dataL, dataR, _blockSize);
+
+    // The events of a block are heard from its beginning
+    int eventIndex = 0;
+    for (quint32 block = 0; block < blockCount; block++)
+    {
+        processEvents(core, sf2Index, static_cast<quint64>(block + 1) * _blockSize, eventIndex);
+        core->render(dataL, dataR, _blockSize);
+        storeBlock(data, block, dataL, dataR);
+    }
+    _midiProcessor->setListener(nullptr);
+    delete [] dataL;
+    delete [] dataR;
+    delete core;
+}
+
+void OfflineRenderer::renderWithThreads(int sf2Index, QVector<float> &data, quint32 blockCount)
+{
+    // Same order as the application: creation, configuration, then sample rate
+    SoundfontManager * sm = SoundfontManager::getInstance();
+    Synth * synth = new Synth(sm->getSoundfonts(), sm->getMutex());
+    synth->setIMidiValues(_midiProcessor);
+    _midiProcessorOwned = false; // Deleted by the synth from now on, still used here
+    EditorSynthListener listener(synth, sm->getSoundfonts()->getSynthSoundfont(sf2Index), sf2Index);
+    _midiProcessor->setListener(&listener);
+    synth->configure(getSynthConfig());
     synth->setSampleRateAndBufferSize(_sampleRate, _blockSize);
+    synth->setLoopEnabled(_sampleLoop);
+    synth->setStereo(_sampleStereo);
+    synth->setSampleGain(_sampleGain);
 
     // Each call to readData returns what has been computed since the previous call: the events of a block
     // are heard in the next one, so the first block is skipped and one more block is computed
-    quint32 frameCount = static_cast<quint32>(qRound64(_duration * _sampleRate));
-    quint32 blockCount = (frameCount + _blockSize - 1) / _blockSize;
-    QVector<float> data(2 * static_cast<int>(blockCount * _blockSize), 0.f);
     float * dataL = new float[_blockSize];
     float * dataR = new float[_blockSize];
     int eventIndex = 0;
@@ -441,73 +604,82 @@ bool OfflineRenderer::render(int sf2Index, QString outputFilePath)
     {
         // Events are processed while no voice is being computed
         synth->waitForComputation();
-        quint64 blockEnd = static_cast<quint64>(block + 1) * _blockSize;
-        while (eventIndex < _events.count() && _events[eventIndex].frame < blockEnd)
-            processEvent(synth, sf2Index, _events[eventIndex++]);
+        processEvents(synth, sf2Index, static_cast<quint64>(block + 1) * _blockSize, eventIndex);
 
         synth->readData(dataL, dataR, _blockSize);
         if (block > 0)
-        {
-            float * destination = data.data() + 2 * (block - 1) * _blockSize;
-            for (quint32 i = 0; i < _blockSize; i++)
-            {
-                destination[2 * i] = dataL[i];
-                destination[2 * i + 1] = dataR[i];
-            }
-        }
+            storeBlock(data, block - 1, dataL, dataR);
     }
+    _midiProcessor->setListener(nullptr);
     delete [] dataL;
     delete [] dataR;
     delete synth;
-
-    return writeWavFile(outputFilePath, data, frameCount);
 }
 
-void OfflineRenderer::processEvent(Synth * synth, int sf2Index, Event &event)
+void OfflineRenderer::storeBlock(QVector<float> &data, quint32 block, const float * dataL, const float * dataR)
 {
-    // As MidiDevice: the values read by the modulators are updated before the synth is notified
-    switch (event.type)
+    float * destination = data.data() + 2 * block * _blockSize;
+    for (quint32 i = 0; i < _blockSize; i++)
     {
-    case EVENT_PROGRAM:
-        _channelPresetIndexes[event.channel] = event.presetIndex;
-        break;
-    case EVENT_NOTE_ON:
-        if (event.value > 0)
+        destination[2 * i] = dataL[i];
+        destination[2 * i + 1] = dataR[i];
+    }
+}
+
+template <class T>
+void OfflineRenderer::processEvents(T * synth, int sf2Index, quint64 blockEnd, int &eventIndex)
+{
+    // The MIDI events go through MidiProcessor, the instruments and samples played alone directly to the synth
+    for (; eventIndex < _events.count() && _events[eventIndex].frame < blockEnd; eventIndex++)
+    {
+        Event &event = _events[eventIndex];
+        switch (event.type)
         {
-            _midiValues->setPolyPressure(event.channel, event.number, event.value);
-            synth->play(EltID(elementPrst, sf2Index, _channelPresetIndexes[event.channel]),
-                        event.channel, event.number, event.value);
+        case EVENT_PROGRAM:
+            // Bank select (the bank of the channel 10 is 128), then program change
+            if (event.channel != 9)
+                _midiProcessor->processControllerChanged(false, event.channel, 0, event.number);
+            _midiProcessor->processProgramChanged(event.channel, static_cast<uint8_t>(event.value));
+            break;
+        case EVENT_NOTE_ON:
+            if (event.value > 0)
+            {
+                _midiProcessor->processKeyOn(event.channel, event.number, event.value);
+                break;
+            }
+            // A velocity of 0 is a note off
+            Q_FALLTHROUGH();
+        case EVENT_NOTE_OFF:
+            _midiProcessor->processKeyOff(event.channel, event.number);
+            break;
+        case EVENT_CONTROLLER:
+            _midiProcessor->processControllerChanged(false, event.channel, event.number, event.value);
+            break;
+        case EVENT_BEND:
+            _midiProcessor->processBendChanged(event.channel, event.floatValue);
+            break;
+        case EVENT_BEND_RANGE: {
+            // RPN 0 (controllers 101 and 100), semitones (controller 6) and cents (controller 38)
+            int semitones = static_cast<int>(event.floatValue);
+            int cents = qRound(100.f * (event.floatValue - static_cast<float>(semitones)));
+            _midiProcessor->processControllerChanged(false, event.channel, 101, 0);
+            _midiProcessor->processControllerChanged(false, event.channel, 100, 0);
+            _midiProcessor->processControllerChanged(false, event.channel, 6, semitones);
+            _midiProcessor->processControllerChanged(false, event.channel, 38, cents);
+        } break;
+        case EVENT_PRESSURE:
+            _midiProcessor->processMonoPressureChanged(event.channel, event.value);
+            break;
+        case EVENT_POLY_PRESSURE:
+            _midiProcessor->processPolyPressureChanged(event.channel, event.number, event.value);
+            break;
+        case EVENT_INSTRUMENT:
+            playElement(synth, elementInst, sf2Index, event.index, event.number, event.value);
+            break;
+        case EVENT_SAMPLE:
+            playElement(synth, elementSmpl, sf2Index, event.index, event.number, event.value);
             break;
         }
-        // A velocity of 0 is a note off
-        Q_FALLTHROUGH();
-    case EVENT_NOTE_OFF:
-        // The key is released whatever the preset (-1)
-        synth->play(EltID(elementPrst, sf2Index, -1), event.channel, event.number, 0);
-        break;
-    case EVENT_CONTROLLER:
-        _midiValues->setControllerValue(event.channel, event.number, event.value);
-        synth->processControllerChanged(event.channel, event.number, event.value);
-        break;
-    case EVENT_BEND:
-        _midiValues->setBendValue(event.channel, event.floatValue);
-        synth->processBendChanged(event.channel, event.floatValue);
-        break;
-    case EVENT_BEND_RANGE: {
-        // RPN 0: semitones in the MSB, cents in the LSB
-        int semitones = static_cast<int>(event.floatValue);
-        int value = (semitones << 7) + qRound(100.f * (event.floatValue - static_cast<float>(semitones)));
-        _midiValues->setBendSensitivityValue(event.channel, static_cast<float>(value >> 7) + 0.01f * static_cast<float>(value & 0x7F));
-        synth->processRPNChanged(event.channel, 0, value, true, 4);
-    } break;
-    case EVENT_PRESSURE:
-        _midiValues->setMonoPressure(event.channel, event.value);
-        synth->processMonoPressureChanged(event.channel, event.value);
-        break;
-    case EVENT_POLY_PRESSURE:
-        _midiValues->setPolyPressure(event.channel, event.number, event.value);
-        synth->processPolyPressureChanged(event.channel, event.number, event.value);
-        break;
     }
 }
 

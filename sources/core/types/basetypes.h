@@ -25,33 +25,13 @@
 #ifndef BASETYPES_H
 #define BASETYPES_H
 
+#include <QtCore>
 #include "idlist.h"
 #include "eltid.h"
 #include "complex.h"
 #include "attribute.h"
 #include "modulatordata.h"
 #include "serializabletypes.h"
-
-#define DB_SF2_TO_REAL_DB 0.4
-
-// In soundengine.h
-#define MAX_NUMBER_OF_VOICES 2048
-#define VOICE_INDEX_MASK 0x7FF
-
-// In voice.h
-#define INITIAL_ARRAY_LENGTH 256
-#define COMPUTATION_CHUNK 256
-#define COMPUTATION_CHUNK_SHIFT 8
-#define COMPUTATION_CHUNK_INVERT 0.00390625
-#define RESAMPLING_ORDER 8
-#define RESAMPLING_SUBDIVISION 256
-
-// In voicelist.h
-#define MIN_POLYPHONY 16
-#define MAX_POLYPHONY 4096
-#define DEFAULT_POLYPHONY 1024
-
-// In modulatorgroup.h
-#define MAX_NUMBER_OF_PARAMETER_MODULATORS 64
+#include "synthconstants.h"
 
 #endif // BASETYPES_H

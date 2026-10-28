@@ -28,11 +28,12 @@
 #include "basetypes.h"
 #include "treeitem.h"
 #include "indexedelementlist.h"
+#include "isynthsoundfont.h"
 class Modulator;
 class InstPrst;
 class Soundfont;
 
-class Division: public TreeItem
+class Division: public TreeItem, public ISynthZone
 {
 public:
     Division(InstPrst * instPrst, Soundfont * soundfont, TreeItem * parent, EltID id);
@@ -43,8 +44,8 @@ public:
     void setGen(AttributeType champ, AttributeValue value);
     void resetGen(AttributeType champ);
     AttributeValue getGen(AttributeType champ);
-    bool * getAttributeSet() { return _attributeSet; }
-    AttributeValue * getAttributeValues() { return _attributeValues; }
+    bool * getAttributeSet() override { return _attributeSet; }
+    AttributeValue * getAttributeValues() override { return _attributeValues; }
 
     void setMute(bool mute);
     bool isMute() override { return _mute; }
@@ -61,6 +62,11 @@ public:
     QString display() override;
     int row() override;
     int indexOfId(int id) override;
+
+    // ISynthZone implementation (and the attributes above)
+    bool isPlayable() override { return !isHidden() && !isMute(); }
+    int getModulatorCount() override { return _modulators.positionCount(); }
+    ModulatorData * getModulatorData(int position) override;
 
 private:
     InstPrst * _instPrst;

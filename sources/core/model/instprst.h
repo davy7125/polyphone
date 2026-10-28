@@ -31,7 +31,7 @@
 #include "indexedelementlist.h"
 class Soundfont;
 
-class InstPrst: public TreeItem // Common class for inst and prst
+class InstPrst: public TreeItem, public ISynthInstPrst // Common class for inst and prst
 {
 public:
     InstPrst(Soundfont * soundfont, int row, TreeItem * parent, EltID id);
@@ -62,6 +62,14 @@ public:
     QString display() override;
     QString sortText() override;
     int row() override { return _row; }
+
+    // ISynthInstPrst implementation (and isAlwaysPlayed above)
+    int getIndex() override { return _id.indexElt; }
+    int getPresetNumber() override { return getExtraField(champ_wPreset); }
+    int getBankNumber() override { return getExtraField(champ_wBank); }
+    ISynthZone * getGlobalZone() override { return _globalDivision; }
+    int getZoneCount() override { return _divisions.positionCount(); }
+    ISynthZone * getZone(int position) override { return _divisions.atPosition(position); }
 
 private:
     Soundfont * _soundfont;

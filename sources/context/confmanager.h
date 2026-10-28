@@ -28,7 +28,7 @@
 #include "basetypes.h"
 #include <QSettings>
 #include <QString>
-class SynthConfig;
+#include "synthcoreconfig.h"
 
 class ConfManager: public QObject
 {
@@ -85,7 +85,7 @@ public:
     QString getMapping(int numOctave, Key key);
 
     /// Gather all configurations for the synth
-    SynthConfig * getSynthConfig();
+    SynthCoreConfig getSynthConfig();
 
 signals:
     /// Emitted when the chorus or reverb configuration changed or the buffer size
@@ -112,7 +112,6 @@ private:
 
     QString getFullKey(Section section, QString subSection, QString key) const;
     QSettings _settings;
-    SynthConfig * _synthConfig;
 };
 
 #endif // CONFMANAGER_H

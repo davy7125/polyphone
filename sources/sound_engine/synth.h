@@ -26,103 +26,26 @@
 #ifndef SYNTH_H
 #define SYNTH_H
 
-#include "voicelist.h"
+#include "basetypes.h"
+#include "synthcore.h"
 #include "soundengine.h"
 #include "calibrationsinus.h"
 #include "liveeq.h"
-#include "stk/FreeVerb.h"
-#include "stk/Chorus.h"
-#include <QDataStream>
 #include "imidilistener.h"
-#include "imidivalues.h"
 #include "recorder.h"
-class Soundfonts;
-class Soundfont;
-class InstPrst;
-class Division;
-class Smpl;
 
-class SynthConfig
-{
-public:
-    SynthConfig() :
-        choLevel(0),
-        choDepth(0),
-        choFrequency(0),
-        revLevel(0),
-        revSize(0),
-        revWidth(0),
-        revDamping(0),
-        masterGain(0),
-        referencePitch(4400),
-        temperament(QStringList())
-    {}
-
-    void copy(SynthConfig * other)
-    {
-        choLevel = other->choLevel;
-        choDepth = other->choDepth;
-        choFrequency = other->choFrequency;
-        revLevel = other->revLevel;
-        revSize = other->revSize;
-        revWidth = other->revWidth;
-        revDamping = other->revDamping;
-        masterGain = other->masterGain;
-        referencePitch = other->referencePitch;
-        temperament = other->temperament;
-    }
-
-    // Effects
-    int choLevel;
-    int choDepth;
-    int choFrequency;
-
-    int revLevel;
-    int revSize;
-    int revWidth;
-    int revDamping;
-
-    // Master gain / tuning
-    double masterGain;
-    int referencePitch;
-    QStringList temperament;
-};
-
-class SynthInternalConfig
-{
-public:
-    SynthInternalConfig() :
-        reverbOn(false),
-        chorusOn(false),
-        sampleRate(44100),
-        smplGain(0),
-        smplIsStereoEnabled(false),
-        smplIsLoopEnabled(true)
-    {}
-
-    // Effects
-    bool reverbOn;
-    bool chorusOn;
-
-    // Global parameters
-    quint32 sampleRate;
-
-    // Sample parameters
-    double smplGain;
-    bool smplIsStereoEnabled;
-    bool smplIsLoopEnabled;
-};
-
-class Synth : public QObject, public IMidiListener
+// Synth of the editor: SynthCore with the voices computed by several threads, the effects for
+// the samples (calibration sinus, equalizer), the recording and the Qt signals
+class Synth : public QObject, public IMidiListener, public ISynthListener
 {
     Q_OBJECT
 
 public:
-    Synth(Soundfonts * soundfonts, QRecursiveMutex * mutexSoundfonts);
+    Synth(ISynthSoundfonts * soundfonts, QRecursiveMutex * mutexSoundfonts);
     ~Synth() override;
 
     // Executed by the main thread (thread 1)
-    void configure(SynthConfig * configuration);
+    void configure(const SynthCoreConfig &configuration);
     void setIMidiValues(IMidiValues * midiValues);
     int play(EltID id, int channel, int key, int velocity);
     void stop(bool allChannels, bool fast);
@@ -163,57 +86,35 @@ public:
     // (in real time, the voices not computed in time are skipped)
     void waitForComputation();
 
+    // ISynthListener implementation (sound engine threads)
+    void onSamplePositionChanged(uint32_t position) override;
+    void onSampleReadFinished(int token) override;
+
 signals:
     void currentPosChanged(quint32 pos);
     void readFinished(int token);
     void dataWritten(quint32 sampleRate, quint32 number); // For updating the recorder
 
 private:
-    void playPrst(Soundfont * soundfont, InstPrst * prst, int channel, int key, int velocity);
-    void playInst(Soundfont * soundfont, InstPrst * inst, int channel, int key, int velocity,
-                  InstPrst * prst = nullptr, Division * prstDiv = nullptr);
-    int playSmpl(Smpl * smpl, int channel, int key, int velocity, bool other,
-                 InstPrst * inst = nullptr, Division * instDiv = nullptr, InstPrst * prst = nullptr, Division * prstDiv = nullptr);
-    void configureVoice(Voice * voice);
-    void configureVoices();
+    void destroySoundEngines();
+    void createSoundEngines();
 
-    // sf2Id: -1 (no filter) or specific sf2 id
-    // presetId: -1 (no filter) or specific preset id
-    // channel: -2 (all channels), -1 (GUI channel) or [0 - 15] (MIDI channel)
-    // key: -2 (all keys), -1 (all keys < 0) or a specific key
-    void releaseVoices(int sf2Id, int presetId, int channel, int key, bool fast);
-
-    void destroySoundEnginesAndBuffers();
-    void createSoundEnginesAndBuffers();
-    void applyChoRev(float * dataL, float * dataR, quint32 maxlen);
-
-    // Soundfonts
-    Soundfonts * _soundfonts;
+    // Soundfonts and synth
     QRecursiveMutex * _mutexSoundfonts;
+    SynthCore _core;
 
-    // Configuration
-    SynthConfig _configuration;
-    SynthInternalConfig _internalConfiguration;
-
-    // Voices and sound engines
-    VoiceList _voices;
+    // Sound engines computing the voices
     SoundEngine ** _soundEngines;
     int _soundEngineCount;
-    static int s_sampleVoiceTokenCounter;
-
-    // Effects / post-processing
-    CalibrationSinus _sinus;
-    LiveEQ _eq;
-    stk::FreeVerb _reverb;
-    stk::Chorus _chorusRevL, _chorusRevR, _chorusL, _chorusR;
-    QAtomicInt _effectsInUse;
-    Recorder _recorder;
-
     quint32 _bufferSize;
 
     // Copy of the sound engine data
-    float * _dataL, * _dataR, * _dataChoL, * _dataChoR,
-          * _dataRevL, * _dataRevR, * _dataChoRevL, * _dataChoRevR;
+    SynthBuses _buses;
+
+    // Post-processing
+    CalibrationSinus _sinus;
+    LiveEQ _eq;
+    Recorder _recorder;
 };
 
 #endif // SYNTH_H

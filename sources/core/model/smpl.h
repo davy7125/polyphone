@@ -28,9 +28,10 @@
 #include "basetypes.h"
 #include "sound.h"
 #include "treeitem.h"
+#include "isynthsoundfont.h"
 class Soundfont;
 
-class Smpl: public TreeItem
+class Smpl: public TreeItem, public ISynthSample
 {
 public:
     Smpl(int row, TreeItem * parent, EltID id);
@@ -51,6 +52,20 @@ public:
     QString sortText() override;
     int row() override { return _row; }
     int indexOfId(int id) override;
+
+    // ISynthSample implementation
+    void loadData() override { _sound.loadSample(); }
+    void getData(quint32 &length, qint16 * &data16, quint8 * &data24, bool getCopy) override {
+        _sound.getData(length, data16, data24, false, getCopy);
+    }
+    quint32 getSampleRate() override { return _sound.getUInt32(champ_dwSampleRate); }
+    quint32 getLength() override { return _sound.getUInt32(champ_dwLength); }
+    quint32 getLoopStart() override { return _sound.getUInt32(champ_dwStartLoop); }
+    quint32 getLoopEnd() override { return _sound.getUInt32(champ_dwEndLoop); }
+    quint32 getRootKey() override { return _sound.getUInt32(champ_byOriginalPitch); }
+    qint32 getPitchCorrection() override { return _sound.getInt32(champ_chPitchCorrection); }
+    SFSampleLink getSampleType() override { return _sfSampleType; }
+    int getLinkedSampleIndex() override { return _wSampleLink; }
 
 private:
     int _row;

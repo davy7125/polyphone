@@ -79,8 +79,10 @@ public:
     /// Csv option: write raw values
     bool csvRawValues() { return _csvRawValues; }
 
-    /// Render option: file describing the events to play
+    /// Render options: file describing the events to play, and synth used
+    /// (false: the synth core in the calling thread, true: the synth of the editor with its threads)
     QString renderEventFile() { return _renderEventFile; }
+    bool renderThreaded() { return _renderThreaded; }
 
     /// Player options
     PlayerOptions * playerOptions() { return _playerOptions; }
@@ -123,8 +125,9 @@ private:
     // Csv option
     bool _csvRawValues;
 
-    // Render option
+    // Render options
     QString _renderEventFile;
+    bool _renderThreaded;
 
     // Player options
     PlayerOptions * _playerOptions;

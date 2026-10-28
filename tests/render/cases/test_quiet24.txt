@@ -1,0 +1,11 @@
+# soundfont: polyphone-test.sf2
+# Sample around -98 dBFS whose signal is in the 8 least significant bits (sm24 chunk), with a gain of 40 dB
+samplerate 48000
+duration 3
+gain 40
+
+0     program 0 0 3
+0.0   on 0 69 127
+0.0   on 0 81 127
+2.0   off 0 69
+2.0   off 0 81

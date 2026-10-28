@@ -27,11 +27,9 @@
 #include <QDir>
 #include "modulatordata.h"
 #include "pushstereoediting.h"
-#include "synth.h"
 
 ConfManager::ConfManager(): QObject(),
-    _settings(this),
-    _synthConfig(new SynthConfig())
+    _settings(this)
 {
     // Get the previous version installed
     QStringList version = this->getValue(SECTION_NONE, "last_version_installed", "0.0").toString().split(".");
@@ -109,7 +107,7 @@ ConfManager::ConfManager(): QObject(),
 
 ConfManager::~ConfManager()
 {
-    delete _synthConfig;
+
 }
 
 QVariant ConfManager::getValue(Section section, QString key, QVariant defaultValue) const
@@ -299,17 +297,27 @@ void ConfManager::clear()
     _settings.clear();
 }
 
-SynthConfig * ConfManager::getSynthConfig()
+SynthCoreConfig ConfManager::getSynthConfig()
 {
-    _synthConfig->choLevel = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "cho_level", 0).toInt();
-    _synthConfig->choDepth = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "cho_depth", 0).toInt();
-    _synthConfig->choFrequency = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "cho_frequency", 0).toInt();
-    _synthConfig->revLevel = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_level", 0).toInt();
-    _synthConfig->revSize = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_size", 0).toInt();
-    _synthConfig->revWidth = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_width", 0).toInt();
-    _synthConfig->revDamping = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_damping", 0).toInt();
-    _synthConfig->masterGain = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "gain", 0).toInt();
-    _synthConfig->referencePitch = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "reference_pitch", 4400).toInt();
-    _synthConfig->temperament = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "temperament", "").toString().split(",");
-    return _synthConfig;
+    SynthCoreConfig configuration;
+    configuration.choLevel = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "cho_level", 0).toInt();
+    configuration.choDepth = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "cho_depth", 0).toInt();
+    configuration.choFrequency = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "cho_frequency", 0).toInt();
+    configuration.revLevel = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_level", 0).toInt();
+    configuration.revSize = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_size", 0).toInt();
+    configuration.revWidth = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_width", 0).toInt();
+    configuration.revDamping = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_damping", 0).toInt();
+    configuration.masterGain = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "gain", 0).toInt();
+    configuration.referencePitch = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "reference_pitch", 4400).toInt();
+
+    // Temperament: a name, 12 fine tunes from C to B, then the relative key (no temperament otherwise)
+    QStringList temperament = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "temperament", "").toString().split(",");
+    if (temperament.count() == 14)
+    {
+        for (int i = 1; i < 13; i++)
+            configuration.temperament[i - 1] = temperament[i].toFloat();
+        configuration.temperamentRelativeKey = temperament[13].toInt() % 12;
+    }
+
+    return configuration;
 }

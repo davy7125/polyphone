@@ -236,6 +236,31 @@ InstPrst * Soundfont::getPreset(int index)
     return nullptr;
 }
 
+ISynthSample * Soundfont::getSynthSample(int index)
+{
+    return getSample(index);
+}
+
+ISynthInstPrst * Soundfont::getSynthInstrument(int index)
+{
+    return getInstrument(index);
+}
+
+ISynthInstPrst * Soundfont::getSynthPreset(int index)
+{
+    return getPreset(index);
+}
+
+ISynthInstPrst * Soundfont::getInstrumentAt(int position)
+{
+    return _inst.atPosition(position);
+}
+
+ISynthInstPrst * Soundfont::getPresetAt(int position)
+{
+    return _prst.atPosition(position);
+}
+
 bool Soundfont::deletePreset(int index)
 {
     // Check that the index is valid

@@ -28,6 +28,7 @@
 
 #include <QMutex>
 #include <QObject>
+#include "synthbuses.h"
 class VoiceList;
 
 class SoundEngine: public QObject
@@ -48,10 +49,8 @@ public:
     bool isIdle();
 
     // Get the result
-    void setData(float * dataL, float * dataR, float * dataChoL, float * dataChoR,
-                 float * dataRevL, float * dataRevR, float * dataChoRevL, float * dataChoRevR, quint32 len);
-    void addData(float * dataL, float * dataR, float * dataChoL, float * dataChoR,
-                 float * dataRevL, float * dataRevR, float * dataChoRevL, float * dataChoRevR, quint32 len);
+    void copyData(SynthBuses &buses, quint32 len);
+    void addData(SynthBuses &buses, quint32 len);
 
 public slots:
     void start();
@@ -59,8 +58,7 @@ public slots:
 private:
     void generateData(quint32 len);
 
-    float * _voiceData;
-    float * _dataL, * _dataR, * _dataRevL, * _dataRevR, * _dataChoL, * _dataChoR, * _dataChoRevL, * _dataChoRevR;
+    SynthBuses _buses;
 
     volatile bool _interrupted;
     QAtomicInt _runningState; // 0: ready (waiting), 1: running, 2: pause required, 3: pause and continue

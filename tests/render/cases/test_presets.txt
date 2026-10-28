@@ -1,0 +1,46 @@
+# soundfont: polyphone-test.sf2
+# Generated soundfont, 24-bit samples: loop modes, modulator, stereo pair, velocity layers, preset layers, exclusive class
+samplerate 48000
+duration 7
+
+0     program 0 0 0
+0     program 1 0 1
+0     program 2 0 2
+0     program 3 0 4
+0     program 9 128 0
+
+# Loop modes: loop (key 55), loop then end of the sample at the release (key 65), no loop with a filter (key 80)
+0.00  on 0 55 100
+0.00  on 0 65 100
+0.00  on 0 80 100
+0.80  off 0 55
+0.80  off 0 65
+0.80  off 0 80
+
+# Modulator of the instrument: CC 1 closes the filter
+1.20  on 0 50 100
+1.40  cc 0 1 64
+1.60  cc 0 1 127
+1.80  cc 0 1 0
+2.00  off 0 50
+
+# Linked stereo pair, then velocity layers
+2.20  on 1 60 100
+2.70  off 1 60
+3.00  on 2 60 40
+3.00  on 2 72 100
+3.60  off 2 60
+3.60  off 2 72
+
+# Layers of a preset (the second one an octave higher, attenuated)
+3.80  on 3 57 110
+4.60  off 3 57
+
+# Exclusive class: 62 cuts 60 and 60 cuts 62, 64 rings
+5.00  on 9 60 120
+5.20  on 9 62 120
+5.40  on 9 60 120
+5.40  on 9 64 120
+5.60  off 9 60
+5.60  off 9 62
+5.60  off 9 64

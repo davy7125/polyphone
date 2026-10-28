@@ -28,6 +28,7 @@
 #include <QDir>
 #include <QScreen>
 #include "soundfontmanager.h"
+#include "soundfonts.h"
 #include "inputfactory.h"
 #include "abstractinputparser.h"
 #include "outputfactory.h"
@@ -40,6 +41,7 @@
 #include "modulatordata.h"
 #include "fastmaths.h"
 #include "voice.h"
+#include "synthcore.h"
 #include "offlinerenderer.h"
 #include "tools/merge_samples/runnablemerger.h"
 
@@ -198,9 +200,7 @@ int render(Options &options)
     }
 
     // Prepare arrays
-    SFModulator::prepareConversionTables();
-    FastMaths::initialize();
-    Voice::prepareTables();
+    SynthCore::prepareTables();
 
     // Events are read before loading the soundfont, which sets the default values of the controllers
     OfflineRenderer renderer;
@@ -227,7 +227,7 @@ int render(Options &options)
     // Render
     QString outputFile = options.getOutputFileFullPath();
     writeLine(QObject::tr("Writing file \"%1\"...").arg(outputFile));
-    if (!renderer.render(sf2Index, outputFile))
+    if (!renderer.render(sf2Index, outputFile, options.renderThreaded()))
     {
         writeLine(QObject::tr("An error occurred: %1.").arg(renderer.getError()));
         return 4;

@@ -1,20 +1,32 @@
 #!/bin/bash
 # Render every case of tests/render/cases with a Polyphone executable.
-# Usage: render.sh <polyphone executable> <soundfont directory> <output directory>
+# Usage: render.sh <polyphone executable> <soundfont directory> <output directory> [threaded]
 # The soundfont of a case is named on its first line: "# soundfont: <file name>".
+# The synth core computes the voices in the calling thread, or the synth of the editor with its
+# threads if "threaded" is given.
 
-if [ $# -ne 3 ]; then
-    echo "Usage: $0 <polyphone executable> <soundfont directory> <output directory>"
+if [ $# -ne 3 ] && { [ $# -ne 4 ] || [ "$4" != "threaded" ]; }; then
+    echo "Usage: $0 <polyphone executable> <soundfont directory> <output directory> [threaded]"
     exit 1
 fi
 polyphone=$1
 soundfontDir=$2
 outputDir=$3
-casesDir="$(cd "$(dirname "$0")" && pwd)/cases"
+option=""
+if [ "$4" = "threaded" ]; then
+    option="|threaded"
+fi
+testsDir="$(cd "$(dirname "$0")" && pwd)"
+casesDir="$testsDir/cases"
 mkdir -p "$outputDir" || exit 1
 
-# No window is needed, and two CPUs give a single sound engine thread: the voices are always
-# added in the same order and a rendering is reproducible bit for bit
+# The soundfont of the tests is generated if it is not in the directory
+if [ ! -f "$soundfontDir/polyphone-test.sf2" ]; then
+    python3 "$testsDir/make_test_soundfont.py" "$soundfontDir/polyphone-test.sf2" || exit 1
+fi
+
+# No window is needed, and two CPUs give a single sound engine thread to the synth of the editor:
+# the voices are always added in the same order and a rendering is reproducible bit for bit
 export QT_QPA_PLATFORM=offscreen
 runner=""
 if command -v taskset > /dev/null; then
@@ -32,7 +44,7 @@ for case in "$casesDir"/*.txt; do
     fi
 
     start=$(date +%s%N)
-    if $runner "$polyphone" -5 -i "$soundfontDir/$soundfont" -c "$case" -d "$outputDir" -o "$name" > "$outputDir/$name.log" 2>&1; then
+    if $runner "$polyphone" -5 -i "$soundfontDir/$soundfont" -c "$case$option" -d "$outputDir" -o "$name" > "$outputDir/$name.log" 2>&1; then
         printf "OK      %-32s %d ms\n" "$name" $((($(date +%s%N) - start) / 1000000))
     else
         echo "FAILED  $name (see $outputDir/$name.log)"

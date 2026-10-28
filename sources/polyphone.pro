@@ -232,6 +232,7 @@ INCLUDEPATH += clavier \
     resources \
     sound_engine \
     sound_engine/elements \
+    synth_core \
     .
 
 SOURCES	+= main.cpp \
@@ -256,7 +257,7 @@ SOURCES	+= main.cpp \
     core/output/csv/csvfilesamples.cpp \
     core/output/csv/outputcsv.cpp \
     core/sample/samplereadersf.cpp \
-    core/fastmaths.cpp \
+    synth_core/fastmaths.cpp \
     core/input/grandorgue/grandorguedatathrough.cpp \
     core/input/grandorgue/grandorgueranklink.cpp \
     core/input/grandorgue/grandorgueswitch.cpp \
@@ -377,16 +378,22 @@ SOURCES	+= main.cpp \
     repository/soundfont/editor/soundfonteditorfiles.cpp \
     repository/soundfont/editor/soundfontfilecell.cpp \
     sound_engine/elements/liveeq.cpp \
-    sound_engine/elements/osctriangle.cpp \
+    synth_core/osctriangle.cpp \
     sound_engine/elements/recorder.cpp \
-    sound_engine/modulatedparameter.cpp \
+    synth_core/modulatedparameter.cpp \
     sound_engine/synth.cpp \
-    sound_engine/voice.cpp \
-    sound_engine/voicelist.cpp \
-    sound_engine/voiceparam.cpp \
+    synth_core/voice.cpp \
+    synth_core/attributebase.cpp \
+    synth_core/synthmath.cpp \
+    synth_core/synthbuses.cpp \
+    synth_core/synthcore.cpp \
+    synth_core/midiprocessor.cpp \
+    synth_core/synthmidi.cpp \
+    synth_core/voicelist.cpp \
+    synth_core/voiceparam.cpp \
     sound_engine/soundengine.cpp \
     sound_engine/elements/calibrationsinus.cpp \
-    sound_engine/elements/enveloppevol.cpp \
+    synth_core/enveloppevol.cpp \
     sound_engine/elements/oscsinus.cpp \
     options.cpp \
     mainwindow/widgetshowhistory.cpp \
@@ -584,14 +591,14 @@ SOURCES	+= main.cpp \
     lib/iir/PoleFilter.cpp \
     lib/iir/State.cpp \
     editor/widgets/spinboxcents.cpp \
-    sound_engine/parametermodulator.cpp \
-    sound_engine/modulatorgroup.cpp \
+    synth_core/parametermodulator.cpp \
+    synth_core/modulatorgroup.cpp \
     editor/modulator/modulatorlistwidget.cpp \
     clavier/styledslider.cpp \
     editor/tools/default_mod/tooldefaultmod.cpp \
     editor/tools/default_mod/tooldefaultmod_parameters.cpp \
     editor/tools/default_mod/tooldefaultmod_gui.cpp \
-    core/types/modulatordata.cpp \
+    synth_core/modulatordata.cpp \
     repository/soundfont/editor/editordialoginsertvideo.cpp \
     repository/soundfont/editor/editordialoginsertimage.cpp \
     dialogs/dialogquestion.cpp \
@@ -613,7 +620,7 @@ SOURCES	+= main.cpp \
     core/output/sf/sfindexconverter.cpp
 
 HEADERS += \
-    context/imidilistener.h \
+    synth_core/imidilistener.h \
     core/input/sf/inputparsersf.h \
     core/output/csv/abstractcsvfile.h \
     core/output/csv/csvfileinstprst.h \
@@ -621,7 +628,7 @@ HEADERS += \
     core/output/csv/outputcsv.h \
     core/sample/samplereadersf.h \
     context/tuningprogrammanager.h \
-    core/fastmaths.h \
+    synth_core/fastmaths.h \
     core/input/grandorgue/grandorguedatathrough.h \
     core/input/grandorgue/grandorgueranklink.h \
     core/input/grandorgue/grandorgueswitch.h \
@@ -766,17 +773,28 @@ HEADERS += \
     repository/soundfont/editor/soundfonteditorfiles.h \
     repository/soundfont/editor/soundfontfilecell.h \
     sound_engine/elements/liveeq.h \
-    sound_engine/elements/osctriangle.h \
+    synth_core/osctriangle.h \
     sound_engine/elements/recorder.h \
-    sound_engine/imidivalues.h \
-    sound_engine/modulatedparameter.h \
+    synth_core/imidivalues.h \
+    synth_core/isynthsoundfont.h \
+    synth_core/modulatedparameter.h \
     sound_engine/synth.h \
-    sound_engine/voice.h \
-    sound_engine/voicelist.h \
-    sound_engine/voiceparam.h \
+    synth_core/voice.h \
+    synth_core/attributebase.h \
+    synth_core/attributetypes.h \
+    synth_core/synthconstants.h \
+    synth_core/synthmath.h \
+    synth_core/isynthlistener.h \
+    synth_core/synthbuses.h \
+    synth_core/synthcore.h \
+    synth_core/synthcoreconfig.h \
+    synth_core/midiprocessor.h \
+    synth_core/synthmidi.h \
+    synth_core/voicelist.h \
+    synth_core/voiceparam.h \
     sound_engine/soundengine.h \
     sound_engine/elements/calibrationsinus.h \
-    sound_engine/elements/enveloppevol.h \
+    synth_core/enveloppevol.h \
     sound_engine/elements/oscsinus.h \
     options.h \
     mainwindow/widgetshowhistory.h \
@@ -986,9 +1004,9 @@ HEADERS += \
     lib/iir/State.h \
     lib/iir/Types.h \
     editor/widgets/spinboxcents.h \
-    sound_engine/parametermodulator.h \
-    sound_engine/modulatorgroup.h \
-    core/types/modulatordata.h \
+    synth_core/parametermodulator.h \
+    synth_core/modulatorgroup.h \
+    synth_core/modulatordata.h \
     clavier/styledslider.h \
     editor/tools/default_mod/tooldefaultmod.h \
     editor/tools/default_mod/tooldefaultmod_parameters.h \

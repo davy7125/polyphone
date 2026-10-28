@@ -355,16 +355,8 @@ void ToolMergeSamples::initVoices()
 
 void ToolMergeSamples::restoreVoices()
 {
-    // Restore the temperament and the reference pitch
-    SynthConfig * configuration = ContextManager::configuration()->getSynthConfig();
-    if (configuration->temperament.count() == 14)
-    {
-        float temperament[12];
-        for (int i = 1; i < 13; i++)
-            temperament[i - 1] = configuration->temperament[i].toFloat();
-        int temperamentRelativeKey = configuration->temperament[13].toInt() % 12;
-        Voice::setTemperament(temperament, temperamentRelativeKey);
-    }
-
-    Voice::setReferencePitch(configuration->referencePitch);
+    // Restore the temperament (no temperament is 0 everywhere) and the reference pitch
+    SynthCoreConfig configuration = ContextManager::configuration()->getSynthConfig();
+    Voice::setTemperament(configuration.temperament, configuration.temperamentRelativeKey);
+    Voice::setReferencePitch(configuration.referencePitch);
 }

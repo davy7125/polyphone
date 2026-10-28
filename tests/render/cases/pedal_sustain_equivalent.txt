@@ -1,0 +1,14 @@
+# soundfont: polyphone-test.sf2
+# Same notes as pedal_sustain, released where the pedal releases them
+samplerate 48000
+duration 3
+
+0     program 0 0 0
+0.0   on 0 48 100
+0.6   on 0 52 100
+1.0   off 0 48
+1.0   on 0 48 100
+1.6   off 0 48
+1.6   off 0 52
+2.0   on 0 55 100
+2.2   off 0 55
