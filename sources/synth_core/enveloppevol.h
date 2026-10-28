@@ -33,7 +33,7 @@ class EnveloppeVol
 public:
     EnveloppeVol() {}
 
-    void initialize(uint32_t chunkRate, bool isMod);
+    void initialize(float chunkRate, bool isMod);
 
     // Apply an envelop on data
     // Return true if the end of the release is reached
@@ -44,6 +44,9 @@ public:
 
     // Call a quick attack, just before the release (sample mode "release")
     void quickAttack();
+
+    // True during the release, while the envelope only decreases
+    bool isReleasing() { return _currentPhase == phase6release; }
 
 private:
     enum EnveloppePhase
@@ -63,7 +66,7 @@ private:
     float _lastValue;
     EnveloppePhase _currentPhase;
 
-    uint32_t _chunkRate;
+    float _chunkRate;
     bool _isMod;
     bool _quickRelease;
     float _quickAttackTarget;

@@ -58,6 +58,7 @@ public:
     void getData(quint32 &length, qint16 * &data16, quint8 * &data24, bool getCopy) override {
         _sound.getData(length, data16, data24, false, getCopy);
     }
+    float getPeak() override { return _sound.getPeak(); }
     quint32 getSampleRate() override { return _sound.getUInt32(champ_dwSampleRate); }
     quint32 getLength() override { return _sound.getUInt32(champ_dwLength); }
     quint32 getLoopStart() override { return _sound.getUInt32(champ_dwStartLoop); }

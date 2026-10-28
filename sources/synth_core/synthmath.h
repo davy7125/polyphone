@@ -27,6 +27,7 @@
 
 #include <cstdint>
 #include <cmath>
+#include "synthconstants.h"
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
@@ -51,6 +52,12 @@ public:
     template <typename T> static const T &min(const T &a, const T &b) { return (a < b) ? a : b; }
     template <typename T> static const T &max(const T &a, const T &b) { return (a < b) ? b : a; }
     template <typename T> static T abs(const T &t) { return t >= 0 ? t : -t; }
+
+    // Length rounded up to whole chunks of computation
+    static uint32_t roundToChunks(uint32_t len)
+    {
+        return ((len + COMPUTATION_CHUNK - 1) >> COMPUTATION_CHUNK_SHIFT) << COMPUTATION_CHUNK_SHIFT;
+    }
 
     // Sinc table windowed by a Kaiser-Bessel window, for the resampling
     static void fillSincTable(float * table, int order, int subdivisions, double kaiserBesserBeta);

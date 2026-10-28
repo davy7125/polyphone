@@ -27,7 +27,7 @@
 #include "voiceparam.h"
 #include "fastmaths.h"
 
-void EnveloppeVol::initialize(uint32_t chunkRate, bool isMod)
+void EnveloppeVol::initialize(float chunkRate, bool isMod)
 {
     _currentChunk = 0;
     _lastValue = 0.0f;

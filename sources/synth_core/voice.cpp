@@ -27,7 +27,7 @@
 #include "fastmaths.h"
 #include "synthmath.h"
 
-float Voice::s_sinc_tables[8][RESAMPLING_SUBDIVISION][RESAMPLING_ORDER];
+alignas(32) float Voice::s_sinc_tables[8][RESAMPLING_SUBDIVISION][RESAMPLING_ORDER];
 float Voice::s_floatConversionCoef24;
 
 void Voice::prepareTables()
@@ -51,19 +51,17 @@ Voice::Voice(VoiceParam * voiceParam, ISynthListener * listener) :
     _voiceParam(voiceParam)
 {
     // Array initialization
-    _arrayLength = INITIAL_ARRAY_LENGTH;
-    _dataVolArray = new float[_arrayLength];
-    _dataModArray = new float[_arrayLength];
-    _modLfoArray = new float[_arrayLength];
-    _vibLfoArray = new float[_arrayLength];
+    _arrayLength = 0;
+    _dataVolArray = nullptr;
+    _dataModArray = nullptr;
+    _modLfoArray = nullptr;
+    _vibLfoArray = nullptr;
+    reserve(DEFAULT_MAX_BLOCK_SIZE >> COMPUTATION_CHUNK_SHIFT);
 }
 
 Voice::~Voice()
 {
-    delete [] _dataVolArray;
-    delete [] _dataModArray;
-    delete [] _modLfoArray;
-    delete [] _vibLfoArray;
+    deleteArrays();
     if (_voiceParam->getType() != 0 && _dataSmpl16 != nullptr)
     {
         if ((void*)_dataSmpl16 != (void*)_dataSmpl24)
@@ -72,6 +70,27 @@ Voice::~Voice()
         _dataSmpl16 = nullptr;
         _dataSmpl24 = nullptr;
     }
+}
+
+void Voice::deleteArrays()
+{
+    delete [] _dataVolArray;
+    delete [] _dataModArray;
+    delete [] _modLfoArray;
+    delete [] _vibLfoArray;
+}
+
+void Voice::reserve(uint32_t chunkCount)
+{
+    if (chunkCount <= _arrayLength)
+        return;
+
+    deleteArrays();
+    _arrayLength = chunkCount;
+    _dataVolArray = new float[_arrayLength];
+    _dataModArray = new float[_arrayLength];
+    _modLfoArray = new float[_arrayLength];
+    _vibLfoArray = new float[_arrayLength];
 }
 
 void Voice::initialize(int sf2Id, ISynthInstPrst * prst, ISynthZone * prstZone, ISynthInstPrst * inst, ISynthZone * instZone,
@@ -95,6 +114,7 @@ void Voice::initialize(int sf2Id, ISynthInstPrst * prst, ISynthZone * prstZone, 
     _sincWindow = nullptr;
 
     _smplRate = smpl->getSampleRate();
+    _smplPeak = smpl->getPeak();
     _sampleRootKey = smpl->getRootKey();
     _audioSmplRate = audioSmplRate;
     _audioSmplRateInv = 1.0f / _audioSmplRate;
@@ -111,20 +131,20 @@ void Voice::initialize(int sf2Id, ISynthInstPrst * prst, ISynthZone * prstZone, 
     _y2 = 0;
     _volumeCoeff = 0;
 
-    uint32_t sampleRateForChunks = (_audioSmplRate >> COMPUTATION_CHUNK_SHIFT);
+    float sampleRateForChunks = static_cast<float>(_audioSmplRate) * static_cast<float>(COMPUTATION_CHUNK_INVERT);
     _modLFO.initialize(sampleRateForChunks);
     _vibLFO.initialize(sampleRateForChunks);
     _volEnvelope.initialize(sampleRateForChunks, false);
     _modEnvelope.initialize(sampleRateForChunks, true);
 
     // Resampling initialization
-    memset(_srcData16, 0, RESAMPLING_ORDER * sizeof(float));
-    memset(_srcData24, 0, RESAMPLING_ORDER * sizeof(float));
+    memset(_srcData16, 0, sizeof(_srcData16));
+    memset(_srcData24, 0, sizeof(_srcData24));
     _lastDistanceFraction = 0;
     _moreAvailable = -1;
 }
 
-void Voice::generateData(float * data, uint32_t len)
+bool Voice::generateData(float * data, uint32_t len)
 {
     // Values read only once
     if (_currentSmplPos == 0xFFFFFFFF)
@@ -136,24 +156,10 @@ void Voice::generateData(float * data, uint32_t len)
     int32_t playedNote = _voiceParam->getInteger(champ_keynum);
     float v_filterQ = _voiceParam->getFloat(champ_initialFilterQ);
     float v_filterFreq = _voiceParam->getFloat(champ_initialFilterFc);
+    float v_modLfoToVolume = _voiceParam->getFloat(champ_modLfoToVolume);
 
-    // Number of chunks
+    // Number of chunks (len is a multiple of COMPUTATION_CHUNK, the arrays have been reserved for it)
     uint32_t chunkCount = (len >> COMPUTATION_CHUNK_SHIFT);
-
-    // Possibly increase the length of arrays
-    if (chunkCount > _arrayLength)
-    {
-        delete [] _dataVolArray;
-        delete [] _dataModArray;
-        delete [] _modLfoArray;
-        delete [] _vibLfoArray;
-
-        _arrayLength = chunkCount;
-        _dataVolArray = new float[_arrayLength];
-        _dataModArray = new float[_arrayLength];
-        _modLfoArray = new float[_arrayLength];
-        _vibLfoArray = new float[_arrayLength];
-    }
 
     /// ENVELOPES ///
     float v_attenuation = _voiceParam->getFloat(champ_initialAttenuation);
@@ -164,6 +170,14 @@ void Voice::generateData(float * data, uint32_t len)
     }
     _modEnvelope.getEnvelope(_dataModArray, chunkCount, _release, playedNote, 1.0f, _voiceParam);
 
+    // During the release, the voice ends after these chunks if it cannot be heard anymore: largest amplitude possible
+    // under the noise floor, with the peak of the sample, the volume modulated by the LFO and the resonance of the
+    // filter (Q dB, half of them being compensated by the gain of the envelope)
+    if (_volEnvelope.isReleasing() && chunkCount > 0 &&
+        _dataVolArray[chunkCount - 1] * _smplPeak *
+        FastMaths::fastPow10(0.05f * SynthMath::abs(v_modLfoToVolume) + 0.025f * v_filterQ) < NOISE_FLOOR)
+        _isFinished = true;
+
     /// LFOs ///
     _modLFO.getData(_modLfoArray, chunkCount,
                     _voiceParam->getFloat(champ_freqModLFO),
@@ -172,22 +186,21 @@ void Voice::generateData(float * data, uint32_t len)
                     _voiceParam->getFloat(champ_freqVibLFO),
                     _voiceParam->getFloat(champ_delayVibLFO));
 
+    bool isAudible = false;
     if (_dataSmpl16 == nullptr)
     {
-        memset(data, 0, len * sizeof(float));
+        // Nothing to play
         finish();
     }
     else if (_loopMode == 2 && !_release)
     {
-        // Blank
-        memset(data, 0, len * sizeof(float));
+        // Blank until the release
     }
     else
     {
         // LFOs and modulation effects
         int32_t v_modLfoToPitch = _voiceParam->getInteger(champ_modLfoToPitch);
         int32_t v_modLfoToFilterFreq = _voiceParam->getInteger(champ_modLfoToFilterFc);
-        float v_modLfoToVolume = _voiceParam->getFloat(champ_modLfoToVolume);
         int32_t v_vibLfoToPitch = _voiceParam->getInteger(champ_vibLfoToPitch);
         int32_t v_modEnvToPitch = _voiceParam->getInteger(champ_modEnvToPitch);
         int32_t v_modEnvToFilterFc = _voiceParam->getInteger(champ_modEnvToFilterFc);
@@ -198,11 +211,16 @@ void Voice::generateData(float * data, uint32_t len)
         int32_t v_fineTune = _voiceParam->getInteger(champ_fineTune);
         int32_t v_coarseTune = _voiceParam->getInteger(champ_coarseTune);
         float temperamentFineTune = _voiceParam->getKey() < 0 ? 0.0f : _context->getTemperamentFineTune(playedNote);
+        float pitchShift = (playedNote - v_rootkey) * v_scaleTune + (temperamentFineTune + static_cast<float>(v_fineTune)) + 100.0f * v_coarseTune;
         float deltaPitchFixed = -1731.234f /* -1200 / ln(2) */ *
                                     std::log(static_cast<double>(_audioSmplRate) * 4400.f / (_smplRate * _context->getReferencePitch())) +
-                                (playedNote - v_rootkey) * v_scaleTune + (temperamentFineTune + static_cast<float>(v_fineTune)) + 100.0f * v_coarseTune;
+                                pitchShift;
         if (_sincWindow == nullptr)
             _sincWindow = s_sinc_tables[whichSincTable(_sampleRootKey, deltaPitchFixed)];
+
+        // Exact ratio between the speed in the sample and the speed of the output, without the modulations
+        double fixedRatio = static_cast<double>(_smplRate) * _context->getReferencePitch() /
+                            (static_cast<double>(_audioSmplRate) * 4400.0) * std::exp2(pitchShift / 1200.0);
 
         // Loop
         uint32_t loopStart = _voiceParam->getPosition(champ_dwStartLoop);
@@ -215,15 +233,25 @@ void Voice::generateData(float * data, uint32_t len)
         // If v_filterQ is 0, inv_q_lin is sqrt(2)
         float inv_q_lin = FastMaths::fastPow10(-0.05f * (v_filterQ - 3.01f));
 
+        bool wasFinished = _isFinished;
         for (uint32_t chunk = 0; chunk < chunkCount; ++chunk)
         {
             uint32_t sampleStart = (chunk << COMPUTATION_CHUNK_SHIFT);
             float * pDataEnd = &data[sampleStart + COMPUTATION_CHUNK];
 
-            // Distance between the points
-            float currentDeltaPitch = deltaPitchFixed + v_modEnvToPitch * _dataModArray[chunk] + v_modLfoToPitch * _modLfoArray[chunk] + v_vibLfoToPitch * _vibLfoArray[chunk];
-            uint32_t fixedGap = static_cast<uint32_t>(
-                FastMaths::fastPow2(currentDeltaPitch * 0.000833333f /* 1:1200 */ + 11.0f /* multiply by 2048, which is 2^11 */) + 0.5f);
+            // End of the sample reached in the previous chunk: silent until the voice is removed, as if the chunks
+            // were computed one by one (otherwise the filter would ring with the following ones)
+            if (_isFinished && !wasFinished)
+            {
+                memset(&data[sampleStart], 0, (len - sampleStart) * sizeof(float));
+                break;
+            }
+
+            // Distance between the points, fixed point with 32 bits for the fraction
+            float pitchModulation = v_modEnvToPitch * _dataModArray[chunk] + v_modLfoToPitch * _modLfoArray[chunk] + v_vibLfoToPitch * _vibLfoArray[chunk];
+            double ratio = pitchModulation == 0.0f ? fixedRatio :
+                               fixedRatio * FastMaths::fastPow2(pitchModulation * 0.000833333f /* 1:1200 */);
+            uint64_t fixedGap = static_cast<uint64_t>(ratio * 4294967296.0 /* 2^32 */ + 0.5);
 
             // Resampling (sinc interpolation)
             int16_t * srcData16 = &_dataSmpl16[_currentSmplPos];
@@ -237,24 +265,24 @@ resample_fast:
             while (true)
             {
                 _lastDistanceFraction += fixedGap;
-                if ((int32_t)(nextPosition = (_lastDistanceFraction >> 11)) > _moreAvailable)
+                if ((int32_t)(nextPosition = static_cast<uint32_t>(_lastDistanceFraction >> 32)) > _moreAvailable)
                 {
                     // Revert the last jump and update the current position
                     _lastDistanceFraction -= fixedGap;
-                    _currentSmplPos += (_lastDistanceFraction >> 11);
-                    _lastDistanceFraction &= 0x7FF;
+                    _currentSmplPos += static_cast<uint32_t>(_lastDistanceFraction >> 32);
+                    _lastDistanceFraction &= 0xFFFFFFFF;
                     goto resample_slow;
                 }
 
-                (*pData++) = FastMaths::multiply8(_sincWindow[(_lastDistanceFraction >> 3) & 0xFF], &srcData16[nextPosition], &srcData24[nextPosition]);
-                            // + FastMaths::multiply8(&_sincWindow[(_lastDistanceFraction >> 3) & 0xFF][8], &srcData16[nextPosition + 8], &srcData24[nextPosition + 8]);
+                (*pData++) = FastMaths::multiply8(_sincWindow[(_lastDistanceFraction >> 24) & 0xFF], &srcData16[nextPosition], &srcData24[nextPosition]);
+                            // + FastMaths::multiply8(&_sincWindow[(_lastDistanceFraction >> 24) & 0xFF][8], &srcData16[nextPosition + 8], &srcData24[nextPosition + 8]);
 
                 if (pData >= pDataEnd)
                 {
                     // Update the current position
                     _currentSmplPos += nextPosition;
                     _moreAvailable -= nextPosition;
-                    _lastDistanceFraction &= 0x7FF;
+                    _lastDistanceFraction &= 0xFFFFFFFF;
                     goto resample_end;
                 }
             }
@@ -264,10 +292,10 @@ resample_slow:
             while (true)
             {
                 _lastDistanceFraction += fixedGap;
-                (*this.*slowExtractFunction)(_lastDistanceFraction >> 11, loopStart, loopEnd, srcData16, srcData24);
-                _lastDistanceFraction &= 0x7FF;
-                (*pData++) = FastMaths::multiply8(_sincWindow[(_lastDistanceFraction >> 3) & 0xFF], srcData16, srcData24);
-                            // + FastMaths::multiply8(&_sincWindow[(_lastDistanceFraction >> 3) & 0xFF][8], &srcData16[8], &srcData24[8]);
+                (*this.*slowExtractFunction)(static_cast<uint32_t>(_lastDistanceFraction >> 32), loopStart, loopEnd, srcData16, srcData24);
+                _lastDistanceFraction &= 0xFFFFFFFF;
+                (*pData++) = FastMaths::multiply8(_sincWindow[(_lastDistanceFraction >> 24) & 0xFF], srcData16, srcData24);
+                            // + FastMaths::multiply8(&_sincWindow[(_lastDistanceFraction >> 24) & 0xFF][8], &srcData16[8], &srcData24[8]);
 
                 if (pData >= pDataEnd)
                     goto resample_end;
@@ -285,6 +313,10 @@ resample_end:
                                     _dataVolArray[chunk] *
                                     FastMaths::fastPow10(0.05f * v_modLfoToVolume * _modLfoArray[chunk])
                                 - _volumeCoeff) * COMPUTATION_CHUNK_INVERT;
+
+            // Silent chunk if the volume stays at 0 (delay of the envelope, end of the release)
+            if (_volumeCoeff != 0.0f || deltaCoeff != 0.0f)
+                isAudible = true;
 
             // Low-pass filter
             pData = &data[sampleStart];
@@ -341,6 +373,8 @@ resample_end:
             }
         }
     }
+
+    return isAudible;
 }
 
 void Voice::getData(uint32_t goOn, uint32_t loopStart, uint32_t loopEnd, int16_t * &srcData16, uint8_t * &srcData24)
@@ -433,7 +467,7 @@ void Voice::release(bool quick)
         // Stopped by an exclusive class => quick release
         _volEnvelope.quickRelease();
     }
-    else if (_voiceParam->getInteger(champ_sampleModes) == 2)
+    else if (_voiceParam->getCurrentInteger(champ_sampleModes) == 2) // Not the audio thread
     {
         // Start of a sample in the release mode
         _volEnvelope.quickAttack();

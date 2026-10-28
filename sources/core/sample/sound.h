@@ -43,6 +43,7 @@ public:
     QString getFileName() { return _fileName; }
     void getData(quint32 &sampleLength, qint16* &data16, quint8* &data24, bool forceReload, bool getCopy);
     QVector<float> getDataFloat(bool forceReload);
+    float getPeak(); // Largest absolute value of the data, 1 being the full scale
     quint32 getUInt32(AttributeType champ); // For everything but the pitch correction
     qint32 getInt32(AttributeType champ); // For the pitch correction
 
@@ -67,6 +68,7 @@ private:
     char* _rawData;
     quint32 _rawDataLength;
     SampleReader* _reader;
+    float _peak; // Negative if not computed for the current data
 
     void setData(qint16* data16, quint8* data24, quint32 length);
     void determineRootKey();

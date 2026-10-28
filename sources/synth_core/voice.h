@@ -52,6 +52,9 @@ public:
     // Get the parameter object, for setting or retrieving values
     VoiceParam * getParam() { return _voiceParam; }
 
+    // Allocate the arrays for computing up to chunkCount chunks at once (not in the audio thread)
+    void reserve(uint32_t chunkCount);
+
     void release(bool quick = false);
     void finish();
     bool isInRelease() { return _release || _loopMode == 2; }
@@ -59,8 +62,10 @@ public:
 
     void setGain(float gain);
 
-    // Generate data (pan, chorus and reverb not done)
-    void generateData(float *data, uint32_t len);
+    // Generate data (pan, chorus and reverb not done), len being a multiple of COMPUTATION_CHUNK
+    // within the reserved chunks
+    // Return false if the voice is silent: the data is then not written
+    bool generateData(float *data, uint32_t len);
 
     // Maths
     static void prepareTables();
@@ -78,6 +83,7 @@ private:
     uint8_t * _dataSmpl24;
     uint32_t _dataSmplLength;
     uint32_t _smplRate, _audioSmplRate;
+    float _smplPeak;
     float _audioSmplRateInv;
     float _gain;
     VoiceParam * _voiceParam;
@@ -95,7 +101,7 @@ private:
     // Saved state for resampling
     int16_t _srcData16[RESAMPLING_ORDER];
     uint8_t _srcData24[RESAMPLING_ORDER];
-    uint32_t _lastDistanceFraction;
+    uint64_t _lastDistanceFraction; // Fixed point, 32 bits for the fraction
     int32_t _moreAvailable;
 
     // Save state for the low pass filter
@@ -111,9 +117,10 @@ private:
     float * _modLfoArray;
     float * _vibLfoArray;
 
-    static float s_sinc_tables[8][RESAMPLING_SUBDIVISION][RESAMPLING_ORDER];
+    alignas(32) static float s_sinc_tables[8][RESAMPLING_SUBDIVISION][RESAMPLING_ORDER]; // Aligned for multiply8
     static float s_floatConversionCoef24;
 
+    void deleteArrays();
     void getData(uint32_t goOn, uint32_t loopStart, uint32_t loopEnd, int16_t * &srcData16, uint8_t * &srcData24);
     void getDataWithLoop(uint32_t goOn, uint32_t loopStart, uint32_t loopEnd, int16_t * &srcData16, uint8_t * &srcData24);
     bool biQuadCoefficients(float *coeffs, float freq, float inv_Q);

@@ -34,7 +34,8 @@ Sound::Sound() :
     _data24(nullptr),
     _rawData(nullptr),
     _rawDataLength(0),
-    _reader(nullptr)
+    _reader(nullptr),
+    _peak(-1.0f)
 {}
 
 Sound::~Sound()
@@ -117,6 +118,29 @@ void Sound::getData(quint32 &sampleLength, qint16* &data16, quint8* &data24, boo
         data24 = _data24;
 }
 
+float Sound::getPeak()
+{
+    // Computed once for the current data
+    if (_peak < 0.0f)
+    {
+        loadSample();
+        qint32 max = 0;
+        if (_data16 != nullptr)
+        {
+            for (quint32 i = 0; i < _info.dwLength; i++)
+            {
+                qint32 value = static_cast<qint32>(_data16[i]) * 256 + (_data24 == nullptr ? 0 : _data24[i]);
+                if (value < 0)
+                    value = -value;
+                if (value > max)
+                    max = value;
+            }
+        }
+        _peak = static_cast<float>(max) / 8388608.0f;
+    }
+    return _peak;
+}
+
 QVector<float> Sound::getDataFloat(bool forceReload)
 {
     quint32 sampleLength;
@@ -195,6 +219,7 @@ void Sound::setData(qint16* data16, quint8* data24, quint32 length)
     // Delete possible existing raw data since there are now obsolete
     delete [] _rawData;
     _rawData = nullptr;
+    _peak = -1.0f;
 
     if (_data16 != nullptr && length == _info.dwLength)
     {
@@ -416,6 +441,7 @@ void Sound::loadSample(bool forceReload)
         if (_info.rawDataAvailable && _rawData == nullptr)
             _reader->getRawData(_rawData, _rawDataLength);
         _reader->getData(_data16, _data24, _rawData, _rawDataLength);
+        _peak = -1.0f;
     }
 }
 
@@ -444,6 +470,7 @@ void Sound::setRawData(const char * rawData, quint32 rawDataLength)
     memcpy(_rawData, rawData, rawDataLength);
     _rawDataLength = rawDataLength;
     _info.rawDataAvailable = true;
+    _peak = -1.0f;
 }
 
 void Sound::copyDataFrom(Sound * sourceSound)
@@ -471,4 +498,5 @@ void Sound::copyDataFrom(Sound * sourceSound)
     quint32 sampleLength;
     sourceSound->getData(sampleLength, _data16, _data24, false, true);
     _info.dwLength = sampleLength;
+    _peak = -1.0f;
 }

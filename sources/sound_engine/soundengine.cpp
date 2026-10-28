@@ -48,6 +48,9 @@ SoundEngine::~SoundEngine()
 
 void SoundEngine::start()
 {
+    // Thread dedicated to the computation of the voices
+    DenormalsDisabled denormalsDisabled;
+
     // Generate and copy data into the buffer after each reading
     while (true)
     {

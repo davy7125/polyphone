@@ -1,0 +1,38 @@
+# soundfont: FluidR3_GM.sf2
+# Reference of the block sizes (block_size_*): the synth computes chunks of 64 frames whatever the size of the
+# blocks asked, an event being heard from the next chunk computed. The events are at multiples of 59200 frames
+# (1.2333 s at 48 kHz), a multiple of 37, 64, 100 and 7400: they start a chunk for each block size. No chorus,
+# whose modulation depends on the size of the first block of silence.
+block 64
+samplerate 48000
+duration 4
+reverb 40 70 80 30
+
+0     program 0 0 48
+0     program 1 0 0
+0     program 9 128 0
+
+# Strings with a vibrato, piano chord, drums
+0     cc 0 1 64
+0     cc 0 91 100
+0     on 0 55 100
+0     on 0 62 100
+0     on 1 60 90
+0     on 1 64 90
+0     on 1 67 90
+0     on 9 36 110
+0     on 9 42 100
+
+# Expression, bend and releases
+1.2333333333  cc 0 11 70
+1.2333333333  bend 0 0.3
+1.2333333333  off 1 60
+1.2333333333  off 1 64
+1.2333333333  off 1 67
+1.2333333333  on 9 38 120
+1.2333333333  on 1 72 100
+
+# End of the strings and of the last piano note
+2.4666666667  off 0 55
+2.4666666667  off 0 62
+2.4666666667  off 1 72

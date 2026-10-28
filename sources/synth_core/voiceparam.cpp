@@ -29,6 +29,7 @@
 
 VoiceParam::VoiceParam(const VoiceContext * context) :
     _context(context),
+    _version(1), // The parameters have no value in cache (version 0)
     _modulatorGroupInst(_parameters, false, context),
     _modulatorGroupPrst(_parameters, true, context)
 {
@@ -268,6 +269,7 @@ void VoiceParam::setPan(float val)
     AttributeValue value;
     value.shValue = static_cast<int16_t>(SynthMath::round(val * 10.));
     _parameters[champ_pan].initValue(value, false);
+    _version.fetch_add(1, std::memory_order_release);
 }
 
 void VoiceParam::setLoopMode(uint16_t val)
@@ -275,6 +277,7 @@ void VoiceParam::setLoopMode(uint16_t val)
     AttributeValue value;
     value.wValue = val;
     _parameters[champ_sampleModes].initValue(value, false);
+    _version.fetch_add(1, std::memory_order_release);
 }
 
 void VoiceParam::setLoopStart(uint32_t val)
@@ -292,16 +295,14 @@ void VoiceParam::setFineTune(int16_t val)
     _sampleFineTune = val;
 }
 
-float VoiceParam::getFloat(AttributeType type)
+float VoiceParam::getCurrentFloat(AttributeType type)
 {
     return _parameters[type].getRealValue();
 }
 
-int32_t VoiceParam::getInteger(AttributeType type)
+int32_t VoiceParam::getCurrentInteger(AttributeType type)
 {
-    // Notes:
-    // * if fineTune is required: add the finetune from the sample level
-    // * if wPreset is required, it will be stored in a special variable
+    // Same notes as getInteger
     if (type == champ_wPreset)
         return _wPresetNumber;
     return (type == champ_fineTune ? _sampleFineTune : 0) + _parameters[type].getIntValue();
@@ -310,12 +311,13 @@ int32_t VoiceParam::getInteger(AttributeType type)
 uint32_t VoiceParam::getPosition(AttributeType type)
 {
     uint32_t result = 0;
+    uint32_t version = _version.load(std::memory_order_acquire);
 
     switch (type)
     {
     case champ_dwStart16: { // Used here for computing the beginning
-        int32_t offset = _parameters[champ_startAddrsOffset].getIntValue() +
-                32768 * _parameters[champ_startAddrsCoarseOffset].getIntValue();
+        int32_t offset = _parameters[champ_startAddrsOffset].getIntValue(version) +
+                32768 * _parameters[champ_startAddrsCoarseOffset].getIntValue(version);
         if (offset < 0)
             result = 0;
         else
@@ -327,8 +329,8 @@ uint32_t VoiceParam::getPosition(AttributeType type)
         }
     } break;
     case champ_dwLength: {
-        int32_t offset = _parameters[champ_endAddrsOffset].getIntValue() +
-                32768 * _parameters[champ_endAddrsCoarseOffset].getIntValue();
+        int32_t offset = _parameters[champ_endAddrsOffset].getIntValue(version) +
+                32768 * _parameters[champ_endAddrsCoarseOffset].getIntValue(version);
         if (_sampleLength + offset < 0)
             result = 0;
         else if (offset > 0)
@@ -337,8 +339,8 @@ uint32_t VoiceParam::getPosition(AttributeType type)
             result = static_cast<uint32_t>(_sampleLength + offset);
     } break;
     case champ_dwStartLoop: {
-        int32_t offset = _parameters[champ_startloopAddrsOffset].getIntValue() +
-                32768 * _parameters[champ_startloopAddrsCoarseOffset].getIntValue();
+        int32_t offset = _parameters[champ_startloopAddrsOffset].getIntValue(version) +
+                32768 * _parameters[champ_startloopAddrsCoarseOffset].getIntValue(version);
         if (_sampleLoopStart + offset < 0)
             result = 0;
         else
@@ -350,8 +352,8 @@ uint32_t VoiceParam::getPosition(AttributeType type)
         }
     } break;
     case champ_dwEndLoop: {
-        int32_t offset = _parameters[champ_endloopAddrsOffset].getIntValue() +
-                32768 * _parameters[champ_endloopAddrsCoarseOffset].getIntValue();
+        int32_t offset = _parameters[champ_endloopAddrsOffset].getIntValue(version) +
+                32768 * _parameters[champ_endloopAddrsCoarseOffset].getIntValue(version);
         if (_sampleLoopEnd + offset < 0)
             result = 0;
         else
@@ -378,6 +380,9 @@ void VoiceParam::computeModulations()
     // Process modulators
     _modulatorGroupInst.process();
     _modulatorGroupPrst.process();
+
+    // The values are computed again by the thread computing the voice
+    _version.fetch_add(1, std::memory_order_release);
 }
 
 void VoiceParam::processPolyPressureChanged(int pressure)

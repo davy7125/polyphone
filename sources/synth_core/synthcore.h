@@ -33,8 +33,7 @@
 #include "imidivalues.h"
 #include "voicecontext.h"
 #include "synthcoreconfig.h"
-#include "stk/FreeVerb.h"
-#include "stk/Chorus.h"
+#include "syntheffects.h"
 
 // Soundfont synthesizer without dependency: it plays the soundfonts given by ISynthSoundfonts
 // The editor adds the multi-threaded computation, the effects for the samples and the recording (Synth)
@@ -86,13 +85,18 @@ public:
     void processBendChanged(int channel, float value);
     void processRPNChanged(int channel, int parameter, int value, bool isRegistered, int trigger);
 
-    // Compute len frames in the calling thread: voices, effects and clipping
-    // For now len must be a multiple of COMPUTATION_CHUNK: otherwise the data is silent and false is returned
-    bool render(float * dataL, float * dataR, uint32_t len);
+    // Maximum number of frames computed at once, for allocating the buffers (not by the audio thread)
+    // The default is DEFAULT_MAX_BLOCK_SIZE, render accepts more but computes them in several times
+    void setMaxBlockSize(uint32_t maxBlockSize);
+
+    // Compute len frames in the calling thread, any length: voices, effects and clipping
+    // The voices are computed by whole chunks (COMPUTATION_CHUNK): the frames computed and not asked are returned
+    // first by the next call, and an event (note, controller...) is heard from the next chunk computed
+    void render(float * dataL, float * dataR, uint32_t len);
 
     // For a computation of the voices by several threads (editor)
     VoiceList * getVoiceList() { return &_voices; }
-    void applyEffects(float * dataL, float * dataR, SynthBuses &buses, uint32_t len);
+    void applyEffects(float * dataL, float * dataR, SynthBuses &buses, uint32_t len); // Aligned as the buses, whole chunks
 
 private:
     void playPrst(int sf2Id, ISynthSoundfont * soundfont, ISynthInstPrst * prst, int channel, int key, int velocity);
@@ -103,6 +107,7 @@ private:
                  ISynthInstPrst * prst = nullptr, ISynthZone * prstZone = nullptr);
     void configureVoice(Voice * voice);
     void configureVoices();
+    void renderChunks(uint32_t len);
 
     // Soundfonts
     ISynthSoundfonts * _soundfonts;
@@ -122,9 +127,14 @@ private:
     SynthBuses _buses;
     std::atomic<int> _sampleVoiceTokenCounter;
 
+    // Result of the last chunks computed, aligned as the buses
+    float * _outputL, * _outputR;
+    uint32_t _outputPosition;  // First frame not returned
+    uint32_t _outputAvailable; // Frames not returned
+
     // Effects
-    stk::FreeVerb _reverb;
-    stk::Chorus _chorusRevL, _chorusRevR, _chorusL, _chorusR;
+    SynthReverb _reverb;
+    SynthChorus _chorusRevL, _chorusRevR, _chorusL, _chorusR;
     std::atomic<int> _effectsInUse;
 };
 

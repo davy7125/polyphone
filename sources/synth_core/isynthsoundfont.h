@@ -42,6 +42,10 @@ public:
     /// If getCopy is true, the arrays are copies that the caller deletes
     virtual void getData(uint32_t &length, int16_t * &data16, uint8_t * &data24, bool getCopy) = 0;
 
+    /// Largest absolute value of the sample data, 1 being the full scale (for stopping the voices that cannot be
+    /// heard anymore): to compute once, and again only when the data changes
+    virtual float getPeak() = 0;
+
     virtual uint32_t getSampleRate() = 0;
     virtual uint32_t getLength() = 0;
     virtual uint32_t getLoopStart() = 0;

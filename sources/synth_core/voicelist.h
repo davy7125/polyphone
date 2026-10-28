@@ -43,6 +43,9 @@ public:
     void setThreadCount(int threadCount) { _threadCount = threadCount; }
     void setMaxPolyphony(int maxPolyphony);
 
+    // Allocate the voices for computing up to chunkCount chunks at once (not in the audio thread)
+    void reserve(uint32_t chunkCount);
+
     // Prepare multiple voice and then add them, run by the MIDI or GUI thread
     Voice * getVoiceToPrepare();
     void addPreparedVoices();

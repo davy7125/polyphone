@@ -32,12 +32,23 @@
 #define VOICE_INDEX_MASK 0x7FF
 
 // In voice.h
-#define INITIAL_ARRAY_LENGTH 256
-#define COMPUTATION_CHUNK 256
-#define COMPUTATION_CHUNK_SHIFT 8
-#define COMPUTATION_CHUNK_INVERT 0.00390625
+#define COMPUTATION_CHUNK 64
+#define COMPUTATION_CHUNK_SHIFT 6
+#define COMPUTATION_CHUNK_INVERT 0.015625
 #define RESAMPLING_ORDER 8
 #define RESAMPLING_SUBDIVISION 256
+#define NOISE_FLOOR 0.000001f // -120 dBFS: a voice in its release is stopped under this amplitude
+
+// In synthcore.h: frames computed at once if no other maximum is given (setMaxBlockSize)
+#define DEFAULT_MAX_BLOCK_SIZE 4096
+
+// In syntheffects.h: the reverb stops after a silent input and an output under -140 dBFS during more frames than its
+// longest delays (also at 192 kHz)
+#define REVERB_IDLE_LEVEL 0.0000001f
+#define REVERB_IDLE_LENGTH 16384
+
+// In fastmaths.h: alignment of the buffers, in bytes
+#define BUFFER_ALIGNMENT 64
 
 // In voicelist.h
 #define MIN_POLYPHONY 16

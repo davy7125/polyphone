@@ -46,16 +46,6 @@
      </item>
      <item>
       <property name="text">
-       <string notr="true">16</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string notr="true">32</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
        <string notr="true">64</string>
       </property>
      </item>

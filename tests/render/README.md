@@ -73,7 +73,7 @@ a setting or an event, `#` starts a comment.
 | Setting | Meaning | Default |
 |---|---|---|
 | `samplerate <Hz>` | sample rate of the rendering | 48000 |
-| `block <frames>` | size of the blocks computed by the synth, a multiple of 256 | 256 |
+| `block <frames>` | size of the blocks asked to the synth, from 1 to 8192 | 256 |
 | `duration <s>` | length of the rendering | mandatory |
 | `gain <dB>` | master gain | 0 |
 | `tuning <Hz>` | reference pitch | 440 |
@@ -111,19 +111,24 @@ samples and zones are their order in the soundfont, from 0.
   6 and 38), bank select (controller 0, then program change). `SynthMidi` then plays the preset of
   each channel with the core, a small listener does it with the synth of the editor. The instruments
   and samples played alone are actions of the editor and go directly to the synth.
-- An event is applied at the start of the block that contains its time (blocks of 256 frames, 5.3 ms
-  at 48 kHz). The voices compute their envelopes and LFOs by chunks of 256 frames
-  (`COMPUTATION_CHUNK`, `Voice::generateData`) and only write whole chunks: the rest of a buffer
-  whose size is not a multiple of 256 keeps the data of the previous voice computed by the same
-  thread (a buffer under 256 frames is never written). The application asks 256 or 512 frames, but
-  a plugin host can ask any size, which the synth will have to handle: until then
-  `SynthCore::render` returns silence and false for such a size.
-- `SynthCore::render` computes the block asked in the calling thread. The synth of the editor
-  returns the data computed by its threads since its previous call and, in real time, skips the
-  voices that were not computed in time. Offline, `Synth::waitForComputation()` waits for every
-  voice before the data is read, and the first block is skipped so that an event at 0 s is heard at
-  0 s. The effects of the synth of the editor process this first block of silence: the core renders
-  one too before the events, otherwise the modulation of the chorus would start with another phase.
+- The synth computes chunks of 64 frames (`COMPUTATION_CHUNK`, 1.3 ms at 48 kHz): the voices compute
+  their envelopes and LFOs once per chunk (`Voice::generateData`). A block of any size can be asked:
+  when everything computed has been returned, the synth computes the chunks covering the rest of the
+  block at once (as FluidSynth does), and the frames of the last chunk not asked are returned first
+  by the next call (always less than a chunk). An event is processed at the start of the block that
+  contains its time and heard from the next chunk computed: from the start of the block if its size
+  is a multiple of 64.
+- `SynthCore::render` computes in the calling thread. The synth of the editor returns the data
+  computed by its threads since its previous call (the chunks that will be missing for a next call of
+  the same length) and, in real time, skips the voices that were not computed in time. Offline,
+  `Synth::waitForComputation()` waits for every voice before the data is read, and the first block is
+  skipped so that an event at 0 s is heard at 0 s. The effects of the synth of the editor process this
+  first block of silence: the core renders one too before the events, otherwise the modulation of the
+  chorus would start with another phase. This first block is made of whole chunks.
+- The `block_size_*` cases must sound like `block_size` (blocks of 64 frames) with blocks of 37, 100
+  and 7400 frames: their events are at multiples of 59200 frames, the start of a chunk and of a block
+  for each size. The voices are summed in another order when the synth computes several chunks at
+  once (rounding errors, about -140 dBFS).
 - With `two_cores`, a second synth core plays the same events in the same thread, with another
   reference pitch (415 Hz), a temperament, the velocity to filter cutoff of the version 2.01 and other
   values of the controllers (vibrato and volume). It is computed between the events and the

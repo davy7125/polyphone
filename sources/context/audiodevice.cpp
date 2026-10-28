@@ -255,6 +255,11 @@ void AudioDevice::initAudio()
             break;
         }
     }
+    else if (bufferSize < COMPUTATION_CHUNK)
+    {
+        // Smaller sizes (no longer proposed) would compute a chunk once every several calls
+        bufferSize = COMPUTATION_CHUNK;
+    }
 
     // Instantiate an RtAudio object with the selected api
     try {

@@ -28,7 +28,10 @@
 
 ModulatedParameter::ModulatedParameter() :
     _type(champ_unknown),
-    _notRealTime(true)
+    _notRealTime(true),
+    _cacheVersion(0), // The versions of VoiceParam start at 1
+    _cachedIntValue(0),
+    _cachedRealValue(0)
 {}
 
 void ModulatedParameter::setType(AttributeType type)
@@ -110,6 +113,13 @@ float ModulatedParameter::getRealValue()
 
     // Return a possibly converted value
     return AttributeBase(_type, false, _computedValue).getRealValue();
+}
+
+void ModulatedParameter::updateCache(uint32_t version)
+{
+    _cachedIntValue = getIntValue();
+    _cachedRealValue = getRealValue();
+    _cacheVersion = version;
 }
 
 void ModulatedParameter::computeValue()

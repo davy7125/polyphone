@@ -26,6 +26,7 @@
 #include <cstring>
 #include "voice.h"
 #include "fastmaths.h"
+#include "synthmath.h"
 
 SynthBuses::SynthBuses() :
     dataL(nullptr),
@@ -47,33 +48,35 @@ SynthBuses::~SynthBuses()
 
 void SynthBuses::deleteBuffers()
 {
-    delete [] dataL;
-    delete [] dataR;
-    delete [] dataRevL;
-    delete [] dataRevR;
-    delete [] dataChoL;
-    delete [] dataChoR;
-    delete [] dataChoRevL;
-    delete [] dataChoRevR;
-    delete [] _voiceData;
+    FastMaths::deleteAlignedBuffer(dataL);
+    FastMaths::deleteAlignedBuffer(dataR);
+    FastMaths::deleteAlignedBuffer(dataRevL);
+    FastMaths::deleteAlignedBuffer(dataRevR);
+    FastMaths::deleteAlignedBuffer(dataChoL);
+    FastMaths::deleteAlignedBuffer(dataChoR);
+    FastMaths::deleteAlignedBuffer(dataChoRevL);
+    FastMaths::deleteAlignedBuffer(dataChoRevR);
+    FastMaths::deleteAlignedBuffer(_voiceData);
 }
 
 void SynthBuses::reserve(uint32_t len)
 {
+    // The voices compute whole chunks
+    len = SynthMath::roundToChunks(len);
     if (len <= _capacity)
         return;
 
     deleteBuffers();
     _capacity = len;
-    dataL = new float[len];
-    dataR = new float[len];
-    dataRevL = new float[len];
-    dataRevR = new float[len];
-    dataChoL = new float[len];
-    dataChoR = new float[len];
-    dataChoRevL = new float[len];
-    dataChoRevR = new float[len];
-    _voiceData = new float[len];
+    dataL = FastMaths::newAlignedBuffer(len);
+    dataR = FastMaths::newAlignedBuffer(len);
+    dataRevL = FastMaths::newAlignedBuffer(len);
+    dataRevR = FastMaths::newAlignedBuffer(len);
+    dataChoL = FastMaths::newAlignedBuffer(len);
+    dataChoR = FastMaths::newAlignedBuffer(len);
+    dataChoRevL = FastMaths::newAlignedBuffer(len);
+    dataChoRevR = FastMaths::newAlignedBuffer(len);
+    _voiceData = FastMaths::newAlignedBuffer(len);
     clear(len);
     memset(_voiceData, 0, len * sizeof(float));
 }
@@ -90,10 +93,23 @@ void SynthBuses::clear(uint32_t len)
     memset(dataChoRevR, 0, len * sizeof(float));
 }
 
+// Mix the data of a voice in a bus, the first voice of a side overwriting it
+// Nothing is done with a coefficient of 0: the buses being cleared before, a bus not written stays at 0
+static void mixVoice(float * bus, const float * voiceData, uint32_t len, float coeff, bool initialized)
+{
+    if (coeff == 0.0f)
+        return;
+    if (initialized)
+        FastMaths::multiplyAdd(bus, voiceData, len, coeff);
+    else
+        FastMaths::multiply(bus, voiceData, len, coeff);
+}
+
 void SynthBuses::addVoice(Voice * voice, uint32_t len, bool &leftInitialized, bool &rightInitialized)
 {
-    // Get data
-    voice->generateData(_voiceData, len);
+    // Get data, nothing to mix if the voice is silent
+    if (!voice->generateData(_voiceData, len))
+        return;
 
     // Coeffs
     float tmp = 0.005f * (voice->getParam()->getFloat(champ_pan) + 50.f); // Between 0 and 1/2 for [0; PI/2]
@@ -109,41 +125,21 @@ void SynthBuses::addVoice(Voice * voice, uint32_t len, bool &leftInitialized, bo
     // Left
     if (coefL > 0.0f)
     {
-        if (leftInitialized)
-        {
-            FastMaths::multiplyAdd(dataL, _voiceData, len, coefL * coefNonRev * coefNonCho); // Left, no reverb, no chorus
-            FastMaths::multiplyAdd(dataRevL, _voiceData, len, coefL * coefRev * coefNonCho); // Left, reverb, no chorus
-            FastMaths::multiplyAdd(dataChoL, _voiceData, len, coefL * coefNonRev * coefCho); // Left, no reverb, chorus
-            FastMaths::multiplyAdd(dataChoRevL, _voiceData, len, coefL * coefRev * coefCho); // Left, reverb, chorus
-        }
-        else
-        {
-            leftInitialized = true;
-            FastMaths::multiply(dataL, _voiceData, len, coefL * coefNonRev * coefNonCho); // Left, no reverb, no chorus
-            FastMaths::multiply(dataRevL, _voiceData, len, coefL * coefRev * coefNonCho); // Left, reverb, no chorus
-            FastMaths::multiply(dataChoL, _voiceData, len, coefL * coefNonRev * coefCho); // Left, no reverb, chorus
-            FastMaths::multiply(dataChoRevL, _voiceData, len, coefL * coefRev * coefCho); // Left, reverb, chorus
-        }
+        mixVoice(dataL, _voiceData, len, coefL * coefNonRev * coefNonCho, leftInitialized); // Left, no reverb, no chorus
+        mixVoice(dataRevL, _voiceData, len, coefL * coefRev * coefNonCho, leftInitialized); // Left, reverb, no chorus
+        mixVoice(dataChoL, _voiceData, len, coefL * coefNonRev * coefCho, leftInitialized); // Left, no reverb, chorus
+        mixVoice(dataChoRevL, _voiceData, len, coefL * coefRev * coefCho, leftInitialized); // Left, reverb, chorus
+        leftInitialized = true;
     }
 
     // Right
     if (coefR > 0.0f)
     {
-        if (rightInitialized)
-        {
-            FastMaths::multiplyAdd(dataR, _voiceData, len, coefR * coefNonRev * coefNonCho); // Right, no reverb, no chorus
-            FastMaths::multiplyAdd(dataRevR, _voiceData, len, coefR * coefRev * coefNonCho); // Right, reverb, no chorus
-            FastMaths::multiplyAdd(dataChoR, _voiceData, len, coefR * coefNonRev * coefCho); // Right, no reverb, chorus
-            FastMaths::multiplyAdd(dataChoRevR, _voiceData, len, coefR * coefRev * coefCho); // Right, reverb, chorus
-        }
-        else
-        {
-            rightInitialized = true;
-            FastMaths::multiply(dataR, _voiceData, len, coefR * coefNonRev * coefNonCho); // Right, no reverb, no chorus
-            FastMaths::multiply(dataRevR, _voiceData, len, coefR * coefRev * coefNonCho); // Right, reverb, no chorus
-            FastMaths::multiply(dataChoR, _voiceData, len, coefR * coefNonRev * coefCho); // Right, no reverb, chorus
-            FastMaths::multiply(dataChoRevR, _voiceData, len, coefR * coefRev * coefCho); // Right, reverb, chorus
-        }
+        mixVoice(dataR, _voiceData, len, coefR * coefNonRev * coefNonCho, rightInitialized); // Right, no reverb, no chorus
+        mixVoice(dataRevR, _voiceData, len, coefR * coefRev * coefNonCho, rightInitialized); // Right, reverb, no chorus
+        mixVoice(dataChoR, _voiceData, len, coefR * coefNonRev * coefCho, rightInitialized); // Right, no reverb, chorus
+        mixVoice(dataChoRevR, _voiceData, len, coefR * coefRev * coefCho, rightInitialized); // Right, reverb, chorus
+        rightInitialized = true;
     }
 }
 

@@ -32,13 +32,13 @@ class OscTriangle
 public:
     OscTriangle() {}
 
-    void initialize(uint32_t sampleRate);
+    void initialize(float sampleRate);
 
     // Freq in Hz, delay in s
     void getData(float * data, uint32_t chunkCount, float freq, float delay);
 
 private:
-    uint32_t _sampleRate;
+    float _sampleRate;
     float _fourInvSampleRate;
     float _previousFreq;
     uint32_t _currentDelay;

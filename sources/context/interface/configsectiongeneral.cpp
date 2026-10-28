@@ -106,15 +106,14 @@ void ConfigSectionGeneral::initializeAudio()
     int bufferSize = ContextManager::configuration()->getValue(ConfManager::SECTION_AUDIO, "buffer_size", 0).toInt();
     switch (bufferSize)
     {
-    case 16: ui->comboBufferSize->setCurrentIndex(1); break;
-    case 32: ui->comboBufferSize->setCurrentIndex(2); break;
-    case 64: ui->comboBufferSize->setCurrentIndex(3); break;
-    case 128: ui->comboBufferSize->setCurrentIndex(4); break;
-    case 256: ui->comboBufferSize->setCurrentIndex(5); break;
-    case 512: ui->comboBufferSize->setCurrentIndex(6); break;
-    case 1024: ui->comboBufferSize->setCurrentIndex(7); break;
-    case 2048: ui->comboBufferSize->setCurrentIndex(8); break;
-    case 4096: ui->comboBufferSize->setCurrentIndex(9); break;
+    case 16: case 32: // No longer proposed, 64 is used (see AudioDevice)
+    case 64: ui->comboBufferSize->setCurrentIndex(1); break;
+    case 128: ui->comboBufferSize->setCurrentIndex(2); break;
+    case 256: ui->comboBufferSize->setCurrentIndex(3); break;
+    case 512: ui->comboBufferSize->setCurrentIndex(4); break;
+    case 1024: ui->comboBufferSize->setCurrentIndex(5); break;
+    case 2048: ui->comboBufferSize->setCurrentIndex(6); break;
+    case 4096: ui->comboBufferSize->setCurrentIndex(7); break;
     case 0: default: ui->comboBufferSize->setCurrentIndex(0); break;
     }
 
@@ -133,15 +132,13 @@ void ConfigSectionGeneral::on_comboBufferSize_currentIndexChanged(int index)
     int bufferSize = 0;
     switch (index)
     {
-    case 1: bufferSize = 16; break;
-    case 2: bufferSize = 32; break;
-    case 3: bufferSize = 64; break;
-    case 4: bufferSize = 128; break;
-    case 5: bufferSize = 256; break;
-    case 6: bufferSize = 512; break;
-    case 7: bufferSize = 1024; break;
-    case 8: bufferSize = 2048; break;
-    case 9: bufferSize = 4096; break;
+    case 1: bufferSize = 64; break;
+    case 2: bufferSize = 128; break;
+    case 3: bufferSize = 256; break;
+    case 4: bufferSize = 512; break;
+    case 5: bufferSize = 1024; break;
+    case 6: bufferSize = 2048; break;
+    case 7: bufferSize = 4096; break;
     case 0: default: break;
     }
 

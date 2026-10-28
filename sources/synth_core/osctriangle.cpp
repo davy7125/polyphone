@@ -26,10 +26,10 @@
 #include <string.h>
 #include "synthmath.h"
 
-void OscTriangle::initialize(uint32_t sampleRate)
+void OscTriangle::initialize(float sampleRate)
 {
     _sampleRate = sampleRate;
-    _fourInvSampleRate = _sampleRate > 0 ? 4.0f / static_cast<float>(_sampleRate) : 0.0f;
+    _fourInvSampleRate = _sampleRate > 0 ? 4.0f / _sampleRate : 0.0f;
     _previousFreq = -1.0f;
     _currentDelay = 0;
     _delayEnded = false;

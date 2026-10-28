@@ -48,8 +48,24 @@ public:
     int32_t getIntValue();
     float getRealValue();
 
+    // Same values, computed again only if the version of the parameters changed since the last call
+    // (VoiceParam increments it after each change), for the thread computing the voice
+    int32_t getIntValue(uint32_t version)
+    {
+        if (version != _cacheVersion)
+            updateCache(version);
+        return _cachedIntValue;
+    }
+    float getRealValue(uint32_t version)
+    {
+        if (version != _cacheVersion)
+            updateCache(version);
+        return _cachedRealValue;
+    }
+
 private:
     void computeValue();
+    void updateCache(uint32_t version);
 
     AttributeType _type;
     AttributeBase _instValue, _prstValue;
@@ -58,6 +74,11 @@ private:
     bool _notRealTime;
     bool _computed;
     AttributeValue _computedValue;
+
+    // Values for a version of the parameters
+    uint32_t _cacheVersion;
+    int32_t _cachedIntValue;
+    float _cachedRealValue;
 };
 
 #endif // MODULATEDPARAMETER_H

@@ -37,12 +37,13 @@
 #include "synthcore.h"
 #include "midiprocessor.h"
 #include "synthmidi.h"
+#include "synthmath.h"
 #include "basetypes.h"
 
 OfflineRenderer::OfflineRenderer() :
     _midiProcessor(new MidiProcessor()),
     _sampleRate(48000),
-    _blockSize(COMPUTATION_CHUNK),
+    _blockSize(256),
     _duration(0),
     _masterGain(0),
     _referencePitch(4400),
@@ -134,14 +135,9 @@ bool OfflineRenderer::readSetting(QStringList words, int line)
     }
     else if (name == "block" && words.count() == 1)
     {
-        // The voices compute their envelopes by chunks, a remainder would be silent
-        if (!readInt(words[0], COMPUTATION_CHUNK, 16 * COMPUTATION_CHUNK, value, line))
+        // Any size: the synth computes whole chunks and returns their remainder in the next block
+        if (!readInt(words[0], 1, 8192, value, line))
             return false;
-        if (value % COMPUTATION_CHUNK != 0)
-        {
-            _error = QString("line %1: the block size must be a multiple of %2").arg(line).arg(COMPUTATION_CHUNK);
-            return false;
-        }
         _blockSize = static_cast<quint32>(value);
     }
     else if (name == "duration" && words.count() == 1)
@@ -555,6 +551,7 @@ bool OfflineRenderer::renderWithCore(int sf2Index, QVector<float> &data, quint32
     _midiProcessor->setListener(&synthMidi);
     core->configure(getSynthConfig());
     core->setSampleRate(_sampleRate);
+    core->setMaxBlockSize(_blockSize);
     core->setLoopEnabled(_sampleLoop);
     core->setStereo(_sampleStereo);
     core->setSampleGain(_sampleGain);
@@ -580,6 +577,7 @@ bool OfflineRenderer::renderWithCore(int sf2Index, QVector<float> &data, quint32
         otherMidiProcessor->setListener(otherSynthMidi);
         otherCore->configure(otherConfiguration);
         otherCore->setSampleRate(_sampleRate);
+        otherCore->setMaxBlockSize(_blockSize);
         otherCore->setLoopEnabled(_sampleLoop);
         otherCore->setStereo(_sampleStereo);
         otherCore->setSampleGain(_sampleGain);
@@ -592,15 +590,18 @@ bool OfflineRenderer::renderWithCore(int sf2Index, QVector<float> &data, quint32
 
     // The synth of the editor applies the effects on a first block of silence (skipped in renderWithThreads):
     // the same is done here so that the modulation of the chorus has the same phase
-    float * dataL = new float[_blockSize];
-    float * dataR = new float[_blockSize];
-    float * otherDataL = new float[_blockSize];
-    float * otherDataR = new float[_blockSize];
-    core->render(dataL, dataR, _blockSize);
+    // This block is made of whole chunks: nothing remains to be returned and the events at 0 s are heard at 0 s
+    quint32 firstBlockSize = SynthMath::roundToChunks(_blockSize);
+    float * dataL = new float[firstBlockSize];
+    float * dataR = new float[firstBlockSize];
+    float * otherDataL = new float[firstBlockSize];
+    float * otherDataR = new float[firstBlockSize];
+    core->render(dataL, dataR, firstBlockSize);
     if (otherCore != nullptr)
-        otherCore->render(otherDataL, otherDataR, _blockSize);
+        otherCore->render(otherDataL, otherDataR, firstBlockSize);
 
-    // The events of a block are heard from its beginning
+    // The events of a block are heard from the next chunk computed (from its beginning if the size of the blocks is
+    // a multiple of COMPUTATION_CHUNK)
     // The second synth is computed between the events and the computation of the first one
     int eventIndex = 0;
     int otherEventIndex = 0;
@@ -656,8 +657,10 @@ void OfflineRenderer::renderWithThreads(int sf2Index, QVector<float> &data, quin
 
     // Each call to readData returns what has been computed since the previous call: the events of a block
     // are heard in the next one, so the first block is skipped and one more block is computed
-    float * dataL = new float[_blockSize];
-    float * dataR = new float[_blockSize];
+    // The first block is made of whole chunks, as in renderWithCore
+    quint32 firstBlockSize = SynthMath::roundToChunks(_blockSize);
+    float * dataL = new float[firstBlockSize];
+    float * dataR = new float[firstBlockSize];
     int eventIndex = 0;
     for (quint32 block = 0; block <= blockCount; block++)
     {
@@ -665,7 +668,7 @@ void OfflineRenderer::renderWithThreads(int sf2Index, QVector<float> &data, quin
         synth->waitForComputation();
         processEvents(synth, _midiProcessor, sf2Index, static_cast<quint64>(block + 1) * _blockSize, eventIndex);
 
-        synth->readData(dataL, dataR, _blockSize);
+        synth->readData(dataL, dataR, block == 0 ? firstBlockSize : _blockSize);
         if (block > 0)
             storeBlock(data, block - 1, dataL, dataR);
     }

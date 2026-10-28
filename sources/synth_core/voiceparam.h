@@ -25,6 +25,7 @@
 #ifndef VOICEPARAM_H
 #define VOICEPARAM_H
 
+#include <atomic>
 #include "modulatorgroup.h"
 #include "modulatedparameter.h"
 #include "isynthsoundfont.h"
@@ -49,10 +50,27 @@ public:
     void setLoopEnd(uint32_t val);
     void setFineTune(int16_t val);
 
-    // Get a param
-    float getFloat(AttributeType type);
-    int32_t getInteger(AttributeType type);
+    // Get a param, by the thread computing the voice: the values are computed again only after a change of the
+    // parameters (initialization, setters, MIDI events)
+    float getFloat(AttributeType type)
+    {
+        return _parameters[type].getRealValue(_version.load(std::memory_order_acquire));
+    }
+    int32_t getInteger(AttributeType type)
+    {
+        // Notes:
+        // * if fineTune is required: add the finetune from the sample level
+        // * if wPreset is required, it will be stored in a special variable
+        if (type == champ_wPreset)
+            return _wPresetNumber;
+        return (type == champ_fineTune ? _sampleFineTune : 0) +
+               _parameters[type].getIntValue(_version.load(std::memory_order_acquire));
+    }
     uint32_t getPosition(AttributeType type);
+
+    // Same values always computed, by another thread
+    float getCurrentFloat(AttributeType type);
+    int32_t getCurrentInteger(AttributeType type);
 
     // Identification
     int8_t getChannel() { return _channel; }
@@ -82,6 +100,7 @@ private:
 
     // All parameters
     ModulatedParameter _parameters[champ_endOper];
+    std::atomic<uint32_t> _version; // Incremented after each change of the parameters
     ModulatorGroup _modulatorGroupInst, _modulatorGroupPrst;
     int32_t _sampleLength, _sampleLoopStart, _sampleLoopEnd, _sampleFineTune;
 

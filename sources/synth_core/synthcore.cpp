@@ -30,6 +30,7 @@
 #include "modulatordata.h"
 #include "voice.h"
 #include "fastmaths.h"
+#include "synthmath.h"
 
 // Value of an attribute in a zone, 0 if it is not set
 static AttributeValue getAttribute(ISynthZone * zone, AttributeType champ)
@@ -63,14 +64,38 @@ SynthCore::SynthCore(ISynthSoundfonts * soundfonts, ISynthListener * listener) :
     _smplIsStereoEnabled(false),
     _smplIsLoopEnabled(true),
     _sampleVoiceTokenCounter(0),
+    _outputL(nullptr),
+    _outputR(nullptr),
+    _outputPosition(0),
+    _outputAvailable(0),
     _effectsInUse(0)
 {
     _voices.initialize(listener, &_context);
+    setMaxBlockSize(DEFAULT_MAX_BLOCK_SIZE);
 }
 
 SynthCore::~SynthCore()
 {
+    FastMaths::deleteAlignedBuffer(_outputL);
+    FastMaths::deleteAlignedBuffer(_outputR);
+}
 
+void SynthCore::setMaxBlockSize(uint32_t maxBlockSize)
+{
+    uint32_t previousCapacity = _buses.capacity();
+    _buses.reserve(maxBlockSize);
+    if (_buses.capacity() == previousCapacity)
+        return;
+
+    _voices.reserve(_buses.capacity() >> COMPUTATION_CHUNK_SHIFT);
+
+    // The frames not returned yet are lost
+    FastMaths::deleteAlignedBuffer(_outputL);
+    FastMaths::deleteAlignedBuffer(_outputR);
+    _outputL = FastMaths::newAlignedBuffer(_buses.capacity());
+    _outputR = FastMaths::newAlignedBuffer(_buses.capacity());
+    _outputPosition = 0;
+    _outputAvailable = 0;
 }
 
 void SynthCore::prepareTables()
@@ -243,7 +268,7 @@ void SynthCore::configureVoice(Voice * voice)
         // Sample triggered from the sample level
         voiceParam->setLoopMode(_smplIsLoopEnabled ? 1 : 0);
 
-        float pan = voiceParam->getFloat(champ_pan);
+        float pan = voiceParam->getCurrentFloat(champ_pan); // Possibly not the audio thread
         if (_smplIsStereoEnabled)
         {
             if (pan < 0)
@@ -367,8 +392,9 @@ void SynthCore::setSampleRate(uint32_t sampleRate)
     // Mutex not mandatory: no data generation when the sample rate changes
     _sampleRate = sampleRate;
 
-    // Reset
+    // Reset, the frames computed with the previous sample rate are not returned
     this->stop(true, true);
+    _outputAvailable = 0;
 
     // Sample rate update
     stk::Chorus::setSampleRate(sampleRate);
@@ -527,17 +553,34 @@ void SynthCore::processRPNChanged(int channel, int parameter, int value, bool is
     }
 }
 
-bool SynthCore::render(float * dataL, float * dataR, uint32_t len)
+void SynthCore::render(float * dataL, float * dataR, uint32_t len)
 {
-    // The voices only compute whole chunks
-    if (len % COMPUTATION_CHUNK != 0)
+    DenormalsDisabled denormalsDisabled;
+    while (len > 0)
     {
-        memset(dataL, 0, len * sizeof(float));
-        memset(dataR, 0, len * sizeof(float));
-        return false;
-    }
-    _buses.reserve(len);
+        // When everything has been returned, compute the chunks covering what remains (as for fluidsynth),
+        // as much as the buffers can contain: the frames not asked are always less than a chunk
+        if (_outputAvailable == 0)
+        {
+            uint32_t chunkLength = SynthMath::min(SynthMath::roundToChunks(len), _buses.capacity());
+            renderChunks(chunkLength);
+            _outputPosition = 0;
+            _outputAvailable = chunkLength;
+        }
 
+        uint32_t count = SynthMath::min(len, _outputAvailable);
+        memcpy(dataL, &_outputL[_outputPosition], count * sizeof(float));
+        memcpy(dataR, &_outputR[_outputPosition], count * sizeof(float));
+        dataL += count;
+        dataR += count;
+        len -= count;
+        _outputPosition += count;
+        _outputAvailable -= count;
+    }
+}
+
+void SynthCore::renderChunks(uint32_t len)
+{
     // Include the voices added and remove the voices that are finished
     _voices.prepareComputation();
 
@@ -550,10 +593,9 @@ bool SynthCore::render(float * dataL, float * dataR, uint32_t len)
         _buses.addVoice(voice, len, leftInitialized, rightInitialized);
 
     // Effects and clipping
-    applyEffects(dataL, dataR, _buses, len);
-    FastMaths::clamp(dataL, len);
-    FastMaths::clamp(dataR, len);
-    return true;
+    applyEffects(_outputL, _outputR, _buses, len);
+    FastMaths::clamp(_outputL, len);
+    FastMaths::clamp(_outputR, len);
 }
 
 void SynthCore::applyEffects(float * dataL, float * dataR, SynthBuses &buses, uint32_t len)
@@ -565,13 +607,15 @@ void SynthCore::applyEffects(float * dataL, float * dataR, SynthBuses &buses, ui
     bool lockAcquired = false;
     if (_chorusOn || _reverbOn)
         lockAcquired = testAndSetRelaxed(_effectsInUse, 0, 1);
+    // The effects are processed chunk by chunk: they decide for each one whether there is something to compute
     if (_chorusOn && lockAcquired)
     {
         // Apply chorus
-        for (uint32_t i = 0; i < len; i++)
-            dataL[i] = static_cast<float>(_chorusRevL.tick(static_cast<double>(dataL[i])));
-        for (uint32_t i = 0; i < len; i++)
-            dataR[i] = static_cast<float>(_chorusRevR.tick(static_cast<double>(dataR[i])));
+        for (uint32_t pos = 0; pos < len; pos += COMPUTATION_CHUNK)
+        {
+            _chorusRevL.process(&dataL[pos], COMPUTATION_CHUNK);
+            _chorusRevR.process(&dataR[pos], COMPUTATION_CHUNK);
+        }
     }
 
     // Add the data rev
@@ -581,21 +625,19 @@ void SynthCore::applyEffects(float * dataL, float * dataR, SynthBuses &buses, ui
     if (_reverbOn && lockAcquired)
     {
         // Apply reverb
-        for (uint32_t i = 0; i < len; i++)
-        {
-            dataL[i] = static_cast<float>(_reverb.tick(static_cast<double>(dataL[i]), static_cast<double>(dataR[i])));
-            dataR[i] = static_cast<float>(_reverb.lastOut(1));
-        }
+        for (uint32_t pos = 0; pos < len; pos += COMPUTATION_CHUNK)
+            _reverb.process(&dataL[pos], &dataR[pos], COMPUTATION_CHUNK);
     }
 
     // Add the data cho, process the effect first
     if (_chorusOn && lockAcquired)
     {
         // Apply chorus
-        for (uint32_t i = 0; i < len; i++)
-            buses.dataChoL[i] = static_cast<float>(_chorusL.tick(static_cast<double>(buses.dataChoL[i])));
-        for (uint32_t i = 0; i < len; i++)
-            buses.dataChoR[i] = static_cast<float>(_chorusR.tick(static_cast<double>(buses.dataChoR[i])));
+        for (uint32_t pos = 0; pos < len; pos += COMPUTATION_CHUNK)
+        {
+            _chorusL.process(&buses.dataChoL[pos], COMPUTATION_CHUNK);
+            _chorusR.process(&buses.dataChoR[pos], COMPUTATION_CHUNK);
+        }
     }
 
     if (lockAcquired)

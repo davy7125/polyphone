@@ -26,13 +26,20 @@
 #include "synth.h"
 #include <QThread>
 #include "fastmaths.h"
+#include "synthmath.h"
 
 Synth::Synth(ISynthSoundfonts * soundfonts, QRecursiveMutex * mutexSoundfonts) : QObject(nullptr),
     _mutexSoundfonts(mutexSoundfonts),
     _core(soundfonts, this),
     _soundEngines(nullptr),
     _soundEngineCount(0),
-    _bufferSize(0)
+    _bufferSize(0),
+    _preparedLength(0),
+    _outputL(nullptr),
+    _outputR(nullptr),
+    _outputCapacity(0),
+    _outputPosition(0),
+    _outputAvailable(0)
 {
     connect(&_recorder, SIGNAL(dataWritten(quint32,quint32)), this, SIGNAL(dataWritten(quint32,quint32)));
 }
@@ -40,6 +47,8 @@ Synth::Synth(ISynthSoundfonts * soundfonts, QRecursiveMutex * mutexSoundfonts) :
 Synth::~Synth()
 {
     destroySoundEngines();
+    FastMaths::deleteAlignedBuffer(_outputL);
+    FastMaths::deleteAlignedBuffer(_outputR);
 }
 
 void Synth::destroySoundEngines()
@@ -70,6 +79,18 @@ void Synth::createSoundEngines()
 {
     _recorder.setBufferSize(_bufferSize);
     _buses.reserve(_bufferSize);
+    _core.setMaxBlockSize(_bufferSize);
+
+    // Output: the frames not returned (less than a chunk if the length asked does not change) followed by the
+    // chunks computed, written at an aligned position
+    FastMaths::deleteAlignedBuffer(_outputL);
+    FastMaths::deleteAlignedBuffer(_outputR);
+    _outputCapacity = _buses.capacity() + COMPUTATION_CHUNK + BUFFER_ALIGNMENT / sizeof(float);
+    _outputL = FastMaths::newAlignedBuffer(_outputCapacity);
+    _outputR = FastMaths::newAlignedBuffer(_outputCapacity);
+    _outputPosition = 0;
+    _outputAvailable = 0;
+    _preparedLength = 0;
 
     _soundEngineCount = qMax(QThread::idealThreadCount() - 1, 1);
     _soundEngines = new SoundEngine * [_soundEngineCount];
@@ -87,9 +108,7 @@ void Synth::createSoundEngines()
     _core.getVoiceList()->setThreadCount(_soundEngineCount);
     SoundEngine::initialize(_core.getVoiceList());
 
-    // Start producing data
-    for (int i = 0; i < _soundEngineCount; i++)
-        _soundEngines[i]->prepareData(_bufferSize);
+    // The sound engines start computing at the first call of readData, which knows the length to prepare
 }
 
 int Synth::play(EltID id, int channel, int key, int velocity)
@@ -263,6 +282,7 @@ void Synth::setSampleRateAndBufferSize(quint32 sampleRate, quint32 bufferSize)
     _core.setSampleRate(sampleRate); // Voices are stopped
     _sinus.setSampleRate(sampleRate);
     _eq.setSampleRate(sampleRate);
+    _outputAvailable = 0; // Frames computed with the previous sample rate
 
     // Update buffer size
     bufferSize *= 2;
@@ -274,46 +294,108 @@ void Synth::setSampleRateAndBufferSize(quint32 sampleRate, quint32 bufferSize)
     }
 }
 
-void Synth::readData(float * dataL, float * dataR, quint32 maxlen)
+void Synth::readData(float * dataL, float * dataR, quint32 len)
 {
     if (_soundEngineCount == 0)
     {
-        memset(dataL, 0, maxlen * sizeof(float));
-        memset(dataR, 0, maxlen * sizeof(float));
+        memset(dataL, 0, len * sizeof(float));
+        memset(dataR, 0, len * sizeof(float));
         return;
     }
 
-    // No more voice processing (will not stop immediately)
+    DenormalsDisabled denormalsDisabled;
+
+    // Chunks computed by the sound engines since the previous call
     VoiceList * voices = _core.getVoiceList();
-    voices->endComputation();
-    for (int i = 0; i < _soundEngineCount; ++i)
-        _soundEngines[i]->endCurrentProcessing();
+    quint32 computedLength = _preparedLength;
+    if (computedLength > 0)
+    {
+        // No more voice processing (will not stop immediately)
+        voices->endComputation();
+        for (int i = 0; i < _soundEngineCount; ++i)
+            _soundEngines[i]->endCurrentProcessing();
 
-    // Get the data of all sound engines, even if they are still working
-    _soundEngines[0]->copyData(_buses, maxlen);
-    for (int i = 1; i < _soundEngineCount; i++)
-        _soundEngines[i]->addData(_buses, maxlen);
+        // Get the data of all sound engines, even if they are still working
+        _soundEngines[0]->copyData(_buses, computedLength);
+        for (int i = 1; i < _soundEngineCount; i++)
+            _soundEngines[i]->addData(_buses, computedLength);
+    }
 
-    // Tell the sound engines to restart (or continue) the processing
-    voices->prepareComputation();
-    for (int i = 0; i < _soundEngineCount; ++i)
-        _soundEngines[i]->prepareData(maxlen);
+    // Frames that will remain after this call, the chunks missing now being silent (first call or longer length)
+    quint32 available = _outputAvailable + computedLength;
+    quint32 remaining = len > available ? SynthMath::roundToChunks(len - available) + available - len : available - len;
 
-    // Apply chorus / reverb on the gathered data
-    _core.applyEffects(dataL, dataR, _buses, maxlen);
+    // Tell the sound engines to restart (or continue) the processing with the chunks missing for a next call of
+    // the same length, which must fit after the remaining frames
+    _preparedLength = 0;
+    if (remaining < len)
+    {
+        quint32 alignment = BUFFER_ALIGNMENT / sizeof(float);
+        quint32 freeLength = _outputCapacity - (remaining + alignment - 1) / alignment * alignment;
+        _preparedLength = qMin(qMin(SynthMath::roundToChunks(len - remaining), _buses.capacity()),
+                               (freeLength >> COMPUTATION_CHUNK_SHIFT) << COMPUTATION_CHUNK_SHIFT);
+    }
+    if (_preparedLength > 0)
+    {
+        voices->prepareComputation();
+        for (int i = 0; i < _soundEngineCount; ++i)
+            _soundEngines[i]->prepareData(_preparedLength);
+    }
 
-    // EQ filter (live preview of filtered samples)
-    _eq.filterData(dataL, dataR, maxlen);
+    // Effects for the data gathered
+    if (computedLength > 0)
+        appendOutput(computedLength);
 
-    // Add calibrating sinus
-    _sinus.addData(dataL, dataR, maxlen);
+    // Return the data, possibly completed by silent chunks
+    quint32 done = 0;
+    while (true)
+    {
+        quint32 count = qMin(len - done, _outputAvailable);
+        memcpy(&dataL[done], &_outputL[_outputPosition], count * sizeof(float));
+        memcpy(&dataR[done], &_outputR[_outputPosition], count * sizeof(float));
+        _outputPosition += count;
+        _outputAvailable -= count;
+        done += count;
+        if (done == len)
+            break;
 
-    // Clipping
-    FastMaths::clamp(dataL, maxlen);
-    FastMaths::clamp(dataR, maxlen);
+        quint32 chunkLength = qMin(SynthMath::roundToChunks(len - done), _buses.capacity());
+        _buses.clear(chunkLength);
+        appendOutput(chunkLength);
+    }
 
     // Possible recording
-    _recorder.process(dataL, dataR, maxlen);
+    _recorder.process(dataL, dataR, len);
+}
+
+void Synth::appendOutput(quint32 len)
+{
+    // The frames not returned are moved just before an aligned position, where the new frames are written
+    quint32 alignment = BUFFER_ALIGNMENT / sizeof(float);
+    quint32 position = (_outputAvailable + alignment - 1) / alignment * alignment;
+    if (_outputPosition + _outputAvailable != position)
+    {
+        memmove(&_outputL[position - _outputAvailable], &_outputL[_outputPosition], _outputAvailable * sizeof(float));
+        memmove(&_outputR[position - _outputAvailable], &_outputR[_outputPosition], _outputAvailable * sizeof(float));
+        _outputPosition = position - _outputAvailable;
+    }
+    float * dataL = &_outputL[position];
+    float * dataR = &_outputR[position];
+
+    // Apply chorus / reverb on the gathered data
+    _core.applyEffects(dataL, dataR, _buses, len);
+
+    // EQ filter (live preview of filtered samples)
+    _eq.filterData(dataL, dataR, len);
+
+    // Add calibrating sinus
+    _sinus.addData(dataL, dataR, len);
+
+    // Clipping
+    FastMaths::clamp(dataL, len);
+    FastMaths::clamp(dataR, len);
+
+    _outputAvailable += len;
 }
 
 void Synth::waitForComputation()

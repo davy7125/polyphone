@@ -36,14 +36,16 @@ public:
     SynthBuses();
     ~SynthBuses();
 
-    // Allocate the buffers for len frames, if they are smaller (not in the audio thread)
+    // Allocate the buffers for len frames rounded up to whole chunks, if they are smaller (not in the audio thread)
+    // The buffers are aligned for FastMaths
     void reserve(uint32_t len);
-    uint32_t capacity() { return _capacity; }
+    uint32_t capacity() { return _capacity; } // Whole chunks
 
     // Set the first len frames to 0
     void clear(uint32_t len);
 
     // Compute len frames of a voice and mix them, the first voice of a side overwriting its buffers
+    // The buffers must have been cleared: those whose coefficient is 0 are not written, nor the silent voices
     void addVoice(Voice * voice, uint32_t len, bool &leftInitialized, bool &rightInitialized);
 
     // Copy or add the first len frames into other buses

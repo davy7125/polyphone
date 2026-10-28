@@ -79,8 +79,10 @@ public:
     bool processRPNChanged(int channel, int parameter, int value, bool isRegistered, int trigger) override;
 
     // Following functions are executed by the audio server (thread 3)
+    // Any length can be read: the voices are computed by whole chunks (COMPUTATION_CHUNK), the frames not asked being
+    // returned first by the next call
     void setSampleRateAndBufferSize(quint32 sampleRate, quint32 bufferSize);
-    void readData(float *dataL, float *dataR, quint32 maxlen);
+    void readData(float *dataL, float *dataR, quint32 len);
 
     // Offline rendering: wait until all voices of the next buffer are computed, before readData
     // (in real time, the voices not computed in time are skipped)
@@ -98,6 +100,7 @@ signals:
 private:
     void destroySoundEngines();
     void createSoundEngines();
+    void appendOutput(quint32 len);
 
     // Soundfonts and synth
     QRecursiveMutex * _mutexSoundfonts;
@@ -110,6 +113,13 @@ private:
 
     // Copy of the sound engine data
     SynthBuses _buses;
+    quint32 _preparedLength; // Frames being computed by the sound engines for the next call
+
+    // Data after the effects, aligned as the buses: frames computed and not returned yet
+    float * _outputL, * _outputR;
+    quint32 _outputCapacity;
+    quint32 _outputPosition;
+    quint32 _outputAvailable;
 
     // Post-processing
     CalibrationSinus _sinus;

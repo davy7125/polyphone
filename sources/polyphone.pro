@@ -372,6 +372,7 @@ SOURCES	+= main.cpp \
     synth_core/synthmath.cpp \
     synth_core/synthbuses.cpp \
     synth_core/synthcore.cpp \
+    synth_core/syntheffects.cpp \
     synth_core/midiprocessor.cpp \
     synth_core/synthmidi.cpp \
     synth_core/voicecontext.cpp \
@@ -773,6 +774,7 @@ HEADERS += \
     synth_core/isynthlistener.h \
     synth_core/synthbuses.h \
     synth_core/synthcore.h \
+    synth_core/syntheffects.h \
     synth_core/synthcoreconfig.h \
     synth_core/midiprocessor.h \
     synth_core/synthmidi.h \

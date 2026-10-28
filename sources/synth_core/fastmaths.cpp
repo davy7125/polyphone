@@ -24,6 +24,8 @@
 
 #include "fastmaths.h"
 #include <cmath>
+#include <new>
+#include "synthconstants.h"
 #ifdef __aarch64__
 #include <arm_neon.h>
 #endif
@@ -40,6 +42,16 @@ void FastMaths::initialize()
     // Lookup table for pow10, values in [-102.4; 102.3]
     for (int i = 0; i < 2048; i++)
         s_pow10_table[i] = std::pow(10.0, 0.1 * (double)(i - 1024));
+}
+
+float * FastMaths::newAlignedBuffer(uint32_t size)
+{
+    return static_cast<float *>(::operator new[](size * sizeof(float), std::align_val_t(BUFFER_ALIGNMENT)));
+}
+
+void FastMaths::deleteAlignedBuffer(float * buffer)
+{
+    ::operator delete[](buffer, std::align_val_t(BUFFER_ALIGNMENT));
 }
 
 float FastMaths::fastSin(float value)
@@ -241,49 +253,20 @@ void FastMaths::multiply(float * __restrict data, const float * __restrict dataT
 #endif
 }
 
-float FastMaths::multiply8(const float * __restrict coeffs, const int16_t * __restrict srcData16, const uint8_t * __restrict srcData24)
+bool FastMaths::isZero(const float * values, unsigned int size)
 {
-    coeffs  = (const float*)__builtin_assume_aligned(coeffs, 32);
+    for (unsigned int i = 0; i < size; ++i)
+        if (values[i] != 0.0f)
+            return false;
+    return true;
+}
 
-#ifdef __aarch64__
-    // Load 8 int16 and convert to int32
-    int16x8_t s16 = vld1q_s16(srcData16);
-    int32x4_t s16_lo = vmovl_s16(vget_low_s16(s16));
-    int32x4_t s16_hi = vmovl_s16(vget_high_s16(s16));
-
-    // Load the 8 LSB uint8, convert to 16-bit
-    uint8x8_t lsb_u8 = vld1_u8(srcData24);
-    uint16x8_t lsb_u16 = vmovl_u8(lsb_u8);
-    uint32x4_t lsb_lo = vmovl_u16(vget_low_u16(lsb_u16));
-    uint32x4_t lsb_hi = vmovl_u16(vget_high_u16(lsb_u16));
-
-    // Put data together int24 = (s16 << 8) | lsb
-    int32x4_t val_lo = vorrq_s32(vshlq_n_s32(s16_lo, 8), vreinterpretq_s32_u32(lsb_lo));
-    int32x4_t val_hi = vorrq_s32(vshlq_n_s32(s16_hi, 8), vreinterpretq_s32_u32(lsb_hi));
-
-    // Convert to float
-    float32x4_t f_lo = vcvtq_f32_s32(val_lo);
-    float32x4_t f_hi = vcvtq_f32_s32(val_hi);
-
-    // Load the coeffs
-    float32x4_t c_lo = vld1q_f32(coeffs);
-    float32x4_t c_hi = vld1q_f32(coeffs + 4);
-
-    // Multiplication / addition
-    float32x4_t mul_lo = vmulq_f32(c_lo, f_lo);
-    float32x4_t mul_hi_and_lo = vfmaq_f32(mul_lo, c_hi, f_hi);
-    float32x2_t sum_pair = vadd_f32(vget_low_f32(mul_hi_and_lo), vget_high_f32(mul_hi_and_lo));
-    return vget_lane_f32(sum_pair, 0) + vget_lane_f32(sum_pair, 1);
-#else
-    return coeffs[0] * static_cast<float>(toInt32(srcData16[0], srcData24[0])) +
-           coeffs[1] * static_cast<float>(toInt32(srcData16[1], srcData24[1])) +
-           coeffs[2] * static_cast<float>(toInt32(srcData16[2], srcData24[2])) +
-           coeffs[3] * static_cast<float>(toInt32(srcData16[3], srcData24[3])) +
-           coeffs[4] * static_cast<float>(toInt32(srcData16[4], srcData24[4])) +
-           coeffs[5] * static_cast<float>(toInt32(srcData16[5], srcData24[5])) +
-           coeffs[6] * static_cast<float>(toInt32(srcData16[6], srcData24[6])) +
-           coeffs[7] * static_cast<float>(toInt32(srcData16[7], srcData24[7]));
-#endif
+bool FastMaths::isUnder(const float * values, unsigned int size, float level)
+{
+    for (unsigned int i = 0; i < size; ++i)
+        if (values[i] >= level || values[i] <= -level)
+            return false;
+    return true;
 }
 
 float FastMaths::multiply4(const float * __restrict coeffs, const float * __restrict srcDataF)

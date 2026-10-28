@@ -69,6 +69,12 @@ void VoiceList::setMaxPolyphony(int maxPolyphony)
     _maxPolyphony = maxPolyphony;
 }
 
+void VoiceList::reserve(uint32_t chunkCount)
+{
+    for (int i = 0; i < MAX_NUMBER_OF_VOICES; ++i)
+        _voices[i]->reserve(chunkCount);
+}
+
 Voice * VoiceList::getVoiceToPrepare()
 {
     // Current voice range
