@@ -25,6 +25,7 @@
 #ifndef VOICE_H
 #define VOICE_H
 
+#include <atomic>
 #include "voiceparam.h"
 #include "enveloppevol.h"
 #include "osctriangle.h"
@@ -58,9 +59,11 @@ public:
     // Allocate the arrays for computing up to chunkCount chunks at once (not in the audio thread)
     void reserve(uint32_t chunkCount);
 
+    // Release (quick for an exclusive class), asked by any thread and applied by the thread computing the voice, the
+    // only one modifying the envelopes
     void release(bool quick = false);
     void finish();
-    bool isInRelease() { return _release || _loopMode == 2; }
+    bool isInRelease() { return _release || _loopMode == 2 || _releaseRequest.load(std::memory_order_relaxed) != 0; }
     bool isFinished() { return _isFinished; }
 
     // Stop the voice with a linear fade (FADE_OUT_DURATION) whatever its state, to free the polyphony or the processor
@@ -104,6 +107,7 @@ private:
 
     // Sample playback
     bool _release;
+    std::atomic<int> _releaseRequest; // 0: none, 1: release, 2: quick release
     bool _isFinished;
     uint32_t _computedChunks, _youngChunkCount;
     uint32_t _fadeOutLength, _fadeOutPosition, _fadeOutChunkCount; // Chunks
@@ -138,6 +142,10 @@ private:
     static float s_floatConversionCoef24;
 
     void deleteArrays();
+    void applyRelease(bool quick);
+    template<bool IS_24_BITS>
+    void resample(float * pData, float * pDataEnd, uint64_t fixedGap, uint32_t loopStart, uint32_t loopEnd,
+                  float (*sincWindow)[RESAMPLING_ORDER]); // One chunk
     void getData(uint32_t goOn, uint32_t loopStart, uint32_t loopEnd, int16_t * &srcData16, uint8_t * &srcData24);
     void getDataWithLoop(uint32_t goOn, uint32_t loopStart, uint32_t loopEnd, int16_t * &srcData16, uint8_t * &srcData24);
     bool biQuadCoefficients(float *coeffs, float freq, float inv_Q);

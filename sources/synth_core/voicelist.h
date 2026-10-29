@@ -123,12 +123,13 @@ private:
     int _indexMask;
     int _threadCount;
 
-    // Indexes
-    volatile int _preparationIndex;  // When voices are being added
-    volatile int _additionIndex;     // When a set of voices is complete
-    std::atomic<int> _currentIndex;  // Index of the last voice being computed
-    volatile int _firstRunningIndex; // Index of the first voice to compute
-    volatile int _lastRunningIndex;  // Index of the last voice to compute
+    // Indexes, published with a release store and read with an acquire load: the voices written before by a thread
+    // are then complete for the others
+    int _preparationIndex;                // When voices are being added (MIDI or GUI thread only)
+    std::atomic<int> _additionIndex;      // When a set of voices is complete
+    std::atomic<int> _currentIndex;       // Index of the last voice being computed
+    std::atomic<int> _firstRunningIndex;  // Index of the first voice to compute
+    std::atomic<int> _lastRunningIndex;   // Index of the last voice to compute
 
     // Limits
     volatile int _maxPolyphony;

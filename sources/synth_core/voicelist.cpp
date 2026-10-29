@@ -92,10 +92,10 @@ void VoiceList::createVoices()
 
     // No voices
     _preparationIndex = 0;
-    _additionIndex = 0;
+    _additionIndex.store(0);
     _currentIndex.store(0);
-    _firstRunningIndex = 0;
-    _lastRunningIndex = 0;
+    _firstRunningIndex.store(0);
+    _lastRunningIndex.store(0);
     _uncomputedVoiceCount = 0;
 }
 
@@ -194,8 +194,8 @@ int VoiceList::getProcessorLimit()
 Voice * VoiceList::getVoiceToPrepare()
 {
     // Current voice range
-    int first = (_firstRunningIndex - _threadCount - 1) & _indexMask;
-    int last = _additionIndex;
+    int first = (_firstRunningIndex.load(std::memory_order_acquire) - _threadCount - 1) & _indexMask;
+    int last = _additionIndex.load(std::memory_order_relaxed); // Written by this thread
     int currentPreparationIndex = _preparationIndex & _indexMask;
 
     // Check the index is available
@@ -218,14 +218,14 @@ Voice * VoiceList::getVoiceToPrepare()
 
 void VoiceList::addPreparedVoices()
 {
-    _additionIndex = (_preparationIndex & _indexMask);
+    _additionIndex.store(_preparationIndex & _indexMask, std::memory_order_release);
 }
 
 void VoiceList::getVoices(Voice ** &voices1, int &count1, Voice ** &voices2, int &count2)
 {
     // Return all running and prepared voices
-    int first = _firstRunningIndex;
-    int last = _additionIndex;
+    int first = _firstRunningIndex.load(std::memory_order_acquire);
+    int last = _additionIndex.load(std::memory_order_relaxed); // Written by this thread
     if (first <= last)
     {
         voices1 = &_voices[first];
@@ -244,13 +244,13 @@ void VoiceList::getVoices(Voice ** &voices1, int &count1, Voice ** &voices2, int
 
 int VoiceList::getVoiceCount()
 {
-    return (_lastRunningIndex - _firstRunningIndex) & _indexMask;
+    return (_lastRunningIndex.load(std::memory_order_acquire) - _firstRunningIndex.load(std::memory_order_acquire)) & _indexMask;
 }
 
 void VoiceList::endComputation()
 {
-    int first = _firstRunningIndex;
-    int last = _lastRunningIndex;
+    int first = _firstRunningIndex.load(std::memory_order_relaxed); // Written by this thread
+    int last = _lastRunningIndex.load(std::memory_order_relaxed);
     int currentIndex = _currentIndex.exchange(last) & _indexMask;
 
     // Number of voices that have not been computed
@@ -262,9 +262,9 @@ void VoiceList::endComputation()
 
 void VoiceList::prepareComputation()
 {
-    int first = _firstRunningIndex;
-    int last = _lastRunningIndex;
-    int additionIndex = _additionIndex;
+    int first = _firstRunningIndex.load(std::memory_order_relaxed); // Written by this thread
+    int last = _lastRunningIndex.load(std::memory_order_relaxed);
+    int additionIndex = _additionIndex.load(std::memory_order_acquire); // The voices added are complete
 
     // Gather the exclusive class close commands
     _closeCommandNumber = 0;
@@ -278,7 +278,7 @@ void VoiceList::prepareComputation()
         if (voiceParam->getType() != 0)
             continue;
 
-        exclusiveClass = voiceParam->getInteger(champ_exclusiveClass);
+        exclusiveClass = voiceParam->getCurrentInteger(champ_exclusiveClass); // Not the thread computing the voice
         if (exclusiveClass != 0)
         {
             for (int i = 0; i < _closeCommandNumber; i++)
@@ -328,7 +328,7 @@ void VoiceList::prepareComputation()
             if (_closeCommands[i].channel == voiceParam->getChannel() &&
                 _closeCommands[i].sf2Id == voiceParam->getSf2Id() &&
                 _closeCommands[i].numPreset == voiceParam->getPresetId() &&
-                _closeCommands[i].exclusiveClass == voiceParam->getInteger(champ_exclusiveClass))
+                _closeCommands[i].exclusiveClass == voiceParam->getCurrentInteger(champ_exclusiveClass))
             {
                 voice->release(true);
                 break;
@@ -339,23 +339,19 @@ void VoiceList::prepareComputation()
     // Include the added voices
     last = additionIndex;
 
-    // Too many voices for the polyphony or, in real time, for the processor (the voices fading out being still
-    // computed): notes fade out
+    // Too many voices for the polyphony or, in real time, for the processor: notes fade out
+    // The voices already fading out are not counted, they stop by themselves (otherwise other notes would fade out
+    // until then)
     int activeCount = 0;
-    int fadingCount = 0;
     for (int index = first; index != last; index = (index + 1) & _indexMask)
-    {
-        if (_voices[index]->isFadingOut())
-            fadingCount++;
-        else
+        if (!_voices[index]->isFadingOut())
             activeCount++;
-    }
     int excess = activeCount - _maxPolyphony;
     if (_isRealTime.load(std::memory_order_relaxed))
     {
         int limit = getProcessorLimit();
-        if (limit != std::numeric_limits<int>::max() && activeCount + fadingCount - limit > excess)
-            excess = activeCount + fadingCount - limit;
+        if (limit != std::numeric_limits<int>::max() && activeCount - limit > excess)
+            excess = activeCount - limit;
 
         // Voices that the sound engines could not compute in time
         if (_uncomputedVoiceCount > excess)
@@ -366,8 +362,8 @@ void VoiceList::prepareComputation()
     _uncomputedVoiceCount = 0;
 
     // Update the indexes
-    _lastRunningIndex = last;
-    _firstRunningIndex = first;
+    _lastRunningIndex.store(last, std::memory_order_release);
+    _firstRunningIndex.store(first, std::memory_order_release);
     _currentIndex.store(first, std::memory_order_release);
 }
 
@@ -481,8 +477,8 @@ void VoiceList::fadeOutNotes(int first, int last, int voiceCount)
 
 Voice * VoiceList::getNextVoiceToCompute()
 {
-    int first = _firstRunningIndex;
-    int last = _lastRunningIndex;
+    int first = _firstRunningIndex.load(std::memory_order_acquire);
+    int last = _lastRunningIndex.load(std::memory_order_acquire);
     int voiceIndex = _currentIndex.fetch_add(1) & _indexMask;
 
     // No more voices to compute?

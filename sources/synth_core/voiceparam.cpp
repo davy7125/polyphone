@@ -30,6 +30,7 @@
 VoiceParam::VoiceParam(const VoiceContext * context) :
     _context(context),
     _version(1), // The parameters have no value in cache (version 0)
+    _modulationsChanged(0),
     _modulatorGroupInst(_parameters, false, context),
     _modulatorGroupPrst(_parameters, true, context)
 {
@@ -107,6 +108,7 @@ void VoiceParam::initialize(int sf2Id, ISynthInstPrst * prst, ISynthZone * prstZ
     // Initialize inputs and compute all modulations
     _modulatorGroupInst.initializeModulatorInputs();
     _modulatorGroupPrst.initializeModulatorInputs();
+    _modulationsChanged.store(0, std::memory_order_relaxed);
     computeModulations();
 }
 
@@ -389,33 +391,33 @@ void VoiceParam::processPolyPressureChanged(int pressure)
 {
     if (_modulatorGroupInst.processPolyPressureChanged(pressure) ||
         _modulatorGroupPrst.processPolyPressureChanged(pressure))
-        computeModulations();
+        _modulationsChanged.store(1, std::memory_order_release);
 }
 
 void VoiceParam::processMonoPressureChanged(int value)
 {
     if (_modulatorGroupInst.processMonoPressureChanged(value) ||
         _modulatorGroupPrst.processMonoPressureChanged(value))
-        computeModulations();
+        _modulationsChanged.store(1, std::memory_order_release);
 }
 
 void VoiceParam::processControllerChanged(int num, int value)
 {
     if (_modulatorGroupInst.processControllerChanged(num, value) ||
         _modulatorGroupPrst.processControllerChanged(num, value))
-        computeModulations();
+        _modulationsChanged.store(1, std::memory_order_release);
 }
 
 void VoiceParam::processBendChanged(float value)
 {
     if (_modulatorGroupInst.processBendChanged(value) ||
         _modulatorGroupPrst.processBendChanged(value))
-        computeModulations();
+        _modulationsChanged.store(1, std::memory_order_release);
 }
 
 void VoiceParam::processBendSensitivityChanged(float semitones)
 {
     if (_modulatorGroupInst.processBendSensitivityChanged(semitones) ||
         _modulatorGroupPrst.processBendSensitivityChanged(semitones))
-        computeModulations();
+        _modulationsChanged.store(1, std::memory_order_release);
 }

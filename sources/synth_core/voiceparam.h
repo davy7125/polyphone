@@ -83,12 +83,23 @@ public:
     int getPresetId() { return _presetId; }
     const VoiceContext * getContext() { return _context; }
 
-    // Update modulators with MIDI events
+    // Update the inputs of the modulators with MIDI events, the modulations being computed again by the thread
+    // computing the voice (updateModulations): the parameters are never modified while it reads them
+    // (initialize also computes them, before the voice is computed)
     void processPolyPressureChanged(int pressure);
     void processMonoPressureChanged(int value);
     void processControllerChanged(int num, int value);
     void processBendChanged(float value);
     void processBendSensitivityChanged(float semitones);
+
+    // Compute the modulations again if an input changed, by the thread computing the voice
+    void updateModulations()
+    {
+        // A load first: no write in the usual case
+        if (_modulationsChanged.load(std::memory_order_acquire) != 0 &&
+            _modulationsChanged.exchange(0, std::memory_order_acquire) != 0)
+            computeModulations();
+    }
 
 private:
     const VoiceContext * _context;
@@ -104,6 +115,7 @@ private:
     // All parameters
     ModulatedParameter _parameters[champ_endOper];
     std::atomic<uint32_t> _version; // Incremented after each change of the parameters
+    std::atomic<int> _modulationsChanged; // Next to _version: read at each computation, with no other cache line
     ModulatorGroup _modulatorGroupInst, _modulatorGroupPrst;
     int32_t _sampleLength, _sampleLoopStart, _sampleLoopEnd, _sampleFineTune;
 

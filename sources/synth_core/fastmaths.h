@@ -164,6 +164,49 @@ public:
                coeffs[7] * static_cast<float>(toInt32(srcData16[7], srcData24[7]));
 #endif
     }
+    // Same for 16-bit data, the 8 least significant bits being 0
+    static float multiply8(const float * __restrict coeffs, const int16_t * __restrict srcData16)
+    {
+        coeffs  = (const float*)__builtin_assume_aligned(coeffs, 32);
+
+#if defined(__aarch64__)
+        // Load 8 int16, convert to int32 shifted by 8 bits
+        int16x8_t s16 = vld1q_s16(srcData16);
+        int32x4_t val_lo = vshll_n_s16(vget_low_s16(s16), 8);
+        int32x4_t val_hi = vshll_n_s16(vget_high_s16(s16), 8);
+
+        // Convert to float, multiply by the coeffs and add
+        float32x4_t mul_lo = vmulq_f32(vld1q_f32(coeffs), vcvtq_f32_s32(val_lo));
+        float32x4_t mul_hi_and_lo = vfmaq_f32(mul_lo, vld1q_f32(coeffs + 4), vcvtq_f32_s32(val_hi));
+        float32x2_t sum_pair = vadd_f32(vget_low_f32(mul_hi_and_lo), vget_high_f32(mul_hi_and_lo));
+        return vget_lane_f32(sum_pair, 0) + vget_lane_f32(sum_pair, 1);
+#elif defined(__SSE2__) || defined(_M_X64)
+        // Load 8 int16 (unaligned), convert to int32 shifted by 8 bits: (s16 << 16) shifted with the sign
+        __m128i s16 = _mm_loadu_si128(reinterpret_cast<const __m128i *>(srcData16));
+        __m128i val_lo = _mm_srai_epi32(_mm_unpacklo_epi16(_mm_setzero_si128(), s16), 8);
+        __m128i val_hi = _mm_srai_epi32(_mm_unpackhi_epi16(_mm_setzero_si128(), s16), 8);
+
+        // Convert to float, multiply by the coeffs and add
+        __m128 sum = _mm_add_ps(_mm_mul_ps(_mm_load_ps(coeffs), _mm_cvtepi32_ps(val_lo)),
+                                _mm_mul_ps(_mm_load_ps(coeffs + 4), _mm_cvtepi32_ps(val_hi)));
+
+        // Sum of the 4 values
+        __m128 shuffled = _mm_shuffle_ps(sum, sum, _MM_SHUFFLE(2, 3, 0, 1));
+        sum = _mm_add_ps(sum, shuffled);
+        shuffled = _mm_movehl_ps(shuffled, sum);
+        return _mm_cvtss_f32(_mm_add_ss(sum, shuffled));
+#else
+        return coeffs[0] * static_cast<float>(static_cast<int32_t>(srcData16[0]) * 256) +
+               coeffs[1] * static_cast<float>(static_cast<int32_t>(srcData16[1]) * 256) +
+               coeffs[2] * static_cast<float>(static_cast<int32_t>(srcData16[2]) * 256) +
+               coeffs[3] * static_cast<float>(static_cast<int32_t>(srcData16[3]) * 256) +
+               coeffs[4] * static_cast<float>(static_cast<int32_t>(srcData16[4]) * 256) +
+               coeffs[5] * static_cast<float>(static_cast<int32_t>(srcData16[5]) * 256) +
+               coeffs[6] * static_cast<float>(static_cast<int32_t>(srcData16[6]) * 256) +
+               coeffs[7] * static_cast<float>(static_cast<int32_t>(srcData16[7]) * 256);
+#endif
+    }
+
     static float multiply4(const float * __restrict coeffs, const float * __restrict srcDataF);
 
 private:

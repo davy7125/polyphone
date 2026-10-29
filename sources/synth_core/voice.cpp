@@ -64,8 +64,7 @@ Voice::~Voice()
     deleteArrays();
     if (_voiceParam->getType() != 0 && _dataSmpl16 != nullptr)
     {
-        if ((void*)_dataSmpl16 != (void*)_dataSmpl24)
-            delete [] _dataSmpl24;
+        delete [] _dataSmpl24; // Possibly null (16-bit sample)
         delete [] _dataSmpl16;
         _dataSmpl16 = nullptr;
         _dataSmpl24 = nullptr;
@@ -100,8 +99,7 @@ void Voice::initialize(int sf2Id, ISynthInstPrst * prst, ISynthZone * prstZone, 
     // Possibly delete previous sample data that has been copied
     if (_voiceParam->getType() != 0 && _dataSmpl16 != nullptr)
     {
-        if ((void*)_dataSmpl16 != (void*)_dataSmpl24)
-            delete [] _dataSmpl24;
+        delete [] _dataSmpl24; // Possibly null (16-bit sample)
         delete [] _dataSmpl16;
         _dataSmpl16 = nullptr;
         _dataSmpl24 = nullptr;
@@ -109,9 +107,8 @@ void Voice::initialize(int sf2Id, ISynthInstPrst * prst, ISynthZone * prstZone, 
 
     _voiceParam->initialize(sf2Id, prst, prstZone, inst, instZone, smpl, channel, key, vel, type);
 
+    // The 8 least significant bits are missing for 16-bit samples (_dataSmpl24 is then null)
     smpl->getData(_dataSmplLength, _dataSmpl16, _dataSmpl24, _voiceParam->getType() != 0 /* copy data at the sample level */);
-    if (_dataSmpl24 == nullptr)
-        _dataSmpl24 = (uint8_t *)_dataSmpl16;
     _sincWindow = nullptr;
 
     _smplRate = smpl->getSampleRate();
@@ -127,6 +124,7 @@ void Voice::initialize(int sf2Id, ISynthInstPrst * prst, ISynthZone * prstZone, 
     _elapsedSmplPos = 0;
     _time = 0;
     _release = false;
+    _releaseRequest.store(0, std::memory_order_relaxed);
     _isFinished = false;
     _x1 = 0;
     _x2 = 0;
@@ -161,11 +159,22 @@ void Voice::initialize(int sf2Id, ISynthInstPrst * prst, ISynthZone * prstZone, 
 
 bool Voice::generateData(float * data, uint32_t len)
 {
+    // Modulations changed by MIDI events
+    _voiceParam->updateModulations();
+
     // Values read only once
     if (_currentSmplPos == 0xFFFFFFFF)
     {
         _currentSmplPos = _voiceParam->getPosition(champ_dwStart16);
         _loopMode = (char)_voiceParam->getInteger(champ_sampleModes);
+    }
+
+    // Release asked by another thread (a load first: no write in the usual case)
+    if (_releaseRequest.load(std::memory_order_acquire) != 0)
+    {
+        int releaseRequest = _releaseRequest.exchange(0, std::memory_order_acquire);
+        if (releaseRequest != 0)
+            applyRelease(releaseRequest == 2);
     }
 
     int32_t playedNote = _voiceParam->getInteger(champ_keynum);
@@ -275,59 +284,10 @@ bool Voice::generateData(float * data, uint32_t len)
             uint64_t fixedGap = static_cast<uint64_t>(ratio * 4294967296.0 /* 2^32 */ + 0.5);
 
             // Resampling (sinc interpolation)
-            int16_t * srcData16 = &_dataSmpl16[_currentSmplPos];
-            uint8_t * srcData24 = &_dataSmpl24[_currentSmplPos];
-            float * pData = &data[sampleStart];
-            uint32_t nextPosition = 0;
-            void(Voice::*slowExtractFunction)(uint32_t,uint32_t,uint32_t,int16_t*&,uint8_t*&) = (_loopMode == 1 || (_loopMode == 3 && !_release)) ? &Voice::getDataWithLoop : &Voice::getData;
-
-resample_fast:
-            // Fast extraction, if possible
-            {
-                uint64_t distanceFraction = _lastDistanceFraction;
-                int32_t moreAvailable = _moreAvailable;
-                while (true)
-                {
-                    distanceFraction += fixedGap;
-                    if ((int32_t)(nextPosition = static_cast<uint32_t>(distanceFraction >> 32)) > moreAvailable)
-                    {
-                        // Revert the last jump and update the current position
-                        distanceFraction -= fixedGap;
-                        _currentSmplPos += static_cast<uint32_t>(distanceFraction >> 32);
-                        _lastDistanceFraction = distanceFraction & 0xFFFFFFFF;
-                        goto resample_slow;
-                    }
-
-                    (*pData++) = FastMaths::multiply8(sincWindow[(distanceFraction >> 24) & 0xFF], &srcData16[nextPosition], &srcData24[nextPosition]);
-                                // + FastMaths::multiply8(&sincWindow[(distanceFraction >> 24) & 0xFF][8], &srcData16[nextPosition + 8], &srcData24[nextPosition + 8]);
-
-                    if (pData >= pDataEnd)
-                    {
-                        // Update the current position
-                        _currentSmplPos += nextPosition;
-                        _moreAvailable = moreAvailable - static_cast<int32_t>(nextPosition);
-                        _lastDistanceFraction = distanceFraction & 0xFFFFFFFF;
-                        goto resample_end;
-                    }
-                }
-            }
-
-resample_slow:
-            // First data extraction or complex extraction (the members are modified by the extraction functions)
-            while (true)
-            {
-                _lastDistanceFraction += fixedGap;
-                (*this.*slowExtractFunction)(static_cast<uint32_t>(_lastDistanceFraction >> 32), loopStart, loopEnd, srcData16, srcData24);
-                _lastDistanceFraction &= 0xFFFFFFFF;
-                (*pData++) = FastMaths::multiply8(sincWindow[(_lastDistanceFraction >> 24) & 0xFF], srcData16, srcData24);
-                            // + FastMaths::multiply8(&sincWindow[(_lastDistanceFraction >> 24) & 0xFF][8], &srcData16[8], &srcData24[8]);
-
-                if (pData >= pDataEnd)
-                    goto resample_end;
-                if (_moreAvailable > 0)
-                    goto resample_fast;
-            }
-resample_end:
+            if (_dataSmpl24 == nullptr)
+                resample<false>(&data[sampleStart], pDataEnd, fixedGap, loopStart, loopEnd, sincWindow);
+            else
+                resample<true>(&data[sampleStart], pDataEnd, fixedGap, loopStart, loopEnd, sincWindow);
 
             // deltaCoeff is the linear evolution of the volume on a chunk
             // The target volume is based on:
@@ -341,7 +301,8 @@ resample_end:
             // Possibly a linear fade until 0, the voice being finished after the last chunk of the fade
             if (_fadeOutLength > 0)
             {
-                _fadeOutPosition++;
+                if (_fadeOutPosition < _fadeOutLength)
+                    _fadeOutPosition++;
                 targetCoeff *= static_cast<float>(_fadeOutLength - _fadeOutPosition) / static_cast<float>(_fadeOutLength);
                 if (_fadeOutPosition >= _fadeOutLength)
                     _isFinished = true;
@@ -353,7 +314,7 @@ resample_end:
                 isAudible = true;
 
             // Low-pass filter, its coefficients being computed again only if the frequency or the resonance changes
-            pData = &data[sampleStart];
+            float * pData = &data[sampleStart];
             float valTmp = v_filterFreq * FastMaths::fastPow2(
                          (v_modEnvToFilterFc * _dataModArray[chunk] + v_modLfoToFilterFreq * _modLfoArray[chunk]) * 0.000833333f /* 1:1200 */);
             if (valTmp != _filterFrequency || inv_q_lin != _filterInvQ)
@@ -426,6 +387,67 @@ resample_end:
     return isAudible;
 }
 
+template<bool IS_24_BITS>
+void Voice::resample(float * pData, float * pDataEnd, uint64_t fixedGap, uint32_t loopStart, uint32_t loopEnd,
+                     float (*sincWindow)[RESAMPLING_ORDER])
+{
+    int16_t * srcData16 = &_dataSmpl16[_currentSmplPos];
+    uint8_t * srcData24 = IS_24_BITS ? &_dataSmpl24[_currentSmplPos] : nullptr;
+    uint32_t nextPosition = 0;
+    void(Voice::*slowExtractFunction)(uint32_t,uint32_t,uint32_t,int16_t*&,uint8_t*&) = (_loopMode == 1 || (_loopMode == 3 && !_release)) ? &Voice::getDataWithLoop : &Voice::getData;
+
+resample_fast:
+    // Fast extraction, if possible
+    {
+        uint64_t distanceFraction = _lastDistanceFraction;
+        int32_t moreAvailable = _moreAvailable;
+        while (true)
+        {
+            distanceFraction += fixedGap;
+            if ((int32_t)(nextPosition = static_cast<uint32_t>(distanceFraction >> 32)) > moreAvailable)
+            {
+                // Revert the last jump and update the current position
+                distanceFraction -= fixedGap;
+                _currentSmplPos += static_cast<uint32_t>(distanceFraction >> 32);
+                _lastDistanceFraction = distanceFraction & 0xFFFFFFFF;
+                goto resample_slow;
+            }
+
+            if constexpr (IS_24_BITS)
+                (*pData++) = FastMaths::multiply8(sincWindow[(distanceFraction >> 24) & 0xFF], &srcData16[nextPosition], &srcData24[nextPosition]);
+            else
+                (*pData++) = FastMaths::multiply8(sincWindow[(distanceFraction >> 24) & 0xFF], &srcData16[nextPosition]);
+
+            if (pData >= pDataEnd)
+            {
+                // Update the current position
+                _currentSmplPos += nextPosition;
+                _moreAvailable = moreAvailable - static_cast<int32_t>(nextPosition);
+                _lastDistanceFraction = distanceFraction & 0xFFFFFFFF;
+                return;
+            }
+        }
+    }
+
+resample_slow:
+    // First data extraction or complex extraction (the members are modified by the extraction functions)
+    while (true)
+    {
+        _lastDistanceFraction += fixedGap;
+        (*this.*slowExtractFunction)(static_cast<uint32_t>(_lastDistanceFraction >> 32), loopStart, loopEnd, srcData16, srcData24);
+        _lastDistanceFraction &= 0xFFFFFFFF;
+        if constexpr (IS_24_BITS)
+            (*pData++) = FastMaths::multiply8(sincWindow[(_lastDistanceFraction >> 24) & 0xFF], srcData16, srcData24);
+        else
+            (*pData++) = FastMaths::multiply8(sincWindow[(_lastDistanceFraction >> 24) & 0xFF], srcData16);
+
+        if (pData >= pDataEnd)
+            return;
+        if (_moreAvailable > 0)
+            goto resample_fast;
+    }
+}
+
 void Voice::getData(uint32_t goOn, uint32_t loopStart, uint32_t loopEnd, int16_t * &srcData16, uint8_t * &srcData24)
 {
     (void)loopStart;
@@ -438,7 +460,8 @@ void Voice::getData(uint32_t goOn, uint32_t loopStart, uint32_t loopEnd, int16_t
     if ((_moreAvailable = _dataSmplLength - _currentSmplPos - RESAMPLING_ORDER) >= 0)
     {
         srcData16 = &_dataSmpl16[_currentSmplPos];
-        srcData24 = &_dataSmpl24[_currentSmplPos];
+        if (_dataSmpl24 != nullptr)
+            srcData24 = &_dataSmpl24[_currentSmplPos];
         return;
     }
 
@@ -448,8 +471,11 @@ void Voice::getData(uint32_t goOn, uint32_t loopStart, uint32_t loopEnd, int16_t
         // Copy what is possible to copy, fill the rest with 0
         memcpy(_srcData16, &_dataSmpl16[_currentSmplPos], remainingSamples * sizeof(int16_t));
         memset(&_srcData16[remainingSamples], 0, (RESAMPLING_ORDER - remainingSamples) * sizeof(int16_t));
-        memcpy(_srcData24, &_dataSmpl24[_currentSmplPos], remainingSamples * sizeof(uint8_t));
-        memset(&_srcData24[remainingSamples], 0, (RESAMPLING_ORDER - remainingSamples) * sizeof(uint8_t));
+        if (_dataSmpl24 != nullptr)
+        {
+            memcpy(_srcData24, &_dataSmpl24[_currentSmplPos], remainingSamples * sizeof(uint8_t));
+            memset(&_srcData24[remainingSamples], 0, (RESAMPLING_ORDER - remainingSamples) * sizeof(uint8_t));
+        }
     }
     else
     {
@@ -476,7 +502,8 @@ void Voice::getDataWithLoop(uint32_t goOn, uint32_t loopStart, uint32_t loopEnd,
     if ((_moreAvailable = loopEnd - _currentSmplPos - RESAMPLING_ORDER) >= 0)
     {
         srcData16 = &_dataSmpl16[_currentSmplPos];
-        srcData24 = &_dataSmpl24[_currentSmplPos];
+        if (_dataSmpl24 != nullptr)
+            srcData24 = &_dataSmpl24[_currentSmplPos];
         return;
     }
 
@@ -486,8 +513,11 @@ void Voice::getDataWithLoop(uint32_t goOn, uint32_t loopStart, uint32_t loopEnd,
         uint32_t remainingSamples = loopEnd - _currentSmplPos;
         memcpy(_srcData16, &_dataSmpl16[_currentSmplPos], remainingSamples * sizeof(int16_t));
         memcpy(&_srcData16[remainingSamples], &_dataSmpl16[loopStart], (RESAMPLING_ORDER - remainingSamples) * sizeof(int16_t));
-        memcpy(_srcData24, &_dataSmpl24[_currentSmplPos], remainingSamples * sizeof(uint8_t));
-        memcpy(&_srcData24[remainingSamples], &_dataSmpl24[loopStart], (RESAMPLING_ORDER - remainingSamples) * sizeof(uint8_t));
+        if (_dataSmpl24 != nullptr)
+        {
+            memcpy(_srcData24, &_dataSmpl24[_currentSmplPos], remainingSamples * sizeof(uint8_t));
+            memcpy(&_srcData24[remainingSamples], &_dataSmpl24[loopStart], (RESAMPLING_ORDER - remainingSamples) * sizeof(uint8_t));
+        }
     }
     else
     {
@@ -497,7 +527,8 @@ void Voice::getDataWithLoop(uint32_t goOn, uint32_t loopStart, uint32_t loopEnd,
         {
             const uint32_t chunk = SynthMath::min(loopEnd - _currentSmplPos, RESAMPLING_ORDER - total);
             memcpy(&_srcData16[total], &_dataSmpl16[_currentSmplPos], chunk * sizeof(int16_t));
-            memcpy(&_srcData24[total], &_dataSmpl24[_currentSmplPos], chunk * sizeof(uint8_t));
+            if (_dataSmpl24 != nullptr)
+                memcpy(&_srcData24[total], &_dataSmpl24[_currentSmplPos], chunk * sizeof(uint8_t));
             _currentSmplPos += chunk;
             if (_currentSmplPos >= loopEnd)
                 _currentSmplPos = loopStart;
@@ -511,12 +542,24 @@ void Voice::getDataWithLoop(uint32_t goOn, uint32_t loopStart, uint32_t loopEnd,
 
 void Voice::release(bool quick)
 {
+    // A quick release replaces a release
+    if (quick)
+        _releaseRequest.store(2, std::memory_order_release);
+    else
+    {
+        int expected = 0;
+        _releaseRequest.compare_exchange_strong(expected, 1, std::memory_order_release, std::memory_order_relaxed);
+    }
+}
+
+void Voice::applyRelease(bool quick)
+{
     if (quick)
     {
         // Stopped by an exclusive class => quick release
         _volEnvelope.quickRelease();
     }
-    else if (_voiceParam->getCurrentInteger(champ_sampleModes) == 2) // Not the audio thread
+    else if (_loopMode == 2)
     {
         // Start of a sample in the release mode
         _volEnvelope.quickAttack();
