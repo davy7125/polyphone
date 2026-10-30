@@ -271,9 +271,6 @@ bool FastMaths::isUnder(const float * values, unsigned int size, float level)
 
 float FastMaths::multiply4(const float * __restrict coeffs, const float * __restrict srcDataF)
 {
-    coeffs = (const float*)__builtin_assume_aligned(coeffs, 32);
-    srcDataF = (const float*)__builtin_assume_aligned(srcDataF, 32);
-
 #ifdef __aarch64__
     // Load all values
     float32x4_t a = vld1q_f32(coeffs);

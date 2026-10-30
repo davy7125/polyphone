@@ -207,6 +207,7 @@ public:
 #endif
     }
 
+    // Sum of 4 coefficients multiplied by 4 values, with no alignment required (offline resampling at any position)
     static float multiply4(const float * __restrict coeffs, const float * __restrict srcDataF);
 
 private:
