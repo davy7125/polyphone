@@ -44,8 +44,6 @@ SoundfontViewerLeft::SoundfontViewerLeft(QWidget *parent) :
     connect(ui->labelAuthor, SIGNAL(linkActivated(QString)), this, SLOT(onAuthorClicked(QString)));
     connect(ui->attributeCategory, SIGNAL(itemClicked(SoundfontFilter*)), this, SIGNAL(itemClicked(SoundfontFilter*)));
     connect(ui->attributeSampleSource, SIGNAL(itemClicked(SoundfontFilter*)), this, SIGNAL(itemClicked(SoundfontFilter*)));
-    connect(ui->attributeTimbre, SIGNAL(itemClicked(SoundfontFilter*)), this, SIGNAL(itemClicked(SoundfontFilter*)));
-    connect(ui->attributeArticulation, SIGNAL(itemClicked(SoundfontFilter*)), this, SIGNAL(itemClicked(SoundfontFilter*)));
     connect(ui->attributeGenre, SIGNAL(itemClicked(SoundfontFilter*)), this, SIGNAL(itemClicked(SoundfontFilter*)));
     connect(ui->attributeMidiStandard, SIGNAL(itemClicked(SoundfontFilter*)), this, SIGNAL(itemClicked(SoundfontFilter*)));
     connect(ui->attributeTag, SIGNAL(itemClicked(SoundfontFilter*)), this, SIGNAL(itemClicked(SoundfontFilter*)));
@@ -105,32 +103,6 @@ void SoundfontViewerLeft::initialize(SoundfontInformation *soundfontInfo)
     {
         ui->attributeSampleSource->hide();
         ui->labelSampleSource->hide();
-    }
-
-    property = SoundfontInformation::TIMBRE;
-    if (soundfontInfo->getProperties().contains(property) && !soundfontInfo->getProperties()[property].empty())
-    {
-        ui->attributeTimbre->clear();
-        foreach (QString value, soundfontInfo->getProperties()[property])
-            ui->attributeTimbre->addProperty(property, value);
-    }
-    else
-    {
-        ui->attributeTimbre->hide();
-        ui->labelTimbre->hide();
-    }
-
-    property = SoundfontInformation::ARTICULATION;
-    if (soundfontInfo->getProperties().contains(property) && !soundfontInfo->getProperties()[property].empty())
-    {
-        ui->attributeArticulation->clear();
-        foreach (QString value, soundfontInfo->getProperties()[property])
-            ui->attributeArticulation->addProperty(property, value);
-    }
-    else
-    {
-        ui->attributeArticulation->hide();
-        ui->labelArticulation->hide();
     }
 
     property = SoundfontInformation::GENRE;

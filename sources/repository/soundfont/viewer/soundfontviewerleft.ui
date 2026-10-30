@@ -182,38 +182,6 @@
     <widget class="AttributeFlow" name="attributeSampleSource" native="true"/>
    </item>
    <item row="9" column="0" colspan="2">
-    <widget class="QLabel" name="labelTimbre">
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>Timbre</string>
-     </property>
-    </widget>
-   </item>
-   <item row="10" column="0" colspan="2">
-    <widget class="AttributeFlow" name="attributeTimbre" native="true"/>
-   </item>
-   <item row="11" column="0" colspan="2">
-    <widget class="QLabel" name="labelArticulation">
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>Articulation</string>
-     </property>
-    </widget>
-   </item>
-   <item row="12" column="0" colspan="2">
-    <widget class="AttributeFlow" name="attributeArticulation" native="true"/>
-   </item>
-   <item row="13" column="0" colspan="2">
     <widget class="QLabel" name="labelGenre">
      <property name="font">
       <font>
@@ -226,10 +194,10 @@
      </property>
     </widget>
    </item>
-   <item row="14" column="0" colspan="2">
+   <item row="10" column="0" colspan="2">
     <widget class="AttributeFlow" name="attributeGenre" native="true"/>
    </item>
-   <item row="15" column="0" colspan="2">
+   <item row="11" column="0" colspan="2">
     <widget class="QLabel" name="labelMidiStandard">
      <property name="font">
       <font>
@@ -242,10 +210,10 @@
      </property>
     </widget>
    </item>
-   <item row="16" column="0" colspan="2">
+   <item row="12" column="0" colspan="2">
     <widget class="AttributeFlow" name="attributeMidiStandard" native="true"/>
    </item>
-   <item row="17" column="0" colspan="2">
+   <item row="13" column="0" colspan="2">
     <widget class="QLabel" name="labelTags">
      <property name="font">
       <font>
@@ -258,10 +226,10 @@
      </property>
     </widget>
    </item>
-   <item row="18" column="0" colspan="2">
+   <item row="14" column="0" colspan="2">
     <widget class="AttributeFlow" name="attributeTag" native="true"/>
    </item>
-   <item row="19" column="0">
+   <item row="15" column="0">
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>

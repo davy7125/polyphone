@@ -35,8 +35,6 @@ public:
     enum Property
     {
         SAMPLE_SOURCE,
-        TIMBRE,
-        ARTICULATION,
         GENRE,
         MIDI_STANDARD
     };

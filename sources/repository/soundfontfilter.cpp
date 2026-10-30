@@ -74,14 +74,6 @@ bool SoundfontFilter::match(SoundfontInformation * soundfontInformation)
             !isMatching(_properties[SoundfontInformation::Property::SAMPLE_SOURCE],
                         properties[SoundfontInformation::Property::SAMPLE_SOURCE]))
         return false;
-    if (!_properties[SoundfontInformation::Property::TIMBRE].isEmpty() &&
-            !isMatching(_properties[SoundfontInformation::Property::TIMBRE],
-                        properties[SoundfontInformation::Property::TIMBRE]))
-        return false;
-    if (!_properties[SoundfontInformation::Property::ARTICULATION].isEmpty() &&
-            !isMatching(_properties[SoundfontInformation::Property::ARTICULATION],
-                        properties[SoundfontInformation::Property::ARTICULATION]))
-        return false;
     if (!_properties[SoundfontInformation::Property::GENRE].isEmpty() &&
             !isMatching(_properties[SoundfontInformation::Property::GENRE],
                         properties[SoundfontInformation::Property::GENRE]))

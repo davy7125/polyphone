@@ -74,56 +74,10 @@ void RepositoryManager::fillPropertyTranslation()
     // SAMPLE SOURCE
     _propertyTranslations[SoundfontInformation::Property::SAMPLE_SOURCE]["acoustic"] = tr("acoustic instrument");
     _propertyTranslations[SoundfontInformation::Property::SAMPLE_SOURCE]["electric"] = tr("electronic instrument");
-    _propertyTranslations[SoundfontInformation::Property::SAMPLE_SOURCE]["records"] = tr("various records");
-    _propertyTranslations[SoundfontInformation::Property::SAMPLE_SOURCE]["additive"] = tr("additive synthesis");
-    _propertyTranslations[SoundfontInformation::Property::SAMPLE_SOURCE]["subtractive"] = tr("subtrative synthesis");
-    _propertyTranslations[SoundfontInformation::Property::SAMPLE_SOURCE]["wavetable"] = tr("wavetable synthesis");
-    _propertyTranslations[SoundfontInformation::Property::SAMPLE_SOURCE]["model"] = tr("model synthesis");
-    _propertyTranslations[SoundfontInformation::Property::SAMPLE_SOURCE]["fm"] = tr("FM synthesis");
-    _propertyTranslations[SoundfontInformation::Property::SAMPLE_SOURCE]["vector"] = tr("vector synthesis");
-    _propertyTranslations[SoundfontInformation::Property::SAMPLE_SOURCE]["granular"] = tr("granular synthesis");
-    _propertyTranslations[SoundfontInformation::Property::SAMPLE_SOURCE]["other_synthesis"] = tr("other synthesis");
-
-    // TIMBRE
-    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["high"] = tr("high");
-    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["low"] = tr("low");
-    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["distorted"] = tr("distorted");
-    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["clean"] = tr("clean");
-    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["bright"] = tr("bright");
-    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["dark"] = tr("dark");
-    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["warm"] = tr("warm");
-    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["cold"] = tr("cold");
-    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["fat"] = tr("fat");
-    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["thin"] = tr("thin");
-    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["hard"] = tr("hard");
-    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["soft"] = tr("soft");
-    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["muted"] = tr("muted");
-    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["detuned"] = tr("detuned");
-    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["dissonant"] = tr("dissonant");
-    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["noisy"] = tr("noisy");
-    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["metallic"] = tr("metallic");
-    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["wooden"] = tr("wooden");
-    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["exotic"] = tr("exotic");
-
-    // ARTICULATION
-    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["slow_attack"] = tr("slow attack");
-    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["decaying"] = tr("decaying");
-    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["sustained"] = tr("sustained");
-    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["long_release"] = tr("long release");
-    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["percussive"] = tr("percussive");
-    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["long_evolving"] = tr("long / evolving");
-    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["pulsating"] = tr("pulsating");
-    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["echoing"] = tr("echoing");
-    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["pad"] = tr("pad");
-    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["lead"] = tr("lead");
-    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["monophonic"] = tr("monophonic");
-    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["chord"] = tr("chord");
-    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["glide_pitch_mod"] = tr("glide / pitch mod");
-    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["sweep_filter_mod"] = tr("sweep / filter mod");
-    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["arpeggiated"] = tr("arpeggiated");
-    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["expressive"] = tr("expressive");
-    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["complex"] = tr("complex");
-    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["randomized"] = tr("randomized");
+    _propertyTranslations[SoundfontInformation::Property::SAMPLE_SOURCE]["records"] = tr("various recordings");
+    _propertyTranslations[SoundfontInformation::Property::SAMPLE_SOURCE]["synthesis"] = tr("synthesis");
+    _propertyTranslations[SoundfontInformation::Property::SAMPLE_SOURCE]["ai_generated"] = tr("AI generated");
+    _propertyTranslations[SoundfontInformation::Property::SAMPLE_SOURCE]["video_game_rip"] = tr("video game rip");
 
     // GENRE
     _propertyTranslations[SoundfontInformation::Property::GENRE]["classic"] = tr("classic music");
@@ -146,6 +100,7 @@ void RepositoryManager::fillPropertyTranslation()
     _propertyTranslations[SoundfontInformation::Property::GENRE]["folk_country"] = tr("folk / country");
     _propertyTranslations[SoundfontInformation::Property::GENRE]["ethnic_world"] = tr("ethnic / world");
     _propertyTranslations[SoundfontInformation::Property::GENRE]["ethnic / world"] = tr("ethnic / world");
+    _propertyTranslations[SoundfontInformation::Property::GENRE]["video_game"] = tr("video game / chiptune");
 
     // No translations for MIDI STANDARDS
     _propertyTranslations[SoundfontInformation::Property::MIDI_STANDARD]["no_standards"] = "no standards"; // Shouldn't be used
@@ -300,8 +255,6 @@ QString RepositoryManager::loadSoundfontInfo()
 
         // Additional properties
         loadProperty(si, jsonObject.value("sample_source"), SoundfontInformation::Property::SAMPLE_SOURCE);
-        loadProperty(si, jsonObject.value("timbre"), SoundfontInformation::Property::TIMBRE);
-        loadProperty(si, jsonObject.value("articulation"), SoundfontInformation::Property::ARTICULATION);
         loadProperty(si, jsonObject.value("genre"), SoundfontInformation::Property::GENRE);
         loadProperty(si, jsonObject.value("midi_standard"), SoundfontInformation::Property::MIDI_STANDARD);
 

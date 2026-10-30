@@ -412,36 +412,6 @@
             <widget class="FilterFlow" name="filterSampleSource" native="true"/>
            </item>
            <item>
-            <widget class="QLabel" name="label_7">
-             <property name="font">
-              <font>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="text">
-              <string>Timbre</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="FilterFlow" name="filterTimbre" native="true"/>
-           </item>
-           <item>
-            <widget class="QLabel" name="label_8">
-             <property name="font">
-              <font>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="text">
-              <string>Articulation</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="FilterFlow" name="filterArticulation" native="true"/>
-           </item>
-           <item>
             <widget class="QLabel" name="label_9">
              <property name="font">
               <font>

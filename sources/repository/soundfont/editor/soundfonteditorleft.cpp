@@ -60,16 +60,6 @@ SoundfontEditorLeft::SoundfontEditorLeft(QWidget *parent) :
     foreach (QString property, properties)
         ui->filterSampleSource->addElement(property);
 
-    ui->filterTimbre->initialize(false, tr("None"));
-    properties = RepositoryManager::getInstance()->getProperties(SoundfontInformation::TIMBRE);
-    foreach (QString property, properties)
-        ui->filterTimbre->addElement(property);
-
-    ui->filterArticulation->initialize(false, tr("None"));
-    properties = RepositoryManager::getInstance()->getProperties(SoundfontInformation::ARTICULATION);
-    foreach (QString property, properties)
-        ui->filterArticulation->addElement(property);
-
     ui->filterGenre->initialize(false, tr("None"));
     properties = RepositoryManager::getInstance()->getProperties(SoundfontInformation::GENRE);
     foreach (QString property, properties)
@@ -110,10 +100,6 @@ void SoundfontEditorLeft::initialize(SoundfontInformation *soundfontInfo)
     QMap<SoundfontInformation::Property, QStringList> properties = soundfontInfo->getProperties();
     ui->filterSampleSource->select(properties.contains(SoundfontInformation::SAMPLE_SOURCE) ?
                                        properties[SoundfontInformation::SAMPLE_SOURCE] : QStringList());
-    ui->filterTimbre->select(properties.contains(SoundfontInformation::TIMBRE) ?
-                                 properties[SoundfontInformation::TIMBRE] : QStringList());
-    ui->filterArticulation->select(properties.contains(SoundfontInformation::ARTICULATION) ?
-                                       properties[SoundfontInformation::ARTICULATION] : QStringList());
     ui->filterGenre->select(properties.contains(SoundfontInformation::GENRE) ?
                                 properties[SoundfontInformation::GENRE] : QStringList());
     ui->filterMidiStandard->select(properties.contains(SoundfontInformation::MIDI_STANDARD) ?
@@ -142,8 +128,6 @@ void SoundfontEditorLeft::fillArguments(QMap<QString, QString> &arguments)
     arguments["category"] = QString::number(ui->comboCategory->currentData().toInt());
     arguments["website"] = ui->lineWebsite->text();
     arguments["sample_source"] = ui->filterSampleSource->getSelectedElements().join("|");
-    arguments["timbre"] = ui->filterTimbre->getSelectedElements().join("|");
-    arguments["articulation"] = ui->filterArticulation->getSelectedElements().join("|");
     arguments["genre"] = ui->filterGenre->getSelectedElements().join("|");
     arguments["midi_standard"] = ui->filterMidiStandard->getSelectedElements().join("|");
     arguments["tags"] = ui->filterTag->getSelection().join("|");

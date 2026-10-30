@@ -14,26 +14,10 @@
    <string notr="true">Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="12" column="0" colspan="2">
-    <widget class="FilterFlow" name="filterArticulation" native="true"/>
-   </item>
    <item row="1" column="1">
     <widget class="QLabel" name="labelDate">
      <property name="text">
       <string notr="true">labelDate</string>
-     </property>
-    </widget>
-   </item>
-   <item row="9" column="0" colspan="2">
-    <widget class="QLabel" name="labelTimbre">
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>Timbre</string>
      </property>
     </widget>
    </item>
@@ -50,7 +34,7 @@
    <item row="8" column="0" colspan="2">
     <widget class="FilterFlow" name="filterSampleSource" native="true"/>
    </item>
-   <item row="13" column="0" colspan="2">
+   <item row="9" column="0" colspan="2">
     <widget class="QLabel" name="labelGenre">
      <property name="font">
       <font>
@@ -82,26 +66,13 @@
      </property>
     </widget>
    </item>
-   <item row="11" column="0" colspan="2">
-    <widget class="QLabel" name="labelArticulation">
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>Articulation</string>
-     </property>
-    </widget>
-   </item>
-   <item row="14" column="0" colspan="2">
+   <item row="10" column="0" colspan="2">
     <widget class="FilterFlow" name="filterGenre" native="true"/>
    </item>
-   <item row="18" column="0" colspan="2">
+   <item row="14" column="0" colspan="2">
     <widget class="FilterTag" name="filterTag" native="true"/>
    </item>
-   <item row="17" column="0" colspan="2">
+   <item row="13" column="0" colspan="2">
     <widget class="QLabel" name="labelTags">
      <property name="font">
       <font>
@@ -114,7 +85,7 @@
      </property>
     </widget>
    </item>
-   <item row="16" column="0" colspan="2">
+   <item row="12" column="0" colspan="2">
     <widget class="FilterFlow" name="filterMidiStandard" native="true"/>
    </item>
    <item row="6" column="0" colspan="2">
@@ -198,10 +169,7 @@
      </property>
     </widget>
    </item>
-   <item row="10" column="0" colspan="2">
-    <widget class="FilterFlow" name="filterTimbre" native="true"/>
-   </item>
-   <item row="19" column="0">
+   <item row="15" column="0">
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -233,7 +201,7 @@
      </property>
     </widget>
    </item>
-   <item row="15" column="0" colspan="2">
+   <item row="11" column="0" colspan="2">
     <widget class="QLabel" name="labelMidiStandard">
      <property name="font">
       <font>

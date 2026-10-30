@@ -86,8 +86,6 @@ SoundfontBrowser::SoundfontBrowser(QWidget *parent) : Tab(parent),
     connect(ui->filterCategory, SIGNAL(selectionChanged()), this, SLOT(updateFilter()));
     connect(ui->filterLicense, SIGNAL(selectionChanged()), this, SLOT(updateFilter()));
     connect(ui->filterSampleSource, SIGNAL(selectionChanged()), this, SLOT(updateFilter()));
-    connect(ui->filterTimbre, SIGNAL(selectionChanged()), this, SLOT(updateFilter()));
-    connect(ui->filterArticulation, SIGNAL(selectionChanged()), this, SLOT(updateFilter()));
     connect(ui->filterGenre, SIGNAL(selectionChanged()), this, SLOT(updateFilter()));
     connect(ui->filterMidiStandard, SIGNAL(selectionChanged()), this, SLOT(updateFilter()));
     connect(ui->filterTag, SIGNAL(selectionChanged()), this, SLOT(updateFilter()));
@@ -148,16 +146,6 @@ void SoundfontBrowser::fillFilter()
     foreach (QString property, properties)
         ui->filterSampleSource->addElement(property);
 
-    ui->filterTimbre->initialize();
-    properties = RepositoryManager::getInstance()->getProperties(SoundfontInformation::Property::TIMBRE);
-    foreach (QString property, properties)
-        ui->filterTimbre->addElement(property);
-
-    ui->filterArticulation->initialize();
-    properties = RepositoryManager::getInstance()->getProperties(SoundfontInformation::Property::ARTICULATION);
-    foreach (QString property, properties)
-        ui->filterArticulation->addElement(property);
-
     ui->filterGenre->initialize();
     properties = RepositoryManager::getInstance()->getProperties(SoundfontInformation::Property::GENRE);
     foreach (QString property, properties)
@@ -193,8 +181,6 @@ void SoundfontBrowser::applyFilter(SoundfontFilter * filter)
 
         // Properties
         ui->filterSampleSource->select(filter->properties(SoundfontInformation::Property::SAMPLE_SOURCE));
-        ui->filterTimbre->select(filter->properties(SoundfontInformation::Property::TIMBRE));
-        ui->filterArticulation->select(filter->properties(SoundfontInformation::Property::ARTICULATION));
         ui->filterGenre->select(filter->properties(SoundfontInformation::Property::GENRE));
         ui->filterMidiStandard->select(filter->properties(SoundfontInformation::Property::MIDI_STANDARD));
 
@@ -207,8 +193,6 @@ void SoundfontBrowser::applyFilter(SoundfontFilter * filter)
         ui->filterCategory->select(-1);
         ui->filterLicense->select(-1);
         ui->filterSampleSource->select(QStringList());
-        ui->filterTimbre->select(QStringList());
-        ui->filterArticulation->select(QStringList());
         ui->filterGenre->select(QStringList());
         ui->filterMidiStandard->select(QStringList());
         ui->filterTag->select(QStringList());
@@ -248,8 +232,6 @@ SoundfontFilter * SoundfontBrowser::getFilter()
 
     // Properties
     filter->setProperties(SoundfontInformation::Property::SAMPLE_SOURCE, ui->filterSampleSource->getSelectedElements());
-    filter->setProperties(SoundfontInformation::Property::TIMBRE, ui->filterTimbre->getSelectedElements());
-    filter->setProperties(SoundfontInformation::Property::ARTICULATION, ui->filterArticulation->getSelectedElements());
     filter->setProperties(SoundfontInformation::Property::GENRE, ui->filterGenre->getSelectedElements());
     filter->setProperties(SoundfontInformation::Property::MIDI_STANDARD, ui->filterMidiStandard->getSelectedElements());
 
