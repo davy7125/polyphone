@@ -50,6 +50,16 @@ void skipData(QDataStream &in, unsigned int number)
     in.skipRawData(number % 0x7FFFFFFF);
 }
 
+quint32 skipPadByte(QDataStream &in, quint32 blockSize, quint32 readSize, quint32 sdtaSize)
+{
+    // A block having an odd size is followed by a pad byte (RIFF format)
+    // Some files don't have it: the pad byte is skipped only if the size of the section "sdta" includes it
+    if (blockSize % 2 == 0 || readSize >= sdtaSize)
+        return 0;
+    in.skipRawData(1);
+    return 1;
+}
+
 QDataStream & operator >> (QDataStream &in, Sf2SdtaPart &sdta)
 {
     // 4 char, should be "LIST"
@@ -79,6 +89,8 @@ QDataStream & operator >> (QDataStream &in, Sf2SdtaPart &sdta)
         // Keep the position of "smpl" and skip the block
         sdta._startSmplOffset = 20;
         skipData(in, sdta._smplSize.value);
+        quint32 readSize = 12 + sdta._smplSize.value;
+        readSize += skipPadByte(in, sdta._smplSize.value, readSize, sdta._sdtaSize.value);
 
         // Block sm24?
         {
@@ -93,8 +105,10 @@ QDataStream & operator >> (QDataStream &in, Sf2SdtaPart &sdta)
             in >> sdta._sm24Size;
 
             // Keep the position of "sm24" and skip the block
-            sdta._startSm24Offset = 20 + sdta._smplSize.value + 8;
+            sdta._startSm24Offset = 8 + readSize + 8;
             skipData(in, sdta._sm24Size.value);
+            readSize += 8 + sdta._sm24Size.value;
+            skipPadByte(in, sdta._sm24Size.value, readSize, sdta._sdtaSize.value);
         }
         else
         {
