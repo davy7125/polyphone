@@ -167,6 +167,35 @@ Así resulta más fácil panoramizar con precisión una muestra en un [instrumen
 Esta herramienta no se puede usar con muestras mono.
 
 
+### Convertir a mono {#doc_mono}
+
+Cada muestra estéreo seleccionada se convierte a mono: una única muestra sustituye a sus partes izquierda y derecha, y las divisiones de los instrumentos que usaban una u otra parte pasan a usar esta nueva muestra.
+Las muestras mono se ignoran, y se muestra un mensaje si la selección no contiene ninguna muestra estéreo.
+
+La señal mono se calcula a partir de los canales izquierdo (I) y derecho (D) según la opción elegida:
+
+* :guilabel:`Suma: I + D`, que puede provocar saturación,
+* :guilabel:`Media: (I + D) / 2`, que conserva el nivel de un sonido centrado en el campo estéreo,
+* :guilabel:`Potencia constante: (I + D) / √2`, que conserva la sonoridad de un sonido estéreo amplio (reverberación, micrófonos espaciados…),
+* :guilabel:`Solo el canal izquierdo`,
+* :guilabel:`Solo el canal derecho`.
+
+Las dos últimas opciones no están disponibles si una muestra tiene el tipo :guilabel:`enlace` en el [editor de muestras](manual/soundfont-editor/editing-pages/sample-editor.md#doc_info), ya que entonces no se pueden distinguir los canales izquierdo y derecho.
+
+La nueva muestra conserva la frecuencia de muestreo, el bucle, la nota raíz y la corrección del canal izquierdo, o del canal derecho si solo se conserva este.
+Su nombre es el del canal izquierdo sin la marca L&nbsp;/&nbsp;R: por ejemplo, ``bassoon45L`` y ``bassoon45R`` se convierten en ``bassoon45``.
+Si los dos canales no tienen la misma longitud, el más corto se completa con silencio.
+Los canales con frecuencias de muestreo diferentes no se pueden mezclar: las muestras correspondientes no se modifican.
+
+Fusionar las divisiones izquierda y derecha en los instrumentos
+: En cada instrumento, una división que usa la parte izquierda y una división que usa la parte derecha se fusionan si sus rangos de notas y de velocidad son idénticos.
+  Sus parámetros se promedian, y un parámetro no definido en una división toma el valor heredado de la división global (o el valor por defecto): por ejemplo, dos divisiones panoramizadas completamente a la izquierda y completamente a la derecha dan una división centrada.
+  :guilabel:`Reproducción en bucle`, :guilabel:`Clase exclusiva`, :guilabel:`Nota raíz`, :guilabel:`Nota fija`, :guilabel:`Velocidad fija` y los moduladores son los de la división izquierda.
+  Si esta opción no está marcada, se conservan las dos divisiones, que reproducen la nueva muestra.
+
+Al final, un mensaje enumera las muestras que se han saturado o que no se han modificado, así como los instrumentos en los que algunas divisiones no se han podido fusionar.
+
+
 ### Encontrar un enlace {#doc_link}
 
 Entre las muestras seleccionadas, las muestras cuyos nombres solo difieren en la última letra (L&nbsp;/&nbsp;R) se enlazan automáticamente (los espacios y los caracteres ``-``, ``_``, ``(``, ``)``, ``[``, ``]``, ``{``, ``}`` y ``|`` se ignoran en los nombres).

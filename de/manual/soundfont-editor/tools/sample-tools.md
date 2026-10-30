@@ -167,6 +167,35 @@ Dadurch lässt sich ein Sample in einem [Instrument](manual/soundfont-editor/edi
 Dieses Werkzeug kann nicht mit Mono-Samples verwendet werden.
 
 
+### In Mono umwandeln {#doc_mono}
+
+Jedes ausgewählte Stereo-Sample wird in Mono umgewandelt: Ein einziges Sample ersetzt seinen linken und rechten Teil, und die Aufteilungen der Instrumente, die einen der beiden Teile verwendeten, verwenden nun dieses neue Sample.
+Mono-Samples werden ignoriert, und eine Meldung erscheint, wenn die Auswahl kein Stereo-Sample enthält.
+
+Das Mono-Signal wird je nach gewählter Option aus dem linken (L) und dem rechten (R) Kanal berechnet:
+
+* :guilabel:`Summe: L + R`, wobei Clipping auftreten kann,
+* :guilabel:`Mittelwert: (L + R) / 2`, der den Pegel eines in der Stereomitte liegenden Klangs erhält,
+* :guilabel:`Konstante Leistung: (L + R) / √2`, die die Lautheit eines breiten Stereoklangs erhält (Hall, Mikrofone mit Abstand…),
+* :guilabel:`Nur linker Kanal`,
+* :guilabel:`Nur rechter Kanal`.
+
+Die letzten beiden Optionen sind nicht verfügbar, wenn ein Sample im [Sample-Editor](manual/soundfont-editor/editing-pages/sample-editor.md#doc_info) den Typ :guilabel:`Verbindung` hat, da sich linker und rechter Kanal dann nicht unterscheiden lassen.
+
+Das neue Sample übernimmt Samplefrequenz, Loop, Basisnote und Korrektur des linken Kanals bzw. des rechten Kanals, wenn nur dieser behalten wird.
+Sein Name ist der des linken Kanals ohne die Kennzeichnung L&nbsp;/&nbsp;R: Aus ``bassoon45L`` und ``bassoon45R`` wird zum Beispiel ``bassoon45``.
+Sind die beiden Kanäle unterschiedlich lang, wird der kürzere mit Stille aufgefüllt.
+Kanäle mit unterschiedlichen Samplefrequenzen können nicht gemischt werden: Die betreffenden Samples bleiben unverändert.
+
+Linke und rechte Aufteilungen in den Instrumenten zusammenführen
+: In jedem Instrument werden eine Aufteilung, die den linken Teil verwendet, und eine Aufteilung, die den rechten Teil verwendet, zusammengeführt, wenn ihre Tasten- und Anschlagsbereiche identisch sind.
+  Ihre Parameter werden gemittelt, wobei ein in einer Aufteilung nicht definierter Parameter den von der globalen Aufteilung geerbten Wert (oder den Standardwert) annimmt: Zwei ganz nach links und ganz nach rechts panoramierte Aufteilungen ergeben zum Beispiel eine mittige Aufteilung.
+  :guilabel:`Loop-Wiedergabe`, :guilabel:`Exklusive Klasse`, :guilabel:`Basisnote`, :guilabel:`Fixierte Note`, :guilabel:`Fixierter Anschlag` und die Modulatoren sind die der linken Aufteilung.
+  Ist diese Option nicht aktiviert, bleiben beide Aufteilungen erhalten und spielen das neue Sample.
+
+Am Ende listet eine Meldung die Samples auf, bei denen Clipping aufgetreten ist oder die unverändert geblieben sind, sowie die Instrumente, in denen Aufteilungen nicht zusammengeführt werden konnten.
+
+
 ### Verknüpfung finden {#doc_link}
 
 Unter den ausgewählten Samples werden diejenigen automatisch verknüpft, deren Namen sich nur im letzten Buchstaben (L&nbsp;/&nbsp;R) unterscheiden (Leerzeichen und die Zeichen ``-``, ``_``, ``(``, ``)``, ``[``, ``]``, ``{``, ``}`` und ``|`` werden in den Namen ignoriert).

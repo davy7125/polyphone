@@ -167,6 +167,35 @@ Isso facilita então o posicionamento preciso de uma amostra no panorama dentro 
 Esta ferramenta não pode ser usada com amostras mono.
 
 
+### Converter para mono {#doc_mono}
+
+Cada amostra estéreo selecionada é convertida para mono: uma única amostra substitui suas partes esquerda e direita, e as divisões dos instrumentos que usavam uma ou outra parte passam a usar essa nova amostra.
+As amostras mono são ignoradas, e uma mensagem é exibida se a seleção não contiver nenhuma amostra estéreo.
+
+O sinal mono é calculado a partir dos canais esquerdo (E) e direito (D), de acordo com a opção escolhida:
+
+* :guilabel:`Soma: E + D`, que pode causar saturação,
+* :guilabel:`Média: (E + D) / 2`, que mantém o nível de um som centralizado no campo estéreo,
+* :guilabel:`Potência constante: (E + D) / √2`, que mantém a sonoridade de um som estéreo amplo (reverberação, microfones espaçados…),
+* :guilabel:`Somente o canal esquerdo`,
+* :guilabel:`Somente o canal direito`.
+
+As duas últimas opções não estão disponíveis se uma amostra tiver o tipo :guilabel:`vínculo` no [editor de amostras](manual/soundfont-editor/editing-pages/sample-editor.md#doc_info), pois os canais esquerdo e direito não podem ser distinguidos.
+
+A nova amostra mantém a taxa de amostragem, o loop, a nota base e a correção do canal esquerdo, ou do canal direito se somente ele for mantido.
+Seu nome é o do canal esquerdo sem a marca L&nbsp;/&nbsp;R: por exemplo, ``bassoon45L`` e ``bassoon45R`` se tornam ``bassoon45``.
+Se os dois canais não tiverem o mesmo comprimento, o mais curto é completado com silêncio.
+Canais com taxas de amostragem diferentes não podem ser mixados: as amostras correspondentes permanecem inalteradas.
+
+Mesclar as divisões esquerda e direita nos instrumentos
+: Em cada instrumento, uma divisão que usa a parte esquerda e uma divisão que usa a parte direita são mescladas se seus alcances de notas e de velocidade forem idênticos.
+  É feita a média de seus parâmetros, e um parâmetro não definido em uma divisão assume o valor herdado da divisão global (ou o valor padrão): por exemplo, duas divisões com panorâmica totalmente à esquerda e totalmente à direita resultam em uma divisão centralizada.
+  :guilabel:`Reprodução em loop`, :guilabel:`Classe exclusiva`, :guilabel:`Nota base`, :guilabel:`Nota fixa`, :guilabel:`Velocidade fixa` e os moduladores são os da divisão esquerda.
+  Se esta opção não estiver marcada, as duas divisões são mantidas e tocam a nova amostra.
+
+No final, uma mensagem lista as amostras que saturaram ou que permaneceram inalteradas, bem como os instrumentos nos quais algumas divisões não puderam ser mescladas.
+
+
 ### Encontrar um vínculo {#doc_link}
 
 Entre as amostras selecionadas, as amostras cujos nomes diferem apenas pela última letra (L&nbsp;/&nbsp;R) são vinculadas automaticamente (espaços e os caracteres ``-``, ``_``, ``(``, ``)``, ``[``, ``]``, ``{``, ``}`` e ``|`` são ignorados nos nomes).

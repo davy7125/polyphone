@@ -167,6 +167,35 @@ This will then make it easier to accurately pan a sample in an [instrument](manu
 This tool cannot be used with mono samples.
 
 
+### Convert to mono {#doc_mono}
+
+Each selected stereo sample is converted to mono: a single sample replaces its left and right parts, and the instrument divisions that used either part now use this new sample.
+Mono samples are ignored, and a message is displayed if the selection contains no stereo samples.
+
+The mono signal is computed from the left (L) and right (R) channels according to the chosen option:
+
+* :guilabel:`Sum: L + R`, which may cause clipping,
+* :guilabel:`Average: (L + R) / 2`, which keeps the level of a sound centered in the stereo field,
+* :guilabel:`Constant power: (L + R) / √2`, which keeps the loudness of a wide stereo sound (reverberation, spaced microphones…),
+* :guilabel:`Left channel only`,
+* :guilabel:`Right channel only`.
+
+The last two options are not available if a sample has the type :guilabel:`link` in the [sample editor](manual/soundfont-editor/editing-pages/sample-editor.md#doc_info), since the left and right channels cannot be distinguished.
+
+The new sample keeps the sample rate, the loop, the root key and the correction of the left channel, or of the right channel if only this one is kept.
+Its name is the name of the left channel without the L&nbsp;/&nbsp;R mark: for example, ``bassoon45L`` and ``bassoon45R`` become ``bassoon45``.
+If both channels don't have the same length, the shortest one is completed with silence.
+Channels having different sample rates cannot be mixed: the corresponding samples are left unchanged.
+
+Merge the left and right divisions in the instruments
+: In each instrument, a division using the left part and a division using the right part are merged if their key and velocity ranges are identical.
+  Their parameters are averaged, a parameter that is not defined in a division taking the value inherited from the global division (or the default value): for example, two divisions panned hard left and hard right give a centered division.
+  :guilabel:`Loop playback`, :guilabel:`Exclusive class`, :guilabel:`Root key`, :guilabel:`Fixed key`, :guilabel:`Fixed velocity` and the modulators are those of the left division.
+  If this option is not checked, both divisions are kept and play the new sample.
+
+At the end, a message lists the samples that clipped or that have been left unchanged, and the instruments in which some divisions could not be merged.
+
+
 ### Find a link {#doc_link}
 
 Among the selected samples, samples whose names only differ by the last letter (L&nbsp;/&nbsp;R) are automatically linked (spaces and the characters ``-``, ``_``, ``(``, ``)``, ``[``, ``]``, ``{``, ``}`` and ``|`` are ignored in the names).

@@ -167,6 +167,35 @@ In questo modo sarà più facile impostare con precisione il pan di un campione 
 Questa funzione non può essere usata con campioni mono.
 
 
+### Converti in mono {#doc_mono}
+
+Ogni campione stereo selezionato viene convertito in mono: un unico campione sostituisce le sue parti sinistra e destra, e le divisioni degli strumenti che usavano l'una o l'altra parte usano ora questo nuovo campione.
+I campioni mono vengono ignorati e viene visualizzato un messaggio se la selezione non contiene alcun campione stereo.
+
+Il segnale mono viene calcolato a partire dai canali sinistro (L) e destro (R) secondo l'opzione scelta:
+
+* :guilabel:`Somma: L + R`, che può causare clipping,
+* :guilabel:`Media: (L + R) / 2`, che mantiene il livello di un suono centrato nel campo stereo,
+* :guilabel:`Potenza costante: (L + R) / √2`, che mantiene il volume percepito di un suono stereo ampio (riverbero, microfoni distanziati…),
+* :guilabel:`Solo canale sinistro`,
+* :guilabel:`Solo canale destro`.
+
+Le ultime due opzioni non sono disponibili se un campione ha il tipo :guilabel:`collegamento` nell'[editor dei campioni](manual/soundfont-editor/editing-pages/sample-editor.md#doc_info), perché i canali sinistro e destro non possono essere distinti.
+
+Il nuovo campione mantiene la frequenza di campionamento, il loop, la nota di base e la correzione del canale sinistro, oppure del canale destro se viene mantenuto solo quest'ultimo.
+Il suo nome è quello del canale sinistro senza il contrassegno L&nbsp;/&nbsp;R: ad esempio, ``bassoon45L`` e ``bassoon45R`` diventano ``bassoon45``.
+Se i due canali non hanno la stessa lunghezza, il più corto viene completato con silenzio.
+I canali con frequenze di campionamento diverse non possono essere mixati: i campioni corrispondenti restano invariati.
+
+Unisci le divisioni sinistra e destra negli strumenti
+: In ogni strumento, una divisione che usa la parte sinistra e una divisione che usa la parte destra vengono unite se i loro intervalli di note e di velocità sono identici.
+  I loro parametri vengono mediati, e un parametro non definito in una divisione assume il valore ereditato dalla divisione globale (o il valore predefinito): ad esempio, due divisioni con panning completamente a sinistra e completamente a destra danno una divisione centrata.
+  :guilabel:`Riproduzione in loop`, :guilabel:`Classe esclusiva`, :guilabel:`Nota di base`, :guilabel:`Nota fissa`, :guilabel:`Velocità fissa` e i modulatori sono quelli della divisione sinistra.
+  Se questa opzione non è selezionata, entrambe le divisioni vengono mantenute e suonano il nuovo campione.
+
+Alla fine, un messaggio elenca i campioni in cui si è verificato un clipping o che sono rimasti invariati, nonché gli strumenti in cui alcune divisioni non hanno potuto essere unite.
+
+
 ### Trova un collegamento {#doc_link}
 
 Tra i campioni selezionati, quelli i cui nomi differiscono solo per l'ultima lettera (L&nbsp;/&nbsp;R) vengono collegati automaticamente (gli spazi e i caratteri ``-``, ``_``, ``(``, ``)``, ``[``, ``]``, ``{``, ``}`` e ``|`` vengono ignorati nei nomi).

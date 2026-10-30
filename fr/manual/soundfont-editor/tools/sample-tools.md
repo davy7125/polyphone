@@ -65,6 +65,35 @@ Un conseil est de se concentrer sur les positions où l'onde croise l'axe des x 
 ## Échantillons stéréo {#doc_cat_stereo}
 
 
+### Convertir en mono {#doc_mono}
+
+Chaque échantillon stéréo sélectionné est converti en mono&nbsp;: un seul échantillon remplace ses parties gauche et droite, et les divisions d'instruments qui utilisaient l'une ou l'autre partie utilisent désormais ce nouvel échantillon.
+Les échantillons mono sont ignorés, et un message s'affiche si la sélection ne contient aucun échantillon stéréo.
+
+Le signal mono est calculé à partir des canaux gauche (G) et droit (D) selon l'option choisie&nbsp;:
+
+* :guilabel:`Somme : G + D`, qui peut provoquer une saturation,
+* :guilabel:`Moyenne : (G + D) / 2`, qui conserve le niveau d'un son centré dans le champ stéréo,
+* :guilabel:`Puissance constante : (G + D) / √2`, qui conserve l'intensité perçue d'un son stéréo large (réverbération, microphones espacés…),
+* :guilabel:`Canal gauche uniquement`,
+* :guilabel:`Canal droit uniquement`.
+
+Les deux dernières options ne sont pas disponibles si un échantillon a le type :guilabel:`lien` dans l'[éditeur d'échantillons](manual/soundfont-editor/editing-pages/sample-editor.md#doc_info), car les canaux gauche et droit ne peuvent alors pas être distingués.
+
+Le nouvel échantillon conserve la fréquence d'échantillonnage, la boucle, la note de base et la correction du canal gauche, ou du canal droit si seul celui-ci est conservé.
+Son nom est celui du canal gauche sans la marque L&nbsp;/&nbsp;R&nbsp;: par exemple, ``bassoon45L`` et ``bassoon45R`` deviennent ``bassoon45``.
+Si les deux canaux n'ont pas la même longueur, le plus court est complété par du silence.
+Des canaux ayant des fréquences d'échantillonnage différentes ne peuvent pas être mélangés&nbsp;: les échantillons correspondants restent inchangés.
+
+Fusionner les divisions gauche et droite dans les instruments
+: Dans chaque instrument, une division utilisant la partie gauche et une division utilisant la partie droite sont fusionnées si leurs étendues de notes et de vélocités sont identiques.
+  Leurs paramètres sont moyennés, un paramètre non défini dans une division prenant la valeur héritée de la division globale (ou la valeur par défaut)&nbsp;: par exemple, deux divisions dont la balance est complètement à gauche et complètement à droite donnent une division centrée.
+  :guilabel:`Lecture en boucle`, :guilabel:`Classe exclusive`, :guilabel:`Note de base`, :guilabel:`Note fixe`, :guilabel:`Vélocité fixe` et les modulateurs sont ceux de la division gauche.
+  Si cette option n'est pas cochée, les deux divisions sont conservées et jouent le nouvel échantillon.
+
+À la fin, un message liste les échantillons qui ont saturé ou qui sont restés inchangés, ainsi que les instruments dans lesquels des divisions n'ont pas pu être fusionnées.
+
+
 ### Dissocier {#doc_unlink}
 
 Tous les échantillons sélectionnés qui sont liés sont séparés.
