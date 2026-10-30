@@ -28,6 +28,7 @@
 #include <QDial>
 
 // Dial edited by dragging the mouse, as in audio applications, whose default value is restored with a double click
+// It is drawn with the theme colors whatever the style, so that it remains visible with a dark theme
 class ResettableDial : public QDial
 {
     Q_OBJECT
@@ -43,6 +44,7 @@ protected:
     void mouseMoveEvent(QMouseEvent * event) override;
     void mouseReleaseEvent(QMouseEvent * event) override;
     void mouseDoubleClickEvent(QMouseEvent * event) override;
+    void paintEvent(QPaintEvent * event) override;
 
 private:
     int _defaultValue;

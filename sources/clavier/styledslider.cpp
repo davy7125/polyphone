@@ -32,10 +32,12 @@ StyledSlider::StyledSlider(QWidget *parent) : ResettableSlider(parent),
     _pressed(true),
     _fast(false)
 {
-    // Colors
+    // Colors mixed with the text, so that they are contrasted with both light and dark backgrounds
     _highlightColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
-    _backgroundColor = ContextManager::theme()->getColor(ThemeManager::BUTTON_BACKGROUND);
-    QColor borderColor = _backgroundColor.darker(140);
+    QColor backgroundColor = ContextManager::theme()->getColor(ThemeManager::BUTTON_BACKGROUND);
+    QColor textColor = ContextManager::theme()->getColor(ThemeManager::BUTTON_TEXT);
+    _grooveColor = ThemeManager::mix(backgroundColor, textColor, 0.1);
+    QColor borderColor = ThemeManager::mix(backgroundColor, textColor, 0.35);
 
     this->setStyleSheet(QString("QSlider::groove:horizontal {" )+
                         "border: 1px solid " + borderColor.name() + ";border-radius: 3px;" +
@@ -43,7 +45,7 @@ StyledSlider::StyledSlider(QWidget *parent) : ResettableSlider(parent),
                         "background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #22000000, stop:1 #00000000);}" +
                         "QSlider::handle:horizontal {" +
                         "background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 " +
-                        _backgroundColor.lighter().name() + ", stop:1 " + _backgroundColor.name() + ");" +
+                        backgroundColor.lighter().name() + ", stop:1 " + backgroundColor.name() + ");" +
                         "border: 1px solid " + borderColor.name() + ";" +
                         "width: 18px;margin: -4px 0;border-radius: 3px;}"
                         );
@@ -65,7 +67,7 @@ void StyledSlider::paintEvent(QPaintEvent *event)
     double length = this->width();
     int height = 6;
     int y1 = (this->height() - height) / 2;
-    p.fillRect(QRect(x1, y1, static_cast<int>(length), height), _backgroundColor.darker(110));
+    p.fillRect(QRect(x1, y1, static_cast<int>(length), height), _grooveColor);
 
     // And over it a highlight
     if (_fromMiddle)

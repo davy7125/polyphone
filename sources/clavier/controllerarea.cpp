@@ -35,18 +35,6 @@ ControllerArea::ControllerArea(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    // Led on / off
-    QMap<QString, QString> replacement;
-    replacement["border1"] = ContextManager::theme()->getColor(ThemeManager::BORDER).darker(130).name();
-    replacement["border2"] = ContextManager::theme()->getColor(ThemeManager::BORDER).name();
-    replacement["color1"] = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).darker(130).name();
-    replacement["color2"] = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name();
-    _ledOn = ContextManager::theme()->getColoredSvg(":/icons/led.svg", QSize(48, 48), replacement);
-    replacement["color1"] = replacement["border1"];
-    replacement["color2"] = replacement["border2"];
-    _ledOff = ContextManager::theme()->getColoredSvg(":/icons/led.svg", QSize(48, 48), replacement);
-    ui->push4->setIcon(_ledOff);
-
     // Values restored with a double click (the default bend sensitivity is 2 semitones)
     ui->sliderPitchWheel->setDefaultValue(64);
     ui->sliderSensitivity->setDefaultValue(200);
@@ -240,16 +228,9 @@ void ControllerArea::on_push4_clicked()
 
 void ControllerArea::updateInput4Display()
 {
-    if (_ledState)
-    {
-        ui->labelValue4->setText(tr("on"));
-        ui->push4->setIcon(_ledOn);
-    }
-    else
-    {
-        ui->labelValue4->setText(tr("off"));
-        ui->push4->setIcon(_ledOff);
-    }
+    // The button also toggles itself when clicked, before _ledState is updated
+    ui->labelValue4->setText(_ledState ? tr("on") : tr("off"));
+    ui->push4->setChecked(_ledState);
 }
 
 bool ControllerArea::processMonoPressureChanged(int channel, int value)

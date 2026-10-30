@@ -91,15 +91,12 @@
     </widget>
    </item>
    <item row="1" column="6">
-    <widget class="QPushButton" name="push4">
+    <widget class="LedButton" name="push4">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="text">
       <string notr="true"/>
@@ -109,9 +106,6 @@
        <width>36</width>
        <height>36</height>
       </size>
-     </property>
-     <property name="flat">
-      <bool>true</bool>
      </property>
     </widget>
    </item>
@@ -289,6 +283,11 @@
    <class>ResettableDial</class>
    <extends>QDial</extends>
    <header>resettabledial.h</header>
+  </customwidget>
+  <customwidget>
+   <class>LedButton</class>
+   <extends>QPushButton</extends>
+   <header>ledbutton.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

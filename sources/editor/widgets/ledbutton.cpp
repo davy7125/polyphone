@@ -33,15 +33,21 @@ LedButton::LedButton(QWidget * parent) : QPushButton(parent)
     this->setFlat(true);
     this->setCursor(Qt::PointingHandCursor);
 
-    // Same colors as the led of the controller area
+    // Border and switched off led mixed with the text, so that they are contrasted with both light and dark backgrounds
+    QColor windowColor = ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND);
+    QColor textColor = ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT);
+    QColor borderColor = ThemeManager::mix(windowColor, textColor, 0.5);
+    QColor offColor = ThemeManager::mix(windowColor, textColor, 0.3);
+    QColor onColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
+
     QMap<QString, QString> replacement;
-    replacement["border1"] = ContextManager::theme()->getColor(ThemeManager::BORDER).darker(130).name();
-    replacement["border2"] = ContextManager::theme()->getColor(ThemeManager::BORDER).name();
-    replacement["color1"] = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).darker(130).name();
-    replacement["color2"] = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name();
+    replacement["border1"] = borderColor.darker(130).name();
+    replacement["border2"] = borderColor.name();
+    replacement["color1"] = onColor.darker(130).name();
+    replacement["color2"] = onColor.name();
     _ledOn = ContextManager::theme()->getColoredSvg(":/icons/led.svg", QSize(48, 48), replacement);
-    replacement["color1"] = replacement["border1"];
-    replacement["color2"] = replacement["border2"];
+    replacement["color1"] = offColor.darker(130).name();
+    replacement["color2"] = offColor.name();
     _ledOff = ContextManager::theme()->getColoredSvg(":/icons/led.svg", QSize(48, 48), replacement);
     updateIcon();
 }

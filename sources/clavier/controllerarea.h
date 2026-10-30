@@ -74,8 +74,6 @@ private:
     void updateInput4Display();
 
     Ui::ControllerArea *ui;
-    QPixmap _ledOn;
-    QPixmap _ledOff;
     bool _ledState;
     int _channel;
     QMap<ComboCC *, int> _comboGroup;

@@ -432,6 +432,16 @@ void ThemeManager::computePalette()
     colorShadow.setHsv(colorTmp.hue(), (int)(0.75 * colorTmp.saturation()), qMin(255, (int)(0.2 * colorTmp.value())));
     _customPalette.setColor(QPalette::Shadow, colorShadow);
 
+    // Multiplying a low value hardly changes it: with a dark theme, lighter colors are mixed with the text instead
+    // Dark is kept since it is also the border color
+    if (isDark(WINDOW_BACKGROUND, WINDOW_TEXT))
+    {
+        QColor colorText = _customPalette.color(QPalette::WindowText);
+        _customPalette.setColor(QPalette::Light, mix(colorTmp, colorText, 0.3));
+        _customPalette.setColor(QPalette::Midlight, mix(colorTmp, colorText, 0.15));
+        _customPalette.setColor(QPalette::Mid, mix(_customPalette.color(QPalette::Button), colorDark, 0.5)); // Between button and dark
+    }
+
     // Disabled colors
     _customPalette.setColor(QPalette::Disabled, QPalette::WindowText,
                             disabled1(_customPalette.color(QPalette::WindowText), _customPalette.color(QPalette::Window)));

@@ -55,7 +55,7 @@ private slots:
 
 private:
     QColor _highlightColor;
-    QColor _backgroundColor;
+    QColor _grooveColor;
     bool _fromMiddle;
     int _middleValue;
     bool _pressed;
