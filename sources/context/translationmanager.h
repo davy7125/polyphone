@@ -53,6 +53,7 @@ public:
 
 private:
     void addTranslations(QString path);
+    static QString getNativeLanguageName(QString locale);
     static const QString DEFAULT_LANGUAGE;
     static const QString RESOURCE_PATH;
     static const QString TRANSLATION_DIRECTORY;

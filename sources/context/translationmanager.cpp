@@ -39,7 +39,7 @@ TranslationManager::TranslationManager(ConfManager * configuration) :
     _translator(new QTranslator())
 {
     // Native language
-    _languages["en"] = QLocale("en").nativeLanguageName();
+    _languages["en"] = getNativeLanguageName("en");
 
     // Languages in embedded translation file
     this->addTranslations(RESOURCE_PATH);
@@ -63,11 +63,21 @@ void TranslationManager::addTranslations(QString path)
         {
             // Language
             QString locale = it.next().section('_', 1, 1).section(".", 0, 0);
-            QString languageName = QLocale(locale).nativeLanguageName();
+            QString languageName = getNativeLanguageName(locale);
             if (languageName != "")
                 _languages[locale] = languageName;
         }
     }
+}
+
+QString TranslationManager::getNativeLanguageName(QString locale)
+{
+    // Qt includes the territory for some languages ("American English", "español de España")
+    if (locale == "en")
+        return "English";
+    if (locale == "es")
+        return "español";
+    return QLocale(locale).nativeLanguageName();
 }
 
 void TranslationManager::translate()
