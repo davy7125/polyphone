@@ -26,6 +26,7 @@
 #include "ui_editor.h"
 #include <QFileInfo>
 #include <QMessageBox>
+#include <QVariantAnimation>
 #include "contextmanager.h"
 #include "treesortfilterproxy.h"
 #include "soundfontmanager.h"
@@ -56,14 +57,9 @@ Editor::Editor(DialogKeyboard * dialogKeyboard, EltID initialSelection) : Soundf
     QString highlightColorBackground = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name();
     QString highlightColorText = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name();
 
-    ui->editFilter->setStyleSheet("QLineEdit{border: 0}");
     ui->frameSearch->setStyleSheet("QFrame{background-color:" +
                                    highlightColorBackground + "}");
-    ui->editFilter->setStyleSheet("QLineEdit{background-color:" + highlightColorBackground +
-                                  ";color:" + highlightColorText +
-                                  ";selection-background-color:" + highlightColorText +
-                                  ";selection-color:" + highlightColorBackground +
-                                  ";}");
+    updateSearchStyle(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT));
     ui->treeView->setStyleSheet("TreeView{border:1px solid " +
                                 ContextManager::theme()->getColor(ThemeManager::BORDER).name() +
                                 ";border-top:0;border-left:0;border-bottom:0}");
@@ -82,6 +78,17 @@ Editor::Editor(DialogKeyboard * dialogKeyboard, EltID initialSelection) : Soundf
                                      highlightColorText +
                                      ";border:0;padding:0px 5px}" +
                                      "QPushButton:hover{color:" + resetHoverColor + "}");
+
+    // Flash of the search field when it is called, so that it is easily spotted
+    QColor flashColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
+    flashColor = ContextManager::theme()->isDark(ThemeManager::HIGHLIGHTED_BACKGROUND, ThemeManager::HIGHLIGHTED_TEXT) ?
+                     flashColor.darker(150) : flashColor.lighter(150);
+    _searchAnimation = new QVariantAnimation(this);
+    _searchAnimation->setStartValue(flashColor);
+    _searchAnimation->setEndValue(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT));
+    _searchAnimation->setDuration(400);
+    _searchAnimation->setEasingCurve(QEasingCurve::OutCubic);
+    connect(_searchAnimation, SIGNAL(valueChanged(QVariant)), this, SLOT(onSearchAnimationValueChanged(QVariant)));
 
     // List of possible pages
     QList<Page *> pages = _pageSelector->getAllPages();
@@ -700,6 +707,8 @@ void Editor::onActionRequired(TabAction action)
     case Tab::SEARCH:
         ui->editFilter->selectAll();
         ui->editFilter->setFocus();
+        _searchAnimation->stop();
+        _searchAnimation->start();
         break;
     case Tab::UNDO:
         SoundfontManager::getInstance()->undo(this->getSf2Index());
@@ -732,4 +741,28 @@ bool Editor::eventFilter(QObject *obj, QEvent *event)
     }
 
     return Tab::eventFilter(obj, event);
+}
+
+void Editor::onSearchAnimationValueChanged(const QVariant &value)
+{
+    updateSearchStyle(value.value<QColor>());
+}
+
+void Editor::updateSearchStyle(QColor focusBackgroundColor)
+{
+    QString highlightColorBackground = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name();
+    QString highlightColorText = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name();
+
+    // Merged with the bar when not focused, inverted colors and set in the bar otherwise
+    // (padding compensated by the margin so that the text doesn't move)
+    ui->editFilter->setStyleSheet("QLineEdit{background-color:" + highlightColorBackground +
+                                  ";color:" + highlightColorText +
+                                  ";selection-background-color:" + highlightColorText +
+                                  ";selection-color:" + highlightColorBackground +
+                                  ";border:0;padding-left:4px}" +
+                                  "QLineEdit:focus{background-color:" + focusBackgroundColor.name() +
+                                  ";color:" + highlightColorBackground +
+                                  ";selection-background-color:" + highlightColorBackground +
+                                  ";selection-color:" + highlightColorText +
+                                  ";margin:2px;padding-left:2px;border-radius:2px}");
 }

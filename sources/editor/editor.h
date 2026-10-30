@@ -31,6 +31,7 @@
 class PageSelector;
 class AbstractInputParser;
 class DialogKeyboard;
+class QVariantAnimation;
 
 namespace Ui {
 class Editor;
@@ -72,9 +73,11 @@ private slots:
     void onErrorEncountered(QString text);
     void onRootKeyChanged(int rootKey);
     void onPageHidden();
+    void onSearchAnimationValueChanged(const QVariant &value);
 
 private:
     QVector<bool> getEnabledKeysForInstrument(EltID idInst);
+    void updateSearchStyle(QColor focusBackgroundColor);
 
     Ui::Editor *ui;
     PageSelector * _pageSelector;
@@ -82,6 +85,7 @@ private:
     IdList _currentIds;
     EltID _initialSelection;
     bool _firstShow;
+    QVariantAnimation * _searchAnimation;
 };
 
 #endif // EDITOR_H
