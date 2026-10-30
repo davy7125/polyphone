@@ -56,6 +56,8 @@ private slots:
     void on_pushDirectory_clicked();
 
 private:
+    static QString splitInTwoLines(QString text, const QFontMetrics &fm);
+
     Ui::ConfigSectionRepository *ui;
     UserManager::ConnectionState _currentState;
     bool _fakePassword;

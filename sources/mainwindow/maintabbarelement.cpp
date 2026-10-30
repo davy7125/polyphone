@@ -35,7 +35,7 @@ int MainTabBarElement::tabHeight()
     return 3 * MARGIN + TAB_ICON_SIZE;
 }
 
-MainTabBarElement::MainTabBarElement(Tab * tab, QString iconName, bool isColored, QFontMetrics fm) :
+MainTabBarElement::MainTabBarElement(Tab * tab, QString iconName, QFontMetrics fm) :
     _tab(tab),
     _iconName(iconName),
     _isEnabled(false),
@@ -56,29 +56,12 @@ MainTabBarElement::MainTabBarElement(Tab * tab, QString iconName, bool isColored
         ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND),
         ContextManager::theme()->getColor(ThemeManager::LIST_TEXT),
         0.2);
-    _textColorEnabled =
-        isColored ?
-            ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT) :
-            ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT);
-    _backgroundColorEnabled =
-        isColored ?
-            ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND) :
-            ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND);
-    if (isColored)
-    {
-        _closeButtonBackgroundColorEnabled = ThemeManager::mix(
-            ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
-            ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT),
-            0.2);
-    }
-    else
-    {
-        _closeButtonBackgroundColorEnabled = ThemeManager::mix(
-            ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND),
-            ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT),
-            0.2);
-    }
-
+    _textColorEnabled = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT);
+    _backgroundColorEnabled = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
+    _closeButtonBackgroundColorEnabled = ThemeManager::mix(
+        ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
+        ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT),
+        0.2);
 
     // Icons
     QMap<QString, QString> replacement;

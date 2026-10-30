@@ -35,7 +35,7 @@ class MainTabBarElement: QObject
     Q_OBJECT
 
 public:
-    MainTabBarElement(Tab * tab, QString iconName, bool isColored, QFontMetrics fm);
+    MainTabBarElement(Tab * tab, QString iconName, QFontMetrics fm);
 
     void setLabel(QString label);
     void setTooltip(QString toolTip) { _toolTip = toolTip; }

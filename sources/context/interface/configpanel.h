@@ -27,6 +27,7 @@
 
 #include "tab.h"
 #include "usermanager.h"
+class QLabel;
 
 namespace Ui
 {
@@ -36,7 +37,7 @@ class ConfigPanel;
 class ConfigPanel : public Tab
 {
     Q_OBJECT
-    
+
 public:
     ConfigPanel(QWidget *parent = NULL);
     ~ConfigPanel();
@@ -44,11 +45,19 @@ public:
     // Initialize the interface with the parameters values
     void initializeInterface();
 
+protected:
+    bool eventFilter(QObject * watched, QEvent * event) override;
+
 private slots:
     void onSectionClicked(int sectionNumber);
+    void updateTitle();
 
 private:
+    void updateTocPosition();
+    void updateBottomSpace();
+
     Ui::ConfigPanel * ui;
+    QList<QLabel *> _sectionLabels; // Headers of the sections, except the first one
 };
 
 #endif // CONFIGPANEL_H

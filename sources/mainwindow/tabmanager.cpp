@@ -106,7 +106,7 @@ void TabManager::openConfiguration()
     _configTab->initializeInterface();
     int index = _stackedWidget->indexOf(_configTab);
     if (index == -1)
-        index = _stackedWidget->addWidgetWithTab(_configTab, ":/icons/settings.svg", tr("Settings"), false);
+        index = _stackedWidget->addWidgetWithTab(_configTab, ":/icons/settings.svg", tr("Settings"));
     _stackedWidget->setCurrentIndex(index);
 }
 
@@ -114,7 +114,7 @@ void TabManager::openNewSoundfont()
 {
     // Create a new editor
     Editor * editor = new Editor(_dialogKeyboard, EltID(elementSf2));
-    int index = _stackedWidget->addWidgetWithTab(editor, ":/icons/file-audio.svg", "", true);
+    int index = _stackedWidget->addWidgetWithTab(editor, ":/icons/file-audio.svg", "");
     connect(editor, SIGNAL(tabTitleChanged(QString)), this, SLOT(onTabTitleChanged(QString)));
     connect(editor, SIGNAL(filePathChanged(QString)), this, SLOT(onFilePathChanged(QString)));
     connect(editor, SIGNAL(keyboardDisplayChanged(bool)), this, SIGNAL(keyboardDisplayChanged(bool)));
@@ -172,7 +172,7 @@ void TabManager::openSoundfont(QString fileName, PlayerOptions *playerOptions, b
 
     // Otherwise, create a new editor or player
     SoundfontTab * tab = ContextManager::s_playerMode ? (SoundfontTab *)(new Player(playerOptions)) : (SoundfontTab *)(new Editor(_dialogKeyboard, initialSelection));
-    int index = _stackedWidget->addWidgetWithTab(tab, ":/icons/file-audio.svg", QFileInfo(fileName).baseName(), true);
+    int index = _stackedWidget->addWidgetWithTab(tab, ":/icons/file-audio.svg", QFileInfo(fileName).baseName());
     connect(tab, SIGNAL(tabTitleChanged(QString)), this, SLOT(onTabTitleChanged(QString)));
     connect(tab, SIGNAL(filePathChanged(QString)), this, SLOT(onFilePathChanged(QString)));
     connect(tab, SIGNAL(keyboardDisplayChanged(bool)), this, SIGNAL(keyboardDisplayChanged(bool)));
@@ -219,7 +219,7 @@ void TabManager::openDirectory(QString directoryPath)
     // Create a new browser
     DirectoryBrowser * browser = new DirectoryBrowser();
     connect(browser, SIGNAL(itemDoubleClicked(QString,EltID)), this, SLOT(openSoundfont(QString,EltID)));
-    int index = _stackedWidget->addWidgetWithTab(browser, ":/icons/folder.svg", dirName, true);
+    int index = _stackedWidget->addWidgetWithTab(browser, ":/icons/folder.svg", dirName);
     _stackedWidget->setTabToolTip(browser, directoryPath);
     _dirBrowserTabs << browser;
 
@@ -242,7 +242,7 @@ void TabManager::openRepository(SoundfontFilter *filter)
     }
     int index = _stackedWidget->indexOf(_browserTab);
     if (index == -1)
-        index = _stackedWidget->addWidgetWithTab(_browserTab, ":/icons/globe.svg", tr("Online repository"), true);
+        index = _stackedWidget->addWidgetWithTab(_browserTab, ":/icons/globe.svg", tr("Online repository"));
     _stackedWidget->setCurrentIndex(index);
 }
 
@@ -409,7 +409,7 @@ void TabManager::openUser()
     _userTab->initializeInterface();
     int index = _stackedWidget->indexOf(_userTab);
     if (index == -1)
-        index = _stackedWidget->addWidgetWithTab(_userTab, ":/icons/user.svg", tr("User area"), false);
+        index = _stackedWidget->addWidgetWithTab(_userTab, ":/icons/user.svg", tr("User area"));
     _stackedWidget->setCurrentIndex(index);
 }
 
@@ -434,7 +434,7 @@ void TabManager::openRepositorySoundfont(int id)
     // Create a new viewer
     SoundfontViewer * viewer = new SoundfontViewer();
     connect(viewer, SIGNAL(itemClicked(SoundfontFilter*)), this, SLOT(openRepository(SoundfontFilter*)));
-    int index = _stackedWidget->addWidgetWithTab(viewer, ":/icons/file-description.svg", si->getTitle(), true);
+    int index = _stackedWidget->addWidgetWithTab(viewer, ":/icons/file-description.svg", si->getTitle());
     _viewerTabs << viewer;
 
     // Initialize and display it

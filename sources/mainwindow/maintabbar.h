@@ -38,7 +38,7 @@ public:
     MainTabBar(QWidget *parent = nullptr);
     ~MainTabBar();
 
-    void addTab(Tab * tab, QString iconName, QString label, bool isColored);
+    void addTab(Tab * tab, QString iconName, QString label);
     void removeTab(Tab * tab);
     void setTabLabel(Tab * tab, const QString &label);
     void setTabToolTip(Tab * tab, const QString &tip);

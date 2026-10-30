@@ -52,10 +52,10 @@ void MainStackedWidget::setControls(QPushButton * pushHome, MainTabBar * tabBar)
     connect(this, SIGNAL(currentChanged(int)), this, SLOT(onCurrentChanged(int)));
 }
 
-int MainStackedWidget::addWidgetWithTab(Tab * tab, QString iconName, const QString &label, bool isColored)
+int MainStackedWidget::addWidgetWithTab(Tab * tab, QString iconName, const QString &label)
 {
     int index = this->addWidget(tab);
-    _tabBar->addTab(tab, iconName, label, isColored);
+    _tabBar->addTab(tab, iconName, label);
     return index;
 }
 

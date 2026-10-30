@@ -59,9 +59,9 @@ MainTabBar::~MainTabBar()
         delete _tabs.takeFirst();
 }
 
-void MainTabBar::addTab(Tab * tab, QString iconName, QString label, bool isColored)
+void MainTabBar::addTab(Tab * tab, QString iconName, QString label)
 {
-    MainTabBarElement * tabElement = new MainTabBarElement(tab, iconName, isColored, this->fontMetrics());
+    MainTabBarElement * tabElement = new MainTabBarElement(tab, iconName, this->fontMetrics());
     tabElement->setLabel(label);
     _tabs.append(tabElement);
     _firstTabDisplayed = -1; // Go to the last position

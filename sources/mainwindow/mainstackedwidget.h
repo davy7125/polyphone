@@ -40,7 +40,7 @@ public:
     MainStackedWidget(QWidget *parent = nullptr);
     void setControls(QPushButton * pushHome, MainTabBar * tabBar);
 
-    int addWidgetWithTab(Tab * tab, QString iconName, const QString &label, bool isColored);
+    int addWidgetWithTab(Tab * tab, QString iconName, const QString &label);
     void removeWidgetWithTab(Tab * tab);
     void setTabLabel(Tab * tab, const QString &label);
     void setTabToolTip(Tab * tab, const QString &tip);

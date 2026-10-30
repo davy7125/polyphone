@@ -32,23 +32,32 @@ ConfigPanel::ConfigPanel(QWidget *parent) : Tab(parent),
 {
     ui->setupUi(this);
 
-    // Style
-    QString styleSheet = QString("QLabel{border-radius:2px;padding: 3px 5px;") +
-            "background-color:" + ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() + ";" +
-            "color: " + ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() + ";}";
-    ui->generalLabel->setStyleSheet(styleSheet);
-    ui->interfaceLabel->setStyleSheet(styleSheet);
-    ui->soundLabel->setStyleSheet(styleSheet);
-    ui->keyboardLabel->setStyleSheet(styleSheet);
-    ui->repositoryLabel->setStyleSheet(styleSheet);
+    // Style (same horizontal padding and no indent for the title and the headers, so that their texts are aligned)
+    QString colors = "background-color:" + ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() + ";" +
+            "color: " + ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() + ";";
+    QString styleSheet = "QLabel{border-radius:2px;padding: 3px 10px;" + colors + "}";
+    foreach (QLabel * label, QList<QLabel *>() << ui->interfaceLabel << ui->soundLabel << ui->keyboardLabel << ui->repositoryLabel)
+    {
+        label->setStyleSheet(styleSheet);
+        label->setIndent(0);
+    }
+    ui->labelTitle->setStyleSheet("QLabel{padding: 0 10px;" + colors + "}");
 
-    // Events
-    connect(ui->widgetToc, SIGNAL(sectionClicked(int)), this, SLOT(onSectionClicked(int)));
-
+    // Section headers
+    _sectionLabels << ui->interfaceLabel << ui->soundLabel << ui->keyboardLabel;
 #ifdef NO_SF2_REPOSITORY
     ui->repositoryLabel->hide();
     ui->repositoryWidget->hide();
+#else
+    _sectionLabels << ui->repositoryLabel;
 #endif
+
+    // Events
+    connect(ui->widgetToc, SIGNAL(sectionClicked(int)), this, SLOT(onSectionClicked(int)));
+    connect(ui->scrollArea->verticalScrollBar(), SIGNAL(valueChanged(int)), this, SLOT(updateTitle()));
+    connect(ui->scrollArea->horizontalScrollBar(), SIGNAL(valueChanged(int)), this, SLOT(updateTitle()));
+    ui->scrollArea->viewport()->installEventFilter(this);
+    ui->scrollAreaWidgetContents->installEventFilter(this);
 }
 
 ConfigPanel::~ConfigPanel()
@@ -67,22 +76,72 @@ void ConfigPanel::initializeInterface()
 #endif
 }
 
+bool ConfigPanel::eventFilter(QObject * watched, QEvent * event)
+{
+    if (event->type() == QEvent::Resize)
+    {
+        updateTocPosition();
+        updateBottomSpace();
+        updateTitle();
+    }
+    return Tab::eventFilter(watched, event);
+}
+
 void ConfigPanel::onSectionClicked(int sectionNumber)
 {
-    QWidget * widget;
-    switch (sectionNumber)
-    {
-    case 0: widget = ui->generalLabel; break;
-    case 1: widget = ui->interfaceLabel; break;
-    case 2: widget = ui->soundLabel; break;
-    case 3: widget = ui->keyboardLabel; break;
-    case 4: widget = ui->repositoryLabel; break;
-    default:
+    if (sectionNumber < 0 || sectionNumber > _sectionLabels.count())
         return;
-    }
 
-    const QPoint p = widget->mapTo(ui->scrollArea, QPoint(0,0));
-    int topMargin;
-    ui->horizontalLayout->getContentsMargins(nullptr, &topMargin, nullptr, nullptr);
-    ui->scrollArea->verticalScrollBar()->setValue(p.y() + ui->scrollArea->verticalScrollBar()->value() - topMargin);
+    // The header of the section is scrolled just under the title
+    int position = 0;
+    if (sectionNumber > 0)
+    {
+        QLabel * label = _sectionLabels[sectionNumber - 1];
+        position = label->y() + label->height();
+    }
+    ui->scrollArea->verticalScrollBar()->setValue(position);
+}
+
+void ConfigPanel::updateTitle()
+{
+    // The title is the name of the last section whose header has been scrolled under it
+    QString title = tr("General");
+    int position = ui->scrollArea->verticalScrollBar()->value();
+    foreach (QLabel * label, _sectionLabels)
+        if (label->y() + label->height() <= position)
+            title = label->text();
+    ui->labelTitle->setText(title);
+
+    // Align the title with the headers
+    int indent = qMax(0, ui->interfaceLabel->mapTo(this, QPoint(0, 0)).x() - ui->labelTitle->x());
+    if (indent != ui->labelTitle->indent())
+        ui->labelTitle->setIndent(indent);
+}
+
+void ConfigPanel::updateTocPosition()
+{
+    // Same space on the left of the table of contents and on the right of the sections
+    int leftMargin = ui->widgetToc->contentsMargins().left();
+    int tocWidth = ui->widgetToc->sizeHint().width() - leftMargin;
+    int tocLeftSpace = ui->widgetToc->layout()->contentsMargins().left();
+    int scrollBarWidth = ui->scrollArea->width() - ui->scrollArea->viewport()->width();
+    int sectionsRight = ui->interfaceLabel->x() + ui->interfaceLabel->width();
+    int newLeftMargin = qMax(0, (this->width() - tocWidth - scrollBarWidth - sectionsRight - tocLeftSpace) / 2);
+    if (newLeftMargin != leftMargin)
+        ui->widgetToc->setContentsMargins(newLeftMargin, 0, 0, 0);
+}
+
+void ConfigPanel::updateBottomSpace()
+{
+    // Space below the last section, so that its header can be scrolled under the title
+    QLabel * lastLabel = _sectionLabels.last();
+    int bottomMargin;
+    ui->horizontalLayout->getContentsMargins(nullptr, nullptr, nullptr, &bottomMargin);
+    int height = qMax(0, lastLabel->y() + lastLabel->height() + ui->scrollArea->viewport()->height() -
+                      ui->bottomSpacer->geometry().top() - bottomMargin);
+    if (height != ui->bottomSpacer->sizeHint().height())
+    {
+        ui->bottomSpacer->changeSize(20, height, QSizePolicy::Minimum, QSizePolicy::MinimumExpanding);
+        ui->verticalLayout->invalidate();
+    }
 }

@@ -47,6 +47,8 @@ ConfigSectionRepository::ConfigSectionRepository(QWidget *parent) :
     QString styleSheet = "QToolButton{border:none; background-color:" + ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND).name() + ";}";
     ui->buttonCreateAccount->setStyleSheet(styleSheet);
     ui->buttonCreateAccount->setIcon(ContextManager::theme()->getColoredSvg(":/icons/user.svg", QSize(48, 48), ThemeManager::WINDOW_TEXT));
+    if (ui->buttonCreateAccount->sizeHint().width() > ui->stackedWidget->maximumWidth())
+        ui->buttonCreateAccount->setText(splitInTwoLines(ui->buttonCreateAccount->text(), ui->buttonCreateAccount->fontMetrics()));
 
     // Style for "Become Premium"
     ui->buttonBecomePremium->setStyleSheet(styleSheet);
@@ -232,4 +234,25 @@ void ConfigSectionRepository::on_linePassword_returnPressed()
 {
     if (!_fakePassword && (_currentState == UserManager::DISCONNECTED || _currentState == UserManager::FAILED))
         this->on_pushConnect_clicked();
+}
+
+QString ConfigSectionRepository::splitInTwoLines(QString text, const QFontMetrics &fm)
+{
+    // Replace the space giving the narrowest text by a line break
+    int bestPosition = -1;
+    int bestWidth = fm.horizontalAdvance(text);
+    for (int i = 0; i < text.size(); i++)
+    {
+        if (text[i] != ' ')
+            continue;
+        int width = qMax(fm.horizontalAdvance(text.left(i)), fm.horizontalAdvance(text.mid(i + 1)));
+        if (width < bestWidth)
+        {
+            bestWidth = width;
+            bestPosition = i;
+        }
+    }
+    if (bestPosition != -1)
+        text[bestPosition] = '\n';
+    return text;
 }
