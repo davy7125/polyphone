@@ -30,6 +30,7 @@
 #include <QMessageBox>
 #include <QCloseEvent>
 #include <QWindow>
+#include <QShortcut>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "repositorymanager.h"
@@ -133,6 +134,14 @@ MainWindow::MainWindow(bool playerMode, QWidget *parent) : QWidget(parent),
     connect(_tabManager, SIGNAL(keyboardDisplayChanged(bool,bool)), this, SLOT(onKeyboardDisplayChange(bool,bool)));
     connect(_tabManager, SIGNAL(recorderDisplayChanged(bool,bool)), this, SLOT(onRecorderDisplayChange(bool,bool)));
     connect(_tabManager, SIGNAL(tabOpen(bool,bool,bool)), ui->topRightWidget, SLOT(onTabOpen(bool,bool,bool)));
+
+    // Navigation between tabs, with a priority over the keys used by the widgets having the focus (lists, trees, tables, ...)
+    new QShortcut(QKeySequence(Qt::CTRL | Qt::Key_Home), this, SLOT(onFirstTab()));
+    new QShortcut(QKeySequence(Qt::CTRL | Qt::Key_PageUp), this, SLOT(onPreviousTab()));
+    new QShortcut(QKeySequence(Qt::CTRL | Qt::SHIFT | Qt::Key_Tab), this, SLOT(onPreviousTab()));
+    new QShortcut(QKeySequence(Qt::CTRL | Qt::Key_PageDown), this, SLOT(onNextTab()));
+    new QShortcut(QKeySequence(Qt::CTRL | Qt::Key_Tab), this, SLOT(onNextTab()));
+    new QShortcut(QKeySequence(Qt::CTRL | Qt::Key_End), this, SLOT(onLastTab()));
 
 #ifdef NO_SF2_REPOSITORY
     ui->widgetRepo->hide();
@@ -428,20 +437,12 @@ void MainWindow::keyPressEvent(QKeyEvent * event)
                 currentTab->onActionRequired(Tab::UNDO);
             event->accept();
         } break;
-        case Qt::Key_Home: // Go to the first tab
-            _tabManager->setCurrentWidget(ui->tabBar->getFirstTab());
+        case Qt::Key_Home: // Shortcut reserved but not used by a text field
+            onFirstTab();
             event->accept();
             break;
-        case Qt::Key_PageUp: // Go to previous tab
-            _tabManager->setCurrentWidget(ui->tabBar->getPreviousTab());
-            event->accept();
-            break;
-        case Qt::Key_Tab: case Qt::Key_PageDown: // Go to next tab
-            _tabManager->setCurrentWidget(ui->tabBar->getNextTab());
-            event->accept();
-            break;
-        case Qt::Key_End: // Go to the last tab
-            _tabManager->setCurrentWidget(ui->tabBar->getLastTab());
+        case Qt::Key_End: // Shortcut reserved but not used by a text field
+            onLastTab();
             event->accept();
             break;
         default:
@@ -458,10 +459,6 @@ void MainWindow::keyPressEvent(QKeyEvent * event)
                 currentTab->onActionRequired(Tab::REDO);
             event->accept();
         } break;
-        case Qt::Key_Backtab: // Go to previous tab
-            _tabManager->setCurrentWidget(ui->tabBar->getPreviousTab());
-            event->accept();
-            break;
         default:
             break;
         }
@@ -483,6 +480,26 @@ void MainWindow::onAboutClicked()
 void MainWindow::onCloseTab()
 {
     _tabManager->closeCurrentTab();
+}
+
+void MainWindow::onFirstTab()
+{
+    _tabManager->setCurrentWidget(ui->tabBar->getFirstTab());
+}
+
+void MainWindow::onPreviousTab()
+{
+    _tabManager->setCurrentWidget(ui->tabBar->getPreviousTab());
+}
+
+void MainWindow::onNextTab()
+{
+    _tabManager->setCurrentWidget(ui->tabBar->getNextTab());
+}
+
+void MainWindow::onLastTab()
+{
+    _tabManager->setCurrentWidget(ui->tabBar->getLastTab());
 }
 
 void MainWindow::onSave()

@@ -67,6 +67,10 @@ private slots:
     void onRecorderDisplayChange(bool isDisplayed, bool propagate);
     void fullScreenTriggered();
     void onCloseTab();
+    void onFirstTab();
+    void onPreviousTab();
+    void onNextTab();
+    void onLastTab();
     void onSave();
     void onSaveAs();
     void onUserClicked();
