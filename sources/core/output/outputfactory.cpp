@@ -32,6 +32,7 @@
 #include "abstractoutput.h"
 #include "sf/outputsf.h"
 #include "sfz/outputsfz.h"
+#include "dls/outputdls.h"
 #include "not_supported/outputnotsupported.h"
 #include "empty/outputdummy.h"
 #include "csv/outputcsv.h"
@@ -58,6 +59,11 @@ AbstractOutput * OutputFactory::getOutput(QString fileName)
         {
             // Format sfz
             output = new OutputSfz();
+        }
+        else if (extension == "dls")
+        {
+            // Format dls
+            output = new OutputDls();
         }
         else if (extension == "csv")
         {

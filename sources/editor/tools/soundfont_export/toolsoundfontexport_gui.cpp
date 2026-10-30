@@ -222,8 +222,8 @@ void ToolSoundfontExport_gui::on_comboFormat_currentIndexChanged(int index)
     ui->labelQuality->setVisible(index == 1);
     ui->comboQuality->setVisible(index == 1);
 
-    // Options for sf2 and sf3
-    ui->checkFilePreset->setVisible(index == 0 || index == 1);
+    // Options for sf2, sf3 and dls
+    ui->checkFilePreset->setVisible(index == 0 || index == 1 || index == 4);
 
     // Options for sfz
     ui->checkBank->setVisible(index == 2);

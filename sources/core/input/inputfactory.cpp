@@ -30,6 +30,7 @@
 #include "sf/inputsf.h"
 #include "sfz/inputsfz.h"
 #include "sfark/inputsfark.h"
+#include "dls/inputdls.h"
 #include "grandorgue/inputgrandorgue.h"
 #include "not_supported/inputparsernotsupported.h"
 #include "empty/inputparserempty.h"
@@ -42,6 +43,7 @@ InputFactory::InputFactory()
     _inputs << new InputSf()
             << new InputSfz()
             << new InputSfArk()
+            << new InputDls()
             << new InputGrandOrgue();
 
     foreach (AbstractInput * input, _inputs)

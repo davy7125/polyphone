@@ -155,6 +155,9 @@ int convert(Options &options)
         output->setOption("raw_values", options.csvRawValues());
         writeLine(QObject::tr("Writing files in directory \"%1\"...").arg(options.getOutputDirectory()));
         break;
+    case Options::MODE_CONVERSION_TO_DLS:
+        writeLine(QObject::tr("Writing file \"%1\"...").arg(outputFile.filePath()));
+        break;
     default:
         writeLine(QObject::tr("Unknown mode \"%1\".").arg(options.mode()));
         return 1;

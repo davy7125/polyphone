@@ -79,6 +79,21 @@
         <string>organ</string>
       </dict>
     </dict>
+    <dict>
+      <key>UTTypeIdentifier</key>
+      <string>fr.polyphone.dls</string>
+      <key>UTTypeDescription</key>
+      <string>DLS sound bank</string>
+      <key>UTTypeConformsTo</key>
+      <array>
+        <string>public.data</string>
+      </array>
+      <key>UTTypeTagSpecification</key>
+      <dict>
+        <key>public.filename-extension</key>
+        <string>dls</string>
+      </dict>
+    </dict>
   </array>
   <key>CFBundleDocumentTypes</key>
   <array>
@@ -141,6 +156,18 @@
       </array>
       <key>CFBundleTypeIconFile</key>
       <string>file_organ</string>
+    </dict>
+    <dict>
+      <key>CFBundleTypeName</key>
+      <string>DLS sound bank</string>
+      <key>CFBundleTypeRole</key>
+      <string>Editor</string>
+      <key>LSItemContentTypes</key>
+      <array>
+        <string>fr.polyphone.dls</string>
+      </array>
+      <key>CFBundleTypeIconFile</key>
+      <string>file_dls</string>
     </dict>
   </array>
   <key>CFBundleExecutable</key>

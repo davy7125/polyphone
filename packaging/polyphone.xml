@@ -113,6 +113,34 @@
     <sub-class-of type="text/plain"/>
   </mime-type>
 
+  <mime-type type="audio/dls">
+    <comment>DLS sound bank</comment>
+    <comment xml:lang="ca">Banc de sons DLS</comment>
+    <comment xml:lang="cs">Zvuková banka DLS</comment>
+    <comment xml:lang="da">Lydbank DLS</comment>
+    <comment xml:lang="de">Klangbank DLS</comment>
+    <comment xml:lang="es">Banco de sonidos DLS</comment>
+    <comment xml:lang="fr">Banque de sons DLS</comment>
+    <comment xml:lang="it">Banco di suoni DLS</comment>
+    <comment xml:lang="ja">サウンドバンク DLS</comment>
+    <comment xml:lang="ko">사운드 뱅크 DLS</comment>
+    <comment xml:lang="nl">Geluidsbank DLS</comment>
+    <comment xml:lang="pl">Bank dźwięków DLS</comment>
+    <comment xml:lang="pt">Banco de sons DLS</comment>
+    <comment xml:lang="ru">Звуковой банк DLS</comment>
+    <comment xml:lang="sr">Звучна банка DLS</comment>
+    <comment xml:lang="zh">音色库 DLS</comment>
+    <acronym>DLS</acronym>
+    <expanded-acronym>DownLoadable Sounds</expanded-acronym>
+    <alias type="audio/x-dls"/>
+    <magic priority="50">
+      <match type="string" offset="0" value="RIFF">
+        <match type="string" offset="8" value="DLS "/>
+      </match>
+    </magic>
+    <glob pattern="*.dls"/>
+  </mime-type>
+
   <mime-type type="audio/x-organ">
     <comment>GrandOrgue disposition</comment>
     <comment xml:lang="ca">Disposició GrandOrgue</comment>

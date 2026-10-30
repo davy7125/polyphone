@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Compare the wav files rendered by render.sh with reference renderings.
 
-Usage: compare.py <reference directory> <output directory> [--threshold dB]
+Usage: compare.py <reference directory> <output directory> [--threshold dB] [--cases directory]
 
 For each reference file, the rendering of the same name must have the same format and length,
 and the largest difference between their samples must stay under the threshold (dBFS).
@@ -83,6 +83,8 @@ def main():
     parser.add_argument('output_dir')
     parser.add_argument('--threshold', type=float, default=-100.0,
                         help='largest difference allowed between two samples, in dBFS (default: -100)')
+    parser.add_argument('--cases', default=os.path.join(os.path.dirname(os.path.abspath(__file__)), 'cases'),
+                        help='directory of the cases (default: the cases of the rendering tests)')
     arguments = parser.parse_args()
 
     names = sorted(name for name in os.listdir(arguments.reference_dir) if name.endswith('.wav'))
@@ -95,7 +97,7 @@ def main():
               for name in names]
 
     # A case with the line "# same as: <other case>" must give the rendering of the other case
-    cases_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'cases')
+    cases_dir = arguments.cases
     for case in sorted(os.listdir(cases_dir)):
         with open(os.path.join(cases_dir, case)) as f:
             same = [line.split(':', 1)[1].strip() for line in f if line.startswith('# same as:')]

@@ -1,0 +1,40 @@
+# soundfont: dls1-test.dls
+# reference: dls1-expected.sf2
+# Import of a DLS level 1 file
+samplerate 48000
+duration 8
+gain -3
+reverb 60 50 50 50
+
+0     program 0 0 0
+0     program 1 1 5
+0     program 9 128 0
+
+# Region with its own wave sample (root key, tuning, gain, loop) and region of an 8-bit wave
+0.00  on 0 50 100
+0.00  on 0 72 64
+0.50  cc 0 1 127
+1.50  off 0 50
+1.50  off 0 72
+1.50  cc 0 1 0
+
+# Velocity to attack and key to decay
+2.00  on 0 40 20
+2.00  on 0 90 127
+3.00  off 0 40
+3.00  off 0 90
+
+# Gain and tuning of the articulation, loop of the region, reverb
+3.50  on 1 60 100
+3.50  on 1 72 100
+3.70  cc 1 91 100
+4.50  off 1 60
+4.50  off 1 72
+
+# Drums: pans, key group, absolute zero not modulated
+5.00  on 9 36 100
+5.20  on 9 38 30
+5.40  on 9 42 100
+6.00  off 9 36
+6.00  off 9 38
+6.00  off 9 42

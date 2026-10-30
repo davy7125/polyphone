@@ -22,8 +22,8 @@ DEFINES += USE_LOCAL_RTAUDIO
 #DEFINES += NO_SF2_CREATION
 
 # Polyphone version
-DEFINES += SOFT_VERSION=\\\"2.6.0\\\"
-DEFINES += IDENTIFIER=\\\"\\\"
+DEFINES += SOFT_VERSION=\\\"2.7.0\\\"
+DEFINES += IDENTIFIER=\\\"DEVEL\\\"
 DEFINES += CURRENT_YEAR=\\\"2026\\\"
 
 # All translations in resources/translations are compiled and embedded
@@ -129,7 +129,8 @@ macx {
         ../packaging/mac/file_sf3.icns \
         ../packaging/mac/file_sfArk.icns \
         ../packaging/mac/file_sfz.icns \
-        ../packaging/mac/file_organ.icns
+        ../packaging/mac/file_organ.icns \
+        ../packaging/mac/file_dls.icns
     fileicons.path = Contents/Resources
     DESTDIR = $$PWD/../macos
 }
@@ -265,6 +266,12 @@ SOURCES	+= main.cpp \
     core/input/sfark/inputsfark.cpp \
     core/input/sfz/inputparsersfz.cpp \
     core/input/sfz/inputsfz.cpp \
+    core/input/dls/inputdls.cpp \
+    core/input/dls/inputparserdls.cpp \
+    core/input/dls/dlsarticulation.cpp \
+    core/sample/samplereaderdls.cpp \
+    core/output/dls/outputdls.cpp \
+    core/output/dls/conversion_dls.cpp \
     core/sample/samplereaderfactory.cpp \
     core/sample/sampleutils.cpp \
     core/sample/samplewriterwav.cpp \
@@ -639,6 +646,13 @@ HEADERS += \
     core/input/sfark/inputsfark.h \
     core/input/sfz/inputparsersfz.h \
     core/input/sfz/inputsfz.h \
+    core/input/dls/inputdls.h \
+    core/input/dls/inputparserdls.h \
+    core/input/dls/dlsarticulation.h \
+    core/input/dls/dlsdefinitions.h \
+    core/sample/samplereaderdls.h \
+    core/output/dls/outputdls.h \
+    core/output/dls/conversion_dls.h \
     core/sample/infosound.h \
     core/sample/samplereader.h \
     core/sample/samplereaderfactory.h \

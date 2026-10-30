@@ -40,7 +40,8 @@ public:
         MODE_CONVERSION_TO_SF3 = 101,
         MODE_CONVERSION_TO_SFZ = 102,
         MODE_CONVERSION_TO_CSV = 103,
-        MODE_RENDER = 104
+        MODE_RENDER = 104,
+        MODE_CONVERSION_TO_DLS = 105
     };
 
     Options(int argc, char *argv[]);

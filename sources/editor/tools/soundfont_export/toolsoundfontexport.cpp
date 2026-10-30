@@ -113,6 +113,9 @@ void ToolSoundfontExport::process(SoundfontManager * sm, QString name, QMap<int,
     case 3: // csv
         output->setOption("raw_values", params->getCsvRaw());
         break;
+    case 4: // dls
+        // Nothing special
+        break;
     default:
         break;
     }
@@ -224,6 +227,7 @@ QString ToolSoundfontExport::getFilePath(QString directory, QString name, int fo
     case 1: extension = ".sf3"; break;
     case 2: extension = ".sfz"; break;
     case 3: extension = ".csv"; break;
+    case 4: extension = ".dls"; break;
     default: extension = ".xxx"; break;
     }
 

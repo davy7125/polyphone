@@ -797,12 +797,12 @@
     <message>
         <location filename="../../context/interface/configsectiongeneral.ui" line="87"/>
         <source>Polyphony</source>
-        <translation type="unfinished"></translation>
+        <translation>Polifonia</translation>
     </message>
     <message>
         <location filename="../../context/interface/configsectiongeneral.ui" line="133"/>
         <source>Processor load</source>
-        <translation type="unfinished"></translation>
+        <translation>Càrrega del processador</translation>
     </message>
     <message>
         <location filename="../../context/interface/configsectiongeneral.ui" line="195"/>
@@ -861,12 +861,12 @@
     <message>
         <location filename="../../context/interface/configsectiongeneral.cpp" line="41"/>
         <source>Maximum number of voices, the quietest notes fading out above it</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre màxim de veus; per sobre, les notes més fluixes s&apos;esvaeixen</translation>
     </message>
     <message>
         <location filename="../../context/interface/configsectiongeneral.cpp" line="42"/>
         <source>Maximum share of the processor time used by the voices, the quietest notes fading out above it</source>
-        <translation type="unfinished"></translation>
+        <translation>Part màxima del temps de processador utilitzada per les veus; per sobre, les notes més fluixes s&apos;esvaeixen</translation>
     </message>
 </context>
 <context>
@@ -1341,6 +1341,19 @@ en línia</translation>
         <location filename="../../clavier/controllerarea.cpp" line="230"/>
         <source>off</source>
         <translation>desactivat</translation>
+    </message>
+</context>
+<context>
+    <name>ConversionDls</name>
+    <message>
+        <location filename="../../core/output/dls/conversion_dls.cpp" line="58"/>
+        <source>cannot create file &quot;%1&quot;</source>
+        <translation>no es pot crear el fitxer &quot;%1&quot;</translation>
+    </message>
+    <message>
+        <location filename="../../core/output/dls/conversion_dls.cpp" line="109"/>
+        <source>cannot write file &quot;%1&quot;</source>
+        <translation>no es pot escriure el fitxer &quot;%1&quot;</translation>
     </message>
 </context>
 <context>
@@ -2766,17 +2779,17 @@ en línia</translation>
     <message>
         <location filename="../../core/input/dls/inputparserdls.cpp" line="60"/>
         <source>Cannot find file &quot;%1&quot;.</source>
-        <translation type="unfinished">No s&apos;ha pogut trobar el fitxer &quot;%1&quot;.</translation>
+        <translation>No s&apos;ha pogut trobar el fitxer &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="../../core/input/dls/inputparserdls.cpp" line="66"/>
         <source>Access denied for reading file &quot;%1&quot;.</source>
-        <translation type="unfinished">Accés denegat per llegir el fitxer &quot;%1&quot;.</translation>
+        <translation>Accés denegat per llegir el fitxer &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../core/input/dls/inputparserdls.cpp" line="131"/>
+        <location filename="../../core/input/dls/inputparserdls.cpp" line="123"/>
         <source>This is not a DLS file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aquest no és un fitxer DLS.</translation>
     </message>
 </context>
 <context>
@@ -4169,7 +4182,7 @@ Ambdues divisions han de compartir la mateixa nota i rang de velocitat.</transla
         <location filename="../../core/input/grandorgue/grandorguerank.cpp" line="142"/>
         <location filename="../../core/input/grandorgue/grandorguestop.cpp" line="141"/>
         <location filename="../../core/input/grandorgue/grandorgueswitch.cpp" line="73"/>
-        <location filename="../../core/output/outputfactory.cpp" line="108"/>
+        <location filename="../../core/output/outputfactory.cpp" line="114"/>
         <source>untitled</source>
         <translation>sense títol</translation>
     </message>
@@ -4184,7 +4197,7 @@ Ambdues divisions han de compartir la mateixa nota i rang de velocitat.</transla
         <translation>Tot</translation>
     </message>
     <message>
-        <location filename="../../core/output/outputfactory.cpp" line="126"/>
+        <location filename="../../core/output/outputfactory.cpp" line="132"/>
         <source>Sf2 files</source>
         <translation>Fitxers sf2</translation>
     </message>
@@ -4219,17 +4232,17 @@ Ambdues divisions han de compartir la mateixa nota i rang de velocitat.</transla
         <translation>Presets</translation>
     </message>
     <message>
-        <location filename="../../core/output/outputfactory.cpp" line="124"/>
+        <location filename="../../core/output/outputfactory.cpp" line="130"/>
         <source>Save a soundfont</source>
         <translation>Desa el soundfont</translation>
     </message>
     <message>
-        <location filename="../../core/output/outputfactory.cpp" line="126"/>
+        <location filename="../../core/output/outputfactory.cpp" line="132"/>
         <source>Sf3 files</source>
         <translation>Fitxers sf3</translation>
     </message>
     <message>
-        <location filename="../../core/output/outputfactory.cpp" line="152"/>
+        <location filename="../../core/output/outputfactory.cpp" line="158"/>
         <location filename="../../core/sample/sampleloader.cpp" line="60"/>
         <source>Warning</source>
         <translation>Atenció</translation>
@@ -4388,13 +4401,13 @@ Ambdues divisions han de compartir la mateixa nota i rang de velocitat.</transla
     </message>
     <message>
         <location filename="../../main.cpp" line="106"/>
-        <location filename="../../main.cpp" line="189"/>
+        <location filename="../../main.cpp" line="192"/>
         <source>The file &quot;%1&quot; does not exist.</source>
         <translation>El fitxer &quot;%1&quot; no existeix.</translation>
     </message>
     <message>
         <location filename="../../main.cpp" line="114"/>
-        <location filename="../../main.cpp" line="194"/>
+        <location filename="../../main.cpp" line="197"/>
         <source>The directory &quot;%1&quot; does not exist.</source>
         <translation>El directori &quot;%1&quot; no existeix.</translation>
     </message>
@@ -4405,26 +4418,27 @@ Ambdues divisions han de compartir la mateixa nota i rang de velocitat.</transla
     </message>
     <message>
         <location filename="../../main.cpp" line="124"/>
-        <location filename="../../main.cpp" line="210"/>
+        <location filename="../../main.cpp" line="213"/>
         <source>Loading file &quot;%1&quot;...</source>
         <translation>S&apos;està carregant el fitxer &quot;%1&quot;...</translation>
     </message>
     <message>
         <location filename="../../main.cpp" line="129"/>
-        <location filename="../../main.cpp" line="215"/>
+        <location filename="../../main.cpp" line="218"/>
         <source>Couldn&apos;t load file &quot;%1&quot;: %2.</source>
         <translation>No s&apos;ha pogut carregar el fitxer &quot;%1&quot;: %2.</translation>
     </message>
     <message>
         <location filename="../../main.cpp" line="135"/>
-        <location filename="../../main.cpp" line="221"/>
+        <location filename="../../main.cpp" line="224"/>
         <source>File successfully loaded!</source>
         <translation>Fitxer carregat correctament!</translation>
     </message>
     <message>
         <location filename="../../main.cpp" line="142"/>
         <location filename="../../main.cpp" line="146"/>
-        <location filename="../../main.cpp" line="225"/>
+        <location filename="../../main.cpp" line="159"/>
+        <location filename="../../main.cpp" line="228"/>
         <source>Writing file &quot;%1&quot;...</source>
         <translation>S&apos;està escrivint el fitxer &quot;%1&quot;...</translation>
     </message>
@@ -4435,46 +4449,46 @@ Ambdues divisions han de compartir la mateixa nota i rang de velocitat.</transla
         <translation>S&apos;estan escrivint fitxers al directori &quot;%1&quot;...</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="159"/>
+        <location filename="../../main.cpp" line="162"/>
         <source>Unknown mode &quot;%1&quot;.</source>
         <translation>Mode desconegut &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="167"/>
-        <location filename="../../main.cpp" line="205"/>
-        <location filename="../../main.cpp" line="233"/>
+        <location filename="../../main.cpp" line="170"/>
+        <location filename="../../main.cpp" line="208"/>
+        <location filename="../../main.cpp" line="236"/>
         <source>An error occurred: %1.</source>
         <translation>S&apos;ha produït un error: %1.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="172"/>
+        <location filename="../../main.cpp" line="175"/>
         <source>File successfully converted!</source>
         <translation>Fitxer convertit correctament!</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="236"/>
+        <location filename="../../main.cpp" line="239"/>
         <source>File successfully rendered!</source>
-        <translation type="unfinished"></translation>
+        <translation>Fitxer renderitzat correctament!</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="249"/>
+        <location filename="../../main.cpp" line="252"/>
         <source>Previous configuration is now cleared.</source>
         <translation>La configuració prèvia s&apos;ha esborrat.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="258"/>
+        <location filename="../../main.cpp" line="261"/>
         <source>See &quot;%1&quot; for more information.</source>
         <translation>Consulteu &quot;%1&quot; per a més informació.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="260"/>
+        <location filename="../../main.cpp" line="263"/>
         <source>Write &quot;%1&quot; to show usage.</source>
         <translation>Escriviu &quot;%1&quot; per mostrar l&apos;ús.</translation>
     </message>
     <message>
         <location filename="../../core/input/dls/inputdls.h" line="35"/>
         <source>Dls files</source>
-        <translation type="unfinished"></translation>
+        <translation>Fitxers dls</translation>
     </message>
 </context>
 <context>
@@ -6760,12 +6774,12 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
 <context>
     <name>ToolSoundfontExport</name>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport.cpp" line="154"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport.cpp" line="157"/>
         <source>Merge soudfonts:</source>
         <translation>Fusiona els soundfonts:</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport.cpp" line="250"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport.cpp" line="254"/>
         <source>Export successful!</source>
         <translation>L&apos;exportació ha finalitzat amb èxit!</translation>
     </message>
@@ -6798,7 +6812,7 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
         <translation>Destí</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="135"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="140"/>
         <source>Format</source>
         <translation>Format</translation>
     </message>
@@ -6808,7 +6822,7 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
         <translation>Classificació General MIDI</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="142"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="147"/>
         <source>one directory per bank</source>
         <translation>un directori per cada banc</translation>
     </message>
@@ -6818,22 +6832,22 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
         <translation>número de preset com a prefix</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="153"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="158"/>
         <source>High</source>
         <translation>Alt</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="158"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="163"/>
         <source>Medium</source>
         <translation>Mitjà</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="163"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="168"/>
         <source>Low</source>
         <translation>Baix</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="171"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="176"/>
         <source>one file per preset</source>
         <translation>un fitxer per cada preset</translation>
     </message>
@@ -6843,17 +6857,17 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
         <translation>Qualitat</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="178"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="183"/>
         <source>raw values</source>
         <translation>valors en brut</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="189"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="194"/>
         <source>&amp;Export</source>
         <translation>&amp;Exporta</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="209"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="214"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Cancel·la</translation>
     </message>

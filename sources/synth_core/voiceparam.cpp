@@ -387,37 +387,44 @@ void VoiceParam::computeModulations()
     _version.fetch_add(1, std::memory_order_release);
 }
 
+// The modulators of both groups store the new value: none of them must be skipped
+
 void VoiceParam::processPolyPressureChanged(int pressure)
 {
-    if (_modulatorGroupInst.processPolyPressureChanged(pressure) ||
-        _modulatorGroupPrst.processPolyPressureChanged(pressure))
+    bool instChanged = _modulatorGroupInst.processPolyPressureChanged(pressure);
+    bool prstChanged = _modulatorGroupPrst.processPolyPressureChanged(pressure);
+    if (instChanged || prstChanged)
         _modulationsChanged.store(1, std::memory_order_release);
 }
 
 void VoiceParam::processMonoPressureChanged(int value)
 {
-    if (_modulatorGroupInst.processMonoPressureChanged(value) ||
-        _modulatorGroupPrst.processMonoPressureChanged(value))
+    bool instChanged = _modulatorGroupInst.processMonoPressureChanged(value);
+    bool prstChanged = _modulatorGroupPrst.processMonoPressureChanged(value);
+    if (instChanged || prstChanged)
         _modulationsChanged.store(1, std::memory_order_release);
 }
 
 void VoiceParam::processControllerChanged(int num, int value)
 {
-    if (_modulatorGroupInst.processControllerChanged(num, value) ||
-        _modulatorGroupPrst.processControllerChanged(num, value))
+    bool instChanged = _modulatorGroupInst.processControllerChanged(num, value);
+    bool prstChanged = _modulatorGroupPrst.processControllerChanged(num, value);
+    if (instChanged || prstChanged)
         _modulationsChanged.store(1, std::memory_order_release);
 }
 
 void VoiceParam::processBendChanged(float value)
 {
-    if (_modulatorGroupInst.processBendChanged(value) ||
-        _modulatorGroupPrst.processBendChanged(value))
+    bool instChanged = _modulatorGroupInst.processBendChanged(value);
+    bool prstChanged = _modulatorGroupPrst.processBendChanged(value);
+    if (instChanged || prstChanged)
         _modulationsChanged.store(1, std::memory_order_release);
 }
 
 void VoiceParam::processBendSensitivityChanged(float semitones)
 {
-    if (_modulatorGroupInst.processBendSensitivityChanged(semitones) ||
-        _modulatorGroupPrst.processBendSensitivityChanged(semitones))
+    bool instChanged = _modulatorGroupInst.processBendSensitivityChanged(semitones);
+    bool prstChanged = _modulatorGroupPrst.processBendSensitivityChanged(semitones);
+    if (instChanged || prstChanged)
         _modulationsChanged.store(1, std::memory_order_release);
 }

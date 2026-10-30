@@ -1350,6 +1350,19 @@ repository</source>
     </message>
 </context>
 <context>
+    <name>ConversionDls</name>
+    <message>
+        <location filename="../../core/output/dls/conversion_dls.cpp" line="58"/>
+        <source>cannot create file &quot;%1&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../core/output/dls/conversion_dls.cpp" line="109"/>
+        <source>cannot write file &quot;%1&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ConversionSfz</name>
     <message>
         <location filename="../../core/output/sfz/conversion_sfz.cpp" line="56"/>
@@ -2785,7 +2798,7 @@ repository</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/input/dls/inputparserdls.cpp" line="131"/>
+        <location filename="../../core/input/dls/inputparserdls.cpp" line="123"/>
         <source>This is not a DLS file.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4042,27 +4055,27 @@ Warning: quality will be reduced and the loop may be altered</source>
         <location filename="../../core/input/grandorgue/grandorguerank.cpp" line="142"/>
         <location filename="../../core/input/grandorgue/grandorguestop.cpp" line="141"/>
         <location filename="../../core/input/grandorgue/grandorgueswitch.cpp" line="73"/>
-        <location filename="../../core/output/outputfactory.cpp" line="108"/>
+        <location filename="../../core/output/outputfactory.cpp" line="114"/>
         <source>untitled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/output/outputfactory.cpp" line="124"/>
+        <location filename="../../core/output/outputfactory.cpp" line="130"/>
         <source>Save a soundfont</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/output/outputfactory.cpp" line="126"/>
+        <location filename="../../core/output/outputfactory.cpp" line="132"/>
         <source>Sf2 files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/output/outputfactory.cpp" line="126"/>
+        <location filename="../../core/output/outputfactory.cpp" line="132"/>
         <source>Sf3 files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/output/outputfactory.cpp" line="152"/>
+        <location filename="../../core/output/outputfactory.cpp" line="158"/>
         <location filename="../../core/sample/sampleloader.cpp" line="60"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
@@ -4397,13 +4410,13 @@ Both divisions must share the same note and velocity ranges.</source>
     </message>
     <message>
         <location filename="../../main.cpp" line="106"/>
-        <location filename="../../main.cpp" line="189"/>
+        <location filename="../../main.cpp" line="192"/>
         <source>The file &quot;%1&quot; does not exist.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../main.cpp" line="114"/>
-        <location filename="../../main.cpp" line="194"/>
+        <location filename="../../main.cpp" line="197"/>
         <source>The directory &quot;%1&quot; does not exist.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4414,27 +4427,28 @@ Both divisions must share the same note and velocity ranges.</source>
     </message>
     <message>
         <location filename="../../main.cpp" line="124"/>
-        <location filename="../../main.cpp" line="210"/>
+        <location filename="../../main.cpp" line="213"/>
         <source>Loading file &quot;%1&quot;...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../main.cpp" line="129"/>
-        <location filename="../../main.cpp" line="215"/>
+        <location filename="../../main.cpp" line="218"/>
         <source>Couldn&apos;t load file &quot;%1&quot;: %2.</source>
         <oldsource>Couldn&apos;t load &quot;%1&quot;: %2.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../main.cpp" line="135"/>
-        <location filename="../../main.cpp" line="221"/>
+        <location filename="../../main.cpp" line="224"/>
         <source>File successfully loaded!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../main.cpp" line="142"/>
         <location filename="../../main.cpp" line="146"/>
-        <location filename="../../main.cpp" line="225"/>
+        <location filename="../../main.cpp" line="159"/>
+        <location filename="../../main.cpp" line="228"/>
         <source>Writing file &quot;%1&quot;...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4445,39 +4459,39 @@ Both divisions must share the same note and velocity ranges.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="159"/>
+        <location filename="../../main.cpp" line="162"/>
         <source>Unknown mode &quot;%1&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="167"/>
-        <location filename="../../main.cpp" line="205"/>
-        <location filename="../../main.cpp" line="233"/>
+        <location filename="../../main.cpp" line="170"/>
+        <location filename="../../main.cpp" line="208"/>
+        <location filename="../../main.cpp" line="236"/>
         <source>An error occurred: %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="172"/>
+        <location filename="../../main.cpp" line="175"/>
         <source>File successfully converted!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="236"/>
+        <location filename="../../main.cpp" line="239"/>
         <source>File successfully rendered!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="249"/>
+        <location filename="../../main.cpp" line="252"/>
         <source>Previous configuration is now cleared.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="258"/>
+        <location filename="../../main.cpp" line="261"/>
         <source>See &quot;%1&quot; for more information.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="260"/>
+        <location filename="../../main.cpp" line="263"/>
         <source>Write &quot;%1&quot; to show usage.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6778,12 +6792,12 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ToolSoundfontExport</name>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport.cpp" line="154"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport.cpp" line="157"/>
         <source>Merge soudfonts:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport.cpp" line="250"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport.cpp" line="254"/>
         <source>Export successful!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6816,7 +6830,7 @@ Other soundfont editors might display other units.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="135"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="140"/>
         <source>Format</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6826,7 +6840,7 @@ Other soundfont editors might display other units.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="142"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="147"/>
         <source>one directory per bank</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6836,22 +6850,22 @@ Other soundfont editors might display other units.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="153"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="158"/>
         <source>High</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="158"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="163"/>
         <source>Medium</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="163"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="168"/>
         <source>Low</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="171"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="176"/>
         <source>one file per preset</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6861,18 +6875,18 @@ Other soundfont editors might display other units.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="178"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="183"/>
         <source>raw values</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="209"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="214"/>
         <source>&amp;Cancel</source>
         <oldsource>Cancel</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="189"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="194"/>
         <source>&amp;Export</source>
         <oldsource>Export</oldsource>
         <translation type="unfinished"></translation>

@@ -1,0 +1,64 @@
+# soundfont: dls2-test.dls
+# reference: dls2-expected.sf2
+# Import of a DLS level 2 file
+samplerate 48000
+duration 13
+gain -6
+reverb 60 50 50 50
+chorus 40 50 30
+
+0     program 0 0 0
+0     program 1 0 1
+0     program 2 0 2
+0     program 3 0 3
+0     program 4 0 4
+0     program 9 128 0
+
+# Filter, LFOs and their controls, velocity and key to the filter, A-law wave, loop and release
+0.00  on 0 48 40
+0.00  on 0 72 110
+0.40  cc 0 1 127
+0.80  pressure 0 100
+1.20  cc 0 91 120
+1.60  off 0 48
+1.60  off 0 72
+1.60  cc 0 1 0
+1.60  pressure 0 0
+
+# Stereo wave and phase locked waves
+2.40  on 1 50 100
+2.40  on 1 70 100
+3.20  off 1 50
+3.20  off 1 70
+
+# Modulation envelope and its key scaling, 24-bit wave
+3.60  on 2 40 100
+3.60  on 2 80 100
+4.80  off 2 40
+4.80  off 2 80
+
+# Global and local articulations
+5.20  on 3 50 100
+5.20  on 3 70 100
+6.00  off 3 50
+6.00  off 3 70
+
+# Modulators
+7.00  on 4 60 90
+7.20  cc 4 74 100
+7.40  pressure 4 90
+7.60  bend 4 0.5
+7.80  cc 4 11 80
+8.00  cc 4 2 100
+8.10  polypressure 4 60 100
+8.30  cc 4 80 127
+8.50  cc 4 1 127
+9.00  off 4 60
+
+# Drums and key groups
+9.50  on 9 36 100
+9.70  on 9 38 100
+9.90  on 9 42 100
+10.50 off 9 36
+10.50 off 9 38
+10.50 off 9 42

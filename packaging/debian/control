@@ -39,8 +39,8 @@ Description: soundfont editor
  making it possible to handle a large amount of data.
  .
  Main features:
-  - import from sf2, sf3, sfz, sfArk, GrandOrgue dispositions,
-  - export as sf2, sfz, sf3,
+  - import from sf2, sf3, sfz, dls, sfArk, GrandOrgue dispositions,
+  - export as sf2, sfz, sf3, dls,
   - support of sf2 format v2.01 and v2.04 (with 24-bit samples),
   - support for Jack and ASIO audio servers,
   - simultaneous editing of parameters,

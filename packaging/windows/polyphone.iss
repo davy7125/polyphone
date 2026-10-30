@@ -84,6 +84,11 @@ Root: HKCR; Subkey: "Polyphone.organ"; ValueType: string; ValueData: "GrandOrgue
 Root: HKCR; Subkey: "Polyphone.organ\DefaultIcon"; ValueType: string; ValueData: "{app}\polyphone.exe,5"
 Root: HKCR; Subkey: "Polyphone.organ\shell\open\command"; ValueType: string; ValueData: """{app}\polyphone.exe"" ""%1"""
 
+Root: HKCR; Subkey: ".dls"; ValueType: string; ValueData: "Polyphone.dls"; Flags: uninsdeletevalue
+Root: HKCR; Subkey: "Polyphone.dls"; ValueType: string; ValueData: "DLS sound bank"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "Polyphone.dls\DefaultIcon"; ValueType: string; ValueData: "{app}\polyphone.exe,6"
+Root: HKCR; Subkey: "Polyphone.dls\shell\open\command"; ValueType: string; ValueData: """{app}\polyphone.exe"" ""%1"""
+
 [Code]
 function IsWindows10OrLater: Boolean;
 begin

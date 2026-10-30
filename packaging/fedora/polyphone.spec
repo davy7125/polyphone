@@ -23,8 +23,8 @@ available on Linux, Windows and Mac OS X,
 making it possible to handle a large amount of data.
  
 Main features:
- - import from sf2, sfz, sfArk, sf3, grandOrgue
- - export as sf2, sfz, sf3,
+ - import from sf2, sfz, dls, sfArk, sf3, grandOrgue
+ - export as sf2, sfz, sf3, dls,
  - support of sf2 format v2.01 and v2.04 (with 24-bit samples),
  - support for jack and ASIO audio servers,
  - simultaneous editing of parameters,

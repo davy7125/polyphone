@@ -25,6 +25,9 @@
 -4 [\fB\-i\fR \fICHEMIN_DE_FICHIER_EN_ENTRÉE\fR] [\fB\-d\fR \fIRÉPERTOIRE_EN_SORTIE\fR] [\fB\-o\fR \fINOM_EN_SORTIE\fR] [\fB\-c\fR \fICONFIG\fR]
 .br
 .B polyphone
+-6 [\fB\-i\fR \fICHEMIN_DE_FICHIER_EN_ENTRÉE\fR] [\fB\-d\fR \fIRÉPERTOIRE_EN_SORTIE\fR] [\fB\-o\fR \fINOM_EN_SORTIE\fR]
+.br
+.B polyphone
 -s [\fB\-i\fR \fICHEMIN_DE_FICHIER_EN_ENTRÉE\fR] [\fB\-c\fR \fICONFIG\fR]
 
 .SH DESCRIPTION
@@ -32,7 +35,7 @@
 fournit une interface simple et efficace pour créer et éditer des fichiers .sf2 . Ce logiciel incorpore des outils pour faciliter et automatiser l'édition de différents paramètres, rendant possible la gestion de grandes quantités de données. 
 .br
 .PP
-Les formats sf2, sf3, sfz (import / export), sfArk (import uniquement) et GrandOrgue (import uniquement) sont supportés. Les lignes de commande peuvent être utilisées pour convertir des fichiers, ouvrir Polyphone en mode synthétiseur ou réinitialiser les configurations en cas de soucis.
+Les formats sf2, sf3, sfz, dls (import / export), sfArk (import uniquement) et GrandOrgue (import uniquement) sont supportés. Les lignes de commande peuvent être utilisées pour convertir des fichiers, ouvrir Polyphone en mode synthétiseur ou réinitialiser les configurations en cas de soucis.
 .br
 .PP
 Davantage d'informations peuvent être trouvées sur le site https://www.polyphone.io .
@@ -43,7 +46,7 @@ Davantage d'informations peuvent être trouvées sur le site https://www.polypho
 Spécifie le fichier à ouvrir quand
 .B polyphone
 démarre. Plusieurs fichiers peuvent être chargés s'ils sont séparés par des espaces.
-Les formats sf2 (version 2.01 ou 2.04), sf3, sfz, sfArk (version 1 ou 2) et GrandOrgue sont supportés.
+Les formats sf2 (version 2.01 ou 2.04), sf3, sfz, dls (niveau 1 ou 2), sfArk (version 1 ou 2) et GrandOrgue sont supportés.
 .TP
 .BR \fB-1\fR
 Utiliser
@@ -65,13 +68,18 @@ Utiliser
 .B polyphone
 pour convertir un fichier dans le format csv.
 .TP
+.BR \fB-6\fR
+Utiliser
+.B polyphone
+pour convertir un fichier dans le format dls (niveau 2).
+.TP
 .BR \fB-s\fR
 Ouvrir
 .B polyphone
 en mode synthétiseur.
 .TP
 [\fB\-i\fR \fICHEMIN_DU_FICHIER_EN_ENTRÉE\fR]
-Chemin du fichier d'entrée à convertir ou ouvrir. Le format du fichier d'entrée doit être sf2, sf3, sfz, sfArk ou organ.
+Chemin du fichier d'entrée à convertir ou ouvrir. Le format du fichier d'entrée doit être sf2, sf3, sfz, dls, sfArk ou organ.
 .TP
 [\fB\-d\fR \fIRÉPERTOIRE_DE_SORTIE\fR]
 Le répertoire de sortie dans lequel le fichier d'entrée sera converti. Par défaut, le même répertoire que celui du fichier d'entrée est utilisé.
@@ -110,6 +118,12 @@ L'option 'raw' permet d'exporter des valeurs brutes (telles qu'elles sont enregi
 .br
 .BR
  * 
+.B conversion dls
+.br
+Pas de configuration pour cette conversion.
+.br
+.BR
+ * 
 .B mode synthétiseur
 .br
 La configuration est composée de 3 valeurs séparées d'un '|'. La première valeur désigne le canal MIDI à écouter, qui peut être une valeur de 1 à 16. La valeur 0 ou « all » indique que tous les canaux seront utilisés et seront traités comme un seul canal. La valeur -1 ou « each » écoute chaque canal séparément, ce qui constitue un prérequis pour lire des fichiers MIDI par exemple. La deuxième valeur est 'on' ou 'off' pour rendre possible la lecture de plusieurs ensembles en même temps. La troisième valeur est 'on', 'off' ou 'toggle' pour permettre l'activation ou la désactivation des ensembles par les notes les plus basses du clavier. Par défaut, 'all|off|off' est utilisé.
@@ -130,6 +144,18 @@ La configuration est composée de 3 valeurs séparées d'un '|'. La première va
 .br
 .BR polyphone
 -3 -i /chemin/vers/le/fichier.sf3 -c '0|1|1'
+.br
+.BR
+ * Conversion depuis dls vers sf2 :
+.br
+.BR polyphone
+-1 -i /chemin/vers/le/fichier.dls
+.br
+.BR
+ * Conversion depuis sf2 vers dls :
+.br
+.BR polyphone
+-6 -i /chemin/vers/le/fichier.sf2
 .br
 .BR
  * Ouverture de Polyphone en mode synthétiseur en permettant l'usage des touches basse pour la sélection de l'ensemble à jouer avec un clavier MIDI :

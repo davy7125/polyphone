@@ -109,6 +109,9 @@ void Options::processType1(QString arg)
     case '5':
         _mode = MODE_RENDER;
         break;
+    case '6':
+        _mode = MODE_CONVERSION_TO_DLS;
+        break;
     case 'd':
         _currentState = STATE_OUTPUT_DIRECTORY;
         break;
@@ -184,7 +187,7 @@ void Options::processType2(QString arg)
             if (configurations.count() > 3)
                 _error = true;
             break;
-        case  MODE_CONVERSION_TO_SF2:
+        case MODE_CONVERSION_TO_SF2: case MODE_CONVERSION_TO_DLS:
             if (configurations.count() > 0)
                 _error = true;
             break;
@@ -263,6 +266,7 @@ void Options::checkErrors()
         break;
     case MODE_CONVERSION_TO_SF2: case MODE_CONVERSION_TO_SF3:
     case MODE_CONVERSION_TO_SFZ: case MODE_CONVERSION_TO_CSV:
+    case MODE_CONVERSION_TO_DLS:
         if (_inputFiles.count() != 1)
             _error = true;
         break;
@@ -276,7 +280,8 @@ void Options::checkErrors()
 void Options::postTreatment()
 {
     if (_mode == MODE_CONVERSION_TO_SF2 || _mode == MODE_CONVERSION_TO_SF3 ||
-        _mode == MODE_CONVERSION_TO_SFZ || _mode == MODE_CONVERSION_TO_CSV)
+        _mode == MODE_CONVERSION_TO_SFZ || _mode == MODE_CONVERSION_TO_CSV ||
+        _mode == MODE_CONVERSION_TO_DLS)
     {
         // By default, the output directory is the same than the input file directory
         if (_outputDirectory == "")
@@ -317,6 +322,9 @@ QString Options::getOutputFileFullPath()
         break;
     case MODE_CONVERSION_TO_CSV:
         extension = ".csv";
+        break;
+    case MODE_CONVERSION_TO_DLS:
+        extension = ".dls";
         break;
     case MODE_RENDER:
         extension = ".wav";

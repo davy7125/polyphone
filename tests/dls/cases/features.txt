@@ -1,0 +1,100 @@
+# soundfont: dls-features.dls
+# reference: dls-features.sf2
+# Export: every parameter of dls-features.sf2 that has an equivalent in the DLS format
+samplerate 48000
+duration 16
+gain -6
+reverb 60 50 50 50
+chorus 40 50 30
+
+0     program 0 0 0
+0     program 1 0 1
+0     program 2 0 2
+0     program 3 0 3
+0     program 4 0 4
+0     program 5 0 5
+0     program 6 0 6
+0     program 7 0 7
+0     program 8 0 8
+0     program 9 128 0
+
+# Filter, LFOs and the default vibrato (modulation wheel and channel pressure)
+0.00  on 0 60 100
+0.60  cc 0 1 127
+1.10  pressure 0 100
+1.60  off 0 60
+1.60  cc 0 1 0
+1.60  pressure 0 0
+
+# Modulation envelope and its key scaling
+2.00  on 1 48 100
+2.00  on 1 84 60
+3.00  off 1 48
+3.00  off 1 84
+
+# Volume envelope, key scaling and velocity to attack
+3.30  on 2 40 30
+3.30  on 2 76 127
+4.40  off 2 40
+4.40  off 2 76
+
+# Tuning: scale tuning, root key, coarse and fine tunes, sample correction
+4.80  on 3 50 100
+5.10  off 3 50
+5.20  on 3 64 100
+5.50  off 3 64
+5.60  on 3 90 100
+6.00  off 3 90
+
+# Preset level: generators, ranges, modulator
+6.20  on 4 35 100
+6.20  on 4 50 100
+6.20  on 4 80 100
+6.20  on 4 95 100
+6.50  cc 4 1 100
+7.10  off 4 35
+7.10  off 4 50
+7.10  off 4 80
+7.10  off 4 95
+
+# Loops, loop offsets, sample offsets
+7.40  on 5 30 100
+7.40  on 5 50 100
+7.40  on 5 70 100
+7.40  on 5 100 100
+8.80  off 5 30
+8.80  off 5 50
+8.80  off 5 70
+8.80  off 5 100
+
+# Modulators
+9.00  on 6 60 70
+9.20  cc 6 74 100
+9.40  pressure 6 90
+9.60  bend 6 0.5
+9.80  cc 6 11 80
+10.00 cc 6 2 100
+10.10 polypressure 6 60 100
+10.30 cc 6 80 127
+10.50 cc 6 1 127
+11.00 off 6 60
+
+# Stereo pairs
+11.20 on 7 60 100
+11.20 on 7 84 100
+12.00 off 7 60
+12.00 off 7 84
+
+# Effects
+12.20 on 8 60 100
+12.40 cc 8 91 100
+12.60 cc 8 93 100
+13.20 off 8 60
+
+# Drums and exclusive classes
+13.40 on 9 36 100
+13.50 on 9 38 100
+13.60 on 9 42 100
+13.75 on 9 44 100
+13.90 on 9 46 100
+14.05 on 9 49 100

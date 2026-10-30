@@ -812,12 +812,12 @@
     <message>
         <location filename="../../context/interface/configsectiongeneral.ui" line="87"/>
         <source>Polyphony</source>
-        <translation type="unfinished"></translation>
+        <translation>Полифония</translation>
     </message>
     <message>
         <location filename="../../context/interface/configsectiongeneral.ui" line="133"/>
         <source>Processor load</source>
-        <translation type="unfinished"></translation>
+        <translation>Нагрузка на процессор</translation>
     </message>
     <message>
         <location filename="../../context/interface/configsectiongeneral.ui" line="214"/>
@@ -866,12 +866,12 @@
     <message>
         <location filename="../../context/interface/configsectiongeneral.cpp" line="41"/>
         <source>Maximum number of voices, the quietest notes fading out above it</source>
-        <translation type="unfinished"></translation>
+        <translation>Максимальное число голосов; сверх него самые тихие ноты плавно затухают</translation>
     </message>
     <message>
         <location filename="../../context/interface/configsectiongeneral.cpp" line="42"/>
         <source>Maximum share of the processor time used by the voices, the quietest notes fading out above it</source>
-        <translation type="unfinished"></translation>
+        <translation>Максимальная доля процессорного времени, используемая голосами; сверх неё самые тихие ноты плавно затухают</translation>
     </message>
 </context>
 <context>
@@ -1347,6 +1347,19 @@ repository</source>
         <location filename="../../clavier/controllerarea.cpp" line="230"/>
         <source>off</source>
         <translation>откл</translation>
+    </message>
+</context>
+<context>
+    <name>ConversionDls</name>
+    <message>
+        <location filename="../../core/output/dls/conversion_dls.cpp" line="58"/>
+        <source>cannot create file &quot;%1&quot;</source>
+        <translation>не удалось создать файл «%1»</translation>
+    </message>
+    <message>
+        <location filename="../../core/output/dls/conversion_dls.cpp" line="109"/>
+        <source>cannot write file &quot;%1&quot;</source>
+        <translation>не удалось записать файл «%1»</translation>
     </message>
 </context>
 <context>
@@ -2794,17 +2807,17 @@ repository</source>
     <message>
         <location filename="../../core/input/dls/inputparserdls.cpp" line="60"/>
         <source>Cannot find file &quot;%1&quot;.</source>
-        <translation type="unfinished">Не удалось найти файл «%1».</translation>
+        <translation>Не удалось найти файл «%1».</translation>
     </message>
     <message>
         <location filename="../../core/input/dls/inputparserdls.cpp" line="66"/>
         <source>Access denied for reading file &quot;%1&quot;.</source>
-        <translation type="unfinished">Доступ запрещён для чтения файла «%1».</translation>
+        <translation>Доступ запрещён для чтения файла «%1».</translation>
     </message>
     <message>
-        <location filename="../../core/input/dls/inputparserdls.cpp" line="131"/>
+        <location filename="../../core/input/dls/inputparserdls.cpp" line="123"/>
         <source>This is not a DLS file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Это не файл DLS.</translation>
     </message>
 </context>
 <context>
@@ -4225,27 +4238,27 @@ Warning: quality will be reduced and the loop may be altered</source>
         <location filename="../../core/input/grandorgue/grandorguerank.cpp" line="142"/>
         <location filename="../../core/input/grandorgue/grandorguestop.cpp" line="141"/>
         <location filename="../../core/input/grandorgue/grandorgueswitch.cpp" line="73"/>
-        <location filename="../../core/output/outputfactory.cpp" line="108"/>
+        <location filename="../../core/output/outputfactory.cpp" line="114"/>
         <source>untitled</source>
         <translation>без названия</translation>
     </message>
     <message>
-        <location filename="../../core/output/outputfactory.cpp" line="124"/>
+        <location filename="../../core/output/outputfactory.cpp" line="130"/>
         <source>Save a soundfont</source>
         <translation>Сохранить SoundFont</translation>
     </message>
     <message>
-        <location filename="../../core/output/outputfactory.cpp" line="126"/>
+        <location filename="../../core/output/outputfactory.cpp" line="132"/>
         <source>Sf2 files</source>
         <translation>Файлы sf2</translation>
     </message>
     <message>
-        <location filename="../../core/output/outputfactory.cpp" line="126"/>
+        <location filename="../../core/output/outputfactory.cpp" line="132"/>
         <source>Sf3 files</source>
         <translation>Файлы sf3</translation>
     </message>
     <message>
-        <location filename="../../core/output/outputfactory.cpp" line="152"/>
+        <location filename="../../core/output/outputfactory.cpp" line="158"/>
         <location filename="../../core/sample/sampleloader.cpp" line="60"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
@@ -4436,13 +4449,13 @@ Both divisions must share the same note and velocity ranges.</source>
     </message>
     <message>
         <location filename="../../main.cpp" line="106"/>
-        <location filename="../../main.cpp" line="189"/>
+        <location filename="../../main.cpp" line="192"/>
         <source>The file &quot;%1&quot; does not exist.</source>
         <translation>Файл «%1» не существует.</translation>
     </message>
     <message>
         <location filename="../../main.cpp" line="114"/>
-        <location filename="../../main.cpp" line="194"/>
+        <location filename="../../main.cpp" line="197"/>
         <source>The directory &quot;%1&quot; does not exist.</source>
         <translation>Каталог «%1» не существует.</translation>
     </message>
@@ -4453,27 +4466,28 @@ Both divisions must share the same note and velocity ranges.</source>
     </message>
     <message>
         <location filename="../../main.cpp" line="124"/>
-        <location filename="../../main.cpp" line="210"/>
+        <location filename="../../main.cpp" line="213"/>
         <source>Loading file &quot;%1&quot;...</source>
         <translation>Загрузка файла «%1»...</translation>
     </message>
     <message>
         <location filename="../../main.cpp" line="129"/>
-        <location filename="../../main.cpp" line="215"/>
+        <location filename="../../main.cpp" line="218"/>
         <source>Couldn&apos;t load file &quot;%1&quot;: %2.</source>
         <oldsource>Couldn&apos;t load &quot;%1&quot;: %2.</oldsource>
         <translation>Не удалось загрузить файл «%1»: %2.</translation>
     </message>
     <message>
         <location filename="../../main.cpp" line="135"/>
-        <location filename="../../main.cpp" line="221"/>
+        <location filename="../../main.cpp" line="224"/>
         <source>File successfully loaded!</source>
         <translation>Файл успешно загружен!</translation>
     </message>
     <message>
         <location filename="../../main.cpp" line="142"/>
         <location filename="../../main.cpp" line="146"/>
-        <location filename="../../main.cpp" line="225"/>
+        <location filename="../../main.cpp" line="159"/>
+        <location filename="../../main.cpp" line="228"/>
         <source>Writing file &quot;%1&quot;...</source>
         <translation>Запись файла «%1»...</translation>
     </message>
@@ -4484,46 +4498,46 @@ Both divisions must share the same note and velocity ranges.</source>
         <translation>Запись файлов в каталог «%1»...</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="159"/>
+        <location filename="../../main.cpp" line="162"/>
         <source>Unknown mode &quot;%1&quot;.</source>
         <translation>Неизвестный режим «%1».</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="167"/>
-        <location filename="../../main.cpp" line="205"/>
-        <location filename="../../main.cpp" line="233"/>
+        <location filename="../../main.cpp" line="170"/>
+        <location filename="../../main.cpp" line="208"/>
+        <location filename="../../main.cpp" line="236"/>
         <source>An error occurred: %1.</source>
         <translation>Произошла ошибка: %1.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="172"/>
+        <location filename="../../main.cpp" line="175"/>
         <source>File successfully converted!</source>
         <translation>Файл успешно преобразован!</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="236"/>
+        <location filename="../../main.cpp" line="239"/>
         <source>File successfully rendered!</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл успешно отрендерен!</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="249"/>
+        <location filename="../../main.cpp" line="252"/>
         <source>Previous configuration is now cleared.</source>
         <translation>Предыдущая конфигурация очищена.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="258"/>
+        <location filename="../../main.cpp" line="261"/>
         <source>See &quot;%1&quot; for more information.</source>
         <translation>См. «%1» для получения дополнительной информации.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="260"/>
+        <location filename="../../main.cpp" line="263"/>
         <source>Write &quot;%1&quot; to show usage.</source>
         <translation>Введите «%1», чтобы показать использование.</translation>
     </message>
     <message>
         <location filename="../../core/input/dls/inputdls.h" line="35"/>
         <source>Dls files</source>
-        <translation type="unfinished"></translation>
+        <translation>Файлы dls</translation>
     </message>
 </context>
 <context>
@@ -6899,12 +6913,12 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ToolSoundfontExport</name>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport.cpp" line="154"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport.cpp" line="157"/>
         <source>Merge soudfonts:</source>
         <translation>Объединить SoundFont:</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport.cpp" line="250"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport.cpp" line="254"/>
         <source>Export successful!</source>
         <translation>Экспорт успешно завершен!</translation>
     </message>
@@ -6937,7 +6951,7 @@ Other soundfont editors might display other units.</source>
         <translation>Назначение</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="135"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="140"/>
         <source>Format</source>
         <translation>Формат</translation>
     </message>
@@ -6947,7 +6961,7 @@ Other soundfont editors might display other units.</source>
         <translation>Классификация General MIDI</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="142"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="147"/>
         <source>one directory per bank</source>
         <translation>один каталог на банк</translation>
     </message>
@@ -6957,22 +6971,22 @@ Other soundfont editors might display other units.</source>
         <translation>номер пресета в качестве префикса</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="153"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="158"/>
         <source>High</source>
         <translation>Высокое</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="158"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="163"/>
         <source>Medium</source>
         <translation>Среднее</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="163"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="168"/>
         <source>Low</source>
         <translation>Низкое</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="171"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="176"/>
         <source>one file per preset</source>
         <translation>один файл на пресет</translation>
     </message>
@@ -6982,17 +6996,17 @@ Other soundfont editors might display other units.</source>
         <translation>Качество</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="178"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="183"/>
         <source>raw values</source>
         <translation>сырые значения</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="189"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="194"/>
         <source>&amp;Export</source>
         <translation>&amp;Экспорт</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="209"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="214"/>
         <source>&amp;Cancel</source>
         <translation>О&amp;тменить</translation>
     </message>
