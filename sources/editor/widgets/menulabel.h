@@ -30,7 +30,7 @@
 class MenuLabel : public QLabel
 {
 public:
-    MenuLabel(QString text);
+    MenuLabel(QString text, int marginTop = 0, int marginBottom = 0);
 
 protected:
     void mousePressEvent(QMouseEvent *event) override;

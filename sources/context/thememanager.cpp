@@ -708,6 +708,7 @@ QString ThemeManager::getMenuTheme()
 QMenu {\
   background-color: %1;\
   border: 1px solid %4;\
+  padding: 10px 0px;\
 }\
 QMenu::item {\
   padding: 5px 15px;\
@@ -721,7 +722,7 @@ QMenu::item:selected {\
 }\
 QMenu::separator {\
   background: %4;\
-  margin: 10px 45px;\
+  margin: 10px 0px;\
   height: 1px;\
 }")
        .arg(this->getColor(LIST_BACKGROUND).name())

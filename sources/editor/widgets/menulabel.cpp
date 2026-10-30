@@ -27,14 +27,15 @@
 #include "contextmanager.h"
 #include <QString>
 
-MenuLabel::MenuLabel(QString text) : QLabel(text)
+MenuLabel::MenuLabel(QString text, int marginTop, int marginBottom) : QLabel(text)
 {
     QString textColor = ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND).name();
     QString backgroundColor = ThemeManager::mix(
                                   ContextManager::theme()->getColor(ThemeManager::LIST_TEXT),
                                   ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND), 0.5).name();
 
-    this->setStyleSheet(QString("background: %1; color: %2; padding: 5px").arg(backgroundColor, textColor));
+    this->setStyleSheet(QString("background: %1; color: %2; padding: 5px; margin: %3px 0px %4px 0px")
+                        .arg(backgroundColor, textColor).arg(marginTop).arg(marginBottom));
 }
 
 void MenuLabel::mousePressEvent(QMouseEvent *event)

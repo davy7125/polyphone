@@ -33,8 +33,10 @@
 ToolMenu::ToolMenu(QWidget * parent) : QMenu(parent),
     _toolFactory(new ToolFactory())
 {
-    // Style of the menu
-    this->setStyleSheet(ContextManager::theme()->getMenuTheme());
+    // Style of the menu, starting directly with a category
+    // (Qt uses the top padding for the bottom too, hence the bottom margin)
+    this->setStyleSheet(ContextManager::theme()->getMenuTheme() + "QMenu{padding-top: 0px;}");
+    this->setContentsMargins(0, 0, 0, 10);
 
     // Connection of the actions
     connect(this, SIGNAL(triggered(QAction*)), this, SLOT(onTriggered(QAction*)));
@@ -80,9 +82,9 @@ void ToolMenu::selectionChanged(IdList ids)
 
 void ToolMenu::addCategory(QString categoryName)
 {
-    // Create a styled label as a separator
+    // Create a styled label as a separator, with a space around the tools of each category
     QWidgetAction * separator = new QWidgetAction(this);
-    separator->setDefaultWidget(new MenuLabel(categoryName));
+    separator->setDefaultWidget(new MenuLabel(categoryName, this->actions().isEmpty() ? 0 : 10, 10));
     this->addAction(separator);
 }
 
