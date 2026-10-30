@@ -170,27 +170,21 @@
       </spacer>
      </item>
      <item>
-      <widget class="QLabel" name="labelInfo">
-       <property name="minimumSize">
+      <widget class="QToolButton" name="toolButtonInfo">
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="text">
+        <string notr="true"/>
+       </property>
+       <property name="iconSize">
         <size>
          <width>18</width>
          <height>18</height>
         </size>
        </property>
-       <property name="maximumSize">
-        <size>
-         <width>18</width>
-         <height>18</height>
-        </size>
-       </property>
-       <property name="textFormat">
-        <enum>Qt::TextFormat::PlainText</enum>
-       </property>
-       <property name="pixmap">
-        <pixmap resource="../resources.qrc">:/icons/info.svg</pixmap>
-       </property>
-       <property name="scaledContents">
-        <bool>true</bool>
+       <property name="popupMode">
+        <enum>QToolButton::ToolButtonPopupMode::InstantPopup</enum>
        </property>
       </widget>
      </item>

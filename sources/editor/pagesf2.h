@@ -29,6 +29,7 @@
 #include <QFocusEvent>
 #include <QKeyEvent>
 #include "page.h"
+class QLabel;
 
 namespace Ui {
 class PageSf2;
@@ -97,11 +98,12 @@ protected:
 private:
     EltID _currentID;
     Ui::PageSf2 *ui;
+    QLabel * _labelInfo;
 
     void countElements();
     void countElements(int &unusedSmpl, int &unusedInst, int &usedSmpl, int &usedInst, int &usedPrst,
                        int &instGen, int &prstGen, int &instMod, int &prstMod);
-    void updateInfoToolTip();
+    void updateInfo();
 };
 
 #endif // PAGE_SF2_H
