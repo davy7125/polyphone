@@ -2906,57 +2906,57 @@ repository</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="232"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="241"/>
         <source>&amp;Save</source>
         <translation>&amp;Сачувај</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="218"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="227"/>
         <source>Warning</source>
         <translation>Упозорење</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="64"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="65"/>
         <source>Polyphone SoundFont Editor</source>
         <translation>Полифон Уређивач звукотека</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="209"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="218"/>
         <source>Untitled</source>
         <translation>Без наслова</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="233"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="242"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Поништи</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="234"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="243"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>&amp;Изађи не сачувавши</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="306"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="315"/>
         <source>Opening files</source>
         <translation>Отварање датотека</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="316"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="325"/>
         <source>Opening a directory</source>
         <translation>Отварање директоријума</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="219"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="228"/>
         <source>Save before exiting?</source>
         <translation>Сачувати пре изласка?</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="222"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="231"/>
         <source>The following files have been modified:</source>
         <translation>Следеће датотеке су измењене:</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="229"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="238"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>Датотека „%1” је измењена.</translation>
     </message>
@@ -2973,7 +2973,7 @@ repository</source>
         <translation>  Документација</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="66"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="67"/>
         <source>Home screen</source>
         <translation>Почетни екран</translation>
     </message>
@@ -3770,13 +3770,13 @@ to display its division ranges</source>
 <context>
     <name>PageSmpl</name>
     <message>
-        <location filename="../../editor/pagesmpl.ui" line="709"/>
+        <location filename="../../editor/pagesmpl.ui" line="734"/>
         <source>Equalizer (±15 dB)</source>
         <translation>Еквилајзер (±15 dB)</translation>
     </message>
     <message>
         <location filename="../../editor/pagesmpl.ui" line="344"/>
-        <location filename="../../editor/pagesmpl.cpp" line="1093"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1135"/>
         <source>Play</source>
         <translation>Пусти</translation>
     </message>
@@ -3817,21 +3817,26 @@ to display its division ranges</source>
     </message>
     <message>
         <location filename="../../editor/pagesmpl.ui" line="549"/>
+        <source>Remove the loop</source>
+        <translation>Уклони вртњу</translation>
+    </message>
+    <message>
+        <location filename="../../editor/pagesmpl.ui" line="574"/>
         <source>Use the full length of the sample as loop</source>
         <translation>Употреби целу дужину узорка као вртњу</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.ui" line="594"/>
+        <location filename="../../editor/pagesmpl.ui" line="619"/>
         <source>Size</source>
         <translation>Величина</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.ui" line="601"/>
+        <location filename="../../editor/pagesmpl.ui" line="626"/>
         <source>Sample rate</source>
         <translation>Учестаност узорковања</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.ui" line="615"/>
+        <location filename="../../editor/pagesmpl.ui" line="640"/>
         <source>Link</source>
         <translation>Веза</translation>
     </message>
@@ -3841,112 +3846,112 @@ to display its division ranges</source>
         <translation>Узми за вредности прорачунате висину тона и исправку</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.ui" line="608"/>
+        <location filename="../../editor/pagesmpl.ui" line="633"/>
         <source>Channel</source>
         <translation>Канал</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.ui" line="669"/>
-        <location filename="../../editor/pagesmpl.cpp" line="536"/>
-        <location filename="../../editor/pagesmpl.cpp" line="1058"/>
+        <location filename="../../editor/pagesmpl.ui" line="694"/>
+        <location filename="../../editor/pagesmpl.cpp" line="578"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1100"/>
         <source>Information</source>
         <translation>Информације</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="163"/>
-        <location filename="../../editor/pagesmpl.cpp" line="168"/>
+        <location filename="../../editor/pagesmpl.cpp" line="164"/>
+        <location filename="../../editor/pagesmpl.cpp" line="169"/>
         <source>s</source>
         <comment>unit for seconds</comment>
         <translation>s</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="167"/>
-        <location filename="../../editor/pagesmpl.cpp" line="170"/>
+        <location filename="../../editor/pagesmpl.cpp" line="168"/>
+        <location filename="../../editor/pagesmpl.cpp" line="171"/>
         <source>(min)</source>
         <comment>minimum</comment>
         <translation>(мин)</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="248"/>
-        <location filename="../../editor/pagesmpl.cpp" line="666"/>
+        <location filename="../../editor/pagesmpl.cpp" line="249"/>
+        <location filename="../../editor/pagesmpl.cpp" line="708"/>
         <source>mono</source>
         <comment>opposite to stereo</comment>
         <translation>моно</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="258"/>
-        <location filename="../../editor/pagesmpl.cpp" line="805"/>
+        <location filename="../../editor/pagesmpl.cpp" line="259"/>
+        <location filename="../../editor/pagesmpl.cpp" line="847"/>
         <source>right</source>
         <translation>десно</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="259"/>
-        <location filename="../../editor/pagesmpl.cpp" line="806"/>
+        <location filename="../../editor/pagesmpl.cpp" line="260"/>
+        <location filename="../../editor/pagesmpl.cpp" line="848"/>
         <source>left</source>
         <translation>лево</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="260"/>
-        <location filename="../../editor/pagesmpl.cpp" line="807"/>
+        <location filename="../../editor/pagesmpl.cpp" line="261"/>
+        <location filename="../../editor/pagesmpl.cpp" line="849"/>
         <source>link</source>
         <translation>веза</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="312"/>
+        <location filename="../../editor/pagesmpl.cpp" line="313"/>
         <source>Compress the sample(s) to reduce the soundfont size
 Warning: quality will be reduced and the loop may be altered</source>
         <translation>Компресуј узорак(е) да бисте смањили величину звукотеке
 Упозорење: квалитет ће бити смањен и вртња може бити измењена</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="320"/>
+        <location filename="../../editor/pagesmpl.cpp" line="321"/>
         <source>This sample is compressed to reduce the size of the soundfont</source>
         <translation>Овај узорак је компресован да би се смањила величина звукотеке</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="321"/>
+        <location filename="../../editor/pagesmpl.cpp" line="322"/>
         <source>The selected samples are compressed to reduce the size of the soundfont</source>
         <translation>Одабрани узорци су компресовани да би се смањила величина звукотеке</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="537"/>
-        <location filename="../../editor/pagesmpl.cpp" line="1059"/>
+        <location filename="../../editor/pagesmpl.cpp" line="579"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1101"/>
         <source>Change successfully applied to the different samples</source>
         <translation>Успешно су примењене измене на различитим узорцима</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="804"/>
-        <location filename="../../editor/pagesmpl.cpp" line="829"/>
+        <location filename="../../editor/pagesmpl.cpp" line="846"/>
+        <location filename="../../editor/pagesmpl.cpp" line="871"/>
         <source>mono</source>
         <translation>моно</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="1087"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1129"/>
         <source>Stop</source>
         <translation>Заустави</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="1106"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1148"/>
         <source>Warning</source>
         <translation>Упозорење</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="1107"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1149"/>
         <source>Are you sure to cut the sample from &lt;b&gt;%1&lt;/b&gt; to &lt;b&gt;%2&lt;/b&gt;?</source>
         <translation>Да ли сте сигурни да желите да исечете узорак од &lt;b&gt;%1&lt;/b&gt; до &lt;b&gt;%2&lt;/b&gt;?</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="1109"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1151"/>
         <source>&amp;Yes</source>
         <translation>&amp;Да</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="1110"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1152"/>
         <source>&amp;No</source>
         <translation>&amp;Не</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="1111"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1153"/>
         <source>Yes and &amp;create another sample</source>
         <translation>Да и &amp;направи други узорак</translation>
     </message>
@@ -5794,17 +5799,17 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ToolExternalCommand</name>
     <message>
-        <location filename="../../editor/tools/external_command/toolexternalcommand.cpp" line="106"/>
+        <location filename="../../editor/tools/external_command/toolexternalcommand.cpp" line="107"/>
         <source>Couldn&apos;t export the sample.</source>
         <translation>Није успео извоз узорка.</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/external_command/toolexternalcommand.cpp" line="126"/>
+        <location filename="../../editor/tools/external_command/toolexternalcommand.cpp" line="127"/>
         <source>Couldn&apos;t start the command.</source>
         <translation>Није успело покретање наредбе.</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/external_command/toolexternalcommand.cpp" line="129"/>
+        <location filename="../../editor/tools/external_command/toolexternalcommand.cpp" line="130"/>
         <source>The execution of the command ended with an error.</source>
         <translation>Извршење наредбе је завршено са грешком.</translation>
     </message>
@@ -6790,12 +6795,12 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ToolSoundfontExport</name>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport.cpp" line="157"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport.cpp" line="158"/>
         <source>Merge soudfonts:</source>
         <translation>Споји звукотеке:</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport.cpp" line="254"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport.cpp" line="255"/>
         <source>Export successful!</source>
         <translation>Извоз успешан!</translation>
     </message>
@@ -6900,8 +6905,8 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="168"/>
         <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="197"/>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="203"/>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="212"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="208"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="217"/>
         <source>Warning</source>
         <translation>Упозорење</translation>
     </message>
@@ -6916,12 +6921,12 @@ Other soundfont editors might display other units.</source>
         <translation>Мора бити изабрана барем једна поставка.</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="203"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="208"/>
         <source>The maximal number of soundfont to export is 128.</source>
         <translation>Максималан број звукотека за извоз је 128.</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="212"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="217"/>
         <source>In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 128.</source>
         <translation>У случају извоза више звукотека, максималан број поставки по звукотеци је 128.</translation>
     </message>

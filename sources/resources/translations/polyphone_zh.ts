@@ -2892,57 +2892,57 @@ repository</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="232"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="241"/>
         <source>&amp;Save</source>
         <translation>保存(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="233"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="242"/>
         <source>&amp;Cancel</source>
         <translation>取消(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="234"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="243"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>不保存(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="218"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="227"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="64"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="65"/>
         <source>Polyphone SoundFont Editor</source>
         <translation>Polyphone 音色库编辑器</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="209"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="218"/>
         <source>Untitled</source>
         <translation>未命名</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="219"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="228"/>
         <source>Save before exiting?</source>
         <translation>退出前是否保存文件？</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="222"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="231"/>
         <source>The following files have been modified:</source>
         <translation>下列文件已被修改：</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="229"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="238"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>文件 &quot;%1&quot; 已被修改。</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="306"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="315"/>
         <source>Opening files</source>
         <translation>正在打开文件</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="316"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="325"/>
         <source>Opening a directory</source>
         <translation>正在打开目录</translation>
     </message>
@@ -2959,7 +2959,7 @@ repository</source>
         <translation>  文档</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="66"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="67"/>
         <source>Home screen</source>
         <translation>主屏幕</translation>
     </message>
@@ -3732,13 +3732,13 @@ to display its division ranges</source>
 <context>
     <name>PageSmpl</name>
     <message>
-        <location filename="../../editor/pagesmpl.ui" line="709"/>
+        <location filename="../../editor/pagesmpl.ui" line="734"/>
         <source>Equalizer (±15 dB)</source>
         <translation>均衡器(±15 分贝)</translation>
     </message>
     <message>
         <location filename="../../editor/pagesmpl.ui" line="344"/>
-        <location filename="../../editor/pagesmpl.cpp" line="1093"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1135"/>
         <source>Play</source>
         <translation>播放</translation>
     </message>
@@ -3779,21 +3779,26 @@ to display its division ranges</source>
     </message>
     <message>
         <location filename="../../editor/pagesmpl.ui" line="549"/>
+        <source>Remove the loop</source>
+        <translation>移除循环</translation>
+    </message>
+    <message>
+        <location filename="../../editor/pagesmpl.ui" line="574"/>
         <source>Use the full length of the sample as loop</source>
         <translation>将采样的完整长度用作循环</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.ui" line="594"/>
+        <location filename="../../editor/pagesmpl.ui" line="619"/>
         <source>Size</source>
         <translation>大小</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.ui" line="601"/>
+        <location filename="../../editor/pagesmpl.ui" line="626"/>
         <source>Sample rate</source>
         <translation>采样率</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.ui" line="615"/>
+        <location filename="../../editor/pagesmpl.ui" line="640"/>
         <source>Link</source>
         <translation>链接</translation>
     </message>
@@ -3803,112 +3808,112 @@ to display its division ranges</source>
         <translation>使用估算的音高和校正值</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.ui" line="608"/>
+        <location filename="../../editor/pagesmpl.ui" line="633"/>
         <source>Channel</source>
         <translation>通道</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.ui" line="669"/>
-        <location filename="../../editor/pagesmpl.cpp" line="536"/>
-        <location filename="../../editor/pagesmpl.cpp" line="1058"/>
+        <location filename="../../editor/pagesmpl.ui" line="694"/>
+        <location filename="../../editor/pagesmpl.cpp" line="578"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1100"/>
         <source>Information</source>
         <translation>信息</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="163"/>
-        <location filename="../../editor/pagesmpl.cpp" line="168"/>
+        <location filename="../../editor/pagesmpl.cpp" line="164"/>
+        <location filename="../../editor/pagesmpl.cpp" line="169"/>
         <source>s</source>
         <comment>unit for seconds</comment>
         <translation>秒</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="167"/>
-        <location filename="../../editor/pagesmpl.cpp" line="170"/>
+        <location filename="../../editor/pagesmpl.cpp" line="168"/>
+        <location filename="../../editor/pagesmpl.cpp" line="171"/>
         <source>(min)</source>
         <comment>minimum</comment>
         <translation>(最小)</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="248"/>
-        <location filename="../../editor/pagesmpl.cpp" line="666"/>
+        <location filename="../../editor/pagesmpl.cpp" line="249"/>
+        <location filename="../../editor/pagesmpl.cpp" line="708"/>
         <source>mono</source>
         <comment>opposite to stereo</comment>
         <translation>单声道</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="258"/>
-        <location filename="../../editor/pagesmpl.cpp" line="805"/>
+        <location filename="../../editor/pagesmpl.cpp" line="259"/>
+        <location filename="../../editor/pagesmpl.cpp" line="847"/>
         <source>right</source>
         <translation>右</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="259"/>
-        <location filename="../../editor/pagesmpl.cpp" line="806"/>
+        <location filename="../../editor/pagesmpl.cpp" line="260"/>
+        <location filename="../../editor/pagesmpl.cpp" line="848"/>
         <source>left</source>
         <translation>左</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="260"/>
-        <location filename="../../editor/pagesmpl.cpp" line="807"/>
+        <location filename="../../editor/pagesmpl.cpp" line="261"/>
+        <location filename="../../editor/pagesmpl.cpp" line="849"/>
         <source>link</source>
         <translation>链接</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="312"/>
+        <location filename="../../editor/pagesmpl.cpp" line="313"/>
         <source>Compress the sample(s) to reduce the soundfont size
 Warning: quality will be reduced and the loop may be altered</source>
         <translation>压缩采样以减小音色库大小
 警告：音质会降低，循环可能会改变</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="320"/>
+        <location filename="../../editor/pagesmpl.cpp" line="321"/>
         <source>This sample is compressed to reduce the size of the soundfont</source>
         <translation>此采样已压缩以减小音色库大小</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="321"/>
+        <location filename="../../editor/pagesmpl.cpp" line="322"/>
         <source>The selected samples are compressed to reduce the size of the soundfont</source>
         <translation>选定的采样已压缩以减小音色库大小</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="537"/>
-        <location filename="../../editor/pagesmpl.cpp" line="1059"/>
+        <location filename="../../editor/pagesmpl.cpp" line="579"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1101"/>
         <source>Change successfully applied to the different samples</source>
         <translation>更改已成功应用到不同采样</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="804"/>
-        <location filename="../../editor/pagesmpl.cpp" line="829"/>
+        <location filename="../../editor/pagesmpl.cpp" line="846"/>
+        <location filename="../../editor/pagesmpl.cpp" line="871"/>
         <source>mono</source>
         <translation>单声道</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="1087"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1129"/>
         <source>Stop</source>
         <translation>停止</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="1106"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1148"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="1107"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1149"/>
         <source>Are you sure to cut the sample from &lt;b&gt;%1&lt;/b&gt; to &lt;b&gt;%2&lt;/b&gt;?</source>
         <translation>确定要将采样从 &lt;b&gt;%1&lt;/b&gt; 剪切到 &lt;b&gt;%2&lt;/b&gt; 吗？</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="1109"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1151"/>
         <source>&amp;Yes</source>
         <translation>是(&amp;Y)</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="1110"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1152"/>
         <source>&amp;No</source>
         <translation>否(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="1111"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1153"/>
         <source>Yes and &amp;create another sample</source>
         <translation>是并创建另一个采样(&amp;C)</translation>
     </message>
@@ -5753,17 +5758,17 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ToolExternalCommand</name>
     <message>
-        <location filename="../../editor/tools/external_command/toolexternalcommand.cpp" line="106"/>
+        <location filename="../../editor/tools/external_command/toolexternalcommand.cpp" line="107"/>
         <source>Couldn&apos;t export the sample.</source>
         <translation>无法导出采样。</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/external_command/toolexternalcommand.cpp" line="126"/>
+        <location filename="../../editor/tools/external_command/toolexternalcommand.cpp" line="127"/>
         <source>Couldn&apos;t start the command.</source>
         <translation>无法启动命令。</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/external_command/toolexternalcommand.cpp" line="129"/>
+        <location filename="../../editor/tools/external_command/toolexternalcommand.cpp" line="130"/>
         <source>The execution of the command ended with an error.</source>
         <translation>命令执行以错误结束。</translation>
     </message>
@@ -6745,12 +6750,12 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ToolSoundfontExport</name>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport.cpp" line="157"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport.cpp" line="158"/>
         <source>Merge soudfonts:</source>
         <translation>合并音色库：</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport.cpp" line="254"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport.cpp" line="255"/>
         <source>Export successful!</source>
         <translation>导出成功！</translation>
     </message>
@@ -6855,8 +6860,8 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="168"/>
         <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="197"/>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="203"/>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="212"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="208"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="217"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
@@ -6871,12 +6876,12 @@ Other soundfont editors might display other units.</source>
         <translation>必须至少选择一个预设。</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="203"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="208"/>
         <source>The maximal number of soundfont to export is 128.</source>
         <translation>可导出的音色库最大数量为 128。</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="212"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="217"/>
         <source>In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 128.</source>
         <translation>如果导出多个音色库，每个音色库的最大预设数量为 128。</translation>
     </message>

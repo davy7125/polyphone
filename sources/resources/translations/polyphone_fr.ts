@@ -2906,57 +2906,57 @@ en ligne</translation>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="232"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="241"/>
         <source>&amp;Save</source>
         <translation>&amp;Enregistrer</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="233"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="242"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Annuler</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="234"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="243"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>&amp;Quitter sans enregistrer</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="218"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="227"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="64"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="65"/>
         <source>Polyphone SoundFont Editor</source>
         <translation>Éditeur de soundfonts Polyphone</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="209"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="218"/>
         <source>Untitled</source>
         <translation>Sans titre</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="219"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="228"/>
         <source>Save before exiting?</source>
         <translation>Sauvegarder avant de quitter ?</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="222"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="231"/>
         <source>The following files have been modified:</source>
         <translation>Les fichiers suivants n&apos;ont pas été sauvegardés :</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="229"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="238"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>Le fichier « %1 » n&apos;a pas été sauvegardé.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="306"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="315"/>
         <source>Opening files</source>
         <translation>Ouverture de fichiers</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="316"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="325"/>
         <source>Opening a directory</source>
         <translation>Ouverture d&apos;un répertoire</translation>
     </message>
@@ -2973,7 +2973,7 @@ en ligne</translation>
         <translation>  Documentation</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="66"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="67"/>
         <source>Home screen</source>
         <translation>Écran d&apos;accueil</translation>
     </message>
@@ -3770,7 +3770,7 @@ pour afficher les étendues de ses divisions</translation>
     <name>PageSmpl</name>
     <message>
         <location filename="../../editor/pagesmpl.ui" line="344"/>
-        <location filename="../../editor/pagesmpl.cpp" line="1093"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1135"/>
         <source>Play</source>
         <translation>Lecture</translation>
     </message>
@@ -3811,21 +3811,26 @@ pour afficher les étendues de ses divisions</translation>
     </message>
     <message>
         <location filename="../../editor/pagesmpl.ui" line="549"/>
+        <source>Remove the loop</source>
+        <translation>Enlever la boucle</translation>
+    </message>
+    <message>
+        <location filename="../../editor/pagesmpl.ui" line="574"/>
         <source>Use the full length of the sample as loop</source>
         <translation>Utilise la longueur totale de l&apos;échantillon comme boucle</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.ui" line="594"/>
+        <location filename="../../editor/pagesmpl.ui" line="619"/>
         <source>Size</source>
         <translation>Taille</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.ui" line="601"/>
+        <location filename="../../editor/pagesmpl.ui" line="626"/>
         <source>Sample rate</source>
         <translation>Échantillonnage</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.ui" line="615"/>
+        <location filename="../../editor/pagesmpl.ui" line="640"/>
         <source>Link</source>
         <translation>Lien</translation>
     </message>
@@ -3835,117 +3840,117 @@ pour afficher les étendues de ses divisions</translation>
         <translation>Utilise l&apos;estimation de la note comme valeur</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.ui" line="608"/>
+        <location filename="../../editor/pagesmpl.ui" line="633"/>
         <source>Channel</source>
         <translation>Canal</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.ui" line="669"/>
-        <location filename="../../editor/pagesmpl.cpp" line="536"/>
-        <location filename="../../editor/pagesmpl.cpp" line="1058"/>
+        <location filename="../../editor/pagesmpl.ui" line="694"/>
+        <location filename="../../editor/pagesmpl.cpp" line="578"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1100"/>
         <source>Information</source>
         <translation>Informations</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.ui" line="709"/>
+        <location filename="../../editor/pagesmpl.ui" line="734"/>
         <source>Equalizer (±15 dB)</source>
         <translation>Égaliseur (±15 dB)</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="163"/>
-        <location filename="../../editor/pagesmpl.cpp" line="168"/>
+        <location filename="../../editor/pagesmpl.cpp" line="164"/>
+        <location filename="../../editor/pagesmpl.cpp" line="169"/>
         <source>s</source>
         <comment>unit for seconds</comment>
         <translation>s</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="167"/>
-        <location filename="../../editor/pagesmpl.cpp" line="170"/>
+        <location filename="../../editor/pagesmpl.cpp" line="168"/>
+        <location filename="../../editor/pagesmpl.cpp" line="171"/>
         <source>(min)</source>
         <comment>minimum</comment>
         <translation>(min)</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="248"/>
-        <location filename="../../editor/pagesmpl.cpp" line="666"/>
+        <location filename="../../editor/pagesmpl.cpp" line="249"/>
+        <location filename="../../editor/pagesmpl.cpp" line="708"/>
         <source>mono</source>
         <comment>opposite to stereo</comment>
         <translation>mono</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="258"/>
-        <location filename="../../editor/pagesmpl.cpp" line="805"/>
+        <location filename="../../editor/pagesmpl.cpp" line="259"/>
+        <location filename="../../editor/pagesmpl.cpp" line="847"/>
         <source>right</source>
         <translation>droit</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="259"/>
-        <location filename="../../editor/pagesmpl.cpp" line="806"/>
+        <location filename="../../editor/pagesmpl.cpp" line="260"/>
+        <location filename="../../editor/pagesmpl.cpp" line="848"/>
         <source>left</source>
         <translation>gauche</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="260"/>
-        <location filename="../../editor/pagesmpl.cpp" line="807"/>
+        <location filename="../../editor/pagesmpl.cpp" line="261"/>
+        <location filename="../../editor/pagesmpl.cpp" line="849"/>
         <source>link</source>
         <translation>lien</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="312"/>
+        <location filename="../../editor/pagesmpl.cpp" line="313"/>
         <source>Compress the sample(s) to reduce the soundfont size
 Warning: quality will be reduced and the loop may be altered</source>
         <translation>Compresser les échantillons sélectionnés pour réduire la taille de la soundfont
 Attention : la qualité sera réduite et les boucles peuvent être altérés</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="320"/>
+        <location filename="../../editor/pagesmpl.cpp" line="321"/>
         <source>This sample is compressed to reduce the size of the soundfont</source>
         <translation>Cet échantillon est compressé pour réduire la taille de la soundfont</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="321"/>
+        <location filename="../../editor/pagesmpl.cpp" line="322"/>
         <source>The selected samples are compressed to reduce the size of the soundfont</source>
         <translation>Les échantillons sélectionnés sont compressés pour réduire la taille de la soundfont</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="537"/>
-        <location filename="../../editor/pagesmpl.cpp" line="1059"/>
+        <location filename="../../editor/pagesmpl.cpp" line="579"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1101"/>
         <source>Change successfully applied to the different samples</source>
         <translation>Modification appliquée avec succès aux différents échantillons</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="804"/>
-        <location filename="../../editor/pagesmpl.cpp" line="829"/>
+        <location filename="../../editor/pagesmpl.cpp" line="846"/>
+        <location filename="../../editor/pagesmpl.cpp" line="871"/>
         <source>mono</source>
         <translation>mono</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="1087"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1129"/>
         <source>Stop</source>
         <translation>Arrêt</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="1106"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1148"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="1107"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1149"/>
         <source>Are you sure to cut the sample from &lt;b&gt;%1&lt;/b&gt; to &lt;b&gt;%2&lt;/b&gt;?</source>
         <translation>Couper l&apos;échantillon de &lt;b&gt;%1&lt;/b&gt; à &lt;b&gt;%2&lt;/b&gt; ?</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="1109"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1151"/>
         <source>&amp;Yes</source>
         <translation>&amp;Oui</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="1110"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1152"/>
         <source>&amp;No</source>
         <translation>&amp;Non</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="1111"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1153"/>
         <source>Yes and &amp;create another sample</source>
         <translation>Oui et &amp;créer un autre échantillon</translation>
     </message>
@@ -5792,17 +5797,17 @@ D&apos;autres éditeurs de soundfonts pourraient utiliser d&apos;autres unités.
 <context>
     <name>ToolExternalCommand</name>
     <message>
-        <location filename="../../editor/tools/external_command/toolexternalcommand.cpp" line="106"/>
+        <location filename="../../editor/tools/external_command/toolexternalcommand.cpp" line="107"/>
         <source>Couldn&apos;t export the sample.</source>
         <translation>Impossible d&apos;exporter l&apos;échantillon.</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/external_command/toolexternalcommand.cpp" line="126"/>
+        <location filename="../../editor/tools/external_command/toolexternalcommand.cpp" line="127"/>
         <source>Couldn&apos;t start the command.</source>
         <translation>La commande n&apos;a pas pu démarrer.</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/external_command/toolexternalcommand.cpp" line="129"/>
+        <location filename="../../editor/tools/external_command/toolexternalcommand.cpp" line="130"/>
         <source>The execution of the command ended with an error.</source>
         <translation>La commande s&apos;est terminée avec une erreur.</translation>
     </message>
@@ -6787,12 +6792,12 @@ D&apos;autres éditeurs de soundfonts pourraient utiliser d&apos;autres unités.
 <context>
     <name>ToolSoundfontExport</name>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport.cpp" line="157"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport.cpp" line="158"/>
         <source>Merge soudfonts:</source>
         <translation>Fusion des banques de sons :</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport.cpp" line="254"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport.cpp" line="255"/>
         <source>Export successful!</source>
         <translation>L&apos;export a réussi !</translation>
     </message>
@@ -6897,8 +6902,8 @@ D&apos;autres éditeurs de soundfonts pourraient utiliser d&apos;autres unités.
     <message>
         <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="168"/>
         <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="197"/>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="203"/>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="212"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="208"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="217"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
@@ -6913,12 +6918,12 @@ D&apos;autres éditeurs de soundfonts pourraient utiliser d&apos;autres unités.
         <translation>Au moins un ensemble doit être sélectionné.</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="203"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="208"/>
         <source>The maximal number of soundfont to export is 128.</source>
         <translation>Le nombre maximal de soundfonts à exporter est de 128.</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="212"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="217"/>
         <source>In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 128.</source>
         <translation>Dans le cas où plusieurs soundfonts sont exportées, le nombre maximal d&apos;ensembles par soundfont est de 128.</translation>
     </message>

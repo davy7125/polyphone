@@ -50,6 +50,7 @@ PageSmpl::PageSmpl(QWidget *parent) :
                                      ";border: 1px solid " + ContextManager::theme()->getColor(ThemeManager::BORDER).name() + ";border-radius: 3px;}");
 
     // Icons
+    ui->pushRemoveLoop->setIcon(ContextManager::theme()->getColoredSvg(":/icons/close.svg", QSize(14, 14), ThemeManager::BUTTON_TEXT));
     ui->pushFullLength->setIcon(ContextManager::theme()->getColoredSvg(":/icons/range.svg", QSize(20, 18), ThemeManager::BUTTON_TEXT));
     ui->pushAutoTune->setIcon(ContextManager::theme()->getColoredSvg(":/icons/left.svg", QSize(14, 14), ThemeManager::BUTTON_TEXT));
     ui->pushCompress->setIcon(ContextManager::theme()->getColoredSvg(":/icons/compress.svg", QSize(20, 18), ThemeManager::BUTTON_TEXT));
@@ -464,6 +465,47 @@ void PageSmpl::setEndLoop(int val)
         // Update the loop option
         ui->checkLectureBoucle->setEnabled(ui->spinStartLoop->value() != ui->spinEndLoop->value());
     }
+}
+
+void PageSmpl::on_pushRemoveLoop_clicked()
+{
+    // Soundfont editing: loop 0 - 0
+    AttributeValue val;
+    val.dwValue = 0;
+
+    QList<EltID> listID = _currentIds.getSelectedIds(elementSmpl);
+    foreach (EltID id, listID)
+    {
+        if (_sf2->isValid(id))
+        {
+            if (_sf2->get(id, champ_dwStartLoop).dwValue != 0)
+                _sf2->set(id, champ_dwStartLoop, val);
+            if (_sf2->get(id, champ_dwEndLoop).dwValue != 0)
+                _sf2->set(id, champ_dwEndLoop, val);
+
+            // Linked sample?
+            EltID id2 = getRepercussionID(id);
+            if (id2.indexElt != -1)
+            {
+                if (_sf2->isValid(id2))
+                {
+                    if (_sf2->get(id2, champ_dwStartLoop).dwValue != 0)
+                        _sf2->set(id2, champ_dwStartLoop, val);
+                    if (_sf2->get(id2, champ_dwEndLoop).dwValue != 0)
+                        _sf2->set(id2, champ_dwEndLoop, val);
+                }
+            }
+        }
+    }
+    _sf2->endEditing(_editingSource);
+
+    // Update the page
+    ui->spinEndLoop->setMinimum(0);
+    ui->spinStartLoop->setValue(0);
+    ui->spinEndLoop->setValue(0);
+    ui->spinStartLoop->setMaximum(0);
+    ui->grapheFourier->setPos(0, 0);
+    updateLoopQuality();
 }
 
 void PageSmpl::on_pushFullLength_clicked()
