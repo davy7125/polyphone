@@ -155,6 +155,25 @@ void Editor::tabInError(QString errorMessage)
 
 void Editor::tabInitialized(int indexSf2)
 {
+    // Page first displayed for the instruments or presets, according to the startup view
+    if (_initialSelection.typeElement == elementUnknown)
+    {
+        switch (ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "startup_view", 0).toInt())
+        {
+        case 7: // First instrument, ranges
+            _pageSelector->setLastPage(elementInst, _pageSelector->getPages(elementInst)[1]);
+            break;
+        case 8: // First instrument, envelopes
+            _pageSelector->setLastPage(elementInst, _pageSelector->getPages(elementInst)[2]);
+            break;
+        case 9: // First preset, ranges
+            _pageSelector->setLastPage(elementPrst, _pageSelector->getPages(elementPrst)[1]);
+            break;
+        default: // Table
+            break;
+        }
+    }
+
     // Prepare the tree
     _initialSelection.indexSf2 = indexSf2;
     TreeModel * model = dynamic_cast<TreeModel*>(SoundfontManager::getInstance()->getModel(indexSf2));

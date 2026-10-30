@@ -753,28 +753,29 @@
 <context>
     <name>ConfigPanel</name>
     <message>
-        <location filename="../../context/interface/configpanel.ui" line="87"/>
+        <location filename="../../context/interface/configpanel.ui" line="63"/>
+        <location filename="../../context/interface/configpanel.cpp" line="108"/>
         <source>General</source>
         <translation>일반</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configpanel.ui" line="120"/>
+        <location filename="../../context/interface/configpanel.ui" line="128"/>
         <source>Interface</source>
         <translation>인터페이스</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configpanel.ui" line="153"/>
+        <location filename="../../context/interface/configpanel.ui" line="161"/>
         <source>Sound</source>
         <translation>사운드</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configpanel.ui" line="186"/>
+        <location filename="../../context/interface/configpanel.ui" line="194"/>
         <source>Keyboard</source>
         <oldsource>Virtual keyboard</oldsource>
         <translation>키보드</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configpanel.ui" line="219"/>
+        <location filename="../../context/interface/configpanel.ui" line="227"/>
         <source>Online repository</source>
         <translation>온라인 저장소</translation>
     </message>
@@ -927,38 +928,53 @@
     </message>
     <message>
         <location filename="../../context/interface/configsectioninterface.ui" line="637"/>
-        <source>general information</source>
-        <translation>일반 정보</translation>
+        <source>General</source>
+        <translation>일반</translation>
     </message>
     <message>
         <location filename="../../context/interface/configsectioninterface.ui" line="642"/>
-        <source>sample list</source>
-        <translation>샘플 목록</translation>
+        <source>Samples</source>
+        <translation>샘플들</translation>
     </message>
     <message>
         <location filename="../../context/interface/configsectioninterface.ui" line="647"/>
-        <source>first sample</source>
-        <translation>첫 번째 샘플</translation>
+        <source>Samples - first sample</source>
+        <translation>샘플들 - 첫 번째 샘플</translation>
     </message>
     <message>
         <location filename="../../context/interface/configsectioninterface.ui" line="652"/>
-        <source>instrument list</source>
-        <translation>악기 목록</translation>
+        <source>Instruments</source>
+        <translation>악기들</translation>
     </message>
     <message>
         <location filename="../../context/interface/configsectioninterface.ui" line="657"/>
-        <source>first instrument</source>
-        <translation>첫 번째 악기</translation>
+        <source>Instruments - first instrument - Table</source>
+        <translation>악기들 - 첫 번째 악기 - 테이블</translation>
     </message>
     <message>
         <location filename="../../context/interface/configsectioninterface.ui" line="662"/>
-        <source>preset list</source>
-        <translation>프리셋 목록</translation>
+        <source>Instruments - first instrument - Ranges</source>
+        <translation>악기들 - 첫 번째 악기 - 범위</translation>
     </message>
     <message>
         <location filename="../../context/interface/configsectioninterface.ui" line="667"/>
-        <source>first preset</source>
-        <translation>첫 번째 프리셋</translation>
+        <source>Instruments - first instrument - Envelopes</source>
+        <translation>악기들 - 첫 번째 악기 - 엔벨로프</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/configsectioninterface.ui" line="672"/>
+        <source>Presets</source>
+        <translation>프리셋들</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/configsectioninterface.ui" line="677"/>
+        <source>Presets - first preset - Table</source>
+        <translation>프리셋들 - 첫 번째 프리셋 - 테이블</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/configsectioninterface.ui" line="682"/>
+        <source>Presets - first preset - Ranges</source>
+        <translation>프리셋들 - 첫 번째 프리셋 - 범위</translation>
     </message>
     <message>
         <location filename="../../context/interface/configsectioninterface.ui" line="71"/>
@@ -1063,15 +1079,15 @@
         <translation>이 변경사항은 다음 번에 소프트웨어를 시작하면 적용됩니다.</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="206"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="218"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="230"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="242"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="254"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="266"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="278"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="290"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="302"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="211"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="223"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="235"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="247"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="259"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="271"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="283"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="295"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="307"/>
         <source>Select a color</source>
         <translation>색상 선택</translation>
     </message>
@@ -1181,44 +1197,44 @@ Premium!</source>
         <translation>내려받기</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionrepository.cpp" line="113"/>
-        <location filename="../../context/interface/configsectionrepository.cpp" line="149"/>
+        <location filename="../../context/interface/configsectionrepository.cpp" line="115"/>
+        <location filename="../../context/interface/configsectionrepository.cpp" line="151"/>
         <source>Connection</source>
         <translation>연결</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionrepository.cpp" line="116"/>
+        <location filename="../../context/interface/configsectionrepository.cpp" line="118"/>
         <source>Connecting...</source>
         <translation>연결하는 중...</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionrepository.cpp" line="120"/>
+        <location filename="../../context/interface/configsectionrepository.cpp" line="122"/>
         <source>Cancel</source>
         <translation>취소</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionrepository.cpp" line="123"/>
-        <location filename="../../context/interface/configsectionrepository.cpp" line="129"/>
-        <location filename="../../context/interface/configsectionrepository.cpp" line="135"/>
+        <location filename="../../context/interface/configsectionrepository.cpp" line="125"/>
+        <location filename="../../context/interface/configsectionrepository.cpp" line="131"/>
+        <location filename="../../context/interface/configsectionrepository.cpp" line="137"/>
         <source>Connected</source>
         <translation>연결됨</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionrepository.cpp" line="126"/>
-        <location filename="../../context/interface/configsectionrepository.cpp" line="132"/>
-        <location filename="../../context/interface/configsectionrepository.cpp" line="138"/>
-        <location filename="../../context/interface/configsectionrepository.cpp" line="143"/>
+        <location filename="../../context/interface/configsectionrepository.cpp" line="128"/>
+        <location filename="../../context/interface/configsectionrepository.cpp" line="134"/>
+        <location filename="../../context/interface/configsectionrepository.cpp" line="140"/>
+        <location filename="../../context/interface/configsectionrepository.cpp" line="145"/>
         <source>Log out</source>
         <translation>로그아웃</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionrepository.cpp" line="209"/>
-        <location filename="../../context/interface/configsectionrepository.cpp" line="216"/>
+        <location filename="../../context/interface/configsectionrepository.cpp" line="211"/>
+        <location filename="../../context/interface/configsectionrepository.cpp" line="218"/>
         <source>Click on %1 to save parameters.</source>
         <translation>%1 클릭으로 매개변수 값을 저장합니다.</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionrepository.cpp" line="222"/>
+        <location filename="../../context/interface/configsectionrepository.cpp" line="224"/>
         <source>Select the destination directory</source>
         <translation>저장될 디렉토리 선택</translation>
     </message>
@@ -2442,7 +2458,7 @@ repository</source>
         <translation>파일을 열 수 없음</translation>
     </message>
     <message>
-        <location filename="../../editor/editor.cpp" line="494"/>
+        <location filename="../../editor/editor.cpp" line="520"/>
         <source>Warning</source>
         <translation>경고</translation>
     </message>
@@ -2914,22 +2930,22 @@ repository</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="241"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="242"/>
         <source>&amp;Save</source>
         <translation>저장(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="242"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="243"/>
         <source>&amp;Cancel</source>
         <translation>취소(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="243"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="244"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>저장하지 않음(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="227"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="228"/>
         <source>Warning</source>
         <translation>경고</translation>
     </message>
@@ -2939,32 +2955,32 @@ repository</source>
         <translation>폴리폰 사운드폰트 에디터</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="218"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="219"/>
         <source>Untitled</source>
         <translation>제목없음</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="228"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="229"/>
         <source>Save before exiting?</source>
         <translation>종료하기 전에 저장할까요?</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="231"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="232"/>
         <source>The following files have been modified:</source>
         <translation>다음의 파일이 변경됐습니다:</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="238"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="239"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>&quot;%1&quot; 파일이 변경됐습니다.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="315"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="316"/>
         <source>Opening files</source>
         <translation>파일 여는 중</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="325"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="326"/>
         <source>Opening a directory</source>
         <translation>디렉터리 열기</translation>
     </message>
@@ -3645,119 +3661,119 @@ to display its division ranges</source>
         <translation>날짜...</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="207"/>
+        <location filename="../../editor/pagesf2.ui" line="201"/>
         <source>Product</source>
         <translation>제품</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="231"/>
+        <location filename="../../editor/pagesf2.ui" line="225"/>
         <source>Copyright</source>
         <translation>저작권</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="214"/>
+        <location filename="../../editor/pagesf2.ui" line="208"/>
         <source>Comments</source>
         <translation>코멘트</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.cpp" line="446"/>
+        <location filename="../../editor/pagesf2.cpp" line="468"/>
         <source>SoundFont format</source>
         <translation>SoundFont 형식</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.cpp" line="451"/>
+        <location filename="../../editor/pagesf2.cpp" line="473"/>
         <source>ROM name</source>
         <translation>ROM 이름</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.cpp" line="458"/>
+        <location filename="../../editor/pagesf2.cpp" line="480"/>
         <source>ROM version</source>
         <translation>ROM 버전</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.cpp" line="464"/>
+        <location filename="../../editor/pagesf2.cpp" line="486"/>
         <source>Sound engine</source>
         <translation>사운드 엔진</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.cpp" line="469"/>
+        <location filename="../../editor/pagesf2.cpp" line="491"/>
         <source>Editing software</source>
         <translation>편집 소프트웨어</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="335"/>
+        <location filename="../../editor/pagesf2.ui" line="329"/>
         <source>Presets</source>
         <translation>프리셋들</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="357"/>
-        <location filename="../../editor/pagesf2.ui" line="471"/>
-        <location filename="../../editor/pagesf2.ui" line="812"/>
+        <location filename="../../editor/pagesf2.ui" line="351"/>
+        <location filename="../../editor/pagesf2.ui" line="465"/>
+        <location filename="../../editor/pagesf2.ui" line="806"/>
         <source>Details</source>
         <translation>세부사항</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="449"/>
+        <location filename="../../editor/pagesf2.ui" line="443"/>
         <source>Samples</source>
         <translation>샘플들</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="524"/>
+        <location filename="../../editor/pagesf2.ui" line="518"/>
         <source>Compression</source>
         <translation>압축</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="531"/>
-        <location filename="../../editor/pagesf2.ui" line="620"/>
-        <location filename="../../editor/pagesf2.ui" line="683"/>
+        <location filename="../../editor/pagesf2.ui" line="525"/>
+        <location filename="../../editor/pagesf2.ui" line="614"/>
+        <location filename="../../editor/pagesf2.ui" line="677"/>
         <source>Count</source>
         <translation>개수</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="545"/>
+        <location filename="../../editor/pagesf2.ui" line="539"/>
         <source>Bit depth</source>
         <translation>비트 깊이</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="559"/>
+        <location filename="../../editor/pagesf2.ui" line="553"/>
         <source>16 bits</source>
         <translation>16 비트</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="564"/>
+        <location filename="../../editor/pagesf2.ui" line="558"/>
         <source>24 bits</source>
         <translation>24 비트</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="579"/>
+        <location filename="../../editor/pagesf2.ui" line="573"/>
         <source>no</source>
         <translation>아니오</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="584"/>
+        <location filename="../../editor/pagesf2.ui" line="578"/>
         <source>possible</source>
         <translation>가능</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="613"/>
-        <location filename="../../editor/pagesf2.ui" line="711"/>
+        <location filename="../../editor/pagesf2.ui" line="607"/>
+        <location filename="../../editor/pagesf2.ui" line="705"/>
         <source>Modulators</source>
         <translation>모듈레이터들</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="641"/>
-        <location filename="../../editor/pagesf2.ui" line="676"/>
+        <location filename="../../editor/pagesf2.ui" line="635"/>
+        <location filename="../../editor/pagesf2.ui" line="670"/>
         <source>Parameters</source>
         <translation>매개변수들</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="790"/>
+        <location filename="../../editor/pagesf2.ui" line="784"/>
         <source>Instruments</source>
         <translation>악기들</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../editor/pagesf2.cpp" line="201"/>
-        <location filename="../../editor/pagesf2.cpp" line="211"/>
+        <location filename="../../editor/pagesf2.cpp" line="218"/>
+        <location filename="../../editor/pagesf2.cpp" line="228"/>
         <source>%1 (unused: %n)</source>
         <translation>
             <numerusform>%1 (사용 안 함: %n개)</numerusform>
@@ -4387,7 +4403,7 @@ Warning: quality will be reduced and the loop may be altered</source>
         <translation>Sfz 파일</translation>
     </message>
     <message>
-        <location filename="../../context/translationmanager.cpp" line="107"/>
+        <location filename="../../context/translationmanager.cpp" line="117"/>
         <source>When editing one side of a stereo sample, the other side is automatically edited the same.
 This rule applies at the sample level and also when editing a division of an instrument:
 the division corresponding to the other channel, if any, is edited the same.

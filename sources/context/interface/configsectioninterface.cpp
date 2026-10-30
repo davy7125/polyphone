@@ -66,6 +66,11 @@ ConfigSectionInterface::ConfigSectionInterface(QWidget *parent) :
     ContextManager::theme()->populateCombobox(ui->comboColorTheme);
     fillColors();
     ui->comboColorTheme->blockSignals(false);
+
+    // Values stored for the startup views (0 to 6 keep their meaning from the previous versions)
+    int startupViews[] = {0, 1, 2, 3, 4, 7, 8, 5, 6, 9};
+    for (int i = 0; i < 10; i++)
+        ui->comboStartupView->setItemData(i, startupViews[i]);
 }
 
 ConfigSectionInterface::~ConfigSectionInterface()
@@ -155,8 +160,8 @@ void ConfigSectionInterface::initialize()
     ui->comboSortDivisions->blockSignals(false);
 
     ui->comboStartupView->blockSignals(true);
-    ui->comboStartupView->setCurrentIndex(
-        ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "startup_view", 0).toInt());
+    ui->comboStartupView->setCurrentIndex(qMax(0, ui->comboStartupView->findData(
+        ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "startup_view", 0).toInt())));
     ui->comboStartupView->blockSignals(false);
 }
 
@@ -327,7 +332,7 @@ void ConfigSectionInterface::on_comboSortDivisions_currentIndexChanged(int index
 
 void ConfigSectionInterface::on_comboStartupView_currentIndexChanged(int index)
 {
-    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "startup_view", index);
+    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "startup_view", ui->comboStartupView->itemData(index));
 }
 
 void ConfigSectionInterface::on_checkBorders_clicked()

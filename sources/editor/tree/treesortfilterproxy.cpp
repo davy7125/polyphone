@@ -57,7 +57,7 @@ TreeSortFilterProxy::TreeSortFilterProxy(int indexSf2, TreeView * treeView, QAbs
         case 3: // Instrument list
             _treeView->setCurrentIndex(this->index(2, 0));
             break;
-        case 4: // First instrument
+        case 4: case 7: case 8: // First instrument (table, ranges or envelopes)
             if (this->hasChildren(this->index(2, 0)))
                 _treeView->setCurrentIndex(this->index(0, 0, this->index(2, 0)));
             else
@@ -66,7 +66,7 @@ TreeSortFilterProxy::TreeSortFilterProxy(int indexSf2, TreeView * treeView, QAbs
         case 5: // Preset list
             _treeView->setCurrentIndex(this->index(3, 0));
             break;
-        case 6: // First preset
+        case 6: case 9: // First preset (table or ranges)
             if (this->hasChildren(this->index(3, 0)))
                 _treeView->setCurrentIndex(this->index(0, 0, this->index(3, 0)));
             else

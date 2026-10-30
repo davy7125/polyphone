@@ -634,37 +634,52 @@
     <widget class="QComboBox" name="comboStartupView">
      <item>
       <property name="text">
-       <string>general information</string>
+       <string>General</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>sample list</string>
+       <string>Samples</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>first sample</string>
+       <string>Samples - first sample</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>instrument list</string>
+       <string>Instruments</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>first instrument</string>
+       <string>Instruments - first instrument - Table</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>preset list</string>
+       <string>Instruments - first instrument - Ranges</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>first preset</string>
+       <string>Instruments - first instrument - Envelopes</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Presets</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Presets - first preset - Table</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Presets - first preset - Ranges</string>
       </property>
      </item>
     </widget>

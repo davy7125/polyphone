@@ -805,28 +805,29 @@
 <context>
     <name>ConfigPanel</name>
     <message>
-        <location filename="../../context/interface/configpanel.ui" line="87"/>
+        <location filename="../../context/interface/configpanel.ui" line="63"/>
+        <location filename="../../context/interface/configpanel.cpp" line="108"/>
         <source>General</source>
         <translation>Allgemein</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configpanel.ui" line="120"/>
+        <location filename="../../context/interface/configpanel.ui" line="128"/>
         <source>Interface</source>
         <translation>Oberfläche</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configpanel.ui" line="153"/>
+        <location filename="../../context/interface/configpanel.ui" line="161"/>
         <source>Sound</source>
         <translation>Sound</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configpanel.ui" line="186"/>
+        <location filename="../../context/interface/configpanel.ui" line="194"/>
         <source>Keyboard</source>
         <oldsource>Virtual keyboard</oldsource>
         <translation>Tastatur</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configpanel.ui" line="219"/>
+        <location filename="../../context/interface/configpanel.ui" line="227"/>
         <source>Online repository</source>
         <translation>Online-Fundgrube</translation>
     </message>
@@ -978,38 +979,53 @@
     </message>
     <message>
         <location filename="../../context/interface/configsectioninterface.ui" line="637"/>
-        <source>general information</source>
-        <translation>Allgemeine Informationen</translation>
+        <source>General</source>
+        <translation>Allgemein</translation>
     </message>
     <message>
         <location filename="../../context/interface/configsectioninterface.ui" line="642"/>
-        <source>sample list</source>
-        <translation>Sample-Liste</translation>
+        <source>Samples</source>
+        <translation>Samples</translation>
     </message>
     <message>
         <location filename="../../context/interface/configsectioninterface.ui" line="647"/>
-        <source>first sample</source>
-        <translation>Erstes Sample</translation>
+        <source>Samples - first sample</source>
+        <translation>Samples - erstes Sample</translation>
     </message>
     <message>
         <location filename="../../context/interface/configsectioninterface.ui" line="652"/>
-        <source>instrument list</source>
-        <translation>Instrumentenliste</translation>
+        <source>Instruments</source>
+        <translation>Instrumente</translation>
     </message>
     <message>
         <location filename="../../context/interface/configsectioninterface.ui" line="657"/>
-        <source>first instrument</source>
-        <translation>Erstes Instrument</translation>
+        <source>Instruments - first instrument - Table</source>
+        <translation>Instrumente - erstes Instrument - Tabelle</translation>
     </message>
     <message>
         <location filename="../../context/interface/configsectioninterface.ui" line="662"/>
-        <source>preset list</source>
-        <translation>Presetliste</translation>
+        <source>Instruments - first instrument - Ranges</source>
+        <translation>Instrumente - erstes Instrument - Bereiche</translation>
     </message>
     <message>
         <location filename="../../context/interface/configsectioninterface.ui" line="667"/>
-        <source>first preset</source>
-        <translation>Erstes Preset</translation>
+        <source>Instruments - first instrument - Envelopes</source>
+        <translation>Instrumente - erstes Instrument - Hüllkurven</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/configsectioninterface.ui" line="672"/>
+        <source>Presets</source>
+        <translation>Presets</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/configsectioninterface.ui" line="677"/>
+        <source>Presets - first preset - Table</source>
+        <translation>Presets - erstes Preset - Tabelle</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/configsectioninterface.ui" line="682"/>
+        <source>Presets - first preset - Ranges</source>
+        <translation>Presets - erstes Preset - Bereiche</translation>
     </message>
     <message>
         <location filename="../../context/interface/configsectioninterface.ui" line="71"/>
@@ -1114,15 +1130,15 @@
         <translation>Diese Änderung wird beim nächsten Start der Software angewendet.</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="206"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="218"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="230"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="242"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="254"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="266"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="278"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="290"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="302"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="211"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="223"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="235"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="247"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="259"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="271"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="283"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="295"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="307"/>
         <source>Select a color</source>
         <translation>Farbe wählen</translation>
     </message>
@@ -1232,44 +1248,44 @@ werden!</translation>
         <translation>Downloads</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionrepository.cpp" line="113"/>
-        <location filename="../../context/interface/configsectionrepository.cpp" line="149"/>
+        <location filename="../../context/interface/configsectionrepository.cpp" line="115"/>
+        <location filename="../../context/interface/configsectionrepository.cpp" line="151"/>
         <source>Connection</source>
         <translation>Verbindung</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionrepository.cpp" line="116"/>
+        <location filename="../../context/interface/configsectionrepository.cpp" line="118"/>
         <source>Connecting...</source>
         <translation>Verbinde...</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionrepository.cpp" line="120"/>
+        <location filename="../../context/interface/configsectionrepository.cpp" line="122"/>
         <source>Cancel</source>
         <translation>Abbrechen</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionrepository.cpp" line="123"/>
-        <location filename="../../context/interface/configsectionrepository.cpp" line="129"/>
-        <location filename="../../context/interface/configsectionrepository.cpp" line="135"/>
+        <location filename="../../context/interface/configsectionrepository.cpp" line="125"/>
+        <location filename="../../context/interface/configsectionrepository.cpp" line="131"/>
+        <location filename="../../context/interface/configsectionrepository.cpp" line="137"/>
         <source>Connected</source>
         <translation>Verbunden</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionrepository.cpp" line="126"/>
-        <location filename="../../context/interface/configsectionrepository.cpp" line="132"/>
-        <location filename="../../context/interface/configsectionrepository.cpp" line="138"/>
-        <location filename="../../context/interface/configsectionrepository.cpp" line="143"/>
+        <location filename="../../context/interface/configsectionrepository.cpp" line="128"/>
+        <location filename="../../context/interface/configsectionrepository.cpp" line="134"/>
+        <location filename="../../context/interface/configsectionrepository.cpp" line="140"/>
+        <location filename="../../context/interface/configsectionrepository.cpp" line="145"/>
         <source>Log out</source>
         <translation>Abmelden</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionrepository.cpp" line="209"/>
-        <location filename="../../context/interface/configsectionrepository.cpp" line="216"/>
+        <location filename="../../context/interface/configsectionrepository.cpp" line="211"/>
+        <location filename="../../context/interface/configsectionrepository.cpp" line="218"/>
         <source>Click on %1 to save parameters.</source>
         <translation>Klicken Sie auf %1, um die Parameter zu speichern.</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionrepository.cpp" line="222"/>
+        <location filename="../../context/interface/configsectionrepository.cpp" line="224"/>
         <source>Select the destination directory</source>
         <translation>Zielordner wählen</translation>
     </message>
@@ -2498,7 +2514,7 @@ Fundgrube</translation>
         <translation>Datei kann nicht geöffnet werden</translation>
     </message>
     <message>
-        <location filename="../../editor/editor.cpp" line="494"/>
+        <location filename="../../editor/editor.cpp" line="520"/>
         <source>Warning</source>
         <translation>Warnung</translation>
     </message>
@@ -2971,12 +2987,12 @@ Fundgrube</translation>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="241"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="242"/>
         <source>&amp;Save</source>
         <translation>&amp;Speichern</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="227"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="228"/>
         <source>Warning</source>
         <translation>Warnung</translation>
     </message>
@@ -2986,42 +3002,42 @@ Fundgrube</translation>
         <translation>Polyphone SoundFont Editor</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="218"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="219"/>
         <source>Untitled</source>
         <translation>Unbenannt</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="242"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="243"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="243"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="244"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>&amp;Nicht speichern</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="315"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="316"/>
         <source>Opening files</source>
         <translation>Dateien öffnen</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="325"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="326"/>
         <source>Opening a directory</source>
         <translation>Verzeichnis öffnen</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="228"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="229"/>
         <source>Save before exiting?</source>
         <translation>Vor dem Beenden speichern?</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="231"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="232"/>
         <source>The following files have been modified:</source>
         <translation>Folgende Dateien wurden geändert:</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="238"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="239"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>Die Datei &quot;%1&quot; wurde geändert.</translation>
     </message>
@@ -3736,119 +3752,119 @@ um die Bereiche seiner Aufteilungen anzuzeigen</translation>
         <translation>Datum...</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="207"/>
+        <location filename="../../editor/pagesf2.ui" line="201"/>
         <source>Product</source>
         <translation>Produkt</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="231"/>
+        <location filename="../../editor/pagesf2.ui" line="225"/>
         <source>Copyright</source>
         <translation>Copyright</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="214"/>
+        <location filename="../../editor/pagesf2.ui" line="208"/>
         <source>Comments</source>
         <translation>Kommentare</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.cpp" line="446"/>
+        <location filename="../../editor/pagesf2.cpp" line="468"/>
         <source>SoundFont format</source>
         <translation>SoundFont-Format</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.cpp" line="451"/>
+        <location filename="../../editor/pagesf2.cpp" line="473"/>
         <source>ROM name</source>
         <translation>ROM-Name</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.cpp" line="458"/>
+        <location filename="../../editor/pagesf2.cpp" line="480"/>
         <source>ROM version</source>
         <translation>ROM-Version</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.cpp" line="464"/>
+        <location filename="../../editor/pagesf2.cpp" line="486"/>
         <source>Sound engine</source>
         <translation>Sound-Engine</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.cpp" line="469"/>
+        <location filename="../../editor/pagesf2.cpp" line="491"/>
         <source>Editing software</source>
         <translation>Bearbeitungssoftware</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="335"/>
+        <location filename="../../editor/pagesf2.ui" line="329"/>
         <source>Presets</source>
         <translation>Presets</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="357"/>
-        <location filename="../../editor/pagesf2.ui" line="471"/>
-        <location filename="../../editor/pagesf2.ui" line="812"/>
+        <location filename="../../editor/pagesf2.ui" line="351"/>
+        <location filename="../../editor/pagesf2.ui" line="465"/>
+        <location filename="../../editor/pagesf2.ui" line="806"/>
         <source>Details</source>
         <translation>Details</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="449"/>
+        <location filename="../../editor/pagesf2.ui" line="443"/>
         <source>Samples</source>
         <translation>Samples</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="524"/>
+        <location filename="../../editor/pagesf2.ui" line="518"/>
         <source>Compression</source>
         <translation>Kompression</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="531"/>
-        <location filename="../../editor/pagesf2.ui" line="620"/>
-        <location filename="../../editor/pagesf2.ui" line="683"/>
+        <location filename="../../editor/pagesf2.ui" line="525"/>
+        <location filename="../../editor/pagesf2.ui" line="614"/>
+        <location filename="../../editor/pagesf2.ui" line="677"/>
         <source>Count</source>
         <translation>Anzahl</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="545"/>
+        <location filename="../../editor/pagesf2.ui" line="539"/>
         <source>Bit depth</source>
         <translation>Bittiefe</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="559"/>
+        <location filename="../../editor/pagesf2.ui" line="553"/>
         <source>16 bits</source>
         <translation>16 Bit</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="564"/>
+        <location filename="../../editor/pagesf2.ui" line="558"/>
         <source>24 bits</source>
         <translation>24 Bit</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="579"/>
+        <location filename="../../editor/pagesf2.ui" line="573"/>
         <source>no</source>
         <translation>nein</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="584"/>
+        <location filename="../../editor/pagesf2.ui" line="578"/>
         <source>possible</source>
         <translation>möglich</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="613"/>
-        <location filename="../../editor/pagesf2.ui" line="711"/>
+        <location filename="../../editor/pagesf2.ui" line="607"/>
+        <location filename="../../editor/pagesf2.ui" line="705"/>
         <source>Modulators</source>
         <translation>Modulatoren</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="641"/>
-        <location filename="../../editor/pagesf2.ui" line="676"/>
+        <location filename="../../editor/pagesf2.ui" line="635"/>
+        <location filename="../../editor/pagesf2.ui" line="670"/>
         <source>Parameters</source>
         <translation>Parameter</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="790"/>
+        <location filename="../../editor/pagesf2.ui" line="784"/>
         <source>Instruments</source>
         <translation>Instrumente</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../editor/pagesf2.cpp" line="201"/>
-        <location filename="../../editor/pagesf2.cpp" line="211"/>
+        <location filename="../../editor/pagesf2.cpp" line="218"/>
+        <location filename="../../editor/pagesf2.cpp" line="228"/>
         <source>%1 (unused: %n)</source>
         <translation>
             <numerusform>%1 (ungenutzt: %n)</numerusform>
@@ -4480,7 +4496,7 @@ Warnung: Die Qualität wird reduziert und der Loop kann verändert werden</trans
         <translation>Sfz-Dateien</translation>
     </message>
     <message>
-        <location filename="../../context/translationmanager.cpp" line="107"/>
+        <location filename="../../context/translationmanager.cpp" line="117"/>
         <source>When editing one side of a stereo sample, the other side is automatically edited the same.
 This rule applies at the sample level and also when editing a division of an instrument:
 the division corresponding to the other channel, if any, is edited the same.
