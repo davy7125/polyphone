@@ -6926,13 +6926,13 @@ Other soundfont editors might display other units.</source>
     </message>
     <message>
         <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="203"/>
-        <source>The maximal number of soundfont to export is 127.</source>
-        <translation>エクスポートできるSoundFontの最大数は127です。</translation>
+        <source>The maximal number of soundfont to export is 128.</source>
+        <translation>エクスポートできるSoundFontの最大数は128です。</translation>
     </message>
     <message>
         <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="212"/>
-        <source>In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 127.</source>
-        <translation>複数のSoundFontをエクスポートする場合、SoundFontあたりのプリセットの最大数は127です。</translation>
+        <source>In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 128.</source>
+        <translation>複数のSoundFontをエクスポートする場合、SoundFontあたりのプリセットの最大数は128です。</translation>
     </message>
 </context>
 <context>

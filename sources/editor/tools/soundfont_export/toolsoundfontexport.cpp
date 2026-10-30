@@ -55,7 +55,8 @@ void ToolSoundfontExport::process(SoundfontManager * sm, IdList ids, AbstractToo
     ToolSoundfontExport_parameters * params = (ToolSoundfontExport_parameters *)parameters;
     
     QMap<int, QList<int> > presets = params->getSelectedPresets();
-    if (params->getFilePreset())
+    int format = params->getFormat();
+    if (params->getFilePreset() && (format == 0 || format == 1 || format == 4)) // Only for sf2, sf3 and dls
     {
         // One file per preset
         foreach (int soundfontId, presets.keys())

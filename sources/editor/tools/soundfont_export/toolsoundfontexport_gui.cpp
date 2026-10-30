@@ -198,19 +198,25 @@ void ToolSoundfontExport_gui::on_pushExport_clicked()
         return;
     }
 
-    if (_presetList.count() > 127)
+    // Limits when several soundfonts are merged in a single file:
+    // each soundfont is a bank (0-127) and each of its presets a preset number (0-127)
+    bool filePreset = !ui->checkFilePreset->isHidden() && ui->checkFilePreset->isChecked();
+    if (_presetList.count() > 1 && !filePreset)
     {
-        QMessageBox::warning(this, tr("Warning"), tr("The maximal number of soundfont to export is 127."));
-        return;
-    }
+        if (_presetList.count() > 128)
+        {
+            QMessageBox::warning(this, tr("Warning"), tr("The maximal number of soundfont to export is 128."));
+            return;
+        }
 
-    int maxNumberOfPresets = 0;
-    foreach (int i, _presetList.keys())
-        maxNumberOfPresets = qMax(maxNumberOfPresets, _presetList[i].count());
-    if (_presetList.count() > 1 && maxNumberOfPresets > 127)
-    {
-        QMessageBox::warning(this, tr("Warning"), tr("In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 127."));
-        return;
+        int maxNumberOfPresets = 0;
+        foreach (int i, _presetList.keys())
+            maxNumberOfPresets = qMax(maxNumberOfPresets, _presetList[i].count());
+        if (maxNumberOfPresets > 128)
+        {
+            QMessageBox::warning(this, tr("Warning"), tr("In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 128."));
+            return;
+        }
     }
 
     emit this->validated();

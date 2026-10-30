@@ -7023,13 +7023,13 @@ Andere Soundfont-Editoren könnten andere Einheiten anzeigen.</translation>
     </message>
     <message>
         <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="203"/>
-        <source>The maximal number of soundfont to export is 127.</source>
-        <translation>Die maximale Anzahl zu exportierender Soundfonts ist 127.</translation>
+        <source>The maximal number of soundfont to export is 128.</source>
+        <translation>Die maximale Anzahl zu exportierender Soundfonts ist 128.</translation>
     </message>
     <message>
         <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="212"/>
-        <source>In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 127.</source>
-        <translation>Wenn mehrere Soundfonts exportiert werden, beträgt die maximale Anzahl der Presets pro Soundfont 127.</translation>
+        <source>In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 128.</source>
+        <translation>Wenn mehrere Soundfonts exportiert werden, beträgt die maximale Anzahl der Presets pro Soundfont 128.</translation>
     </message>
 </context>
 <context>
