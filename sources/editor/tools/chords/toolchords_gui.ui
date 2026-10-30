@@ -138,7 +138,7 @@
        </widget>
       </item>
       <item row="2" column="2">
-       <widget class="QSlider" name="sliderType5">
+       <widget class="ResettableSlider" name="sliderType5">
         <property name="font">
          <font>
           <bold>false</bold>
@@ -186,7 +186,7 @@
        </widget>
       </item>
       <item row="3" column="2">
-       <widget class="QSlider" name="sliderType7">
+       <widget class="ResettableSlider" name="sliderType7">
         <property name="font">
          <font>
           <bold>false</bold>
@@ -253,7 +253,7 @@
        </widget>
       </item>
       <item row="0" column="2">
-       <widget class="QSlider" name="sliderType1">
+       <widget class="ResettableSlider" name="sliderType1">
         <property name="font">
          <font>
           <bold>false</bold>
@@ -301,7 +301,7 @@
        </widget>
       </item>
       <item row="1" column="2">
-       <widget class="QSlider" name="sliderType3">
+       <widget class="ResettableSlider" name="sliderType3">
         <property name="font">
          <font>
           <bold>false</bold>
@@ -366,7 +366,7 @@
        </widget>
       </item>
       <item row="4" column="2">
-       <widget class="QSlider" name="sliderType9">
+       <widget class="ResettableSlider" name="sliderType9">
         <property name="font">
          <font>
           <bold>false</bold>
@@ -500,7 +500,7 @@
          </spacer>
         </item>
         <item row="0" column="1">
-         <widget class="QSlider" name="sliderOctave">
+         <widget class="ResettableSlider" name="sliderOctave">
           <property name="minimum">
            <number>-3</number>
           </property>
@@ -706,6 +706,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ResettableSlider</class>
+   <extends>QSlider</extends>
+   <header>resettableslider.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>lineName</tabstop>
   <tabstop>checkStereo</tabstop>

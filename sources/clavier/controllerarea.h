@@ -61,6 +61,9 @@ private slots:
     void on_comboControl2_currentIndexChanged(int index);
     void on_comboControl3_currentIndexChanged(int index);
     void on_comboControl4_currentIndexChanged(int index);
+    void on_knob1_sliderPressed();
+    void on_knob2_sliderPressed();
+    void on_knob3_sliderPressed();
     void on_knob1_valueChanged(int value);
     void on_knob2_valueChanged(int value);
     void on_knob3_valueChanged(int value);

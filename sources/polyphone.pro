@@ -588,6 +588,8 @@ SOURCES	+= main.cpp \
     lib/iir/PoleFilter.cpp \
     lib/iir/State.cpp \
     editor/widgets/spinboxcents.cpp \
+    editor/widgets/resettabledial.cpp \
+    editor/widgets/resettableslider.cpp \
     synth_core/parametermodulator.cpp \
     synth_core/modulatorgroup.cpp \
     editor/modulator/modulatorlistwidget.cpp \
@@ -1013,6 +1015,8 @@ HEADERS += \
     lib/iir/State.h \
     lib/iir/Types.h \
     editor/widgets/spinboxcents.h \
+    editor/widgets/resettabledial.h \
+    editor/widgets/resettableslider.h \
     synth_core/parametermodulator.h \
     synth_core/modulatorgroup.h \
     synth_core/modulatordata.h \

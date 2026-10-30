@@ -59,6 +59,9 @@ public:
     int getMonoPressure(int channel) override;
     int getPolyPressure(int channel, int key) override;
 
+    // Value of a controller as long as it has not been received
+    int getDefaultControllerValue(int channel, int controllerNumber);
+
     // Process MIDI signals
     void processMidiMessage(const unsigned char * message, size_t length);
     void processKeyOn(int channel, int key, int vel);

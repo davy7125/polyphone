@@ -35,7 +35,7 @@
       <number>2</number>
      </property>
      <item row="0" column="8">
-      <widget class="QSlider" name="verticalSlider_9">
+      <widget class="ResettableSlider" name="verticalSlider_9">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
          <horstretch>0</horstretch>
@@ -129,7 +129,7 @@
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QSlider" name="verticalSlider_2">
+      <widget class="ResettableSlider" name="verticalSlider_2">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
          <horstretch>0</horstretch>
@@ -160,7 +160,7 @@
       </widget>
      </item>
      <item row="0" column="2">
-      <widget class="QSlider" name="verticalSlider_3">
+      <widget class="ResettableSlider" name="verticalSlider_3">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
          <horstretch>0</horstretch>
@@ -194,7 +194,7 @@
       </widget>
      </item>
      <item row="0" column="3">
-      <widget class="QSlider" name="verticalSlider_4">
+      <widget class="ResettableSlider" name="verticalSlider_4">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
          <horstretch>0</horstretch>
@@ -267,7 +267,7 @@
       </widget>
      </item>
      <item row="0" column="0">
-      <widget class="QSlider" name="verticalSlider_1">
+      <widget class="ResettableSlider" name="verticalSlider_1">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
          <horstretch>0</horstretch>
@@ -319,7 +319,7 @@
       </widget>
      </item>
      <item row="0" column="6">
-      <widget class="QSlider" name="verticalSlider_7">
+      <widget class="ResettableSlider" name="verticalSlider_7">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
          <horstretch>0</horstretch>
@@ -350,7 +350,7 @@
       </widget>
      </item>
      <item row="0" column="7">
-      <widget class="QSlider" name="verticalSlider_8">
+      <widget class="ResettableSlider" name="verticalSlider_8">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
          <horstretch>0</horstretch>
@@ -402,7 +402,7 @@
       </widget>
      </item>
      <item row="0" column="4">
-      <widget class="QSlider" name="verticalSlider_5">
+      <widget class="ResettableSlider" name="verticalSlider_5">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
          <horstretch>0</horstretch>
@@ -433,7 +433,7 @@
       </widget>
      </item>
      <item row="0" column="5">
-      <widget class="QSlider" name="verticalSlider_6">
+      <widget class="ResettableSlider" name="verticalSlider_6">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
          <horstretch>0</horstretch>
@@ -506,7 +506,7 @@
       </widget>
      </item>
      <item row="0" column="9">
-      <widget class="QSlider" name="verticalSlider_10">
+      <widget class="ResettableSlider" name="verticalSlider_10">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
          <horstretch>0</horstretch>
@@ -657,6 +657,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ResettableSlider</class>
+   <extends>QSlider</extends>
+   <header>resettableslider.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>verticalSlider_1</tabstop>
   <tabstop>verticalSlider_2</tabstop>

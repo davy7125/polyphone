@@ -46,7 +46,7 @@
     <widget class="ComboCC" name="comboControl3"/>
    </item>
    <item row="1" column="5">
-    <widget class="QDial" name="knob3">
+    <widget class="ResettableDial" name="knob3">
      <property name="maximum">
       <number>127</number>
      </property>
@@ -136,7 +136,7 @@
     </widget>
    </item>
    <item row="1" column="4">
-    <widget class="QDial" name="knob2">
+    <widget class="ResettableDial" name="knob2">
      <property name="maximum">
       <number>127</number>
      </property>
@@ -184,7 +184,7 @@
     </widget>
    </item>
    <item row="1" column="3">
-    <widget class="QDial" name="knob1">
+    <widget class="ResettableDial" name="knob1">
      <property name="maximum">
       <number>127</number>
      </property>
@@ -284,6 +284,11 @@
    <class>StyledSlider</class>
    <extends>QSlider</extends>
    <header>styledslider.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ResettableDial</class>
+   <extends>QDial</extends>
+   <header>resettabledial.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

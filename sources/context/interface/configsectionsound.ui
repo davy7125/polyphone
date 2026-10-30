@@ -27,7 +27,7 @@
       </widget>
      </item>
      <item row="0" column="2">
-      <widget class="QDial" name="dialChoFrequence">
+      <widget class="ResettableDial" name="dialChoFrequence">
        <property name="maximum">
         <number>100</number>
        </property>
@@ -50,7 +50,7 @@
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QDial" name="dialChoAmplitude">
+      <widget class="ResettableDial" name="dialChoAmplitude">
        <property name="maximum">
         <number>100</number>
        </property>
@@ -63,7 +63,7 @@
       </widget>
      </item>
      <item row="0" column="0">
-      <widget class="QDial" name="dialChoNiveau">
+      <widget class="ResettableDial" name="dialChoNiveau">
        <property name="minimumSize">
         <size>
          <width>100</width>
@@ -144,7 +144,7 @@
       <number>5</number>
      </property>
      <item row="0" column="1">
-      <widget class="QDial" name="dialRevProfondeur">
+      <widget class="ResettableDial" name="dialRevProfondeur">
        <property name="maximum">
         <number>100</number>
        </property>
@@ -157,7 +157,7 @@
       </widget>
      </item>
      <item row="0" column="3">
-      <widget class="QDial" name="dialRevAttenuation">
+      <widget class="ResettableDial" name="dialRevAttenuation">
        <property name="maximum">
         <number>100</number>
        </property>
@@ -200,7 +200,7 @@
       </widget>
      </item>
      <item row="0" column="2">
-      <widget class="QDial" name="dialRevDensite">
+      <widget class="ResettableDial" name="dialRevDensite">
        <property name="maximum">
         <number>100</number>
        </property>
@@ -243,7 +243,7 @@
       </widget>
      </item>
      <item row="0" column="0">
-      <widget class="QDial" name="dialRevNiveau">
+      <widget class="ResettableDial" name="dialRevNiveau">
        <property name="minimumSize">
         <size>
          <width>100</width>
@@ -277,7 +277,7 @@
     </layout>
    </item>
    <item row="1" column="2">
-    <widget class="QSlider" name="sliderGain">
+    <widget class="ResettableSlider" name="sliderGain">
      <property name="sizePolicy">
       <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
        <horstretch>0</horstretch>
@@ -384,6 +384,18 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ResettableDial</class>
+   <extends>QDial</extends>
+   <header>resettabledial.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ResettableSlider</class>
+   <extends>QSlider</extends>
+   <header>resettableslider.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>sliderGain</tabstop>
   <tabstop>comboVelToFilter</tabstop>

@@ -6,6 +6,7 @@ polyphone (2.7) UNRELEASED; urgency=low
   * (new) tool for converting stereo samples to mono, with the possible merge of the left and right divisions in the instruments
   * (improvement) faster sound engine
   * (improvement) the startup view can open the first instrument or preset on its ranges or envelopes page
+  * (improvement) knobs are edited by dragging the mouse (finer with Shift) and a double click on a knob or a slider restores its default value
 
  -- Davy Triponney <contact@polyphone.io>  Fri, 30 Oct 2026 12:00:00 +0100
 

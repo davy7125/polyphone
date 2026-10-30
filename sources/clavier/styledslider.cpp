@@ -26,7 +26,7 @@
 #include "contextmanager.h"
 #include <QPainter>
 
-StyledSlider::StyledSlider(QWidget *parent) : QSlider(parent),
+StyledSlider::StyledSlider(QWidget *parent) : ResettableSlider(parent),
     _fromMiddle(false),
     _middleValue(-1),
     _pressed(true),

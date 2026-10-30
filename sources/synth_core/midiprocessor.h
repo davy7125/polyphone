@@ -59,6 +59,9 @@ public:
     // Default value of a controller used as the source of a modulator, if it has not been received
     void setDefaultControllerValue(int controllerNumber, bool isBipolar, bool isDescending);
 
+    // Value of a controller as long as it has not been received
+    int getDefaultControllerValue(int channel, int controllerNumber);
+
     // Bend sensitivity in semitones (and hundredths)
     void setBendSensitivityValue(int channel, float value);
 
@@ -74,6 +77,7 @@ private:
     {
         // Configuration of a channel, the values being written and read by different threads
         volatile int _controllerValues[128];
+        volatile int _controllerDefaultValues[128];
         volatile bool _controllerValueSpecified[128];
         volatile bool _controllerValueIsRelative[128];
         volatile uint8_t _controllerValueIsRelativeCounter[128];

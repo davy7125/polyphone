@@ -25,10 +25,10 @@
 #ifndef PITCHWHEELSLIDER_H
 #define PITCHWHEELSLIDER_H
 
-#include <QSlider>
+#include "resettableslider.h"
 #include <QTimer>
 
-class StyledSlider : public QSlider
+class StyledSlider : public ResettableSlider
 {
     Q_OBJECT
 

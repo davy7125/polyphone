@@ -278,6 +278,11 @@ int MidiDevice::getControllerValue(int channel, int controllerNumber)
     return _processor.getControllerValue(channel, controllerNumber);
 }
 
+int MidiDevice::getDefaultControllerValue(int channel, int controllerNumber)
+{
+    return _processor.getDefaultControllerValue(channel, controllerNumber);
+}
+
 float MidiDevice::getBendValue(int channel)
 {
     return _processor.getBendValue(channel);

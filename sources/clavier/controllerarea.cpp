@@ -47,6 +47,10 @@ ControllerArea::ControllerArea(QWidget *parent) :
     _ledOff = ContextManager::theme()->getColoredSvg(":/icons/led.svg", QSize(48, 48), replacement);
     ui->push4->setIcon(_ledOff);
 
+    // Values restored with a double click (the default bend sensitivity is 2 semitones)
+    ui->sliderPitchWheel->setDefaultValue(64);
+    ui->sliderSensitivity->setDefaultValue(200);
+
     // Initialize the channel
     setChannel(-1);
 }
@@ -191,6 +195,22 @@ void ControllerArea::on_comboControl4_currentIndexChanged(int index)
         _ledState = (previousValue >= 64);
         updateInput4Display();
     }
+}
+
+// The default value of a controller depends on the modulators: it is updated at each press, before a possible double click
+void ControllerArea::on_knob1_sliderPressed()
+{
+    ui->knob1->setDefaultValue(ContextManager::midi()->getDefaultControllerValue(_channel, ui->comboControl1->getCurrentCC()));
+}
+
+void ControllerArea::on_knob2_sliderPressed()
+{
+    ui->knob2->setDefaultValue(ContextManager::midi()->getDefaultControllerValue(_channel, ui->comboControl2->getCurrentCC()));
+}
+
+void ControllerArea::on_knob3_sliderPressed()
+{
+    ui->knob3->setDefaultValue(ContextManager::midi()->getDefaultControllerValue(_channel, ui->comboControl3->getCurrentCC()));
 }
 
 void ControllerArea::on_knob1_valueChanged(int value)
