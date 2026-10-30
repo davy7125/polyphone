@@ -91,6 +91,10 @@ This window triggers MIDI signals:
 * other MIDI signals if the **MIDI controller part** is expanded.
 
 The key, the velocity and the aftertouch of the note being played are displayed at the bottom of the window, along with a drop-down list for choosing the size of the keyboard (5 octaves, 6 octaves, 88 keys or 128 keys).
+Two buttons at the bottom right show or hide the MIDI controllers above the keyboard and the audio effects below it.
+
+The window keeps the proportions of the keyboard: changing its width changes its height, and conversely.
+Showing or hiding an area only changes the height of the window.
 
 
 ![Virtual keyboard](images/virtual_keyboard.png "Virtual keyboard")
@@ -109,6 +113,7 @@ with the mouse
 
 using the computer keyboard
 : The keys used are defined in the [settings](manual/settings.md#doc_keyboard).
+  They play as soon as the window of the virtual keyboard is active, even if another element of this window has the focus (a knob, the drop-down list…).
 
 using an external MIDI keyboard
 : The MIDI input is defined in the [settings](manual/settings.md#doc_general).
@@ -140,6 +145,7 @@ using an external MIDI keyboard
 : These shortcuts change the octaves played with the computer keyboard.
   After the use of :kbd:`Ctrl`+:kbd:`1`, the lowest octaves can be played.
   The highest octaves are reached using :kbd:`Ctrl`+:kbd:`8`.
+  They also work as soon as the window of the virtual keyboard is active.
 
 :kbd:`→` / :kbd:`←`
 : The right or left arrow will play the pitch just above or below the last key that has been played, with the same velocity.
@@ -149,11 +155,14 @@ using an external MIDI keyboard
 : The up or down arrow will play the same pitch as the last key played, but with a stronger or weaker velocity.
   Combined with the key :kbd:`Shift`, the velocity is changed by 10 instead of 1.
 
+The arrows play notes only if the piano keyboard has the focus: otherwise they act on the element having the focus, a knob for instance.
+
 
 ### MIDI controllers
 
 
-When clicking on the bottom right arrow, the MIDI controller area can be displayed or hidden.
+When clicking on the MIDI button at the bottom right, the MIDI controller area is displayed above the keyboard or hidden.
+The window then moves so that the keyboard stays at the same place on the screen (this is not possible with Wayland on Linux).
 If you are playing with modulators, it is advised to use these features to test your soundfont.
 
 
@@ -183,5 +192,24 @@ On / off led
   It is like a knob but with only two possible values.
 
 All these elements can be synchronized with a MIDI keyboard connected to the computer if the MIDI input is correctly set in the [settings](manual/settings.md#doc_general). Relative MIDI controller values are supported for driving the knobs.
+
+
+### Audio effects {#doc_keyboard_effects}
+
+
+When clicking on the speaker button at the bottom right, an area is displayed below the keyboard for adjusting the main settings of the synthesizer while playing:
+
+Reverb
+: A led switches the reverb on or off, then 4 knobs change its level, room size, width and damping.
+  The name of a knob is displayed when the mouse is over it.
+
+Chorus
+: A led switches the chorus on or off, then 3 knobs change its level, depth and frequency.
+
+Volume
+: The slider changes the general volume.
+
+These settings are the same as in the [sound settings](manual/settings.md#doc_sound): a change made in one place is displayed in the other one.
+A change is progressive and doesn't interrupt the notes being played.
 
 *[MIDI]: Musical Instrument Digital Interface

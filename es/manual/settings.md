@@ -102,6 +102,8 @@ Las modificaciones del idioma, de los nombres de las notas, del estilo, de los c
 
 La sección :guilabel:`Sonido` permite modificar la reverberación (nivel, tamaño de la sala, amortiguación y anchura) y el coro (nivel, profundidad y frecuencia) del sintetizador, así como su volumen general.
 El volumen general se puede cambiar con el controlador MIDI de volumen si hay un teclado externo conectado.
+Un LED a la izquierda de :guilabel:`Reverberación` y de :guilabel:`Coro` activa o desactiva cada efecto sin perder sus ajustes.
+Estos ajustes también se pueden cambiar debajo del [teclado virtual](manual/soundfont-editor/toolbar.md#doc_keyboard_effects) mientras se toca: un cambio es progresivo y no interrumpe las notas que se están tocando.
 
 Como el modulador por defecto que modifica la frecuencia de corte del filtro cambió entre las versiones 2.01 y 2.04 de las especificaciones sf2, aquí se puede elegir qué versión usar:
 

@@ -91,6 +91,10 @@ Esta ventana emite señales MIDI:
 * otras señales MIDI si la **parte de controladores MIDI** está desplegada.
 
 La nota, la velocidad y la postpulsación (aftertouch) de la nota que se toca se muestran en la parte inferior de la ventana, junto con una lista desplegable para elegir el tamaño del teclado (5 octavas, 6 octavas, 88 teclas o 128 teclas).
+Dos botones en la esquina inferior derecha muestran u ocultan los controladores MIDI encima del teclado y los efectos de audio debajo de él.
+
+La ventana conserva las proporciones del teclado: al cambiar su anchura cambia su altura, y viceversa.
+Mostrar u ocultar una zona solo cambia la altura de la ventana.
 
 
 ![Teclado virtual](images/virtual_keyboard.png "Teclado virtual")
@@ -109,6 +113,7 @@ con el ratón
 
 con el teclado del ordenador
 : Las teclas utilizadas se definen en las [preferencias](manual/settings.md#doc_keyboard).
+  Suenan en cuanto la ventana del teclado virtual está activa, aunque otro elemento de esta ventana tenga el foco (un potenciómetro, la lista desplegable…).
 
 con un teclado MIDI externo
 : La entrada MIDI se define en las [preferencias](manual/settings.md#doc_general).
@@ -140,6 +145,7 @@ con un teclado MIDI externo
 : Estos atajos cambian las octavas que se tocan con el teclado del ordenador.
   Tras usar :kbd:`Ctrl`+:kbd:`1`, se pueden tocar las octavas más graves.
   Las octavas más agudas se alcanzan con :kbd:`Ctrl`+:kbd:`8`.
+  También funcionan en cuanto la ventana del teclado virtual está activa.
 
 :kbd:`→` / :kbd:`←`
 : La flecha derecha o izquierda toca la altura inmediatamente superior o inferior a la última tecla tocada, con la misma velocidad.
@@ -149,11 +155,14 @@ con un teclado MIDI externo
 : La flecha arriba o abajo toca la misma altura que la última tecla tocada, pero con una velocidad mayor o menor.
   Combinada con la tecla :kbd:`Shift`, la velocidad cambia en 10 en lugar de 1.
 
+Las flechas solo tocan notas si el teclado de piano tiene el foco: si no, actúan sobre el elemento que tiene el foco, por ejemplo un potenciómetro.
+
 
 ### Controladores MIDI
 
 
-Al hacer clic en la flecha de la esquina inferior derecha, se puede mostrar u ocultar la zona de controladores MIDI.
+Al hacer clic en el botón MIDI de la esquina inferior derecha, la zona de controladores MIDI se muestra encima del teclado o se oculta.
+La ventana se desplaza entonces para que el teclado se quede en el mismo lugar de la pantalla (no es posible con Wayland en Linux).
 Si trabajas con moduladores, es recomendable usar estas funciones para probar tu soundfont.
 
 
@@ -183,5 +192,24 @@ LED de encendido / apagado
   Es como un potenciómetro, pero con solo dos valores posibles.
 
 Todos estos elementos se pueden sincronizar con un teclado MIDI conectado al ordenador si la entrada MIDI está bien configurada en las [preferencias](manual/settings.md#doc_general). Se admiten valores relativos de controladores MIDI para manejar los potenciómetros.
+
+
+### Efectos de audio {#doc_keyboard_effects}
+
+
+Al hacer clic en el botón del altavoz de la esquina inferior derecha, se muestra debajo del teclado una zona para ajustar los principales parámetros del sintetizador mientras se toca:
+
+Reverberación
+: Un LED activa o desactiva la reverberación y luego 4 potenciómetros cambian su nivel, el tamaño de la sala, la anchura y la amortiguación.
+  El nombre de un potenciómetro se muestra al pasar el ratón por encima.
+
+Coro
+: Un LED activa o desactiva el coro y luego 3 potenciómetros cambian su nivel, su profundidad y su frecuencia.
+
+Volumen
+: El deslizador cambia el volumen general.
+
+Estos ajustes son los mismos que en las [preferencias de sonido](manual/settings.md#doc_sound): un cambio hecho en un lugar se muestra en el otro.
+Un cambio es progresivo y no interrumpe las notas que se están tocando.
 
 *[MIDI]: Musical Instrument Digital Interface

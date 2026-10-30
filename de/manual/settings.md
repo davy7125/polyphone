@@ -102,6 +102,8 @@ Eine Änderung der Sprache, der Notennamen, des Stils, der Farben, der Fensterra
 
 Im Bereich :guilabel:`Sound` lassen sich der Hall (Intensität, Raumgröße, Dämpfung und Weite) und der Chorus (Intensität, Tiefe und Frequenz) des Synthesizers sowie seine Gesamtlautstärke ändern.
 Ist eine externe Tastatur angeschlossen, kann die Gesamtlautstärke mit dem MIDI-Lautstärkeregler geändert werden.
+Eine LED links neben :guilabel:`Halleffekt` und :guilabel:`Chorus` schaltet den jeweiligen Effekt ein oder aus, ohne seine Einstellungen zu verlieren.
+Diese Einstellungen lassen sich während des Spielens auch unterhalb der [virtuellen Tastatur](manual/soundfont-editor/toolbar.md#doc_keyboard_effects) ändern: Eine Änderung erfolgt schrittweise und unterbricht die gespielten Noten nicht.
 
 Da der Standardmodulator, der die Grenzfrequenz des Filters ändert, zwischen den Versionen 2.01 und 2.04 der sf2-Spezifikation geändert wurde, kann hier festgelegt werden, welche Version verwendet werden soll:
 

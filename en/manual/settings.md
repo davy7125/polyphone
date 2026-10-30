@@ -102,6 +102,8 @@ A modification of the language, the key names, the style, the colors, the window
 
 The :guilabel:`Sound` section makes it possible to modify the reverb (level, room size, damping and width) and the chorus (level, depth and frequency) of the synthesizer, along with its general volume.
 The general volume may be changed with the volume MIDI controller if an external keyboard is connected.
+A led on the left of :guilabel:`Reverb` and :guilabel:`Chorus` switches each effect on or off without losing its settings.
+These settings can also be changed below the [virtual keyboard](manual/soundfont-editor/toolbar.md#doc_keyboard_effects) while playing: a change is progressive and doesn't interrupt the notes being played.
 
 Since the default modulator modifying the filter cutoff frequency has been changed between versions 2.01 and 2.04 of the sf2 specifications, it is possible to define here which version to use:
 

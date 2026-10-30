@@ -91,6 +91,10 @@ Essa janela emite sinais MIDI:
 * outros sinais MIDI se a **parte dos controladores MIDI** estiver expandida.
 
 A nota, a velocidade e o aftertouch da nota tocada são exibidos na parte inferior da janela, junto com uma lista suspensa para escolher o tamanho do teclado (5 oitavas, 6 oitavas, 88 teclas ou 128 teclas).
+Dois botões no canto inferior direito exibem ou ocultam os controladores MIDI acima do teclado e os efeitos de áudio abaixo dele.
+
+A janela mantém as proporções do teclado: alterar sua largura altera sua altura, e vice-versa.
+Exibir ou ocultar uma área altera apenas a altura da janela.
 
 
 ![Teclado virtual](images/virtual_keyboard.png "Teclado virtual")
@@ -109,6 +113,7 @@ com o mouse
 
 com o teclado do computador
 : As teclas usadas são definidas nas [configurações](manual/settings.md#doc_keyboard).
+  Elas tocam assim que a janela do teclado virtual está ativa, mesmo que outro elemento dessa janela tenha o foco (um botão giratório, a lista suspensa…).
 
 com um teclado MIDI externo
 : A entrada MIDI é definida nas [configurações](manual/settings.md#doc_general).
@@ -140,6 +145,7 @@ com um teclado MIDI externo
 : Estes atalhos mudam as oitavas tocadas com o teclado do computador.
   Depois de usar :kbd:`Ctrl`+:kbd:`1`, as oitavas mais graves podem ser tocadas.
   As oitavas mais agudas são alcançadas com :kbd:`Ctrl`+:kbd:`8`.
+  Eles também funcionam assim que a janela do teclado virtual está ativa.
 
 :kbd:`→` / :kbd:`←`
 : A seta para a direita ou para a esquerda toca a altura imediatamente acima ou abaixo da última tecla tocada, com a mesma velocidade.
@@ -149,11 +155,14 @@ com um teclado MIDI externo
 : A seta para cima ou para baixo toca a mesma altura da última tecla tocada, mas com uma velocidade maior ou menor.
   Combinada com a tecla :kbd:`Shift`, a velocidade muda em 10 em vez de 1.
 
+As setas só tocam notas se o teclado de piano tiver o foco: caso contrário, elas agem sobre o elemento que tem o foco, por exemplo um botão giratório.
+
 
 ### Controladores MIDI
 
 
-Clicando na seta do canto inferior direito, a área dos controladores MIDI pode ser exibida ou ocultada.
+Clicando no botão MIDI do canto inferior direito, a área dos controladores MIDI é exibida acima do teclado ou ocultada.
+A janela então se desloca para que o teclado fique no mesmo lugar da tela (isso não é possível com o Wayland no Linux).
 Se você estiver trabalhando com moduladores, é recomendável usar esses recursos para testar sua soundfont.
 
 
@@ -183,5 +192,24 @@ LED liga / desliga
   É como um botão giratório, mas com apenas dois valores possíveis.
 
 Todos esses elementos podem ser sincronizados com um teclado MIDI conectado ao computador, se a entrada MIDI estiver configurada corretamente nas [configurações](manual/settings.md#doc_general). Valores relativos de controladores MIDI são suportados para controlar os botões giratórios.
+
+
+### Efeitos de áudio {#doc_keyboard_effects}
+
+
+Clicando no botão do alto-falante no canto inferior direito, uma área é exibida abaixo do teclado para ajustar as principais configurações do sintetizador enquanto se toca:
+
+Reverberação
+: Um LED liga ou desliga a reverberação e, em seguida, 4 botões giratórios alteram seu nível, o tamanho da sala, a largura e o amortecimento.
+  O nome de um botão giratório é exibido ao passar o mouse sobre ele.
+
+Chorus
+: Um LED liga ou desliga o chorus e, em seguida, 3 botões giratórios alteram seu nível, sua profundidade e sua frequência.
+
+Volume
+: O controle deslizante altera o volume geral.
+
+Essas configurações são as mesmas das [configurações de som](manual/settings.md#doc_sound): uma alteração feita em um lugar é exibida no outro.
+Uma alteração é progressiva e não interrompe as notas que estão sendo tocadas.
 
 *[MIDI]: Musical Instrument Digital Interface

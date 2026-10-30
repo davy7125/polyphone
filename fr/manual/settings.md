@@ -102,6 +102,8 @@ Une modification de la langue, du nom des notes, du style, des couleurs, des bor
 
 La section :guilabel:`Son` permet de configurer la réverbération (niveau, profondeur, atténuation et densité) et le chorus (niveau, amplitude et fréquence) du synthétiseur, ainsi que son volume général.
 Le volume général peut aussi être modifié avec le contrôleur MIDI du volume si un clavier externe est connecté.
+Une led à gauche de :guilabel:`Réverbération` et de :guilabel:`Chorus` active ou désactive chaque effet sans perdre ses réglages.
+Ces réglages peuvent aussi être modifiés sous le [clavier virtuel](manual/soundfont-editor/toolbar.md#doc_keyboard_effects) tout en jouant&nbsp;: une modification est progressive et n'interrompt pas les notes en cours.
 
 Le modulateur par défaut modifiant la fréquence de coupure du filtre ayant été modifié entre les versions 2.01 et 2.04 des spécifications sf2, il est possible de définir ici quelle version utiliser&nbsp;:
 

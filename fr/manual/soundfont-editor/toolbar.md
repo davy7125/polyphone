@@ -91,6 +91,10 @@ Cette fenêtre déclenche des signaux MIDI&nbsp;:
 * d'autres signaux MIDI si la partie **contrôleurs MIDI** est visible.
 
 La note, la vélocité et l'aftertouch de la note jouée sont affichés en bas de la fenêtre, avec une liste déroulante permettant de choisir la taille du clavier (5 octaves, 6 octaves, 88 notes ou 128 notes).
+Deux boutons en bas à droite affichent ou masquent les contrôleurs MIDI au-dessus du clavier et les effets audio en dessous.
+
+La fenêtre conserve les proportions du clavier&nbsp;: modifier sa largeur modifie sa hauteur, et inversement.
+Afficher ou masquer une zone ne modifie que la hauteur de la fenêtre.
 
 
 ![Clavier virtuel](images/virtual_keyboard.png "Clavier virtuel")
@@ -109,6 +113,7 @@ avec la souris
 
 avec le clavier de l'ordinateur
 : Les touches assignées à des notes sont définies dans les [préférences](manual/settings.md#doc_keyboard).
+  Elles jouent dès que la fenêtre du clavier virtuel est active, même si un autre élément de cette fenêtre a le focus (un potentiomètre, la liste déroulante…).
 
 en utilisant un clavier MIDI externe
 : L'entrée MIDI est définie dans les [préférences](manual/settings.md#doc_general).
@@ -140,6 +145,7 @@ en utilisant un clavier MIDI externe
 : Ces raccourcis changent les octaves jouées par le clavier de l'ordinateur.
   Après l'utilisation de :kbd:`Ctrl`+:kbd:`1`, les octaves les plus graves peuvent être jouées.
   Les octaves les plus hautes sont atteintes en utilisant :kbd:`Ctrl`+:kbd:`8`.
+  Ils fonctionnent eux aussi dès que la fenêtre du clavier virtuel est active.
 
 :kbd:`→` / :kbd:`←`
 : Les flèches droite et gauche jouent la note située juste au-dessus ou juste en dessous de la dernière note jouée, avec la même vélocité.
@@ -149,11 +155,14 @@ en utilisant un clavier MIDI externe
 : Les flèches haut et bas jouent la même note que la précédente, mais avec une vélocité plus forte ou plus faible.
   Combinées à la touche :kbd:`Maj`, la vélocité varie de 10 au lieu de 1.
 
+Les flèches ne jouent des notes que si le clavier de piano a le focus&nbsp;: sinon elles agissent sur l'élément qui a le focus, un potentiomètre par exemple.
+
 
 ### Contrôleurs MIDI
 
 
-En cliquant sur la flèche en bas à droite, la zone des contrôleurs MIDI peut être affichée ou masquée.
+En cliquant sur le bouton MIDI en bas à droite, la zone des contrôleurs MIDI est affichée au-dessus du clavier ou masquée.
+La fenêtre se déplace alors pour que le clavier reste à la même place à l'écran (ce n'est pas possible avec Wayland sous Linux).
 Si vous jouez avec les modulateurs, il est conseillé d'utiliser ces fonctionnalités pour tester votre banque de sons.
 
 
@@ -183,5 +192,24 @@ Led on / off
   Elle est comme un potentiomètre mais avec seulement deux valeurs possibles.
 
 Tous ces éléments peuvent être synchronisés avec un clavier MIDI raccordé à l'ordinateur si l'entrée MIDI est correctement renseignée dans les [préférences](manual/settings.md#doc_general). Les valeurs relatives pour les contrôleurs MIDI sont prises en charge pour piloter les potentiomètres.
+
+
+### Effets audio {#doc_keyboard_effects}
+
+
+En cliquant sur le bouton haut-parleur en bas à droite, une zone s'affiche sous le clavier pour régler les principaux paramètres du synthétiseur tout en jouant&nbsp;:
+
+Réverbération
+: Une led active ou désactive la réverbération, puis 4 potentiomètres modifient son niveau, sa profondeur, sa densité et son atténuation.
+  Le nom d'un potentiomètre s'affiche lorsque la souris le survole.
+
+Chorus
+: Une led active ou désactive le chorus, puis 3 potentiomètres modifient son niveau, son amplitude et sa fréquence.
+
+Volume
+: Le curseur modifie le volume général.
+
+Ces réglages sont les mêmes que dans les [préférences du son](manual/settings.md#doc_sound)&nbsp;: une modification faite à un endroit est affichée à l'autre.
+Une modification est progressive et n'interrompt pas les notes en cours.
 
 *[MIDI]: Musical Instrument Digital Interface

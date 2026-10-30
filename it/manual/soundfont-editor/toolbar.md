@@ -91,6 +91,10 @@ Questa finestra genera segnali MIDI:
 * altri segnali MIDI se la **sezione dei controller MIDI** è espansa.
 
 La nota, la velocità e l'aftertouch della nota suonata vengono mostrati nella parte inferiore della finestra, insieme a un elenco a discesa per scegliere la dimensione della tastiera (5 ottave, 6 ottave, 88 tasti o 128 tasti).
+Due pulsanti in basso a destra mostrano o nascondono i controller MIDI sopra la tastiera e gli effetti audio sotto di essa.
+
+La finestra mantiene le proporzioni della tastiera: modificandone la larghezza cambia l'altezza, e viceversa.
+Mostrare o nascondere un'area cambia solo l'altezza della finestra.
 
 
 ![Tastiera virtuale](images/virtual_keyboard.png "Tastiera virtuale")
@@ -109,6 +113,7 @@ con il mouse
 
 con la tastiera del computer
 : I tasti usati sono definiti nelle [impostazioni](manual/settings.md#doc_keyboard).
+  Suonano non appena la finestra della tastiera virtuale è attiva, anche se un altro elemento di questa finestra ha il focus (una manopola, l'elenco a discesa…).
 
 con una tastiera MIDI esterna
 : L'ingresso MIDI è definito nelle [impostazioni](manual/settings.md#doc_general).
@@ -140,6 +145,7 @@ con una tastiera MIDI esterna
 : Queste scorciatoie cambiano le ottave suonate con la tastiera del computer.
   Dopo :kbd:`Ctrl`+:kbd:`1` si possono suonare le ottave più gravi.
   Le ottave più acute si raggiungono con :kbd:`Ctrl`+:kbd:`8`.
+  Funzionano anch'esse non appena la finestra della tastiera virtuale è attiva.
 
 :kbd:`→` / :kbd:`←`
 : La freccia destra o sinistra suona la nota immediatamente sopra o sotto l'ultimo tasto suonato, con la stessa velocità.
@@ -149,11 +155,14 @@ con una tastiera MIDI esterna
 : La freccia su o giù suona la stessa nota dell'ultimo tasto suonato, ma con una velocità maggiore o minore.
   In combinazione con il tasto :kbd:`Shift`, la velocità cambia di 10 invece che di 1.
 
+Le frecce suonano le note solo se la tastiera del pianoforte ha il focus: altrimenti agiscono sull'elemento che ha il focus, ad esempio una manopola.
+
 
 ### Controller MIDI
 
 
-Facendo clic sulla freccia in basso a destra si può mostrare o nascondere l'area dei controller MIDI.
+Facendo clic sul pulsante MIDI in basso a destra, l'area dei controller MIDI viene mostrata sopra la tastiera o nascosta.
+La finestra si sposta allora in modo che la tastiera resti nello stesso punto dello schermo (non è possibile con Wayland su Linux).
 Se lavori con i modulatori, è consigliabile usare queste funzionalità per provare il tuo soundfont.
 
 
@@ -183,5 +192,24 @@ LED acceso / spento
   Funziona come una manopola, ma con solo due valori possibili.
 
 Tutti questi elementi possono essere sincronizzati con una tastiera MIDI collegata al computer, se l'ingresso MIDI è impostato correttamente nelle [impostazioni](manual/settings.md#doc_general). Per il controllo delle manopole sono supportati i valori relativi dei controller MIDI.
+
+
+### Effetti audio {#doc_keyboard_effects}
+
+
+Facendo clic sul pulsante con l'altoparlante in basso a destra, sotto la tastiera compare un'area per regolare le principali impostazioni del sintetizzatore mentre si suona:
+
+Riverbero
+: Un LED attiva o disattiva il riverbero, poi 4 manopole ne modificano il livello, la dimensione della stanza, l'ampiezza e lo smorzamento.
+  Il nome di una manopola compare passandoci sopra con il mouse.
+
+Chorus
+: Un LED attiva o disattiva il chorus, poi 3 manopole ne modificano il livello, la profondità e la frequenza.
+
+Volume
+: Il cursore modifica il volume generale.
+
+Queste impostazioni sono le stesse delle [impostazioni del suono](manual/settings.md#doc_sound): una modifica fatta in un punto viene mostrata anche nell'altro.
+Una modifica è progressiva e non interrompe le note in corso.
 
 *[MIDI]: Musical Instrument Digital Interface

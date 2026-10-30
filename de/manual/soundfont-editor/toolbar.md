@@ -91,6 +91,10 @@ Dieses Fenster sendet MIDI-Signale:
 * weitere MIDI-Signale, wenn der **Bereich der MIDI-Controller** ausgeklappt ist.
 
 Taste, Anschlag und Aftertouch der gespielten Note werden am unteren Rand des Fensters angezeigt, zusammen mit einer Dropdown-Liste zur Auswahl der Tastaturgröße (5 Oktaven, 6 Oktaven, 88 Tasten oder 128 Tasten).
+Zwei Schaltflächen unten rechts blenden die MIDI-Controller oberhalb der Klaviatur und die Audioeffekte darunter ein oder aus.
+
+Das Fenster behält die Proportionen der Klaviatur bei: Wird seine Breite geändert, ändert sich seine Höhe, und umgekehrt.
+Das Ein- oder Ausblenden eines Bereichs ändert nur die Höhe des Fensters.
 
 
 ![Virtuelle Tastatur](images/virtual_keyboard.png "Virtuelle Tastatur")
@@ -109,6 +113,7 @@ mit der Maus
 
 mit der Computertastatur
 : Die verwendeten Tasten werden in den [Einstellungen](manual/settings.md#doc_keyboard) festgelegt.
+  Sie spielen, sobald das Fenster der virtuellen Tastatur aktiv ist, auch wenn ein anderes Element dieses Fensters den Fokus hat (ein Drehregler, die Dropdown-Liste …).
 
 mit einer externen MIDI-Tastatur
 : Der MIDI-Eingang wird in den [Einstellungen](manual/settings.md#doc_general) festgelegt.
@@ -140,6 +145,7 @@ mit einer externen MIDI-Tastatur
 : Diese Tastenkombinationen ändern die Oktaven, die mit der Computertastatur gespielt werden.
   Nach :kbd:`Ctrl`+:kbd:`1` können die tiefsten Oktaven gespielt werden.
   Die höchsten Oktaven erreicht man mit :kbd:`Ctrl`+:kbd:`8`.
+  Sie funktionieren ebenfalls, sobald das Fenster der virtuellen Tastatur aktiv ist.
 
 :kbd:`→` / :kbd:`←`
 : Der Pfeil nach rechts bzw. links spielt die Tonhöhe direkt über bzw. unter der zuletzt gespielten Taste, mit derselben Anschlagsstärke.
@@ -149,11 +155,14 @@ mit einer externen MIDI-Tastatur
 : Der Pfeil nach oben bzw. unten spielt dieselbe Tonhöhe wie die zuletzt gespielte Taste, aber mit stärkerem bzw. schwächerem Anschlag.
   Zusammen mit der Taste :kbd:`Shift` ändert sich die Anschlagsstärke um 10 statt um 1.
 
+Die Pfeiltasten spielen nur dann Noten, wenn die Klaviatur den Fokus hat: Andernfalls wirken sie auf das Element mit dem Fokus, zum Beispiel auf einen Drehregler.
+
 
 ### MIDI-Controller
 
 
-Mit einem Klick auf den Pfeil unten rechts kann der Bereich der MIDI-Controller ein- oder ausgeblendet werden.
+Mit einem Klick auf die MIDI-Schaltfläche unten rechts wird der Bereich der MIDI-Controller oberhalb der Klaviatur ein- oder ausgeblendet.
+Das Fenster wird dabei so verschoben, dass die Klaviatur an derselben Stelle des Bildschirms bleibt (unter Linux mit Wayland nicht möglich).
 Wenn Sie mit Modulatoren arbeiten, empfiehlt es sich, diese Funktionen zum Testen Ihres Soundfonts zu verwenden.
 
 
@@ -183,5 +192,24 @@ Ein/Aus-LED
   Sie funktioniert wie ein Drehregler, jedoch mit nur zwei möglichen Werten.
 
 Alle diese Elemente können mit einer an den Computer angeschlossenen MIDI-Tastatur synchronisiert werden, wenn der MIDI-Eingang in den [Einstellungen](manual/settings.md#doc_general) korrekt festgelegt ist. Relative Werte von MIDI-Controllern werden zur Steuerung der Drehregler unterstützt.
+
+
+### Audioeffekte {#doc_keyboard_effects}
+
+
+Mit einem Klick auf die Lautsprecher-Schaltfläche unten rechts wird unterhalb der Klaviatur ein Bereich angezeigt, in dem sich die wichtigsten Einstellungen des Synthesizers während des Spielens anpassen lassen:
+
+Halleffekt
+: Eine LED schaltet den Hall ein oder aus, dann ändern 4 Drehregler seine Intensität, Raumgröße, Weite und Dämpfung.
+  Der Name eines Drehreglers wird angezeigt, wenn sich die Maus darüber befindet.
+
+Chorus
+: Eine LED schaltet den Chorus ein oder aus, dann ändern 3 Drehregler seine Intensität, Tiefe und Frequenz.
+
+Lautstärke
+: Der Schieberegler ändert die Gesamtlautstärke.
+
+Diese Einstellungen sind dieselben wie in den [Sound-Einstellungen](manual/settings.md#doc_sound): Eine Änderung an einer Stelle wird auch an der anderen angezeigt.
+Eine Änderung erfolgt schrittweise und unterbricht die gespielten Noten nicht.
 
 *[MIDI]: Musical Instrument Digital Interface
