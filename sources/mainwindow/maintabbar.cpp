@@ -28,8 +28,11 @@
 #include <QStylePainter>
 #include <QStyleOptionTab>
 #include <QToolTip>
+#include <QMimeData>
+#include <QDir>
 #include "maintabbarelement.h"
 #include "contextmanager.h"
+#include "inputfactory.h"
 #include "tab.h"
 
 const int MainTabBar::TAB_MIN_WIDTH = 50;
@@ -39,9 +42,13 @@ const int MainTabBar::ARROW_INNER_MARGIN = 5;
 MainTabBar::MainTabBar(QWidget *parent) : QWidget(parent),
     _clickedItemIndex(-1),
     _clickedInCloseButton(false),
-    _firstTabDisplayed(0)
+    _firstTabDisplayed(0),
+    _wheelAngleDelta(0)
 {
     setMouseTracking(true);
+
+    // Drag & drop of soundfonts and directories
+    setAcceptDrops(true);
 
     // Icons
     _leftArrowIcon = ContextManager::theme()->getColoredSvg(
@@ -251,13 +258,74 @@ void MainTabBar::mouseReleaseEvent(QMouseEvent *event)
 
 void MainTabBar::wheelEvent(QWheelEvent *event)
 {
-    if (_clickedItemIndex == -1 && !_clickedInCloseButton)
+    if (_clickedItemIndex == -1 && !_clickedInCloseButton && (event->modifiers() & Qt::ShiftModifier))
+    {
+        // Change the current tab like Ctrl+Tab / Ctrl+Shift+Tab, one tab per wheel step
+        // (the scroll may become horizontal with Shift, depending on the system)
+        _wheelAngleDelta += event->angleDelta().y() != 0 ? event->angleDelta().y() : event->angleDelta().x();
+        Tab * tab = nullptr;
+        if (_wheelAngleDelta >= QWheelEvent::DefaultDeltasPerStep)
+            tab = getPreviousTab();
+        else if (_wheelAngleDelta <= -QWheelEvent::DefaultDeltasPerStep)
+            tab = getNextTab();
+        else
+            return;
+
+        _wheelAngleDelta = 0;
+        if (tab != nullptr)
+            emit widgetClicked(tab);
+    }
+    else if (_clickedItemIndex == -1 && !_clickedInCloseButton)
     {
         if (event->angleDelta().ry() > 0)
             goLeft();
         else if (event->angleDelta().ry() < 0)
             goRight();
     }
+}
+
+void MainTabBar::dragEnterEvent(QDragEnterEvent *event)
+{
+    if (event->source() == nullptr && !getDroppedPaths(event->mimeData()).isEmpty())
+    {
+        // The files are only read, never moved
+        event->setDropAction(Qt::CopyAction);
+        event->accept();
+    }
+    else
+        event->ignore();
+}
+
+void MainTabBar::dragMoveEvent(QDragMoveEvent *event)
+{
+    event->setDropAction(Qt::CopyAction);
+    event->accept();
+}
+
+void MainTabBar::dropEvent(QDropEvent *event)
+{
+    if (event->source() != nullptr)
+        return;
+
+    event->setDropAction(Qt::CopyAction);
+    event->accept();
+    foreach (QString path, getDroppedPaths(event->mimeData()))
+        emit openFile(path);
+}
+
+QStringList MainTabBar::getDroppedPaths(const QMimeData * mimeData)
+{
+    // Local directories and soundfonts, written like the paths given by the file dialogs
+    QStringList paths;
+    foreach (QUrl url, mimeData->urls())
+    {
+        if (!url.isLocalFile())
+            continue;
+        QFileInfo fileInfo(QDir::cleanPath(url.toLocalFile()));
+        if (fileInfo.isDir() || (fileInfo.isFile() && InputFactory::isSuffixSupported(fileInfo.suffix())))
+            paths << fileInfo.filePath();
+    }
+    return paths;
 }
 
 void MainTabBar::goLeft()

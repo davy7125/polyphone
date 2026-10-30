@@ -60,6 +60,7 @@ QDate CalendarPopup::getDate() const
 StyledLineEditWithCalendar::StyledLineEditWithCalendar(QWidget * parent) : StyledLineEdit(parent)
 {
     _popup = new CalendarPopup(this->parentWidget());
+    _popup->hide(); // Otherwise displayed with its parent, until the next focus change
     connect(_popup, &CalendarPopup::dateSelected, this, &StyledLineEditWithCalendar::onDateSelected);
     connect(qApp, &QApplication::focusChanged, this, &StyledLineEditWithCalendar::onFocusChanged);
     connect(this, &QLineEdit::textEdited, this, &StyledLineEditWithCalendar::setInitialText);

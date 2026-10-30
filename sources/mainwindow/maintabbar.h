@@ -29,6 +29,7 @@
 #include <QVector>
 class MainTabBarElement;
 class Tab;
+class QMimeData;
 
 class MainTabBar : public QWidget
 {
@@ -54,6 +55,7 @@ public:
 signals:
     void widgetClicked(QWidget * widget);
     void closeClicked(QWidget * widget);
+    void openFile(QString file);
 
 protected:
     bool event(QEvent *event) override;
@@ -62,9 +64,13 @@ protected:
     void mouseMoveEvent(QMouseEvent *event) override;
     void mouseReleaseEvent(QMouseEvent *event) override;
     void wheelEvent(QWheelEvent *event) override;
+    void dragEnterEvent(QDragEnterEvent *event) override;
+    void dragMoveEvent(QDragMoveEvent *event) override;
+    void dropEvent(QDropEvent *event) override;
 
 private:
     int itemAt(const QPoint &pos);
+    static QStringList getDroppedPaths(const QMimeData * mimeData);
     int adaptWidths(QVector<int> &widths, int maxWidth);
     void goLeft();
     void goRight();
@@ -81,6 +87,7 @@ private:
     int _xShift;
     int _firstTabDisplayed; // 0 is first tab, -1 is align the right tab with the right border
     bool _withArrows;
+    int _wheelAngleDelta; // Accumulated while Shift is pressed, for changing the current tab
 
     static const int TAB_MIN_WIDTH;
     static const int ARROW_WIDTH;
