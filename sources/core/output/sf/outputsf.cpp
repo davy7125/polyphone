@@ -268,7 +268,7 @@ void OutputSf::fillSf2(int sf2Index, Sf2Header * header, Sf2SdtaPart * sdtaPart,
         id.indexElt = indexes[i];
         sdtaPart->_sounds.append(_sm->getSound(id));
     }
-    sdtaPart->_sample24bits = id.indexElt != -1 && _sm->get(id, champ_wBpsSave).wValue == 24;
+    sdtaPart->_sample24bits = id.indexElt != -1 && _sm->get(EltID(elementSf2, sf2Index), champ_wBpsSave).wValue == 24;
 
     ////////////
     /// PDTA ///
