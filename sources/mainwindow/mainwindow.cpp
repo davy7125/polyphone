@@ -41,6 +41,7 @@
 #include "dialogchangelog.h"
 #include "dialogkeyboard.h"
 #include "dialogrecorder.h"
+#include "dialogmidiplayer.h"
 #include "editortoolbar.h"
 #include "outputfactory.h"
 #include "inputfactory.h"
@@ -54,6 +55,7 @@ const int MainWindow::RESIZE_BORDER_WIDTH = 5;
 MainWindow::MainWindow(bool playerMode, QWidget *parent) : QWidget(parent),
     ui(new Ui::MainWindow),
     _recorder(new DialogRecorder(this)),
+    _midiPlayer(new DialogMidiPlayer(this)),
     _dialogAbout(this)
 {
     ///////////
@@ -134,6 +136,7 @@ MainWindow::MainWindow(bool playerMode, QWidget *parent) : QWidget(parent),
     connect(ui->widgetShowSoundfonts, SIGNAL(itemClicked(SoundfontFilter*)), _tabManager, SLOT(openRepository(SoundfontFilter*)));
     connect(_tabManager, SIGNAL(keyboardDisplayChanged(bool,bool)), this, SLOT(onKeyboardDisplayChange(bool,bool)));
     connect(_tabManager, SIGNAL(recorderDisplayChanged(bool,bool)), this, SLOT(onRecorderDisplayChange(bool,bool)));
+    connect(_tabManager, SIGNAL(midiPlayerDisplayChanged(bool,bool)), this, SLOT(onMidiPlayerDisplayChange(bool,bool)));
     connect(_tabManager, SIGNAL(tabOpen(bool,bool,bool)), ui->topRightWidget, SLOT(onTabOpen(bool,bool,bool)));
 
     // Navigation between tabs, with a priority over the keys used by the widgets having the focus (lists, trees, tables, ...)
@@ -184,6 +187,7 @@ MainWindow::MainWindow(bool playerMode, QWidget *parent) : QWidget(parent),
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete _midiPlayer;
     delete _recorder;
     TabManager::kill();
     _tabManager = nullptr;
@@ -266,6 +270,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
     if (_keyboard)
         _keyboard->updateState(false);
     _recorder->updateState(false);
+    _midiPlayer->updateState(false);
 }
 
 void MainWindow::recentSf2Changed()
@@ -383,6 +388,14 @@ void MainWindow::onRecorderDisplayChange(bool isDisplayed, bool propagate)
         _recorder->updateState(false);
     _recorder->setVisible(isDisplayed);
     _recorder->updateState(true);
+}
+
+void MainWindow::onMidiPlayerDisplayChange(bool isDisplayed, bool propagate)
+{
+    if (!propagate)
+        _midiPlayer->updateState(false);
+    _midiPlayer->setVisible(isDisplayed);
+    _midiPlayer->updateState(true);
 }
 
 void MainWindow::keyPressEvent(QKeyEvent * event)

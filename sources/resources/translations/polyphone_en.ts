@@ -1896,6 +1896,70 @@ repository</source>
     </message>
 </context>
 <context>
+    <name>DialogMidiPlayer</name>
+    <message>
+        <location filename="../../dialogs/dialogmidiplayer.ui" line="14"/>
+        <source>MIDI player</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogmidiplayer.ui" line="59"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="118"/>
+        <source>Open a MIDI file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogmidiplayer.ui" line="118"/>
+        <source>Stop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogmidiplayer.ui" line="149"/>
+        <source>Loop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="72"/>
+        <source>Channel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="72"/>
+        <source>Soundfont</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="72"/>
+        <source>Preset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="72"/>
+        <source>Volume</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="88"/>
+        <source>Open a MIDI file to play it with the soundfonts that are open.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="119"/>
+        <source>MIDI files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="268"/>
+        <source>Pause</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="268"/>
+        <source>Play</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogNewElement</name>
     <message>
         <location filename="../../dialogs/dialognewelement.ui" line="55"/>
@@ -2481,7 +2545,7 @@ repository</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/editor.cpp" line="520"/>
+        <location filename="../../editor/editor.cpp" line="521"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2551,67 +2615,72 @@ repository</source>
 <context>
     <name>EditorToolBar</name>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="68"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="69"/>
         <source>Add a sample</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="69"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="70"/>
         <source>Add an instrument</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="70"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="71"/>
         <source>Add a preset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="75"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="76"/>
         <source>Toolbox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="71"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="72"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="72"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="73"/>
         <source>Redo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="73"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="74"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="81"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="82"/>
         <source>Recorder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="84"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="85"/>
         <source>Virtual keyboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="279"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="88"/>
+        <source>MIDI player</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="302"/>
         <source>Import an audio file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="281"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="304"/>
         <source>Audio files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="437"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="460"/>
         <source>Cannot create more presets.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="437"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="460"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3025,57 +3094,57 @@ repository</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="242"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="246"/>
         <source>&amp;Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="243"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="247"/>
         <source>&amp;Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="244"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="248"/>
         <source>Do&amp;n&apos;t save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="228"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="232"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="65"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="67"/>
         <source>Polyphone SoundFont Editor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="219"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="223"/>
         <source>Untitled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="229"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="233"/>
         <source>Save before exiting?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="232"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="236"/>
         <source>The following files have been modified:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="239"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="243"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="316"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="321"/>
         <source>Opening files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="326"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="331"/>
         <source>Opening a directory</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3092,7 +3161,7 @@ repository</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="67"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="69"/>
         <source>Home screen</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3143,6 +3212,91 @@ repository</source>
     <message>
         <location filename="../../mainwindow/mainwindow.ui" line="281"/>
         <source>History</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MidiFile</name>
+    <message>
+        <location filename="../../midi_player/midifile.cpp" line="103"/>
+        <source>Cannot read file &quot;%1&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../midi_player/midifile.cpp" line="108"/>
+        <location filename="../../midi_player/midifile.cpp" line="203"/>
+        <source>This is not a MIDI file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../midi_player/midifile.cpp" line="163"/>
+        <source>This MIDI file contains no notes.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../midi_player/midifile.cpp" line="222"/>
+        <source>The time division of this MIDI file is not valid.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MidiPlayerChannel</name>
+    <message>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="65"/>
+        <source>Activity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="80"/>
+        <source>Force a bank and a preset, otherwise they are chosen by the MIDI file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="95"/>
+        <source>Volume</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="102"/>
+        <source>M</source>
+        <comment>short for Mute</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="106"/>
+        <source>Mute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="108"/>
+        <source>S</source>
+        <comment>short for Solo</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="112"/>
+        <source>Solo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="157"/>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="166"/>
+        <source>Untitled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="308"/>
+        <source>The soundfont has no preset with this bank and this number: the notes are not played.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="338"/>
+        <source>dB</source>
+        <comment>unit for decibels</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4122,34 +4276,39 @@ Warning: quality will be reduced and the loop may be altered</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../player/player.ui" line="278"/>
+        <location filename="../../player/player.ui" line="285"/>
         <source>Opening file...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../player/player.ui" line="356"/>
+        <location filename="../../player/player.ui" line="363"/>
         <source>Banks (number of instruments)</source>
         <oldsource>Banques (nombre d&apos;instruments)</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../player/player.ui" line="433"/>
+        <location filename="../../player/player.ui" line="440"/>
         <source>Instruments</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../player/player.ui" line="567"/>
+        <location filename="../../player/player.ui" line="574"/>
         <source>Cannot open the file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../player/player.cpp" line="51"/>
+        <location filename="../../player/player.cpp" line="52"/>
         <source>MIDI panic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../player/player.cpp" line="52"/>
+        <location filename="../../player/player.cpp" line="53"/>
         <source>Recorder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../player/player.cpp" line="55"/>
+        <source>MIDI player</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5259,53 +5418,53 @@ download content</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="136"/>
-        <location filename="../../mainwindow/tabmanager.cpp" line="288"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="137"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="292"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="137"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="138"/>
         <source>Cannot open file &quot;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="245"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="249"/>
         <source>Online repository</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="283"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="287"/>
         <source>Save before exiting?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="286"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="290"/>
         <source>untitled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="287"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="291"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="290"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="294"/>
         <source>&amp;Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="291"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="295"/>
         <source>&amp;Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="292"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="296"/>
         <source>Do&amp;n&apos;t save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="412"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="417"/>
         <source>User area</source>
         <translation type="unfinished"></translation>
     </message>

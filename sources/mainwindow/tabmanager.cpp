@@ -81,7 +81,7 @@ TabManager::TabManager(DialogKeyboard * dialogKeyboard, MainStackedWidget * stac
 
 TabManager::~TabManager()
 {
-    // Save the state of the keyboard and recorder windows
+    // Save the state of the keyboard, recorder and MIDI player windows
     saveWindowState();
 
     delete _configTab;
@@ -119,6 +119,7 @@ void TabManager::openNewSoundfont()
     connect(editor, SIGNAL(filePathChanged(QString)), this, SLOT(onFilePathChanged(QString)));
     connect(editor, SIGNAL(keyboardDisplayChanged(bool)), this, SIGNAL(keyboardDisplayChanged(bool)));
     connect(editor, SIGNAL(recorderDisplayChanged(bool)), this, SIGNAL(recorderDisplayChanged(bool)));
+    connect(editor, SIGNAL(midiPlayerDisplayChanged(bool)), this, SIGNAL(midiPlayerDisplayChanged(bool)));
     _soundfontTabs << editor;
 
     // Initialize and display it
@@ -177,6 +178,7 @@ void TabManager::openSoundfont(QString fileName, PlayerOptions *playerOptions, b
     connect(tab, SIGNAL(filePathChanged(QString)), this, SLOT(onFilePathChanged(QString)));
     connect(tab, SIGNAL(keyboardDisplayChanged(bool)), this, SIGNAL(keyboardDisplayChanged(bool)));
     connect(tab, SIGNAL(recorderDisplayChanged(bool)), this, SIGNAL(recorderDisplayChanged(bool)));
+    connect(tab, SIGNAL(midiPlayerDisplayChanged(bool)), this, SIGNAL(midiPlayerDisplayChanged(bool)));
     _soundfontTabs << tab;
 
     // Initialize and display it
@@ -186,13 +188,15 @@ void TabManager::openSoundfont(QString fileName, PlayerOptions *playerOptions, b
     else
         tab->initializeWithSoundfontIndex(indexSf2);
 
-    // Possibly open the keyboard and recorder windows
+    // Possibly open the keyboard, recorder and MIDI player windows
     if (_soundfontTabs.count() == 1)
     {
         if (ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "keyboard_open", false).toBool())
             emit keyboardDisplayChanged(true);
         if (ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "recorder_open", false).toBool())
             emit recorderDisplayChanged(true);
+        if (ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "midiplayer_open", false).toBool())
+            emit midiPlayerDisplayChanged(true);
     }
 }
 
@@ -339,12 +343,13 @@ void TabManager::onTabCloseRequested(QWidget * widget)
 
         if (_soundfontTabs.empty())
         {
-            // Save the state of the keyboard and recorder windows
+            // Save the state of the keyboard, recorder and MIDI player windows
             saveWindowState();
 
             // Close them
             emit keyboardDisplayChanged(false, false);
             emit recorderDisplayChanged(false, false);
+            emit midiPlayerDisplayChanged(false, false);
         }
     }
     else if (widget == dynamic_cast<QWidget*>(_configTab))
@@ -457,4 +462,5 @@ void TabManager::saveWindowState()
 {
     ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "keyboard_open", EditorToolBar::isKeyboardOpen());
     ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "recorder_open", EditorToolBar::isRecorderOpen());
+    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "midiplayer_open", EditorToolBar::isMidiPlayerOpen());
 }

@@ -29,12 +29,10 @@ MidiProcessor::MidiProcessor() :
     _listener(nullptr)
 {
     memset((MIDI_State *)_midiStates, 0, 17 * sizeof(MIDI_State));
-    memset((Sustain_State *)_sustainStates, 0, 17 * sizeof(Sustain_State));
 
-    // Initialize MIDI values
+    // Default values of the controllers, then the other values
     for (int channel = 0; channel <= 16; channel++)
     {
-        _midiStates[channel]._bendSensitivityValue = 2.0f;
         for (int i = 0; i < 128; i++)
         {
             // Default value, depending on the CC number
@@ -60,12 +58,34 @@ MidiProcessor::MidiProcessor() :
                 break;
             }
 
-            _midiStates[channel]._controllerValues[i] = defaultValue;
             _midiStates[channel]._controllerDefaultValues[i] = defaultValue;
-            _midiStates[channel]._controllerValueSpecified[i] = false;
-            _midiStates[channel]._controllerValueIsRelative[i] = true; // Default is true, until an "absolute" value is encountered
-            _midiStates[channel]._controllerValueIsRelativeCounter[i] = 0;
         }
+    }
+    resetChannels();
+}
+
+void MidiProcessor::resetChannels()
+{
+    memset((Sustain_State *)_sustainStates, 0, 17 * sizeof(Sustain_State));
+    for (int channel = 0; channel <= 16; channel++)
+    {
+        MIDI_State * midiState = &_midiStates[channel];
+        for (int i = 0; i < 128; i++)
+        {
+            midiState->_controllerValues[i] = midiState->_controllerDefaultValues[i];
+            midiState->_controllerValueSpecified[i] = false;
+            midiState->_controllerValueIsRelative[i] = true; // Default is true, until an "absolute" value is encountered
+            midiState->_controllerValueIsRelativeCounter[i] = 0;
+            midiState->_polyPressureValues[i] = 0;
+        }
+        midiState->_bendValue = 0.0f;
+        midiState->_bendSensitivityValue = 2.0f;
+        midiState->_monoPressureValue = 0;
+        midiState->_rpnMSBparameter = 0;
+        midiState->_rpnLSBparameter = 0;
+        midiState->_rpnMSBvalue = 0;
+        midiState->_rpnLSBvalue = 0;
+        midiState->_rpnIsRegistered = false;
     }
 }
 

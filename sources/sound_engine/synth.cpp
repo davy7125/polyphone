@@ -41,6 +41,7 @@ Synth::Synth(ISynthSoundfonts * soundfonts, QRecursiveMutex * mutexSoundfonts) :
     _outputPosition(0),
     _outputAvailable(0)
 {
+    _core.setMidiValues(&_midiValues);
     connect(&_recorder, SIGNAL(dataWritten(quint32,quint32)), this, SIGNAL(dataWritten(quint32,quint32)));
 }
 
@@ -148,6 +149,16 @@ void Synth::stop(bool allChannels, bool fast)
     _core.stop(allChannels, fast);
 }
 
+void Synth::releaseChannel(int channel, bool fast)
+{
+    _core.releaseVoices(-1, -1, channel, -2, fast);
+}
+
+void Synth::setChannelGain(int channel, float gain)
+{
+    _core.setChannelGain(channel, gain);
+}
+
 void Synth::configure(const SynthCoreConfig &configuration)
 {
     _core.configure(configuration);
@@ -155,7 +166,50 @@ void Synth::configure(const SynthCoreConfig &configuration)
 
 void Synth::setIMidiValues(IMidiValues * midiValues)
 {
-    _core.setMidiValues(midiValues);
+    _midiValues.setInputValues(midiValues);
+}
+
+void Synth::setMidiFileValues(IMidiValues * midiValues)
+{
+    _midiValues.setFileValues(midiValues);
+}
+
+Synth::MidiValues::MidiValues() :
+    _inputValues(&_defaultValues),
+    _fileValues(&_defaultValues)
+{}
+
+IMidiValues * Synth::MidiValues::getValues(int &channel)
+{
+    if (channel < MIDI_FILE_CHANNEL_OFFSET)
+        return _inputValues.load(std::memory_order_relaxed);
+    channel -= MIDI_FILE_CHANNEL_OFFSET;
+    return _fileValues.load(std::memory_order_relaxed);
+}
+
+int Synth::MidiValues::getControllerValue(int channel, int controllerNumber)
+{
+    return getValues(channel)->getControllerValue(channel, controllerNumber);
+}
+
+float Synth::MidiValues::getBendValue(int channel)
+{
+    return getValues(channel)->getBendValue(channel);
+}
+
+float Synth::MidiValues::getBendSensitivityValue(int channel)
+{
+    return getValues(channel)->getBendSensitivityValue(channel);
+}
+
+int Synth::MidiValues::getMonoPressure(int channel)
+{
+    return getValues(channel)->getMonoPressure(channel);
+}
+
+int Synth::MidiValues::getPolyPressure(int channel, int key)
+{
+    return getValues(channel)->getPolyPressure(channel, key);
 }
 
 void Synth::setSampleGain(double gain)

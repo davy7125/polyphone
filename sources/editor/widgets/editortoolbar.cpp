@@ -42,6 +42,7 @@
 
 bool EditorToolBar::s_recorderOpen = false;
 bool EditorToolBar::s_keyboardOpen = false;
+bool EditorToolBar::s_midiPlayerOpen = false;
 QMap<int, bool> EditorToolBar::s_midiExtensionOpen;
 QList<EditorToolBar *> EditorToolBar::s_instances;
 
@@ -83,6 +84,9 @@ EditorToolBar::EditorToolBar(QWidget * parent) : QWidget(parent),
 
     ui->pushShowKeyboard->initialize(tr("Virtual keyboard"), ":/icons/piano.svg");
     ui->pushShowKeyboard->setChecked(s_keyboardOpen);
+
+    ui->pushShowMidiPlayer->initialize(tr("MIDI player"), ":/icons/MIDI.svg");
+    ui->pushShowMidiPlayer->setChecked(s_midiPlayerOpen);
 
     // Possible extensions
     for (int i = 0; i < ExtensionManager::midi()->count(); i++)
@@ -243,6 +247,14 @@ void EditorToolBar::on_pushShowKeyboard_clicked()
     emit keyboardDisplayChanged(isDisplayed);
 }
 
+void EditorToolBar::on_pushShowMidiPlayer_clicked()
+{
+    if (_initializing)
+        return;
+    bool isDisplayed = ui->pushShowMidiPlayer->isChecked();
+    emit midiPlayerDisplayChanged(isDisplayed);
+}
+
 void EditorToolBar::updateRecorderButtonsState(bool isChecked)
 {
     s_recorderOpen = isChecked;
@@ -261,6 +273,17 @@ void EditorToolBar::updateKeyboardButtonsState(bool isChecked)
     {
         toolBar->blockSignals(true);
         toolBar->ui->pushShowKeyboard->setChecked(s_keyboardOpen);
+        toolBar->blockSignals(false);
+    }
+}
+
+void EditorToolBar::updateMidiPlayerButtonsState(bool isChecked)
+{
+    s_midiPlayerOpen = isChecked;
+    foreach (EditorToolBar * toolBar, s_instances)
+    {
+        toolBar->blockSignals(true);
+        toolBar->ui->pushShowMidiPlayer->setChecked(s_midiPlayerOpen);
         toolBar->blockSignals(false);
     }
 }

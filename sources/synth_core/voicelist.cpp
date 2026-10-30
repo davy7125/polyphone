@@ -369,9 +369,9 @@ void VoiceList::prepareComputation()
 
 void VoiceList::fadeOutNotes(int first, int last, int voiceCount)
 {
-    // Lowest and highest keys held on each channel (-1 for the editor, then 0 to 15)
-    int lowestKeys[17], highestKeys[17];
-    for (int i = 0; i < 17; i++)
+    // Lowest and highest keys held on each channel (-1 for the editor, then 0 to MAX_CHANNEL)
+    int lowestKeys[MAX_CHANNEL + 2], highestKeys[MAX_CHANNEL + 2];
+    for (int i = 0; i < MAX_CHANNEL + 2; i++)
     {
         lowestKeys[i] = 1000;
         highestKeys[i] = -1000;
@@ -386,7 +386,7 @@ void VoiceList::fadeOutNotes(int first, int last, int voiceCount)
             continue;
         voiceParam = voice->getParam();
         channel = voiceParam->getChannel() + 1;
-        if (channel < 0 || channel > 16)
+        if (channel < 0 || channel > MAX_CHANNEL + 1)
             continue;
         key = voiceParam->getKey();
         if (key < lowestKeys[channel])
@@ -415,7 +415,8 @@ void VoiceList::fadeOutNotes(int first, int last, int voiceCount)
             voiceParam = voice->getParam();
             channel = voiceParam->getChannel() + 1;
             key = voiceParam->getKey();
-            bool isExtremeKey = channel >= 0 && channel <= 16 && (key == lowestKeys[channel] || key == highestKeys[channel]);
+            bool isExtremeKey = channel >= 0 && channel <= MAX_CHANNEL + 1 &&
+                                (key == lowestKeys[channel] || key == highestKeys[channel]);
             priority.level = isExtremeKey ? 2 : 1;
         }
     }

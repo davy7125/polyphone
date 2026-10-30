@@ -56,6 +56,10 @@ public:
     // Release all keys of the channel -1, including the ones held by the pedals
     void stopAll();
 
+    // Initial state of all channels, without notifying the listener: controllers back to their default values, no key
+    // and no pedal held
+    void resetChannels();
+
     // Default value of a controller used as the source of a modulator, if it has not been received
     void setDefaultControllerValue(int controllerNumber, bool isBipolar, bool isDescending);
 

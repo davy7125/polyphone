@@ -123,6 +123,7 @@ Editor::Editor(DialogKeyboard * dialogKeyboard, EltID initialSelection) : Soundf
     connect(ui->toolBar, SIGNAL(displayOptionChanged(int)), this, SLOT(displayOptionChanged(int)));
     connect(ui->toolBar, SIGNAL(keyboardDisplayChanged(bool)), this, SIGNAL(keyboardDisplayChanged(bool)));
     connect(ui->toolBar, SIGNAL(recorderDisplayChanged(bool)), this, SIGNAL(recorderDisplayChanged(bool)));
+    connect(ui->toolBar, SIGNAL(midiPlayerDisplayChanged(bool)), this, SIGNAL(midiPlayerDisplayChanged(bool)));
     connect(ui->toolBar, SIGNAL(selectionChanged(IdList)), ui->treeView, SLOT(onSelectionChanged(IdList)));
 
     // Other
@@ -758,6 +759,11 @@ bool Editor::eventFilter(QObject *obj, QEvent *event)
             return true;
         }
     }
+    else if (obj == ui->editFilter && (event->type() == QEvent::FocusIn || event->type() == QEvent::FocusOut))
+    {
+        // The placeholder color depends on the focus
+        updateSearchStyle(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT));
+    }
 
     return Tab::eventFilter(obj, event);
 }
@@ -772,12 +778,18 @@ void Editor::updateSearchStyle(QColor focusBackgroundColor)
     QString highlightColorBackground = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name();
     QString highlightColorText = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name();
 
+    // Qt ignores the placeholder color in ":focus", the color is thus set in the main rule according to the focus
+    QColor placeholderColor = ContextManager::theme()->getColor(ui->editFilter->hasFocus() ?
+                                                                    ThemeManager::HIGHLIGHTED_BACKGROUND : ThemeManager::HIGHLIGHTED_TEXT);
+    placeholderColor.setAlpha(128);
+
     // Merged with the bar when not focused, inverted colors and set in the bar otherwise
     // (padding compensated by the margin so that the text doesn't move)
     ui->editFilter->setStyleSheet("QLineEdit{background-color:" + highlightColorBackground +
                                   ";color:" + highlightColorText +
                                   ";selection-background-color:" + highlightColorText +
                                   ";selection-color:" + highlightColorBackground +
+                                  ";placeholder-text-color:" + placeholderColor.name(QColor::HexArgb) +
                                   ";border:0;padding-left:4px}" +
                                   "QLineEdit:focus{background-color:" + focusBackgroundColor.name() +
                                   ";color:" + highlightColorBackground +

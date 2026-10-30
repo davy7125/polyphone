@@ -52,6 +52,7 @@ signals:
     void filePathChanged(QString filePath);
     void recorderDisplayChanged(bool isDisplayed);
     void keyboardDisplayChanged(bool isDisplayed);
+    void midiPlayerDisplayChanged(bool isDisplayed);
 
 protected:
     virtual void tabInitializing(QString filename) = 0;

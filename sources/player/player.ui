@@ -224,6 +224,13 @@
         </property>
        </widget>
       </item>
+      <item>
+       <widget class="StyledAction" name="pushShowMidiPlayer">
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>

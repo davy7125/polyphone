@@ -32,6 +32,7 @@
 #include "playerpresetlistdelegate.h"
 
 bool Player::s_recorderOpen = false;
+bool Player::s_midiPlayerOpen = false;
 QList<Player *> Player::s_instances;
 
 Player::Player(PlayerOptions * playerOptions, QWidget * parent) : SoundfontTab(parent),
@@ -51,6 +52,8 @@ Player::Player(PlayerOptions * playerOptions, QWidget * parent) : SoundfontTab(p
     ui->pushPanic->initialize(tr("MIDI panic"), ":/icons/MIDI_panic.svg");
     ui->pushShowRecorder->initialize(tr("Recorder"), ":/icons/recorder.svg");
     ui->pushShowRecorder->setChecked(s_recorderOpen);
+    ui->pushShowMidiPlayer->initialize(tr("MIDI player"), ":/icons/MIDI.svg");
+    ui->pushShowMidiPlayer->setChecked(s_midiPlayerOpen);
 
     // Keyboard with all keys (128)
     ui->keyboard->set(PianoKeybd::PROPERTY_KEY_MIN, 0);
@@ -480,6 +483,26 @@ void Player::updateRecorderButtonsState(bool isChecked)
     {
         player->blockSignals(true);
         player->ui->pushShowRecorder->setChecked(s_recorderOpen);
+        player->blockSignals(false);
+    }
+}
+
+void Player::on_pushShowMidiPlayer_clicked()
+{
+    if (_initializing)
+        return;
+    bool isDisplayed = ui->pushShowMidiPlayer->isChecked();
+    updateMidiPlayerButtonsState(isDisplayed);
+    emit midiPlayerDisplayChanged(isDisplayed);
+}
+
+void Player::updateMidiPlayerButtonsState(bool isChecked)
+{
+    s_midiPlayerOpen = isChecked;
+    foreach (Player * player, s_instances)
+    {
+        player->blockSignals(true);
+        player->ui->pushShowMidiPlayer->setChecked(s_midiPlayerOpen);
         player->blockSignals(false);
     }
 }

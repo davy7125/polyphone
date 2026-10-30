@@ -76,6 +76,8 @@ SynthCore::SynthCore(ISynthSoundfonts * soundfonts, ISynthListener * listener) :
     _effectConfigurationChanged(false),
     _effectConfigurationLock(0)
 {
+    for (int i = 0; i < MAX_CHANNEL + 2; i++)
+        _channelGains[i] = 0;
     _voices.initialize(listener, &_context);
     setMaxBlockSize(DEFAULT_MAX_BLOCK_SIZE);
 }
@@ -287,7 +289,9 @@ void SynthCore::configureVoice(Voice * voice)
     if (voiceParam->getType() == 0)
     {
         // Sample triggered from the instrument or preset level
-        voice->setGain(_configuration.masterGain);
+        int channel = voiceParam->getChannel();
+        float channelGain = (channel >= -1 && channel <= MAX_CHANNEL) ? _channelGains[channel + 1] : 0;
+        voice->setGain(_configuration.masterGain + channelGain);
     }
     else
     {
@@ -369,6 +373,22 @@ void SynthCore::stop(bool allChannels, bool fast)
 {
     // Stop required for all voices
     releaseVoices(-1, -1, allChannels ? -2 : -1, -2, fast);
+}
+
+void SynthCore::setChannelGain(int channel, float gain)
+{
+    if (channel < -1 || channel > MAX_CHANNEL)
+        return;
+
+    {
+        std::lock_guard<std::recursive_mutex> lock(_voicesMutex);
+        if (_channelGains[channel + 1] == gain)
+            return;
+        _channelGains[channel + 1] = gain;
+    }
+
+    // The voices playing reach the new gain progressively (linear evolution of the volume on each chunk)
+    configureVoices();
 }
 
 void SynthCore::configure(const SynthCoreConfig &configuration)

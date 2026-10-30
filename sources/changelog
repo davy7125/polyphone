@@ -4,6 +4,7 @@ polyphone (2.7) UNRELEASED; urgency=low
   * (new) voice overflow management: above a maximum polyphony or processor load, the quietest notes fade out
   * (new) button for removing the loop of the selected samples
   * (new) tool for converting stereo samples to mono, with the possible merge of the left and right divisions in the instruments
+  * (new) MIDI player
   * (improvement) faster sound engine
   * (improvement) the startup view can open the first instrument or preset on its ranges or envelopes page
   * (improvement) knobs are edited by dragging the mouse (finer with Shift) and a double click on a knob or a slider restores its default value

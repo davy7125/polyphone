@@ -49,6 +49,7 @@ public:
     bool processProgramChanged(int channel, quint16 bank, quint8 preset) override;
 
     static void updateRecorderButtonsState(bool isChecked);
+    static void updateMidiPlayerButtonsState(bool isChecked);
 
 protected:
     void tabInitializing(QString filename) override;
@@ -64,6 +65,7 @@ private slots:
     void on_comboMultipleSelection_currentIndexChanged(int index);
     void on_comboSelectionByKeys_currentIndexChanged(int index);
     void on_pushShowRecorder_clicked();
+    void on_pushShowMidiPlayer_clicked();
 
     void on_pushPanic_clicked();
 
@@ -86,6 +88,7 @@ private:
 
     static QList<Player *> s_instances;
     static bool s_recorderOpen;
+    static bool s_midiPlayerOpen;
 };
 
 #endif // PLAYER_H

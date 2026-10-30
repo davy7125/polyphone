@@ -69,6 +69,10 @@ public:
     void releaseVoices(int sf2Id, int presetId, int channel, int key, bool fast);
     void stop(bool allChannels, bool fast);
 
+    // Gain (dB) added to the voices of a channel (-1 to MAX_CHANNEL), 0 by default: the voices playing reach it
+    // progressively
+    void setChannelGain(int channel, float gain);
+
     // Configuration for reading samples alone
     void setSampleGain(double gain);
     void setStereo(bool isStereoEnabled);
@@ -128,6 +132,7 @@ private:
     SynthCoreConfig _configuration;
     uint32_t _sampleRate;
     double _smplGain;
+    float _channelGains[MAX_CHANNEL + 2]; // From channel -1
     bool _smplIsStereoEnabled;
     bool _smplIsLoopEnabled;
     VoiceContext _context; // Read by the voices

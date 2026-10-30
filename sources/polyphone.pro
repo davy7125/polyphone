@@ -206,6 +206,7 @@ INCLUDEPATH += clavier \
     lib \
     lib/qtsingleapplication \
     mainwindow \
+    midi_player \
     player \
     repository \
     repository/browser \
@@ -472,6 +473,10 @@ SOURCES	+= main.cpp \
     context/interface/configpanel.cpp \
     dialogs/dialogkeyboard.cpp \
     dialogs/dialogrecorder.cpp \
+    dialogs/dialogmidiplayer.cpp \
+    midi_player/midifile.cpp \
+    midi_player/midifileplayer.cpp \
+    midi_player/midiplayerchannel.cpp \
     editor/tools/link_sample/toollinksample.cpp \
     editor/tools/unlink_sample/toolunlinksample.cpp \
     editor/tools/mono_conversion/toolmonoconversion.cpp \
@@ -893,6 +898,10 @@ HEADERS += \
     context/interface/configpanel.h \
     dialogs/dialogkeyboard.h \
     dialogs/dialogrecorder.h \
+    dialogs/dialogmidiplayer.h \
+    midi_player/midifile.h \
+    midi_player/midifileplayer.h \
+    midi_player/midiplayerchannel.h \
     editor/tools/link_sample/toollinksample.h \
     editor/tools/unlink_sample/toolunlinksample.h \
     editor/tools/mono_conversion/toolmonoconversion.h \
@@ -1102,6 +1111,7 @@ FORMS += \
     context/interface/configpanel.ui \
     dialogs/dialogkeyboard.ui \
     dialogs/dialogrecorder.ui \
+    dialogs/dialogmidiplayer.ui \
     editor/tools/change_attenuation/toolchangeattenuation_gui.ui \
     editor/tools/global_settings/toolglobalsettings_gui.ui \
     editor/tools/celeste_tuning/toolcelestetuning_gui.ui \

@@ -34,6 +34,9 @@
 #include "imidilistener.h"
 #include "recorder.h"
 
+// The channels 0 to 15 of the MIDI file player are the channels 16 to 31 of the synth, with their own controller values
+#define MIDI_FILE_CHANNEL_OFFSET 16
+
 // Synth of the editor: SynthCore with the voices computed by several threads, the effects for
 // the samples (calibration sinus, equalizer), the recording and the Qt signals
 class Synth : public QObject, public IMidiListener, public ISynthListener
@@ -47,8 +50,11 @@ public:
     // Executed by the main thread (thread 1)
     void configure(const SynthCoreConfig &configuration);
     void setIMidiValues(IMidiValues * midiValues); // Not deleted by the synth (null: default values)
+    void setMidiFileValues(IMidiValues * midiValues); // Same for the channels of the MIDI file player
     int play(EltID id, int channel, int key, int velocity);
     void stop(bool allChannels, bool fast);
+    void releaseChannel(int channel, bool fast);
+    void setChannelGain(int channel, float gain); // dB
 
     // Configuration for reading samples
     void setSampleGain(double gain);
@@ -103,6 +109,28 @@ signals:
     void dataWritten(quint32 sampleRate, quint32 number); // For updating the recorder
 
 private:
+    // Values read by the voices: the ones of the MIDI input, or of the MIDI file player for its channels
+    class MidiValues: public IMidiValues
+    {
+    public:
+        MidiValues();
+        void setInputValues(IMidiValues * midiValues) { _inputValues.store(midiValues == nullptr ? &_defaultValues : midiValues); }
+        void setFileValues(IMidiValues * midiValues) { _fileValues.store(midiValues == nullptr ? &_defaultValues : midiValues); }
+
+        int getControllerValue(int channel, int controllerNumber) override;
+        float getBendValue(int channel) override;
+        float getBendSensitivityValue(int channel) override;
+        int getMonoPressure(int channel) override;
+        int getPolyPressure(int channel, int key) override;
+
+    private:
+        IMidiValues * getValues(int &channel);
+
+        DummyMidiDevice _defaultValues;
+        std::atomic<IMidiValues *> _inputValues;
+        std::atomic<IMidiValues *> _fileValues;
+    };
+
     void destroySoundEngines();
     void createSoundEngines();
     void appendOutput(quint32 len);
@@ -110,6 +138,7 @@ private:
     // Soundfonts and synth
     QRecursiveMutex * _mutexSoundfonts;
     SynthCore _core;
+    MidiValues _midiValues;
 
     // Sound engines computing the voices
     SoundEngine ** _soundEngines;

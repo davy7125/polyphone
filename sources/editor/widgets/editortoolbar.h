@@ -49,9 +49,11 @@ public:
 
     static void updateRecorderButtonsState(bool isChecked);
     static void updateKeyboardButtonsState(bool isChecked);
+    static void updateMidiPlayerButtonsState(bool isChecked);
     static void updateMidiExtensionButtonsState(int midiExtensionIndex, bool isChecked);
     static bool isKeyboardOpen() { return s_keyboardOpen; }
     static bool isRecorderOpen() { return s_recorderOpen; }
+    static bool isMidiPlayerOpen() { return s_midiPlayerOpen; }
 
 public slots:
     void onSelectionChanged(IdList ids);
@@ -62,6 +64,7 @@ signals:
     void displayOptionChanged(int displayOption);
     void recorderDisplayChanged(bool isDisplayed);
     void keyboardDisplayChanged(bool isDisplayed);
+    void midiPlayerDisplayChanged(bool isDisplayed);
     void selectionChanged(IdList id);
 
 private slots:
@@ -77,6 +80,7 @@ private slots:
     void on_pushSave_clicked();
     void on_pushShowRecorder_clicked();
     void on_pushShowKeyboard_clicked();
+    void on_pushShowMidiPlayer_clicked();
     void onMidiExtensionActionClicked();
     void onExtensionDialogClosed(int result);
 
@@ -93,6 +97,7 @@ private:
     static QList<EditorToolBar *> s_instances;
     static bool s_recorderOpen;
     static bool s_keyboardOpen;
+    static bool s_midiPlayerOpen;
     static QMap<int, bool> s_midiExtensionOpen;
 };
 

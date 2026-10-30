@@ -40,6 +40,7 @@ RecentFileManager::RecentFileManager(ConfManager * configuration) : QObject(null
     _pngFile = _configuration->getValue(ConfManager::SECTION_RECENT_FILES, "frequencies", "").toString();
     _executableFile = _configuration->getValue(ConfManager::SECTION_RECENT_FILES, "executable", "").toString();
     _uploadFile = _configuration->getValue(ConfManager::SECTION_RECENT_FILES, "upload", "").toString();
+    _midiFile = _configuration->getValue(ConfManager::SECTION_RECENT_FILES, "midi", "").toString();
 
     // Recent sf2 list
     int j = 0;
@@ -93,6 +94,10 @@ void RecentFileManager::addRecentFile(FileType fileType, QString filePath)
     case FILE_TYPE_UPLOAD:
         _uploadFile = filePath;
         _configuration->setValue(ConfManager::SECTION_RECENT_FILES, "upload", _uploadFile);
+        break;
+    case FILE_TYPE_MIDI:
+        _midiFile = filePath;
+        _configuration->setValue(ConfManager::SECTION_RECENT_FILES, "midi", _midiFile);
         break;
     case FILE_TYPE_SOUNDFONT:{
         int position = _listFiles.indexOf(filePath);
@@ -169,6 +174,9 @@ QString RecentFileManager::getLastFile(FileType fileType, int num)
         break;
     case FILE_TYPE_UPLOAD:
         lastFile = _uploadFile;
+        break;
+    case FILE_TYPE_MIDI:
+        lastFile = _midiFile;
         break;
     }
 

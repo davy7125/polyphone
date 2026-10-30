@@ -82,9 +82,10 @@ public slots:
     void closeCurrentTab();
 
 signals:
-    /// Emitted when the visibility of the keyboard or recorder changes
+    /// Emitted when the visibility of the keyboard, recorder or MIDI player changes
     void keyboardDisplayChanged(bool isDisplayed, bool propagate = true);
     void recorderDisplayChanged(bool isDisplayed, bool propagate = true);
+    void midiPlayerDisplayChanged(bool isDisplayed, bool propagate = true);
 
     /// Emitted when the current tab changed
     void tabOpen(bool canSave, bool canExport, bool canClose);

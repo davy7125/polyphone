@@ -40,6 +40,10 @@
 // In synthcore.h: frames computed at once if no other maximum is given (setMaxBlockSize)
 #define DEFAULT_MAX_BLOCK_SIZE 4096
 
+// In synthcore.h and voicelist.h: channels of the voices, from -1 (editor) to MAX_CHANNEL (the editor plays the MIDI
+// files on the channels 16 to 31)
+#define MAX_CHANNEL 31
+
 // In syntheffects.h: the reverb stops after a silent input and an output under -140 dBFS during more frames than its
 // longest delays (also at 192 kHz)
 #define REVERB_IDLE_LEVEL 0.0000001f

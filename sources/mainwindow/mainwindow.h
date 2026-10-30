@@ -34,6 +34,7 @@ class MainWindow;
 class TabManager;
 class DialogKeyboard;
 class DialogRecorder;
+class DialogMidiPlayer;
 
 class MainWindow : public QWidget
 {
@@ -65,6 +66,7 @@ private slots:
     void onAboutClicked();
     void onKeyboardDisplayChange(bool isDisplayed, bool propagate);
     void onRecorderDisplayChange(bool isDisplayed, bool propagate);
+    void onMidiPlayerDisplayChange(bool isDisplayed, bool propagate);
     void fullScreenTriggered();
     void onCloseTab();
     void onFirstTab();
@@ -84,6 +86,7 @@ private:
     TabManager * _tabManager;
     DialogKeyboard * _keyboard;
     DialogRecorder * _recorder;
+    DialogMidiPlayer * _midiPlayer;
     DialogAbout _dialogAbout;
     Qt::Edges _mousePositionEdges;
 };
