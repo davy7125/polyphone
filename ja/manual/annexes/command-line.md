@@ -1,4 +1,4 @@
-Polyphoneをコマンドラインで実行して、SoundFontを[sf2](#doc_sf2)、[sf3](#doc_sf3)、[sfz](#doc_sfz)、[csv](#doc_csv)のいずれかの形式に変換できます。変換に対応しているファイル形式は、[sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2)、[sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3)、[sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz)、[sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark)、[organ](manual/annexes/the-different-soundfont-formats.md#doc_organ)です。
+Polyphoneをコマンドラインで実行して、SoundFontを[sf2](#doc_sf2)、[sf3](#doc_sf3)、[sfz](#doc_sfz)、[csv](#doc_csv)、[dls](#doc_dls)のいずれかの形式に変換できます。変換に対応しているファイル形式は、[sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2)、[sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3)、[sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz)、[dls](manual/annexes/the-different-soundfont-formats.md#doc_dls)、[sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark)、[organ](manual/annexes/the-different-soundfont-formats.md#doc_organ)です。
 
 Polyphoneを[シンセモード](#doc_synth)で開くためのオプションもあります。
 
@@ -6,7 +6,7 @@ Polyphoneを[シンセモード](#doc_synth)で開くためのオプションも
 また、設定をリセットしたりヘルプを表示したりするための[その他のオプション](#doc_other)もいくつかあります。
 
 変換時には、読み込みと書き込みの状況がコンソールに出力されます。
-変換に成功した場合の戻り値は0で、失敗した場合（入力ファイルが存在しない、ファイルを読み書きできない、sf2形式とsf3形式で出力ファイルがすでに存在する、など）はそれ以外の値になります。
+変換に成功した場合の戻り値は0で、失敗した場合（入力ファイルが存在しない、ファイルを読み書きできない、sf2形式、sf3形式、dls形式で出力ファイルがすでに存在する、など）はそれ以外の値になります。
 
 
 ## sf2への変換 {#doc_sf2}
@@ -171,6 +171,44 @@ polyphone -4 -i /path/to/file.sf2 -c 'raw'
 ```
 
 変換すると、ファイル :file:`samples.csv` と、インストゥルメントごと・プリセットごとに1つずつのファイルを含むディレクトリ（出力名と同じ名前）が作成されます。このディレクトリがすでに存在する場合は、名前に番号が付けられます。
+
+
+## dlsへの変換 {#doc_dls}
+
+
+### コマンドライン
+
+
+```
+polyphone -6 -i <file/to/convert> -d <output/directory> -o <output_file_name>
+```
+
+**注意：**Windowsでは、:command:`polyphone` だけでなく、Polyphoneのフルパスを書く必要があります。たとえば :command:`C:/Program files/Polyphone/polyphone.exe` です。
+
+
+### 引数
+
+
+-6
+: モード「6」は「dlsに変換」です。
+
+-d
+: 入力ファイルの変換先となる出力ディレクトリです。
+  この引数は省略可能で、省略した場合は入力ファイルと同じディレクトリになります。
+
+-o
+: 変換後のファイルの出力名（拡張子なし）です。拡張子「.dls」は自動的に付けられます。
+  この引数は省略可能で、省略した場合は入力ファイルと同じ名前になります。
+
+
+### 例
+
+
+```
+polyphone -6 -i /path/to/file.sf2
+```
+
+ファイルはDLSレベル2形式で書き込まれます。変換の制限については[こちら](manual/annexes/the-different-soundfont-formats.md#doc_dls)で説明しています。
 
 
 ## シンセモード {#doc_synth}

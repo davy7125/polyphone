@@ -1,4 +1,4 @@
-可以通过命令行运行 Polyphone，将音色库转换为 [sf2](#doc_sf2)、[sf3](#doc_sf3)、[sfz](#doc_sfz) 或 [csv](#doc_csv) 格式。转换支持的文件格式有 [sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2)、[sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3)、[sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz)、[sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark) 和 [organ](manual/annexes/the-different-soundfont-formats.md#doc_organ)。
+可以通过命令行运行 Polyphone，将音色库转换为 [sf2](#doc_sf2)、[sf3](#doc_sf3)、[sfz](#doc_sfz)、[csv](#doc_csv) 或 [dls](#doc_dls) 格式。转换支持的文件格式有 [sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2)、[sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3)、[sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz)、[dls](manual/annexes/the-different-soundfont-formats.md#doc_dls)、[sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark) 和 [organ](manual/annexes/the-different-soundfont-formats.md#doc_organ)。
 
 还可以使用一个选项以[合成器模式](#doc_synth)打开 Polyphone。
 
@@ -6,7 +6,7 @@
 另外还有一些[其他选项](#doc_other)，用于重置配置或显示帮助。
 
 转换时，加载和写入过程会记录在控制台中。
-如果转换成功，返回码为 0；如果失败（输入文件不存在、文件无法读取或写入、sf2 和 sf3 格式的输出文件已存在等），则返回其他值。
+如果转换成功，返回码为 0；如果失败（输入文件不存在、文件无法读取或写入、sf2、sf3 和 dls 格式的输出文件已存在等），则返回其他值。
 
 
 ## 转换为 sf2 {#doc_sf2}
@@ -171,6 +171,44 @@ polyphone -4 -i /path/to/file.sf2 -c 'raw'
 ```
 
 转换时会创建一个目录（以输出名称命名），其中包含 :file:`samples.csv` 文件，以及每个乐器和每个预设各一个文件。如果该目录已存在，会在其名称后加上一个数字。
+
+
+## 转换为 dls {#doc_dls}
+
+
+### 命令行
+
+
+```
+polyphone -6 -i <file/to/convert> -d <output/directory> -o <output_file_name>
+```
+
+**注意：**在 Windows 上，需要写出 Polyphone 的完整路径，而不只是 :command:`polyphone`，例如 :command:`C:/Program files/Polyphone/polyphone.exe`。
+
+
+### 参数
+
+
+-6
+: 模式“6”表示“转换为 dls”。
+
+-d
+: 输入文件转换后的输出目录。
+  此参数是可选的，默认与输入文件位于同一目录。
+
+-o
+: 转换后文件的输出名称，不含扩展名（会自动添加扩展名“.dls”）。
+  此参数是可选的，默认与输入文件同名。
+
+
+### 示例
+
+
+```
+polyphone -6 -i /path/to/file.sf2
+```
+
+文件以 DLS 2 级格式写入，转换的限制见[这里](manual/annexes/the-different-soundfont-formats.md#doc_dls)。
 
 
 ## 合成器模式 {#doc_synth}

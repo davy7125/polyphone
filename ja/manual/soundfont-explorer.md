@@ -9,7 +9,7 @@ Polyphoneでは、[ホーム画面](manual/index.md#doc_left)の :guilabel:`デ�
 
 画面左側にあるメインリストにはファイルの一覧が表示され、Polyphoneはそれらを次のように区別します。
 
-* すばやくスキャンできる対応ファイル（たとえば[.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2)、[.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3)、[.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz)形式）は、内容の詳細とともに表示されます。
+* すばやくスキャンできる対応ファイル（たとえば[.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2)、[.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3)、[.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz)、[.dls](manual/annexes/the-different-soundfont-formats.md#doc_dls)形式）は、内容の詳細とともに表示されます。
 * すばやくスキャンできない対応ファイル（特に[.sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark)形式）は、基本的な情報だけが表示されます。
 * 対応していないファイルはグレー表示になり、開くことはできません。
 

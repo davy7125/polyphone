@@ -24,7 +24,7 @@ Polyphone 的第一个屏幕基本上由 3 部分组成：
 
 打开音色库有多种方式：
 
-* 单击 :guilabel:`打开音色库` 会打开文件浏览器，可选择扩展名为 :file:`.sf2`、:file:`.sf3`、:file:`.sfArk`、:file:`.sfz` 或 :file:`.organ` 的文件（不同格式的介绍见[这里](manual/annexes/the-different-soundfont-formats.md)）。可以一次选择多个文件；
+* 单击 :guilabel:`打开音色库` 会打开文件浏览器，可选择扩展名为 :file:`.sf2`、:file:`.sf3`、:file:`.sfArk`、:file:`.sfz`、:file:`.dls` 或 :file:`.organ` 的文件（不同格式的介绍见[这里](manual/annexes/the-different-soundfont-formats.md)）。可以一次选择多个文件；
 * 单击 :guilabel:`新音色库` 会打开一个空白音色库，一切都需要从零开始制作；
 * 单击 :guilabel:`打开目录` 会打开[音色库浏览器](manual/soundfont-explorer.md)，它会扫描整个目录，便于打开所需的文件；
 * 双击历史记录中的音色库可以重新打开它（选中的条目也可以按 :kbd:`Enter` 打开，按 :kbd:`Del` 从历史记录中移除）；

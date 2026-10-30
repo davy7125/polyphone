@@ -1,4 +1,4 @@
-Polyphone можно запускать из командной строки для преобразования SoundFont в формат [sf2](#doc_sf2), [sf3](#doc_sf3), [sfz](#doc_sfz) или [csv](#doc_csv). Для преобразования поддерживаются форматы файлов [sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz), [sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark) и [organ](manual/annexes/the-different-soundfont-formats.md#doc_organ).
+Polyphone можно запускать из командной строки для преобразования SoundFont в формат [sf2](#doc_sf2), [sf3](#doc_sf3), [sfz](#doc_sfz), [csv](#doc_csv) или [dls](#doc_dls). Для преобразования поддерживаются форматы файлов [sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz), [dls](manual/annexes/the-different-soundfont-formats.md#doc_dls), [sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark) и [organ](manual/annexes/the-different-soundfont-formats.md#doc_organ).
 
 Также можно указать параметр для открытия Polyphone в [режиме синтезатора](#doc_synth).
 
@@ -6,7 +6,7 @@ Polyphone можно запускать из командной строки д�
 Есть и несколько [других параметров](#doc_other) для сброса конфигурации или вывода справки.
 
 При преобразовании ход загрузки и записи выводится в консоль.
-Код возврата равен 0, если преобразование прошло успешно, и другому значению в случае ошибки (входной файл не существует, файл не удаётся прочитать или записать, для форматов sf2 и sf3 выходной файл уже существует и т. д.).
+Код возврата равен 0, если преобразование прошло успешно, и другому значению в случае ошибки (входной файл не существует, файл не удаётся прочитать или записать, для форматов sf2, sf3 и dls выходной файл уже существует и т. д.).
 
 
 ## Преобразование в sf2 {#doc_sf2}
@@ -171,6 +171,44 @@ polyphone -4 -i /path/to/file.sf2 -c 'raw'
 ```
 
 При преобразовании создаётся каталог (с именем выходного файла), содержащий файл :file:`samples.csv` и по одному файлу на каждый инструмент и пресет. Если такой каталог уже существует, к его имени добавляется число.
+
+
+## Преобразование в dls {#doc_dls}
+
+
+### Командная строка
+
+
+```
+polyphone -6 -i <file/to/convert> -d <output/directory> -o <output_file_name>
+```
+
+**Примечание:** в Windows вместо :command:`polyphone` нужно указать полный путь к Polyphone, например :command:`C:/Program files/Polyphone/polyphone.exe`.
+
+
+### Аргументы
+
+
+-6
+: Режим «6» означает «преобразовать в dls».
+
+-d
+: Выходной каталог, в который будет преобразован входной файл.
+  Этот аргумент необязателен; по умолчанию используется каталог входного файла.
+
+-o
+: Имя преобразованного файла без расширения (расширение «.dls» добавляется автоматически).
+  Этот аргумент необязателен; по умолчанию используется имя входного файла.
+
+
+### Пример
+
+
+```
+polyphone -6 -i /path/to/file.sf2
+```
+
+Файл записывается в формате DLS уровня 2; ограничения преобразования описаны [здесь](manual/annexes/the-different-soundfont-formats.md#doc_dls).
 
 
 ## Режим синтезатора {#doc_synth}

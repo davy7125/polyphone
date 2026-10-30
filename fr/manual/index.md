@@ -24,7 +24,7 @@ Si vous avez besoin de plus d'aide, ou si la lecture de ces pages vous rebute, v
 
 Plusieurs manières d'ouvrir une banque de sons&nbsp;:
 
-* un clic sur :guilabel:`Ouvrir banque de sons` ouvre un navigateur de fichiers, les fichiers sélectionnables ayant l'extension :file:`.sf2`, :file:`.sf3`, :file:`.sfArk`, :file:`.sfz` ou :file:`.organ` (les différents formats sont décrits [ici](manual/annexes/the-different-soundfont-formats.md)). Plusieurs fichiers peuvent être sélectionnés en une seule fois&nbsp;;
+* un clic sur :guilabel:`Ouvrir banque de sons` ouvre un navigateur de fichiers, les fichiers sélectionnables ayant l'extension :file:`.sf2`, :file:`.sf3`, :file:`.sfArk`, :file:`.sfz`, :file:`.dls` ou :file:`.organ` (les différents formats sont décrits [ici](manual/annexes/the-different-soundfont-formats.md)). Plusieurs fichiers peuvent être sélectionnés en une seule fois&nbsp;;
 * un clic sur :guilabel:`Nouvelle banque de sons` ouvre une banque de sons vide, tout devant être fait à partir de zéro&nbsp;;
 * un clic sur :guilabel:`Ouvrir répertoire` ouvre l'[explorateur de banques de sons](manual/soundfont-explorer.md) qui scanne tout un répertoire et permet d'ouvrir le fichier souhaité&nbsp;;
 * un double-clic sur une banque de sons de l'historique la rouvre (les éléments sélectionnés peuvent aussi être ouverts avec :kbd:`Entrée` et retirés de l'historique avec :kbd:`Suppr`)&nbsp;;

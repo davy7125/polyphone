@@ -9,7 +9,7 @@ Con Polyphone, se puede abrir un directorio desde la [pantalla de inicio](manual
 
 La lista principal, situada en el lado izquierdo de la interfaz, contiene la lista de archivos, y Polyphone los distingue de la siguiente manera:
 
-* los archivos compatibles que se pueden analizar rápidamente (formatos [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3) y [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz), por ejemplo) se muestran con detalles sobre su contenido,
+* los archivos compatibles que se pueden analizar rápidamente (formatos [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz) y [.dls](manual/annexes/the-different-soundfont-formats.md#doc_dls), por ejemplo) se muestran con detalles sobre su contenido,
 * los archivos compatibles que no se pueden analizar rápidamente (formato [.sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark), en particular) se muestran solo con información básica,
 * los archivos no compatibles aparecen en gris y no se pueden abrir.
 

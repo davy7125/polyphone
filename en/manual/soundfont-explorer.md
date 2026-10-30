@@ -9,7 +9,7 @@ With Polyphone, it is possible to open a directory from the [home screen](manual
 
 The main list, located on the left side of the interface, contains the list of files, and Polyphone distinguishes them as follows:
 
-* compatible files that can be scanned quickly ([.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3) and [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz) formats, for example) are displayed with details about their content,
+* compatible files that can be scanned quickly ([.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz) and [.dls](manual/annexes/the-different-soundfont-formats.md#doc_dls) formats, for example) are displayed with details about their content,
 * compatible files that cannot be scanned quickly ([.sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark) format, in particular) are displayed with basic information only,
 * files that are not compatible are grayed out and cannot be opened.
 

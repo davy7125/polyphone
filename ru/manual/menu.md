@@ -12,7 +12,7 @@
   Также доступно по сочетанию :kbd:`Ctrl`+:kbd:`N`.
 
 Открыть…
-: Открывает файл [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz), [.sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark) или [.organ](manual/annexes/the-different-soundfont-formats.md#doc_organ).
+: Открывает файл [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz), [.dls](manual/annexes/the-different-soundfont-formats.md#doc_dls), [.sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark) или [.organ](manual/annexes/the-different-soundfont-formats.md#doc_organ).
   Также доступно по сочетанию :kbd:`Ctrl`+:kbd:`O`.
 
 
@@ -28,7 +28,7 @@
   Также доступно по сочетанию :kbd:`Ctrl`+:kbd:`Shift`+:kbd:`S`.
 
 Экспортировать SoundFont…
-: Объединяет и экспортирует один или несколько пресетов из открытых SoundFont в формате [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3) или [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz). Дополнительный формат .csv экспортирует все параметры для подробного анализа содержимого SoundFont.
+: Объединяет и экспортирует один или несколько пресетов из открытых SoundFont в формате [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz) или [.dls](manual/annexes/the-different-soundfont-formats.md#doc_dls). Дополнительный формат .csv экспортирует все параметры для подробного анализа содержимого SoundFont.
   Также доступно по сочетанию :kbd:`Ctrl`+:kbd:`E`.
 
 
@@ -43,7 +43,7 @@
   Файл никогда не перезаписывается: если файл с таким именем уже существует, к имени нового файла добавляется число.
 
 Формат
-: Один из форматов :guilabel:`.sf2`, :guilabel:`.sf3`, :guilabel:`.sfz` или :guilabel:`.csv`.
+: Один из форматов :guilabel:`.sf2`, :guilabel:`.sf3`, :guilabel:`.sfz`, :guilabel:`.csv` или :guilabel:`.dls`.
   Если пресеты взяты из нескольких SoundFont, они объединяются в один SoundFont, в котором каждый исходный SoundFont становится банком.
   Поэтому одновременно можно экспортировать не более 127 SoundFont, в каждом из которых выбрано не более 127 пресетов.
 
@@ -51,7 +51,7 @@
 : Только для формата .sf3 — качество сжатия семплов.
 
 Один файл на пресет
-: Только для форматов .sf2 и .sf3 — создание отдельного файла для каждого выбранного пресета вместо одного общего файла.
+: Только для форматов .sf2, .sf3 и .dls — создание отдельного файла для каждого выбранного пресета вместо одного общего файла.
 
 Один каталог на банк, номер пресета в качестве префикса, классификация General MIDI
 : Только для формата .sfz. При экспорте создаётся каталог с файлами sfz и подкаталогом :file:`samples`.

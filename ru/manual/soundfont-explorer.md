@@ -9,7 +9,7 @@
 
 Основной список в левой части интерфейса содержит перечень файлов, которые Polyphone разделяет следующим образом:
 
-* совместимые файлы, которые можно быстро просканировать (например, в форматах [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3) и [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz)), отображаются с подробностями об их содержимом,
+* совместимые файлы, которые можно быстро просканировать (например, в форматах [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz) и [.dls](manual/annexes/the-different-soundfont-formats.md#doc_dls)), отображаются с подробностями об их содержимом,
 * совместимые файлы, которые нельзя быстро просканировать (в частности, в формате [.sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark)), отображаются только с основной информацией,
 * несовместимые файлы выделены серым и не могут быть открыты.
 

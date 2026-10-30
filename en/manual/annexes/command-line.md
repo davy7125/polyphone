@@ -1,4 +1,4 @@
-Polyphone can be run with a command line to convert soundfonts in the format [sf2](#doc_sf2), [sf3](#doc_sf3), [sfz](#doc_sfz) or [csv](#doc_csv). Supported file formats for the conversion are [sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz), [sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark), and [organ](manual/annexes/the-different-soundfont-formats.md#doc_organ).
+Polyphone can be run with a command line to convert soundfonts in the format [sf2](#doc_sf2), [sf3](#doc_sf3), [sfz](#doc_sfz), [csv](#doc_csv) or [dls](#doc_dls). Supported file formats for the conversion are [sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz), [dls](manual/annexes/the-different-soundfont-formats.md#doc_dls), [sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark), and [organ](manual/annexes/the-different-soundfont-formats.md#doc_organ).
 
 An option can also be called for opening Polyphone in [synth mode](#doc_synth).
 
@@ -6,7 +6,7 @@ Files and directories can also be passed as arguments for opening them in the gr
 A few [other options](#doc_other) are available for resetting the configuration or for displaying the help.
 
 In a conversion, the loading and the writing are logged in the console.
-The returned code is 0 if the conversion succeeded, and another value in case of failure (the input file does not exist, the file cannot be read or written, an output file already exists for the formats sf2 and sf3, etc.).
+The returned code is 0 if the conversion succeeded, and another value in case of failure (the input file does not exist, the file cannot be read or written, an output file already exists for the formats sf2, sf3 and dls, etc.).
 
 
 ## Conversion to sf2 {#doc_sf2}
@@ -171,6 +171,44 @@ polyphone -4 -i /path/to/file.sf2 -c 'raw'
 ```
 
 The conversion creates a directory (named after the output name) containing the file :file:`samples.csv` and one file per instrument and per preset. If this directory already exists, a number is added to its name.
+
+
+## Conversion to dls {#doc_dls}
+
+
+### Command line
+
+
+```
+polyphone -6 -i <file/to/convert> -d <output/directory> -o <output_file_name>
+```
+
+**Note:** with Windows you need to write the full path of Polyphone instead of just :command:`polyphone`, which is for example :command:`C:/Program files/Polyphone/polyphone.exe`.
+
+
+### Arguments
+
+
+-6
+: Mode “6” is “convert to dls”.
+
+-d
+: Output directory in which the input file will be converted.
+  This argument is optional, by default this is the same directory as the input file.
+
+-o
+: Output name of the converted file without the extension (the extension “.dls” will be automatically added).
+  This argument is optional, by default this is the same name as the input file.
+
+
+### Example
+
+
+```
+polyphone -6 -i /path/to/file.sf2
+```
+
+The file is written in the DLS level 2 format, the limitations of the conversion being described [here](manual/annexes/the-different-soundfont-formats.md#doc_dls).
 
 
 ## Synth mode {#doc_synth}

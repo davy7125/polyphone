@@ -3,6 +3,7 @@ Polyphone prend en charge plusieurs formats de banques de sons&nbsp;:
 * [sf2](#doc_sf2),
 * [sf3](#doc_sf3),
 * [sfz](#doc_sfz),
+* [dls](#doc_dls),
 * [sfArk](#doc_sfark),
 * [organ](#doc_organ).
 
@@ -86,6 +87,55 @@ Il peut cependant subsister quelques différences.
 
 Par ailleurs, la manière dont les paramètres varient selon la note (via :guilabel:`Note → Vol env maintien / déclin` et :guilabel:`Note → Mod env maintien / déclin`) n'a pas d'équivalent exact.
 Le format sf2 utilise une loi exponentielle pour définir la durée des phases de maintien et de déclin en fonction de la note, alors que le format sfz utilise une loi linéaire.
+
+
+## Fichiers DLS {#doc_dls}
+
+
+Le format DLS (DownLoadable Sounds), publié par la MIDI Manufacturers Association, a le même but que le format sf2&nbsp;: un fichier unique contient des échantillons et les paramètres nécessaires pour les jouer comme des instruments de musique.
+Il existe en deux niveaux&nbsp;: DLS niveau 1 (1997) et DLS niveau 2 (dont la dernière version est la 2.2).
+Les fichiers DLS ont été utilisés par le synthétiseur logiciel de Windows (le fichier :file:`gm.dls`), par DirectMusic, par des jeux vidéo et par des téléphones mobiles.
+
+La structure diffère de celle du format sf2&nbsp;: un fichier DLS contient des ondes (les échantillons) et des instruments, chaque instrument ayant une banque et un numéro de programme comme un ensemble.
+Un instrument est constitué de régions, chacune jouant une onde sur une étendue de notes et de vélocités.
+Les paramètres (enveloppes, LFO, filtre, modulations…) sont écrits sous la forme de connexions entre une source (par exemple un contrôleur MIDI ou un LFO), un contrôle optionnel et une destination.
+Ils peuvent être définis pour l'instrument entier ou pour une seule région, les paramètres d'une région remplaçant alors ceux de l'instrument.
+
+Polyphone importe les fichiers DLS des deux niveaux (fichiers .dls uniquement, les banques DLS intégrées dans des fichiers .rmi ou .xmf ne sont pas prises en charge) et [exporte](manual/menu.md#doc_save) les banques de sons au format DLS niveau 2.2.
+Un fichier DLS importé n'est pas modifié lorsque la banque de sons est enregistrée&nbsp;: la banque de sons est enregistrée au format sf2.
+
+
+### Limitations sur l'importation DLS
+
+
+* Certains paramètres n'ont pas d'équivalent dans le format sf2 et sont ignorés&nbsp;: la durée d'extinction de l'enveloppe de volume, les sorties autres que la balance stéréo (canaux central, arrière et LFE), le LFO de vibrato appliqué au volume ou au filtre, et l'enveloppe de modulation appliquée au volume.
+* Une note jouée à nouveau arrête la précédente dans un synthétiseur DLS, alors que les deux notes sont entendues dans un synthétiseur sf2.
+* Seul le MSB de la banque (CC0) est conservé, ou le LSB de la banque (CC32) si le MSB vaut 0. Si plusieurs instruments ont la même banque et le même numéro de programme, le numéro de programme de l'un d'eux est modifié.
+
+
+### Limitations sur l'exportation DLS
+
+
+* Un synthétiseur DLS niveau 1 joue les échantillons mais ignore les enveloppes, les LFO, le filtre et les modulations.
+* Les échantillons 24 bits sont arrondis à 16 bits.
+* Ne sont pas exportés&nbsp;:
+  les paramètres :guilabel:`Note fixe` et :guilabel:`Vélocité fixe`,
+  les divisions utilisant la [lecture en boucle](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table) «&nbsp;relâche&nbsp;»,
+  les modulateurs avec la transformation «&nbsp;valeur absolue&nbsp;» ou liés à d'autres modulateurs,
+  les modulateurs d'un paramètre qui n'existe pas dans le format DLS (offsets des échantillons, note vers maintien ou déclin des enveloppes…),
+  les modulateurs modifiant la profondeur d'un LFO ou de l'enveloppe de modulation avec 2 sources.
+* Deux modulateurs ayant les mêmes sources et la même destination mais des courbes différentes sont fusionnés.
+* Seules 15 classes exclusives par ensemble peuvent être exportées.
+* Le :guilabel:`Réglage de tonalité` et les modulations provenant de contrôleurs MIDI autres que CC1, CC7, CC10, CC11, CC91 et CC93 peuvent être ignorés par certains synthétiseurs DLS.
+
+
+### En général
+
+
+Les modulations par défaut des formats sf2 et DLS sont différentes (vélocité vers fréquence de coupure du filtre, vibrato avec la molette de modulation et la pression de canal, niveaux de réverbération et de chorus)&nbsp;: des modulateurs sont ajoutés lors des conversions pour que le son reste le même.
+
+Les conversions ont été testées en comparant les rendus des fichiers d'origine et des fichiers convertis, ainsi qu'avec <a href="https://github.com/spessasus/spessasynth_core" target="_blank">SpessaSynth</a>, qui lit et écrit les fichiers DLS.
+Peu de synthétiseurs prenant en charge le format DLS niveau 2, la manière dont certains paramètres sont joués peut différer d'un synthétiseur à l'autre.
 
 
 ## Archives sfArk {#doc_sfark}

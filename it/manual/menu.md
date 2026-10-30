@@ -12,7 +12,7 @@ Nuovo
   Accessibile anche con la scorciatoia :kbd:`Ctrl`+:kbd:`N`.
 
 Apri…
-: Apre un file [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz), [.sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark) o [.organ](manual/annexes/the-different-soundfont-formats.md#doc_organ).
+: Apre un file [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz), [.dls](manual/annexes/the-different-soundfont-formats.md#doc_dls), [.sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark) o [.organ](manual/annexes/the-different-soundfont-formats.md#doc_organ).
   Accessibile anche con la scorciatoia :kbd:`Ctrl`+:kbd:`O`.
 
 
@@ -28,7 +28,7 @@ Salva con nome…
   Accessibile anche con la scorciatoia :kbd:`Ctrl`+:kbd:`Shift`+:kbd:`S`.
 
 Esporta soundfont…
-: Unisce ed esporta uno o più preset dei soundfont aperti nel formato [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3) o [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz). Il formato aggiuntivo .csv esporta tutti i parametri per un'analisi dettagliata del contenuto del soundfont.
+: Unisce ed esporta uno o più preset dei soundfont aperti nel formato [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz) o [.dls](manual/annexes/the-different-soundfont-formats.md#doc_dls). Il formato aggiuntivo .csv esporta tutti i parametri per un'analisi dettagliata del contenuto del soundfont.
   Accessibile anche con la scorciatoia :kbd:`Ctrl`+:kbd:`E`.
 
 
@@ -43,7 +43,7 @@ Destinazione
   Un file non viene mai sovrascritto: se esiste già un file con lo stesso nome, alla fine del nome del nuovo file viene aggiunto un numero.
 
 Formato
-: Uno tra :guilabel:`.sf2`, :guilabel:`.sf3`, :guilabel:`.sfz` e :guilabel:`.csv`.
+: Uno tra :guilabel:`.sf2`, :guilabel:`.sf3`, :guilabel:`.sfz`, :guilabel:`.csv` e :guilabel:`.dls`.
   Se i preset provengono da più soundfont, vengono uniti in un unico soundfont in cui ogni soundfont di origine diventa un banco.
   Per questo motivo si possono esportare contemporaneamente al massimo 127 soundfont, ciascuno con al massimo 127 preset selezionati.
 
@@ -51,7 +51,7 @@ Qualità
 : Solo per il formato .sf3, qualità della compressione dei campioni.
 
 Un file per preset
-: Solo per i formati .sf2 e .sf3, creazione di un file per ogni preset selezionato invece di un unico file.
+: Solo per i formati .sf2, .sf3 e .dls, creazione di un file per ogni preset selezionato invece di un unico file.
 
 Una directory per banco, numero preset come prefisso, classificazione General MIDI
 : Solo per il formato .sfz. L'esportazione crea una cartella contenente i file sfz e una sottocartella :file:`samples`.

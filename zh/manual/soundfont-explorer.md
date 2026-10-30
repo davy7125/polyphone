@@ -9,7 +9,7 @@
 
 主列表位于界面左侧，包含文件列表，Polyphone 会按以下方式区分这些文件：
 
-* 可以快速扫描的兼容文件（例如 [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2)、[.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3) 和 [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz) 格式）会显示其内容的详细信息，
+* 可以快速扫描的兼容文件（例如 [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2)、[.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3)、[.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz) 和 [.dls](manual/annexes/the-different-soundfont-formats.md#doc_dls) 格式）会显示其内容的详细信息，
 * 无法快速扫描的兼容文件（尤其是 [.sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark) 格式）只显示基本信息，
 * 不兼容的文件显示为灰色，无法打开。
 

@@ -9,7 +9,7 @@ Mit Polyphone kann über den Button :guilabel:`Verzeichnis öffnen` auf dem [Sta
 
 Die Hauptliste auf der linken Seite der Oberfläche enthält die Liste der Dateien, die Polyphone wie folgt unterscheidet:
 
-* kompatible Dateien, die schnell durchsucht werden können (zum Beispiel in den Formaten [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3) und [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz)), werden mit Details zu ihrem Inhalt angezeigt,
+* kompatible Dateien, die schnell durchsucht werden können (zum Beispiel in den Formaten [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz) und [.dls](manual/annexes/the-different-soundfont-formats.md#doc_dls)), werden mit Details zu ihrem Inhalt angezeigt,
 * kompatible Dateien, die nicht schnell durchsucht werden können (insbesondere im Format [.sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark)), werden nur mit grundlegenden Informationen angezeigt,
 * nicht kompatible Dateien sind ausgegraut und können nicht geöffnet werden.
 

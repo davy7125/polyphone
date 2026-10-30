@@ -12,7 +12,7 @@
   也可以使用快捷键 :kbd:`Ctrl`+:kbd:`N`。
 
 打开…
-: 打开 [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2)、[.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3)、[.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz)、[.sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark) 或 [.organ](manual/annexes/the-different-soundfont-formats.md#doc_organ) 文件。
+: 打开 [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2)、[.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3)、[.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz)、[.dls](manual/annexes/the-different-soundfont-formats.md#doc_dls)、[.sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark) 或 [.organ](manual/annexes/the-different-soundfont-formats.md#doc_organ) 文件。
   也可以使用快捷键 :kbd:`Ctrl`+:kbd:`O`。
 
 
@@ -28,7 +28,7 @@
   也可以使用快捷键 :kbd:`Ctrl`+:kbd:`Shift`+:kbd:`S`。
 
 导出音色库…
-: 将已打开音色库中的一个或多个预设合并，并以 [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2)、[.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3) 或 [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz) 格式导出。另外的 .csv 格式会导出所有参数，以便详细分析音色库的内容。
+: 将已打开音色库中的一个或多个预设合并，并以 [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2)、[.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3)、[.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz) 或 [.dls](manual/annexes/the-different-soundfont-formats.md#doc_dls) 格式导出。另外的 .csv 格式会导出所有参数，以便详细分析音色库的内容。
   也可以使用快捷键 :kbd:`Ctrl`+:kbd:`E`。
 
 
@@ -43,7 +43,7 @@
   文件永远不会被覆盖：如果已存在同名文件，会在新文件名的末尾加上一个数字。
 
 格式
-: :guilabel:`.sf2`、:guilabel:`.sf3`、:guilabel:`.sfz` 或 :guilabel:`.csv` 之一。
+: :guilabel:`.sf2`、:guilabel:`.sf3`、:guilabel:`.sfz`、:guilabel:`.csv` 或 :guilabel:`.dls` 之一。
   如果预设来自多个音色库，它们会被合并到一个音色库中，每个源音色库成为其中的一个库。
   因此，同一次最多可以导出 127 个音色库，每个音色库最多选择 127 个预设。
 
@@ -51,7 +51,7 @@
 : 仅适用于 .sf3 格式，指采样的压缩质量。
 
 每个预设一个文件
-: 仅适用于 .sf2 和 .sf3 格式，为每个选中的预设分别创建一个文件，而不是生成单个文件。
+: 仅适用于 .sf2、.sf3 和 .dls 格式，为每个选中的预设分别创建一个文件，而不是生成单个文件。
 
 每个库一个目录、预设编号作为前缀、通用MIDI分类
 : 仅适用于 .sfz 格式。导出时会创建一个目录，其中包含 sfz 文件和一个 :file:`samples` 子目录。

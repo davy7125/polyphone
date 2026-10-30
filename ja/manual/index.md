@@ -24,7 +24,7 @@ Polyphoneの最初の画面は、基本的に3つの部分で構成されてい�
 
 SoundFontを開く方法はいくつかあります。
 
-* :guilabel:`SoundFontを開く` をクリックするとファイルブラウザーが開き、拡張子が :file:`.sf2`、:file:`.sf3`、:file:`.sfArk`、:file:`.sfz`、:file:`.organ` のファイルを選択できます（各形式については[こちら](manual/annexes/the-different-soundfont-formats.md)で説明しています）。一度に複数のファイルを選択できます。
+* :guilabel:`SoundFontを開く` をクリックするとファイルブラウザーが開き、拡張子が :file:`.sf2`、:file:`.sf3`、:file:`.sfArk`、:file:`.sfz`、:file:`.dls`、:file:`.organ` のファイルを選択できます（各形式については[こちら](manual/annexes/the-different-soundfont-formats.md)で説明しています）。一度に複数のファイルを選択できます。
 * :guilabel:`新規 SoundFont` をクリックすると空のSoundFontが開き、すべてを一から作成することになります。
 * :guilabel:`ディレクトリを開く` をクリックすると[SoundFontエクスプローラー](manual/soundfont-explorer.md)が開き、ディレクトリ全体をスキャンして目的のファイルを開けます。
 * 履歴内のSoundFontをダブルクリックすると、そのSoundFontが再び開きます（選択した項目は :kbd:`Enter` でも開け、:kbd:`Del` で履歴から削除できます）。

@@ -3,6 +3,7 @@ O Polyphone suporta vários formatos de soundfont:
 * [sf2](#doc_sf2),
 * [sf3](#doc_sf3),
 * [sfz](#doc_sfz),
+* [dls](#doc_dls),
 * [sfArk](#doc_sfark),
 * [organ](#doc_organ).
 
@@ -86,6 +87,55 @@ Podem, no entanto, permanecer algumas diferenças.
 
 Além disso, a maneira como os parâmetros variam de acordo com a nota (por meio de :guilabel:`Nota → Vol env hold / decay` e :guilabel:`Nota → Mod env hold / decay`) não tem correspondência exata.
 O formato sf2 usa uma lei exponencial para definir as durações de decay e de hold em função da nota, enquanto o formato sfz usa uma lei linear.
+
+
+## Arquivos DLS {#doc_dls}
+
+
+O formato DLS (DownLoadable Sounds), publicado pela MIDI Manufacturers Association, tem o mesmo objetivo que o formato sf2: um único arquivo contém amostras e os parâmetros necessários para tocá-las como instrumentos musicais.
+Ele existe em dois níveis: DLS nível 1 (1997) e DLS nível 2 (cuja versão mais recente é a 2.2).
+Os arquivos DLS foram usados pelo sintetizador de software do Windows (o arquivo :file:`gm.dls`), pelo DirectMusic, por videogames e por telefones celulares.
+
+A estrutura é diferente da do formato sf2: um arquivo DLS contém ondas (as amostras) e instrumentos, cada instrumento tendo um banco e um número de programa, como uma predefinição.
+Um instrumento é composto de regiões, cada uma tocando uma onda em uma faixa de notas e de velocidades.
+Os parâmetros (envelopes, LFOs, filtro, modulações…) são escritos como conexões entre uma fonte (por exemplo, um controlador MIDI ou um LFO), um controle opcional e um destino.
+Eles podem ser definidos para o instrumento inteiro ou para uma única região; os parâmetros de uma região substituem então os do instrumento.
+
+O Polyphone importa arquivos DLS dos dois níveis (somente arquivos .dls; bancos DLS incorporados em arquivos .rmi ou .xmf não são suportados) e [exporta](manual/menu.md#doc_save) soundfonts no formato DLS nível 2.2.
+Um arquivo DLS importado não é modificado quando a soundfont é salva: a soundfont é salva no formato sf2.
+
+
+### Limitações da importação DLS
+
+
+* Alguns parâmetros não têm equivalente no formato sf2 e são ignorados: o tempo de desligamento do envelope de volume, as saídas além do balanço estéreo (canais central, traseiros e LFE), o LFO de vibrato aplicado ao volume ou ao filtro e o envelope de modulação aplicado ao volume.
+* Uma nota tocada novamente interrompe a anterior em um sintetizador DLS, enquanto em um sintetizador sf2 as duas notas são ouvidas.
+* Somente o MSB do banco (CC0) é mantido, ou o LSB do banco (CC32) se o MSB for 0. Se vários instrumentos tiverem o mesmo banco e o mesmo número de programa, o número de programa de um deles é alterado.
+
+
+### Limitações da exportação DLS
+
+
+* Um sintetizador DLS nível 1 toca as amostras, mas ignora os envelopes, os LFOs, o filtro e as modulações.
+* As amostras de 24 bits são arredondadas para 16 bits.
+* Não são exportados:
+  os parâmetros :guilabel:`Nota fixa` e :guilabel:`Velocidade fixa`,
+  as divisões que usam a [reprodução em loop](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table) “release”,
+  os moduladores com a transformação “valor absoluto” ou ligados a outros moduladores,
+  os moduladores de um parâmetro que não existe no formato DLS (offsets das amostras, nota → hold ou decay dos envelopes…),
+  os moduladores que alteram a profundidade de um LFO ou do envelope de modulação com 2 fontes.
+* Dois moduladores com as mesmas fontes e o mesmo destino, mas com curvas diferentes, são mesclados.
+* Somente 15 classes exclusivas por predefinição podem ser exportadas.
+* :guilabel:`Afinação (escala)` e as modulações de controladores MIDI diferentes de CC1, CC7, CC10, CC11, CC91 e CC93 podem ser ignoradas por alguns sintetizadores DLS.
+
+
+### Em geral
+
+
+As modulações padrão dos formatos sf2 e DLS são diferentes (velocidade para a frequência de corte do filtro, vibrato com a roda de modulação e a pressão de canal, níveis de reverberação e de chorus): moduladores são adicionados durante as conversões para que o som permaneça o mesmo.
+
+As conversões foram testadas comparando as renderizações dos arquivos originais e dos arquivos convertidos, e também com o <a href="https://github.com/spessasus/spessasynth_core" target="_blank">SpessaSynth</a>, que lê e grava arquivos DLS.
+Como poucos sintetizadores suportam o formato DLS nível 2, a forma como alguns parâmetros são tocados pode variar de um sintetizador para outro.
 
 
 ## Arquivos sfArk {#doc_sfark}

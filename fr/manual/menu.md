@@ -12,7 +12,7 @@ Nouveau
   Accessible également avec le raccourci clavier :kbd:`Ctrl`+:kbd:`N`.
 
 Ouvrir…
-: Ouvre un fichier [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz), [.sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark) ou [.organ](manual/annexes/the-different-soundfont-formats.md#doc_organ).
+: Ouvre un fichier [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz), [.dls](manual/annexes/the-different-soundfont-formats.md#doc_dls), [.sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark) ou [.organ](manual/annexes/the-different-soundfont-formats.md#doc_organ).
   Accessible également avec le raccourci clavier :kbd:`Ctrl`+:kbd:`O`.
 
 
@@ -28,7 +28,7 @@ Sauvegarder sous…
   Accessible également avec le raccourci clavier :kbd:`Ctrl`+:kbd:`Maj`+:kbd:`S`.
 
 Exporter banques de sons…
-: Fusionne et exporte un ou plusieurs ensembles depuis les banques de sons ouvertes dans le format [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3) ou [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz). Le format additionnel .csv exporte tous les paramètres pour une analyse fine du contenu de la banque de sons.
+: Fusionne et exporte un ou plusieurs ensembles depuis les banques de sons ouvertes dans le format [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz) ou [.dls](manual/annexes/the-different-soundfont-formats.md#doc_dls). Le format additionnel .csv exporte tous les paramètres pour une analyse fine du contenu de la banque de sons.
   Accessible également avec le raccourci clavier :kbd:`Ctrl`+:kbd:`E`.
 
 
@@ -43,7 +43,7 @@ Emplacement
   Un fichier n'est jamais écrasé&nbsp;: si un fichier de même nom existe déjà, un numéro est ajouté à la fin du nom du nouveau fichier.
 
 Format
-: L'un des formats :guilabel:`.sf2`, :guilabel:`.sf3`, :guilabel:`.sfz` ou :guilabel:`.csv`.
+: L'un des formats :guilabel:`.sf2`, :guilabel:`.sf3`, :guilabel:`.sfz`, :guilabel:`.csv` ou :guilabel:`.dls`.
   Si les ensembles proviennent de plusieurs banques de sons, ils sont fusionnés dans une seule banque de sons dans laquelle chaque banque de sons source devient une banque.
   C'est pourquoi un maximum de 127 banques de sons, chacune avec au plus 127 ensembles sélectionnés, peut être exporté en une seule fois.
 
@@ -51,7 +51,7 @@ Qualité
 : Pour le format .sf3 uniquement, qualité de la compression des échantillons.
 
 Un fichier par ensemble
-: Pour les formats .sf2 et .sf3 uniquement, création d'un fichier par ensemble sélectionné au lieu d'un fichier unique.
+: Pour les formats .sf2, .sf3 et .dls uniquement, création d'un fichier par ensemble sélectionné au lieu d'un fichier unique.
 
 Un répertoire par banque, numéro de l'ensemble en préfixe, classement général MIDI
 : Pour le format .sfz uniquement. L'export crée un répertoire contenant les fichiers sfz et un sous-répertoire :file:`samples`.

@@ -12,7 +12,7 @@
   ショートカット :kbd:`Ctrl`+:kbd:`N` でも実行できます。
 
 開く…
-: [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2)、[.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3)、[.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz)、[.sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark)、[.organ](manual/annexes/the-different-soundfont-formats.md#doc_organ)のいずれかのファイルを開きます。
+: [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2)、[.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3)、[.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz)、[.dls](manual/annexes/the-different-soundfont-formats.md#doc_dls)、[.sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark)、[.organ](manual/annexes/the-different-soundfont-formats.md#doc_organ)のいずれかのファイルを開きます。
   ショートカット :kbd:`Ctrl`+:kbd:`O` でも実行できます。
 
 
@@ -28,7 +28,7 @@
   ショートカット :kbd:`Ctrl`+:kbd:`Shift`+:kbd:`S` でも実行できます。
 
 SoundFontをエクスポート…
-: 開いているSoundFontから1つ以上のプリセットをまとめて、[.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2)、[.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3)、[.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz)のいずれかの形式でエクスポートします。追加の.csv形式では、SoundFontの内容を詳しく分析するために、すべてのパラメーターがエクスポートされます。
+: 開いているSoundFontから1つ以上のプリセットをまとめて、[.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2)、[.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3)、[.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz)、[.dls](manual/annexes/the-different-soundfont-formats.md#doc_dls)のいずれかの形式でエクスポートします。追加の.csv形式では、SoundFontの内容を詳しく分析するために、すべてのパラメーターがエクスポートされます。
   ショートカット :kbd:`Ctrl`+:kbd:`E` でも実行できます。
 
 
@@ -43,7 +43,7 @@ SoundFontをエクスポート…
   ファイルが上書きされることはありません。同じ名前のファイルがすでにある場合は、新しいファイルの名前の末尾に番号が付けられます。
 
 形式
-: :guilabel:`.sf2`、:guilabel:`.sf3`、:guilabel:`.sfz`、:guilabel:`.csv` のいずれかです。
+: :guilabel:`.sf2`、:guilabel:`.sf3`、:guilabel:`.sfz`、:guilabel:`.csv`、:guilabel:`.dls` のいずれかです。
   プリセットが複数のSoundFontから来ている場合、それらは1つのSoundFontにまとめられ、元の各SoundFontが1つのバンクになります。
   そのため、一度にエクスポートできるのは最大127個のSoundFontで、それぞれから選択できるプリセットは最大127個です。
 
@@ -51,7 +51,7 @@ SoundFontをエクスポート…
 : .sf3形式の場合のみ、サンプルの圧縮品質を指定します。
 
 プリセットごとに1つのファイル
-: .sf2形式と.sf3形式の場合のみ、1つのファイルにまとめるのではなく、選択したプリセットごとに1つのファイルを作成します。
+: .sf2形式、.sf3形式、.dls形式の場合のみ、1つのファイルにまとめるのではなく、選択したプリセットごとに1つのファイルを作成します。
 
 バンクごとに1つのディレクトリ、プリセット番号をプレフィックスとして、General MIDI分類
 : .sfz形式の場合のみ使えます。エクスポートすると、sfzファイルとサブディレクトリ :file:`samples` を含むディレクトリが作成されます。

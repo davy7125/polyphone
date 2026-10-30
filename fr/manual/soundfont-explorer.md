@@ -9,7 +9,7 @@ Avec Polyphone, il est possible d'ouvrir un répertoire depuis l'[écran d'accue
 
 La liste principale, située à gauche de l'interface, contient les fichiers et Polyphone les distingue ainsi&nbsp;:
 
-* les fichiers compatibles et pouvant être scannés rapidement (formats [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3) et [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz) par exemple) sont affichés avec des détails sur leur contenu,
+* les fichiers compatibles et pouvant être scannés rapidement (formats [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz) et [.dls](manual/annexes/the-different-soundfont-formats.md#doc_dls) par exemple) sont affichés avec des détails sur leur contenu,
 * les fichiers compatibles et ne pouvant pas être scannés rapidement (format [.sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark) notamment) sont affichés avec des informations basiques seulement,
 * les fichiers qui ne sont pas compatibles sont grisés et ne peuvent pas être ouverts.
 

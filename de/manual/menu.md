@@ -12,7 +12,7 @@ Neu
   Auch über die Tastenkombination :kbd:`Ctrl`+:kbd:`N` erreichbar.
 
 Öffnen…
-: Öffnet eine Datei im Format [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz), [.sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark) oder [.organ](manual/annexes/the-different-soundfont-formats.md#doc_organ).
+: Öffnet eine Datei im Format [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz), [.dls](manual/annexes/the-different-soundfont-formats.md#doc_dls), [.sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark) oder [.organ](manual/annexes/the-different-soundfont-formats.md#doc_organ).
   Auch über die Tastenkombination :kbd:`Ctrl`+:kbd:`O` erreichbar.
 
 
@@ -28,7 +28,7 @@ Speichern unter…
   Auch über die Tastenkombination :kbd:`Ctrl`+:kbd:`Shift`+:kbd:`S` erreichbar.
 
 Soundfonts exportieren…
-: Führt ein oder mehrere Presets aus den geöffneten Soundfonts zusammen und exportiert sie im Format [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3) oder [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz). Das zusätzliche .csv-Format exportiert alle Parameter für eine detaillierte Analyse des Soundfont-Inhalts.
+: Führt ein oder mehrere Presets aus den geöffneten Soundfonts zusammen und exportiert sie im Format [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz) oder [.dls](manual/annexes/the-different-soundfont-formats.md#doc_dls). Das zusätzliche .csv-Format exportiert alle Parameter für eine detaillierte Analyse des Soundfont-Inhalts.
   Auch über die Tastenkombination :kbd:`Ctrl`+:kbd:`E` erreichbar.
 
 
@@ -43,7 +43,7 @@ Ziel
   Eine Datei wird nie überschrieben: Existiert bereits eine Datei mit demselben Namen, wird am Ende des Namens der neuen Datei eine Zahl angehängt.
 
 Format
-: Eines der Formate :guilabel:`.sf2`, :guilabel:`.sf3`, :guilabel:`.sfz` oder :guilabel:`.csv`.
+: Eines der Formate :guilabel:`.sf2`, :guilabel:`.sf3`, :guilabel:`.sfz`, :guilabel:`.csv` oder :guilabel:`.dls`.
   Stammen die Presets aus mehreren Soundfonts, werden sie zu einem einzigen Soundfont zusammengeführt, in dem jeder Quell-Soundfont zu einer Bank wird.
   Deshalb können höchstens 127 Soundfonts mit jeweils höchstens 127 ausgewählten Presets gleichzeitig exportiert werden.
 
@@ -51,7 +51,7 @@ Qualität
 : Nur für das .sf3-Format: Qualität der Kompression der Samples.
 
 Eine Datei pro Preset
-: Nur für die Formate .sf2 und .sf3: Erstellung einer Datei pro ausgewähltem Preset statt einer einzigen Datei.
+: Nur für die Formate .sf2, .sf3 und .dls: Erstellung einer Datei pro ausgewähltem Preset statt einer einzigen Datei.
 
 Ein Ordner pro Bank, Presetnummer als Präfix, General-MIDI-Klassifikation
 : Nur für das .sfz-Format. Der Export erstellt ein Verzeichnis mit den sfz-Dateien und einem Unterverzeichnis :file:`samples`.
