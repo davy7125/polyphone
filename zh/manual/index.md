@@ -28,7 +28,7 @@ Polyphone 的第一个屏幕基本上由 3 部分组成：
 * 单击 :guilabel:`新音色库` 会打开一个空白音色库，一切都需要从零开始制作；
 * 单击 :guilabel:`打开目录` 会打开[音色库浏览器](manual/soundfont-explorer.md)，它会扫描整个目录，便于打开所需的文件；
 * 双击历史记录中的音色库可以重新打开它（选中的条目也可以按 :kbd:`Enter` 打开，按 :kbd:`Del` 从历史记录中移除）；
-* 将文件或目录拖放到历史记录区域即可将其打开。
+* 将文件或目录拖放到历史记录区域，或拖放到[标签栏](#doc_top)（无论当前处于哪个标签页），即可将其打开。
 
 打开音色库后，会出现一个新的标签页，其中包含一个[音色库编辑器](manual/soundfont-editor/index.md)。
 
@@ -81,10 +81,10 @@ Polyphone 的第一个屏幕基本上由 3 部分组成：
 * [在线仓库](manual/online-repository.md)，
 * 在线仓库中某个音色库的[描述](manual/online-repository.md#doc_description)。
 
-可以使用键盘快捷键在标签页之间切换：
+可以使用键盘快捷键或鼠标滚轮在标签页之间切换：
 
-* :kbd:`Ctrl`+:kbd:`Tab` 或 :kbd:`Ctrl`+:kbd:`PageDown`：转到下一个标签页（不包括主屏幕标签页），
-* :kbd:`Ctrl`+:kbd:`Shift`+:kbd:`Tab` 或 :kbd:`Ctrl`+:kbd:`PageUp`：转到上一个标签页（不包括主屏幕标签页），
+* :kbd:`Ctrl`+:kbd:`Tab`、:kbd:`Ctrl`+:kbd:`PageDown` 或在标签栏上按住 :kbd:`Shift` 向下滚动鼠标滚轮：转到下一个标签页（不包括主屏幕标签页），
+* :kbd:`Ctrl`+:kbd:`Shift`+:kbd:`Tab`、:kbd:`Ctrl`+:kbd:`PageUp` 或在标签栏上按住 :kbd:`Shift` 向上滚动鼠标滚轮：转到上一个标签页（不包括主屏幕标签页），
 * :kbd:`Ctrl`+:kbd:`Home` 和 :kbd:`Ctrl`+:kbd:`End`：转到第一个和最后一个标签页（不包括主屏幕标签页），
 * :kbd:`Ctrl`+:kbd:`W`：关闭当前标签页，
 * :kbd:`Ctrl`+:kbd:`H`：转到主屏幕。

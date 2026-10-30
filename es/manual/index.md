@@ -28,7 +28,7 @@ Hay varias formas de abrir un soundfont:
 * un clic en :guilabel:`Nuevo soundfont` abre un soundfont vacío, en el que hay que hacerlo todo desde cero;
 * un clic en :guilabel:`Abrir directorio` abre el [explorador de soundfonts](manual/soundfont-explorer.md), que analiza un directorio completo y permite abrir el archivo deseado;
 * un doble clic en un soundfont del historial lo vuelve a abrir (los elementos seleccionados también se pueden abrir con :kbd:`Enter` y quitar del historial con :kbd:`Del`);
-* un archivo o un directorio arrastrado y soltado sobre la zona del historial se abre.
+* un archivo o un directorio arrastrado y soltado sobre la zona del historial, o sobre la [barra de pestañas](#doc_top) sea cual sea la pestaña actual, se abre.
 
 Cuando se abre un soundfont, aparece una nueva pestaña con un [editor de soundfonts](manual/soundfont-editor/index.md) en su interior.
 
@@ -81,10 +81,10 @@ Las pestañas dan acceso rápido a:
 * el [repositorio en línea](manual/online-repository.md),
 * la [descripción de un soundfont](manual/online-repository.md#doc_description) del repositorio en línea.
 
-Se puede navegar entre las pestañas con atajos de teclado:
+Se puede navegar entre las pestañas con atajos de teclado o con la rueda del ratón:
 
-* :kbd:`Ctrl`+:kbd:`Tab` o :kbd:`Ctrl`+:kbd:`PageDown` para ir a la pestaña siguiente, sin contar la pestaña de la pantalla de inicio,
-* :kbd:`Ctrl`+:kbd:`Shift`+:kbd:`Tab` o :kbd:`Ctrl`+:kbd:`PageUp` para ir a la pestaña anterior, sin contar la pestaña de la pantalla de inicio,
+* :kbd:`Ctrl`+:kbd:`Tab`, :kbd:`Ctrl`+:kbd:`PageDown` o :kbd:`Shift`+rueda del ratón hacia abajo sobre la barra de pestañas para ir a la pestaña siguiente, sin contar la pestaña de la pantalla de inicio,
+* :kbd:`Ctrl`+:kbd:`Shift`+:kbd:`Tab`, :kbd:`Ctrl`+:kbd:`PageUp` o :kbd:`Shift`+rueda del ratón hacia arriba sobre la barra de pestañas para ir a la pestaña anterior, sin contar la pestaña de la pantalla de inicio,
 * :kbd:`Ctrl`+:kbd:`Home` y :kbd:`Ctrl`+:kbd:`End` para ir a la primera y a la última pestaña, sin contar la pestaña de la pantalla de inicio,
 * :kbd:`Ctrl`+:kbd:`W` para cerrar la pestaña actual,
 * :kbd:`Ctrl`+:kbd:`H` para ir a la pantalla de inicio.

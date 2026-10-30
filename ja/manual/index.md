@@ -28,7 +28,7 @@ SoundFontを開く方法はいくつかあります。
 * :guilabel:`新規 SoundFont` をクリックすると空のSoundFontが開き、すべてを一から作成することになります。
 * :guilabel:`ディレクトリを開く` をクリックすると[SoundFontエクスプローラー](manual/soundfont-explorer.md)が開き、ディレクトリ全体をスキャンして目的のファイルを開けます。
 * 履歴内のSoundFontをダブルクリックすると、そのSoundFontが再び開きます（選択した項目は :kbd:`Enter` でも開け、:kbd:`Del` で履歴から削除できます）。
-* ファイルやディレクトリを履歴エリアにドラッグ＆ドロップすると、それが開きます。
+* ファイルやディレクトリを履歴エリア、または（どのタブを表示していても）[タブバー](#doc_top)にドラッグ＆ドロップすると、それが開きます。
 
 SoundFontを開くと、[SoundFontエディター](manual/soundfont-editor/index.md)を含む新しいタブが表示されます。
 
@@ -81,10 +81,10 @@ SoundFontを開くと、[SoundFontエディター](manual/soundfont-editor/index
 * [オンラインリポジトリ](manual/online-repository.md)
 * オンラインリポジトリにある[SoundFontの説明](manual/online-repository.md#doc_description)
 
-タブ間の移動にはキーボードショートカットを使えます。
+タブ間の移動にはキーボードショートカットまたはマウスホイールを使えます。
 
-* :kbd:`Ctrl`+:kbd:`Tab` または :kbd:`Ctrl`+:kbd:`PageDown`：次のタブに移動します（ホーム画面のタブを除く）。
-* :kbd:`Ctrl`+:kbd:`Shift`+:kbd:`Tab` または :kbd:`Ctrl`+:kbd:`PageUp`：前のタブに移動します（ホーム画面のタブを除く）。
+* :kbd:`Ctrl`+:kbd:`Tab`、:kbd:`Ctrl`+:kbd:`PageDown`、またはタブバー上で :kbd:`Shift`+マウスホイールを下に回す：次のタブに移動します（ホーム画面のタブを除く）。
+* :kbd:`Ctrl`+:kbd:`Shift`+:kbd:`Tab`、:kbd:`Ctrl`+:kbd:`PageUp`、またはタブバー上で :kbd:`Shift`+マウスホイールを上に回す：前のタブに移動します（ホーム画面のタブを除く）。
 * :kbd:`Ctrl`+:kbd:`Home` と :kbd:`Ctrl`+:kbd:`End`：最初のタブと最後のタブに移動します（ホーム画面のタブを除く）。
 * :kbd:`Ctrl`+:kbd:`W`：現在のタブを閉じます。
 * :kbd:`Ctrl`+:kbd:`H`：ホーム画面に移動します。

@@ -28,7 +28,7 @@ Ci sono diversi modi per aprire un soundfont:
 * un clic su :guilabel:`Nuovo soundfont` apre un soundfont vuoto, in cui tutto deve essere creato da zero;
 * un clic su :guilabel:`Apri directory` apre l'[esploratore di soundfont](manual/soundfont-explorer.md), che analizza un'intera cartella e permette di aprire il file desiderato;
 * un doppio clic su un soundfont della cronologia lo riapre (gli elementi selezionati possono anche essere aperti con :kbd:`Enter` e rimossi dalla cronologia con :kbd:`Del`);
-* un file o una cartella trascinati nell'area della cronologia vengono aperti.
+* un file o una cartella trascinati nell'area della cronologia, oppure nella [barra delle schede](#doc_top) qualunque sia la scheda corrente, vengono aperti.
 
 Quando un soundfont è aperto, compare una nuova scheda che contiene un [editor di soundfont](manual/soundfont-editor/index.md).
 
@@ -81,10 +81,10 @@ Le schede permettono di passare rapidamente tra:
 * l'[archivio online](manual/online-repository.md),
 * la [descrizione di un soundfont](manual/online-repository.md#doc_description) dell'archivio online.
 
-Per spostarsi tra le schede si possono usare le scorciatoie da tastiera:
+Per spostarsi tra le schede si possono usare le scorciatoie da tastiera o la rotellina del mouse:
 
-* :kbd:`Ctrl`+:kbd:`Tab` o :kbd:`Ctrl`+:kbd:`PageDown` per passare alla scheda successiva, esclusa la scheda della schermata iniziale,
-* :kbd:`Ctrl`+:kbd:`Shift`+:kbd:`Tab` o :kbd:`Ctrl`+:kbd:`PageUp` per passare alla scheda precedente, esclusa la scheda della schermata iniziale,
+* :kbd:`Ctrl`+:kbd:`Tab`, :kbd:`Ctrl`+:kbd:`PageDown` o :kbd:`Shift`+rotellina del mouse verso il basso sulla barra delle schede per passare alla scheda successiva, esclusa la scheda della schermata iniziale,
+* :kbd:`Ctrl`+:kbd:`Shift`+:kbd:`Tab`, :kbd:`Ctrl`+:kbd:`PageUp` o :kbd:`Shift`+rotellina del mouse verso l'alto sulla barra delle schede per passare alla scheda precedente, esclusa la scheda della schermata iniziale,
 * :kbd:`Ctrl`+:kbd:`Home` e :kbd:`Ctrl`+:kbd:`End` per passare alla prima e all'ultima scheda, esclusa la scheda della schermata iniziale,
 * :kbd:`Ctrl`+:kbd:`W` per chiudere la scheda corrente,
 * :kbd:`Ctrl`+:kbd:`H` per tornare alla schermata iniziale.

@@ -28,7 +28,7 @@ Plusieurs manières d'ouvrir une banque de sons&nbsp;:
 * un clic sur :guilabel:`Nouvelle banque de sons` ouvre une banque de sons vide, tout devant être fait à partir de zéro&nbsp;;
 * un clic sur :guilabel:`Ouvrir répertoire` ouvre l'[explorateur de banques de sons](manual/soundfont-explorer.md) qui scanne tout un répertoire et permet d'ouvrir le fichier souhaité&nbsp;;
 * un double-clic sur une banque de sons de l'historique la rouvre (les éléments sélectionnés peuvent aussi être ouverts avec :kbd:`Entrée` et retirés de l'historique avec :kbd:`Suppr`)&nbsp;;
-* un fichier ou un répertoire glissé-déposé sur la zone de l'historique est ouvert.
+* un fichier ou un répertoire glissé-déposé sur la zone de l'historique, ou sur la [barre d'onglets](#doc_top) quel que soit l'onglet affiché, est ouvert.
 
 Lorsqu'une banque de sons est ouverte un nouvel onglet apparaît, permettant d'accéder à un [éditeur](manual/soundfont-editor/index.md).
 
@@ -81,10 +81,10 @@ Les onglets permettent un accès rapide entre&nbsp;:
 * le [dépôt en ligne](manual/online-repository.md),
 * la [page de présentation](manual/online-repository.md#doc_description) d'une banque de sons en ligne.
 
-La navigation entre les onglets peut s'effectuer grâce à des raccourcis clavier&nbsp;:
+La navigation entre les onglets peut s'effectuer grâce à des raccourcis clavier ou à la molette de la souris&nbsp;:
 
-* :kbd:`Ctrl`+:kbd:`Tab` ou :kbd:`Ctrl`+:kbd:`Page↓` pour aller à l'onglet suivant, en excluant l'onglet de l'écran d'accueil,
-* :kbd:`Ctrl`+:kbd:`Maj`+:kbd:`Tab` ou :kbd:`Ctrl`+:kbd:`Page↑` pour aller à l'onglet précédent, en excluant l'onglet de l'écran d'accueil,
+* :kbd:`Ctrl`+:kbd:`Tab`, :kbd:`Ctrl`+:kbd:`Page↓` ou :kbd:`Maj`+molette vers le bas au-dessus de la barre d'onglets pour aller à l'onglet suivant, en excluant l'onglet de l'écran d'accueil,
+* :kbd:`Ctrl`+:kbd:`Maj`+:kbd:`Tab`, :kbd:`Ctrl`+:kbd:`Page↑` ou :kbd:`Maj`+molette vers le haut au-dessus de la barre d'onglets pour aller à l'onglet précédent, en excluant l'onglet de l'écran d'accueil,
 * :kbd:`Ctrl`+:kbd:`Début` et :kbd:`Ctrl`+:kbd:`Fin` pour aller au premier et au dernier onglet, en excluant l'onglet de l'écran d'accueil,
 * :kbd:`Ctrl`+:kbd:`W` pour fermer l'onglet courant,
 * :kbd:`Ctrl`+:kbd:`H` pour aller à l'écran d'accueil.

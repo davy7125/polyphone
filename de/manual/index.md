@@ -28,7 +28,7 @@ Es gibt mehrere Möglichkeiten, einen Soundfont zu öffnen:
 * ein Klick auf :guilabel:`Neuer Soundfont` öffnet einen leeren Soundfont, in dem alles von Grund auf erstellt werden muss;
 * ein Klick auf :guilabel:`Verzeichnis öffnen` öffnet den [Soundfont-Explorer](manual/soundfont-explorer.md), der ein ganzes Verzeichnis durchsucht und das Öffnen der gewünschten Datei ermöglicht;
 * ein Doppelklick auf einen Soundfont im Verlauf öffnet ihn erneut (die ausgewählten Einträge können auch mit :kbd:`Enter` geöffnet und mit :kbd:`Del` aus dem Verlauf entfernt werden);
-* eine Datei oder ein Verzeichnis, die bzw. das per Drag & Drop auf den Verlaufsbereich gezogen wird, wird geöffnet.
+* eine Datei oder ein Verzeichnis, die bzw. das per Drag & Drop auf den Verlaufsbereich oder – unabhängig vom aktuellen Tab – auf die [Tab-Leiste](#doc_top) gezogen wird, wird geöffnet.
 
 Wenn ein Soundfont geöffnet ist, erscheint ein neuer Tab mit einem [Soundfont-Editor](manual/soundfont-editor/index.md).
 
@@ -81,10 +81,10 @@ Die Tabs ermöglichen einen schnellen Wechsel zwischen:
 * der [Online-Fundgrube](manual/online-repository.md),
 * einer [Soundfont-Beschreibung](manual/online-repository.md#doc_description) aus der Online-Fundgrube.
 
-Zwischen den Tabs kann mit Tastenkombinationen navigiert werden:
+Zwischen den Tabs kann mit Tastenkombinationen oder dem Mausrad navigiert werden:
 
-* :kbd:`Ctrl`+:kbd:`Tab` oder :kbd:`Ctrl`+:kbd:`PageDown`, um zum nächsten Tab zu wechseln (ohne den Tab des Startbildschirms),
-* :kbd:`Ctrl`+:kbd:`Shift`+:kbd:`Tab` oder :kbd:`Ctrl`+:kbd:`PageUp`, um zum vorherigen Tab zu wechseln (ohne den Tab des Startbildschirms),
+* :kbd:`Ctrl`+:kbd:`Tab`, :kbd:`Ctrl`+:kbd:`PageDown` oder :kbd:`Shift`+Mausrad nach unten über der Tab-Leiste, um zum nächsten Tab zu wechseln (ohne den Tab des Startbildschirms),
+* :kbd:`Ctrl`+:kbd:`Shift`+:kbd:`Tab`, :kbd:`Ctrl`+:kbd:`PageUp` oder :kbd:`Shift`+Mausrad nach oben über der Tab-Leiste, um zum vorherigen Tab zu wechseln (ohne den Tab des Startbildschirms),
 * :kbd:`Ctrl`+:kbd:`Home` und :kbd:`Ctrl`+:kbd:`End`, um zum ersten bzw. letzten Tab zu wechseln (ohne den Tab des Startbildschirms),
 * :kbd:`Ctrl`+:kbd:`W`, um den aktuellen Tab zu schließen,
 * :kbd:`Ctrl`+:kbd:`H`, um zum Startbildschirm zu wechseln.

@@ -28,7 +28,7 @@ Há várias maneiras de abrir uma soundfont:
 * um clique em :guilabel:`Nova soundfont` abre uma soundfont vazia, em que tudo precisa ser feito do zero;
 * um clique em :guilabel:`Abrir diretório` abre o [explorador de soundfonts](manual/soundfont-explorer.md), que analisa um diretório inteiro e permite abrir o arquivo desejado;
 * um clique duplo em uma soundfont do histórico a reabre (os itens selecionados também podem ser abertos com :kbd:`Enter` e removidos do histórico com :kbd:`Del`);
-* um arquivo ou diretório arrastado e solto na área do histórico é aberto.
+* um arquivo ou diretório arrastado e solto na área do histórico, ou na [barra de abas](#doc_top) qualquer que seja a aba atual, é aberto.
 
 Quando uma soundfont é aberta, uma nova aba aparece com um [editor de soundfonts](manual/soundfont-editor/index.md) dentro dela.
 
@@ -81,10 +81,10 @@ As abas dão acesso rápido a:
 * o [repositório online](manual/online-repository.md),
 * a [descrição de uma soundfont](manual/online-repository.md#doc_description) do repositório online.
 
-É possível navegar entre as abas com atalhos de teclado:
+É possível navegar entre as abas com atalhos de teclado ou com a roda do mouse:
 
-* :kbd:`Ctrl`+:kbd:`Tab` ou :kbd:`Ctrl`+:kbd:`PageDown` para ir à próxima aba, excluindo a aba da tela inicial,
-* :kbd:`Ctrl`+:kbd:`Shift`+:kbd:`Tab` ou :kbd:`Ctrl`+:kbd:`PageUp` para ir à aba anterior, excluindo a aba da tela inicial,
+* :kbd:`Ctrl`+:kbd:`Tab`, :kbd:`Ctrl`+:kbd:`PageDown` ou :kbd:`Shift`+roda do mouse para baixo sobre a barra de abas para ir à próxima aba, excluindo a aba da tela inicial,
+* :kbd:`Ctrl`+:kbd:`Shift`+:kbd:`Tab`, :kbd:`Ctrl`+:kbd:`PageUp` ou :kbd:`Shift`+roda do mouse para cima sobre a barra de abas para ir à aba anterior, excluindo a aba da tela inicial,
 * :kbd:`Ctrl`+:kbd:`Home` e :kbd:`Ctrl`+:kbd:`End` para ir à primeira e à última aba, excluindo a aba da tela inicial,
 * :kbd:`Ctrl`+:kbd:`W` para fechar a aba atual,
 * :kbd:`Ctrl`+:kbd:`H` para ir à tela inicial.

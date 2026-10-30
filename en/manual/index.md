@@ -28,7 +28,7 @@ Several ways for opening a soundfont:
 * a click on :guilabel:`New soundfont` opens an empty soundfont, everything having to be done from scratch;
 * a click on :guilabel:`Open directory` opens the [soundfont explorer](manual/soundfont-explorer.md), which scans an entire directory and allows you to open the desired file;
 * a double-click on a soundfont from the history reopens it (the selected items can also be opened with :kbd:`Enter` and removed from the history with :kbd:`Del`);
-* a file or a directory dragged and dropped on the history area is opened.
+* a file or a directory dragged and dropped on the history area, or on the [tab bar](#doc_top) whatever the current tab, is opened.
 
 When a soundfont is open, a new tab appears with a [soundfont editor](manual/soundfont-editor/index.md) inside.
 
@@ -81,10 +81,10 @@ The tabs provide a quick access between:
 * the [online repository](manual/online-repository.md),
 * a [soundfont description](manual/online-repository.md#doc_description) from the online repository.
 
-Navigation between tabs can be performed using keyboard shortcuts:
+Navigation between tabs can be performed using keyboard shortcuts or the mouse wheel:
 
-* :kbd:`Ctrl`+:kbd:`Tab` or :kbd:`Ctrl`+:kbd:`PageDown` to go to the next tab, excluding the home screen tab,
-* :kbd:`Ctrl`+:kbd:`Shift`+:kbd:`Tab` or :kbd:`Ctrl`+:kbd:`PageUp` to go to the previous tab, excluding the home screen tab,
+* :kbd:`Ctrl`+:kbd:`Tab`, :kbd:`Ctrl`+:kbd:`PageDown` or :kbd:`Shift`+mouse wheel down over the tab bar to go to the next tab, excluding the home screen tab,
+* :kbd:`Ctrl`+:kbd:`Shift`+:kbd:`Tab`, :kbd:`Ctrl`+:kbd:`PageUp` or :kbd:`Shift`+mouse wheel up over the tab bar to go to the previous tab, excluding the home screen tab,
 * :kbd:`Ctrl`+:kbd:`Home` and :kbd:`Ctrl`+:kbd:`End` to go to the first and the last tab, excluding the home screen tab,
 * :kbd:`Ctrl`+:kbd:`W` to close the current tab,
 * :kbd:`Ctrl`+:kbd:`H` to go to the home screen.
