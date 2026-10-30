@@ -50,6 +50,8 @@
 * 编辑预设时，可以在 ![表格](images/toolbar_table.png "表格"){.inline} 表格视图和 ![范围](images/toolbar_range.png "范围"){.inline} 范围编辑器之间切换，
 * 其他情况下不显示任何图标。
 
+选择其他乐器或预设时，所选视图保持不变。打开音色库时第一个乐器或预设显示的视图可以通过[设置](manual/settings.md#doc_interface)中的 :guilabel:`启动视图` 选项选择。
+
 
 ## 录音机 {#doc_recorder}
 

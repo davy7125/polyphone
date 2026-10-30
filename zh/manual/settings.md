@@ -71,7 +71,7 @@ MIDI 输入
 : 在同一个窗口中打开所有文件。
 
 启动视图
-: 选择打开音色库时显示的视图，可选项如下：:guilabel:`一般信息`（默认）、:guilabel:`采样列表`、:guilabel:`第一个采样`、:guilabel:`乐器列表`、:guilabel:`第一个乐器`、:guilabel:`预设列表`、:guilabel:`第一个预设`。
+: 选择打开音色库时显示的视图，可选项如下：:guilabel:`通用`（默认）、:guilabel:`采样`、:guilabel:`采样 - 第一个采样`、:guilabel:`乐器`、:guilabel:`乐器 - 第一个乐器 - 表格`、:guilabel:`乐器 - 第一个乐器 - 范围`、:guilabel:`乐器 - 第一个乐器 - 包络`、:guilabel:`预设`、:guilabel:`预设 - 第一个预设 - 表格`、:guilabel:`预设 - 第一个预设 - 范围`。对于第一个乐器或预设，最后一部分指定显示的页面：[表格](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table)、[范围编辑器](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range)或[包络编辑器](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope)。
 
 分区排序
 : 可以在这里更改乐器或预设中分区的排列顺序：:guilabel:`按音符范围`、:guilabel:`按力度范围`、:guilabel:`按字母顺序` 或 :guilabel:`无`（按创建顺序）。

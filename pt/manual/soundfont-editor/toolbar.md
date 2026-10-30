@@ -50,6 +50,8 @@ Na parte direita da barra de ferramentas, alguns ícones podem aparecer, depende
 * é possível alternar entre a ![tabela](images/toolbar_table.png "tabela"){.inline} visualização em tabela e o ![alcances](images/toolbar_range.png "alcances"){.inline} editor de alcances ao editar uma predefinição,
 * nada é exibido nos demais casos.
 
+A visualização escolhida é mantida quando outro instrumento ou predefinição é selecionado. A visualização exibida para o primeiro instrumento ou predefinição ao abrir uma soundfont pode ser escolhida com a opção :guilabel:`Visualização inicial` das [configurações](manual/settings.md#doc_interface).
+
 
 ## Gravador {#doc_recorder}
 

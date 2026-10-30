@@ -71,7 +71,7 @@ Einzelne Instanz
 : Öffnet alle Dateien in einem einzigen Fenster.
 
 Startansicht
-: Wählt die Ansicht, die beim Öffnen eines Soundfonts angezeigt wird, unter folgenden aus: :guilabel:`Allgemeine Informationen` (Standard), :guilabel:`Sample-Liste`, :guilabel:`Erstes Sample`, :guilabel:`Instrumentenliste`, :guilabel:`Erstes Instrument`, :guilabel:`Presetliste`, :guilabel:`Erstes Preset`.
+: Wählt die Ansicht, die beim Öffnen eines Soundfonts angezeigt wird, unter folgenden aus: :guilabel:`Allgemein` (Standard), :guilabel:`Samples`, :guilabel:`Samples - erstes Sample`, :guilabel:`Instrumente`, :guilabel:`Instrumente - erstes Instrument - Tabelle`, :guilabel:`Instrumente - erstes Instrument - Bereiche`, :guilabel:`Instrumente - erstes Instrument - Hüllkurven`, :guilabel:`Presets`, :guilabel:`Presets - erstes Preset - Tabelle`, :guilabel:`Presets - erstes Preset - Bereiche`. Beim ersten Instrument oder Preset legt der letzte Teil die angezeigte Seite fest: [Tabelle](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), [Bereichseditor](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range) oder [Hüllkurveneditor](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope).
 
 Aufteilungen sortieren
 : Hier kann die Reihenfolge der Aufteilungen innerhalb eines Instruments oder eines Presets geändert werden: :guilabel:`Nach Tastenbereich`, :guilabel:`Nach Anschlagsbereich`, :guilabel:`Alphabetische Reihenfolge` oder :guilabel:`Keine` (die Reihenfolge der Erstellung).

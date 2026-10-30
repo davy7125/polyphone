@@ -50,6 +50,8 @@ Im rechten Teil der Werkzeugleiste können je nach angezeigtem [Editor](manual/s
 * beim Bearbeiten eines Presets kann zwischen der ![Tabelle](images/toolbar_table.png "Tabelle"){.inline} Tabellenansicht und dem ![Bereiche](images/toolbar_range.png "Bereiche"){.inline} Bereichseditor gewechselt werden,
 * andernfalls wird nichts angezeigt.
 
+Die gewählte Ansicht bleibt erhalten, wenn ein anderes Instrument oder Preset ausgewählt wird. Die Ansicht, die beim Öffnen eines Soundfonts für das erste Instrument oder Preset angezeigt wird, kann mit der Option :guilabel:`Startansicht` in den [Einstellungen](manual/settings.md#doc_interface) gewählt werden.
+
 
 ## Rekorder {#doc_recorder}
 

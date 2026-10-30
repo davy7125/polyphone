@@ -71,7 +71,7 @@ MIDI入力
 : すべてのファイルを1つのウィンドウで開きます。
 
 起動時の表示
-: SoundFontを開いたときに表示する画面を、:guilabel:`一般情報`（初期設定）、:guilabel:`サンプルリスト`、:guilabel:`最初のサンプル`、:guilabel:`インストゥルメントリスト`、:guilabel:`最初のインストゥルメント`、:guilabel:`プリセットリスト`、:guilabel:`最初のプリセット` の中から選びます。
+: SoundFontを開いたときに表示する画面を、:guilabel:`一般`（初期設定）、:guilabel:`サンプル`、:guilabel:`サンプル - 最初のサンプル`、:guilabel:`インストゥルメント`、:guilabel:`インストゥルメント - 最初のインストゥルメント - テーブル`、:guilabel:`インストゥルメント - 最初のインストゥルメント - 範囲`、:guilabel:`インストゥルメント - 最初のインストゥルメント - エンベロープ`、:guilabel:`プリセット`、:guilabel:`プリセット - 最初のプリセット - テーブル`、:guilabel:`プリセット - 最初のプリセット - 範囲` の中から選びます。最初のインストゥルメントまたはプリセットでは、最後の部分で表示するページ（[テーブル](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table)、[範囲エディター](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range)、[エンベロープエディター](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope)）を指定します。
 
 ディビジョンを並べ替え
 : インストゥルメントやプリセット内のディビジョンの並び順を、:guilabel:`キー範囲で`、:guilabel:`ベロシティ範囲で`、:guilabel:`アルファベット順で`、:guilabel:`なし`（作成順）のいずれかに変更できます。

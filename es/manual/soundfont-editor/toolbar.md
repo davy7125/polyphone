@@ -50,6 +50,8 @@ En la parte derecha de la barra de herramientas pueden aparecer algunos iconos s
 * al editar un conjunto, se puede cambiar entre la ![tabla](images/toolbar_table.png "tabla"){.inline} vista de tabla y el ![rangos](images/toolbar_range.png "rangos"){.inline} editor de rangos,
 * en los demás casos no se muestra nada.
 
+La vista elegida se mantiene al seleccionar otro instrumento o conjunto. La vista que se muestra para el primer instrumento o conjunto al abrir un soundfont se puede elegir con la opción :guilabel:`Vista de inicio` de las [preferencias](manual/settings.md#doc_interface).
+
 
 ## Grabadora {#doc_recorder}
 

@@ -71,7 +71,7 @@ Istanza unica
 : Apre tutti i file in un'unica finestra.
 
 Vista all'avvio
-: Seleziona la vista da mostrare all'apertura di un soundfont tra le seguenti: :guilabel:`informazioni generali` (predefinita), :guilabel:`elenco campioni`, :guilabel:`primo campione`, :guilabel:`elenco strumenti`, :guilabel:`primo strumento`, :guilabel:`elenco preset`, :guilabel:`primo preset`.
+: Seleziona la vista da mostrare all'apertura di un soundfont tra le seguenti: :guilabel:`Generale` (predefinita), :guilabel:`Campioni`, :guilabel:`Campioni - primo campione`, :guilabel:`Strumenti`, :guilabel:`Strumenti - primo strumento - Tabella`, :guilabel:`Strumenti - primo strumento - Intervalli`, :guilabel:`Strumenti - primo strumento - Inviluppi`, :guilabel:`Preset`, :guilabel:`Preset - primo preset - Tabella`, :guilabel:`Preset - primo preset - Intervalli`. Per il primo strumento o preset, l'ultima parte indica la pagina mostrata: [tabella](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), [editor degli intervalli](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range) o [editor degli inviluppi](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope).
 
 Ordina le divisioni
 : Qui si può cambiare l'ordine delle divisioni all'interno di uno strumento o di un preset: :guilabel:`per intervallo di nota`, :guilabel:`per intervallo di velocità`, :guilabel:`in ordine alfabetico` o :guilabel:`nessuna` (l'ordine di creazione).

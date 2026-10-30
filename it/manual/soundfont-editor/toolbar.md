@@ -50,6 +50,8 @@ Nella parte destra della barra degli strumenti possono comparire alcune icone, a
 * durante la modifica di un preset è possibile passare dalla ![tabella](images/toolbar_table.png "tabella"){.inline} vista a tabella all'![intervalli](images/toolbar_range.png "intervalli"){.inline} editor degli intervalli e viceversa,
 * negli altri casi non viene mostrato nulla.
 
+La vista scelta viene mantenuta quando si seleziona un altro strumento o preset. La vista mostrata per il primo strumento o preset all'apertura di un soundfont può essere scelta con l'opzione :guilabel:`Vista all'avvio` delle [impostazioni](manual/settings.md#doc_interface).
+
 
 ## Registratore {#doc_recorder}
 

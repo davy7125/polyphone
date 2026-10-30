@@ -71,7 +71,7 @@ Instancia única
 : Abre todos los archivos en una sola ventana.
 
 Vista de inicio
-: Permite elegir la vista que se muestra al abrir un soundfont entre las siguientes: :guilabel:`información general` (por defecto), :guilabel:`lista de muestras`, :guilabel:`primera muestra`, :guilabel:`lista de instrumentos`, :guilabel:`primer instrumento`, :guilabel:`lista de conjuntos`, :guilabel:`primer conjunto`.
+: Permite elegir la vista que se muestra al abrir un soundfont entre las siguientes: :guilabel:`General` (por defecto), :guilabel:`Muestras`, :guilabel:`Muestras - primera muestra`, :guilabel:`Instrumentos`, :guilabel:`Instrumentos - primer instrumento - Tabla`, :guilabel:`Instrumentos - primer instrumento - Rangos`, :guilabel:`Instrumentos - primer instrumento - Envolventes`, :guilabel:`Conjuntos`, :guilabel:`Conjuntos - primer conjunto - Tabla`, :guilabel:`Conjuntos - primer conjunto - Rangos`. Para el primer instrumento o conjunto, la última parte indica la página mostrada: [tabla](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), [editor de rangos](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range) o [editor de envolventes](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope).
 
 Ordenar divisiones
 : Aquí se puede cambiar el orden de las divisiones dentro de un instrumento o de un conjunto: :guilabel:`por rango de notas`, :guilabel:`por rango de velocidad`, :guilabel:`en orden alfabético` o :guilabel:`ninguna` (el orden de creación).

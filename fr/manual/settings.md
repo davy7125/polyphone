@@ -71,7 +71,7 @@ Instance unique
 : Ouvre tous les fichiers dans une seule et même fenêtre.
 
 Vue de démarrage
-: Sélectionne la vue à afficher à l'ouverture d'une banque de sons parmi&nbsp;: :guilabel:`informations générales` (par défaut), :guilabel:`liste des échantillons`, :guilabel:`premier échantillon`, :guilabel:`liste des instruments`, :guilabel:`premier instrument`, :guilabel:`liste des ensembles`, :guilabel:`premier ensemble`.
+: Sélectionne la vue à afficher à l'ouverture d'une banque de sons parmi&nbsp;: :guilabel:`Général` (par défaut), :guilabel:`Échantillons`, :guilabel:`Échantillons - premier échantillon`, :guilabel:`Instruments`, :guilabel:`Instruments - premier instrument - Table`, :guilabel:`Instruments - premier instrument - Étendues`, :guilabel:`Instruments - premier instrument - Enveloppes`, :guilabel:`Ensembles`, :guilabel:`Ensembles - premier ensemble - Table`, :guilabel:`Ensembles - premier ensemble - Étendues`. Pour le premier instrument ou ensemble, la dernière partie désigne la page affichée&nbsp;: [table](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), [éditeur d'étendues](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range) ou [éditeur d'enveloppes](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope).
 
 Ordonner les divisions
 : L'ordre des divisions au sein d'un instrument ou d'un ensemble peut être changé ici&nbsp;: :guilabel:`par étendue de notes`, :guilabel:`par étendues de vélocités`, :guilabel:`alphabétiquement` ou :guilabel:`non` (ordre de création).

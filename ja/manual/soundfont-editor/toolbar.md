@@ -50,6 +50,8 @@
 * プリセットの編集中は、![テーブル](images/toolbar_table.png "テーブル"){.inline} テーブル表示と ![範囲](images/toolbar_range.png "範囲"){.inline} 範囲エディターを切り替えられます。
 * それ以外の場合は何も表示されません。
 
+選択した表示は、別のインストゥルメントやプリセットを選択しても維持されます。SoundFontを開いたときに最初のインストゥルメントまたはプリセットで表示される画面は、[設定](manual/settings.md#doc_interface)の :guilabel:`起動時の表示` オプションで選べます。
+
 
 ## レコーダー {#doc_recorder}
 

@@ -50,6 +50,8 @@ In the right part of the toolbar, some icons may appear depending on which [edit
 * switching between the ![table](images/toolbar_table.png "table"){.inline} table view and the ![range](images/toolbar_range.png "range"){.inline} range editor is possible when editing a preset,
 * nothing displayed otherwise.
 
+The selected view is kept when another instrument or preset is selected. The view displayed for the first instrument or preset when a soundfont is opened can be chosen with the option :guilabel:`Startup view` in the [settings](manual/settings.md#doc_interface).
+
 
 ## Recorder {#doc_recorder}
 

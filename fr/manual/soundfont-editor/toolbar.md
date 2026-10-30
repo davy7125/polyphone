@@ -50,6 +50,8 @@ Dans la partie droite de la barre d'outils, certaines icônes peuvent apparaîtr
 * il est possible de basculer entre la table ![table](images/toolbar_table.png "table"){.inline} et l'éditeur d'étendues ![étendues](images/toolbar_range.png "étendues"){.inline} lors de l'édition d'un ensemble,
 * rien n'est affiché dans les autres cas.
 
+La vue choisie est conservée lorsqu'un autre instrument ou ensemble est sélectionné. La vue affichée pour le premier instrument ou ensemble à l'ouverture d'une banque de sons peut être choisie avec l'option :guilabel:`Vue de démarrage` des [préférences](manual/settings.md#doc_interface).
+
 
 ## Magnétophone {#doc_recorder}
 
