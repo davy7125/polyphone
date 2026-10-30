@@ -94,6 +94,8 @@ void PianoScene::initConfiguration(PianoScene * previousScene)
         m_lastNoteLeft = previousScene->m_lastNoteLeft;
         m_lastNoteRight = previousScene->m_lastNoteRight;
         m_currentArrow = previousScene->m_currentArrow;
+        _keyNotes = previousScene->_keyNotes;
+        _mappedKeyNotes = previousScene->_mappedKeyNotes;
     }
     else
     {
@@ -226,6 +228,7 @@ void PianoScene::keyOff(PianoKey* key)
 
 void PianoScene::keyNoteOn(const int note , const int velo)
 {
+    _keyNotes << note;
     if (m_keys.contains(note))
         keyOn(m_keys.value(note), velo);
     else
@@ -234,10 +237,19 @@ void PianoScene::keyNoteOn(const int note , const int velo)
 
 void PianoScene::keyNoteOff(const int note)
 {
+    _keyNotes.removeOne(note);
     if (m_keys.contains(note))
         keyOff(m_keys.value(note));
     else
         triggerNoteOff(note);
+}
+
+void PianoScene::releaseKeys()
+{
+    while (!_keyNotes.isEmpty())
+        keyNoteOff(_keyNotes.last());
+    _mappedKeyNotes.clear();
+    m_currentArrow = 0;
 }
 
 PianoKey* PianoScene::getKeyForPos( const QPointF& p ) const
@@ -363,7 +375,10 @@ void PianoScene::keyPressEvent(QKeyEvent * keyEvent)
             QString keyStr = QKeySequence(key).toString();
             int note = _keybdMap.getKey(QKeySequence(modifier + keyStr));
             if (note > -1)
+            {
                 keyNoteOn(note, m_lastVelocity);
+                _mappedKeyNotes[key] = note;
+            }
         }
     }
     keyEvent->accept();
@@ -393,16 +408,10 @@ void PianoScene::keyReleaseEvent(QKeyEvent * keyEvent)
             keyNoteOff(m_lastNoteLeft);
             m_currentArrow = 0;
         }
-        else
+        else if (_mappedKeyNotes.contains(keyEvent->key()))
         {
-            // Mute the note with and without the modifier
-            QString keyStr = QKeySequence(keyEvent->key()).toString();
-            int note = _keybdMap.getKey(QKeySequence(keyStr));
-            if (note > -1)
-                keyNoteOff(note);
-            note = _keybdMap.getKey(QKeySequence("Shift+" + keyStr));
-            if (note > -1)
-                keyNoteOff(note);
+            // Mute the note started by the key, whatever the modifier or the octave now
+            keyNoteOff(_mappedKeyNotes.take(keyEvent->key()));
         }
     }
     keyEvent->accept();

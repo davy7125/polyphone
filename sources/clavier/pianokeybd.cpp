@@ -205,6 +205,11 @@ bool PianoKeybd::capturesKey(QKeyEvent * event)
     return _scene->capturesKey(event);
 }
 
+void PianoKeybd::releaseKeys()
+{
+    _scene->releaseKeys();
+}
+
 void PianoKeybd::updateMapping()
 {
     _scene->updateMapping();

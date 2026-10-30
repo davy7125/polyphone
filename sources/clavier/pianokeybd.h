@@ -80,6 +80,9 @@ public:
     // mapped keys, octave selection and release of the arrows
     bool capturesKey(QKeyEvent * event);
 
+    // Stop the notes started by the computer keyboard, whose keys may be released while another window has the focus
+    void releaseKeys();
+
     void inputNoteOn(int midiNote, int vel);
     void inputNoteOff(int midiNote);
 

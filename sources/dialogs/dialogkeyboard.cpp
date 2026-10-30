@@ -162,6 +162,16 @@ void DialogKeyboard::resizeEvent(QResizeEvent * event)
     }
 }
 
+void DialogKeyboard::changeEvent(QEvent * event)
+{
+    QDialog::changeEvent(event);
+
+    // The release of a key wouldn't be received by the keyboard if another window has the focus:
+    // all notes started by the computer keyboard are stopped as soon as the focus is lost
+    if (event->type() == QEvent::ActivationChange && !this->isActiveWindow())
+        ui->keyboard->releaseKeys();
+}
+
 int DialogKeyboard::getHeightForWidth(int width)
 {
     // Height of the window when each element has its preferred size, the keyboard keeping its ratio

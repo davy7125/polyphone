@@ -57,6 +57,9 @@ public:
     void keyNoteOn( const int note, const int velo);
     void keyNoteOff( const int note);
 
+    // Stop the notes started by the computer keyboard
+    void releaseKeys();
+
 signals:
     void noteOn(int n, int v);
     void noteOff(int n);
@@ -108,6 +111,8 @@ private:
 
     static int MIN_NOTE, MAX_NOTE, KEYWIDTH, KEYHEIGHT;
     KeyboardMap _keybdMap;
+    QList<int> _keyNotes; // Notes started by the computer keyboard
+    QMap<int, int> _mappedKeyNotes; // Note started by each mapped key
 
     QTimer *_timer;
     double _glowEffect;
