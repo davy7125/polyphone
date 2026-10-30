@@ -107,6 +107,7 @@ MainWindow::MainWindow(bool playerMode, QWidget *parent) : QWidget(parent),
     ui->pushButtonSoundfonts->setIcon(ContextManager::theme()->getColoredSvg(":/icons/globe.svg", iconSize, ThemeManager::BUTTON_TEXT));
 
     // Top right widget
+    ui->topBackground->setIconArea(ui->topRightWidget);
     connect(ui->topRightWidget, SIGNAL(newClicked()), this, SLOT(on_pushButtonNew_clicked()));
     connect(ui->topRightWidget, SIGNAL(openClicked()), this, SLOT(on_pushButtonOpen_clicked()));
     connect(ui->topRightWidget, SIGNAL(openSettingsClicked()), this, SLOT(on_pushButtonSettings_clicked()));

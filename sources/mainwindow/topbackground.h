@@ -26,7 +26,7 @@
 #define TOPBACKGROUND_H
 
 #include <QWidget>
-class QPixmap;
+#include <QPixmap>
 
 class TopBackground : public QWidget
 {
@@ -36,19 +36,29 @@ public:
     explicit TopBackground(QWidget *parent = nullptr);
     ~TopBackground();
 
+    // The pattern fades out before reaching this area, so that the icons it contains remain readable
+    void setIconArea(QWidget * iconArea);
+
 protected:
     void paintEvent(QPaintEvent *event) override;
+    void resizeEvent(QResizeEvent *event) override;
+    bool eventFilter(QObject *watched, QEvent *event) override;
     void mousePressEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
     void mouseDoubleClickEvent(QMouseEvent *event) override;
 
 private:
+    void updatePattern();
+
     static const int CORNER_RADIUS;
+    static const int FADE_WIDTH;
 
     bool _withWindowBorders;
     QColor _backgroundColor;
     QColor _bottomBorderColor;
     QPixmap * _pixmapFront;
+    QPixmap _pattern; // Repeated _pixmapFront, faded out before the icon area
+    QWidget * _iconArea;
     bool _aboutToMove;
 };
 

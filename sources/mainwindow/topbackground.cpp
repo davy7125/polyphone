@@ -31,9 +31,11 @@
 #include <QPainterPath>
 
 const int TopBackground::CORNER_RADIUS = 10;
+const int TopBackground::FADE_WIDTH = 80;
 
 TopBackground::TopBackground(QWidget *parent) : QWidget(parent),
     _pixmapFront(nullptr),
+    _iconArea(nullptr),
     _aboutToMove(false)
 {
     // Window borders?
@@ -47,21 +49,73 @@ TopBackground::TopBackground(QWidget *parent) : QWidget(parent),
     // Bottom border color
     _bottomBorderColor = ContextManager::theme()->getColor(ThemeManager::BORDER);
 
-    // Possible pattern
-    QDate today = QDateTime::currentDateTime().date();
-    if (today.month() == 12 && today.day() > 24) // Between christmas and new year
-        _pixmapFront = new QPixmap(":/banners/christmas.png");
-    else if (today.month() == 10 && today.day() == 31) // Halloween
-        _pixmapFront = new QPixmap(":/banners/halloween.png");
-    else if (today.month() == 2 && today.day() == 14) // Valentine's day
-        _pixmapFront = new QPixmap(":/banners/valentine.png");
-    else if (today.month() == 6 && today.day() == 21) // Summer
-        _pixmapFront = new QPixmap(":/banners/music.png");
+    // Possible pattern, if decorations are allowed
+    if (ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "decoration", true).toBool())
+    {
+        QDate today = QDateTime::currentDateTime().date();
+        if (today.month() == 12 && today.day() > 24) // Between christmas and new year
+            _pixmapFront = new QPixmap(":/banners/christmas.png");
+        else if (today.month() == 10 && today.day() == 31) // Halloween
+            _pixmapFront = new QPixmap(":/banners/halloween.png");
+        else if (today.month() == 2 && today.day() == 14) // Valentine's day
+            _pixmapFront = new QPixmap(":/banners/valentine.png");
+        else if (today.month() == 6 && today.day() == 21) // Summer
+            _pixmapFront = new QPixmap(":/banners/music.png");
+    }
 }
 
 TopBackground::~TopBackground()
 {
     delete _pixmapFront;
+}
+
+void TopBackground::setIconArea(QWidget * iconArea)
+{
+    _iconArea = iconArea;
+    _iconArea->installEventFilter(this);
+    updatePattern();
+}
+
+bool TopBackground::eventFilter(QObject *watched, QEvent *event)
+{
+    // The icon area moves when the window is resized or when icons are shown / hidden
+    if (watched == _iconArea && event->type() == QEvent::Move)
+        updatePattern();
+    return QWidget::eventFilter(watched, event);
+}
+
+void TopBackground::resizeEvent(QResizeEvent *event)
+{
+    updatePattern();
+    QWidget::resizeEvent(event);
+}
+
+void TopBackground::updatePattern()
+{
+    if (_pixmapFront == nullptr || this->width() <= 0 || this->height() <= 0)
+        return;
+
+    _pattern = QPixmap(this->size() * this->devicePixelRatioF());
+    _pattern.setDevicePixelRatio(this->devicePixelRatioF());
+    _pattern.fill(Qt::transparent);
+
+    QPainter p(&_pattern);
+    for (int i = 0; i < this->width() / _pixmapFront->width() + 1; i++)
+        p.drawPixmap(i * _pixmapFront->width(), 1, *_pixmapFront);
+
+    // Progressively remove the pattern until the icon area is reached
+    if (_iconArea != nullptr)
+    {
+        int fadeEnd = _iconArea->x();
+        QLinearGradient gradient(fadeEnd - FADE_WIDTH, 0, fadeEnd, 0);
+        gradient.setColorAt(0, Qt::black);
+        gradient.setColorAt(1, Qt::transparent);
+        p.setCompositionMode(QPainter::CompositionMode_DestinationIn);
+        p.fillRect(_pattern.rect(), gradient);
+    }
+    p.end();
+
+    this->update();
 }
 
 void TopBackground::paintEvent(QPaintEvent *event)
@@ -91,11 +145,8 @@ void TopBackground::paintEvent(QPaintEvent *event)
     }
 
     // Possible pattern on top of it
-    if (_pixmapFront)
-    {
-        for (int i = 0; i < this->width() / _pixmapFront->width() + 1; i++)
-            p.drawPixmap(i * _pixmapFront->width(), 1, *_pixmapFront);
-    }
+    if (!_pattern.isNull())
+        p.drawPixmap(0, 0, _pattern);
 
     // Bottom border
     p.setPen(QPen(_bottomBorderColor, _withWindowBorders ? 0 : 1));
