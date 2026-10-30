@@ -141,7 +141,7 @@ void GraphicsViewRange::initItems()
         text->setZValue(100);
         text->setBrush(_textColor);
         text->setText(QString::number(vel));
-        text->setPos(OFFSET, 126.5 - vel);
+        text->setPos(OFFSET, 127 - vel);
         _leftLabels << text;
         _lines << line;
     }
