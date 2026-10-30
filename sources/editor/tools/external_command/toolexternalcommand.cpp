@@ -98,11 +98,12 @@ void ToolExternalCommand::process(SoundfontManager * sm, EltID id, AbstractToolP
     QString pathTempFile;
     if (tempFile->open())
     {
-        QString pathTempFile = tempFile->fileName();
+        pathTempFile = tempFile->fileName();
         tempFile->close();
     }
     else
     {
+        delete tempFile;
         _warning = tr("Couldn't export the sample.");
         return;
     }
@@ -141,7 +142,7 @@ void ToolExternalCommand::process(SoundfontManager * sm, EltID id, AbstractToolP
         val.wValue = 0;
         sound.set(champ_wChannel, val);
         import(id, sound, sm, replaceInfo);
-        if (id2.indexSf2 != -1 && sound.getUInt32(champ_wChannels) == 2)
+        if (id2.indexElt != -1 && sound.getUInt32(champ_wChannels) == 2)
         {
             val.wValue = 1;
             sound.set(champ_wChannel, val);
