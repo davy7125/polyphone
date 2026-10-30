@@ -581,6 +581,7 @@ SOURCES	+= main.cpp \
     editor/modulator/modulatorcombodest.cpp \
     editor/modulator/modulatorcombosrc.cpp \
     clavier/controllerarea.cpp \
+    clavier/effectarea.cpp \
     clavier/combocc.cpp \
     lib/iir/Biquad.cpp \
     lib/iir/Butterworth.cpp \
@@ -590,6 +591,7 @@ SOURCES	+= main.cpp \
     editor/widgets/spinboxcents.cpp \
     editor/widgets/resettabledial.cpp \
     editor/widgets/resettableslider.cpp \
+    editor/widgets/ledbutton.cpp \
     synth_core/parametermodulator.cpp \
     synth_core/modulatorgroup.cpp \
     editor/modulator/modulatorlistwidget.cpp \
@@ -1003,6 +1005,7 @@ HEADERS += \
     editor/modulator/modulatorcombosrc.h \
     editor/modulator/modulatorlistwidget.h \
     clavier/controllerarea.h \
+    clavier/effectarea.h \
     clavier/combocc.h \
     lib/iir/Iir_2.h \
     lib/iir/Biquad.h \
@@ -1017,6 +1020,7 @@ HEADERS += \
     editor/widgets/spinboxcents.h \
     editor/widgets/resettabledial.h \
     editor/widgets/resettableslider.h \
+    editor/widgets/ledbutton.h \
     synth_core/parametermodulator.h \
     synth_core/modulatorgroup.h \
     synth_core/modulatordata.h \
@@ -1135,6 +1139,7 @@ FORMS += \
     editor/modulator/modulatoreditor.ui \
     editor/modulator/modulatorcell.ui \
     clavier/controllerarea.ui \
+    clavier/effectarea.ui \
     editor/tools/default_mod/tooldefaultmod_gui.ui \
     repository/soundfont/editor/editordialoginsertvideo.ui \
     repository/soundfont/editor/editordialoginsertimage.ui \

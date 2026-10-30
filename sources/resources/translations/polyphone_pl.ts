@@ -1285,18 +1285,28 @@ Premium!</translation>
         <translation>Opcje</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionsound.ui" line="369"/>
+        <location filename="../../context/interface/configsectionsound.ui" line="366"/>
+        <source>Reverb on / off</source>
+        <translation>Włącz / wyłącz pogłos</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/configsectionsound.ui" line="384"/>
         <source>Reverb</source>
         <translation>Pogłos</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionsound.ui" line="381"/>
+        <location filename="../../context/interface/configsectionsound.ui" line="408"/>
+        <source>Chorus on / off</source>
+        <translation>Włącz / wyłącz chorus</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/configsectionsound.ui" line="426"/>
         <source>Chorus</source>
         <translation>Chorus</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionsound.cpp" line="53"/>
-        <location filename="../../context/interface/configsectionsound.cpp" line="129"/>
+        <location filename="../../context/interface/configsectionsound.cpp" line="56"/>
+        <location filename="../../context/interface/configsectionsound.cpp" line="150"/>
         <source>dB</source>
         <comment>unit for decibels</comment>
         <translation>dB</translation>
@@ -1350,12 +1360,12 @@ online</translation>
         <translation>Nacisk</translation>
     </message>
     <message>
-        <location filename="../../clavier/controllerarea.cpp" line="225"/>
+        <location filename="../../clavier/controllerarea.cpp" line="245"/>
         <source>on</source>
         <translation>włącz</translation>
     </message>
     <message>
-        <location filename="../../clavier/controllerarea.cpp" line="230"/>
+        <location filename="../../clavier/controllerarea.cpp" line="250"/>
         <source>off</source>
         <translation>wyłącz</translation>
     </message>
@@ -1789,49 +1799,59 @@ online</translation>
         <translation>Wirtualna klawiatura</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="147"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="150"/>
         <source>5 octaves</source>
         <translation>5 oktaw</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="152"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="155"/>
         <source>6 octaves</source>
         <translation>6 oktaw</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="157"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="160"/>
         <source>88 keys (piano)</source>
         <translation>88 klawiszy (fortepian)</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="162"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="165"/>
         <source>128 keys (full)</source>
         <translation>128 klawiszy (pełen zakres)</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="188"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="191"/>
         <source>Key</source>
         <translation>Klawisz</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="213"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="216"/>
         <source>Velocity</source>
         <translation>Siła klawisza</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="238"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="241"/>
         <source>Aftertouch</source>
         <translation>Docisk klawisza</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="200"/>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="279"/>
         <source>Hide the controller area</source>
         <translation>Ukryj strefę kontrolerów</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="206"/>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="279"/>
         <source>Show the controller area</source>
         <translation>Pokaż strefę kontrolerów</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="284"/>
+        <source>Hide the effects</source>
+        <translation>Ukryj efekty</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="284"/>
+        <source>Show the effects</source>
+        <translation>Pokaż efekty</translation>
     </message>
 </context>
 <context>
@@ -2587,6 +2607,76 @@ online</translation>
         <location filename="../../editor/widgets/editortoolbar.cpp" line="437"/>
         <source>Cannot create more presets.</source>
         <translation>Nie można utworzyć więcej presetów.</translation>
+    </message>
+</context>
+<context>
+    <name>EffectArea</name>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="35"/>
+        <source>Reverb on / off</source>
+        <translation>Włącz / wyłącz pogłos</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="38"/>
+        <source>Reverb</source>
+        <translation>Pogłos</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="63"/>
+        <location filename="../../clavier/effectarea.ui" line="180"/>
+        <source>Level</source>
+        <translation>Poziom</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="85"/>
+        <source>Room</source>
+        <translation>Pokój</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="107"/>
+        <source>Width</source>
+        <translation>Szerokość</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="129"/>
+        <source>Damp</source>
+        <translation>Wytłumienie</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="152"/>
+        <source>Chorus on / off</source>
+        <translation>Włącz / wyłącz chorus</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="155"/>
+        <source>Chorus</source>
+        <translation>Chorus</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="202"/>
+        <source>Depth</source>
+        <translation>Głębia</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="224"/>
+        <source>Frequency</source>
+        <translation>Częstotliwość</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="247"/>
+        <source>Volume</source>
+        <translation>Głośność</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="260"/>
+        <source>General volume</source>
+        <translation>Głośność ogólna</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.cpp" line="146"/>
+        <source>dB</source>
+        <comment>unit for decibels</comment>
+        <translation>dB</translation>
     </message>
 </context>
 <context>

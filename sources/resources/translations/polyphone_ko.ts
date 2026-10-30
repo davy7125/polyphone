@@ -1242,7 +1242,7 @@ Premium!</source>
 <context>
     <name>ConfigSectionSound</name>
     <message>
-        <location filename="../../context/interface/configsectionsound.ui" line="369"/>
+        <location filename="../../context/interface/configsectionsound.ui" line="384"/>
         <source>Reverb</source>
         <translation>리버브</translation>
     </message>
@@ -1289,7 +1289,17 @@ Premium!</source>
         <translation>옵션</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionsound.ui" line="381"/>
+        <location filename="../../context/interface/configsectionsound.ui" line="366"/>
+        <source>Reverb on / off</source>
+        <translation>리버브 켜기 / 끄기</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/configsectionsound.ui" line="408"/>
+        <source>Chorus on / off</source>
+        <translation>코러스 켜기 / 끄기</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/configsectionsound.ui" line="426"/>
         <source>Chorus</source>
         <translation>코러스</translation>
     </message>
@@ -1304,8 +1314,8 @@ Premium!</source>
         <translation>깊이</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionsound.cpp" line="53"/>
-        <location filename="../../context/interface/configsectionsound.cpp" line="129"/>
+        <location filename="../../context/interface/configsectionsound.cpp" line="56"/>
+        <location filename="../../context/interface/configsectionsound.cpp" line="150"/>
         <source>dB</source>
         <comment>unit for decibels</comment>
         <translation>dB</translation>
@@ -1360,12 +1370,12 @@ repository</source>
         <translation>프레셔</translation>
     </message>
     <message>
-        <location filename="../../clavier/controllerarea.cpp" line="225"/>
+        <location filename="../../clavier/controllerarea.cpp" line="245"/>
         <source>on</source>
         <translation>켜기</translation>
     </message>
     <message>
-        <location filename="../../clavier/controllerarea.cpp" line="230"/>
+        <location filename="../../clavier/controllerarea.cpp" line="250"/>
         <source>off</source>
         <translation>끄기</translation>
     </message>
@@ -1800,49 +1810,59 @@ repository</source>
         <translation>가상 건반</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="147"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="150"/>
         <source>5 octaves</source>
         <translation>5 옥타브</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="152"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="155"/>
         <source>6 octaves</source>
         <translation>6 옥타브</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="157"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="160"/>
         <source>88 keys (piano)</source>
         <translation>88 건반</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="162"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="165"/>
         <source>128 keys (full)</source>
         <translation>128 건반</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="188"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="191"/>
         <source>Key</source>
         <translation>키</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="213"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="216"/>
         <source>Velocity</source>
         <translation>벨로시티</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="238"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="241"/>
         <source>Aftertouch</source>
         <translation>애프터 터치</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="200"/>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="279"/>
         <source>Hide the controller area</source>
         <translation>컨트롤러 영역 숨기기</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="206"/>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="279"/>
         <source>Show the controller area</source>
         <translation>컨트롤러 영역 보이기</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="284"/>
+        <source>Hide the effects</source>
+        <translation>효과 숨기기</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="284"/>
+        <source>Show the effects</source>
+        <translation>효과 보이기</translation>
     </message>
 </context>
 <context>
@@ -2591,6 +2611,76 @@ repository</source>
         <location filename="../../editor/widgets/editortoolbar.cpp" line="437"/>
         <source>Warning</source>
         <translation>경고</translation>
+    </message>
+</context>
+<context>
+    <name>EffectArea</name>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="35"/>
+        <source>Reverb on / off</source>
+        <translation>리버브 켜기 / 끄기</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="38"/>
+        <source>Reverb</source>
+        <translation>리버브</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="63"/>
+        <location filename="../../clavier/effectarea.ui" line="180"/>
+        <source>Level</source>
+        <translation>레벨</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="85"/>
+        <source>Room</source>
+        <translation>룸</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="107"/>
+        <source>Width</source>
+        <translation>너비</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="129"/>
+        <source>Damp</source>
+        <translation>댐프</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="152"/>
+        <source>Chorus on / off</source>
+        <translation>코러스 켜기 / 끄기</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="155"/>
+        <source>Chorus</source>
+        <translation>코러스</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="202"/>
+        <source>Depth</source>
+        <translation>깊이</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="224"/>
+        <source>Frequency</source>
+        <translation>주파수</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="247"/>
+        <source>Volume</source>
+        <translation>볼륨</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="260"/>
+        <source>General volume</source>
+        <translation>일반 볼륨</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.cpp" line="146"/>
+        <source>dB</source>
+        <comment>unit for decibels</comment>
+        <translation>dB</translation>
     </message>
 </context>
 <context>

@@ -1239,7 +1239,7 @@ Premium!</source>
 <context>
     <name>ConfigSectionSound</name>
     <message>
-        <location filename="../../context/interface/configsectionsound.ui" line="381"/>
+        <location filename="../../context/interface/configsectionsound.ui" line="426"/>
         <source>Chorus</source>
         <translation>Хорус</translation>
     </message>
@@ -1280,9 +1280,19 @@ Premium!</source>
         <translation>Параметры</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionsound.ui" line="369"/>
+        <location filename="../../context/interface/configsectionsound.ui" line="366"/>
+        <source>Reverb on / off</source>
+        <translation>Включить / отключить реверберацию</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/configsectionsound.ui" line="384"/>
         <source>Reverb</source>
         <translation>Реверберация</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/configsectionsound.ui" line="408"/>
+        <source>Chorus on / off</source>
+        <translation>Включить / отключить хорус</translation>
     </message>
     <message>
         <location filename="../../context/interface/configsectionsound.ui" line="223"/>
@@ -1300,8 +1310,8 @@ Premium!</source>
         <translation>Помещение</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionsound.cpp" line="53"/>
-        <location filename="../../context/interface/configsectionsound.cpp" line="129"/>
+        <location filename="../../context/interface/configsectionsound.cpp" line="56"/>
+        <location filename="../../context/interface/configsectionsound.cpp" line="150"/>
         <source>dB</source>
         <comment>unit for decibels</comment>
         <translation>дБ</translation>
@@ -1356,12 +1366,12 @@ repository</source>
         <translation>Давление</translation>
     </message>
     <message>
-        <location filename="../../clavier/controllerarea.cpp" line="225"/>
+        <location filename="../../clavier/controllerarea.cpp" line="245"/>
         <source>on</source>
         <translation>вкл</translation>
     </message>
     <message>
-        <location filename="../../clavier/controllerarea.cpp" line="230"/>
+        <location filename="../../clavier/controllerarea.cpp" line="250"/>
         <source>off</source>
         <translation>откл</translation>
     </message>
@@ -1812,49 +1822,59 @@ repository</source>
         <translation>Виртуальная клавиатура</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="147"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="150"/>
         <source>5 octaves</source>
         <translation>5 октав</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="152"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="155"/>
         <source>6 octaves</source>
         <translation>6 октав</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="157"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="160"/>
         <source>88 keys (piano)</source>
         <translation>88 клавиш (фортепиано)</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="162"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="165"/>
         <source>128 keys (full)</source>
         <translation>128 клавиш (полная)</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="188"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="191"/>
         <source>Key</source>
         <translation>Клавиша</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="213"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="216"/>
         <source>Velocity</source>
         <translation>Сила нажатия</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="238"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="241"/>
         <source>Aftertouch</source>
         <translation>Послекасание</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="200"/>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="279"/>
         <source>Hide the controller area</source>
         <translation>Скрыть область контроллеров</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="206"/>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="279"/>
         <source>Show the controller area</source>
         <translation>Показать область контроллеров</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="284"/>
+        <source>Hide the effects</source>
+        <translation>Скрыть эффекты</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="284"/>
+        <source>Show the effects</source>
+        <translation>Показать эффекты</translation>
     </message>
 </context>
 <context>
@@ -2610,6 +2630,76 @@ repository</source>
         <location filename="../../editor/widgets/editortoolbar.cpp" line="437"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
+    </message>
+</context>
+<context>
+    <name>EffectArea</name>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="35"/>
+        <source>Reverb on / off</source>
+        <translation>Включить / отключить реверберацию</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="38"/>
+        <source>Reverb</source>
+        <translation>Реверберация</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="63"/>
+        <location filename="../../clavier/effectarea.ui" line="180"/>
+        <source>Level</source>
+        <translation>Уровень</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="85"/>
+        <source>Room</source>
+        <translation>Помещение</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="107"/>
+        <source>Width</source>
+        <translation>Ширина</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="129"/>
+        <source>Damp</source>
+        <translation>Демпфирование</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="152"/>
+        <source>Chorus on / off</source>
+        <translation>Включить / отключить хорус</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="155"/>
+        <source>Chorus</source>
+        <translation>Хорус</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="202"/>
+        <source>Depth</source>
+        <translation>Глубина</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="224"/>
+        <source>Frequency</source>
+        <translation>Частота</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="247"/>
+        <source>Volume</source>
+        <translation>Громкость</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="260"/>
+        <source>General volume</source>
+        <translation>Общая громкость</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.cpp" line="146"/>
+        <source>dB</source>
+        <comment>unit for decibels</comment>
+        <translation>дБ</translation>
     </message>
 </context>
 <context>

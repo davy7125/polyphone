@@ -48,7 +48,8 @@ public:
     // Tables shared by all the synths, to prepare before using one (only computed the first time)
     static void prepareTables();
 
-    // Configuration (not by the audio thread)
+    // Configuration (not by the audio thread), without stopping the notes: the gain of the voices and the effects
+    // change progressively
     void configure(const SynthCoreConfig &configuration);
     void setMidiValues(IMidiValues * midiValues); // Not deleted by the synth (null: default values)
     void setSampleRate(uint32_t sampleRate);
@@ -118,6 +119,7 @@ private:
     void configureVoice(Voice * voice);
     void configureVoices();
     void renderChunks(uint32_t len);
+    void updateEffects(const SynthCoreConfig &configuration);
 
     // Soundfonts
     ISynthSoundfonts * _soundfonts;
@@ -125,8 +127,6 @@ private:
     // Configuration
     SynthCoreConfig _configuration;
     uint32_t _sampleRate;
-    bool _reverbOn;
-    bool _chorusOn;
     double _smplGain;
     bool _smplIsStereoEnabled;
     bool _smplIsLoopEnabled;
@@ -144,10 +144,12 @@ private:
     uint32_t _outputPosition;  // First frame not returned
     uint32_t _outputAvailable; // Frames not returned
 
-    // Effects
+    // Effects, only used by the audio thread which applies the settings given by configure
     SynthReverb _reverb;
     SynthChorus _chorusRevL, _chorusRevR, _chorusL, _chorusR;
-    std::atomic<int> _effectsInUse;
+    SynthCoreConfig _effectConfiguration;
+    std::atomic<bool> _effectConfigurationChanged;
+    std::atomic<int> _effectConfigurationLock; // The audio thread never waits for it
 };
 
 #endif // SYNTHCORE_H

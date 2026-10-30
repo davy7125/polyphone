@@ -70,10 +70,15 @@ public:
     void clearCustomization();
 
     QSize sizeHint() const override;
+    QSize minimumSizeHint() const override;
     bool hasHeightForWidth() const override;
     int heightForWidth(int w) const override;
 
     void triggerGlowEffect();
+
+    // True if a key event must reach the keyboard even if another widget of the window has the focus:
+    // mapped keys, octave selection and release of the arrows
+    bool capturesKey(QKeyEvent * event);
 
     void inputNoteOn(int midiNote, int vel);
     void inputNoteOff(int midiNote);
@@ -93,6 +98,7 @@ protected:
     void initialize();
     void initScene(int startKey, int numKeys);
     void resizeEvent(QResizeEvent *event) override;
+    void fitScene();
 
 private:
     void setStartKey(int key);

@@ -358,29 +358,89 @@
      </property>
     </widget>
    </item>
-   <item row="3" column="0" colspan="2">
-    <widget class="QLabel" name="labelSubTitle2">
-     <property name="font">
-      <font>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>Reverb</string>
-     </property>
-    </widget>
+   <item row="3" column="0" colspan="4">
+    <layout class="QHBoxLayout" name="layoutReverb">
+     <item>
+      <widget class="LedButton" name="pushReverb">
+       <property name="toolTip">
+        <string>Reverb on / off</string>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="labelSubTitle2">
+       <property name="font">
+        <font>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Reverb</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_6">
+       <property name="orientation">
+        <enum>Qt::Orientation::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
    </item>
-   <item row="5" column="0" colspan="2">
-    <widget class="QLabel" name="labelSubTitle3">
-     <property name="font">
-      <font>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>Chorus</string>
-     </property>
-    </widget>
+   <item row="5" column="0" colspan="4">
+    <layout class="QHBoxLayout" name="layoutChorus">
+     <item>
+      <widget class="LedButton" name="pushChorus">
+       <property name="toolTip">
+        <string>Chorus on / off</string>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="labelSubTitle3">
+       <property name="font">
+        <font>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Chorus</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_7">
+       <property name="orientation">
+        <enum>Qt::Orientation::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>
@@ -395,14 +455,21 @@
    <extends>QSlider</extends>
    <header>resettableslider.h</header>
   </customwidget>
+  <customwidget>
+   <class>LedButton</class>
+   <extends>QPushButton</extends>
+   <header>ledbutton.h</header>
+  </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>sliderGain</tabstop>
   <tabstop>comboVelToFilter</tabstop>
+  <tabstop>pushReverb</tabstop>
   <tabstop>dialRevNiveau</tabstop>
   <tabstop>dialRevProfondeur</tabstop>
   <tabstop>dialRevDensite</tabstop>
   <tabstop>dialRevAttenuation</tabstop>
+  <tabstop>pushChorus</tabstop>
   <tabstop>dialChoNiveau</tabstop>
   <tabstop>dialChoAmplitude</tabstop>
   <tabstop>dialChoFrequence</tabstop>

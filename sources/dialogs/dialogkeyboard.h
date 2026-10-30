@@ -60,20 +60,29 @@ protected:
     void showEvent(QShowEvent * event) override;
     void hideEvent(QHideEvent * event) override;
     void keyPressEvent(QKeyEvent * event) override;
+    void resizeEvent(QResizeEvent * event) override;
+    bool eventFilter(QObject * watched, QEvent * event) override;
 
 private slots:
     void onProcessKeyMainThread(int channel, int key, int vel);
     void on_comboType_currentIndexChanged(int index);
     void onMouseHover(int key, int vel);
-    void on_pushExpand_clicked();
+    void on_pushControllers_clicked();
+    void on_pushEffects_clicked();
 
 private:
     void displayKeyInfo();
-    void updateControlAreaVisibility();
+    void updateAreaVisibility();
+    void adjustHeight();
+    int getHeightForWidth(int width);
+    int getWidthForHeight(int height);
+    static QIcon getToggleIcon(QString svgPath);
 
     Ui::DialogKeyboard *ui;
     QList<QPair<int, QPair<int, int> > > _triggeredKeys; // velocity and aftertouch by key
     bool _stateUpdate;
+    int _keyboardTop; // Position of the keyboard in the window, kept on the screen when the controllers are toggled
+    bool _keepKeyboardTop;
 };
 
 #endif // DIALOGKEYBOARD_H

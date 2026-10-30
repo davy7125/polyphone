@@ -513,3 +513,19 @@ void PianoScene::updateMapping()
 {
     _keybdMap.initializeMapping();
 }
+
+bool PianoScene::capturesKey(QKeyEvent * keyEvent)
+{
+    // Octave selection
+    int key = keyEvent->key();
+    if ((keyEvent->modifiers() & Qt::ControlModifier) > 0 && key >= Qt::Key_1 && key <= Qt::Key_8)
+        return true;
+
+    // Arrows are left to the widget having the focus, except their release that stops a note possibly started before
+    if (key == Qt::Key_Up || key == Qt::Key_Down || key == Qt::Key_Right || key == Qt::Key_Left)
+        return keyEvent->type() == QEvent::KeyRelease;
+
+    // Mapped keys, with or without the modifier
+    QString keyStr = QKeySequence(key).toString();
+    return _keybdMap.getKey(QKeySequence(keyStr)) > -1 || _keybdMap.getKey(QKeySequence("Shift+" + keyStr)) > -1;
+}

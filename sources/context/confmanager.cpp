@@ -294,10 +294,14 @@ void ConfManager::clear()
 SynthCoreConfig ConfManager::getSynthConfig()
 {
     SynthCoreConfig configuration;
-    configuration.choLevel = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "cho_level", 0).toInt();
+
+    // An effect switched off keeps its settings, only its level is 0
+    configuration.choLevel = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "cho_on", true).toBool() ?
+                                 this->getValue(ConfManager::SECTION_SOUND_ENGINE, "cho_level", 0).toInt() : 0;
     configuration.choDepth = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "cho_depth", 0).toInt();
     configuration.choFrequency = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "cho_frequency", 0).toInt();
-    configuration.revLevel = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_level", 0).toInt();
+    configuration.revLevel = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_on", true).toBool() ?
+                                 this->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_level", 0).toInt() : 0;
     configuration.revSize = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_size", 0).toInt();
     configuration.revWidth = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_width", 0).toInt();
     configuration.revDamping = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_damping", 0).toInt();

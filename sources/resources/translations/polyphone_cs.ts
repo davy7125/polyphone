@@ -1242,7 +1242,7 @@ prémiový!</translation>
 <context>
     <name>ConfigSectionSound</name>
     <message>
-        <location filename="../../context/interface/configsectionsound.ui" line="369"/>
+        <location filename="../../context/interface/configsectionsound.ui" line="384"/>
         <source>Reverb</source>
         <translation>Dozvuk</translation>
     </message>
@@ -1289,7 +1289,17 @@ prémiový!</translation>
         <translation>Volby</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionsound.ui" line="381"/>
+        <location filename="../../context/interface/configsectionsound.ui" line="366"/>
+        <source>Reverb on / off</source>
+        <translation>Zapnout / vypnout dozvuk</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/configsectionsound.ui" line="408"/>
+        <source>Chorus on / off</source>
+        <translation>Zapnout / vypnout sbor (chorus)</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/configsectionsound.ui" line="426"/>
         <source>Chorus</source>
         <translation>Sbor (chorus)</translation>
     </message>
@@ -1304,8 +1314,8 @@ prémiový!</translation>
         <translation>Rozkmit</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionsound.cpp" line="53"/>
-        <location filename="../../context/interface/configsectionsound.cpp" line="129"/>
+        <location filename="../../context/interface/configsectionsound.cpp" line="56"/>
+        <location filename="../../context/interface/configsectionsound.cpp" line="150"/>
         <source>dB</source>
         <comment>unit for decibels</comment>
         <translation>dB</translation>
@@ -1360,12 +1370,12 @@ repository</source>
         <translation>Tlak</translation>
     </message>
     <message>
-        <location filename="../../clavier/controllerarea.cpp" line="225"/>
+        <location filename="../../clavier/controllerarea.cpp" line="245"/>
         <source>on</source>
         <translation>zapnuto</translation>
     </message>
     <message>
-        <location filename="../../clavier/controllerarea.cpp" line="230"/>
+        <location filename="../../clavier/controllerarea.cpp" line="250"/>
         <source>off</source>
         <translation>vypnuto</translation>
     </message>
@@ -1799,49 +1809,59 @@ repository</source>
         <translation>Virtuální klávesnice</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="147"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="150"/>
         <source>5 octaves</source>
         <translation>5 oktáv</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="152"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="155"/>
         <source>6 octaves</source>
         <translation>6 oktáv</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="157"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="160"/>
         <source>88 keys (piano)</source>
         <translation>88 kláves (klavír)</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="162"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="165"/>
         <source>128 keys (full)</source>
         <translation>128 kláves (úplná)</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="188"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="191"/>
         <source>Key</source>
         <translation>Nota</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="213"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="216"/>
         <source>Velocity</source>
         <translation>Dynamika</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="238"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="241"/>
         <source>Aftertouch</source>
         <translation>Aftertouch</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="200"/>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="279"/>
         <source>Hide the controller area</source>
         <translation>Skrýt oblast ovladačů</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="206"/>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="279"/>
         <source>Show the controller area</source>
         <translation>Zobrazit oblast ovladačů</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="284"/>
+        <source>Hide the effects</source>
+        <translation>Skrýt efekty</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="284"/>
+        <source>Show the effects</source>
+        <translation>Zobrazit efekty</translation>
     </message>
 </context>
 <context>
@@ -2602,6 +2622,76 @@ repository</source>
         <location filename="../../editor/widgets/editortoolbar.cpp" line="437"/>
         <source>Warning</source>
         <translation>Pozor</translation>
+    </message>
+</context>
+<context>
+    <name>EffectArea</name>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="35"/>
+        <source>Reverb on / off</source>
+        <translation>Zapnout / vypnout dozvuk</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="38"/>
+        <source>Reverb</source>
+        <translation>Dozvuk</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="63"/>
+        <location filename="../../clavier/effectarea.ui" line="180"/>
+        <source>Level</source>
+        <translation>Hladina</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="85"/>
+        <source>Room</source>
+        <translation>Místnost</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="107"/>
+        <source>Width</source>
+        <translation>Šířka</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="129"/>
+        <source>Damp</source>
+        <translation>Ztlumení</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="152"/>
+        <source>Chorus on / off</source>
+        <translation>Zapnout / vypnout sbor (chorus)</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="155"/>
+        <source>Chorus</source>
+        <translation>Sbor (chorus)</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="202"/>
+        <source>Depth</source>
+        <translation>Rozkmit</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="224"/>
+        <source>Frequency</source>
+        <translation>Kmitočet</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="247"/>
+        <source>Volume</source>
+        <translation>Hlasitost</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.ui" line="260"/>
+        <source>General volume</source>
+        <translation>Obecná hlasitost</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/effectarea.cpp" line="146"/>
+        <source>dB</source>
+        <comment>unit for decibels</comment>
+        <translation>dB</translation>
     </message>
 </context>
 <context>

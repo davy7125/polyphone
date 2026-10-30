@@ -49,17 +49,21 @@ static RangesType getRange(ISynthZone * zone, AttributeType champ, RangesType de
     return zone->getAttributeSet()[champ] ? zone->getAttributeValues()[champ].rValue : defaultRange;
 }
 
-// Set the value if the current one is the expected one
-static bool testAndSetRelaxed(std::atomic<int> &value, int expected, int newValue)
+// Lock shared with the audio thread, which only tries to take it
+static bool tryLock(std::atomic<int> &lock)
 {
-    return value.compare_exchange_strong(expected, newValue, std::memory_order_relaxed);
+    int expected = 0;
+    return lock.compare_exchange_strong(expected, 1, std::memory_order_acquire);
+}
+
+static void unlock(std::atomic<int> &lock)
+{
+    lock.store(0, std::memory_order_release);
 }
 
 SynthCore::SynthCore(ISynthSoundfonts * soundfonts, ISynthListener * listener) :
     _soundfonts(soundfonts),
     _sampleRate(44100),
-    _reverbOn(false),
-    _chorusOn(false),
     _smplGain(0),
     _smplIsStereoEnabled(false),
     _smplIsLoopEnabled(true),
@@ -69,7 +73,8 @@ SynthCore::SynthCore(ISynthSoundfonts * soundfonts, ISynthListener * listener) :
     _outputR(nullptr),
     _outputPosition(0),
     _outputAvailable(0),
-    _effectsInUse(0)
+    _effectConfigurationChanged(false),
+    _effectConfigurationLock(0)
 {
     _voices.initialize(listener, &_context);
     setMaxBlockSize(DEFAULT_MAX_BLOCK_SIZE);
@@ -368,44 +373,47 @@ void SynthCore::stop(bool allChannels, bool fast)
 
 void SynthCore::configure(const SynthCoreConfig &configuration)
 {
-    this->stop(true, true);
-    _configuration = configuration;
+    // The notes go on
+    bool gainChanged;
+    {
+        std::lock_guard<std::recursive_mutex> lock(_voicesMutex);
+        gainChanged = (configuration.masterGain != _configuration.masterGain);
+        _configuration = configuration;
+    }
 
-    // Update reverb and chorus
-
-    // Possibly wait if another thread is using the reverb or the chorus
-    _reverbOn = false;
-    _chorusOn = false;
-    while (!testAndSetRelaxed(_effectsInUse, 0, 1))
-        std::this_thread::sleep_for(std::chrono::milliseconds(2));
-
-    _reverbOn = _configuration.revLevel > 0;
-    _reverb.setEffectMix(0.01 * _configuration.revLevel);
-    _reverb.setRoomSize(0.01 * _configuration.revSize);
-    _reverb.setWidth(0.01 * _configuration.revWidth);
-    _reverb.setDamping(0.01 * _configuration.revDamping);
-
-    _chorusOn = _configuration.choLevel > 0;
-    _chorusRevL.setEffectMix(0.005 * _configuration.choLevel);
-    _chorusRevL.setModDepth(0.00025 * _configuration.choDepth);
-    _chorusRevL.setModFrequency(0.06667 * _configuration.choFrequency);
-    _chorusRevR.setEffectMix(0.005 * _configuration.choLevel);
-    _chorusRevR.setModDepth(0.00025 * _configuration.choDepth);
-    _chorusRevR.setModFrequency(0.06667 * _configuration.choFrequency);
-    _chorusL.setEffectMix(0.005 * _configuration.choLevel);
-    _chorusL.setModDepth(0.00025 * _configuration.choDepth);
-    _chorusL.setModFrequency(0.06667 * _configuration.choFrequency);
-    _chorusR.setEffectMix(0.005 * _configuration.choLevel);
-    _chorusR.setModDepth(0.00025 * _configuration.choDepth);
-    _chorusR.setModFrequency(0.06667 * _configuration.choFrequency);
-    _effectsInUse.store(0, std::memory_order_relaxed);
+    // Reverb and chorus, updated by the audio thread before computing its next chunks so that it never stops them
+    while (!tryLock(_effectConfigurationLock))
+        std::this_thread::yield();
+    _effectConfiguration = configuration;
+    _effectConfigurationChanged.store(true, std::memory_order_relaxed);
+    unlock(_effectConfigurationLock);
 
     // Share of the duration of the audio that computing the voices can take in real time
-    _voices.setCpuBudget(_configuration.cpuBudget);
+    _voices.setCpuBudget(configuration.cpuBudget);
 
     // Settings read by the voices
-    _context.setTuning(_configuration.referencePitch, _configuration.temperament, _configuration.temperamentRelativeKey);
-    _context.setModulatorVelToFilterType(_configuration.modulatorVelToFilterType);
+    _context.setTuning(configuration.referencePitch, configuration.temperament, configuration.temperamentRelativeKey);
+    _context.setModulatorVelToFilterType(configuration.modulatorVelToFilterType);
+
+    // The voices playing reach the new gain progressively (linear evolution of the volume on each chunk)
+    if (gainChanged)
+        configureVoices();
+}
+
+void SynthCore::updateEffects(const SynthCoreConfig &configuration)
+{
+    _reverb.setTargetMix(0.01 * configuration.revLevel);
+    _reverb.setRoomSize(0.01 * configuration.revSize);
+    _reverb.setWidth(0.01 * configuration.revWidth);
+    _reverb.setDamping(0.01 * configuration.revDamping);
+
+    SynthChorus * choruses[4] = { &_chorusRevL, &_chorusRevR, &_chorusL, &_chorusR };
+    for (SynthChorus * chorus : choruses)
+    {
+        chorus->setTargetMix(0.005 * configuration.choLevel);
+        chorus->setTargetModDepth(0.00025 * configuration.choDepth);
+        chorus->setModFrequency(0.06667 * configuration.choFrequency);
+    }
 }
 
 void SynthCore::setMidiValues(IMidiValues * midiValues)
@@ -647,15 +655,22 @@ void SynthCore::renderChunks(uint32_t len)
 
 void SynthCore::applyEffects(float * dataL, float * dataR, SynthBuses &buses, uint32_t len)
 {
+    // New settings given by configure (taken at the next call if configure is writing them)
+    if (_effectConfigurationChanged.load(std::memory_order_relaxed) && tryLock(_effectConfigurationLock))
+    {
+        SynthCoreConfig configuration = _effectConfiguration;
+        _effectConfigurationChanged.store(false, std::memory_order_relaxed);
+        unlock(_effectConfigurationLock);
+        updateEffects(configuration);
+    }
+
     // Copy the data rev + chorus
     memcpy(dataL, buses.dataChoRevL, len * sizeof(float));
     memcpy(dataR, buses.dataChoRevR, len * sizeof(float));
 
-    bool lockAcquired = false;
-    if (_chorusOn || _reverbOn)
-        lockAcquired = testAndSetRelaxed(_effectsInUse, 0, 1);
     // The effects are processed chunk by chunk: they decide for each one whether there is something to compute
-    if (_chorusOn && lockAcquired)
+    // (nothing when they are off)
+    if (_chorusRevL.isOn() || _chorusRevR.isOn())
     {
         // Apply chorus
         for (uint32_t pos = 0; pos < len; pos += COMPUTATION_CHUNK)
@@ -669,7 +684,7 @@ void SynthCore::applyEffects(float * dataL, float * dataR, SynthBuses &buses, ui
     FastMaths::addVectors(dataL, buses.dataRevL, len);
     FastMaths::addVectors(dataR, buses.dataRevR, len);
 
-    if (_reverbOn && lockAcquired)
+    if (_reverb.isOn())
     {
         // Apply reverb
         for (uint32_t pos = 0; pos < len; pos += COMPUTATION_CHUNK)
@@ -677,7 +692,7 @@ void SynthCore::applyEffects(float * dataL, float * dataR, SynthBuses &buses, ui
     }
 
     // Add the data cho, process the effect first
-    if (_chorusOn && lockAcquired)
+    if (_chorusL.isOn() || _chorusR.isOn())
     {
         // Apply chorus
         for (uint32_t pos = 0; pos < len; pos += COMPUTATION_CHUNK)
@@ -686,9 +701,6 @@ void SynthCore::applyEffects(float * dataL, float * dataR, SynthBuses &buses, ui
             _chorusR.process(&buses.dataChoR[pos], COMPUTATION_CHUNK);
         }
     }
-
-    if (lockAcquired)
-        _effectsInUse.store(0, std::memory_order_relaxed);
 
     FastMaths::addVectors(dataL, buses.dataChoL, len);
     FastMaths::addVectors(dataR, buses.dataChoR, len);

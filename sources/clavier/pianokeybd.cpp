@@ -21,6 +21,7 @@
 #include "pianoscene.h"
 #include "contextmanager.h"
 #include <QApplication>
+#include <cmath>
 
 PianoKeybd::PianoKeybd(QWidget *parent, const int startKey, const int numKeys) : QGraphicsView(parent),
     _scene(nullptr),
@@ -65,7 +66,17 @@ void PianoKeybd::initialize()
 void PianoKeybd::resizeEvent(QResizeEvent *event)
 {
     QGraphicsView::resizeEvent(event);
-    fitInView(_scene->sceneRect());
+    fitScene();
+}
+
+void PianoKeybd::fitScene()
+{
+    // The keyboard fills the view without being distorted, centered if the view hasn't the height for its width
+    // (unlike fitInView, no margin is added)
+    QRectF rect = _scene->sceneRect();
+    double scale = qMin(viewport()->width() / rect.width(), viewport()->height() / rect.height());
+    setTransform(QTransform::fromScale(scale, scale));
+    centerOn(rect.center());
 }
 
 void PianoKeybd::set(KeyboardProperty keyboardProperty, QVariant value)
@@ -113,7 +124,8 @@ void PianoKeybd::setStartKey(int startKey)
     if (startKey != _scene->startKey())
     {
         initScene(startKey, _scene->numKeys());
-        fitInView(_scene->sceneRect());
+        fitScene();
+        updateGeometry(); // Another ratio
     }
 }
 
@@ -122,7 +134,8 @@ void PianoKeybd::setNumKeys(int numKeys)
     if (numKeys != _scene->numKeys())
     {
         initScene(_scene->startKey(), numKeys);
-        fitInView(_scene->sceneRect());
+        fitScene();
+        updateGeometry(); // Another ratio
     }
 }
 
@@ -136,9 +149,17 @@ QSize PianoKeybd::sizeHint() const
     return sceneRect().toRect().size();
 }
 
+QSize PianoKeybd::minimumSizeHint() const
+{
+    // Small, so that the window can have the height for its width
+    return QSize(100, heightForWidth(100));
+}
+
 int PianoKeybd::heightForWidth(int w) const
 {
-    return static_cast<int>((double)w * sceneRect().height() / sceneRect().width() + 0.5);
+    // Same ratio as the scene inside the frame, rounded up: the keyboard fills the whole width
+    int frame = 2 * frameWidth();
+    return static_cast<int>(std::ceil(static_cast<double>(w - frame) * sceneRect().height() / sceneRect().width())) + frame;
 }
 
 void PianoKeybd::customize(int key, CustomizationType type, QVariant value)
@@ -177,6 +198,11 @@ void PianoKeybd::inputNoteOff(int midiNote)
 void PianoKeybd::triggerGlowEffect()
 {
     _scene->triggerGlowEffect();
+}
+
+bool PianoKeybd::capturesKey(QKeyEvent * event)
+{
+    return _scene->capturesKey(event);
 }
 
 void PianoKeybd::updateMapping()

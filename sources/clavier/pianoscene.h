@@ -49,6 +49,7 @@ public:
     void resetCustomization(int key, PianoKeybd::CustomizationType type);
 
     void updateMapping();
+    bool capturesKey(QKeyEvent * keyEvent);
     void showNoteOn(const int note, int vel);
     void showNoteOff(const int note);
     int numKeys() const { return m_numKeys; }

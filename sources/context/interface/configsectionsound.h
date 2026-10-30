@@ -38,9 +38,13 @@ class ConfigSectionSound : public QWidget
 public:
     explicit ConfigSectionSound(QWidget *parent = nullptr);
     ~ConfigSectionSound();
+
+public slots:
     void initialize();
 
 private slots:
+    void on_pushReverb_toggled(bool checked);
+    void on_pushChorus_toggled(bool checked);
     void on_dialRevNiveau_valueChanged(int value);
     void on_dialRevProfondeur_valueChanged(int value);
     void on_dialRevDensite_valueChanged(int value);

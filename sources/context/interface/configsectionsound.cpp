@@ -36,6 +36,9 @@ ConfigSectionSound::ConfigSectionSound(QWidget *parent) :
     ui->labelSubTitle1->setStyleSheet("QLabel{margin: 20px 0;}");
     ui->labelSubTitle2->setStyleSheet("QLabel{margin: 20px 0;}");
     ui->labelSubTitle3->setStyleSheet("QLabel{margin: 20px 0;}");
+
+    // The effects and the volume can also be changed in the virtual keyboard
+    connect(ContextManager::configuration(), SIGNAL(soundEngineConfigurationChanged()), this, SLOT(initialize()));
 }
 
 ConfigSectionSound::~ConfigSectionSound()
@@ -53,6 +56,10 @@ void ConfigSectionSound::initialize()
     ui->labelGain->setText((gain >= 0 ? "+" : "") + QString::number(gain) + " " + tr("dB", "unit for decibels"));
 
     // Reverb
+    ui->pushReverb->blockSignals(true);
+    ui->pushReverb->setChecked(ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_on", true).toBool());
+    ui->pushReverb->blockSignals(false);
+
     ui->dialRevNiveau->blockSignals(true);
     ui->dialRevNiveau->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_level", 0).toInt());
     ui->dialRevNiveau->blockSignals(false);
@@ -70,6 +77,10 @@ void ConfigSectionSound::initialize()
     ui->dialRevAttenuation->blockSignals(false);
 
     // Chorus
+    ui->pushChorus->blockSignals(true);
+    ui->pushChorus->setChecked(ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "cho_on", true).toBool());
+    ui->pushChorus->blockSignals(false);
+
     ui->dialChoNiveau->blockSignals(true);
     ui->dialChoNiveau->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "cho_level", 0).toInt());
     ui->dialChoNiveau->blockSignals(false);
@@ -86,6 +97,16 @@ void ConfigSectionSound::initialize()
     ui->comboVelToFilter->blockSignals(true);
     ui->comboVelToFilter->setCurrentIndex(ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "modulator_vel_to_filter", 1).toInt());
     ui->comboVelToFilter->blockSignals(false);
+}
+
+void ConfigSectionSound::on_pushReverb_toggled(bool checked)
+{
+    ContextManager::configuration()->setValue(ConfManager::SECTION_SOUND_ENGINE, "rev_on", checked);
+}
+
+void ConfigSectionSound::on_pushChorus_toggled(bool checked)
+{
+    ContextManager::configuration()->setValue(ConfManager::SECTION_SOUND_ENGINE, "cho_on", checked);
 }
 
 void ConfigSectionSound::on_dialRevNiveau_valueChanged(int value)
