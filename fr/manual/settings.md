@@ -25,6 +25,17 @@ Taille du tampon
   Une faible valeur induit une faible latence mais le son risque de craquer selon la performance de l'ordinateur.
   Avec la valeur :guilabel:`Défaut`, la taille dépend du système audio.
 
+Polyphonie
+: Nombre maximal de voix jouées simultanément, de 64 à 4096 (1024 par défaut).
+  Une voix est un échantillon en cours de lecture&nbsp;: une note peut utiliser plusieurs voix, deux avec un échantillon stéréo par exemple.
+  Au-delà de ce nombre, des notes s'estompent&nbsp;: d'abord celles qui sont relâchées, puis les plus faibles.
+  Les notes qui viennent de commencer, ainsi que la note la plus grave et la note la plus aiguë parmi celles qui sont tenues, sont conservées le plus longtemps possible.
+
+Charge du processeur
+: Part maximale du temps processeur utilisée pour calculer les voix, de 20 à 100&nbsp;% (60&nbsp;% par défaut).
+  Au-delà, des notes s'estompent de la même manière.
+  Une valeur élevée permet de jouer plus de notes simultanément, mais le son risque de craquer.
+
 Entrée MIDI
 : Spécifie l'entrée MIDI qui contrôle le synthétiseur et le clavier virtuel.
 

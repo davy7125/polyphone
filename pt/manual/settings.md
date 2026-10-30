@@ -25,6 +25,17 @@ Tamanho do buffer
   Um buffer pequeno resulta em uma latência pequena, mas o som pode ficar com estalos.
   Com o valor :guilabel:`Padrão`, o tamanho depende do sistema de áudio.
 
+Polifonia
+: Número máximo de vozes tocadas ao mesmo tempo, de 64 a 4096 (1024 por padrão).
+  Uma voz é uma amostra sendo tocada: uma nota pode usar várias vozes, duas com uma amostra estéreo, por exemplo.
+  Acima desse número, algumas notas desaparecem gradualmente: primeiro as que foram soltas, depois as mais suaves.
+  As notas que acabaram de começar, assim como a tecla pressionada mais aguda e a mais grave, são conservadas pelo maior tempo possível.
+
+Carga do processador
+: Parcela máxima do tempo do processador usada para calcular as vozes, de 20 a 100% (60% por padrão).
+  Acima dessa parcela, algumas notas desaparecem gradualmente da mesma forma.
+  Um valor alto permite tocar mais notas ao mesmo tempo, mas o som pode ficar com estalos.
+
 Entrada MIDI
 : Especifica a entrada MIDI que controla o sintetizador e o teclado virtual.
 

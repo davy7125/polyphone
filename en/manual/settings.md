@@ -25,6 +25,17 @@ Buffer size
   A small buffer results in a small latency, but the sound may become scratchy.
   With the value :guilabel:`Default`, the size depends on the audio system.
 
+Polyphony
+: Maximum number of voices played at the same time, from 64 to 4096 (1024 by default).
+  A voice is a sample being played: a note can use several voices, two with a stereo sample for instance.
+  Beyond this number, notes fade out: first the released ones, then the quietest ones.
+  The notes that have just started, as well as the highest and the lowest keys held, are kept as long as possible.
+
+Processor load
+: Maximum share of the processor time used for computing the voices, from 20 to 100% (60% by default).
+  Beyond this share, notes fade out in the same way.
+  A high value allows more notes to be played at the same time, but the sound may become scratchy.
+
 MIDI input
 : Specifies the MIDI input controlling the synthesizer and the virtual keyboard.
 

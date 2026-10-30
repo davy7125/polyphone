@@ -25,6 +25,17 @@ Pufferlänge
   Ein kleiner Puffer führt zu einer geringen Latenz, der Klang kann dabei aber kratzig werden.
   Mit dem Wert :guilabel:`Standard` hängt die Größe vom Audiosystem ab.
 
+Polyphonie
+: Maximale Anzahl gleichzeitig gespielter Stimmen, von 64 bis 4096 (standardmäßig 1024).
+  Eine Stimme ist ein Sample, das gerade abgespielt wird: Eine Note kann mehrere Stimmen nutzen, zum Beispiel zwei bei einem Stereo-Sample.
+  Oberhalb dieser Anzahl werden Noten ausgeblendet: zuerst die losgelassenen, dann die leisesten.
+  Gerade begonnene Noten sowie die höchste und die tiefste gehaltene Taste bleiben so lange wie möglich erhalten.
+
+Prozessorlast
+: Maximaler Anteil der Prozessorzeit, der für die Berechnung der Stimmen genutzt wird, von 20 bis 100 % (standardmäßig 60 %).
+  Oberhalb dieses Anteils werden Noten auf dieselbe Weise ausgeblendet.
+  Ein hoher Wert erlaubt mehr gleichzeitig gespielte Noten, der Klang kann dabei aber kratzig werden.
+
 MIDI-Eingang
 : Legt den MIDI-Eingang fest, der den Synthesizer und die virtuelle Tastatur steuert.
 

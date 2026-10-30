@@ -25,6 +25,17 @@ Tamaño del búfer
   Un búfer pequeño da una latencia baja, pero el sonido puede volverse entrecortado.
   Con el valor :guilabel:`Por defecto`, el tamaño depende del sistema de audio.
 
+Polifonía
+: Número máximo de voces reproducidas a la vez, de 64 a 4096 (1024 por defecto).
+  Una voz es una muestra en reproducción: una nota puede usar varias voces, por ejemplo dos con una muestra estéreo.
+  Por encima de este número, algunas notas se desvanecen: primero las que se han soltado, luego las más suaves.
+  Las notas que acaban de empezar, así como la nota más aguda y la más grave de las que se mantienen pulsadas, se conservan el mayor tiempo posible.
+
+Carga del procesador
+: Proporción máxima del tiempo de procesador utilizada para calcular las voces, del 20 al 100 % (60 % por defecto).
+  Por encima de esta proporción, algunas notas se desvanecen de la misma manera.
+  Un valor alto permite tocar más notas a la vez, pero el sonido puede volverse entrecortado.
+
 Entrada MIDI
 : Indica la entrada MIDI que controla el sintetizador y el teclado virtual.
 

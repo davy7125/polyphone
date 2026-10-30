@@ -25,6 +25,17 @@ Dimensione del buffer
   Un buffer piccolo comporta una latenza ridotta, ma il suono può diventare graffiante.
   Con il valore :guilabel:`Predefinito`, la dimensione dipende dal sistema audio.
 
+Polifonia
+: Numero massimo di voci suonate contemporaneamente, da 64 a 4096 (1024 per impostazione predefinita).
+  Una voce è un campione in riproduzione: una nota può usare più voci, ad esempio due con un campione stereo.
+  Oltre questo numero, alcune note si dissolvono: prima quelle rilasciate, poi le più deboli.
+  Le note appena iniziate, così come la nota tenuta più acuta e quella più grave, vengono mantenute il più a lungo possibile.
+
+Carico del processore
+: Quota massima del tempo del processore usata per calcolare le voci, dal 20 al 100% (60% per impostazione predefinita).
+  Oltre questa quota, alcune note si dissolvono allo stesso modo.
+  Un valore elevato permette di suonare più note contemporaneamente, ma il suono può diventare graffiante.
+
 Ingresso MIDI
 : Specifica l'ingresso MIDI che controlla il sintetizzatore e la tastiera virtuale.
 
