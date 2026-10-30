@@ -52,12 +52,6 @@ Licenza
 Provenienza dei campioni
 : Origine dei campioni.
 
-Timbro
-: Descrizione del timbro.
-
-Articolazione
-: Descrizione dell'articolazione.
-
 Genere
 : Genere musicale a cui è destinato il soundfont.
 

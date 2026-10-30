@@ -52,12 +52,6 @@ Licença
 Origem das amostras
 : Origem das amostras.
 
-Timbre
-: Descrição do timbre.
-
-Articulação
-: Descrição da articulação.
-
 Gênero
 : Gênero musical visado pela soundfont.
 

@@ -52,12 +52,6 @@ Licencia
 Origen de las muestras
 : Procedencia de las muestras.
 
-Timbre
-: Descripción del timbre.
-
-Articulación
-: Descripción de la articulación.
-
 Género
 : Género musical al que se dirige el soundfont.
 

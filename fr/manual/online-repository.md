@@ -52,12 +52,6 @@ Licence
 Source des échantillons
 : Origine des échantillons.
 
-Timbre
-: Description du timbre.
-
-Articulation
-: Description de l'articulation.
-
 Genre
 : Genre visé par la banque de sons.
 

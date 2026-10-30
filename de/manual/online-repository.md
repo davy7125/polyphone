@@ -52,12 +52,6 @@ Lizenz
 Sample-Quelle
 : Herkunft der Samples.
 
-Klangfarbe
-: Beschreibung der Klangfarbe.
-
-Artikulation
-: Beschreibung der Artikulation.
-
 Genre
 : Musikgenre, auf das der Soundfont ausgerichtet ist.
 

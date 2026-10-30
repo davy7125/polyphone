@@ -52,12 +52,6 @@ License
 Sample source
 : Origin of the samples.
 
-Timbre
-: Description of the timbre.
-
-Articulation
-: Description of the articulation.
-
 Genre
 : Genre targeted by the soundfont.
 
