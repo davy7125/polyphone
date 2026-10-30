@@ -70,7 +70,8 @@ Size
 
 Loop
 : The loop start and end points can be modified here.
-  A button edits the start and end positions so that the loop spans the entire sample.
+  A first button removes the loop by setting its start and end to 0.
+  A second button edits the start and end positions so that the loop spans the entire sample.
 
 Tuning
 : Ability to adjust the root key of a sample and its correction in cents so that the sound is tuned to equal temperament.

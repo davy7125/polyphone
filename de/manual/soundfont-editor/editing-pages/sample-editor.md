@@ -70,7 +70,8 @@ Größe
 
 Loop
 : Hier können Start- und Endpunkt des Loops geändert werden.
-  Ein Button setzt Start- und Endposition so, dass der Loop das gesamte Sample umfasst.
+  Ein erster Button entfernt den Loop, indem Start und Ende auf 0 gesetzt werden.
+  Ein zweiter Button setzt Start- und Endposition so, dass der Loop das gesamte Sample umfasst.
 
 Stimmung
 : Hier können die Basisnote eines Samples und seine Korrektur in Cent angepasst werden, damit der Klang gleichstufig gestimmt ist.

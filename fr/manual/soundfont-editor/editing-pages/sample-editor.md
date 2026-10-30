@@ -70,7 +70,8 @@ Taille
 
 Boucle
 : Le début et la fin de la boucle peuvent être modifiés ici.
-  Un bouton édite les positions de début et de fin de manière à ce que la boucle représente l'échantillon entier.
+  Un premier bouton enlève la boucle en mettant son début et sa fin à 0.
+  Un second bouton édite les positions de début et de fin de manière à ce que la boucle représente l'échantillon entier.
 
 Accordage
 : Possibilité d'ajuster la note de base d'un échantillon et sa correction en centièmes de demi-ton pour que le son soit accordé dans le tempérament égal.

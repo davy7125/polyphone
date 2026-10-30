@@ -70,7 +70,8 @@ Tamanho
 
 Loop
 : Os pontos de início e de fim do loop podem ser modificados aqui.
-  Um botão ajusta as posições de início e de fim para que o loop abranja a amostra inteira.
+  Um primeiro botão remove o loop definindo o início e o fim como 0.
+  Um segundo botão ajusta as posições de início e de fim para que o loop abranja a amostra inteira.
 
 Afinação
 : Permite ajustar a nota base de uma amostra e sua correção em cents para que o som fique afinado no temperamento igual.

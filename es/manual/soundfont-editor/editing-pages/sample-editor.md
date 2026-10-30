@@ -70,7 +70,8 @@ Tamaño
 
 Bucle
 : Aquí se pueden modificar los puntos de inicio y de fin del bucle.
-  Un botón ajusta las posiciones de inicio y de fin para que el bucle abarque toda la muestra.
+  Un primer botón elimina el bucle poniendo su inicio y su fin a 0.
+  Un segundo botón ajusta las posiciones de inicio y de fin para que el bucle abarque toda la muestra.
 
 Afinación
 : Permite ajustar la nota raíz de una muestra y su corrección en centésimas para que el sonido quede afinado en el temperamento igual.

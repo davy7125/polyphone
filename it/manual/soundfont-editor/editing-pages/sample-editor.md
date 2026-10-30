@@ -70,7 +70,8 @@ Dimensione
 
 Loop
 : Qui si possono modificare i punti di inizio e di fine del loop.
-  Un pulsante imposta le posizioni di inizio e di fine in modo che il loop copra l'intero campione.
+  Un primo pulsante rimuove il loop impostandone l'inizio e la fine a 0.
+  Un secondo pulsante imposta le posizioni di inizio e di fine in modo che il loop copra l'intero campione.
 
 Accordatura
 : Permette di regolare la nota di base di un campione e la sua correzione in centesimi, in modo che il suono sia accordato secondo il temperamento equabile.
