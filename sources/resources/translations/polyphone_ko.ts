@@ -25,12 +25,13 @@
 <context>
     <name>AbstractTool</name>
     <message>
-        <location filename="../../editor/tools/abstracttool.cpp" line="132"/>
+        <location filename="../../editor/tools/abstracttool.cpp" line="98"/>
+        <location filename="../../editor/tools/abstracttool.cpp" line="140"/>
         <source>Warning</source>
         <translation>경고</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/abstracttool.cpp" line="137"/>
+        <location filename="../../editor/tools/abstracttool.cpp" line="145"/>
         <source>Information</source>
         <translation>정보</translation>
     </message>
@@ -6591,6 +6592,112 @@ Other soundfont editors might display other units.</source>
         <location filename="../../editor/tools/monitor/toolmonitor_gui.ui" line="201"/>
         <source>Defined value in a division</source>
         <translation>분할에 정의된 값</translation>
+    </message>
+</context>
+<context>
+    <name>ToolMonoConversion</name>
+    <message>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion.cpp" line="58"/>
+        <source>At least one stereo sample must be selected.</source>
+        <translation>하나 이상의 스테레오 샘플을 선택해야 합니다.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion.cpp" line="340"/>
+        <source>The following stereo samples have not been converted because the sample rates of their channels differ:</source>
+        <translation>다음 스테레오 샘플은 채널의 샘플 레이트가 서로 달라 변환되지 않았습니다:</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion.cpp" line="344"/>
+        <source>Clipping occurred in the following samples:</source>
+        <translation>다음 샘플에서 클리핑이 발생했습니다:</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion.cpp" line="347"/>
+        <source>In the following instruments, some divisions have not been merged because their key or velocity ranges differ:</source>
+        <translation>다음 악기에서 키 범위 또는 벨로시티 범위가 달라 일부 분할이 병합되지 않았습니다:</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion.h" line="47"/>
+        <source>Stereo samples</source>
+        <translation>스테레오 샘플</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion.h" line="68"/>
+        <source>Convert to mono</source>
+        <translation>모노로 변환</translation>
+    </message>
+</context>
+<context>
+    <name>ToolMonoConversion_gui</name>
+    <message>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion_gui.ui" line="20"/>
+        <source>Mono signal:</source>
+        <translation>모노 신호:</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion_gui.ui" line="27"/>
+        <source>Clipping may occur.</source>
+        <translation>클리핑이 발생할 수 있습니다.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion_gui.ui" line="30"/>
+        <source>Sum: L + R</source>
+        <translation>합: L + R</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion_gui.ui" line="37"/>
+        <source>Keeps the level of a sound centered in the stereo field.</source>
+        <translation>스테레오 필드 중앙에 위치한 소리의 레벨을 유지합니다.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion_gui.ui" line="40"/>
+        <source>Average: (L + R) / 2</source>
+        <translation>평균: (L + R) / 2</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion_gui.ui" line="47"/>
+        <source>Keeps the loudness of a wide stereo sound.</source>
+        <translation>넓은 스테레오 소리의 음량감을 유지합니다.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion_gui.ui" line="50"/>
+        <source>Constant power: (L + R) / √2</source>
+        <translation>일정 파워: (L + R) / √2</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion_gui.ui" line="57"/>
+        <source>Left channel only</source>
+        <translation>왼쪽 채널만</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion_gui.ui" line="64"/>
+        <source>Right channel only</source>
+        <translation>오른쪽 채널만</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion_gui.ui" line="71"/>
+        <source>Divisions using the left and right channels are merged if their key and velocity ranges are identical. Their parameters are averaged.</source>
+        <translation>왼쪽 및 오른쪽 채널을 사용하는 분할은 키 범위와 벨로시티 범위가 동일하면 병합됩니다. 매개변수는 평균화됩니다.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion_gui.ui" line="74"/>
+        <source>Merge the left and right divisions in the instruments</source>
+        <translation>악기에서 왼쪽 및 오른쪽 분할 병합</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion_gui.ui" line="96"/>
+        <source>&amp;Ok</source>
+        <translation>확인(&amp;O)</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion_gui.ui" line="116"/>
+        <source>&amp;Cancel</source>
+        <translation>취소(&amp;C)</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion_gui.cpp" line="64"/>
+        <source>Not available with samples of type &quot;link&quot;: the left and right channels cannot be distinguished.</source>
+        <translation>&quot;연결&quot; 유형의 샘플에서는 사용할 수 없습니다: 왼쪽과 오른쪽 채널을 구분할 수 없습니다.</translation>
     </message>
 </context>
 <context>

@@ -72,6 +72,9 @@ protected:
     /// Run the tool, emit the signal "finished" at the end
     virtual void runInternal(SoundfontManager * sm, QWidget * parent, IdList ids, AbstractToolParameters * parameters) = 0;
 
+    /// Get an error preventing the tool from running on the ids to process (displayed instead of running the tool)
+    virtual QString getBlockingError(IdList ids) { Q_UNUSED(ids) return ""; }
+
     /// Get the warning to display after the tool is run
     virtual QString getWarning() { return ""; }
 

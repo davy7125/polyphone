@@ -25,12 +25,13 @@
 <context>
     <name>AbstractTool</name>
     <message>
-        <location filename="../../editor/tools/abstracttool.cpp" line="132"/>
+        <location filename="../../editor/tools/abstracttool.cpp" line="98"/>
+        <location filename="../../editor/tools/abstracttool.cpp" line="140"/>
         <source>Warning</source>
         <translation>Aviso</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/abstracttool.cpp" line="137"/>
+        <location filename="../../editor/tools/abstracttool.cpp" line="145"/>
         <source>Information</source>
         <translation>Informação</translation>
     </message>
@@ -6633,6 +6634,112 @@ Outros editores de soundfont podem exibir outras unidades.</translation>
         <location filename="../../editor/tools/monitor/toolmonitor_gui.ui" line="201"/>
         <source>Defined value in a division</source>
         <translation>Valor definido em uma divisão</translation>
+    </message>
+</context>
+<context>
+    <name>ToolMonoConversion</name>
+    <message>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion.cpp" line="58"/>
+        <source>At least one stereo sample must be selected.</source>
+        <translation>Ao menos uma amostra estéreo deve ser selecionada.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion.cpp" line="340"/>
+        <source>The following stereo samples have not been converted because the sample rates of their channels differ:</source>
+        <translation>As seguintes amostras estéreo não foram convertidas porque as taxas de amostragem de seus canais são diferentes:</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion.cpp" line="344"/>
+        <source>Clipping occurred in the following samples:</source>
+        <translation>Ocorreu saturação nas seguintes amostras:</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion.cpp" line="347"/>
+        <source>In the following instruments, some divisions have not been merged because their key or velocity ranges differ:</source>
+        <translation>Nos seguintes instrumentos, algumas divisões não foram mescladas porque seus alcances de notas ou de velocidade são diferentes:</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion.h" line="47"/>
+        <source>Stereo samples</source>
+        <translation>Amostras estéreo</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion.h" line="68"/>
+        <source>Convert to mono</source>
+        <translation>Converter para mono</translation>
+    </message>
+</context>
+<context>
+    <name>ToolMonoConversion_gui</name>
+    <message>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion_gui.ui" line="20"/>
+        <source>Mono signal:</source>
+        <translation>Sinal mono:</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion_gui.ui" line="27"/>
+        <source>Clipping may occur.</source>
+        <translation>Pode ocorrer saturação.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion_gui.ui" line="30"/>
+        <source>Sum: L + R</source>
+        <translation>Soma: E + D</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion_gui.ui" line="37"/>
+        <source>Keeps the level of a sound centered in the stereo field.</source>
+        <translation>Mantém o nível de um som centralizado no campo estéreo.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion_gui.ui" line="40"/>
+        <source>Average: (L + R) / 2</source>
+        <translation>Média: (E + D) / 2</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion_gui.ui" line="47"/>
+        <source>Keeps the loudness of a wide stereo sound.</source>
+        <translation>Mantém a sonoridade de um som estéreo amplo.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion_gui.ui" line="50"/>
+        <source>Constant power: (L + R) / √2</source>
+        <translation>Potência constante: (E + D) / √2</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion_gui.ui" line="57"/>
+        <source>Left channel only</source>
+        <translation>Somente o canal esquerdo</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion_gui.ui" line="64"/>
+        <source>Right channel only</source>
+        <translation>Somente o canal direito</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion_gui.ui" line="71"/>
+        <source>Divisions using the left and right channels are merged if their key and velocity ranges are identical. Their parameters are averaged.</source>
+        <translation>As divisões que usam os canais esquerdo e direito são mescladas se seus alcances de notas e de velocidade forem idênticos. É feita a média de seus parâmetros.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion_gui.ui" line="74"/>
+        <source>Merge the left and right divisions in the instruments</source>
+        <translation>Mesclar as divisões esquerda e direita nos instrumentos</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion_gui.ui" line="96"/>
+        <source>&amp;Ok</source>
+        <translation>&amp;Ok</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion_gui.ui" line="116"/>
+        <source>&amp;Cancel</source>
+        <translation>Cancel&amp;ar</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion_gui.cpp" line="64"/>
+        <source>Not available with samples of type &quot;link&quot;: the left and right channels cannot be distinguished.</source>
+        <translation>Indisponível com amostras do tipo &quot;vínculo&quot;: os canais esquerdo e direito não podem ser distinguidos.</translation>
     </message>
 </context>
 <context>

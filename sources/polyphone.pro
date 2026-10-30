@@ -474,6 +474,9 @@ SOURCES	+= main.cpp \
     dialogs/dialogrecorder.cpp \
     editor/tools/link_sample/toollinksample.cpp \
     editor/tools/unlink_sample/toolunlinksample.cpp \
+    editor/tools/mono_conversion/toolmonoconversion.cpp \
+    editor/tools/mono_conversion/toolmonoconversion_gui.cpp \
+    editor/tools/mono_conversion/toolmonoconversion_parameters.cpp \
     editor/tools/change_attenuation/toolchangeattenuation.cpp \
     editor/tools/change_attenuation/toolchangeattenuation_gui.cpp \
     editor/tools/change_attenuation/toolchangeattenuation_parameters.cpp \
@@ -888,6 +891,9 @@ HEADERS += \
     dialogs/dialogrecorder.h \
     editor/tools/link_sample/toollinksample.h \
     editor/tools/unlink_sample/toolunlinksample.h \
+    editor/tools/mono_conversion/toolmonoconversion.h \
+    editor/tools/mono_conversion/toolmonoconversion_gui.h \
+    editor/tools/mono_conversion/toolmonoconversion_parameters.h \
     editor/tools/change_attenuation/toolchangeattenuation.h \
     editor/tools/change_attenuation/toolchangeattenuation_gui.h \
     editor/tools/change_attenuation/toolchangeattenuation_parameters.h \
@@ -1083,6 +1089,7 @@ FORMS += \
     editor/tools/external_command/toolexternalcommand_gui.ui \
     editor/tools/frequency_filter/toolfrequencyfilter_gui.ui \
     editor/tools/change_volume/toolchangevolume_gui.ui \
+    editor/tools/mono_conversion/toolmonoconversion_gui.ui \
     editor/tools/transpose_smpl/tooltransposesmpl_gui.ui \
     context/interface/configpanel.ui \
     dialogs/dialogkeyboard.ui \

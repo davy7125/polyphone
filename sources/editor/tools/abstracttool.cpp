@@ -91,6 +91,14 @@ void AbstractTool::run()
         }
     }
 
+    // Possibly display an error instead of running the tool
+    QString error = getBlockingError(_idsToProcess);
+    if (!error.isEmpty())
+    {
+        QMessageBox::warning(s_parent, tr("Warning"), error);
+        return;
+    }
+
     // Possibly create a dialog if not already done
     if (_toolGui != nullptr && _toolDialog == nullptr)
     {

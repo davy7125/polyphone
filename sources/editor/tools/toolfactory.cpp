@@ -36,6 +36,7 @@
 #include "transpose_smpl/tooltransposesmpl.h"
 #include "link_sample/toollinksample.h"
 #include "unlink_sample/toolunlinksample.h"
+#include "mono_conversion/toolmonoconversion.h"
 #include "change_attenuation/toolchangeattenuation.h"
 #include "global_settings/toolglobalsettings.h"
 #include "celeste_tuning/toolcelestetuning.h"
@@ -93,6 +94,7 @@ void ToolFactory::initialize()
            << new ToolTransposeSmpl()
            << new ToolLinkSample()
            << new ToolUnlinkSample()
+           << new ToolMonoConversion()
            << new ToolSampleExport()
            << new ToolFastEditSmpl()
            << new ToolLoadFromInst()
