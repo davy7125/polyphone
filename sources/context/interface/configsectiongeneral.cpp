@@ -28,7 +28,8 @@
 
 ConfigSectionGeneral::ConfigSectionGeneral(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::ConfigSectionGeneral)
+    ui(new Ui::ConfigSectionGeneral),
+    _audioDevicesChanged(false)
 {
     ui->setupUi(this);
 
@@ -40,6 +41,9 @@ ConfigSectionGeneral::ConfigSectionGeneral(QWidget *parent) :
     ui->checkRepercussionStereo->setToolTip(ContextManager::translation()->getTranslation(TranslationManager::TRANSLATION_STEREO_EDITING_HELP));
     ui->comboPolyphony->setToolTip(tr("Maximum number of voices, the quietest notes fading out above it"));
     ui->comboCpuBudget->setToolTip(tr("Maximum share of the processor time used by the voices, the quietest notes fading out above it"));
+
+    // Audio outputs plugged or unplugged
+    connect(ContextManager::audio(), SIGNAL(devicesChanged()), this, SLOT(onAudioDevicesChanged()));
 }
 
 ConfigSectionGeneral::~ConfigSectionGeneral()
@@ -77,35 +81,74 @@ void ConfigSectionGeneral::showEvent(QShowEvent * event)
     ui->checkRepercussionStereo->setChecked(ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "stereo_modification", true).toBool());
     ui->checkRepercussionStereo->blockSignals(false);
 
+    // The audio outputs may have changed while the section was hidden
+    if (_audioDevicesChanged)
+        initializeAudio();
+
     if (event != nullptr)
         QWidget::showEvent(event);
 }
 
+void ConfigSectionGeneral::onAudioDevicesChanged()
+{
+    // Probing the devices may interrupt the sound: only done if the list can be seen
+    if (isVisible())
+        initializeAudio();
+    else
+        _audioDevicesChanged = true;
+}
+
 void ConfigSectionGeneral::initializeAudio()
 {
+    _audioDevicesChanged = false;
     ui->comboAudioOuput->blockSignals(true);
     ui->comboBufferSize->blockSignals(true);
     ui->comboPolyphony->blockSignals(true);
     ui->comboCpuBudget->blockSignals(true);
 
+    // Configured device
+    QString audioType = ContextManager::configuration()->getValue(ConfManager::SECTION_AUDIO, "type", "").toString();
+    QString selectedHostIdentifier, selectedHostName, selectedDeviceName;
+    if (audioType != "none")
+        AudioDevice::getHostAndDeviceFromConfig(audioType, selectedHostIdentifier, selectedHostName, selectedDeviceName);
+
     // Current hosts with devices
     QList<AudioDevice::HostInfo> hosts = ContextManager::audio()->getAllHosts();
     ui->comboAudioOuput->clear();
     ui->comboAudioOuput->addItem("-", "none");
+    int selectedIndex = -1;
+    int selectedHostEnd = -1;
     for (int i = 0; i < hosts.count(); i++)
     {
         QString hostIdentifier = hosts[i].identifier;
         QString hostName = hosts[i].name;
+        bool isSelectedHost = (hostIdentifier == selectedHostIdentifier);
+        if (hosts[i].canFollowDefault)
+        {
+            if (isSelectedHost && selectedDeviceName.isEmpty())
+                selectedIndex = ui->comboAudioOuput->count();
+            ui->comboAudioOuput->addItem(hostName + " - " + tr("System default"), hostIdentifier + "|");
+        }
         for (int j = 0; j < hosts[i].devices.count(); j++)
         {
             QString deviceName = hosts[i].devices[j].name;
+            if (isSelectedHost && (deviceName == selectedDeviceName ||
+                                   (selectedDeviceName.isEmpty() && !hosts[i].canFollowDefault && hosts[i].devices[j].isDefault)))
+                selectedIndex = ui->comboAudioOuput->count();
             ui->comboAudioOuput->addItem(hostName + " - " + deviceName, hostIdentifier + "|" + deviceName);
         }
+        if (isSelectedHost)
+            selectedHostEnd = ui->comboAudioOuput->count();
     }
 
-    // Select the right device
-    QString audioType = ContextManager::configuration()->getValue(ConfManager::SECTION_AUDIO, "type", "").toString();
-    ui->comboAudioOuput->setCurrentIndex(AudioDevice::getCurrentDeviceIndex(hosts, audioType) + 1);
+    // The configured device is still displayed if disconnected (the default device being used meanwhile)
+    if (selectedIndex == -1 && !selectedDeviceName.isEmpty())
+    {
+        selectedIndex = (selectedHostEnd == -1 ? ui->comboAudioOuput->count() : selectedHostEnd);
+        ui->comboAudioOuput->insertItem(selectedIndex, selectedHostName + " - " + selectedDeviceName + " (" + tr("disconnected") + ")",
+                                        selectedHostIdentifier + "|" + selectedDeviceName);
+    }
+    ui->comboAudioOuput->setCurrentIndex(qMax(0, selectedIndex));
 
     int bufferSize = ContextManager::configuration()->getValue(ConfManager::SECTION_AUDIO, "buffer_size", 0).toInt();
     switch (bufferSize)

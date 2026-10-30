@@ -23,6 +23,7 @@
 ***************************************************************************/
 
 #include "audiodevice.h"
+#include "audiodevicewatcher.h"
 #include "synth.h"
 #include "rtaudio/RtAudio.h"
 #include "confmanager.h"
@@ -51,6 +52,7 @@ QList<AudioDevice::HostInfo> AudioDevice::getAllHosts()
         HostInfo hostInfo;
         hostInfo.identifier = QString::fromStdString(RtAudio::getApiName(availableApi).c_str());
         hostInfo.name = QString::fromStdString(RtAudio::getApiDisplayName(availableApi).c_str());
+        hostInfo.canFollowDefault = (availableApi == RtAudio::MACOSX_CORE || availableApi == RtAudio::WINDOWS_WASAPI);
 
         if (availableApi == _currentApi && !_currentDeviceName.isEmpty())
         {
@@ -123,53 +125,12 @@ QList<AudioDevice::HostInfo> AudioDevice::getAllHosts()
     return hosts;
 }
 
-int AudioDevice::getCurrentDeviceIndex(QList<AudioDevice::HostInfo> hosts, QString config)
+void AudioDevice::getHostAndDeviceFromConfig(QString config, QString &hostIdentifier, QString &hostName, QString &deviceName)
 {
-    if (config == "none")
-        return -1;
-
-    // Find the host identifier and device name
     int api;
-    QString deviceName;
     getApiAndDeviceNameFromConfig(config, api, deviceName);
-    QString hostIdentifier = QString::fromStdString(RtAudio::getApiName((RtAudio::Api)api).c_str());
-
-    int currentIndex = 0;
-    int exactMatch = -1;
-    int defaultMatch = -1;
-    HostInfo hostInfo;
-    DeviceInfo deviceInfo;
-    for (int i = 0; i < hosts.count(); i++)
-    {
-        hostInfo = hosts[i];
-        if (hostInfo.identifier == hostIdentifier)
-        {
-            for (int j = 0; j < hostInfo.devices.count(); j++)
-            {
-                deviceInfo = hostInfo.devices[j];
-                if (deviceInfo.name == deviceName)
-                {
-                    exactMatch = currentIndex;
-                    break;
-                }
-                if (deviceInfo.isDefault)
-                {
-                    if (deviceName == "")
-                    {
-                        exactMatch = currentIndex;
-                        break;
-                    }
-                    defaultMatch = currentIndex;
-                }
-                currentIndex++;
-            }
-            break;
-        }
-        else
-            currentIndex += hostInfo.devices.count();
-    }
-
-    return exactMatch != -1 ? exactMatch : defaultMatch;
+    hostIdentifier = QString::fromStdString(RtAudio::getApiName((RtAudio::Api)api).c_str());
+    hostName = QString::fromStdString(RtAudio::getApiDisplayName((RtAudio::Api)api).c_str());
 }
 
 void AudioDevice::getApiAndDeviceNameFromConfig(QString config, int &api, QString &deviceName)
@@ -221,6 +182,13 @@ AudioDevice::AudioDevice(ConfManager *configuration) : QObject(nullptr),
     _synth = new Synth(SoundfontManager::getInstance()->getSoundfonts(), SoundfontManager::getInstance()->getMutex());
     _synth->configure(_configuration->getSynthConfig());
     initAudio();
+
+    // Changes in the audio outputs, grouped since a single change is notified several times
+    _deviceCheckTimer.setSingleShot(true);
+    _deviceCheckTimer.setInterval(500);
+    connect(&_deviceCheckTimer, SIGNAL(timeout()), this, SLOT(checkDevices()));
+    AudioDeviceWatcher * watcher = new AudioDeviceWatcher(this);
+    connect(watcher, SIGNAL(devicesChanged()), &_deviceCheckTimer, SLOT(start()));
 }
 
 AudioDevice::~AudioDevice()
@@ -266,7 +234,19 @@ void AudioDevice::initAudio()
 
     // Instantiate an RtAudio object with the selected api
     try {
+        #ifdef RT_AUDIO_5_2
         _rtAudio = new RtAudio((RtAudio::Api)_currentApi);
+        #else
+        _rtAudio = new RtAudio((RtAudio::Api)_currentApi, [this](RtAudioErrorType type, const std::string &errorText) {
+            // The stream has been closed by RtAudio in an audio thread
+            if (type == RTAUDIO_DEVICE_DISCONNECT)
+                QMetaObject::invokeMethod(this, [this]() {
+                    _deviceCheckTimer.start();
+                }, Qt::QueuedConnection);
+            else
+                qWarning("%s", errorText.c_str());
+        });
+        #endif
     } catch (RtAudioError &error) {
         error.printMessage();
         return;
@@ -275,10 +255,34 @@ void AudioDevice::initAudio()
     _rtAudio->showWarnings(false);
     #endif
 
-    // Browse the devices
-    int selectedDevice = -1;
-    int defaultDevice = -1;
+    // Find the device to open
     std::vector<unsigned int> sampleRates;
+    int selectedDevice = findDevice(_openedDeviceName, sampleRates);
+    if (selectedDevice == -1)
+    {
+        // No audio output
+        closeConnections();
+        return;
+    }
+
+    quint32 closestSampleRate = 0;
+    for (auto const sampleRate : sampleRates)
+    {
+        // Find anything that is close to 48000
+        if (closestSampleRate == 0 || qAbs(sampleRate - 48000) < qAbs(closestSampleRate - 48000))
+            closestSampleRate = sampleRate;
+    }
+    if (closestSampleRate == 0)
+        closestSampleRate = 48000;
+
+    // Open the connection
+    openConnection(selectedDevice, bufferSize, closestSampleRate);
+}
+
+int AudioDevice::findDevice(QString &deviceName, std::vector<unsigned int> &sampleRates)
+{
+    // Browse the devices
+    int defaultDevice = -1;
     #ifdef RT_AUDIO_5_2
     for (unsigned int i = 0, end = _rtAudio->getDeviceCount(); i < end; ++i)
     #else
@@ -298,51 +302,45 @@ void AudioDevice::initAudio()
 
             if (QString::fromStdString(deviceInfo.name.c_str()) == _currentDeviceName)
             {
-                selectedDevice = i;
+                deviceName = _currentDeviceName;
                 sampleRates = deviceInfo.sampleRates;
-                break;
+                return i;
             }
             if (deviceInfo.isDefaultOutput)
             {
+                deviceName = QString::fromStdString(deviceInfo.name.c_str());
                 sampleRates = deviceInfo.sampleRates;
                 if (_currentDeviceName == "")
-                {
-                    selectedDevice = i;
-                    break;
-                }
+                    return i;
                 defaultDevice = i;
             }
         } catch (RtAudioError &error) {
             error.printMessage();
-            return;
+            return -1;
         }
     }
 
-    // No exact match, the default device is selected
-    if (selectedDevice == -1)
-    {
-        selectedDevice = defaultDevice;
+    // No exact match, the default device is selected (if any)
+    return defaultDevice;
+}
 
-        // No default device either, so no audio output
-        if (selectedDevice == -1)
-        {
-            closeConnections();
-            return;
-        }
+void AudioDevice::checkDevices()
+{
+    bool reopen = true;
+    if (_rtAudio != nullptr && _rtAudio->isStreamRunning())
+    {
+        // Possibly keep the stream if it already uses the right device (ASIO cannot be probed while it is in use)
+        QString deviceName;
+        std::vector<unsigned int> sampleRates;
+        reopen = _currentApi != RtAudio::WINDOWS_ASIO &&
+                 (findDevice(deviceName, sampleRates) == -1 || deviceName != _openedDeviceName);
     }
 
-    quint32 closestSampleRate = 0;
-    for (auto const sampleRate : sampleRates)
-    {
-        // Find anything that is close to 48000
-        if (closestSampleRate == 0 || qAbs(sampleRate - 48000) < qAbs(closestSampleRate - 48000))
-            closestSampleRate = sampleRate;
-    }
-    if (closestSampleRate == 0)
-        closestSampleRate = 48000;
+    // The configured device if available, otherwise the default device (the configuration is not changed)
+    if (reopen)
+        initAudio();
 
-    // Open the connection
-    openConnection(selectedDevice, bufferSize, closestSampleRate);
+    emit devicesChanged();
 }
 
 void AudioDevice::openConnection(unsigned int deviceNumber, quint32 bufferSize, quint32 sampleRate)

@@ -26,6 +26,8 @@
 #define AUDIODEVICE_H
 
 #include <QObject>
+#include <QTimer>
+#include <vector>
 
 class Synth;
 class ConfManager;
@@ -50,11 +52,12 @@ public:
     public:
         QString identifier;
         QString name;
+        bool canFollowDefault; // The default device of the system is followed when it changes
         QList<DeviceInfo> devices;
     };
 
     QList<HostInfo> getAllHosts();
-    static int getCurrentDeviceIndex(QList<HostInfo> devices, QString config);
+    static void getHostAndDeviceFromConfig(QString config, QString &hostIdentifier, QString &hostName, QString &deviceName);
     /////////////////////////////////////
 
     AudioDevice(ConfManager * configuration);
@@ -62,13 +65,21 @@ public:
 
     Synth * getSynth() { return _synth; }
 
+signals:
+    // Audio outputs have been plugged, unplugged or the default output changed
+    void devicesChanged();
+
 public slots:
     void initAudio();
     void closeConnections();
 
+private slots:
+    void checkDevices();
+
 private:
     static void getApiAndDeviceNameFromConfig(QString config, int &api, QString &deviceName);
     static int getDefaultApi();
+    int findDevice(QString &deviceName, std::vector<unsigned int> &sampleRates);
     void openConnection(unsigned int deviceNumber, quint32 bufferSize, quint32 sampleRate);
 
     RtAudio * _rtAudio;
@@ -76,6 +87,8 @@ private:
     Synth * _synth;
     int _currentApi;
     QString _currentDeviceName;
+    QString _openedDeviceName;
+    QTimer _deviceCheckTimer;
 };
 
 #endif // AUDIODEVICE_H

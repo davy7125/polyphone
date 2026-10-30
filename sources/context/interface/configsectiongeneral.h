@@ -55,11 +55,14 @@ private slots:
     void on_checkBlanc_toggled(bool checked);
     void on_checkRepercussionStereo_toggled(bool checked);
 
+    void onAudioDevicesChanged();
+
 private:
     void initializeAudio();
     void initializeMidi();
 
     Ui::ConfigSectionGeneral *ui;
+    bool _audioDevicesChanged;
 };
 
 #endif // CONFIGSECTIONGENERAL_H

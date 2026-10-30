@@ -236,6 +236,7 @@ SOURCES	+= main.cpp \
     context/translationmanager.cpp \
     context/interface/editkey.cpp \
     context/audiodevice.cpp \
+    context/audiodevicewatcher.cpp \
     context/mididevice.cpp \
     context/tuningprogrammanager.cpp \
     core/input/sf/inputparsersf.cpp \
@@ -688,6 +689,7 @@ HEADERS += \
     context/interface/editkey.h \
     context/mididevice.h \
     context/audiodevice.h \
+    context/audiodevicewatcher.h \
     dialogs/dialog_list.h \
     dialogs/dialog_rename.h \
     dialogs/dialog_about.h \
