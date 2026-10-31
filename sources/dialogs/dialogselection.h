@@ -29,6 +29,7 @@
 #include "basetypes.h"
 
 class SoundfontManager;
+class QListWidgetItem;
 
 namespace Ui {
 class DialogSelection;
@@ -42,17 +43,27 @@ public:
     DialogSelection(SoundfontManager *sf2, EltID id, QWidget *parent = nullptr);
     ~DialogSelection();
 
+protected:
+    bool eventFilter(QObject * obj, QEvent * event) override;
+
 private slots:
     void on_pushSelectAll_clicked();
     void on_pushSelectNone_clicked();
     void on_buttonBox_rejected();
     void on_buttonBox_accepted();
+    void on_lineSearch_textChanged(const QString &text);
+    void on_listWidget_itemDoubleClicked(QListWidgetItem * item);
+    void updateCheckedCount();
 
 signals:
     void listChosen(QList<int> listIndex);
 
 private:
+    QList<QListWidgetItem *> getVisibleItems();
+    void setCheckState(QList<QListWidgetItem *> items, Qt::CheckState state);
+
     Ui::DialogSelection *ui;
+    bool _isPreset;
 };
 
 #endif // DIALOGSELECTION_H

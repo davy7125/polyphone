@@ -205,6 +205,15 @@ void ToolSoundfontExport_gui::on_lineSearch_textChanged(const QString &text)
     updateCheckedCount();
 }
 
+void ToolSoundfontExport_gui::on_listPresets_itemDoubleClicked(QTreeWidgetItem * item, int column)
+{
+    Q_UNUSED(column)
+
+    // A double click anywhere on the row of a preset ticks or unticks it (soundfonts are expanded / collapsed)
+    if (item->parent() != nullptr)
+        item->setCheckState(0, item->checkState(0) == Qt::Checked ? Qt::Unchecked : Qt::Checked);
+}
+
 void ToolSoundfontExport_gui::updateCheckedCount()
 {
     int nbPresets = 0;

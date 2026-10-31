@@ -58,6 +58,7 @@ private slots:
     void on_buttonBox_accepted();
     void on_comboFormat_currentIndexChanged(int index);
     void on_lineSearch_textChanged(const QString &text);
+    void on_listPresets_itemDoubleClicked(QTreeWidgetItem * item, int column);
     void updateCheckedCount();
 
 private:
