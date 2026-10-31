@@ -32,6 +32,8 @@ ToolFastEditSmpl_gui::ToolFastEditSmpl_gui(QWidget *parent) :
     ui(new Ui::ToolFastEditSmpl_gui)
 {
     ui->setupUi(this);
+    ui->buttonBox->addButton(tr("&Ok"), QDialogButtonBox::AcceptRole);
+    ui->buttonBox->addButton(tr("&Cancel"), QDialogButtonBox::RejectRole);
 
     // Possible parameters to edit
     QList<AttributeType> types;
@@ -100,12 +102,12 @@ void ToolFastEditSmpl_gui::on_radioMultiply_toggled(bool checked)
     ui->doubleSpinMultiply->setEnabled(checked);
 }
 
-void ToolFastEditSmpl_gui::on_pushOk_clicked()
+void ToolFastEditSmpl_gui::on_buttonBox_accepted()
 {
     emit this->validated();
 }
 
-void ToolFastEditSmpl_gui::on_pushCancel_clicked()
+void ToolFastEditSmpl_gui::on_buttonBox_rejected()
 {
     emit this->canceled();
 }

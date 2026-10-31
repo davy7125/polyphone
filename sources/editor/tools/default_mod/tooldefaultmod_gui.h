@@ -26,6 +26,8 @@
 #define TOOLDEFAULTMOD_GUI_H
 
 #include "abstracttoolgui.h"
+class QAbstractButton;
+class QPushButton;
 
 namespace Ui {
 class ToolDefaultMod_gui;
@@ -45,14 +47,18 @@ public:
     /// Save the parameters based on the interface
     void saveParameters(AbstractToolParameters * parameters) override;
 
+protected:
+    void showEvent(QShowEvent * event) override;
+
 private slots:
-    void on_pushCancel_clicked();
-    void on_pushOverride_clicked();
-    void on_pushDisable_clicked();
+    void on_buttonBox_clicked(QAbstractButton * button);
+    void on_buttonBox_rejected();
     void on_listWidget_itemSelectionChanged();
 
 private:
     Ui::ToolDefaultMod_gui *ui;
+    QPushButton * _pushOverride;
+    QPushButton * _pushDisable;
     bool _isActionDisable;
 };
 

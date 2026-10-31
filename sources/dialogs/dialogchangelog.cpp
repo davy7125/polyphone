@@ -34,6 +34,9 @@ DialogChangeLog::DialogChangeLog(QWidget *parent) :
     ui(new Ui::DialogChangeLog)
 {
     ui->setupUi(this);
+    QPushButton * pushDonate = ui->buttonBox->addButton(tr("&Donate"), QDialogButtonBox::ActionRole);
+    connect(pushDonate, SIGNAL(clicked()), this, SLOT(onDonateClicked()));
+    ui->buttonBox->addButton(tr("&Ok"), QDialogButtonBox::RejectRole); // Only closes the dialog, like a "close" button
     this->setAttribute(Qt::WA_DeleteOnClose);
     this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint));
 
@@ -107,12 +110,12 @@ DialogChangeLog::~DialogChangeLog()
     delete ui;
 }
 
-void DialogChangeLog::on_pushDonate_clicked()
+void DialogChangeLog::onDonateClicked()
 {
     QDesktopServices::openUrl(QUrl("https://www.polyphone.io/donate"));
 }
 
-void DialogChangeLog::on_pushOk_clicked()
+void DialogChangeLog::on_buttonBox_rejected()
 {
     this->close();
 }

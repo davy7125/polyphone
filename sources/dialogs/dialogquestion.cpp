@@ -31,6 +31,8 @@ DialogQuestion::DialogQuestion(QWidget *parent) :
     ui(new Ui::DialogQuestion)
 {
     ui->setupUi(this);
+    ui->buttonBox->addButton(tr("&Ok"), QDialogButtonBox::AcceptRole);
+    ui->buttonBox->addButton(tr("&Cancel"), QDialogButtonBox::RejectRole);
     this->setAttribute(Qt::WA_DeleteOnClose);
     this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint));
     ui->lineEdit->setValidator(new LatinValidator(ui->lineEdit));
@@ -57,12 +59,12 @@ void DialogQuestion::setTextLimit(int textLimit)
     ui->lineEdit->setFocus();
 }
 
-void DialogQuestion::on_pushCancel_clicked()
+void DialogQuestion::on_buttonBox_rejected()
 {
     QDialog::reject();
 }
 
-void DialogQuestion::on_pushOk_clicked()
+void DialogQuestion::on_buttonBox_accepted()
 {
     emit onOk(ui->lineEdit->text());
     QDialog::close();

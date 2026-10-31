@@ -50,8 +50,8 @@ signals:
 
 private slots:
     void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
-    void on_pushCancel_clicked();
-    void on_pushOk_clicked();
+    void on_buttonBox_rejected();
+    void on_buttonBox_accepted();
 
     void on_lineSearch_textChanged(const QString &arg1);
 

@@ -32,6 +32,8 @@ ToolChangeAttenuation_gui::ToolChangeAttenuation_gui(QWidget *parent) :
     ui(new Ui::ToolChangeAttenuation_gui)
 {
     ui->setupUi(this);
+    ui->buttonBox->addButton(tr("&Ok"), QDialogButtonBox::AcceptRole);
+    ui->buttonBox->addButton(tr("&Cancel"), QDialogButtonBox::RejectRole);
 }
 
 ToolChangeAttenuation_gui::~ToolChangeAttenuation_gui()
@@ -101,12 +103,12 @@ QString ToolChangeAttenuation_gui::formatDouble(double value)
     return (value > 0 ? "+" : "") + QLocale::system().toString(value, 'f', 2);
 }
 
-void ToolChangeAttenuation_gui::on_pushCancel_clicked()
+void ToolChangeAttenuation_gui::on_buttonBox_rejected()
 {
     emit this->canceled();
 }
 
-void ToolChangeAttenuation_gui::on_pushOk_clicked()
+void ToolChangeAttenuation_gui::on_buttonBox_accepted()
 {
     emit this->validated();
 }

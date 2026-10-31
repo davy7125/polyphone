@@ -31,6 +31,8 @@ ToolChords_gui::ToolChords_gui(QWidget *parent) :
     ui(new Ui::ToolChords_gui)
 {
     ui->setupUi(this);
+    ui->buttonBox->addButton(tr("&Ok"), QDialogButtonBox::AcceptRole);
+    ui->buttonBox->addButton(tr("&Cancel"), QDialogButtonBox::RejectRole);
 }
 
 ToolChords_gui::~ToolChords_gui()
@@ -153,12 +155,12 @@ void ToolChords_gui::saveParameters(AbstractToolParameters * parameters)
     params->setChordConfiguration(ci);
 }
 
-void ToolChords_gui::on_pushCancel_clicked()
+void ToolChords_gui::on_buttonBox_rejected()
 {
     emit this->canceled();
 }
 
-void ToolChords_gui::on_pushOk_clicked()
+void ToolChords_gui::on_buttonBox_accepted()
 {
     emit this->validated();
 }

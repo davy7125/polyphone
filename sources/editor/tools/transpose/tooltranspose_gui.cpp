@@ -32,6 +32,8 @@ ToolTranspose_gui::ToolTranspose_gui(QWidget *parent) :
     ui(new Ui::ToolTranspose_gui)
 {
     ui->setupUi(this);
+    ui->buttonBox->addButton(tr("&Ok"), QDialogButtonBox::AcceptRole);
+    ui->buttonBox->addButton(tr("&Cancel"), QDialogButtonBox::RejectRole);
 }
 
 ToolTranspose_gui::~ToolTranspose_gui()
@@ -58,12 +60,12 @@ void ToolTranspose_gui::saveParameters(AbstractToolParameters * parameters)
     params->setAdaptKeyRanges(ui->checkKeyRange->isChecked());
 }
 
-void ToolTranspose_gui::on_pushCancel_clicked()
+void ToolTranspose_gui::on_buttonBox_rejected()
 {
     emit this->canceled();
 }
 
-void ToolTranspose_gui::on_pushOk_clicked()
+void ToolTranspose_gui::on_buttonBox_accepted()
 {
     emit this->validated();
 }

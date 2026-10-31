@@ -61,8 +61,8 @@ public:
     ~DialogAbout();
     
 private slots:
-    void on_pushCredit_clicked(bool checked);
-    void on_pushClose_clicked();
+    void onCreditClicked(bool checked);
+    void on_buttonBox_rejected();
 
 private:
     Ui::DialogAbout *ui;

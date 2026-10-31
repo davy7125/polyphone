@@ -31,6 +31,8 @@ ToolDivisionDuplication_gui::ToolDivisionDuplication_gui(QWidget *parent) :
     ui(new Ui::ToolDivisionDuplication_gui)
 {
     ui->setupUi(this);
+    ui->buttonBox->addButton(tr("&Ok"), QDialogButtonBox::AcceptRole);
+    ui->buttonBox->addButton(tr("&Cancel"), QDialogButtonBox::RejectRole);
 }
 
 ToolDivisionDuplication_gui::~ToolDivisionDuplication_gui()
@@ -155,12 +157,12 @@ void ToolDivisionDuplication_gui::on_checkForEachVelocityRange_clicked()
     ui->spinMinVel->setEnabled(isEnabled);
 }
 
-void ToolDivisionDuplication_gui::on_pushCancel_clicked()
+void ToolDivisionDuplication_gui::on_buttonBox_rejected()
 {
     emit this->canceled();
 }
 
-void ToolDivisionDuplication_gui::on_pushOk_clicked()
+void ToolDivisionDuplication_gui::on_buttonBox_accepted()
 {
     emit this->validated();
 }

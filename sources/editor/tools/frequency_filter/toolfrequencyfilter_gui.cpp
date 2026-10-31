@@ -33,6 +33,8 @@ ToolFrequencyFilter_gui::ToolFrequencyFilter_gui(QWidget *parent) :
     ui(new Ui::ToolFrequencyFilter_gui)
 {
     ui->setupUi(this);
+    ui->buttonBox->addButton(tr("&Ok"), QDialogButtonBox::AcceptRole);
+    ui->buttonBox->addButton(tr("&Cancel"), QDialogButtonBox::RejectRole);
 }
 
 ToolFrequencyFilter_gui::~ToolFrequencyFilter_gui()
@@ -75,12 +77,12 @@ void ToolFrequencyFilter_gui::saveParameters(AbstractToolParameters * parameters
     params->setCurve(ui->graphFilterFrequencies->getValues());
 }
 
-void ToolFrequencyFilter_gui::on_pushCancel_clicked()
+void ToolFrequencyFilter_gui::on_buttonBox_rejected()
 {
     emit this->canceled();
 }
 
-void ToolFrequencyFilter_gui::on_pushOk_clicked()
+void ToolFrequencyFilter_gui::on_buttonBox_accepted()
 {
     emit this->validated();
 }

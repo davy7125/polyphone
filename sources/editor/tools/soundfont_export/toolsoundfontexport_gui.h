@@ -54,8 +54,8 @@ private slots:
     void on_pushTick_clicked();
     void on_pushUntick_clicked();
     void on_pushFolder_clicked();
-    void on_pushAnnuler_clicked();
-    void on_pushExport_clicked();
+    void on_buttonBox_rejected();
+    void on_buttonBox_accepted();
     void on_comboFormat_currentIndexChanged(int index);
     void on_lineSearch_textChanged(const QString &text);
     void updateCheckedCount();

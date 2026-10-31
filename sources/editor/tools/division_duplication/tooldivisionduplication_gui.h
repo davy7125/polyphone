@@ -52,8 +52,8 @@ private slots:
     void on_spinMaxVel_valueChanged(int arg1);
     void on_checkForEachVelocityRange_clicked();
     void on_listVelocites_currentRowChanged(int currentRow);
-    void on_pushCancel_clicked();
-    void on_pushOk_clicked();
+    void on_buttonBox_rejected();
+    void on_buttonBox_accepted();
 
 private:
     void dispVel();

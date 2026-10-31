@@ -45,8 +45,8 @@ public:
 private slots:
     void on_pushSelectAll_clicked();
     void on_pushSelectNone_clicked();
-    void on_pushCancel_clicked();
-    void on_pushOk_clicked();
+    void on_buttonBox_rejected();
+    void on_buttonBox_accepted();
 
 signals:
     void listChosen(QList<int> listIndex);

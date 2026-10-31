@@ -34,6 +34,8 @@ ToolGlobalSettings_gui::ToolGlobalSettings_gui(QWidget *parent) :
     ui(new Ui::ToolGlobalSettings_gui)
 {
     ui->setupUi(this);
+    ui->buttonBox->addButton(tr("&Ok"), QDialogButtonBox::AcceptRole);
+    ui->buttonBox->addButton(tr("&Cancel"), QDialogButtonBox::RejectRole);
 }
 
 ToolGlobalSettings_gui::~ToolGlobalSettings_gui()
@@ -250,12 +252,12 @@ void ToolGlobalSettings_gui::on_doubleSpinMax_valueChanged(double arg1)
     ui->graphParamGlobal->setMinMax(ui->doubleSpinMin->value(), arg1);
 }
 
-void ToolGlobalSettings_gui::on_pushCancel_clicked()
+void ToolGlobalSettings_gui::on_buttonBox_rejected()
 {
     emit this->canceled();
 }
 
-void ToolGlobalSettings_gui::on_pushOk_clicked()
+void ToolGlobalSettings_gui::on_buttonBox_accepted()
 {
     emit this->validated();
 }

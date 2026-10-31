@@ -31,6 +31,8 @@ ToolLoopCrossfade_gui::ToolLoopCrossfade_gui(QWidget *parent) :
     ui(new Ui::ToolLoopCrossfade_gui)
 {
     ui->setupUi(this);
+    ui->buttonBox->addButton(tr("&Ok"), QDialogButtonBox::AcceptRole);
+    ui->buttonBox->addButton(tr("&Cancel"), QDialogButtonBox::RejectRole);
 }
 
 ToolLoopCrossfade_gui::~ToolLoopCrossfade_gui()
@@ -51,12 +53,12 @@ void ToolLoopCrossfade_gui::saveParameters(AbstractToolParameters * parameters)
     params->setDurationMs(ui->spinDuration->value());
 }
 
-void ToolLoopCrossfade_gui::on_pushCancel_clicked()
+void ToolLoopCrossfade_gui::on_buttonBox_rejected()
 {
     emit this->canceled();
 }
 
-void ToolLoopCrossfade_gui::on_pushOk_clicked()
+void ToolLoopCrossfade_gui::on_buttonBox_accepted()
 {
     emit this->validated();
 }

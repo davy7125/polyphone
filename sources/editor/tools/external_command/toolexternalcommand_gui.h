@@ -49,8 +49,8 @@ public:
 private slots:
     void on_comboPrevious_currentIndexChanged(int index);
     void on_pushOpen_clicked();
-    void on_pushOk_clicked();
-    void on_pushCancel_clicked();
+    void on_buttonBox_accepted();
+    void on_buttonBox_rejected();
 
 private:
     Ui::ToolExternalCommand_gui *ui;

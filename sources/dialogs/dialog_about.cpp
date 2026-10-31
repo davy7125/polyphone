@@ -32,6 +32,10 @@ DialogAbout::DialogAbout(QWidget *parent) :
     ui(new Ui::DialogAbout)
 {
     ui->setupUi(this);
+    QPushButton * pushCredit = ui->buttonBox->addButton(tr("Credit"), QDialogButtonBox::ActionRole);
+    pushCredit->setCheckable(true);
+    connect(pushCredit, SIGNAL(clicked(bool)), this, SLOT(onCreditClicked(bool)));
+    ui->buttonBox->addButton(tr("Close"), QDialogButtonBox::RejectRole);
     this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint));
     ui->labelNomVersion->setText(tr("Polyphone") + " " + SOFT_VERSION +
                                  (QString(IDENTIFIER).isEmpty() ? "" : QString(" ") + IDENTIFIER));
@@ -91,12 +95,12 @@ DialogAbout::~DialogAbout()
     delete ui;
 }
 
-void DialogAbout::on_pushCredit_clicked(bool checked)
+void DialogAbout::onCreditClicked(bool checked)
 {
     ui->stackedWidget->setCurrentIndex(!checked);
 }
 
-void DialogAbout::on_pushClose_clicked()
+void DialogAbout::on_buttonBox_rejected()
 {
     QDialog::close();
 }

@@ -33,6 +33,14 @@ ToolDefaultMod_gui::ToolDefaultMod_gui(QWidget *parent) :
     ui(new Ui::ToolDefaultMod_gui)
 {
     ui->setupUi(this);
+
+    // "Override" and "Disable" both validate the tool
+    // Same role so that they stay together (a second accept role would be placed before "Cancel" on macOS and GNOME)
+    _pushOverride = ui->buttonBox->addButton(tr("&Override"), QDialogButtonBox::YesRole);
+    _pushOverride->setEnabled(false);
+    _pushDisable = ui->buttonBox->addButton(tr("&Disable"), QDialogButtonBox::YesRole);
+    _pushDisable->setEnabled(false);
+    ui->buttonBox->addButton(tr("&Cancel"), QDialogButtonBox::RejectRole);
 }
 
 ToolDefaultMod_gui::~ToolDefaultMod_gui()
@@ -78,25 +86,30 @@ void ToolDefaultMod_gui::saveParameters(AbstractToolParameters * parameters)
     params->setModulators(modData);
 }
 
-void ToolDefaultMod_gui::on_pushCancel_clicked()
+void ToolDefaultMod_gui::showEvent(QShowEvent * event)
+{
+    // Without accept role, the button box doesn't choose a default button
+    // This must be done once the gui is in its dialog, otherwise the dialog takes the first button
+    _pushOverride->setDefault(true);
+    AbstractToolGui::showEvent(event);
+}
+
+void ToolDefaultMod_gui::on_buttonBox_clicked(QAbstractButton * button)
+{
+    if (button == _pushOverride || button == _pushDisable)
+    {
+        _isActionDisable = (button == _pushDisable);
+        emit validated();
+    }
+}
+
+void ToolDefaultMod_gui::on_buttonBox_rejected()
 {
     emit canceled();
 }
 
-void ToolDefaultMod_gui::on_pushOverride_clicked()
-{
-    _isActionDisable = false;
-    emit validated();
-}
-
-void ToolDefaultMod_gui::on_pushDisable_clicked()
-{
-    _isActionDisable = true;
-    emit validated();
-}
-
 void ToolDefaultMod_gui::on_listWidget_itemSelectionChanged()
 {
-    ui->pushDisable->setEnabled(!ui->listWidget->selectedItems().empty());
-    ui->pushOverride->setEnabled(!ui->listWidget->selectedItems().empty());
+    _pushDisable->setEnabled(!ui->listWidget->selectedItems().empty());
+    _pushOverride->setEnabled(!ui->listWidget->selectedItems().empty());
 }

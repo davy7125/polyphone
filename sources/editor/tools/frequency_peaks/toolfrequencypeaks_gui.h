@@ -27,6 +27,7 @@
 
 #include "abstracttoolgui.h"
 #include "toolfrequencypeaks_parameters.h"
+class QPushButton;
 
 namespace Ui {
 class ToolFrequencyPeaks_gui;
@@ -51,12 +52,13 @@ signals:
     void peakComputed(EltID id, const SampleFrequencyInfo sfi);
 
 private slots:
-    void on_pushExport_clicked();
-    void on_pushClose_clicked();
+    void on_buttonBox_accepted();
+    void on_buttonBox_rejected();
     void onPeakComputed(EltID id, const SampleFrequencyInfo sfi);
 
 private:
     Ui::ToolFrequencyPeaks_gui *ui;
+    QPushButton * _pushExport;
     QString _path;
     QString _sf2Name;
     QList<SampleFrequencyInfo> _data;

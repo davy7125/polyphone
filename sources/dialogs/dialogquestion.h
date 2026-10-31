@@ -46,8 +46,8 @@ signals:
     void onOk(QString txt);
 
 private slots:
-    void on_pushCancel_clicked();
-    void on_pushOk_clicked();
+    void on_buttonBox_rejected();
+    void on_buttonBox_accepted();
 
 private:
     Ui::DialogQuestion *ui;

@@ -33,6 +33,8 @@ ToolMonoConversion_gui::ToolMonoConversion_gui(QWidget *parent) :
     ui(new Ui::ToolMonoConversion_gui)
 {
     ui->setupUi(this);
+    ui->buttonBox->addButton(tr("&Ok"), QDialogButtonBox::AcceptRole);
+    ui->buttonBox->addButton(tr("&Cancel"), QDialogButtonBox::RejectRole);
 }
 
 ToolMonoConversion_gui::~ToolMonoConversion_gui()
@@ -116,12 +118,12 @@ void ToolMonoConversion_gui::saveParameters(AbstractToolParameters * parameters)
     params->setMergeDivisions(ui->checkMergeDivisions->isChecked());
 }
 
-void ToolMonoConversion_gui::on_pushOk_clicked()
+void ToolMonoConversion_gui::on_buttonBox_accepted()
 {
     emit this->validated();
 }
 
-void ToolMonoConversion_gui::on_pushCancel_clicked()
+void ToolMonoConversion_gui::on_buttonBox_rejected()
 {
     emit this->canceled();
 }

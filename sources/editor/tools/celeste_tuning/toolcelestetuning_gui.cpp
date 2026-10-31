@@ -32,6 +32,8 @@ ToolCelesteTuning_gui::ToolCelesteTuning_gui(QWidget *parent) :
     ui(new Ui::ToolCelesteTuning_gui)
 {
     ui->setupUi(this);
+    ui->buttonBox->addButton(tr("&Ok"), QDialogButtonBox::AcceptRole);
+    ui->buttonBox->addButton(tr("&Cancel"), QDialogButtonBox::RejectRole);
 }
 
 ToolCelesteTuning_gui::~ToolCelesteTuning_gui()
@@ -59,12 +61,12 @@ void ToolCelesteTuning_gui::saveParameters(AbstractToolParameters * parameters)
     params->setCoefficient(ui->doubleSpinDiv->value());
 }
 
-void ToolCelesteTuning_gui::on_pushCancel_clicked()
+void ToolCelesteTuning_gui::on_buttonBox_rejected()
 {
     emit this->canceled();
 }
 
-void ToolCelesteTuning_gui::on_pushOk_clicked()
+void ToolCelesteTuning_gui::on_buttonBox_accepted()
 {
     emit this->validated();
 }

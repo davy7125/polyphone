@@ -20,19 +20,8 @@
    <string notr="true">Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="1" column="0">
-    <widget class="QPushButton" name="pushExport">
-     <property name="text">
-      <string>&amp;Export</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="2">
-    <widget class="QPushButton" name="pushClose">
-     <property name="text">
-      <string>&amp;Close</string>
-     </property>
-    </widget>
+   <item row="1" column="0" colspan="3">
+    <widget class="QDialogButtonBox" name="buttonBox"/>
    </item>
    <item row="0" column="0" colspan="3">
     <widget class="QTableWidget" name="table">
@@ -65,25 +54,10 @@
      </attribute>
     </widget>
    </item>
-   <item row="1" column="1">
-    <spacer name="horizontalSpacer">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>40</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
   </layout>
  </widget>
  <tabstops>
   <tabstop>table</tabstop>
-  <tabstop>pushExport</tabstop>
-  <tabstop>pushClose</tabstop>
  </tabstops>
  <resources/>
  <connections/>

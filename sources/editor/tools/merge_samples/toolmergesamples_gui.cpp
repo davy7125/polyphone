@@ -31,6 +31,8 @@ ToolMergeSamples_gui::ToolMergeSamples_gui(QWidget *parent) :
     ui(new Ui::ToolMergeSamples_gui)
 {
     ui->setupUi(this);
+    ui->buttonBox->addButton(tr("&Ok"), QDialogButtonBox::AcceptRole);
+    ui->buttonBox->addButton(tr("&Cancel"), QDialogButtonBox::RejectRole);
 }
 
 ToolMergeSamples_gui::~ToolMergeSamples_gui()
@@ -65,12 +67,12 @@ void ToolMergeSamples_gui::saveParameters(AbstractToolParameters * parameters)
     params->setSampleReleaseDuration(ui->spinReleaseDuration->value());
 }
 
-void ToolMergeSamples_gui::on_pushCancel_clicked()
+void ToolMergeSamples_gui::on_buttonBox_rejected()
 {
     emit this->canceled();
 }
 
-void ToolMergeSamples_gui::on_pushOk_clicked()
+void ToolMergeSamples_gui::on_buttonBox_accepted()
 {
     emit this->validated();
 }

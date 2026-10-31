@@ -31,6 +31,8 @@ ToolTransposeSmpl_gui::ToolTransposeSmpl_gui(QWidget *parent) :
     ui(new Ui::ToolTransposeSmpl_gui)
 {
     ui->setupUi(this);
+    ui->buttonBox->addButton(tr("&Ok"), QDialogButtonBox::AcceptRole);
+    ui->buttonBox->addButton(tr("&Cancel"), QDialogButtonBox::RejectRole);
 }
 
 ToolTransposeSmpl_gui::~ToolTransposeSmpl_gui()
@@ -51,12 +53,12 @@ void ToolTransposeSmpl_gui::saveParameters(AbstractToolParameters * parameters)
     params->setSemiTones(ui->spinTon->value());
 }
 
-void ToolTransposeSmpl_gui::on_pushCancel_clicked()
+void ToolTransposeSmpl_gui::on_buttonBox_rejected()
 {
     emit this->canceled();
 }
 
-void ToolTransposeSmpl_gui::on_pushOk_clicked()
+void ToolTransposeSmpl_gui::on_buttonBox_accepted()
 {
     emit this->validated();
 }

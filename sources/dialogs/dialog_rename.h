@@ -45,8 +45,8 @@ signals:
 
 private slots:
     void on_comboBox_currentIndexChanged(int index);
-    void on_pushCancel_clicked();
-    void on_pushOk_clicked();
+    void on_buttonBox_rejected();
+    void on_buttonBox_accepted();
 
 private:
     Ui::DialogRename *ui;

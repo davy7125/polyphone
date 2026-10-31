@@ -32,6 +32,8 @@ ToolMixtureCreation_gui::ToolMixtureCreation_gui(QWidget *parent) :
     ui(new Ui::ToolMixtureCreation_gui)
 {
     ui->setupUi(this);
+    ui->buttonBox->addButton(tr("&Ok"), QDialogButtonBox::AcceptRole);
+    ui->buttonBox->addButton(tr("&Cancel"), QDialogButtonBox::RejectRole);
 
     // Icons
     ui->pushAddDiv->setIcon(ContextManager::theme()->getColoredSvg(":/icons/document-new.svg", QSize(16, 16), ThemeManager::BUTTON_TEXT));
@@ -557,12 +559,12 @@ void ToolMixtureCreation_gui::on_comboType2_currentIndexChanged(int index)
     ui->listRangs->blockSignals(false);
 }
 
-void ToolMixtureCreation_gui::on_pushCancel_clicked()
+void ToolMixtureCreation_gui::on_buttonBox_rejected()
 {
     emit this->canceled();
 }
 
-void ToolMixtureCreation_gui::on_pushOk_clicked()
+void ToolMixtureCreation_gui::on_buttonBox_accepted()
 {
     // Check that the name is specified
     if (ui->lineNom->text().isEmpty())

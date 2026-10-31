@@ -37,6 +37,8 @@ ToolExternalCommand_gui::ToolExternalCommand_gui(QWidget *parent) :
 {
     // Prepare the interface
     ui->setupUi(this);
+    ui->buttonBox->addButton(tr("&Ok"), QDialogButtonBox::AcceptRole);
+    ui->buttonBox->addButton(tr("&Cancel"), QDialogButtonBox::RejectRole);
     ui->pushOpen->setIcon(ContextManager::theme()->getColoredSvg(":/icons/search.svg", QSize(24, 24), ThemeManager::WINDOW_TEXT));
 
     // Select the text
@@ -105,7 +107,7 @@ void ToolExternalCommand_gui::on_pushOpen_clicked()
         ui->lineCommand->setText("\"" + command + "\" {wav}");
 }
 
-void ToolExternalCommand_gui::on_pushOk_clicked()
+void ToolExternalCommand_gui::on_buttonBox_accepted()
 {
     QString command = ui->lineCommand->text();
 
@@ -130,7 +132,7 @@ void ToolExternalCommand_gui::on_pushOk_clicked()
     emit this->validated();
 }
 
-void ToolExternalCommand_gui::on_pushCancel_clicked()
+void ToolExternalCommand_gui::on_buttonBox_rejected()
 {
     emit this->canceled();
 }

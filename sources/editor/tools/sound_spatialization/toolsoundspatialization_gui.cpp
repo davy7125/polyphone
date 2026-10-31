@@ -32,6 +32,8 @@ ToolSoundSpatialization_gui::ToolSoundSpatialization_gui(QWidget *parent) :
     ui(new Ui::ToolSoundSpatialization_gui)
 {
     ui->setupUi(this);
+    ui->buttonBox->addButton(tr("&Ok"), QDialogButtonBox::AcceptRole);
+    ui->buttonBox->addButton(tr("&Cancel"), QDialogButtonBox::RejectRole);
 }
 
 ToolSoundSpatialization_gui::~ToolSoundSpatialization_gui()
@@ -337,12 +339,12 @@ double ToolSoundSpatialization_gui::getAxe(int note, int nbDiv, bool sens)
     return (double)(2 * axe + 1) / (2 * nbDiv);
 }
 
-void ToolSoundSpatialization_gui::on_pushCancel_clicked()
+void ToolSoundSpatialization_gui::on_buttonBox_rejected()
 {
     emit this->canceled();
 }
 
-void ToolSoundSpatialization_gui::on_pushOk_clicked()
+void ToolSoundSpatialization_gui::on_buttonBox_accepted()
 {
     emit this->validated();
 }

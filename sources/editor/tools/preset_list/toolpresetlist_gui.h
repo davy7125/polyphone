@@ -48,8 +48,8 @@ public:
 private slots:
     void on_radioCsv_clicked();
     void on_radioHtml_clicked();
-    void on_pushCopy_clicked();
-    void on_pushClose_clicked();
+    void onCopyClicked();
+    void on_buttonBox_rejected();
 
 private:
     Ui::ToolPresetList_gui *ui;

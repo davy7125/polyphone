@@ -70,6 +70,10 @@ ToolFrequencyPeaks_gui::ToolFrequencyPeaks_gui(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    // Exporting validates the tool
+    _pushExport = ui->buttonBox->addButton(tr("&Export"), QDialogButtonBox::AcceptRole);
+    ui->buttonBox->addButton(tr("&Close"), QDialogButtonBox::RejectRole);
+
     // Table header
     ui->table->setColumnCount(6);
     ui->table->setHorizontalHeaderItem(0, new QTableWidgetItem(tr("Sample")));
@@ -106,7 +110,7 @@ void ToolFrequencyPeaks_gui::updateInterface(AbstractToolParameters * parameters
     ui->table->setRowCount(0);
 
     // Compute the peaks
-    ui->pushExport->setEnabled(false);
+    _pushExport->setEnabled(false);
     _data.clear();
     _idsToCompute = ids;
     foreach (EltID id, ids)
@@ -149,7 +153,7 @@ void ToolFrequencyPeaks_gui::onPeakComputed(EltID id, const SampleFrequencyInfo 
     }
 
     if (_idsToCompute.empty())
-        ui->pushExport->setEnabled(true);
+        _pushExport->setEnabled(true);
 }
 
 void ToolFrequencyPeaks_gui::saveParameters(AbstractToolParameters * parameters)
@@ -161,7 +165,7 @@ void ToolFrequencyPeaks_gui::saveParameters(AbstractToolParameters * parameters)
     params->setSampleFrequencies(_data);
 }
 
-void ToolFrequencyPeaks_gui::on_pushExport_clicked()
+void ToolFrequencyPeaks_gui::on_buttonBox_accepted()
 {
     QString defaultFile = ContextManager::recentFile()->getLastDirectory(RecentFileManager::FILE_TYPE_FREQUENCIES) + "/" + _sf2Name;
     QString fileName = QFileDialog::getSaveFileName(this, tr("Export peak frequency"),
@@ -176,7 +180,7 @@ void ToolFrequencyPeaks_gui::on_pushExport_clicked()
     }
 }
 
-void ToolFrequencyPeaks_gui::on_pushClose_clicked()
+void ToolFrequencyPeaks_gui::on_buttonBox_rejected()
 {
     _idsToCompute.clear();
     emit this->canceled();

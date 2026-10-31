@@ -24,27 +24,10 @@
      </property>
     </widget>
    </item>
+   <item row="2" column="1" colspan="4">
+    <widget class="QDialogButtonBox" name="buttonBox"/>
+   </item>
    <item row="2" column="0">
-    <widget class="QPushButton" name="pushCopy">
-     <property name="text">
-      <string>Copy</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="1">
-    <spacer name="horizontalSpacer">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>34</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="2" column="2">
     <widget class="QLabel" name="label">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
@@ -59,19 +42,6 @@
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
-   </item>
-   <item row="2" column="3">
-    <spacer name="horizontalSpacer_2">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>35</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
    </item>
    <item row="0" column="0" colspan="5">
     <layout class="QHBoxLayout" name="horizontalLayout">
@@ -107,21 +77,12 @@
      </item>
     </layout>
    </item>
-   <item row="2" column="4">
-    <widget class="QPushButton" name="pushClose">
-     <property name="text">
-      <string>Close</string>
-     </property>
-    </widget>
-   </item>
   </layout>
  </widget>
  <tabstops>
   <tabstop>radioCsv</tabstop>
   <tabstop>radioHtml</tabstop>
   <tabstop>plainTextEdit</tabstop>
-  <tabstop>pushCopy</tabstop>
-  <tabstop>pushClose</tabstop>
  </tabstops>
  <resources/>
  <connections/>

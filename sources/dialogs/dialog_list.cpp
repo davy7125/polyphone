@@ -32,6 +32,8 @@ DialogList::DialogList(QWidget *parent) :
     ui(new Ui::DialogList)
 {
     ui->setupUi(this);
+    ui->buttonBox->addButton(tr("&Ok"), QDialogButtonBox::AcceptRole);
+    ui->buttonBox->addButton(tr("&Cancel"), QDialogButtonBox::RejectRole);
     this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint));
 }
 
@@ -111,12 +113,12 @@ void DialogList::showDialog(EltID idSrc, bool isAssociation)
     ui->lineSearch->setFocus();
 }
 
-void DialogList::on_pushCancel_clicked()
+void DialogList::on_buttonBox_rejected()
 {
     QDialog::reject();
 }
 
-void DialogList::on_pushOk_clicked()
+void DialogList::on_buttonBox_accepted()
 {
     // An element is selected?
     if (ui->listWidget->selectedItems().count())
@@ -130,7 +132,7 @@ void DialogList::on_pushOk_clicked()
 void DialogList::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
 {
     Q_UNUSED(item)
-    on_pushOk_clicked();
+    on_buttonBox_accepted();
 }
 
 void DialogList::on_lineSearch_textChanged(const QString &arg1)

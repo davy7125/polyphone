@@ -34,6 +34,8 @@ DialogRename::DialogRename(ElementType type, QString defaultText, QWidget *paren
     _type(type)
 {
     ui->setupUi(this);
+    ui->buttonBox->addButton(tr("&Ok"), QDialogButtonBox::AcceptRole);
+    ui->buttonBox->addButton(tr("&Cancel"), QDialogButtonBox::RejectRole);
     this->setAttribute(Qt::WA_DeleteOnClose);
     this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint));
 
@@ -135,12 +137,12 @@ void DialogRename::on_comboBox_currentIndexChanged(int index)
     this->adjustSize();
 }
 
-void DialogRename::on_pushCancel_clicked()
+void DialogRename::on_buttonBox_rejected()
 {
     QDialog::reject();
 }
 
-void DialogRename::on_pushOk_clicked()
+void DialogRename::on_buttonBox_accepted()
 {
     int type = ui->comboBox->currentIndex();
     this->updateNames(type, ui->lineText1->text(), ui->lineText2->text(),

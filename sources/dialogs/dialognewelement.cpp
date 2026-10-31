@@ -32,6 +32,8 @@ DialogNewElement::DialogNewElement(QWidget *parent) :
     ui(new Ui::DialogNewElement)
 {
     ui->setupUi(this);
+    ui->buttonBox->addButton(tr("&Ok"), QDialogButtonBox::AcceptRole);
+    ui->buttonBox->addButton(tr("&Cancel"), QDialogButtonBox::RejectRole);
     this->setAttribute(Qt::WA_DeleteOnClose);
     this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint));
     ui->lineEdit->setMaxLength(20);
@@ -57,12 +59,12 @@ void DialogNewElement::initialize(bool isPrst, bool withPossibleLinkedElements, 
     ui->lineEdit->selectAll();
 }
 
-void DialogNewElement::on_pushCancel_clicked()
+void DialogNewElement::on_buttonBox_rejected()
 {
     QDialog::reject();
 }
 
-void DialogNewElement::on_pushOk_clicked()
+void DialogNewElement::on_buttonBox_accepted()
 {
     // Save the checkbox state
     ContextManager::configuration()->setValue(ConfManager::SECTION_TOOLS, "new_element", ui->checkLink->isChecked());

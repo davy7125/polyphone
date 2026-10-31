@@ -32,6 +32,8 @@ DialogCreateElements::DialogCreateElements(QWidget *parent) :
     ui(new Ui::DialogCreateElements)
 {
     ui->setupUi(this);
+    ui->buttonBox->addButton(tr("&Ok"), QDialogButtonBox::AcceptRole);
+    ui->buttonBox->addButton(tr("&Cancel"), QDialogButtonBox::RejectRole);
     this->setAttribute(Qt::WA_DeleteOnClose);
     this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint));
 }
@@ -104,12 +106,12 @@ void DialogCreateElements::initialize(IdList ids)
         ui->radioOnlyOne->setChecked(true);
 }
 
-void DialogCreateElements::on_pushCancel_clicked()
+void DialogCreateElements::on_buttonBox_rejected()
 {
     QDialog::reject();
 }
 
-void DialogCreateElements::on_pushOk_clicked()
+void DialogCreateElements::on_buttonBox_accepted()
 {
     // Store the option
     ContextManager::configuration()->setValue(ConfManager::SECTION_NONE, "create_element_dialog", ui->radioOnePerElement->isChecked() ? 1 : 0);

@@ -40,8 +40,8 @@ public:
     ~DialogChangeLog();
 
 private slots:
-    void on_pushDonate_clicked();
-    void on_pushOk_clicked();
+    void onDonateClicked();
+    void on_buttonBox_rejected();
 
 private:
     Ui::DialogChangeLog *ui;

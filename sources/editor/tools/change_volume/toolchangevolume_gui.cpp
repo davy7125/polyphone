@@ -31,6 +31,8 @@ ToolChangeVolume_gui::ToolChangeVolume_gui(QWidget *parent) :
     ui(new Ui::ToolChangeVolume_gui)
 {
     ui->setupUi(this);
+    ui->buttonBox->addButton(tr("&Ok"), QDialogButtonBox::AcceptRole);
+    ui->buttonBox->addButton(tr("&Cancel"), QDialogButtonBox::RejectRole);
 }
 
 ToolChangeVolume_gui::~ToolChangeVolume_gui()
@@ -95,12 +97,12 @@ void ToolChangeVolume_gui::on_radioNormalize_toggled(bool checked)
     ui->doubleSpinNormalize->setEnabled(checked);
 }
 
-void ToolChangeVolume_gui::on_pushOk_clicked()
+void ToolChangeVolume_gui::on_buttonBox_accepted()
 {
     emit this->validated();
 }
 
-void ToolChangeVolume_gui::on_pushCancel_clicked()
+void ToolChangeVolume_gui::on_buttonBox_rejected()
 {
     emit this->canceled();
 }

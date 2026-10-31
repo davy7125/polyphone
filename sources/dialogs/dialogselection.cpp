@@ -31,6 +31,8 @@ DialogSelection::DialogSelection(SoundfontManager *sf2, EltID id, QWidget *paren
     ui(new Ui::DialogSelection)
 {
     ui->setupUi(this);
+    ui->buttonBox->addButton(tr("&Duplicate"), QDialogButtonBox::AcceptRole);
+    ui->buttonBox->addButton(tr("&Cancel"), QDialogButtonBox::RejectRole);
     this->setAttribute(Qt::WA_DeleteOnClose);
     this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint));
 
@@ -79,12 +81,12 @@ void DialogSelection::on_pushSelectNone_clicked()
         ui->listWidget->item(i)->setCheckState(Qt::Unchecked);
 }
 
-void DialogSelection::on_pushCancel_clicked()
+void DialogSelection::on_buttonBox_rejected()
 {
     QDialog::close();
 }
 
-void DialogSelection::on_pushOk_clicked()
+void DialogSelection::on_buttonBox_accepted()
 {
     // Création liste index
     QList<int> listIndex;

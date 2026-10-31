@@ -39,6 +39,8 @@ ToolSoundfontExport_gui::ToolSoundfontExport_gui(QWidget *parent) :
     ui(new Ui::ToolSoundfontExport_gui)
 {
     ui->setupUi(this);
+    ui->buttonBox->addButton(tr("&Export"), QDialogButtonBox::AcceptRole);
+    ui->buttonBox->addButton(tr("&Cancel"), QDialogButtonBox::RejectRole);
     ui->pushFolder->setIcon(ContextManager::theme()->getColoredSvg(":/icons/folder.svg", QSize(24, 24), ThemeManager::WINDOW_TEXT));
 
     // Filter field, focused with Ctrl+F
@@ -284,12 +286,12 @@ void ToolSoundfontExport_gui::on_pushFolder_clicked()
         ui->lineFolder->setText(qDir);
 }
 
-void ToolSoundfontExport_gui::on_pushAnnuler_clicked()
+void ToolSoundfontExport_gui::on_buttonBox_rejected()
 {
     emit this->canceled();
 }
 
-void ToolSoundfontExport_gui::on_pushExport_clicked()
+void ToolSoundfontExport_gui::on_buttonBox_accepted()
 {
     // Check the directory
     if (ui->lineFolder->text().isEmpty() || !QDir(ui->lineFolder->text()).exists())

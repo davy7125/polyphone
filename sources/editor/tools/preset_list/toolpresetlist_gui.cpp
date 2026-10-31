@@ -34,6 +34,9 @@ ToolPresetList_gui::ToolPresetList_gui(QWidget *parent) :
     ui(new Ui::ToolPresetList_gui)
 {
     ui->setupUi(this);
+    QPushButton * pushCopy = ui->buttonBox->addButton(tr("Copy"), QDialogButtonBox::ActionRole);
+    connect(pushCopy, SIGNAL(clicked()), this, SLOT(onCopyClicked()));
+    ui->buttonBox->addButton(tr("Close"), QDialogButtonBox::RejectRole);
     ui->label->setStyleSheet("QLabel { color : " + ContextManager::theme()->getFixedColor(
                                  ThemeManager::GREEN, ThemeManager::WINDOW_BACKGROUND).name() + "; }");
 }
@@ -135,14 +138,14 @@ void ToolPresetList_gui::on_radioHtml_clicked()
     ui->plainTextEdit->setPlainText(str);
 }
 
-void ToolPresetList_gui::on_pushCopy_clicked()
+void ToolPresetList_gui::onCopyClicked()
 {
     QClipboard *clipboard = QApplication::clipboard();
     clipboard->setText(ui->plainTextEdit->toPlainText());
     ui->label->show();
 }
 
-void ToolPresetList_gui::on_pushClose_clicked()
+void ToolPresetList_gui::on_buttonBox_rejected()
 {
     emit this->validated();
 }

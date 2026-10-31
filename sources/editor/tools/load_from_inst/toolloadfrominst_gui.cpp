@@ -31,6 +31,8 @@ ToolLoadFromInst_gui::ToolLoadFromInst_gui(QWidget *parent) :
     ui(new Ui::ToolLoadFromInst_gui)
 {
     ui->setupUi(this);
+    ui->buttonBox->addButton(tr("&Ok"), QDialogButtonBox::AcceptRole);
+    ui->buttonBox->addButton(tr("&Cancel"), QDialogButtonBox::RejectRole);
 }
 
 ToolLoadFromInst_gui::~ToolLoadFromInst_gui()
@@ -76,12 +78,12 @@ void ToolLoadFromInst_gui::saveParameters(AbstractToolParameters * parameters)
         params->setParameter(0);
 }
 
-void ToolLoadFromInst_gui::on_pushOk_clicked()
+void ToolLoadFromInst_gui::on_buttonBox_accepted()
 {
     emit this->validated();
 }
 
-void ToolLoadFromInst_gui::on_pushCancel_clicked()
+void ToolLoadFromInst_gui::on_buttonBox_rejected()
 {
     emit this->canceled();
 }

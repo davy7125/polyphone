@@ -49,8 +49,8 @@ private slots:
     void on_radioAdd_toggled(bool checked);
     void on_radioMultiply_toggled(bool checked);
     void on_radioNormalize_toggled(bool checked);
-    void on_pushOk_clicked();
-    void on_pushCancel_clicked();
+    void on_buttonBox_accepted();
+    void on_buttonBox_rejected();
 
 private:
     Ui::ToolChangeVolume_gui *ui;

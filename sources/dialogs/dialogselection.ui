@@ -39,35 +39,7 @@
     </widget>
    </item>
    <item row="4" column="0" colspan="2">
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <item>
-      <widget class="QPushButton" name="pushOk">
-       <property name="text">
-        <string>&amp;Duplicate</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushCancel">
-       <property name="text">
-        <string>&amp;Cancel</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
+    <widget class="QDialogButtonBox" name="buttonBox"/>
    </item>
   </layout>
  </widget>
@@ -75,8 +47,6 @@
   <tabstop>pushSelectAll</tabstop>
   <tabstop>pushSelectNone</tabstop>
   <tabstop>listWidget</tabstop>
-  <tabstop>pushOk</tabstop>
-  <tabstop>pushCancel</tabstop>
  </tabstops>
  <resources>
   <include location="../resources.qrc"/>
