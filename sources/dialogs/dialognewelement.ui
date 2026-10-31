@@ -37,7 +37,7 @@
     <widget class="QLineEdit" name="lineEdit"/>
    </item>
    <item row="2" column="0" colspan="3">
-    <widget class="QDialogButtonBox" name="buttonBox"/>
+    <widget class="DialogButtonBox" name="buttonBox"/>
    </item>
    <item row="1" column="0" colspan="3">
     <widget class="QCheckBox" name="checkLink">
@@ -48,6 +48,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>DialogButtonBox</class>
+   <extends>QDialogButtonBox</extends>
+   <header>dialogbuttonbox.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>lineEdit</tabstop>
   <tabstop>checkLink</tabstop>

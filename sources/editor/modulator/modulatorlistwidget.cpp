@@ -53,6 +53,8 @@ void ModulatorListWidget::keyPressEvent(QKeyEvent * event)
         emit copied();
     else if (event->key() == Qt::Key_V && (event->modifiers() & Qt::ControlModifier))
         emit pasted();
+    else
+        QListWidget::keyPressEvent(event); // Navigation, and keys such as Escape left to the parents
 }
 
 QList<ModulatorData> ModulatorListWidget::getSelectedModulators()

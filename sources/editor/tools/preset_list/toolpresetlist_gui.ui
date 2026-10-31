@@ -25,7 +25,7 @@
     </widget>
    </item>
    <item row="2" column="1" colspan="4">
-    <widget class="QDialogButtonBox" name="buttonBox"/>
+    <widget class="DialogButtonBox" name="buttonBox"/>
    </item>
    <item row="2" column="0">
     <widget class="QLabel" name="label">
@@ -79,6 +79,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>DialogButtonBox</class>
+   <extends>QDialogButtonBox</extends>
+   <header>dialogbuttonbox.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>radioCsv</tabstop>
   <tabstop>radioHtml</tabstop>

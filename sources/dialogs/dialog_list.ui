@@ -34,7 +34,7 @@
     <number>6</number>
    </property>
    <item row="3" column="0">
-    <widget class="QDialogButtonBox" name="buttonBox"/>
+    <widget class="DialogButtonBox" name="buttonBox"/>
    </item>
    <item row="1" column="0">
     <widget class="QListWidget" name="listWidget"/>
@@ -51,6 +51,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>DialogButtonBox</class>
+   <extends>QDialogButtonBox</extends>
+   <header>dialogbuttonbox.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>lineSearch</tabstop>
   <tabstop>listWidget</tabstop>

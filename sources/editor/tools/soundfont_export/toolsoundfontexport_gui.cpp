@@ -239,9 +239,12 @@ bool ToolSoundfontExport_gui::eventFilter(QObject * obj, QEvent * event)
         return AbstractToolGui::eventFilter(obj, event);
 
     QKeyEvent * keyEvent = static_cast<QKeyEvent *>(event);
-    if (obj == ui->lineSearch && keyEvent->key() == Qt::Key_Down)
+    bool isEnter = (keyEvent->key() == Qt::Key_Return || keyEvent->key() == Qt::Key_Enter) &&
+                   !(keyEvent->modifiers() & Qt::ControlModifier);
+    if (obj == ui->lineSearch && (keyEvent->key() == Qt::Key_Down || isEnter))
     {
         // Go to the first preset displayed (if any)
+        // Enter doesn't start the export, which is still possible with Ctrl+Enter
         QTreeWidgetItem * item = nullptr;
         for (int i = 0; i < ui->listPresets->topLevelItemCount() && item == nullptr; i++)
             if (!ui->listPresets->topLevelItem(i)->isHidden())

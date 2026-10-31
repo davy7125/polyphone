@@ -609,6 +609,7 @@ SOURCES	+= main.cpp \
     repository/soundfont/editor/editordialoginsertvideo.cpp \
     repository/soundfont/editor/editordialoginsertimage.cpp \
     dialogs/dialogquestion.cpp \
+    dialogs/dialogbuttonbox.cpp \
     editor/graphics/graphicswave.cpp \
     editor/graphics/graphicswavepainter.cpp \
     dialogs/dialognewelement.cpp \
@@ -1042,6 +1043,7 @@ HEADERS += \
     repository/soundfont/editor/editordialoginsertvideo.h \
     repository/soundfont/editor/editordialoginsertimage.h \
     dialogs/dialogquestion.h \
+    dialogs/dialogbuttonbox.h \
     editor/graphics/graphicswave.h \
     editor/graphics/graphicswavepainter.h \
     dialogs/dialognewelement.h \

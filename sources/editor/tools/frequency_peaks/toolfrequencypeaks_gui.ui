@@ -21,7 +21,7 @@
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="1" column="0" colspan="3">
-    <widget class="QDialogButtonBox" name="buttonBox"/>
+    <widget class="DialogButtonBox" name="buttonBox"/>
    </item>
    <item row="0" column="0" colspan="3">
     <widget class="QTableWidget" name="table">
@@ -56,6 +56,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>DialogButtonBox</class>
+   <extends>QDialogButtonBox</extends>
+   <header>dialogbuttonbox.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>table</tabstop>
  </tabstops>

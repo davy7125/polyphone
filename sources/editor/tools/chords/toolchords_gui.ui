@@ -674,7 +674,7 @@
     </spacer>
    </item>
    <item>
-    <widget class="QDialogButtonBox" name="buttonBox"/>
+    <widget class="DialogButtonBox" name="buttonBox"/>
    </item>
   </layout>
  </widget>
@@ -683,6 +683,11 @@
    <class>ResettableSlider</class>
    <extends>QSlider</extends>
    <header>resettableslider.h</header>
+  </customwidget>
+  <customwidget>
+   <class>DialogButtonBox</class>
+   <extends>QDialogButtonBox</extends>
+   <header>dialogbuttonbox.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

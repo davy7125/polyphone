@@ -141,10 +141,17 @@
     </widget>
    </item>
    <item row="5" column="0" colspan="3">
-    <widget class="QDialogButtonBox" name="buttonBox"/>
+    <widget class="DialogButtonBox" name="buttonBox"/>
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>DialogButtonBox</class>
+   <extends>QDialogButtonBox</extends>
+   <header>dialogbuttonbox.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>comboBox</tabstop>
   <tabstop>spinPos1</tabstop>

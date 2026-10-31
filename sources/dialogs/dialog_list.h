@@ -45,6 +45,9 @@ public:
 
     void showDialog(EltID idSrc, bool isAssociation);
 
+protected:
+    bool eventFilter(QObject * obj, QEvent * event) override;
+
 signals:
     void elementSelected(EltID id, bool isAssociation);
 

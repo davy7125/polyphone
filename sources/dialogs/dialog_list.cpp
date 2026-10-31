@@ -26,6 +26,7 @@
 #include "ui_dialog_list.h"
 #include "soundfontmanager.h"
 #include "utils.h"
+#include <QKeyEvent>
 
 DialogList::DialogList(QWidget *parent) :
     QDialog(parent),
@@ -35,6 +36,7 @@ DialogList::DialogList(QWidget *parent) :
     ui->buttonBox->addButton(tr("&Ok"), QDialogButtonBox::AcceptRole);
     ui->buttonBox->addButton(tr("&Cancel"), QDialogButtonBox::RejectRole);
     this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint));
+    ui->lineSearch->installEventFilter(this);
 }
 
 DialogList::~DialogList()
@@ -120,8 +122,8 @@ void DialogList::on_buttonBox_rejected()
 
 void DialogList::on_buttonBox_accepted()
 {
-    // An element is selected?
-    if (ui->listWidget->selectedItems().count())
+    // An element is selected? (not hidden by the filter)
+    if (ui->listWidget->selectedItems().count() && !ui->listWidget->currentItem()->isHidden())
     {
         ListWidgetItem *item = dynamic_cast<ListWidgetItem *>(ui->listWidget->currentItem());
         emit elementSelected(item->id, _isAssociation);
@@ -141,5 +143,34 @@ void DialogList::on_lineSearch_textChanged(const QString &arg1)
     QString filter = Utils::simplifySpaces(arg1.toLower());
     for (int i = 0; i < ui->listWidget->count(); i++)
         ui->listWidget->item(i)->setHidden(!Utils::simplifySpaces(ui->listWidget->item(i)->text().toLower()).contains(filter));
+}
+
+bool DialogList::eventFilter(QObject * obj, QEvent * event)
+{
+    if (obj == ui->lineSearch && event->type() == QEvent::KeyPress)
+    {
+        QKeyEvent * keyEvent = static_cast<QKeyEvent *>(event);
+        bool isEnter = (keyEvent->key() == Qt::Key_Return || keyEvent->key() == Qt::Key_Enter) &&
+                       !(keyEvent->modifiers() & Qt::ControlModifier);
+        if (keyEvent->key() == Qt::Key_Down || isEnter)
+        {
+            // Go to the selected element if still displayed, otherwise to the first element displayed
+            // Enter doesn't validate the dialog, which is still possible with Ctrl+Enter
+            QListWidgetItem * item = ui->listWidget->currentItem();
+            if (item != nullptr && (item->isHidden() || !item->isSelected()))
+                item = nullptr;
+            for (int i = 0; i < ui->listWidget->count() && item == nullptr; i++)
+                if (!ui->listWidget->item(i)->isHidden())
+                    item = ui->listWidget->item(i);
+            if (item != nullptr)
+            {
+                ui->listWidget->setFocus();
+                ui->listWidget->setCurrentItem(item);
+            }
+            return true;
+        }
+    }
+
+    return QDialog::eventFilter(obj, event);
 }
 
