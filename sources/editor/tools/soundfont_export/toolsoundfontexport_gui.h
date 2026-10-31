@@ -27,6 +27,8 @@
 
 #include "abstracttoolgui.h"
 
+class QTreeWidgetItem;
+
 namespace Ui {
 class ToolSoundfontExport_gui;
 }
@@ -45,6 +47,9 @@ public:
     /// Save the parameters based on the interface
     void saveParameters(AbstractToolParameters * parameters) override;
 
+protected:
+    bool eventFilter(QObject * obj, QEvent * event) override;
+
 private slots:
     void on_pushTick_clicked();
     void on_pushUntick_clicked();
@@ -52,8 +57,13 @@ private slots:
     void on_pushAnnuler_clicked();
     void on_pushExport_clicked();
     void on_comboFormat_currentIndexChanged(int index);
+    void on_lineSearch_textChanged(const QString &text);
+    void updateCheckedCount();
 
 private:
+    QList<QTreeWidgetItem *> getVisiblePresets();
+    void setCheckState(QList<QTreeWidgetItem *> items, Qt::CheckState state);
+
     Ui::ToolSoundfontExport_gui *ui;
     QMap<int, QList<int> > _presetList;
 };

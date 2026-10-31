@@ -27,9 +27,12 @@
 #include "toolsoundfontexport_parameters.h"
 #include "contextmanager.h"
 #include "soundfontmanager.h"
+#include "utils.h"
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QRegularExpression>
+#include <QShortcut>
+#include <QKeyEvent>
 
 ToolSoundfontExport_gui::ToolSoundfontExport_gui(QWidget *parent) :
     AbstractToolGui(parent),
@@ -37,6 +40,16 @@ ToolSoundfontExport_gui::ToolSoundfontExport_gui(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->pushFolder->setIcon(ContextManager::theme()->getColoredSvg(":/icons/folder.svg", QSize(24, 24), ThemeManager::WINDOW_TEXT));
+
+    // Filter field, focused with Ctrl+F
+    QShortcut * shortcut = new QShortcut(QKeySequence(Qt::CTRL | Qt::Key_F), this);
+    connect(shortcut, &QShortcut::activated, this, [this]() {
+        ui->lineSearch->selectAll();
+        ui->lineSearch->setFocus();
+    });
+    ui->lineSearch->installEventFilter(this);
+    ui->listPresets->installEventFilter(this);
+    connect(ui->listPresets, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(updateCheckedCount()));
 }
 
 ToolSoundfontExport_gui::~ToolSoundfontExport_gui()
@@ -61,6 +74,7 @@ void ToolSoundfontExport_gui::updateInterface(AbstractToolParameters * parameter
         if (title.isEmpty())
             title = tr("Untitled");
         QTreeWidgetItem * rootItem = new QTreeWidgetItem(QStringList(title));
+        rootItem->setFlags(rootItem->flags() & ~Qt::ItemIsSelectable);
         ui->listPresets->addTopLevelItem(rootItem);
 
         id.typeElement = elementPrst;
@@ -73,6 +87,7 @@ void ToolSoundfontExport_gui::updateInterface(AbstractToolParameters * parameter
                         .arg(sm->getQstr(id, champ_name)));
             item->setCheckState(0, Qt::Checked);
             item->setData(0, Qt::UserRole, QPoint(id.indexSf2, id.indexElt));
+            item->setData(0, Qt::UserRole + 1, sm->getQstr(id, champ_nameSort));
             rootItem->addChild(item);
             rootItem->setExpanded(true);
         }
@@ -81,6 +96,11 @@ void ToolSoundfontExport_gui::updateInterface(AbstractToolParameters * parameter
         rootItem->sortChildren(0, Qt::AscendingOrder);
     }
     ui->listPresets->resizeColumnToContents(0);
+
+    // Empty filter
+    ui->lineSearch->clear();
+    ui->lineSearch->setFocus();
+    updateCheckedCount();
 
     // Load parameters
     ToolSoundfontExport_parameters * params = (ToolSoundfontExport_parameters *) parameters;
@@ -123,28 +143,137 @@ void ToolSoundfontExport_gui::saveParameters(AbstractToolParameters * parameters
 
 void ToolSoundfontExport_gui::on_pushTick_clicked()
 {
-    // Select all
-    int nbTopLevelItems = ui->listPresets->topLevelItemCount();
-    for (int i = 0; i < nbTopLevelItems; i++)
-    {
-        QTreeWidgetItem * rootItem = ui->listPresets->topLevelItem(i);
-        int nbItems = rootItem->childCount();
-        for (int j = 0; j < nbItems; j++)
-            rootItem->child(j)->setCheckState(0, Qt::Checked);
-    }
+    // Select all presets displayed by the filter
+    setCheckState(getVisiblePresets(), Qt::Checked);
 }
 
 void ToolSoundfontExport_gui::on_pushUntick_clicked()
 {
-    // Untick all
+    // Untick all presets displayed by the filter
+    setCheckState(getVisiblePresets(), Qt::Unchecked);
+}
+
+QList<QTreeWidgetItem *> ToolSoundfontExport_gui::getVisiblePresets()
+{
+    QList<QTreeWidgetItem *> items;
     int nbTopLevelItems = ui->listPresets->topLevelItemCount();
     for (int i = 0; i < nbTopLevelItems; i++)
     {
         QTreeWidgetItem * rootItem = ui->listPresets->topLevelItem(i);
         int nbItems = rootItem->childCount();
         for (int j = 0; j < nbItems; j++)
-            rootItem->child(j)->setCheckState(0, Qt::Unchecked);
+            if (!rootItem->child(j)->isHidden())
+                items << rootItem->child(j);
     }
+    return items;
+}
+
+void ToolSoundfontExport_gui::setCheckState(QList<QTreeWidgetItem *> items, Qt::CheckState state)
+{
+    // Count updated once at the end
+    ui->listPresets->blockSignals(true);
+    foreach (QTreeWidgetItem * item, items)
+        item->setCheckState(0, state);
+    ui->listPresets->blockSignals(false);
+    updateCheckedCount();
+}
+
+void ToolSoundfontExport_gui::on_lineSearch_textChanged(const QString &text)
+{
+    // Presets whose numbers or name contain the filter, soundfonts without matches are hidden
+    QString filter = Utils::removeAccents(text).toLower();
+    int nbTopLevelItems = ui->listPresets->topLevelItemCount();
+    for (int i = 0; i < nbTopLevelItems; i++)
+    {
+        QTreeWidgetItem * rootItem = ui->listPresets->topLevelItem(i);
+        bool rootVisible = filter.isEmpty();
+        int nbItems = rootItem->childCount();
+        for (int j = 0; j < nbItems; j++)
+        {
+            bool visible = rootItem->child(j)->data(0, Qt::UserRole + 1).toString().contains(filter);
+            rootItem->child(j)->setHidden(!visible);
+            if (!visible)
+                rootItem->child(j)->setSelected(false);
+            rootVisible |= visible;
+        }
+        rootItem->setHidden(!rootVisible);
+    }
+
+    // Checked presets may now be hidden
+    updateCheckedCount();
+}
+
+void ToolSoundfontExport_gui::updateCheckedCount()
+{
+    int nbPresets = 0;
+    int nbChecked = 0;
+    int nbHiddenChecked = 0;
+    int nbTopLevelItems = ui->listPresets->topLevelItemCount();
+    for (int i = 0; i < nbTopLevelItems; i++)
+    {
+        QTreeWidgetItem * rootItem = ui->listPresets->topLevelItem(i);
+        int nbItems = rootItem->childCount();
+        for (int j = 0; j < nbItems; j++)
+        {
+            nbPresets++;
+            if (rootItem->child(j)->checkState(0) == Qt::Checked)
+            {
+                nbChecked++;
+                if (rootItem->child(j)->isHidden())
+                    nbHiddenChecked++;
+            }
+        }
+    }
+
+    if (nbHiddenChecked > 0)
+        ui->labelCount->setText(tr("Checked presets: %1 / %2 (hidden: %n)", "", nbHiddenChecked).arg(nbChecked).arg(nbPresets));
+    else
+        ui->labelCount->setText(tr("Checked presets: %1 / %2").arg(nbChecked).arg(nbPresets));
+}
+
+bool ToolSoundfontExport_gui::eventFilter(QObject * obj, QEvent * event)
+{
+    if (event->type() != QEvent::KeyPress)
+        return AbstractToolGui::eventFilter(obj, event);
+
+    QKeyEvent * keyEvent = static_cast<QKeyEvent *>(event);
+    if (obj == ui->lineSearch && keyEvent->key() == Qt::Key_Down)
+    {
+        // Go to the first preset displayed (if any)
+        QTreeWidgetItem * item = nullptr;
+        for (int i = 0; i < ui->listPresets->topLevelItemCount() && item == nullptr; i++)
+            if (!ui->listPresets->topLevelItem(i)->isHidden())
+                item = ui->listPresets->topLevelItem(i);
+        while (item != nullptr && item->parent() == nullptr)
+            item = ui->listPresets->itemBelow(item);
+        if (item != nullptr)
+        {
+            ui->listPresets->setFocus();
+            ui->listPresets->setCurrentItem(item);
+        }
+        return true;
+    }
+
+    if (obj == ui->listPresets && keyEvent->key() == Qt::Key_Space && keyEvent->modifiers() == Qt::NoModifier)
+    {
+        // A preset hidden by the filter cannot be changed
+        QTreeWidgetItem * currentItem = ui->listPresets->currentItem();
+        if (currentItem != nullptr && currentItem->isHidden())
+            return true;
+
+        // The opposite state of the current preset is applied to all selected presets
+        if (currentItem != nullptr && currentItem->parent() != nullptr && currentItem->isSelected())
+        {
+            QList<QTreeWidgetItem *> items;
+            foreach (QTreeWidgetItem * item, ui->listPresets->selectedItems())
+                if (item->parent() != nullptr)
+                    items << item;
+            setCheckState(items, currentItem->checkState(0) == Qt::Checked ? Qt::Unchecked : Qt::Checked);
+            return true;
+        }
+    }
+
+    return AbstractToolGui::eventFilter(obj, event);
 }
 
 void ToolSoundfontExport_gui::on_pushFolder_clicked()

@@ -861,14 +861,24 @@
         <translation>移除开头空白</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectiongeneral.cpp" line="41"/>
+        <location filename="../../context/interface/configsectiongeneral.cpp" line="42"/>
         <source>Maximum number of voices, the quietest notes fading out above it</source>
         <translation>最大复音数，超出后最轻的音符将淡出</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectiongeneral.cpp" line="42"/>
+        <location filename="../../context/interface/configsectiongeneral.cpp" line="43"/>
         <source>Maximum share of the processor time used by the voices, the quietest notes fading out above it</source>
         <translation>复音可占用的最大处理器时间比例，超出后最轻的音符将淡出</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/configsectiongeneral.cpp" line="130"/>
+        <source>System default</source>
+        <translation>系统默认</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/configsectiongeneral.cpp" line="148"/>
+        <source>disconnected</source>
+        <translation>已断开</translation>
     </message>
 </context>
 <context>
@@ -1343,27 +1353,27 @@ repository</source>
 <context>
     <name>ControllerArea</name>
     <message>
-        <location filename="../../clavier/controllerarea.ui" line="209"/>
+        <location filename="../../clavier/controllerarea.ui" line="203"/>
         <source>Pitch wheel</source>
         <translation>弯音轮</translation>
     </message>
     <message>
-        <location filename="../../clavier/controllerarea.ui" line="233"/>
+        <location filename="../../clavier/controllerarea.ui" line="227"/>
         <source>Sensitivity</source>
         <translation>灵敏度</translation>
     </message>
     <message>
-        <location filename="../../clavier/controllerarea.ui" line="257"/>
+        <location filename="../../clavier/controllerarea.ui" line="251"/>
         <source>Pressure</source>
         <translation>压感</translation>
     </message>
     <message>
-        <location filename="../../clavier/controllerarea.cpp" line="245"/>
+        <location filename="../../clavier/controllerarea.cpp" line="232"/>
         <source>on</source>
         <translation>开</translation>
     </message>
     <message>
-        <location filename="../../clavier/controllerarea.cpp" line="250"/>
+        <location filename="../../clavier/controllerarea.cpp" line="232"/>
         <source>off</source>
         <translation>关</translation>
     </message>
@@ -1832,22 +1842,22 @@ repository</source>
         <translation>触后</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="279"/>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="289"/>
         <source>Hide the controller area</source>
         <translation>隐藏控制器区域</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="279"/>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="289"/>
         <source>Show the controller area</source>
         <translation>显示控制器区域</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="284"/>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="294"/>
         <source>Hide the effects</source>
         <translation>隐藏效果</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="284"/>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="294"/>
         <source>Show the effects</source>
         <translation>显示效果</translation>
     </message>
@@ -3068,22 +3078,22 @@ repository</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="246"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="247"/>
         <source>&amp;Save</source>
         <translation>保存(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="247"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="248"/>
         <source>&amp;Cancel</source>
         <translation>取消(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="248"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="249"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>不保存(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="232"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="233"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
@@ -3093,32 +3103,32 @@ repository</source>
         <translation>Polyphone 音色库编辑器</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="223"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="224"/>
         <source>Untitled</source>
         <translation>未命名</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="233"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="234"/>
         <source>Save before exiting?</source>
         <translation>退出前是否保存文件？</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="236"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="237"/>
         <source>The following files have been modified:</source>
         <translation>下列文件已被修改：</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="243"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="244"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>文件 &quot;%1&quot; 已被修改。</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="321"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="322"/>
         <source>Opening files</source>
         <translation>正在打开文件</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="331"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="332"/>
         <source>Opening a directory</source>
         <translation>正在打开目录</translation>
     </message>
@@ -5493,62 +5503,62 @@ Other soundfont editors might display other units.</source>
         <translation>自定义</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="468"/>
+        <location filename="../../context/thememanager.cpp" line="478"/>
         <source>Default</source>
         <translation>默认</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="488"/>
+        <location filename="../../context/thememanager.cpp" line="498"/>
         <source>Gnome</source>
         <translation>Gnome</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="501"/>
+        <location filename="../../context/thememanager.cpp" line="511"/>
         <source>Dark, blue</source>
         <translation>暗蓝</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="514"/>
+        <location filename="../../context/thememanager.cpp" line="524"/>
         <source>Dark, orange</source>
         <translation>暗橙</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="527"/>
+        <location filename="../../context/thememanager.cpp" line="537"/>
         <source>Dark, green</source>
         <translation>暗绿</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="540"/>
+        <location filename="../../context/thememanager.cpp" line="550"/>
         <source>Dark, yellow</source>
         <translation>暗黄</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="553"/>
+        <location filename="../../context/thememanager.cpp" line="563"/>
         <source>Aqua</source>
         <translation>水绿</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="566"/>
+        <location filename="../../context/thememanager.cpp" line="576"/>
         <source>Spring</source>
         <translation>春天</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="579"/>
+        <location filename="../../context/thememanager.cpp" line="589"/>
         <source>Windows 10</source>
         <translation>Windows 10</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="592"/>
+        <location filename="../../context/thememanager.cpp" line="602"/>
         <source>Ubuntu</source>
         <translation>Ubuntu</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="605"/>
+        <location filename="../../context/thememanager.cpp" line="615"/>
         <source>Good night</source>
         <translation>晚安</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="618"/>
+        <location filename="../../context/thememanager.cpp" line="628"/>
         <source>Pink</source>
         <translation>粉色</translation>
     </message>
@@ -7145,115 +7155,132 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ToolSoundfontExport_gui</name>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="22"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="32"/>
         <source>Select all</source>
         <translation>全选</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="29"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="39"/>
         <source>Unselect all</source>
         <translation>全不选</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="97"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="117"/>
         <source>Destination</source>
         <translation>目标</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="140"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="160"/>
         <source>Format</source>
         <translation>格式</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="71"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="91"/>
         <source>General MIDI classification</source>
         <translation>通用MIDI分类</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="147"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="167"/>
         <source>one directory per bank</source>
         <translation>每个库一个目录</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="104"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="124"/>
         <source>preset number as prefix</source>
         <translation>预设编号作为前缀</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="158"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="20"/>
+        <source>Search...</source>
+        <translation>搜索...</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="178"/>
         <source>High</source>
         <translation>高</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="163"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="183"/>
         <source>Medium</source>
         <translation>中</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="168"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="188"/>
         <source>Low</source>
         <translation>低</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="176"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="196"/>
         <source>one file per preset</source>
         <translation>每个预设一个文件</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="61"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="81"/>
         <source>Quality</source>
         <translation>质量</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="183"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="203"/>
         <source>raw values</source>
         <translation>原始值</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="214"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="234"/>
         <source>&amp;Cancel</source>
         <translation>取消(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="194"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="214"/>
         <source>&amp;Export</source>
         <translation>导出(&amp;E)</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="62"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="75"/>
         <source>Untitled</source>
         <translation>未命名</translation>
     </message>
+    <message numerus="yes">
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="229"/>
+        <source>Checked presets: %1 / %2 (hidden: %n)</source>
+        <translation>
+            <numerusform>已勾选的预设：%1 / %2 (隐藏：%n)</numerusform>
+        </translation>
+    </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="152"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="231"/>
+        <source>Checked presets: %1 / %2</source>
+        <translation>已勾选的预设：%1 / %2</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="281"/>
         <source>Select the destination directory</source>
         <translation>选择目标目录</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="168"/>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="197"/>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="208"/>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="217"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="297"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="326"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="337"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="346"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="168"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="297"/>
         <source>Invalid directory.</source>
         <translation>无效目录。</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="197"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="326"/>
         <source>At least one preset must be selected.</source>
         <translation>必须至少选择一个预设。</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="208"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="337"/>
         <source>The maximal number of soundfont to export is 128.</source>
         <translation>可导出的音色库最大数量为 128。</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="217"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="346"/>
         <source>In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 128.</source>
         <translation>如果导出多个音色库，每个音色库的最大预设数量为 128。</translation>
     </message>

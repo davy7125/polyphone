@@ -869,14 +869,24 @@
         <translation>시작할 때 공백 제거</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectiongeneral.cpp" line="41"/>
+        <location filename="../../context/interface/configsectiongeneral.cpp" line="42"/>
         <source>Maximum number of voices, the quietest notes fading out above it</source>
         <translation>최대 보이스 수. 이를 넘으면 가장 작은 음부터 페이드아웃됩니다</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectiongeneral.cpp" line="42"/>
+        <location filename="../../context/interface/configsectiongeneral.cpp" line="43"/>
         <source>Maximum share of the processor time used by the voices, the quietest notes fading out above it</source>
         <translation>보이스가 사용하는 프로세서 시간의 최대 비율. 이를 넘으면 가장 작은 음부터 페이드아웃됩니다</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/configsectiongeneral.cpp" line="130"/>
+        <source>System default</source>
+        <translation>시스템 기본값</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/configsectiongeneral.cpp" line="148"/>
+        <source>disconnected</source>
+        <translation>연결 끊김</translation>
     </message>
 </context>
 <context>
@@ -1355,27 +1365,27 @@ repository</source>
 <context>
     <name>ControllerArea</name>
     <message>
-        <location filename="../../clavier/controllerarea.ui" line="209"/>
+        <location filename="../../clavier/controllerarea.ui" line="203"/>
         <source>Pitch wheel</source>
         <translation>피치 휠</translation>
     </message>
     <message>
-        <location filename="../../clavier/controllerarea.ui" line="233"/>
+        <location filename="../../clavier/controllerarea.ui" line="227"/>
         <source>Sensitivity</source>
         <translation>감도</translation>
     </message>
     <message>
-        <location filename="../../clavier/controllerarea.ui" line="257"/>
+        <location filename="../../clavier/controllerarea.ui" line="251"/>
         <source>Pressure</source>
         <translation>프레셔</translation>
     </message>
     <message>
-        <location filename="../../clavier/controllerarea.cpp" line="245"/>
+        <location filename="../../clavier/controllerarea.cpp" line="232"/>
         <source>on</source>
         <translation>켜기</translation>
     </message>
     <message>
-        <location filename="../../clavier/controllerarea.cpp" line="250"/>
+        <location filename="../../clavier/controllerarea.cpp" line="232"/>
         <source>off</source>
         <translation>끄기</translation>
     </message>
@@ -1845,22 +1855,22 @@ repository</source>
         <translation>애프터 터치</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="279"/>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="289"/>
         <source>Hide the controller area</source>
         <translation>컨트롤러 영역 숨기기</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="279"/>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="289"/>
         <source>Show the controller area</source>
         <translation>컨트롤러 영역 보이기</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="284"/>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="294"/>
         <source>Hide the effects</source>
         <translation>효과 숨기기</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="284"/>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="294"/>
         <source>Show the effects</source>
         <translation>효과 보이기</translation>
     </message>
@@ -3089,22 +3099,22 @@ repository</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="246"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="247"/>
         <source>&amp;Save</source>
         <translation>저장(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="247"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="248"/>
         <source>&amp;Cancel</source>
         <translation>취소(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="248"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="249"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>저장하지 않음(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="232"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="233"/>
         <source>Warning</source>
         <translation>경고</translation>
     </message>
@@ -3114,32 +3124,32 @@ repository</source>
         <translation>폴리폰 사운드폰트 에디터</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="223"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="224"/>
         <source>Untitled</source>
         <translation>제목없음</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="233"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="234"/>
         <source>Save before exiting?</source>
         <translation>종료하기 전에 저장할까요?</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="236"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="237"/>
         <source>The following files have been modified:</source>
         <translation>다음의 파일이 변경됐습니다:</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="243"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="244"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>&quot;%1&quot; 파일이 변경됐습니다.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="321"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="322"/>
         <source>Opening files</source>
         <translation>파일 여는 중</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="331"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="332"/>
         <source>Opening a directory</source>
         <translation>디렉터리 열기</translation>
     </message>
@@ -5532,62 +5542,62 @@ Other soundfont editors might display other units.</source>
         <translation>사용자 정의</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="468"/>
+        <location filename="../../context/thememanager.cpp" line="478"/>
         <source>Default</source>
         <translation>기본</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="488"/>
+        <location filename="../../context/thememanager.cpp" line="498"/>
         <source>Gnome</source>
         <translation>그놈(Gnome)</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="501"/>
+        <location filename="../../context/thememanager.cpp" line="511"/>
         <source>Dark, blue</source>
         <translation>어두운, 파랑</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="514"/>
+        <location filename="../../context/thememanager.cpp" line="524"/>
         <source>Dark, orange</source>
         <translation>어두운, 오렌지</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="527"/>
+        <location filename="../../context/thememanager.cpp" line="537"/>
         <source>Dark, green</source>
         <translation>어두운, 초록</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="540"/>
+        <location filename="../../context/thememanager.cpp" line="550"/>
         <source>Dark, yellow</source>
         <translation>어두운, 노랑</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="553"/>
+        <location filename="../../context/thememanager.cpp" line="563"/>
         <source>Aqua</source>
         <translation>아쿠아</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="566"/>
+        <location filename="../../context/thememanager.cpp" line="576"/>
         <source>Spring</source>
         <translation>봄</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="579"/>
+        <location filename="../../context/thememanager.cpp" line="589"/>
         <source>Windows 10</source>
         <translation>윈도우즈 10</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="592"/>
+        <location filename="../../context/thememanager.cpp" line="602"/>
         <source>Ubuntu</source>
         <translation>우분투(Ubuntu)</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="605"/>
+        <location filename="../../context/thememanager.cpp" line="615"/>
         <source>Good night</source>
         <translation>굿나잇</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="618"/>
+        <location filename="../../context/thememanager.cpp" line="628"/>
         <source>Pink</source>
         <translation>분홍</translation>
     </message>
@@ -7197,117 +7207,134 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ToolSoundfontExport_gui</name>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="22"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="32"/>
         <source>Select all</source>
         <translation>모두 선택</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="29"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="39"/>
         <source>Unselect all</source>
         <translation>모두 선택해제</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="97"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="117"/>
         <source>Destination</source>
         <translation>경로</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="140"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="160"/>
         <source>Format</source>
         <translation>형식</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="71"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="91"/>
         <source>General MIDI classification</source>
         <translation>제너럴 MIDI 분류</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="147"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="167"/>
         <source>one directory per bank</source>
         <translation>뱅크당 디렉터리 하나</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="104"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="124"/>
         <source>preset number as prefix</source>
         <translation>프리셋 번호를 접두사로</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="158"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="20"/>
+        <source>Search...</source>
+        <translation>검색...</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="178"/>
         <source>High</source>
         <translation>높음</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="163"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="183"/>
         <source>Medium</source>
         <translation>보통</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="168"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="188"/>
         <source>Low</source>
         <translation>낮음</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="176"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="196"/>
         <source>one file per preset</source>
         <translation>프리셋당 한 개의 파일</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="61"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="81"/>
         <source>Quality</source>
         <translation>품질</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="183"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="203"/>
         <source>raw values</source>
         <translation>원시 값</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="214"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="234"/>
         <source>&amp;Cancel</source>
         <oldsource>Cancel</oldsource>
         <translation>취소(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="194"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="214"/>
         <source>&amp;Export</source>
         <oldsource>Export</oldsource>
         <translation>내보내기(&amp;E)</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="62"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="75"/>
         <source>Untitled</source>
         <translation>제목없음</translation>
     </message>
+    <message numerus="yes">
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="229"/>
+        <source>Checked presets: %1 / %2 (hidden: %n)</source>
+        <translation>
+            <numerusform>체크된 프리셋: %1 / %2 (숨김: %n개)</numerusform>
+        </translation>
+    </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="152"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="231"/>
+        <source>Checked presets: %1 / %2</source>
+        <translation>체크된 프리셋: %1 / %2</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="281"/>
         <source>Select the destination directory</source>
         <translation>저장할 경로 선택</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="168"/>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="197"/>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="208"/>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="217"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="297"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="326"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="337"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="346"/>
         <source>Warning</source>
         <translation>경고</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="168"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="297"/>
         <source>Invalid directory.</source>
         <translation>경로가 잘못됐습니다.</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="197"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="326"/>
         <source>At least one preset must be selected.</source>
         <translation>하나 이상의 프리셋을 선택해야 합니다.</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="208"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="337"/>
         <source>The maximal number of soundfont to export is 128.</source>
         <translation>내보낼 사운드폰트의 최대 수는 128입니다.</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="217"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="346"/>
         <source>In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 128.</source>
         <translation>여러 사운드폰트를 내보내는 경우 사운드폰트 당 최대 프리셋 수는 128입니다.</translation>
     </message>

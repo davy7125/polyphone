@@ -869,14 +869,24 @@
         <translation>remover silêncio inicial</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectiongeneral.cpp" line="41"/>
+        <location filename="../../context/interface/configsectiongeneral.cpp" line="42"/>
         <source>Maximum number of voices, the quietest notes fading out above it</source>
         <translation>Número máximo de vozes; acima dele, as notas mais suaves desaparecem gradualmente</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectiongeneral.cpp" line="42"/>
+        <location filename="../../context/interface/configsectiongeneral.cpp" line="43"/>
         <source>Maximum share of the processor time used by the voices, the quietest notes fading out above it</source>
         <translation>Parcela máxima do tempo do processador usada pelas vozes; acima dela, as notas mais suaves desaparecem gradualmente</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/configsectiongeneral.cpp" line="130"/>
+        <source>System default</source>
+        <translation>Padrão do sistema</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/configsectiongeneral.cpp" line="148"/>
+        <source>disconnected</source>
+        <translation>desconectado</translation>
     </message>
 </context>
 <context>
@@ -1355,27 +1365,27 @@ online</translation>
 <context>
     <name>ControllerArea</name>
     <message>
-        <location filename="../../clavier/controllerarea.ui" line="209"/>
+        <location filename="../../clavier/controllerarea.ui" line="203"/>
         <source>Pitch wheel</source>
         <translation>Roda de pitch</translation>
     </message>
     <message>
-        <location filename="../../clavier/controllerarea.ui" line="233"/>
+        <location filename="../../clavier/controllerarea.ui" line="227"/>
         <source>Sensitivity</source>
         <translation>Sensibilidade</translation>
     </message>
     <message>
-        <location filename="../../clavier/controllerarea.ui" line="257"/>
+        <location filename="../../clavier/controllerarea.ui" line="251"/>
         <source>Pressure</source>
         <translation>Pressão</translation>
     </message>
     <message>
-        <location filename="../../clavier/controllerarea.cpp" line="245"/>
+        <location filename="../../clavier/controllerarea.cpp" line="232"/>
         <source>on</source>
         <translation>ligado</translation>
     </message>
     <message>
-        <location filename="../../clavier/controllerarea.cpp" line="250"/>
+        <location filename="../../clavier/controllerarea.cpp" line="232"/>
         <source>off</source>
         <translation>desligado</translation>
     </message>
@@ -1845,22 +1855,22 @@ online</translation>
         <translation>Aftertouch</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="279"/>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="289"/>
         <source>Hide the controller area</source>
         <translation>Esconder a área do controlador</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="279"/>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="289"/>
         <source>Show the controller area</source>
         <translation>Mostrar a área do controlador</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="284"/>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="294"/>
         <source>Hide the effects</source>
         <translation>Esconder os efeitos</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="284"/>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="294"/>
         <source>Show the effects</source>
         <translation>Mostrar os efeitos</translation>
     </message>
@@ -3096,22 +3106,22 @@ online</translation>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="246"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="247"/>
         <source>&amp;Save</source>
         <translation>&amp;Salvar</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="247"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="248"/>
         <source>&amp;Cancel</source>
         <translation>Cancel&amp;ar</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="248"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="249"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>&amp;Não salvar</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="232"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="233"/>
         <source>Warning</source>
         <translation>Atenção</translation>
     </message>
@@ -3121,32 +3131,32 @@ online</translation>
         <translation>Editor de SoundFont Polyphone</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="223"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="224"/>
         <source>Untitled</source>
         <translation>Sem nome</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="233"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="234"/>
         <source>Save before exiting?</source>
         <translation>Salvar antes de sair?</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="236"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="237"/>
         <source>The following files have been modified:</source>
         <translation>Os seguintes arquivos foram modificados:</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="243"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="244"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>O arquivo &quot;%1&quot; foi modificado.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="321"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="322"/>
         <source>Opening files</source>
         <translation>Abrindo arquivos</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="331"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="332"/>
         <source>Opening a directory</source>
         <translation>Abrindo um diretório</translation>
     </message>
@@ -5572,62 +5582,62 @@ Outros editores de soundfont podem exibir outras unidades.</translation>
         <translation>Personalizado</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="468"/>
+        <location filename="../../context/thememanager.cpp" line="478"/>
         <source>Default</source>
         <translation>Padrão</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="488"/>
+        <location filename="../../context/thememanager.cpp" line="498"/>
         <source>Gnome</source>
         <translation>Gnome</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="501"/>
+        <location filename="../../context/thememanager.cpp" line="511"/>
         <source>Dark, blue</source>
         <translation>Escuro, azul</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="514"/>
+        <location filename="../../context/thememanager.cpp" line="524"/>
         <source>Dark, orange</source>
         <translation>Escuro, laranja</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="527"/>
+        <location filename="../../context/thememanager.cpp" line="537"/>
         <source>Dark, green</source>
         <translation>Escuro, verde</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="540"/>
+        <location filename="../../context/thememanager.cpp" line="550"/>
         <source>Dark, yellow</source>
         <translation>Escuro, amarelo</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="553"/>
+        <location filename="../../context/thememanager.cpp" line="563"/>
         <source>Aqua</source>
         <translation>Aqua</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="566"/>
+        <location filename="../../context/thememanager.cpp" line="576"/>
         <source>Spring</source>
         <translation>Primavera</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="579"/>
+        <location filename="../../context/thememanager.cpp" line="589"/>
         <source>Windows 10</source>
         <translation>Windows 10</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="592"/>
+        <location filename="../../context/thememanager.cpp" line="602"/>
         <source>Ubuntu</source>
         <translation>Ubuntu</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="605"/>
+        <location filename="../../context/thememanager.cpp" line="615"/>
         <source>Good night</source>
         <translation>Boa noite</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="618"/>
+        <location filename="../../context/thememanager.cpp" line="628"/>
         <source>Pink</source>
         <translation>Rosa</translation>
     </message>
@@ -7240,117 +7250,135 @@ Outros editores de soundfont podem exibir outras unidades.</translation>
 <context>
     <name>ToolSoundfontExport_gui</name>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="22"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="32"/>
         <source>Select all</source>
         <translation>Selecionar tudo</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="29"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="39"/>
         <source>Unselect all</source>
         <translation>Desmarcar tudo</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="97"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="117"/>
         <source>Destination</source>
         <translation>Destino</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="140"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="160"/>
         <source>Format</source>
         <translation>Formato</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="71"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="91"/>
         <source>General MIDI classification</source>
         <translation>Classificação General MIDI</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="147"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="167"/>
         <source>one directory per bank</source>
         <translation>uma pasta por banco</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="104"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="124"/>
         <source>preset number as prefix</source>
         <translation>número de predefinição como prefixo</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="158"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="20"/>
+        <source>Search...</source>
+        <translation>Buscar...</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="178"/>
         <source>High</source>
         <translation>Alta</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="163"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="183"/>
         <source>Medium</source>
         <translation>Média</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="168"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="188"/>
         <source>Low</source>
         <translation>Baixa</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="176"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="196"/>
         <source>one file per preset</source>
         <translation>um arquivo por predefinição</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="61"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="81"/>
         <source>Quality</source>
         <translation>Qualidade</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="183"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="203"/>
         <source>raw values</source>
         <translation>valores brutos</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="214"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="234"/>
         <source>&amp;Cancel</source>
         <oldsource>Cancel</oldsource>
         <translation>Cancel&amp;ar</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="194"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="214"/>
         <source>&amp;Export</source>
         <oldsource>Export</oldsource>
         <translation>&amp;Exportar</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="62"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="75"/>
         <source>Untitled</source>
         <translation>Sem nome</translation>
     </message>
+    <message numerus="yes">
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="229"/>
+        <source>Checked presets: %1 / %2 (hidden: %n)</source>
+        <translation>
+            <numerusform>Predefinições marcadas: %1 / %2 (oculta: %n)</numerusform>
+            <numerusform>Predefinições marcadas: %1 / %2 (ocultas: %n)</numerusform>
+        </translation>
+    </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="152"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="231"/>
+        <source>Checked presets: %1 / %2</source>
+        <translation>Predefinições marcadas: %1 / %2</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="281"/>
         <source>Select the destination directory</source>
         <translation>Selecione o diretório de destino</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="168"/>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="197"/>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="208"/>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="217"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="297"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="326"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="337"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="346"/>
         <source>Warning</source>
         <translation>Aviso</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="168"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="297"/>
         <source>Invalid directory.</source>
         <translation>Pasta inválida.</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="197"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="326"/>
         <source>At least one preset must be selected.</source>
         <translation>Ao menos uma predefinição deve ser selecionada.</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="208"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="337"/>
         <source>The maximal number of soundfont to export is 128.</source>
         <translation>O número máximo de soundfonts a exportar é 128.</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="217"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="346"/>
         <source>In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 128.</source>
         <translation>No caso de várias soundfonts serem exportadas, o número máximo de predefinições por soundfont é 128.</translation>
     </message>

@@ -12,6 +12,7 @@ polyphone (2.7) UNRELEASED; urgency=low
   * (improvement) soundfonts and directories can be opened by dragging them onto the tab bar
   * (improvement) the mouse wheel with Shift over the tab bar goes to the previous or next tab
   * (improvement) knobs have the same look whatever the style, with an arc showing their value
+  * (improvement) the preset list of the export window can be filtered (Ctrl+F), several presets can be selected and ticked or unticked together with the space key, and the number of ticked presets is displayed
   * (fix) the calendar of the date field could appear when a soundfont was opened in the background
 
  -- Davy Triponney <contact@polyphone.io>  Fri, 30 Oct 2026 12:00:00 +0100

@@ -869,14 +869,24 @@
         <translation>先頭の空白を削除</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectiongeneral.cpp" line="41"/>
+        <location filename="../../context/interface/configsectiongeneral.cpp" line="42"/>
         <source>Maximum number of voices, the quietest notes fading out above it</source>
         <translation>最大ボイス数。これを超えると、最も小さい音から順にフェードアウトします</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectiongeneral.cpp" line="42"/>
+        <location filename="../../context/interface/configsectiongeneral.cpp" line="43"/>
         <source>Maximum share of the processor time used by the voices, the quietest notes fading out above it</source>
         <translation>ボイスが使用するプロセッサー時間の最大割合。これを超えると、最も小さい音から順にフェードアウトします</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/configsectiongeneral.cpp" line="130"/>
+        <source>System default</source>
+        <translation>システムのデフォルト</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/configsectiongeneral.cpp" line="148"/>
+        <source>disconnected</source>
+        <translation>切断済み</translation>
     </message>
 </context>
 <context>
@@ -1355,27 +1365,27 @@ repository</source>
 <context>
     <name>ControllerArea</name>
     <message>
-        <location filename="../../clavier/controllerarea.ui" line="209"/>
+        <location filename="../../clavier/controllerarea.ui" line="203"/>
         <source>Pitch wheel</source>
         <translation>ピッチホイール</translation>
     </message>
     <message>
-        <location filename="../../clavier/controllerarea.ui" line="233"/>
+        <location filename="../../clavier/controllerarea.ui" line="227"/>
         <source>Sensitivity</source>
         <translation>感度</translation>
     </message>
     <message>
-        <location filename="../../clavier/controllerarea.ui" line="257"/>
+        <location filename="../../clavier/controllerarea.ui" line="251"/>
         <source>Pressure</source>
         <translation>プレッシャー</translation>
     </message>
     <message>
-        <location filename="../../clavier/controllerarea.cpp" line="245"/>
+        <location filename="../../clavier/controllerarea.cpp" line="232"/>
         <source>on</source>
         <translation>オン</translation>
     </message>
     <message>
-        <location filename="../../clavier/controllerarea.cpp" line="250"/>
+        <location filename="../../clavier/controllerarea.cpp" line="232"/>
         <source>off</source>
         <translation>オフ</translation>
     </message>
@@ -1844,22 +1854,22 @@ repository</source>
         <translation>アフタータッチ</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="279"/>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="289"/>
         <source>Hide the controller area</source>
         <translation>コントローラーエリアを隠す</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="279"/>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="289"/>
         <source>Show the controller area</source>
         <translation>コントローラーエリアを表示</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="284"/>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="294"/>
         <source>Hide the effects</source>
         <translation>エフェクトを隠す</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="284"/>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="294"/>
         <source>Show the effects</source>
         <translation>エフェクトを表示</translation>
     </message>
@@ -3089,12 +3099,12 @@ repository</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="246"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="247"/>
         <source>&amp;Save</source>
         <translation>保存(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="232"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="233"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
@@ -3104,42 +3114,42 @@ repository</source>
         <translation>Polyphone SoundFont エディター</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="223"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="224"/>
         <source>Untitled</source>
         <translation>無題</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="233"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="234"/>
         <source>Save before exiting?</source>
         <translation>閉じる前に保存しますか？</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="236"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="237"/>
         <source>The following files have been modified:</source>
         <translation>以下のファイルが変更されています:</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="243"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="244"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>ファイル「%1」は変更されています。</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="247"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="248"/>
         <source>&amp;Cancel</source>
         <translation>キャンセル(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="248"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="249"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>保存しない(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="321"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="322"/>
         <source>Opening files</source>
         <translation>ファイルを開いています</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="331"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="332"/>
         <source>Opening a directory</source>
         <translation>ディレクトリを開いています</translation>
     </message>
@@ -5533,62 +5543,62 @@ Other soundfont editors might display other units.</source>
         <translation>カスタム</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="468"/>
+        <location filename="../../context/thememanager.cpp" line="478"/>
         <source>Default</source>
         <translation>デフォルト</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="488"/>
+        <location filename="../../context/thememanager.cpp" line="498"/>
         <source>Gnome</source>
         <translation>Gnome</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="501"/>
+        <location filename="../../context/thememanager.cpp" line="511"/>
         <source>Dark, blue</source>
         <translation>ダーク ブルー</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="514"/>
+        <location filename="../../context/thememanager.cpp" line="524"/>
         <source>Dark, orange</source>
         <translation>ダーク オレンジ</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="527"/>
+        <location filename="../../context/thememanager.cpp" line="537"/>
         <source>Dark, green</source>
         <translation>ダーク グリーン</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="540"/>
+        <location filename="../../context/thememanager.cpp" line="550"/>
         <source>Dark, yellow</source>
         <translation>ダーク イエロー</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="553"/>
+        <location filename="../../context/thememanager.cpp" line="563"/>
         <source>Aqua</source>
         <translation>アクア</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="566"/>
+        <location filename="../../context/thememanager.cpp" line="576"/>
         <source>Spring</source>
         <translation>春</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="579"/>
+        <location filename="../../context/thememanager.cpp" line="589"/>
         <source>Windows 10</source>
         <translation>Windows 10</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="592"/>
+        <location filename="../../context/thememanager.cpp" line="602"/>
         <source>Ubuntu</source>
         <translation>Ubuntu</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="605"/>
+        <location filename="../../context/thememanager.cpp" line="615"/>
         <source>Good night</source>
         <translation>おやすみ</translation>
     </message>
     <message>
-        <location filename="../../context/thememanager.cpp" line="618"/>
+        <location filename="../../context/thememanager.cpp" line="628"/>
         <source>Pink</source>
         <translation>ピンク</translation>
     </message>
@@ -7197,117 +7207,134 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ToolSoundfontExport_gui</name>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="22"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="32"/>
         <source>Select all</source>
         <translation>全て選択</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="29"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="39"/>
         <source>Unselect all</source>
         <translation>全て選択解除</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="97"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="117"/>
         <source>Destination</source>
         <translation>保存先</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="140"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="160"/>
         <source>Format</source>
         <translation>形式</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="71"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="91"/>
         <source>General MIDI classification</source>
         <translation>General MIDI分類</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="147"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="167"/>
         <source>one directory per bank</source>
         <translation>バンクごとに1つのディレクトリ</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="104"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="124"/>
         <source>preset number as prefix</source>
         <translation>プリセット番号をプレフィックスとして</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="158"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="20"/>
+        <source>Search...</source>
+        <translation>検索...</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="178"/>
         <source>High</source>
         <translation>高</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="163"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="183"/>
         <source>Medium</source>
         <translation>中</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="168"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="188"/>
         <source>Low</source>
         <translation>低</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="176"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="196"/>
         <source>one file per preset</source>
         <translation>プリセットごとに1つのファイル</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="61"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="81"/>
         <source>Quality</source>
         <translation>品質</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="183"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="203"/>
         <source>raw values</source>
         <translation>生の値</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="214"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="234"/>
         <source>&amp;Cancel</source>
         <oldsource>Cancel</oldsource>
         <translation>キャンセル(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="194"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="214"/>
         <source>&amp;Export</source>
         <oldsource>Export</oldsource>
         <translation>エクスポート(&amp;E)</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="62"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="75"/>
         <source>Untitled</source>
         <translation>無題</translation>
     </message>
+    <message numerus="yes">
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="229"/>
+        <source>Checked presets: %1 / %2 (hidden: %n)</source>
+        <translation>
+            <numerusform>チェック済みプリセット: %1 / %2 (非表示: %n)</numerusform>
+        </translation>
+    </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="152"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="231"/>
+        <source>Checked presets: %1 / %2</source>
+        <translation>チェック済みプリセット: %1 / %2</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="281"/>
         <source>Select the destination directory</source>
         <translation>保存先ディレクトリを選択</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="168"/>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="197"/>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="208"/>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="217"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="297"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="326"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="337"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="346"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="168"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="297"/>
         <source>Invalid directory.</source>
         <translation>無効なディレクトリです。</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="197"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="326"/>
         <source>At least one preset must be selected.</source>
         <translation>少なくとも1つのプリセットを選択する必要があります。</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="208"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="337"/>
         <source>The maximal number of soundfont to export is 128.</source>
         <translation>エクスポートできるSoundFontの最大数は128です。</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="217"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="346"/>
         <source>In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 128.</source>
         <translation>複数のSoundFontをエクスポートする場合、SoundFontあたりのプリセットの最大数は128です。</translation>
     </message>
