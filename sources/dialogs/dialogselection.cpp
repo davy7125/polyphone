@@ -32,7 +32,9 @@
 DialogSelection::DialogSelection(SoundfontManager *sf2, EltID id, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::DialogSelection),
-    _isPreset(id.typeElement == elementPrst)
+    _isPreset(id.typeElement == elementPrst),
+    _clickedItem(nullptr),
+    _clickedItemState(Qt::Unchecked)
 {
     ui->setupUi(this);
     ui->buttonBox->addButton(tr("&Duplicate"), QDialogButtonBox::AcceptRole);
@@ -74,6 +76,7 @@ DialogSelection::DialogSelection(SoundfontManager *sf2, EltID id, QWidget *paren
     });
     ui->lineSearch->installEventFilter(this);
     ui->listWidget->installEventFilter(this);
+    ui->listWidget->viewport()->installEventFilter(this);
     connect(ui->listWidget, SIGNAL(itemChanged(QListWidgetItem*)), this, SLOT(updateCheckedCount()));
     updateCheckedCount();
     ui->lineSearch->setFocus();
@@ -134,7 +137,9 @@ void DialogSelection::on_lineSearch_textChanged(const QString &text)
 
 void DialogSelection::on_listWidget_itemDoubleClicked(QListWidgetItem * item)
 {
-    // A double click anywhere on the row ticks or unticks the element
+    // A double click anywhere on the row ticks or unticks the element, unless its first click already did it (on the check box)
+    if (item == _clickedItem && item->checkState() != _clickedItemState)
+        return;
     item->setCheckState(item->checkState() == Qt::Checked ? Qt::Unchecked : Qt::Checked);
 }
 
@@ -171,6 +176,14 @@ void DialogSelection::updateCheckedCount()
 
 bool DialogSelection::eventFilter(QObject * obj, QEvent * event)
 {
+    if (obj == ui->listWidget->viewport() && event->type() == QEvent::MouseButtonPress)
+    {
+        // State before the first click of a possible double click
+        _clickedItem = ui->listWidget->itemAt(static_cast<QMouseEvent *>(event)->position().toPoint());
+        if (_clickedItem != nullptr)
+            _clickedItemState = _clickedItem->checkState();
+    }
+
     if (event->type() != QEvent::KeyPress)
         return QDialog::eventFilter(obj, event);
 

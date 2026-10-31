@@ -67,6 +67,9 @@ private:
 
     Ui::ToolSoundfontExport_gui *ui;
     QMap<int, QList<int> > _presetList;
+    QTreeWidgetItem * _clickedItem;
+    Qt::CheckState _clickedItemState;
+    bool _ignoreNextRelease;
 };
 
 #endif // TOOLSOUNDFONTEXPORT_GUI_H

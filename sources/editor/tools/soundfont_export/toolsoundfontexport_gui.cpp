@@ -36,7 +36,10 @@
 
 ToolSoundfontExport_gui::ToolSoundfontExport_gui(QWidget *parent) :
     AbstractToolGui(parent),
-    ui(new Ui::ToolSoundfontExport_gui)
+    ui(new Ui::ToolSoundfontExport_gui),
+    _clickedItem(nullptr),
+    _clickedItemState(Qt::Unchecked),
+    _ignoreNextRelease(false)
 {
     ui->setupUi(this);
     ui->buttonBox->addButton(tr("&Export"), QDialogButtonBox::AcceptRole);
@@ -51,6 +54,7 @@ ToolSoundfontExport_gui::ToolSoundfontExport_gui(QWidget *parent) :
     });
     ui->lineSearch->installEventFilter(this);
     ui->listPresets->installEventFilter(this);
+    ui->listPresets->viewport()->installEventFilter(this);
     connect(ui->listPresets, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(updateCheckedCount()));
 }
 
@@ -65,6 +69,7 @@ void ToolSoundfontExport_gui::updateInterface(AbstractToolParameters * parameter
 
     // Populate the tree
     ui->listPresets->clear();
+    _clickedItem = nullptr;
     SoundfontManager * sm = SoundfontManager::getInstance();
     EltID idSf2(elementSf2);
     foreach (int i, sm->getSiblings(idSf2))
@@ -209,9 +214,11 @@ void ToolSoundfontExport_gui::on_listPresets_itemDoubleClicked(QTreeWidgetItem *
 {
     Q_UNUSED(column)
 
-    // A double click anywhere on the row of a preset ticks or unticks it (soundfonts are expanded / collapsed)
-    if (item->parent() != nullptr)
-        item->setCheckState(0, item->checkState(0) == Qt::Checked ? Qt::Unchecked : Qt::Checked);
+    // A double click anywhere on the row of a preset ticks or unticks it (soundfonts are expanded / collapsed),
+    // unless its first click already did it (on the check box)
+    if (item->parent() == nullptr || (item == _clickedItem && item->checkState(0) != _clickedItemState))
+        return;
+    item->setCheckState(0, item->checkState(0) == Qt::Checked ? Qt::Unchecked : Qt::Checked);
 }
 
 void ToolSoundfontExport_gui::updateCheckedCount()
@@ -244,6 +251,30 @@ void ToolSoundfontExport_gui::updateCheckedCount()
 
 bool ToolSoundfontExport_gui::eventFilter(QObject * obj, QEvent * event)
 {
+    if (obj == ui->listPresets->viewport())
+    {
+        if (event->type() == QEvent::MouseButtonPress)
+        {
+            // State before the first click of a possible double click
+            _clickedItem = ui->listPresets->itemAt(static_cast<QMouseEvent *>(event)->position().toPoint());
+            if (_clickedItem != nullptr)
+                _clickedItemState = _clickedItem->checkState(0);
+            _ignoreNextRelease = false;
+        }
+        else if (event->type() == QEvent::MouseButtonDblClick && _clickedItem != nullptr &&
+                 _clickedItem->checkState(0) != _clickedItemState)
+        {
+            // Double click on the check box, already changed by the first click: the tree would change it again
+            // when the button is released
+            _ignoreNextRelease = true;
+        }
+        else if (event->type() == QEvent::MouseButtonRelease && _ignoreNextRelease)
+        {
+            _ignoreNextRelease = false;
+            return true;
+        }
+    }
+
     if (event->type() != QEvent::KeyPress)
         return AbstractToolGui::eventFilter(obj, event);
 

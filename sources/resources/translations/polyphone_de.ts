@@ -1581,154 +1581,154 @@ Fundgrube</translation>
         <translation>Über</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.ui" line="177"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="35"/>
         <source>Credit</source>
         <translation>Danksagung</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.ui" line="200"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="38"/>
         <source>Close</source>
         <translation>Schließen</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="36"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="40"/>
         <source>Polyphone</source>
         <translation>Polyphone</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="49"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="53"/>
         <source>Copyright</source>
         <translation>Copyright</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="53"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="57"/>
         <source>Polyphone website</source>
         <translation>Polyphone-Website</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="57"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="61"/>
         <source>Donate</source>
         <translation>Spenden</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="61"/>
-        <location filename="../../dialogs/dialog_about.cpp" line="75"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="65"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="79"/>
         <source>Davy Triponney</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Davy Triponney</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="63"/>
-        <location filename="../../dialogs/dialog_about.cpp" line="72"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="67"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="76"/>
         <source>Andrea Celani</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Andrea Celani</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="64"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="68"/>
         <source>Kinwie</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Kinwie</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="65"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="69"/>
         <source>Michael Schyllberg</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Michael Schyllberg</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="66"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="70"/>
         <source>mirabilos</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>mirabilos</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="67"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="71"/>
         <source>Paul Stratman</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Paul Stratman</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="68"/>
-        <location filename="../../dialogs/dialog_about.cpp" line="84"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="72"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="88"/>
         <source>Steve Clarke</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Steve Clarke</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="70"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="74"/>
         <source>Aleksey Bobylev</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Aleksey Bobylev</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="71"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="75"/>
         <source>Alejandro Moctezuma</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Alejandro Moctezuma</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="74"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="78"/>
         <source>David Surroca</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>David Surroca</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="76"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="80"/>
         <source>F.J. Martínez Murcia</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>F.J. Martínez Murcia</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="77"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="81"/>
         <source>Georg Gergull</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Georg Gergull</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="78"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="82"/>
         <source>Jay Alexander Fleming</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Jay Alexander Fleming</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="79"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="83"/>
         <source>Joel Gomes</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Joel Gomes</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="80"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="84"/>
         <source>JuliusLC</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>JuliusLC</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="81"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="85"/>
         <source>Magson</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Magson</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="82"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="86"/>
         <source>Pavel Fric</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Pavel Fric</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="83"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="87"/>
         <source>Spessasus</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Spessasus</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="73"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="77"/>
         <source>Chris Hansen</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Chris Hansen</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="50"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="54"/>
         <source>Davy Triponney</source>
         <translation>Davy Triponney</translation>
     </message>
@@ -1741,37 +1741,37 @@ Fundgrube</translation>
         <translation>Willkommen</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogchangelog.ui" line="87"/>
+        <location filename="../../dialogs/dialogchangelog.cpp" line="37"/>
         <source>&amp;Donate</source>
         <translation>&amp;Spenden</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogchangelog.ui" line="107"/>
+        <location filename="../../dialogs/dialogchangelog.cpp" line="39"/>
         <source>&amp;Ok</source>
         <translation>&amp;Ok</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogchangelog.cpp" line="48"/>
+        <location filename="../../dialogs/dialogchangelog.cpp" line="51"/>
         <source>Thank you for having installed</source>
         <translation>Danke für die Installation von</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogchangelog.cpp" line="49"/>
+        <location filename="../../dialogs/dialogchangelog.cpp" line="52"/>
         <source>Polyphone</source>
         <translation>Polyphone</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogchangelog.cpp" line="94"/>
+        <location filename="../../dialogs/dialogchangelog.cpp" line="97"/>
         <source>What is new</source>
         <translation>Was ist neu</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogchangelog.cpp" line="97"/>
+        <location filename="../../dialogs/dialogchangelog.cpp" line="100"/>
         <source>What has improved</source>
         <translation>Was hat sich verbessert</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogchangelog.cpp" line="100"/>
+        <location filename="../../dialogs/dialogchangelog.cpp" line="103"/>
         <source>What is fixed</source>
         <translation>Was ist behoben</translation>
     </message>
@@ -1812,52 +1812,52 @@ Fundgrube</translation>
         <translation>Frage</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogcreateelements.ui" line="121"/>
+        <location filename="../../dialogs/dialogcreateelements.cpp" line="36"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogcreateelements.ui" line="101"/>
+        <location filename="../../dialogs/dialogcreateelements.cpp" line="35"/>
         <source>&amp;Ok</source>
         <translation>&amp;Ok</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogcreateelements.cpp" line="72"/>
+        <location filename="../../dialogs/dialogcreateelements.cpp" line="74"/>
         <source>Create an instrument comprising the sample %1?</source>
         <translation>Ein Instrument mit dem Sample %1 erstellen?</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogcreateelements.cpp" line="78"/>
+        <location filename="../../dialogs/dialogcreateelements.cpp" line="80"/>
         <source>Create an instrument</source>
         <translation>Instrument erstellen</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogcreateelements.cpp" line="79"/>
+        <location filename="../../dialogs/dialogcreateelements.cpp" line="81"/>
         <source>for each sample</source>
         <translation>für jedes Sample</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogcreateelements.cpp" line="80"/>
+        <location filename="../../dialogs/dialogcreateelements.cpp" line="82"/>
         <source>comprising the %1 samples</source>
         <translation>mit den %1 Samples</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogcreateelements.cpp" line="88"/>
+        <location filename="../../dialogs/dialogcreateelements.cpp" line="90"/>
         <source>Create a preset comprising the instrument %1?</source>
         <translation>Ein Preset mit dem Instrument %1 erstellen?</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogcreateelements.cpp" line="94"/>
+        <location filename="../../dialogs/dialogcreateelements.cpp" line="96"/>
         <source>Create a preset</source>
         <translation>Preset erstellen</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogcreateelements.cpp" line="95"/>
+        <location filename="../../dialogs/dialogcreateelements.cpp" line="97"/>
         <source>for each instrument</source>
         <translation>für jedes Instrument</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogcreateelements.cpp" line="96"/>
+        <location filename="../../dialogs/dialogcreateelements.cpp" line="98"/>
         <source>comprising the %1 instruments</source>
         <translation>mit den %1 Instrumenten</translation>
     </message>
@@ -1928,32 +1928,32 @@ Fundgrube</translation>
 <context>
     <name>DialogList</name>
     <message>
-        <location filename="../../dialogs/dialog_list.cpp" line="53"/>
+        <location filename="../../dialogs/dialog_list.cpp" line="58"/>
         <source>Sample list</source>
         <translation>Sampleliste</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_list.cpp" line="58"/>
+        <location filename="../../dialogs/dialog_list.cpp" line="63"/>
         <source>Instrument list</source>
         <translation>Instrumentenliste</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_list.cpp" line="63"/>
+        <location filename="../../dialogs/dialog_list.cpp" line="68"/>
         <source>Preset list</source>
         <translation>Presetliste</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_list.ui" line="61"/>
+        <location filename="../../dialogs/dialog_list.cpp" line="37"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_list.ui" line="73"/>
+        <location filename="../../dialogs/dialog_list.ui" line="45"/>
         <source>Search...</source>
         <translation>Suche...</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_list.ui" line="41"/>
+        <location filename="../../dialogs/dialog_list.cpp" line="36"/>
         <source>&amp;Ok</source>
         <translation>&amp;Ok</translation>
     </message>
@@ -2025,43 +2025,43 @@ Fundgrube</translation>
 <context>
     <name>DialogNewElement</name>
     <message>
-        <location filename="../../dialogs/dialognewelement.ui" line="55"/>
+        <location filename="../../dialogs/dialognewelement.cpp" line="36"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialognewelement.ui" line="62"/>
+        <location filename="../../dialogs/dialognewelement.cpp" line="35"/>
         <source>&amp;Ok</source>
         <translation>&amp;Ok</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialognewelement.cpp" line="51"/>
+        <location filename="../../dialogs/dialognewelement.cpp" line="53"/>
         <source>Create a new preset</source>
         <translation>Neues Preset erstellen</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialognewelement.cpp" line="51"/>
+        <location filename="../../dialogs/dialognewelement.cpp" line="53"/>
         <source>Create a new instrument</source>
         <translation>Neues Instrument erstellen</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialognewelement.cpp" line="52"/>
+        <location filename="../../dialogs/dialognewelement.cpp" line="54"/>
         <source>Name of the new preset</source>
         <translation>Name des neuen Presets</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialognewelement.cpp" line="52"/>
+        <location filename="../../dialogs/dialognewelement.cpp" line="54"/>
         <source>Name of the new instrument</source>
         <translation>Name des neuen Instruments</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialognewelement.cpp" line="53"/>
+        <location filename="../../dialogs/dialognewelement.cpp" line="55"/>
         <source>Link selected instruments</source>
         <oldsource>Link selected isntruments</oldsource>
         <translation>Ausgewählte Instrumente verknüpfen</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialognewelement.cpp" line="54"/>
+        <location filename="../../dialogs/dialognewelement.cpp" line="56"/>
         <source>Link selected samples</source>
         <translation>Ausgewählte Samples verknüpfen</translation>
     </message>
@@ -2069,12 +2069,12 @@ Fundgrube</translation>
 <context>
     <name>DialogQuestion</name>
     <message>
-        <location filename="../../dialogs/dialogquestion.ui" line="39"/>
+        <location filename="../../dialogs/dialogquestion.cpp" line="34"/>
         <source>&amp;Ok</source>
         <translation>&amp;Ok</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogquestion.ui" line="46"/>
+        <location filename="../../dialogs/dialogquestion.cpp" line="35"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
     </message>
@@ -2143,43 +2143,43 @@ Fundgrube</translation>
     </message>
     <message>
         <location filename="../../dialogs/dialog_rename.ui" line="129"/>
-        <location filename="../../dialogs/dialog_rename.cpp" line="113"/>
+        <location filename="../../dialogs/dialog_rename.cpp" line="115"/>
         <source>Position</source>
         <translation>Position</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_rename.ui" line="168"/>
+        <location filename="../../dialogs/dialog_rename.cpp" line="38"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_rename.ui" line="148"/>
+        <location filename="../../dialogs/dialog_rename.cpp" line="37"/>
         <source>&amp;Ok</source>
         <translation>&amp;Ok</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_rename.cpp" line="79"/>
-        <location filename="../../dialogs/dialog_rename.cpp" line="90"/>
+        <location filename="../../dialogs/dialog_rename.cpp" line="81"/>
+        <location filename="../../dialogs/dialog_rename.cpp" line="92"/>
         <source>New name:</source>
         <translation>Neuer Name:</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_rename.cpp" line="101"/>
+        <location filename="../../dialogs/dialog_rename.cpp" line="103"/>
         <source>Find:</source>
         <translation>Suchen:</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_rename.cpp" line="104"/>
+        <location filename="../../dialogs/dialog_rename.cpp" line="106"/>
         <source>And replace by:</source>
         <translation>Und ersetzen durch:</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_rename.cpp" line="114"/>
+        <location filename="../../dialogs/dialog_rename.cpp" line="116"/>
         <source>Text to insert:</source>
         <translation>Einzufügender Text:</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_rename.cpp" line="125"/>
+        <location filename="../../dialogs/dialog_rename.cpp" line="127"/>
         <source>Range</source>
         <translation>Bereich</translation>
     </message>
@@ -2192,24 +2192,55 @@ Fundgrube</translation>
         <translation>Duplizieren</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogselection.ui" line="30"/>
+        <location filename="../../dialogs/dialogselection.ui" line="27"/>
+        <source>Search...</source>
+        <translation>Suche...</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogselection.ui" line="37"/>
         <source>Select all</source>
         <translatorcomment>alles anwählen</translatorcomment>
         <translation>Alle auswählen</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogselection.ui" line="37"/>
+        <location filename="../../dialogs/dialogselection.ui" line="44"/>
         <source>Unselect all</source>
         <translation>Alle abwählen</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogselection.ui" line="66"/>
+        <location filename="../../dialogs/dialogselection.cpp" line="41"/>
         <source>&amp;Cancel</source>
         <oldsource>Cancel</oldsource>
         <translation>&amp;Abbrechen</translation>
     </message>
+    <message numerus="yes">
+        <location filename="../../dialogs/dialogselection.cpp" line="164"/>
+        <source>Checked presets: %1 / %2 (hidden: %n)</source>
+        <translation>
+            <numerusform>Angehakte Presets: %1 / %2 (ausgeblendet: %n)</numerusform>
+            <numerusform>Angehakte Presets: %1 / %2 (ausgeblendet: %n)</numerusform>
+        </translation>
+    </message>
     <message>
-        <location filename="../../dialogs/dialogselection.ui" line="46"/>
+        <location filename="../../dialogs/dialogselection.cpp" line="166"/>
+        <source>Checked presets: %1 / %2</source>
+        <translation>Angehakte Presets: %1 / %2</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../dialogs/dialogselection.cpp" line="171"/>
+        <source>Checked instruments: %1 / %2 (hidden: %n)</source>
+        <translation>
+            <numerusform>Angehakte Instrumente: %1 / %2 (ausgeblendet: %n)</numerusform>
+            <numerusform>Angehakte Instrumente: %1 / %2 (ausgeblendet: %n)</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogselection.cpp" line="173"/>
+        <source>Checked instruments: %1 / %2</source>
+        <translation>Angehakte Instrumente: %1 / %2</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogselection.cpp" line="40"/>
         <source>&amp;Duplicate</source>
         <translation>&amp;Duplizieren</translation>
     </message>
@@ -4555,22 +4586,22 @@ Warnung: Die Qualität wird reduziert und der Loop kann verändert werden</trans
         <translation>Anschlagsbereich:</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="127"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="131"/>
         <source>Created by</source>
         <translation>Erstellt von</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="128"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="132"/>
         <source>Contributors</source>
         <translation>Mitwirkende</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="129"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="133"/>
         <source>Translated by</source>
         <translation>Übersetzt von</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="171"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="175"/>
         <source>Icons</source>
         <translation>Icons</translation>
     </message>
@@ -4706,30 +4737,30 @@ Warnung: Die Qualität wird reduziert und der Loop kann verändert werden</trans
         <translation>A♯</translation>
     </message>
     <message>
-        <location filename="../../core/utils.cpp" line="314"/>
+        <location filename="../../core/utils.cpp" line="331"/>
         <source>bytes</source>
         <translation>Bytes</translation>
     </message>
     <message>
-        <location filename="../../core/utils.cpp" line="316"/>
+        <location filename="../../core/utils.cpp" line="333"/>
         <source>kB</source>
         <comment>kilobytes</comment>
         <translation>kB</translation>
     </message>
     <message>
-        <location filename="../../core/utils.cpp" line="318"/>
+        <location filename="../../core/utils.cpp" line="335"/>
         <source>MB</source>
         <comment>megabytes</comment>
         <translation>MB</translation>
     </message>
     <message>
-        <location filename="../../core/utils.cpp" line="320"/>
+        <location filename="../../core/utils.cpp" line="337"/>
         <source>GB</source>
         <comment>gigabytes</comment>
         <translation>GB</translation>
     </message>
     <message>
-        <location filename="../../core/utils.cpp" line="321"/>
+        <location filename="../../core/utils.cpp" line="338"/>
         <source>TB</source>
         <comment>terabytes</comment>
         <translation>TB</translation>
@@ -5770,32 +5801,32 @@ Andere Soundfont-Editoren könnten andere Einheiten anzeigen.</translation>
 <context>
     <name>ToolCelesteTuning_gui</name>
     <message>
-        <location filename="../../editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="49"/>
+        <location filename="../../editor/tools/celeste_tuning/toolcelestetuning_gui.cpp" line="36"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="29"/>
+        <location filename="../../editor/tools/celeste_tuning/toolcelestetuning_gui.cpp" line="35"/>
         <source>&amp;Ok</source>
         <translation>&amp;Ok</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="97"/>
+        <location filename="../../editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="69"/>
         <source>Division to the next octave</source>
         <translation>Teilung zur nächsten Oktave</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="58"/>
+        <location filename="../../editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="30"/>
         <source>The algebraic sign determines the tuning direction.</source>
         <translation>Das algebraische Vorzeichen bestimmt die Stimmrichtung.</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/celeste_tuning/toolcelestetuning_gui.cpp" line="50"/>
+        <location filename="../../editor/tools/celeste_tuning/toolcelestetuning_gui.cpp" line="52"/>
         <source>Number of beats per second</source>
         <translation>Anzahl der Schwebungen pro Sekunde</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/celeste_tuning/toolcelestetuning_gui.cpp" line="50"/>
+        <location filename="../../editor/tools/celeste_tuning/toolcelestetuning_gui.cpp" line="52"/>
         <source>key</source>
         <translation>Taste</translation>
     </message>
@@ -5816,32 +5847,32 @@ Andere Soundfont-Editoren könnten andere Einheiten anzeigen.</translation>
 <context>
     <name>ToolChangeAttenuation_gui</name>
     <message>
-        <location filename="../../editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="83"/>
+        <location filename="../../editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="55"/>
         <source>Desired value</source>
         <translation>Gewünschter Wert</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="125"/>
+        <location filename="../../editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="97"/>
         <source>Possible offset</source>
         <translation>Möglicher Offset</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="112"/>
+        <location filename="../../editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="84"/>
         <source>Attenuation range</source>
         <translation>Dämpfungsbereich</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="55"/>
+        <location filename="../../editor/tools/change_attenuation/toolchangeattenuation_gui.cpp" line="36"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="35"/>
+        <location filename="../../editor/tools/change_attenuation/toolchangeattenuation_gui.cpp" line="35"/>
         <source>&amp;Ok</source>
         <translation>&amp;Ok</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="96"/>
+        <location filename="../../editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="68"/>
         <source> dB</source>
         <translation> dB</translation>
     </message>
@@ -5868,7 +5899,7 @@ Andere Soundfont-Editoren könnten andere Einheiten anzeigen.</translation>
         <translation>Addieren</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/change_volume/toolchangevolume_gui.ui" line="108"/>
+        <location filename="../../editor/tools/change_volume/toolchangevolume_gui.cpp" line="35"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
     </message>
@@ -5888,7 +5919,7 @@ Andere Soundfont-Editoren könnten andere Einheiten anzeigen.</translation>
         <translation>Normalisieren</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/change_volume/toolchangevolume_gui.ui" line="88"/>
+        <location filename="../../editor/tools/change_volume/toolchangevolume_gui.cpp" line="34"/>
         <source>&amp;Ok</source>
         <translation>&amp;Ok</translation>
     </message>
@@ -6038,12 +6069,12 @@ Andere Soundfont-Editoren könnten andere Einheiten anzeigen.</translation>
         <translation>Oktave</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/chords/toolchords_gui.ui" line="701"/>
+        <location filename="../../editor/tools/chords/toolchords_gui.cpp" line="35"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/chords/toolchords_gui.ui" line="681"/>
+        <location filename="../../editor/tools/chords/toolchords_gui.cpp" line="34"/>
         <source>&amp;Ok</source>
         <translation>&amp;Ok</translation>
     </message>
@@ -6105,19 +6136,19 @@ Andere Soundfont-Editoren könnten andere Einheiten anzeigen.</translation>
         <translation>Hier ist die Liste der Modulatoren, die automatisch für jedes Instrument eingestellt sind. Sie können diese überschreiben oder deaktivieren, indem Sie die entsprechenden Modulatoren und Aktionen unten auswählen.</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/default_mod/tooldefaultmod_gui.ui" line="58"/>
+        <location filename="../../editor/tools/default_mod/tooldefaultmod_gui.cpp" line="39"/>
         <source>&amp;Override</source>
         <oldsource>Override</oldsource>
         <translation>&amp;Überschreiben</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/default_mod/tooldefaultmod_gui.ui" line="68"/>
+        <location filename="../../editor/tools/default_mod/tooldefaultmod_gui.cpp" line="41"/>
         <source>&amp;Disable</source>
         <oldsource>Disable</oldsource>
         <translation>&amp;Deaktivieren</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/default_mod/tooldefaultmod_gui.ui" line="88"/>
+        <location filename="../../editor/tools/default_mod/tooldefaultmod_gui.cpp" line="43"/>
         <source>&amp;Cancel</source>
         <oldsource>Cancel</oldsource>
         <translation>&amp;Abbrechen</translation>
@@ -6154,12 +6185,12 @@ Andere Soundfont-Editoren könnten andere Einheiten anzeigen.</translation>
         <translation>Eine Aufteilung für jeden Anschlagsbereich</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="143"/>
+        <location filename="../../editor/tools/division_duplication/tooldivisionduplication_gui.cpp" line="35"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="123"/>
+        <location filename="../../editor/tools/division_duplication/tooldivisionduplication_gui.cpp" line="34"/>
         <source>&amp;Ok</source>
         <translation>&amp;Ok</translation>
     </message>
@@ -6221,12 +6252,12 @@ Andere Soundfont-Editoren könnten andere Einheiten anzeigen.</translation>
         <translation>Sample-Informationen, wenn möglich, ersetzen</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/external_command/toolexternalcommand_gui.ui" line="150"/>
+        <location filename="../../editor/tools/external_command/toolexternalcommand_gui.cpp" line="41"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/external_command/toolexternalcommand_gui.ui" line="130"/>
+        <location filename="../../editor/tools/external_command/toolexternalcommand_gui.cpp" line="40"/>
         <source>&amp;Ok</source>
         <translation>&amp;Ok</translation>
     </message>
@@ -6236,23 +6267,23 @@ Andere Soundfont-Editoren könnten andere Einheiten anzeigen.</translation>
         <translation>Befehlsbeispiele:</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/external_command/toolexternalcommand_gui.cpp" line="101"/>
+        <location filename="../../editor/tools/external_command/toolexternalcommand_gui.cpp" line="103"/>
         <source>Executable file</source>
         <translation>Ausführbare Datei</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/external_command/toolexternalcommand_gui.cpp" line="118"/>
-        <location filename="../../editor/tools/external_command/toolexternalcommand_gui.cpp" line="125"/>
+        <location filename="../../editor/tools/external_command/toolexternalcommand_gui.cpp" line="120"/>
+        <location filename="../../editor/tools/external_command/toolexternalcommand_gui.cpp" line="127"/>
         <source>Warning</source>
         <translation>Warnung</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/external_command/toolexternalcommand_gui.cpp" line="118"/>
+        <location filename="../../editor/tools/external_command/toolexternalcommand_gui.cpp" line="120"/>
         <source>You must enter a command with at least {wav} as argument.</source>
         <translation>Der Befehl muss mindestens {wav} als Argument enthalten.</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/external_command/toolexternalcommand_gui.cpp" line="125"/>
+        <location filename="../../editor/tools/external_command/toolexternalcommand_gui.cpp" line="127"/>
         <source>The command must contain the argument {wav}.</source>
         <translation>Der Befehl muss das Argument {wav} enthalten.</translation>
     </message>
@@ -6273,27 +6304,27 @@ Andere Soundfont-Editoren könnten andere Einheiten anzeigen.</translation>
 <context>
     <name>ToolFastEditSmpl_gui</name>
     <message>
-        <location filename="../../editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.ui" line="22"/>
+        <location filename="../../editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.cpp" line="35"/>
         <source>&amp;Ok</source>
         <translation>&amp;Ok</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.ui" line="42"/>
+        <location filename="../../editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.cpp" line="36"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.ui" line="67"/>
+        <location filename="../../editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.ui" line="39"/>
         <source>Add</source>
         <translation>Addieren</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.ui" line="74"/>
+        <location filename="../../editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.ui" line="46"/>
         <source>Multiply</source>
         <translation>Multiplizieren</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.ui" line="84"/>
+        <location filename="../../editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.ui" line="56"/>
         <source>Parameter</source>
         <translation>Parameter</translation>
     </message>
@@ -6315,12 +6346,12 @@ Andere Soundfont-Editoren könnten andere Einheiten anzeigen.</translation>
 <context>
     <name>ToolFrequencyFilter_gui</name>
     <message>
-        <location filename="../../editor/tools/frequency_filter/toolfrequencyfilter_gui.ui" line="101"/>
+        <location filename="../../editor/tools/frequency_filter/toolfrequencyfilter_gui.cpp" line="37"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/frequency_filter/toolfrequencyfilter_gui.ui" line="81"/>
+        <location filename="../../editor/tools/frequency_filter/toolfrequencyfilter_gui.cpp" line="36"/>
         <source>&amp;Ok</source>
         <translation>&amp;Ok</translation>
     </message>
@@ -6383,60 +6414,60 @@ Andere Soundfont-Editoren könnten andere Einheiten anzeigen.</translation>
 <context>
     <name>ToolFrequencyPeaks_gui</name>
     <message>
-        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.ui" line="26"/>
+        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="74"/>
         <source>&amp;Export</source>
         <oldsource>Export</oldsource>
         <translation>&amp;Exportieren</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.ui" line="33"/>
+        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="75"/>
         <source>&amp;Close</source>
         <oldsource>Close</oldsource>
         <translation>&amp;Schließen</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="75"/>
+        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="79"/>
         <source>Sample</source>
         <translation>Sample</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="76"/>
+        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="80"/>
         <source>Peak</source>
         <translation>Spitze</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="77"/>
+        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="81"/>
         <source>Intensity</source>
         <translation>Intensität</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="78"/>
+        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="82"/>
         <source>Frequency</source>
         <translation>Frequenz</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="79"/>
+        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="83"/>
         <source>Key</source>
         <translation>Taste</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="80"/>
+        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="84"/>
         <source>Correction</source>
         <translation>Korrektur</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="143"/>
+        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="147"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
         <translation>Hz</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="167"/>
+        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="171"/>
         <source>Export peak frequency</source>
         <translation>Spitzenfrequenzen exportieren</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="168"/>
+        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="172"/>
         <source>Csv file</source>
         <translation>CSV-Datei</translation>
     </message>
@@ -6532,22 +6563,22 @@ Andere Soundfont-Editoren könnten andere Einheiten anzeigen.</translation>
         <translation>Auf einen Anschlagsbereich anwenden</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/global_settings/toolglobalsettings_gui.ui" line="278"/>
+        <location filename="../../editor/tools/global_settings/toolglobalsettings_gui.cpp" line="38"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/global_settings/toolglobalsettings_gui.ui" line="271"/>
+        <location filename="../../editor/tools/global_settings/toolglobalsettings_gui.cpp" line="37"/>
         <source>&amp;Ok</source>
         <translation>&amp;Ok</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/global_settings/toolglobalsettings_gui.cpp" line="222"/>
+        <location filename="../../editor/tools/global_settings/toolglobalsettings_gui.cpp" line="224"/>
         <source>Stiffness</source>
         <translation>Steilheit</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/global_settings/toolglobalsettings_gui.cpp" line="227"/>
+        <location filename="../../editor/tools/global_settings/toolglobalsettings_gui.cpp" line="229"/>
         <source>Distribution</source>
         <translation>Verteilung</translation>
     </message>
@@ -6615,12 +6646,12 @@ Andere Soundfont-Editoren könnten andere Einheiten anzeigen.</translation>
         <translation>Loop-Start / Loop-Ende</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/load_from_inst/toolloadfrominst_gui.ui" line="63"/>
+        <location filename="../../editor/tools/load_from_inst/toolloadfrominst_gui.cpp" line="34"/>
         <source>&amp;Ok</source>
         <translation>&amp;Ok</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/load_from_inst/toolloadfrominst_gui.ui" line="83"/>
+        <location filename="../../editor/tools/load_from_inst/toolloadfrominst_gui.cpp" line="35"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
     </message>
@@ -6647,17 +6678,17 @@ Andere Soundfont-Editoren könnten andere Einheiten anzeigen.</translation>
         <translation>Crossfade-Dauer</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="29"/>
+        <location filename="../../editor/tools/loop_crossfade/toolloopcrossfade_gui.cpp" line="34"/>
         <source>&amp;Ok</source>
         <translation>&amp;Ok</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="49"/>
+        <location filename="../../editor/tools/loop_crossfade/toolloopcrossfade_gui.cpp" line="35"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="58"/>
+        <location filename="../../editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="30"/>
         <source> ms</source>
         <comment>Unit for milliseconds</comment>
         <translation> ms</translation>
@@ -6737,12 +6768,12 @@ Andere Soundfont-Editoren könnten andere Einheiten anzeigen.</translation>
         <translation>Release-Dauer</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/merge_samples/toolmergesamples_gui.ui" line="136"/>
+        <location filename="../../editor/tools/merge_samples/toolmergesamples_gui.cpp" line="34"/>
         <source>&amp;Ok</source>
         <translation>&amp;Ok</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/merge_samples/toolmergesamples_gui.ui" line="156"/>
+        <location filename="../../editor/tools/merge_samples/toolmergesamples_gui.cpp" line="35"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
     </message>
@@ -6893,28 +6924,28 @@ Andere Soundfont-Editoren könnten andere Einheiten anzeigen.</translation>
         <translation>Siebenundzwanzigste</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="498"/>
+        <location filename="../../editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="36"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="478"/>
+        <location filename="../../editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="35"/>
         <source>&amp;Ok</source>
         <translation>&amp;Ok</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="570"/>
-        <location filename="../../editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="586"/>
+        <location filename="../../editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="572"/>
+        <location filename="../../editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="588"/>
         <source>Warning</source>
         <translation>Warnung</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="570"/>
+        <location filename="../../editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="572"/>
         <source>The instrument name must be provided.</source>
         <translation>Der Instrumentname muss angegeben werden.</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="586"/>
+        <location filename="../../editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="588"/>
         <source>At least one rank must be specified.</source>
         <translation>Es muss mindestens ein Chor angegeben werden.</translation>
     </message>
@@ -7056,17 +7087,17 @@ Andere Soundfont-Editoren könnten andere Einheiten anzeigen.</translation>
         <translation>Linke und rechte Aufteilungen in den Instrumenten zusammenführen</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/mono_conversion/toolmonoconversion_gui.ui" line="96"/>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion_gui.cpp" line="36"/>
         <source>&amp;Ok</source>
         <translation>&amp;Ok</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/mono_conversion/toolmonoconversion_gui.ui" line="116"/>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion_gui.cpp" line="37"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/mono_conversion/toolmonoconversion_gui.cpp" line="64"/>
+        <location filename="../../editor/tools/mono_conversion/toolmonoconversion_gui.cpp" line="66"/>
         <source>Not available with samples of type &quot;link&quot;: the left and right channels cannot be distinguished.</source>
         <translation>Nicht verfügbar bei Samples vom Typ „Verbindung“: Linker und rechter Kanal können nicht unterschieden werden.</translation>
     </message>
@@ -7087,27 +7118,27 @@ Andere Soundfont-Editoren könnten andere Einheiten anzeigen.</translation>
 <context>
     <name>ToolPresetList_gui</name>
     <message>
-        <location filename="../../editor/tools/preset_list/toolpresetlist_gui.ui" line="30"/>
+        <location filename="../../editor/tools/preset_list/toolpresetlist_gui.cpp" line="37"/>
         <source>Copy</source>
         <translation>Kopieren</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/preset_list/toolpresetlist_gui.ui" line="56"/>
+        <location filename="../../editor/tools/preset_list/toolpresetlist_gui.ui" line="39"/>
         <source>text copied in the clipboard</source>
         <translation>Text in die Zwischenablage kopiert</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/preset_list/toolpresetlist_gui.ui" line="81"/>
+        <location filename="../../editor/tools/preset_list/toolpresetlist_gui.ui" line="51"/>
         <source>csv format</source>
         <translation>CSV-Format</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/preset_list/toolpresetlist_gui.ui" line="91"/>
+        <location filename="../../editor/tools/preset_list/toolpresetlist_gui.ui" line="61"/>
         <source>html table</source>
         <translation>HTML-Tabelle</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/preset_list/toolpresetlist_gui.ui" line="113"/>
+        <location filename="../../editor/tools/preset_list/toolpresetlist_gui.cpp" line="39"/>
         <source>Close</source>
         <translation>Schließen</translation>
     </message>
@@ -7128,27 +7159,27 @@ Andere Soundfont-Editoren könnten andere Einheiten anzeigen.</translation>
 <context>
     <name>ToolRelease_gui</name>
     <message>
-        <location filename="../../editor/tools/release/toolrelease_gui.ui" line="61"/>
+        <location filename="../../editor/tools/release/toolrelease_gui.cpp" line="36"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/release/toolrelease_gui.ui" line="41"/>
+        <location filename="../../editor/tools/release/toolrelease_gui.cpp" line="35"/>
         <source>&amp;Ok</source>
         <translation>&amp;Ok</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/release/toolrelease_gui.ui" line="70"/>
+        <location filename="../../editor/tools/release/toolrelease_gui.ui" line="42"/>
         <source>Division to the next octave</source>
         <translation>Teilung zur nächsten Oktave</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/release/toolrelease_gui.ui" line="116"/>
+        <location filename="../../editor/tools/release/toolrelease_gui.ui" line="88"/>
         <source>Detuning induced (semi-tones)</source>
         <translation>Induzierte Verstimmung (Halbtöne)</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/release/toolrelease_gui.cpp" line="51"/>
+        <location filename="../../editor/tools/release/toolrelease_gui.cpp" line="53"/>
         <source>Release time (key %1)</source>
         <translation>Release-Zeit (Taste %1)</translation>
     </message>
@@ -7213,7 +7244,7 @@ Andere Soundfont-Editoren könnten andere Einheiten anzeigen.</translation>
 <context>
     <name>ToolSoundSpatialization_gui</name>
     <message>
-        <location filename="../../editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="138"/>
+        <location filename="../../editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="110"/>
         <source>Inversions</source>
         <translation>Umkehrungen</translation>
     </message>
@@ -7248,17 +7279,17 @@ Andere Soundfont-Editoren könnten andere Einheiten anzeigen.</translation>
         <translation>Zufall</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="95"/>
+        <location filename="../../editor/tools/sound_spatialization/toolsoundspatialization_gui.cpp" line="36"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="88"/>
+        <location filename="../../editor/tools/sound_spatialization/toolsoundspatialization_gui.cpp" line="35"/>
         <source>&amp;Ok</source>
         <translation>&amp;Ok</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="104"/>
+        <location filename="../../editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="76"/>
         <source>Pattern</source>
         <translation>Muster</translation>
     </message>
@@ -7268,12 +7299,12 @@ Andere Soundfont-Editoren könnten andere Einheiten anzeigen.</translation>
         <translation>Anzahl der Teilungen</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="121"/>
+        <location filename="../../editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="93"/>
         <source>Offset (0-100)</source>
         <translation>Offset (0-100)</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="181"/>
+        <location filename="../../editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="153"/>
         <source>Filling (%)</source>
         <translation>Füllgrad (%)</translation>
     </message>
@@ -7374,24 +7405,24 @@ Andere Soundfont-Editoren könnten andere Einheiten anzeigen.</translation>
         <translation>Rohwerte</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="234"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="46"/>
         <source>&amp;Cancel</source>
         <oldsource>Cancel</oldsource>
         <translation>&amp;Abbrechen</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="214"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="45"/>
         <source>&amp;Export</source>
         <oldsource>Export</oldsource>
         <translation>&amp;Exportieren</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="75"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="82"/>
         <source>Untitled</source>
         <translation>Unbenannt</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="229"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="247"/>
         <source>Checked presets: %1 / %2 (hidden: %n)</source>
         <translation>
             <numerusform>Angehakte Presets: %1 / %2 (ausgeblendet: %n)</numerusform>
@@ -7399,40 +7430,40 @@ Andere Soundfont-Editoren könnten andere Einheiten anzeigen.</translation>
         </translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="231"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="249"/>
         <source>Checked presets: %1 / %2</source>
         <translation>Angehakte Presets: %1 / %2</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="281"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="326"/>
         <source>Select the destination directory</source>
         <translation>Zielordner wählen</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="297"/>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="326"/>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="337"/>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="346"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="342"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="371"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="382"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="391"/>
         <source>Warning</source>
         <translation>Warnung</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="297"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="342"/>
         <source>Invalid directory.</source>
         <translation>Ungültiges Verzeichnis.</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="326"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="371"/>
         <source>At least one preset must be selected.</source>
         <translation>Es muss mindestens ein Preset ausgewählt werden.</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="337"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="382"/>
         <source>The maximal number of soundfont to export is 128.</source>
         <translation>Die maximale Anzahl zu exportierender Soundfonts ist 128.</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="346"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="391"/>
         <source>In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 128.</source>
         <translation>Wenn mehrere Soundfonts exportiert werden, beträgt die maximale Anzahl der Presets pro Soundfont 128.</translation>
     </message>
@@ -7477,12 +7508,12 @@ Andere Soundfont-Editoren könnten andere Einheiten anzeigen.</translation>
         <translation>Verschiebung in Halbtönen</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/transpose_smpl/tooltransposesmpl_gui.ui" line="59"/>
+        <location filename="../../editor/tools/transpose_smpl/tooltransposesmpl_gui.cpp" line="35"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/transpose_smpl/tooltransposesmpl_gui.ui" line="39"/>
+        <location filename="../../editor/tools/transpose_smpl/tooltransposesmpl_gui.cpp" line="34"/>
         <source>&amp;Ok</source>
         <translation>&amp;Ok</translation>
     </message>
@@ -7500,12 +7531,12 @@ Andere Soundfont-Editoren könnten andere Einheiten anzeigen.</translation>
         <translation>Tastenbereich anpassen</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/transpose/tooltranspose_gui.ui" line="56"/>
+        <location filename="../../editor/tools/transpose/tooltranspose_gui.cpp" line="36"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/transpose/tooltranspose_gui.ui" line="36"/>
+        <location filename="../../editor/tools/transpose/tooltranspose_gui.cpp" line="35"/>
         <source>&amp;Ok</source>
         <translation>&amp;Ok</translation>
     </message>

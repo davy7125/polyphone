@@ -64,6 +64,8 @@ private:
 
     Ui::DialogSelection *ui;
     bool _isPreset;
+    QListWidgetItem * _clickedItem;
+    Qt::CheckState _clickedItemState;
 };
 
 #endif // DIALOGSELECTION_H
