@@ -36,6 +36,10 @@ Exportar soundfonts…
 
 
 Na janela de exportação, as predefinições de todas as soundfonts abertas são listadas, e as que devem ser exportadas precisam ser marcadas (os botões :guilabel:`Selecionar tudo` e :guilabel:`Desmarcar tudo` ajudam a alterar rapidamente a seleção).
+O campo acima desses botões filtra a lista pelos números e pelo nome das predefinições (atalho :kbd:`Ctrl`+:kbd:`F`; as teclas :kbd:`↓` ou :kbd:`Enter` levam depois à primeira predefinição exibida): os dois botões passam a se aplicar apenas às predefinições exibidas, e as predefinições marcadas ocultadas pelo filtro continuam sendo exportadas.
+Várias predefinições podem ser selecionadas mantendo a tecla :kbd:`Ctrl` pressionada e clicando nelas uma a uma, ou com a tecla :kbd:`Shift` para selecionar todas as predefinições entre dois cliques. A tecla :kbd:`Space` então as marca ou desmarca todas juntas.
+Um clique duplo em qualquer ponto da linha de uma predefinição também a marca ou desmarca.
+O número de predefinições marcadas é exibido abaixo da lista, junto com o número das que estão ocultadas pelo filtro.
 Os outros parâmetros são:
 
 Destino

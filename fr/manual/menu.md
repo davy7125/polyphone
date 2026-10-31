@@ -36,6 +36,10 @@ Exporter banques de sons…
 
 
 Dans la fenêtre d'export, les ensembles de toutes les banques de sons ouvertes sont listés et ceux à exporter doivent être cochés (les boutons :guilabel:`Tout cocher` et :guilabel:`Tout décocher` permettent de changer rapidement la sélection).
+Le champ au-dessus de ces boutons filtre la liste sur les numéros et le nom des ensembles (raccourci clavier :kbd:`Ctrl`+:kbd:`F`, les touches :kbd:`↓` ou :kbd:`Entrée` permettant ensuite d'aller au premier ensemble affiché)&nbsp;: les deux boutons ne s'appliquent alors qu'aux ensembles affichés, et les ensembles cochés masqués par le filtre sont tout de même exportés.
+Plusieurs ensembles peuvent être sélectionnés en maintenant la touche :kbd:`Ctrl` enfoncée puis en cliquant dessus un par un, ou avec la touche :kbd:`Maj` pour sélectionner tous les ensembles entre deux clics. La touche :kbd:`Espace` les coche ou les décoche alors ensemble.
+Un double-clic n'importe où sur la ligne d'un ensemble le coche ou le décoche également.
+Le nombre d'ensembles cochés est affiché sous la liste, ainsi que le nombre de ceux masqués par le filtre.
 Les autres paramètres sont&nbsp;:
 
 Emplacement

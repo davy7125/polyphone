@@ -5,6 +5,7 @@ Les outils sont tous disponibles dans un menu qui est affiché en cliquant sur l
 Le contenu de ce menu dépend de la sélection dans l'[arborescence](manual/soundfont-editor/tree.md)&nbsp;: le type de sélection est tout d'abord pris en compte (comme décrit ci-dessous), ensuite le nombre des éléments sélectionnés.
 Certains outils ne peuvent pas manipuler plusieurs éléments en même temps et sont ainsi masqués lors d'une sélection multiple.
 Les outils sont triés par catégorie puis par nom, et un nom suivi de points de suspension (…) indique qu'une fenêtre sera affichée pour paramétrer l'outil.
+Dans cette fenêtre, le raccourci :kbd:`Ctrl`+:kbd:`Entrée` actionne le bouton de validation (s'il n'y en a qu'un) et la touche :kbd:`Échap` le bouton d'annulation ou de fermeture.
 
 
 ## Outils globaux {#doc_global}

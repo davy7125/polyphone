@@ -5,6 +5,7 @@ Tools are all available in a menu that is displayed when clicking on the toolbox
 The content of this menu depends on the selection in the [tree](manual/soundfont-editor/tree.md): first on the kind of selection (as described below) but also on the number of selected elements.
 A few tools cannot process multiple elements so they will be hidden with a multiple selection.
 The tools are sorted by category and then by name, and a name followed by an ellipsis (…) indicates that a window will be displayed for configuring the tool.
+In this window, the shortcut :kbd:`Ctrl`+:kbd:`Enter` presses the validation button (if there is only one) and the key :kbd:`Esc` presses the button for canceling or closing.
 
 
 ## Global tools {#doc_global}

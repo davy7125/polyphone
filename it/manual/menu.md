@@ -36,6 +36,10 @@ Esporta soundfont…
 
 
 Nella finestra di esportazione sono elencati i preset di tutti i soundfont aperti, e occorre spuntare quelli da esportare (i pulsanti :guilabel:`Seleziona tutto` e :guilabel:`Deseleziona tutto` aiutano a cambiare rapidamente la selezione).
+Il campo sopra questi pulsanti filtra l'elenco in base ai numeri e al nome dei preset (scorciatoia :kbd:`Ctrl`+:kbd:`F`; i tasti :kbd:`↓` o :kbd:`Enter` portano poi al primo preset visualizzato): i due pulsanti si applicano allora solo ai preset visualizzati, e i preset spuntati nascosti dal filtro vengono comunque esportati.
+Si possono selezionare più preset tenendo premuto il tasto :kbd:`Ctrl` e facendo clic su di essi uno a uno, oppure con il tasto :kbd:`Shift` per selezionare tutti i preset compresi tra due clic. Il tasto :kbd:`Space` aggiunge o toglie poi la spunta a tutti insieme.
+Anche un doppio clic in un punto qualsiasi della riga di un preset aggiunge o toglie la spunta.
+Il numero di preset spuntati è indicato sotto l'elenco, insieme al numero di quelli nascosti dal filtro.
 Gli altri parametri sono:
 
 Destinazione

@@ -5,6 +5,7 @@ Tutte le funzioni sono disponibili in un menu che compare facendo clic sull'icon
 Il contenuto di questo menu dipende dalla selezione nell'[albero](manual/soundfont-editor/tree.md): prima di tutto dal tipo di selezione (come descritto sotto), ma anche dal numero di elementi selezionati.
 Alcune funzioni non possono elaborare più elementi e vengono quindi nascoste in caso di selezione multipla.
 Le funzioni sono ordinate per categoria e poi per nome; un nome seguito da puntini di sospensione (…) indica che si aprirà una finestra per configurare la funzione.
+In questa finestra, la scorciatoia :kbd:`Ctrl`+:kbd:`Enter` preme il pulsante di conferma (se ce n'è uno solo) e il tasto :kbd:`Esc` il pulsante per annullare o chiudere.
 
 
 ## Funzioni globali {#doc_global}

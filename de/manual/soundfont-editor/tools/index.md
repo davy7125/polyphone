@@ -5,6 +5,7 @@ Alle Werkzeuge sind über ein Menü erreichbar, das beim Klick auf das Werkzeugk
 Der Inhalt dieses Menüs hängt von der Auswahl in der [Baumansicht](manual/soundfont-editor/tree.md) ab: zunächst von der Art der Auswahl (wie unten beschrieben), aber auch von der Anzahl der ausgewählten Elemente.
 Einige Werkzeuge können nicht mehrere Elemente verarbeiten und werden daher bei einer Mehrfachauswahl ausgeblendet.
 Die Werkzeuge sind nach Kategorie und dann nach Name sortiert; ein Name, auf den Auslassungspunkte (…) folgen, zeigt an, dass ein Fenster zur Konfiguration des Werkzeugs geöffnet wird.
+In diesem Fenster betätigt das Tastenkürzel :kbd:`Ctrl`+:kbd:`Enter` die Schaltfläche zum Bestätigen (sofern es nur eine gibt) und die Taste :kbd:`Esc` die Schaltfläche zum Abbrechen oder Schließen.
 
 
 ## Globale Werkzeuge {#doc_global}

@@ -36,6 +36,10 @@ Soundfonts exportieren…
 
 
 Im Exportfenster werden die Presets aller geöffneten Soundfonts aufgelistet, und die zu exportierenden müssen angehakt werden (mit den Buttons :guilabel:`Alle auswählen` und :guilabel:`Alle abwählen` lässt sich die Auswahl schnell ändern).
+Das Feld über diesen Buttons filtert die Liste nach den Nummern und Namen der Presets (Tastenkombination :kbd:`Ctrl`+:kbd:`F`, mit den Tasten :kbd:`↓` oder :kbd:`Enter` gelangt man anschließend zum ersten angezeigten Preset): Die beiden Buttons wirken dann nur auf die angezeigten Presets, und angehakte Presets, die durch den Filter ausgeblendet sind, werden trotzdem exportiert.
+Mehrere Presets lassen sich auswählen, indem Sie die Taste :kbd:`Ctrl` gedrückt halten und sie nacheinander anklicken, oder mit der Taste :kbd:`Shift`, um alle Presets zwischen zwei Klicks auszuwählen. Mit der Taste :kbd:`Space` werden sie dann gemeinsam an- oder abgehakt.
+Ein Doppelklick an beliebiger Stelle in der Zeile eines Presets hakt es ebenfalls an oder ab.
+Unter der Liste wird die Anzahl der angehakten Presets angezeigt, zusammen mit der Anzahl der durch den Filter ausgeblendeten.
 Die weiteren Parameter sind:
 
 Ziel

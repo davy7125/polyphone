@@ -36,6 +36,10 @@ Exportar soundfonts…
 
 
 En la ventana de exportación se listan los conjuntos de todos los soundfonts abiertos, y hay que marcar los que se van a exportar (los botones :guilabel:`Seleccionar todo` y :guilabel:`Deseleccionar todo` ayudan a cambiar rápidamente la selección).
+El campo situado encima de estos botones filtra la lista por los números y el nombre de los conjuntos (atajo :kbd:`Ctrl`+:kbd:`F`; las teclas :kbd:`↓` o :kbd:`Enter` llevan después al primer conjunto mostrado): los dos botones solo se aplican entonces a los conjuntos mostrados, y los conjuntos marcados que el filtro oculta se exportan igualmente.
+Se pueden seleccionar varios conjuntos manteniendo pulsada la tecla :kbd:`Ctrl` y haciendo clic en ellos uno a uno, o con la tecla :kbd:`Shift` para seleccionar todos los conjuntos entre dos clics. La tecla :kbd:`Space` los marca o desmarca entonces a la vez.
+Un doble clic en cualquier punto de la fila de un conjunto también lo marca o desmarca.
+El número de conjuntos marcados se muestra debajo de la lista, junto con el número de los que oculta el filtro.
 Los demás parámetros son:
 
 Destino

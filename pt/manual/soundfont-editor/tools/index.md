@@ -5,6 +5,7 @@ Todas as ferramentas ficam em um menu exibido ao clicar no ícone da caixa de fe
 O conteúdo desse menu depende da seleção na [árvore](manual/soundfont-editor/tree.md): primeiro do tipo de seleção (como descrito abaixo), mas também do número de elementos selecionados.
 Algumas ferramentas não conseguem processar vários elementos e, por isso, ficam ocultas em caso de seleção múltipla.
 As ferramentas são ordenadas por categoria e depois por nome, e um nome seguido de reticências (…) indica que uma janela será exibida para configurar a ferramenta.
+Nessa janela, o atalho :kbd:`Ctrl`+:kbd:`Enter` aciona o botão de validação (se houver apenas um) e a tecla :kbd:`Esc` o botão para cancelar ou fechar.
 
 
 ## Ferramentas globais {#doc_global}

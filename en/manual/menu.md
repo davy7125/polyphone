@@ -36,6 +36,10 @@ Export soundfonts…
 
 
 In the export window, the presets of all open soundfonts are listed and the ones to export must be ticked (the buttons :guilabel:`Select all` and :guilabel:`Unselect all` help to quickly change the selection).
+The field above these buttons filters the list on the preset numbers and names (shortcut :kbd:`Ctrl`+:kbd:`F`, the keys :kbd:`↓` or :kbd:`Enter` then going to the first preset displayed): both buttons only apply to the presets displayed, and the ticked presets hidden by the filter are still exported.
+Several presets can be selected by maintaining the key :kbd:`Ctrl` and clicking on them one by one, or with the key :kbd:`Shift` for selecting all presets between two clicks. The key :kbd:`Space` then ticks or unticks them together.
+A double click anywhere on the row of a preset also ticks or unticks it.
+The number of ticked presets is displayed under the list, along with the number of those hidden by the filter.
 The other parameters are:
 
 Destination
