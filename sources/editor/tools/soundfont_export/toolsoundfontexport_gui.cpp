@@ -87,7 +87,7 @@ void ToolSoundfontExport_gui::updateInterface(AbstractToolParameters * parameter
                         .arg(sm->getQstr(id, champ_name)));
             item->setCheckState(0, Qt::Checked);
             item->setData(0, Qt::UserRole, QPoint(id.indexSf2, id.indexElt));
-            item->setData(0, Qt::UserRole + 1, sm->getQstr(id, champ_nameSort));
+            item->setData(0, Qt::UserRole + 1, Utils::simplifySpaces(sm->getQstr(id, champ_nameSort)));
             rootItem->addChild(item);
             rootItem->setExpanded(true);
         }
@@ -180,8 +180,8 @@ void ToolSoundfontExport_gui::setCheckState(QList<QTreeWidgetItem *> items, Qt::
 
 void ToolSoundfontExport_gui::on_lineSearch_textChanged(const QString &text)
 {
-    // Presets whose numbers or name contain the filter, soundfonts without matches are hidden
-    QString filter = Utils::removeAccents(text).toLower();
+    // Presets whose numbers or name contain the filter (whatever the number of spaces), soundfonts without matches are hidden
+    QString filter = Utils::simplifySpaces(Utils::removeAccents(text).toLower());
     int nbTopLevelItems = ui->listPresets->topLevelItemCount();
     for (int i = 0; i < nbTopLevelItems; i++)
     {

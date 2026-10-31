@@ -138,8 +138,8 @@ bool TreeSortFilterProxy::lessThan(QString left, QString right) const
 
 void TreeSortFilterProxy::filterChanged(QString filter)
 {
-    // Find the matches to prepare the filter
-    filter = Utils::removeAccents(filter).toLower();
+    // Find the matches to prepare the filter (whatever the number of spaces)
+    filter = Utils::simplifySpaces(Utils::removeAccents(filter).toLower());
     findMatches(_indexSf2, filter);
     _treeView->setBestMatch(_bestMatchSample, _bestMatchInstrument, _bestMatchPreset);
 
@@ -202,7 +202,7 @@ void TreeSortFilterProxy::findMatches(int idSf2, QString filter)
     foreach (int i, _sm->getSiblings(idSmpl))
     {
         idSmpl.indexElt = i;
-        QString name = _sm->getQstr(idSmpl, champ_nameSort);
+        QString name = Utils::simplifySpaces(_sm->getQstr(idSmpl, champ_nameSort));
         if (name.contains(filter))
         {
             _matchingSamples << i;
@@ -219,7 +219,7 @@ void TreeSortFilterProxy::findMatches(int idSf2, QString filter)
     foreach (int i, _sm->getSiblings(idInst))
     {
         idInst.indexElt = i;
-        QString name = _sm->getQstr(idInst, champ_nameSort);
+        QString name = Utils::simplifySpaces(_sm->getQstr(idInst, champ_nameSort));
         if (name.contains(filter))
         {
             if (!_matchingInstruments.contains(i))
@@ -237,7 +237,7 @@ void TreeSortFilterProxy::findMatches(int idSf2, QString filter)
     foreach (int i, _sm->getSiblings(idPrst))
     {
         idPrst.indexElt = i;
-        QString name = _sm->getQstr(idPrst, champ_nameSort);
+        QString name = Utils::simplifySpaces(_sm->getQstr(idPrst, champ_nameSort));
         if (name.contains(filter))
         {
             if (!_matchingPresets.contains(i))

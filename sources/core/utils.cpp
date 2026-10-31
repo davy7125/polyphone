@@ -134,6 +134,23 @@ QString Utils::removeAccents(QString s)
     return output;
 }
 
+QString Utils::simplifySpaces(QString s)
+{
+    // Nothing to do in most cases (no copy)
+    bool found = false;
+    for (int i = 0; i < s.length() && !found; i++)
+        found = s[i].isSpace() && (s[i] != QChar(' ') || (i > 0 && s[i - 1].isSpace()));
+    if (!found)
+        return s;
+
+    QString output = "";
+    for (int i = 0; i < s.length(); i++)
+        if (!s[i].isSpace() || i == 0 || !s[i - 1].isSpace())
+            output.append(s[i].isSpace() ? QChar(' ') : s[i]);
+
+    return output;
+}
+
 QString Utils::commonPart(QStringList list)
 {
     if (list.empty())

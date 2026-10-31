@@ -41,6 +41,10 @@ public:
     /// Can be useful for sorting strings
     static QString removeAccents(QString s);
 
+    /// Replace consecutive spaces (or any other whitespace) by a single space
+    /// Useful for searching a text whatever the number of spaces
+    static QString simplifySpaces(QString s);
+
     /// Return the first letters in common from a list of string
     static QString commonPart(QStringList list);
 

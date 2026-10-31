@@ -63,7 +63,7 @@ void DirectorySortProxyModel::setFilter(QString filter)
 #if QT_VERSION >= 0x060900
     beginFilterChange();
 #endif
-    _filter = filter;
+    _filter = Utils::simplifySpaces(filter);
 
 #if QT_VERSION >= 0x060900
     endFilterChange();

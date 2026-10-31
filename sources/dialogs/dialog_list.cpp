@@ -25,6 +25,7 @@
 #include "dialog_list.h"
 #include "ui_dialog_list.h"
 #include "soundfontmanager.h"
+#include "utils.h"
 
 DialogList::DialogList(QWidget *parent) :
     QDialog(parent),
@@ -134,8 +135,9 @@ void DialogList::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
 
 void DialogList::on_lineSearch_textChanged(const QString &arg1)
 {
-    QString filter = arg1.toLower();
+    // Whatever the number of spaces
+    QString filter = Utils::simplifySpaces(arg1.toLower());
     for (int i = 0; i < ui->listWidget->count(); i++)
-        ui->listWidget->item(i)->setHidden(!ui->listWidget->item(i)->text().toLower().contains(filter));
+        ui->listWidget->item(i)->setHidden(!Utils::simplifySpaces(ui->listWidget->item(i)->text().toLower()).contains(filter));
 }
 

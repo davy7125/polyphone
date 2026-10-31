@@ -214,7 +214,7 @@ void DirectoryFileData::scanInstPrst(QVectorIterator<InstPrst*> &i, QList<Direct
 bool DirectoryFileData::getFilterResult(QString filter) const
 {
     return filter.isEmpty() ||
-           this->getFileName().contains(filter, Qt::CaseInsensitive) ||
+           Utils::simplifySpaces(this->getFileName()).contains(filter, Qt::CaseInsensitive) ||
            this->getPresetFilterResult(filter) ||
            this->getInstrumentFilterResult(filter) ||
            this->getSampleFilterResult(filter) ;
@@ -224,7 +224,7 @@ bool DirectoryFileData::getSampleFilterResult(QString filter) const
 {
     foreach (DirectorySampleData data, _samples)
     {
-        if (data.name.contains(filter, Qt::CaseInsensitive))
+        if (Utils::simplifySpaces(data.name).contains(filter, Qt::CaseInsensitive))
             return true;
     }
     return false;
@@ -234,7 +234,7 @@ bool DirectoryFileData::getInstrumentFilterResult(QString filter) const
 {
     foreach (DirectoryInstrumentPresetData data, _instruments)
     {
-        if (data.name.contains(filter, Qt::CaseInsensitive))
+        if (Utils::simplifySpaces(data.name).contains(filter, Qt::CaseInsensitive))
             return true;
     }
     return false;
@@ -244,7 +244,7 @@ bool DirectoryFileData::getPresetFilterResult(QString filter) const
 {
     foreach (DirectoryInstrumentPresetData data, _presets)
     {
-        if (data.name.contains(filter, Qt::CaseInsensitive))
+        if (Utils::simplifySpaces(data.name).contains(filter, Qt::CaseInsensitive))
             return true;
     }
     return false;

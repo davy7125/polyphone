@@ -26,6 +26,7 @@
 #include <QMouseEvent>
 #include <QStandardItemModel>
 #include "directoryelementlistdelegate.h"
+#include "utils.h"
 
 DirectoryElementListView::DirectoryElementListView(QWidget *parent) : QListView(parent),
     _path(""),
@@ -35,7 +36,7 @@ DirectoryElementListView::DirectoryElementListView(QWidget *parent) : QListView(
     _proxy = new QSortFilterProxyModel(this);
     _proxy->setSourceModel(_model);
     _proxy->setFilterCaseSensitivity(Qt::CaseInsensitive);
-    _proxy->setFilterRole(Qt::DisplayRole);
+    _proxy->setFilterRole(Qt::UserRole + 4);
     this->setModel(_proxy);
 
     this->setItemDelegate(new DirectoryElementListDelegate(this));
@@ -66,6 +67,9 @@ void DirectoryElementListView::setData(DirectoryFileData::DetailsData data, QStr
         item->setData(tmp.count('\n') + 1, Qt::UserRole + 2);
         item->setData(data.values[i], Qt::UserRole + 3);
 
+        // Text for the filter, whatever the number of spaces
+        item->setData(Utils::simplifySpaces(data.names[i]), Qt::UserRole + 4);
+
         _model->appendRow(item);
     }
 }
@@ -78,5 +82,5 @@ void DirectoryElementListView::onActivated(const QModelIndex &index)
 
 void DirectoryElementListView::setFilter(QString filter)
 {
-    _proxy->setFilterFixedString(filter);
+    _proxy->setFilterFixedString(Utils::simplifySpaces(filter));
 }
