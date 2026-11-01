@@ -407,19 +407,29 @@
         <translation>Data</translation>
     </message>
     <message>
-        <location filename="../../repository/browser/browsersortmenu.cpp" line="62"/>
+        <location filename="../../repository/browser/browsersortmenu.cpp" line="56"/>
+        <source>Trend</source>
+        <translation>Tendència</translation>
+    </message>
+    <message>
+        <location filename="../../repository/browser/browsersortmenu.cpp" line="57"/>
         <source>Downloads</source>
         <translation>Baixades</translation>
     </message>
     <message>
-        <location filename="../../repository/browser/browsersortmenu.cpp" line="69"/>
+        <location filename="../../repository/browser/browsersortmenu.cpp" line="58"/>
         <source>Rating score</source>
         <translation>Valoració</translation>
     </message>
     <message>
-        <location filename="../../repository/browser/browsersortmenu.cpp" line="76"/>
+        <location filename="../../repository/browser/browsersortmenu.cpp" line="59"/>
         <source>Title (A→Z)</source>
         <translation>Títol (A→Z)</translation>
+    </message>
+    <message>
+        <location filename="../../repository/browser/browsersortmenu.cpp" line="60"/>
+        <source>Size</source>
+        <translation>Mida</translation>
     </message>
 </context>
 <context>
@@ -1911,7 +1921,7 @@ en línia</translation>
     </message>
     <message>
         <location filename="../../dialogs/dialogmidiplayer.ui" line="72"/>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="152"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="176"/>
         <source>Open a MIDI file</source>
         <translation>Obre un fitxer MIDI</translation>
     </message>
@@ -1926,86 +1936,107 @@ en línia</translation>
         <translation>Configuració de reproducció</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="352"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="378"/>
         <source>Tempo</source>
         <translation>Tempo</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="367"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="393"/>
         <source>The percussions (bank 128) are not transposed</source>
         <translation>Les percussions (banc 128) no es transporten</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="101"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="112"/>
         <source>Channel</source>
         <translation>Canal</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="101"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="112"/>
         <source>Soundfont</source>
         <translation>Soundfont</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="101"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="112"/>
         <source>Preset</source>
         <translation>Preset</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="101"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="112"/>
         <source>Volume</source>
         <translation>Volum</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="121"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="132"/>
         <source>Open a MIDI file to play it with the soundfonts that are open.</source>
         <translation>Obre un fitxer MIDI per reproduir-lo amb els soundfonts oberts.</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="153"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="177"/>
         <source>MIDI files</source>
         <translation>Fitxers MIDI</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="343"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="369"/>
         <source>Loop playback</source>
         <translation>Reproduir en bucle</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="358"/>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="419"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="384"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="450"/>
         <source>%1%</source>
         <comment>percentage</comment>
         <translation>%1 %</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="359"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="385"/>
         <source>Pitch</source>
         <translation>To</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="402"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="415"/>
+        <source>Export audio...</source>
+        <translation>Exporta l&apos;àudio...</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="433"/>
         <source>Tempo of the file: %1 bpm, variable</source>
         <translation>Tempo del fitxer: %1 bpm, variable</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="402"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="433"/>
         <source>Tempo of the file: %1 bpm</source>
         <translation>Tempo del fitxer: %1 bpm</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="404"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="435"/>
         <source>File without tempo (SMPTE time code)</source>
         <translation>Fitxer sense tempo (codi de temps SMPTE)</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="463"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="494"/>
         <source>Pause</source>
         <translation>Pausa</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="463"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="494"/>
         <source>Play</source>
         <translation>Reprodueix</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="573"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="608"/>
+        <source>Export audio</source>
+        <translation>Exporta l&apos;àudio</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="576"/>
+        <source>Wav file</source>
+        <translation>Fitxer wav</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="647"/>
+        <source>Warning</source>
+        <translation>Atenció</translation>
     </message>
 </context>
 <context>
@@ -3374,6 +3405,21 @@ en línia</translation>
         <location filename="../../midi_player/midifile.cpp" line="231"/>
         <source>The time division of this MIDI file is not valid.</source>
         <translation>La divisió temporal d&apos;aquest fitxer MIDI no és vàlida.</translation>
+    </message>
+</context>
+<context>
+    <name>MidiFileRenderer</name>
+    <message>
+        <location filename="../../midi_player/midifilerenderer.cpp" line="115"/>
+        <location filename="../../midi_player/midifilerenderer.cpp" line="172"/>
+        <location filename="../../midi_player/midifilerenderer.cpp" line="197"/>
+        <source>Cannot write file &quot;%1&quot;.</source>
+        <translation>No es pot escriure el fitxer &quot;%1&quot;.</translation>
+    </message>
+    <message>
+        <location filename="../../midi_player/midifilerenderer.cpp" line="142"/>
+        <source>The audio file cannot exceed 4 GB.</source>
+        <translation>El fitxer d&apos;àudio no pot superar els 4 GB.</translation>
     </message>
 </context>
 <context>
@@ -4791,6 +4837,7 @@ Ambdues divisions han de compartir la mateixa nota i rang de velocitat.</transla
     </message>
     <message>
         <location filename="../../core/utils.cpp" line="335"/>
+        <location filename="../../repository/browser/soundfontbrowser.cpp" line="80"/>
         <source>MB</source>
         <comment>megabytes</comment>
         <translation>MB</translation>
@@ -4808,7 +4855,7 @@ Ambdues divisions han de compartir la mateixa nota i rang de velocitat.</transla
         <translation>TB</translation>
     </message>
     <message>
-        <location filename="../../repository/soundfontinformation.cpp" line="46"/>
+        <location filename="../../repository/soundfontinformation.cpp" line="48"/>
         <source>Unknown author</source>
         <translation>Autor desconegut</translation>
     </message>
@@ -4834,88 +4881,98 @@ Ambdues divisions han de compartir la mateixa nota i rang de velocitat.</transla
         <translation>no es pot crear el fitxer &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="107"/>
-        <location filename="../../main.cpp" line="193"/>
+        <location filename="../../main.cpp" line="111"/>
+        <location filename="../../main.cpp" line="255"/>
         <source>The file &quot;%1&quot; does not exist.</source>
         <translation>El fitxer &quot;%1&quot; no existeix.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="115"/>
-        <location filename="../../main.cpp" line="198"/>
+        <location filename="../../main.cpp" line="119"/>
+        <location filename="../../main.cpp" line="260"/>
         <source>The directory &quot;%1&quot; does not exist.</source>
         <translation>El directori &quot;%1&quot; no existeix.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="120"/>
+        <location filename="../../main.cpp" line="124"/>
         <source>The file &quot;%1&quot; already exists.</source>
         <translation>El fitxer &quot;%1&quot; ja existeix.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="125"/>
-        <location filename="../../main.cpp" line="214"/>
+        <location filename="../../main.cpp" line="129"/>
+        <location filename="../../main.cpp" line="201"/>
+        <location filename="../../main.cpp" line="286"/>
         <source>Loading file &quot;%1&quot;...</source>
         <translation>S&apos;està carregant el fitxer &quot;%1&quot;...</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="130"/>
-        <location filename="../../main.cpp" line="219"/>
+        <location filename="../../main.cpp" line="134"/>
+        <location filename="../../main.cpp" line="206"/>
+        <location filename="../../main.cpp" line="291"/>
         <source>Couldn&apos;t load file &quot;%1&quot;: %2.</source>
         <translation>No s&apos;ha pogut carregar el fitxer &quot;%1&quot;: %2.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="136"/>
-        <location filename="../../main.cpp" line="225"/>
+        <location filename="../../main.cpp" line="140"/>
+        <location filename="../../main.cpp" line="212"/>
+        <location filename="../../main.cpp" line="297"/>
         <source>File successfully loaded!</source>
         <translation>Fitxer carregat correctament!</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="143"/>
         <location filename="../../main.cpp" line="147"/>
-        <location filename="../../main.cpp" line="160"/>
-        <location filename="../../main.cpp" line="229"/>
+        <location filename="../../main.cpp" line="151"/>
+        <location filename="../../main.cpp" line="164"/>
+        <location filename="../../main.cpp" line="234"/>
+        <location filename="../../main.cpp" line="301"/>
         <source>Writing file &quot;%1&quot;...</source>
         <translation>S&apos;està escrivint el fitxer &quot;%1&quot;...</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="153"/>
         <location filename="../../main.cpp" line="157"/>
+        <location filename="../../main.cpp" line="161"/>
         <source>Writing files in directory &quot;%1&quot;...</source>
         <translation>S&apos;estan escrivint fitxers al directori &quot;%1&quot;...</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="163"/>
+        <location filename="../../main.cpp" line="167"/>
         <source>Unknown mode &quot;%1&quot;.</source>
         <translation>Mode desconegut &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="171"/>
-        <location filename="../../main.cpp" line="209"/>
-        <location filename="../../main.cpp" line="237"/>
+        <location filename="../../main.cpp" line="175"/>
+        <location filename="../../main.cpp" line="281"/>
+        <location filename="../../main.cpp" line="309"/>
         <source>An error occurred: %1.</source>
         <translation>S&apos;ha produït un error: %1.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="176"/>
+        <location filename="../../main.cpp" line="180"/>
         <source>File successfully converted!</source>
         <translation>Fitxer convertit correctament!</translation>
     </message>
     <message>
+        <location filename="../../main.cpp" line="221"/>
+        <source>Channel %1: no preset %2 in the soundfont, its notes are not played.</source>
+        <translation>Canal %1: no hi ha cap preset %2 al soundfont, les seves notes no es reprodueixen.</translation>
+    </message>
+    <message>
         <location filename="../../main.cpp" line="240"/>
+        <location filename="../../main.cpp" line="312"/>
         <source>File successfully rendered!</source>
         <translation>Fitxer renderitzat correctament!</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="253"/>
+        <location filename="../../main.cpp" line="325"/>
         <source>Previous configuration is now cleared.</source>
         <translation>La configuració prèvia s&apos;ha esborrat.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="262"/>
+        <location filename="../../main.cpp" line="334"/>
         <source>See &quot;%1&quot; for more information.</source>
         <translation>Consulteu &quot;%1&quot; per a més informació.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="264"/>
+        <location filename="../../main.cpp" line="336"/>
         <source>Write &quot;%1&quot; to show usage.</source>
         <translation>Escriviu &quot;%1&quot; per mostrar l&apos;ús.</translation>
     </message>
@@ -5090,122 +5147,122 @@ Ambdues divisions han de compartir la mateixa nota i rang de velocitat.</transla
         <translation>per a ús personal; no distribuir cap versió modificada</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="339"/>
+        <location filename="../../repository/repositorymanager.cpp" line="349"/>
         <source>piano</source>
         <translation>piano</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="342"/>
+        <location filename="../../repository/repositorymanager.cpp" line="352"/>
         <source>organ</source>
         <translation>orgue</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="345"/>
+        <location filename="../../repository/repositorymanager.cpp" line="355"/>
         <source>synthesizer</source>
         <translation>sintetitzador</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="348"/>
+        <location filename="../../repository/repositorymanager.cpp" line="358"/>
         <source>harpsichord</source>
         <translation>clavicèmbal</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="351"/>
+        <location filename="../../repository/repositorymanager.cpp" line="361"/>
         <source>guitar</source>
         <translation>guitarra</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="354"/>
+        <location filename="../../repository/repositorymanager.cpp" line="364"/>
         <source>bass</source>
         <translation>baix</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="357"/>
+        <location filename="../../repository/repositorymanager.cpp" line="367"/>
         <source>plucked strings</source>
         <translation>de corda pinçada</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="360"/>
+        <location filename="../../repository/repositorymanager.cpp" line="370"/>
         <source>bowed strings</source>
         <translation>de corda fregada</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="363"/>
+        <location filename="../../repository/repositorymanager.cpp" line="373"/>
         <source>flute</source>
         <translation>flauta</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="366"/>
+        <location filename="../../repository/repositorymanager.cpp" line="376"/>
         <source>reed</source>
         <translation>de canya</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="369"/>
+        <location filename="../../repository/repositorymanager.cpp" line="379"/>
         <source>brass</source>
         <translation>vent-metall</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="372"/>
+        <location filename="../../repository/repositorymanager.cpp" line="382"/>
         <source>vocal</source>
         <translation>vocal</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="375"/>
+        <location filename="../../repository/repositorymanager.cpp" line="385"/>
         <source>unpitched percussion</source>
         <translation>percussió de so indeterminat</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="378"/>
+        <location filename="../../repository/repositorymanager.cpp" line="388"/>
         <source>melodic percussion</source>
         <translation>percussió melòdica</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="381"/>
+        <location filename="../../repository/repositorymanager.cpp" line="391"/>
         <source>sound effect</source>
         <translation>efecte de so</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="384"/>
+        <location filename="../../repository/repositorymanager.cpp" line="394"/>
         <source>soundscape</source>
         <translation>paisatge sonor</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="387"/>
+        <location filename="../../repository/repositorymanager.cpp" line="397"/>
         <source>loop / rythm</source>
         <translation>bucle / ritme</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="390"/>
+        <location filename="../../repository/repositorymanager.cpp" line="400"/>
         <source>instrument set</source>
         <translation>conjunt instrumental</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="393"/>
+        <location filename="../../repository/repositorymanager.cpp" line="403"/>
         <source>unclassifiable</source>
         <translation>no classificable</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="400"/>
+        <location filename="../../repository/repositorymanager.cpp" line="410"/>
         <source>Category %1</source>
         <translation>Categoria %1</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="428"/>
+        <location filename="../../repository/repositorymanager.cpp" line="438"/>
         <source>Please wait...</source>
         <translation>Espereu...</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="431"/>
+        <location filename="../../repository/repositorymanager.cpp" line="441"/>
         <source>Your account has been banned.</source>
         <translation>El vostre compte està bloquejat.</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="436"/>
+        <location filename="../../repository/repositorymanager.cpp" line="446"/>
         <source>A Premium account allows you to browse and download all soundfonts available online.</source>
         <translation>Un compte Premium permet navegar i descarregar tots els soundfonts disponibles en línia.</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="445"/>
+        <location filename="../../repository/repositorymanager.cpp" line="455"/>
         <source>Warning</source>
         <translation>Atenció</translation>
     </message>
@@ -5278,31 +5335,49 @@ baixar la llista</translation>
         <translation>Etiquetes</translation>
     </message>
     <message>
-        <location filename="../../repository/browser/soundfontbrowser.ui" line="527"/>
+        <location filename="../../repository/browser/soundfontbrowser.ui" line="467"/>
+        <source>Size</source>
+        <translation>Mida</translation>
+    </message>
+    <message>
+        <location filename="../../repository/browser/soundfontbrowser.ui" line="542"/>
         <source>Go to the previous page</source>
         <translation>Vés a la pàgina anterior</translation>
     </message>
     <message>
-        <location filename="../../repository/browser/soundfontbrowser.ui" line="562"/>
+        <location filename="../../repository/browser/soundfontbrowser.ui" line="577"/>
         <source>Go to the next page</source>
         <translation>Vés a la pàgina següent</translation>
     </message>
     <message>
-        <location filename="../../repository/browser/soundfontbrowser.ui" line="652"/>
+        <location filename="../../repository/browser/soundfontbrowser.ui" line="667"/>
         <source>Oops! Cannot
 download the list</source>
         <translation>No es pot
 baixar la llista</translation>
     </message>
     <message>
-        <location filename="../../repository/browser/soundfontbrowser.cpp" line="140"/>
+        <location filename="../../repository/browser/soundfontbrowser.cpp" line="81"/>
+        <source>All</source>
+        <translation>Totes</translation>
+    </message>
+    <message>
+        <location filename="../../repository/browser/soundfontbrowser.cpp" line="148"/>
         <source>commercial use</source>
         <translation>per a ús comercial</translation>
     </message>
     <message>
-        <location filename="../../repository/browser/soundfontbrowser.cpp" line="141"/>
+        <location filename="../../repository/browser/soundfontbrowser.cpp" line="149"/>
         <source>share after editing</source>
         <translation>compartir després d&apos;editar</translation>
+    </message>
+</context>
+<context>
+    <name>SoundfontCellFull</name>
+    <message>
+        <location filename="../../repository/browser/soundfontcellfull.cpp" line="53"/>
+        <source>Downloads over the last 90 days</source>
+        <translation>Baixades dels darrers 90 dies</translation>
     </message>
 </context>
 <context>
@@ -7790,7 +7865,7 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
         <translation>Processant...</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/waitingtooldialog.cpp" line="77"/>
+        <location filename="../../editor/tools/waitingtooldialog.cpp" line="82"/>
         <source>Canceling...</source>
         <translation>Cancel·lant...</translation>
     </message>

@@ -23,12 +23,14 @@
 ***************************************************************************/
 
 #include "soundfontfilter.h"
+#include "repositorymanager.h"
 #include <QRegularExpression>
 
 SoundfontFilter::SoundfontFilter() :
     _searchText(""),
     _catId(-1),
-    _licenseFlags(SoundfontInformation::LicenseFlag::NONE)
+    _licenseFlags(SoundfontInformation::LicenseFlag::NONE),
+    _maxSize(-1)
 {
 
 }
@@ -54,9 +56,12 @@ bool SoundfontFilter::match(SoundfontInformation * soundfontInformation)
             search = search.replace(regExp, "").trimmed();
         }
 
-        // Search the remaining part in the title
-        if (!soundfontInformation->getTitle().toLower().contains(search.toLower()))
-            return false;
+        // Search each word of the remaining part in the title, the tags and the attributes
+        static const QRegularExpression separator("\\s+");
+        QStringList words = search.split(separator, Qt::SkipEmptyParts);
+        foreach (QString word, words)
+            if (!containsText(soundfontInformation, word))
+                return false;
     }
 
     // Category
@@ -87,6 +92,10 @@ bool SoundfontFilter::match(SoundfontInformation * soundfontInformation)
     if (!_tags.empty() && !isMatching(_tags, soundfontInformation->getTags()))
         return false;
 
+    // Size (an unknown size doesn't match a limit)
+    if (_maxSize != -1 && (soundfontInformation->getSize() <= 0 || soundfontInformation->getSize() >= _maxSize))
+        return false;
+
     return true;
 }
 
@@ -97,5 +106,30 @@ bool SoundfontFilter::isMatching(QStringList valuesToFind, QStringList values)
         if (values.contains(valueToFind))
             return true;
     }
+    return false;
+}
+
+bool SoundfontFilter::containsText(SoundfontInformation * soundfontInformation, QString text)
+{
+    // Title
+    if (soundfontInformation->getTitle().contains(text, Qt::CaseInsensitive))
+        return true;
+
+    // Category, as displayed
+    if (soundfontInformation->getCategoryId() != -1 &&
+            RepositoryManager::getInstance()->getCategoryName(soundfontInformation->getCategoryId()).contains(text, Qt::CaseInsensitive))
+        return true;
+
+    // Sample source, genre and MIDI standard (the license is not included)
+    foreach (QStringList values, soundfontInformation->getProperties())
+        foreach (QString value, values)
+            if (value.contains(text, Qt::CaseInsensitive))
+                return true;
+
+    // Tags
+    foreach (QString tag, soundfontInformation->getTags())
+        if (tag.contains(text, Qt::CaseInsensitive))
+            return true;
+
     return false;
 }

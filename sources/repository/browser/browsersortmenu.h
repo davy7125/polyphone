@@ -27,6 +27,7 @@
 
 #include <QWidget>
 #include <QIcon>
+class QMenu;
 
 namespace Ui {
 class BrowserSortMenu;
@@ -37,13 +38,24 @@ class BrowserSortMenu : public QWidget
     Q_OBJECT
 
 public:
+    // Values stored in the configuration (the order in the menu is different)
+    enum SortType
+    {
+        SORT_DATE = 0,
+        SORT_DOWNLOADS = 1,
+        SORT_RATING = 2,
+        SORT_TITLE = 3,
+        SORT_TRENDING = 4,
+        SORT_SIZE = 5
+    };
+
     explicit BrowserSortMenu(QWidget *parent = nullptr);
     ~BrowserSortMenu();
 
-    int currentIndex();
+    SortType currentSort();
 
 signals:
-    void currentIndexChanged(int index);
+    void sortChanged();
 
 protected:
 #if QT_VERSION >= 0x060000
@@ -55,14 +67,11 @@ protected:
     void mousePressEvent(QMouseEvent *event) override;
 
 private slots:
-    void element1Clicked();
-    void element2Clicked();
-    void element3Clicked();
-    void element4Clicked();
     void onMenuClosed();
 
 private:
-    void elementClicked(int index);
+    void addElement(QMenu * menu, QString text, SortType sortType, int currentSort);
+    void elementClicked(SortType sortType);
     void setStyle(bool hovered);
 
     Ui::BrowserSortMenu *ui;

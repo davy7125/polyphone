@@ -27,10 +27,11 @@
 #include "soundfontinformation.h"
 #include "repositorymanager.h"
 #include "contextmanager.h"
+#include "utils.h"
 
 SoundfontCellFull::IconContainer * SoundfontCellFull::s_icons = nullptr;
 
-SoundfontCellFull::SoundfontCellFull(SoundfontInformation* soundfontInfo, QWidget *parent) :
+SoundfontCellFull::SoundfontCellFull(SoundfontInformation* soundfontInfo, bool showTrendingNumber, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::SoundfontCellFull),
     _active(true),
@@ -46,7 +47,14 @@ SoundfontCellFull::SoundfontCellFull(SoundfontInformation* soundfontInfo, QWidge
 
     // Numbers
     ui->labelCommentNumber->setText(QString::number(soundfontInfo->getCommentNumber()));
-    ui->labelDownloadNumber->setText(QString::number(soundfontInfo->getDownloadNumber()));
+    if (showTrendingNumber)
+    {
+        ui->labelDownloadNumber->setText(QString::number(soundfontInfo->getTrendingNumber()));
+        ui->iconDownload->setToolTip(tr("Downloads over the last 90 days"));
+        ui->labelDownloadNumber->setToolTip(ui->iconDownload->toolTip());
+    }
+    else
+        ui->labelDownloadNumber->setText(QString::number(soundfontInfo->getDownloadNumber()));
     ui->widgetStars->setScore(soundfontInfo->getRating());
 
     // Author
@@ -55,6 +63,15 @@ SoundfontCellFull::SoundfontCellFull(SoundfontInformation* soundfontInfo, QWidge
 
     // Date
     ui->labelDate->setText(soundfontInfo->getDateTime().toString(this->locale().dateFormat(QLocale::ShortFormat)));
+
+    // Size (hidden if unknown)
+    if (soundfontInfo->getSize() > 0)
+        ui->labelSize->setText(Utils::getFormattedSize(soundfontInfo->getSize()));
+    else
+    {
+        ui->iconSize->hide();
+        ui->labelSize->hide();
+    }
 
     // License
     ui->labelLicense->setTextToElide(RepositoryManager::getInstance()->getLicenseLabel(soundfontInfo->getLicense()),
@@ -101,6 +118,7 @@ void SoundfontCellFull::setActive(bool isActive)
         ui->iconDownload->setPixmap(s_icons->_downloadIconSelected);
         ui->iconAuthor->setPixmap(s_icons->_userIconSelected);
         ui->iconDate->setPixmap(s_icons->_dateIconSelected);
+        ui->iconSize->setPixmap(s_icons->_sizeIconSelected);
         ui->iconLicense->setPixmap(s_icons->_copyrightIconSelected);
 
         // Author and license texts
@@ -117,6 +135,7 @@ void SoundfontCellFull::setActive(bool isActive)
         ui->iconDownload->setPixmap(s_icons->_downloadIcon);
         ui->iconAuthor->setPixmap(s_icons->_userIcon);
         ui->iconDate->setPixmap(s_icons->_dateIcon);
+        ui->iconSize->setPixmap(s_icons->_sizeIcon);
         ui->iconLicense->setPixmap(s_icons->_copyrightIcon);
 
         // Author and license texts
@@ -133,6 +152,7 @@ void SoundfontCellFull::setActive(bool isActive)
     this->style()->polish(ui->labelDownloadNumber);
     this->style()->polish(ui->labelCommentNumber);
     this->style()->polish(ui->labelDate);
+    this->style()->polish(ui->labelSize);
     this->style()->polish(ui->labelLicense);
     ui->line3->polish(this->style());
 }
@@ -145,6 +165,7 @@ SoundfontCellFull::IconContainer::IconContainer()
     _userIcon = ContextManager::theme()->getColoredSvg(":/icons/user.svg", QSize(16, 16), ThemeManager::ColorType::LIST_TEXT);
     _dateIcon = ContextManager::theme()->getColoredSvg(":/icons/calendar.svg", QSize(16, 16), ThemeManager::ColorType::LIST_TEXT);
     _copyrightIcon = ContextManager::theme()->getColoredSvg(":/icons/copyright.svg", QSize(16, 16), ThemeManager::ColorType::LIST_TEXT);
+    _sizeIcon = ContextManager::theme()->getColoredSvg(":/icons/hard-drive.svg", QSize(16, 16), ThemeManager::ColorType::LIST_TEXT);
 
     // Icons under selection
     _commentIconSelected = ContextManager::theme()->getColoredSvg(":/icons/comment.svg", QSize(24, 24), ThemeManager::ColorType::HIGHLIGHTED_TEXT);
@@ -152,6 +173,7 @@ SoundfontCellFull::IconContainer::IconContainer()
     _userIconSelected = ContextManager::theme()->getColoredSvg(":/icons/user.svg", QSize(16, 16), ThemeManager::ColorType::HIGHLIGHTED_TEXT);
     _dateIconSelected = ContextManager::theme()->getColoredSvg(":/icons/calendar.svg", QSize(16, 16), ThemeManager::ColorType::HIGHLIGHTED_TEXT);
     _copyrightIconSelected = ContextManager::theme()->getColoredSvg(":/icons/copyright.svg", QSize(16, 16), ThemeManager::ColorType::HIGHLIGHTED_TEXT);
+    _sizeIconSelected = ContextManager::theme()->getColoredSvg(":/icons/hard-drive.svg", QSize(16, 16), ThemeManager::ColorType::HIGHLIGHTED_TEXT);
 }
 
 void SoundfontCellFull::on_labelAuthor_linkActivated(const QString &link)

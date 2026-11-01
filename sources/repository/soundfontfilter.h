@@ -53,16 +53,22 @@ public:
     void setTags(QStringList tags) { _tags = tags; }
     QStringList tags() { return _tags; }
 
+    // Filter on the size (maximum size excluded in bytes, -1 for no limit)
+    void setMaxSize(qint64 maxSize) { _maxSize = maxSize; }
+    qint64 maxSize() { return _maxSize; }
+
     bool match(SoundfontInformation * soundfontInformation);
 
 private:
     bool isMatching(QStringList valuesToFind, QStringList values);
+    bool containsText(SoundfontInformation * soundfontInformation, QString text);
 
     QString _searchText;
     int _catId;
     SoundfontInformation::LicenseFlags _licenseFlags;
     QMap<SoundfontInformation::Property, QStringList> _properties;
     QStringList _tags;
+    qint64 _maxSize;
 };
 
 #endif // SOUNDFONTFILTER_H

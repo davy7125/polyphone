@@ -60,7 +60,7 @@ private slots:
     void on_pushResetFilters_clicked();
     void updateFilter();
     void on_listWidget_itemSelectionChanged();
-    void onComboSortCurrentIndexChanged(int index);
+    void onSortChanged();
     void on_pushBecomePremium_clicked();
     void userStatusChanged(UserManager::ConnectionState state);
     void on_pushGoPrevious_clicked();

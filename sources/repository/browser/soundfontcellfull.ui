@@ -222,6 +222,32 @@
        </widget>
       </item>
       <item>
+       <widget class="QLabel" name="iconSize">
+        <property name="minimumSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="labelSize">
+        <property name="text">
+         <string notr="true">labelSize</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QLabel" name="iconLicense">
         <property name="minimumSize">
          <size>

@@ -38,7 +38,7 @@ class SoundfontCellFull : public QWidget
     Q_OBJECT
 
 public:
-    explicit SoundfontCellFull(SoundfontInformation* soundfontInfo, QWidget *parent = nullptr);
+    explicit SoundfontCellFull(SoundfontInformation* soundfontInfo, bool showTrendingNumber, QWidget *parent = nullptr);
     ~SoundfontCellFull() override;
     void setActive(bool isActive);
     bool hasHeightForWidth() const override;
@@ -70,6 +70,8 @@ private:
         QPixmap _dateIconSelected;
         QPixmap _copyrightIcon;
         QPixmap _copyrightIconSelected;
+        QPixmap _sizeIcon;
+        QPixmap _sizeIconSelected;
     };
 
     void initIcons();

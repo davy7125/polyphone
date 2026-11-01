@@ -230,6 +230,16 @@ QString RepositoryManager::loadSoundfontInfo()
         if (valueTmp.isDouble())
             si->setDownloadNumber(static_cast<int>(valueTmp.toDouble()));
 
+        // Download number over the last 90 days
+        valueTmp = jsonObject.value("trending");
+        if (valueTmp.isDouble())
+            si->setTrendingNumber(static_cast<int>(valueTmp.toDouble()));
+
+        // Size
+        valueTmp = jsonObject.value("size");
+        if (valueTmp.isDouble())
+            si->setSize(static_cast<qint64>(valueTmp.toDouble()));
+
         // Rating
         valueTmp = jsonObject.value("rating");
         if (valueTmp.isDouble())

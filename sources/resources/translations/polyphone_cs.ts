@@ -407,19 +407,29 @@
         <translation>Datum</translation>
     </message>
     <message>
-        <location filename="../../repository/browser/browsersortmenu.cpp" line="62"/>
+        <location filename="../../repository/browser/browsersortmenu.cpp" line="56"/>
+        <source>Trend</source>
+        <translation>Trend</translation>
+    </message>
+    <message>
+        <location filename="../../repository/browser/browsersortmenu.cpp" line="57"/>
         <source>Downloads</source>
         <translation>Stahování</translation>
     </message>
     <message>
-        <location filename="../../repository/browser/browsersortmenu.cpp" line="69"/>
+        <location filename="../../repository/browser/browsersortmenu.cpp" line="58"/>
         <source>Rating score</source>
         <translation>Hodnocení</translation>
     </message>
     <message>
-        <location filename="../../repository/browser/browsersortmenu.cpp" line="76"/>
+        <location filename="../../repository/browser/browsersortmenu.cpp" line="59"/>
         <source>Title (A→Z)</source>
         <translation>Název (A→Z)</translation>
+    </message>
+    <message>
+        <location filename="../../repository/browser/browsersortmenu.cpp" line="60"/>
+        <source>Size</source>
+        <translation>Velikost</translation>
     </message>
 </context>
 <context>
@@ -1922,7 +1932,7 @@ repository</source>
     </message>
     <message>
         <location filename="../../dialogs/dialogmidiplayer.ui" line="72"/>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="152"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="176"/>
         <source>Open a MIDI file</source>
         <translation>Otevřít soubor MIDI</translation>
     </message>
@@ -1937,86 +1947,107 @@ repository</source>
         <translation>Nastavení přehrávání</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="352"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="378"/>
         <source>Tempo</source>
         <translation>Tempo</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="367"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="393"/>
         <source>The percussions (bank 128) are not transposed</source>
         <translation>Bicí nástroje (banka 128) se netransponují</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="101"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="112"/>
         <source>Channel</source>
         <translation>Kanál</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="101"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="112"/>
         <source>Soundfont</source>
         <translation>Zvuková banka</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="101"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="112"/>
         <source>Preset</source>
         <translation>Přednastavení</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="101"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="112"/>
         <source>Volume</source>
         <translation>Hlasitost</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="121"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="132"/>
         <source>Open a MIDI file to play it with the soundfonts that are open.</source>
         <translation>Otevřete soubor MIDI a přehrajte jej s otevřenými zvukovými bankami.</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="153"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="177"/>
         <source>MIDI files</source>
         <translation>Soubory MIDI</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="343"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="369"/>
         <source>Loop playback</source>
         <translation>Přehrávání ve smyčce</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="358"/>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="419"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="384"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="450"/>
         <source>%1%</source>
         <comment>percentage</comment>
         <translation>%1 %</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="359"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="385"/>
         <source>Pitch</source>
         <translation>Výška tónu</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="402"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="415"/>
+        <source>Export audio...</source>
+        <translation>Vyvést zvuk...</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="433"/>
         <source>Tempo of the file: %1 bpm, variable</source>
         <translation>Tempo souboru: %1 bpm, proměnlivé</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="402"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="433"/>
         <source>Tempo of the file: %1 bpm</source>
         <translation>Tempo souboru: %1 bpm</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="404"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="435"/>
         <source>File without tempo (SMPTE time code)</source>
         <translation>Soubor bez tempa (časový kód SMPTE)</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="463"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="494"/>
         <source>Pause</source>
         <translation>Pozastavit</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="463"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="494"/>
         <source>Play</source>
         <translation>Přehrát</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="573"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="608"/>
+        <source>Export audio</source>
+        <translation>Vyvést zvuk</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="576"/>
+        <source>Wav file</source>
+        <translation>Soubor .wav</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="647"/>
+        <source>Warning</source>
+        <translation>Pozor</translation>
     </message>
 </context>
 <context>
@@ -3400,6 +3431,21 @@ repository</source>
     </message>
 </context>
 <context>
+    <name>MidiFileRenderer</name>
+    <message>
+        <location filename="../../midi_player/midifilerenderer.cpp" line="115"/>
+        <location filename="../../midi_player/midifilerenderer.cpp" line="172"/>
+        <location filename="../../midi_player/midifilerenderer.cpp" line="197"/>
+        <source>Cannot write file &quot;%1&quot;.</source>
+        <translation>Nelze zapsat soubor &quot;%1&quot;.</translation>
+    </message>
+    <message>
+        <location filename="../../midi_player/midifilerenderer.cpp" line="142"/>
+        <source>The audio file cannot exceed 4 GB.</source>
+        <translation>Zvukový soubor nemůže přesáhnout 4 GB.</translation>
+    </message>
+</context>
+<context>
     <name>MidiPlayerChannel</name>
     <message>
         <location filename="../../midi_player/midiplayerchannel.cpp" line="136"/>
@@ -4668,7 +4714,7 @@ Upozornění: kvalita bude snížena a smyčka může být změněna</translatio
         <translation>Ikony</translation>
     </message>
     <message>
-        <location filename="../../repository/soundfontinformation.cpp" line="46"/>
+        <location filename="../../repository/soundfontinformation.cpp" line="48"/>
         <source>Unknown author</source>
         <translation>Neznámý autor</translation>
     </message>
@@ -4811,6 +4857,7 @@ Upozornění: kvalita bude snížena a smyčka může být změněna</translatio
     </message>
     <message>
         <location filename="../../core/utils.cpp" line="335"/>
+        <location filename="../../repository/browser/soundfontbrowser.cpp" line="80"/>
         <source>MB</source>
         <comment>megabytes</comment>
         <translation>MB</translation>
@@ -4880,89 +4927,99 @@ Obě divize musí sdílet stejné rozsahy not a dynamiky.</translation>
         <translation>nelze vytvořit soubor &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="107"/>
-        <location filename="../../main.cpp" line="193"/>
+        <location filename="../../main.cpp" line="111"/>
+        <location filename="../../main.cpp" line="255"/>
         <source>The file &quot;%1&quot; does not exist.</source>
         <translation>Soubor &quot;%1&quot; neexistuje.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="115"/>
-        <location filename="../../main.cpp" line="198"/>
+        <location filename="../../main.cpp" line="119"/>
+        <location filename="../../main.cpp" line="260"/>
         <source>The directory &quot;%1&quot; does not exist.</source>
         <translation>Adresář &quot;%1&quot; neexistuje.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="120"/>
+        <location filename="../../main.cpp" line="124"/>
         <source>The file &quot;%1&quot; already exists.</source>
         <translation>Soubor &quot;%1&quot; již existuje.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="125"/>
-        <location filename="../../main.cpp" line="214"/>
+        <location filename="../../main.cpp" line="129"/>
+        <location filename="../../main.cpp" line="201"/>
+        <location filename="../../main.cpp" line="286"/>
         <source>Loading file &quot;%1&quot;...</source>
         <translation>Načítá se soubor &quot;%1&quot;...</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="130"/>
-        <location filename="../../main.cpp" line="219"/>
+        <location filename="../../main.cpp" line="134"/>
+        <location filename="../../main.cpp" line="206"/>
+        <location filename="../../main.cpp" line="291"/>
         <source>Couldn&apos;t load file &quot;%1&quot;: %2.</source>
         <oldsource>Couldn&apos;t load &quot;%1&quot;: %2.</oldsource>
         <translation>Nepodařilo se načíst soubor &quot;%1&quot;: %2.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="136"/>
-        <location filename="../../main.cpp" line="225"/>
+        <location filename="../../main.cpp" line="140"/>
+        <location filename="../../main.cpp" line="212"/>
+        <location filename="../../main.cpp" line="297"/>
         <source>File successfully loaded!</source>
         <translation>Soubor úspěšně načten!</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="143"/>
         <location filename="../../main.cpp" line="147"/>
-        <location filename="../../main.cpp" line="160"/>
-        <location filename="../../main.cpp" line="229"/>
+        <location filename="../../main.cpp" line="151"/>
+        <location filename="../../main.cpp" line="164"/>
+        <location filename="../../main.cpp" line="234"/>
+        <location filename="../../main.cpp" line="301"/>
         <source>Writing file &quot;%1&quot;...</source>
         <translation>Zapisuje se soubor &quot;%1&quot;...</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="153"/>
         <location filename="../../main.cpp" line="157"/>
+        <location filename="../../main.cpp" line="161"/>
         <source>Writing files in directory &quot;%1&quot;...</source>
         <translation>Zapisují se soubory do adresáře &quot;%1&quot;...</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="163"/>
+        <location filename="../../main.cpp" line="167"/>
         <source>Unknown mode &quot;%1&quot;.</source>
         <translation>Neznámý režim &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="171"/>
-        <location filename="../../main.cpp" line="209"/>
-        <location filename="../../main.cpp" line="237"/>
+        <location filename="../../main.cpp" line="175"/>
+        <location filename="../../main.cpp" line="281"/>
+        <location filename="../../main.cpp" line="309"/>
         <source>An error occurred: %1.</source>
         <translation>Došlo k chybě: %1.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="176"/>
+        <location filename="../../main.cpp" line="180"/>
         <source>File successfully converted!</source>
         <translation>Soubor úspěšně převeden!</translation>
     </message>
     <message>
+        <location filename="../../main.cpp" line="221"/>
+        <source>Channel %1: no preset %2 in the soundfont, its notes are not played.</source>
+        <translation>Kanál %1: ve zvukové bance není přednastavení %2, jeho noty se nepřehrají.</translation>
+    </message>
+    <message>
         <location filename="../../main.cpp" line="240"/>
+        <location filename="../../main.cpp" line="312"/>
         <source>File successfully rendered!</source>
         <translation>Soubor úspěšně vykreslen!</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="253"/>
+        <location filename="../../main.cpp" line="325"/>
         <source>Previous configuration is now cleared.</source>
         <translation>Předchozí konfigurace je nyní vymazána.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="262"/>
+        <location filename="../../main.cpp" line="334"/>
         <source>See &quot;%1&quot; for more information.</source>
         <translation>Pro více informací viz &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="264"/>
+        <location filename="../../main.cpp" line="336"/>
         <source>Write &quot;%1&quot; to show usage.</source>
         <translation>Napište &quot;%1&quot; pro zobrazení použití.</translation>
     </message>
@@ -5137,122 +5194,122 @@ Obě divize musí sdílet stejné rozsahy not a dynamiky.</translation>
         <translation>osobní užití, nešířit změněnou verzi</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="339"/>
+        <location filename="../../repository/repositorymanager.cpp" line="349"/>
         <source>piano</source>
         <translation>klavír</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="342"/>
+        <location filename="../../repository/repositorymanager.cpp" line="352"/>
         <source>organ</source>
         <translation>varhany</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="345"/>
+        <location filename="../../repository/repositorymanager.cpp" line="355"/>
         <source>synthesizer</source>
         <translation>syntetizátor</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="348"/>
+        <location filename="../../repository/repositorymanager.cpp" line="358"/>
         <source>harpsichord</source>
         <translation>cembalo</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="351"/>
+        <location filename="../../repository/repositorymanager.cpp" line="361"/>
         <source>guitar</source>
         <translation>kytara</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="354"/>
+        <location filename="../../repository/repositorymanager.cpp" line="364"/>
         <source>bass</source>
         <translation>basa</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="357"/>
+        <location filename="../../repository/repositorymanager.cpp" line="367"/>
         <source>plucked strings</source>
         <translation>Strunné nástroje (drnkací)</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="360"/>
+        <location filename="../../repository/repositorymanager.cpp" line="370"/>
         <source>bowed strings</source>
         <translation>Strunné nástroje (smyčcové)</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="363"/>
+        <location filename="../../repository/repositorymanager.cpp" line="373"/>
         <source>flute</source>
         <translation>flétna</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="366"/>
+        <location filename="../../repository/repositorymanager.cpp" line="376"/>
         <source>reed</source>
         <translation>jazýčkové nástroje</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="369"/>
+        <location filename="../../repository/repositorymanager.cpp" line="379"/>
         <source>brass</source>
         <translation>žestě</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="372"/>
+        <location filename="../../repository/repositorymanager.cpp" line="382"/>
         <source>vocal</source>
         <translation>zpěv</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="375"/>
+        <location filename="../../repository/repositorymanager.cpp" line="385"/>
         <source>unpitched percussion</source>
         <translation>Bicí nástroje (neladěné)</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="378"/>
+        <location filename="../../repository/repositorymanager.cpp" line="388"/>
         <source>melodic percussion</source>
         <translation>melodické bicí</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="381"/>
+        <location filename="../../repository/repositorymanager.cpp" line="391"/>
         <source>sound effect</source>
         <translation>Zvukový efekt</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="384"/>
+        <location filename="../../repository/repositorymanager.cpp" line="394"/>
         <source>soundscape</source>
         <translation>zvuková krajina</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="387"/>
+        <location filename="../../repository/repositorymanager.cpp" line="397"/>
         <source>loop / rythm</source>
         <translation>smyčka/rytmus</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="390"/>
+        <location filename="../../repository/repositorymanager.cpp" line="400"/>
         <source>instrument set</source>
         <translation>sada nástrojů</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="393"/>
+        <location filename="../../repository/repositorymanager.cpp" line="403"/>
         <source>unclassifiable</source>
         <translation>nezařaditelné</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="400"/>
+        <location filename="../../repository/repositorymanager.cpp" line="410"/>
         <source>Category %1</source>
         <translation>Skupina %1</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="428"/>
+        <location filename="../../repository/repositorymanager.cpp" line="438"/>
         <source>Please wait...</source>
         <translation>Počkejte, prosím...</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="431"/>
+        <location filename="../../repository/repositorymanager.cpp" line="441"/>
         <source>Your account has been banned.</source>
         <translation>Váš účet byl zakázán.</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="436"/>
+        <location filename="../../repository/repositorymanager.cpp" line="446"/>
         <source>A Premium account allows you to browse and download all soundfonts available online.</source>
         <translation>Prémiový účet umožňuje procházet a stahovat všechny zvukové banky dostupné na internetu.</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="445"/>
+        <location filename="../../repository/repositorymanager.cpp" line="455"/>
         <source>Warning</source>
         <translation>Pozor</translation>
     </message>
@@ -5325,31 +5382,49 @@ Nelze stáhnout seznam</translation>
         <translation>Žádné výsledky</translation>
     </message>
     <message>
-        <location filename="../../repository/browser/soundfontbrowser.ui" line="527"/>
+        <location filename="../../repository/browser/soundfontbrowser.ui" line="467"/>
+        <source>Size</source>
+        <translation>Velikost</translation>
+    </message>
+    <message>
+        <location filename="../../repository/browser/soundfontbrowser.ui" line="542"/>
         <source>Go to the previous page</source>
         <translation>Přejít na předchozí stránku</translation>
     </message>
     <message>
-        <location filename="../../repository/browser/soundfontbrowser.ui" line="562"/>
+        <location filename="../../repository/browser/soundfontbrowser.ui" line="577"/>
         <source>Go to the next page</source>
         <translation>Přejít na další stránku</translation>
     </message>
     <message>
-        <location filename="../../repository/browser/soundfontbrowser.ui" line="652"/>
+        <location filename="../../repository/browser/soundfontbrowser.ui" line="667"/>
         <source>Oops! Cannot
 download the list</source>
         <translation>Ale, ale!
 Nelze stáhnout seznam</translation>
     </message>
     <message>
-        <location filename="../../repository/browser/soundfontbrowser.cpp" line="140"/>
+        <location filename="../../repository/browser/soundfontbrowser.cpp" line="81"/>
+        <source>All</source>
+        <translation>Všechny</translation>
+    </message>
+    <message>
+        <location filename="../../repository/browser/soundfontbrowser.cpp" line="148"/>
         <source>commercial use</source>
         <translation>Obchodní využití</translation>
     </message>
     <message>
-        <location filename="../../repository/browser/soundfontbrowser.cpp" line="141"/>
+        <location filename="../../repository/browser/soundfontbrowser.cpp" line="149"/>
         <source>share after editing</source>
         <translation>Sdílet po upravení</translation>
+    </message>
+</context>
+<context>
+    <name>SoundfontCellFull</name>
+    <message>
+        <location filename="../../repository/browser/soundfontcellfull.cpp" line="53"/>
+        <source>Downloads over the last 90 days</source>
+        <translation>Stahování za posledních 90 dní</translation>
     </message>
 </context>
 <context>
@@ -7862,7 +7937,7 @@ Jiné editory soundfontů mohou zobrazovat jiné jednotky.</translation>
         <translation>Zpracovává se...</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/waitingtooldialog.cpp" line="77"/>
+        <location filename="../../editor/tools/waitingtooldialog.cpp" line="82"/>
         <source>Canceling...</source>
         <translation>Ruší se...</translation>
     </message>

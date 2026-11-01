@@ -16,6 +16,7 @@ polyphone (2.7) UNRELEASED; urgency=low
   * (improvement) preset list filter / selection
   * (improvement) the soundfont explorer shows the files in columns sorted by clicking on their header, the columns and the preset summary can be hidden
   * (improvement) the sample, instrument or preset selected in the soundfont explorer can be played with the virtual keyboard or a MIDI keyboard
+  * (improvement) online repository: size of the soundfonts displayed and filtered, results sortable by trend (downloads over the last 90 days) or by size, keyword search also in the tags and attributes
   * (improvement) various ergonomic improvements
   * (fix) the calendar of the date field could appear when a soundfont was opened in the background
   * (fix) a soundfont opened again while it was still loading was opened in a second tab

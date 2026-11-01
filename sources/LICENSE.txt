@@ -46,6 +46,7 @@ At least the following icons are derived from and (c) Font Awesome:
 - resources/flag.svg
 - resources/forum.svg
 - resources/globe.svg
+- resources/hard-drive.svg
 - resources/home.svg
 - resources/html_editor/align-left.svg
 - resources/html_editor/bold.svg

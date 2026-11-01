@@ -33,8 +33,10 @@ SoundfontInformation::SoundfontInformation(int id, QString title) :
     _licenseFlags(LicenseFlag::NONE),
     _license(""),
     _downloadNumber(-1),
+    _trendingNumber(-1),
     _commentNumber(-1),
     _categoryId(-1),
+    _size(0),
     _rating(-1),
     _website("")
 {

@@ -407,19 +407,29 @@
         <translation>Data</translation>
     </message>
     <message>
-        <location filename="../../repository/browser/browsersortmenu.cpp" line="62"/>
+        <location filename="../../repository/browser/browsersortmenu.cpp" line="56"/>
+        <source>Trend</source>
+        <translation>Trend</translation>
+    </message>
+    <message>
+        <location filename="../../repository/browser/browsersortmenu.cpp" line="57"/>
         <source>Downloads</source>
         <translation>Pobrania</translation>
     </message>
     <message>
-        <location filename="../../repository/browser/browsersortmenu.cpp" line="69"/>
+        <location filename="../../repository/browser/browsersortmenu.cpp" line="58"/>
         <source>Rating score</source>
         <translation>Wynik ocen</translation>
     </message>
     <message>
-        <location filename="../../repository/browser/browsersortmenu.cpp" line="76"/>
+        <location filename="../../repository/browser/browsersortmenu.cpp" line="59"/>
         <source>Title (A→Z)</source>
         <translation>Tytuł (A→Z)</translation>
+    </message>
+    <message>
+        <location filename="../../repository/browser/browsersortmenu.cpp" line="60"/>
+        <source>Size</source>
+        <translation>Rozmiar</translation>
     </message>
 </context>
 <context>
@@ -1911,7 +1921,7 @@ online</translation>
     </message>
     <message>
         <location filename="../../dialogs/dialogmidiplayer.ui" line="72"/>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="152"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="176"/>
         <source>Open a MIDI file</source>
         <translation>Otwórz plik MIDI</translation>
     </message>
@@ -1926,86 +1936,107 @@ online</translation>
         <translation>Ustawienia odtwarzania</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="352"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="378"/>
         <source>Tempo</source>
         <translation>Tempo</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="367"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="393"/>
         <source>The percussions (bank 128) are not transposed</source>
         <translation>Perkusja (bank 128) nie jest transponowana</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="101"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="112"/>
         <source>Channel</source>
         <translation>Kanał</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="101"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="112"/>
         <source>Soundfont</source>
         <translation>SoundFont</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="101"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="112"/>
         <source>Preset</source>
         <translation>Preset</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="101"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="112"/>
         <source>Volume</source>
         <translation>Głośność</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="121"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="132"/>
         <source>Open a MIDI file to play it with the soundfonts that are open.</source>
         <translation>Otwórz plik MIDI, aby odtworzyć go z otwartymi SoundFontami.</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="153"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="177"/>
         <source>MIDI files</source>
         <translation>Pliki MIDI</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="343"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="369"/>
         <source>Loop playback</source>
         <translation>Odtwarzanie w pętli</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="358"/>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="419"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="384"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="450"/>
         <source>%1%</source>
         <comment>percentage</comment>
         <translation>%1%</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="359"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="385"/>
         <source>Pitch</source>
         <translation>Wysokość</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="402"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="415"/>
+        <source>Export audio...</source>
+        <translation>Eksportuj dźwięk...</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="433"/>
         <source>Tempo of the file: %1 bpm, variable</source>
         <translation>Tempo pliku: %1 bpm, zmienne</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="402"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="433"/>
         <source>Tempo of the file: %1 bpm</source>
         <translation>Tempo pliku: %1 bpm</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="404"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="435"/>
         <source>File without tempo (SMPTE time code)</source>
         <translation>Plik bez tempa (kod czasowy SMPTE)</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="463"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="494"/>
         <source>Pause</source>
         <translation>Wstrzymaj</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="463"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="494"/>
         <source>Play</source>
         <translation>Odtwórz</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="573"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="608"/>
+        <source>Export audio</source>
+        <translation>Eksportuj dźwięk</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="576"/>
+        <source>Wav file</source>
+        <translation>Plik WAV</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="647"/>
+        <source>Warning</source>
+        <translation>Uwaga</translation>
     </message>
 </context>
 <context>
@@ -3382,6 +3413,21 @@ online</translation>
         <location filename="../../midi_player/midifile.cpp" line="231"/>
         <source>The time division of this MIDI file is not valid.</source>
         <translation>Podział czasu w tym pliku MIDI jest nieprawidłowy.</translation>
+    </message>
+</context>
+<context>
+    <name>MidiFileRenderer</name>
+    <message>
+        <location filename="../../midi_player/midifilerenderer.cpp" line="115"/>
+        <location filename="../../midi_player/midifilerenderer.cpp" line="172"/>
+        <location filename="../../midi_player/midifilerenderer.cpp" line="197"/>
+        <source>Cannot write file &quot;%1&quot;.</source>
+        <translation>Nie można zapisać pliku &quot;%1&quot;.</translation>
+    </message>
+    <message>
+        <location filename="../../midi_player/midifilerenderer.cpp" line="142"/>
+        <source>The audio file cannot exceed 4 GB.</source>
+        <translation>Plik dźwiękowy nie może przekraczać 4 GB.</translation>
     </message>
 </context>
 <context>
@@ -4781,6 +4827,7 @@ Obydwa przedziały muszą mieć takie same zakresy klawiszy i sił klawiszy.</tr
     </message>
     <message>
         <location filename="../../core/utils.cpp" line="335"/>
+        <location filename="../../repository/browser/soundfontbrowser.cpp" line="80"/>
         <source>MB</source>
         <comment>megabytes</comment>
         <translation>MB</translation>
@@ -4798,7 +4845,7 @@ Obydwa przedziały muszą mieć takie same zakresy klawiszy i sił klawiszy.</tr
         <translation>TB</translation>
     </message>
     <message>
-        <location filename="../../repository/soundfontinformation.cpp" line="46"/>
+        <location filename="../../repository/soundfontinformation.cpp" line="48"/>
         <source>Unknown author</source>
         <translation>Autor nieznany</translation>
     </message>
@@ -4844,89 +4891,99 @@ Obydwa przedziały muszą mieć takie same zakresy klawiszy i sił klawiszy.</tr
         <translation>nie można utworzyć pliku &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="107"/>
-        <location filename="../../main.cpp" line="193"/>
+        <location filename="../../main.cpp" line="111"/>
+        <location filename="../../main.cpp" line="255"/>
         <source>The file &quot;%1&quot; does not exist.</source>
         <translation>Plik &quot;%1&quot; nie istnieje.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="115"/>
-        <location filename="../../main.cpp" line="198"/>
+        <location filename="../../main.cpp" line="119"/>
+        <location filename="../../main.cpp" line="260"/>
         <source>The directory &quot;%1&quot; does not exist.</source>
         <translation>Katalog &quot;%1&quot; nie istnieje.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="120"/>
+        <location filename="../../main.cpp" line="124"/>
         <source>The file &quot;%1&quot; already exists.</source>
         <translation>Plik &quot;%1&quot; już istnieje.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="125"/>
-        <location filename="../../main.cpp" line="214"/>
+        <location filename="../../main.cpp" line="129"/>
+        <location filename="../../main.cpp" line="201"/>
+        <location filename="../../main.cpp" line="286"/>
         <source>Loading file &quot;%1&quot;...</source>
         <translation>Ładowanie pliku &quot;%1&quot;...</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="130"/>
-        <location filename="../../main.cpp" line="219"/>
+        <location filename="../../main.cpp" line="134"/>
+        <location filename="../../main.cpp" line="206"/>
+        <location filename="../../main.cpp" line="291"/>
         <source>Couldn&apos;t load file &quot;%1&quot;: %2.</source>
         <oldsource>Couldn&apos;t load &quot;%1&quot;: %2.</oldsource>
         <translation>Nie można załadować pliku &quot;%1&quot;: %2.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="136"/>
-        <location filename="../../main.cpp" line="225"/>
+        <location filename="../../main.cpp" line="140"/>
+        <location filename="../../main.cpp" line="212"/>
+        <location filename="../../main.cpp" line="297"/>
         <source>File successfully loaded!</source>
         <translation>Plik załadowany pomyślnie!</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="143"/>
         <location filename="../../main.cpp" line="147"/>
-        <location filename="../../main.cpp" line="160"/>
-        <location filename="../../main.cpp" line="229"/>
+        <location filename="../../main.cpp" line="151"/>
+        <location filename="../../main.cpp" line="164"/>
+        <location filename="../../main.cpp" line="234"/>
+        <location filename="../../main.cpp" line="301"/>
         <source>Writing file &quot;%1&quot;...</source>
         <translation>Zapisywanie pliku &quot;%1&quot;...</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="153"/>
         <location filename="../../main.cpp" line="157"/>
+        <location filename="../../main.cpp" line="161"/>
         <source>Writing files in directory &quot;%1&quot;...</source>
         <translation>Zapisywanie plików w katalogu &quot;%1&quot;...</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="163"/>
+        <location filename="../../main.cpp" line="167"/>
         <source>Unknown mode &quot;%1&quot;.</source>
         <translation>Nieznany tryb &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="171"/>
-        <location filename="../../main.cpp" line="209"/>
-        <location filename="../../main.cpp" line="237"/>
+        <location filename="../../main.cpp" line="175"/>
+        <location filename="../../main.cpp" line="281"/>
+        <location filename="../../main.cpp" line="309"/>
         <source>An error occurred: %1.</source>
         <translation>Wystąpił błąd: %1.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="176"/>
+        <location filename="../../main.cpp" line="180"/>
         <source>File successfully converted!</source>
         <translation>Plik został pomyślnie przekonwertowany!</translation>
     </message>
     <message>
+        <location filename="../../main.cpp" line="221"/>
+        <source>Channel %1: no preset %2 in the soundfont, its notes are not played.</source>
+        <translation>Kanał %1: brak presetu %2 w pliku SoundFont, jego nuty nie są odtwarzane.</translation>
+    </message>
+    <message>
         <location filename="../../main.cpp" line="240"/>
+        <location filename="../../main.cpp" line="312"/>
         <source>File successfully rendered!</source>
         <translation>Plik został pomyślnie wyrenderowany!</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="253"/>
+        <location filename="../../main.cpp" line="325"/>
         <source>Previous configuration is now cleared.</source>
         <translation>Poprzednia konfiguracja została wyczyszczona.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="262"/>
+        <location filename="../../main.cpp" line="334"/>
         <source>See &quot;%1&quot; for more information.</source>
         <translation>Więcej informacji znajdziesz w &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="264"/>
+        <location filename="../../main.cpp" line="336"/>
         <source>Write &quot;%1&quot; to show usage.</source>
         <translation>Wpisz &quot;%1&quot;, aby wyświetlić użycie.</translation>
     </message>
@@ -5101,122 +5158,122 @@ Obydwa przedziały muszą mieć takie same zakresy klawiszy i sił klawiszy.</tr
         <translation>do użytku osobistego, nie rozpowszechniać zmodyfikowanej wersji</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="339"/>
+        <location filename="../../repository/repositorymanager.cpp" line="349"/>
         <source>piano</source>
         <translation>fortepian</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="342"/>
+        <location filename="../../repository/repositorymanager.cpp" line="352"/>
         <source>organ</source>
         <translation>organy</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="345"/>
+        <location filename="../../repository/repositorymanager.cpp" line="355"/>
         <source>synthesizer</source>
         <translation>syntezator</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="348"/>
+        <location filename="../../repository/repositorymanager.cpp" line="358"/>
         <source>harpsichord</source>
         <translation>klawesyn</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="351"/>
+        <location filename="../../repository/repositorymanager.cpp" line="361"/>
         <source>guitar</source>
         <translation>gitara</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="354"/>
+        <location filename="../../repository/repositorymanager.cpp" line="364"/>
         <source>bass</source>
         <translation>bas</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="357"/>
+        <location filename="../../repository/repositorymanager.cpp" line="367"/>
         <source>plucked strings</source>
         <translation>struny szarpane</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="360"/>
+        <location filename="../../repository/repositorymanager.cpp" line="370"/>
         <source>bowed strings</source>
         <translation>smyczkowy</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="363"/>
+        <location filename="../../repository/repositorymanager.cpp" line="373"/>
         <source>flute</source>
         <translation>flet</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="366"/>
+        <location filename="../../repository/repositorymanager.cpp" line="376"/>
         <source>reed</source>
         <translation>stroikowy</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="369"/>
+        <location filename="../../repository/repositorymanager.cpp" line="379"/>
         <source>brass</source>
         <translation>dęty blaszany</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="372"/>
+        <location filename="../../repository/repositorymanager.cpp" line="382"/>
         <source>vocal</source>
         <translation>wokalny</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="375"/>
+        <location filename="../../repository/repositorymanager.cpp" line="385"/>
         <source>unpitched percussion</source>
         <translation>niemelodyczna perkusja</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="378"/>
+        <location filename="../../repository/repositorymanager.cpp" line="388"/>
         <source>melodic percussion</source>
         <translation>melodyczna perkusja</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="381"/>
+        <location filename="../../repository/repositorymanager.cpp" line="391"/>
         <source>sound effect</source>
         <translation>efekt dźwiękowy</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="384"/>
+        <location filename="../../repository/repositorymanager.cpp" line="394"/>
         <source>soundscape</source>
         <translation>soundscape</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="387"/>
+        <location filename="../../repository/repositorymanager.cpp" line="397"/>
         <source>loop / rythm</source>
         <translation>pętla / rytm</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="390"/>
+        <location filename="../../repository/repositorymanager.cpp" line="400"/>
         <source>instrument set</source>
         <translation>zestaw instrumentów</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="393"/>
+        <location filename="../../repository/repositorymanager.cpp" line="403"/>
         <source>unclassifiable</source>
         <translation>nieklasyfikowany</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="400"/>
+        <location filename="../../repository/repositorymanager.cpp" line="410"/>
         <source>Category %1</source>
         <translation>Kategoria %1</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="428"/>
+        <location filename="../../repository/repositorymanager.cpp" line="438"/>
         <source>Please wait...</source>
         <translation>Proszę czekać...</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="431"/>
+        <location filename="../../repository/repositorymanager.cpp" line="441"/>
         <source>Your account has been banned.</source>
         <translation>Twoje konto zostało zablokowane.</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="436"/>
+        <location filename="../../repository/repositorymanager.cpp" line="446"/>
         <source>A Premium account allows you to browse and download all soundfonts available online.</source>
         <translation>Konto premium pozwala Ci na przeglądanie i pobieranie wszystkich SoundFontów dostępnych online.</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="445"/>
+        <location filename="../../repository/repositorymanager.cpp" line="455"/>
         <source>Warning</source>
         <translation>Uwaga</translation>
     </message>
@@ -5289,31 +5346,49 @@ pobrać listy</translation>
         <translation>Tagi</translation>
     </message>
     <message>
-        <location filename="../../repository/browser/soundfontbrowser.ui" line="527"/>
+        <location filename="../../repository/browser/soundfontbrowser.ui" line="467"/>
+        <source>Size</source>
+        <translation>Rozmiar</translation>
+    </message>
+    <message>
+        <location filename="../../repository/browser/soundfontbrowser.ui" line="542"/>
         <source>Go to the previous page</source>
         <translation>Cofnij do poprzedniej strony</translation>
     </message>
     <message>
-        <location filename="../../repository/browser/soundfontbrowser.ui" line="562"/>
+        <location filename="../../repository/browser/soundfontbrowser.ui" line="577"/>
         <source>Go to the next page</source>
         <translation>Idź do kolejnej strony</translation>
     </message>
     <message>
-        <location filename="../../repository/browser/soundfontbrowser.ui" line="652"/>
+        <location filename="../../repository/browser/soundfontbrowser.ui" line="667"/>
         <source>Oops! Cannot
 download the list</source>
         <translation>Ups! Nie można
 pobrać listy</translation>
     </message>
     <message>
-        <location filename="../../repository/browser/soundfontbrowser.cpp" line="140"/>
+        <location filename="../../repository/browser/soundfontbrowser.cpp" line="81"/>
+        <source>All</source>
+        <translation>Wszystkie</translation>
+    </message>
+    <message>
+        <location filename="../../repository/browser/soundfontbrowser.cpp" line="148"/>
         <source>commercial use</source>
         <translation>użycie komercyjne</translation>
     </message>
     <message>
-        <location filename="../../repository/browser/soundfontbrowser.cpp" line="141"/>
+        <location filename="../../repository/browser/soundfontbrowser.cpp" line="149"/>
         <source>share after editing</source>
         <translation>udostępnij po edycji</translation>
+    </message>
+</context>
+<context>
+    <name>SoundfontCellFull</name>
+    <message>
+        <location filename="../../repository/browser/soundfontcellfull.cpp" line="53"/>
+        <source>Downloads over the last 90 days</source>
+        <translation>Pobrania z ostatnich 90 dni</translation>
     </message>
 </context>
 <context>
@@ -7806,7 +7881,7 @@ Inne edytory SoundFontów mogą wyświetlać inne jednostki.</translation>
         <translation>Przetwarzanie...</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/waitingtooldialog.cpp" line="77"/>
+        <location filename="../../editor/tools/waitingtooldialog.cpp" line="82"/>
         <source>Canceling...</source>
         <translation>Anulowanie...</translation>
     </message>

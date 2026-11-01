@@ -47,40 +47,30 @@ BrowserSortMenu::BrowserSortMenu(QWidget *parent) :
 
     // Add a menu to the button
     int currentSort = ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "repository_sort", 0).toInt();
-    if (currentSort < 0 || currentSort > 3)
-        currentSort = 0;
+    if (currentSort < SORT_DATE || currentSort > SORT_SIZE)
+        currentSort = SORT_DATE;
     QMenu * menu = new QMenu(this);
     connect(menu, SIGNAL(aboutToHide()), this, SLOT(onMenuClosed()));
     menu->setStyleSheet(ContextManager::theme()->getMenuTheme());
-    QAction * action = menu->addAction(tr("Date"));
-    if (currentSort == 0)
-    {
-        action->setIcon(_checkIcon);
-        ui->pushButton->setText(action->text());
-    }
-    connect(action, SIGNAL(triggered()), this, SLOT(element1Clicked()));
-    action = menu->addAction(tr("Downloads"));
-    if (currentSort == 1)
-    {
-        action->setIcon(_checkIcon);
-        ui->pushButton->setText(action->text());
-    }
-    connect(action, SIGNAL(triggered()), this, SLOT(element2Clicked()));
-    action = menu->addAction(tr("Rating score"));
-    if (currentSort == 2)
-    {
-        action->setIcon(_checkIcon);
-        ui->pushButton->setText(action->text());
-    }
-    connect(action, SIGNAL(triggered()), this, SLOT(element3Clicked()));
-    action = menu->addAction(tr("Title (A→Z)"));
-    if (currentSort == 3)
-    {
-        action->setIcon(_checkIcon);
-        ui->pushButton->setText(action->text());
-    }
-    connect(action, SIGNAL(triggered()), this, SLOT(element4Clicked()));
+    addElement(menu, tr("Date"), SORT_DATE, currentSort);
+    addElement(menu, tr("Trend"), SORT_TRENDING, currentSort);
+    addElement(menu, tr("Downloads"), SORT_DOWNLOADS, currentSort);
+    addElement(menu, tr("Rating score"), SORT_RATING, currentSort);
+    addElement(menu, tr("Title (A→Z)"), SORT_TITLE, currentSort);
+    addElement(menu, tr("Size"), SORT_SIZE, currentSort);
     ui->pushButton->setMenu(menu);
+}
+
+void BrowserSortMenu::addElement(QMenu * menu, QString text, SortType sortType, int currentSort)
+{
+    QAction * action = menu->addAction(text);
+    action->setData(sortType);
+    if (currentSort == sortType)
+    {
+        action->setIcon(_checkIcon);
+        ui->pushButton->setText(action->text());
+    }
+    connect(action, &QAction::triggered, this, [this, sortType]() { elementClicked(sortType); });
 }
 
 BrowserSortMenu::~BrowserSortMenu()
@@ -88,45 +78,24 @@ BrowserSortMenu::~BrowserSortMenu()
     delete ui;
 }
 
-int BrowserSortMenu::currentIndex()
+BrowserSortMenu::SortType BrowserSortMenu::currentSort()
 {
     QList<QAction *> actions = ui->pushButton->menu()->actions();
-    for (int i = 0; i < actions.count(); i++)
+    foreach (QAction * action, actions)
     {
-        if (!actions[i]->icon().isNull())
-            return i;
+        if (!action->icon().isNull())
+            return static_cast<SortType>(action->data().toInt());
     }
-    return 0;
+    return SORT_DATE;
 }
 
-void BrowserSortMenu::element1Clicked()
+void BrowserSortMenu::elementClicked(SortType sortType)
 {
-    elementClicked(0);
-}
-
-void BrowserSortMenu::element2Clicked()
-{
-    elementClicked(1);
-}
-
-void BrowserSortMenu::element3Clicked()
-{
-    elementClicked(2);
-}
-
-void BrowserSortMenu::element4Clicked()
-{
-    elementClicked(3);
-}
-
-void BrowserSortMenu::elementClicked(int index)
-{
-    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "repository_sort", index);
+    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "repository_sort", sortType);
     QList<QAction *> actions = ui->pushButton->menu()->actions();
-    for (int i = 0; i < actions.count(); i++)
+    foreach (QAction * action, actions)
     {
-        QAction * action = actions[i];
-        if (i == index)
+        if (action->data().toInt() == sortType)
         {
             ui->pushButton->setText(action->text());
             action->setIcon(_checkIcon);
@@ -134,7 +103,7 @@ void BrowserSortMenu::elementClicked(int index)
         else
             action->setIcon(QIcon());
     }
-    emit currentIndexChanged(index);
+    emit sortChanged();
 }
 
 #if QT_VERSION >= 0x060000

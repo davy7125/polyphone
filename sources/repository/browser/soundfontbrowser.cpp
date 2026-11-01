@@ -76,6 +76,13 @@ SoundfontBrowser::SoundfontBrowser(QWidget *parent) : Tab(parent),
     ui->pushGoPrevious->setIcon(ContextManager::theme()->getColoredSvg(":/icons/arrow_left.svg", QSize(30, 30), ThemeManager::WINDOW_TEXT));
     ui->pushGoNext->setIcon(ContextManager::theme()->getColoredSvg(":/icons/arrow_right.svg", QSize(30, 30), ThemeManager::WINDOW_TEXT));
 
+    // Size limits (same units as the sizes displayed in the cells)
+    QString megabytes = QObject::tr("MB", "megabytes");
+    ui->comboSize->addItem(tr("All"), static_cast<qint64>(-1));
+    ui->comboSize->addItem("< 1 " + megabytes, static_cast<qint64>(1024 * 1024));
+    ui->comboSize->addItem("< 10 " + megabytes, static_cast<qint64>(10 * 1024 * 1024));
+    ui->comboSize->addItem("< 100 " + megabytes, static_cast<qint64>(100 * 1024 * 1024));
+
     // Connection with the repository manager
     RepositoryManager * rm = RepositoryManager::getInstance();
     connect(rm, SIGNAL(initializing()), this, SLOT(initialize()));
@@ -89,6 +96,7 @@ SoundfontBrowser::SoundfontBrowser(QWidget *parent) : Tab(parent),
     connect(ui->filterGenre, SIGNAL(selectionChanged()), this, SLOT(updateFilter()));
     connect(ui->filterMidiStandard, SIGNAL(selectionChanged()), this, SLOT(updateFilter()));
     connect(ui->filterTag, SIGNAL(selectionChanged()), this, SLOT(updateFilter()));
+    connect(ui->comboSize, SIGNAL(currentIndexChanged(int)), this, SLOT(updateFilter()));
     ui->lineSearch->installEventFilter(this);
 
     // Connection with the user manager
@@ -96,7 +104,7 @@ SoundfontBrowser::SoundfontBrowser(QWidget *parent) : Tab(parent),
             this, SLOT(userStatusChanged(UserManager::ConnectionState)));
 
     // Other connection
-    connect(ui->widgetSortMenu, SIGNAL(currentIndexChanged(int)), this, SLOT(onComboSortCurrentIndexChanged(int)));
+    connect(ui->widgetSortMenu, SIGNAL(sortChanged()), this, SLOT(onSortChanged()));
 }
 
 SoundfontBrowser::~SoundfontBrowser()
@@ -186,6 +194,10 @@ void SoundfontBrowser::applyFilter(SoundfontFilter * filter)
 
         // Tags
         ui->filterTag->select(filter->tags());
+
+        // Size
+        int sizeIndex = ui->comboSize->findData(filter->maxSize());
+        ui->comboSize->setCurrentIndex(sizeIndex == -1 ? 0 : sizeIndex);
     }
     else
     {
@@ -196,6 +208,7 @@ void SoundfontBrowser::applyFilter(SoundfontFilter * filter)
         ui->filterGenre->select(QStringList());
         ui->filterMidiStandard->select(QStringList());
         ui->filterTag->select(QStringList());
+        ui->comboSize->setCurrentIndex(0);
     }
     _loadingFilter = false;
 
@@ -238,6 +251,9 @@ SoundfontFilter * SoundfontBrowser::getFilter()
     // Tags
     filter->setTags(ui->filterTag->getSelection());
 
+    // Size
+    filter->setMaxSize(ui->comboSize->currentData().toLongLong());
+
     return filter;
 }
 
@@ -265,6 +281,11 @@ bool sortByDate(SoundfontInformation * si1, SoundfontInformation * si2)
     return si1->getDateTime() > si2->getDateTime();
 }
 
+bool sortByTrendingNumber(SoundfontInformation * si1, SoundfontInformation * si2)
+{
+    return si1->getTrendingNumber() > si2->getTrendingNumber();
+}
+
 bool sortByDownloads(SoundfontInformation * si1, SoundfontInformation * si2)
 {
     return si1->getDownloadNumber() > si2->getDownloadNumber();
@@ -280,22 +301,33 @@ bool sortByTitle(SoundfontInformation * si1, SoundfontInformation * si2)
     return Utils::naturalOrder(si1->getTitle().toLower(), si2->getTitle().toLower()) < 0;
 }
 
+bool sortBySize(SoundfontInformation * si1, SoundfontInformation * si2)
+{
+    return si1->getSize() > si2->getSize();
+}
+
 void SoundfontBrowser::updateSort()
 {
     // Sort
-    switch (ui->widgetSortMenu->currentIndex())
+    switch (ui->widgetSortMenu->currentSort())
     {
-    case 0:
+    case BrowserSortMenu::SORT_DATE:
         std::sort(_currentSoundfontInfos.begin(), _currentSoundfontInfos.end(), sortByDate);
         break;
-    case 1:
+    case BrowserSortMenu::SORT_TRENDING:
+        std::sort(_currentSoundfontInfos.begin(), _currentSoundfontInfos.end(), sortByTrendingNumber);
+        break;
+    case BrowserSortMenu::SORT_DOWNLOADS:
         std::sort(_currentSoundfontInfos.begin(), _currentSoundfontInfos.end(), sortByDownloads);
         break;
-    case 2:
+    case BrowserSortMenu::SORT_RATING:
         std::sort(_currentSoundfontInfos.begin(), _currentSoundfontInfos.end(), sortByScore);
         break;
-    case 3:
+    case BrowserSortMenu::SORT_TITLE:
         std::sort(_currentSoundfontInfos.begin(), _currentSoundfontInfos.end(), sortByTitle);
+        break;
+    case BrowserSortMenu::SORT_SIZE:
+        std::sort(_currentSoundfontInfos.begin(), _currentSoundfontInfos.end(), sortBySize);
         break;
     }
 
@@ -310,11 +342,12 @@ void SoundfontBrowser::updatePage()
     ui->pushGoPrevious->setEnabled(_currentPage > 0);
     ui->pushGoNext->setEnabled(_currentPage < (_currentSoundfontInfos.count() - 1) / ITEMS_PER_PAGE);
 
-    // Fill with the soundfonts
+    // Fill with the soundfonts (download numbers over the last 90 days if sorted by trend)
+    bool showTrendingNumber = (ui->widgetSortMenu->currentSort() == BrowserSortMenu::SORT_TRENDING);
     ui->listWidget->clear();
     for (int i = _currentPage * ITEMS_PER_PAGE; i < qMin((_currentPage + 1) * ITEMS_PER_PAGE, _currentSoundfontInfos.count()); i++)
     {
-        SoundfontCellFull * cell = new SoundfontCellFull(_currentSoundfontInfos[i], this);
+        SoundfontCellFull * cell = new SoundfontCellFull(_currentSoundfontInfos[i], showTrendingNumber, this);
         connect(cell, SIGNAL(itemClicked(SoundfontFilter*)), this, SLOT(applyFilter(SoundfontFilter*)));
 
         QListWidgetItem * item = new QListWidgetItem();
@@ -379,9 +412,8 @@ void SoundfontBrowser::on_listWidget_itemSelectionChanged()
     }
 }
 
-void SoundfontBrowser::onComboSortCurrentIndexChanged(int index)
+void SoundfontBrowser::onSortChanged()
 {
-    Q_UNUSED(index)
     updateSort();
 }
 

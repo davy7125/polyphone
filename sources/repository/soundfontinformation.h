@@ -67,6 +67,14 @@ public:
     void setDownloadNumber(int downloadNumber) { _downloadNumber = downloadNumber; }
     int getDownloadNumber() { return _downloadNumber; }
 
+    // Number of downloads over the last 90 days
+    void setTrendingNumber(int trendingNumber) { _trendingNumber = trendingNumber; }
+    int getTrendingNumber() { return _trendingNumber; }
+
+    // Size in bytes (0 if unknown)
+    void setSize(qint64 size) { _size = size; }
+    qint64 getSize() { return _size; }
+
     void setRating(double rating) { _rating = rating; }
     double getRating() { return _rating; }
 
@@ -94,7 +102,8 @@ private:
     QDateTime _dateTime;
     LicenseFlags _licenseFlags;
     QString _license;
-    int _downloadNumber, _commentNumber, _categoryId;
+    int _downloadNumber, _trendingNumber, _commentNumber, _categoryId;
+    qint64 _size;
     double _rating;
     QMap<Property, QStringList> _properties;
     QStringList _tags;
