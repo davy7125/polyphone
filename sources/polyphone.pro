@@ -479,6 +479,7 @@ SOURCES	+= main.cpp \
     midi_player/midifile.cpp \
     midi_player/midifileplayer.cpp \
     midi_player/midiplayerchannel.cpp \
+    midi_player/midiplayerdelegate.cpp \
     editor/tools/link_sample/toollinksample.cpp \
     editor/tools/unlink_sample/toolunlinksample.cpp \
     editor/tools/mono_conversion/toolmonoconversion.cpp \
@@ -907,6 +908,7 @@ HEADERS += \
     midi_player/midifile.h \
     midi_player/midifileplayer.h \
     midi_player/midiplayerchannel.h \
+    midi_player/midiplayerdelegate.h \
     editor/tools/link_sample/toollinksample.h \
     editor/tools/unlink_sample/toolunlinksample.h \
     editor/tools/mono_conversion/toolmonoconversion.h \

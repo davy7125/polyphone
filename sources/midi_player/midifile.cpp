@@ -89,6 +89,8 @@ static QString readText(const uchar * data, int length)
 
 MidiFile::MidiFile() :
     _duration(0),
+    _tempo(0),
+    _isTempoVariable(false),
     _usedChannels(0),
     _lastTick(0),
     _ticksPerQuarter(1),
@@ -118,6 +120,8 @@ bool MidiFile::read(const QByteArray &data)
     _rawEvents.clear();
     _tempos.clear();
     _duration = 0;
+    _tempo = 0;
+    _isTempoVariable = false;
     _usedChannels = 0;
     _lastTick = 0;
     for (int i = 0; i < 16; i++)
@@ -135,14 +139,19 @@ bool MidiFile::read(const QByteArray &data)
         qint64 declaredEnd = position + 8 + static_cast<qint64>(readBigEndian32(bytes + position + 4));
         if (memcmp(bytes + position, "MTrk", 4) == 0)
         {
+            // The length is trusted if it reaches the end of the data or the next track, otherwise (wrong length, often
+            // found) the track is read until its end event
+            bool isLengthValid = declaredEnd == size ||
+                                 (declaredEnd + 8 <= size && memcmp(bytes + declaredEnd, "MTrk", 4) == 0);
             quint64 lastTick;
-            int parsedEnd = readTrack(data, position + 8, declaredEnd, size, firstTick, lastTick);
+            int parsedEnd = readTrack(data, position + 8, isLengthValid ? static_cast<int>(declaredEnd) : size,
+                                      firstTick, lastTick);
 
             // With the format 2, the tracks are independent sequences played one after the other
             if (format == 2)
                 firstTick = lastTick;
 
-            position = getNextChunkPosition(data, size, declaredEnd, parsedEnd);
+            position = isLengthValid ? static_cast<int>(declaredEnd) : getNextChunkPosition(data, size, parsedEnd);
         }
         else if (isChunkId(bytes + position) && declaredEnd <= size)
         {
@@ -232,15 +241,9 @@ bool MidiFile::readHeader(const QByteArray &data, int &position, int &size, int 
     return true;
 }
 
-int MidiFile::readTrack(const QByteArray &data, int start, qint64 declaredEnd, int size, quint64 firstTick, quint64 &lastTick)
+int MidiFile::readTrack(const QByteArray &data, int start, int end, quint64 firstTick, quint64 &lastTick)
 {
     const uchar * bytes = reinterpret_cast<const uchar *>(data.constData());
-
-    // The length is trusted if it reaches the end of the data or another chunk, otherwise the track is read until its end
-    // event or the end of the data
-    bool isLengthValid = declaredEnd == size || (declaredEnd + 8 <= size && isChunkId(bytes + declaredEnd));
-    int end = isLengthValid ? static_cast<int>(declaredEnd) : size;
-
     quint64 tick = firstTick;
     lastTick = firstTick;
     quint8 runningStatus = 0;
@@ -331,7 +334,7 @@ int MidiFile::readTrack(const QByteArray &data, int start, qint64 declaredEnd, i
                 break;
             RawEvent event;
             event.tick = tick;
-            event.order = 0;
+            event.isAfterNoteOns = false;
             event.status = status;
             event.data1 = qMin(bytes[position], static_cast<uchar>(127));
             event.data2 = dataCount == 2 ? qMin(bytes[position + 1], static_cast<uchar>(127)) : 0;
@@ -364,16 +367,11 @@ int MidiFile::readTrack(const QByteArray &data, int start, qint64 declaredEnd, i
     return position;
 }
 
-int MidiFile::getNextChunkPosition(const QByteArray &data, int size, qint64 declaredEnd, int parsedEnd)
+int MidiFile::getNextChunkPosition(const QByteArray &data, int size, int parsedEnd)
 {
+    // Chunk after the events read (another track or a chunk that is not a track), otherwise the next track
     const uchar * bytes = reinterpret_cast<const uchar *>(data.constData());
-
-    // After the length of the track if it reaches the end of the data or another chunk
-    if (declaredEnd == size || (declaredEnd + 8 <= size && isChunkId(bytes + declaredEnd)))
-        return static_cast<int>(declaredEnd);
-
-    // Otherwise after the events read, or at the next track
-    if (parsedEnd + 8 <= size && memcmp(bytes + parsedEnd, "MTrk", 4) == 0)
+    if (parsedEnd + 8 <= size && isChunkId(bytes + parsedEnd))
         return parsedEnd;
     int next = static_cast<int>(data.indexOf("MTrk", parsedEnd));
     return next < 0 ? size : next;
@@ -386,41 +384,74 @@ void MidiFile::sortEvents()
         return a.tick < b.tick;
     });
 
-    // The notes of a key end in the order they started. A note off ending a note started earlier is moved before the
-    // note on of the same key written before it at the same tick: otherwise it would stop the new note. The note off of
-    // a note started at the same tick stays after its note on.
-    std::vector<std::deque<quint64>> startTicks(16 * 128);
-    std::vector<quint64> lastNoteOnTicks(16 * 128, static_cast<quint64>(-1));
-    std::vector<qint64> lastNoteOnOrders(16 * 128, 0);
+    // The notes of a key end in the order they started
+    std::vector<int> partners(_rawEvents.size(), -1); // Note on of a note off and conversely
+    std::vector<std::deque<int>> noteOnIndexes(16 * 128);
     for (int i = 0; i < _rawEvents.size(); i++)
     {
-        RawEvent &event = _rawEvents[i];
-        event.order = 2 * static_cast<qint64>(i);
+        const RawEvent &event = _rawEvents[i];
         int type = event.status & 0xF0;
         if (type != 0x80 && type != 0x90)
             continue;
 
-        int note = (event.status & 0x0F) * 128 + event.data1;
-        std::deque<quint64> &noteStartTicks = startTicks[note];
+        std::deque<int> &indexes = noteOnIndexes[(event.status & 0x0F) * 128 + event.data1];
         if (type == 0x90)
+            indexes.push_back(i);
+        else if (!indexes.empty())
         {
-            noteStartTicks.push_back(event.tick);
-            if (lastNoteOnTicks[note] != event.tick)
-            {
-                lastNoteOnTicks[note] = event.tick;
-                lastNoteOnOrders[note] = event.order;
-            }
-        }
-        else if (!noteStartTicks.empty())
-        {
-            if (noteStartTicks.front() < event.tick && lastNoteOnTicks[note] == event.tick)
-                event.order = lastNoteOnOrders[note] - 1;
-            noteStartTicks.pop_front();
+            partners[i] = indexes.front();
+            partners[indexes.front()] = i;
+            indexes.pop_front();
         }
     }
-    std::stable_sort(_rawEvents.begin(), _rawEvents.end(), [](const RawEvent &a, const RawEvent &b) {
-        return a.tick < b.tick || (a.tick == b.tick && a.order < b.order);
+
+    // Notes doubled (same channel, key and tick): only the longest one is kept, otherwise the end of the shortest one
+    // would stop it (a note without end being the longest)
+    std::vector<bool> isRemoved(_rawEvents.size(), false);
+    std::vector<int> lastNoteOnIndexes(16 * 128, -1);
+    auto getEnd = [&](int noteOnIndex) {
+        return partners[noteOnIndex] < 0 ? static_cast<quint64>(-1) : _rawEvents[partners[noteOnIndex]].tick;
+    };
+    for (int i = 0; i < _rawEvents.size(); i++)
+    {
+        const RawEvent &event = _rawEvents[i];
+        if ((event.status & 0xF0) != 0x90)
+            continue;
+
+        int &lastIndex = lastNoteOnIndexes[(event.status & 0x0F) * 128 + event.data1];
+        if (lastIndex >= 0 && _rawEvents[lastIndex].tick == event.tick)
+        {
+            int removedIndex = getEnd(i) > getEnd(lastIndex) ? lastIndex : i;
+            isRemoved[removedIndex] = true;
+            if (partners[removedIndex] >= 0)
+                isRemoved[partners[removedIndex]] = true;
+            if (removedIndex == lastIndex)
+                lastIndex = i;
+        }
+        else
+            lastIndex = i;
+    }
+
+    // At a same tick, the note ons come after the other events: the programs and controllers chosen for them (possibly
+    // written after them, or in another track), and the note offs ending earlier notes (if the note off of a note is
+    // written after the note on of the next note of the same key, it must not stop this new note). The note off of a
+    // note started at the same tick stays after its note on.
+    QVector<RawEvent> events;
+    events.reserve(_rawEvents.size());
+    for (int i = 0; i < _rawEvents.size(); i++)
+    {
+        if (isRemoved[i])
+            continue;
+        RawEvent event = _rawEvents[i];
+        int type = event.status & 0xF0;
+        event.isAfterNoteOns = type == 0x90 ||
+                               (type == 0x80 && (partners[i] < 0 || _rawEvents[partners[i]].tick == event.tick));
+        events << event;
+    }
+    std::stable_sort(events.begin(), events.end(), [](const RawEvent &a, const RawEvent &b) {
+        return a.tick < b.tick || (a.tick == b.tick && !a.isAfterNoteOns && b.isAfterNoteOns);
     });
+    _rawEvents = events;
 }
 
 void MidiFile::computeTimes()
@@ -429,6 +460,7 @@ void MidiFile::computeTimes()
     std::stable_sort(_tempos.begin(), _tempos.end(), [](const Tempo &a, const Tempo &b) {
         return a.tick < b.tick;
     });
+    quint32 microsecondsPerQuarter = 500000;
     double microsecondsPerTick = (_isSmpte ? 1000000.0 : 500000.0) / _ticksPerQuarter;
     quint64 segmentTick = 0;
     double segmentTime = 0;
@@ -439,13 +471,15 @@ void MidiFile::computeTimes()
         {
             segmentTime += static_cast<double>(_tempos[tempoIndex].tick - segmentTick) * microsecondsPerTick;
             segmentTick = _tempos[tempoIndex].tick;
-            microsecondsPerTick = _tempos[tempoIndex].microsecondsPerQuarter / _ticksPerQuarter;
+            microsecondsPerQuarter = _tempos[tempoIndex].microsecondsPerQuarter;
+            microsecondsPerTick = microsecondsPerQuarter / _ticksPerQuarter;
             tempoIndex++;
         }
         return std::llround(segmentTime + static_cast<double>(tick - segmentTick) * microsecondsPerTick);
     };
 
     _events.resize(_rawEvents.size());
+    bool isFirstNote = true;
     for (int i = 0; i < _rawEvents.size(); i++)
     {
         const RawEvent &rawEvent = _rawEvents[i];
@@ -454,6 +488,15 @@ void MidiFile::computeTimes()
         event.status = rawEvent.status;
         event.data1 = rawEvent.data1;
         event.data2 = rawEvent.data2;
+
+        // Tempo of the first note, possibly changed by the next tempo events
+        if (isFirstNote && (event.status & 0xF0) == 0x90 && !_isSmpte)
+        {
+            isFirstNote = false;
+            _tempo = 60000000.0 / microsecondsPerQuarter;
+            for (int j = tempoIndex; j < _tempos.size(); j++)
+                _isTempoVariable |= (_tempos[j].microsecondsPerQuarter != microsecondsPerQuarter);
+        }
     }
     _duration = getTime(_lastTick);
 }

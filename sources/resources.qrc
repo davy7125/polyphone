@@ -93,6 +93,7 @@
         <file alias="eye.svg">resources/eye.svg</file>
         <file alias="trash.svg">resources/trash.svg</file>
         <file alias="folder.svg">resources/folder.svg</file>
+        <file alias="gear.svg">resources/gear.svg</file>
     </qresource>
     <qresource prefix="/misc">
         <file>changelog</file>

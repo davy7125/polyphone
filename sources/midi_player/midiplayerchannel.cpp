@@ -23,138 +23,156 @@
 ***************************************************************************/
 
 #include "midiplayerchannel.h"
-#include <QGridLayout>
+#include <QTableWidget>
+#include <QHBoxLayout>
 #include <QLabel>
-#include <QComboBox>
-#include <QCheckBox>
 #include <QPushButton>
+#include <QToolButton>
+#include <QMenu>
+#include <QWidgetAction>
 #include <QApplication>
 #include <QRegularExpression>
 #include "midifileplayer.h"
+#include "midiplayerdelegate.h"
 #include "resettableslider.h"
+#include "modulatorcombosrc.h"
 #include "contextmanager.h"
 #include "soundfontmanager.h"
 
 MidiPlayerChannel::MidiPlayerChannel(MidiFilePlayer * player, int channel, QString name, QList<int> usedPrograms,
-                                     QGridLayout * layout, int row) : QObject(),
+                                     QTableWidget * table, int row) : QObject(),
     _player(player),
     _channel(channel),
     _usedPrograms(usedPrograms),
     _sf2Index(-1),
+    _forcedProgram(-1),
     _displayedProgram(-2),
     _noteCount(player->getNoteCount(channel)),
     _isLedOn(false)
 {
     // Led with the colors of the controller area, and red warning
+    ThemeManager * theme = ContextManager::theme();
     QMap<QString, QString> replacement;
-    replacement["border1"] = ContextManager::theme()->getColor(ThemeManager::BORDER).darker(130).name();
-    replacement["border2"] = ContextManager::theme()->getColor(ThemeManager::BORDER).name();
-    replacement["color1"] = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).darker(130).name();
-    replacement["color2"] = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name();
-    _ledOn = ContextManager::theme()->getColoredSvg(":/icons/led.svg", QSize(16, 16), replacement);
+    replacement["border1"] = theme->getColor(ThemeManager::BORDER).darker(130).name();
+    replacement["border2"] = theme->getColor(ThemeManager::BORDER).name();
+    replacement["color1"] = theme->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).darker(130).name();
+    replacement["color2"] = theme->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name();
+    _ledOn = theme->getColoredSvg(":/icons/led.svg", QSize(16, 16), replacement);
     replacement["color1"] = replacement["border1"];
     replacement["color2"] = replacement["border2"];
-    _ledOff = ContextManager::theme()->getColoredSvg(":/icons/led.svg", QSize(16, 16), replacement);
+    _ledOff = theme->getColoredSvg(":/icons/led.svg", QSize(16, 16), replacement);
     QMap<QString, QString> warningReplacement;
-    warningReplacement["currentColor"] = ContextManager::theme()->getFixedColor(
-                                                              ThemeManager::FixedColorType::RED, ThemeManager::WINDOW_BACKGROUND).name();
-    _warning = ContextManager::theme()->getColoredSvg(":/icons/warning.svg", QSize(16, 16), warningReplacement);
+    warningReplacement["currentColor"] = theme->getFixedColor(ThemeManager::FixedColorType::RED, ThemeManager::LIST_BACKGROUND).name();
+    _warning = theme->getColoredSvg(":/icons/warning.svg", QSize(16, 16), warningReplacement);
 
+    // Channel: number (with the name of its track as tooltip), then mute, solo and the MIDI values, flat and separated by
+    // vertical lines as the buttons of the status bar of the virtual keyboard
+    QColor text = theme->getColor(ThemeManager::LIST_TEXT);
+    QColor highlighted = theme->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
+    QColor dimmed = ThemeManager::mix(theme->getColor(ThemeManager::LIST_BACKGROUND), text, 0.45);
+    QColor hover = ThemeManager::mix(theme->getColor(ThemeManager::LIST_BACKGROUND), highlighted, 0.2);
+    QString buttonStyle = "QPushButton,QToolButton{border:0;border-left:1px solid " + theme->getColor(ThemeManager::BORDER).name() +
+                          ";background:transparent;padding:0;color:" + dimmed.name() + "}" +
+                          "QPushButton:checked{color:" + highlighted.name() + ";font-weight:bold}" +
+                          "QPushButton:hover,QToolButton:hover,QToolButton:pressed{background-color:" + hover.name() + "}" +
+                          "QToolButton::menu-indicator{width:0px;image:url(:/misc/transparent.png)}";
+    QWidget * widgetChannel = new QWidget();
+    QHBoxLayout * layoutChannel = new QHBoxLayout(widgetChannel);
+    layoutChannel->setContentsMargins(6, 0, 0, 0);
+    layoutChannel->setSpacing(0);
+    QLabel * labelNumber = new QLabel(QString::number(channel + 1));
+    labelNumber->setMinimumWidth(30);
+    labelNumber->setToolTip(name);
+    layoutChannel->addWidget(labelNumber);
+
+    _pushMute = new QPushButton(tr("M", "short for Mute"));
+    _pushMute->setToolTip(tr("Mute"));
+    _pushMute->setCursor(Qt::PointingHandCursor);
+    _pushSolo = new QPushButton(tr("S", "short for Solo"));
+    _pushSolo->setToolTip(tr("Solo"));
+    _pushSolo->setCursor(Qt::PointingHandCursor);
+    foreach (QPushButton * button, QList<QPushButton *>() << _pushMute << _pushSolo)
+    {
+        button->setCheckable(true);
+        button->setFocusPolicy(Qt::NoFocus);
+        button->setFixedWidth(30);
+        button->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
+        button->setStyleSheet(buttonStyle);
+        layoutChannel->addWidget(button);
+    }
+
+    // Current MIDI values, in a menu as the information of the soundfont page
+    QToolButton * toolButtonMidi = new QToolButton();
+    toolButtonMidi->setIcon(theme->getColoredSvg(":/icons/MIDI.svg", QSize(16, 16), ThemeManager::HIGHLIGHTED_BACKGROUND));
+    toolButtonMidi->setToolTip(tr("MIDI values"));
+    toolButtonMidi->setFocusPolicy(Qt::NoFocus);
+    toolButtonMidi->setFixedWidth(30);
+    toolButtonMidi->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
+    toolButtonMidi->setStyleSheet(buttonStyle);
+    toolButtonMidi->setPopupMode(QToolButton::InstantPopup);
+    toolButtonMidi->setCursor(Qt::PointingHandCursor);
+    _menuMidi = new QMenu(toolButtonMidi);
+    _menuMidi->setStyleSheet(theme->getMenuTheme());
+    _labelMidi = new QLabel();
+    _labelMidi->setStyleSheet("QLabel{padding:10px 15px;color:" + text.name() + "}");
+    QWidgetAction * actionMidi = new QWidgetAction(_menuMidi);
+    actionMidi->setDefaultWidget(_labelMidi);
+    _menuMidi->addAction(actionMidi);
+    toolButtonMidi->setMenu(_menuMidi);
+    layoutChannel->addWidget(toolButtonMidi);
+    connect(_menuMidi, SIGNAL(aboutToShow()), this, SLOT(updateMidiValues()));
+
+    // Soundfont and preset, edited by MidiPlayerDelegate
+    _itemSoundfont = new QTableWidgetItem();
+    _itemPreset = new QTableWidgetItem();
+
+    // Volume and activity
+    QWidget * widgetVolume = new QWidget();
+    QHBoxLayout * layoutVolume = new QHBoxLayout(widgetVolume);
+    layoutVolume->setContentsMargins(6, 0, 6, 0);
+    layoutVolume->setSpacing(6);
     _labelLed = new QLabel();
     _labelLed->setPixmap(_ledOff);
     _labelLed->setToolTip(tr("Activity"));
-
-    _labelChannel = new QLabel(QString::number(channel + 1));
-    _labelChannel->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-
-    _labelName = new QLabel();
-    _labelName->setFixedWidth(110);
-    _labelName->setText(_labelName->fontMetrics().elidedText(name, Qt::ElideRight, _labelName->width()));
-    _labelName->setToolTip(name);
-
-    _comboSoundfont = new QComboBox();
-    _comboSoundfont->setSizeAdjustPolicy(QComboBox::AdjustToMinimumContentsLengthWithIcon);
-    _comboSoundfont->setMinimumContentsLength(16);
-
-    _checkForced = new QCheckBox();
-    _checkForced->setToolTip(tr("Force a bank and a preset, otherwise they are chosen by the MIDI file"));
-
-    _comboPreset = new QComboBox();
-    _comboPreset->setSizeAdjustPolicy(QComboBox::AdjustToMinimumContentsLengthWithIcon);
-    _comboPreset->setMinimumContentsLength(22);
-    _comboPreset->setEnabled(false);
-
-    _labelWarning = new QLabel();
-    _labelWarning->setFixedSize(16, 16);
-
     _sliderVolume = new ResettableSlider();
     _sliderVolume->setOrientation(Qt::Horizontal);
     _sliderVolume->setRange(-40, 10);
     _sliderVolume->setValue(0);
     _sliderVolume->setFixedWidth(100);
+    _sliderVolume->setFocusPolicy(Qt::NoFocus);
     _sliderVolume->setToolTip(tr("Volume"));
-
     _labelVolume = new QLabel();
-    _labelVolume->setMinimumWidth(50);
-    _labelVolume->setAlignment(Qt::AlignCenter);
+    _labelVolume->setMinimumWidth(45);
+    _labelVolume->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
     onVolumeChanged(0);
+    layoutVolume->addWidget(_labelLed);
+    layoutVolume->addWidget(_sliderVolume);
+    layoutVolume->addWidget(_labelVolume);
 
-    _pushMute = new QPushButton(tr("M", "short for Mute"));
-    _pushMute->setCheckable(true);
-    _pushMute->setFixedWidth(28);
-    _pushMute->setFocusPolicy(Qt::NoFocus);
-    _pushMute->setToolTip(tr("Mute"));
+    // The cells with widgets are not edited
+    foreach (int column, QList<int>() << MidiPlayerDelegate::COLUMN_CHANNEL << MidiPlayerDelegate::COLUMN_VOLUME)
+    {
+        QTableWidgetItem * item = new QTableWidgetItem();
+        item->setFlags(Qt::ItemIsEnabled);
+        table->setItem(row, column, item);
+    }
+    table->setCellWidget(row, MidiPlayerDelegate::COLUMN_CHANNEL, widgetChannel);
+    table->setItem(row, MidiPlayerDelegate::COLUMN_SOUNDFONT, _itemSoundfont);
+    table->setItem(row, MidiPlayerDelegate::COLUMN_PRESET, _itemPreset);
+    table->setCellWidget(row, MidiPlayerDelegate::COLUMN_VOLUME, widgetVolume);
 
-    _pushSolo = new QPushButton(tr("S", "short for Solo"));
-    _pushSolo->setCheckable(true);
-    _pushSolo->setFixedWidth(28);
-    _pushSolo->setFocusPolicy(Qt::NoFocus);
-    _pushSolo->setToolTip(tr("Solo"));
-
-    layout->addWidget(_labelLed, row, 0);
-    layout->addWidget(_labelChannel, row, 1);
-    layout->addWidget(_labelName, row, 2);
-    layout->addWidget(_comboSoundfont, row, 3);
-    layout->addWidget(_checkForced, row, 4);
-    layout->addWidget(_comboPreset, row, 5);
-    layout->addWidget(_labelWarning, row, 6);
-    layout->addWidget(_sliderVolume, row, 7);
-    layout->addWidget(_labelVolume, row, 8);
-    layout->addWidget(_pushMute, row, 9);
-    layout->addWidget(_pushSolo, row, 10);
-
-    updateSoundfontList();
-    connect(_comboSoundfont, SIGNAL(currentIndexChanged(int)), this, SLOT(onSoundfontChanged(int)));
-    connect(_checkForced, SIGNAL(toggled(bool)), this, SLOT(onForcedToggled(bool)));
-    connect(_comboPreset, SIGNAL(currentIndexChanged(int)), this, SLOT(onPresetChanged(int)));
     connect(_sliderVolume, SIGNAL(valueChanged(int)), this, SLOT(onVolumeChanged(int)));
     connect(_pushMute, SIGNAL(toggled(bool)), this, SIGNAL(mixChanged()));
     connect(_pushSolo, SIGNAL(toggled(bool)), this, SIGNAL(mixChanged()));
 }
 
-MidiPlayerChannel::~MidiPlayerChannel()
-{
-    delete _labelLed;
-    delete _labelChannel;
-    delete _labelName;
-    delete _comboSoundfont;
-    delete _checkForced;
-    delete _comboPreset;
-    delete _labelWarning;
-    delete _sliderVolume;
-    delete _labelVolume;
-    delete _pushMute;
-    delete _pushSolo;
-}
-
-void MidiPlayerChannel::updateSoundfontList()
+QList<QPair<QString, int> > MidiPlayerChannel::getSoundfontChoices()
 {
     // "None" and the soundfonts that are open, named as their tab
+    QList<QPair<QString, int> > choices;
+    choices << QPair<QString, int>(tr("None"), -1);
     SoundfontManager * sm = SoundfontManager::getInstance();
     static QRegularExpression reg("(/|\\\\)");
-    _comboSoundfont->blockSignals(true);
-    _comboSoundfont->clear();
-    _comboSoundfont->addItem(tr("None"), -1);
     EltID idSf2(elementSf2);
     foreach (int sf2Index, sm->getSiblings(idSf2))
     {
@@ -168,45 +186,52 @@ void MidiPlayerChannel::updateSoundfontList()
             name = sm->getQstr(idSf2, champ_filenameInitial).split(reg).last();
         if (name.isEmpty())
             name = tr("Untitled");
-        _comboSoundfont->addItem(name, sf2Index);
+        choices << QPair<QString, int>(name, sf2Index);
     }
-    int index = _comboSoundfont->findData(_sf2Index);
-    _comboSoundfont->setCurrentIndex(index < 0 ? 0 : index);
-    _comboSoundfont->blockSignals(false);
-
-    // The soundfont has been closed
-    if (index < 0)
-        applySoundfont(-1);
+    return choices;
 }
 
 void MidiPlayerChannel::setSoundfont(int sf2Index)
 {
-    int index = _comboSoundfont->findData(sf2Index);
-    _comboSoundfont->blockSignals(true);
-    _comboSoundfont->setCurrentIndex(index < 0 ? 0 : index);
-    _comboSoundfont->blockSignals(false);
-    applySoundfont(index < 0 ? -1 : sf2Index);
-}
+    // A soundfont that is not open is "None"
+    QList<QPair<QString, int> > choices = getSoundfontChoices();
+    QString name = choices.first().first;
+    bool isFound = false;
+    for (int i = 0; i < choices.count() && !isFound; i++)
+    {
+        if (choices[i].second == sf2Index)
+        {
+            name = choices[i].first;
+            isFound = true;
+        }
+    }
+    _sf2Index = isFound ? sf2Index : -1;
+    _itemSoundfont->setText(name);
 
-void MidiPlayerChannel::onSoundfontChanged(int index)
-{
-    applySoundfont(_comboSoundfont->itemData(index).toInt());
-}
-
-void MidiPlayerChannel::applySoundfont(int sf2Index)
-{
-    _sf2Index = sf2Index;
-    _player->setSoundfont(_channel, sf2Index);
-    _checkForced->setEnabled(sf2Index >= 0);
-    _comboPreset->setEnabled(sf2Index >= 0 && _checkForced->isChecked());
+    _player->setSoundfont(_channel, _sf2Index);
     updatePresetList();
     loadSamples();
+}
+
+void MidiPlayerChannel::updateSoundfont()
+{
+    // Possibly a new name, or the soundfont has been closed
+    QList<QPair<QString, int> > choices = getSoundfontChoices();
+    for (int i = 0; i < choices.count(); i++)
+    {
+        if (choices[i].second == _sf2Index)
+        {
+            _itemSoundfont->setText(choices[i].first);
+            return;
+        }
+    }
+    setSoundfont(-1);
 }
 
 void MidiPlayerChannel::updatePresetList()
 {
     // Presets of the soundfont, by bank and preset numbers
-    QList<QPair<int, QString> > presets;
+    _presets.clear();
     if (_sf2Index >= 0)
     {
         SoundfontManager * sm = SoundfontManager::getInstance();
@@ -214,102 +239,71 @@ void MidiPlayerChannel::updatePresetList()
         foreach (int presetIndex, sm->getSiblings(idPrst))
         {
             idPrst.indexElt = presetIndex;
-            presets << QPair<int, QString>(sm->get(idPrst, champ_wBank).wValue * 128 + sm->get(idPrst, champ_wPreset).wValue,
-                                           sm->getQstr(idPrst, champ_name));
+            _presets << QPair<int, QString>(sm->get(idPrst, champ_wBank).wValue * 128 + sm->get(idPrst, champ_wPreset).wValue,
+                                            sm->getQstr(idPrst, champ_name));
         }
-        std::sort(presets.begin(), presets.end(), [](const QPair<int, QString> &a, const QPair<int, QString> &b) {
+        std::sort(_presets.begin(), _presets.end(), [](const QPair<int, QString> &a, const QPair<int, QString> &b) {
             return a.first < b.first;
         });
     }
 
-    // The forced program is kept if possible, otherwise it is the first one
-    bool isForced = _checkForced->isChecked();
-    int previousProgram = getForcedProgram();
-    _comboPreset->blockSignals(true);
-    _comboPreset->clear();
-    for (int i = 0; i < presets.count(); i++)
-        _comboPreset->addItem(getProgramText(presets[i].first) + " " + presets[i].second, presets[i].first);
-    if (isForced)
+    // A forced program that the soundfont does not have is replaced by its first preset (by "auto" without preset)
+    if (_forcedProgram >= 0 && !hasPreset(_forcedProgram))
     {
-        int index = _comboPreset->findData(previousProgram);
-        _comboPreset->setCurrentIndex(index < 0 ? 0 : index);
-    }
-    _comboPreset->blockSignals(false);
-
-    if (isForced)
-    {
-        int program = getForcedProgram();
-        _player->setForcedProgram(_channel, true, program);
-        if (program != previousProgram)
-            loadSamples();
-    }
-    else
-        displayFileProgram(_player->getFileProgram(_channel));
-}
-
-void MidiPlayerChannel::onForcedToggled(bool isChecked)
-{
-    _comboPreset->setEnabled(isChecked && _sf2Index >= 0);
-    if (isChecked)
-    {
-        // Program of the file if the soundfont has it, otherwise the first one
-        _comboPreset->blockSignals(true);
-        if (_comboPreset->count() > 0 && _comboPreset->itemData(0, Qt::UserRole + 1).toBool())
-            _comboPreset->removeItem(0);
-        int index = _comboPreset->findData(_player->getFileProgram(_channel));
-        _comboPreset->setCurrentIndex(index < 0 ? 0 : index);
-        _comboPreset->blockSignals(false);
-        _labelWarning->setPixmap(QPixmap());
-        _labelWarning->setToolTip("");
-        _displayedProgram = -2;
-
-        _player->setForcedProgram(_channel, true, getForcedProgram());
-        loadSamples();
-    }
-    else
-    {
-        _player->setForcedProgram(_channel, false, -1);
-        displayFileProgram(_player->getFileProgram(_channel));
-    }
-}
-
-void MidiPlayerChannel::onPresetChanged(int index)
-{
-    Q_UNUSED(index)
-    if (!_checkForced->isChecked())
+        setForcedProgram(_presets.isEmpty() ? -1 : _presets.first().first);
         return;
-    _player->setForcedProgram(_channel, true, getForcedProgram());
+    }
+    updatePresetText();
+}
+
+QList<QPair<QString, int> > MidiPlayerChannel::getPresetChoices()
+{
+    // "Auto" with the preset chosen by the file, then the presets of the soundfont
+    QList<QPair<QString, int> > choices;
+    choices << QPair<QString, int>(tr("Auto (%1)").arg(getPresetText(_player->getFileProgram(_channel))), -1);
+    for (int i = 0; i < _presets.count(); i++)
+        choices << QPair<QString, int>(getProgramText(_presets[i].first) + " " + _presets[i].second, _presets[i].first);
+    return choices;
+}
+
+void MidiPlayerChannel::setForcedProgram(int program)
+{
+    _forcedProgram = program;
+    _player->setForcedProgram(_channel, program >= 0, program);
+    updatePresetText();
     loadSamples();
 }
 
-int MidiPlayerChannel::getForcedProgram()
+void MidiPlayerChannel::updatePresetText()
 {
-    if (!_checkForced->isChecked() || _comboPreset->currentIndex() < 0)
-        return -1;
-    return _comboPreset->currentData().toInt();
+    // Forced preset, or "auto" with the preset chosen by the file and a warning if the soundfont does not have it
+    bool isMissing = false;
+    if (_forcedProgram >= 0)
+        _itemPreset->setText(getPresetText(_forcedProgram));
+    else
+    {
+        _displayedProgram = _player->getFileProgram(_channel);
+        _itemPreset->setText(tr("Auto (%1)").arg(getPresetText(_displayedProgram)));
+        isMissing = _sf2Index >= 0 && !hasPreset(_displayedProgram);
+    }
+    _itemPreset->setIcon(isMissing ? QIcon(_warning) : QIcon());
+    _itemPreset->setToolTip(isMissing ? tr("The soundfont has no preset with this bank and this number: the notes are not played.") : "");
 }
 
-void MidiPlayerChannel::displayFileProgram(int program)
+QString MidiPlayerChannel::getPresetText(int program)
 {
-    // A program that the soundfont does not have is displayed by a first item, with a warning
-    _displayedProgram = program;
-    _comboPreset->blockSignals(true);
-    if (_comboPreset->count() > 0 && _comboPreset->itemData(0, Qt::UserRole + 1).toBool())
-        _comboPreset->removeItem(0);
-    int index = _comboPreset->findData(program);
-    bool isMissing = (index < 0);
-    if (isMissing)
-    {
-        _comboPreset->insertItem(0, getProgramText(program), program);
-        _comboPreset->setItemData(0, true, Qt::UserRole + 1);
-        index = 0;
-    }
-    _comboPreset->setCurrentIndex(index);
-    _comboPreset->blockSignals(false);
+    for (int i = 0; i < _presets.count(); i++)
+        if (_presets[i].first == program)
+            return getProgramText(program) + " " + _presets[i].second;
+    return getProgramText(program);
+}
 
-    isMissing &= (_sf2Index >= 0);
-    _labelWarning->setPixmap(isMissing ? _warning : QPixmap());
-    _labelWarning->setToolTip(isMissing ? tr("The soundfont has no preset with this bank and this number: the notes are not played.") : "");
+bool MidiPlayerChannel::hasPreset(int program)
+{
+    for (int i = 0; i < _presets.count(); i++)
+        if (_presets[i].first == program)
+            return true;
+    return false;
 }
 
 void MidiPlayerChannel::updateState()
@@ -329,11 +323,51 @@ void MidiPlayerChannel::updateState()
     }
 
     // Program chosen by the file
-    if (!_checkForced->isChecked())
+    if (_forcedProgram < 0 && _player->getFileProgram(_channel) != _displayedProgram)
+        updatePresetText();
+
+    // MIDI values, if they are displayed
+    if (_menuMidi->isVisible())
+        updateMidiValues();
+}
+
+void MidiPlayerChannel::updateMidiValues()
+{
+    // Controllers that are not at their default value, except the bank (displayed with the preset), the parameter
+    // numbers with their data (RPN, NRPN) and the channel mode messages
+    MidiProcessor * states = _player->getChannelStates();
+    QString labelStyle = "padding-right:15px;color:" + ThemeManager::mix(
+                             ContextManager::theme()->getColor(ThemeManager::LIST_TEXT),
+                             ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND), 0.4).name();
+    QString rowPattern = "<tr><td style=\"" + labelStyle + "\">%1</td><td align=\"right\">%2</td></tr>";
+    QString rows;
+    for (int number = 1; number < 120; number++)
     {
-        int program = _player->getFileProgram(_channel);
-        if (program != _displayedProgram)
-            displayFileProgram(program);
+        if (number == 6 || number == 32 || number == 38 || (number >= 96 && number <= 101))
+            continue;
+        int value = states->getControllerValue(_channel, number);
+        if (value != states->getDefaultControllerValue(_channel, number))
+            rows += rowPattern.arg(ModulatorComboSrc::getIndexName(number, true), QString::number(value));
+    }
+
+    // Pitch wheel in semitones, its sensitivity and the channel pressure
+    float sensitivity = states->getBendSensitivityValue(_channel);
+    float bend = states->getBendValue(_channel);
+    if (bend != 0.0f)
+        rows += rowPattern.arg(ModulatorComboSrc::getIndexName(14, false),
+                               (bend > 0 ? "+" : "") + QLocale().toString(bend * sensitivity, 'f', 2) + " " + tr("semitones"));
+    if (sensitivity != 2.0f)
+        rows += rowPattern.arg(ModulatorComboSrc::getIndexName(16, false),
+                               QLocale().toString(sensitivity, 'g', 4) + " " + tr("semitones"));
+    int pressure = states->getMonoPressure(_channel);
+    if (pressure != 0)
+        rows += rowPattern.arg(ModulatorComboSrc::getIndexName(13, false), QString::number(pressure));
+
+    QString text = rows.isEmpty() ? tr("All controllers are at their default value.") : "<table>" + rows + "</table>";
+    if (text != _labelMidi->text())
+    {
+        _labelMidi->setText(text);
+        _menuMidi->adjustSize();
     }
 }
 
@@ -360,8 +394,8 @@ void MidiPlayerChannel::loadSamples()
     if (_sf2Index < 0)
         return;
     QList<int> programs;
-    if (_checkForced->isChecked())
-        programs << getForcedProgram();
+    if (_forcedProgram >= 0)
+        programs << _forcedProgram;
     else
         programs = _usedPrograms;
 

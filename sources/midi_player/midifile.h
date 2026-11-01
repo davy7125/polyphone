@@ -38,7 +38,9 @@
 // * running status kept after a meta or a system exclusive event, system exclusive event without a valid length,
 // * tempo changes in any track, null tempo,
 // * end of track long after the song in a track without notes (tempo track ending at 2^18 - 1 ticks for instance),
-// * note off written after the note on of the next note of the same key at the same time.
+// * note off written after the note on of the next note of the same key at the same time,
+// * program or controller written after the notes it is for at the same time, possibly in another track,
+// * notes doubled (same channel, key and time), the shortest one stopping the longest one.
 // A track stops at data bytes without status. The system exclusive events are ignored, as well as the MIDI ports (all
 // tracks play the same 16 channels).
 class MidiFile
@@ -67,6 +69,10 @@ public:
     // Duration (microseconds): last event or end of a track having notes
     qint64 getDuration() const { return _duration; }
 
+    // Tempo of the first note (beats per minute, 0 with a SMPTE division), and whether the tempo changes afterwards
+    double getTempo() const { return _tempo; }
+    bool isTempoVariable() const { return _isTempoVariable; }
+
     // Channels having notes (0 to 15), and their name if a track has the notes of one channel
     bool isChannelUsed(int channel) const { return channel >= 0 && channel < 16 && (_usedChannels & (1 << channel)); }
     QString getChannelName(int channel) const { return channel >= 0 && channel < 16 ? _channelNames[channel] : ""; }
@@ -75,7 +81,7 @@ private:
     struct RawEvent
     {
         quint64 tick;
-        qint64 order; // Order of the events of a same tick
+        bool isAfterNoteOns; // Among the events of a same tick
         quint8 status;
         quint8 data1;
         quint8 data2;
@@ -88,14 +94,16 @@ private:
     };
 
     bool readHeader(const QByteArray &data, int &position, int &size, int &format);
-    int readTrack(const QByteArray &data, int start, qint64 declaredEnd, int size, quint64 firstTick, quint64 &lastTick);
-    int getNextChunkPosition(const QByteArray &data, int size, qint64 declaredEnd, int parsedEnd);
+    int readTrack(const QByteArray &data, int start, int end, quint64 firstTick, quint64 &lastTick);
+    int getNextChunkPosition(const QByteArray &data, int size, int parsedEnd);
     void sortEvents();
     void computeTimes();
 
     QString _error;
     QVector<Event> _events;
     qint64 _duration;
+    double _tempo;
+    bool _isTempoVariable;
     quint16 _usedChannels;
     QString _channelNames[16];
 

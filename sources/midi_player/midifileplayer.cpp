@@ -67,6 +67,7 @@ MidiFilePlayer::MidiFilePlayer(Synth * synth, ISynthSoundfonts * soundfonts, QRe
     _isPlaying(false),
     _isLooping(false),
     _startPosition(0),
+    _speed(1.0),
     _preparationRequired(false),
     _fastRelease(false),
     _releaseRequired(false),
@@ -80,7 +81,10 @@ MidiFilePlayer::MidiFilePlayer(Synth * synth, ISynthSoundfonts * soundfonts, QRe
         _forcedPrograms[i] = 0;
         _filePrograms[i] = getDefaultProgram(i);
         _noteCounts[i] = 0;
+        for (int key = 0; key < 128; key++)
+            _playedKeys[i][key] = -1;
     }
+    _transposition = 0;
     _processor.setListener(this);
     _thread = std::thread(&MidiFilePlayer::run, this);
 }
@@ -183,7 +187,25 @@ qint64 MidiFilePlayer::getPositionLocked()
 {
     if (!_isPlaying)
         return _startPosition;
-    return _startPosition + std::chrono::duration_cast<std::chrono::microseconds>(Clock::now() - _startTime).count();
+    return _startPosition + static_cast<qint64>(
+               _speed * std::chrono::duration_cast<std::chrono::microseconds>(Clock::now() - _startTime).count());
+}
+
+void MidiFilePlayer::setSpeed(double speed)
+{
+    {
+        // The position is kept
+        std::lock_guard<std::mutex> lock(_mutex);
+        _startPosition = getPositionLocked();
+        _startTime = Clock::now();
+        _speed = speed;
+    }
+    _condition.notify_one();
+}
+
+void MidiFilePlayer::setTransposition(int semitones)
+{
+    _transposition = semitones;
 }
 
 void MidiFilePlayer::setSoundfont(int channel, int sf2Index)
@@ -319,7 +341,8 @@ void MidiFilePlayer::run()
 
         // Wait for the next event, the end of the file or a change
         qint64 nextTime = _nextEventIndex < events.size() ? events[_nextEventIndex].time : _currentFile->getDuration();
-        _condition.wait_until(lock, _startTime + std::chrono::microseconds(nextTime - _startPosition));
+        _condition.wait_until(lock, _startTime + std::chrono::microseconds(
+                                        static_cast<qint64>(static_cast<double>(nextTime - _startPosition) / _speed)));
     }
 }
 
@@ -411,7 +434,11 @@ void MidiFilePlayer::dispatch(const MidiFile::Event &event)
 void MidiFilePlayer::releaseAll(bool fastRelease)
 {
     for (int channel = 0; channel < 16; channel++)
+    {
         _synth->releaseChannel(MIDI_FILE_CHANNEL_OFFSET + channel, fastRelease);
+        for (int key = 0; key < 128; key++)
+            _playedKeys[channel][key] = -1;
+    }
 }
 
 bool MidiFilePlayer::processKey(int channel, int key, int vel)
@@ -422,8 +449,13 @@ bool MidiFilePlayer::processKey(int channel, int key, int vel)
 
     if (vel == 0)
     {
-        // Released whatever the preset playing the key
-        _synth->play(EltID(elementPrst), MIDI_FILE_CHANNEL_OFFSET + channel, key, 0);
+        // Key released whatever the preset playing it, with the transposition it had when it started
+        int playedKey = _playedKeys[channel][key];
+        if (playedKey >= 0)
+        {
+            _playedKeys[channel][key] = -1;
+            _synth->play(EltID(elementPrst), MIDI_FILE_CHANNEL_OFFSET + channel, playedKey, 0);
+        }
         return true;
     }
     _noteCounts[channel]++;
@@ -432,18 +464,29 @@ bool MidiFilePlayer::processKey(int channel, int key, int vel)
     int program = _isForced[channel] ? _forcedPrograms[channel].load() : _filePrograms[channel].load();
     if (sf2Index < 0 || program < 0)
         return true;
+
+    // Transposition, except for the percussions
+    int playedKey = key;
+    if (program / 128 != 128)
+        playedKey += _transposition;
+    if (playedKey < 0 || playedKey > 127)
+        return true;
+
     QMutexLocker locker(_mutexSoundfonts);
     ISynthSoundfont * soundfont = _soundfonts->getSynthSoundfont(sf2Index);
     int presetIndex = soundfont == nullptr ? -1 : SynthMidi::findPreset(soundfont, program / 128, program % 128);
     if (presetIndex >= 0)
-        _synth->play(EltID(elementPrst, sf2Index, presetIndex), MIDI_FILE_CHANNEL_OFFSET + channel, key, vel);
+    {
+        _playedKeys[channel][key] = playedKey;
+        _synth->play(EltID(elementPrst, sf2Index, presetIndex), MIDI_FILE_CHANNEL_OFFSET + channel, playedKey, vel);
+    }
     return true;
 }
 
 bool MidiFilePlayer::processPolyPressureChanged(int channel, int key, int pressure)
 {
-    if (channel >= 0 && channel < 16)
-        _synth->processPolyPressureChanged(MIDI_FILE_CHANNEL_OFFSET + channel, key, pressure);
+    if (channel >= 0 && channel < 16 && _playedKeys[channel][key] >= 0)
+        _synth->processPolyPressureChanged(MIDI_FILE_CHANNEL_OFFSET + channel, _playedKeys[channel][key], pressure);
     return true;
 }
 

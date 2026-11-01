@@ -9,7 +9,7 @@
         <translation>未处理</translation>
     </message>
     <message>
-        <location filename="../../core/input/abstractinputparser.cpp" line="94"/>
+        <location filename="../../core/input/abstractinputparser.cpp" line="95"/>
         <source>This file is already open.</source>
         <translation>该文件已打开。</translation>
     </message>
@@ -1908,58 +1908,100 @@ repository</source>
         <translation>MIDI 播放器</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.ui" line="59"/>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="118"/>
+        <location filename="../../dialogs/dialogmidiplayer.ui" line="72"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="152"/>
         <source>Open a MIDI file</source>
         <translation>打开 MIDI 文件</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.ui" line="118"/>
+        <location filename="../../dialogs/dialogmidiplayer.ui" line="178"/>
         <source>Stop</source>
         <translation>停止</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.ui" line="149"/>
-        <source>Loop</source>
-        <translation>循环播放</translation>
+        <location filename="../../dialogs/dialogmidiplayer.ui" line="209"/>
+        <source>Playback settings</source>
+        <translation>播放设置</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="72"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="352"/>
+        <source>Tempo</source>
+        <translation>速度</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="367"/>
+        <source>The percussions (bank 128) are not transposed</source>
+        <translation>打击乐（库 128）不移调</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="101"/>
         <source>Channel</source>
         <translation>通道</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="72"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="101"/>
         <source>Soundfont</source>
         <translation>音色库</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="72"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="101"/>
         <source>Preset</source>
         <translation>预设</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="72"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="101"/>
         <source>Volume</source>
         <translation>音量</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="88"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="121"/>
         <source>Open a MIDI file to play it with the soundfonts that are open.</source>
         <translation>打开一个 MIDI 文件，使用已打开的音色库播放。</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="119"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="153"/>
         <source>MIDI files</source>
         <translation>MIDI 文件</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="275"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="343"/>
+        <source>Loop playback</source>
+        <translation>循环播放</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="358"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="419"/>
+        <source>%1%</source>
+        <comment>percentage</comment>
+        <translation>%1%</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="359"/>
+        <source>Pitch</source>
+        <translation>音高</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="402"/>
+        <source>Tempo of the file: %1 bpm, variable</source>
+        <translation>文件速度：%1 bpm，可变</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="402"/>
+        <source>Tempo of the file: %1 bpm</source>
+        <translation>文件速度：%1 bpm</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="404"/>
+        <source>File without tempo (SMPTE time code)</source>
+        <translation>无速度的文件（SMPTE 时间码）</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="463"/>
         <source>Pause</source>
         <translation>暂停</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="275"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="463"/>
         <source>Play</source>
         <translation>播放</translation>
     </message>
@@ -3294,23 +3336,23 @@ repository</source>
 <context>
     <name>MidiFile</name>
     <message>
-        <location filename="../../midi_player/midifile.cpp" line="103"/>
+        <location filename="../../midi_player/midifile.cpp" line="105"/>
         <source>Cannot read file &quot;%1&quot;.</source>
         <translation>无法读取文件 &quot;%1&quot;。</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midifile.cpp" line="108"/>
-        <location filename="../../midi_player/midifile.cpp" line="203"/>
+        <location filename="../../midi_player/midifile.cpp" line="110"/>
+        <location filename="../../midi_player/midifile.cpp" line="212"/>
         <source>This is not a MIDI file.</source>
         <translation>这不是 MIDI 文件。</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midifile.cpp" line="163"/>
+        <location filename="../../midi_player/midifile.cpp" line="172"/>
         <source>This MIDI file contains no notes.</source>
         <translation>此 MIDI 文件不包含音符。</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midifile.cpp" line="222"/>
+        <location filename="../../midi_player/midifile.cpp" line="231"/>
         <source>The time division of this MIDI file is not valid.</source>
         <translation>此 MIDI 文件的时间分辨率无效。</translation>
     </message>
@@ -3318,59 +3360,76 @@ repository</source>
 <context>
     <name>MidiPlayerChannel</name>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="65"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="136"/>
         <source>Activity</source>
         <translation>活动</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="80"/>
-        <source>Force a bank and a preset, otherwise they are chosen by the MIDI file</source>
-        <translation>强制指定库和预设，否则由 MIDI 文件选择</translation>
-    </message>
-    <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="95"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="143"/>
         <source>Volume</source>
         <translation>音量</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="102"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="88"/>
         <source>M</source>
         <comment>short for Mute</comment>
         <translation>M</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="106"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="89"/>
         <source>Mute</source>
         <translation>静音</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="108"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="91"/>
         <source>S</source>
         <comment>short for Solo</comment>
         <translation>S</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="112"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="92"/>
         <source>Solo</source>
         <translation>独奏</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="157"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="107"/>
+        <source>MIDI values</source>
+        <translation>MIDI 值</translation>
+    </message>
+    <message>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="173"/>
         <source>None</source>
         <translation>无</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="170"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="188"/>
         <source>Untitled</source>
         <translation>未命名</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="312"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="263"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="286"/>
+        <source>Auto (%1)</source>
+        <translation>自动 (%1)</translation>
+    </message>
+    <message>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="290"/>
         <source>The soundfont has no preset with this bank and this number: the notes are not played.</source>
         <translation>该音色库中没有此库号和编号的预设：这些音符不会被播放。</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="342"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="358"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="361"/>
+        <source>semitones</source>
+        <translation>半音</translation>
+    </message>
+    <message>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="366"/>
+        <source>All controllers are at their default value.</source>
+        <translation>所有控制器均为默认值。</translation>
+    </message>
+    <message>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="376"/>
         <source>dB</source>
         <comment>unit for decibels</comment>
         <translation>分贝</translation>

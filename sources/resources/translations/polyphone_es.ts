@@ -9,7 +9,7 @@
         <translation>aún no procesado</translation>
     </message>
     <message>
-        <location filename="../../core/input/abstractinputparser.cpp" line="94"/>
+        <location filename="../../core/input/abstractinputparser.cpp" line="95"/>
         <source>This file is already open.</source>
         <translation>Este archivo ya está abierto.</translation>
     </message>
@@ -1921,58 +1921,100 @@ en línea</translation>
         <translation>Reproductor MIDI</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.ui" line="59"/>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="118"/>
+        <location filename="../../dialogs/dialogmidiplayer.ui" line="72"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="152"/>
         <source>Open a MIDI file</source>
         <translation>Abrir un archivo MIDI</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.ui" line="118"/>
+        <location filename="../../dialogs/dialogmidiplayer.ui" line="178"/>
         <source>Stop</source>
         <translation>Detener</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.ui" line="149"/>
-        <source>Loop</source>
-        <translation>Bucle</translation>
+        <location filename="../../dialogs/dialogmidiplayer.ui" line="209"/>
+        <source>Playback settings</source>
+        <translation>Opciones de reproducción</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="72"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="352"/>
+        <source>Tempo</source>
+        <translation>Tempo</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="367"/>
+        <source>The percussions (bank 128) are not transposed</source>
+        <translation>Las percusiones (banco 128) no se transportan</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="101"/>
         <source>Channel</source>
         <translation>Canal</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="72"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="101"/>
         <source>Soundfont</source>
         <translation>Soundfont</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="72"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="101"/>
         <source>Preset</source>
         <translation>Conjunto</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="72"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="101"/>
         <source>Volume</source>
         <translation>Volumen</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="88"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="121"/>
         <source>Open a MIDI file to play it with the soundfonts that are open.</source>
         <translation>Abra un archivo MIDI para reproducirlo con los soundfonts abiertos.</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="119"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="153"/>
         <source>MIDI files</source>
         <translation>Archivos MIDI</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="275"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="343"/>
+        <source>Loop playback</source>
+        <translation>Reproducción en bucle</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="358"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="419"/>
+        <source>%1%</source>
+        <comment>percentage</comment>
+        <translation>%1 %</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="359"/>
+        <source>Pitch</source>
+        <translation>Tono</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="402"/>
+        <source>Tempo of the file: %1 bpm, variable</source>
+        <translation>Tempo del archivo: %1 bpm, variable</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="402"/>
+        <source>Tempo of the file: %1 bpm</source>
+        <translation>Tempo del archivo: %1 bpm</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="404"/>
+        <source>File without tempo (SMPTE time code)</source>
+        <translation>Archivo sin tempo (código de tiempo SMPTE)</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="463"/>
         <source>Pause</source>
         <translation>Pausa</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="275"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="463"/>
         <source>Play</source>
         <translation>Reproducir</translation>
     </message>
@@ -3327,23 +3369,23 @@ en línea</translation>
 <context>
     <name>MidiFile</name>
     <message>
-        <location filename="../../midi_player/midifile.cpp" line="103"/>
+        <location filename="../../midi_player/midifile.cpp" line="105"/>
         <source>Cannot read file &quot;%1&quot;.</source>
         <translation>No se puede leer el archivo &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midifile.cpp" line="108"/>
-        <location filename="../../midi_player/midifile.cpp" line="203"/>
+        <location filename="../../midi_player/midifile.cpp" line="110"/>
+        <location filename="../../midi_player/midifile.cpp" line="212"/>
         <source>This is not a MIDI file.</source>
         <translation>Este no es un archivo MIDI.</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midifile.cpp" line="163"/>
+        <location filename="../../midi_player/midifile.cpp" line="172"/>
         <source>This MIDI file contains no notes.</source>
         <translation>Este archivo MIDI no contiene notas.</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midifile.cpp" line="222"/>
+        <location filename="../../midi_player/midifile.cpp" line="231"/>
         <source>The time division of this MIDI file is not valid.</source>
         <translation>La división de tiempo de este archivo MIDI no es válida.</translation>
     </message>
@@ -3351,59 +3393,76 @@ en línea</translation>
 <context>
     <name>MidiPlayerChannel</name>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="65"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="136"/>
         <source>Activity</source>
         <translation>Actividad</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="80"/>
-        <source>Force a bank and a preset, otherwise they are chosen by the MIDI file</source>
-        <translation>Forzar un banco y un conjunto; si no, los elige el archivo MIDI</translation>
-    </message>
-    <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="95"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="143"/>
         <source>Volume</source>
         <translation>Volumen</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="102"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="88"/>
         <source>M</source>
         <comment>short for Mute</comment>
         <translation>M</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="106"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="89"/>
         <source>Mute</source>
         <translation>Silenciar</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="108"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="91"/>
         <source>S</source>
         <comment>short for Solo</comment>
         <translation>S</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="112"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="92"/>
         <source>Solo</source>
         <translation>Solo</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="157"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="107"/>
+        <source>MIDI values</source>
+        <translation>Valores MIDI</translation>
+    </message>
+    <message>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="173"/>
         <source>None</source>
         <translation>Ninguno</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="170"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="188"/>
         <source>Untitled</source>
         <translation>Sin nombre</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="312"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="263"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="286"/>
+        <source>Auto (%1)</source>
+        <translation>Auto (%1)</translation>
+    </message>
+    <message>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="290"/>
         <source>The soundfont has no preset with this bank and this number: the notes are not played.</source>
         <translation>El soundfont no tiene ningún conjunto con este banco y este número: las notas no se reproducen.</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="342"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="358"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="361"/>
+        <source>semitones</source>
+        <translation>semitonos</translation>
+    </message>
+    <message>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="366"/>
+        <source>All controllers are at their default value.</source>
+        <translation>Todos los controladores tienen su valor predeterminado.</translation>
+    </message>
+    <message>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="376"/>
         <source>dB</source>
         <comment>unit for decibels</comment>
         <translation>dB</translation>

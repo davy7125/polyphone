@@ -28,6 +28,13 @@
 #include <QFileInfo>
 #include <QFileDialog>
 #include <QKeyEvent>
+#include <QHeaderView>
+#include <QMenu>
+#include <QWidgetAction>
+#include <QGridLayout>
+#include <QCheckBox>
+#include <QScreen>
+#include <QLabel>
 #include "contextmanager.h"
 #include "soundfontmanager.h"
 #include "soundfonts.h"
@@ -36,15 +43,25 @@
 #include "midifile.h"
 #include "midifileplayer.h"
 #include "midiplayerchannel.h"
+#include "midiplayerdelegate.h"
 #include "editortoolbar.h"
 #include "player.h"
+#include "resettableslider.h"
 
 DialogMidiPlayer::DialogMidiPlayer(QWidget *parent) :
     QDialog(parent, Qt::Tool | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint),
     ui(new Ui::DialogMidiPlayer),
     _stateUpdate(true),
     _isPlaying(false),
-    _updatingSlider(false)
+    _updatingSlider(false),
+    _speed(1.0),
+    _sliderTempo(nullptr),
+    _sliderPitch(nullptr),
+    _labelTempoTitle(nullptr),
+    _labelTempo(nullptr),
+    _labelPitch(nullptr),
+    _labelLoop(nullptr),
+    _checkLoop(nullptr)
 {
     ui->setupUi(this);
 
@@ -52,46 +69,63 @@ DialogMidiPlayer::DialogMidiPlayer(QWidget *parent) :
     SoundfontManager * sm = SoundfontManager::getInstance();
     Synth * synth = ContextManager::audio()->getSynth();
     _player = new MidiFilePlayer(synth, sm->getSoundfonts(), sm->getMutex());
-    synth->setMidiFileValues(_player->getMidiValues());
+    synth->setMidiFileValues(_player->getChannelStates());
 
-    // Icons, the loop being lit when it is enabled
-    ui->pushOpen->setIcon(ContextManager::theme()->getColoredSvg(":/icons/folder.svg", QSize(28, 28), ThemeManager::WINDOW_TEXT));
-    ui->pushStop->setIcon(ContextManager::theme()->getColoredSvg(":/icons/recorder_stop.svg", QSize(32, 32), ThemeManager::WINDOW_TEXT));
-    QIcon loopIcon;
-    loopIcon.addPixmap(ContextManager::theme()->getColoredSvg(":/icons/reload.svg", QSize(24, 24), ThemeManager::HIGHLIGHTED_BACKGROUND),
-                       QIcon::Normal, QIcon::On);
-    QMap<QString, QString> replacement;
-    replacement["currentColor"] = ThemeManager::mix(ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND),
-                                                    ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT), 0.4).name();
-    loopIcon.addPixmap(ContextManager::theme()->getColoredSvg(":/icons/reload.svg", QSize(24, 24), replacement), QIcon::Normal, QIcon::Off);
-    ui->pushLoop->setIcon(loopIcon);
+    // Banner with the colors of the status bar of the virtual keyboard, its buttons being as the ones of the editor
+    // toolbar (lighter icon when hovered, arrow for the menu)
+    ThemeManager * theme = ContextManager::theme();
+    QColor bannerColor = theme->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
+    QColor bannerTextColor = theme->getColor(ThemeManager::HIGHLIGHTED_TEXT);
+    ui->frameTop->setStyleSheet("QFrame#frameTop{background-color:" + bannerColor.name() + "}" +
+                                "QLabel{color:" + bannerTextColor.name() + "}" +
+                                "QToolButton{border:0;background:transparent}" +
+                                "QToolButton#toolButtonSettings{padding-right:6px}" +
+                                "QToolButton::menu-indicator{image:url(:/icons/arrow_down.svg);height:12px;width:12px}" +
+                                "QSlider::groove:horizontal{height:4px;border-radius:2px;background:" +
+                                ThemeManager::mix(bannerColor, bannerTextColor, 0.35).name() + "}" +
+                                "QSlider::sub-page:horizontal{border-radius:2px;background:" + bannerTextColor.name() + "}" +
+                                "QSlider::handle:horizontal{width:12px;margin:-4px 0;border-radius:6px;background:" +
+                                bannerTextColor.name() + "}");
+    ui->pushOpen->setIcon(getBannerIcon(":/icons/folder.svg", 24));
+    ui->pushStop->setIcon(getBannerIcon(":/icons/recorder_stop.svg", 28));
+    ui->toolButtonSettings->setIcon(getBannerIcon(":/icons/gear.svg", 24));
     updatePlayPauseIcon(false);
+    initializeSettingsMenu();
 
-    // Titles of the channel columns
-    QStringList titles;
-    titles << tr("Channel") << tr("Soundfont") << tr("Preset") << tr("Volume");
-    QList<int> columns, spans;
-    columns << 1 << 3 << 4 << 7;
-    spans << 2 << 1 << 3 << 2;
-    for (int i = 0; i < titles.count(); i++)
-    {
-        QLabel * label = new QLabel(titles[i]);
-        QFont font = label->font();
-        font.setBold(true);
-        label->setFont(font);
-        ui->gridChannels->addWidget(label, 0, columns[i], 1, spans[i]);
-    }
-    ui->gridChannels->setColumnStretch(5, 1);
+    // Table of the channels, in the style of the tables of the editor but its edges being the ones of the window: no
+    // border, and no line on the right side of the last column and at the bottom of the last row (grid drawn by
+    // MidiPlayerDelegate). A list opens with a click on the selected cell or with a double click.
+    QTableWidget * table = ui->tableChannels;
+    table->setItemDelegate(new MidiPlayerDelegate(_channels, table));
+    table->setColumnCount(4);
+    table->setHorizontalHeaderLabels(QStringList() << tr("Channel") << tr("Soundfont") << tr("Preset") << tr("Volume"));
+    table->setStyleSheet(theme->getTableTheme() + "QTableWidget{border:0}QHeaderView::section:last{border-right:0}");
+    QPalette palette = table->palette();
+    palette.setColor(QPalette::Base, theme->getColor(ThemeManager::LIST_BACKGROUND));
+    palette.setColor(QPalette::AlternateBase, theme->getColor(ThemeManager::LIST_ALTERNATIVE_BACKGROUND));
+    palette.setColor(QPalette::Text, theme->getColor(ThemeManager::LIST_TEXT));
+    table->setPalette(palette);
+    table->setWordWrap(false);
+    table->horizontalHeader()->setSectionsClickable(false);
+    table->horizontalHeader()->setHighlightSections(false);
+    table->horizontalHeader()->setSectionResizeMode(MidiPlayerDelegate::COLUMN_CHANNEL, QHeaderView::ResizeToContents);
+    table->horizontalHeader()->setSectionResizeMode(MidiPlayerDelegate::COLUMN_SOUNDFONT, QHeaderView::Fixed);
+    table->horizontalHeader()->setSectionResizeMode(MidiPlayerDelegate::COLUMN_PRESET, QHeaderView::Stretch);
+    table->horizontalHeader()->setSectionResizeMode(MidiPlayerDelegate::COLUMN_VOLUME, QHeaderView::ResizeToContents);
+    table->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+    table->verticalHeader()->setDefaultSectionSize(28);
+    connect(table, SIGNAL(itemChanged(QTableWidgetItem*)), this, SLOT(onItemChanged(QTableWidgetItem*)));
 
     // No file at the beginning
     ui->labelFile->setText("-");
     ui->labelMessage->setText(tr("Open a MIDI file to play it with the soundfonts that are open."));
-    ui->scrollArea->hide();
+    ui->tableChannels->hide();
     ui->pushPlayPause->setEnabled(false);
     ui->pushStop->setEnabled(false);
     ui->sliderPosition->setEnabled(false);
+    updateSize();
 
-    // Periodic update of the position, the activity and the programs
+    // Periodic update of the position, the activity, the programs and the MIDI values
     _timer = new QTimer(this);
     connect(_timer, SIGNAL(timeout()), this, SLOT(onTimeout()));
 
@@ -143,15 +177,18 @@ void DialogMidiPlayer::loadFile(QString filePath)
     {
         ui->labelMessage->setText(file->getError());
         ui->labelMessage->show();
-        ui->scrollArea->hide();
-        ui->labelTime->setText(getTimeText(0) + " / " + getTimeText(0));
+        ui->tableChannels->hide();
+        updateTempoToolTip();
+        updateTime(0);
+        updateSize();
         return;
     }
     ui->labelMessage->hide();
-    ui->scrollArea->show();
+    ui->tableChannels->show();
     ContextManager::recentFile()->addRecentFile(RecentFileManager::FILE_TYPE_MIDI, filePath);
     _file = file;
     _player->setFile(file);
+    updateTempoToolTip();
     updatePosition(0);
 
     // The channels play the soundfont of the current tab, otherwise the first one open
@@ -173,24 +210,71 @@ void DialogMidiPlayer::loadFile(QString filePath)
     }
 
     // A row for each channel having notes
-    int row = 1;
+    int rowCount = 0;
+    for (int channel = 0; channel < 16; channel++)
+        if (file->isChannelUsed(channel))
+            rowCount++;
+    ui->tableChannels->setRowCount(rowCount);
     for (int channel = 0; channel < 16; channel++)
     {
         if (!file->isChannelUsed(channel))
             continue;
         MidiPlayerChannel * playerChannel = new MidiPlayerChannel(
             _player, channel, file->getChannelName(channel), MidiFilePlayer::getUsedPrograms(file.get(), channel),
-            ui->gridChannels, row++);
+            ui->tableChannels, _channels.count());
         connect(playerChannel, SIGNAL(mixChanged()), this, SLOT(onMixChanged()));
-        playerChannel->setSoundfont(sf2Index);
         _channels << playerChannel;
+        playerChannel->setSoundfont(sf2Index);
     }
+
+    // Size once the rows are shown (the size hints of their widgets are then known)
+    updateSize();
+    QTimer::singleShot(0, this, SLOT(updateSize()));
+}
+
+void DialogMidiPlayer::updateSize()
+{
+    // The table shows all channels
+    QTableWidget * table = ui->tableChannels;
+    int height = table->horizontalHeader()->sizeHint().height() + 2 * table->frameWidth();
+    for (int i = 0; i < table->rowCount(); i++)
+        height += table->rowHeight(i);
+    table->setFixedHeight(height);
+
+    // Soundfont names as wide as needed (up to a limit), the presets having the remaining space
+    int charWidth = table->fontMetrics().averageCharWidth();
+    int soundfontWidth = table->fontMetrics().horizontalAdvance(
+                             table->horizontalHeaderItem(MidiPlayerDelegate::COLUMN_SOUNDFONT)->text()) + 4 * charWidth;
+    for (int i = 0; i < table->rowCount(); i++)
+    {
+        QTableWidgetItem * item = table->item(i, MidiPlayerDelegate::COLUMN_SOUNDFONT); // Null while the rows are created
+        if (item != nullptr)
+            soundfontWidth = qMax(soundfontWidth, table->fontMetrics().horizontalAdvance(item->text()) + 2 * charWidth);
+    }
+    soundfontWidth = qMin(soundfontWidth, 25 * charWidth);
+    table->horizontalHeader()->resizeSection(MidiPlayerDelegate::COLUMN_SOUNDFONT, soundfontWidth);
+    int width = soundfontWidth + 25 * charWidth + 2 * table->frameWidth();
+    foreach (int column, QList<int>() << MidiPlayerDelegate::COLUMN_CHANNEL << MidiPlayerDelegate::COLUMN_VOLUME)
+        if (table->rowCount() > 0 && table->cellWidget(0, column) != nullptr)
+            width += table->cellWidget(0, column)->sizeHint().width();
+    table->setMinimumWidth(width);
+
+    // Fixed height of the window, depending on the number of channels
+    this->setFixedHeight(this->sizeHint().height());
+}
+
+void DialogMidiPlayer::onItemChanged(QTableWidgetItem * item)
+{
+    // Another soundfont name
+    if (item->column() == MidiPlayerDelegate::COLUMN_SOUNDFONT)
+        updateSize();
 }
 
 void DialogMidiPlayer::clearChannels()
 {
     while (!_channels.isEmpty())
         delete _channels.takeFirst();
+    ui->tableChannels->setRowCount(0);
 
     // Default configuration of all channels
     for (int channel = 0; channel < 16; channel++)
@@ -224,18 +308,13 @@ void DialogMidiPlayer::on_pushStop_clicked()
     updatePosition(0);
 }
 
-void DialogMidiPlayer::on_pushLoop_toggled(bool checked)
-{
-    _player->setLoop(checked);
-}
-
 void DialogMidiPlayer::on_sliderPosition_valueChanged(int value)
 {
     if (_updatingSlider)
         return;
 
     // The position changes when the slider is released, or directly with a click on the groove
-    ui->labelTime->setText(getTimeText(1000LL * value) + " / " + getTimeText(_file == nullptr ? 0 : _file->getDuration()));
+    updateTime(1000LL * value);
     if (!ui->sliderPosition->isSliderDown())
         _player->setPosition(1000LL * value);
 }
@@ -243,6 +322,108 @@ void DialogMidiPlayer::on_sliderPosition_valueChanged(int value)
 void DialogMidiPlayer::on_sliderPosition_sliderReleased()
 {
     _player->setPosition(1000LL * ui->sliderPosition->value());
+}
+
+void DialogMidiPlayer::initializeSettingsMenu()
+{
+    // Menu under the button on the right side of the banner (not a child of the banner, whose style would apply)
+    ThemeManager * theme = ContextManager::theme();
+    QMenu * menu = new QMenu(this);
+    menu->setStyleSheet(theme->getMenuTheme());
+    menu->installEventFilter(this); // Aligned on the right side of the button
+    QWidget * widget = new QWidget();
+    widget->setAttribute(Qt::WA_NoMousePropagation); // A click on a label does not close the menu
+    widget->setStyleSheet("QLabel,QCheckBox{color:" + theme->getColor(ThemeManager::LIST_TEXT).name() + "}");
+    QGridLayout * layout = new QGridLayout(widget);
+    layout->setContentsMargins(15, 5, 15, 5);
+    layout->setHorizontalSpacing(10);
+    layout->setVerticalSpacing(10);
+
+    // Loop, the checkbox being on the right side and toggled by a click on its label
+    _labelLoop = new QLabel(tr("Loop playback"));
+    _labelLoop->installEventFilter(this);
+    _checkLoop = new QCheckBox();
+    _checkLoop->setFocusPolicy(Qt::NoFocus);
+    layout->addWidget(_labelLoop, 0, 0, 1, 2);
+    layout->addWidget(_checkLoop, 0, 2, Qt::AlignRight);
+
+    // Tempo as a percentage of the one of the file (all its tempo changes being kept), and transposition except for the
+    // percussions, both kept for all files and restored with a double click
+    _labelTempoTitle = new QLabel(tr("Tempo"));
+    _sliderTempo = new ResettableSlider();
+    _sliderTempo->setRange(25, 200);
+    _sliderTempo->setValue(100);
+    _sliderTempo->setDefaultValue(100);
+    _labelTempo = new QLabel();
+    _labelTempo->setMinimumWidth(_labelTempo->fontMetrics().horizontalAdvance(tr("%1%", "percentage").arg(200)));
+    QLabel * labelPitchTitle = new QLabel(tr("Pitch"));
+    _sliderPitch = new ResettableSlider();
+    _sliderPitch->setRange(-12, 12);
+    _sliderPitch->setPageStep(1);
+    _sliderPitch->setValue(0);
+    _labelPitch = new QLabel();
+    _labelPitch->setMinimumWidth(_labelPitch->fontMetrics().horizontalAdvance("+12"));
+    foreach (QWidget * pitchWidget, QList<QWidget *>() << labelPitchTitle << _sliderPitch << _labelPitch)
+        pitchWidget->setToolTip(tr("The percussions (bank 128) are not transposed"));
+    foreach (ResettableSlider * slider, QList<ResettableSlider *>() << _sliderTempo << _sliderPitch)
+    {
+        slider->setOrientation(Qt::Horizontal);
+        slider->setFocusPolicy(Qt::NoFocus);
+        slider->setMinimumWidth(160);
+    }
+    foreach (QLabel * label, QList<QLabel *>() << _labelTempo << _labelPitch)
+        label->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    layout->addWidget(_labelTempoTitle, 1, 0);
+    layout->addWidget(_sliderTempo, 1, 1);
+    layout->addWidget(_labelTempo, 1, 2);
+    layout->addWidget(labelPitchTitle, 2, 0);
+    layout->addWidget(_sliderPitch, 2, 1);
+    layout->addWidget(_labelPitch, 2, 2);
+
+    QWidgetAction * action = new QWidgetAction(menu);
+    action->setDefaultWidget(widget);
+    menu->addAction(action);
+    ui->toolButtonSettings->setMenu(menu);
+
+    connect(_checkLoop, SIGNAL(toggled(bool)), this, SLOT(onLoopToggled(bool)));
+    connect(_sliderTempo, SIGNAL(valueChanged(int)), this, SLOT(onTempoChanged(int)));
+    connect(_sliderPitch, SIGNAL(valueChanged(int)), this, SLOT(onPitchChanged(int)));
+    onTempoChanged(100);
+    onPitchChanged(0);
+    updateTempoToolTip();
+}
+
+void DialogMidiPlayer::updateTempoToolTip()
+{
+    // Tempo of the file, if there is one
+    int tempo = _file == nullptr ? 0 : qRound(_file->getTempo());
+    QString toolTip;
+    if (tempo > 0)
+        toolTip = (_file->isTempoVariable() ? tr("Tempo of the file: %1 bpm, variable") : tr("Tempo of the file: %1 bpm")).arg(tempo);
+    else if (_file != nullptr)
+        toolTip = tr("File without tempo (SMPTE time code)");
+    _labelTempoTitle->setToolTip(toolTip);
+    _sliderTempo->setToolTip(toolTip);
+    _labelTempo->setToolTip(toolTip);
+}
+
+void DialogMidiPlayer::onLoopToggled(bool checked)
+{
+    _player->setLoop(checked);
+}
+
+void DialogMidiPlayer::onTempoChanged(int value)
+{
+    _speed = value / 100.0;
+    _player->setSpeed(_speed);
+    _labelTempo->setText(tr("%1%", "percentage").arg(value));
+    updateTime(1000LL * ui->sliderPosition->value());
+}
+
+void DialogMidiPlayer::onPitchChanged(int value)
+{
+    _player->setTransposition(value);
+    _labelPitch->setText((value > 0 ? "+" : "") + QString::number(value));
 }
 
 void DialogMidiPlayer::onTimeout()
@@ -264,15 +445,37 @@ void DialogMidiPlayer::updatePosition(qint64 position)
     _updatingSlider = true;
     ui->sliderPosition->setValue(static_cast<int>(position / 1000));
     _updatingSlider = false;
-    ui->labelTime->setText(getTimeText(position) + " / " + getTimeText(_file == nullptr ? 0 : _file->getDuration()));
+    updateTime(position);
+}
+
+void DialogMidiPlayer::updateTime(qint64 position)
+{
+    // Times at the current speed
+    qint64 duration = _file == nullptr ? 0 : _file->getDuration();
+    ui->labelTime->setText(getTimeText(static_cast<qint64>(position / _speed)) + " / " +
+                           getTimeText(static_cast<qint64>(duration / _speed)));
 }
 
 void DialogMidiPlayer::updatePlayPauseIcon(bool isPlaying)
 {
     _isPlaying = isPlaying;
-    ui->pushPlayPause->setIcon(ContextManager::theme()->getColoredSvg(
-        isPlaying ? ":/icons/recorder_pause.svg" : ":/icons/recorder_play.svg", QSize(32, 32), ThemeManager::WINDOW_TEXT));
+    ui->pushPlayPause->setIcon(getBannerIcon(isPlaying ? ":/icons/recorder_pause.svg" : ":/icons/recorder_play.svg", 28));
     ui->pushPlayPause->setToolTip(isPlaying ? tr("Pause") : tr("Play"));
+}
+
+QIcon DialogMidiPlayer::getBannerIcon(QString svgPath, int size)
+{
+    // Text color of the banner, changed when the button is hovered (active mode of an auto-raise button) and dimmed
+    // when it is disabled
+    QIcon icon;
+    icon.addPixmap(ContextManager::theme()->getColoredSvg(svgPath, QSize(size, size), ThemeManager::HIGHLIGHTED_TEXT), QIcon::Normal);
+    QMap<QString, QString> replacement;
+    replacement["currentColor"] = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT, ThemeManager::HOVERED).name();
+    icon.addPixmap(ContextManager::theme()->getColoredSvg(svgPath, QSize(size, size), replacement), QIcon::Active);
+    replacement["currentColor"] = ThemeManager::mix(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
+                                                    ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT), 0.4).name();
+    icon.addPixmap(ContextManager::theme()->getColoredSvg(svgPath, QSize(size, size), replacement), QIcon::Disabled);
+    return icon;
 }
 
 QString DialogMidiPlayer::getTimeText(qint64 microseconds)
@@ -298,10 +501,7 @@ void DialogMidiPlayer::onSoundfontLoaded(int sf2Index)
     // are updated
     bool withoutSoundfont = true;
     foreach (MidiPlayerChannel * channel, _channels)
-    {
         withoutSoundfont &= (channel->getSoundfont() == -1);
-        channel->updateSoundfontList();
-    }
     foreach (MidiPlayerChannel * channel, _channels)
         if (withoutSoundfont || channel->getSoundfont() == sf2Index)
             channel->setSoundfont(sf2Index);
@@ -312,7 +512,7 @@ void DialogMidiPlayer::onSoundfontClosed(int sf2Index)
     // The channels playing it play nothing
     Q_UNUSED(sf2Index)
     foreach (MidiPlayerChannel * channel, _channels)
-        channel->updateSoundfontList();
+        channel->updateSoundfont();
 }
 
 void DialogMidiPlayer::onEditingDone(QString editingSource, QList<int> sf2Indexes)
@@ -321,7 +521,7 @@ void DialogMidiPlayer::onEditingDone(QString editingSource, QList<int> sf2Indexe
     Q_UNUSED(editingSource)
     foreach (MidiPlayerChannel * channel, _channels)
     {
-        channel->updateSoundfontList();
+        channel->updateSoundfont();
         if (sf2Indexes.contains(channel->getSoundfont()))
             channel->updatePresetList();
     }
@@ -374,6 +574,30 @@ void DialogMidiPlayer::hideEvent(QHideEvent * event)
     _player->stop();
     updatePlayPauseIcon(false);
     updatePosition(0);
+}
+
+bool DialogMidiPlayer::eventFilter(QObject * watched, QEvent * event)
+{
+    // A click on the label of the loop toggles it
+    if (watched == _labelLoop && event->type() == QEvent::MouseButtonRelease &&
+        static_cast<QMouseEvent *>(event)->button() == Qt::LeftButton)
+    {
+        _checkLoop->toggle();
+        return true;
+    }
+
+    // The settings menu is aligned on the right side of its button (a right-to-left button would have its arrow on the
+    // left side), within the screen
+    if (watched == ui->toolButtonSettings->menu() && event->type() == QEvent::Show)
+    {
+        QWidget * menu = ui->toolButtonSettings->menu();
+        QPoint position = ui->toolButtonSettings->mapToGlobal(
+            QPoint(ui->toolButtonSettings->width() - menu->width(), ui->toolButtonSettings->height()));
+        if (menu->screen() != nullptr)
+            position.setX(qMax(position.x(), menu->screen()->availableGeometry().left()));
+        menu->move(position.x(), menu->y());
+    }
+    return QDialog::eventFilter(watched, event);
 }
 
 void DialogMidiPlayer::keyPressEvent(QKeyEvent * event)

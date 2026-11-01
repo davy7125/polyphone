@@ -60,7 +60,12 @@ public:
     void setPosition(qint64 position);
     void setLoop(bool isLooping);
     bool isPlaying();
-    qint64 getPosition();
+    qint64 getPosition(); // In the time of the file, whatever the speed
+
+    // Speed of the playback (1 for the tempo of the file), and transposition in semitones except for the percussions
+    // (bank 128): the notes playing keep their key
+    void setSpeed(double speed);
+    void setTransposition(int semitones);
 
     // Configuration of a channel (0 to 15): soundfont (-1 for none) and possibly a forced program, a program being
     // "bank * 128 + preset" (-1 for none)
@@ -75,9 +80,9 @@ public:
     // Programs used by the notes of a channel in a file, for loading the samples beforehand
     static QList<int> getUsedPrograms(const MidiFile * file, int channel);
 
-    // Values of the controllers read by the synth for the channels of the player, and their default values (depending
-    // on the modulators)
-    IMidiValues * getMidiValues() { return &_processor; }
+    // States of the channels: values of the controllers read by the synth for the channels of the player and displayed,
+    // and their default values (depending on the modulators)
+    MidiProcessor * getChannelStates() { return &_processor; }
     void setDefaultControllerValue(int controllerNumber, bool isBipolar, bool isDescending);
 
     // IMidiListener implementation (thread of the player): events processed by MidiProcessor
@@ -114,6 +119,7 @@ private:
     std::atomic<int> _forcedPrograms[16];
     std::atomic<int> _filePrograms[16];
     std::atomic<quint32> _noteCounts[16];
+    std::atomic<int> _transposition;
 
     // Transport, shared with the thread under the mutex
     std::mutex _mutex;
@@ -122,8 +128,9 @@ private:
     bool _fileChanged;
     bool _isPlaying;
     bool _isLooping;
-    qint64 _startPosition; // Position when the playback started, or current position otherwise
+    qint64 _startPosition; // Position when the playback started (or when the speed changed), or current position otherwise
     Clock::time_point _startTime;
+    double _speed;
     bool _preparationRequired; // The channels must be prepared for _startPosition
     bool _fastRelease; // For the preparation
     bool _releaseRequired;
@@ -133,6 +140,7 @@ private:
     std::shared_ptr<const MidiFile> _currentFile;
     int _nextEventIndex;
     std::vector<bool> _isEventPrepared; // Events already processed when the channels were prepared
+    int _playedKeys[16][128]; // Key played (transposed) by each key of the channels, -1 if none
 
     std::thread _thread;
 };
