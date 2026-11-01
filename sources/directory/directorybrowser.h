@@ -29,6 +29,8 @@
 #include "basetypes.h"
 class QFileSystemWatcher;
 class QPushButton;
+class DialogKeyboard;
+class DirectoryPreview;
 
 namespace Ui {
 class DirectoryBrowser;
@@ -39,7 +41,8 @@ class DirectoryBrowser : public Tab
     Q_OBJECT
 
 public:
-    DirectoryBrowser(QWidget *parent = nullptr);
+    // Without keyboard (player mode), the elements cannot be played
+    DirectoryBrowser(DialogKeyboard * dialogKeyboard, QWidget *parent = nullptr);
     ~DirectoryBrowser();
 
     void initialize(QString dirPath);
@@ -49,15 +52,20 @@ public:
 
 signals:
     void itemDoubleClicked(QString filePath, EltID id);
+    void keyboardDisplayChanged(bool isDisplayed);
+    void recorderDisplayChanged(bool isDisplayed);
 
 protected:
     bool eventFilter(QObject *obj, QEvent *event) override;
+    void showEvent(QShowEvent * event) override;
+    void hideEvent(QHideEvent * event) override;
 
 private slots:
     void on_pushRetry_clicked();
     void onDirectoryChanged(const QString &path);
     void onContentChanged();
     void onSelectionChanged(QItemSelection selected, QItemSelection deselected);
+    void onFileDataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight);
     void onSmplSelectionChanged(QItemSelection selected, QItemSelection deselected);
     void onInstSelectionChanged(QItemSelection selected, QItemSelection deselected);
     void onPrstSelectionChanged(QItemSelection selected, QItemSelection deselected);
@@ -67,15 +75,20 @@ private slots:
     void on_pushShowSamples_toggled(bool checked);
     void on_pushShowInstruments_toggled(bool checked);
     void on_pushShowPresets_toggled(bool checked);
+    void on_pushShowKeyboard_clicked();
+    void on_pushShowRecorder_clicked();
 
 private:
     void updateVerticalSpacer();
     void updateShowIcon(QPushButton * button);
+    void setPreviewElement(EltID id);
+    void focusFileList();
 
     Ui::DirectoryBrowser *ui;
     QString _dirPath;
     QFileSystemWatcher * _watcher;
     QMap<QString, QDateTime> _currentFiles;
+    DirectoryPreview * _preview;
 };
 
 #endif // DIRECTORYBROWSER_H

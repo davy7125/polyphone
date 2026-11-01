@@ -159,10 +159,17 @@ void DialogMidiPlayer::loadFile(QString filePath)
     int sf2Index = tabManager == nullptr ? -1 : tabManager->getCurrentSf2();
     if (sf2Index < 0)
     {
+        // Not the soundfonts loaded without tab by the soundfont explorer
+        SoundfontManager * sm = SoundfontManager::getInstance();
         EltID idSf2(elementSf2);
-        QList<int> sf2Indexes = SoundfontManager::getInstance()->getSiblings(idSf2);
-        if (!sf2Indexes.isEmpty())
-            sf2Index = sf2Indexes.first();
+        foreach (int index, sm->getSiblings(idSf2))
+        {
+            if (!sm->isTemporary(index))
+            {
+                sf2Index = index;
+                break;
+            }
+        }
     }
 
     // A row for each channel having notes

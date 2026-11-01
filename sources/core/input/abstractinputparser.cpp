@@ -41,7 +41,8 @@ AbstractInputParser::AbstractInputParser() : QObject(),
     _fileName(""),
     _isSuccess(false),
     _error(tr("not processed yet")),
-    _sf2Index(-1)
+    _sf2Index(-1),
+    _isTemporary(false)
 {
     connect(_futureWatcher, SIGNAL(finished()), this, SIGNAL(finished()), Qt::QueuedConnection);
 }
@@ -83,6 +84,10 @@ void AbstractInputParser::processAsync()
         EltID idSf2(elementSf2);
         foreach (int i, _sm->getSiblings(idSf2))
         {
+            // Temporary soundfonts are copies used by the soundfont explorer, there can be several of them
+            if (_isTemporary && _sm->isTemporary(i))
+                continue;
+
             if (_sm->getQstr(EltID(elementSf2, i), champ_filenameInitial) == _fileName)
             {
                 _isSuccess = false;
@@ -96,6 +101,10 @@ void AbstractInputParser::processAsync()
     QString tempFilePath = "";
     this->processInternal(_fileName, _sm, _isSuccess, _error, _sf2Index, tempFilePath);
 
+    // Temporary soundfont, even if the process failed (it is then deleted by the caller)
+    if (_isTemporary && _sf2Index != -1)
+        _sm->setTemporary(_sf2Index, true);
+
     if (_isSuccess)
     {
         // Keep a track of the files
@@ -104,7 +113,7 @@ void AbstractInputParser::processAsync()
         _sm->set(id, champ_filenameForData, tempFilePath.isEmpty() ? _fileName : tempFilePath);
 
         // Possibly load all samples
-        if (ContextManager::s_playerMode)
+        if (ContextManager::s_playerMode && !_isTemporary)
             _sm->loadAllSamples(_sf2Index);
     }
     else if (!tempFilePath.isEmpty())
@@ -112,5 +121,6 @@ void AbstractInputParser::processAsync()
 
     // The operation are not stored in the action manager
     _sm->clearNewEditing();
-    _sm->emitNewSoundfontLoaded(_sf2Index);
+    if (!_isTemporary)
+        _sm->emitNewSoundfontLoaded(_sf2Index);
 }

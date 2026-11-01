@@ -45,6 +45,8 @@ bool EditorToolBar::s_keyboardOpen = false;
 bool EditorToolBar::s_midiPlayerOpen = false;
 QMap<int, bool> EditorToolBar::s_midiExtensionOpen;
 QList<EditorToolBar *> EditorToolBar::s_instances;
+QList<StyledAction *> EditorToolBar::s_keyboardButtons;
+QList<StyledAction *> EditorToolBar::s_recorderButtons;
 
 EditorToolBar::EditorToolBar(QWidget * parent) : QWidget(parent),
     ui(new Ui::EditorToolBar),
@@ -264,6 +266,8 @@ void EditorToolBar::updateRecorderButtonsState(bool isChecked)
         toolBar->ui->pushShowRecorder->setChecked(s_recorderOpen);
         toolBar->blockSignals(false);
     }
+    foreach (StyledAction * button, s_recorderButtons)
+        button->setChecked(s_recorderOpen);
 }
 
 void EditorToolBar::updateKeyboardButtonsState(bool isChecked)
@@ -275,6 +279,30 @@ void EditorToolBar::updateKeyboardButtonsState(bool isChecked)
         toolBar->ui->pushShowKeyboard->setChecked(s_keyboardOpen);
         toolBar->blockSignals(false);
     }
+    foreach (StyledAction * button, s_keyboardButtons)
+        button->setChecked(s_keyboardOpen);
+}
+
+void EditorToolBar::addKeyboardButton(StyledAction * button)
+{
+    button->setChecked(s_keyboardOpen);
+    s_keyboardButtons << button;
+}
+
+void EditorToolBar::removeKeyboardButton(StyledAction * button)
+{
+    s_keyboardButtons.removeAll(button);
+}
+
+void EditorToolBar::addRecorderButton(StyledAction * button)
+{
+    button->setChecked(s_recorderOpen);
+    s_recorderButtons << button;
+}
+
+void EditorToolBar::removeRecorderButton(StyledAction * button)
+{
+    s_recorderButtons.removeAll(button);
 }
 
 void EditorToolBar::updateMidiPlayerButtonsState(bool isChecked)

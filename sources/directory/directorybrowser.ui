@@ -678,32 +678,56 @@
            <number>6</number>
           </property>
           <property name="topMargin">
-           <number>5</number>
+           <number>2</number>
           </property>
           <property name="rightMargin">
-           <number>6</number>
+           <number>2</number>
           </property>
           <property name="bottomMargin">
-           <number>6</number>
+           <number>2</number>
           </property>
           <item>
-           <widget class="QLineEdit" name="lineSearch">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
+           <layout class="QHBoxLayout" name="horizontalLayoutSearch">
+            <property name="topMargin">
+             <number>3</number>
             </property>
-            <property name="placeholderText">
-             <string>Search a file, a sample, an instrument or a preset...</string>
+            <property name="bottomMargin">
+             <number>4</number>
             </property>
-            <property name="clearButtonEnabled">
+            <item>
+             <widget class="QLineEdit" name="lineSearch">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="placeholderText">
+               <string>Search a file, a sample, an instrument or a preset...</string>
+              </property>
+              <property name="clearButtonEnabled">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="DirectoryDisplayMenu" name="widgetDisplayMenu" native="true"/>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="StyledAction" name="pushShowKeyboard">
+            <property name="checkable">
              <bool>true</bool>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="DirectoryDisplayMenu" name="widgetDisplayMenu" native="true"/>
+           <widget class="StyledAction" name="pushShowRecorder">
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -726,6 +750,11 @@
    <extends>QWidget</extends>
    <header>directorydisplaymenu.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>StyledAction</class>
+   <extends>QPushButton</extends>
+   <header>styledaction.h</header>
   </customwidget>
   <customwidget>
    <class>DirectoryListHeader</class>

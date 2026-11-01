@@ -74,6 +74,14 @@ void DirectoryElementListView::setData(DirectoryFileData::DetailsData data, QStr
     }
 }
 
+EltID DirectoryElementListView::getSelectedElement()
+{
+    QModelIndexList indexes = this->selectionModel()->selectedIndexes();
+    if (indexes.isEmpty() || _type == elementUnknown)
+        return EltID(elementUnknown);
+    return EltID(_type, -1, indexes[0].data(Qt::UserRole + 3).toInt());
+}
+
 void DirectoryElementListView::onActivated(const QModelIndex &index)
 {
     if (index.isValid() && _type != elementUnknown)

@@ -12,8 +12,9 @@ polyphone (2.7) UNRELEASED; urgency=low
   * (improvement) soundfonts and directories can be opened by dragging them onto the tab bar
   * (improvement) the mouse wheel with Shift over the tab bar goes to the previous or next tab
   * (improvement) knobs have the same look whatever the style, with an arc showing their value
-  * (improvement) the preset list of the export window can be filtered (Ctrl+F), several presets can be selected and ticked or unticked together with the space key, and the number of ticked presets is displayed
-  * (improvement) the soundfont explorer shows the files in columns sorted by clicking on their header, the columns and the preset summary can be hidden, and the layout is kept for the next time
+  * (improvement) preset list filter / selection
+  * (improvement) the soundfont explorer shows the files in columns sorted by clicking on their header, the columns and the preset summary can be hidden
+  * (improvement) the sample, instrument or preset selected in the soundfont explorer can be played with the virtual keyboard or a MIDI keyboard
   * (improvement) various ergonomic improvements
   * (fix) the calendar of the date field could appear when a soundfont was opened in the background
 

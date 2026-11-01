@@ -94,6 +94,7 @@ public:
     quint16 _wBpsInit; // bit per sample found when opening the file (16, 24 or 0 if new)
     quint16 _wBpsSave; // bit per sample desired during save (16 or 24)
     QString _nameSort; // _INAM lowercase, no accent
+    bool _isTemporary; // Loaded without tab (soundfont explorer)
 
 private:
     EltID _id;

@@ -39,6 +39,9 @@ public:
     void clear();
     void setData(DirectoryFileData::DetailsData data, QString path, ElementType type);
 
+    // Element selected (indexSf2 not set), or elementUnknown
+    EltID getSelectedElement();
+
 public slots:
     void setFilter(QString filter);
 

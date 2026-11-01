@@ -108,6 +108,7 @@ private:
     explicit TabManager(DialogKeyboard * dialogKeyboard, MainStackedWidget * stackedWidget);
     ~TabManager();
     void saveWindowState();
+    bool isExplorerPlaying(); // A soundfont explorer uses the keyboard and recorder windows
 
     DialogKeyboard * _dialogKeyboard;
     MainStackedWidget * _stackedWidget;

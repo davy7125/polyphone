@@ -78,6 +78,11 @@ public:
     void markAsSaved(int indexSf2);
     bool isEdited(int indexSf2);
 
+    // Soundfonts loaded without tab by the soundfont explorer (scan, elements played), hidden in the lists of open
+    // soundfonts. A temporary soundfont becomes a regular one when a tab is opened with it.
+    void setTemporary(int indexSf2, bool isTemporary);
+    bool isTemporary(int indexSf2);
+
     // Find if an ID is valid (allowing or not browing in hidden ID, not allowed by default)
     bool isValid(EltID &id, bool acceptHidden = false, bool justCheckParentLevel = false);
 

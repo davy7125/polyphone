@@ -300,6 +300,7 @@ SOURCES	+= main.cpp \
     directory/directorylistheader.cpp \
     directory/directorylistmodel.cpp \
     directory/directorylistview.cpp \
+    directory/directorypreview.cpp \
     directory/directorysortproxymodel.cpp \
     editor/footers/footerlinkedto.cpp \
     editor/footers/footeroverview.cpp \
@@ -707,6 +708,7 @@ HEADERS += \
     directory/directorylistheader.h \
     directory/directorylistmodel.h \
     directory/directorylistview.h \
+    directory/directorypreview.h \
     directory/directorysortproxymodel.h \
     editor/footers/abstractfooter.h \
     editor/footers/footerlinkedto.h \

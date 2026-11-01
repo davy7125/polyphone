@@ -124,7 +124,7 @@
     </widget>
    </item>
    <item>
-    <widget class="StyledAction" name="pushShowRecorder">
+    <widget class="StyledAction" name="pushShowMidiPlayer">
      <property name="checkable">
       <bool>true</bool>
      </property>
@@ -138,7 +138,7 @@
     </widget>
    </item>
    <item>
-    <widget class="StyledAction" name="pushShowMidiPlayer">
+    <widget class="StyledAction" name="pushShowRecorder">
      <property name="checkable">
       <bool>true</bool>
      </property>

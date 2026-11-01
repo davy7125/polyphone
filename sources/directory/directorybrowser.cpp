@@ -28,13 +28,16 @@
 #include "directoryfiledata.h"
 #include "customsplitter.h"
 #include "soundfontmanager.h"
+#include "directorypreview.h"
+#include "editortoolbar.h"
 #include <QInputDialog>
 #include <QMessageBox>
 #include <QKeyEvent>
 
-DirectoryBrowser::DirectoryBrowser(QWidget *parent) : Tab(parent),
+DirectoryBrowser::DirectoryBrowser(DialogKeyboard * dialogKeyboard, QWidget *parent) : Tab(parent),
     ui(new Ui::DirectoryBrowser),
-    _watcher(nullptr)
+    _watcher(nullptr),
+    _preview(dialogKeyboard == nullptr ? nullptr : new DirectoryPreview(dialogKeyboard, this))
 {
     ui->setupUi(this);
 
@@ -73,6 +76,21 @@ DirectoryBrowser::DirectoryBrowser(QWidget *parent) : Tab(parent),
     ui->pushShowPresets->setStyleSheet("QPushButton:focus {border: 2px solid " + highlightedBackground + "; border-radius: 2px;}");
     updateShowIcon(ui->pushShowPresets);
 
+    // Virtual keyboard and recorder, in the same state as the buttons of the editor (nothing to play in player mode)
+    ui->pushShowKeyboard->initialize(tr("Virtual keyboard"), ":/icons/piano.svg");
+    ui->pushShowRecorder->initialize(tr("Recorder"), ":/icons/recorder.svg");
+    if (_preview == nullptr)
+    {
+        ui->pushShowKeyboard->hide();
+        ui->pushShowRecorder->hide();
+        ui->frameTop->layout()->setContentsMargins(6, 2, 6, 2);
+    }
+    else
+    {
+        EditorToolBar::addKeyboardButton(ui->pushShowKeyboard);
+        EditorToolBar::addRecorderButton(ui->pushShowRecorder);
+    }
+
     // Connections
     connect(ui->widgetDisplayMenu, SIGNAL(displayOptionsChanged(int)), ui->listView, SLOT(setDisplayOptions(int)));
     connect(ui->lineSearch, SIGNAL(textEdited(QString)), ui->listView, SLOT(setFilter(QString)));
@@ -81,6 +99,7 @@ DirectoryBrowser::DirectoryBrowser(QWidget *parent) : Tab(parent),
     connect(ui->lineSearch, SIGNAL(textEdited(QString)), ui->listPresets, SLOT(setFilter(QString)));
     connect(ui->listView, SIGNAL(contentChanged()), this, SLOT(onContentChanged()));
     connect(ui->listView->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), this, SLOT(onSelectionChanged(QItemSelection,QItemSelection)));
+    connect(ui->listView->model(), SIGNAL(dataChanged(QModelIndex,QModelIndex,QList<int>)), this, SLOT(onFileDataChanged(QModelIndex,QModelIndex)));
     connect(ui->listView, SIGNAL(renameRequested(QString)), this, SLOT(onRenameRequested(QString)));
     connect(ui->listView, SIGNAL(deleteRequested(QString)), this, SLOT(onDeleteRequested(QString)));
     connect(ui->listSamples->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), this, SLOT(onSmplSelectionChanged(QItemSelection,QItemSelection)));
@@ -116,6 +135,12 @@ DirectoryBrowser::DirectoryBrowser(QWidget *parent) : Tab(parent),
 
 DirectoryBrowser::~DirectoryBrowser()
 {
+    if (_preview != nullptr)
+    {
+        EditorToolBar::removeKeyboardButton(ui->pushShowKeyboard);
+        EditorToolBar::removeRecorderButton(ui->pushShowRecorder);
+        delete _preview;
+    }
     delete ui;
 }
 
@@ -140,12 +165,22 @@ void DirectoryBrowser::initialize(QString dirPath)
         return;
     }
 
-    // Files already open
+    // The soundfont played is released if its file changed
+    if (_preview != nullptr && _currentFiles.contains(_preview->getFile()))
+    {
+        QFileInfo fileInfo(_preview->getFile());
+        if (!fileInfo.exists() || fileInfo.lastModified() != _currentFiles[_preview->getFile()])
+            _preview->release();
+    }
+
+    // Files already open (not the soundfonts loaded by the explorer)
     QMap<QString, int> openedFilesWithId;
     EltID idSf2(elementSf2);
     SoundfontManager * sm = SoundfontManager::getInstance();
     foreach (int index, sm->getSiblings(idSf2))
     {
+        if (sm->isTemporary(index))
+            continue;
         idSf2.indexSf2 = index;
         openedFilesWithId[sm->getQstr(idSf2, champ_filenameInitial)] = index;
     }
@@ -233,6 +268,19 @@ void DirectoryBrowser::onSelectionChanged(QItemSelection selected, QItemSelectio
         ui->listInstruments->setData(d->getInstrumentDetails(), d->getPath(), elementInst);
         ui->listPresets->setData(d->getPresetDetails(), d->getPath(), elementPrst);
     }
+
+    // The lists have no selection anymore, the soundfont played is released if another file is selected
+    if (_preview != nullptr)
+        _preview->setFile(d == nullptr ? "" : d->getPath());
+    setPreviewElement(EltID(elementUnknown));
+}
+
+void DirectoryBrowser::onFileDataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight)
+{
+    // The details of the current file are updated (scan over, file changed)
+    QModelIndex index = ui->listView->currentIndex();
+    if (index.isValid() && index.row() >= topLeft.row() && index.row() <= bottomRight.row())
+        onSelectionChanged(QItemSelection(), QItemSelection());
 }
 
 void DirectoryBrowser::on_listView_activated(const QModelIndex &index)
@@ -310,6 +358,8 @@ void DirectoryBrowser::onSmplSelectionChanged(QItemSelection selected, QItemSele
     ui->listPresets->clearSelection();
     ui->listPresets->selectionModel()->blockSignals(false);
     ui->listPresets->viewport()->update();
+
+    setPreviewElement(ui->listSamples->getSelectedElement());
 }
 
 void DirectoryBrowser::onInstSelectionChanged(QItemSelection selected, QItemSelection deselected)
@@ -326,6 +376,8 @@ void DirectoryBrowser::onInstSelectionChanged(QItemSelection selected, QItemSele
     ui->listPresets->clearSelection();
     ui->listPresets->selectionModel()->blockSignals(false);
     ui->listPresets->viewport()->update();
+
+    setPreviewElement(ui->listInstruments->getSelectedElement());
 }
 
 void DirectoryBrowser::onPrstSelectionChanged(QItemSelection selected, QItemSelection deselected)
@@ -342,6 +394,8 @@ void DirectoryBrowser::onPrstSelectionChanged(QItemSelection selected, QItemSele
     ui->listInstruments->clearSelection();
     ui->listInstruments->selectionModel()->blockSignals(false);
     ui->listInstruments->viewport()->update();
+
+    setPreviewElement(ui->listPresets->getSelectedElement());
 }
 
 void DirectoryBrowser::onActionRequired(TabAction action)
@@ -398,6 +452,47 @@ void DirectoryBrowser::updateShowIcon(QPushButton * button)
                                                            QSize(16, 16), ThemeManager::WINDOW_TEXT));
 }
 
+void DirectoryBrowser::on_pushShowKeyboard_clicked()
+{
+    emit keyboardDisplayChanged(ui->pushShowKeyboard->isChecked());
+}
+
+void DirectoryBrowser::on_pushShowRecorder_clicked()
+{
+    emit recorderDisplayChanged(ui->pushShowRecorder->isChecked());
+}
+
+void DirectoryBrowser::setPreviewElement(EltID id)
+{
+    if (_preview != nullptr)
+        _preview->setElement(id);
+}
+
+void DirectoryBrowser::showEvent(QShowEvent * event)
+{
+    Tab::showEvent(event);
+    if (_preview != nullptr)
+        _preview->onShown();
+}
+
+void DirectoryBrowser::hideEvent(QHideEvent * event)
+{
+    Tab::hideEvent(event);
+    if (_preview != nullptr)
+        _preview->onHidden();
+}
+
+void DirectoryBrowser::focusFileList()
+{
+    // Select the first element in the list (if any)
+    if (ui->listView->model() && ui->listView->model()->rowCount() > 0)
+    {
+        ui->listView->setFocus();
+        if (!ui->listView->selectionModel()->hasSelection())
+            ui->listView->setCurrentIndex(ui->listView->model()->index(0, 0));
+    }
+}
+
 bool DirectoryBrowser::eventFilter(QObject *obj, QEvent *event)
 {
     // Navigation with arrows between widgets
@@ -406,6 +501,13 @@ bool DirectoryBrowser::eventFilter(QObject *obj, QEvent *event)
         QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
         switch (keyEvent->key())
         {
+        case Qt::Key_Return: case Qt::Key_Enter:
+            if (obj == ui->lineSearch)
+            {
+                focusFileList();
+                return true;
+            }
+            break;
         case Qt::Key_Up:
             if (obj == ui->listView)
             {
@@ -436,13 +538,7 @@ bool DirectoryBrowser::eventFilter(QObject *obj, QEvent *event)
         case Qt::Key_Down:
             if (obj == ui->lineSearch)
             {
-                // Select the first element in the list (if any)
-                if (ui->listView->model() && ui->listView->model()->rowCount() > 0)
-                {
-                    ui->listView->setFocus();
-                    if (!ui->listView->selectionModel()->hasSelection())
-                        ui->listView->setCurrentIndex(ui->listView->model()->index(0, 0));
-                }
+                focusFileList();
                 return true;
             }
             else if (obj == ui->pushShowSamples)

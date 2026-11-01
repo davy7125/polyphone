@@ -9,7 +9,7 @@
         <translation>ainda não processado</translation>
     </message>
     <message>
-        <location filename="../../core/input/abstractinputparser.cpp" line="89"/>
+        <location filename="../../core/input/abstractinputparser.cpp" line="94"/>
         <source>This file is already open.</source>
         <translation>Este arquivo já está aberto.</translation>
     </message>
@@ -1963,12 +1963,12 @@ online</translation>
         <translation>Arquivos MIDI</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="268"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="275"/>
         <source>Pause</source>
         <translation>Pausar</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="268"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="275"/>
         <source>Play</source>
         <translation>Reproduzir</translation>
     </message>
@@ -2218,84 +2218,94 @@ online</translation>
         <translation>Amostras</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.ui" line="698"/>
+        <location filename="../../directory/directorybrowser.ui" line="706"/>
         <source>Search a file, a sample, an instrument or a preset...</source>
         <translation>Procurar um arquivo, uma amostra, um instrumento ou uma predefinição...</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="131"/>
+        <location filename="../../directory/directorybrowser.cpp" line="80"/>
+        <source>Virtual keyboard</source>
+        <translation>Teclado virtual</translation>
+    </message>
+    <message>
+        <location filename="../../directory/directorybrowser.cpp" line="81"/>
+        <source>Recorder</source>
+        <translation>Gravador</translation>
+    </message>
+    <message>
+        <location filename="../../directory/directorybrowser.cpp" line="156"/>
         <source>The directory &quot;%1&quot; does not exist.</source>
         <oldsource>The directory &quot;%1&quot; doesn&apos;t exist.</oldsource>
         <translation>O diretório &quot;%1&quot; não existe.</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="138"/>
+        <location filename="../../directory/directorybrowser.cpp" line="163"/>
         <source>The directory &quot;%1&quot; is not readable.</source>
         <translation>O diretório &quot;%1&quot; não pode ser lido.</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="258"/>
+        <location filename="../../directory/directorybrowser.cpp" line="306"/>
         <source>Rename</source>
         <translation>Renomear</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="259"/>
+        <location filename="../../directory/directorybrowser.cpp" line="307"/>
         <source>New name:</source>
         <translation>Novo nome:</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="261"/>
+        <location filename="../../directory/directorybrowser.cpp" line="309"/>
         <source>&amp;Cancel</source>
         <oldsource>Cancel</oldsource>
         <translation>Cancel&amp;ar</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="262"/>
+        <location filename="../../directory/directorybrowser.cpp" line="310"/>
         <source>&amp;Ok</source>
         <oldsource>Ok</oldsource>
         <translation>&amp;Ok</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="273"/>
+        <location filename="../../directory/directorybrowser.cpp" line="321"/>
         <source>A file with this name already exists.</source>
         <translation>Já existe um arquivo com este nome.</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="273"/>
-        <location filename="../../directory/directorybrowser.cpp" line="278"/>
-        <location filename="../../directory/directorybrowser.cpp" line="296"/>
+        <location filename="../../directory/directorybrowser.cpp" line="321"/>
+        <location filename="../../directory/directorybrowser.cpp" line="326"/>
+        <location filename="../../directory/directorybrowser.cpp" line="344"/>
         <source>Warning</source>
         <translation>Aviso</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="278"/>
+        <location filename="../../directory/directorybrowser.cpp" line="326"/>
         <source>Cannot rename file &quot;%1&quot;.</source>
         <translation>Não foi possível renomear o arquivo &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="286"/>
+        <location filename="../../directory/directorybrowser.cpp" line="334"/>
         <source>Confirm deletion</source>
         <translation>Confirmar exclusão</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="287"/>
+        <location filename="../../directory/directorybrowser.cpp" line="335"/>
         <source>Are you sure you want to delete file &quot;%1&quot;?</source>
         <translation>Você tem certeza que quer excluir o arquivo &quot;%1&quot;?</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="289"/>
+        <location filename="../../directory/directorybrowser.cpp" line="337"/>
         <source>&amp;Yes</source>
         <oldsource>Yes</oldsource>
         <translation>&amp;Sim</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="290"/>
+        <location filename="../../directory/directorybrowser.cpp" line="338"/>
         <source>&amp;No</source>
         <oldsource>No</oldsource>
         <translation>&amp;Não</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="296"/>
+        <location filename="../../directory/directorybrowser.cpp" line="344"/>
         <source>Cannot delete file &quot;%1&quot;.</source>
         <translation>Não foi possível excluir o arquivo &quot;%1&quot;.</translation>
     </message>
@@ -2341,50 +2351,50 @@ online</translation>
 <context>
     <name>DirectoryFileData</name>
     <message>
-        <location filename="../../directory/directoryfiledata.cpp" line="296"/>
+        <location filename="../../directory/directoryfiledata.cpp" line="298"/>
         <source>Invalid link</source>
         <translation>Link inválido</translation>
     </message>
     <message>
-        <location filename="../../directory/directoryfiledata.cpp" line="299"/>
+        <location filename="../../directory/directoryfiledata.cpp" line="301"/>
         <source>Mono</source>
         <comment>opposite to stereo</comment>
         <translation>Mono</translation>
     </message>
     <message>
-        <location filename="../../directory/directoryfiledata.cpp" line="302"/>
+        <location filename="../../directory/directoryfiledata.cpp" line="304"/>
         <source>Stereo right</source>
         <translation>Estéreo direito</translation>
     </message>
     <message>
-        <location filename="../../directory/directoryfiledata.cpp" line="305"/>
+        <location filename="../../directory/directoryfiledata.cpp" line="307"/>
         <source>Stereo left</source>
         <translation>Estéreo esquerdo</translation>
     </message>
     <message>
-        <location filename="../../directory/directoryfiledata.cpp" line="308"/>
+        <location filename="../../directory/directoryfiledata.cpp" line="310"/>
         <source>Stereo non defined</source>
         <translation>Estéreo não definido</translation>
     </message>
     <message>
-        <location filename="../../directory/directoryfiledata.cpp" line="312"/>
+        <location filename="../../directory/directoryfiledata.cpp" line="314"/>
         <source>s</source>
         <comment>unit for seconds</comment>
         <translation>s</translation>
     </message>
     <message>
-        <location filename="../../directory/directoryfiledata.cpp" line="315"/>
+        <location filename="../../directory/directoryfiledata.cpp" line="317"/>
         <source>Loop</source>
         <translation>Loop</translation>
     </message>
     <message>
-        <location filename="../../directory/directoryfiledata.cpp" line="316"/>
+        <location filename="../../directory/directoryfiledata.cpp" line="318"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
         <translation>Hz</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../directory/directoryfiledata.cpp" line="326"/>
+        <location filename="../../directory/directoryfiledata.cpp" line="328"/>
         <source>%n division(s)</source>
         <translation>
             <numerusform>%n divisão</numerusform>
@@ -2392,7 +2402,7 @@ online</translation>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../directory/directoryfiledata.cpp" line="327"/>
+        <location filename="../../directory/directoryfiledata.cpp" line="329"/>
         <source>%n parameter(s)</source>
         <translation>
             <numerusform>%n parâmetro</numerusform>
@@ -2400,7 +2410,7 @@ online</translation>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../directory/directoryfiledata.cpp" line="328"/>
+        <location filename="../../directory/directoryfiledata.cpp" line="330"/>
         <source>%n modulator(s)</source>
         <translation>
             <numerusform>%n modulador</numerusform>
@@ -2408,7 +2418,7 @@ online</translation>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../directory/directoryfiledata.cpp" line="329"/>
+        <location filename="../../directory/directoryfiledata.cpp" line="331"/>
         <source>%n distinct key range(s)</source>
         <translation>
             <numerusform>%n alcance de nota distinto</numerusform>
@@ -2416,7 +2426,7 @@ online</translation>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../directory/directoryfiledata.cpp" line="330"/>
+        <location filename="../../directory/directoryfiledata.cpp" line="332"/>
         <source>%n distinct velocity range(s)</source>
         <translation>
             <numerusform>%n alcance de velocidade distinto</numerusform>
@@ -2637,7 +2647,7 @@ online</translation>
         <translation>Não é possível abrir o arquivo</translation>
     </message>
     <message>
-        <location filename="../../editor/editor.cpp" line="521"/>
+        <location filename="../../editor/editor.cpp" line="526"/>
         <source>Warning</source>
         <translation>Aviso</translation>
     </message>
@@ -2707,72 +2717,72 @@ online</translation>
 <context>
     <name>EditorToolBar</name>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="69"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="71"/>
         <source>Add a sample</source>
         <translation>Adicionar uma amostra</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="70"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="72"/>
         <source>Add an instrument</source>
         <translation>Adicionar um instrumento</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="71"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="73"/>
         <source>Add a preset</source>
         <translation>Adicionar uma predefinição</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="76"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="78"/>
         <source>Toolbox</source>
         <translation>Caixa de ferramentas</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="72"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="74"/>
         <source>Cancel</source>
         <translation>Desfazer</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="73"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="75"/>
         <source>Redo</source>
         <translation>Refazer</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="74"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="76"/>
         <source>Save</source>
         <translation>Salvar</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="82"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="84"/>
         <source>Recorder</source>
         <translation>Gravador</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="85"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="87"/>
         <source>Virtual keyboard</source>
         <translation>Teclado virtual</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="88"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="90"/>
         <source>MIDI player</source>
         <translation>Reprodutor MIDI</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="302"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="330"/>
         <source>Import an audio file</source>
         <translation>Importar um arquivo de áudio</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="304"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="332"/>
         <source>Audio files</source>
         <translation>Arquivos de áudio</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="460"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="488"/>
         <source>Cannot create more presets.</source>
         <translation>Não é possível criar mais predefinições.</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="460"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="488"/>
         <source>Warning</source>
         <translation>Aviso</translation>
     </message>
@@ -3379,17 +3389,17 @@ online</translation>
         <translation>Nenhuma</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="166"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="170"/>
         <source>Untitled</source>
         <translation>Sem nome</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="308"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="312"/>
         <source>The soundfont has no preset with this bank and this number: the notes are not played.</source>
         <translation>A soundfont não tem nenhuma predefinição com este banco e este número: as notas não são tocadas.</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="338"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="342"/>
         <source>dB</source>
         <comment>unit for decibels</comment>
         <translation>dB</translation>
@@ -5555,7 +5565,7 @@ baixar o conteúdo</translation>
     </message>
     <message>
         <location filename="../../mainwindow/tabmanager.cpp" line="137"/>
-        <location filename="../../mainwindow/tabmanager.cpp" line="292"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="318"/>
         <source>Warning</source>
         <translation>Aviso</translation>
     </message>
@@ -5565,42 +5575,42 @@ baixar o conteúdo</translation>
         <translation>Não é possível abrir o arquivo &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="249"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="275"/>
         <source>Online repository</source>
         <translation>Repositório online</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="287"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="313"/>
         <source>Save before exiting?</source>
         <translation>Salvar antes de sair?</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="290"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="316"/>
         <source>untitled</source>
         <translation>sem nome</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="291"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="317"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>O arquivo &quot;%1&quot; foi modificado.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="294"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="320"/>
         <source>&amp;Save</source>
         <translation>&amp;Salvar</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="295"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="321"/>
         <source>&amp;Cancel</source>
         <translation>Cancel&amp;ar</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="296"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="322"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>&amp;Não salvar</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="417"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="455"/>
         <source>User area</source>
         <translation>Área do usuário</translation>
     </message>
@@ -7411,12 +7421,12 @@ Outros editores de soundfont podem exibir outras unidades.</translation>
         <translation>&amp;Exportar</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="82"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="86"/>
         <source>Untitled</source>
         <translation>Sem nome</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="247"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="251"/>
         <source>Checked presets: %1 / %2 (hidden: %n)</source>
         <translation>
             <numerusform>Predefinições marcadas: %1 / %2 (oculta: %n)</numerusform>
@@ -7424,40 +7434,40 @@ Outros editores de soundfont podem exibir outras unidades.</translation>
         </translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="249"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="253"/>
         <source>Checked presets: %1 / %2</source>
         <translation>Predefinições marcadas: %1 / %2</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="326"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="330"/>
         <source>Select the destination directory</source>
         <translation>Selecione o diretório de destino</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="342"/>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="371"/>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="382"/>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="391"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="346"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="375"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="386"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="395"/>
         <source>Warning</source>
         <translation>Aviso</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="342"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="346"/>
         <source>Invalid directory.</source>
         <translation>Pasta inválida.</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="371"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="375"/>
         <source>At least one preset must be selected.</source>
         <translation>Ao menos uma predefinição deve ser selecionada.</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="382"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="386"/>
         <source>The maximal number of soundfont to export is 128.</source>
         <translation>O número máximo de soundfonts a exportar é 128.</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="391"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="395"/>
         <source>In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 128.</source>
         <translation>No caso de várias soundfonts serem exportadas, o número máximo de predefinições por soundfont é 128.</translation>
     </message>

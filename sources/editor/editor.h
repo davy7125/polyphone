@@ -31,6 +31,7 @@
 class PageSelector;
 class AbstractInputParser;
 class DialogKeyboard;
+class PianoKeybdCustom;
 class QVariantAnimation;
 
 namespace Ui {
@@ -75,8 +76,15 @@ private slots:
     void onPageHidden();
     void onSearchAnimationValueChanged(const QVariant &value);
 
+public:
+    // Display on a keyboard the ranges and root keys of elements (also used by the soundfont explorer)
+    static void customizeKeyboard(PianoKeybdCustom * keyboard, IdList currentIds);
+
+    // Emphasize on a keyboard the ranges of the instrument divisions played by a key, and return these divisions
+    static IdList showPlayedRanges(PianoKeybdCustom * keyboard, EltID idInst, int key, int vel);
+
 private:
-    QVector<bool> getEnabledKeysForInstrument(EltID idInst);
+    static QVector<bool> getEnabledKeysForInstrument(EltID idInst);
     void updateSearchStyle(QColor focusBackgroundColor);
 
     Ui::Editor *ui;

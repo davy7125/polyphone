@@ -140,7 +140,7 @@ void TabManager::openSoundfont(QString fileName, PlayerOptions *playerOptions, b
     }
     ContextManager::recentFile()->addRecentFile(RecentFileManager::FILE_TYPE_SOUNDFONT, fileName);
 
-    // Check if the file is not already open?
+    // Check if the file is not already open? (otherwise possibly loaded by the soundfont explorer)
     SoundfontManager * sf2 = SoundfontManager::getInstance();
     int indexSf2 = -1;
     EltID idSf2(elementSf2);
@@ -148,8 +148,12 @@ void TabManager::openSoundfont(QString fileName, PlayerOptions *playerOptions, b
     {
         if (sf2->getQstr(EltID(elementSf2, i), champ_filenameInitial) == fileName)
         {
-            indexSf2 = i;
-            break;
+            if (!sf2->isTemporary(i))
+            {
+                indexSf2 = i;
+                break;
+            }
+            indexSf2 = i; // The most recent temporary soundfont, the one played by the explorer
         }
     }
 
@@ -186,15 +190,26 @@ void TabManager::openSoundfont(QString fileName, PlayerOptions *playerOptions, b
     if (indexSf2 == -1)
         tab->initialize(InputFactory::getInput(fileName), async);
     else
+    {
+        // A soundfont loaded by the soundfont explorer becomes a regular soundfont
+        if (sf2->isTemporary(indexSf2))
+        {
+            sf2->setTemporary(indexSf2, false);
+            sf2->emitNewSoundfontLoaded(indexSf2);
+        }
         tab->initializeWithSoundfontIndex(indexSf2);
+    }
 
-    // Possibly open the keyboard, recorder and MIDI player windows
+    // Possibly open the keyboard and recorder (if not already used by a soundfont explorer), and MIDI player windows
     if (_soundfontTabs.count() == 1)
     {
-        if (ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "keyboard_open", false).toBool())
-            emit keyboardDisplayChanged(true);
-        if (ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "recorder_open", false).toBool())
-            emit recorderDisplayChanged(true);
+        if (!isExplorerPlaying())
+        {
+            if (ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "keyboard_open", false).toBool())
+                emit keyboardDisplayChanged(true);
+            if (ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "recorder_open", false).toBool())
+                emit recorderDisplayChanged(true);
+        }
         if (ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "midiplayer_open", false).toBool())
             emit midiPlayerDisplayChanged(true);
     }
@@ -221,8 +236,10 @@ void TabManager::openDirectory(QString directoryPath)
     QString dirName = dir.dirName();
 
     // Create a new browser
-    DirectoryBrowser * browser = new DirectoryBrowser();
+    DirectoryBrowser * browser = new DirectoryBrowser(_dialogKeyboard);
     connect(browser, SIGNAL(itemDoubleClicked(QString,EltID)), this, SLOT(openSoundfont(QString,EltID)));
+    connect(browser, SIGNAL(keyboardDisplayChanged(bool)), this, SIGNAL(keyboardDisplayChanged(bool)));
+    connect(browser, SIGNAL(recorderDisplayChanged(bool)), this, SIGNAL(recorderDisplayChanged(bool)));
     int index = _stackedWidget->addWidgetWithTab(browser, ":/icons/folder.svg", dirName);
     _stackedWidget->setTabToolTip(browser, directoryPath);
     _dirBrowserTabs << browser;
@@ -230,6 +247,15 @@ void TabManager::openDirectory(QString directoryPath)
     // Initialize and display it
     browser->initialize(directoryPath);
     _stackedWidget->setCurrentIndex(index);
+
+    // Possibly open the keyboard and recorder windows, if not already used by a soundfont tab
+    if (_dirBrowserTabs.count() == 1 && _soundfontTabs.empty() && isExplorerPlaying())
+    {
+        if (ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "keyboard_open", false).toBool())
+            emit keyboardDisplayChanged(true);
+        if (ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "recorder_open", false).toBool())
+            emit recorderDisplayChanged(true);
+    }
 }
 
 void TabManager::openSoundfont(QString filePath, EltID id)
@@ -346,9 +372,12 @@ void TabManager::onTabCloseRequested(QWidget * widget)
             // Save the state of the keyboard, recorder and MIDI player windows
             saveWindowState();
 
-            // Close them
-            emit keyboardDisplayChanged(false, false);
-            emit recorderDisplayChanged(false, false);
+            // Close them (the keyboard and the recorder are still used by the soundfont explorers)
+            if (!isExplorerPlaying())
+            {
+                emit keyboardDisplayChanged(false, false);
+                emit recorderDisplayChanged(false, false);
+            }
             emit midiPlayerDisplayChanged(false, false);
         }
     }
@@ -384,6 +413,15 @@ void TabManager::onTabCloseRequested(QWidget * widget)
         Tab * tab = dynamic_cast<Tab *>(widget);
         _stackedWidget->removeWidgetWithTab(tab);
         delete browser;
+
+        if (!ContextManager::s_playerMode && _dirBrowserTabs.empty() && _soundfontTabs.empty())
+        {
+            // Save the state of the keyboard and recorder windows and close them
+            ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "keyboard_open", EditorToolBar::isKeyboardOpen());
+            ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "recorder_open", EditorToolBar::isRecorderOpen());
+            emit keyboardDisplayChanged(false, false);
+            emit recorderDisplayChanged(false, false);
+        }
     }
 }
 
@@ -456,6 +494,12 @@ void TabManager::setCurrentWidget(QWidget * widget)
 {
     if (widget != nullptr)
         _stackedWidget->setCurrentWidget(widget);
+}
+
+bool TabManager::isExplorerPlaying()
+{
+    // Not in player mode, where the explorers play nothing
+    return !_dirBrowserTabs.empty() && !ContextManager::s_playerMode;
 }
 
 void TabManager::saveWindowState()

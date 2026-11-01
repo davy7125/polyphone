@@ -329,21 +329,26 @@ void Editor::customizeKeyboard()
     if (!this->isVisible())
         return;
 
-    _dialogKeyboard->getKeyboard()->clearCustomization();
-    if (_currentIds.isEmpty())
+    customizeKeyboard(_dialogKeyboard->getKeyboard(), _currentIds);
+}
+
+void Editor::customizeKeyboard(PianoKeybdCustom * keyboard, IdList currentIds)
+{
+    keyboard->clearCustomization();
+    if (currentIds.isEmpty())
         return;
 
     // Browse all ids
     SoundfontManager * sf2 = SoundfontManager::getInstance();
-    IdList ids  = _currentIds;
+    IdList ids  = currentIds;
     RangesType defaultKeyRange;
     defaultKeyRange.byLo = 0;
     defaultKeyRange.byHi = 127;
     bool defaultDefined = false;
     bool displayRootKeys = true;
-    for (int i = 0; i < _currentIds.count(); i++)
+    for (int i = 0; i < currentIds.count(); i++)
     {
-        EltID id = _currentIds[i];
+        EltID id = currentIds[i];
 
         // Nothing to customize for headers
         if (id.typeElement == elementSf2 || id.typeElement == elementRootSmpl ||
@@ -356,12 +361,12 @@ void Editor::customizeKeyboard()
             QList<int> rootKeys;
             bool uniqueSample = true;
             rootKeys << sf2->get(id, champ_byOriginalPitch).bValue;
-            for (int j = i + 1; j < _currentIds.count(); j++)
+            for (int j = i + 1; j < currentIds.count(); j++)
             {
-                if (_currentIds[j].typeElement == elementSmpl)
+                if (currentIds[j].typeElement == elementSmpl)
                 {
                     uniqueSample = false;
-                    int rootKey = sf2->get(_currentIds[j], champ_byOriginalPitch).bValue;
+                    int rootKey = sf2->get(currentIds[j], champ_byOriginalPitch).bValue;
                     if (!rootKeys.contains(rootKey))
                         rootKeys << rootKey;
                 }
@@ -369,15 +374,15 @@ void Editor::customizeKeyboard()
 
             // Show the rootkeys and enable the piano if there is only one sample
             foreach (int rootKey, rootKeys)
-                _dialogKeyboard->getKeyboard()->addRangeAndRootKey(rootKey, uniqueSample ? 0 : -1, uniqueSample ? 127 : -1);
+                keyboard->addRangeAndRootKey(rootKey, uniqueSample ? 0 : -1, uniqueSample ? 127 : -1);
             return;
         }
 
         if (id.typeElement == elementInst || id.typeElement == elementPrst)
         {
             // If more than one global divison are in the list, don't customize
-            for (int j = i + 1; j < _currentIds.count(); j++)
-                if (_currentIds[j].typeElement == elementInst || _currentIds[j].typeElement == elementPrst)
+            for (int j = i + 1; j < currentIds.count(); j++)
+                if (currentIds[j].typeElement == elementInst || currentIds[j].typeElement == elementPrst)
                     return;
 
             // Default key range of the divisions
@@ -441,7 +446,7 @@ void Editor::customizeKeyboard()
             RangesType keyRange = defaultKeyRange;
             if (sf2->isSet(id, champ_keyRange))
                 keyRange = sf2->get(id, champ_keyRange).rValue;
-            _dialogKeyboard->getKeyboard()->addRangeAndRootKey(rootKey, keyRange.byLo, keyRange.byHi);
+            keyboard->addRangeAndRootKey(rootKey, keyRange.byLo, keyRange.byHi);
         }
         else // elementPrstInst
         {
@@ -470,7 +475,7 @@ void Editor::customizeKeyboard()
                     if (startKey != -1)
                     {
                         // Close a range
-                        _dialogKeyboard->getKeyboard()->addRangeAndRootKey(-1, startKey, key - 1);
+                        keyboard->addRangeAndRootKey(-1, startKey, key - 1);
                         startKey = -1;
                     }
                 }
@@ -478,7 +483,7 @@ void Editor::customizeKeyboard()
 
             // Final range
             if (startKey != -1)
-                _dialogKeyboard->getKeyboard()->addRangeAndRootKey(-1, startKey, maxRange.byHi);
+                keyboard->addRangeAndRootKey(-1, startKey, maxRange.byHi);
         }
     }
 }
@@ -593,59 +598,7 @@ void Editor::onProcessKeyMainThread(int channel, int key, int vel)
         if (vel > 0)
         {
             // Emphasize the related ranges
-            EltID idInst = ids[0];
-            idInst.typeElement = elementInst;
-            RangesType defaultKeyRange, defaultVelRange;
-            if (sf2->isSet(idInst, champ_keyRange))
-                defaultKeyRange = sf2->get(idInst, champ_keyRange).rValue;
-            else
-            {
-                defaultKeyRange.byLo = 0;
-                defaultKeyRange.byHi = 127;
-            }
-            if (sf2->isSet(idInst, champ_velRange))
-                defaultVelRange = sf2->get(idInst, champ_velRange).rValue;
-            else
-            {
-                defaultVelRange.byLo = 0;
-                defaultVelRange.byHi = 127;
-            }
-
-            EltID idInstSmpl = ids[0];
-            idInstSmpl.typeElement = elementInstSmpl;
-            IdList currentIds;
-            foreach (int i, sf2->getSiblings(idInstSmpl))
-            {
-                idInstSmpl.indexElt2 = i;
-                int keyMin, keyMax, velMin, velMax;
-                if (sf2->isSet(idInstSmpl, champ_keyRange))
-                {
-                    RangesType rangeTmp = sf2->get(idInstSmpl, champ_keyRange).rValue;
-                    keyMin = rangeTmp.byLo;
-                    keyMax = rangeTmp.byHi;
-                }
-                else
-                {
-                    keyMin = defaultKeyRange.byLo;
-                    keyMax = defaultKeyRange.byHi;
-                }
-                if (sf2->isSet(idInstSmpl, champ_velRange))
-                {
-                    RangesType rangeTmp = sf2->get(idInstSmpl, champ_velRange).rValue;
-                    velMin = rangeTmp.byLo;
-                    velMax = rangeTmp.byHi;
-                }
-                else
-                {
-                    velMin = defaultVelRange.byLo;
-                    velMax = defaultVelRange.byHi;
-                }
-                if (keyMin <= key && keyMax >= key && velMin <= vel && velMax >= vel)
-                {
-                    currentIds << idInstSmpl;
-                    _dialogKeyboard->getKeyboard()->addCurrentRange(key, keyMin, keyMax);
-                }
-            }
+            IdList currentIds = showPlayedRanges(_dialogKeyboard->getKeyboard(), ids[0], key, vel);
 
             // Possibly update the current selection
             if (!currentIds.isEmpty() && (QApplication::queryKeyboardModifiers() & Qt::ControlModifier) != 0)
@@ -718,6 +671,65 @@ void Editor::onProcessKeyMainThread(int channel, int key, int vel)
                 ui->treeView->onSelectionChanged(currentIds);
         }
     }
+}
+
+IdList Editor::showPlayedRanges(PianoKeybdCustom * keyboard, EltID idInst, int key, int vel)
+{
+    SoundfontManager * sf2 = SoundfontManager::getInstance();
+    idInst.typeElement = elementInst;
+    RangesType defaultKeyRange, defaultVelRange;
+    if (sf2->isSet(idInst, champ_keyRange))
+        defaultKeyRange = sf2->get(idInst, champ_keyRange).rValue;
+    else
+    {
+        defaultKeyRange.byLo = 0;
+        defaultKeyRange.byHi = 127;
+    }
+    if (sf2->isSet(idInst, champ_velRange))
+        defaultVelRange = sf2->get(idInst, champ_velRange).rValue;
+    else
+    {
+        defaultVelRange.byLo = 0;
+        defaultVelRange.byHi = 127;
+    }
+
+    EltID idInstSmpl = idInst;
+    idInstSmpl.typeElement = elementInstSmpl;
+    IdList currentIds;
+    foreach (int i, sf2->getSiblings(idInstSmpl))
+    {
+        idInstSmpl.indexElt2 = i;
+        int keyMin, keyMax, velMin, velMax;
+        if (sf2->isSet(idInstSmpl, champ_keyRange))
+        {
+            RangesType rangeTmp = sf2->get(idInstSmpl, champ_keyRange).rValue;
+            keyMin = rangeTmp.byLo;
+            keyMax = rangeTmp.byHi;
+        }
+        else
+        {
+            keyMin = defaultKeyRange.byLo;
+            keyMax = defaultKeyRange.byHi;
+        }
+        if (sf2->isSet(idInstSmpl, champ_velRange))
+        {
+            RangesType rangeTmp = sf2->get(idInstSmpl, champ_velRange).rValue;
+            velMin = rangeTmp.byLo;
+            velMax = rangeTmp.byHi;
+        }
+        else
+        {
+            velMin = defaultVelRange.byLo;
+            velMax = defaultVelRange.byHi;
+        }
+        if (keyMin <= key && keyMax >= key && velMin <= vel && velMax >= vel)
+        {
+            currentIds << idInstSmpl;
+            keyboard->addCurrentRange(key, keyMin, keyMax);
+        }
+    }
+
+    return currentIds;
 }
 
 void Editor::onActionRequired(TabAction action)

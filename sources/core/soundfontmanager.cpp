@@ -776,6 +776,21 @@ bool SoundfontManager::isEdited(int indexSf2)
     return this->_undoRedo->getEdition(indexSf2) != _soundfonts->getSoundfont(indexSf2)->_numEdition;
 }
 
+void SoundfontManager::setTemporary(int indexSf2, bool isTemporary)
+{
+    QMutexLocker locker(&_mutex);
+    if (_soundfonts->getSoundfont(indexSf2) != nullptr)
+        _soundfonts->getSoundfont(indexSf2)->_isTemporary = isTemporary;
+}
+
+bool SoundfontManager::isTemporary(int indexSf2)
+{
+    QMutexLocker locker(&_mutex);
+    if (_soundfonts->getSoundfont(indexSf2) == nullptr)
+        return false;
+    return _soundfonts->getSoundfont(indexSf2)->_isTemporary;
+}
+
 // Add a child to ID
 int SoundfontManager::add(EltID id)
 {

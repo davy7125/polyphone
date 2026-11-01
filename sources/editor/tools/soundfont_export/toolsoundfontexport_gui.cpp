@@ -74,6 +74,10 @@ void ToolSoundfontExport_gui::updateInterface(AbstractToolParameters * parameter
     EltID idSf2(elementSf2);
     foreach (int i, sm->getSiblings(idSf2))
     {
+        // Not the soundfonts loaded without tab by the soundfont explorer
+        if (sm->isTemporary(i))
+            continue;
+
         EltID id(elementSf2, i);
         QString title = sm->getQstr(id, champ_name);
         if (title.isEmpty())

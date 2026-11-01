@@ -158,6 +158,10 @@ void MidiPlayerChannel::updateSoundfontList()
     EltID idSf2(elementSf2);
     foreach (int sf2Index, sm->getSiblings(idSf2))
     {
+        // Not the soundfonts loaded without tab by the soundfont explorer
+        if (sm->isTemporary(sf2Index))
+            continue;
+
         idSf2.indexSf2 = sf2Index;
         QString name = sm->getQstr(idSf2, champ_name);
         if (name.isEmpty())

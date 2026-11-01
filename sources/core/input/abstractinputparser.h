@@ -43,6 +43,11 @@ public:
     /// Initialize the parser (done by the InputFactory)
     void initialize(QString fileName, SoundfontManager * sm);
 
+    /// Load the soundfont without tab (soundfont explorer): it is marked as temporary in the SoundfontManager, its
+    /// samples are not loaded in advance and the signal "soundfontLoaded" of the SoundfontManager is not sent
+    /// Other temporary soundfonts loaded from the same file are allowed
+    void setTemporary(bool isTemporary) { _isTemporary = isTemporary; }
+
     /// Process a file.
     /// When async is false, the function returns when the job is done
     /// Otherwise the function returns immediately and the signal "finished" is sent later
@@ -79,6 +84,7 @@ private:
     bool _isSuccess;
     QString _error;
     int _sf2Index;
+    bool _isTemporary;
 };
 
 #endif // ABSTRACTINPUTPARSER_H

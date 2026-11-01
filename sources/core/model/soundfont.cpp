@@ -67,6 +67,7 @@ Soundfont::Soundfont(EltID id) :
     _fileNameInitial = "";
     _numEdition = 0;
     _nameSort = "";
+    _isTemporary = false;
 }
 
 Soundfont::~Soundfont()

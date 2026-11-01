@@ -56,6 +56,7 @@ void DirectoryFileData::process()
                 if (parser->canFastLoad())
                 {
                     connect(parser, SIGNAL(finished()), this, SLOT(inputProcessed()));
+                    parser->setTemporary(true);
                     parser->process(true);
                 }
                 else
@@ -93,7 +94,8 @@ void DirectoryFileData::inputProcessed()
     int tmpIndex = parser->getSf2Index();
     delete parser;
 
-    if (tmpIndex != -1)
+    // Delete the soundfont, unless a tab has been opened with it meanwhile
+    if (tmpIndex != -1 && SoundfontManager::getInstance()->isTemporary(tmpIndex))
         SoundfontManager::getInstance()->remove(EltID(elementSf2, tmpIndex));
     emit processFinished();
 }
