@@ -235,7 +235,8 @@ void DirectoryBrowser::on_listView_activated(const QModelIndex &index)
         d->getStatus() == DirectoryFileData::NOT_OPENABLE)
         return;
 
-    emit itemDoubleClicked(d->getPath(), EltID(elementSf2));
+    // No initial selection: the startup view will be used
+    emit itemDoubleClicked(d->getPath(), EltID());
 }
 
 void DirectoryBrowser::onRenameRequested(QString path)
