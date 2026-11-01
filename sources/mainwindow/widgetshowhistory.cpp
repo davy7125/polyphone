@@ -85,6 +85,9 @@ void WidgetShowHistory::addFile(QString path, QDateTime datetime)
     cell->setLink(path);
     cell->setDateTime(datetime);
 
+    // Queued: removing the file rebuilds the list, which deletes the cell
+    connect(cell, SIGNAL(removeClicked(QString)), this, SLOT(removeFile(QString)), Qt::QueuedConnection);
+
     QListWidgetItem *item = new QListWidgetItem();
     item->setSizeHint(QSize(cell->width(), cell->height()));
     ui->listWidget->addItem(item);
@@ -110,6 +113,11 @@ void WidgetShowHistory::on_listWidget_itemSelectionChanged()
         QListWidgetItem * item = ui->listWidget->item(i);
         ((WidgetShowHistoryCell*)ui->listWidget->itemWidget(item))->setActive(item->isSelected());
     }
+}
+
+void WidgetShowHistory::removeFile(QString link)
+{
+    ContextManager::recentFile()->removeRecentSoundfontFile(link);
 }
 
 void WidgetShowHistory::paintEvent(QPaintEvent *event)

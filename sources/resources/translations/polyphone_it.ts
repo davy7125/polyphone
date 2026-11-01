@@ -7812,4 +7812,12 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
         <translation>Lista vuota</translation>
     </message>
 </context>
+<context>
+    <name>WidgetShowHistoryCell</name>
+    <message>
+        <location filename="../../mainwindow/widgetshowhistorycell.ui" line="46"/>
+        <source>Remove from history</source>
+        <translation>Rimuovi dalla cronologia</translation>
+    </message>
+</context>
 </TS>

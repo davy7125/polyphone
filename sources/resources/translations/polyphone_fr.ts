@@ -7752,4 +7752,12 @@ D&apos;autres éditeurs de soundfonts pourraient utiliser d&apos;autres unités.
         <translation>La liste est vide</translation>
     </message>
 </context>
+<context>
+    <name>WidgetShowHistoryCell</name>
+    <message>
+        <location filename="../../mainwindow/widgetshowhistorycell.ui" line="46"/>
+        <source>Remove from history</source>
+        <translation>Retirer de l&apos;historique</translation>
+    </message>
+</context>
 </TS>

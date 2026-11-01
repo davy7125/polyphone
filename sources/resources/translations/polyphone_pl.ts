@@ -7755,4 +7755,12 @@ Inne edytory SoundFontów mogą wyświetlać inne jednostki.</translation>
         <translation>Pusta lista</translation>
     </message>
 </context>
+<context>
+    <name>WidgetShowHistoryCell</name>
+    <message>
+        <location filename="../../mainwindow/widgetshowhistorycell.ui" line="46"/>
+        <source>Remove from history</source>
+        <translation>Usuń z historii</translation>
+    </message>
+</context>
 </TS>

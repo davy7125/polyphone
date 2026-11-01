@@ -135,7 +135,7 @@ void RecentFileManager::removeRecentSoundfontFile(QString filePath)
             _listDateTimes[i] = _listDateTimes.at(i + 1);
         }
         _listFiles[MAX_SF2_FILES - 1] = "";
-        _listDateTimes[0] = QDateTime::currentDateTime();
+        _listDateTimes[MAX_SF2_FILES - 1] = QDateTime();
 
         for (int i = 0; i < MAX_SF2_FILES; i++)
         {

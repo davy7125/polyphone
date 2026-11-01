@@ -7865,4 +7865,12 @@ Andere Soundfont-Editoren könnten andere Einheiten anzeigen.</translation>
         <translation>Leere Liste</translation>
     </message>
 </context>
+<context>
+    <name>WidgetShowHistoryCell</name>
+    <message>
+        <location filename="../../mainwindow/widgetshowhistorycell.ui" line="46"/>
+        <source>Remove from history</source>
+        <translation>Aus dem Verlauf entfernen</translation>
+    </message>
+</context>
 </TS>

@@ -7765,4 +7765,12 @@ Other soundfont editors might display other units.</source>
         <translation>空のリスト</translation>
     </message>
 </context>
+<context>
+    <name>WidgetShowHistoryCell</name>
+    <message>
+        <location filename="../../mainwindow/widgetshowhistorycell.ui" line="46"/>
+        <source>Remove from history</source>
+        <translation>履歴から削除</translation>
+    </message>
+</context>
 </TS>

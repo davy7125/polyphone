@@ -7883,4 +7883,12 @@ Other soundfont editors might display other units.</source>
         <translation>Пустой список</translation>
     </message>
 </context>
+<context>
+    <name>WidgetShowHistoryCell</name>
+    <message>
+        <location filename="../../mainwindow/widgetshowhistorycell.ui" line="46"/>
+        <source>Remove from history</source>
+        <translation>Удалить из истории</translation>
+    </message>
+</context>
 </TS>

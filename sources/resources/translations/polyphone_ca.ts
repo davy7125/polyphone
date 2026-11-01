@@ -7739,4 +7739,12 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
         <translation>Llista buida</translation>
     </message>
 </context>
+<context>
+    <name>WidgetShowHistoryCell</name>
+    <message>
+        <location filename="../../mainwindow/widgetshowhistorycell.ui" line="46"/>
+        <source>Remove from history</source>
+        <translation>Elimina de l&apos;historial</translation>
+    </message>
+</context>
 </TS>

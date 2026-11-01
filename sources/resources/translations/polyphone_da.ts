@@ -7812,4 +7812,12 @@ Andre soundfont-editorer kan vise andre enheder.</translation>
         <translation>Tom liste</translation>
     </message>
 </context>
+<context>
+    <name>WidgetShowHistoryCell</name>
+    <message>
+        <location filename="../../mainwindow/widgetshowhistorycell.ui" line="46"/>
+        <source>Remove from history</source>
+        <translation>Fjern fra historik</translation>
+    </message>
+</context>
 </TS>

@@ -7707,4 +7707,12 @@ Other soundfont editors might display other units.</source>
         <translation>列表为空</translation>
     </message>
 </context>
+<context>
+    <name>WidgetShowHistoryCell</name>
+    <message>
+        <location filename="../../mainwindow/widgetshowhistorycell.ui" line="46"/>
+        <source>Remove from history</source>
+        <translation>从历史记录中移除</translation>
+    </message>
+</context>
 </TS>

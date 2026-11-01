@@ -7776,4 +7776,12 @@ Andere soundfont-editors kunnen andere eenheden weergeven.</translation>
         <translation>Lijst is leeg</translation>
     </message>
 </context>
+<context>
+    <name>WidgetShowHistoryCell</name>
+    <message>
+        <location filename="../../mainwindow/widgetshowhistorycell.ui" line="46"/>
+        <source>Remove from history</source>
+        <translation>Uit geschiedenis verwijderen</translation>
+    </message>
+</context>
 </TS>

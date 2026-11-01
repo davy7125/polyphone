@@ -7811,4 +7811,12 @@ Jiné editory soundfontů mohou zobrazovat jiné jednotky.</translation>
         <translation>Prázdný seznam</translation>
     </message>
 </context>
+<context>
+    <name>WidgetShowHistoryCell</name>
+    <message>
+        <location filename="../../mainwindow/widgetshowhistorycell.ui" line="46"/>
+        <source>Remove from history</source>
+        <translation>Odstranit z historie</translation>
+    </message>
+</context>
 </TS>

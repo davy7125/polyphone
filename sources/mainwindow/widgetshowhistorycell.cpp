@@ -43,6 +43,14 @@ WidgetShowHistoryCell::WidgetShowHistoryCell(QWidget *parent) :
 
     // The style changes when the cell is activated
     _activeStyleSheet = "QLabel{color:" + ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() + ";}";
+
+    // Button for removing the file from the history, only visible when the cell is activated
+    QColor removeHover = ThemeManager::mix(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
+                                           ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT), 0.2);
+    ui->toolButtonRemove->setIcon(s_icons->_removeIcon);
+    ui->toolButtonRemove->setStyleSheet("QToolButton{border:0;border-radius:2px;padding:2px;background-color:transparent}"
+                                        "QToolButton:hover,QToolButton:pressed{background-color:" + removeHover.name() + "}");
+    ui->toolButtonRemove->hide();
 }
 
 WidgetShowHistoryCell::Icons::Icons()
@@ -51,6 +59,7 @@ WidgetShowHistoryCell::Icons::Icons()
     _fileIconActive = ContextManager::theme()->getColoredSvg(":/icons/file-audio.svg", QSize(48, 64), ThemeManager::HIGHLIGHTED_TEXT);
     _fileDirIcon = ContextManager::theme()->getColoredSvg(":/icons/folder.svg", QSize(48, 48), ThemeManager::LIST_TEXT);
     _fileDirIconActive = ContextManager::theme()->getColoredSvg(":/icons/folder.svg", QSize(48, 48), ThemeManager::HIGHLIGHTED_TEXT);
+    _removeIcon = ContextManager::theme()->getColoredSvg(":/icons/trash.svg", QSize(16, 16), ThemeManager::HIGHLIGHTED_TEXT);
 }
 
 WidgetShowHistoryCell::~WidgetShowHistoryCell()
@@ -87,10 +96,17 @@ void WidgetShowHistoryCell::setActive(bool isActive)
     {
         this->setStyleSheet(_activeStyleSheet);
         ui->iconFile->setPixmap(_isDir ? s_icons->_fileDirIconActive : s_icons->_fileIconActive);
+        ui->toolButtonRemove->show();
     }
     else if (!isActive && this->styleSheet() != "")
     {
         this->setStyleSheet("");
         ui->iconFile->setPixmap(_isDir ? s_icons->_fileDirIcon : s_icons->_fileIcon);
+        ui->toolButtonRemove->hide();
     }
+}
+
+void WidgetShowHistoryCell::on_toolButtonRemove_clicked()
+{
+    emit removeClicked(_link);
 }

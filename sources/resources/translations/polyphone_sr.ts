@@ -7758,4 +7758,12 @@ Other soundfont editors might display other units.</source>
         <translation>Празна листа</translation>
     </message>
 </context>
+<context>
+    <name>WidgetShowHistoryCell</name>
+    <message>
+        <location filename="../../mainwindow/widgetshowhistorycell.ui" line="46"/>
+        <source>Remove from history</source>
+        <translation>Уклони из историјата</translation>
+    </message>
+</context>
 </TS>

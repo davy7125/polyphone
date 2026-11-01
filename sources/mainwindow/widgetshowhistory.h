@@ -59,6 +59,7 @@ protected:
 private slots:
     void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
     void on_listWidget_itemSelectionChanged();
+    void removeFile(QString link);
 
 private:
     void updateCellSize();

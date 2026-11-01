@@ -44,6 +44,12 @@ public:
     void setDateTime(QDateTime dateTime);
     void setActive(bool isActive);
 
+signals:
+    void removeClicked(QString link);
+
+private slots:
+    void on_toolButtonRemove_clicked();
+
 private:
     class Icons
     {
@@ -54,6 +60,7 @@ private:
         QPixmap _fileIconActive;
         QPixmap _fileDirIcon;
         QPixmap _fileDirIconActive;
+        QPixmap _removeIcon;
     };
 
     Ui::WidgetShowHistoryCell *ui;
