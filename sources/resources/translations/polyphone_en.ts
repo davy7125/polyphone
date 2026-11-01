@@ -935,52 +935,57 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="637"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="606"/>
+        <source>Restore tabs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/configsectioninterface.ui" line="651"/>
         <source>General</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="642"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="656"/>
         <source>Samples</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="647"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="661"/>
         <source>Samples - first sample</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="652"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="666"/>
         <source>Instruments</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="657"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="671"/>
         <source>Instruments - first instrument - Table</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="662"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="676"/>
         <source>Instruments - first instrument - Ranges</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="667"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="681"/>
         <source>Instruments - first instrument - Envelopes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="672"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="686"/>
         <source>Presets</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="677"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="691"/>
         <source>Presets - first preset - Table</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="682"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="696"/>
         <source>Presets - first preset - Ranges</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1005,22 +1010,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="613"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="627"/>
         <source>by key range</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="618"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="632"/>
         <source>by velocity range</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="623"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="637"/>
         <source>in alphabetical order</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="628"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="642"/>
         <source>none</source>
         <comment>speaking of the &quot;sort divisions&quot;</comment>
         <translation type="unfinished"></translation>
@@ -1087,15 +1092,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="211"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="223"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="235"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="247"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="259"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="271"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="283"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="295"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="307"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="215"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="227"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="239"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="251"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="263"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="275"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="287"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="299"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="311"/>
         <source>Select a color</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3039,7 +3044,7 @@ repository</source>
 <context>
     <name>GraphicsViewEnvelop</name>
     <message>
-        <location filename="../../editor/graphics/graphicsviewenvelop.cpp" line="354"/>
+        <location filename="../../editor/graphics/graphicsviewenvelop.cpp" line="458"/>
         <source>s</source>
         <comment>unit for seconds</comment>
         <translation type="unfinished"></translation>
@@ -3238,12 +3243,12 @@ repository</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="322"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="330"/>
         <source>Opening files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="332"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="340"/>
         <source>Opening a directory</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3703,13 +3708,13 @@ default mod.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/pageenvelope.cpp" line="93"/>
+        <location filename="../../editor/pageenvelope.cpp" line="122"/>
         <source>dB</source>
         <comment>unit for decibels</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/pageenvelope.cpp" line="106"/>
+        <location filename="../../editor/pageenvelope.cpp" line="135"/>
         <source>%</source>
         <comment>percentage</comment>
         <translation type="unfinished"></translation>
@@ -4779,89 +4784,89 @@ Both divisions must share the same note and velocity ranges.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="106"/>
-        <location filename="../../main.cpp" line="192"/>
+        <location filename="../../main.cpp" line="107"/>
+        <location filename="../../main.cpp" line="193"/>
         <source>The file &quot;%1&quot; does not exist.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="114"/>
-        <location filename="../../main.cpp" line="197"/>
+        <location filename="../../main.cpp" line="115"/>
+        <location filename="../../main.cpp" line="198"/>
         <source>The directory &quot;%1&quot; does not exist.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="119"/>
+        <location filename="../../main.cpp" line="120"/>
         <source>The file &quot;%1&quot; already exists.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="124"/>
-        <location filename="../../main.cpp" line="213"/>
+        <location filename="../../main.cpp" line="125"/>
+        <location filename="../../main.cpp" line="214"/>
         <source>Loading file &quot;%1&quot;...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="129"/>
-        <location filename="../../main.cpp" line="218"/>
+        <location filename="../../main.cpp" line="130"/>
+        <location filename="../../main.cpp" line="219"/>
         <source>Couldn&apos;t load file &quot;%1&quot;: %2.</source>
         <oldsource>Couldn&apos;t load &quot;%1&quot;: %2.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="135"/>
-        <location filename="../../main.cpp" line="224"/>
+        <location filename="../../main.cpp" line="136"/>
+        <location filename="../../main.cpp" line="225"/>
         <source>File successfully loaded!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="142"/>
-        <location filename="../../main.cpp" line="146"/>
-        <location filename="../../main.cpp" line="159"/>
-        <location filename="../../main.cpp" line="228"/>
+        <location filename="../../main.cpp" line="143"/>
+        <location filename="../../main.cpp" line="147"/>
+        <location filename="../../main.cpp" line="160"/>
+        <location filename="../../main.cpp" line="229"/>
         <source>Writing file &quot;%1&quot;...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="152"/>
-        <location filename="../../main.cpp" line="156"/>
+        <location filename="../../main.cpp" line="153"/>
+        <location filename="../../main.cpp" line="157"/>
         <source>Writing files in directory &quot;%1&quot;...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="162"/>
+        <location filename="../../main.cpp" line="163"/>
         <source>Unknown mode &quot;%1&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="170"/>
-        <location filename="../../main.cpp" line="208"/>
-        <location filename="../../main.cpp" line="236"/>
+        <location filename="../../main.cpp" line="171"/>
+        <location filename="../../main.cpp" line="209"/>
+        <location filename="../../main.cpp" line="237"/>
         <source>An error occurred: %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="175"/>
+        <location filename="../../main.cpp" line="176"/>
         <source>File successfully converted!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="239"/>
+        <location filename="../../main.cpp" line="240"/>
         <source>File successfully rendered!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="252"/>
+        <location filename="../../main.cpp" line="253"/>
         <source>Previous configuration is now cleared.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="261"/>
+        <location filename="../../main.cpp" line="262"/>
         <source>See &quot;%1&quot; for more information.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="263"/>
+        <location filename="../../main.cpp" line="264"/>
         <source>Write &quot;%1&quot; to show usage.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5416,7 +5421,7 @@ download the list</source>
 <context>
     <name>SoundfontTab</name>
     <message>
-        <location filename="../../mainwindow/soundfonttab.cpp" line="90"/>
+        <location filename="../../mainwindow/soundfonttab.cpp" line="102"/>
         <source>Untitled</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5518,7 +5523,7 @@ download content</source>
     </message>
     <message>
         <location filename="../../mainwindow/tabmanager.cpp" line="137"/>
-        <location filename="../../mainwindow/tabmanager.cpp" line="318"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="324"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5528,42 +5533,42 @@ download content</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="275"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="281"/>
         <source>Online repository</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="313"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="319"/>
         <source>Save before exiting?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="316"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="322"/>
         <source>untitled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="317"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="323"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="320"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="326"/>
         <source>&amp;Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="321"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="327"/>
         <source>&amp;Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="322"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="328"/>
         <source>Do&amp;n&apos;t save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="455"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="461"/>
         <source>User area</source>
         <translation type="unfinished"></translation>
     </message>

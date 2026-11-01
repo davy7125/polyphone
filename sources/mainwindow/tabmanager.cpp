@@ -127,7 +127,7 @@ void TabManager::openNewSoundfont()
     _stackedWidget->setCurrentIndex(index);
 }
 
-void TabManager::openSoundfont(QString fileName, PlayerOptions *playerOptions, bool async, EltID initialSelection)
+void TabManager::openSoundfont(QString fileName, PlayerOptions *playerOptions, bool async, EltID initialSelection, bool addToHistory)
 {
     fileName = Utils::fixFilePath(fileName);
 
@@ -138,7 +138,8 @@ void TabManager::openSoundfont(QString fileName, PlayerOptions *playerOptions, b
                              tr("Cannot open file \"%1\"").arg(fileName));
         return;
     }
-    ContextManager::recentFile()->addRecentFile(RecentFileManager::FILE_TYPE_SOUNDFONT, fileName);
+    if (addToHistory)
+        ContextManager::recentFile()->addRecentFile(RecentFileManager::FILE_TYPE_SOUNDFONT, fileName);
 
     // Check if the file is not already open? (otherwise possibly loaded by the soundfont explorer)
     SoundfontManager * sf2 = SoundfontManager::getInstance();
@@ -157,16 +158,20 @@ void TabManager::openSoundfont(QString fileName, PlayerOptions *playerOptions, b
         }
     }
 
-    // Find the corresponding editor if the file is already open (not in synth mode)
-    if (!ContextManager::s_playerMode && indexSf2 != -1)
+    // Find the corresponding editor if the file is already open or still loading (not in synth mode)
+    if (!ContextManager::s_playerMode)
     {
         foreach (SoundfontTab * tab, _soundfontTabs)
         {
-            if (tab->getSf2Index() == indexSf2)
+            if ((indexSf2 != -1 && tab->getSf2Index() == indexSf2) ||
+                (indexSf2 == -1 && tab->getSf2Index() == -1 && tab->getFilePath() == fileName))
             {
-                initialSelection.indexSf2 = indexSf2;
-                Editor * editor = (Editor *)tab;
-                editor->selectElement(initialSelection);
+                if (indexSf2 != -1)
+                {
+                    initialSelection.indexSf2 = indexSf2;
+                    Editor * editor = (Editor *)tab;
+                    editor->selectElement(initialSelection);
+                }
 
                 int index = _stackedWidget->indexOf(tab);
                 _stackedWidget->setCurrentIndex(index);
@@ -215,7 +220,7 @@ void TabManager::openSoundfont(QString fileName, PlayerOptions *playerOptions, b
     }
 }
 
-void TabManager::openDirectory(QString directoryPath)
+void TabManager::openDirectory(QString directoryPath, bool addToHistory)
 {
     directoryPath = Utils::fixFilePath(directoryPath);
 
@@ -229,7 +234,8 @@ void TabManager::openDirectory(QString directoryPath)
             return;
         }
     }
-    ContextManager::recentFile()->addRecentFile(RecentFileManager::FILE_TYPE_SOUNDFONT, directoryPath);
+    if (addToHistory)
+        ContextManager::recentFile()->addRecentFile(RecentFileManager::FILE_TYPE_SOUNDFONT, directoryPath);
 
     // Name of the directory
     QDir dir(directoryPath);
@@ -494,6 +500,53 @@ void TabManager::setCurrentWidget(QWidget * widget)
 {
     if (widget != nullptr)
         _stackedWidget->setCurrentWidget(widget);
+}
+
+void TabManager::saveOpenTabs()
+{
+    // Not in player mode, so that the tabs of the editor are kept
+    if (ContextManager::s_playerMode)
+        return;
+
+    // Soundfonts and directories in the order of the tab bar (a new soundfont never saved has no path)
+    QStringList paths;
+    if (ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "restore_tabs", false).toBool())
+    {
+        foreach (Tab * tab, _stackedWidget->getTabs())
+        {
+            QString path;
+            if (SoundfontTab * soundfontTab = dynamic_cast<SoundfontTab *>(tab))
+                path = soundfontTab->getFilePath();
+            else if (DirectoryBrowser * browser = dynamic_cast<DirectoryBrowser *>(tab))
+                path = browser->getDirectoryPath();
+            if (!path.isEmpty())
+                paths << path;
+        }
+    }
+    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "open_tabs", paths);
+}
+
+void TabManager::restoreOpenTabs()
+{
+    if (ContextManager::s_playerMode ||
+        !ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "restore_tabs", false).toBool())
+        return;
+
+    // Soundfonts and directories deleted, renamed or moved in the meantime are skipped, the history is not changed
+    QStringList paths = ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "open_tabs", QStringList()).toStringList();
+    foreach (QString path, paths)
+    {
+        QFileInfo fileInfo(path);
+        if (!fileInfo.isReadable())
+            continue;
+        if (fileInfo.isDir())
+            openDirectory(path, false);
+        else if (fileInfo.isFile() && InputFactory::isSuffixSupported(fileInfo.suffix()))
+            openSoundfont(path, nullptr, true, EltID(), false);
+    }
+
+    // The home screen stays displayed
+    showHome();
 }
 
 bool TabManager::isExplorerPlaying()

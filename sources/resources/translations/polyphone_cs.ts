@@ -937,52 +937,57 @@
         <translation>Jednočárkované C (C1) → C5, pak D♭5</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="637"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="606"/>
+        <source>Restore tabs</source>
+        <translation>Obnovit karty</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/configsectioninterface.ui" line="651"/>
         <source>General</source>
         <translation>Obecné</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="642"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="656"/>
         <source>Samples</source>
         <translation>Vzorky</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="647"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="661"/>
         <source>Samples - first sample</source>
         <translation>Vzorky - první vzorek</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="652"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="666"/>
         <source>Instruments</source>
         <translation>Nástroje</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="657"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="671"/>
         <source>Instruments - first instrument - Table</source>
         <translation>Nástroje - první nástroj - Tabulka</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="662"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="676"/>
         <source>Instruments - first instrument - Ranges</source>
         <translation>Nástroje - první nástroj - Rozsahy</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="667"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="681"/>
         <source>Instruments - first instrument - Envelopes</source>
         <translation>Nástroje - první nástroj - Obálky</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="672"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="686"/>
         <source>Presets</source>
         <translation>Přednastavení</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="677"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="691"/>
         <source>Presets - first preset - Table</source>
         <translation>Přednastavení - první přednastavení - Tabulka</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="682"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="696"/>
         <source>Presets - first preset - Ranges</source>
         <translation>Přednastavení - první přednastavení - Rozsahy</translation>
     </message>
@@ -1007,22 +1012,22 @@
         <translation>Pohled při spuštění</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="613"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="627"/>
         <source>by key range</source>
         <translation>Podle rozsahu not</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="618"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="632"/>
         <source>by velocity range</source>
         <translation>Podle rozsahu dynamiky</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="623"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="637"/>
         <source>in alphabetical order</source>
         <translation>abecedně</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="628"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="642"/>
         <source>none</source>
         <comment>speaking of the &quot;sort divisions&quot;</comment>
         <translation>žádné</translation>
@@ -1089,15 +1094,15 @@
         <translation>Tato změna se projeví při příštím spuštění programu.</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="211"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="223"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="235"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="247"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="259"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="271"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="283"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="295"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="307"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="215"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="227"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="239"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="251"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="263"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="275"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="287"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="299"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="311"/>
         <source>Select a color</source>
         <translation>Vyberte barvu</translation>
     </message>
@@ -3050,7 +3055,7 @@ repository</source>
 <context>
     <name>GraphicsViewEnvelop</name>
     <message>
-        <location filename="../../editor/graphics/graphicsviewenvelop.cpp" line="354"/>
+        <location filename="../../editor/graphics/graphicsviewenvelop.cpp" line="458"/>
         <source>s</source>
         <comment>unit for seconds</comment>
         <translation>s</translation>
@@ -3248,12 +3253,12 @@ repository</source>
         <translation>Soubor &quot;%1&quot; byl změněn.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="322"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="330"/>
         <source>Opening files</source>
         <translation>Otevírají se soubory</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="332"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="340"/>
         <source>Opening a directory</source>
         <translation>Otevírá se adresář</translation>
     </message>
@@ -3716,13 +3721,13 @@ výchozího mod.</translation>
         <translation>Modulační obálka</translation>
     </message>
     <message>
-        <location filename="../../editor/pageenvelope.cpp" line="93"/>
+        <location filename="../../editor/pageenvelope.cpp" line="122"/>
         <source>dB</source>
         <comment>unit for decibels</comment>
         <translation>dB</translation>
     </message>
     <message>
-        <location filename="../../editor/pageenvelope.cpp" line="106"/>
+        <location filename="../../editor/pageenvelope.cpp" line="135"/>
         <source>%</source>
         <comment>percentage</comment>
         <translation>%</translation>
@@ -4816,89 +4821,89 @@ Obě divize musí sdílet stejné rozsahy not a dynamiky.</translation>
         <translation>nelze vytvořit soubor &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="106"/>
-        <location filename="../../main.cpp" line="192"/>
+        <location filename="../../main.cpp" line="107"/>
+        <location filename="../../main.cpp" line="193"/>
         <source>The file &quot;%1&quot; does not exist.</source>
         <translation>Soubor &quot;%1&quot; neexistuje.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="114"/>
-        <location filename="../../main.cpp" line="197"/>
+        <location filename="../../main.cpp" line="115"/>
+        <location filename="../../main.cpp" line="198"/>
         <source>The directory &quot;%1&quot; does not exist.</source>
         <translation>Adresář &quot;%1&quot; neexistuje.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="119"/>
+        <location filename="../../main.cpp" line="120"/>
         <source>The file &quot;%1&quot; already exists.</source>
         <translation>Soubor &quot;%1&quot; již existuje.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="124"/>
-        <location filename="../../main.cpp" line="213"/>
+        <location filename="../../main.cpp" line="125"/>
+        <location filename="../../main.cpp" line="214"/>
         <source>Loading file &quot;%1&quot;...</source>
         <translation>Načítá se soubor &quot;%1&quot;...</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="129"/>
-        <location filename="../../main.cpp" line="218"/>
+        <location filename="../../main.cpp" line="130"/>
+        <location filename="../../main.cpp" line="219"/>
         <source>Couldn&apos;t load file &quot;%1&quot;: %2.</source>
         <oldsource>Couldn&apos;t load &quot;%1&quot;: %2.</oldsource>
         <translation>Nepodařilo se načíst soubor &quot;%1&quot;: %2.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="135"/>
-        <location filename="../../main.cpp" line="224"/>
+        <location filename="../../main.cpp" line="136"/>
+        <location filename="../../main.cpp" line="225"/>
         <source>File successfully loaded!</source>
         <translation>Soubor úspěšně načten!</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="142"/>
-        <location filename="../../main.cpp" line="146"/>
-        <location filename="../../main.cpp" line="159"/>
-        <location filename="../../main.cpp" line="228"/>
+        <location filename="../../main.cpp" line="143"/>
+        <location filename="../../main.cpp" line="147"/>
+        <location filename="../../main.cpp" line="160"/>
+        <location filename="../../main.cpp" line="229"/>
         <source>Writing file &quot;%1&quot;...</source>
         <translation>Zapisuje se soubor &quot;%1&quot;...</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="152"/>
-        <location filename="../../main.cpp" line="156"/>
+        <location filename="../../main.cpp" line="153"/>
+        <location filename="../../main.cpp" line="157"/>
         <source>Writing files in directory &quot;%1&quot;...</source>
         <translation>Zapisují se soubory do adresáře &quot;%1&quot;...</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="162"/>
+        <location filename="../../main.cpp" line="163"/>
         <source>Unknown mode &quot;%1&quot;.</source>
         <translation>Neznámý režim &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="170"/>
-        <location filename="../../main.cpp" line="208"/>
-        <location filename="../../main.cpp" line="236"/>
+        <location filename="../../main.cpp" line="171"/>
+        <location filename="../../main.cpp" line="209"/>
+        <location filename="../../main.cpp" line="237"/>
         <source>An error occurred: %1.</source>
         <translation>Došlo k chybě: %1.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="175"/>
+        <location filename="../../main.cpp" line="176"/>
         <source>File successfully converted!</source>
         <translation>Soubor úspěšně převeden!</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="239"/>
+        <location filename="../../main.cpp" line="240"/>
         <source>File successfully rendered!</source>
         <translation>Soubor úspěšně vykreslen!</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="252"/>
+        <location filename="../../main.cpp" line="253"/>
         <source>Previous configuration is now cleared.</source>
         <translation>Předchozí konfigurace je nyní vymazána.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="261"/>
+        <location filename="../../main.cpp" line="262"/>
         <source>See &quot;%1&quot; for more information.</source>
         <translation>Pro více informací viz &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="263"/>
+        <location filename="../../main.cpp" line="264"/>
         <source>Write &quot;%1&quot; to show usage.</source>
         <translation>Napište &quot;%1&quot; pro zobrazení použití.</translation>
     </message>
@@ -5455,7 +5460,7 @@ Nelze stáhnout seznam</translation>
 <context>
     <name>SoundfontTab</name>
     <message>
-        <location filename="../../mainwindow/soundfonttab.cpp" line="90"/>
+        <location filename="../../mainwindow/soundfonttab.cpp" line="102"/>
         <source>Untitled</source>
         <translation>Bez názvu</translation>
     </message>
@@ -5558,7 +5563,7 @@ Nelze stáhnout obsah</translation>
     </message>
     <message>
         <location filename="../../mainwindow/tabmanager.cpp" line="137"/>
-        <location filename="../../mainwindow/tabmanager.cpp" line="318"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="324"/>
         <source>Warning</source>
         <translation>Pozor</translation>
     </message>
@@ -5568,42 +5573,42 @@ Nelze stáhnout obsah</translation>
         <translation>Nelze otevřít soubor &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="275"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="281"/>
         <source>Online repository</source>
         <translation>Internetové úložiště</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="313"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="319"/>
         <source>Save before exiting?</source>
         <translation>Uložit před ukončením?</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="316"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="322"/>
         <source>untitled</source>
         <translation>Bez názvu</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="317"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="323"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>Soubor &quot;%1&quot; byl změněn.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="320"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="326"/>
         <source>&amp;Save</source>
         <translation>&amp;Uložit</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="321"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="327"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Zrušit</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="322"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="328"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>&amp;Zavřít bez uložení</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="455"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="461"/>
         <source>User area</source>
         <translation>Uživatelská oblast</translation>
     </message>

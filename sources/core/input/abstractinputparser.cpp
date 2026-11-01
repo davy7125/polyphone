@@ -85,7 +85,8 @@ void AbstractInputParser::processAsync()
         foreach (int i, _sm->getSiblings(idSf2))
         {
             // Temporary soundfonts are copies used by the soundfont explorer, there can be several of them
-            if (_isTemporary && _sm->isTemporary(i))
+            // and they don't prevent a tab from opening the file (they can still be there while the explorer scans the directory)
+            if (_sm->isTemporary(i))
                 continue;
 
             if (_sm->getQstr(EltID(elementSf2, i), champ_filenameInitial) == _fileName)

@@ -44,6 +44,9 @@ public:
     /// Index of the soundfont created
     int getSf2Index() { return _sf2Index; }
 
+    /// Path of the file opened, possibly still loading (empty for a new soundfont or a file that couldn't be loaded)
+    QString getFilePath();
+
     /// Notify that a change has been made somewhere
     void update(QString editingSource);
 
@@ -67,6 +70,7 @@ private slots:
 private:
     void updateTitleAndPath();
     int _sf2Index;
+    QString _filePath; // Path given for loading the soundfont
 };
 
 #endif // SOUNDFONTTAB_H

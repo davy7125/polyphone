@@ -268,10 +268,18 @@ void MainWindow::closeEvent(QCloseEvent *event)
         }
     }
 
+    // Soundfonts and directories reopened at the next startup
+    _tabManager->saveOpenTabs();
+
     if (_keyboard)
         _keyboard->updateState(false);
     _recorder->updateState(false);
     _midiPlayer->updateState(false);
+}
+
+void MainWindow::restoreTabs()
+{
+    _tabManager->restoreOpenTabs();
 }
 
 void MainWindow::recentSf2Changed()

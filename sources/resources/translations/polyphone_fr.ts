@@ -929,52 +929,57 @@
         <translation>Do central → Do5, puis Ré♭5</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="637"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="606"/>
+        <source>Restore tabs</source>
+        <translation>Restaurer les onglets</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/configsectioninterface.ui" line="651"/>
         <source>General</source>
         <translation>Général</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="642"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="656"/>
         <source>Samples</source>
         <translation>Échantillons</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="647"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="661"/>
         <source>Samples - first sample</source>
         <translation>Échantillons - premier échantillon</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="652"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="666"/>
         <source>Instruments</source>
         <translation>Instruments</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="657"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="671"/>
         <source>Instruments - first instrument - Table</source>
         <translation>Instruments - premier instrument - Table</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="662"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="676"/>
         <source>Instruments - first instrument - Ranges</source>
         <translation>Instruments - premier instrument - Étendues</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="667"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="681"/>
         <source>Instruments - first instrument - Envelopes</source>
         <translation>Instruments - premier instrument - Enveloppes</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="672"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="686"/>
         <source>Presets</source>
         <translation>Ensembles</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="677"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="691"/>
         <source>Presets - first preset - Table</source>
         <translation>Ensembles - premier ensemble - Table</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="682"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="696"/>
         <source>Presets - first preset - Ranges</source>
         <translation>Ensembles - premier ensemble - Étendues</translation>
     </message>
@@ -999,22 +1004,22 @@
         <translation>Vue de démarrage</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="613"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="627"/>
         <source>by key range</source>
         <translation>par étendue de notes</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="618"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="632"/>
         <source>by velocity range</source>
         <translation>par étendues de vélocités</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="623"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="637"/>
         <source>in alphabetical order</source>
         <translation>alphabétiquement</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="628"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="642"/>
         <source>none</source>
         <comment>speaking of the &quot;sort divisions&quot;</comment>
         <translation>non</translation>
@@ -1081,15 +1086,15 @@
         <translation>La modification sera prise en compte lors du prochain démarrage du logiciel.</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="211"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="223"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="235"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="247"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="259"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="271"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="283"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="295"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="307"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="215"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="227"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="239"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="251"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="263"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="275"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="287"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="299"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="311"/>
         <source>Select a color</source>
         <translation>Choisissez une couleur</translation>
     </message>
@@ -3028,7 +3033,7 @@ en ligne</translation>
 <context>
     <name>GraphicsViewEnvelop</name>
     <message>
-        <location filename="../../editor/graphics/graphicsviewenvelop.cpp" line="354"/>
+        <location filename="../../editor/graphics/graphicsviewenvelop.cpp" line="458"/>
         <source>s</source>
         <comment>unit for seconds</comment>
         <translation>s</translation>
@@ -3226,12 +3231,12 @@ en ligne</translation>
         <translation>Le fichier « %1 » n&apos;a pas été sauvegardé.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="322"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="330"/>
         <source>Opening files</source>
         <translation>Ouverture de fichiers</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="332"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="340"/>
         <source>Opening a directory</source>
         <translation>Ouverture d&apos;un répertoire</translation>
     </message>
@@ -3690,13 +3695,13 @@ mod. par défaut</translation>
         <translation>Enveloppe de modulation</translation>
     </message>
     <message>
-        <location filename="../../editor/pageenvelope.cpp" line="93"/>
+        <location filename="../../editor/pageenvelope.cpp" line="122"/>
         <source>dB</source>
         <comment>unit for decibels</comment>
         <translation>dB</translation>
     </message>
     <message>
-        <location filename="../../editor/pageenvelope.cpp" line="106"/>
+        <location filename="../../editor/pageenvelope.cpp" line="135"/>
         <source>%</source>
         <comment>percentage</comment>
         <translation>%</translation>
@@ -4782,88 +4787,88 @@ Les 2 divisions doivent partager les mêmes étendues de notes et de vélocités
         <translation>impossible de créer le fichier « %1 »</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="106"/>
-        <location filename="../../main.cpp" line="192"/>
+        <location filename="../../main.cpp" line="107"/>
+        <location filename="../../main.cpp" line="193"/>
         <source>The file &quot;%1&quot; does not exist.</source>
         <translation>Le fichier « %1 » n&apos;existe pas.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="114"/>
-        <location filename="../../main.cpp" line="197"/>
+        <location filename="../../main.cpp" line="115"/>
+        <location filename="../../main.cpp" line="198"/>
         <source>The directory &quot;%1&quot; does not exist.</source>
         <translation>Le répertoire « %1 » n&apos;existe pas.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="119"/>
+        <location filename="../../main.cpp" line="120"/>
         <source>The file &quot;%1&quot; already exists.</source>
         <translation>Le fichier « %1 » existe déjà.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="124"/>
-        <location filename="../../main.cpp" line="213"/>
+        <location filename="../../main.cpp" line="125"/>
+        <location filename="../../main.cpp" line="214"/>
         <source>Loading file &quot;%1&quot;...</source>
         <translation>Chargement du fichier « %1 »...</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="129"/>
-        <location filename="../../main.cpp" line="218"/>
+        <location filename="../../main.cpp" line="130"/>
+        <location filename="../../main.cpp" line="219"/>
         <source>Couldn&apos;t load file &quot;%1&quot;: %2.</source>
         <translation>Impossible de charger le fichier « %1 » : %2.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="135"/>
-        <location filename="../../main.cpp" line="224"/>
+        <location filename="../../main.cpp" line="136"/>
+        <location filename="../../main.cpp" line="225"/>
         <source>File successfully loaded!</source>
         <translation>Le fichier a bien été chargé !</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="142"/>
-        <location filename="../../main.cpp" line="146"/>
-        <location filename="../../main.cpp" line="159"/>
-        <location filename="../../main.cpp" line="228"/>
+        <location filename="../../main.cpp" line="143"/>
+        <location filename="../../main.cpp" line="147"/>
+        <location filename="../../main.cpp" line="160"/>
+        <location filename="../../main.cpp" line="229"/>
         <source>Writing file &quot;%1&quot;...</source>
         <translation>Écriture du fichier « %1 »...</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="152"/>
-        <location filename="../../main.cpp" line="156"/>
+        <location filename="../../main.cpp" line="153"/>
+        <location filename="../../main.cpp" line="157"/>
         <source>Writing files in directory &quot;%1&quot;...</source>
         <translation>Écriture de fichiers dans le répertoire « %1 »...</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="162"/>
+        <location filename="../../main.cpp" line="163"/>
         <source>Unknown mode &quot;%1&quot;.</source>
         <translation>Mode « %1 » inconnu.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="170"/>
-        <location filename="../../main.cpp" line="208"/>
-        <location filename="../../main.cpp" line="236"/>
+        <location filename="../../main.cpp" line="171"/>
+        <location filename="../../main.cpp" line="209"/>
+        <location filename="../../main.cpp" line="237"/>
         <source>An error occurred: %1.</source>
         <translation>Une erreur est survenue : %1.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="175"/>
+        <location filename="../../main.cpp" line="176"/>
         <source>File successfully converted!</source>
         <translation>Le fichier a bien été converti !</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="239"/>
+        <location filename="../../main.cpp" line="240"/>
         <source>File successfully rendered!</source>
         <translation>Le fichier a bien été rendu !</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="252"/>
+        <location filename="../../main.cpp" line="253"/>
         <source>Previous configuration is now cleared.</source>
         <translation>La configuration existante a bien été effacée.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="261"/>
+        <location filename="../../main.cpp" line="262"/>
         <source>See &quot;%1&quot; for more information.</source>
         <translation>Voir « %1 » pour plus d&apos;informations.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="263"/>
+        <location filename="../../main.cpp" line="264"/>
         <source>Write &quot;%1&quot; to show usage.</source>
         <translation>Tapez « %1 » pour afficher l&apos;aide.</translation>
     </message>
@@ -5420,7 +5425,7 @@ de télécharger la liste</translation>
 <context>
     <name>SoundfontTab</name>
     <message>
-        <location filename="../../mainwindow/soundfonttab.cpp" line="90"/>
+        <location filename="../../mainwindow/soundfonttab.cpp" line="102"/>
         <source>Untitled</source>
         <translation>Sans titre</translation>
     </message>
@@ -5523,7 +5528,7 @@ de télécharger le contenu</translation>
     </message>
     <message>
         <location filename="../../mainwindow/tabmanager.cpp" line="137"/>
-        <location filename="../../mainwindow/tabmanager.cpp" line="318"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="324"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
@@ -5533,42 +5538,42 @@ de télécharger le contenu</translation>
         <translation>Impossible d&apos;ouvrir le fichier « %1 »</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="275"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="281"/>
         <source>Online repository</source>
         <translation>Banques de sons en ligne</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="313"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="319"/>
         <source>Save before exiting?</source>
         <translation>Sauvegarder avant de quitter ?</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="316"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="322"/>
         <source>untitled</source>
         <translation>sans titre</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="317"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="323"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>Le fichier « %1 » a été modifié.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="320"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="326"/>
         <source>&amp;Save</source>
         <translation>&amp;Sauvegarder</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="321"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="327"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Annuler</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="322"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="328"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>&amp;Quitter sans enregistrer</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="455"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="461"/>
         <source>User area</source>
         <translation>Espace utilisateur</translation>
     </message>

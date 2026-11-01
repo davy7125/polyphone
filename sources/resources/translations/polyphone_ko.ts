@@ -937,52 +937,57 @@
         <translation>중간 C → C5, 그다음 D♭5</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="637"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="606"/>
+        <source>Restore tabs</source>
+        <translation>탭 복원</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/configsectioninterface.ui" line="651"/>
         <source>General</source>
         <translation>일반</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="642"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="656"/>
         <source>Samples</source>
         <translation>샘플들</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="647"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="661"/>
         <source>Samples - first sample</source>
         <translation>샘플들 - 첫 번째 샘플</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="652"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="666"/>
         <source>Instruments</source>
         <translation>악기들</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="657"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="671"/>
         <source>Instruments - first instrument - Table</source>
         <translation>악기들 - 첫 번째 악기 - 테이블</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="662"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="676"/>
         <source>Instruments - first instrument - Ranges</source>
         <translation>악기들 - 첫 번째 악기 - 범위</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="667"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="681"/>
         <source>Instruments - first instrument - Envelopes</source>
         <translation>악기들 - 첫 번째 악기 - 엔벨로프</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="672"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="686"/>
         <source>Presets</source>
         <translation>프리셋들</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="677"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="691"/>
         <source>Presets - first preset - Table</source>
         <translation>프리셋들 - 첫 번째 프리셋 - 테이블</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="682"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="696"/>
         <source>Presets - first preset - Ranges</source>
         <translation>프리셋들 - 첫 번째 프리셋 - 범위</translation>
     </message>
@@ -1007,22 +1012,22 @@
         <translation>시작 화면</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="613"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="627"/>
         <source>by key range</source>
         <translation>키 범위대로</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="618"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="632"/>
         <source>by velocity range</source>
         <translation>벨로시티 범위대로</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="623"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="637"/>
         <source>in alphabetical order</source>
         <translation>철자 순서대로</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="628"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="642"/>
         <source>none</source>
         <comment>speaking of the &quot;sort divisions&quot;</comment>
         <translation>없음</translation>
@@ -1089,15 +1094,15 @@
         <translation>이 변경사항은 다음 번에 소프트웨어를 시작하면 적용됩니다.</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="211"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="223"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="235"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="247"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="259"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="271"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="283"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="295"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="307"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="215"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="227"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="239"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="251"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="263"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="275"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="287"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="299"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="311"/>
         <source>Select a color</source>
         <translation>색상 선택</translation>
     </message>
@@ -3033,7 +3038,7 @@ repository</source>
 <context>
     <name>GraphicsViewEnvelop</name>
     <message>
-        <location filename="../../editor/graphics/graphicsviewenvelop.cpp" line="354"/>
+        <location filename="../../editor/graphics/graphicsviewenvelop.cpp" line="458"/>
         <source>s</source>
         <comment>unit for seconds</comment>
         <translation>초</translation>
@@ -3231,12 +3236,12 @@ repository</source>
         <translation>&quot;%1&quot; 파일이 변경됐습니다.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="322"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="330"/>
         <source>Opening files</source>
         <translation>파일 여는 중</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="332"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="340"/>
         <source>Opening a directory</source>
         <translation>디렉터리 열기</translation>
     </message>
@@ -3696,13 +3701,13 @@ default mod.</source>
         <translation>모듈레이션 엔벨로프</translation>
     </message>
     <message>
-        <location filename="../../editor/pageenvelope.cpp" line="93"/>
+        <location filename="../../editor/pageenvelope.cpp" line="122"/>
         <source>dB</source>
         <comment>unit for decibels</comment>
         <translation>dB</translation>
     </message>
     <message>
-        <location filename="../../editor/pageenvelope.cpp" line="106"/>
+        <location filename="../../editor/pageenvelope.cpp" line="135"/>
         <source>%</source>
         <comment>percentage</comment>
         <translation>%</translation>
@@ -4781,89 +4786,89 @@ Both divisions must share the same note and velocity ranges.</source>
         <translation>&quot;%1&quot; 파일을 생성할 수 없습니다</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="106"/>
-        <location filename="../../main.cpp" line="192"/>
+        <location filename="../../main.cpp" line="107"/>
+        <location filename="../../main.cpp" line="193"/>
         <source>The file &quot;%1&quot; does not exist.</source>
         <translation>파일 &quot;%1&quot;이(가) 존재하지 않습니다.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="114"/>
-        <location filename="../../main.cpp" line="197"/>
+        <location filename="../../main.cpp" line="115"/>
+        <location filename="../../main.cpp" line="198"/>
         <source>The directory &quot;%1&quot; does not exist.</source>
         <translation>디렉터리 &quot;%1&quot;이(가) 존재하지 않습니다.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="119"/>
+        <location filename="../../main.cpp" line="120"/>
         <source>The file &quot;%1&quot; already exists.</source>
         <translation>파일 &quot;%1&quot;이(가) 이미 존재합니다.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="124"/>
-        <location filename="../../main.cpp" line="213"/>
+        <location filename="../../main.cpp" line="125"/>
+        <location filename="../../main.cpp" line="214"/>
         <source>Loading file &quot;%1&quot;...</source>
         <translation>파일 &quot;%1&quot;을(를) 불러오는 중...</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="129"/>
-        <location filename="../../main.cpp" line="218"/>
+        <location filename="../../main.cpp" line="130"/>
+        <location filename="../../main.cpp" line="219"/>
         <source>Couldn&apos;t load file &quot;%1&quot;: %2.</source>
         <oldsource>Couldn&apos;t load &quot;%1&quot;: %2.</oldsource>
         <translation>파일 &quot;%1&quot;을(를) 불러올 수 없습니다: %2.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="135"/>
-        <location filename="../../main.cpp" line="224"/>
+        <location filename="../../main.cpp" line="136"/>
+        <location filename="../../main.cpp" line="225"/>
         <source>File successfully loaded!</source>
         <translation>파일을 성공적으로 불러왔습니다!</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="142"/>
-        <location filename="../../main.cpp" line="146"/>
-        <location filename="../../main.cpp" line="159"/>
-        <location filename="../../main.cpp" line="228"/>
+        <location filename="../../main.cpp" line="143"/>
+        <location filename="../../main.cpp" line="147"/>
+        <location filename="../../main.cpp" line="160"/>
+        <location filename="../../main.cpp" line="229"/>
         <source>Writing file &quot;%1&quot;...</source>
         <translation>파일 &quot;%1&quot;을(를) 쓰는 중...</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="152"/>
-        <location filename="../../main.cpp" line="156"/>
+        <location filename="../../main.cpp" line="153"/>
+        <location filename="../../main.cpp" line="157"/>
         <source>Writing files in directory &quot;%1&quot;...</source>
         <translation>디렉터리 &quot;%1&quot;에 파일을 쓰는 중...</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="162"/>
+        <location filename="../../main.cpp" line="163"/>
         <source>Unknown mode &quot;%1&quot;.</source>
         <translation>알 수 없는 모드 &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="170"/>
-        <location filename="../../main.cpp" line="208"/>
-        <location filename="../../main.cpp" line="236"/>
+        <location filename="../../main.cpp" line="171"/>
+        <location filename="../../main.cpp" line="209"/>
+        <location filename="../../main.cpp" line="237"/>
         <source>An error occurred: %1.</source>
         <translation>오류가 발생했습니다: %1.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="175"/>
+        <location filename="../../main.cpp" line="176"/>
         <source>File successfully converted!</source>
         <translation>파일을 성공적으로 변환했습니다!</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="239"/>
+        <location filename="../../main.cpp" line="240"/>
         <source>File successfully rendered!</source>
         <translation>파일을 성공적으로 렌더링했습니다!</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="252"/>
+        <location filename="../../main.cpp" line="253"/>
         <source>Previous configuration is now cleared.</source>
         <translation>이전 설정이 초기화되었습니다.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="261"/>
+        <location filename="../../main.cpp" line="262"/>
         <source>See &quot;%1&quot; for more information.</source>
         <translation>자세한 내용은 &quot;%1&quot;을(를) 참조하십시오.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="263"/>
+        <location filename="../../main.cpp" line="264"/>
         <source>Write &quot;%1&quot; to show usage.</source>
         <translation>사용법을 보려면 &quot;%1&quot;을(를) 입력하십시오.</translation>
     </message>
@@ -5420,7 +5425,7 @@ download the list</source>
 <context>
     <name>SoundfontTab</name>
     <message>
-        <location filename="../../mainwindow/soundfonttab.cpp" line="90"/>
+        <location filename="../../mainwindow/soundfonttab.cpp" line="102"/>
         <source>Untitled</source>
         <translation>제목없음</translation>
     </message>
@@ -5523,7 +5528,7 @@ download content</source>
     </message>
     <message>
         <location filename="../../mainwindow/tabmanager.cpp" line="137"/>
-        <location filename="../../mainwindow/tabmanager.cpp" line="318"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="324"/>
         <source>Warning</source>
         <translation>경고</translation>
     </message>
@@ -5533,42 +5538,42 @@ download content</source>
         <translation>&quot;%1&quot; 파일을 열 수 없음</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="275"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="281"/>
         <source>Online repository</source>
         <translation>온라인 저장소</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="313"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="319"/>
         <source>Save before exiting?</source>
         <translation>종료하기 전에 저장할까요?</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="316"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="322"/>
         <source>untitled</source>
         <translation>제목없음</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="317"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="323"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>&quot;%1&quot; 파일이 변경되었습니다.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="320"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="326"/>
         <source>&amp;Save</source>
         <translation>저장(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="321"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="327"/>
         <source>&amp;Cancel</source>
         <translation>취소(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="322"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="328"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>저장하지 않음(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="455"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="461"/>
         <source>User area</source>
         <translation>사용자 영역</translation>
     </message>

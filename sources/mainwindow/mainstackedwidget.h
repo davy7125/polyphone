@@ -44,6 +44,7 @@ public:
     void removeWidgetWithTab(Tab * tab);
     void setTabLabel(Tab * tab, const QString &label);
     void setTabToolTip(Tab * tab, const QString &tip);
+    QList<Tab *> getTabs(); // In the order of the tab bar
 
 signals:
     void tabCloseRequested(QWidget * widget);

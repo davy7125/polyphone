@@ -44,6 +44,9 @@ public:
     explicit MainWindow(bool playerMode, QWidget *parent = nullptr);
     ~MainWindow();
 
+    /// Reopen the soundfonts and directories that were open when the application was closed
+    void restoreTabs();
+
 public slots:
     void recentSf2Changed();
     void openFiles(QString fileNames);

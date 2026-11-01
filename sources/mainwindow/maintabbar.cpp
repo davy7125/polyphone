@@ -573,3 +573,11 @@ Tab * MainTabBar::getLastTab()
 {
     return _tabs.count() > 0 ? _tabs[_tabs.count() - 1]->getWidget() : nullptr;
 }
+
+QList<Tab *> MainTabBar::getTabs()
+{
+    QList<Tab *> tabs;
+    for (int i = 0; i < _tabs.count(); i++)
+        tabs << _tabs[i]->getWidget();
+    return tabs;
+}

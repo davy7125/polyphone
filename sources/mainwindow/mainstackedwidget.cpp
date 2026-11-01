@@ -104,6 +104,11 @@ void MainStackedWidget::setTabToolTip(Tab * tab, const QString &tip)
     _tabBar->setTabToolTip(tab, tip);
 }
 
+QList<Tab *> MainStackedWidget::getTabs()
+{
+    return _tabBar->getTabs();
+}
+
 void MainStackedWidget::styleHomeButton(bool isEnabled)
 {
     QString styleSheet = "\

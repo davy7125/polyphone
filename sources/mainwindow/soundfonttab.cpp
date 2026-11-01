@@ -40,7 +40,8 @@ SoundfontTab::~SoundfontTab()
 
 void SoundfontTab::initialize(AbstractInputParser * input, bool async)
 {
-    tabInitializing(input->getFileName());
+    _filePath = input->getFileName();
+    tabInitializing(_filePath);
     connect(input, SIGNAL(finished()), this, SLOT(inputProcessed()));
     input->process(async);
 }
@@ -67,9 +68,20 @@ void SoundfontTab::inputProcessed()
         updateTitleAndPath();
     }
     else
+    {
+        _filePath = "";
         tabInError(input->getError());
+    }
 
     delete input;
+}
+
+QString SoundfontTab::getFilePath()
+{
+    // The path known by the soundfont manager is changed by "save as"
+    if (_sf2Index == -1)
+        return _filePath;
+    return SoundfontManager::getInstance()->getQstr(EltID(elementSf2, _sf2Index), champ_filenameInitial);
 }
 
 void SoundfontTab::update(QString editingSource)

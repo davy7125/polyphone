@@ -140,6 +140,10 @@ void ConfigSectionInterface::initialize()
     ui->checkUniqueInstance->setChecked(ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "unique_instance", true).toBool());
     ui->checkUniqueInstance->blockSignals(false);
 
+    ui->checkRestoreTabs->blockSignals(true);
+    ui->checkRestoreTabs->setChecked(ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "restore_tabs", false).toBool());
+    ui->checkRestoreTabs->blockSignals(false);
+
     ui->checkBorders->blockSignals(true);
 #if defined(Q_OS_MACOS)
     ui->checkBorders->setVisible(false);
@@ -350,6 +354,11 @@ void ConfigSectionInterface::on_checkDecorations_clicked()
 void ConfigSectionInterface::on_checkUniqueInstance_clicked()
 {
     ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "unique_instance", ui->checkUniqueInstance->isChecked());
+}
+
+void ConfigSectionInterface::on_checkRestoreTabs_clicked()
+{
+    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "restore_tabs", ui->checkRestoreTabs->isChecked());
 }
 
 void ConfigSectionInterface::on_comboStyle_currentIndexChanged(int index)

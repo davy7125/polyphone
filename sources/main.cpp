@@ -86,7 +86,8 @@ int launchApplication(QtSingleApplication * app, Options &options)
     QObject::connect(app, SIGNAL(messageReceived(const QString&)), &w, SLOT(openFiles(const QString&)));
     w.show();
 
-    // Open files passed as argument
+    // Reopen the tabs of the last session, then the files passed as argument
+    w.restoreTabs();
     w.openFiles(options.getInputFilesAsString());
 
     return app->exec();

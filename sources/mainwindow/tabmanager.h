@@ -50,12 +50,16 @@ public:
     void showHome();
     void setCurrentWidget(QWidget * widget);
 
+    /// Save the soundfonts and directories open when the application closes, reopen them at startup
+    void saveOpenTabs();
+    void restoreOpenTabs();
+
 public slots:
     /// Open the configuration
     void openConfiguration();
 
     /// Open the soundfont browser
-    void openSoundfont(QString fileName, PlayerOptions * playerOptions, bool async, EltID initialSelection = EltID());
+    void openSoundfont(QString fileName, PlayerOptions * playerOptions, bool async, EltID initialSelection = EltID(), bool addToHistory = true);
     void openNewSoundfont();
 
     /// Open the repository, initialized with a filter
@@ -70,7 +74,7 @@ public slots:
     void openUser();
 
     /// Open a directory
-    void openDirectory(QString directoryPath);
+    void openDirectory(QString directoryPath, bool addToHistory = true);
 
     /// The function is called when pages have to be updated
     void editingDone(QString source, QList<int> sf2Indexes);

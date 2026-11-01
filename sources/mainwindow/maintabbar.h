@@ -49,6 +49,7 @@ public:
     Tab * getPreviousTab();
     Tab * getNextTab();
     Tab * getLastTab();
+    QList<Tab *> getTabs(); // In the display order
 
     QSize minimumSizeHint() const override;
 
