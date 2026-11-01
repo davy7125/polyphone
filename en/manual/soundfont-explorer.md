@@ -22,6 +22,8 @@ Clicking on a scannable file displays, in the lists on the right side of the int
   * number of samples, instruments and presets,
   * names of the first presets.
 
+These details are aligned in columns under a header. The :guilabel:`Display` button, to the right of the text field, opens a menu for choosing the columns shown (all of them can be hidden except the name) and whether the :guilabel:`Preset summary` is displayed, that is the names of the first presets on a second line. Without this summary, each file takes up a single line, as in a table.
+
 ### Information for each sample
 
 * type (mono / stereo),
@@ -46,7 +48,9 @@ The upper section features a text field (the shortcut :kbd:`Ctrl`+:kbd:`F` puts 
 
 The lists of samples, instruments and presets are also filtered to highlight the matching elements.
 
-To the right of the text field is a drop-down list that lets you sort files by name (A→Z), by last modification date (newest first) or by file size (largest or smallest first).
+Clicking on a column header sorts the files by name, size, date, or number of samples, instruments or presets, and clicking on it again reverses the order. The first click sorts the names from A to Z and the other columns starting with the largest value or the newest file. When sorting by a number of elements, the files whose content is unknown are always placed at the end of the list.
+
+The display options, the sort, and the width and expanded or collapsed state of the lists on the right are kept for the next time.
 
 
 ## File operations {#doc_file_operations}

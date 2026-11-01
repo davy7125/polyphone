@@ -22,6 +22,8 @@ Ein Klick auf eine durchsuchbare Datei zeigt in den Listen auf der rechten Seite
   * Anzahl der Samples, Instrumente und Presets,
   * Namen der ersten Presets.
 
+Diese Angaben sind in Spalten unter einer Kopfzeile ausgerichtet. Die Schaltfläche :guilabel:`Anzeige` rechts neben dem Textfeld öffnet ein Menü, in dem die angezeigten Spalten gewählt werden (alle außer dem Namen können ausgeblendet werden) und festgelegt wird, ob die :guilabel:`Preset-Übersicht` angezeigt wird, also die Namen der ersten Presets in einer zweiten Zeile. Ohne diese Übersicht belegt jede Datei nur eine Zeile, wie in einer Tabelle.
+
 ### Informationen zu jedem Sample
 
 * Typ (Mono / Stereo),
@@ -46,7 +48,9 @@ Im oberen Bereich befindet sich ein Textfeld (die Tastenkombination :kbd:`Ctrl`+
 
 Auch die Listen der Samples, Instrumente und Presets werden gefiltert, um die passenden Elemente hervorzuheben.
 
-Rechts neben dem Textfeld befindet sich eine Dropdown-Liste, mit der die Dateien nach Name (A→Z), nach Datum der letzten Änderung (neueste zuerst) oder nach Dateigröße (größte oder kleinste zuerst) sortiert werden können.
+Ein Klick auf eine Spaltenüberschrift sortiert die Dateien nach Name, Größe, Datum oder Anzahl der Samples, Instrumente oder Presets, ein erneuter Klick kehrt die Reihenfolge um. Der erste Klick sortiert die Namen von A bis Z und die anderen Spalten beginnend mit dem größten Wert bzw. der neuesten Datei. Bei einer Sortierung nach einer Anzahl von Elementen stehen die Dateien, deren Inhalt unbekannt ist, immer am Ende der Liste.
+
+Die Anzeigeoptionen, die Sortierung sowie die Breite und der auf- oder zugeklappte Zustand der Listen auf der rechten Seite bleiben für das nächste Mal erhalten.
 
 
 ## Dateioperationen {#doc_file_operations}

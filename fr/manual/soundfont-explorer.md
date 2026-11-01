@@ -22,6 +22,8 @@ Un clic sur un fichier pouvant être scanné affiche, dans les listes de la part
   * nombre d'échantillons, d'instruments et d'ensembles,
   * noms des premiers ensembles.
 
+Ces détails sont alignés en colonnes sous un en-tête. Le bouton :guilabel:`Affichage`, à droite du champ de texte, ouvre un menu permettant de choisir les colonnes affichées (toutes peuvent être masquées sauf le nom) et d'afficher ou non le :guilabel:`Résumé des ensembles`, c'est-à-dire les noms des premiers ensembles sur une seconde ligne. Sans ce résumé, chaque fichier tient sur une seule ligne, comme dans un tableau.
+
 ### Informations pour chaque échantillon
 
 * type (mono / stéréo),
@@ -46,7 +48,9 @@ La partie haute présente un champ de texte (le raccourci :kbd:`Ctrl`+:kbd:`F` y
 
 Les listes des échantillons, instruments et ensembles sont également filtrées pour mettre en évidence les éléments recherchés.
 
-À droite du champ de texte se trouve une liste déroulante permettant de trier les fichiers selon leur nom (A→Z), leur date de dernière modification (les plus récents en premier) ou leur taille (les plus grands ou les plus petits en premier).
+Un clic sur l'en-tête d'une colonne trie les fichiers selon leur nom, leur taille, leur date ou leur nombre d'échantillons, d'instruments ou d'ensembles, et un nouveau clic inverse l'ordre. Le premier clic trie les noms de A à Z et les autres colonnes en commençant par la plus grande valeur ou le fichier le plus récent. Lors d'un tri selon un nombre d'éléments, les fichiers dont le contenu est inconnu sont toujours placés en fin de liste.
+
+Les options d'affichage, le tri ainsi que la largeur et l'état déplié ou replié des listes de droite sont conservés pour la prochaine fois.
 
 
 ## Opérations sur les fichiers {#doc_file_operations}

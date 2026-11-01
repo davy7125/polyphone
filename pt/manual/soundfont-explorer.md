@@ -22,6 +22,8 @@ Clicar em um arquivo analisável exibe, nas listas do lado direito da interface,
   * número de amostras, instrumentos e predefinições,
   * nomes das primeiras predefinições.
 
+Esses detalhes ficam alinhados em colunas sob um cabeçalho. O botão :guilabel:`Visualização`, à direita do campo de texto, abre um menu que permite escolher as colunas exibidas (todas podem ser ocultadas, exceto o nome) e exibir ou não o :guilabel:`Resumo das predefinições`, ou seja, os nomes das primeiras predefinições em uma segunda linha. Sem esse resumo, cada arquivo ocupa uma única linha, como em uma tabela.
+
 ### Informações de cada amostra
 
 * tipo (mono / estéreo),
@@ -46,7 +48,9 @@ A seção superior traz um campo de texto (o atalho :kbd:`Ctrl`+:kbd:`F` coloca 
 
 As listas de amostras, instrumentos e predefinições também são filtradas para destacar os elementos correspondentes.
 
-À direita do campo de texto há uma lista suspensa que permite ordenar os arquivos por nome (A→Z), pela data da última modificação (mais recentes primeiro) ou pelo tamanho do arquivo (maiores ou menores primeiro).
+Um clique no cabeçalho de uma coluna ordena os arquivos por nome, tamanho, data ou número de amostras, instrumentos ou predefinições, e um novo clique inverte a ordem. O primeiro clique ordena os nomes de A a Z e as outras colunas começando pelo maior valor ou pelo arquivo mais recente. Ao ordenar por um número de elementos, os arquivos cujo conteúdo é desconhecido são sempre colocados no fim da lista.
+
+As opções de visualização, a ordenação, bem como a largura e o estado expandido ou recolhido das listas à direita são mantidos para a próxima vez.
 
 
 ## Operações com arquivos {#doc_file_operations}

@@ -22,6 +22,8 @@ Al hacer clic en un archivo analizable se muestran, en las listas del lado derec
   * número de muestras, instrumentos y conjuntos,
   * nombres de los primeros conjuntos.
 
+Estos detalles se alinean en columnas bajo un encabezado. El botón :guilabel:`Visualización`, a la derecha del campo de texto, abre un menú que permite elegir las columnas mostradas (todas pueden ocultarse salvo el nombre) y mostrar o no el :guilabel:`Resumen de los conjuntos`, es decir, los nombres de los primeros conjuntos en una segunda línea. Sin este resumen, cada archivo ocupa una sola línea, como en una tabla.
+
 ### Información de cada muestra
 
 * tipo (mono / estéreo),
@@ -46,7 +48,9 @@ La sección superior incluye un campo de texto (el atajo :kbd:`Ctrl`+:kbd:`F` po
 
 Las listas de muestras, instrumentos y conjuntos también se filtran para resaltar los elementos coincidentes.
 
-A la derecha del campo de texto hay una lista desplegable que permite ordenar los archivos por nombre (A→Z), por fecha de última modificación (más recientes primero) o por tamaño de archivo (más grandes o más pequeños primero).
+Un clic en el encabezado de una columna ordena los archivos por nombre, tamaño, fecha o número de muestras, instrumentos o conjuntos, y un nuevo clic invierte el orden. El primer clic ordena los nombres de la A a la Z y las demás columnas empezando por el valor más grande o el archivo más reciente. Al ordenar por un número de elementos, los archivos cuyo contenido se desconoce siempre se colocan al final de la lista.
+
+Las opciones de visualización, el orden, así como el ancho y el estado desplegado o plegado de las listas de la derecha se conservan para la próxima vez.
 
 
 ## Operaciones con archivos {#doc_file_operations}

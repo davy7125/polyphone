@@ -22,6 +22,8 @@ Un clic su un file analizzabile mostra, negli elenchi nella parte destra dell'in
   * numero di campioni, strumenti e preset,
   * nomi dei primi preset.
 
+Questi dettagli sono allineati in colonne sotto un'intestazione. Il pulsante :guilabel:`Visualizzazione`, a destra del campo di testo, apre un menu che permette di scegliere le colonne mostrate (tutte possono essere nascoste tranne il nome) e di mostrare o meno il :guilabel:`Riepilogo dei preset`, cioè i nomi dei primi preset su una seconda riga. Senza questo riepilogo, ogni file occupa una sola riga, come in una tabella.
+
 ### Informazioni per ogni campione
 
 * tipo (mono / stereo),
@@ -46,7 +48,9 @@ La parte superiore presenta un campo di testo (la scorciatoia :kbd:`Ctrl`+:kbd:`
 
 Anche gli elenchi di campioni, strumenti e preset vengono filtrati per evidenziare gli elementi corrispondenti.
 
-A destra del campo di testo si trova un elenco a discesa che permette di ordinare i file per nome (A→Z), per data dell'ultima modifica (più recenti prima) o per dimensione (più grandi o più piccoli prima).
+Un clic sull'intestazione di una colonna ordina i file per nome, dimensione, data o numero di campioni, strumenti o preset, e un nuovo clic inverte l'ordine. Il primo clic ordina i nomi dalla A alla Z e le altre colonne partendo dal valore più grande o dal file più recente. Quando si ordina per numero di elementi, i file il cui contenuto è sconosciuto sono sempre posti in fondo all'elenco.
+
+Le opzioni di visualizzazione, l'ordinamento, così come la larghezza e lo stato espanso o compresso degli elenchi a destra vengono conservati per la volta successiva.
 
 
 ## Operazioni sui file {#doc_file_operations}
