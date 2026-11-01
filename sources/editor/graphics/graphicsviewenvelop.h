@@ -27,9 +27,11 @@
 
 #include <QWidget>
 #include <QPen>
+#include <QElapsedTimer>
 #include "envelop.h"
 class GraphicsWavePainter;
 class QScrollBar;
+class QTimer;
 
 class GraphicsViewEnvelop : public QWidget
 {
@@ -48,35 +50,83 @@ public:
     // Prepare an envelop and return the index
     int addEnvelop();
 
-    // Set the value of an envelop
+    // Set / get the value of an envelop
     void setValue(int index, Envelop::ValueType type, double value, bool isDefined = true);
+    double getValue(int index, Envelop::ValueType type);
     void setKeyRange(int index, int keyMin, int keyMax);
     void setSample(QVector<float> vData, int sampleRate, int loopMode, int startLoop, int endLoop);
+    void clearSample();
 
     // Set the style of an envelop
+    // The main envelops can be edited with the mouse
     void setEnvelopStyle(int index, bool isGlobal, bool isVolume, bool isMain);
+    void setEnvelopName(int index, QString name);
+
+    // Bounds of a value when dragging the points
+    void setValueRange(Envelop::ValueType type, double min, double max);
+
+    // Text describing a value in the legend
+    void setValueText(Envelop::ValueType type, QString label, QString suffix, int decimals);
 
     // Compute all points of all envelops
     void computeEnvelops();
+
+    // Stop a possible edition, without notification
+    // Return true if values have been changed
+    bool abortEdition();
 
 public slots:
     void setPosX(int _posX);
 
 signals:
-    void valueChanged(int index, int type, double value, bool isDefined);
+    // The values of all main envelops are being changed by dragging a point
+    void valuesEdited(QList<int> valueTypes);
+    void editionFinished();
+    void editionCancelled();
+
+    // Values of all main envelops to restore (double click on a point)
+    void resetRequested(QList<int> valueTypes);
 
 protected:
     void paintEvent(QPaintEvent *event) override;
     void mousePressEvent(QMouseEvent *event) override;
     void mouseReleaseEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
-    void mouseDoubleClickEvent(QMouseEvent *) override {}
+    void mouseDoubleClickEvent(QMouseEvent *event) override;
+    void keyPressEvent(QKeyEvent *event) override;
+    void keyReleaseEvent(QKeyEvent *event) override;
+    void leaveEvent(QEvent *event) override;
     void wheelEvent(QWheelEvent *event) override;
     bool event(QEvent* event) override;
 
+private slots:
+    void onEdgeTimer();
+
 private:
+    void computeSampleData();
+    void getDisplayedRange(double &xOffset, double &xRange);
+    void updateHandles();
+    QString getHoverState();
+    void updateCursor();
+    void startEdition(QPoint pos);
+    void editValues();
+    void stopEdition(bool isCancelled);
+    void scaleForKey(QMap<Envelop::ValueType, double> &values, Envelop::ValueType type, Envelop::ValueType keyType,
+                     double key, double duration);
+    void solveForKeys(QMap<Envelop::ValueType, double> &values, Envelop::ValueType type, Envelop::ValueType keyType,
+                      double key, double duration, double pivotKey);
+    void limitValues(QMap<Envelop::ValueType, double> &values);
+    void updateEditionLayout();
+    QStringList getLegendLines(QStringList &values);
+    void drawLegend(QPainter * painter);
+    QString valueToString(Envelop * env, Envelop::ValueType type, double value);
+    static QList<Envelop::ValueType> getValueTypes(Envelop::HandleType handle);
+
     GraphicsWavePainter * _wavePainter;
     int _sampleRate;
+    double _sampleDataDuration;
+    QVector<float> _sampleData;
+    int _loopMode, _startLoop, _endLoop;
 
     int _index;
     QMap<int, Envelop *> _envelops;
@@ -95,6 +145,33 @@ private:
     double _zoomXinit, _posXinit;
     bool _bFromExt;
     QScrollBar * _qScrollX;
+
+    // Hovered point
+    QPoint _mousePos;
+    bool _mouseInside;
+    int _hoveredEnvelop;
+    Envelop::HandleType _hoveredHandle;
+
+    // Point being dragged
+    int _editedEnvelop;
+    Envelop::HandleType _editedHandle;
+    bool _valuesEdited;
+    bool _axisXActive, _axisYActive;
+    bool _pivotOnCenter;
+    QPoint _editStartPos, _editLastPos;
+    QPointF _editStartCoord, _editCoord; // Seconds and level
+    QMap<int, QMap<Envelop::ValueType, double> > _editStartValues;
+    double _editOffset, _editRange; // Visible part (seconds), kept during the edition
+    double _editTriggeredKeyDuration, _editReleasedKeyDuration, _editSizeX, _editZoomX, _editPosX;
+    QTimer * _edgeTimer;
+    int _edgeDirection;
+    QElapsedTimer _sampleDataTimer;
+
+    // Bounds and texts of the values
+    QMap<Envelop::ValueType, QPair<double, double> > _valueRanges;
+    QMap<Envelop::ValueType, QString> _valueLabels;
+    QMap<Envelop::ValueType, QString> _valueSuffixes;
+    QMap<Envelop::ValueType, int> _valueDecimals;
 
     double getTickStep();
     void zoom(QPoint point);

@@ -71,14 +71,22 @@ private slots:
     void on_pushRelease_clicked();
     void on_pushDecay_clicked();
     void on_pushKeyDecay_clicked();
+    void onGraphValuesEdited(QList<int> valueTypes);
+    void onGraphEditionFinished();
+    void onGraphEditionCancelled();
+    void onGraphResetRequested(QList<int> valueTypes);
 
 private:
     Ui::PageEnvelope *ui;
     bool _isVolume;
+    QMap<int, EltID> _mainEnvelops; // Envelops that can be edited in the graph
 
     void enableEditor(bool isEnabled);
     void stopSignals(bool isStopped);
+    void fillEditor();
     void addEnvelop(EltID id, bool isVolume, bool isMain);
+    QString getName(EltID id);
+    AttributeType getAttribute(Envelop::ValueType valueType);
     void addSample(EltID idInstSmpl);
     double computeValue(EltID id, AttributeType champ, bool &isOverridden);
     void processEdit(AttributeType champ, double value);

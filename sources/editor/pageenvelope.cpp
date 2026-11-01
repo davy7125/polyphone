@@ -35,6 +35,35 @@ PageEnvelope::PageEnvelope(QWidget *parent) :
     ui->setupUi(this);
     ui->graphicsView->linkSliderX(ui->sliderGraph);
     connect(ui->sliderGraph, SIGNAL(valueChanged(int)), ui->graphicsView, SLOT(setPosX(int)));
+    connect(ui->graphicsView, SIGNAL(valuesEdited(QList<int>)), this, SLOT(onGraphValuesEdited(QList<int>)));
+    connect(ui->graphicsView, SIGNAL(editionFinished()), this, SLOT(onGraphEditionFinished()));
+    connect(ui->graphicsView, SIGNAL(editionCancelled()), this, SLOT(onGraphEditionCancelled()));
+    connect(ui->graphicsView, SIGNAL(resetRequested(QList<int>)), this, SLOT(onGraphResetRequested(QList<int>)));
+
+    // Bounds of the values edited in the graph (sustain excepted, stored as a level)
+    QList<Envelop::ValueType> valueTypes;
+    valueTypes << Envelop::DELAY << Envelop::ATTACK << Envelop::HOLD << Envelop::DECAY << Envelop::RELEASE
+               << Envelop::KEYNUM_TO_HOLD << Envelop::KEYNUM_TO_DECAY;
+    foreach (Envelop::ValueType valueType, valueTypes)
+    {
+        AttributeType champ = getAttribute(valueType);
+        int min, max;
+        Attribute::getLimit(champ, false, min, max);
+        AttributeValue minValue, maxValue;
+        minValue.shValue = static_cast<qint16>(min);
+        maxValue.shValue = static_cast<qint16>(max);
+        ui->graphicsView->setValueRange(valueType, Attribute::toRealValue(champ, false, minValue),
+                                        Attribute::toRealValue(champ, false, maxValue));
+    }
+
+    // Texts of the values in the graph
+    ui->graphicsView->setValueText(Envelop::DELAY, ui->labelDelay->text(), ui->doubleSpinDelay->suffix(), ui->doubleSpinDelay->decimals());
+    ui->graphicsView->setValueText(Envelop::ATTACK, ui->labelAttack->text(), ui->doubleSpinAttack->suffix(), ui->doubleSpinAttack->decimals());
+    ui->graphicsView->setValueText(Envelop::HOLD, ui->labelHold->text(), ui->doubleSpinHold->suffix(), ui->doubleSpinHold->decimals());
+    ui->graphicsView->setValueText(Envelop::DECAY, ui->labelDecay->text(), ui->doubleSpinDecay->suffix(), ui->doubleSpinDecay->decimals());
+    ui->graphicsView->setValueText(Envelop::RELEASE, ui->labelRelease->text(), ui->doubleSpinRelease->suffix(), ui->doubleSpinRelease->decimals());
+    ui->graphicsView->setValueText(Envelop::KEYNUM_TO_HOLD, ui->labelKeyHold->text(), ui->spinKeyHold->suffix(), 0);
+    ui->graphicsView->setValueText(Envelop::KEYNUM_TO_DECAY, ui->labelKeyDecay->text(), ui->spinKeyDecay->suffix(), 0);
 
     QColor redColor = ContextManager::theme()->getFixedColor(ThemeManager::RED, ThemeManager::LIST_BACKGROUND);
     QColor greenColor = ContextManager::theme()->getFixedColor(ThemeManager::GREEN, ThemeManager::LIST_BACKGROUND);
@@ -112,14 +141,63 @@ void PageEnvelope::on_pushModulation_clicked()
 
 void PageEnvelope::populate()
 {
+    // Keep the changes of a possible edition in the graph
+    if (ui->graphicsView->abortEdition())
+        _sf2->endEditing(_editingSource);
+
     stopSignals(true);
 
+    // Initialize the editor values
+    fillEditor();
+
+    // Graphics
+    _mainEnvelops.clear();
+    ui->graphicsView->setValueText(Envelop::SUSTAIN, ui->labelSustain->text(), ui->doubleSpinSustain->suffix(),
+                                   ui->doubleSpinSustain->decimals());
+    ui->graphicsView->clearEnvelops();
+    if (_isVolume)
+    {
+        for (int i = 0; i < _currentIds.count(); i++)
+        {
+            EltID id = _currentIds[i];
+
+            // Volume envelop
+            addEnvelop(id, true, true);
+        }
+    }
+    else
+    {
+        for (int i = 0; i < _currentIds.count(); i++)
+        {
+            EltID id = _currentIds[i];
+
+            // Corresponding volume envelop in secondary
+            addEnvelop(id, true, false);
+
+            // Modulation envelop
+            addEnvelop(id, false, true);
+        }
+    }
+    ui->graphicsView->computeEnvelops();
+
+    // Sample
+    if (_currentIds.count() == 1 && _currentIds[0].typeElement == elementInstSmpl)
+        addSample(_currentIds[0]);
+    else
+        ui->graphicsView->clearSample();
+
+    ui->graphicsView->repaint();
+
+    stopSignals(false);
+}
+
+void PageEnvelope::fillEditor()
+{
     // Prepare fonts
     QFont font = this->font();
     QFont fontB = font;
     fontB.setBold(true);
 
-    // Initialize the editor values
     if (_currentIds.count() == 1)
     {
         EltID id = _currentIds[0];
@@ -165,41 +243,6 @@ void PageEnvelope::populate()
         ui->labelKeyDecay->setFont(isOverridden ? fontB : font);
         ui->pushKeyDecay->setEnabled(isOverridden);
     }
-
-    // Graphics
-    ui->graphicsView->clearEnvelops();
-    if (_isVolume)
-    {
-        for (int i = 0; i < _currentIds.count(); i++)
-        {
-            EltID id = _currentIds[i];
-
-            // Volume envelop
-            addEnvelop(id, true, true);
-        }
-    }
-    else
-    {
-        for (int i = 0; i < _currentIds.count(); i++)
-        {
-            EltID id = _currentIds[i];
-
-            // Corresponding volume envelop in secondary
-            addEnvelop(id, true, false);
-
-            // Modulation envelop
-            addEnvelop(id, false, true);
-        }
-    }
-    ui->graphicsView->computeEnvelops();
-
-    // Sample
-    if (_currentIds.count() == 1 && _currentIds[0].typeElement == elementInstSmpl)
-        addSample(_currentIds[0]);
-
-    ui->graphicsView->repaint();
-
-    stopSignals(false);
 }
 
 double PageEnvelope::computeValue(EltID id, AttributeType champ, bool &isOverridden)
@@ -230,6 +273,9 @@ void PageEnvelope::addEnvelop(EltID id, bool isVolume, bool isMain)
 {
     int index = ui->graphicsView->addEnvelop();
     ui->graphicsView->setEnvelopStyle(index, id.typeElement == elementInst, isVolume, isMain);
+    ui->graphicsView->setEnvelopName(index, getName(id));
+    if (isMain)
+        _mainEnvelops[index] = id;
 
     bool isOverridden = false;
     if (isVolume)
@@ -279,6 +325,19 @@ void PageEnvelope::addEnvelop(EltID id, bool isVolume, bool isMain)
     }
 
     ui->graphicsView->setKeyRange(index, keyMin, keyMax);
+}
+
+QString PageEnvelope::getName(EltID id)
+{
+    if (id.typeElement == elementInstSmpl)
+    {
+        // Name of the sample
+        EltID idSmpl = id;
+        idSmpl.typeElement = elementSmpl;
+        idSmpl.indexElt = _sf2->get(id, champ_sampleID).wValue;
+        return _sf2->getQstr(idSmpl, champ_name);
+    }
+    return _sf2->getQstr(id, champ_name);
 }
 
 void PageEnvelope::addSample(EltID idInstSmpl)
@@ -456,6 +515,88 @@ void PageEnvelope::processClear(AttributeType champ)
     if (_sf2->isSet(_currentIds[0], champ))
     {
         _sf2->reset(_currentIds[0], champ);
+        _sf2->endEditing(_editingSource);
+        populate();
+    }
+}
+
+AttributeType PageEnvelope::getAttribute(Envelop::ValueType valueType)
+{
+    switch (valueType)
+    {
+    case Envelop::DELAY:
+        return _isVolume ? champ_delayVolEnv : champ_delayModEnv;
+    case Envelop::ATTACK:
+        return _isVolume ? champ_attackVolEnv : champ_attackModEnv;
+    case Envelop::HOLD:
+        return _isVolume ? champ_holdVolEnv : champ_holdModEnv;
+    case Envelop::DECAY:
+        return _isVolume ? champ_decayVolEnv : champ_decayModEnv;
+    case Envelop::SUSTAIN:
+        return _isVolume ? champ_sustainVolEnv : champ_sustainModEnv;
+    case Envelop::RELEASE:
+        return _isVolume ? champ_releaseVolEnv : champ_releaseModEnv;
+    case Envelop::KEYNUM_TO_HOLD:
+        return _isVolume ? champ_keynumToVolEnvHold : champ_keynumToModEnvHold;
+    case Envelop::KEYNUM_TO_DECAY:
+        return _isVolume ? champ_keynumToVolEnvDecay : champ_keynumToModEnvDecay;
+    default:
+        break;
+    }
+    return champ_unknown;
+}
+
+void PageEnvelope::onGraphValuesEdited(QList<int> valueTypes)
+{
+    // The values of the current edition replace the previous ones (one undo step at the end)
+    _sf2->revertNewEditing();
+    foreach (int index, _mainEnvelops.keys())
+    {
+        foreach (int valueType, valueTypes)
+        {
+            AttributeType champ = getAttribute(static_cast<Envelop::ValueType>(valueType));
+            double value = ui->graphicsView->getValue(index, static_cast<Envelop::ValueType>(valueType));
+            if (valueType == Envelop::SUSTAIN)
+                value = (1. - value) * (_isVolume ? 144. : 100.);
+            _sf2->set(_mainEnvelops[index], champ, Attribute::limit(champ, Attribute::fromRealValue(champ, false, value), false));
+        }
+    }
+
+    stopSignals(true);
+    fillEditor();
+    stopSignals(false);
+}
+
+void PageEnvelope::onGraphEditionFinished()
+{
+    _sf2->endEditing(_editingSource);
+    populate();
+}
+
+void PageEnvelope::onGraphEditionCancelled()
+{
+    _sf2->revertNewEditing();
+    populate();
+}
+
+void PageEnvelope::onGraphResetRequested(QList<int> valueTypes)
+{
+    bool withChanges = false;
+    foreach (EltID id, _mainEnvelops.values())
+    {
+        foreach (int valueType, valueTypes)
+        {
+            AttributeType champ = getAttribute(static_cast<Envelop::ValueType>(valueType));
+            if (_sf2->isSet(id, champ))
+            {
+                _sf2->reset(id, champ);
+                withChanges = true;
+            }
+        }
+    }
+
+    if (withChanges)
+    {
         _sf2->endEditing(_editingSource);
         populate();
     }
