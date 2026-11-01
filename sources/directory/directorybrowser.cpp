@@ -74,7 +74,7 @@ DirectoryBrowser::DirectoryBrowser(QWidget *parent) : Tab(parent),
     updateShowIcon(ui->pushShowPresets);
 
     // Connections
-    connect(ui->widgetSortMenu, SIGNAL(currentIndexChanged(int)), ui->listView, SLOT(setSortType(int)));
+    connect(ui->widgetDisplayMenu, SIGNAL(displayOptionsChanged(int)), ui->listView, SLOT(setDisplayOptions(int)));
     connect(ui->lineSearch, SIGNAL(textEdited(QString)), ui->listView, SLOT(setFilter(QString)));
     connect(ui->lineSearch, SIGNAL(textEdited(QString)), ui->listSamples, SLOT(setFilter(QString)));
     connect(ui->lineSearch, SIGNAL(textEdited(QString)), ui->listInstruments, SLOT(setFilter(QString)));
@@ -104,8 +104,14 @@ DirectoryBrowser::DirectoryBrowser(QWidget *parent) : Tab(parent),
     layout->addWidget(splitter, 1, 0);
     splitter->setHandleWidth(6);
 
-    // Initial sort type
-    ui->listView->setSortType(ui->widgetSortMenu->currentIndex());
+    // Column header and initial display options
+    ui->widgetHeader->setListView(ui->listView);
+    ui->listView->setDisplayOptions(ui->widgetDisplayMenu->displayOptions());
+
+    // Sections expanded or collapsed on the right
+    ui->pushShowSamples->setChecked(ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "directory_browser_show_samples", true).toBool());
+    ui->pushShowInstruments->setChecked(ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "directory_browser_show_instruments", true).toBool());
+    ui->pushShowPresets->setChecked(ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "directory_browser_show_presets", true).toBool());
 }
 
 DirectoryBrowser::~DirectoryBrowser()
@@ -203,6 +209,9 @@ void DirectoryBrowser::onContentChanged()
         ui->listView->hide();
         ui->labelNoResults->show();
     }
+
+    // The header width depends on the list visibility
+    ui->widgetHeader->update();
 }
 
 void DirectoryBrowser::onSelectionChanged(QItemSelection selected, QItemSelection deselected)
@@ -353,6 +362,7 @@ void DirectoryBrowser::on_pushShowSamples_toggled(bool checked)
     updateShowIcon(ui->pushShowSamples);
     ui->listSamples->setVisible(checked);
     updateVerticalSpacer();
+    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "directory_browser_show_samples", checked);
 }
 
 void DirectoryBrowser::on_pushShowInstruments_toggled(bool checked)
@@ -360,6 +370,7 @@ void DirectoryBrowser::on_pushShowInstruments_toggled(bool checked)
     updateShowIcon(ui->pushShowInstruments);
     ui->listInstruments->setVisible(checked);
     updateVerticalSpacer();
+    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "directory_browser_show_instruments", checked);
 }
 
 void DirectoryBrowser::on_pushShowPresets_toggled(bool checked)
@@ -367,6 +378,7 @@ void DirectoryBrowser::on_pushShowPresets_toggled(bool checked)
     updateShowIcon(ui->pushShowPresets);
     ui->listPresets->setVisible(checked);
     updateVerticalSpacer();
+    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "directory_browser_show_presets", checked);
 }
 
 void DirectoryBrowser::updateVerticalSpacer()

@@ -31,35 +31,75 @@ class DirectoryListModel;
 class DirectoryListDelegate;
 class DirectoryFileData;
 class DirectorySortProxyModel;
+class QTimer;
 
 class DirectoryListView : public QListView
 {
     Q_OBJECT
 
 public:
+    enum Column
+    {
+        COLUMN_NAME,
+        COLUMN_SIZE,
+        COLUMN_DATE,
+        COLUMN_SAMPLES,
+        COLUMN_INSTRUMENTS,
+        COLUMN_PRESETS
+    };
+    static const int COLUMN_NUMBER = 6;
+
     explicit DirectoryListView(QWidget *parent = nullptr);
 
     void addFile(DirectoryFileData * fileData);
     void removeFile(QString filePath);
     void updateFile(DirectoryFileData * fileData);
 
+    // Display options: bit 0 for the preset summary, bit i for the column i (the name is always displayed)
+    bool isPresetSummaryDisplayed() const;
+    bool isColumnDisplayed(int column) const;
+
+    // Horizontal limits of a column in a row having the specified width
+    // Columns are aligned on the right, the name takes the remaining space
+    void getColumnLimits(int column, int totalWidth, int &left, int &right) const;
+    void setMinimumColumnWidth(int column, int width);
+
+    // Sort
+    int getSortColumn() const;
+    bool isSortDescending() const;
+    void toggleSort(int column); // Sort by the column, or reverse the order if already sorted by it
+
 signals:
     void contentChanged();
+    void columnsChanged();
     void itemDoubleClicked(QString filePath, EltID elt);
     void renameRequested(QString filePath);
     void deleteRequested(QString filePath);
 
 public slots:
-    void setSortType(int sortType);
+    void setDisplayOptions(int displayOptions);
     void setFilter(QString filter);
 
 protected:
     void keyPressEvent(QKeyEvent *event) override;
+    void resizeEvent(QResizeEvent *event) override;
+
+private slots:
+    void onModelChanged();
+    void updateContentWidths();
 
 private:
+    void setSort(int column, bool descending);
+
     DirectorySortProxyModel * _proxy;
     DirectoryListModel * _model;
     DirectoryListDelegate * _delegate;
+    QTimer * _timerContentWidths;
+    int _displayOptions;
+    int _minimumWidths[COLUMN_NUMBER];
+    int _contentWidths[COLUMN_NUMBER];
+
+    static const int COLUMN_SPACING;
 };
 
 #endif // DIRECTORYLISTVIEW_H

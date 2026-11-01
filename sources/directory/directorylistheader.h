@@ -1,7 +1,7 @@
 /***************************************************************************
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
-**  Copyright (C) 2013-2024 Davy Triponney                                **
+**  Copyright (C) 2013-2026 Davy Triponney                                **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -22,52 +22,46 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef DIRECTORYSORTMENU_H
-#define DIRECTORYSORTMENU_H
+#ifndef DIRECTORYLISTHEADER_H
+#define DIRECTORYLISTHEADER_H
 
 #include <QWidget>
-#include <QIcon>
+#include "directorylistview.h"
 
-namespace Ui {
-class DirectorySortMenu;
-}
-
-class DirectorySortMenu : public QWidget
+// Header above the list of files, aligned with the columns of each row
+// Clicking on a column sorts the files, clicking again reverses the order
+class DirectoryListHeader : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit DirectorySortMenu(QWidget *parent = nullptr);
-    ~DirectorySortMenu();
+    explicit DirectoryListHeader(QWidget *parent = nullptr);
 
-    int currentIndex();
-
-signals:
-    void currentIndexChanged(int index);
+    void setListView(DirectoryListView * listView);
 
 protected:
-#if QT_VERSION >= 0x060000
-    void enterEvent(QEnterEvent * event) override;
-#else
-    void enterEvent(QEvent * event) override;
-#endif
-    void leaveEvent(QEvent *event) override;
+    bool event(QEvent *event) override;
+    void paintEvent(QPaintEvent *event) override;
+    void mouseMoveEvent(QMouseEvent *event) override;
     void mousePressEvent(QMouseEvent *event) override;
-
-private slots:
-    void element1Clicked();
-    void element2Clicked();
-    void element3Clicked();
-    void element4Clicked();
-    void onMenuClosed();
+    void mouseReleaseEvent(QMouseEvent *event) override;
+    void leaveEvent(QEvent *event) override;
 
 private:
-    void elementClicked(int index);
-    void setStyle(bool hovered);
+    int getTotalWidth() const;
+    int getLabelWidth(int column) const;
+    void getSectionLimits(int column, int &left, int &right) const;
+    int getColumnAt(int x) const;
+    void setHoveredColumn(int column);
 
-    Ui::DirectorySortMenu *ui;
-    QIcon _checkIcon;
-    QString _textColor, _backgroundColor, _hoveredBackgroundColor;
+    DirectoryListView * _listView;
+    QString _texts[DirectoryListView::COLUMN_NUMBER];
+    QPixmap _icons[DirectoryListView::COLUMN_NUMBER];
+    QString _toolTips[DirectoryListView::COLUMN_NUMBER];
+    QPixmap _arrowUp, _arrowDown;
+    QColor _textColor, _backgroundColor, _hoveredBackgroundColor, _borderColor;
+    int _hoveredColumn;
+    int _pressedColumn;
 };
 
-#endif // DIRECTORYSORTMENU_H
+#endif // DIRECTORYLISTHEADER_H

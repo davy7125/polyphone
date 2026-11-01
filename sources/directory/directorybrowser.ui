@@ -277,6 +277,9 @@
            <number>0</number>
           </property>
           <item>
+           <widget class="DirectoryListHeader" name="widgetHeader" native="true"/>
+          </item>
+          <item>
            <widget class="QLabel" name="labelNoResults">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -700,7 +703,7 @@
            </widget>
           </item>
           <item>
-           <widget class="DirectorySortMenu" name="widgetSortMenu" native="true"/>
+           <widget class="DirectoryDisplayMenu" name="widgetDisplayMenu" native="true"/>
           </item>
          </layout>
         </widget>
@@ -719,9 +722,15 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>DirectorySortMenu</class>
+   <class>DirectoryDisplayMenu</class>
    <extends>QWidget</extends>
-   <header>directorysortmenu.h</header>
+   <header>directorydisplaymenu.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>DirectoryListHeader</class>
+   <extends>QWidget</extends>
+   <header>directorylistheader.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>

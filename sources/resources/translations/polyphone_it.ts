@@ -2198,106 +2198,144 @@ online</translation>
 <context>
     <name>DirectoryBrowser</name>
     <message>
-        <location filename="../../directory/directorybrowser.ui" line="293"/>
+        <location filename="../../directory/directorybrowser.ui" line="296"/>
         <source>No results</source>
         <translation>Nessun risultato</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.ui" line="493"/>
+        <location filename="../../directory/directorybrowser.ui" line="496"/>
         <source>Instruments</source>
         <translation>Strumenti</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.ui" line="587"/>
+        <location filename="../../directory/directorybrowser.ui" line="590"/>
         <source>Presets</source>
         <translation>Preset</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.ui" line="399"/>
+        <location filename="../../directory/directorybrowser.ui" line="402"/>
         <source>Samples</source>
         <translation>Campioni</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.ui" line="695"/>
+        <location filename="../../directory/directorybrowser.ui" line="698"/>
         <source>Search a file, a sample, an instrument or a preset...</source>
         <translation>Cerca un file, un campione, uno strumento o un preset...</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="125"/>
+        <location filename="../../directory/directorybrowser.cpp" line="131"/>
         <source>The directory &quot;%1&quot; does not exist.</source>
         <oldsource>The directory &quot;%1&quot; doesn&apos;t exist.</oldsource>
         <translation>La directory &quot;%1&quot; non esiste.</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="132"/>
+        <location filename="../../directory/directorybrowser.cpp" line="138"/>
         <source>The directory &quot;%1&quot; is not readable.</source>
         <translation>La directory &quot;%1&quot; non è leggibile.</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="248"/>
+        <location filename="../../directory/directorybrowser.cpp" line="258"/>
         <source>Rename</source>
         <translation>Rinomina</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="249"/>
+        <location filename="../../directory/directorybrowser.cpp" line="259"/>
         <source>New name:</source>
         <translation>Nuovo nome:</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="251"/>
+        <location filename="../../directory/directorybrowser.cpp" line="261"/>
         <source>&amp;Cancel</source>
         <oldsource>Cancel</oldsource>
         <translation>&amp;Annulla</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="252"/>
+        <location filename="../../directory/directorybrowser.cpp" line="262"/>
         <source>&amp;Ok</source>
         <oldsource>Ok</oldsource>
         <translation>&amp;Ok</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="263"/>
+        <location filename="../../directory/directorybrowser.cpp" line="273"/>
         <source>A file with this name already exists.</source>
         <translation>Un file con questo nome esiste già.</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="263"/>
-        <location filename="../../directory/directorybrowser.cpp" line="268"/>
-        <location filename="../../directory/directorybrowser.cpp" line="286"/>
+        <location filename="../../directory/directorybrowser.cpp" line="273"/>
+        <location filename="../../directory/directorybrowser.cpp" line="278"/>
+        <location filename="../../directory/directorybrowser.cpp" line="296"/>
         <source>Warning</source>
         <translation>Attenzione</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="268"/>
+        <location filename="../../directory/directorybrowser.cpp" line="278"/>
         <source>Cannot rename file &quot;%1&quot;.</source>
         <translation>Impossibile rinominare il file &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="276"/>
+        <location filename="../../directory/directorybrowser.cpp" line="286"/>
         <source>Confirm deletion</source>
         <translation>Conferma eliminazione</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="277"/>
+        <location filename="../../directory/directorybrowser.cpp" line="287"/>
         <source>Are you sure you want to delete file &quot;%1&quot;?</source>
         <translation>Sei sicuro di voler eliminare il file &quot;%1&quot;?</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="279"/>
+        <location filename="../../directory/directorybrowser.cpp" line="289"/>
         <source>&amp;Yes</source>
         <oldsource>Yes</oldsource>
         <translation>&amp;Sì</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="280"/>
+        <location filename="../../directory/directorybrowser.cpp" line="290"/>
         <source>&amp;No</source>
         <oldsource>No</oldsource>
         <translation>&amp;No</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="286"/>
+        <location filename="../../directory/directorybrowser.cpp" line="296"/>
         <source>Cannot delete file &quot;%1&quot;.</source>
         <translation>Impossibile eliminare il file &quot;%1&quot;.</translation>
+    </message>
+</context>
+<context>
+    <name>DirectoryDisplayMenu</name>
+    <message>
+        <location filename="../../directory/directorydisplaymenu.ui" line="63"/>
+        <source>Display</source>
+        <translation>Visualizzazione</translation>
+    </message>
+    <message>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="61"/>
+        <source>Preset summary</source>
+        <translation>Riepilogo dei preset</translation>
+    </message>
+    <message>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="63"/>
+        <source>Size</source>
+        <translation>Dimensione</translation>
+    </message>
+    <message>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="64"/>
+        <source>Date</source>
+        <translation>Data</translation>
+    </message>
+    <message>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="65"/>
+        <source>Samples</source>
+        <translation>Campioni</translation>
+    </message>
+    <message>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="66"/>
+        <source>Instruments</source>
+        <translation>Strumenti</translation>
+    </message>
+    <message>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="67"/>
+        <source>Presets</source>
+        <translation>Preset</translation>
     </message>
 </context>
 <context>
@@ -2389,17 +2427,17 @@ online</translation>
 <context>
     <name>DirectoryListDelegate</name>
     <message>
-        <location filename="../../directory/directorylistdelegate.cpp" line="135"/>
+        <location filename="../../directory/directorylistdelegate.cpp" line="133"/>
         <source>Analyze in progress...</source>
         <translation>Analisi in corso...</translation>
     </message>
     <message>
-        <location filename="../../directory/directorylistdelegate.cpp" line="138"/>
+        <location filename="../../directory/directorylistdelegate.cpp" line="136"/>
         <source>NOT READABLE</source>
         <translation>NON LEGGIBILE</translation>
     </message>
     <message>
-        <location filename="../../directory/directorylistdelegate.cpp" line="145"/>
+        <location filename="../../directory/directorylistdelegate.cpp" line="143"/>
         <source>Error when reading the file.</source>
         <translation>Errore durante la lettura del file.</translation>
     </message>
@@ -2415,26 +2453,36 @@ online</translation>
     </message>
 </context>
 <context>
-    <name>DirectorySortMenu</name>
+    <name>DirectoryListHeader</name>
     <message>
-        <location filename="../../directory/directorysortmenu.cpp" line="55"/>
-        <source>Name (A→Z)</source>
-        <translation>Nome (A→Z)</translation>
+        <location filename="../../directory/directorylistheader.cpp" line="47"/>
+        <source>Name</source>
+        <translation>Nome</translation>
     </message>
     <message>
-        <location filename="../../directory/directorysortmenu.cpp" line="62"/>
-        <source>Newest first</source>
-        <translation>Più recenti prima</translation>
+        <location filename="../../directory/directorylistheader.cpp" line="48"/>
+        <source>Size</source>
+        <translation>Dimensione</translation>
     </message>
     <message>
-        <location filename="../../directory/directorysortmenu.cpp" line="69"/>
-        <source>Largest first</source>
-        <translation>Più grandi prima</translation>
+        <location filename="../../directory/directorylistheader.cpp" line="49"/>
+        <source>Date</source>
+        <translation>Data</translation>
     </message>
     <message>
-        <location filename="../../directory/directorysortmenu.cpp" line="76"/>
-        <source>Smallest first</source>
-        <translation>Più piccoli prima</translation>
+        <location filename="../../directory/directorylistheader.cpp" line="54"/>
+        <source>Number of samples</source>
+        <translation>Numero di campioni</translation>
+    </message>
+    <message>
+        <location filename="../../directory/directorylistheader.cpp" line="57"/>
+        <source>Number of instruments</source>
+        <translation>Numero di strumenti</translation>
+    </message>
+    <message>
+        <location filename="../../directory/directorylistheader.cpp" line="60"/>
+        <source>Number of presets</source>
+        <translation>Numero di preset</translation>
     </message>
 </context>
 <context>

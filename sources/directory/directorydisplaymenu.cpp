@@ -27,8 +27,7 @@
 #include "contextmanager.h"
 #include <QMenu>
 #include <QMouseEvent>
-#include <QWidgetAction>
-#include "menulabel.h"
+#include "directorylistview.h"
 
 DirectoryDisplayMenu::DirectoryDisplayMenu(QWidget *parent) :
     QWidget(parent),
@@ -44,8 +43,10 @@ DirectoryDisplayMenu::DirectoryDisplayMenu(QWidget *parent) :
     this->setStyle(false);
 
     // Icons
-    _emptyIcon.addPixmap(QPixmap(24, 24), QIcon::Normal);
-    _emptyIcon.addPixmap(QPixmap(24, 24), QIcon::Active);
+    QPixmap emptyPixmap(24, 24);
+    emptyPixmap.fill(Qt::transparent);
+    _emptyIcon.addPixmap(emptyPixmap, QIcon::Normal);
+    _emptyIcon.addPixmap(emptyPixmap, QIcon::Active);
     _checkIcon.addPixmap(ContextManager::theme()->getColoredSvg(":/icons/check.svg", QSize(24, 24), ThemeManager::LIST_TEXT), QIcon::Normal);
     _checkIcon.addPixmap(ContextManager::theme()->getColoredSvg(":/icons/check.svg", QSize(24, 24), ThemeManager::HIGHLIGHTED_TEXT), QIcon::Active);
 
@@ -55,60 +56,15 @@ DirectoryDisplayMenu::DirectoryDisplayMenu(QWidget *parent) :
     connect(menu, SIGNAL(aboutToHide()), this, SLOT(onMenuClosed()));
     menu->setStyleSheet(ContextManager::theme()->getMenuTheme());
 
-    // QWidgetAction * wAction = new QWidgetAction(menu);
-    // wAction->setDefaultWidget(new MenuLabel(tr("Samples")));
-    // menu->addAction(wAction);
-
-    // int displayOptions = ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "directory_browser_display_options", 0x1FFF).toInt();
-    // QAction * action = menu->addAction(tr("sampling rate (Hz)"));
-    // action->setData(displayOptions & 0x0001);
-    // action->setIcon(action->data().toBool() ? _checkIcon : _emptyIcon);
-    // action = menu->addAction(tr("total duration (s)"));
-    // action->setData(displayOptions & 0x0002);
-    // action->setIcon(action->data().toBool() ? _checkIcon : _emptyIcon);
-    // action = menu->addAction(tr("loop duration (s)"));
-    // action->setData(displayOptions & 0x0004);
-    // action->setIcon(action->data().toBool() ? _checkIcon : _emptyIcon);
-
-    // wAction = new QWidgetAction(menu);
-    // wAction->setDefaultWidget(new MenuLabel(tr("Instruments")));
-    // menu->addAction(wAction);
-
-    // action = menu->addAction(tr("number of divisions"));
-    // action->setData(displayOptions & 0x0008);
-    // action->setIcon(action->data().toBool() ? _checkIcon : _emptyIcon);
-    // action = menu->addAction(tr("number of distinct key ranges"));
-    // action->setData(displayOptions & 0x0010);
-    // action->setIcon(action->data().toBool() ? _checkIcon : _emptyIcon);
-    // action = menu->addAction(tr("number of distinct velocity ranges"));
-    // action->setData(displayOptions & 0x0020);
-    // action->setIcon(action->data().toBool() ? _checkIcon : _emptyIcon);
-    // action = menu->addAction(tr("number of parameters"));
-    // action->setData(displayOptions & 0x0040);
-    // action->setIcon(action->data().toBool() ? _checkIcon : _emptyIcon);
-    // action = menu->addAction(tr("number of modulators"));
-    // action->setData(displayOptions & 0x0080);
-    // action->setIcon(action->data().toBool() ? _checkIcon : _emptyIcon);
-
-    // wAction = new QWidgetAction(menu);
-    // wAction->setDefaultWidget(new MenuLabel(tr("Presets")));
-    // menu->addAction(wAction);
-
-    // action = menu->addAction(tr("number of divisions"));
-    // action->setData(displayOptions & 0x0100);
-    // action->setIcon(action->data().toBool() ? _checkIcon : _emptyIcon);
-    // action = menu->addAction(tr("number of distinct key ranges"));
-    // action->setData(displayOptions & 0x0200);
-    // action->setIcon(action->data().toBool() ? _checkIcon : _emptyIcon);
-    // action = menu->addAction(tr("number of distinct velocity ranges"));
-    // action->setData(displayOptions & 0x0400);
-    // action->setIcon(action->data().toBool() ? _checkIcon : _emptyIcon);
-    // action = menu->addAction(tr("number of parameters"));
-    // action->setData(displayOptions & 0x0800);
-    // action->setIcon(action->data().toBool() ? _checkIcon : _emptyIcon);
-    // action = menu->addAction(tr("number of modulators"));
-    // action->setData(displayOptions & 0x1000);
-    // action->setIcon(action->data().toBool() ? _checkIcon : _emptyIcon);
+    // Bit 0 for the preset summary, bit i for the column i
+    _displayOptions = ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "directory_browser_display", 0x3F).toInt();
+    addOption(menu, tr("Preset summary"), 0x01);
+    menu->addSeparator();
+    addOption(menu, tr("Size"), 0x01 << DirectoryListView::COLUMN_SIZE);
+    addOption(menu, tr("Date"), 0x01 << DirectoryListView::COLUMN_DATE);
+    addOption(menu, tr("Samples"), 0x01 << DirectoryListView::COLUMN_SAMPLES);
+    addOption(menu, tr("Instruments"), 0x01 << DirectoryListView::COLUMN_INSTRUMENTS);
+    addOption(menu, tr("Presets"), 0x01 << DirectoryListView::COLUMN_PRESETS);
 
     ui->pushButton->setMenu(menu);
 }
@@ -118,20 +74,20 @@ DirectoryDisplayMenu::~DirectoryDisplayMenu()
     delete ui;
 }
 
-int DirectoryDisplayMenu::displayOptions()
+void DirectoryDisplayMenu::addOption(QMenu * menu, QString text, int flag)
 {
-    int displayOptions = 0;
-    QList<QAction *> actions = ui->pushButton->menu()->actions();
-    int actionIndex = 0;
-    for (int i = 0; i < actions.count(); i++)
-    {
-        if (i == 0 || i == 4 || i == 10)
-            continue; // Separators
-        if (actions[i]->data().toBool())
-            displayOptions += (0x0001 << actionIndex);
-        actionIndex++;
-    }
-    return displayOptions;
+    QAction * action = menu->addAction(text);
+    action->setData(flag);
+    action->setIcon((_displayOptions & flag) ? _checkIcon : _emptyIcon);
+}
+
+void DirectoryDisplayMenu::toggleOption(QAction * action)
+{
+    int flag = action->data().toInt();
+    _displayOptions ^= flag;
+    action->setIcon((_displayOptions & flag) ? _checkIcon : _emptyIcon);
+    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "directory_browser_display", _displayOptions);
+    emit displayOptionsChanged(_displayOptions);
 }
 
 #if QT_VERSION >= 0x060000
@@ -153,7 +109,7 @@ void DirectoryDisplayMenu::leaveEvent(QEvent *event)
 void DirectoryDisplayMenu::mousePressEvent(QMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
-        ui->pushButton->menu()->exec();
+        ui->pushButton->showMenu();
     QWidget::mousePressEvent(event);
 }
 
@@ -177,18 +133,25 @@ bool DirectoryDisplayMenu::eventFilter(QObject *obj, QEvent *event)
     if (!menu)
         return QWidget::eventFilter(obj, event);
 
+    // Toggle an option without closing the menu, with the mouse or the keyboard
     if (event->type() == QEvent::MouseButtonRelease)
     {
         QMouseEvent * mouseEvent = static_cast<QMouseEvent *>(event);
         QAction * action = menu->actionAt(mouseEvent->pos());
-        if (action)
+        if (action && !action->isSeparator())
         {
-            action->setData(!action->data().toBool());
-            action->setIcon(action->data().toBool() ? _checkIcon : _emptyIcon);
-            int currentOptions = displayOptions();
-            emit displayOptionsChanged(currentOptions);
-            ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "directory_browser_display_options", currentOptions);
+            toggleOption(action);
             return true; // consume the event and don't close the menu
+        }
+    }
+    else if (event->type() == QEvent::KeyPress)
+    {
+        int key = static_cast<QKeyEvent *>(event)->key();
+        QAction * action = menu->activeAction();
+        if (action && !action->isSeparator() && (key == Qt::Key_Return || key == Qt::Key_Enter || key == Qt::Key_Space))
+        {
+            toggleOption(action);
+            return true;
         }
     }
 

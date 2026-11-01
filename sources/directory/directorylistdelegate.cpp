@@ -23,6 +23,7 @@
 ***************************************************************************/
 
 #include "directorylistdelegate.h"
+#include "directorylistview.h"
 #include "directoryfiledata.h"
 #include "utils.h"
 #include "contextmanager.h"
@@ -39,7 +40,8 @@ const int DirectoryListDelegate::MARGIN = 6;
 const int DirectoryListDelegate::ICON_SIZE = 16;
 const int DirectoryListDelegate::BUTTON_SIZE = 16;
 
-DirectoryListDelegate::DirectoryListDelegate(QObject *parent) : QStyledItemDelegate(parent)
+DirectoryListDelegate::DirectoryListDelegate(DirectoryListView *parent) : QStyledItemDelegate(parent),
+    _view(parent)
 {
     _dateFormat = QLocale().dateFormat(QLocale::ShortFormat);
     _colorEnabled = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT, ThemeManager::NORMAL);
@@ -47,21 +49,7 @@ DirectoryListDelegate::DirectoryListDelegate(QObject *parent) : QStyledItemDeleg
     _colorDisabled = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT, ThemeManager::DISABLED);
 
     // Icons
-    QMap<QString, QString> replacement;
-    replacement["currentColor"] = ContextManager::theme()->getFixedColor(ThemeManager::YELLOW, ThemeManager::LIST_BACKGROUND).name();
-    _iconSample = ContextManager::theme()->getColoredSvg(":/icons/sample.svg", QSize(ICON_SIZE, ICON_SIZE), replacement);
-    replacement["currentColor"] = ContextManager::theme()->getFixedColor(ThemeManager::BLUE, ThemeManager::LIST_BACKGROUND).name();
-    _iconInstrument = ContextManager::theme()->getColoredSvg(":/icons/instrument.svg", QSize(ICON_SIZE, ICON_SIZE), replacement);
-    replacement["currentColor"] = ContextManager::theme()->getFixedColor(ThemeManager::RED, ThemeManager::LIST_BACKGROUND).name();
-    _iconPreset = ContextManager::theme()->getColoredSvg(":/icons/preset.svg", QSize(ICON_SIZE, ICON_SIZE), replacement);
-
-    _iconSampleSelected = ContextManager::theme()->getColoredSvg(":/icons/sample.svg", QSize(ICON_SIZE, ICON_SIZE), ThemeManager::HIGHLIGHTED_TEXT);
-    _iconInstrumentSelected = ContextManager::theme()->getColoredSvg(":/icons/instrument.svg", QSize(ICON_SIZE, ICON_SIZE), ThemeManager::HIGHLIGHTED_TEXT);
-    _iconPresetSelected = ContextManager::theme()->getColoredSvg(":/icons/preset.svg", QSize(ICON_SIZE, ICON_SIZE), ThemeManager::HIGHLIGHTED_TEXT);
-
-    _iconRename = ContextManager::theme()->getColoredSvg(":/icons/pen.svg", QSize(BUTTON_SIZE, BUTTON_SIZE), ThemeManager::LIST_TEXT);
     _iconRenameSelected = ContextManager::theme()->getColoredSvg(":/icons/pen.svg", QSize(BUTTON_SIZE, BUTTON_SIZE), ThemeManager::HIGHLIGHTED_TEXT);
-    _iconDelete = ContextManager::theme()->getColoredSvg(":/icons/trash.svg", QSize(BUTTON_SIZE, BUTTON_SIZE), ThemeManager::LIST_TEXT);
     _iconDeleteSelected = ContextManager::theme()->getColoredSvg(":/icons/trash.svg", QSize(BUTTON_SIZE, BUTTON_SIZE), ThemeManager::HIGHLIGHTED_TEXT);
 }
 
@@ -74,7 +62,10 @@ QSize DirectoryListDelegate::sizeHint(const QStyleOptionViewItem &option, const 
     QFontMetrics fm(option.font);
     int height = fm.height() + 2 * MARGIN;
 
-    if (d->getStatus() == DirectoryFileData::OK || d->getStatus() == DirectoryFileData::NOT_INITIALIZED)
+    // Second line with the preset summary or the status
+    if (_view->isPresetSummaryDisplayed() && (d->getStatus() == DirectoryFileData::OK ||
+                                              d->getStatus() == DirectoryFileData::NOT_INITIALIZED ||
+                                              d->getStatus() == DirectoryFileData::CANNOT_SCAN))
         height += 0.5 * MARGIN + 0.9 * fm.height();
 
     return QSize(option.rect.width(), height);
@@ -119,20 +110,27 @@ void DirectoryListDelegate::paint(QPainter *painter, const QStyleOptionViewItem 
     // Main font
     QFont font = option.font;
     const QFontMetrics fm(font);
+    painter->setFont(font);
 
-    // First line text
+    // First line: columns on the right, aligned with the header
+    int left, right;
+    for (int column = DirectoryListView::COLUMN_NAME + 1; column < DirectoryListView::COLUMN_NUMBER; column++)
+    {
+        if (!_view->isColumnDisplayed(column))
+            continue;
+        _view->getColumnLimits(column, option.rect.width(), left, right);
+        QString text = getText(d, column);
+        painter->drawText(option.rect.left() + right - fm.horizontalAdvance(text), option.rect.top() + MARGIN + fm.ascent(), text);
+    }
+
+    // Name and status
     QString fileName = d->getFileName();
-    QString suffix = QString(" (%1 - %2)").arg(Utils::getFormattedSize(d->getFileSize()), d->getLastModified().toString(_dateFormat));
-    int suffixWidth = fm.horizontalAdvance(suffix);
-    int counterWidth = 0;
-
-    // Second line text
-    QString secondLineText = "";
-
+    QString statusText = "";
+    QString presetSummary = "";
     switch (d->getStatus())
     {
     case DirectoryFileData:: NOT_INITIALIZED:
-        secondLineText = tr("Analyze in progress...");
+        statusText = tr("Analyze in progress...");
         break;
     case DirectoryFileData::NOT_READABLE:
         fileName = "[" + tr("NOT READABLE") + "] " + fileName;
@@ -142,33 +140,49 @@ void DirectoryListDelegate::paint(QPainter *painter, const QStyleOptionViewItem 
     case DirectoryFileData::NOT_SCANNABLE:
         break;
     case DirectoryFileData::CANNOT_SCAN:
-        secondLineText = tr("Error when reading the file.");
+        statusText = tr("Error when reading the file.");
         break;
     case DirectoryFileData::OK:
-        // First line: counters on the right
-        counterWidth = getCounterWidth(fm, d);
-        paintCounters(painter, fm, d, option.rect.right() - MARGIN - counterWidth, option.rect.top() + MARGIN, selected);
-
-        // Second line
+        if (_view->isPresetSummaryDisplayed())
         {
             DirectoryFileData::DetailsData presets = d->getPresetDetails();
             QStringList listTmp;
             for (const QString &s : presets.names)
                 listTmp << s.mid(8);
-            secondLineText = listTmp.join(", ");
+            presetSummary = listTmp.join(", ");
         }
         break;
     }
 
-    // First line: text on the left
+    // Second line with the preset summary or the status, otherwise the status follows the name
+    QString secondLineText = "";
+    if (_view->isPresetSummaryDisplayed())
+    {
+        secondLineText = statusText.isEmpty() ? presetSummary : statusText;
+        statusText = "";
+    }
+
+    // First line: name on the left, elided first if a status follows
+    _view->getColumnLimits(DirectoryListView::COLUMN_NAME, option.rect.width(), left, right);
+    int x = option.rect.left() + left + prefixWidth;
+    int availableWidth = right - left - prefixWidth;
     QFont fontBold = font;
     fontBold.setBold(true);
     const QFontMetrics fmBold(fontBold);
-    fileName = fmBold.elidedText(fileName, Qt::ElideMiddle, option.rect.width() - 3 * MARGIN - counterWidth - suffixWidth - prefixWidth);
+    QFont fontItalic = font;
+    fontItalic.setItalic(true);
+    const QFontMetrics fmItalic(fontItalic);
+    int statusWidth = statusText.isEmpty() ? 0 : MARGIN + fmItalic.horizontalAdvance(statusText);
+    fileName = fmBold.elidedText(fileName, Qt::ElideMiddle, qMax(availableWidth - statusWidth, availableWidth / 2));
     painter->setFont(fontBold);
-    painter->drawText(option.rect.left() + MARGIN + prefixWidth, option.rect.top() + MARGIN + fm.ascent(), fileName);
-    painter->setFont(font);
-    painter->drawText(option.rect.left() + MARGIN + prefixWidth + fmBold.horizontalAdvance(fileName), option.rect.top() + MARGIN + fm.ascent(), suffix);
+    painter->drawText(x, option.rect.top() + MARGIN + fm.ascent(), fileName);
+    if (!statusText.isEmpty())
+    {
+        x += fmBold.horizontalAdvance(fileName) + MARGIN;
+        statusText = fmItalic.elidedText(statusText, Qt::ElideRight, option.rect.left() + right - x);
+        painter->setFont(fontItalic);
+        painter->drawText(x, option.rect.top() + MARGIN + fm.ascent(), statusText);
+    }
 
     // Second line
     if (!secondLineText.isEmpty())
@@ -185,38 +199,24 @@ void DirectoryListDelegate::paint(QPainter *painter, const QStyleOptionViewItem 
     painter->restore();
 }
 
-int DirectoryListDelegate::getCounterWidth(const QFontMetrics &fm, const DirectoryFileData * d) const
+QString DirectoryListDelegate::getText(const DirectoryFileData * d, int column) const
 {
-    return ICON_SIZE + MARGIN / 2 +
-           fm.horizontalAdvance(QString::number(d->getSampleCount())) +
-           MARGIN +
-           ICON_SIZE + MARGIN / 2 +
-           fm.horizontalAdvance(QString::number(d->getInstrumentCount())) +
-           MARGIN +
-           ICON_SIZE + MARGIN / 2 +
-           fm.horizontalAdvance(QString::number(d->getPresetCount()));
-}
-
-void DirectoryListDelegate::paintCounters(QPainter *painter, const QFontMetrics &fm, const DirectoryFileData * d, int x, int y, bool selected) const
-{
-    int deltaPixmap = (fm.height() - ICON_SIZE) / 2;
-
-    painter->drawPixmap(x, y + deltaPixmap, selected ? _iconSampleSelected : _iconSample);
-    x += ICON_SIZE + MARGIN / 2;
-    int count = d->getSampleCount();
-    painter->drawText(x, y + fm.ascent(), QString::number(count));
-    x += MARGIN + fm.horizontalAdvance(QString::number(count));
-
-    painter->drawPixmap(x, y + deltaPixmap, selected ? _iconInstrumentSelected : _iconInstrument);
-    x += ICON_SIZE + MARGIN / 2;
-    count = d->getInstrumentCount();
-    painter->drawText(x, y + fm.ascent(), QString::number(count));
-    x += MARGIN + fm.horizontalAdvance(QString::number(count));
-
-    painter->drawPixmap(x, y + deltaPixmap, selected ? _iconPresetSelected : _iconPreset);
-    x += ICON_SIZE + MARGIN / 2;
-    count = d->getPresetCount();
-    painter->drawText(x, y + fm.ascent(), QString::number(count));
+    switch (column)
+    {
+    case DirectoryListView::COLUMN_SIZE:
+        return Utils::getFormattedSize(d->getFileSize());
+    case DirectoryListView::COLUMN_DATE:
+        return d->getLastModified().toString(_dateFormat);
+    case DirectoryListView::COLUMN_SAMPLES:
+        return d->getStatus() == DirectoryFileData::OK ? QString::number(d->getSampleCount()) : "";
+    case DirectoryListView::COLUMN_INSTRUMENTS:
+        return d->getStatus() == DirectoryFileData::OK ? QString::number(d->getInstrumentCount()) : "";
+    case DirectoryListView::COLUMN_PRESETS:
+        return d->getStatus() == DirectoryFileData::OK ? QString::number(d->getPresetCount()) : "";
+    default:
+        break;
+    }
+    return "";
 }
 
 QRect DirectoryListDelegate::getRenameButtonRect(const QStyleOptionViewItem &option) const

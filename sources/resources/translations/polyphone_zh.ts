@@ -2179,101 +2179,139 @@ repository</source>
 <context>
     <name>DirectoryBrowser</name>
     <message>
-        <location filename="../../directory/directorybrowser.ui" line="293"/>
+        <location filename="../../directory/directorybrowser.ui" line="296"/>
         <source>No results</source>
         <translation>无结果</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.ui" line="493"/>
+        <location filename="../../directory/directorybrowser.ui" line="496"/>
         <source>Instruments</source>
         <translation>乐器</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.ui" line="587"/>
+        <location filename="../../directory/directorybrowser.ui" line="590"/>
         <source>Presets</source>
         <translation>预设</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.ui" line="399"/>
+        <location filename="../../directory/directorybrowser.ui" line="402"/>
         <source>Samples</source>
         <translation>采样</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.ui" line="695"/>
+        <location filename="../../directory/directorybrowser.ui" line="698"/>
         <source>Search a file, a sample, an instrument or a preset...</source>
         <translation>搜索文件、采样、乐器或预设...</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="125"/>
+        <location filename="../../directory/directorybrowser.cpp" line="131"/>
         <source>The directory &quot;%1&quot; does not exist.</source>
         <translation>目录&quot;%1&quot;不存在。</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="132"/>
+        <location filename="../../directory/directorybrowser.cpp" line="138"/>
         <source>The directory &quot;%1&quot; is not readable.</source>
         <translation>目录“%1”不可读。</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="248"/>
+        <location filename="../../directory/directorybrowser.cpp" line="258"/>
         <source>Rename</source>
         <translation>重命名</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="249"/>
+        <location filename="../../directory/directorybrowser.cpp" line="259"/>
         <source>New name:</source>
         <translation>新名称：</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="251"/>
+        <location filename="../../directory/directorybrowser.cpp" line="261"/>
         <source>&amp;Cancel</source>
         <translation>取消(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="252"/>
+        <location filename="../../directory/directorybrowser.cpp" line="262"/>
         <source>&amp;Ok</source>
         <translation>确定(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="263"/>
+        <location filename="../../directory/directorybrowser.cpp" line="273"/>
         <source>A file with this name already exists.</source>
         <translation>具有此名称的文件已存在。</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="263"/>
-        <location filename="../../directory/directorybrowser.cpp" line="268"/>
-        <location filename="../../directory/directorybrowser.cpp" line="286"/>
+        <location filename="../../directory/directorybrowser.cpp" line="273"/>
+        <location filename="../../directory/directorybrowser.cpp" line="278"/>
+        <location filename="../../directory/directorybrowser.cpp" line="296"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="268"/>
+        <location filename="../../directory/directorybrowser.cpp" line="278"/>
         <source>Cannot rename file &quot;%1&quot;.</source>
         <translation>无法重命名文件 &quot;%1&quot;。</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="276"/>
+        <location filename="../../directory/directorybrowser.cpp" line="286"/>
         <source>Confirm deletion</source>
         <translation>确认删除</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="277"/>
+        <location filename="../../directory/directorybrowser.cpp" line="287"/>
         <source>Are you sure you want to delete file &quot;%1&quot;?</source>
         <translation>您确定要删除文件“%1”吗？</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="279"/>
+        <location filename="../../directory/directorybrowser.cpp" line="289"/>
         <source>&amp;Yes</source>
         <translation>是(&amp;Y)</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="280"/>
+        <location filename="../../directory/directorybrowser.cpp" line="290"/>
         <source>&amp;No</source>
         <translation>否(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="286"/>
+        <location filename="../../directory/directorybrowser.cpp" line="296"/>
         <source>Cannot delete file &quot;%1&quot;.</source>
         <translation>无法删除文件 &quot;%1&quot;。</translation>
+    </message>
+</context>
+<context>
+    <name>DirectoryDisplayMenu</name>
+    <message>
+        <location filename="../../directory/directorydisplaymenu.ui" line="63"/>
+        <source>Display</source>
+        <translation>显示</translation>
+    </message>
+    <message>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="61"/>
+        <source>Preset summary</source>
+        <translation>预设摘要</translation>
+    </message>
+    <message>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="63"/>
+        <source>Size</source>
+        <translation>大小</translation>
+    </message>
+    <message>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="64"/>
+        <source>Date</source>
+        <translation>日期</translation>
+    </message>
+    <message>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="65"/>
+        <source>Samples</source>
+        <translation>采样</translation>
+    </message>
+    <message>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="66"/>
+        <source>Instruments</source>
+        <translation>乐器</translation>
+    </message>
+    <message>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="67"/>
+        <source>Presets</source>
+        <translation>预设</translation>
     </message>
 </context>
 <context>
@@ -2360,17 +2398,17 @@ repository</source>
 <context>
     <name>DirectoryListDelegate</name>
     <message>
-        <location filename="../../directory/directorylistdelegate.cpp" line="135"/>
+        <location filename="../../directory/directorylistdelegate.cpp" line="133"/>
         <source>Analyze in progress...</source>
         <translation>正在分析...</translation>
     </message>
     <message>
-        <location filename="../../directory/directorylistdelegate.cpp" line="138"/>
+        <location filename="../../directory/directorylistdelegate.cpp" line="136"/>
         <source>NOT READABLE</source>
         <translation>不可读</translation>
     </message>
     <message>
-        <location filename="../../directory/directorylistdelegate.cpp" line="145"/>
+        <location filename="../../directory/directorylistdelegate.cpp" line="143"/>
         <source>Error when reading the file.</source>
         <translation>读取文件时出错。</translation>
     </message>
@@ -2386,26 +2424,36 @@ repository</source>
     </message>
 </context>
 <context>
-    <name>DirectorySortMenu</name>
+    <name>DirectoryListHeader</name>
     <message>
-        <location filename="../../directory/directorysortmenu.cpp" line="55"/>
-        <source>Name (A→Z)</source>
-        <translation>名称 (A→Z)</translation>
+        <location filename="../../directory/directorylistheader.cpp" line="47"/>
+        <source>Name</source>
+        <translation>名称</translation>
     </message>
     <message>
-        <location filename="../../directory/directorysortmenu.cpp" line="62"/>
-        <source>Newest first</source>
-        <translation>最新的在前</translation>
+        <location filename="../../directory/directorylistheader.cpp" line="48"/>
+        <source>Size</source>
+        <translation>大小</translation>
     </message>
     <message>
-        <location filename="../../directory/directorysortmenu.cpp" line="69"/>
-        <source>Largest first</source>
-        <translation>最大的在前</translation>
+        <location filename="../../directory/directorylistheader.cpp" line="49"/>
+        <source>Date</source>
+        <translation>日期</translation>
     </message>
     <message>
-        <location filename="../../directory/directorysortmenu.cpp" line="76"/>
-        <source>Smallest first</source>
-        <translation>最小的在前</translation>
+        <location filename="../../directory/directorylistheader.cpp" line="54"/>
+        <source>Number of samples</source>
+        <translation>采样数</translation>
+    </message>
+    <message>
+        <location filename="../../directory/directorylistheader.cpp" line="57"/>
+        <source>Number of instruments</source>
+        <translation>乐器数</translation>
+    </message>
+    <message>
+        <location filename="../../directory/directorylistheader.cpp" line="60"/>
+        <source>Number of presets</source>
+        <translation>预设数</translation>
     </message>
 </context>
 <context>

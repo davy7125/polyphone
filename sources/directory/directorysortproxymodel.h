@@ -27,23 +27,18 @@
 
 #include <QObject>
 #include <QSortFilterProxyModel>
+class DirectoryFileData;
 
 class DirectorySortProxyModel : public QSortFilterProxyModel
 {
     Q_OBJECT
 
 public:
-    enum SortMode
-    {
-        SortByName,
-        SortByDateDesc,
-        SortBySizeDesc,
-        SortBySizeAsc
-    };
-
     explicit DirectorySortProxyModel(QObject *parent = nullptr);
 
-    void setSortMode(SortMode mode);
+    // Column as defined in DirectoryListView
+    void setSortColumn(int column, bool descending);
+    int getSortColumn() const { return _column; }
     void setFilter(QString filter);
 
 protected:
@@ -51,7 +46,9 @@ protected:
     bool filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const override;
 
 private:
-    SortMode _mode;
+    static int getCount(const DirectoryFileData * fd, int column);
+
+    int _column;
     QString _filter;
 };
 

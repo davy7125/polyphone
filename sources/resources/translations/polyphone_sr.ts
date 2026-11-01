@@ -2185,101 +2185,139 @@ repository</source>
 <context>
     <name>DirectoryBrowser</name>
     <message>
-        <location filename="../../directory/directorybrowser.ui" line="293"/>
+        <location filename="../../directory/directorybrowser.ui" line="296"/>
         <source>No results</source>
         <translation>Нема резултата</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.ui" line="493"/>
+        <location filename="../../directory/directorybrowser.ui" line="496"/>
         <source>Instruments</source>
         <translation>Инструменти</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.ui" line="587"/>
+        <location filename="../../directory/directorybrowser.ui" line="590"/>
         <source>Presets</source>
         <translation>Поставке</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.ui" line="399"/>
+        <location filename="../../directory/directorybrowser.ui" line="402"/>
         <source>Samples</source>
         <translation>Узорци</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.ui" line="695"/>
+        <location filename="../../directory/directorybrowser.ui" line="698"/>
         <source>Search a file, a sample, an instrument or a preset...</source>
         <translation>Претражи датотеку, узорак, инструмент или поставку...</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="125"/>
+        <location filename="../../directory/directorybrowser.cpp" line="131"/>
         <source>The directory &quot;%1&quot; does not exist.</source>
         <translation>Директоријум „%1“ не постоји.</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="132"/>
+        <location filename="../../directory/directorybrowser.cpp" line="138"/>
         <source>The directory &quot;%1&quot; is not readable.</source>
         <translation>Директоријум „%1“ није читљив.</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="248"/>
+        <location filename="../../directory/directorybrowser.cpp" line="258"/>
         <source>Rename</source>
         <translation>Преименуј</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="249"/>
+        <location filename="../../directory/directorybrowser.cpp" line="259"/>
         <source>New name:</source>
         <translation>Нови назив:</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="251"/>
+        <location filename="../../directory/directorybrowser.cpp" line="261"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Поништи</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="252"/>
+        <location filename="../../directory/directorybrowser.cpp" line="262"/>
         <source>&amp;Ok</source>
         <translation>&amp;У реду</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="263"/>
+        <location filename="../../directory/directorybrowser.cpp" line="273"/>
         <source>A file with this name already exists.</source>
         <translation>Датотека са овим називом већ постоји.</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="263"/>
-        <location filename="../../directory/directorybrowser.cpp" line="268"/>
-        <location filename="../../directory/directorybrowser.cpp" line="286"/>
+        <location filename="../../directory/directorybrowser.cpp" line="273"/>
+        <location filename="../../directory/directorybrowser.cpp" line="278"/>
+        <location filename="../../directory/directorybrowser.cpp" line="296"/>
         <source>Warning</source>
         <translation>Упозорење</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="268"/>
+        <location filename="../../directory/directorybrowser.cpp" line="278"/>
         <source>Cannot rename file &quot;%1&quot;.</source>
         <translation>Не могу да преименујем датотеку „%1”.</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="276"/>
+        <location filename="../../directory/directorybrowser.cpp" line="286"/>
         <source>Confirm deletion</source>
         <translation>Потврди брисање</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="277"/>
+        <location filename="../../directory/directorybrowser.cpp" line="287"/>
         <source>Are you sure you want to delete file &quot;%1&quot;?</source>
         <translation>Да ли сте сигурни да желите да обришете датотеку „%1“?</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="279"/>
+        <location filename="../../directory/directorybrowser.cpp" line="289"/>
         <source>&amp;Yes</source>
         <translation>&amp;Да</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="280"/>
+        <location filename="../../directory/directorybrowser.cpp" line="290"/>
         <source>&amp;No</source>
         <translation>&amp;Не</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="286"/>
+        <location filename="../../directory/directorybrowser.cpp" line="296"/>
         <source>Cannot delete file &quot;%1&quot;.</source>
         <translation>Не могу да обришем датотеку „%1”.</translation>
+    </message>
+</context>
+<context>
+    <name>DirectoryDisplayMenu</name>
+    <message>
+        <location filename="../../directory/directorydisplaymenu.ui" line="63"/>
+        <source>Display</source>
+        <translation>Приказ</translation>
+    </message>
+    <message>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="61"/>
+        <source>Preset summary</source>
+        <translation>Преглед поставки</translation>
+    </message>
+    <message>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="63"/>
+        <source>Size</source>
+        <translation>Величина</translation>
+    </message>
+    <message>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="64"/>
+        <source>Date</source>
+        <translation>Датум</translation>
+    </message>
+    <message>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="65"/>
+        <source>Samples</source>
+        <translation>Узорци</translation>
+    </message>
+    <message>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="66"/>
+        <source>Instruments</source>
+        <translation>Инструменти</translation>
+    </message>
+    <message>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="67"/>
+        <source>Presets</source>
+        <translation>Поставке</translation>
     </message>
 </context>
 <context>
@@ -2376,17 +2414,17 @@ repository</source>
 <context>
     <name>DirectoryListDelegate</name>
     <message>
-        <location filename="../../directory/directorylistdelegate.cpp" line="135"/>
+        <location filename="../../directory/directorylistdelegate.cpp" line="133"/>
         <source>Analyze in progress...</source>
         <translation>Анализа у току...</translation>
     </message>
     <message>
-        <location filename="../../directory/directorylistdelegate.cpp" line="138"/>
+        <location filename="../../directory/directorylistdelegate.cpp" line="136"/>
         <source>NOT READABLE</source>
         <translation>НИЈЕ ЧИТЉИВО</translation>
     </message>
     <message>
-        <location filename="../../directory/directorylistdelegate.cpp" line="145"/>
+        <location filename="../../directory/directorylistdelegate.cpp" line="143"/>
         <source>Error when reading the file.</source>
         <translation>Грешка приликом читања датотеке.</translation>
     </message>
@@ -2402,26 +2440,36 @@ repository</source>
     </message>
 </context>
 <context>
-    <name>DirectorySortMenu</name>
+    <name>DirectoryListHeader</name>
     <message>
-        <location filename="../../directory/directorysortmenu.cpp" line="55"/>
-        <source>Name (A→Z)</source>
-        <translation>Назив (А→Ш)</translation>
+        <location filename="../../directory/directorylistheader.cpp" line="47"/>
+        <source>Name</source>
+        <translation>Назив</translation>
     </message>
     <message>
-        <location filename="../../directory/directorysortmenu.cpp" line="62"/>
-        <source>Newest first</source>
-        <translation>Најновије прво</translation>
+        <location filename="../../directory/directorylistheader.cpp" line="48"/>
+        <source>Size</source>
+        <translation>Величина</translation>
     </message>
     <message>
-        <location filename="../../directory/directorysortmenu.cpp" line="69"/>
-        <source>Largest first</source>
-        <translation>Највеће прво</translation>
+        <location filename="../../directory/directorylistheader.cpp" line="49"/>
+        <source>Date</source>
+        <translation>Датум</translation>
     </message>
     <message>
-        <location filename="../../directory/directorysortmenu.cpp" line="76"/>
-        <source>Smallest first</source>
-        <translation>Најмање прво</translation>
+        <location filename="../../directory/directorylistheader.cpp" line="54"/>
+        <source>Number of samples</source>
+        <translation>Број узорака</translation>
+    </message>
+    <message>
+        <location filename="../../directory/directorylistheader.cpp" line="57"/>
+        <source>Number of instruments</source>
+        <translation>Број инструмената</translation>
+    </message>
+    <message>
+        <location filename="../../directory/directorylistheader.cpp" line="60"/>
+        <source>Number of presets</source>
+        <translation>Број поставки</translation>
     </message>
 </context>
 <context>

@@ -297,9 +297,9 @@ SOURCES	+= main.cpp \
     directory/directoryelementlistview.cpp \
     directory/directoryfiledata.cpp \
     directory/directorylistdelegate.cpp \
+    directory/directorylistheader.cpp \
     directory/directorylistmodel.cpp \
     directory/directorylistview.cpp \
-    directory/directorysortmenu.cpp \
     directory/directorysortproxymodel.cpp \
     editor/footers/footerlinkedto.cpp \
     editor/footers/footeroverview.cpp \
@@ -704,9 +704,9 @@ HEADERS += \
     directory/directoryelementlistview.h \
     directory/directoryfiledata.h \
     directory/directorylistdelegate.h \
+    directory/directorylistheader.h \
     directory/directorylistmodel.h \
     directory/directorylistview.h \
-    directory/directorysortmenu.h \
     directory/directorysortproxymodel.h \
     editor/footers/abstractfooter.h \
     editor/footers/footerlinkedto.h \
@@ -1072,7 +1072,6 @@ FORMS += \
     dialogs/dialogchangelog.ui \
     directory/directorybrowser.ui \
     directory/directorydisplaymenu.ui \
-    directory/directorysortmenu.ui \
     editor/footers/footerlinkedto.ui \
     editor/footers/footeroverview.ui \
     editor/footers/footerprst.ui \

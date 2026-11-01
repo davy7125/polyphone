@@ -24,17 +24,22 @@
 
 #include "directorysortproxymodel.h"
 #include "directoryfiledata.h"
+#include "directorylistview.h"
 #include "utils.h"
 
 DirectorySortProxyModel::DirectorySortProxyModel(QObject *parent) : QSortFilterProxyModel{parent},
-    _mode(SortByName),
+    _column(DirectoryListView::COLUMN_NAME),
     _filter("")
 {}
 
-void DirectorySortProxyModel::setSortMode(SortMode mode)
+void DirectorySortProxyModel::setSortColumn(int column, bool descending)
 {
-    _mode = mode;
-    invalidate();
+    _column = column;
+    Qt::SortOrder order = descending ? Qt::DescendingOrder : Qt::AscendingOrder;
+    if (order == sortOrder())
+        invalidate(); // sort() would do nothing
+    else
+        sort(0, order);
 }
 
 bool DirectorySortProxyModel::lessThan(const QModelIndex &left, const QModelIndex &right) const
@@ -43,19 +48,52 @@ bool DirectorySortProxyModel::lessThan(const QModelIndex &left, const QModelInde
     const DirectoryFileData * dfR = sourceModel()->data(right, Qt::UserRole).value<const DirectoryFileData *>();
     if (fdL == nullptr || dfR == nullptr)
         return false;
-    switch (_mode)
+
+    bool ascending = (sortOrder() == Qt::AscendingOrder);
+    switch (_column)
     {
-    case SortByName:
-        return Utils::naturalOrder(fdL->getFileName(), dfR->getFileName()) < 0;
-    case SortByDateDesc:
-        return fdL->getLastModified() > dfR->getLastModified();
-    case SortBySizeDesc:
-        return fdL->getFileSize() > dfR->getFileSize();
-    case SortBySizeAsc:
-        return fdL->getFileSize() < dfR->getFileSize();
+    case DirectoryListView::COLUMN_SIZE:
+        if (fdL->getFileSize() != dfR->getFileSize())
+            return fdL->getFileSize() < dfR->getFileSize();
+        break;
+    case DirectoryListView::COLUMN_DATE:
+        if (fdL->getLastModified() != dfR->getLastModified())
+            return fdL->getLastModified() < dfR->getLastModified();
+        break;
+    case DirectoryListView::COLUMN_SAMPLES:
+    case DirectoryListView::COLUMN_INSTRUMENTS:
+    case DirectoryListView::COLUMN_PRESETS: {
+        // Files without numbers are at the end, whatever the order
+        bool hasCountL = (fdL->getStatus() == DirectoryFileData::OK);
+        bool hasCountR = (dfR->getStatus() == DirectoryFileData::OK);
+        if (hasCountL != hasCountR)
+            return ascending ? hasCountL : hasCountR;
+        if (hasCountL && getCount(fdL, _column) != getCount(dfR, _column))
+            return getCount(fdL, _column) < getCount(dfR, _column);
+    } break;
+    default:
+        break;
     }
 
-    return false;
+    // Sort by name, or names A→Z for equal values whatever the order
+    int nameOrder = Utils::naturalOrder(fdL->getFileName(), dfR->getFileName());
+    return (_column == DirectoryListView::COLUMN_NAME || ascending) ? nameOrder < 0 : nameOrder > 0;
+}
+
+int DirectorySortProxyModel::getCount(const DirectoryFileData * fd, int column)
+{
+    switch (column)
+    {
+    case DirectoryListView::COLUMN_SAMPLES:
+        return fd->getSampleCount();
+    case DirectoryListView::COLUMN_INSTRUMENTS:
+        return fd->getInstrumentCount();
+    case DirectoryListView::COLUMN_PRESETS:
+        return fd->getPresetCount();
+    default:
+        break;
+    }
+    return 0;
 }
 
 void DirectorySortProxyModel::setFilter(QString filter)

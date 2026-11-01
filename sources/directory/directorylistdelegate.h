@@ -28,37 +28,40 @@
 #include <QStyledItemDelegate>
 #include "basetypes.h"
 class DirectoryFileData;
+class DirectoryListView;
 
 class DirectoryListDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
 
 public:
-    explicit DirectoryListDelegate(QObject *parent = nullptr);
+    explicit DirectoryListDelegate(DirectoryListView *parent);
 
     QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const override;
     void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
     bool editorEvent(QEvent *event, QAbstractItemModel *model, const QStyleOptionViewItem &option, const QModelIndex &index) override;
     bool eventFilter(QObject *obj, QEvent *event) override;
 
+    // Text displayed in a column other than the name
+    QString getText(const DirectoryFileData *d, int column) const;
+
+    static const int MARGIN;
+
 signals:
     void renameRequested(QString path);
     void deleteRequested(QString path);
 
 private:
-    int getCounterWidth(const QFontMetrics &fm, const DirectoryFileData *d) const;
-    void paintCounters(QPainter *painter, const QFontMetrics &fm, const DirectoryFileData *d, int x, int y, bool selected) const;
     QRect getRenameButtonRect(const QStyleOptionViewItem &option) const;
     QRect getDeleteButtonRect(const QStyleOptionViewItem &option) const;
 
+    DirectoryListView * _view;
     QColor _colorEnabled, _colorHighlighted, _colorDisabled;
     QString _dateFormat;
-    QPixmap _iconSample, _iconInstrument, _iconPreset, _iconRename, _iconDelete;
-    QPixmap _iconSampleSelected, _iconInstrumentSelected, _iconPresetSelected, _iconRenameSelected, _iconDeleteSelected;
+    QPixmap _iconRenameSelected, _iconDeleteSelected;
     mutable QPersistentModelIndex _pressedIndex;
     mutable bool _pressedWasSelected = false;
 
-    static const int MARGIN;
     static const int ICON_SIZE;
     static const int BUTTON_SIZE;
 };
