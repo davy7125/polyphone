@@ -271,10 +271,17 @@ void Options::checkErrors()
             _error = true;
         break;
     case MODE_RENDER:
-        if (_inputFiles.count() != 1 || _renderEventFile.isEmpty())
+        if (_inputFiles.count() != 1 || _renderEventFile.isEmpty() || (renderMidiFile() && !_renderSynth.isEmpty()))
             _error = true;
         break;
     }
+}
+
+bool Options::renderMidiFile()
+{
+    // Extensions of the MIDI player
+    QString suffix = QFileInfo(_renderEventFile).suffix().toLower();
+    return suffix == "mid" || suffix == "midi" || suffix == "kar" || suffix == "rmi";
 }
 
 void Options::postTreatment()

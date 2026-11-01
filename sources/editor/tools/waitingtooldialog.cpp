@@ -67,6 +67,11 @@ void WaitingToolDialog::closeEvent(QCloseEvent *event)
     event->ignore();
 }
 
+void WaitingToolDialog::reject()
+{
+    this->cancel();
+}
+
 void WaitingToolDialog::cancel()
 {
     if (_isCanceled)

@@ -27,13 +27,18 @@
 
 #include <QDialog>
 #include <memory>
+#include <thread>
+#include <atomic>
 class MidiFile;
 class MidiFilePlayer;
+class MidiFileRenderer;
+class WaitingToolDialog;
 class MidiPlayerChannel;
 class QTimer;
 class QTableWidgetItem;
 class QLabel;
 class QCheckBox;
+class QAction;
 class ResettableSlider;
 
 namespace Ui {
@@ -43,6 +48,7 @@ class DialogMidiPlayer;
 // Plays a MIDI file with the soundfonts that are open, the soundfont, the preset and the volume of each channel being
 // chosen in a table, the loop, the tempo and the transposition in a menu. The last file is opened again, and the playback
 // stops when the window is closed. The height of the window depends on the number of channels.
+// The menu also exports the file in a wav file, as it is heard (without the loop).
 class DialogMidiPlayer : public QDialog
 {
     Q_OBJECT
@@ -75,6 +81,9 @@ private slots:
     void onSoundfontClosed(int sf2Index);
     void onEditingDone(QString editingSource, QList<int> sf2Indexes);
     void onInputModulatorChanged(int controllerNumber, bool isBipolar, bool isDescending);
+    void onExportTriggered();
+    void onExportCanceled();
+    void onExportTimeout();
 
 private:
     void loadFile(QString filePath);
@@ -90,6 +99,7 @@ private:
     Ui::DialogMidiPlayer * ui;
     MidiFilePlayer * _player;
     std::shared_ptr<MidiFile> _file;
+    QString _filePath;
     QList<MidiPlayerChannel *> _channels; // By row of the table
     QTimer * _timer;
     bool _stateUpdate;
@@ -103,6 +113,14 @@ private:
     QLabel * _labelPitch;
     QLabel * _labelLoop;
     QCheckBox * _checkLoop;
+    QAction * _actionExport;
+
+    // Export, rendered by another thread
+    MidiFileRenderer * _renderer;
+    std::thread _exportThread;
+    std::atomic<bool> _isExportFinished;
+    WaitingToolDialog * _exportDialog;
+    QTimer * _exportTimer;
 };
 
 #endif // DIALOGMIDIPLAYER_H

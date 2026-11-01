@@ -60,8 +60,12 @@ public:
     int getForcedProgram() { return _forcedProgram; }
     void updatePresetList(); // When the soundfont is edited
 
+    // Channel of the file (0 to 15)
+    int getChannel() { return _channel; }
+
     // Gain sent to the synth, depending on the volume, mute and solo of all channels
     bool isSolo();
+    float getGain(bool isSoloEnabled);
     void updateGain(bool isSoloEnabled);
 
     // Activity, program chosen by the file and MIDI values, read periodically

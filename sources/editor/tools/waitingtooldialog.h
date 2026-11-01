@@ -41,6 +41,9 @@ public:
 
     void setValue(int value);
 
+    // The escape key cancels as the button does, the window staying open until the process stops
+    void reject() override;
+
 signals:
     void canceled();
 

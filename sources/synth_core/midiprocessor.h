@@ -63,6 +63,9 @@ public:
     // Default value of a controller used as the source of a modulator, if it has not been received
     void setDefaultControllerValue(int controllerNumber, bool isBipolar, bool isDescending);
 
+    // Default values of all controllers copied from another processor
+    void copyDefaultControllerValues(MidiProcessor &other);
+
     // Value of a controller as long as it has not been received
     int getDefaultControllerValue(int channel, int controllerNumber);
 

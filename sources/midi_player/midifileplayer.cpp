@@ -321,7 +321,7 @@ void MidiFilePlayer::run()
             lock.unlock();
             for (int i = firstEventIndex; i < lastEventIndex; i++)
                 if (!_isEventPrepared[i])
-                    dispatch(events[i]);
+                    dispatch(_processor, events[i]);
             lock.lock();
             continue;
         }
@@ -379,52 +379,52 @@ void MidiFilePlayer::prepare(const MidiFile * file, qint64 position, bool fastRe
             continue;
         if (i < _nextEventIndex || i < nextNoteIndexes[event.status & 0x0F])
         {
-            dispatch(event);
+            dispatch(_processor, event);
             _isEventPrepared[i] = true;
         }
     }
 }
 
-void MidiFilePlayer::dispatch(const MidiFile::Event &event)
+void MidiFilePlayer::dispatch(MidiProcessor &processor, const MidiFile::Event &event)
 {
     // Values from the file, never relative
     int channel = event.status & 0x0F;
     switch (event.status & 0xF0)
     {
     case 0x80:
-        _processor.processKeyOff(channel, event.data1);
+        processor.processKeyOff(channel, event.data1);
         break;
     case 0x90:
-        _processor.processKeyOn(channel, event.data1, event.data2);
+        processor.processKeyOn(channel, event.data1, event.data2);
         break;
     case 0xA0:
-        _processor.processPolyPressureChanged(channel, event.data1, event.data2);
+        processor.processPolyPressureChanged(channel, event.data1, event.data2);
         break;
     case 0xB0:
         if (event.data1 == 121)
         {
             // Reset all controllers, not done by MidiProcessor: pitch bend, pressure, modulation, expression, pedals and
             // (N)RPN
-            _processor.processBendChanged(channel, 0.0f);
-            _processor.processMonoPressureChanged(channel, 0);
-            _processor.processControllerChanged(false, channel, 1, 0);
-            _processor.processControllerChanged(false, channel, 11, 127);
+            processor.processBendChanged(channel, 0.0f);
+            processor.processMonoPressureChanged(channel, 0);
+            processor.processControllerChanged(false, channel, 1, 0);
+            processor.processControllerChanged(false, channel, 11, 127);
             for (int num = 64; num <= 67; num++)
-                _processor.processControllerChanged(false, channel, num, 0);
-            _processor.processControllerChanged(false, channel, 101, 127);
-            _processor.processControllerChanged(false, channel, 100, 127);
+                processor.processControllerChanged(false, channel, num, 0);
+            processor.processControllerChanged(false, channel, 101, 127);
+            processor.processControllerChanged(false, channel, 100, 127);
         }
         else
-            _processor.processControllerChanged(false, channel, event.data1, event.data2);
+            processor.processControllerChanged(false, channel, event.data1, event.data2);
         break;
     case 0xC0:
-        _processor.processProgramChanged(channel, event.data1);
+        processor.processProgramChanged(channel, event.data1);
         break;
     case 0xD0:
-        _processor.processMonoPressureChanged(channel, event.data1);
+        processor.processMonoPressureChanged(channel, event.data1);
         break;
     case 0xE0:
-        _processor.processBendChanged(channel, (static_cast<float>((event.data2 << 7) | event.data1) - 8192.0f) / 8192.0f);
+        processor.processBendChanged(channel, (static_cast<float>((event.data2 << 7) | event.data1) - 8192.0f) / 8192.0f);
         break;
     default:
         break;

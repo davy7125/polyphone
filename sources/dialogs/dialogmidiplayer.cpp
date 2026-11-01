@@ -35,6 +35,7 @@
 #include <QCheckBox>
 #include <QScreen>
 #include <QLabel>
+#include <QMessageBox>
 #include "contextmanager.h"
 #include "soundfontmanager.h"
 #include "soundfonts.h"
@@ -42,11 +43,13 @@
 #include "synth.h"
 #include "midifile.h"
 #include "midifileplayer.h"
+#include "midifilerenderer.h"
 #include "midiplayerchannel.h"
 #include "midiplayerdelegate.h"
 #include "editortoolbar.h"
 #include "player.h"
 #include "resettableslider.h"
+#include "waitingtooldialog.h"
 
 DialogMidiPlayer::DialogMidiPlayer(QWidget *parent) :
     QDialog(parent, Qt::Tool | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint),
@@ -61,7 +64,11 @@ DialogMidiPlayer::DialogMidiPlayer(QWidget *parent) :
     _labelTempo(nullptr),
     _labelPitch(nullptr),
     _labelLoop(nullptr),
-    _checkLoop(nullptr)
+    _checkLoop(nullptr),
+    _actionExport(nullptr),
+    _renderer(nullptr),
+    _isExportFinished(false),
+    _exportDialog(nullptr)
 {
     ui->setupUi(this);
 
@@ -87,10 +94,14 @@ DialogMidiPlayer::DialogMidiPlayer(QWidget *parent) :
                                 "QSlider::handle:horizontal{width:12px;margin:-4px 0;border-radius:6px;background:" +
                                 bannerTextColor.name() + "}");
     ui->pushOpen->setIcon(getBannerIcon(":/icons/folder.svg", 24));
+    ui->pushOpen->setCursor(Qt::PointingHandCursor);
     ui->pushStop->setIcon(getBannerIcon(":/icons/recorder_stop.svg", 28));
-    ui->toolButtonSettings->setIcon(getBannerIcon(":/icons/gear.svg", 24));
+    ui->pushStop->setCursor(Qt::PointingHandCursor);
+    ui->toolButtonSettings->setIcon(getBannerIcon(":/icons/menu.svg", 24));
+    ui->toolButtonSettings->setCursor(Qt::PointingHandCursor);
     updatePlayPauseIcon(false);
     initializeSettingsMenu();
+    ui->pushPlayPause->setCursor(Qt::PointingHandCursor);
 
     // Table of the channels, in the style of the tables of the editor but its edges being the ones of the window: no
     // border, and no line on the right side of the last column and at the bottom of the last row (grid drawn by
@@ -123,11 +134,16 @@ DialogMidiPlayer::DialogMidiPlayer(QWidget *parent) :
     ui->pushPlayPause->setEnabled(false);
     ui->pushStop->setEnabled(false);
     ui->sliderPosition->setEnabled(false);
+    _actionExport->setEnabled(false);
     updateSize();
 
     // Periodic update of the position, the activity, the programs and the MIDI values
     _timer = new QTimer(this);
     connect(_timer, SIGNAL(timeout()), this, SLOT(onTimeout()));
+
+    // Progress of an export
+    _exportTimer = new QTimer(this);
+    connect(_exportTimer, SIGNAL(timeout()), this, SLOT(onExportTimeout()));
 
     connect(sm, SIGNAL(soundfontLoaded(int)), this, SLOT(onSoundfontLoaded(int)));
     connect(sm, SIGNAL(soundfontClosed(int)), this, SLOT(onSoundfontClosed(int)));
@@ -137,6 +153,14 @@ DialogMidiPlayer::DialogMidiPlayer(QWidget *parent) :
 
 DialogMidiPlayer::~DialogMidiPlayer()
 {
+    // Possibly an export not finished
+    if (_exportThread.joinable())
+    {
+        _renderer->cancel();
+        _exportThread.join();
+    }
+    delete _renderer;
+
     clearChannels();
     ContextManager::audio()->getSynth()->setMidiFileValues(nullptr);
     delete _player;
@@ -169,6 +193,7 @@ void DialogMidiPlayer::loadFile(QString filePath)
     ui->pushPlayPause->setEnabled(isValid);
     ui->pushStop->setEnabled(isValid);
     ui->sliderPosition->setEnabled(isValid);
+    _actionExport->setEnabled(isValid);
     _updatingSlider = true;
     ui->sliderPosition->setRange(0, isValid ? static_cast<int>(file->getDuration() / 1000) : 0);
     ui->sliderPosition->setValue(0);
@@ -187,6 +212,7 @@ void DialogMidiPlayer::loadFile(QString filePath)
     ui->tableChannels->show();
     ContextManager::recentFile()->addRecentFile(RecentFileManager::FILE_TYPE_MIDI, filePath);
     _file = file;
+    _filePath = filePath;
     _player->setFile(file);
     updateTempoToolTip();
     updatePosition(0);
@@ -383,6 +409,11 @@ void DialogMidiPlayer::initializeSettingsMenu()
     QWidgetAction * action = new QWidgetAction(menu);
     action->setDefaultWidget(widget);
     menu->addAction(action);
+
+    // Export of the file as it is heard
+    menu->addSeparator();
+    _actionExport = menu->addAction(tr("Export audio..."));
+    connect(_actionExport, SIGNAL(triggered()), this, SLOT(onExportTriggered()));
     ui->toolButtonSettings->setMenu(menu);
 
     connect(_checkLoop, SIGNAL(toggled(bool)), this, SLOT(onLoopToggled(bool)));
@@ -530,6 +561,90 @@ void DialogMidiPlayer::onEditingDone(QString editingSource, QList<int> sf2Indexe
 void DialogMidiPlayer::onInputModulatorChanged(int controllerNumber, bool isBipolar, bool isDescending)
 {
     _player->setDefaultControllerValue(controllerNumber, isBipolar, isDescending);
+}
+
+void DialogMidiPlayer::onExportTriggered()
+{
+    if (_file == nullptr || _renderer != nullptr)
+        return;
+
+    // Wav file named after the MIDI file, in the directory of the last record
+    QString filePath = QFileDialog::getSaveFileName(
+        this, tr("Export audio"),
+        ContextManager::recentFile()->getLastDirectory(RecentFileManager::FILE_TYPE_RECORD) + "/" +
+            QFileInfo(_filePath).completeBaseName() + ".wav",
+        tr("Wav file") + " (*.wav)");
+    if (filePath.isEmpty())
+        return;
+    if (!filePath.endsWith(".wav", Qt::CaseInsensitive))
+        filePath.append(".wav");
+    ContextManager::recentFile()->addRecentFile(RecentFileManager::FILE_TYPE_RECORD, filePath);
+
+    // The playback pauses during the export
+    if (_player->isPlaying())
+    {
+        _player->pause();
+        updatePlayPauseIcon(false);
+    }
+
+    // Same settings as the synth of the editor (its sample rate being shared by the effects of all synths), and same
+    // channels, tempo and transposition as the player
+    ConfManager * configuration = ContextManager::configuration();
+    _renderer = new MidiFileRenderer();
+    _renderer->copyDefaultControllerValues(*_player->getChannelStates());
+    _renderer->configure(configuration->getSynthConfig(),
+                         configuration->getValue(ConfManager::SECTION_AUDIO, "polyphony", DEFAULT_POLYPHONY).toInt(),
+                         ContextManager::audio()->getSynth()->getSampleRate());
+    bool isSoloEnabled = false;
+    foreach (MidiPlayerChannel * channel, _channels)
+        isSoloEnabled |= channel->isSolo();
+    foreach (MidiPlayerChannel * channel, _channels)
+        _renderer->setChannel(channel->getChannel(), channel->getSoundfont(), channel->getForcedProgram(),
+                              channel->getGain(isSoloEnabled));
+    _renderer->setSpeed(_speed);
+    _renderer->setTransposition(_sliderPitch->value());
+
+    // Rendering in another thread, the window waiting for it (the soundfonts cannot be edited meanwhile)
+    _exportDialog = new WaitingToolDialog(tr("Export audio"), 1000, this);
+    connect(_exportDialog, SIGNAL(canceled()), this, SLOT(onExportCanceled()));
+    _exportDialog->show();
+    _isExportFinished = false;
+    std::shared_ptr<const MidiFile> file = _file;
+    MidiFileRenderer * renderer = _renderer;
+    _exportThread = std::thread([this, file, renderer, filePath]() {
+        renderer->render(file.get(), filePath);
+        _isExportFinished = true;
+    });
+    _exportTimer->start(50);
+}
+
+void DialogMidiPlayer::onExportCanceled()
+{
+    // The incomplete file is removed
+    if (_renderer != nullptr)
+        _renderer->cancel();
+}
+
+void DialogMidiPlayer::onExportTimeout()
+{
+    if (_renderer == nullptr)
+        return;
+    if (!_isExportFinished)
+    {
+        _exportDialog->setValue(_renderer->getProgress());
+        return;
+    }
+
+    // End of the export, possibly with an error
+    _exportTimer->stop();
+    _exportThread.join();
+    QString error = _renderer->getError();
+    delete _renderer;
+    _renderer = nullptr;
+    delete _exportDialog;
+    _exportDialog = nullptr;
+    if (!error.isEmpty())
+        QMessageBox::warning(this, tr("Warning"), error);
 }
 
 void DialogMidiPlayer::showEvent(QShowEvent * event)

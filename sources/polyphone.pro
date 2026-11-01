@@ -478,6 +478,7 @@ SOURCES	+= main.cpp \
     dialogs/dialogmidiplayer.cpp \
     midi_player/midifile.cpp \
     midi_player/midifileplayer.cpp \
+    midi_player/midifilerenderer.cpp \
     midi_player/midiplayerchannel.cpp \
     midi_player/midiplayerdelegate.cpp \
     editor/tools/link_sample/toollinksample.cpp \
@@ -907,6 +908,7 @@ HEADERS += \
     dialogs/dialogmidiplayer.h \
     midi_player/midifile.h \
     midi_player/midifileplayer.h \
+    midi_player/midifilerenderer.h \
     midi_player/midiplayerchannel.h \
     midi_player/midiplayerdelegate.h \
     editor/tools/link_sample/toollinksample.h \

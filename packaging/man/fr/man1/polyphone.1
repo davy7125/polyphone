@@ -25,6 +25,9 @@
 -4 [\fB\-i\fR \fICHEMIN_DE_FICHIER_EN_ENTRÉE\fR] [\fB\-d\fR \fIRÉPERTOIRE_EN_SORTIE\fR] [\fB\-o\fR \fINOM_EN_SORTIE\fR] [\fB\-c\fR \fICONFIG\fR]
 .br
 .B polyphone
+-5 [\fB\-i\fR \fICHEMIN_DE_FICHIER_EN_ENTRÉE\fR] [\fB\-d\fR \fIRÉPERTOIRE_EN_SORTIE\fR] [\fB\-o\fR \fINOM_EN_SORTIE\fR] [\fB\-c\fR \fICHEMIN_DU_FICHIER_MIDI\fR]
+.br
+.B polyphone
 -6 [\fB\-i\fR \fICHEMIN_DE_FICHIER_EN_ENTRÉE\fR] [\fB\-d\fR \fIRÉPERTOIRE_EN_SORTIE\fR] [\fB\-o\fR \fINOM_EN_SORTIE\fR]
 .br
 .B polyphone
@@ -35,7 +38,7 @@
 fournit une interface simple et efficace pour créer et éditer des fichiers .sf2 . Ce logiciel incorpore des outils pour faciliter et automatiser l'édition de différents paramètres, rendant possible la gestion de grandes quantités de données. 
 .br
 .PP
-Les formats sf2, sf3, sfz, dls (import / export), sfArk (import uniquement) et GrandOrgue (import uniquement) sont supportés. Les lignes de commande peuvent être utilisées pour convertir des fichiers, ouvrir Polyphone en mode synthétiseur ou réinitialiser les configurations en cas de soucis.
+Les formats sf2, sf3, sfz, dls (import / export), sfArk (import uniquement) et GrandOrgue (import uniquement) sont supportés. Les lignes de commande peuvent être utilisées pour convertir des fichiers, jouer un fichier MIDI dans un fichier wav, ouvrir Polyphone en mode synthétiseur ou réinitialiser les configurations en cas de soucis.
 .br
 .PP
 Davantage d'informations peuvent être trouvées sur le site https://www.polyphone.io .
@@ -67,6 +70,11 @@ pour convertir un fichier dans le format sfz.
 Utiliser
 .B polyphone
 pour convertir un fichier dans le format csv.
+.TP
+.BR \fB-5\fR
+Utiliser
+.B polyphone
+pour jouer un fichier MIDI avec une banque de sons et écrire le résultat dans un fichier wav.
 .TP
 .BR \fB-6\fR
 Utiliser
@@ -118,6 +126,12 @@ L'option 'raw' permet d'exporter des valeurs brutes (telles qu'elles sont enregi
 .br
 .BR
  * 
+.B rendu d'un fichier MIDI
+.br
+La configuration est le chemin du fichier MIDI à jouer (mid, midi, kar ou rmi). Tous ses canaux jouent la banque de sons d'entrée, les ensembles étant choisis par les changements de programme du fichier (banque 128 sur le canal 10), avec les réglages du synthétiseur (réverbération, chorus, gain, polyphonie, accordage). Le résultat est un fichier wav stéréo 32 bits à virgule flottante à 48000 Hz, écrit par défaut à côté du fichier MIDI et avec son nom. Un fichier existant est remplacé. Les notes d'un ensemble absent de la banque de sons ne sont pas jouées et un avertissement est affiché.
+.br
+.BR
+ * 
 .B conversion dls
 .br
 Pas de configuration pour cette conversion.
@@ -156,6 +170,12 @@ La configuration est composée de 3 valeurs séparées d'un '|'. La première va
 .br
 .BR polyphone
 -6 -i /chemin/vers/le/fichier.sf2
+.br
+.BR
+ * Rendu d'un fichier MIDI avec une banque de sons (fichier.wav est écrit à côté de fichier.mid) :
+.br
+.BR polyphone
+-5 -i /chemin/vers/la/banque.sf2 -c /chemin/vers/le/fichier.mid
 .br
 .BR
  * Ouverture de Polyphone en mode synthétiseur en permettant l'usage des touches basse pour la sélection de l'ensemble à jouer avec un clavier MIDI :

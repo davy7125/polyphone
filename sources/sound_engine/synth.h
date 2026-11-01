@@ -75,6 +75,9 @@ public:
     void endRecord();
     void pause(bool isOn);
 
+    // Sample rate of the audio output, also used by the records
+    quint32 getSampleRate() { return _core.getSampleRate(); }
+
     // MIDI signals (thread 2)
     bool processKey(int channel, int key, int vel) override;
     bool processPolyPressureChanged(int channel, int key, int pressure) override;

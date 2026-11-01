@@ -41,6 +41,10 @@
 #include "synth.h"
 #include "synthcore.h"
 #include "offlinerenderer.h"
+#include "midifile.h"
+#include "midifileplayer.h"
+#include "midifilerenderer.h"
+#include "synthmidi.h"
 #include "tools/merge_samples/runnablemerger.h"
 
 
@@ -180,10 +184,68 @@ int convert(Options &options)
     return 0;
 }
 
+/// MIDI file played by all channels with the soundfont as the MIDI player does, with the settings of the synth
+/// Error codes as for render
+int renderMidiFile(Options &options, QFileInfo inputFile)
+{
+    // The renderer is created before loading the soundfont, which sets the default values of the controllers
+    MidiFileRenderer renderer;
+    MidiFile midiFile;
+    if (!midiFile.read(options.renderEventFile()))
+    {
+        writeLine(midiFile.getError());
+        return 2;
+    }
+
+    // Load input file
+    writeLine(QObject::tr("Loading file \"%1\"...").arg(inputFile.filePath()));
+    AbstractInputParser * input = InputFactory::getInput(inputFile.filePath());
+    input->process(false);
+    if (!input->isSuccess())
+    {
+        writeLine(QObject::tr("Couldn't load file \"%1\": %2.").arg(inputFile.filePath()).arg(input->getError()));
+        delete input;
+        return 1;
+    }
+    int sf2Index = input->getSf2Index();
+    delete input;
+    writeLine(QObject::tr("File successfully loaded!"));
+
+    // The notes of a program that the soundfont does not have are not played
+    ISynthSoundfont * soundfont = SoundfontManager::getInstance()->getSoundfonts()->getSynthSoundfont(sf2Index);
+    for (int channel = 0; channel < 16; channel++)
+    {
+        foreach (int program, MidiFilePlayer::getUsedPrograms(&midiFile, channel))
+        {
+            if (SynthMidi::findPreset(soundfont, program / 128, program % 128) == -1)
+                writeLine(QObject::tr("Channel %1: no preset %2 in the soundfont, its notes are not played.").arg(channel + 1)
+                              .arg(QString("%1:%2").arg(program / 128, 3, 10, QChar('0')).arg(program % 128, 3, 10, QChar('0'))));
+        }
+        renderer.setChannel(channel, sf2Index, -1, 0);
+    }
+
+    // Settings of the synth of the editor, at its default sample rate
+    ConfManager * configuration = ContextManager::configuration();
+    renderer.configure(configuration->getSynthConfig(),
+                       configuration->getValue(ConfManager::SECTION_AUDIO, "polyphony", DEFAULT_POLYPHONY).toInt(), 48000);
+
+    // Render
+    QString outputFile = options.getOutputFileFullPath();
+    writeLine(QObject::tr("Writing file \"%1\"...").arg(outputFile));
+    if (!renderer.render(&midiFile, outputFile))
+    {
+        writeLine(renderer.getError());
+        return 4;
+    }
+    writeLine(QObject::tr("File successfully rendered!"));
+    return 0;
+}
+
 /// Error codes
 /// 1: input file or output directory does not exist, or the file cannot be opened
-/// 2: wrong event file
+/// 2: wrong event file (or MIDI file)
 /// 4: the events cannot be played with this soundfont (missing preset or program), or the output file cannot be saved
+///    (a missing preset does not stop the rendering of a MIDI file)
 int render(Options &options)
 {
     // Check the input file and the output directory (an existing output file is replaced)
@@ -201,6 +263,16 @@ int render(Options &options)
 
     // Prepare arrays
     SynthCore::prepareTables();
+
+    // A MIDI file, or the events of a text file (tests of the sound engine)
+    if (options.renderMidiFile())
+    {
+        int result = renderMidiFile(options, inputFile);
+
+        // Destroy a singleton that has been silently created, once the renderer is deleted
+        SoundfontManager::kill();
+        return result;
+    }
 
     // Events are read before loading the soundfont, which sets the default values of the controllers
     OfflineRenderer renderer;

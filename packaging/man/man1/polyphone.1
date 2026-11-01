@@ -25,6 +25,9 @@
 -4 [\fB\-i\fR \fIINPUT_FILEPATH\fR] [\fB\-d\fR \fIOUTPUT_DIR\fR] [\fB\-o\fR \fIOUTPUT_NAME\fR] [\fB\-c\fR \fICONFIG\fR]
 .br
 .B polyphone
+-5 [\fB\-i\fR \fIINPUT_FILEPATH\fR] [\fB\-d\fR \fIOUTPUT_DIR\fR] [\fB\-o\fR \fIOUTPUT_NAME\fR] [\fB\-c\fR \fIMIDI_FILEPATH\fR]
+.br
+.B polyphone
 -6 [\fB\-i\fR \fIINPUT_FILEPATH\fR] [\fB\-d\fR \fIOUTPUT_DIR\fR] [\fB\-o\fR \fIOUTPUT_NAME\fR]
 .br
 .B polyphone
@@ -35,7 +38,7 @@
 provides a simple and efficient interface for creating and editing .sf2 files. This software comprises tools to facilitate and automate the editing of different parameters, making it possible to handle a large amount of data.
 .br
 .PP
-sf2, sf3, sfz, dls (import / export), sfArk (import only) and GrandOrgue (import only) formats are supported. Command lines can be used to convert files, open Polyphone in synthesizer mode or reset configurations in case of trouble.
+sf2, sf3, sfz, dls (import / export), sfArk (import only) and GrandOrgue (import only) formats are supported. Command lines can be used to convert files, render a MIDI file into a wav file, open Polyphone in synthesizer mode or reset configurations in case of trouble.
 .br
 .PP
 More information can be found at https://www.polyphone.io .
@@ -67,6 +70,11 @@ to convert a file into the sfz format.
 Use
 .B polyphone
 to convert a file into the csv format.
+.TP
+.BR \fB-5\fR
+Use
+.B polyphone
+to play a MIDI file with a soundfont and write the result in a wav file.
 .TP
 .BR \fB-6\fR
 Use
@@ -118,6 +126,12 @@ The option 'raw' can be used to export raw values (as they are stored in the sou
 .br
 .BR
  * 
+.B MIDI file rendering
+.br
+The configuration is the path of the MIDI file to play (mid, midi, kar or rmi). All its channels play the input soundfont, the presets being chosen by the program changes of the file (bank 128 on channel 10), with the settings of the synthesizer (reverb, chorus, gain, polyphony, tuning). The result is a stereo 32-bit float wav file at 48000 Hz, written by default next to the MIDI file and with its name. An existing file is replaced. The notes of a preset that the soundfont does not have are not played and a warning is displayed.
+.br
+.BR
+ * 
 .B dls conversion
 .br
 No configuration for this conversion.
@@ -156,6 +170,12 @@ The configuration is made up of 3 values separated by a '|'. The first value spe
 .br
 .BR polyphone
 -6 -i /path/to/file.sf2
+.br
+.BR
+ * Rendering of a MIDI file with a soundfont (file.wav is written next to file.mid):
+.br
+.BR polyphone
+-5 -i /path/to/soundfont.sf2 -c /path/to/file.mid
 .br
 .BR
  * Open Polyphone in synthesizer mode, allowing use of the bass keys to select the ensemble to be played with a MIDI keyboard:

@@ -65,6 +65,10 @@ is replaced. Exit codes: 1 for a missing input file or output directory, 2 for a
 4 when a preset or a program is missing, the output cannot be written or the second synth core gives
 the same rendering as the first one.
 
+A MIDI file (`.mid`, `.midi`, `.kar` or `.rmi`) can be given instead of an event file, without
+`|two_cores` or `|threaded`: it is played as the MIDI player does, with the settings of the synth
+saved by Polyphone (see the command line in the user manual). It is not used by these tests.
+
 ## Event files
 
 The cases are in `cases/`. The first line names the soundfont used by `render.sh`. Then each line is

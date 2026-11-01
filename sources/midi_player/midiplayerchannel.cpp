@@ -382,10 +382,15 @@ bool MidiPlayerChannel::isSolo()
     return _pushSolo->isChecked();
 }
 
-void MidiPlayerChannel::updateGain(bool isSoloEnabled)
+float MidiPlayerChannel::getGain(bool isSoloEnabled)
 {
     bool isSilent = _pushMute->isChecked() || (isSoloEnabled && !_pushSolo->isChecked());
-    _player->setGain(_channel, isSilent ? -1000.0f : static_cast<float>(_sliderVolume->value()));
+    return isSilent ? -1000.0f : static_cast<float>(_sliderVolume->value());
+}
+
+void MidiPlayerChannel::updateGain(bool isSoloEnabled)
+{
+    _player->setGain(_channel, getGain(isSoloEnabled));
 }
 
 void MidiPlayerChannel::loadSamples()

@@ -97,13 +97,15 @@ public:
     // Default program of a channel, before any program change
     static int getDefaultProgram(int channel) { return channel == 9 ? 128 * 128 : 0; }
 
+    // Event of a file given to a processor, as the player does (also used by MidiFileRenderer)
+    static void dispatch(MidiProcessor &processor, const MidiFile::Event &event);
+
 private:
     typedef std::chrono::steady_clock Clock;
 
     void run();
     qint64 getPositionLocked();
     void prepare(const MidiFile * file, qint64 position, bool fastRelease);
-    void dispatch(const MidiFile::Event &event);
     void releaseAll(bool fastRelease);
 
     Synth * _synth;

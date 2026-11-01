@@ -461,6 +461,19 @@ void MidiProcessor::setDefaultControllerValue(int controllerNumber, bool isBipol
     }
 }
 
+void MidiProcessor::copyDefaultControllerValues(MidiProcessor &other)
+{
+    for (int channel = 0; channel <= 16; channel++)
+    {
+        for (int i = 0; i < 128; i++)
+        {
+            _midiStates[channel]._controllerDefaultValues[i] = other._midiStates[channel]._controllerDefaultValues[i];
+            if (!_midiStates[channel]._controllerValueSpecified[i])
+                _midiStates[channel]._controllerValues[i] = _midiStates[channel]._controllerDefaultValues[i];
+        }
+    }
+}
+
 int MidiProcessor::getDefaultControllerValue(int channel, int controllerNumber)
 {
     return _midiStates[channel + 1]._controllerDefaultValues[controllerNumber];

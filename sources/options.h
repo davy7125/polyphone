@@ -86,6 +86,9 @@ public:
     QString renderEventFile() { return _renderEventFile; }
     QString renderSynth() { return _renderSynth; }
 
+    /// Render option: the events are the ones of a MIDI file, played as the MIDI player does (the synth cannot be chosen)
+    bool renderMidiFile();
+
     /// Player options
     PlayerOptions * playerOptions() { return _playerOptions; }
 
