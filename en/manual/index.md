@@ -12,6 +12,8 @@ The first screen of Polyphone is basically made of 3 parts:
 * a [right part](#doc_right), dedicated to the soundfont repository;
 * a [top area](#doc_top), containing tabs and a menu.
 
+Below the tabs, a banner can also display a [notification](#doc_notifications) published on the website.
+
 
 ![Home screen of Polyphone](images/page_home.png "Home screen of Polyphone")
 
@@ -96,3 +98,18 @@ The shortcut :kbd:`Ctrl`+:kbd:`F` puts the focus on the search field of the curr
 
 
 The menu, located in the top right corner, contains general functions and is described [here](manual/menu.md).
+
+
+## Notifications {#doc_notifications}
+
+
+At startup, Polyphone reads the messages published on the website for its users and displays at most one of them in a banner below the tabs, across the whole width of the home screen. The icon of the banner depends on the type of message:
+
+* an alert, for instance about a known bug in the installed version;
+* a new version of Polyphone, only displayed by the versions downloaded from the website (the package of a Linux distribution is updated by the distribution);
+* an announcement about the software or the project;
+* an appeal for support, displayed after several days of use and never when Polyphone is connected to a [Premium account](premium).
+
+The button on the right, if any, opens the corresponding page of the website. The message then disappears for good, as with the cross. The next message is displayed one week later at the earliest, except for an alert, which is displayed immediately.
+
+Only the language of the interface is sent to the website, so that the messages are written in this language when it is available. Notifications can be disabled in the [settings](manual/settings.md#doc_interface).

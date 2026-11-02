@@ -12,6 +12,8 @@ A primeira tela do Polyphone é composta basicamente de 3 partes:
 * uma [parte direita](#doc_right), dedicada ao repositório de soundfonts;
 * uma [área superior](#doc_top), que contém abas e um menu.
 
+Abaixo das abas, um banner também pode exibir uma [notificação](#doc_notifications) publicada no site.
+
 
 ![Tela inicial do Polyphone](images/page_home.png "Tela inicial do Polyphone")
 
@@ -96,3 +98,18 @@ O atalho :kbd:`Ctrl`+:kbd:`F` coloca o foco no campo de pesquisa da aba atual: o
 
 
 O menu, localizado no canto superior direito, contém funções gerais e é descrito [aqui](manual/menu.md).
+
+
+## Notificações {#doc_notifications}
+
+
+Na inicialização, o Polyphone lê as mensagens publicadas no site para os seus usuários e exibe no máximo uma delas em um banner abaixo das abas, ocupando toda a largura da tela inicial. O ícone do banner depende do tipo de mensagem:
+
+* um alerta, por exemplo sobre um bug conhecido da versão instalada;
+* uma nova versão do Polyphone, exibida apenas pelas versões baixadas do site (o pacote de uma distribuição Linux é atualizado pela distribuição);
+* um anúncio sobre o software ou o projeto;
+* um pedido de apoio, exibido após vários dias de uso e nunca quando o Polyphone está conectado a uma [conta Premium](premium).
+
+O botão à direita, se houver, abre a página correspondente do site. A mensagem então desaparece definitivamente, como ao clicar no X. A próxima mensagem é exibida no mínimo uma semana depois, exceto um alerta, que é exibido imediatamente.
+
+Somente o idioma da interface é enviado ao site, para que as mensagens sejam escritas nesse idioma quando ele estiver disponível. As notificações podem ser desativadas nas [configurações](manual/settings.md#doc_interface).

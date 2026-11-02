@@ -12,6 +12,8 @@ Si vous avez besoin de plus d'aide, ou si la lecture de ces pages vous rebute, v
 * une [partie droite](#doc_right), dédiée aux banques de sons en ligne&nbsp;;
 * une [partie haute](#doc_top), présentant des onglets et un menu.
 
+Sous les onglets, un bandeau peut également afficher une [notification](#doc_notifications) publiée sur le site web.
+
 
 ![Écran d'accueil de Polyphone](images/page_home.png "Écran d'accueil de Polyphone")
 
@@ -96,3 +98,18 @@ Le raccourci :kbd:`Ctrl`+:kbd:`F` place le focus sur le champ de recherche de l'
 
 
 Le menu, situé dans le coin en haut à droite, contient des fonctions générales décrites [ici](manual/menu.md).
+
+
+## Notifications {#doc_notifications}
+
+
+Au démarrage, Polyphone lit les messages publiés sur le site web à l'intention de ses utilisateurs et en affiche au plus un dans un bandeau situé sous les onglets, sur toute la largeur de l'écran d'accueil. L'icône du bandeau dépend du type de message&nbsp;:
+
+* une alerte, par exemple au sujet d'un bug connu de la version installée&nbsp;;
+* une nouvelle version de Polyphone, affichée uniquement par les versions téléchargées depuis le site (le paquet d'une distribution Linux est mis à jour par la distribution)&nbsp;;
+* une annonce concernant le logiciel ou le projet&nbsp;;
+* un appel au soutien, affiché après plusieurs jours d'utilisation et jamais lorsque Polyphone est connecté à un [compte Premium](premium).
+
+Le bouton de droite, s'il est présent, ouvre la page correspondante du site. Le message disparaît alors définitivement, comme avec la croix. Le message suivant s'affiche au plus tôt une semaine plus tard, sauf une alerte, qui s'affiche immédiatement.
+
+Seule la langue de l'interface est transmise au site, afin que les messages soient rédigés dans cette langue lorsqu'elle est disponible. Les notifications peuvent être désactivées dans les [préférences](manual/settings.md#doc_interface).

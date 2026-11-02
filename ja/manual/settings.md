@@ -73,6 +73,9 @@ MIDI入力
 タブを復元
 : Polyphoneを閉じたときに開いていたSoundFontとディレクトリを、起動時に同じ順序で再び開きます。[ホーム画面](manual/index.md#doc_home)は表示されたままです。その間に削除、名前の変更、移動されたものはスキップされます。
 
+通知
+: Webサイトで公開された[通知](manual/index.md#doc_notifications)（警告、新しいバージョン、お知らせ、支援のお願い）を[ホーム画面](manual/index.md#doc_home)に表示します。このオプションを無効にすると、何もダウンロードされません。
+
 起動時の表示
 : SoundFontを開いたときに表示する画面を、:guilabel:`一般`（初期設定）、:guilabel:`サンプル`、:guilabel:`サンプル - 最初のサンプル`、:guilabel:`インストゥルメント`、:guilabel:`インストゥルメント - 最初のインストゥルメント - テーブル`、:guilabel:`インストゥルメント - 最初のインストゥルメント - 範囲`、:guilabel:`インストゥルメント - 最初のインストゥルメント - エンベロープ`、:guilabel:`プリセット`、:guilabel:`プリセット - 最初のプリセット - テーブル`、:guilabel:`プリセット - 最初のプリセット - 範囲` の中から選びます。最初のインストゥルメントまたはプリセットでは、最後の部分で表示するページ（[テーブル](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table)、[範囲エディター](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range)、[エンベロープエディター](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope)）を指定します。
 

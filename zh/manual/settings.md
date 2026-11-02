@@ -73,6 +73,9 @@ MIDI 输入
 恢复标签页
 : 启动时按相同顺序重新打开关闭 Polyphone 时已打开的音色库和目录，并保持显示[主屏幕](manual/index.md#doc_home)。在此期间被删除、重命名或移动的项目将被跳过。
 
+通知
+: 在[主屏幕](manual/index.md#doc_home)上显示网站发布的[通知](manual/index.md#doc_notifications)（警报、新版本、公告、支持呼吁）。禁用此选项后，不会下载任何内容。
+
 启动视图
 : 选择打开音色库时显示的视图，可选项如下：:guilabel:`通用`（默认）、:guilabel:`采样`、:guilabel:`采样 - 第一个采样`、:guilabel:`乐器`、:guilabel:`乐器 - 第一个乐器 - 表格`、:guilabel:`乐器 - 第一个乐器 - 范围`、:guilabel:`乐器 - 第一个乐器 - 包络`、:guilabel:`预设`、:guilabel:`预设 - 第一个预设 - 表格`、:guilabel:`预设 - 第一个预设 - 范围`。对于第一个乐器或预设，最后一部分指定显示的页面：[表格](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table)、[范围编辑器](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range)或[包络编辑器](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope)。
 

@@ -73,6 +73,9 @@ Unique instance
 Restore tabs
 : Reopen at startup the soundfonts and directories that were open when Polyphone was closed, in the same order, while the [home screen](manual/index.md#doc_home) remains displayed. Those that have been deleted, renamed or moved in the meantime are skipped.
 
+Notifications
+: Display on the [home screen](manual/index.md#doc_home) the [notifications](manual/index.md#doc_notifications) published on the website (alert, new version, announcement, appeal for support). When this option is disabled, nothing is downloaded.
+
 Startup view
 : Select the view to display when a soundfont is opened among the following: :guilabel:`General` (default), :guilabel:`Samples`, :guilabel:`Samples - first sample`, :guilabel:`Instruments`, :guilabel:`Instruments - first instrument - Table`, :guilabel:`Instruments - first instrument - Ranges`, :guilabel:`Instruments - first instrument - Envelopes`, :guilabel:`Presets`, :guilabel:`Presets - first preset - Table`, :guilabel:`Presets - first preset - Ranges`. For the first instrument or preset, the last part sets the page displayed: [table](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), [range editor](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range) or [envelope editor](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope).
 

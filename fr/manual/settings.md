@@ -73,6 +73,9 @@ Instance unique
 Restaurer les onglets
 : Rouvre au démarrage les banques de sons et les répertoires qui étaient ouverts à la fermeture de Polyphone, dans le même ordre, l'[écran d'accueil](manual/index.md#doc_home) restant affiché. Ceux qui ont été supprimés, renommés ou déplacés entre-temps sont ignorés.
 
+Notifications
+: Affiche sur l'[écran d'accueil](manual/index.md#doc_home) les [notifications](manual/index.md#doc_notifications) publiées sur le site web (alerte, nouvelle version, annonce, appel au soutien). Lorsque l'option est désactivée, rien n'est téléchargé.
+
 Vue de démarrage
 : Sélectionne la vue à afficher à l'ouverture d'une banque de sons parmi&nbsp;: :guilabel:`Général` (par défaut), :guilabel:`Échantillons`, :guilabel:`Échantillons - premier échantillon`, :guilabel:`Instruments`, :guilabel:`Instruments - premier instrument - Table`, :guilabel:`Instruments - premier instrument - Étendues`, :guilabel:`Instruments - premier instrument - Enveloppes`, :guilabel:`Ensembles`, :guilabel:`Ensembles - premier ensemble - Table`, :guilabel:`Ensembles - premier ensemble - Étendues`. Pour le premier instrument ou ensemble, la dernière partie désigne la page affichée&nbsp;: [table](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), [éditeur d'étendues](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range) ou [éditeur d'enveloppes](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope).
 

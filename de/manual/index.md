@@ -12,6 +12,8 @@ Der erste Bildschirm von Polyphone besteht im Wesentlichen aus 3 Teilen:
 * einem [rechten Teil](#doc_right), der der Soundfont-Fundgrube gewidmet ist;
 * einem [oberen Bereich](#doc_top) mit Tabs und einem Menü.
 
+Unter den Tabs kann außerdem ein Banner eine auf der Website veröffentlichte [Benachrichtigung](#doc_notifications) anzeigen.
+
 
 ![Startbildschirm von Polyphone](images/page_home.png "Startbildschirm von Polyphone")
 
@@ -96,3 +98,18 @@ Die Tastenkombination :kbd:`Ctrl`+:kbd:`F` setzt den Fokus auf das Suchfeld des 
 
 
 Das Menü in der oberen rechten Ecke enthält allgemeine Funktionen und wird [hier](manual/menu.md) beschrieben.
+
+
+## Benachrichtigungen {#doc_notifications}
+
+
+Beim Start liest Polyphone die auf der Website für seine Benutzer veröffentlichten Nachrichten und zeigt höchstens eine davon in einem Banner unter den Tabs an, über die gesamte Breite des Startbildschirms. Das Symbol des Banners hängt von der Art der Nachricht ab:
+
+* eine Warnung, zum Beispiel zu einem bekannten Fehler der installierten Version;
+* eine neue Version von Polyphone, die nur in den von der Website heruntergeladenen Versionen angezeigt wird (das Paket einer Linux-Distribution wird von der Distribution aktualisiert);
+* eine Ankündigung zur Software oder zum Projekt;
+* ein Aufruf zur Unterstützung, der nach mehreren Tagen der Nutzung angezeigt wird und nie, wenn Polyphone mit einem [Premium-Konto](premium) verbunden ist.
+
+Die Schaltfläche rechts öffnet, falls vorhanden, die entsprechende Seite der Website. Die Nachricht verschwindet dann endgültig, wie mit dem Kreuz. Die nächste Nachricht wird frühestens eine Woche später angezeigt, außer einer Warnung, die sofort angezeigt wird.
+
+Nur die Sprache der Oberfläche wird an die Website übermittelt, damit die Nachrichten in dieser Sprache verfasst sind, sofern sie verfügbar ist. Die Benachrichtigungen können in den [Einstellungen](manual/settings.md#doc_interface) deaktiviert werden.

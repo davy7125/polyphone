@@ -12,6 +12,8 @@ La primera pantalla de Polyphone se compone básicamente de 3 partes:
 * una [parte derecha](#doc_right), dedicada al repositorio de soundfonts;
 * una [zona superior](#doc_top), que contiene pestañas y un menú.
 
+Debajo de las pestañas, un banner también puede mostrar una [notificación](#doc_notifications) publicada en el sitio web.
+
 
 ![Pantalla de inicio de Polyphone](images/page_home.png "Pantalla de inicio de Polyphone")
 
@@ -96,3 +98,18 @@ El atajo :kbd:`Ctrl`+:kbd:`F` pone el foco en el campo de búsqueda de la pesta�
 
 
 El menú, situado en la esquina superior derecha, contiene funciones generales y se describe [aquí](manual/menu.md).
+
+
+## Notificaciones {#doc_notifications}
+
+
+Al iniciarse, Polyphone lee los mensajes publicados en el sitio web para sus usuarios y muestra como máximo uno de ellos en un banner situado debajo de las pestañas, a lo ancho de toda la pantalla de inicio. El icono del banner depende del tipo de mensaje:
+
+* una alerta, por ejemplo sobre un error conocido de la versión instalada;
+* una nueva versión de Polyphone, que solo muestran las versiones descargadas desde el sitio web (el paquete de una distribución Linux lo actualiza la distribución);
+* un anuncio sobre el programa o el proyecto;
+* un llamamiento de apoyo, que se muestra tras varios días de uso y nunca cuando Polyphone está conectado a una [cuenta Premium](premium).
+
+El botón de la derecha, si lo hay, abre la página correspondiente del sitio web. El mensaje desaparece entonces definitivamente, como con la cruz. El siguiente mensaje se muestra como pronto una semana después, salvo una alerta, que se muestra de inmediato.
+
+Solo se envía al sitio web el idioma de la interfaz, para que los mensajes estén redactados en ese idioma cuando esté disponible. Las notificaciones se pueden desactivar en las [preferencias](manual/settings.md#doc_interface).

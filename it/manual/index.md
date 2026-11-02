@@ -12,6 +12,8 @@ La prima schermata di Polyphone è composta essenzialmente da 3 parti:
 * una [parte destra](#doc_right), dedicata all'archivio di soundfont;
 * un'[area superiore](#doc_top), che contiene le schede e un menu.
 
+Sotto le schede, un banner può inoltre mostrare una [notifica](#doc_notifications) pubblicata sul sito.
+
 
 ![Schermata iniziale di Polyphone](images/page_home.png "Schermata iniziale di Polyphone")
 
@@ -96,3 +98,18 @@ La scorciatoia :kbd:`Ctrl`+:kbd:`F` porta il focus sul campo di ricerca della sc
 
 
 Il menu, situato nell'angolo in alto a destra, contiene funzioni generali ed è descritto [qui](manual/menu.md).
+
+
+## Notifiche {#doc_notifications}
+
+
+All'avvio, Polyphone legge i messaggi pubblicati sul sito per i suoi utenti e ne mostra al massimo uno in un banner sotto le schede, su tutta la larghezza della schermata iniziale. L'icona del banner dipende dal tipo di messaggio:
+
+* un avviso, ad esempio su un bug noto della versione installata;
+* una nuova versione di Polyphone, mostrata solo dalle versioni scaricate dal sito (il pacchetto di una distribuzione Linux viene aggiornato dalla distribuzione);
+* un annuncio sul software o sul progetto;
+* un appello al sostegno, mostrato dopo diversi giorni di utilizzo e mai quando Polyphone è collegato a un [account Premium](premium).
+
+Il pulsante a destra, se presente, apre la pagina corrispondente del sito. Il messaggio scompare quindi definitivamente, come con la croce. Il messaggio successivo viene mostrato non prima di una settimana, tranne un avviso, che viene mostrato subito.
+
+Al sito viene inviata solo la lingua dell'interfaccia, affinché i messaggi siano scritti in questa lingua quando è disponibile. Le notifiche possono essere disattivate nelle [impostazioni](manual/settings.md#doc_interface).
