@@ -28,7 +28,9 @@ ArchitecturesInstallIn64BitMode=x64compatible
 
 [Languages]
 Name: "catalan"; MessagesFile: "compiler:Languages\Catalan.isl"
+#if FileExists(AddBackslash(CompilerPath) + "Languages\ChineseSimplified.isl")
 Name: "chinesesimplified"; MessagesFile: "compiler:Languages\ChineseSimplified.isl"
+#endif
 Name: "czech"; MessagesFile: "compiler:Languages\Czech.isl"
 Name: "danish"; MessagesFile: "compiler:Languages\Danish.isl"
 Name: "dutch"; MessagesFile: "compiler:Languages\Dutch.isl"
@@ -41,7 +43,9 @@ Name: "korean"; MessagesFile: "compiler:Languages\Korean.isl"
 Name: "polish"; MessagesFile: "compiler:Languages\Polish.isl"
 Name: "portuguese"; MessagesFile: "compiler:Languages\Portuguese.isl"
 Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
+#if FileExists(AddBackslash(CompilerPath) + "Languages\SerbianCyrillic.isl")
 Name: "serbian"; MessagesFile: "compiler:Languages\SerbianCyrillic.isl"
+#endif
 Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
 
 [Tasks]

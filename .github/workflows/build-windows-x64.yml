@@ -133,24 +133,47 @@ jobs:
           Write-Host "Created portable archive: $portableName.zip"
 
       - name: Install Inno Setup
-        run: choco install innosetup -y
+        shell: pwsh
+        run: |
+          choco install innosetup -y
+
+          # Version and location of Inno Setup, read from its uninstall registry key
+          $keys = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Inno Setup [0-9]*_is1",
+                  "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Inno Setup [0-9]*_is1"
+          $innoSetup = Get-ItemProperty -Path $keys -ErrorAction SilentlyContinue | Sort-Object PSChildName | Select-Object -Last 1
+          if (-not $innoSetup) {
+            throw "Inno Setup installation not found"
+          }
+          $innoSetupDir = $innoSetup.InstallLocation.TrimEnd("\")
+          Write-Host "Inno Setup $($innoSetup.DisplayVersion) found in $innoSetupDir"
+          "INNO_SETUP_VERSION=$($innoSetup.DisplayVersion)" | Out-File -FilePath $env:GITHUB_ENV -Append
+          "INNO_SETUP_DIR=$innoSetupDir" | Out-File -FilePath $env:GITHUB_ENV -Append
 
       - name: Download Inno Setup extra translations
         shell: pwsh
         run: |
-          $url = "https://raw.githubusercontent.com/jrsoftware/issrc/is-6_7_1/Files/Languages/Unofficial/ChineseSimplified.isl"
-          $destination = "C:\Program Files (x86)\Inno Setup 6\Languages\ChineseSimplified.isl"
-          Invoke-WebRequest -Uri $url -OutFile $destination
-          Write-Host "ChineseSimplified.isl downloaded successfully"
-          
-          $url = "https://raw.githubusercontent.com/jrsoftware/issrc/is-6_7_1/Files/Languages/Unofficial/SerbianCyrillic.isl"
-          $destination = "C:\Program Files (x86)\Inno Setup 6\Languages\SerbianCyrillic.isl"
-          Invoke-WebRequest -Uri $url -OutFile $destination
-          Write-Host "SerbianCyrillic.isl downloaded successfully"
+          # Translations missing from the installation, taken from the sources of the same version if available
+          $tag = "is-" + $env:INNO_SETUP_VERSION.Replace(".", "_")
+          foreach ($language in "ChineseSimplified", "SerbianCyrillic") {
+            $destination = "$env:INNO_SETUP_DIR\Languages\$language.isl"
+            if (Test-Path $destination) {
+              Write-Host "$language.isl is already an official translation"
+              continue
+            }
+            $url = "https://raw.githubusercontent.com/jrsoftware/issrc/$tag/Files/Languages/Unofficial/$language.isl"
+            try {
+              Invoke-WebRequest -Uri $url -OutFile $destination
+              Write-Host "$language.isl downloaded successfully"
+            } catch {
+              Remove-Item -Path $destination -ErrorAction SilentlyContinue
+              Write-Host "::warning::$language.isl not found for Inno Setup $env:INNO_SETUP_VERSION, the language is skipped"
+            }
+          }
 
       - name: Create installer
+        shell: pwsh
         run: |
-          iscc /DMyAppVersion=${{ inputs.tag }} /DSourceDir=../../deploy packaging/windows/polyphone.iss
+          & "$env:INNO_SETUP_DIR\ISCC.exe" /DMyAppVersion=${{ inputs.tag }} /DSourceDir=../../deploy packaging/windows/polyphone.iss
 
       - name: Upload installer artifact
         id: upload-installer-artifact

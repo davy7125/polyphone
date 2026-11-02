@@ -10,7 +10,8 @@ This application uses client-side HTTP requests exclusively for operational purp
 
 * application version checks and update retrieval,
 * downloading the soundfont list and associated soundfont files,
-* user authentication and account access.
+* user authentication and account access,
+* notifications like an update.
 
 The application does not collect, track, or share any personal data.
 No data is transmitted to any server other than [https://www.polyphone.io](https://www.polyphone.io), and no third-party services are involved.
