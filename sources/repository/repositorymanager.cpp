@@ -250,6 +250,11 @@ QString RepositoryManager::loadSoundfontInfo()
         if (valueTmp.isDouble())
             si->setCommentNumber(static_cast<int>(valueTmp.toDouble()));
 
+        // Draft
+        valueTmp = jsonObject.value("is_draft");
+        if (valueTmp.isDouble())
+            si->setDraft(static_cast<int>(valueTmp.toDouble()) == 1);
+
         // Website
         valueTmp = jsonObject.value("website");
         if (valueTmp.isString())

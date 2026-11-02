@@ -53,6 +53,11 @@ public:
     int getId() { return _id; }
     QString getTitle() { return _title; }
 
+    // Draft (a review reported issues): the displayed title is prefixed with "(draft)"
+    void setDraft(bool isDraft) { _isDraft = isDraft; }
+    bool isDraft() { return _isDraft; }
+    QString getDisplayedTitle();
+
     void setDateTime(QDateTime dateTime) { _dateTime = dateTime; }
     QDateTime getDateTime() { return _dateTime; }
 
@@ -108,6 +113,7 @@ private:
     QMap<Property, QStringList> _properties;
     QStringList _tags;
     QString _website;
+    bool _isDraft;
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(SoundfontInformation::LicenseFlags)

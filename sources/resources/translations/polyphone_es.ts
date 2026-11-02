@@ -4785,7 +4785,12 @@ Advertencia: la calidad se reducirá y el bucle podría alterarse</translation>
         <translation>Íconos</translation>
     </message>
     <message>
-        <location filename="../../repository/soundfontinformation.cpp" line="48"/>
+        <location filename="../../repository/soundfontinformation.cpp" line="49"/>
+        <source>(draft) %1</source>
+        <translation>(borrador) %1</translation>
+    </message>
+    <message>
+        <location filename="../../repository/soundfontinformation.cpp" line="54"/>
         <source>Unknown author</source>
         <translation>Autor desconocido</translation>
     </message>
@@ -5265,122 +5270,122 @@ Ambas divisiones deben compartir los mismos rangos de notas y velocidades.</tran
         <translation>uso personal, no distribuir una versión modificada</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="349"/>
+        <location filename="../../repository/repositorymanager.cpp" line="354"/>
         <source>piano</source>
         <translation>piano</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="352"/>
+        <location filename="../../repository/repositorymanager.cpp" line="357"/>
         <source>organ</source>
         <translation>órgano</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="355"/>
+        <location filename="../../repository/repositorymanager.cpp" line="360"/>
         <source>synthesizer</source>
         <translation>sintetizador</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="358"/>
+        <location filename="../../repository/repositorymanager.cpp" line="363"/>
         <source>harpsichord</source>
         <translation>clave</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="361"/>
+        <location filename="../../repository/repositorymanager.cpp" line="366"/>
         <source>guitar</source>
         <translation>guitarra</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="364"/>
+        <location filename="../../repository/repositorymanager.cpp" line="369"/>
         <source>bass</source>
         <translation>bajo</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="367"/>
+        <location filename="../../repository/repositorymanager.cpp" line="372"/>
         <source>plucked strings</source>
         <translation>cuerda pulsada</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="370"/>
+        <location filename="../../repository/repositorymanager.cpp" line="375"/>
         <source>bowed strings</source>
         <translation>cuerda frotada</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="373"/>
+        <location filename="../../repository/repositorymanager.cpp" line="378"/>
         <source>flute</source>
         <translation>flauta</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="376"/>
+        <location filename="../../repository/repositorymanager.cpp" line="381"/>
         <source>reed</source>
         <translation>lengüeta</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="379"/>
+        <location filename="../../repository/repositorymanager.cpp" line="384"/>
         <source>brass</source>
         <translation>viento metal</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="382"/>
+        <location filename="../../repository/repositorymanager.cpp" line="387"/>
         <source>vocal</source>
         <translation>vocal</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="385"/>
+        <location filename="../../repository/repositorymanager.cpp" line="390"/>
         <source>unpitched percussion</source>
         <translation>percusión no afinada</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="388"/>
+        <location filename="../../repository/repositorymanager.cpp" line="393"/>
         <source>melodic percussion</source>
         <translation>percusión melódica</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="391"/>
+        <location filename="../../repository/repositorymanager.cpp" line="396"/>
         <source>sound effect</source>
         <translation>efecto de sonido</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="394"/>
+        <location filename="../../repository/repositorymanager.cpp" line="399"/>
         <source>soundscape</source>
         <translation>paisaje sonoro</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="397"/>
+        <location filename="../../repository/repositorymanager.cpp" line="402"/>
         <source>loop / rythm</source>
         <translation>bucle / ritmo</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="400"/>
+        <location filename="../../repository/repositorymanager.cpp" line="405"/>
         <source>instrument set</source>
         <translation>kit instrumental</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="403"/>
+        <location filename="../../repository/repositorymanager.cpp" line="408"/>
         <source>unclassifiable</source>
         <translation>inclasificable</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="410"/>
+        <location filename="../../repository/repositorymanager.cpp" line="415"/>
         <source>Category %1</source>
         <translation>Categoría %1</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="438"/>
+        <location filename="../../repository/repositorymanager.cpp" line="443"/>
         <source>Please wait...</source>
         <translation>Por favor, espera...</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="441"/>
+        <location filename="../../repository/repositorymanager.cpp" line="446"/>
         <source>Your account has been banned.</source>
         <translation>Tu cuenta ha sido bloqueada.</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="446"/>
+        <location filename="../../repository/repositorymanager.cpp" line="451"/>
         <source>A Premium account allows you to browse and download all soundfonts available online.</source>
         <translation>Una cuenta Premium te permite buscar y descargar todos los soundfonts disponibles en línea.</translation>
     </message>
     <message>
-        <location filename="../../repository/repositorymanager.cpp" line="455"/>
+        <location filename="../../repository/repositorymanager.cpp" line="460"/>
         <source>Warning</source>
         <translation>Advertencia</translation>
     </message>

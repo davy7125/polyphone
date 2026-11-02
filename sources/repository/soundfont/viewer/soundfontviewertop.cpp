@@ -46,7 +46,7 @@ SoundfontViewerTop::~SoundfontViewerTop()
 void SoundfontViewerTop::initialize(SoundfontInformation * soundfontInfo)
 {
     // Title
-    ui->labelTitle->setTextToElide(soundfontInfo->getTitle());
+    ui->labelTitle->setTextToElide(soundfontInfo->getDisplayedTitle());
 
     // Numbers
     ui->labelCommentNumber->setText(QString::number(soundfontInfo->getCommentNumber()));

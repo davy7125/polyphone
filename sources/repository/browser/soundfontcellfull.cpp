@@ -43,7 +43,7 @@ SoundfontCellFull::SoundfontCellFull(SoundfontInformation* soundfontInfo, bool s
         s_icons = new IconContainer();
 
     // Title
-    ui->labelTitle->setTextToElide(soundfontInfo->getTitle());
+    ui->labelTitle->setTextToElide(soundfontInfo->getDisplayedTitle());
 
     // Numbers
     ui->labelCommentNumber->setText(QString::number(soundfontInfo->getCommentNumber()));

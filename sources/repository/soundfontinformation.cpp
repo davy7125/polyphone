@@ -38,9 +38,15 @@ SoundfontInformation::SoundfontInformation(int id, QString title) :
     _categoryId(-1),
     _size(0),
     _rating(-1),
-    _website("")
+    _website(""),
+    _isDraft(false)
 {
 
+}
+
+QString SoundfontInformation::getDisplayedTitle()
+{
+    return _isDraft ? QObject::tr("(draft) %1").arg(_title) : _title;
 }
 
 QString SoundfontInformation::getAuthor() {
