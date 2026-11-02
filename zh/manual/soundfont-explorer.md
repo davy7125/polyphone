@@ -64,9 +64,23 @@
 利用这些操作，可以快速管理和清理本地的音色库收藏。
 
 
+## 演奏元素 {#doc_play}
+
+
+:guilabel:`显示` 按钮右侧的 ![piano](images/toolbar_piano.png "piano"){.inline} 按钮用于显示或隐藏[虚拟键盘](manual/soundfont-editor/toolbar.md#doc_keyboard)，旁边的 ![录音机](images/toolbar_recorder.png "录音机"){.inline} 按钮用于显示或隐藏[录音机](manual/soundfont-editor/toolbar.md#doc_recorder)，与编辑器工具栏中的按钮作用相同。
+
+在右侧列表中选中的采样、乐器或预设可以用虚拟键盘演奏，即使虚拟键盘处于隐藏状态，也可以用外部 MIDI 键盘演奏。与编辑器中一样，虚拟键盘会显示该元素的音域，或采样的根音符。如果采样带有循环，则循环播放；如果勾选了采样[播放器](manual/soundfont-editor/editing-pages/sample-editor.md#doc_player)的 :guilabel:`立体声` 选项，则以立体声播放。
+
+首次选中某个文件中的元素时，音色库会在后台加载，不会打开标签页。之后，只要选中的元素属于同一个文件，音色库就会一直保留；在主列表中选中另一个文件时，它会被释放。
+
+已在标签页中打开的音色库会按照它在编辑器中的状态演奏，包括尚未保存的修改。
+
+
 ## 打开音色库 {#doc_open_soundfont}
 
 
 双击主列表中的条目会打开该文件（前提是其格式与 Polyphone 兼容），打开后显示的位置由[设置](manual/settings.md#doc_interface)中的 :guilabel:`启动视图` 选项决定（默认显示[一般信息](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md)）。
 
 双击某个[采样](manual/soundfont-editor/editing-pages/sample-editor.md)、[乐器](manual/soundfont-editor/editing-pages/instrument-editor.md)或[预设](manual/soundfont-editor/editing-pages/preset-editor.md)，会打开该文件并定位到所选的元素。
+
+如果该音色库已为演奏其中的元素而加载，标签页会立即打开。

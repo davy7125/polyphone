@@ -96,6 +96,8 @@ Two buttons at the bottom right show or hide the MIDI controllers above the keyb
 The window keeps the proportions of the keyboard: changing its width changes its height, and conversely.
 Showing or hiding an area only changes the height of the window.
 
+The virtual keyboard can also be displayed from the [soundfont explorer](manual/soundfont-explorer.md#doc_play), for playing the elements of the files of a directory without opening them.
+
 
 ![Virtual keyboard](images/virtual_keyboard.png "Virtual keyboard")
 

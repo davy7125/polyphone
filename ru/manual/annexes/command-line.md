@@ -1,5 +1,6 @@
 Polyphone можно запускать из командной строки для преобразования SoundFont в формат [sf2](#doc_sf2), [sf3](#doc_sf3), [sfz](#doc_sfz), [csv](#doc_csv) или [dls](#doc_dls). Для преобразования поддерживаются форматы файлов [sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz), [dls](manual/annexes/the-different-soundfont-formats.md#doc_dls), [sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark) и [organ](manual/annexes/the-different-soundfont-formats.md#doc_organ).
 
+[MIDI-файл можно воспроизвести](#doc_render) с SoundFont и записать в wav-файл.
 Также можно указать параметр для открытия Polyphone в [режиме синтезатора](#doc_synth).
 
 Файлы и каталоги можно передавать в качестве аргументов, чтобы открыть их в графическом интерфейсе, например :command:`polyphone file1.sf2 file2.sf3 /path/to/directory` (каталог открывается в [обозревателе SoundFont](manual/soundfont-explorer.md)).
@@ -171,6 +172,50 @@ polyphone -4 -i /path/to/file.sf2 -c 'raw'
 ```
 
 При преобразовании создаётся каталог (с именем выходного файла), содержащий файл :file:`samples.csv` и по одному файлу на каждый инструмент и пресет. Если такой каталог уже существует, к его имени добавляется число.
+
+
+## Рендеринг MIDI-файла {#doc_render}
+
+
+### Командная строка
+
+
+```
+polyphone -5 -i <soundfont> -c <MIDI/file> -d <output/directory> -o <output_file_name>
+```
+
+**Примечание:** в Windows вместо :command:`polyphone` нужно указать полный путь к Polyphone, например :command:`C:/Program files/Polyphone/polyphone.exe`.
+
+
+### Аргументы
+
+
+-5
+: Режим «5» означает «отрендерить MIDI-файл»: MIDI-файл воспроизводится с SoundFont, а результат записывается в wav-файл.
+
+-d
+: Выходной каталог, в который будет записан wav-файл.
+  Этот аргумент необязателен; по умолчанию используется каталог MIDI-файла.
+
+-o
+: Имя wav-файла без расширения (расширение «.wav» добавляется автоматически).
+  Этот аргумент необязателен; по умолчанию используется имя MIDI-файла.
+
+-c
+: Путь к воспроизводимому MIDI-файлу (расширение .mid, .midi, .kar или .rmi).
+
+
+### Пример
+
+
+```
+polyphone -5 -i /path/to/file.sf2 -c /path/to/song.mid
+```
+
+Все каналы MIDI-файла играют SoundFont, а пресеты выбираются сообщениями смены программы из файла (банк 128 на канале 10, для ударных).
+Используются настройки синтезатора: [звук](manual/settings.md#doc_sound) (реверберация, хорус, общая громкость), [полифония](manual/settings.md#doc_general) и [строй](manual/settings.md#doc_keyboard).
+Результат — стереофонический wav-файл в 32-битном формате с плавающей запятой с частотой 48 000 Гц, который заканчивается, когда звук последних нот затихает. Существующий wav-файл заменяется.
+Ноты пресета, которого нет в SoundFont, не воспроизводятся, и для этого пресета выводится предупреждение.
 
 
 ## Преобразование в dls {#doc_dls}

@@ -230,6 +230,38 @@ When only one division of an instrument is selected in the tree, the correspondi
 It is thus possible to better visualize the evolution of the envelope relative to the sample being played.
 
 
+### Moving the points
+
+
+Each point of the curve can be moved with the left button:
+
+* the ends of **delay**, **attack**, **hold** and **release** move horizontally;
+* the end of **decay** moves in both directions: horizontally for the **decay**, vertically for the **sustain**;
+* the point at which the key is released moves vertically, for the **sustain**.
+
+The parameters of the point under the mouse cursor and their values are displayed in a top corner of the graph.
+When several points are at the same place, the circle is divided into parts, from the first stage on the left to the last one on the right.
+
+The **Key → Hold** and **Key → Decay** parameters are edited with a small ruler crossing the end of **hold** or **decay**: its top end shows the duration for the highest key of the division, its bottom end the duration for the lowest key.
+Moving one end changes the duration of its key only, the other end staying in place; with the key :kbd:`Ctrl` held down, both ends move around the middle of the ruler.
+The ruler appears when the mouse gets close to the point and remains visible when the parameter is not 0.
+
+The key :kbd:`Shift` gives a finer adjustment.
+Pushing a point against the right side of the graph scrolls the view or zooms out, to reach longer durations.
+The key :kbd:`Esc` cancels a change in progress.
+A double-click on a point resets its parameters (only **Key → Hold** or **Key → Decay** for an end of the ruler): the value of the :guilabel:`Global` division or the default value applies again.
+
+If several divisions or instruments are selected, all their envelopes are changed together: durations in the same proportion, the other values by the same amount.
+
+
+### Drag & zoom
+
+
+Maintaining the right click allows you to change the zoom around the selected point.
+
+Maintaining the left click allows you to move the graphic if the click does not start on a point of the curve.
+
+
 ## Modulators {#doc_modulator}
 
 

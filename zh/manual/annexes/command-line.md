@@ -1,5 +1,6 @@
 可以通过命令行运行 Polyphone，将音色库转换为 [sf2](#doc_sf2)、[sf3](#doc_sf3)、[sfz](#doc_sfz)、[csv](#doc_csv) 或 [dls](#doc_dls) 格式。转换支持的文件格式有 [sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2)、[sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3)、[sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz)、[dls](manual/annexes/the-different-soundfont-formats.md#doc_dls)、[sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark) 和 [organ](manual/annexes/the-different-soundfont-formats.md#doc_organ)。
 
+还可以用音色库[播放 MIDI 文件](#doc_render)，并将结果写入 wav 文件。
 还可以使用一个选项以[合成器模式](#doc_synth)打开 Polyphone。
 
 也可以将文件和目录作为参数传入，以便在图形界面中打开它们，例如 :command:`polyphone file1.sf2 file2.sf3 /path/to/directory`（目录会在[音色库浏览器](manual/soundfont-explorer.md)中打开）。
@@ -171,6 +172,50 @@ polyphone -4 -i /path/to/file.sf2 -c 'raw'
 ```
 
 转换时会创建一个目录（以输出名称命名），其中包含 :file:`samples.csv` 文件，以及每个乐器和每个预设各一个文件。如果该目录已存在，会在其名称后加上一个数字。
+
+
+## 渲染 MIDI 文件 {#doc_render}
+
+
+### 命令行
+
+
+```
+polyphone -5 -i <soundfont> -c <MIDI/file> -d <output/directory> -o <output_file_name>
+```
+
+**注意：**在 Windows 上，需要写出 Polyphone 的完整路径，而不只是 :command:`polyphone`，例如 :command:`C:/Program files/Polyphone/polyphone.exe`。
+
+
+### 参数
+
+
+-5
+: 模式“5”表示“渲染 MIDI 文件”：用音色库播放 MIDI 文件，并将结果写入 wav 文件。
+
+-d
+: 写入 wav 文件的输出目录。
+  此参数是可选的，默认与 MIDI 文件位于同一目录。
+
+-o
+: wav 文件的输出名称，不含扩展名（会自动添加扩展名“.wav”）。
+  此参数是可选的，默认与 MIDI 文件同名。
+
+-c
+: 要播放的 MIDI 文件的路径（扩展名为 .mid、.midi、.kar 或 .rmi）。
+
+
+### 示例
+
+
+```
+polyphone -5 -i /path/to/file.sf2 -c /path/to/song.mid
+```
+
+MIDI 文件的所有通道都演奏该音色库，预设由文件中的程序变更（program change）选择（打击乐使用通道 10 上的库 128）。
+使用合成器的设置：[音频](manual/settings.md#doc_sound)（混响、合唱、总音量）、[复音数](manual/settings.md#doc_general)和[调音](manual/settings.md#doc_keyboard)。
+结果是 48,000 Hz 的立体声 32 位浮点 wav 文件，在最后几个音符的声音消失后结束。已存在的 wav 文件会被替换。
+音色库中没有的预设，其音符不会被演奏，并会针对该预设显示警告。
 
 
 ## 转换为 dls {#doc_dls}

@@ -64,9 +64,23 @@ Lors d'un clic sur un fichier dans la liste principale, 2 icônes cliquables app
 Ces opérations permettent de gérer et de nettoyer rapidement une collection locale de banques de sons.
 
 
+## Jouer les éléments {#doc_play}
+
+
+Le bouton ![piano](images/toolbar_piano.png "piano"){.inline}, à droite du bouton :guilabel:`Affichage`, affiche ou masque le [clavier virtuel](manual/soundfont-editor/toolbar.md#doc_keyboard), et le bouton ![magnétophone](images/toolbar_recorder.png "magnétophone"){.inline} situé à côté affiche ou masque le [magnétophone](manual/soundfont-editor/toolbar.md#doc_recorder), comme les boutons de la barre d'outils de l'éditeur.
+
+L'échantillon, l'instrument ou l'ensemble sélectionné dans les listes de droite peut être joué avec le clavier virtuel, ou avec un clavier MIDI externe même si le clavier virtuel est masqué. Comme dans l'éditeur, le clavier virtuel montre l'étendue de l'élément, ou la note de référence d'un échantillon. Un échantillon est joué en boucle s'il en possède une, et en stéréo si l'option :guilabel:`stéréo` du [lecteur](manual/soundfont-editor/editing-pages/sample-editor.md#doc_player) d'échantillon est cochée.
+
+La première fois qu'un élément d'un fichier est sélectionné, la banque de sons est chargée en arrière-plan sans ouvrir d'onglet. La banque de sons est ensuite conservée tant que les éléments sélectionnés appartiennent au même fichier, et libérée lorsqu'un autre fichier est sélectionné dans la liste principale.
+
+Une banque de sons déjà ouverte dans un onglet est jouée telle qu'elle est dans l'éditeur, avec ses modifications non enregistrées.
+
+
 ## Ouvrir une banque de sons {#doc_open_soundfont}
 
 
 Un double-clic sur un élément de la liste principale ouvre le fichier — dans le cas où son format est compatible avec Polyphone — à l'endroit configuré dans les [préférences](manual/settings.md#doc_interface) avec l'option :guilabel:`Vue de démarrage` (les [informations générales](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md) sont affichées par défaut).
 
 Un double-clic sur un [échantillon](manual/soundfont-editor/editing-pages/sample-editor.md), un [instrument](manual/soundfont-editor/editing-pages/instrument-editor.md) ou un [ensemble](manual/soundfont-editor/editing-pages/preset-editor.md) ouvre le fichier sur l'élément sélectionné.
+
+Si la banque de sons a déjà été chargée pour jouer l'un de ses éléments, l'onglet s'ouvre immédiatement.

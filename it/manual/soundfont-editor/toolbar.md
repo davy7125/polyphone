@@ -96,6 +96,8 @@ Due pulsanti in basso a destra mostrano o nascondono i controller MIDI sopra la 
 La finestra mantiene le proporzioni della tastiera: modificandone la larghezza cambia l'altezza, e viceversa.
 Mostrare o nascondere un'area cambia solo l'altezza della finestra.
 
+La tastiera virtuale può essere mostrata anche dall'[esploratore di soundfont](manual/soundfont-explorer.md#doc_play), per suonare gli elementi dei file di una cartella senza aprirli.
+
 
 ![Tastiera virtuale](images/virtual_keyboard.png "Tastiera virtuale")
 

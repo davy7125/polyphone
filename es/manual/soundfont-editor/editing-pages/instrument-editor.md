@@ -230,6 +230,38 @@ Cuando solo hay una división de un instrumento seleccionada en el árbol, la [m
 Así se puede visualizar mejor la evolución de la envolvente con respecto a la muestra reproducida.
 
 
+### Mover los puntos
+
+
+Cada punto de la curva se puede mover con el botón izquierdo:
+
+* los finales del **retraso**, del **ataque**, del **mantenimiento** y de la **liberación** se mueven horizontalmente;
+* el final del **decaimiento** se mueve en ambas direcciones: horizontalmente para el **decaimiento**, verticalmente para el **sostenido**;
+* el punto en el que se suelta la tecla se mueve verticalmente, para el **sostenido**.
+
+Los parámetros del punto bajo el cursor del ratón y sus valores se muestran en una esquina superior del gráfico.
+Cuando varios puntos están en el mismo lugar, el círculo se divide en partes, desde la primera etapa a la izquierda hasta la última a la derecha.
+
+Los parámetros **Nota → Mantenimiento** y **Nota → Decaimiento** se editan con una pequeña regla que atraviesa el final del **mantenimiento** o del **decaimiento**: su extremo superior indica la duración para la nota más aguda de la división, su extremo inferior la duración para la nota más grave.
+Mover un extremo solo cambia la duración de su nota, y el otro extremo permanece en su sitio; manteniendo pulsada la tecla :kbd:`Ctrl`, ambos extremos se mueven alrededor del centro de la regla.
+La regla aparece cuando el ratón se acerca al punto y sigue visible cuando el parámetro no es 0.
+
+La tecla :kbd:`Shift` permite un ajuste más fino.
+Empujar un punto contra el borde derecho del gráfico desplaza la vista o reduce el zoom, para alcanzar duraciones más largas.
+La tecla :kbd:`Esc` cancela un cambio en curso.
+Un doble clic en un punto restablece sus parámetros (solo **Nota → Mantenimiento** o **Nota → Decaimiento** para un extremo de la regla): vuelve a aplicarse el valor de la división :guilabel:`Global` o el valor por defecto.
+
+Si hay varias divisiones o instrumentos seleccionados, todas sus envolventes se modifican a la vez: las duraciones en la misma proporción, los demás valores en la misma cantidad.
+
+
+### Desplazamiento y zoom
+
+
+Mantener pulsado el clic derecho permite cambiar el zoom alrededor del punto seleccionado.
+
+Mantener pulsado el clic izquierdo permite desplazar el gráfico si el clic no empieza sobre un punto de la curva.
+
+
 ## Moduladores {#doc_modulator}
 
 

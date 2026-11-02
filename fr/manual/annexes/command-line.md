@@ -1,5 +1,6 @@
 Polyphone peut être exécuté en ligne de commande pour convertir des banques de sons dans les formats [sf2](#doc_sf2), [sf3](#doc_sf3), [sfz](#doc_sfz), [csv](#doc_csv) ou [dls](#doc_dls). Les formats de fichiers pris en charge pour la conversion sont [sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz), [dls](manual/annexes/the-different-soundfont-formats.md#doc_dls), [sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark) et [organ](manual/annexes/the-different-soundfont-formats.md#doc_organ).
 
+Un [fichier MIDI peut être joué](#doc_render) avec une banque de sons et enregistré dans un fichier wav.
 Une option peut être appelée pour ouvrir Polyphone en [mode synthé](#doc_synth).
 
 Des fichiers et des répertoires peuvent également être passés en arguments pour les ouvrir dans l'interface graphique, par exemple :command:`polyphone fichier1.sf2 fichier2.sf3 /adresse/du/répertoire` (un répertoire est ouvert dans l'[explorateur de banques de sons](manual/soundfont-explorer.md)).
@@ -171,6 +172,50 @@ polyphone -4 -i /adresse/du/fichier.sf2 -c 'raw'
 ```
 
 La conversion crée un répertoire (portant le nom de sortie) contenant le fichier :file:`samples.csv` ainsi qu'un fichier par instrument et par ensemble. Si ce répertoire existe déjà, un numéro est ajouté à son nom.
+
+
+## Rendu d'un fichier MIDI {#doc_render}
+
+
+### Ligne de commande
+
+
+```
+polyphone -5 -i <banque/de/sons> -c <fichier/MIDI> -d <répertoire/de/destination> -o <nom_de_sortie>
+```
+
+**Note&nbsp;:** avec Windows vous devez écrire l'adresse complète de Polyphone au lieu de simplement écrire :command:`polyphone`, ce qui donne par exemple :command:`C:/Program files/Polyphone/polyphone.exe`.
+
+
+### Arguments
+
+
+-5
+: Le mode «&nbsp;5&nbsp;» correspond à «&nbsp;rendu d'un fichier MIDI&nbsp;»&nbsp;: le fichier MIDI est joué avec la banque de sons et le résultat est écrit dans un fichier wav.
+
+-d
+: Répertoire de destination qui recevra le fichier wav.
+  Cet argument est optionnel&nbsp;: par défaut le même répertoire que celui qui contient le fichier MIDI est utilisé.
+
+-o
+: Nom de sortie sans l'extension du fichier wav (l'extension «&nbsp;.wav&nbsp;» sera ajoutée automatiquement).
+  Cet argument est optionnel&nbsp;: par défaut le nom du fichier MIDI est utilisé.
+
+-c
+: Adresse du fichier MIDI à jouer (extension .mid, .midi, .kar ou .rmi).
+
+
+### Exemple
+
+
+```
+polyphone -5 -i /adresse/du/fichier.sf2 -c /adresse/du/morceau.mid
+```
+
+Tous les canaux du fichier MIDI jouent la banque de sons, les ensembles étant choisis par les changements de programme du fichier (banque 128 sur le canal 10, pour les percussions).
+Les réglages du synthétiseur sont utilisés&nbsp;: [son](manual/settings.md#doc_sound) (réverbération, chorus, volume général), [polyphonie](manual/settings.md#doc_general) et [accordage](manual/settings.md#doc_keyboard).
+Le résultat est un fichier wav stéréo 32 bits à virgule flottante à 48&nbsp;000&nbsp;Hz, qui se termine une fois le son des dernières notes éteint. Un fichier wav existant est remplacé.
+Les notes d'un ensemble absent de la banque de sons ne sont pas jouées et un avertissement est affiché pour cet ensemble.
 
 
 ## Conversion en dls {#doc_dls}

@@ -96,6 +96,8 @@ Deux boutons en bas à droite affichent ou masquent les contrôleurs MIDI au-des
 La fenêtre conserve les proportions du clavier&nbsp;: modifier sa largeur modifie sa hauteur, et inversement.
 Afficher ou masquer une zone ne modifie que la hauteur de la fenêtre.
 
+Le clavier virtuel peut également être affiché depuis l'[explorateur de banques de sons](manual/soundfont-explorer.md#doc_play), pour jouer les éléments des fichiers d'un répertoire sans les ouvrir.
+
 
 ![Clavier virtuel](images/virtual_keyboard.png "Clavier virtuel")
 

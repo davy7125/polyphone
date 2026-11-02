@@ -64,9 +64,23 @@ Polyphoneでは、[ホーム画面](manual/index.md#doc_left)の :guilabel:`デ�
 これらの操作を使うと、手元のSoundFontコレクションをすばやく管理・整理できます。
 
 
+## 要素を演奏する {#doc_play}
+
+
+:guilabel:`表示` ボタンの右にある ![piano](images/toolbar_piano.png "piano"){.inline} ボタンで[仮想キーボード](manual/soundfont-editor/toolbar.md#doc_keyboard)の表示 / 非表示を、その隣の ![レコーダー](images/toolbar_recorder.png "レコーダー"){.inline} ボタンで[レコーダー](manual/soundfont-editor/toolbar.md#doc_recorder)の表示 / 非表示を、エディターのツールバーのボタンと同じように切り替えられます。
+
+右側のリストで選択したサンプル、インストゥルメント、プリセットは、仮想キーボードで演奏できるほか、仮想キーボードが非表示のときでも外部MIDIキーボードで演奏できます。エディターと同じく、仮想キーボードには要素の音域、またはサンプルのルートキーが表示されます。サンプルは、ループがあればループ再生され、サンプルの[プレーヤー](manual/soundfont-editor/editing-pages/sample-editor.md#doc_player)の :guilabel:`ステレオ` オプションがオンならステレオで再生されます。
+
+ファイルの要素を初めて選択すると、タブを開かずにバックグラウンドでSoundFontが読み込まれます。その後、同じファイルの要素を選択している間はSoundFontが保持され、メインリストで別のファイルを選択すると解放されます。
+
+すでにタブで開いているSoundFontは、保存していない変更も含め、エディター上の状態のまま演奏されます。
+
+
 ## SoundFontを開く {#doc_open_soundfont}
 
 
 メインリストの項目をダブルクリックすると、ファイルが開きます（Polyphoneが対応している形式に限ります）。最初に表示される場所は、[設定](manual/settings.md#doc_interface)の :guilabel:`起動時の表示` オプションで決まります（初期設定では[一般情報](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md)が表示されます）。
 
 [サンプル](manual/soundfont-editor/editing-pages/sample-editor.md)、[インストゥルメント](manual/soundfont-editor/editing-pages/instrument-editor.md)、[プリセット](manual/soundfont-editor/editing-pages/preset-editor.md)をダブルクリックすると、選択した要素の位置でファイルが開きます。
+
+要素を演奏するためにSoundFontがすでに読み込まれている場合、タブはすぐに開きます。

@@ -96,6 +96,8 @@ Dos botones en la esquina inferior derecha muestran u ocultan los controladores 
 La ventana conserva las proporciones del teclado: al cambiar su anchura cambia su altura, y viceversa.
 Mostrar u ocultar una zona solo cambia la altura de la ventana.
 
+El teclado virtual también se puede mostrar desde el [explorador de soundfonts](manual/soundfont-explorer.md#doc_play), para tocar los elementos de los archivos de un directorio sin abrirlos.
+
 
 ![Teclado virtual](images/virtual_keyboard.png "Teclado virtual")
 

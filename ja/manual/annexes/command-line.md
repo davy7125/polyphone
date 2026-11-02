@@ -1,5 +1,6 @@
 Polyphoneをコマンドラインで実行して、SoundFontを[sf2](#doc_sf2)、[sf3](#doc_sf3)、[sfz](#doc_sfz)、[csv](#doc_csv)、[dls](#doc_dls)のいずれかの形式に変換できます。変換に対応しているファイル形式は、[sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2)、[sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3)、[sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz)、[dls](manual/annexes/the-different-soundfont-formats.md#doc_dls)、[sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark)、[organ](manual/annexes/the-different-soundfont-formats.md#doc_organ)です。
 
+[MIDIファイルをSoundFontで再生し](#doc_render)、wavファイルに書き出すこともできます。
 Polyphoneを[シンセモード](#doc_synth)で開くためのオプションもあります。
 
 ファイルやディレクトリを引数として渡して、グラフィカルインタフェースで開くこともできます。たとえば :command:`polyphone file1.sf2 file2.sf3 /path/to/directory` のように指定します（ディレクトリは[SoundFontエクスプローラー](manual/soundfont-explorer.md)で開きます）。
@@ -171,6 +172,50 @@ polyphone -4 -i /path/to/file.sf2 -c 'raw'
 ```
 
 変換すると、ファイル :file:`samples.csv` と、インストゥルメントごと・プリセットごとに1つずつのファイルを含むディレクトリ（出力名と同じ名前）が作成されます。このディレクトリがすでに存在する場合は、名前に番号が付けられます。
+
+
+## MIDIファイルのレンダリング {#doc_render}
+
+
+### コマンドライン
+
+
+```
+polyphone -5 -i <soundfont> -c <MIDI/file> -d <output/directory> -o <output_file_name>
+```
+
+**注意：**Windowsでは、:command:`polyphone` だけでなく、Polyphoneのフルパスを書く必要があります。たとえば :command:`C:/Program files/Polyphone/polyphone.exe` です。
+
+
+### 引数
+
+
+-5
+: モード「5」は「MIDIファイルをレンダリング」です。MIDIファイルをSoundFontで再生し、その結果をwavファイルに書き込みます。
+
+-d
+: wavファイルを書き込む出力ディレクトリです。
+  この引数は省略可能で、省略した場合はMIDIファイルと同じディレクトリになります。
+
+-o
+: wavファイルの出力名（拡張子なし）です。拡張子「.wav」は自動的に付けられます。
+  この引数は省略可能で、省略した場合はMIDIファイルと同じ名前になります。
+
+-c
+: 再生するMIDIファイルのパスです（拡張子は.mid、.midi、.kar、.rmi）。
+
+
+### 例
+
+
+```
+polyphone -5 -i /path/to/file.sf2 -c /path/to/song.mid
+```
+
+MIDIファイルのすべてのチャンネルがSoundFontを演奏し、プリセットはファイルのプログラムチェンジによって選ばれます（パーカッション用に、チャンネル10ではバンク128）。
+シンセサイザーの設定が使われます：[サウンド](manual/settings.md#doc_sound)（リバーブ、コーラス、全体の音量）、[同時発音数](manual/settings.md#doc_general)、[チューニング](manual/settings.md#doc_keyboard)。
+結果は48,000 Hzのステレオ32ビット浮動小数点のwavファイルで、最後のノートの音が消えた時点で終わります。既存のwavファイルは置き換えられます。
+SoundFontにないプリセットのノートは演奏されず、そのプリセットについて警告が表示されます。
 
 
 ## dlsへの変換 {#doc_dls}

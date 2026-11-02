@@ -70,6 +70,9 @@ Nomi delle note
 Istanza unica
 : Apre tutti i file in un'unica finestra.
 
+Ripristina le schede
+: Riapre all'avvio i soundfont e le cartelle aperti alla chiusura di Polyphone, nello stesso ordine, lasciando visualizzata la [schermata iniziale](manual/index.md#doc_home). Quelli eliminati, rinominati o spostati nel frattempo vengono ignorati.
+
 Vista all'avvio
 : Seleziona la vista da mostrare all'apertura di un soundfont tra le seguenti: :guilabel:`Generale` (predefinita), :guilabel:`Campioni`, :guilabel:`Campioni - primo campione`, :guilabel:`Strumenti`, :guilabel:`Strumenti - primo strumento - Tabella`, :guilabel:`Strumenti - primo strumento - Intervalli`, :guilabel:`Strumenti - primo strumento - Inviluppi`, :guilabel:`Preset`, :guilabel:`Preset - primo preset - Tabella`, :guilabel:`Preset - primo preset - Intervalli`. Per il primo strumento o preset, l'ultima parte indica la pagina mostrata: [tabella](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), [editor degli intervalli](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range) o [editor degli inviluppi](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope).
 

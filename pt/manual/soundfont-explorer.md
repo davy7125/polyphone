@@ -64,9 +64,23 @@ Ao clicar em um arquivo da lista principal, 2 ícones clicáveis aparecem antes 
 Essas operações permitem gerenciar e organizar rapidamente uma coleção local de soundfonts.
 
 
+## Tocar os elementos {#doc_play}
+
+
+O botão ![piano](images/toolbar_piano.png "piano"){.inline}, à direita do botão :guilabel:`Visualização`, exibe ou oculta o [teclado virtual](manual/soundfont-editor/toolbar.md#doc_keyboard), e o botão ![gravador](images/toolbar_recorder.png "gravador"){.inline} ao lado exibe ou oculta o [gravador](manual/soundfont-editor/toolbar.md#doc_recorder), como os botões da barra de ferramentas do editor.
+
+A amostra, o instrumento ou a predefinição selecionada nas listas da direita pode ser tocada com o teclado virtual, ou com um teclado MIDI externo mesmo que o teclado virtual esteja oculto. Como no editor, o teclado virtual mostra a extensão do elemento, ou a nota base de uma amostra. Uma amostra é tocada em loop se tiver um, e em estéreo se a opção :guilabel:`estéreo` do [reprodutor](manual/soundfont-editor/editing-pages/sample-editor.md#doc_player) de amostras estiver marcada.
+
+Na primeira vez que um elemento de um arquivo é selecionado, a soundfont é carregada em segundo plano sem abrir uma aba. A soundfont é então mantida enquanto elementos do mesmo arquivo forem selecionados, e liberada quando outro arquivo é selecionado na lista principal.
+
+Uma soundfont já aberta em uma aba é tocada tal como está no editor, com suas alterações não salvas.
+
+
 ## Abrir uma soundfont {#doc_open_soundfont}
 
 
 Um clique duplo em um item da lista principal abre o arquivo — desde que seu formato seja compatível com o Polyphone — no local configurado nas [configurações](manual/settings.md#doc_interface) com a opção :guilabel:`Visualização inicial` (as [informações gerais](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md) são exibidas por padrão).
 
 Um clique duplo em uma [amostra](manual/soundfont-editor/editing-pages/sample-editor.md), em um [instrumento](manual/soundfont-editor/editing-pages/instrument-editor.md) ou em uma [predefinição](manual/soundfont-editor/editing-pages/preset-editor.md) abre o arquivo no elemento selecionado.
+
+Se a soundfont já foi carregada para tocar um de seus elementos, a aba abre imediatamente.

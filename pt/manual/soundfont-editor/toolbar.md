@@ -96,6 +96,8 @@ Dois botões no canto inferior direito exibem ou ocultam os controladores MIDI a
 A janela mantém as proporções do teclado: alterar sua largura altera sua altura, e vice-versa.
 Exibir ou ocultar uma área altera apenas a altura da janela.
 
+O teclado virtual também pode ser exibido a partir do [explorador de soundfonts](manual/soundfont-explorer.md#doc_play), para tocar os elementos dos arquivos de um diretório sem abri-los.
+
 
 ![Teclado virtual](images/virtual_keyboard.png "Teclado virtual")
 

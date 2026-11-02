@@ -230,6 +230,38 @@ Ist in der Baumansicht nur eine Aufteilung eines Instruments ausgewählt, wird d
 So lässt sich der Verlauf der Hüllkurve im Verhältnis zum abgespielten Sample besser erkennen.
 
 
+### Punkte verschieben
+
+
+Jeder Punkt der Kurve lässt sich mit der linken Maustaste verschieben:
+
+* die Enden von **Delay**, **Attack**, **Hold** und **Release** werden horizontal verschoben;
+* das Ende von **Decay** lässt sich in beide Richtungen verschieben: horizontal für **Decay**, vertikal für **Sustain**;
+* der Punkt, an dem die Taste losgelassen wird, wird vertikal verschoben, für **Sustain**.
+
+Die Parameter des Punkts unter dem Mauszeiger und ihre Werte werden in einer oberen Ecke der Grafik angezeigt.
+Liegen mehrere Punkte an derselben Stelle, ist der Kreis in Teile aufgeteilt, von der ersten Phase links bis zur letzten rechts.
+
+Die Parameter **Key → Hold** und **Key → Decay** werden mit einem kleinen Lineal bearbeitet, das das Ende von **Hold** bzw. **Decay** kreuzt: Sein oberes Ende zeigt die Dauer für die höchste Taste der Aufteilung, sein unteres Ende die Dauer für die tiefste Taste.
+Das Verschieben eines Endes ändert nur die Dauer seiner Taste, das andere Ende bleibt an seinem Platz; bei gedrückter Taste :kbd:`Ctrl` bewegen sich beide Enden um die Mitte des Lineals.
+Das Lineal erscheint, wenn sich die Maus dem Punkt nähert, und bleibt sichtbar, wenn der Parameter nicht 0 ist.
+
+Die Taste :kbd:`Shift` ermöglicht eine feinere Einstellung.
+Wird ein Punkt gegen den rechten Rand der Grafik geschoben, wird die Ansicht verschoben oder herausgezoomt, um längere Dauern zu erreichen.
+Die Taste :kbd:`Esc` bricht eine laufende Änderung ab.
+Ein Doppelklick auf einen Punkt setzt seine Parameter zurück (bei einem Ende des Lineals nur **Key → Hold** bzw. **Key → Decay**): Es gilt wieder der Wert der Aufteilung :guilabel:`Global` oder der Standardwert.
+
+Sind mehrere Aufteilungen oder Instrumente ausgewählt, werden alle ihre Hüllkurven gemeinsam geändert: die Dauern im gleichen Verhältnis, die übrigen Werte um denselben Betrag.
+
+
+### Verschieben & Zoomen
+
+
+Durch Gedrückthalten der rechten Maustaste lässt sich der Zoom um den gewählten Punkt herum ändern.
+
+Durch Gedrückthalten der linken Maustaste lässt sich die Grafik verschieben, wenn der Klick nicht auf einem Punkt der Kurve beginnt.
+
+
 ## Modulatoren {#doc_modulator}
 
 

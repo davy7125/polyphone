@@ -15,18 +15,21 @@ The results are displayed 25 per page, and buttons at the bottom allow going to 
 ### Searching a soundfont
 
 
-For searching a soundfont, write a text in the top bar: the list is updated while typing and only displays the soundfonts whose title contains this text.
+For searching a soundfont, write a text in the top bar: the list is updated while typing and only displays the soundfonts in which each word of this text is found in the title, the tags or the attributes (category, sample source, genre, MIDI standard).
 It is possible to write :command:`Author:"someone"` to search the soundfonts of a specific author (the exact name of the author must be written between the double quotes).
-This can be combined with a text to search in the title, for instance :command:`piano Author:"someone"`.
+This can be combined with a text to search, for instance :command:`piano Author:"someone"`.
 
 
 ### Sorting the results
 
 
-Next to the search bar, a drop-down menu provides 4 ways to sort soundfont results:
+Next to the search bar, a drop-down menu provides 6 ways to sort soundfont results:
 
 Date
 : Newest soundfonts are first (default choice).
+
+Trend
+: Soundfonts most downloaded over the last 90 days are first. The number of downloads shown in each cell is then the number over the last 90 days.
 
 Downloads
 : Most downloaded soundfonts are first.
@@ -36,6 +39,9 @@ Rating score
 
 Title (A→Z)
 : Soundfont results are sorted in alphabetical order.
+
+Size
+: Biggest soundfonts are first.
 
 
 ### Filtering the results
@@ -60,6 +66,9 @@ MIDI standard
 
 Tags
 : Show soundfonts having a specific tag.
+
+Size
+: Only show soundfonts smaller than 1 MB, 10 MB or 100 MB. The size of each soundfont is displayed in the list after its date.
 
 
 ## Soundfont description {#doc_description}

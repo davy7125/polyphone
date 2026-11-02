@@ -64,9 +64,23 @@ Facendo clic su un file nell'elenco principale, prima del nome del file compaion
 Queste operazioni permettono di gestire e riordinare rapidamente una raccolta locale di soundfont.
 
 
+## Suonare gli elementi {#doc_play}
+
+
+Il pulsante ![piano](images/toolbar_piano.png "piano"){.inline}, a destra del pulsante :guilabel:`Visualizzazione`, mostra o nasconde la [tastiera virtuale](manual/soundfont-editor/toolbar.md#doc_keyboard), e il pulsante ![registratore](images/toolbar_recorder.png "registratore"){.inline} accanto mostra o nasconde il [registratore](manual/soundfont-editor/toolbar.md#doc_recorder), come i pulsanti della barra degli strumenti dell'editor.
+
+Il campione, lo strumento o il preset selezionato negli elenchi di destra può essere suonato con la tastiera virtuale, oppure con una tastiera MIDI esterna anche se la tastiera virtuale è nascosta. Come nell'editor, la tastiera virtuale mostra l'estensione dell'elemento, o la nota di base di un campione. Un campione viene riprodotto in loop se ne ha uno, e in stereo se l'opzione :guilabel:`stereo` del [lettore](manual/soundfont-editor/editing-pages/sample-editor.md#doc_player) del campione è selezionata.
+
+La prima volta che viene selezionato un elemento di un file, il soundfont viene caricato in background senza aprire una scheda. Il soundfont viene poi conservato finché vengono selezionati elementi dello stesso file, e rilasciato quando nell'elenco principale viene selezionato un altro file.
+
+Un soundfont già aperto in una scheda viene suonato così com'è nell'editor, con le sue modifiche non salvate.
+
+
 ## Aprire un soundfont {#doc_open_soundfont}
 
 
 Un doppio clic su una voce dell'elenco principale apre il file, purché il suo formato sia compatibile con Polyphone, nella posizione configurata nelle [impostazioni](manual/settings.md#doc_interface) con l'opzione :guilabel:`Vista all'avvio` (per impostazione predefinita vengono mostrate le [informazioni generali](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md)).
 
 Un doppio clic su un [campione](manual/soundfont-editor/editing-pages/sample-editor.md), uno [strumento](manual/soundfont-editor/editing-pages/instrument-editor.md) o un [preset](manual/soundfont-editor/editing-pages/preset-editor.md) apre il file in corrispondenza dell'elemento selezionato.
+
+Se il soundfont è già stato caricato per suonare uno dei suoi elementi, la scheda si apre immediatamente.

@@ -96,6 +96,8 @@ Zwei Schaltflächen unten rechts blenden die MIDI-Controller oberhalb der Klavia
 Das Fenster behält die Proportionen der Klaviatur bei: Wird seine Breite geändert, ändert sich seine Höhe, und umgekehrt.
 Das Ein- oder Ausblenden eines Bereichs ändert nur die Höhe des Fensters.
 
+Die virtuelle Tastatur kann auch im [Soundfont-Explorer](manual/soundfont-explorer.md#doc_play) angezeigt werden, um die Elemente der Dateien eines Verzeichnisses zu spielen, ohne sie zu öffnen.
+
 
 ![Virtuelle Tastatur](images/virtual_keyboard.png "Virtuelle Tastatur")
 

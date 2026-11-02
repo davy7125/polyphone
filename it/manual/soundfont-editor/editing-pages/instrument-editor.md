@@ -230,6 +230,38 @@ Quando nell'albero è selezionata una sola divisione di uno strumento, il [campi
 È così possibile visualizzare meglio l'evoluzione dell'inviluppo rispetto al campione riprodotto.
 
 
+### Spostare i punti
+
+
+Ogni punto della curva può essere spostato con il tasto sinistro:
+
+* i punti finali di **delay**, **attack**, **hold** e **release** si spostano orizzontalmente;
+* il punto finale del **decay** si sposta in entrambe le direzioni: orizzontalmente per il **decay**, verticalmente per il **sustain**;
+* il punto in cui il tasto viene rilasciato si sposta verticalmente, per il **sustain**.
+
+I parametri del punto sotto il cursore del mouse e i loro valori sono mostrati in un angolo superiore del grafico.
+Quando più punti si trovano nello stesso posto, il cerchio è diviso in parti, dalla prima fase a sinistra fino all'ultima a destra.
+
+I parametri **Key → Hold** e **Key → Decay** si modificano con un piccolo righello che attraversa il punto finale dell'**hold** o del **decay**: la sua estremità superiore indica la durata per la nota più acuta della divisione, quella inferiore la durata per la nota più grave.
+Spostare un'estremità cambia solo la durata della sua nota, mentre l'altra estremità resta al suo posto; tenendo premuto il tasto :kbd:`Ctrl`, entrambe le estremità si muovono attorno al centro del righello.
+Il righello appare quando il mouse si avvicina al punto e resta visibile quando il parametro è diverso da 0.
+
+Il tasto :kbd:`Shift` permette una regolazione più fine.
+Spingere un punto contro il bordo destro del grafico fa scorrere la vista o riduce lo zoom, per raggiungere durate più lunghe.
+Il tasto :kbd:`Esc` annulla una modifica in corso.
+Un doppio clic su un punto reimposta i suoi parametri (solo **Key → Hold** o **Key → Decay** per un'estremità del righello): torna ad applicarsi il valore della divisione :guilabel:`Globale` o il valore predefinito.
+
+Se sono selezionati più divisioni o strumenti, tutti i loro inviluppi vengono modificati insieme: le durate nella stessa proporzione, gli altri valori della stessa quantità.
+
+
+### Trascinamento e zoom
+
+
+Tenendo premuto il tasto destro si può cambiare lo zoom attorno al punto selezionato.
+
+Tenendo premuto il tasto sinistro si può spostare il grafico, se il clic non inizia su un punto della curva.
+
+
 ## Modulatori {#doc_modulator}
 
 

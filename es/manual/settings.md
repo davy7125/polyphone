@@ -70,6 +70,9 @@ Nombres de las notas
 Instancia única
 : Abre todos los archivos en una sola ventana.
 
+Restaurar las pestañas
+: Vuelve a abrir al inicio los soundfonts y directorios que estaban abiertos al cerrar Polyphone, en el mismo orden, y la [pantalla de inicio](manual/index.md#doc_home) sigue mostrándose. Los que se han eliminado, renombrado o movido entretanto se omiten.
+
 Vista de inicio
 : Permite elegir la vista que se muestra al abrir un soundfont entre las siguientes: :guilabel:`General` (por defecto), :guilabel:`Muestras`, :guilabel:`Muestras - primera muestra`, :guilabel:`Instrumentos`, :guilabel:`Instrumentos - primer instrumento - Tabla`, :guilabel:`Instrumentos - primer instrumento - Rangos`, :guilabel:`Instrumentos - primer instrumento - Envolventes`, :guilabel:`Conjuntos`, :guilabel:`Conjuntos - primer conjunto - Tabla`, :guilabel:`Conjuntos - primer conjunto - Rangos`. Para el primer instrumento o conjunto, la última parte indica la página mostrada: [tabla](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), [editor de rangos](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range) o [editor de envolventes](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope).
 

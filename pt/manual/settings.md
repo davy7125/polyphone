@@ -70,6 +70,9 @@ Nomes de notas
 Instância única
 : Abre todos os arquivos em uma única janela.
 
+Restaurar abas
+: Reabre na inicialização as soundfonts e os diretórios que estavam abertos quando o Polyphone foi fechado, na mesma ordem, mantendo a [tela inicial](manual/index.md#doc_home) exibida. Os que foram excluídos, renomeados ou movidos nesse meio-tempo são ignorados.
+
 Visualização inicial
 : Seleciona a visualização a exibir quando uma soundfont é aberta, entre as seguintes: :guilabel:`Geral` (padrão), :guilabel:`Amostras`, :guilabel:`Amostras - primeira amostra`, :guilabel:`Instrumentos`, :guilabel:`Instrumentos - primeiro instrumento - Tabela`, :guilabel:`Instrumentos - primeiro instrumento - Alcances`, :guilabel:`Instrumentos - primeiro instrumento - Envelopes`, :guilabel:`Predefinições`, :guilabel:`Predefinições - primeira predefinição - Tabela`, :guilabel:`Predefinições - primeira predefinição - Alcances`. Para o primeiro instrumento ou predefinição, a última parte indica a página exibida: [tabela](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), [editor de alcances](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range) ou [editor de envelopes](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope).
 

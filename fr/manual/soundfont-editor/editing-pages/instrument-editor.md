@@ -230,6 +230,38 @@ Lorsqu'une seule division d'un instrument est sélectionnée dans l'arborescence
 Il est ainsi possible de mieux visualiser l'évolution de l'enveloppe par rapport à l'échantillon en train d'être joué.
 
 
+### Déplacer les points
+
+
+Chaque point de la courbe peut être déplacé avec le bouton gauche de la souris&nbsp;:
+
+* les fins du **délai**, de l'**attaque**, du **maintien** et de la **relâche** se déplacent horizontalement&nbsp;;
+* la fin du **déclin** se déplace dans les deux directions&nbsp;: horizontalement pour le **déclin**, verticalement pour le **soutien**&nbsp;;
+* le point où la touche est relâchée se déplace verticalement, pour le **soutien**.
+
+Les paramètres du point sous le curseur de la souris et leurs valeurs sont affichés dans un coin supérieur du graphique.
+Lorsque plusieurs points sont au même endroit, le cercle est divisé en parties, de la première étape à gauche jusqu'à la dernière à droite.
+
+Les paramètres **Note → Maintien** et **Note → Déclin** se modifient avec une petite réglette qui traverse la fin du **maintien** ou du **déclin**&nbsp;: son extrémité haute indique la durée pour la note la plus aiguë de la division, son extrémité basse la durée pour la note la plus grave.
+Déplacer une extrémité ne change que la durée de sa note, l'autre extrémité restant en place&nbsp;; en maintenant la touche :kbd:`Ctrl` enfoncée, les deux extrémités bougent autour du milieu de la réglette.
+La réglette apparaît lorsque la souris s'approche du point et reste visible lorsque le paramètre est différent de 0.
+
+La touche :kbd:`Maj` permet un réglage plus fin.
+Pousser un point contre le bord droit du graphique fait défiler la vue ou effectue un zoom arrière, pour atteindre des durées plus longues.
+La touche :kbd:`Échap` annule un changement en cours.
+Un double-clic sur un point réinitialise ses paramètres (uniquement **Note → Maintien** ou **Note → Déclin** pour une extrémité de la réglette)&nbsp;: la valeur de la division :guilabel:`Global` ou la valeur par défaut s'applique à nouveau.
+
+Si plusieurs divisions ou instruments sont sélectionnés, toutes leurs enveloppes sont modifiées ensemble&nbsp;: les durées dans la même proportion, les autres valeurs du même écart.
+
+
+### Déplacement et zoom
+
+
+Maintenir le clic droit permet de modifier le zoom autour du point de départ.
+
+Maintenir le clic gauche permet de déplacer le graphique si le clic ne commence pas sur un point de la courbe.
+
+
 ## Modulateurs {#doc_modulator}
 
 

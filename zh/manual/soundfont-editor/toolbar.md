@@ -96,6 +96,8 @@
 窗口会保持键盘的比例：改变宽度时高度随之改变，反之亦然。
 显示或隐藏某个区域只会改变窗口的高度。
 
+也可以在[音色库浏览器](manual/soundfont-explorer.md#doc_play)中显示虚拟键盘，无需打开文件即可演奏目录中各文件的元素。
+
 
 ![虚拟键盘](images/virtual_keyboard.png "虚拟键盘")
 

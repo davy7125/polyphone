@@ -1,5 +1,6 @@
 Polyphone kann über die Kommandozeile ausgeführt werden, um Soundfonts in das Format [sf2](#doc_sf2), [sf3](#doc_sf3), [sfz](#doc_sfz), [csv](#doc_csv) oder [dls](#doc_dls) umzuwandeln. Für die Umwandlung werden die Dateiformate [sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz), [dls](manual/annexes/the-different-soundfont-formats.md#doc_dls), [sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark) und [organ](manual/annexes/the-different-soundfont-formats.md#doc_organ) unterstützt.
 
+Eine [MIDI-Datei kann](#doc_render) mit einer Soundfont abgespielt und als wav-Datei gespeichert werden.
 Außerdem kann eine Option aufgerufen werden, um Polyphone im [Synth-Modus](#doc_synth) zu öffnen.
 
 Dateien und Verzeichnisse können auch als Argumente übergeben werden, um sie in der grafischen Oberfläche zu öffnen, zum Beispiel :command:`polyphone file1.sf2 file2.sf3 /path/to/directory` (ein Verzeichnis wird im [Soundfont-Explorer](manual/soundfont-explorer.md) geöffnet).
@@ -171,6 +172,50 @@ polyphone -4 -i /path/to/file.sf2 -c 'raw'
 ```
 
 Die Umwandlung erstellt ein Verzeichnis (benannt nach dem Ausgabenamen) mit der Datei :file:`samples.csv` und einer Datei pro Instrument und pro Preset. Existiert dieses Verzeichnis bereits, wird seinem Namen eine Zahl angehängt.
+
+
+## Rendern einer MIDI-Datei {#doc_render}
+
+
+### Kommandozeile
+
+
+```
+polyphone -5 -i <soundfont> -c <MIDI/file> -d <output/directory> -o <output_file_name>
+```
+
+**Hinweis:** Unter Windows müssen Sie statt :command:`polyphone` den vollständigen Pfad von Polyphone angeben, zum Beispiel :command:`C:/Program files/Polyphone/polyphone.exe`.
+
+
+### Argumente
+
+
+-5
+: Modus „5“ bedeutet „eine MIDI-Datei rendern“: Die MIDI-Datei wird mit der Soundfont abgespielt und das Ergebnis in eine wav-Datei geschrieben.
+
+-d
+: Ausgabeverzeichnis, in das die wav-Datei geschrieben wird.
+  Dieses Argument ist optional; standardmäßig ist es dasselbe Verzeichnis wie das der MIDI-Datei.
+
+-o
+: Name der wav-Datei ohne Endung (die Endung „.wav“ wird automatisch hinzugefügt).
+  Dieses Argument ist optional; standardmäßig ist es derselbe Name wie der der MIDI-Datei.
+
+-c
+: Pfad der abzuspielenden MIDI-Datei (Endung .mid, .midi, .kar oder .rmi).
+
+
+### Beispiel
+
+
+```
+polyphone -5 -i /path/to/file.sf2 -c /path/to/song.mid
+```
+
+Alle Kanäle der MIDI-Datei spielen die Soundfont, wobei die Presets durch die Programmwechsel der Datei gewählt werden (Bank 128 auf Kanal 10, für das Schlagzeug).
+Die Einstellungen des Synthesizers werden verwendet: [Sound](manual/settings.md#doc_sound) (Hall, Chorus, Gesamtlautstärke), [Polyphonie](manual/settings.md#doc_general) und [Stimmung](manual/settings.md#doc_keyboard).
+Das Ergebnis ist eine Stereo-wav-Datei im 32-Bit-Gleitkommaformat mit 48.000 Hz, die endet, sobald der Klang der letzten Noten verklungen ist. Eine vorhandene wav-Datei wird ersetzt.
+Die Noten eines Presets, das die Soundfont nicht enthält, werden nicht gespielt, und für dieses Preset wird eine Warnung angezeigt.
 
 
 ## Umwandlung in dls {#doc_dls}

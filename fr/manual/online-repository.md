@@ -15,18 +15,21 @@ Les résultats sont affichés par pages de 25 et des boutons en bas permettent d
 ### Rechercher une banque de sons
 
 
-Pour chercher une banque de sons, écrivez un texte dans la barre supérieure&nbsp;: la liste est mise à jour au fil de la saisie et n'affiche que les banques de sons dont le titre contient ce texte.
+Pour chercher une banque de sons, écrivez un texte dans la barre supérieure&nbsp;: la liste est mise à jour au fil de la saisie et n'affiche que les banques de sons pour lesquelles chaque mot de ce texte se trouve dans le titre, les tags ou les attributs (catégorie, source des échantillons, genre, standard MIDI).
 Il est possible d'écrire :command:`Author:"someone"` pour chercher les banques de sons d'un auteur particulier (le nom exact de l'auteur doit être écrit entre les guillemets droits).
-Cela peut être combiné avec un texte à chercher dans le titre, par exemple :command:`piano Author:"someone"`.
+Cela peut être combiné avec un texte à chercher, par exemple :command:`piano Author:"someone"`.
 
 
 ### Trier les résultats
 
 
-À côté de la barre de recherche, un menu déroulant fournit quatre manières de trier les résultats&nbsp;:
+À côté de la barre de recherche, un menu déroulant fournit six manières de trier les résultats&nbsp;:
 
 Date
 : Les banques de sons les plus récentes apparaissent en premier (choix par défaut).
+
+Tendance
+: Les banques de sons les plus téléchargées au cours des 90 derniers jours apparaissent en premier. Le nombre de téléchargements affiché dans chaque cellule est alors celui des 90 derniers jours.
 
 Téléchargements
 : Les banques de sons les plus téléchargées apparaissent en premier.
@@ -36,6 +39,9 @@ Téléchargements
 
 Titre (A→Z)
 : Les banques de sons sont affichées selon l'ordre alphabétique.
+
+Taille
+: Les banques de sons les plus volumineuses apparaissent en premier.
 
 
 ### Filtrer les résultats
@@ -60,6 +66,9 @@ Standard MIDI
 
 Tags
 : Pour afficher les banques de sons ayant un tag spécifique.
+
+Taille
+: Pour n'afficher que les banques de sons de moins de 1 Mo, 10 Mo ou 100 Mo. La taille de chaque banque de sons est affichée dans la liste après sa date.
 
 
 ## Page de présentation {#doc_description}

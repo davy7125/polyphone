@@ -15,18 +15,21 @@ Die Ergebnisse werden mit 25 Einträgen pro Seite angezeigt, und mit den Buttons
 ### Einen Soundfont suchen
 
 
-Um einen Soundfont zu suchen, geben Sie in der oberen Leiste einen Text ein: Die Liste wird während der Eingabe aktualisiert und zeigt nur die Soundfonts an, deren Titel diesen Text enthält.
+Um einen Soundfont zu suchen, geben Sie in der oberen Leiste einen Text ein: Die Liste wird während der Eingabe aktualisiert und zeigt nur die Soundfonts an, bei denen jedes Wort dieses Textes im Titel, in den Markierungen oder in den Attributen (Kategorie, Sample-Quelle, Genre, MIDI-Standard) vorkommt.
 Mit :command:`Author:"someone"` lassen sich die Soundfonts eines bestimmten Autors suchen (zwischen den Anführungszeichen muss der genaue Name des Autors stehen).
-Dies kann mit einem Text kombiniert werden, der im Titel gesucht wird, zum Beispiel :command:`piano Author:"someone"`.
+Dies kann mit einem zu suchenden Text kombiniert werden, zum Beispiel :command:`piano Author:"someone"`.
 
 
 ### Die Ergebnisse sortieren
 
 
-Neben der Suchleiste bietet ein Dropdown-Menü 4 Möglichkeiten, die Soundfonts zu sortieren:
+Neben der Suchleiste bietet ein Dropdown-Menü 6 Möglichkeiten, die Soundfonts zu sortieren:
 
 Datum
 : Die neuesten Soundfonts stehen zuerst (Standardeinstellung).
+
+Trend
+: Die in den letzten 90 Tagen am häufigsten heruntergeladenen Soundfonts stehen zuerst. Die in jeder Zelle angezeigte Anzahl der Downloads ist dann die der letzten 90 Tage.
 
 Downloads
 : Die am häufigsten heruntergeladenen Soundfonts stehen zuerst.
@@ -36,6 +39,9 @@ Bewertungspunktzahl
 
 Titel (A→Z)
 : Die Soundfonts werden alphabetisch sortiert.
+
+Größe
+: Die größten Soundfonts stehen zuerst.
 
 
 ### Die Ergebnisse filtern
@@ -60,6 +66,9 @@ MIDI-Standard
 
 Markierungen
 : Zeigt Soundfonts mit einer bestimmten Markierung an.
+
+Größe
+: Zeigt nur Soundfonts an, die kleiner als 1 MB, 10 MB oder 100 MB sind. Die Größe jedes Soundfonts wird in der Liste nach seinem Datum angezeigt.
 
 
 ## Beschreibung eines Soundfonts {#doc_description}

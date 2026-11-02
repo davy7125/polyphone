@@ -230,6 +230,38 @@ Quando apenas uma divisão de um instrumento está selecionada na árvore, a [am
 Assim, é possível visualizar melhor a evolução do envelope em relação à amostra tocada.
 
 
+### Mover os pontos
+
+
+Cada ponto da curva pode ser movido com o botão esquerdo:
+
+* os finais de **delay**, **attack**, **hold** e **release** se movem horizontalmente;
+* o final do **decay** se move nas duas direções: horizontalmente para o **decay**, verticalmente para o **sustain**;
+* o ponto em que a tecla é solta se move verticalmente, para o **sustain**.
+
+Os parâmetros do ponto sob o cursor do mouse e seus valores são exibidos em um canto superior do gráfico.
+Quando vários pontos estão no mesmo lugar, o círculo é dividido em partes, da primeira etapa à esquerda até a última à direita.
+
+Os parâmetros **Nota → Hold** e **Nota → Decay** são editados com uma pequena régua que atravessa o final do **hold** ou do **decay**: sua extremidade superior indica a duração para a nota mais aguda da divisão, sua extremidade inferior a duração para a nota mais grave.
+Mover uma extremidade altera apenas a duração da sua nota, enquanto a outra extremidade permanece no lugar; mantendo a tecla :kbd:`Ctrl` pressionada, as duas extremidades se movem em torno do meio da régua.
+A régua aparece quando o mouse se aproxima do ponto e continua visível quando o parâmetro é diferente de 0.
+
+A tecla :kbd:`Shift` permite um ajuste mais fino.
+Empurrar um ponto contra a borda direita do gráfico desloca a visualização ou diminui o zoom, para alcançar durações mais longas.
+A tecla :kbd:`Esc` cancela uma alteração em andamento.
+Um clique duplo em um ponto redefine seus parâmetros (apenas **Nota → Hold** ou **Nota → Decay** para uma extremidade da régua): volta a valer o valor da divisão :guilabel:`Global` ou o valor padrão.
+
+Se várias divisões ou instrumentos estiverem selecionados, todos os seus envelopes são alterados juntos: as durações na mesma proporção, os outros valores na mesma quantidade.
+
+
+### Deslocamento e zoom
+
+
+Manter o clique direito pressionado permite alterar o zoom em torno do ponto selecionado.
+
+Manter o clique esquerdo pressionado permite deslocar o gráfico se o clique não começar sobre um ponto da curva.
+
+
 ## Moduladores {#doc_modulator}
 
 

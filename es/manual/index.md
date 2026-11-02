@@ -27,7 +27,7 @@ Hay varias formas de abrir un soundfont:
 * un clic en :guilabel:`Abrir soundfont` abre un explorador de archivos en el que se pueden seleccionar los archivos con extensión :file:`.sf2`, :file:`.sf3`, :file:`.sfArk`, :file:`.sfz`, :file:`.dls` u :file:`.organ` (los distintos formatos se describen [aquí](manual/annexes/the-different-soundfont-formats.md)). Se pueden seleccionar varios archivos a la vez;
 * un clic en :guilabel:`Nuevo soundfont` abre un soundfont vacío, en el que hay que hacerlo todo desde cero;
 * un clic en :guilabel:`Abrir directorio` abre el [explorador de soundfonts](manual/soundfont-explorer.md), que analiza un directorio completo y permite abrir el archivo deseado;
-* un doble clic en un soundfont del historial lo vuelve a abrir (los elementos seleccionados también se pueden abrir con :kbd:`Enter` y quitar del historial con :kbd:`Del`);
+* un doble clic en un soundfont del historial lo vuelve a abrir (los elementos seleccionados también se pueden abrir con :kbd:`Enter` y quitar del historial con :kbd:`Del` o con el icono de papelera mostrado a la derecha de su ruta);
 * un archivo o un directorio arrastrado y soltado sobre la zona del historial, o sobre la [barra de pestañas](#doc_top) sea cual sea la pestaña actual, se abre.
 
 Cuando se abre un soundfont, aparece una nueva pestaña con un [editor de soundfonts](manual/soundfont-editor/index.md) en su interior.
