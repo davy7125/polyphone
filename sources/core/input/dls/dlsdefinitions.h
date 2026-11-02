@@ -112,8 +112,8 @@ namespace Dls
     const quint32 WLOOP_TYPE_FORWARD = 0x0000;
     const quint32 WLOOP_TYPE_RELEASE = 0x0001;
 
-    // Wave formats
-    const quint16 WAVE_FORMAT_PCM = 0x0001;
+    // Wave formats (not "WAVE_FORMAT_PCM", already a macro in the Windows headers)
+    const quint16 FORMAT_TAG_PCM = 0x0001;
 
     // Gains are in 1/655360 dB, times in 1/65536 timecents, pitches in 1/65536 cents and percentages in 1/65536 of 0.1%
     const double UNIT_SCALE = 65536.0;

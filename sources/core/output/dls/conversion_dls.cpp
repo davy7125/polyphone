@@ -677,7 +677,7 @@ void ConversionDls::writeWave(QFile &file, const Wave &wave)
     // Format: mono 16-bit PCM
     quint32 sampleRate = _sm->get(idSmpl, champ_dwSampleRate).dwValue;
     QByteArray data;
-    appendUInt16(data, Dls::WAVE_FORMAT_PCM);
+    appendUInt16(data, Dls::FORMAT_TAG_PCM);
     appendUInt16(data, 1);
     appendUInt32(data, sampleRate);
     appendUInt32(data, 2 * sampleRate);
