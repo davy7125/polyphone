@@ -12,6 +12,11 @@ This tutorial describes how to add and prepare a sample in a soundfont.
 The purpose of this tutorial is to create expressive instruments using looped samples whose releases have been recorded.
 You will learn how to fully use the capabilities of such a sample, by using the attack and sustain of the sample but also its release.
 
+### [Realistic instruments with multiple velocity layers](tutorials/realistic-instruments-with-multiple-velocity-layers.md)
+
+A real instrument doesn't only sound louder when it is played harder: its timbre changes too.
+Taking the piano as an example, this tutorial shows how to stack several recordings of each note in velocity layers, how to balance them, and which other details can make an instrument more realistic.
+
 ### [Use Polyphone as a synthesizer](tutorials/use-polyphone-as-a-synthesizer.md)
 
 Polyphone isn't just a soundfont editor, it's also a full-featured synthesizer that lets you play along with a MIDI keyboard.

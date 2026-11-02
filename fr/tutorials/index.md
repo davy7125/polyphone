@@ -12,6 +12,11 @@ Ce tutoriel décrit comment ajouter et préparer un échantillon dans une banque
 Le but de ce tutoriel est de créer un instrument expressif en utilisant des échantillons possédant des boucles et dont les relâches (release) ont été enregistrées.
 Vous apprendrez ici comment utiliser complètement les possibilités de tels échantillons, en utilisant non seulement leur attaque et leur maintien (sustain), mais aussi leur relâche.
 
+### [Des instruments réalistes avec plusieurs couches de vélocités](tutorials/realistic-instruments-with-multiple-velocity-layers.md)
+
+Un instrument réel ne sonne pas seulement plus fort lorsqu'il est joué plus fort&nbsp;: son timbre change aussi.
+En prenant le piano comme exemple, ce tutoriel montre comment superposer plusieurs enregistrements de chaque note en couches de vélocités, comment les équilibrer, et quels autres détails peuvent rendre un instrument plus réaliste.
+
 ### [Utiliser Polyphone comme un synthétiseur](tutorials/use-polyphone-as-a-synthesizer.md)
 
 Polyphone n'est pas qu'un éditeur de banque de sons, c'est aussi un synthétiseur complet permettant de jouer avec un clavier MIDI.

@@ -2,6 +2,7 @@ index.md=Tutoriels
 |create-a-soundfont-from-scratch.md=Créer une banque de sons à partir de zéro
 |how-to-prepare-a-sample.md=Comment préparer un échantillon
 |using-custom-releases-in-an-instrument.md=Utiliser des échantillons pour la relâche d'une note
+|realistic-instruments-with-multiple-velocity-layers.md=Des instruments réalistes avec plusieurs couches de vélocités
 |use-polyphone-as-a-synthesizer.md=Utiliser Polyphone comme un synthétiseur
 |create-a-synthesizer-with-raspberry-pi.md=Créer un synthétiseur avec un Raspberry Pi
 |read-midi-file-with-soundfont.md=Lire un fichier MIDI avec une banque de sons

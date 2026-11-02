@@ -12,6 +12,11 @@ Este tutorial descreve como adicionar e preparar uma amostra em uma soundfont.
 O objetivo deste tutorial é criar instrumentos expressivos usando amostras com loop cujos releases foram gravados.
 Você vai aprender a aproveitar plenamente as possibilidades de uma amostra desse tipo, usando o ataque e o sustain da amostra, mas também o seu release.
 
+### [Instrumentos realistas com várias camadas de velocidade](tutorials/realistic-instruments-with-multiple-velocity-layers.md)
+
+Um instrumento real não soa apenas mais forte quando é tocado com mais força: o timbre dele também muda.
+Usando o piano como exemplo, este tutorial mostra como empilhar várias gravações de cada nota em camadas de velocidade, como equilibrá-las e quais outros detalhes podem tornar um instrumento mais realista.
+
 ### [Usar o Polyphone como sintetizador](tutorials/use-polyphone-as-a-synthesizer.md)
 
 O Polyphone não é apenas um editor de soundfonts, é também um sintetizador completo que permite tocar com um teclado MIDI.

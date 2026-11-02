@@ -12,6 +12,11 @@ Questo tutorial descrive come aggiungere e preparare un campione in un soundfont
 Lo scopo di questo tutorial è creare strumenti espressivi usando campioni in loop di cui è stato registrato anche il release.
 Imparerai a sfruttare appieno le possibilità di un campione di questo tipo, usandone non solo l'attacco e il sustain ma anche il release.
 
+### [Strumenti realistici con più livelli di velocità](tutorials/realistic-instruments-with-multiple-velocity-layers.md)
+
+Uno strumento reale non suona solo più forte quando viene suonato con più forza: cambia anche il suo timbro.
+Prendendo come esempio il pianoforte, questo tutorial mostra come sovrapporre più registrazioni di ogni nota in livelli di velocità, come bilanciarle e quali altri dettagli possono rendere uno strumento più realistico.
+
 ### [Usare Polyphone come sintetizzatore](tutorials/use-polyphone-as-a-synthesizer.md)
 
 Polyphone non è solo un editor di soundfont, è anche un sintetizzatore completo che permette di suonare con una tastiera MIDI.

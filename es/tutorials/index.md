@@ -12,6 +12,11 @@ Este tutorial describe cómo añadir y preparar una muestra en un soundfont.
 El objetivo de este tutorial es crear instrumentos expresivos con muestras en bucle cuyos releases se han grabado.
 Aprenderás a aprovechar al máximo las posibilidades de una muestra así, usando el ataque y el sostenido de la muestra, pero también su release.
 
+### [Instrumentos realistas con varias capas de velocidad](tutorials/realistic-instruments-with-multiple-velocity-layers.md)
+
+Un instrumento real no solo suena más fuerte cuando se toca con más fuerza: su timbre también cambia.
+Tomando el piano como ejemplo, este tutorial muestra cómo apilar varias grabaciones de cada nota en capas de velocidad, cómo equilibrarlas y qué otros detalles pueden hacer que un instrumento sea más realista.
+
 ### [Usar Polyphone como sintetizador](tutorials/use-polyphone-as-a-synthesizer.md)
 
 Polyphone no es solo un editor de soundfonts: también es un sintetizador completo que te permite tocar con un teclado MIDI.

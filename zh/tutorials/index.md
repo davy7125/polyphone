@@ -12,6 +12,11 @@
 本教程的目标是利用录有释音的循环采样，制作富有表现力的乐器。
 你将学会充分利用这类采样的能力，不仅使用采样的起音和延音部分，还使用它的释音部分。
 
+### [使用多个力度层制作逼真的乐器](tutorials/realistic-instruments-with-multiple-velocity-layers.md)
+
+真实的乐器在用力演奏时不只是声音更大：音色也会变化。
+本教程以钢琴为例，介绍如何将每个音符的多段录音叠加为力度层、如何平衡它们，以及还有哪些细节可以让乐器更加逼真。
+
 ### [将 Polyphone 用作合成器](tutorials/use-polyphone-as-a-synthesizer.md)
 
 Polyphone 不仅是一个音色库编辑器，还是一个功能完备的合成器，可以配合 MIDI 键盘演奏。

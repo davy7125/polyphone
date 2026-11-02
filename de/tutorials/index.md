@@ -12,6 +12,11 @@ Dieses Tutorial beschreibt, wie man ein Sample zu einem Soundfont hinzufügt und
 Ziel dieses Tutorials ist es, ausdrucksstarke Instrumente mit geloopten Samples zu erstellen, deren Release mit aufgenommen wurde.
 Sie lernen, die Möglichkeiten eines solchen Samples voll auszuschöpfen, indem Sie nicht nur Attack und Sustain des Samples, sondern auch sein Release nutzen.
 
+### [Realistische Instrumente mit mehreren Anschlagsebenen](tutorials/realistic-instruments-with-multiple-velocity-layers.md)
+
+Ein echtes Instrument klingt nicht nur lauter, wenn es stärker gespielt wird: Auch seine Klangfarbe ändert sich.
+Am Beispiel des Klaviers zeigt dieses Tutorial, wie mehrere Aufnahmen jeder Note in Anschlagsebenen gestapelt und ausgeglichen werden und welche weiteren Details ein Instrument realistischer machen.
+
 ### [Polyphone als Synthesizer verwenden](tutorials/use-polyphone-as-a-synthesizer.md)
 
 Polyphone ist nicht nur ein Soundfont-Editor, sondern auch ein vollwertiger Synthesizer, auf dem Sie mit einer MIDI-Tastatur spielen können.

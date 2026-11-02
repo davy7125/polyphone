@@ -2,6 +2,7 @@ index.md=Tutorials
 |create-a-soundfont-from-scratch.md=Create a soundfont from scratch
 |how-to-prepare-a-sample.md=How to prepare a sample
 |using-custom-releases-in-an-instrument.md=Using custom releases in an instrument
+|realistic-instruments-with-multiple-velocity-layers.md=Realistic instruments with multiple velocity layers
 |use-polyphone-as-a-synthesizer.md=Use Polyphone as a synthesizer
 |create-a-synthesizer-with-raspberry-pi.md=Create a synthesizer with a Raspberry Pi
 |read-midi-file-with-soundfont.md=Read a MIDI file with a soundfont
