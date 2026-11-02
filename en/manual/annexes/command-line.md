@@ -216,6 +216,7 @@ All channels of the MIDI file play the soundfont, the presets being chosen by th
 The settings of the synthesizer are used: [sound](manual/settings.md#doc_sound) (reverb, chorus, general volume), [polyphony](manual/settings.md#doc_general) and [tuning](manual/settings.md#doc_keyboard).
 The result is a stereo 32-bit float wav file at 48,000 Hz, ending once the sound of the last notes has faded out. An existing wav file is replaced.
 The notes of a preset that the soundfont doesn't have are not played, and a warning is displayed for this preset.
+In the graphical interface, a MIDI file can also be exported from the [MIDI player](manual/soundfont-editor/toolbar.md#doc_midi_player_settings), each channel being able to play a different soundfont or preset.
 
 
 ## Conversion to dls {#doc_dls}
@@ -280,7 +281,7 @@ polyphone -s -i <file/to/read> -c <configuration>
 -c
 : Synth configuration made of 3 values separated by the “|” character. This argument is optional, by default this is “0|off|off”. These parameters can then be changed via the graphical interface.
   
-  * The first value is the MIDI channel number (between 1 and 16) to be listened to for playing. A value of 0 or “all” indicates that all channels will be used and processed as one channel. A value of -1 or “each” listens to each channel separately, which is a prerequisite for [playing MIDI files](tutorials/read-midi-file-with-soundfont.md) for instance.
+  * The first value is the MIDI channel number (between 1 and 16) to be listened to for playing. A value of 0 or “all” indicates that all channels will be used and processed as one channel. A value of -1 or “each” listens to each channel separately, which is a prerequisite for playing the MIDI output of a sequencer for instance (a MIDI file can also be played directly with the [MIDI player](manual/soundfont-editor/toolbar.md#doc_midi_player)).
   * The second value is “off” or “on”, enabling or disabling the selection of multiple presets for playing.
   * The third value is “off”, “on”, or “toggle”, enabling or disabling the selection of presets by the keys corresponding to the preset number (key 0 activates preset 0, for example).
 

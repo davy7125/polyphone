@@ -20,45 +20,52 @@ Les fichiers au format MIDI contiennent des messages MIDI qui, mis ensemble, for
 
 Pour lire un fichier MIDI avec la méthode proposée ci-dessous, vous aurez besoin&nbsp;:
 
-- d'un accès à internet,
-- d'un navigateur web,
+- de la dernière version de Polyphone, disponible sur cette [page](software),
 - d'un fichier MIDI, par exemple <a href="files/ff7choco.mid" download>celui-ci</a>,
-- optionnellement, d'une banque de sons que vous voulez tester et qui respecte la norme <a href="https://fr.wikipedia.org/wiki/General_MIDI" target="_blank">General MIDI</a> (un filtre existe dans le [dépôt](soundfonts/midi-standard/gm)),
-- optionnellement, de la dernière version de Polyphone disponible sur cette [page](software).
+- d'une banque de sons que vous voulez tester et qui respecte la norme <a href="https://fr.wikipedia.org/wiki/General_MIDI" target="_blank">General MIDI</a> (un filtre existe dans le [dépôt](soundfonts/midi-standard/gm)).
+
+Une banque de sons qui ne respecte pas cette norme peut aussi être testée, en [choisissant vous-même ses ensembles](#doc_presets).
 
 
 ## Lire un fichier MIDI
 
 
-Une méthode simple consiste à utiliser le synthétiseur <a href="https://spessasus.github.io/SpessaSynth/" target="_blank">SpessaSynth</a>, qui sert à la fois de lecteur de fichiers MIDI et de synthétiseur utilisant des banques de sons. Il a l'avantage d'être disponible en ligne et ne nécessite aucune installation particulière.
+Ouvrez votre banque de sons dans Polyphone, puis cliquez sur l'icône ![MIDI](images/toolbar_midi.png "MIDI"){.inline} à droite de la [barre d'outils](manual/soundfont-editor/toolbar.md) pour afficher le [lecteur MIDI](manual/soundfont-editor/toolbar.md#doc_midi_player).
 
-Cliquez sur le bouton :guilabel:`Charger un fichier MIDI`, sélectionnez votre fichier MIDI, et le tour est joué.
+Cliquez sur le bouton dossier en haut à gauche de la fenêtre, sélectionnez votre fichier MIDI, puis cliquez sur le bouton de lecture (ou appuyez sur :kbd:`Espace`), et le tour est joué.
 
-![Le lecteur MIDI et synthétiseur SpessaSynth](images/SpessaSynth.jpg "Le lecteur MIDI et synthétiseur SpessaSynth")
+![Le lecteur MIDI de Polyphone](images/midi_player.png "Le lecteur MIDI de Polyphone")
 
+Chaque canal du fichier contenant des notes a sa propre ligne dans le tableau. La colonne :guilabel:`Ensemble` indique l'ensemble demandé par le fichier, qui peut changer au cours du morceau, et la led de la colonne :guilabel:`Volume` s'allume à chaque début de note. Le curseur sous le nom du fichier permet d'aller à un autre passage du morceau.
 
-## Choisir la banque de sons
-
-
-Pour utiliser la banque de sons de votre choix, cliquez sur le bouton :guilabel:`Charger une banque de sons` et sélectionnez votre fichier.
+Le lecteur MIDI est également disponible lorsque Polyphone est ouvert en [mode synthé](tutorials/use-polyphone-as-a-synthesizer.md).
 
 
-## Connecter la sortie MIDI à Polyphone
+## Tester la banque de sons
 
 
-Comme indiqué plus haut, **SpessaSynth** est à la fois un lecteur de fichier MIDI et un synthétiseur. Il est possible de n'utiliser que la fonction de lecture de fichier MIDI et d'envoyer les signaux à Polyphone qui prendra le relais pour la synthèse sonore. Cette manipulation peut être utile si la banque de sons est trop lourde pour être envoyée par internet.
+La banque de sons est jouée telle qu'elle est dans l'éditeur, modifications non enregistrées comprises&nbsp;: vous pouvez modifier un instrument pendant la lecture du morceau et entendre immédiatement le résultat, par exemple en ajustant son volume, son enveloppe ou son filtre.
 
-Pour connecter SpessaSynth à Polyphone (méthode testée avec Linux)&nbsp;:
+Le lecteur aide aussi à écouter les détails&nbsp;:
 
-- lancez le logiciel Polyphone en [mode synthé](tutorials/use-polyphone-as-a-synthesizer.md) et ouvrez les [préférences](manual/settings.md#doc_general),
-- sélectionnez «&nbsp;MIDI through&nbsp;» comme entrée MIDI (retenez le nom),
-- ouvrez SpessaSynth dans le navigateur internet et ouvrez ses paramètres,
-- sélectionnez la sortie MIDI «&nbsp;MIDI through&nbsp;» (nom identique à l'entrée MIDI de Polyphone).
+- les boutons :guilabel:`S` (solo) et :guilabel:`M` (rendre muet) d'un canal isolent un instrument ou le retirent du mélange, et le curseur de la colonne :guilabel:`Volume` l'équilibre avec les autres&nbsp;;
+- une icône d'avertissement dans la colonne :guilabel:`Ensemble` signifie que la banque de sons ne contient pas l'ensemble demandé par le fichier&nbsp;: les notes de ce canal ne sont pas jouées, ce qui révèle une banque de sons ne respectant pas complètement la norme General MIDI&nbsp;;
+- le bouton MIDI d'un canal liste les contrôleurs actuellement utilisés par le fichier (molette de modulation, expression, réverbération…), ce qui est utile pour vérifier les [modulateurs](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_modulator) de la banque de sons&nbsp;;
+- les [paramètres de lecture](manual/soundfont-editor/toolbar.md#doc_midi_player_settings), à droite du bandeau, permettent de jouer le morceau en boucle, de le ralentir pour écouter un passage rapide ou de le transposer pour tester d'autres notes.
 
-Un fichier MIDI pouvant envoyer des messages à destination de 16 canaux, il faudra ouvrir la banque de sons 16 fois et préciser pour chaque onglet un canal différent de 1 à 16. Par commodité, il est possible, lors de l'ouverture de Polyphone, de préciser la banque de sons à ouvrir et l'option «&nbsp;each&nbsp;» pour ouvrir les 16 onglets en une seule fois. La commande sera par exemple&nbsp;:
 
-```
-polyphone -s -i "/home/davy/Downloads/gm.sf2" -c "each|off|off"
-```
+## Choisir les banques de sons et les ensembles {#doc_presets}
 
-Voir cette [page](manual/annexes/command-line.md#doc_synth) pour plus d'informations sur les lignes de commande.
+
+Chaque canal peut jouer une banque de sons différente&nbsp;: ouvrez plusieurs banques de sons dans Polyphone, puis double-cliquez sur une cellule de la colonne :guilabel:`Banque de sons` pour choisir celle que joue le canal. Vous pouvez par exemple comparer les pianos de deux banques de sons sur la même partie, ou garder une banque de sons General MIDI pour l'accompagnement pendant que votre propre banque de sons joue la mélodie.
+
+![Choisir la banque de sons d'un canal](images/midi_player_soundfonts.png "Choisir la banque de sons d'un canal")
+
+De la même manière, un double-clic sur une cellule de la colonne :guilabel:`Ensemble` impose un ensemble de la banque de sons à la place de celui demandé par le fichier. C'est ainsi que l'on teste une banque de sons qui ne respecte pas la norme General MIDI, par exemple une banque de sons ne contenant qu'un seul instrument&nbsp;: choisissez son ensemble pour le canal de la mélodie, les changements de programme du fichier étant alors ignorés sur ce canal.
+
+
+## Exporter le résultat
+
+
+Lorsque le résultat vous convient, :guilabel:`Exporter l'audio...` dans les paramètres de lecture écrit le morceau dans un fichier wav tel qu'il est entendu dans le lecteur, avec les mêmes banques de sons, ensembles, volumes, tempo et hauteur.
+Un fichier MIDI peut aussi être converti en fichier wav en [ligne de commande](manual/annexes/command-line.md#doc_render), par exemple dans un script.

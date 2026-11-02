@@ -1,6 +1,6 @@
 Polyphone kann über die Kommandozeile ausgeführt werden, um Soundfonts in das Format [sf2](#doc_sf2), [sf3](#doc_sf3), [sfz](#doc_sfz), [csv](#doc_csv) oder [dls](#doc_dls) umzuwandeln. Für die Umwandlung werden die Dateiformate [sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz), [dls](manual/annexes/the-different-soundfont-formats.md#doc_dls), [sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark) und [organ](manual/annexes/the-different-soundfont-formats.md#doc_organ) unterstützt.
 
-Eine [MIDI-Datei kann](#doc_render) mit einer Soundfont abgespielt und als wav-Datei gespeichert werden.
+Eine [MIDI-Datei kann](#doc_render) mit einem Soundfont abgespielt und als wav-Datei gespeichert werden.
 Außerdem kann eine Option aufgerufen werden, um Polyphone im [Synth-Modus](#doc_synth) zu öffnen.
 
 Dateien und Verzeichnisse können auch als Argumente übergeben werden, um sie in der grafischen Oberfläche zu öffnen, zum Beispiel :command:`polyphone file1.sf2 file2.sf3 /path/to/directory` (ein Verzeichnis wird im [Soundfont-Explorer](manual/soundfont-explorer.md) geöffnet).
@@ -212,10 +212,11 @@ polyphone -5 -i <soundfont> -c <MIDI/file> -d <output/directory> -o <output_file
 polyphone -5 -i /path/to/file.sf2 -c /path/to/song.mid
 ```
 
-Alle Kanäle der MIDI-Datei spielen die Soundfont, wobei die Presets durch die Programmwechsel der Datei gewählt werden (Bank 128 auf Kanal 10, für das Schlagzeug).
+Alle Kanäle der MIDI-Datei spielen den Soundfont, wobei die Presets durch die Programmwechsel der Datei gewählt werden (Bank 128 auf Kanal 10, für das Schlagzeug).
 Die Einstellungen des Synthesizers werden verwendet: [Sound](manual/settings.md#doc_sound) (Hall, Chorus, Gesamtlautstärke), [Polyphonie](manual/settings.md#doc_general) und [Stimmung](manual/settings.md#doc_keyboard).
 Das Ergebnis ist eine Stereo-wav-Datei im 32-Bit-Gleitkommaformat mit 48.000 Hz, die endet, sobald der Klang der letzten Noten verklungen ist. Eine vorhandene wav-Datei wird ersetzt.
-Die Noten eines Presets, das die Soundfont nicht enthält, werden nicht gespielt, und für dieses Preset wird eine Warnung angezeigt.
+Die Noten eines Presets, das der Soundfont nicht enthält, werden nicht gespielt, und für dieses Preset wird eine Warnung angezeigt.
+In der grafischen Oberfläche kann eine MIDI-Datei auch aus dem [MIDI-Player](manual/soundfont-editor/toolbar.md#doc_midi_player_settings) exportiert werden, wobei jeder Kanal einen anderen Soundfont oder ein anderes Preset spielen kann.
 
 
 ## Umwandlung in dls {#doc_dls}
@@ -280,7 +281,7 @@ polyphone -s -i <file/to/read> -c <configuration>
 -c
 : Konfiguration des Synthesizers, bestehend aus 3 durch das Zeichen „|“ getrennten Werten. Dieses Argument ist optional; standardmäßig ist es „0|off|off“. Diese Parameter können anschließend über die grafische Oberfläche geändert werden.
   
-  * Der erste Wert ist die Nummer des MIDI-Kanals (zwischen 1 und 16), auf den zum Spielen gehört wird. Ein Wert von 0 oder „all“ bedeutet, dass alle Kanäle verwendet und wie ein einziger Kanal verarbeitet werden. Ein Wert von -1 oder „each“ hört jeden Kanal getrennt ab, was zum Beispiel Voraussetzung für das [Abspielen von MIDI-Dateien](tutorials/read-midi-file-with-soundfont.md) ist.
+  * Der erste Wert ist die Nummer des MIDI-Kanals (zwischen 1 und 16), auf den zum Spielen gehört wird. Ein Wert von 0 oder „all“ bedeutet, dass alle Kanäle verwendet und wie ein einziger Kanal verarbeitet werden. Ein Wert von -1 oder „each“ hört jeden Kanal getrennt ab, was zum Beispiel Voraussetzung dafür ist, die MIDI-Ausgabe eines Sequenzers zu spielen (eine MIDI-Datei kann auch direkt mit dem [MIDI-Player](manual/soundfont-editor/toolbar.md#doc_midi_player) abgespielt werden).
   * Der zweite Wert ist „off“ oder „on“ und deaktiviert bzw. aktiviert die Auswahl mehrerer Presets zum Spielen.
   * Der dritte Wert ist „off“, „on“ oder „toggle“ und deaktiviert bzw. aktiviert die Auswahl von Presets über die Tasten, die der Presetnummer entsprechen (Taste 0 aktiviert zum Beispiel Preset 0).
 

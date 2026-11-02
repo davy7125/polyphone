@@ -216,6 +216,7 @@ MIDI 文件的所有通道都演奏该音色库，预设由文件中的程序变
 使用合成器的设置：[音频](manual/settings.md#doc_sound)（混响、合唱、总音量）、[复音数](manual/settings.md#doc_general)和[调音](manual/settings.md#doc_keyboard)。
 结果是 48,000 Hz 的立体声 32 位浮点 wav 文件，在最后几个音符的声音消失后结束。已存在的 wav 文件会被替换。
 音色库中没有的预设，其音符不会被演奏，并会针对该预设显示警告。
+在图形界面中，也可以从[MIDI 播放器](manual/soundfont-editor/toolbar.md#doc_midi_player_settings)导出 MIDI 文件，此时每个通道可以演奏不同的音色库或预设。
 
 
 ## 转换为 dls {#doc_dls}
@@ -280,7 +281,7 @@ polyphone -s -i <file/to/read> -c <configuration>
 -c
 : 合成器配置，由 3 个以字符“|”分隔的值组成。此参数是可选的，默认为“0|off|off”。之后可以通过图形界面修改这些参数。
   
-  * 第一个值是演奏时要监听的 MIDI 通道编号（1 到 16 之间）。值为 0 或“all”表示使用所有通道，并将其作为一个通道处理。值为 -1 或“each”表示分别监听每个通道，例如这是[播放 MIDI 文件](tutorials/read-midi-file-with-soundfont.md)的前提条件。
+  * 第一个值是演奏时要监听的 MIDI 通道编号（1 到 16 之间）。值为 0 或“all”表示使用所有通道，并将其作为一个通道处理。值为 -1 或“each”表示分别监听每个通道，例如这是播放音序器 MIDI 输出的前提条件（也可以直接用[MIDI 播放器](manual/soundfont-editor/toolbar.md#doc_midi_player)播放 MIDI 文件）。
   * 第二个值为“off”或“on”，用于禁用或启用同时选择多个预设进行演奏。
   * 第三个值为“off”、“on”或“toggle”，用于禁用或启用通过与预设编号对应的琴键来选择预设（例如，琴键 0 激活预设 0）。
 

@@ -216,6 +216,7 @@ Todos los canales del archivo MIDI tocan el soundfont, y los conjuntos se eligen
 Se usan los ajustes del sintetizador: [sonido](manual/settings.md#doc_sound) (reverberación, coro, volumen general), [polifonía](manual/settings.md#doc_general) y [afinación](manual/settings.md#doc_keyboard).
 El resultado es un archivo wav estéreo de 32 bits en coma flotante a 48 000 Hz, que termina cuando el sonido de las últimas notas se ha extinguido. Un archivo wav existente se reemplaza.
 Las notas de un conjunto que el soundfont no tiene no se tocan, y se muestra un aviso para ese conjunto.
+En la interfaz gráfica, un archivo MIDI también se puede exportar desde el [reproductor MIDI](manual/soundfont-editor/toolbar.md#doc_midi_player_settings), donde cada canal puede tocar un soundfont o un conjunto diferente.
 
 
 ## Conversión a dls {#doc_dls}
@@ -280,7 +281,7 @@ polyphone -s -i <file/to/read> -c <configuration>
 -c
 : Configuración del sintetizador, compuesta de 3 valores separados por el carácter «|». Este argumento es opcional; por defecto es «0|off|off». Estos parámetros se pueden cambiar después desde la interfaz gráfica.
   
-  * El primer valor es el número del canal MIDI (entre 1 y 16) que se escucha para tocar. Un valor de 0 o «all» indica que se usarán todos los canales y se tratarán como uno solo. Un valor de -1 o «each» escucha cada canal por separado, lo que es un requisito previo, por ejemplo, para [reproducir archivos MIDI](tutorials/read-midi-file-with-soundfont.md).
+  * El primer valor es el número del canal MIDI (entre 1 y 16) que se escucha para tocar. Un valor de 0 o «all» indica que se usarán todos los canales y se tratarán como uno solo. Un valor de -1 o «each» escucha cada canal por separado, lo que es un requisito previo, por ejemplo, para tocar la salida MIDI de un secuenciador (un archivo MIDI también se puede reproducir directamente con el [reproductor MIDI](manual/soundfont-editor/toolbar.md#doc_midi_player)).
   * El segundo valor es «off» u «on», y desactiva o activa la selección de varios conjuntos para tocar.
   * El tercer valor es «off», «on» o «toggle», y desactiva o activa la selección de los conjuntos mediante las teclas correspondientes al número de conjunto (la tecla 0 activa el conjunto 0, por ejemplo).
 

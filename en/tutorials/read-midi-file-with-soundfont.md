@@ -18,47 +18,54 @@ MIDI files contain MIDI messages which, when put together, form a melody. They c
 ## Prerequisites
 
 
-To play a MIDI file using the method described below, you will need:
+To play a MIDI file with the method described below, you will need:
 
-- Internet access,
-- a web browser,
+- the latest version of Polyphone, available on this [page](software),
 - a MIDI file, such as <a href="files/ff7choco.mid" download>this one</a>,
-- optionally, a soundfont that you want to test and that complies with the <a href="https://en.wikipedia.org/wiki/General_MIDI" target="_blank">General MIDI</a> standard (a filter exists in the [repository](soundfonts/midi-standard/gm)),
-- optionally, the latest version of Polyphone available on this [page](software).
+- a soundfont that you want to test and that complies with the <a href="https://en.wikipedia.org/wiki/General_MIDI" target="_blank">General MIDI</a> standard (a filter exists in the [repository](soundfonts/midi-standard/gm)).
+
+A soundfont that doesn't comply with this standard can also be tested, by [choosing its presets](#doc_presets) yourself.
 
 
 ## Reading a MIDI file
 
 
-A simple method is to use the <a href="https://spessasus.github.io/SpessaSynth/" target="_blank">SpessaSynth</a> synthesizer, which is both a MIDI file reader and a soundfont synthesizer. It has the advantage of being available online and requires no special installation.
+Open your soundfont in Polyphone, then click on the icon ![MIDI](images/toolbar_midi.png "MIDI"){.inline} on the right of the [toolbar](manual/soundfont-editor/toolbar.md) to display the [MIDI player](manual/soundfont-editor/toolbar.md#doc_midi_player).
 
-Click on the :guilabel:`Load MIDI file` button, select your MIDI file, and you are ready to go.
+Click on the folder button at the top left of the window, select your MIDI file, then click on the play button (or press :kbd:`Space`), and you are ready to go.
 
-![The SpessaSynth MIDI player and synthesizer](images/SpessaSynth.jpg "The SpessaSynth MIDI player and synthesizer")
+![The MIDI player of Polyphone](images/midi_player.png "The MIDI player of Polyphone")
 
+Each channel of the file containing notes has its own row in the table. The column :guilabel:`Preset` shows the preset requested by the file, which can change during the piece, and the led of the column :guilabel:`Volume` lights up each time a note starts. The slider below the name of the file moves to another passage of the piece.
 
-## Selecting a soundfont
-
-
-To use a soundfont of your choice, click on the :guilabel:`Upload soundfont` button and select your file.
+The MIDI player is also available when Polyphone is opened in [synth mode](tutorials/use-polyphone-as-a-synthesizer.md).
 
 
-## Connecting the MIDI output to Polyphone
+## Testing the soundfont
 
 
-As mentioned above, **SpessaSynth** is both a MIDI file reader and a synthesizer. It is possible to use only the MIDI file reader feature and send the signals to Polyphone, which will take over for sound synthesis. This can be useful if the soundfont is too large to be sent over the Internet.
+The soundfont is played as it is in the editor, unsaved changes included: you can edit an instrument while the piece is playing and hear the result immediately, for instance when adjusting its volume, its envelope or its filter.
 
-To connect SpessaSynth to Polyphone (method tested with Linux):
+The player also helps you to listen to the details:
 
-- launch the Polyphone software in [synth mode](tutorials/use-polyphone-as-a-synthesizer.md) and open the [settings](manual/settings.md#doc_general),
-- select “MIDI through” as MIDI input (remember the name),
-- open SpessaSynth in your web browser and open its settings,
-- select the MIDI output “MIDI through” (identical name to Polyphone's MIDI input).
+- the buttons :guilabel:`S` (solo) and :guilabel:`M` (mute) of a channel isolate an instrument or remove it from the mix, and the slider of the column :guilabel:`Volume` balances it with the others;
+- a warning icon in the column :guilabel:`Preset` means that the soundfont doesn't have the preset requested by the file: the notes of this channel are not played, which reveals a soundfont that doesn't fully comply with the General MIDI standard;
+- the MIDI button of a channel lists the controllers currently used by the file (modulation wheel, expression, reverb…), which is useful for checking the [modulators](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_modulator) of the soundfont;
+- the [playback settings](manual/soundfont-editor/toolbar.md#doc_midi_player_settings), on the right of the banner, play the piece in a loop, slow it down for listening to a fast passage, or transpose it for testing other keys.
 
-As a MIDI file can send messages to 16 channels, you will need to open the soundfont 16 times and specify a different channel from 1 to 16 for each tab. For convenience, when opening Polyphone, you can specify the soundfont to be opened and the option “each” to open all 16 tabs at once. The command would be, for example:
 
-```
-polyphone -s -i "/home/davy/Downloads/gm.sf2" -c "each|off|off"
-```
+## Choosing the soundfonts and the presets {#doc_presets}
 
-See this [page](manual/annexes/command-line.md#doc_synth) for more information about command lines.
+
+Each channel can play a different soundfont: open several soundfonts in Polyphone, then double click on a cell of the column :guilabel:`Soundfont` to choose the soundfont played by the channel. You can for instance compare the pianos of two soundfonts on the same part, or keep a General MIDI soundfont for the accompaniment while your own soundfont plays the melody.
+
+![Choosing the soundfont of a channel](images/midi_player_soundfonts.png "Choosing the soundfont of a channel")
+
+In the same way, a double click on a cell of the column :guilabel:`Preset` forces a preset of the soundfont instead of the one requested by the file. This is the way to test a soundfont that doesn't comply with the General MIDI standard, a soundfont containing a single instrument for instance: choose its preset for the channel of the melody, the program changes of the file being then ignored on this channel.
+
+
+## Exporting the result
+
+
+When the result suits you, :guilabel:`Export audio...` in the playback settings writes the piece in a wav file as it is heard in the player, with the same soundfonts, presets, volumes, tempo and pitch.
+A MIDI file can also be converted into a wav file with the [command line](manual/annexes/command-line.md#doc_render), for instance in a script.

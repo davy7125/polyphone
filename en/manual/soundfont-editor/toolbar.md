@@ -3,7 +3,8 @@ The toolbar, located on the top of the editor, contains icons for:
 * common [editing functions](#doc_edit),
 * switching the [view](#doc_view) in editors,
 * displaying the [recorder](#doc_recorder),
-* displaying the [virtual keyboard](#doc_keyboard).
+* displaying the [virtual keyboard](#doc_keyboard),
+* displaying the [MIDI player](#doc_midi_player).
 
 
 ![Toolbar](images/toolbar.png "Toolbar")
@@ -213,5 +214,83 @@ Volume
 
 These settings are the same as in the [sound settings](manual/settings.md#doc_sound): a change made in one place is displayed in the other one.
 A change is progressive and doesn't interrupt the notes being played.
+
+
+## MIDI player {#doc_midi_player}
+
+
+When clicking on the icon ![MIDI](images/toolbar_midi.png "MIDI"){.inline}, a window opens showing the MIDI player, which plays a MIDI file (:file:`.mid`, :file:`.midi`, :file:`.kar` or :file:`.rmi`) with the soundfonts that are open, for testing them in a piece of music.
+The soundfonts are played as they are in the editor, with their unsaved changes.
+The MIDI player is also available in [synth mode](tutorials/use-polyphone-as-a-synthesizer.md).
+
+
+![MIDI player](images/midi_player.png "MIDI player")
+
+
+The banner at the top of the window contains, from left to right:
+
+* a button for opening a MIDI file (when the window is opened, the last file opened is loaded again if it still exists),
+* the name of the file, the elapsed time and the total duration, above a slider for moving to another position in the piece,
+* a button for starting or pausing the playback, also accessible with :kbd:`Space`,
+* a button for stopping the playback and going back to the beginning,
+* a button opening the [playback settings](#doc_midi_player_settings).
+
+If the file cannot be read, the reason is displayed instead of the channels.
+The playback stops when the window is closed.
+
+During the playback, an external MIDI keyboard or the [virtual keyboard](#doc_keyboard) can still play the element selected in the editor along with the file (the notes of the file are not displayed on the virtual keyboard), and the [recorder](#doc_recorder) can record the result.
+
+
+### Channels
+
+
+The table lists the channels of the file that contain notes, each channel having its own settings:
+
+Channel
+: The number of the channel, the name of its track being displayed in a tooltip.
+  The buttons :guilabel:`M` (mute) and :guilabel:`S` (solo) silence the channel or play only the channels in solo.
+  The MIDI button displays the current MIDI values of the channel that differ from their default value: controllers, pitch wheel (in semitones), its sensitivity and channel pressure.
+
+Soundfont
+: The soundfont played by the channel, among the soundfonts open in tabs, or :guilabel:`None` for silence.
+  When a file is opened, all channels play the soundfont of the current tab (or the first soundfont open).
+
+Preset
+: With :guilabel:`Auto`, the presets are chosen by the program changes of the file (bank 128 on channel 10, for the percussions) and the current one is displayed in brackets.
+  Otherwise, the preset chosen in the list is played whatever the file requests.
+  If the soundfont doesn't have the preset requested by the file, a warning icon is displayed and the notes of the channel are not played.
+
+Volume
+: The led lights up when notes start, and the slider changes the volume of the channel from -40 to +10 dB (a double click resets it to 0 dB).
+
+The list of the soundfonts or presets opens with a double click on a cell, or with a click on a cell already selected.
+These settings are reset when another file is opened.
+
+
+### Playback settings {#doc_midi_player_settings}
+
+
+The button on the right of the banner opens a menu with the following settings, which are kept when another file is opened:
+
+Loop playback
+: The piece starts again from the beginning when it ends.
+
+Tempo
+: Playback speed, from 25% to 200% of the tempo of the file (its tempo changes being kept).
+  The tempo of the file is displayed in a tooltip, and the elapsed time and the duration displayed in the banner follow the playback speed.
+
+Pitch
+: Transposition from -12 to +12 semitones, except for the percussions (bank 128).
+
+A double click on a slider resets it to its default value (100% and 0).
+
+
+![Playback settings](images/midi_player_settings.png "Playback settings")
+
+
+The menu ends with :guilabel:`Export audio...`, which writes the piece in a :file:`.wav` file as it is heard in the player: same soundfonts, presets, volumes, mute and solo, tempo and pitch.
+The playback is paused during the export, which ends once the sound of the last notes has faded out.
+If the export is canceled, the incomplete file is removed.
+A MIDI file can also be rendered from the [command line](manual/annexes/command-line.md#doc_render).
 
 *[MIDI]: Musical Instrument Digital Interface

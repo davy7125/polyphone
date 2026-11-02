@@ -216,6 +216,7 @@ Tous les canaux du fichier MIDI jouent la banque de sons, les ensembles étant c
 Les réglages du synthétiseur sont utilisés&nbsp;: [son](manual/settings.md#doc_sound) (réverbération, chorus, volume général), [polyphonie](manual/settings.md#doc_general) et [accordage](manual/settings.md#doc_keyboard).
 Le résultat est un fichier wav stéréo 32 bits à virgule flottante à 48&nbsp;000&nbsp;Hz, qui se termine une fois le son des dernières notes éteint. Un fichier wav existant est remplacé.
 Les notes d'un ensemble absent de la banque de sons ne sont pas jouées et un avertissement est affiché pour cet ensemble.
+Dans l'interface graphique, un fichier MIDI peut aussi être exporté depuis le [lecteur MIDI](manual/soundfont-editor/toolbar.md#doc_midi_player_settings), chaque canal pouvant alors jouer une banque de sons ou un ensemble différent.
 
 
 ## Conversion en dls {#doc_dls}
@@ -280,7 +281,7 @@ polyphone -s -i <fichier/à/lire> -c <configuration>
 -c
 : Configuration du synthé, composée de 3 valeurs séparées du caractère «&nbsp;|&nbsp;». Cet argument est optionnel&nbsp;: par défaut la valeur utilisée est «&nbsp;0|off|off&nbsp;». L'interface graphique permettra ensuite de changer ces paramètres.
   
-  * Le premier champ est le numéro du canal MIDI (entre 1 et 16) à écouter pour jouer. La valeur 0 ou «&nbsp;all&nbsp;» indique que tous les canaux sont utilisés et traités comme un seul canal. La valeur -1 ou «&nbsp;each&nbsp;» écoute chaque canal séparément, ce qui constitue un prérequis pour [lire des fichiers MIDI](tutorials/read-midi-file-with-soundfont.md) par exemple.
+  * Le premier champ est le numéro du canal MIDI (entre 1 et 16) à écouter pour jouer. La valeur 0 ou «&nbsp;all&nbsp;» indique que tous les canaux sont utilisés et traités comme un seul canal. La valeur -1 ou «&nbsp;each&nbsp;» écoute chaque canal séparément, ce qui constitue un prérequis pour jouer la sortie MIDI d'un séquenceur par exemple (un fichier MIDI peut aussi être lu directement avec le [lecteur MIDI](manual/soundfont-editor/toolbar.md#doc_midi_player)).
   * Le deuxième champ est «&nbsp;off&nbsp;» ou «&nbsp;on&nbsp;», rendant possible ou non la sélection de plusieurs ensembles pour jouer.
   * Le troisième champ est «&nbsp;off&nbsp;», «&nbsp;on&nbsp;», ou «&nbsp;toggle&nbsp;», autorisant ou non la sélection des ensembles par les touches correspondant au numéro de l'ensemble (la touche 0 permettant d'activer par exemple l'ensemble 0).
 

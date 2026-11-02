@@ -216,6 +216,7 @@ Todos os canais do arquivo MIDI tocam a soundfont, e as predefinições são esc
 São usadas as configurações do sintetizador: [som](manual/settings.md#doc_sound) (reverberação, chorus, volume geral), [polifonia](manual/settings.md#doc_general) e [afinação](manual/settings.md#doc_keyboard).
 O resultado é um arquivo wav estéreo de 32 bits em ponto flutuante a 48.000 Hz, que termina quando o som das últimas notas se extingue. Um arquivo wav existente é substituído.
 As notas de uma predefinição que a soundfont não tem não são tocadas, e um aviso é exibido para essa predefinição.
+Na interface gráfica, um arquivo MIDI também pode ser exportado a partir do [reprodutor MIDI](manual/soundfont-editor/toolbar.md#doc_midi_player_settings), onde cada canal pode tocar uma soundfont ou uma predefinição diferente.
 
 
 ## Conversão para dls {#doc_dls}
@@ -280,7 +281,7 @@ polyphone -s -i <file/to/read> -c <configuration>
 -c
 : Configuração do sintetizador, composta de 3 valores separados pelo caractere “|”. Este argumento é opcional; por padrão, é “0|off|off”. Esses parâmetros podem depois ser alterados pela interface gráfica.
   
-  * O primeiro valor é o número do canal MIDI (entre 1 e 16) a escutar para tocar. Um valor de 0 ou “all” indica que todos os canais serão usados e tratados como um único canal. Um valor de -1 ou “each” escuta cada canal separadamente, o que é um pré-requisito, por exemplo, para [tocar arquivos MIDI](tutorials/read-midi-file-with-soundfont.md).
+  * O primeiro valor é o número do canal MIDI (entre 1 e 16) a escutar para tocar. Um valor de 0 ou “all” indica que todos os canais serão usados e tratados como um único canal. Um valor de -1 ou “each” escuta cada canal separadamente, o que é um pré-requisito, por exemplo, para tocar a saída MIDI de um sequenciador (um arquivo MIDI também pode ser tocado diretamente com o [reprodutor MIDI](manual/soundfont-editor/toolbar.md#doc_midi_player)).
   * O segundo valor é “off” ou “on”, desativando ou ativando a seleção de várias predefinições para tocar.
   * O terceiro valor é “off”, “on” ou “toggle”, desativando ou ativando a seleção das predefinições pelas teclas correspondentes ao número da predefinição (a tecla 0 ativa a predefinição 0, por exemplo).
 

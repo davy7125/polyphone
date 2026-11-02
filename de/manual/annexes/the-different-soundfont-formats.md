@@ -102,7 +102,7 @@ Die Parameter (Hüllkurven, LFOs, Filter, Modulationen …) werden als Verbindun
 Sie können für das ganze Instrument oder für eine einzelne Region festgelegt werden; die Parameter einer Region ersetzen dann die des Instruments.
 
 Polyphone importiert DLS-Dateien beider Level (nur .dls-Dateien, in .rmi- oder .xmf-Dateien eingebettete DLS-Bänke werden nicht unterstützt) und [exportiert](manual/menu.md#doc_save) Soundfonts im Format DLS Level 2.2.
-Eine importierte DLS-Datei wird beim Speichern der Soundfont nicht verändert: Die Soundfont wird im sf2-Format gespeichert.
+Eine importierte DLS-Datei wird beim Speichern des Soundfonts nicht verändert: Der Soundfont wird im sf2-Format gespeichert.
 
 
 ### Einschränkungen beim DLS-Import

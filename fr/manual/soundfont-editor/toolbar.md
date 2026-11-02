@@ -3,7 +3,8 @@ La barre d'outils, située dans la partie haute de l'éditeur, contient des icô
 * des fonctions communes d'[édition](#doc_edit),
 * changer de [vue](#doc_view) dans les éditeurs,
 * afficher le [magnétophone](#doc_recorder),
-* afficher le [clavier virtuel](#doc_keyboard).
+* afficher le [clavier virtuel](#doc_keyboard),
+* afficher le [lecteur MIDI](#doc_midi_player).
 
 
 ![Barre d'outils](images/toolbar.png "Barre d'outils")
@@ -213,5 +214,83 @@ Volume
 
 Ces réglages sont les mêmes que dans les [préférences du son](manual/settings.md#doc_sound)&nbsp;: une modification faite à un endroit est affichée à l'autre.
 Une modification est progressive et n'interrompt pas les notes en cours.
+
+
+## Lecteur MIDI {#doc_midi_player}
+
+
+En cliquant sur l'icône ![MIDI](images/toolbar_midi.png "MIDI"){.inline}, une fenêtre s'ouvre présentant le lecteur MIDI, qui joue un fichier MIDI (:file:`.mid`, :file:`.midi`, :file:`.kar` ou :file:`.rmi`) avec les banques de sons ouvertes, pour les tester dans un morceau de musique.
+Les banques de sons sont jouées telles qu'elles sont dans l'éditeur, avec leurs modifications non enregistrées.
+Le lecteur MIDI est également disponible en [mode synthé](tutorials/use-polyphone-as-a-synthesizer.md).
+
+
+![Lecteur MIDI](images/midi_player.png "Lecteur MIDI")
+
+
+Le bandeau en haut de la fenêtre contient, de gauche à droite&nbsp;:
+
+* un bouton pour ouvrir un fichier MIDI (à l'ouverture de la fenêtre, le dernier fichier ouvert est rechargé s'il existe toujours),
+* le nom du fichier, le temps écoulé et la durée totale, au-dessus d'un curseur permettant d'aller à une autre position du morceau,
+* un bouton pour lancer ou mettre en pause la lecture, également accessible avec :kbd:`Espace`,
+* un bouton pour arrêter la lecture et revenir au début,
+* un bouton ouvrant les [paramètres de lecture](#doc_midi_player_settings).
+
+Si le fichier ne peut pas être lu, la raison est affichée à la place des canaux.
+La lecture s'arrête lorsque la fenêtre est fermée.
+
+Pendant la lecture, un clavier MIDI externe ou le [clavier virtuel](#doc_keyboard) peuvent toujours jouer l'élément sélectionné dans l'éditeur en même temps que le fichier (les notes du fichier ne sont pas affichées sur le clavier virtuel), et le [magnétophone](#doc_recorder) peut enregistrer le résultat.
+
+
+### Canaux
+
+
+Le tableau liste les canaux du fichier qui contiennent des notes, chaque canal ayant ses propres réglages&nbsp;:
+
+Canal
+: Le numéro du canal, le nom de sa piste étant affiché dans une info-bulle.
+  Les boutons :guilabel:`M` (rendre muet) et :guilabel:`S` (solo) rendent le canal muet ou ne font entendre que les canaux en solo.
+  Le bouton MIDI affiche les valeurs MIDI actuelles du canal qui diffèrent de leur valeur par défaut&nbsp;: contrôleurs, Pitch Bend (en demi-tons), sensibilité du Pitch Bend et pression globale.
+
+Banque de sons
+: La banque de sons jouée par le canal, parmi les banques de sons ouvertes dans des onglets, ou :guilabel:`Aucune` pour ne rien jouer.
+  À l'ouverture d'un fichier, tous les canaux jouent la banque de sons de l'onglet courant (ou la première banque de sons ouverte).
+
+Ensemble
+: Avec :guilabel:`Auto`, les ensembles sont choisis par les changements de programme du fichier (banque 128 sur le canal 10, pour les percussions) et l'ensemble en cours est affiché entre parenthèses.
+  Sinon, l'ensemble choisi dans la liste est joué, quoi que demande le fichier.
+  Si la banque de sons ne contient pas l'ensemble demandé par le fichier, une icône d'avertissement est affichée et les notes du canal ne sont pas jouées.
+
+Volume
+: La led s'allume lorsque des notes démarrent, et le curseur modifie le volume du canal de -40 à +10 dB (un double-clic le remet à 0 dB).
+
+La liste des banques de sons ou des ensembles s'ouvre avec un double-clic sur une cellule, ou avec un clic sur une cellule déjà sélectionnée.
+Ces réglages sont réinitialisés lorsqu'un autre fichier est ouvert.
+
+
+### Paramètres de lecture {#doc_midi_player_settings}
+
+
+Le bouton à droite du bandeau ouvre un menu contenant les réglages suivants, qui sont conservés lorsqu'un autre fichier est ouvert&nbsp;:
+
+Lecture en boucle
+: Le morceau recommence depuis le début lorsqu'il se termine.
+
+Tempo
+: Vitesse de lecture, de 25&nbsp;% à 200&nbsp;% du tempo du fichier (ses changements de tempo étant conservés).
+  Le tempo du fichier est affiché dans une info-bulle, et le temps écoulé et la durée affichés dans le bandeau suivent la vitesse de lecture.
+
+Hauteur
+: Transposition de -12 à +12 demi-tons, sauf pour les percussions (banque 128).
+
+Un double-clic sur un curseur le remet à sa valeur par défaut (100&nbsp;% et 0).
+
+
+![Paramètres de lecture](images/midi_player_settings.png "Paramètres de lecture")
+
+
+Le menu se termine par :guilabel:`Exporter l'audio...`, qui écrit le morceau dans un fichier :file:`.wav` tel qu'il est entendu dans le lecteur&nbsp;: mêmes banques de sons, ensembles, volumes, muet et solo, tempo et hauteur.
+La lecture est mise en pause pendant l'export, qui se termine une fois le son des dernières notes éteint.
+Si l'export est annulé, le fichier incomplet est supprimé.
+Un fichier MIDI peut aussi être converti en fichier wav en [ligne de commande](manual/annexes/command-line.md#doc_render).
 
 *[MIDI]: Musical Instrument Digital Interface

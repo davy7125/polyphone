@@ -3,7 +3,8 @@ Die Werkzeugleiste oben im Editor enthält Symbole für:
 * häufig verwendete [Bearbeitungsfunktionen](#doc_edit),
 * das Umschalten der [Ansicht](#doc_view) in den Editoren,
 * das Anzeigen des [Rekorders](#doc_recorder),
-* das Anzeigen der [virtuellen Tastatur](#doc_keyboard).
+* das Anzeigen der [virtuellen Tastatur](#doc_keyboard),
+* das Anzeigen des [MIDI-Players](#doc_midi_player).
 
 
 ![Werkzeugleiste](images/toolbar.png "Werkzeugleiste")
@@ -213,5 +214,83 @@ Lautstärke
 
 Diese Einstellungen sind dieselben wie in den [Sound-Einstellungen](manual/settings.md#doc_sound): Eine Änderung an einer Stelle wird auch an der anderen angezeigt.
 Eine Änderung erfolgt schrittweise und unterbricht die gespielten Noten nicht.
+
+
+## MIDI-Player {#doc_midi_player}
+
+
+Ein Klick auf das Symbol ![MIDI](images/toolbar_midi.png "MIDI"){.inline} öffnet ein Fenster mit dem MIDI-Player, der eine MIDI-Datei (:file:`.mid`, :file:`.midi`, :file:`.kar` oder :file:`.rmi`) mit den geöffneten Soundfonts abspielt, um sie in einem Musikstück zu testen.
+Die Soundfonts werden so gespielt, wie sie im Editor sind, einschließlich ihrer nicht gespeicherten Änderungen.
+Der MIDI-Player ist auch im [Synth-Modus](tutorials/use-polyphone-as-a-synthesizer.md) verfügbar.
+
+
+![MIDI-Player](images/midi_player.png "MIDI-Player")
+
+
+Das Banner oben im Fenster enthält von links nach rechts:
+
+* eine Schaltfläche zum Öffnen einer MIDI-Datei (beim Öffnen des Fensters wird die zuletzt geöffnete Datei erneut geladen, sofern sie noch existiert),
+* den Namen der Datei, die verstrichene Zeit und die Gesamtdauer über einem Schieberegler, mit dem man an eine andere Stelle des Stücks springen kann,
+* eine Schaltfläche zum Starten oder Pausieren der Wiedergabe, auch mit :kbd:`Space` erreichbar,
+* eine Schaltfläche zum Stoppen der Wiedergabe und Zurückkehren zum Anfang,
+* eine Schaltfläche, die die [Wiedergabeeinstellungen](#doc_midi_player_settings) öffnet.
+
+Kann die Datei nicht gelesen werden, wird der Grund anstelle der Kanäle angezeigt.
+Die Wiedergabe stoppt, wenn das Fenster geschlossen wird.
+
+Während der Wiedergabe kann mit einer externen MIDI-Tastatur oder der [virtuellen Tastatur](#doc_keyboard) weiterhin das im Editor ausgewählte Element zur Datei gespielt werden (die Noten der Datei werden nicht auf der virtuellen Tastatur angezeigt), und der [Rekorder](#doc_recorder) kann das Ergebnis aufnehmen.
+
+
+### Kanäle
+
+
+Die Tabelle listet die Kanäle der Datei auf, die Noten enthalten, wobei jeder Kanal eigene Einstellungen hat:
+
+Kanal
+: Die Nummer des Kanals; der Name seiner Spur wird in einem Tooltip angezeigt.
+  Die Schaltflächen :guilabel:`M` (Stummschalten) und :guilabel:`S` (Solo) schalten den Kanal stumm oder lassen nur die Kanäle im Solo hören.
+  Die MIDI-Schaltfläche zeigt die aktuellen MIDI-Werte des Kanals an, die von ihrem Standardwert abweichen: Controller, Pitch-Rad (in Halbtönen), seine Empfindlichkeit und Kanaldruck.
+
+Soundfont
+: Der vom Kanal gespielte Soundfont unter den in Tabs geöffneten Soundfonts, oder :guilabel:`Keine` für Stille.
+  Beim Öffnen einer Datei spielen alle Kanäle den Soundfont des aktuellen Tabs (oder den ersten geöffneten Soundfont).
+
+Preset
+: Mit :guilabel:`Auto` werden die Presets durch die Programmwechsel der Datei gewählt (Bank 128 auf Kanal 10, für das Schlagzeug), und das aktuelle Preset wird in Klammern angezeigt.
+  Andernfalls wird das in der Liste gewählte Preset gespielt, unabhängig davon, was die Datei anfordert.
+  Enthält der Soundfont das von der Datei angeforderte Preset nicht, wird ein Warnsymbol angezeigt und die Noten des Kanals werden nicht gespielt.
+
+Lautstärke
+: Die LED leuchtet auf, wenn Noten beginnen, und der Schieberegler ändert die Lautstärke des Kanals von -40 bis +10 dB (ein Doppelklick setzt sie auf 0 dB zurück).
+
+Die Liste der Soundfonts oder Presets öffnet sich mit einem Doppelklick auf eine Zelle oder mit einem Klick auf eine bereits ausgewählte Zelle.
+Diese Einstellungen werden zurückgesetzt, wenn eine andere Datei geöffnet wird.
+
+
+### Wiedergabeeinstellungen {#doc_midi_player_settings}
+
+
+Die Schaltfläche rechts im Banner öffnet ein Menü mit den folgenden Einstellungen, die beim Öffnen einer anderen Datei erhalten bleiben:
+
+Loop-Wiedergabe
+: Das Stück beginnt wieder von vorne, wenn es endet.
+
+Tempo
+: Wiedergabegeschwindigkeit, von 25 % bis 200 % des Tempos der Datei (ihre Tempowechsel bleiben erhalten).
+  Das Tempo der Datei wird in einem Tooltip angezeigt, und die im Banner angezeigte verstrichene Zeit und Dauer folgen der Wiedergabegeschwindigkeit.
+
+Tonhöhe
+: Transposition von -12 bis +12 Halbtönen, außer für das Schlagzeug (Bank 128).
+
+Ein Doppelklick auf einen Schieberegler setzt ihn auf seinen Standardwert zurück (100 % bzw. 0).
+
+
+![Wiedergabeeinstellungen](images/midi_player_settings.png "Wiedergabeeinstellungen")
+
+
+Das Menü endet mit :guilabel:`Audio exportieren...`, das das Stück so in eine :file:`.wav`-Datei schreibt, wie es im Player zu hören ist: dieselben Soundfonts, Presets, Lautstärken, Stummschaltungen und Solos, dasselbe Tempo und dieselbe Tonhöhe.
+Die Wiedergabe wird während des Exports pausiert, der endet, sobald der Klang der letzten Noten verklungen ist.
+Wird der Export abgebrochen, wird die unvollständige Datei gelöscht.
+Eine MIDI-Datei kann auch über die [Kommandozeile](manual/annexes/command-line.md#doc_render) als wav-Datei gespeichert werden.
 
 *[MIDI]: Musical Instrument Digital Interface

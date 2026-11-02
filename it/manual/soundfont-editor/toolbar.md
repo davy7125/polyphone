@@ -3,7 +3,8 @@ La barra degli strumenti, situata nella parte superiore dell'editor, contiene ic
 * le [funzioni di modifica](#doc_edit) più comuni,
 * il cambio di [vista](#doc_view) negli editor,
 * la visualizzazione del [registratore](#doc_recorder),
-* la visualizzazione della [tastiera virtuale](#doc_keyboard).
+* la visualizzazione della [tastiera virtuale](#doc_keyboard),
+* la visualizzazione del [lettore MIDI](#doc_midi_player).
 
 
 ![Barra degli strumenti](images/toolbar.png "Barra degli strumenti")
@@ -213,5 +214,83 @@ Volume
 
 Queste impostazioni sono le stesse delle [impostazioni del suono](manual/settings.md#doc_sound): una modifica fatta in un punto viene mostrata anche nell'altro.
 Una modifica è progressiva e non interrompe le note in corso.
+
+
+## Lettore MIDI {#doc_midi_player}
+
+
+Facendo clic sull'icona ![MIDI](images/toolbar_midi.png "MIDI"){.inline} si apre una finestra con il lettore MIDI, che riproduce un file MIDI (:file:`.mid`, :file:`.midi`, :file:`.kar` o :file:`.rmi`) con i soundfont aperti, per provarli in un brano musicale.
+I soundfont vengono suonati così come sono nell'editor, con le modifiche non salvate.
+Il lettore MIDI è disponibile anche in [modalità sintetizzatore](tutorials/use-polyphone-as-a-synthesizer.md).
+
+
+![Lettore MIDI](images/midi_player.png "Lettore MIDI")
+
+
+La fascia in alto nella finestra contiene, da sinistra a destra:
+
+* un pulsante per aprire un file MIDI (all'apertura della finestra, l'ultimo file aperto viene ricaricato se esiste ancora),
+* il nome del file, il tempo trascorso e la durata totale, sopra un cursore per spostarsi in un altro punto del brano,
+* un pulsante per avviare o mettere in pausa la riproduzione, accessibile anche con :kbd:`Space`,
+* un pulsante per fermare la riproduzione e tornare all'inizio,
+* un pulsante che apre le [impostazioni di riproduzione](#doc_midi_player_settings).
+
+Se il file non può essere letto, il motivo viene mostrato al posto dei canali.
+La riproduzione si ferma quando la finestra viene chiusa.
+
+Durante la riproduzione, una tastiera MIDI esterna o la [tastiera virtuale](#doc_keyboard) possono ancora suonare l'elemento selezionato nell'editor insieme al file (le note del file non vengono mostrate sulla tastiera virtuale), e il [registratore](#doc_recorder) può registrare il risultato.
+
+
+### Canali
+
+
+La tabella elenca i canali del file che contengono note, ognuno con le proprie impostazioni:
+
+Canale
+: Il numero del canale; il nome della sua traccia viene mostrato in un suggerimento.
+  I pulsanti :guilabel:`M` (silenzia) e :guilabel:`S` (solo) silenziano il canale o fanno sentire solo i canali in solo.
+  Il pulsante MIDI mostra i valori MIDI attuali del canale che differiscono dal loro valore predefinito: controller, ruota del pitch (in semitoni), la sua sensibilità e pressione del canale.
+
+Soundfont
+: Il soundfont suonato dal canale, tra i soundfont aperti nelle schede, oppure :guilabel:`Nessuno` per il silenzio.
+  All'apertura di un file, tutti i canali suonano il soundfont della scheda corrente (o il primo soundfont aperto).
+
+Preset
+: Con :guilabel:`Auto`, i preset vengono scelti dai cambi di programma del file (banco 128 sul canale 10, per le percussioni) e il preset corrente viene mostrato tra parentesi.
+  Altrimenti viene suonato il preset scelto nell'elenco, qualunque cosa richieda il file.
+  Se il soundfont non contiene il preset richiesto dal file, viene mostrata un'icona di avviso e le note del canale non vengono suonate.
+
+Volume
+: Il LED si accende quando iniziano delle note, e il cursore modifica il volume del canale da -40 a +10 dB (un doppio clic lo riporta a 0 dB).
+
+L'elenco dei soundfont o dei preset si apre con un doppio clic su una cella, o con un clic su una cella già selezionata.
+Queste impostazioni vengono reimpostate quando si apre un altro file.
+
+
+### Impostazioni di riproduzione {#doc_midi_player_settings}
+
+
+Il pulsante a destra della fascia apre un menu con le seguenti impostazioni, che vengono mantenute quando si apre un altro file:
+
+Riproduzione in loop
+: Il brano ricomincia dall'inizio quando finisce.
+
+Tempo
+: Velocità di riproduzione, dal 25% al 200% del tempo del file (i suoi cambi di tempo vengono mantenuti).
+  Il tempo del file viene mostrato in un suggerimento, e il tempo trascorso e la durata mostrati nella fascia seguono la velocità di riproduzione.
+
+Intonazione
+: Trasposizione da -12 a +12 semitoni, tranne che per le percussioni (banco 128).
+
+Un doppio clic su un cursore lo riporta al suo valore predefinito (100% e 0).
+
+
+![Impostazioni di riproduzione](images/midi_player_settings.png "Impostazioni di riproduzione")
+
+
+Il menu termina con :guilabel:`Esporta audio...`, che scrive il brano in un file :file:`.wav` così come si sente nel lettore: stessi soundfont, preset, volumi, silenziamento e solo, tempo e intonazione.
+La riproduzione viene messa in pausa durante l'esportazione, che termina quando il suono delle ultime note si è spento.
+Se l'esportazione viene annullata, il file incompleto viene eliminato.
+Un file MIDI può anche essere convertito in un file wav dalla [riga di comando](manual/annexes/command-line.md#doc_render).
 
 *[MIDI]: Musical Instrument Digital Interface

@@ -20,45 +20,52 @@ MIDI 文件包含 MIDI 消息，组合起来就构成一段旋律。它们可以
 
 要用下文介绍的方法播放 MIDI 文件，你需要：
 
-- 能够上网，
-- 一个网页浏览器，
+- 最新版本的 Polyphone，可在这个[页面](software)获取，
 - 一个 MIDI 文件，例如<a href="files/ff7choco.mid" download>这个</a>，
-- 可选：一个你想测试、且符合 <a href="https://zh.wikipedia.org/wiki/General_MIDI" target="_blank">General MIDI</a> 标准的音色库（[仓库](soundfonts/midi-standard/gm)中有相应的筛选条件），
-- 可选：最新版本的 Polyphone，可在这个[页面](software)获取。
+- 一个你想测试、且符合 <a href="https://zh.wikipedia.org/wiki/General_MIDI" target="_blank">General MIDI</a> 标准的音色库（[仓库](soundfonts/midi-standard/gm)中有相应的筛选条件）。
+
+不符合该标准的音色库也可以测试，只需[自己选择它的预设](#doc_presets)。
 
 
 ## 播放 MIDI 文件
 
 
-一个简单的方法是使用 <a href="https://spessasus.github.io/SpessaSynth/" target="_blank">SpessaSynth</a> 合成器，它既是 MIDI 文件播放器，又是音色库合成器。它的优点是可以在线使用，无需任何特殊安装。
+在 Polyphone 中打开你的音色库，然后单击[工具栏](manual/soundfont-editor/toolbar.md)右侧的 ![MIDI](images/toolbar_midi.png "MIDI"){.inline} 图标，显示[MIDI 播放器](manual/soundfont-editor/toolbar.md#doc_midi_player)。
 
-单击 :guilabel:`Load MIDI file` 按钮，选择你的 MIDI 文件，就可以开始了。
+单击窗口左上角的文件夹按钮，选择你的 MIDI 文件，然后单击播放按钮（或按 :kbd:`Space`），就可以开始了。
 
-![SpessaSynth MIDI 播放器和合成器](images/SpessaSynth.jpg "SpessaSynth MIDI 播放器和合成器")
+![Polyphone 的 MIDI 播放器](images/midi_player.png "Polyphone 的 MIDI 播放器")
 
+文件中每个包含音符的通道在表格中各占一行。:guilabel:`预设` 列显示文件请求的预设（它可能在乐曲中途改变），每当有音符开始时，:guilabel:`音量` 列中的指示灯就会亮起。文件名下方的滑块可用于跳转到乐曲的其他段落。
 
-## 选择音色库
-
-
-要使用你选择的音色库，请单击 :guilabel:`Upload soundfont` 按钮并选择你的文件。
+以[合成器模式](tutorials/use-polyphone-as-a-synthesizer.md)打开 Polyphone 时，也可以使用 MIDI 播放器。
 
 
-## 将 MIDI 输出连接到 Polyphone
+## 测试音色库
 
 
-如上所述，**SpessaSynth** 既是 MIDI 文件播放器，又是合成器。也可以只使用它的 MIDI 文件播放功能，把信号发送给 Polyphone，由 Polyphone 负责声音合成。如果音色库太大，不便通过互联网上传，这种方式会很有用。
+音色库按其在编辑器中的状态演奏，包括尚未保存的修改：你可以在乐曲播放时编辑乐器，并立即听到结果，例如在调整其音量、包络或滤波器时。
 
-将 SpessaSynth 连接到 Polyphone 的方法（已在 Linux 上测试）：
+播放器还可以帮助你听清细节：
 
-- 以[合成器模式](tutorials/use-polyphone-as-a-synthesizer.md)启动 Polyphone，并打开[设置](manual/settings.md#doc_general)，
-- 选择“MIDI through”作为 MIDI 输入（记住这个名称），
-- 在网页浏览器中打开 SpessaSynth，并打开它的设置，
-- 选择 MIDI 输出“MIDI through”（与 Polyphone 的 MIDI 输入同名）。
+- 通道的 :guilabel:`S`（独奏）和 :guilabel:`M`（静音）按钮可以单独播放某个乐器或将其从混音中去掉，:guilabel:`音量` 列中的滑块则用于平衡它与其他通道的音量；
+- :guilabel:`预设` 列中的警告图标表示音色库中没有文件请求的预设：该通道的音符不会被演奏，这说明该音色库没有完全符合 General MIDI 标准；
+- 通道的 MIDI 按钮会列出文件当前使用的控制器（调制轮、表情、混响……），便于检查音色库的[调制器](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_modulator)；
+- 横幅右侧的[播放设置](manual/soundfont-editor/toolbar.md#doc_midi_player_settings)可以循环播放乐曲、放慢速度以便听清快速段落，或者移调以测试其他音。
 
-由于 MIDI 文件可以向 16 个通道发送消息，需要将音色库打开 16 次，并为每个标签页指定 1 到 16 中的不同通道。为方便起见，打开 Polyphone 时可以指定要打开的音色库以及选项“each”，从而一次打开全部 16 个标签页。例如，命令如下：
 
-```
-polyphone -s -i "/home/davy/Downloads/gm.sf2" -c "each|off|off"
-```
+## 选择音色库和预设 {#doc_presets}
 
-关于命令行的更多信息，请参阅这个[页面](manual/annexes/command-line.md#doc_synth)。
+
+每个通道都可以演奏不同的音色库：在 Polyphone 中打开多个音色库，然后双击 :guilabel:`音色库` 列中的单元格，选择该通道演奏的音色库。例如，你可以在同一声部上比较两个音色库的钢琴，或者在你自己的音色库演奏旋律时，用一个 General MIDI 音色库演奏伴奏。
+
+![选择通道的音色库](images/midi_player_soundfonts.png "选择通道的音色库")
+
+同样，双击 :guilabel:`预设` 列中的单元格，可以强制使用音色库中的某个预设，而不使用文件请求的预设。这样就可以测试不符合 General MIDI 标准的音色库，例如只包含一个乐器的音色库：为旋律所在的通道选择它的预设，该通道就会忽略文件中的程序变更。
+
+
+## 导出结果
+
+
+对结果满意后，播放设置中的 :guilabel:`导出音频...` 会按播放器中听到的效果将乐曲写入 wav 文件，音色库、预设、音量、速度和音高均与播放器相同。
+也可以通过[命令行](manual/annexes/command-line.md#doc_render)将 MIDI 文件转换为 wav 文件，例如在脚本中使用。

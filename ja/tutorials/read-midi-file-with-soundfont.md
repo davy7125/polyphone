@@ -20,45 +20,52 @@ MIDIファイルにはMIDIメッセージが含まれており、それらを組
 
 以下で説明する方法でMIDIファイルを再生するには、次のものが必要です。
 
-- インターネット接続
-- Webブラウザー
+- この[ページ](software)で入手できるPolyphoneの最新バージョン
 - MIDIファイル（たとえば<a href="files/ff7choco.mid" download>このファイル</a>）
-- 必要に応じて、試してみたい<a href="https://ja.wikipedia.org/wiki/General_MIDI" target="_blank">General MIDI</a>規格準拠のSoundFont（[リポジトリ](soundfonts/midi-standard/gm)には専用のフィルターがあります）
-- 必要に応じて、この[ページ](software)で入手できるPolyphoneの最新バージョン
+- 試してみたい<a href="https://ja.wikipedia.org/wiki/General_MIDI" target="_blank">General MIDI</a>規格準拠のSoundFont（[リポジトリ](soundfonts/midi-standard/gm)には専用のフィルターがあります）
+
+この規格に準拠していないSoundFontも、[プリセットを自分で選ぶ](#doc_presets)ことで試すことができます。
 
 
 ## MIDIファイルの再生
 
 
-簡単な方法は、MIDIファイルプレーヤーとSoundFontシンセサイザーを兼ねた<a href="https://spessasus.github.io/SpessaSynth/" target="_blank">SpessaSynth</a>を使うことです。オンラインで利用でき、特別なインストールが不要という利点があります。
+PolyphoneでSoundFontを開き、[ツールバー](manual/soundfont-editor/toolbar.md)の右側にあるアイコン ![MIDI](images/toolbar_midi.png "MIDI"){.inline} をクリックして[MIDIプレーヤー](manual/soundfont-editor/toolbar.md#doc_midi_player)を表示します。
 
-:guilabel:`Load MIDI file` ボタンをクリックしてMIDIファイルを選択すれば、準備は完了です。
+ウィンドウ左上のフォルダーボタンをクリックしてMIDIファイルを選択し、再生ボタンをクリック（または :kbd:`Space` を押す）すれば、準備は完了です。
 
-![SpessaSynthのMIDIプレーヤーとシンセサイザー](images/SpessaSynth.jpg "SpessaSynthのMIDIプレーヤーとシンセサイザー")
+![PolyphoneのMIDIプレーヤー](images/midi_player.png "PolyphoneのMIDIプレーヤー")
 
+ファイルのうちノートを含む各チャンネルが、表の1行に表示されます。:guilabel:`プリセット` 列には、ファイルが指定しているプリセット（曲の途中で変わることがあります）が表示され、:guilabel:`ボリューム` 列のLEDはノートが始まるたびに点灯します。ファイル名の下にあるスライダーで、曲の別の箇所へ移動できます。
 
-## SoundFontの選択
-
-
-好きなSoundFontを使うには、:guilabel:`Upload soundfont` ボタンをクリックしてファイルを選択します。
+MIDIプレーヤーは、Polyphoneを[シンセモード](tutorials/use-polyphone-as-a-synthesizer.md)で開いた場合にも使用できます。
 
 
-## MIDI出力をPolyphoneに接続する
+## SoundFontを試す
 
 
-上で述べたように、**SpessaSynth**はMIDIファイルプレーヤーであると同時にシンセサイザーでもあります。MIDIファイルプレーヤーの機能だけを使い、信号をPolyphoneに送って、音の合成をPolyphoneに任せることもできます。これは、SoundFontが大きすぎてインターネット経由で送れない場合に便利です。
+SoundFontはエディターでの状態のまま、保存されていない変更も含めて演奏されます。曲を再生しながらインストゥルメントを編集し、その結果をすぐに聞くことができます。たとえば、ボリューム、エンベロープ、フィルターを調整するときに便利です。
 
-SpessaSynthをPolyphoneに接続するには、次のようにします（Linuxで動作確認済みの方法です）。
+プレーヤーには、細部を聞き取るための機能もあります。
 
-- Polyphoneを[シンセモード](tutorials/use-polyphone-as-a-synthesizer.md)で起動し、[設定](manual/settings.md#doc_general)を開きます。
-- MIDI入力として「MIDI through」を選択します（名前を覚えておいてください）。
-- WebブラウザーでSpessaSynthを開き、その設定を開きます。
-- MIDI出力として「MIDI through」（PolyphoneのMIDI入力と同じ名前）を選択します。
+- チャンネルの :guilabel:`S`（ソロ）ボタンと :guilabel:`M`（ミュート）ボタンで、インストゥルメントを単独で鳴らしたりミックスから外したりでき、:guilabel:`ボリューム` 列のスライダーでほかのチャンネルとのバランスを取れます。
+- :guilabel:`プリセット` 列の警告アイコンは、ファイルが指定したプリセットがSoundFontにないことを示します。そのチャンネルのノートは演奏されないため、General MIDI規格に完全には準拠していないSoundFontであることがわかります。
+- チャンネルのMIDIボタンには、ファイルがその時点で使っているコントローラー（モジュレーションホイール、エクスプレッション、リバーブ…）が一覧表示されるので、SoundFontの[モジュレーター](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_modulator)を確認するのに役立ちます。
+- バナーの右側にある[再生設定](manual/soundfont-editor/toolbar.md#doc_midi_player_settings)では、曲をループ再生したり、速いパッセージを聞くために遅くしたり、ほかの音を試すために移調したりできます。
 
-MIDIファイルは16のチャンネルにメッセージを送信できるため、SoundFontを16回開き、タブごとに1から16までの異なるチャンネルを指定する必要があります。便利な方法として、Polyphoneを開くときに、開くSoundFontとオプション「each」を指定すれば、16個のタブを一度に開けます。たとえば、コマンドは次のようになります。
 
-```
-polyphone -s -i "/home/davy/Downloads/gm.sf2" -c "each|off|off"
-```
+## SoundFontとプリセットの選択 {#doc_presets}
 
-コマンドラインについて詳しくは、この[ページ](manual/annexes/command-line.md#doc_synth)を参照してください。
+
+チャンネルごとに異なるSoundFontを演奏させることができます。Polyphoneで複数のSoundFontを開き、:guilabel:`SoundFont` 列のセルをダブルクリックして、そのチャンネルが演奏するSoundFontを選びます。たとえば、同じパートで2つのSoundFontのピアノを比べたり、自分のSoundFontでメロディーを演奏しながら、伴奏にはGeneral MIDIのSoundFontを使ったりできます。
+
+![チャンネルのSoundFontの選択](images/midi_player_soundfonts.png "チャンネルのSoundFontの選択")
+
+同様に、:guilabel:`プリセット` 列のセルをダブルクリックすると、ファイルが指定したプリセットの代わりに、SoundFontのプリセットを強制的に使用できます。これにより、General MIDI規格に準拠していないSoundFont（たとえばインストゥルメントが1つだけのSoundFont）を試すことができます。メロディーのチャンネルにそのプリセットを選ぶと、そのチャンネルではファイルのプログラムチェンジが無視されます。
+
+
+## 結果の書き出し
+
+
+結果に満足したら、再生設定の :guilabel:`オーディオをエクスポート...` で、プレーヤーで聞こえるとおりに曲をwavファイルに書き出せます。SoundFont、プリセット、ボリューム、テンポ、ピッチはプレーヤーと同じです。
+MIDIファイルは[コマンドライン](manual/annexes/command-line.md#doc_render)からwavファイルに変換することもできます（たとえばスクリプトで使う場合）。

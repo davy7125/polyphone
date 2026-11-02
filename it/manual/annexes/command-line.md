@@ -216,6 +216,7 @@ Tutti i canali del file MIDI suonano il soundfont, e i preset vengono scelti dai
 Vengono usate le impostazioni del sintetizzatore: [suono](manual/settings.md#doc_sound) (riverbero, chorus, volume generale), [polifonia](manual/settings.md#doc_general) e [accordatura](manual/settings.md#doc_keyboard).
 Il risultato è un file wav stereo a 32 bit in virgola mobile a 48.000 Hz, che termina quando il suono delle ultime note si è spento. Un file wav esistente viene sostituito.
 Le note di un preset che il soundfont non contiene non vengono suonate, e viene mostrato un avviso per quel preset.
+Nell'interfaccia grafica, un file MIDI può anche essere esportato dal [lettore MIDI](manual/soundfont-editor/toolbar.md#doc_midi_player_settings), dove ogni canale può suonare un soundfont o un preset diverso.
 
 
 ## Conversione in dls {#doc_dls}
@@ -280,7 +281,7 @@ polyphone -s -i <file/to/read> -c <configuration>
 -c
 : Configurazione del sintetizzatore, composta da 3 valori separati dal carattere «|». Questo argomento è facoltativo; per impostazione predefinita vale «0|off|off». Questi parametri possono poi essere modificati tramite l'interfaccia grafica.
   
-  * Il primo valore è il numero del canale MIDI (tra 1 e 16) da ascoltare per suonare. Un valore di 0 o «all» indica che verranno usati tutti i canali, elaborati come un unico canale. Un valore di -1 o «each» ascolta ogni canale separatamente, il che è un prerequisito ad esempio per [riprodurre file MIDI](tutorials/read-midi-file-with-soundfont.md).
+  * Il primo valore è il numero del canale MIDI (tra 1 e 16) da ascoltare per suonare. Un valore di 0 o «all» indica che verranno usati tutti i canali, elaborati come un unico canale. Un valore di -1 o «each» ascolta ogni canale separatamente, il che è un prerequisito ad esempio per suonare l'uscita MIDI di un sequencer (un file MIDI può anche essere riprodotto direttamente con il [lettore MIDI](manual/soundfont-editor/toolbar.md#doc_midi_player)).
   * Il secondo valore è «off» o «on» e disattiva o attiva la selezione di più preset da suonare.
   * Il terzo valore è «off», «on» o «toggle» e disattiva o attiva la selezione dei preset tramite i tasti corrispondenti al numero di preset (ad esempio, il tasto 0 attiva il preset 0).
 
