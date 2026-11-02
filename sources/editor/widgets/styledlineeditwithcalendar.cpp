@@ -8,6 +8,8 @@
 #include <QTableView>
 #include <QPushButton>
 #include <QHBoxLayout>
+#include "contextmanager.h"
+#include "translationmanager.h"
 
 CalendarPopup::CalendarPopup(QWidget * parent) : QFrame(parent, Qt::FramelessWindowHint)
 {
@@ -101,10 +103,21 @@ void StyledLineEditWithCalendar::setInitialText(const QString &text)
     _initialText = text;
     _currentDate = QDate(); // Invalid date
 
-    // Try to find the datetime with the current locale or with the EN locale
-    QDateTime dateTime = this->locale().toDateTime(_initialText, "dddd d MMMM yyyy, hh:mm:ss");
+    // Try to find the datetime with the current locale, with the EN locale or with the locale of another translation
+    // (former versions wrote the date in the language of the interface)
+    QString format = "dddd d MMMM yyyy, hh:mm:ss";
+    QDateTime dateTime = this->locale().toDateTime(_initialText, format);
     if (!dateTime.isValid())
-        dateTime = QDateTime::fromString(_initialText, "dddd d MMMM yyyy, hh:mm:ss");
+        dateTime = QDateTime::fromString(_initialText, format);
+    if (!dateTime.isValid())
+    {
+        foreach (QString language, ContextManager::translation()->getLanguages().keys())
+        {
+            dateTime = QLocale(language).toDateTime(_initialText, format);
+            if (dateTime.isValid())
+                break;
+        }
+    }
     if (!dateTime.isValid())
         dateTime = QDateTime::fromString(_initialText, "yyyy-MM-ddThh:mm:ss");
     if (dateTime.isValid())

@@ -1,12 +1,12 @@
 polyphone (2.7) UNRELEASED; urgency=low
 
   * (new) DLS import (levels 1 and 2) and export (level 2)
+  * (new) MIDI player, with an audio export to a wav file (also available with the command line)
   * (new) voice overflow management: above a maximum polyphony or processor load, the quietest notes fade out
   * (new) button for removing the loop of the selected samples
   * (new) tool for converting stereo samples to mono, with the possible merge of the left and right divisions in the instruments
-  * (new) MIDI player, with an audio export to a wav file also available with the command line
   * (new) option for reopening at startup the soundfonts and directories that were open when Polyphone was closed
-  * (new) messages published on polyphone.io shown in a banner of the home screen (new version, alert, announcement, appeal for support), which can be disabled in the settings
+  * (new) messages published on polyphone.io shown in a banner of the home screen, which can be disabled in the settings
   * (improvement) faster sound engine
   * (improvement) the startup view can open the first instrument or preset on its ranges or envelopes page
   * (improvement) knobs are edited by dragging the mouse (finer with Shift) and a double click on a knob or a slider restores its default value
@@ -17,7 +17,7 @@ polyphone (2.7) UNRELEASED; urgency=low
   * (improvement) preset list filter / selection
   * (improvement) the soundfont explorer shows the files in columns sorted by clicking on their header, the columns and the preset summary can be hidden
   * (improvement) the sample, instrument or preset selected in the soundfont explorer can be played with the virtual keyboard or a MIDI keyboard
-  * (improvement) online repository: size of the soundfonts displayed and filtered, results sortable by trend (downloads over the last 90 days) or by size, keyword search also in the tags and attributes
+  * (improvement) size of the soundfonts displayed and filtered in the online repository, results sortable by trend or by size
   * (improvement) various ergonomic improvements
   * (fix) the calendar of the date field could appear when a soundfont was opened in the background
   * (fix) a soundfont opened again while it was still loading was opened in a second tab
@@ -34,7 +34,7 @@ polyphone (2.6) unstable; urgency=low
   * (new) startup view option
   * (new) RPN messages can change the tuning
   * (new) option for allowing the compression in a soundfont
-  * (new) option for compressing a non-compressed sample in a sf3 file
+  * (new) option for compressing a non-compressed sample in an sf3 file
   * (new) display of the compressed samples in the sample summary page
   * (new) icons for soundfont files on Windows and MacOS
   * (improvement) saving a sf3 file does not lower the sample quality

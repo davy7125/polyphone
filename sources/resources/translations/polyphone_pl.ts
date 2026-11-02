@@ -435,12 +435,12 @@
 <context>
     <name>CalendarPopup</name>
     <message>
-        <location filename="../../editor/widgets/styledlineeditwithcalendar.cpp" line="30"/>
+        <location filename="../../editor/widgets/styledlineeditwithcalendar.cpp" line="32"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Anuluj</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/styledlineeditwithcalendar.cpp" line="31"/>
+        <location filename="../../editor/widgets/styledlineeditwithcalendar.cpp" line="33"/>
         <source>&amp;Ok</source>
         <translation>&amp;Ok</translation>
     </message>
@@ -3600,6 +3600,7 @@ domyślnego mod.</translation>
     <name>ModulatorComboSrc</name>
     <message>
         <location filename="../../editor/modulator/modulatorcombosrc.cpp" line="64"/>
+        <location filename="../../editor/modulator/modulatorcombosrc.cpp" line="284"/>
         <source>Link</source>
         <translation>Łącze</translation>
     </message>
@@ -3612,6 +3613,41 @@ domyślnego mod.</translation>
         <location filename="../../editor/modulator/modulatorcombosrc.cpp" line="96"/>
         <source>Modulator</source>
         <translation>Modulator</translation>
+    </message>
+    <message>
+        <location filename="../../editor/modulator/modulatorcombosrc.cpp" line="277"/>
+        <source>No controller, = 1</source>
+        <translation>Brak kontrolera, = 1</translation>
+    </message>
+    <message>
+        <location filename="../../editor/modulator/modulatorcombosrc.cpp" line="278"/>
+        <source>Note-On velocity</source>
+        <translation>Siła klawisza (Note-On)</translation>
+    </message>
+    <message>
+        <location filename="../../editor/modulator/modulatorcombosrc.cpp" line="279"/>
+        <source>Note-On key number</source>
+        <translation>Numer klawisza (Note-On)</translation>
+    </message>
+    <message>
+        <location filename="../../editor/modulator/modulatorcombosrc.cpp" line="280"/>
+        <source>Poly pressure</source>
+        <translation>Nacisk polifoniczny</translation>
+    </message>
+    <message>
+        <location filename="../../editor/modulator/modulatorcombosrc.cpp" line="281"/>
+        <source>Channel pressure</source>
+        <translation>Nacisk kanału</translation>
+    </message>
+    <message>
+        <location filename="../../editor/modulator/modulatorcombosrc.cpp" line="282"/>
+        <source>Pitch wheel</source>
+        <translation>Koło wysokości</translation>
+    </message>
+    <message>
+        <location filename="../../editor/modulator/modulatorcombosrc.cpp" line="283"/>
+        <source>Pitch wheel sensitivity</source>
+        <translation>Czułość koła wysokości</translation>
     </message>
 </context>
 <context>

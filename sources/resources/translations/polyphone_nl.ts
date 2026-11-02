@@ -435,12 +435,12 @@
 <context>
     <name>CalendarPopup</name>
     <message>
-        <location filename="../../editor/widgets/styledlineeditwithcalendar.cpp" line="30"/>
+        <location filename="../../editor/widgets/styledlineeditwithcalendar.cpp" line="32"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Annuleren</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/styledlineeditwithcalendar.cpp" line="31"/>
+        <location filename="../../editor/widgets/styledlineeditwithcalendar.cpp" line="33"/>
         <source>&amp;Ok</source>
         <translation>&amp;Ok</translation>
     </message>
@@ -3607,6 +3607,7 @@ overschrijven</translation>
     <name>ModulatorComboSrc</name>
     <message>
         <location filename="../../editor/modulator/modulatorcombosrc.cpp" line="64"/>
+        <location filename="../../editor/modulator/modulatorcombosrc.cpp" line="284"/>
         <source>Link</source>
         <translation>Link</translation>
     </message>
@@ -3619,6 +3620,41 @@ overschrijven</translation>
         <location filename="../../editor/modulator/modulatorcombosrc.cpp" line="96"/>
         <source>Modulator</source>
         <translation>Modulator</translation>
+    </message>
+    <message>
+        <location filename="../../editor/modulator/modulatorcombosrc.cpp" line="277"/>
+        <source>No controller, = 1</source>
+        <translation>Geen controller, = 1</translation>
+    </message>
+    <message>
+        <location filename="../../editor/modulator/modulatorcombosrc.cpp" line="278"/>
+        <source>Note-On velocity</source>
+        <translation>Note-On-snelheid</translation>
+    </message>
+    <message>
+        <location filename="../../editor/modulator/modulatorcombosrc.cpp" line="279"/>
+        <source>Note-On key number</source>
+        <translation>Note-On-toetsnummer</translation>
+    </message>
+    <message>
+        <location filename="../../editor/modulator/modulatorcombosrc.cpp" line="280"/>
+        <source>Poly pressure</source>
+        <translation>Polyfone druk</translation>
+    </message>
+    <message>
+        <location filename="../../editor/modulator/modulatorcombosrc.cpp" line="281"/>
+        <source>Channel pressure</source>
+        <translation>Kanaaldruk</translation>
+    </message>
+    <message>
+        <location filename="../../editor/modulator/modulatorcombosrc.cpp" line="282"/>
+        <source>Pitch wheel</source>
+        <translation>Pitch wheel</translation>
+    </message>
+    <message>
+        <location filename="../../editor/modulator/modulatorcombosrc.cpp" line="283"/>
+        <source>Pitch wheel sensitivity</source>
+        <translation>Gevoeligheid van de pitch wheel</translation>
     </message>
 </context>
 <context>

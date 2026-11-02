@@ -435,12 +435,12 @@
 <context>
     <name>CalendarPopup</name>
     <message>
-        <location filename="../../editor/widgets/styledlineeditwithcalendar.cpp" line="30"/>
+        <location filename="../../editor/widgets/styledlineeditwithcalendar.cpp" line="32"/>
         <source>&amp;Cancel</source>
         <translation>취소(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/styledlineeditwithcalendar.cpp" line="31"/>
+        <location filename="../../editor/widgets/styledlineeditwithcalendar.cpp" line="33"/>
         <source>&amp;Ok</source>
         <translation>확인(&amp;O)</translation>
     </message>
@@ -3599,6 +3599,7 @@ default mod.</source>
     <name>ModulatorComboSrc</name>
     <message>
         <location filename="../../editor/modulator/modulatorcombosrc.cpp" line="64"/>
+        <location filename="../../editor/modulator/modulatorcombosrc.cpp" line="284"/>
         <source>Link</source>
         <translation>연결</translation>
     </message>
@@ -3611,6 +3612,41 @@ default mod.</source>
         <location filename="../../editor/modulator/modulatorcombosrc.cpp" line="96"/>
         <source>Modulator</source>
         <translation>모듈레이터</translation>
+    </message>
+    <message>
+        <location filename="../../editor/modulator/modulatorcombosrc.cpp" line="277"/>
+        <source>No controller, = 1</source>
+        <translation>컨트롤러 없음, = 1</translation>
+    </message>
+    <message>
+        <location filename="../../editor/modulator/modulatorcombosrc.cpp" line="278"/>
+        <source>Note-On velocity</source>
+        <translation>노트 온 벨로시티</translation>
+    </message>
+    <message>
+        <location filename="../../editor/modulator/modulatorcombosrc.cpp" line="279"/>
+        <source>Note-On key number</source>
+        <translation>노트 온 키 번호</translation>
+    </message>
+    <message>
+        <location filename="../../editor/modulator/modulatorcombosrc.cpp" line="280"/>
+        <source>Poly pressure</source>
+        <translation>폴리 프레셔</translation>
+    </message>
+    <message>
+        <location filename="../../editor/modulator/modulatorcombosrc.cpp" line="281"/>
+        <source>Channel pressure</source>
+        <translation>채널 프레셔</translation>
+    </message>
+    <message>
+        <location filename="../../editor/modulator/modulatorcombosrc.cpp" line="282"/>
+        <source>Pitch wheel</source>
+        <translation>피치 휠</translation>
+    </message>
+    <message>
+        <location filename="../../editor/modulator/modulatorcombosrc.cpp" line="283"/>
+        <source>Pitch wheel sensitivity</source>
+        <translation>피치 휠 감도</translation>
     </message>
 </context>
 <context>

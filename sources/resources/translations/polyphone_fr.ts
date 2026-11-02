@@ -435,12 +435,12 @@
 <context>
     <name>CalendarPopup</name>
     <message>
-        <location filename="../../editor/widgets/styledlineeditwithcalendar.cpp" line="30"/>
+        <location filename="../../editor/widgets/styledlineeditwithcalendar.cpp" line="32"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Annuler</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/styledlineeditwithcalendar.cpp" line="31"/>
+        <location filename="../../editor/widgets/styledlineeditwithcalendar.cpp" line="33"/>
         <source>&amp;Ok</source>
         <translation>&amp;Ok</translation>
     </message>
@@ -1392,12 +1392,12 @@ en ligne</translation>
     <message>
         <location filename="../../clavier/controllerarea.cpp" line="232"/>
         <source>on</source>
-        <translation>on</translation>
+        <translation>activé</translation>
     </message>
     <message>
         <location filename="../../clavier/controllerarea.cpp" line="232"/>
         <source>off</source>
-        <translation>off</translation>
+        <translation>désactivé</translation>
     </message>
 </context>
 <context>
@@ -3572,7 +3572,7 @@ mod. par défaut</translation>
     <message>
         <location filename="../../editor/modulator/modulatorcell.cpp" line="407"/>
         <source>Multiply from:</source>
-        <translation>Multiplication de:</translation>
+        <translation>Multiplication de :</translation>
     </message>
     <message>
         <location filename="../../editor/modulator/modulatorcell.cpp" line="409"/>
@@ -3593,6 +3593,7 @@ mod. par défaut</translation>
     <name>ModulatorComboSrc</name>
     <message>
         <location filename="../../editor/modulator/modulatorcombosrc.cpp" line="64"/>
+        <location filename="../../editor/modulator/modulatorcombosrc.cpp" line="284"/>
         <source>Link</source>
         <translation>Lien</translation>
     </message>
@@ -3605,6 +3606,41 @@ mod. par défaut</translation>
         <location filename="../../editor/modulator/modulatorcombosrc.cpp" line="96"/>
         <source>Modulator</source>
         <translation>Modulateur</translation>
+    </message>
+    <message>
+        <location filename="../../editor/modulator/modulatorcombosrc.cpp" line="277"/>
+        <source>No controller, = 1</source>
+        <translation>Aucun contrôleur, = 1</translation>
+    </message>
+    <message>
+        <location filename="../../editor/modulator/modulatorcombosrc.cpp" line="278"/>
+        <source>Note-On velocity</source>
+        <translation>Vélocité de la note</translation>
+    </message>
+    <message>
+        <location filename="../../editor/modulator/modulatorcombosrc.cpp" line="279"/>
+        <source>Note-On key number</source>
+        <translation>Numéro de la note</translation>
+    </message>
+    <message>
+        <location filename="../../editor/modulator/modulatorcombosrc.cpp" line="280"/>
+        <source>Poly pressure</source>
+        <translation>Pression polyphonique</translation>
+    </message>
+    <message>
+        <location filename="../../editor/modulator/modulatorcombosrc.cpp" line="281"/>
+        <source>Channel pressure</source>
+        <translation>Pression globale</translation>
+    </message>
+    <message>
+        <location filename="../../editor/modulator/modulatorcombosrc.cpp" line="282"/>
+        <source>Pitch wheel</source>
+        <translation>Pitch-Bend</translation>
+    </message>
+    <message>
+        <location filename="../../editor/modulator/modulatorcombosrc.cpp" line="283"/>
+        <source>Pitch wheel sensitivity</source>
+        <translation>Sensibilité du Pitch-Bend</translation>
     </message>
 </context>
 <context>

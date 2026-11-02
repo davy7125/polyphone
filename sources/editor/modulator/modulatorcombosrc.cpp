@@ -274,14 +274,14 @@ QString ModulatorComboSrc::getIndexName(quint16 iVal, bool CC)
     {
         switch (iVal)
         {
-        case 0: qStr = "No controller, = 1"; break;
-        case 2: qStr = "Note-On velocity"; break;
-        case 3: qStr = "Note-On key number"; break;
-        case 10: qStr = "Poly pressure"; break;
-        case 13: qStr = "Channel pressure"; break;
-        case 14: qStr = "Pitch wheel"; break;
-        case 16: qStr = "Pitch wheel sensitivity"; break;
-        case 127: qStr = "Link"; break;
+        case 0: qStr = tr("No controller, = 1"); break;
+        case 2: qStr = tr("Note-On velocity"); break;
+        case 3: qStr = tr("Note-On key number"); break;
+        case 10: qStr = tr("Poly pressure"); break;
+        case 13: qStr = tr("Channel pressure"); break;
+        case 14: qStr = tr("Pitch wheel"); break;
+        case 16: qStr = tr("Pitch wheel sensitivity"); break;
+        case 127: qStr = tr("Link"); break;
         }
     }
     return qStr;
