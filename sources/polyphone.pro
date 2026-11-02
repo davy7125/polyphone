@@ -7,7 +7,7 @@
 # Use local copies of RtAudio, RtMidi, and Stk libraries
 # (this is forced to true for Windows or Mac OS X)
 # Uncomment a line if your distribution does not come with some of the following libraries
-DEFINES += USE_LOCAL_RTAUDIO
+#DEFINES += USE_LOCAL_RTAUDIO
 #DEFINES += USE_LOCAL_RTMIDI
 #DEFINES += USE_LOCAL_STK
 
@@ -26,7 +26,7 @@ DEFINES += USE_LOCAL_RTAUDIO
 
 # Polyphone version
 DEFINES += SOFT_VERSION=\\\"2.7.0\\\"
-DEFINES += IDENTIFIER=\\\"DEVEL\\\"
+DEFINES += IDENTIFIER=\\\"BETA\\\"
 DEFINES += CURRENT_YEAR=\\\"2026\\\"
 
 # All translations in resources/translations are compiled and embedded
