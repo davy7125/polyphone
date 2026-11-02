@@ -138,12 +138,12 @@ jobs:
       - name: Download Inno Setup extra translations
         shell: pwsh
         run: |
-          $url = "https://raw.githubusercontent.com/jrsoftware/issrc/main/Files/Languages/Unofficial/ChineseSimplified.isl"
+          $url = "https://raw.githubusercontent.com/jrsoftware/issrc/is-6_7_1/Files/Languages/Unofficial/ChineseSimplified.isl"
           $destination = "C:\Program Files (x86)\Inno Setup 6\Languages\ChineseSimplified.isl"
           Invoke-WebRequest -Uri $url -OutFile $destination
           Write-Host "ChineseSimplified.isl downloaded successfully"
           
-          $url = "https://raw.githubusercontent.com/jrsoftware/issrc/main/Files/Languages/Unofficial/SerbianCyrillic.isl"
+          $url = "https://raw.githubusercontent.com/jrsoftware/issrc/is-6_7_1/Files/Languages/Unofficial/SerbianCyrillic.isl"
           $destination = "C:\Program Files (x86)\Inno Setup 6\Languages\SerbianCyrillic.isl"
           Invoke-WebRequest -Uri $url -OutFile $destination
           Write-Host "SerbianCyrillic.isl downloaded successfully"
