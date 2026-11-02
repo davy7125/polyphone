@@ -25,6 +25,7 @@
 #include "configsectioninterface.h"
 #include "ui_configsectioninterface.h"
 #include "contextmanager.h"
+#include "notificationmanager.h"
 #include <QColorDialog>
 #include <QMessageBox>
 #include <QStyleFactory>
@@ -143,6 +144,15 @@ void ConfigSectionInterface::initialize()
     ui->checkRestoreTabs->blockSignals(true);
     ui->checkRestoreTabs->setChecked(ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "restore_tabs", false).toBool());
     ui->checkRestoreTabs->blockSignals(false);
+
+#ifdef NO_SF2_REPOSITORY
+    ui->labelNotifications->hide();
+    ui->checkNotifications->hide();
+#else
+    ui->checkNotifications->blockSignals(true);
+    ui->checkNotifications->setChecked(NotificationManager::getInstance()->isEnabled());
+    ui->checkNotifications->blockSignals(false);
+#endif
 
     ui->checkBorders->blockSignals(true);
 #if defined(Q_OS_MACOS)
@@ -359,6 +369,11 @@ void ConfigSectionInterface::on_checkUniqueInstance_clicked()
 void ConfigSectionInterface::on_checkRestoreTabs_clicked()
 {
     ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "restore_tabs", ui->checkRestoreTabs->isChecked());
+}
+
+void ConfigSectionInterface::on_checkNotifications_clicked()
+{
+    NotificationManager::getInstance()->setEnabled(ui->checkNotifications->isChecked());
 }
 
 void ConfigSectionInterface::on_comboStyle_currentIndexChanged(int index)

@@ -448,313 +448,313 @@
 <context>
     <name>ConfManager</name>
     <message>
-        <location filename="../../context/confmanager.cpp" line="211"/>
+        <location filename="../../context/confmanager.cpp" line="212"/>
         <source>Z</source>
         <comment>first key mapping for bottom left C</comment>
         <translation>Z</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="212"/>
+        <location filename="../../context/confmanager.cpp" line="213"/>
         <source>S</source>
         <comment>first key mapping for bottom C#</comment>
         <translation>S</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="213"/>
+        <location filename="../../context/confmanager.cpp" line="214"/>
         <source>X</source>
         <comment>first key mapping for bottom D</comment>
         <translation>X</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="214"/>
+        <location filename="../../context/confmanager.cpp" line="215"/>
         <source>D</source>
         <comment>first key mapping for bottom D#</comment>
         <translation>D</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="215"/>
+        <location filename="../../context/confmanager.cpp" line="216"/>
         <source>C</source>
         <comment>first key mapping for bottom E</comment>
         <translation>C</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="216"/>
+        <location filename="../../context/confmanager.cpp" line="217"/>
         <source>V</source>
         <comment>first key mapping for bottom F</comment>
         <translation>V</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="217"/>
+        <location filename="../../context/confmanager.cpp" line="218"/>
         <source>G</source>
         <comment>first key mapping for bottom F#</comment>
         <translation>G</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="218"/>
+        <location filename="../../context/confmanager.cpp" line="219"/>
         <source>B</source>
         <comment>first key mapping for bottom G</comment>
         <translation>B</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="219"/>
+        <location filename="../../context/confmanager.cpp" line="220"/>
         <source>H</source>
         <comment>first key mapping for bottom G#</comment>
         <translation>H</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="220"/>
+        <location filename="../../context/confmanager.cpp" line="221"/>
         <source>N</source>
         <comment>first key mapping for bottom A</comment>
         <translation>N</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="221"/>
+        <location filename="../../context/confmanager.cpp" line="222"/>
         <source>J</source>
         <comment>first key mapping for bottom A#</comment>
         <translation>J</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="222"/>
+        <location filename="../../context/confmanager.cpp" line="223"/>
         <source>M</source>
         <comment>first key mapping for bottom B</comment>
         <translation>M</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="223"/>
+        <location filename="../../context/confmanager.cpp" line="224"/>
         <source>,</source>
         <comment>first key mapping for bottom right C</comment>
         <translation>,</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="229"/>
+        <location filename="../../context/confmanager.cpp" line="230"/>
         <source>Q</source>
         <comment>first key mapping for upper left C</comment>
         <translation>Q</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="230"/>
+        <location filename="../../context/confmanager.cpp" line="231"/>
         <source>2</source>
         <comment>first key mapping for upper C#</comment>
         <translation>2</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="231"/>
+        <location filename="../../context/confmanager.cpp" line="232"/>
         <source>W</source>
         <comment>first key mapping for upper D</comment>
         <translation>W</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="232"/>
+        <location filename="../../context/confmanager.cpp" line="233"/>
         <source>3</source>
         <comment>first key mapping for upper D#</comment>
         <translation>3</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="233"/>
+        <location filename="../../context/confmanager.cpp" line="234"/>
         <source>E</source>
         <comment>first key mapping for upper E</comment>
         <translation>E</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="234"/>
+        <location filename="../../context/confmanager.cpp" line="235"/>
         <source>R</source>
         <comment>first key mapping for upper F</comment>
         <translation>R</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="235"/>
+        <location filename="../../context/confmanager.cpp" line="236"/>
         <source>5</source>
         <comment>first key mapping for upper F#</comment>
         <translation>5</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="236"/>
+        <location filename="../../context/confmanager.cpp" line="237"/>
         <source>T</source>
         <comment>first key mapping for upper G</comment>
         <translation>T</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="237"/>
+        <location filename="../../context/confmanager.cpp" line="238"/>
         <source>6</source>
         <comment>first key mapping for upper G#</comment>
         <translation>6</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="238"/>
+        <location filename="../../context/confmanager.cpp" line="239"/>
         <source>Y</source>
         <comment>first key mapping for upper A</comment>
         <translation>Y</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="239"/>
+        <location filename="../../context/confmanager.cpp" line="240"/>
         <source>7</source>
         <comment>first key mapping for upper A#</comment>
         <translation>7</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="240"/>
+        <location filename="../../context/confmanager.cpp" line="241"/>
         <source>U</source>
         <comment>first key mapping for upper B</comment>
         <translation>U</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="241"/>
+        <location filename="../../context/confmanager.cpp" line="242"/>
         <source>I</source>
         <comment>first key mapping for upper right C</comment>
         <translation>I</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="247"/>
+        <location filename="../../context/confmanager.cpp" line="248"/>
         <source>Shift+Z</source>
         <comment>second key mapping for bottom left C</comment>
         <translation>Shift+Z</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="248"/>
+        <location filename="../../context/confmanager.cpp" line="249"/>
         <source>Shift+S</source>
         <comment>second key mapping for bottom C#</comment>
         <translation>Shift+S</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="249"/>
+        <location filename="../../context/confmanager.cpp" line="250"/>
         <source>Shift+X</source>
         <comment>second key mapping for bottom D</comment>
         <translation>Shift+X</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="250"/>
+        <location filename="../../context/confmanager.cpp" line="251"/>
         <source>Shift+D</source>
         <comment>second key mapping for bottom D#</comment>
         <translation>Shift+D</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="251"/>
+        <location filename="../../context/confmanager.cpp" line="252"/>
         <source>Shift+C</source>
         <comment>second key mapping for bottom E</comment>
         <translation>Shift+C</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="252"/>
+        <location filename="../../context/confmanager.cpp" line="253"/>
         <source>Shift+V</source>
         <comment>second key mapping for bottom F</comment>
         <translation>Shift+V</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="253"/>
+        <location filename="../../context/confmanager.cpp" line="254"/>
         <source>Shift+G</source>
         <comment>second key mapping for bottom F#</comment>
         <translation>Shift+G</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="254"/>
+        <location filename="../../context/confmanager.cpp" line="255"/>
         <source>Shift+B</source>
         <comment>second key mapping for bottom G</comment>
         <translation>Shift+B</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="255"/>
+        <location filename="../../context/confmanager.cpp" line="256"/>
         <source>Shift+H</source>
         <comment>second key mapping for bottom G#</comment>
         <translation>Shift+H</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="256"/>
+        <location filename="../../context/confmanager.cpp" line="257"/>
         <source>Shift+N</source>
         <comment>second key mapping for bottom A</comment>
         <translation>Shift+N</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="257"/>
+        <location filename="../../context/confmanager.cpp" line="258"/>
         <source>Shift+J</source>
         <comment>second key mapping for bottom A#</comment>
         <translation>Shift+J</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="258"/>
+        <location filename="../../context/confmanager.cpp" line="259"/>
         <source>Shift+M</source>
         <comment>second key mapping for bottom B</comment>
         <translation>Shift+M</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="259"/>
+        <location filename="../../context/confmanager.cpp" line="260"/>
         <source>Shift+&lt;</source>
         <comment>second key mapping for bottom right C</comment>
         <translation>Shift+;</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="265"/>
+        <location filename="../../context/confmanager.cpp" line="266"/>
         <source>Shift+Q</source>
         <comment>second key mapping for upper left C</comment>
         <translation>Shift+Q</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="266"/>
+        <location filename="../../context/confmanager.cpp" line="267"/>
         <source>Shift+@</source>
         <comment>second key mapping for upper C#</comment>
         <translation>Shift+&quot;</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="267"/>
+        <location filename="../../context/confmanager.cpp" line="268"/>
         <source>Shift+W</source>
         <comment>second key mapping for upper D</comment>
         <translation>Shift+W</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="268"/>
+        <location filename="../../context/confmanager.cpp" line="269"/>
         <source>Shift+#</source>
         <comment>second key mapping for upper D#</comment>
         <translation>Shift+£</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="269"/>
+        <location filename="../../context/confmanager.cpp" line="270"/>
         <source>Shift+E</source>
         <comment>second key mapping for upper E</comment>
         <translation>Shift+E</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="270"/>
+        <location filename="../../context/confmanager.cpp" line="271"/>
         <source>Shift+R</source>
         <comment>second key mapping for upper F</comment>
         <translation>Shift+R</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="271"/>
+        <location filename="../../context/confmanager.cpp" line="272"/>
         <source>Shift+%</source>
         <comment>second key mapping for upper F#</comment>
         <translation>Shift+%</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="272"/>
+        <location filename="../../context/confmanager.cpp" line="273"/>
         <source>Shift+T</source>
         <comment>second key mapping for upper G</comment>
         <translation>Shift+T</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="273"/>
+        <location filename="../../context/confmanager.cpp" line="274"/>
         <source>Shift+^</source>
         <comment>second key mapping for upper G#</comment>
         <translation>Shift+&amp;</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="274"/>
+        <location filename="../../context/confmanager.cpp" line="275"/>
         <source>Shift+Y</source>
         <comment>second key mapping for upper A</comment>
         <translation>Shift+Y</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="275"/>
+        <location filename="../../context/confmanager.cpp" line="276"/>
         <source>Shift+&amp;</source>
         <comment>second key mapping for upper A#</comment>
         <translation>Shift+/</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="276"/>
+        <location filename="../../context/confmanager.cpp" line="277"/>
         <source>Shift+U</source>
         <comment>second key mapping for upper B</comment>
         <translation>Shift+U</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="277"/>
+        <location filename="../../context/confmanager.cpp" line="278"/>
         <source>Shift+I</source>
         <comment>second key mapping for upper right C</comment>
         <translation>Shift+I</translation>
@@ -952,52 +952,57 @@
         <translation>Ripristina le schede</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="651"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="620"/>
+        <source>Notifications</source>
+        <translation>Notifiche</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/configsectioninterface.ui" line="665"/>
         <source>General</source>
         <translation>Generale</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="656"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="670"/>
         <source>Samples</source>
         <translation>Campioni</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="661"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="675"/>
         <source>Samples - first sample</source>
         <translation>Campioni - primo campione</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="666"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="680"/>
         <source>Instruments</source>
         <translation>Strumenti</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="671"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="685"/>
         <source>Instruments - first instrument - Table</source>
         <translation>Strumenti - primo strumento - Tabella</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="676"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="690"/>
         <source>Instruments - first instrument - Ranges</source>
         <translation>Strumenti - primo strumento - Intervalli</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="681"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="695"/>
         <source>Instruments - first instrument - Envelopes</source>
         <translation>Strumenti - primo strumento - Inviluppi</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="686"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="700"/>
         <source>Presets</source>
         <translation>Preset</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="691"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="705"/>
         <source>Presets - first preset - Table</source>
         <translation>Preset - primo preset - Tabella</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="696"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="710"/>
         <source>Presets - first preset - Ranges</source>
         <translation>Preset - primo preset - Intervalli</translation>
     </message>
@@ -1022,22 +1027,22 @@
         <translation>Vista all&apos;avvio</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="627"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="641"/>
         <source>by key range</source>
         <translation>per intervallo di nota</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="632"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="646"/>
         <source>by velocity range</source>
         <translation>per intervallo di velocità</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="637"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="651"/>
         <source>in alphabetical order</source>
         <translation>in ordine alfabetico</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="642"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="656"/>
         <source>none</source>
         <comment>speaking of the &quot;sort divisions&quot;</comment>
         <translation>nessuna</translation>
@@ -1104,15 +1109,15 @@
         <translation>Le modifiche saranno applicate durante il prossimo riavvio del software.</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="215"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="227"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="239"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="251"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="263"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="275"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="287"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="299"/>
-        <location filename="../../context/interface/configsectioninterface.cpp" line="311"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="225"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="237"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="249"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="261"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="273"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="285"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="297"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="309"/>
+        <location filename="../../context/interface/configsectioninterface.cpp" line="321"/>
         <source>Select a color</source>
         <translation>Scegli un colore</translation>
     </message>
@@ -3273,79 +3278,79 @@ online</translation>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="247"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="253"/>
         <source>&amp;Save</source>
         <translation>&amp;Salva</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="248"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="254"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Annulla</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="249"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="255"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>&amp;Esci senza salvare</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="233"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="239"/>
         <source>Warning</source>
         <translation>Attenzione</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="67"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="68"/>
         <source>Polyphone SoundFont Editor</source>
         <translation>Editor SoundFont Polyphone</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="224"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="230"/>
         <source>Untitled</source>
         <translation>Senza titolo</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="234"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="240"/>
         <source>Save before exiting?</source>
         <translation>Salvare prima di uscire?</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="237"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="243"/>
         <source>The following files have been modified:</source>
         <translation>I seguenti file sono stati modificati:</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="244"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="250"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>Il file &quot;%1&quot; è stato modificato.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="330"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="336"/>
         <source>Opening files</source>
         <translation>Apertura file</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="340"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="346"/>
         <source>Opening a directory</source>
         <translation>Apertura di una directory</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.ui" line="356"/>
+        <location filename="../../mainwindow/mainwindow.ui" line="377"/>
         <source>  Settings</source>
         <extracomment>prefixed with 2 spaces</extracomment>
         <translation>  Impostazioni</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.ui" line="312"/>
+        <location filename="../../mainwindow/mainwindow.ui" line="333"/>
         <source>  Documentation</source>
         <extracomment>prefixed with 2 spaces</extracomment>
         <translation>  Documentazione</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="69"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="70"/>
         <source>Home screen</source>
         <translation>Schermata iniziale</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.ui" line="118"/>
+        <location filename="../../mainwindow/mainwindow.ui" line="139"/>
         <source>  New
   soundfont</source>
         <extracomment>prefixed with 2 spaces for each line</extracomment>
@@ -3353,7 +3358,7 @@ online</translation>
   soundfont</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.ui" line="152"/>
+        <location filename="../../mainwindow/mainwindow.ui" line="173"/>
         <source>  Open
   directory</source>
         <extracomment>prefixed with 2 spaces for each line</extracomment>
@@ -3361,18 +3366,18 @@ online</translation>
   directory</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.ui" line="334"/>
+        <location filename="../../mainwindow/mainwindow.ui" line="355"/>
         <source>  Forum</source>
         <extracomment>prefixed with 2 spaces</extracomment>
         <translation>  Forum</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.ui" line="249"/>
+        <location filename="../../mainwindow/mainwindow.ui" line="270"/>
         <source>Daily soundfonts</source>
         <translation>Soundfont giornalieri</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.ui" line="259"/>
+        <location filename="../../mainwindow/mainwindow.ui" line="280"/>
         <source>  Online
   repository</source>
         <extracomment>prefixed with 2 spaces for each line</extracomment>
@@ -3380,12 +3385,12 @@ online</translation>
   online</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.ui" line="198"/>
+        <location filename="../../mainwindow/mainwindow.ui" line="219"/>
         <source>Search a soundfont...</source>
         <translation>Cerca un soundfont...</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.ui" line="135"/>
+        <location filename="../../mainwindow/mainwindow.ui" line="156"/>
         <source>  Open
   soundfont</source>
         <extracomment>prefixed with 2 spaces for each line</extracomment>
@@ -3393,7 +3398,7 @@ online</translation>
   soundfont</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.ui" line="281"/>
+        <location filename="../../mainwindow/mainwindow.ui" line="302"/>
         <source>History</source>
         <translation>Cronologia</translation>
     </message>
@@ -3707,6 +3712,30 @@ mod. predefinito</translation>
         <location filename="../../editor/modulator/modulatoreditor.cpp" line="658"/>
         <source>%1 cannot be modulated in a preset.</source>
         <translation>%1 non può essere modulato in un preset.</translation>
+    </message>
+</context>
+<context>
+    <name>NotificationBanner</name>
+    <message>
+        <location filename="../../mainwindow/notificationbanner.ui" line="96"/>
+        <source>Close</source>
+        <translation>Chiudi</translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow/notificationbanner.cpp" line="77"/>
+        <location filename="../../mainwindow/notificationbanner.cpp" line="85"/>
+        <source>More information</source>
+        <translation>Maggiori informazioni</translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow/notificationbanner.cpp" line="81"/>
+        <source>Download</source>
+        <translation>Scarica</translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow/notificationbanner.cpp" line="89"/>
+        <source>Support Polyphone</source>
+        <translation>Sostieni Polyphone</translation>
     </message>
 </context>
 <context>

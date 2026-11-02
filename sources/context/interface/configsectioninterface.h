@@ -59,6 +59,7 @@ private slots:
     void on_checkDecorations_clicked();
     void on_checkUniqueInstance_clicked();
     void on_checkRestoreTabs_clicked();
+    void on_checkNotifications_clicked();
     void on_comboStyle_currentIndexChanged(int index);
 
 

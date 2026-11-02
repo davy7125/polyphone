@@ -2,7 +2,8 @@
 set -e
 
 # For building a RPM package:
-# * first build polyphone and copy the executable "polyphone" in the directory "fedora"
+# * first build polyphone with "qmake DEFINES+=OFFICIAL_BUILD" (official package: the notifications of a new version are shown)
+#   and copy the executable "polyphone" in the directory "fedora"
 # * then make sure you installed the rpmdevtools
 # * finally run this script
 # A RPM package will appear in fedora/x86_64

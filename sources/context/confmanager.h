@@ -49,7 +49,8 @@ public:
         SECTION_TOOLS,
         SECTION_WARNINGS,
         SECTION_REPOSITORY,
-        SECTION_EXTENSIONS
+        SECTION_EXTENSIONS,
+        SECTION_NOTIFICATIONS
     };
 
     enum Key

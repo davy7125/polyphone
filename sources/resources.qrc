@@ -78,6 +78,7 @@
         <file alias="reset_eq.svg">resources/reset_eq.svg</file>
         <file alias="pen.svg">resources/pen.svg</file>
         <file alias="info.svg">resources/info.svg</file>
+        <file alias="heart.svg">resources/heart.svg</file>
         <file alias="left.svg">resources/left.svg</file>
         <file alias="shield.svg">resources/shield.svg</file>
         <file alias="exchange.svg">resources/exchange.svg</file>

@@ -76,7 +76,7 @@ jobs:
           export PATH="/mingw64/bin:$(cygpath -u "$QT_ROOT_DIR/bin"):$PATH"
           mkdir build
           cd build
-          qmake ../sources/polyphone.pro CONFIG+=release
+          qmake ../sources/polyphone.pro CONFIG+=release DEFINES+=OFFICIAL_BUILD
 
       - name: Build Polyphone
         shell: msys2 {0}

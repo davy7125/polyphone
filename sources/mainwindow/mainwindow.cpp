@@ -35,6 +35,7 @@
 #include "ui_mainwindow.h"
 #include "repositorymanager.h"
 #include "usermanager.h"
+#include "notificationmanager.h"
 #include "tabmanager.h"
 #include "contextmanager.h"
 #include "soundfontmanager.h"
@@ -163,6 +164,10 @@ MainWindow::MainWindow(bool playerMode, QWidget *parent) : QWidget(parent),
     // Possibly initialize the user (must be done after the window manager creation)
     if (ContextManager::configuration()->getValue(ConfManager::SECTION_REPOSITORY, "auto_connect", false).toBool())
         UserManager::getInstance()->login();
+
+    // Notifications published on the website
+    connect(NotificationManager::getInstance(), SIGNAL(currentNotificationChanged()), ui->notificationBanner, SLOT(updateNotification()));
+    NotificationManager::getInstance()->initialize();
 #endif
 
     // Recent files
@@ -195,6 +200,7 @@ MainWindow::~MainWindow()
     delete _keyboard;
     SoundfontManager::kill();
     RepositoryManager::kill();
+    NotificationManager::kill();
     ExtensionManager::kill();
     ContextManager::kill();
     InputFactory::clear();

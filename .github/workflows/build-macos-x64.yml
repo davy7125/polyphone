@@ -76,7 +76,7 @@ jobs:
       - name: Configure with qmake
         run: |
           cd sources
-          qmake polyphone.pro CONFIG+=release
+          qmake polyphone.pro CONFIG+=release DEFINES+=OFFICIAL_BUILD
 
       - name: Build Polyphone
         run: |

@@ -21,6 +21,9 @@ DEFINES += USE_LOCAL_RTAUDIO
 #DEFINES += NO_SF2_REPOSITORY
 #DEFINES += NO_SF2_CREATION
 
+# Only for the official builds (GitHub workflows, packaging scripts), given to qmake: "DEFINES+=OFFICIAL_BUILD"
+# The notifications of a new version are then shown. Not for the package of a distribution, which updates the software itself
+
 # Polyphone version
 DEFINES += SOFT_VERSION=\\\"2.7.0\\\"
 DEFINES += IDENTIFIER=\\\"DEVEL\\\"
@@ -396,8 +399,10 @@ SOURCES	+= main.cpp \
     mainwindow/widgetshowhistory.cpp \
     mainwindow/widgetshowhistorycell.cpp \
     mainwindow/mainwindow.cpp \
+    mainwindow/notificationbanner.cpp \
     repository/urlreader.cpp \
     repository/urlreaderjson.cpp \
+    repository/notificationmanager.cpp \
     repository/repositorymanager.cpp \
     repository/soundfontinformation.cpp \
     repository/soundfontfilter.cpp \
@@ -822,8 +827,10 @@ HEADERS += \
     mainwindow/widgetshowhistory.h \
     mainwindow/widgetshowhistorycell.h \
     mainwindow/mainwindow.h \
+    mainwindow/notificationbanner.h \
     repository/urlreader.h \
     repository/urlreaderjson.h \
+    repository/notificationmanager.h \
     repository/repositorymanager.h \
     repository/soundfontinformation.h \
     repository/soundfontfilter.h \
@@ -1092,6 +1099,7 @@ FORMS += \
     mainwindow/widgetshowhistory.ui \
     mainwindow/widgetshowhistorycell.ui \
     mainwindow/mainwindow.ui \
+    mainwindow/notificationbanner.ui \
     player/player.ui \
     repository/browser/browsersortmenu.ui \
     repository/browser/soundfontbrowser.ui \

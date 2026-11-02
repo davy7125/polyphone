@@ -86,7 +86,8 @@ jobs:
           qmake6 polyphone.pro \
             PREFIX=/usr \
             CONFIG+=release \
-            DEFINES+=USE_LOCAL_RTAUDIO
+            DEFINES+=USE_LOCAL_RTAUDIO \
+            DEFINES+=OFFICIAL_BUILD
 
       - name: Build Polyphone
         run: |
