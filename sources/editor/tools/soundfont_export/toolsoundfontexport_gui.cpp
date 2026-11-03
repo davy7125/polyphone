@@ -260,7 +260,11 @@ bool ToolSoundfontExport_gui::eventFilter(QObject * obj, QEvent * event)
         if (event->type() == QEvent::MouseButtonPress)
         {
             // State before the first click of a possible double click
+#if QT_VERSION < 0x060000
+            _clickedItem = ui->listPresets->itemAt(static_cast<QMouseEvent *>(event)->pos());
+#else
             _clickedItem = ui->listPresets->itemAt(static_cast<QMouseEvent *>(event)->position().toPoint());
+#endif
             if (_clickedItem != nullptr)
                 _clickedItemState = _clickedItem->checkState(0);
             _ignoreNextRelease = false;

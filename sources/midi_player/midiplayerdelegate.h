@@ -59,10 +59,10 @@ class MidiPlayerDelegate : public QStyledItemDelegate
 
 public:
     // Columns of the table
-    static const int COLUMN_CHANNEL = 0;
-    static const int COLUMN_SOUNDFONT = 1;
-    static const int COLUMN_PRESET = 2;
-    static const int COLUMN_VOLUME = 3;
+    static constexpr int COLUMN_CHANNEL = 0;
+    static constexpr int COLUMN_SOUNDFONT = 1;
+    static constexpr int COLUMN_PRESET = 2;
+    static constexpr int COLUMN_VOLUME = 3;
 
     MidiPlayerDelegate(const QList<MidiPlayerChannel *> &channels, QObject * parent = nullptr);
 

@@ -28,6 +28,7 @@
 #include "utils.h"
 #include <QShortcut>
 #include <QKeyEvent>
+#include <QMouseEvent>
 
 DialogSelection::DialogSelection(SoundfontManager *sf2, EltID id, QWidget *parent) :
     QDialog(parent),
@@ -179,7 +180,11 @@ bool DialogSelection::eventFilter(QObject * obj, QEvent * event)
     if (obj == ui->listWidget->viewport() && event->type() == QEvent::MouseButtonPress)
     {
         // State before the first click of a possible double click
+#if QT_VERSION < 0x060000
+        _clickedItem = ui->listWidget->itemAt(static_cast<QMouseEvent *>(event)->pos());
+#else
         _clickedItem = ui->listWidget->itemAt(static_cast<QMouseEvent *>(event)->position().toPoint());
+#endif
         if (_clickedItem != nullptr)
             _clickedItemState = _clickedItem->checkState();
     }

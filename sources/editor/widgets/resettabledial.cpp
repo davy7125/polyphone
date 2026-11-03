@@ -51,7 +51,11 @@ void ResettableDial::mousePressEvent(QMouseEvent * event)
     // Unlike QDial, the value doesn't jump to the position of the mouse
     event->accept();
     _dragValue = this->value();
+#if QT_VERSION < 0x060000
+    _lastPosition = event->localPos();
+#else
     _lastPosition = event->position();
+#endif
     this->setSliderDown(true);
 }
 
@@ -65,8 +69,13 @@ void ResettableDial::mouseMoveEvent(QMouseEvent * event)
     }
 
     // The value increases upward and to the right
-    QPointF delta = event->position() - _lastPosition;
-    _lastPosition = event->position();
+#if QT_VERSION < 0x060000
+    QPointF position = event->localPos();
+#else
+    QPointF position = event->position();
+#endif
+    QPointF delta = position - _lastPosition;
+    _lastPosition = position;
     double length = (event->modifiers() & Qt::ShiftModifier) ? 10.0 * s_dragLength : s_dragLength;
     _dragValue += (delta.x() - delta.y()) * (this->maximum() - this->minimum()) / length;
     _dragValue = qBound(static_cast<double>(this->minimum()), _dragValue, static_cast<double>(this->maximum()));
