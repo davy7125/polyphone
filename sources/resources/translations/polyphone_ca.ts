@@ -2227,17 +2227,17 @@ en línia</translation>
         <translation>Desselecciona tot</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogselection.cpp" line="40"/>
+        <location filename="../../dialogs/dialogselection.cpp" line="41"/>
         <source>&amp;Duplicate</source>
         <translation>&amp;Duplica</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogselection.cpp" line="41"/>
+        <location filename="../../dialogs/dialogselection.cpp" line="42"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Cancel·la</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../dialogs/dialogselection.cpp" line="164"/>
+        <location filename="../../dialogs/dialogselection.cpp" line="165"/>
         <source>Checked presets: %1 / %2 (hidden: %n)</source>
         <translation>
             <numerusform>Presets marcats: %1 / %2 (amagat: %n)</numerusform>
@@ -2245,12 +2245,12 @@ en línia</translation>
         </translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogselection.cpp" line="166"/>
+        <location filename="../../dialogs/dialogselection.cpp" line="167"/>
         <source>Checked presets: %1 / %2</source>
         <translation>Presets marcats: %1 / %2</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../dialogs/dialogselection.cpp" line="171"/>
+        <location filename="../../dialogs/dialogselection.cpp" line="172"/>
         <source>Checked instruments: %1 / %2 (hidden: %n)</source>
         <translation>
             <numerusform>Instruments marcats: %1 / %2 (amagat: %n)</numerusform>
@@ -2258,7 +2258,7 @@ en línia</translation>
         </translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogselection.cpp" line="173"/>
+        <location filename="../../dialogs/dialogselection.cpp" line="174"/>
         <source>Checked instruments: %1 / %2</source>
         <translation>Instruments marcats: %1 / %2</translation>
     </message>
@@ -4016,111 +4016,118 @@ modulador per defecte</translation>
     </message>
     <message>
         <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="40"/>
+        <source>Duplicate
+of</source>
+        <translation>Duplicat
+de</translation>
+    </message>
+    <message>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="41"/>
         <source>Total
 duration</source>
         <translation>Durada
 total</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="41"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="42"/>
         <source>Loop
 duration</source>
         <translation>Durada
 del bucle</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="42"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="43"/>
         <source>Root
 key</source>
         <translation>Nota
 base</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="43"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="44"/>
         <source>Correction</source>
         <translation>Correcció</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="44"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="45"/>
         <source>Sample
 type</source>
         <translation>Tipus
 de mostra</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="45"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="46"/>
         <source>Linked
 sample</source>
         <translation>Mostra
 enllaçada</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="46"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="47"/>
         <source>Sample
 rate</source>
         <translation>Freqüència
 de mostreig</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="47"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="48"/>
         <source>Compression</source>
         <translation>Compressió</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="136"/>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="306"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="146"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="330"/>
         <source>yes</source>
         <translation>sí</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="140"/>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="310"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="150"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="334"/>
         <source>no</source>
         <translation>no</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="147"/>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="163"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="171"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="187"/>
         <source>s</source>
         <comment>unit for seconds</comment>
         <translation>s</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="226"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="250"/>
         <source>Invalid link</source>
         <translation>L&apos;enllaç no és vàlid</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="230"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="254"/>
         <source>Mono</source>
         <comment>opposite to stereo</comment>
         <translation>Mono</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="233"/>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="237"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="257"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="261"/>
         <source>Stereo right</source>
         <translation>Estèreo dreta</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="241"/>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="245"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="265"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="269"/>
         <source>Stereo left</source>
         <translation>Estèreo esquerra</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="249"/>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="253"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="273"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="277"/>
         <source>Stereo non defined</source>
         <translation>Estèreo no definit</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="276"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="300"/>
         <source>invalid</source>
         <translation>no vàlid</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="282"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="306"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
         <translation>Hz</translation>
@@ -4183,28 +4190,44 @@ per visualitzar els rangs de divisió</translation>
         <source>Comments</source>
         <translation>Comentaris</translation>
     </message>
+    <message numerus="yes">
+        <location filename="../../editor/pagesf2.cpp" line="219"/>
+        <source>unused: %n</source>
+        <translation>
+            <numerusform>no usat: %n</numerusform>
+            <numerusform>no usats: %n</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../editor/pagesf2.cpp" line="221"/>
+        <source>duplicates: %n</source>
+        <translation>
+            <numerusform>duplicat: %n</numerusform>
+            <numerusform>duplicats: %n</numerusform>
+        </translation>
+    </message>
     <message>
-        <location filename="../../editor/pagesf2.cpp" line="468"/>
+        <location filename="../../editor/pagesf2.cpp" line="474"/>
         <source>SoundFont format</source>
         <translation>Format SoundFont</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.cpp" line="473"/>
+        <location filename="../../editor/pagesf2.cpp" line="479"/>
         <source>ROM name</source>
         <translation>Nom de la ROM</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.cpp" line="480"/>
+        <location filename="../../editor/pagesf2.cpp" line="486"/>
         <source>ROM version</source>
         <translation>Versió de la ROM</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.cpp" line="486"/>
+        <location filename="../../editor/pagesf2.cpp" line="492"/>
         <source>Sound engine</source>
         <translation>Motor de so</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.cpp" line="491"/>
+        <location filename="../../editor/pagesf2.cpp" line="497"/>
         <source>Editing software</source>
         <translation>Programari d&apos;edició</translation>
     </message>
@@ -4280,8 +4303,7 @@ per visualitzar els rangs de divisió</translation>
         <translation>Instruments</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../editor/pagesf2.cpp" line="218"/>
-        <location filename="../../editor/pagesf2.cpp" line="228"/>
+        <location filename="../../editor/pagesf2.cpp" line="234"/>
         <source>%1 (unused: %n)</source>
         <translation>
             <numerusform>%1 (no usat: %n)</numerusform>
@@ -4838,22 +4860,22 @@ Ambdues divisions han de compartir la mateixa nota i rang de velocitat.</transla
         <translation>I&amp;gnora tot</translation>
     </message>
     <message>
-        <location filename="../../core/sample/sound.cpp" line="72"/>
+        <location filename="../../core/sample/sound.cpp" line="73"/>
         <source>Corrupted file: &quot;%1&quot;</source>
         <translation>El fitxer &quot;%1&quot; està malmès</translation>
     </message>
     <message>
-        <location filename="../../core/sample/sound.cpp" line="75"/>
+        <location filename="../../core/sample/sound.cpp" line="76"/>
         <source>Cannot find file &quot;%1&quot;</source>
         <translation>No s&apos;ha pogut trobar el fitxer &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../../core/sample/sound.cpp" line="78"/>
+        <location filename="../../core/sample/sound.cpp" line="79"/>
         <source>Cannot open file &quot;%1&quot;</source>
         <translation>No es pot obrir el fitxer &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../../core/sample/sound.cpp" line="81"/>
+        <location filename="../../core/sample/sound.cpp" line="82"/>
         <source>File not supported: &quot;%1&quot;</source>
         <translation>Fitxer no compatible: &quot;%1&quot;</translation>
     </message>
@@ -6239,6 +6261,27 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
     </message>
 </context>
 <context>
+    <name>ToolCleanDuplicates</name>
+    <message numerus="yes">
+        <location filename="../../editor/tools/clean_duplicates/toolcleanduplicates.cpp" line="82"/>
+        <source>%n duplicate sample(s) have been deleted.</source>
+        <translation>
+            <numerusform>S&apos;ha eliminat %n mostra duplicada.</numerusform>
+            <numerusform>S&apos;han eliminat %n mostres duplicades.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/clean_duplicates/toolcleanduplicates.h" line="48"/>
+        <source>Clean up</source>
+        <translation>Neteja</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/clean_duplicates/toolcleanduplicates.h" line="66"/>
+        <source>Clean duplicates</source>
+        <translation>Neteja els duplicats</translation>
+    </message>
+</context>
+<context>
     <name>ToolCleanUnused</name>
     <message>
         <location filename="../../editor/tools/clean_unused_elements/toolcleanunused.cpp" line="108"/>
@@ -7580,35 +7623,35 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
         <translation>Presets marcats: %1 / %2</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="330"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="334"/>
         <source>Select the destination directory</source>
         <translation>Seleccioneu el directori de destí</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="346"/>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="375"/>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="386"/>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="395"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="350"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="379"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="390"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="399"/>
         <source>Warning</source>
         <translation>Atenció</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="346"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="350"/>
         <source>Invalid directory.</source>
         <translation>El directori no és vàlid.</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="375"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="379"/>
         <source>At least one preset must be selected.</source>
         <translation>Almenys heu de seleccionar un preset.</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="386"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="390"/>
         <source>The maximal number of soundfont to export is 128.</source>
         <translation>El nombre màxim de soundfonts per exportar és de 128.</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="395"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="399"/>
         <source>In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 128.</source>
         <translation>En cas d&apos;exportar diversos soundfonts, el nombre màxim de presets per soundfont és de 128.</translation>
     </message>

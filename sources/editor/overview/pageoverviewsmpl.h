@@ -47,6 +47,7 @@ protected:
 
 private:
     QString isUsed(EltID id, int &status);
+    QString duplicate(EltID id, int &status);
     QString totalLength(EltID id);
     QString loopLength(EltID id, int &status);
     quint8 rootKey(EltID id, int &status);
@@ -58,6 +59,7 @@ private:
     QString compression(EltID id, int &status);
 
     QList<int> _usedSmpl;
+    QMap<int, int> _duplicates;
     EltID _linkedSampleId;
     int _linkedSampleStatus; // 0: none, 1: valid, 2: not valid
 };

@@ -2087,3 +2087,99 @@ void SoundfontManager::loadAllSamples(int sf2Index)
             smplTmp->_sound.loadSample();
     }
 }
+
+QMap<int, int> SoundfontManager::getDuplicateSamples(int sf2Index)
+{
+    QMutexLocker locker(&_mutex);
+    QMap<int, int> duplicates;
+    Soundfont * soundfont = _soundfonts->getSoundfont(sf2Index);
+    if (soundfont == nullptr)
+        return duplicates;
+    const IndexedElementList<Smpl *> &samples = soundfont->getSamples();
+
+    // Samples that can be compared: visible and not in a ROM
+    auto isComparable = [&samples](int index) {
+        if (index < 0 || index >= samples.indexCount())
+            return false;
+        Smpl * smpl = samples.atIndex(index);
+        return smpl != nullptr && !smpl->isHidden() && smpl->_sfSampleType != linkInvalid && (smpl->_sfSampleType & 0x8000) == 0;
+    };
+
+    // Configuration of a sample, compared first since it is cheaper than the data
+    auto getConfiguration = [](Smpl * smpl) {
+        // The length of compressed data is not known without decompressing them
+        quint32 length = smpl->_sound.isRawDataUnchanged() ? 0 : smpl->_sound.getUInt32(champ_dwLength);
+        return QString("%1 %2 %3 %4 %5 %6 %7").arg(static_cast<int>(smpl->_sfSampleType)).arg(length)
+                .arg(smpl->_sound.getUInt32(champ_dwSampleRate))
+                .arg(smpl->_sound.getUInt32(champ_dwStartLoop)).arg(smpl->_sound.getUInt32(champ_dwEndLoop))
+                .arg(smpl->_sound.getUInt32(champ_byOriginalPitch)).arg(smpl->_sound.getInt32(champ_chPitchCorrection));
+    };
+
+    // Group the samples by configuration
+    // A stereo sample is compared along with its linked sample, the link being valid in both directions
+    QMap<int, int> linkedIndexes; // -1 for a mono sample
+    QMap<QString, QList<int> > groups;
+    for (int i = 0; i < samples.indexCount(); i++)
+    {
+        if (!isComparable(i))
+            continue;
+
+        Smpl * smpl = samples.atIndex(i);
+        QString configuration = getConfiguration(smpl);
+        int linkedIndex = -1;
+        if (smpl->_sfSampleType != monoSample)
+        {
+            linkedIndex = smpl->_wSampleLink;
+            if (linkedIndex == i || !isComparable(linkedIndex) || samples.atIndex(linkedIndex)->_sfSampleType == monoSample ||
+                samples.atIndex(linkedIndex)->_wSampleLink != i)
+                continue;
+            configuration += "|" + getConfiguration(samples.atIndex(linkedIndex));
+        }
+        linkedIndexes[i] = linkedIndex;
+        groups[configuration] << i;
+    }
+
+    // Within each group, gather the samples having the same data
+    foreach (QList<int> group, groups)
+    {
+        if (group.count() < 2)
+            continue;
+
+        QMap<QByteArray, QList<int> > identicalSamples;
+        foreach (int i, group)
+        {
+            QByteArray hash = samples.atIndex(i)->_sound.getDataHash();
+            if (!hash.isEmpty() && linkedIndexes[i] != -1)
+            {
+                QByteArray linkedHash = samples.atIndex(linkedIndexes[i])->_sound.getDataHash();
+                hash = linkedHash.isEmpty() ? QByteArray() : hash + linkedHash;
+            }
+            if (!hash.isEmpty())
+                identicalSamples[hash] << i;
+        }
+
+        // Each sample is a duplicate of the identical sample immediately before
+        // A stereo pair is positioned by the first index of its samples
+        foreach (QList<int> list, identicalSamples)
+        {
+            QList<QPair<int, int> > positions; // Position, index
+            foreach (int i, list)
+                positions << QPair<int, int>(linkedIndexes[i] == -1 ? i : qMin(i, linkedIndexes[i]), i);
+            std::sort(positions.begin(), positions.end());
+
+            for (int j = 1; j < positions.count(); j++)
+            {
+                for (int k = j - 1; k >= 0; k--)
+                {
+                    if (positions[k].first < positions[j].first)
+                    {
+                        duplicates[positions[j].second] = positions[k].second;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    return duplicates;
+}

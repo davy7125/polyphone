@@ -42,6 +42,7 @@
 #include "celeste_tuning/toolcelestetuning.h"
 #include "auto_distribution/toolautodistribution.h"
 #include "clean_unused_elements/toolcleanunused.h"
+#include "clean_duplicates/toolcleanduplicates.h"
 #include "division_duplication/tooldivisionduplication.h"
 #include "mixture_creation/toolmixturecreation.h"
 #include "monitor/toolmonitor.h"
@@ -114,5 +115,6 @@ void ToolFactory::initialize()
            << new ToolRemoveMods()
            << new ToolMergeSamples() // Presets
            << new ToolCleanUnused() // Sf2
+           << new ToolCleanDuplicates()
            << new ToolPresetList();
 }

@@ -24,6 +24,7 @@
 
 #include "sound.h"
 #include <QFileInfo>
+#include <QCryptographicHash>
 #include "samplereader.h"
 #include "samplereaderfactory.h"
 #include "sampleutils.h"
@@ -141,6 +142,47 @@ float Sound::getPeak()
     return _peak;
 }
 
+QByteArray Sound::getDataHash()
+{
+    // Computed once for the current data
+    if (_dataHash.isEmpty())
+    {
+        QCryptographicHash hash(QCryptographicHash::Sha1);
+        if (this->isRawDataUnchanged())
+        {
+            // Compressed data are not decompressed
+            char * rawData;
+            quint32 rawDataLength;
+            this->getRawData(rawData, rawDataLength);
+            if (rawDataLength == 0)
+                return _dataHash;
+            hash.addData(QByteArray::fromRawData(rawData, rawDataLength));
+        }
+        else
+        {
+            loadSample();
+            if (_data16 == nullptr || _info.dwLength == 0)
+                return _dataHash;
+            hash.addData(QByteArray::fromRawData(reinterpret_cast<const char *>(_data16), _info.dwLength * sizeof(qint16)));
+
+            // Extra 8 bits, ignored if they are all 0 (same as no extra bits)
+            if (_data24 != nullptr)
+            {
+                for (quint32 i = 0; i < _info.dwLength; i++)
+                {
+                    if (_data24[i] != 0)
+                    {
+                        hash.addData(QByteArray::fromRawData(reinterpret_cast<const char *>(_data24), _info.dwLength));
+                        break;
+                    }
+                }
+            }
+        }
+        _dataHash = hash.result();
+    }
+    return _dataHash;
+}
+
 QVector<float> Sound::getDataFloat(bool forceReload)
 {
     quint32 sampleLength;
@@ -220,6 +262,7 @@ void Sound::setData(qint16* data16, quint8* data24, quint32 length)
     delete [] _rawData;
     _rawData = nullptr;
     _peak = -1.0f;
+    _dataHash.clear();
 
     if (_data16 != nullptr && length == _info.dwLength)
     {
@@ -471,6 +514,7 @@ void Sound::setRawData(const char * rawData, quint32 rawDataLength)
     _rawDataLength = rawDataLength;
     _info.rawDataAvailable = true;
     _peak = -1.0f;
+    _dataHash.clear();
 }
 
 void Sound::copyDataFrom(Sound * sourceSound)
@@ -499,4 +543,5 @@ void Sound::copyDataFrom(Sound * sourceSound)
     sourceSound->getData(sampleLength, _data16, _data24, false, true);
     _info.dwLength = sampleLength;
     _peak = -1.0f;
+    _dataHash.clear();
 }

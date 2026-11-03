@@ -2240,37 +2240,37 @@ repository</source>
         <translation>선택해제</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogselection.cpp" line="41"/>
+        <location filename="../../dialogs/dialogselection.cpp" line="42"/>
         <source>&amp;Cancel</source>
         <oldsource>Cancel</oldsource>
         <translation>취소(&amp;C)</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../dialogs/dialogselection.cpp" line="164"/>
+        <location filename="../../dialogs/dialogselection.cpp" line="165"/>
         <source>Checked presets: %1 / %2 (hidden: %n)</source>
         <translation>
             <numerusform>체크된 프리셋: %1 / %2 (숨김: %n개)</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogselection.cpp" line="166"/>
+        <location filename="../../dialogs/dialogselection.cpp" line="167"/>
         <source>Checked presets: %1 / %2</source>
         <translation>체크된 프리셋: %1 / %2</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../dialogs/dialogselection.cpp" line="171"/>
+        <location filename="../../dialogs/dialogselection.cpp" line="172"/>
         <source>Checked instruments: %1 / %2 (hidden: %n)</source>
         <translation>
             <numerusform>체크된 악기: %1 / %2 (숨김: %n개)</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogselection.cpp" line="173"/>
+        <location filename="../../dialogs/dialogselection.cpp" line="174"/>
         <source>Checked instruments: %1 / %2</source>
         <translation>체크된 악기: %1 / %2</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogselection.cpp" line="40"/>
+        <location filename="../../dialogs/dialogselection.cpp" line="41"/>
         <source>&amp;Duplicate</source>
         <translation>복제(&amp;D)</translation>
     </message>
@@ -4017,19 +4017,19 @@ default mod.</source>
         <translation>사용됨</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="40"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="41"/>
         <source>Total
 duration</source>
         <translation>전체
 지속시간</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="43"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="44"/>
         <source>Correction</source>
         <translation>보정</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="41"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="42"/>
         <source>Loop
 duration</source>
         <translation>루프
@@ -4041,93 +4041,100 @@ duration</source>
         <translation>샘플들</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="42"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="40"/>
+        <source>Duplicate
+of</source>
+        <translation>중복
+원본</translation>
+    </message>
+    <message>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="43"/>
         <source>Root
 key</source>
         <translation>루트
 키</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="44"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="45"/>
         <source>Sample
 type</source>
         <translation>샘플
 유형</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="45"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="46"/>
         <source>Linked
 sample</source>
         <translation>연결된
 샘플</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="46"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="47"/>
         <source>Sample
 rate</source>
         <translation>샘플
 레이트</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="47"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="48"/>
         <source>Compression</source>
         <translation>압축</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="136"/>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="306"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="146"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="330"/>
         <source>yes</source>
         <translation>네</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="140"/>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="310"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="150"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="334"/>
         <source>no</source>
         <translation>아니오</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="147"/>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="163"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="171"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="187"/>
         <source>s</source>
         <comment>unit for seconds</comment>
         <translation>초</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="226"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="250"/>
         <source>Invalid link</source>
         <translation>유효하지 않은 연결</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="230"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="254"/>
         <source>Mono</source>
         <comment>opposite to stereo</comment>
         <translation>모노</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="233"/>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="237"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="257"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="261"/>
         <source>Stereo right</source>
         <translation>우측 스테레오</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="241"/>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="245"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="265"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="269"/>
         <source>Stereo left</source>
         <translation>좌측 스테레오</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="249"/>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="253"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="273"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="277"/>
         <source>Stereo non defined</source>
         <translation>정의되지 않은 스테레오</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="276"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="300"/>
         <source>invalid</source>
         <translation>유효하지 않은</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="282"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="306"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
         <translation>Hz</translation>
@@ -4191,28 +4198,42 @@ to display its division ranges</source>
         <source>Comments</source>
         <translation>코멘트</translation>
     </message>
+    <message numerus="yes">
+        <location filename="../../editor/pagesf2.cpp" line="219"/>
+        <source>unused: %n</source>
+        <translation>
+            <numerusform>사용 안 함: %n개</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../editor/pagesf2.cpp" line="221"/>
+        <source>duplicates: %n</source>
+        <translation>
+            <numerusform>중복: %n개</numerusform>
+        </translation>
+    </message>
     <message>
-        <location filename="../../editor/pagesf2.cpp" line="468"/>
+        <location filename="../../editor/pagesf2.cpp" line="474"/>
         <source>SoundFont format</source>
         <translation>SoundFont 형식</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.cpp" line="473"/>
+        <location filename="../../editor/pagesf2.cpp" line="479"/>
         <source>ROM name</source>
         <translation>ROM 이름</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.cpp" line="480"/>
+        <location filename="../../editor/pagesf2.cpp" line="486"/>
         <source>ROM version</source>
         <translation>ROM 버전</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.cpp" line="486"/>
+        <location filename="../../editor/pagesf2.cpp" line="492"/>
         <source>Sound engine</source>
         <translation>사운드 엔진</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.cpp" line="491"/>
+        <location filename="../../editor/pagesf2.cpp" line="497"/>
         <source>Editing software</source>
         <translation>편집 소프트웨어</translation>
     </message>
@@ -4288,8 +4309,7 @@ to display its division ranges</source>
         <translation>악기들</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../editor/pagesf2.cpp" line="218"/>
-        <location filename="../../editor/pagesf2.cpp" line="228"/>
+        <location filename="../../editor/pagesf2.cpp" line="234"/>
         <source>%1 (unused: %n)</source>
         <translation>
             <numerusform>%1 (사용 안 함: %n개)</numerusform>
@@ -4691,22 +4711,22 @@ Warning: quality will be reduced and the loop may be altered</source>
         <translation>프리셋들</translation>
     </message>
     <message>
-        <location filename="../../core/sample/sound.cpp" line="72"/>
+        <location filename="../../core/sample/sound.cpp" line="73"/>
         <source>Corrupted file: &quot;%1&quot;</source>
         <translation>손상된 파일: &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../../core/sample/sound.cpp" line="75"/>
+        <location filename="../../core/sample/sound.cpp" line="76"/>
         <source>Cannot find file &quot;%1&quot;</source>
         <translation>&quot;%1&quot; 파일을 찾을 수 없음</translation>
     </message>
     <message>
-        <location filename="../../core/sample/sound.cpp" line="78"/>
+        <location filename="../../core/sample/sound.cpp" line="79"/>
         <source>Cannot open file &quot;%1&quot;</source>
         <translation>&quot;%1&quot; 파일을 열 수 없음</translation>
     </message>
     <message>
-        <location filename="../../core/sample/sound.cpp" line="81"/>
+        <location filename="../../core/sample/sound.cpp" line="82"/>
         <source>File not supported: &quot;%1&quot;</source>
         <oldsource>File not supported &quot;%1&quot;</oldsource>
         <translation>지원되지 않는 파일: &quot;%1&quot;</translation>
@@ -6253,6 +6273,26 @@ Other soundfont editors might display other units.</source>
     </message>
 </context>
 <context>
+    <name>ToolCleanDuplicates</name>
+    <message numerus="yes">
+        <location filename="../../editor/tools/clean_duplicates/toolcleanduplicates.cpp" line="82"/>
+        <source>%n duplicate sample(s) have been deleted.</source>
+        <translation>
+            <numerusform>%n개의 중복 샘플이 삭제되었습니다.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/clean_duplicates/toolcleanduplicates.h" line="48"/>
+        <source>Clean up</source>
+        <translation>정리</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/clean_duplicates/toolcleanduplicates.h" line="66"/>
+        <source>Clean duplicates</source>
+        <translation>중복 정리</translation>
+    </message>
+</context>
+<context>
     <name>ToolCleanUnused</name>
     <message>
         <location filename="../../editor/tools/clean_unused_elements/toolcleanunused.cpp" line="108"/>
@@ -7602,35 +7642,35 @@ Other soundfont editors might display other units.</source>
         <translation>체크된 프리셋: %1 / %2</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="330"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="334"/>
         <source>Select the destination directory</source>
         <translation>저장할 경로 선택</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="346"/>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="375"/>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="386"/>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="395"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="350"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="379"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="390"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="399"/>
         <source>Warning</source>
         <translation>경고</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="346"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="350"/>
         <source>Invalid directory.</source>
         <translation>경로가 잘못됐습니다.</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="375"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="379"/>
         <source>At least one preset must be selected.</source>
         <translation>하나 이상의 프리셋을 선택해야 합니다.</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="386"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="390"/>
         <source>The maximal number of soundfont to export is 128.</source>
         <translation>내보낼 사운드폰트의 최대 수는 128입니다.</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="395"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="399"/>
         <source>In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 128.</source>
         <translation>여러 사운드폰트를 내보내는 경우 사운드폰트 당 최대 프리셋 수는 128입니다.</translation>
     </message>

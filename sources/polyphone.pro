@@ -7,9 +7,9 @@
 # Use local copies of RtAudio, RtMidi, and Stk libraries
 # (this is forced to true for Windows or Mac OS X)
 # Uncomment a line if your distribution does not come with some of the following libraries
-#DEFINES += USE_LOCAL_RTAUDIO
-#DEFINES += USE_LOCAL_RTMIDI
-#DEFINES += USE_LOCAL_STK
+DEFINES += USE_LOCAL_RTAUDIO
+DEFINES += USE_LOCAL_RTMIDI
+DEFINES += USE_LOCAL_STK
 
 # Uncomment this line to use wolfssl instead of openssl
 #DEFINES += USE_WOLFSSL
@@ -506,6 +506,7 @@ SOURCES	+= main.cpp \
     editor/tools/celeste_tuning/toolcelestetuning_parameters.cpp \
     editor/tools/auto_distribution/toolautodistribution.cpp \
     editor/tools/clean_unused_elements/toolcleanunused.cpp \
+    editor/tools/clean_duplicates/toolcleanduplicates.cpp \
     editor/tools/division_duplication/tooldivisionduplication.cpp \
     editor/tools/division_duplication/tooldivisionduplication_gui.cpp \
     editor/tools/division_duplication/tooldivisionduplication_parameters.cpp \
@@ -939,6 +940,7 @@ HEADERS += \
     editor/tools/celeste_tuning/toolcelestetuning_parameters.h \
     editor/tools/auto_distribution/toolautodistribution.h \
     editor/tools/clean_unused_elements/toolcleanunused.h \
+    editor/tools/clean_duplicates/toolcleanduplicates.h \
     editor/tools/division_duplication/tooldivisionduplication.h \
     editor/tools/division_duplication/tooldivisionduplication_gui.h \
     editor/tools/division_duplication/tooldivisionduplication_parameters.h \

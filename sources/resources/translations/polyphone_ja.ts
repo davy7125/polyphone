@@ -2240,37 +2240,37 @@ repository</source>
         <translation>全て選択解除</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogselection.cpp" line="41"/>
+        <location filename="../../dialogs/dialogselection.cpp" line="42"/>
         <source>&amp;Cancel</source>
         <oldsource>Cancel</oldsource>
         <translation>キャンセル(&amp;C)</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../dialogs/dialogselection.cpp" line="164"/>
+        <location filename="../../dialogs/dialogselection.cpp" line="165"/>
         <source>Checked presets: %1 / %2 (hidden: %n)</source>
         <translation>
             <numerusform>チェック済みプリセット: %1 / %2 (非表示: %n)</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogselection.cpp" line="166"/>
+        <location filename="../../dialogs/dialogselection.cpp" line="167"/>
         <source>Checked presets: %1 / %2</source>
         <translation>チェック済みプリセット: %1 / %2</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../dialogs/dialogselection.cpp" line="171"/>
+        <location filename="../../dialogs/dialogselection.cpp" line="172"/>
         <source>Checked instruments: %1 / %2 (hidden: %n)</source>
         <translation>
             <numerusform>チェック済みインストゥルメント: %1 / %2 (非表示: %n)</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogselection.cpp" line="173"/>
+        <location filename="../../dialogs/dialogselection.cpp" line="174"/>
         <source>Checked instruments: %1 / %2</source>
         <translation>チェック済みインストゥルメント: %1 / %2</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogselection.cpp" line="40"/>
+        <location filename="../../dialogs/dialogselection.cpp" line="41"/>
         <source>&amp;Duplicate</source>
         <translation>複製(&amp;D)</translation>
     </message>
@@ -4024,111 +4024,118 @@ default mod.</source>
     </message>
     <message>
         <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="40"/>
+        <source>Duplicate
+of</source>
+        <translation>重複元
+サンプル</translation>
+    </message>
+    <message>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="41"/>
         <source>Total
 duration</source>
         <translation>合計
 時間</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="41"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="42"/>
         <source>Loop
 duration</source>
         <translation>ループ
 時間</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="42"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="43"/>
         <source>Root
 key</source>
         <translation>ルート
 キー</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="43"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="44"/>
         <source>Correction</source>
         <translation>補正</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="44"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="45"/>
         <source>Sample
 type</source>
         <translation>サンプル
 タイプ</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="45"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="46"/>
         <source>Linked
 sample</source>
         <translation>リンクされた
 サンプル</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="46"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="47"/>
         <source>Sample
 rate</source>
         <translation>サンプル
 レート</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="47"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="48"/>
         <source>Compression</source>
         <translation>圧縮</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="136"/>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="306"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="146"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="330"/>
         <source>yes</source>
         <translation>はい</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="140"/>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="310"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="150"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="334"/>
         <source>no</source>
         <translation>いいえ</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="147"/>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="163"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="171"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="187"/>
         <source>s</source>
         <comment>unit for seconds</comment>
         <translation>秒</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="226"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="250"/>
         <source>Invalid link</source>
         <translation>無効なリンク</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="230"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="254"/>
         <source>Mono</source>
         <comment>opposite to stereo</comment>
         <translation>モノラル</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="233"/>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="237"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="257"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="261"/>
         <source>Stereo right</source>
         <translation>ステレオ右</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="241"/>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="245"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="265"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="269"/>
         <source>Stereo left</source>
         <translation>ステレオ左</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="249"/>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="253"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="273"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="277"/>
         <source>Stereo non defined</source>
         <translation>ステレオ未定義</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="276"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="300"/>
         <source>invalid</source>
         <translation>無効</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="282"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="306"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
         <translation>Hz</translation>
@@ -4192,28 +4199,42 @@ to display its division ranges</source>
         <source>Comments</source>
         <translation>コメント</translation>
     </message>
+    <message numerus="yes">
+        <location filename="../../editor/pagesf2.cpp" line="219"/>
+        <source>unused: %n</source>
+        <translation>
+            <numerusform>未使用: %n</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../editor/pagesf2.cpp" line="221"/>
+        <source>duplicates: %n</source>
+        <translation>
+            <numerusform>重複: %n</numerusform>
+        </translation>
+    </message>
     <message>
-        <location filename="../../editor/pagesf2.cpp" line="468"/>
+        <location filename="../../editor/pagesf2.cpp" line="474"/>
         <source>SoundFont format</source>
         <translation>SoundFont形式</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.cpp" line="473"/>
+        <location filename="../../editor/pagesf2.cpp" line="479"/>
         <source>ROM name</source>
         <translation>ROM名</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.cpp" line="480"/>
+        <location filename="../../editor/pagesf2.cpp" line="486"/>
         <source>ROM version</source>
         <translation>ROMバージョン</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.cpp" line="486"/>
+        <location filename="../../editor/pagesf2.cpp" line="492"/>
         <source>Sound engine</source>
         <translation>サウンドエンジン</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.cpp" line="491"/>
+        <location filename="../../editor/pagesf2.cpp" line="497"/>
         <source>Editing software</source>
         <translation>編集ソフトウェア</translation>
     </message>
@@ -4289,8 +4310,7 @@ to display its division ranges</source>
         <translation>インストゥルメント</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../editor/pagesf2.cpp" line="218"/>
-        <location filename="../../editor/pagesf2.cpp" line="228"/>
+        <location filename="../../editor/pagesf2.cpp" line="234"/>
         <source>%1 (unused: %n)</source>
         <translation>
             <numerusform>%1 (未使用: %n)</numerusform>
@@ -4676,22 +4696,22 @@ Warning: quality will be reduced and the loop may be altered</source>
         <translation>すべて無視(&amp;G)</translation>
     </message>
     <message>
-        <location filename="../../core/sample/sound.cpp" line="72"/>
+        <location filename="../../core/sample/sound.cpp" line="73"/>
         <source>Corrupted file: &quot;%1&quot;</source>
         <translation>破損したファイル: 「%1」</translation>
     </message>
     <message>
-        <location filename="../../core/sample/sound.cpp" line="75"/>
+        <location filename="../../core/sample/sound.cpp" line="76"/>
         <source>Cannot find file &quot;%1&quot;</source>
         <translation>ファイル「%1」が見つかりません</translation>
     </message>
     <message>
-        <location filename="../../core/sample/sound.cpp" line="78"/>
+        <location filename="../../core/sample/sound.cpp" line="79"/>
         <source>Cannot open file &quot;%1&quot;</source>
         <translation>ファイル「%1」を開けません</translation>
     </message>
     <message>
-        <location filename="../../core/sample/sound.cpp" line="81"/>
+        <location filename="../../core/sample/sound.cpp" line="82"/>
         <source>File not supported: &quot;%1&quot;</source>
         <oldsource>File not supported &quot;%1&quot;</oldsource>
         <translation>ファイルはサポートされていません: 「%1」</translation>
@@ -6254,6 +6274,26 @@ Other soundfont editors might display other units.</source>
     </message>
 </context>
 <context>
+    <name>ToolCleanDuplicates</name>
+    <message numerus="yes">
+        <location filename="../../editor/tools/clean_duplicates/toolcleanduplicates.cpp" line="82"/>
+        <source>%n duplicate sample(s) have been deleted.</source>
+        <translation>
+            <numerusform>%n個の重複サンプルが削除されました。</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/clean_duplicates/toolcleanduplicates.h" line="48"/>
+        <source>Clean up</source>
+        <translation>クリーンアップ</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/clean_duplicates/toolcleanduplicates.h" line="66"/>
+        <source>Clean duplicates</source>
+        <translation>重複をクリーンアップ</translation>
+    </message>
+</context>
+<context>
     <name>ToolCleanUnused</name>
     <message>
         <location filename="../../editor/tools/clean_unused_elements/toolcleanunused.cpp" line="108"/>
@@ -7602,35 +7642,35 @@ Other soundfont editors might display other units.</source>
         <translation>チェック済みプリセット: %1 / %2</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="330"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="334"/>
         <source>Select the destination directory</source>
         <translation>保存先ディレクトリを選択</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="346"/>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="375"/>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="386"/>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="395"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="350"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="379"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="390"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="399"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="346"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="350"/>
         <source>Invalid directory.</source>
         <translation>無効なディレクトリです。</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="375"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="379"/>
         <source>At least one preset must be selected.</source>
         <translation>少なくとも1つのプリセットを選択する必要があります。</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="386"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="390"/>
         <source>The maximal number of soundfont to export is 128.</source>
         <translation>エクスポートできるSoundFontの最大数は128です。</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="395"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="399"/>
         <source>In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 128.</source>
         <translation>複数のSoundFontをエクスポートする場合、SoundFontあたりのプリセットの最大数は128です。</translation>
     </message>

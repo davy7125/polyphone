@@ -2240,13 +2240,13 @@ en línea</translation>
         <translation>Deseleccionar todo</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogselection.cpp" line="41"/>
+        <location filename="../../dialogs/dialogselection.cpp" line="42"/>
         <source>&amp;Cancel</source>
         <oldsource>Cancel</oldsource>
         <translation>&amp;Cancelar</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../dialogs/dialogselection.cpp" line="164"/>
+        <location filename="../../dialogs/dialogselection.cpp" line="165"/>
         <source>Checked presets: %1 / %2 (hidden: %n)</source>
         <translation>
             <numerusform>Conjuntos marcados: %1 / %2 (oculto: %n)</numerusform>
@@ -2254,12 +2254,12 @@ en línea</translation>
         </translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogselection.cpp" line="166"/>
+        <location filename="../../dialogs/dialogselection.cpp" line="167"/>
         <source>Checked presets: %1 / %2</source>
         <translation>Conjuntos marcados: %1 / %2</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../dialogs/dialogselection.cpp" line="171"/>
+        <location filename="../../dialogs/dialogselection.cpp" line="172"/>
         <source>Checked instruments: %1 / %2 (hidden: %n)</source>
         <translation>
             <numerusform>Instrumentos marcados: %1 / %2 (oculto: %n)</numerusform>
@@ -2267,12 +2267,12 @@ en línea</translation>
         </translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogselection.cpp" line="173"/>
+        <location filename="../../dialogs/dialogselection.cpp" line="174"/>
         <source>Checked instruments: %1 / %2</source>
         <translation>Instrumentos marcados: %1 / %2</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogselection.cpp" line="40"/>
+        <location filename="../../dialogs/dialogselection.cpp" line="41"/>
         <source>&amp;Duplicate</source>
         <translation>&amp;Duplicar</translation>
     </message>
@@ -4052,7 +4052,7 @@ de velocidad</translation>
         <translation>Utilizado</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="40"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="41"/>
         <source>Total
 duration</source>
         <oldsource>Durée de la boucle</oldsource>
@@ -4060,12 +4060,12 @@ duration</source>
 total</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="43"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="44"/>
         <source>Correction</source>
         <translation>Corrección</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="41"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="42"/>
         <source>Loop
 duration</source>
         <translation>Duración
@@ -4077,14 +4077,21 @@ del bucle</translation>
         <translation>Muestras</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="42"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="40"/>
+        <source>Duplicate
+of</source>
+        <translation>Duplicado
+de</translation>
+    </message>
+    <message>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="43"/>
         <source>Root
 key</source>
         <translation>Nota
 raíz</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="44"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="45"/>
         <source>Sample
 type</source>
         <oldsource>Échantillon lié</oldsource>
@@ -4092,82 +4099,82 @@ type</source>
 muestra</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="45"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="46"/>
         <source>Linked
 sample</source>
         <translation>Muestra
 enlazada</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="46"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="47"/>
         <source>Sample
 rate</source>
         <translation>Frecuencia
 de muestreo</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="47"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="48"/>
         <source>Compression</source>
         <translation>Compresión</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="136"/>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="306"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="146"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="330"/>
         <source>yes</source>
         <translation>sí</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="140"/>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="310"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="150"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="334"/>
         <source>no</source>
         <translation>no</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="147"/>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="163"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="171"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="187"/>
         <source>s</source>
         <comment>unit for seconds</comment>
         <translation>s</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="226"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="250"/>
         <source>Invalid link</source>
         <translation>Enlace no válido</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="230"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="254"/>
         <source>Mono</source>
         <comment>opposite to stereo</comment>
         <translation>Mono</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="233"/>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="237"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="257"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="261"/>
         <source>Stereo right</source>
         <oldsource>Stereo droit</oldsource>
         <translation>Estéreo derecha</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="241"/>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="245"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="265"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="269"/>
         <source>Stereo left</source>
         <oldsource>Stereo gauche</oldsource>
         <translation>Estéreo izquierda</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="249"/>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="253"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="273"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="277"/>
         <source>Stereo non defined</source>
         <oldsource>Stereo non défini</oldsource>
         <translation>Estéreo no definido</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="276"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="300"/>
         <source>invalid</source>
         <translation>no válido</translation>
     </message>
     <message>
-        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="282"/>
+        <location filename="../../editor/overview/pageoverviewsmpl.cpp" line="306"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
         <translation>Hz</translation>
@@ -4231,28 +4238,44 @@ para mostrar los rangos de sus divisiones</translation>
         <source>Comments</source>
         <translation>Comentarios</translation>
     </message>
+    <message numerus="yes">
+        <location filename="../../editor/pagesf2.cpp" line="219"/>
+        <source>unused: %n</source>
+        <translation>
+            <numerusform>sin usar: %n</numerusform>
+            <numerusform>sin usar: %n</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../editor/pagesf2.cpp" line="221"/>
+        <source>duplicates: %n</source>
+        <translation>
+            <numerusform>duplicado: %n</numerusform>
+            <numerusform>duplicados: %n</numerusform>
+        </translation>
+    </message>
     <message>
-        <location filename="../../editor/pagesf2.cpp" line="468"/>
+        <location filename="../../editor/pagesf2.cpp" line="474"/>
         <source>SoundFont format</source>
         <translation>Formato SoundFont</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.cpp" line="473"/>
+        <location filename="../../editor/pagesf2.cpp" line="479"/>
         <source>ROM name</source>
         <translation>Nombre de la ROM</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.cpp" line="480"/>
+        <location filename="../../editor/pagesf2.cpp" line="486"/>
         <source>ROM version</source>
         <translation>Versión de la ROM</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.cpp" line="486"/>
+        <location filename="../../editor/pagesf2.cpp" line="492"/>
         <source>Sound engine</source>
         <translation>Motor de sonido</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.cpp" line="491"/>
+        <location filename="../../editor/pagesf2.cpp" line="497"/>
         <source>Editing software</source>
         <translation>Software de edición</translation>
     </message>
@@ -4328,8 +4351,7 @@ para mostrar los rangos de sus divisiones</translation>
         <translation>Instrumentos</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../editor/pagesf2.cpp" line="218"/>
-        <location filename="../../editor/pagesf2.cpp" line="228"/>
+        <location filename="../../editor/pagesf2.cpp" line="234"/>
         <source>%1 (unused: %n)</source>
         <translation>
             <numerusform>%1 (sin usar: %n)</numerusform>
@@ -4724,22 +4746,22 @@ Advertencia: la calidad se reducirá y el bucle podría alterarse</translation>
         <translation>Conjuntos</translation>
     </message>
     <message>
-        <location filename="../../core/sample/sound.cpp" line="72"/>
+        <location filename="../../core/sample/sound.cpp" line="73"/>
         <source>Corrupted file: &quot;%1&quot;</source>
         <translation>Archivo dañado: &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../../core/sample/sound.cpp" line="75"/>
+        <location filename="../../core/sample/sound.cpp" line="76"/>
         <source>Cannot find file &quot;%1&quot;</source>
         <translation>No se puede encontrar el archivo &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../../core/sample/sound.cpp" line="78"/>
+        <location filename="../../core/sample/sound.cpp" line="79"/>
         <source>Cannot open file &quot;%1&quot;</source>
         <translation>No se puede abrir el archivo &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../../core/sample/sound.cpp" line="81"/>
+        <location filename="../../core/sample/sound.cpp" line="82"/>
         <source>File not supported: &quot;%1&quot;</source>
         <oldsource>File not supported &quot;%1&quot;</oldsource>
         <translation>Archivo no compatible: &quot;%1&quot;</translation>
@@ -6297,6 +6319,27 @@ Otros editores de soundfonts pueden mostrar otras unidades.</translation>
     </message>
 </context>
 <context>
+    <name>ToolCleanDuplicates</name>
+    <message numerus="yes">
+        <location filename="../../editor/tools/clean_duplicates/toolcleanduplicates.cpp" line="82"/>
+        <source>%n duplicate sample(s) have been deleted.</source>
+        <translation>
+            <numerusform>Se ha borrado %n muestra duplicada.</numerusform>
+            <numerusform>Se han borrado %n muestras duplicadas.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/clean_duplicates/toolcleanduplicates.h" line="48"/>
+        <source>Clean up</source>
+        <translation>Limpiar</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/clean_duplicates/toolcleanduplicates.h" line="66"/>
+        <source>Clean duplicates</source>
+        <translation>Limpiar duplicados</translation>
+    </message>
+</context>
+<context>
     <name>ToolCleanUnused</name>
     <message>
         <location filename="../../editor/tools/clean_unused_elements/toolcleanunused.cpp" line="108"/>
@@ -7651,35 +7694,35 @@ Otros editores de soundfonts pueden mostrar otras unidades.</translation>
         <translation>Conjuntos marcados: %1 / %2</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="330"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="334"/>
         <source>Select the destination directory</source>
         <translation>Selecciona el directorio de destino</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="346"/>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="375"/>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="386"/>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="395"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="350"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="379"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="390"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="399"/>
         <source>Warning</source>
         <translation>Advertencia</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="346"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="350"/>
         <source>Invalid directory.</source>
         <translation>Directorio no válido.</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="375"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="379"/>
         <source>At least one preset must be selected.</source>
         <translation>Al menos un conjunto debe estar seleccionado.</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="386"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="390"/>
         <source>The maximal number of soundfont to export is 128.</source>
         <translation>El número máximo de soundfonts a exportar es 128.</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="395"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="399"/>
         <source>In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 128.</source>
         <translation>En caso de exportar varios soundfonts, el número máximo de conjuntos por soundfont es 128.</translation>
     </message>

@@ -37,6 +37,7 @@ QStringList PageOverviewSmpl::getHorizontalHeader()
 {
     QStringList hHeader;
     hHeader << tr("Used")
+            << tr("Duplicate\nof")
             << tr("Total\nduration")
             << tr("Loop\nduration")
             << tr("Root\nkey")
@@ -65,6 +66,9 @@ void PageOverviewSmpl::prepare(EltID id)
             _usedSmpl << _sf2->get(idSubElt, champ_sampleID).wValue;
         }
     }
+
+    // Samples identical to a previous one
+    _duplicates = _sf2->getDuplicateSamples(id.indexSf2);
 }
 
 // Called for each smpl
@@ -77,6 +81,12 @@ void PageOverviewSmpl::getInformation(EltID id, QStringList &info, QStringList &
     QString strTmp = isUsed(id, iTmp);
     info << strTmp;
     order << strTmp;
+    status << iTmp;
+
+    // Duplicate
+    strTmp = duplicate(id, iTmp);
+    info << strTmp;
+    order << QString::number(2 - iTmp) + strTmp;
     status << iTmp;
 
     // Total duration
@@ -138,6 +148,20 @@ QString PageOverviewSmpl::isUsed(EltID id, int &status)
 
     status = 2; // Error
     return tr("no");
+}
+
+QString PageOverviewSmpl::duplicate(EltID id, int &status)
+{
+    if (_duplicates.contains(id.indexElt))
+    {
+        status = 1; // Warning
+        EltID idOriginal = id;
+        idOriginal.indexElt = _duplicates[id.indexElt];
+        return _sf2->getQstr(idOriginal, champ_name);
+    }
+
+    status = 0;
+    return "-";
 }
 
 QString PageOverviewSmpl::totalLength(EltID id)

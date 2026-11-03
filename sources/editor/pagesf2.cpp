@@ -205,6 +205,7 @@ void PageSf2::countElements()
     // Count des samples, instruments and presets that are used and unused
     int unusedSmpl, unusedInst, usedSmpl, usedInst, usedPrst, instGen, prstGen, instMod, prstMod;
     this->countElements(unusedSmpl, unusedInst, usedSmpl, usedInst, usedPrst, instGen, prstGen, instMod, prstMod);
+    int duplicateSmpl = _sf2->getDuplicateSamples(_currentID.indexSf2).count();
 
     // Colors
     QString greenStr = "QLabel { color : " + ContextManager::theme()->getFixedColor(ThemeManager::GREEN, ThemeManager::WINDOW_BACKGROUND).name() + "; }";
@@ -213,9 +214,14 @@ void PageSf2::countElements()
     QString normalStr = "QLabel { color : " + ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT).name() + "; font-weight: normal; }";
 
     // Display
+    QStringList smplDetails;
     if (unusedSmpl)
+        smplDetails << tr("unused: %n", "", unusedSmpl);
+    if (duplicateSmpl)
+        smplDetails << tr("duplicates: %n", "", duplicateSmpl);
+    if (!smplDetails.isEmpty())
     {
-        ui->label_nbSmpl->setText(tr("%1 (unused: %n)", "", unusedSmpl).arg(usedSmpl));
+        ui->label_nbSmpl->setText(QString("%1 (%2)").arg(usedSmpl).arg(smplDetails.join(", ")));
         ui->label_nbSmpl->setStyleSheet(redStr);
     }
     else

@@ -44,6 +44,7 @@ public:
     void getData(quint32 &sampleLength, qint16* &data16, quint8* &data24, bool forceReload, bool getCopy);
     QVector<float> getDataFloat(bool forceReload);
     float getPeak(); // Largest absolute value of the data, 1 being the full scale
+    QByteArray getDataHash(); // Hash of the raw data if unchanged (no decompression), otherwise of the data (empty if no data)
     quint32 getUInt32(AttributeType champ); // For everything but the pitch correction
     qint32 getInt32(AttributeType champ); // For the pitch correction
 
@@ -69,6 +70,7 @@ private:
     quint32 _rawDataLength;
     SampleReader* _reader;
     float _peak; // Negative if not computed for the current data
+    QByteArray _dataHash; // Empty if not computed for the current data
 
     void setData(qint16* data16, quint8* data24, quint32 length);
     void determineRootKey();

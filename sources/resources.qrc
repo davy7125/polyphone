@@ -123,6 +123,7 @@
         <file alias="celeste_tuning.svg">editor/tools/celeste_tuning/celeste_tuning.svg</file>
         <file alias="auto_distribution.svg">editor/tools/auto_distribution/auto_distribution.svg</file>
         <file alias="remove_unused.svg">editor/tools/clean_unused_elements/remove_unused.svg</file>
+        <file alias="clean_duplicates.svg">editor/tools/clean_duplicates/clean_duplicates.svg</file>
         <file alias="duplicate.svg">editor/tools/division_duplication/duplicate.svg</file>
         <file alias="peak_export.svg">editor/tools/frequency_peaks/peak_export.svg</file>
         <file alias="mixture.svg">editor/tools/mixture_creation/mixture.svg</file>

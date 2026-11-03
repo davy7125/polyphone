@@ -112,6 +112,10 @@ public:
     // Load all samples in RAM
     void loadAllSamples(int sf2Index);
 
+    // Find the samples identical to a previous one (configuration and data), stereo samples being compared by pairs
+    // Result: index of each duplicated sample => index of the identical sample immediately before
+    QMap<int, int> getDuplicateSamples(int sf2Index);
+
 signals:
     // Emitted when a group of actions is finished
     // "editingSource" can be:
