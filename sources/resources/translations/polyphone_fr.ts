@@ -4986,13 +4986,13 @@ Les 2 divisions doivent partager les mêmes étendues de notes et de vélocités
     </message>
     <message>
         <location filename="../../main.cpp" line="111"/>
-        <location filename="../../main.cpp" line="255"/>
+        <location filename="../../main.cpp" line="257"/>
         <source>The file &quot;%1&quot; does not exist.</source>
         <translation>Le fichier « %1 » n&apos;existe pas.</translation>
     </message>
     <message>
         <location filename="../../main.cpp" line="119"/>
-        <location filename="../../main.cpp" line="260"/>
+        <location filename="../../main.cpp" line="262"/>
         <source>The directory &quot;%1&quot; does not exist.</source>
         <translation>Le répertoire « %1 » n&apos;existe pas.</translation>
     </message>
@@ -5003,80 +5003,80 @@ Les 2 divisions doivent partager les mêmes étendues de notes et de vélocités
     </message>
     <message>
         <location filename="../../main.cpp" line="129"/>
-        <location filename="../../main.cpp" line="201"/>
-        <location filename="../../main.cpp" line="286"/>
+        <location filename="../../main.cpp" line="203"/>
+        <location filename="../../main.cpp" line="288"/>
         <source>Loading file &quot;%1&quot;...</source>
         <translation>Chargement du fichier « %1 »...</translation>
     </message>
     <message>
         <location filename="../../main.cpp" line="134"/>
-        <location filename="../../main.cpp" line="206"/>
-        <location filename="../../main.cpp" line="291"/>
+        <location filename="../../main.cpp" line="208"/>
+        <location filename="../../main.cpp" line="293"/>
         <source>Couldn&apos;t load file &quot;%1&quot;: %2.</source>
         <translation>Impossible de charger le fichier « %1 » : %2.</translation>
     </message>
     <message>
         <location filename="../../main.cpp" line="140"/>
-        <location filename="../../main.cpp" line="212"/>
-        <location filename="../../main.cpp" line="297"/>
+        <location filename="../../main.cpp" line="214"/>
+        <location filename="../../main.cpp" line="299"/>
         <source>File successfully loaded!</source>
         <translation>Le fichier a bien été chargé !</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="147"/>
-        <location filename="../../main.cpp" line="151"/>
-        <location filename="../../main.cpp" line="164"/>
-        <location filename="../../main.cpp" line="234"/>
-        <location filename="../../main.cpp" line="301"/>
+        <location filename="../../main.cpp" line="148"/>
+        <location filename="../../main.cpp" line="153"/>
+        <location filename="../../main.cpp" line="166"/>
+        <location filename="../../main.cpp" line="236"/>
+        <location filename="../../main.cpp" line="303"/>
         <source>Writing file &quot;%1&quot;...</source>
         <translation>Écriture du fichier « %1 »...</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="157"/>
-        <location filename="../../main.cpp" line="161"/>
+        <location filename="../../main.cpp" line="159"/>
+        <location filename="../../main.cpp" line="163"/>
         <source>Writing files in directory &quot;%1&quot;...</source>
         <translation>Écriture de fichiers dans le répertoire « %1 »...</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="167"/>
+        <location filename="../../main.cpp" line="169"/>
         <source>Unknown mode &quot;%1&quot;.</source>
         <translation>Mode « %1 » inconnu.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="175"/>
-        <location filename="../../main.cpp" line="281"/>
-        <location filename="../../main.cpp" line="309"/>
+        <location filename="../../main.cpp" line="177"/>
+        <location filename="../../main.cpp" line="283"/>
+        <location filename="../../main.cpp" line="311"/>
         <source>An error occurred: %1.</source>
         <translation>Une erreur est survenue : %1.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="180"/>
+        <location filename="../../main.cpp" line="182"/>
         <source>File successfully converted!</source>
         <translation>Le fichier a bien été converti !</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="221"/>
+        <location filename="../../main.cpp" line="223"/>
         <source>Channel %1: no preset %2 in the soundfont, its notes are not played.</source>
         <translation>Canal %1 : pas d&apos;ensemble %2 dans la banque de sons, ses notes ne sont pas jouées.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="240"/>
-        <location filename="../../main.cpp" line="312"/>
+        <location filename="../../main.cpp" line="242"/>
+        <location filename="../../main.cpp" line="314"/>
         <source>File successfully rendered!</source>
         <translation>Le fichier a bien été rendu !</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="325"/>
+        <location filename="../../main.cpp" line="327"/>
         <source>Previous configuration is now cleared.</source>
         <translation>La configuration existante a bien été effacée.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="334"/>
+        <location filename="../../main.cpp" line="336"/>
         <source>See &quot;%1&quot; for more information.</source>
         <translation>Voir « %1 » pour plus d&apos;informations.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="336"/>
+        <location filename="../../main.cpp" line="338"/>
         <source>Write &quot;%1&quot; to show usage.</source>
         <translation>Tapez « %1 » pour afficher l&apos;aide.</translation>
     </message>
@@ -7515,12 +7515,12 @@ D&apos;autres éditeurs de soundfonts pourraient utiliser d&apos;autres unités.
 <context>
     <name>ToolSoundfontExport</name>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport.cpp" line="158"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport.cpp" line="159"/>
         <source>Merge soudfonts:</source>
         <translation>Fusion des banques de sons :</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport.cpp" line="255"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport.cpp" line="256"/>
         <source>Export successful!</source>
         <translation>L&apos;export a réussi !</translation>
     </message>

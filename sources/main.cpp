@@ -144,9 +144,11 @@ int convert(Options &options)
     switch (options.mode())
     {
     case Options::MODE_CONVERSION_TO_SF2:
+        SoundfontManager::getInstance()->setSoundfontVersion(sf2Index, false);
         writeLine(QObject::tr("Writing file \"%1\"...").arg(outputFile.filePath()));
         break;
     case Options::MODE_CONVERSION_TO_SF3:
+        SoundfontManager::getInstance()->setSoundfontVersion(sf2Index, true);
         output->setOption("quality", options.sf3Quality());
         writeLine(QObject::tr("Writing file \"%1\"...").arg(outputFile.filePath()));
         break;

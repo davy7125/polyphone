@@ -23,6 +23,7 @@ polyphone (2.7) UNRELEASED; urgency=low
   * (fix) the calendar of the date field could appear when a soundfont was opened in the background
   * (fix) a soundfont opened again while it was still loading was opened in a second tab
   * (fix) the escape key hid the progress window of a tool without stopping the tool
+  * (fix) the export to sf3 (tool or command line) did not compress the samples, and the command line conversion to sf2 kept them compressed
 
  -- Davy Triponney <contact@polyphone.io>  Fri, 30 Oct 2026 12:00:00 +0100
 

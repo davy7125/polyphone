@@ -99,7 +99,7 @@ DirectoryBrowser::DirectoryBrowser(DialogKeyboard * dialogKeyboard, QWidget *par
     connect(ui->lineSearch, SIGNAL(textEdited(QString)), ui->listPresets, SLOT(setFilter(QString)));
     connect(ui->listView, SIGNAL(contentChanged()), this, SLOT(onContentChanged()));
     connect(ui->listView->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), this, SLOT(onSelectionChanged(QItemSelection,QItemSelection)));
-    connect(ui->listView->model(), SIGNAL(dataChanged(QModelIndex,QModelIndex,QList<int>)), this, SLOT(onFileDataChanged(QModelIndex,QModelIndex)));
+    connect(ui->listView->model(), SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(onFileDataChanged(QModelIndex,QModelIndex)));
     connect(ui->listView, SIGNAL(renameRequested(QString)), this, SLOT(onRenameRequested(QString)));
     connect(ui->listView, SIGNAL(deleteRequested(QString)), this, SLOT(onDeleteRequested(QString)));
     connect(ui->listSamples->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), this, SLOT(onSmplSelectionChanged(QItemSelection,QItemSelection)));

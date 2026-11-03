@@ -801,11 +801,21 @@ void Editor::updateSearchStyle(QColor focusBackgroundColor)
                                   ";color:" + highlightColorText +
                                   ";selection-background-color:" + highlightColorText +
                                   ";selection-color:" + highlightColorBackground +
+#if QT_VERSION >= 0x060500
                                   ";placeholder-text-color:" + placeholderColor.name(QColor::HexArgb) +
+#endif
                                   ";border:0;padding-left:4px}" +
                                   "QLineEdit:focus{background-color:" + focusBackgroundColor.name() +
                                   ";color:" + highlightColorBackground +
                                   ";selection-background-color:" + highlightColorBackground +
                                   ";selection-color:" + highlightColorText +
                                   ";margin:2px;padding-left:2px;border-radius:2px}");
+
+#if QT_VERSION < 0x060500
+    // Property "placeholder-text-color" not available before Qt 6.5, the palette is used instead
+    // (set after the style sheet since applying a style sheet restores the previous palette)
+    QPalette palette = ui->editFilter->palette();
+    palette.setColor(QPalette::PlaceholderText, placeholderColor);
+    ui->editFilter->setPalette(palette);
+#endif
 }

@@ -2088,6 +2088,32 @@ void SoundfontManager::loadAllSamples(int sf2Index)
     }
 }
 
+void SoundfontManager::setSoundfontVersion(int sf2Index, bool isSf3)
+{
+    EltID id(elementSf2, sf2Index);
+    bool isCurrentlySf3 = this->get(id, champ_IFIL).sfVerValue.wMajor == 3;
+    if (isSf3 == isCurrentlySf3)
+        return;
+
+    AttributeValue value;
+    if (isSf3)
+    {
+        // Compression is possible in soundfont version 3.00, with a bit depth of 16
+        value.sfVerValue.wMajor = 3;
+        value.sfVerValue.wMinor = 0;
+        this->set(id, champ_IFIL, value);
+        value.wValue = 16;
+        this->set(id, champ_wBpsSave, value);
+    }
+    else
+    {
+        // No compression: soundfont version 2.04
+        value.sfVerValue.wMajor = 2;
+        value.sfVerValue.wMinor = 4;
+        this->set(id, champ_IFIL, value);
+    }
+}
+
 QMap<int, int> SoundfontManager::getDuplicateSamples(int sf2Index)
 {
     QMutexLocker locker(&_mutex);

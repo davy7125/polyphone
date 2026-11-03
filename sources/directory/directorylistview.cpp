@@ -66,7 +66,7 @@ DirectoryListView::DirectoryListView(QWidget * parent) : QListView(parent),
     connect(_timerContentWidths, SIGNAL(timeout()), this, SLOT(updateContentWidths()));
     connect(_model, SIGNAL(rowsInserted(QModelIndex,int,int)), this, SLOT(onModelChanged()));
     connect(_model, SIGNAL(rowsRemoved(QModelIndex,int,int)), this, SLOT(onModelChanged()));
-    connect(_model, SIGNAL(dataChanged(QModelIndex,QModelIndex,QList<int>)), this, SLOT(onModelChanged()));
+    connect(_model, SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(onModelChanged()));
 
     // Initial sort (formerly a single choice: name, newest first, largest first, smallest first)
     int sortColumn = ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "directory_browser_sort_column", -1).toInt();

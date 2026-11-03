@@ -101,9 +101,10 @@ void ToolSoundfontExport::process(SoundfontManager * sm, QString name, QMap<int,
     switch (params->getFormat())
     {
     case 0: // sf2
-        // Nothing special
+        sm->setSoundfontVersion(idExport.indexSf2, false);
         break;
     case 1: // sf3
+        sm->setSoundfontVersion(idExport.indexSf2, true);
         output->setOption("quality", params->getQuality());
         break;
     case 2: // sfz

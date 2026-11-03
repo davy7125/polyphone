@@ -4974,13 +4974,13 @@ Ambdues divisions han de compartir la mateixa nota i rang de velocitat.</transla
     </message>
     <message>
         <location filename="../../main.cpp" line="111"/>
-        <location filename="../../main.cpp" line="255"/>
+        <location filename="../../main.cpp" line="257"/>
         <source>The file &quot;%1&quot; does not exist.</source>
         <translation>El fitxer &quot;%1&quot; no existeix.</translation>
     </message>
     <message>
         <location filename="../../main.cpp" line="119"/>
-        <location filename="../../main.cpp" line="260"/>
+        <location filename="../../main.cpp" line="262"/>
         <source>The directory &quot;%1&quot; does not exist.</source>
         <translation>El directori &quot;%1&quot; no existeix.</translation>
     </message>
@@ -4991,80 +4991,80 @@ Ambdues divisions han de compartir la mateixa nota i rang de velocitat.</transla
     </message>
     <message>
         <location filename="../../main.cpp" line="129"/>
-        <location filename="../../main.cpp" line="201"/>
-        <location filename="../../main.cpp" line="286"/>
+        <location filename="../../main.cpp" line="203"/>
+        <location filename="../../main.cpp" line="288"/>
         <source>Loading file &quot;%1&quot;...</source>
         <translation>S&apos;està carregant el fitxer &quot;%1&quot;...</translation>
     </message>
     <message>
         <location filename="../../main.cpp" line="134"/>
-        <location filename="../../main.cpp" line="206"/>
-        <location filename="../../main.cpp" line="291"/>
+        <location filename="../../main.cpp" line="208"/>
+        <location filename="../../main.cpp" line="293"/>
         <source>Couldn&apos;t load file &quot;%1&quot;: %2.</source>
         <translation>No s&apos;ha pogut carregar el fitxer &quot;%1&quot;: %2.</translation>
     </message>
     <message>
         <location filename="../../main.cpp" line="140"/>
-        <location filename="../../main.cpp" line="212"/>
-        <location filename="../../main.cpp" line="297"/>
+        <location filename="../../main.cpp" line="214"/>
+        <location filename="../../main.cpp" line="299"/>
         <source>File successfully loaded!</source>
         <translation>Fitxer carregat correctament!</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="147"/>
-        <location filename="../../main.cpp" line="151"/>
-        <location filename="../../main.cpp" line="164"/>
-        <location filename="../../main.cpp" line="234"/>
-        <location filename="../../main.cpp" line="301"/>
+        <location filename="../../main.cpp" line="148"/>
+        <location filename="../../main.cpp" line="153"/>
+        <location filename="../../main.cpp" line="166"/>
+        <location filename="../../main.cpp" line="236"/>
+        <location filename="../../main.cpp" line="303"/>
         <source>Writing file &quot;%1&quot;...</source>
         <translation>S&apos;està escrivint el fitxer &quot;%1&quot;...</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="157"/>
-        <location filename="../../main.cpp" line="161"/>
+        <location filename="../../main.cpp" line="159"/>
+        <location filename="../../main.cpp" line="163"/>
         <source>Writing files in directory &quot;%1&quot;...</source>
         <translation>S&apos;estan escrivint fitxers al directori &quot;%1&quot;...</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="167"/>
+        <location filename="../../main.cpp" line="169"/>
         <source>Unknown mode &quot;%1&quot;.</source>
         <translation>Mode desconegut &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="175"/>
-        <location filename="../../main.cpp" line="281"/>
-        <location filename="../../main.cpp" line="309"/>
+        <location filename="../../main.cpp" line="177"/>
+        <location filename="../../main.cpp" line="283"/>
+        <location filename="../../main.cpp" line="311"/>
         <source>An error occurred: %1.</source>
         <translation>S&apos;ha produït un error: %1.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="180"/>
+        <location filename="../../main.cpp" line="182"/>
         <source>File successfully converted!</source>
         <translation>Fitxer convertit correctament!</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="221"/>
+        <location filename="../../main.cpp" line="223"/>
         <source>Channel %1: no preset %2 in the soundfont, its notes are not played.</source>
         <translation>Canal %1: no hi ha cap preset %2 al soundfont, les seves notes no es reprodueixen.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="240"/>
-        <location filename="../../main.cpp" line="312"/>
+        <location filename="../../main.cpp" line="242"/>
+        <location filename="../../main.cpp" line="314"/>
         <source>File successfully rendered!</source>
         <translation>Fitxer renderitzat correctament!</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="325"/>
+        <location filename="../../main.cpp" line="327"/>
         <source>Previous configuration is now cleared.</source>
         <translation>La configuració prèvia s&apos;ha esborrat.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="334"/>
+        <location filename="../../main.cpp" line="336"/>
         <source>See &quot;%1&quot; for more information.</source>
         <translation>Consulteu &quot;%1&quot; per a més informació.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="336"/>
+        <location filename="../../main.cpp" line="338"/>
         <source>Write &quot;%1&quot; to show usage.</source>
         <translation>Escriviu &quot;%1&quot; per mostrar l&apos;ús.</translation>
     </message>
@@ -7502,12 +7502,12 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
 <context>
     <name>ToolSoundfontExport</name>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport.cpp" line="158"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport.cpp" line="159"/>
         <source>Merge soudfonts:</source>
         <translation>Fusiona els soundfonts:</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport.cpp" line="255"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport.cpp" line="256"/>
         <source>Export successful!</source>
         <translation>L&apos;exportació ha finalitzat amb èxit!</translation>
     </message>
