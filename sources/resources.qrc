@@ -96,6 +96,7 @@
         <file alias="folder.svg">resources/folder.svg</file>
         <file alias="gear.svg">resources/gear.svg</file>
         <file alias="hard-drive.svg">resources/hard-drive.svg</file>
+        <file alias="sparkles.svg">resources/sparkles.svg</file>
     </qresource>
     <qresource prefix="/misc">
         <file>changelog</file>

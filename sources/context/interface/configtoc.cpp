@@ -40,7 +40,7 @@ ConfigToc::ConfigToc(QWidget *parent) :
     ui->buttonInterface->setIconName(":/icons/flag.svg");
     ui->buttonSound->setIconName(":/icons/sound.svg");
     ui->buttonKeyboard->setIconName(":/icons/keyboard.svg");
-    ui->buttonMcp->setIconName(":/icons/exchange.svg");
+    ui->buttonMcp->setIconName(":/icons/sparkles.svg");
 #ifdef NO_SF2_REPOSITORY
     ui->buttonRepository->hide();
 #else
