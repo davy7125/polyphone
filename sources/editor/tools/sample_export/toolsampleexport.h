@@ -56,6 +56,9 @@ public:
         return "wavExport";
     }
 
+    /// Destination directory, used instead of asking it (automation) if not empty
+    void setDirectory(QString directory) { _forcedDirectory = directory; }
+
     /// Method executed before the iterating process
     void beforeProcess(IdList ids) override;
 
@@ -74,6 +77,7 @@ private:
     QMutex _mutex;
     IdList _exportedSamples;
     QString _dirPath;
+    QString _forcedDirectory;
 };
 
 #endif // TOOLSAMPLEEXPORT_H

@@ -97,24 +97,8 @@ void AbstractToolIterating::runInternal(SoundfontManager * sm, QWidget * parent,
     _parameters = parameters;
 
     // Number of steps
-    _steps = 0;
-    QList<EltID> listID;
-    foreach (ElementType type, _elementTypes)
-    {
-        listID = ids.getSelectedIds(type);
-        if (!listID.isEmpty())
-            break;
-    }
-    _idsToProcess.clear();
-    foreach (EltID id, listID)
-    {
-        if (_sm->isValid(id))
-        {
-            _idsToProcess.append(id);
-            _steps++;
-        }
-    }
-
+    _idsToProcess = getIdsToProcess(sm, ids);
+    _steps = _idsToProcess.count();
     if (_steps == 0)
     {
         emit finished(false);
@@ -151,6 +135,35 @@ void AbstractToolIterating::runInternal(SoundfontManager * sm, QWidget * parent,
             QThreadPool::globalInstance()->start(new RunnableTool(_sm, this, id, _parameters));
     else
         QThreadPool::globalInstance()->start(new RunnableTool(_sm, this, _idsToProcess.takeFirst(), _parameters));
+}
+
+bool AbstractToolIterating::runSynchronously(SoundfontManager * sm, IdList ids, AbstractToolParameters * parameters)
+{
+    IdList idsToProcess = getIdsToProcess(sm, ids);
+    if (idsToProcess.isEmpty())
+        return true;
+
+    this->beforeProcess(idsToProcess);
+    foreach (EltID id, idsToProcess)
+        this->process(sm, id, parameters);
+    return true;
+}
+
+IdList AbstractToolIterating::getIdsToProcess(SoundfontManager * sm, IdList ids)
+{
+    IdList listID;
+    foreach (ElementType type, _elementTypes)
+    {
+        listID = ids.getSelectedIds(type);
+        if (!listID.isEmpty())
+            break;
+    }
+
+    IdList result;
+    foreach (EltID id, listID)
+        if (sm->isValid(id))
+            result << id;
+    return result;
 }
 
 void AbstractToolIterating::onElementProcessed()

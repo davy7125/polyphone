@@ -96,8 +96,8 @@ void ToolBalanceAdjustment::process(SoundfontManager * sm, EltID id, AbstractToo
     }
 
     // Compute intensities
-    float intensite1 = SampleUtils::meanSquare(vData1.mid(debut1, fin1 - debut1));
-    float intensite2 = SampleUtils::meanSquare(vData2.mid(debut2, fin2 - debut2));
+    float intensite1 = SampleUtils::normDividedBySize(vData1.mid(debut1, fin1 - debut1));
+    float intensite2 = SampleUtils::normDividedBySize(vData2.mid(debut2, fin2 - debut2));
 
     // Mean intensity
     float intensiteMoy = sqrt(intensite1 * intensite2);

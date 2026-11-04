@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ConfigSectionMcp</class>
+ <widget class="QWidget" name="ConfigSectionMcp">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>465</width>
+    <height>420</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string notr="true">Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0" colspan="4">
+    <widget class="QLabel" name="labelDescription">
+     <property name="text">
+      <string>An AI assistant supporting the Model Context Protocol (MCP) can browse, edit and analyze the soundfonts open in Polyphone. Its changes are visible immediately and can be undone. The server only accepts connections from this computer.</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0" colspan="4">
+    <widget class="QCheckBox" name="checkEnabled">
+     <property name="text">
+      <string>Allow AI assistants to access the open soundfonts</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="2" column="1">
+    <widget class="QLabel" name="labelPort">
+     <property name="text">
+      <string>Port</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="2">
+    <widget class="QSpinBox" name="spinPort">
+     <property name="minimumSize">
+      <size>
+       <width>90</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="minimum">
+      <number>1024</number>
+     </property>
+     <property name="maximum">
+      <number>65535</number>
+     </property>
+     <property name="value">
+      <number>8642</number>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="3">
+    <spacer name="horizontalSpacerPort">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="3" column="1" colspan="3">
+    <widget class="QLabel" name="labelState">
+     <property name="text">
+      <string notr="true">-</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+     <property name="textInteractionFlags">
+      <set>Qt::TextSelectableByMouse</set>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1" colspan="3">
+    <widget class="QLabel" name="labelCommand">
+     <property name="text">
+      <string>Command adding Polyphone to Claude Code:</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1" colspan="3">
+    <layout class="QHBoxLayout" name="layoutCommand">
+     <item>
+      <widget class="QLineEdit" name="lineCommand">
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushCopy">
+       <property name="text">
+        <string>Copy</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="6" column="0" colspan="4">
+    <widget class="QLabel" name="labelSubTitle">
+     <property name="font">
+      <font>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Functions available for the AI</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="0" colspan="4">
+    <widget class="QTreeWidget" name="treeFunctions">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>320</height>
+      </size>
+     </property>
+     <property name="editTriggers">
+      <set>QAbstractItemView::NoEditTriggers</set>
+     </property>
+     <property name="rootIsDecorated">
+      <bool>true</bool>
+     </property>
+     <property name="uniformRowHeights">
+      <bool>true</bool>
+     </property>
+     <property name="wordWrap">
+      <bool>false</bool>
+     </property>
+     <column>
+      <property name="text">
+       <string>Function</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Description</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

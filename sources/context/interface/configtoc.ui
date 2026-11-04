@@ -100,6 +100,20 @@
        </widget>
       </item>
       <item>
+       <widget class="ConfigTocButton" name="buttonMcp">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>AI
+assistant</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="ConfigTocButton" name="buttonRepository">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">

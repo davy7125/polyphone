@@ -209,6 +209,7 @@ INCLUDEPATH += clavier \
     lib \
     lib/qtsingleapplication \
     mainwindow \
+    mcp \
     midi_player \
     player \
     repository \
@@ -563,6 +564,18 @@ SOURCES	+= main.cpp \
     context/interface/configsectioninterface.cpp \
     context/interface/configsectionsound.cpp \
     context/interface/configsectionkeyboard.cpp \
+    context/interface/configsectionmcp.cpp \
+    core/sample/soundanalyzer.cpp \
+    mcp/mcpanalysisfunctions.cpp \
+    mcp/mcpattributes.cpp \
+    mcp/mcpbrowsingfunctions.cpp \
+    mcp/mcpeditingfunctions.cpp \
+    mcp/mcpfunction.cpp \
+    mcp/mcpfunctions.cpp \
+    mcp/mcpmodulators.cpp \
+    mcp/mcpserver.cpp \
+    mcp/mcptoolfunctions.cpp \
+    mcp/mcputils.cpp \
     context/interface/configsectionrepository.cpp \
     repository/usermanager.cpp \
     mainwindow/toprightwidget.cpp \
@@ -997,6 +1010,14 @@ HEADERS += \
     context/interface/configsectioninterface.h \
     context/interface/configsectionsound.h \
     context/interface/configsectionkeyboard.h \
+    context/interface/configsectionmcp.h \
+    core/sample/soundanalyzer.h \
+    mcp/mcpattributes.h \
+    mcp/mcpfunction.h \
+    mcp/mcpfunctions.h \
+    mcp/mcpmodulators.h \
+    mcp/mcpserver.h \
+    mcp/mcputils.h \
     context/interface/configsectionrepository.h \
     repository/usermanager.h \
     mainwindow/toprightwidget.h \
@@ -1150,6 +1171,7 @@ FORMS += \
     context/interface/configsectioninterface.ui \
     context/interface/configsectionsound.ui \
     context/interface/configsectionkeyboard.ui \
+    context/interface/configsectionmcp.ui \
     context/interface/configsectionrepository.ui \
     mainwindow/toprightwidget.ui \
     repository/user/userarea.ui \

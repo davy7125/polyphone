@@ -50,6 +50,7 @@
 #include "utils.h"
 #include "playeroptions.h"
 #include "tab.h"
+#include "mcpserver.h"
 
 const int MainWindow::RESIZE_BORDER_WIDTH = 5;
 
@@ -141,6 +142,10 @@ MainWindow::MainWindow(bool playerMode, QWidget *parent) : QWidget(parent),
     connect(_tabManager, SIGNAL(tabOpen(bool,bool,bool)), ui->topRightWidget, SLOT(onTabOpen(bool,bool,bool)));
     connect(ui->tabBar, SIGNAL(openFile(QString)), this, SLOT(openFiles(QString)), Qt::QueuedConnection);
 
+    // Possibly start the server giving access to the soundfonts to AI assistants
+    if (!playerMode)
+        McpServer::getInstance()->applyConfiguration();
+
     // Navigation between tabs, with a priority over the keys used by the widgets having the focus (lists, trees, tables, ...)
     new QShortcut(QKeySequence(Qt::CTRL | Qt::Key_Home), this, SLOT(onFirstTab()));
     new QShortcut(QKeySequence(Qt::CTRL | Qt::Key_PageUp), this, SLOT(onPreviousTab()));
@@ -192,6 +197,7 @@ MainWindow::MainWindow(bool playerMode, QWidget *parent) : QWidget(parent),
 
 MainWindow::~MainWindow()
 {
+    McpServer::kill();
     delete ui;
     delete _midiPlayer;
     delete _recorder;

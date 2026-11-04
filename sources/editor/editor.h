@@ -50,6 +50,7 @@ public:
     bool processKey(int channel, int key, int vel) override;
 
     void selectElement(EltID id);
+    IdList getSelection() { return _currentIds; }
     void onActionRequired(TabAction action) override;
 
 signals:

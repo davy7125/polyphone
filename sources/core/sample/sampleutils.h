@@ -51,7 +51,7 @@ public:
     static QList<quint32> findMins(QVector<float> vectData, int maxNb, float minFrac = 0);
     static QList<quint32> findMax(QVector<float> vectData, int maxNb, float minFrac = 0);
     static float max(QVector<float> vData);
-    static float meanSquare(QVector<float> vData);
+    static float normDividedBySize(QVector<float> vData); // sqrt(sum(x^2)) / n, not an RMS
     static int lastLettersToRemove(QString str1, QString str2);
 
     // Compute the quality of a loop:

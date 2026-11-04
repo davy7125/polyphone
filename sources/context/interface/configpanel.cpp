@@ -36,7 +36,7 @@ ConfigPanel::ConfigPanel(QWidget *parent) : Tab(parent),
     QString colors = "background-color:" + ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() + ";" +
             "color: " + ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() + ";";
     QString styleSheet = "QLabel{border-radius:2px;padding: 3px 10px;" + colors + "}";
-    foreach (QLabel * label, QList<QLabel *>() << ui->interfaceLabel << ui->soundLabel << ui->keyboardLabel << ui->repositoryLabel)
+    foreach (QLabel * label, QList<QLabel *>() << ui->interfaceLabel << ui->soundLabel << ui->keyboardLabel << ui->mcpLabel << ui->repositoryLabel)
     {
         label->setStyleSheet(styleSheet);
         label->setIndent(0);
@@ -44,7 +44,7 @@ ConfigPanel::ConfigPanel(QWidget *parent) : Tab(parent),
     ui->labelTitle->setStyleSheet("QLabel{padding: 0 10px;" + colors + "}");
 
     // Section headers
-    _sectionLabels << ui->interfaceLabel << ui->soundLabel << ui->keyboardLabel;
+    _sectionLabels << ui->interfaceLabel << ui->soundLabel << ui->keyboardLabel << ui->mcpLabel;
 #ifdef NO_SF2_REPOSITORY
     ui->repositoryLabel->hide();
     ui->repositoryWidget->hide();
@@ -71,6 +71,7 @@ void ConfigPanel::initializeInterface()
     ui->interfaceWidget->initialize();
     ui->soundWidget->initialize();
     ui->keyboardWidget->initialize();
+    ui->mcpWidget->initialize();
 #ifndef NO_SF2_REPOSITORY
     ui->repositoryWidget->initialize();
 #endif

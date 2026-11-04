@@ -48,6 +48,10 @@ public:
     // Duplicate an element
     EltID duplicate(EltID id);
 
+    // No questions asked (automation): elements having the same name are duplicated, a filled global division is
+    // not overwritten and no warnings are displayed
+    void setNonInteractive();
+
 private:
     enum EtatMessage
     {

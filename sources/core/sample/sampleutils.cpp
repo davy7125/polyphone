@@ -381,21 +381,30 @@ Complex * SampleUtils::IFFT(Complex * x, quint32 N)
 
 QVector<float> SampleUtils::getFourierTransform(QVector<float> input)
 {
+    // Hann window, the amplitude being compensated (the peak of a sinusoid keeps the same value)
+    int length = input.size();
+    if (length > 1)
+    {
+        double windowSum = 0;
+        for (int i = 0; i < length; i++)
+            windowSum += 0.5 - 0.5 * cos(2.0 * M_PI * i / (length - 1));
+        double gain = windowSum > 0 ? length / windowSum : 1.0;
+        for (int i = 0; i < length; i++)
+            input[i] *= static_cast<float>(gain * (0.5 - 0.5 * cos(2.0 * M_PI * i / (length - 1))));
+    }
+
     quint32 size = 0;
     Complex * cpxData = fromFloatToComplex(input, size);
     Complex * fc_sortie_fft = FFT(cpxData, size);
     delete [] cpxData;
+
+    // Module of the bins from 0 to the Nyquist frequency (the other half is symmetric for a real signal)
     QVector<float> vectFourier;
     vectFourier.resize(size / 2);
     for (quint32 i = 0; i < size / 2; i++)
-    {
         vectFourier[static_cast<int>(i)] =
-            static_cast<float>(0.5 * qSqrt(fc_sortie_fft[i].real() * fc_sortie_fft[i].real() +
-                                           fc_sortie_fft[i].imag() * fc_sortie_fft[i].imag()));
-        vectFourier[static_cast<int>(i)] +=
-            static_cast<float>(0.5 * qSqrt(fc_sortie_fft[size-i-1].real() * fc_sortie_fft[size-i-1].real() +
-                                           fc_sortie_fft[size-i-1].imag() * fc_sortie_fft[size-i-1].imag()));
-    }
+            static_cast<float>(qSqrt(fc_sortie_fft[i].real() * fc_sortie_fft[i].real() +
+                                     fc_sortie_fft[i].imag() * fc_sortie_fft[i].imag()));
     delete [] fc_sortie_fft;
 
     return vectFourier;
@@ -902,7 +911,7 @@ float SampleUtils::mean(QVector<float> vData)
         return 0;
 }
 
-float SampleUtils::meanSquare(QVector<float> vData)
+float SampleUtils::normDividedBySize(QVector<float> vData)
 {
     return qSqrt(sumSquare(vData)) / vData.size();
 }
@@ -1074,7 +1083,7 @@ double SampleUtils::gainEQ(double freq, QVector<int> eqGains)
 
 void SampleUtils::regimePermanent(QVector<float> data, quint32 dwSmplRate, quint32 &posStart, quint32 &posEnd, quint32 nbOK, float coef)
 {
-    // Calcul de la moyenne des valeurs absolues sur une période de 0.05 s à chaque 10ième de seconde
+    // Mean of the absolute values over 0.1 s, every 0.05 s
     quint32 sizePeriode = dwSmplRate / 10;
     quint32 len = static_cast<quint32>(data.size());
     if (len < sizePeriode)
@@ -1099,38 +1108,54 @@ void SampleUtils::regimePermanent(QVector<float> data, quint32 dwSmplRate, quint
         float valTmp = 0;
         for (quint32 j = 0; j < sizePeriode; j++)
             valTmp += qAbs(data[static_cast<int>((dwSmplRate / 20) * i + j)]);
-        data[static_cast<int>(i)] = valTmp / sizePeriode;
+        tableauMoyennes[static_cast<int>(i)] = valTmp / sizePeriode;
     }
 
-    // Calcul de la médiane des valeurs
+    // First and last series of nbOK consecutive means close to the median (2 means of margin)
     float med = median(tableauMoyennes);
-    posStart = 0;
-    posEnd = nbValeurs - 1;
+    quint32 first = 0;
     quint32 count = 0;
-    while (count < nbOK && posStart <= posEnd)
+    while (count < nbOK && first < nbValeurs)
     {
-        if (data[static_cast<int>(posStart)] < coef * med && data[static_cast<int>(posStart)] > med / coef)
+        float value = tableauMoyennes[static_cast<int>(first)];
+        if (value < coef * med && value > med / coef)
             count++;
         else
             count = 0;
-        posStart++;
+        first++;
     }
-    posStart = posStart + 2 - count;
+    if (count < nbOK)
+    {
+        // Not found: no steady part
+        posStart = 0;
+        posEnd = 0;
+        return;
+    }
+    first = first - count + 2;
+
+    quint32 last = nbValeurs;
     count = 0;
-    while (count < nbOK && posEnd > 0)
+    while (count < nbOK && last > 0)
     {
-        if (data[static_cast<int>(posEnd)] < coef * med && data[static_cast<int>(posEnd)] > med / coef)
+        last--;
+        float value = tableauMoyennes[static_cast<int>(last)];
+        if (value < coef * med && value > med / coef)
             count++;
         else
             count = 0;
-        posEnd--;
     }
-    posEnd += count-2;
+    last = last + count - 1;
+    if (last < first + 2)
+    {
+        posStart = 0;
+        posEnd = 0;
+        return;
+    }
+    last -= 2;
 
     // Conversion position
-    posStart *= dwSmplRate / 20;
-    posEnd *= dwSmplRate / 20;
-    posEnd += sizePeriode;
+    posStart = first * (dwSmplRate / 20);
+    posEnd = qMin(last * (dwSmplRate / 20) + sizePeriode, len - 1);
 }
 
 void SampleUtils::fillSincTable(float * table, int order, int subdivisions, double kaiserBesserBeta)

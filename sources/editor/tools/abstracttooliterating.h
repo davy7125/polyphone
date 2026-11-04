@@ -54,6 +54,7 @@ protected:
 
     /// Run the tool on a list of id
     void runInternal(SoundfontManager * sm, QWidget * parent, IdList ids, AbstractToolParameters * parameters) override;
+    bool runSynchronously(SoundfontManager * sm, IdList ids, AbstractToolParameters * parameters) override;
 
     // Additional configurations
     bool _openWaitDialogJustInProcess; // false by default
@@ -64,6 +65,8 @@ private slots:
     void onCancel();
 
 private:
+    IdList getIdsToProcess(SoundfontManager * sm, IdList ids);
+
     QList<ElementType> _elementTypes;
     WaitingToolDialog * _waitingDialog;
     int _steps;

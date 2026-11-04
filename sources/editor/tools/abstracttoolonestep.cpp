@@ -79,6 +79,12 @@ void AbstractToolOneStep::runInternal(SoundfontManager * sm, QWidget * parent, I
     QThreadPool::globalInstance()->start(new RunnableToolOneStep(sm, this, ids, parameters));
 }
 
+bool AbstractToolOneStep::runSynchronously(SoundfontManager * sm, IdList ids, AbstractToolParameters * parameters)
+{
+    this->process(sm, ids, parameters);
+    return true;
+}
+
 void AbstractToolOneStep::onProcessed()
 {
     if (_waitingDialog == nullptr)

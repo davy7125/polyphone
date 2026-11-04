@@ -40,6 +40,7 @@ ConfigToc::ConfigToc(QWidget *parent) :
     ui->buttonInterface->setIconName(":/icons/flag.svg");
     ui->buttonSound->setIconName(":/icons/sound.svg");
     ui->buttonKeyboard->setIconName(":/icons/keyboard.svg");
+    ui->buttonMcp->setIconName(":/icons/exchange.svg");
 #ifdef NO_SF2_REPOSITORY
     ui->buttonRepository->hide();
 #else
@@ -72,7 +73,12 @@ void ConfigToc::on_buttonKeyboard_clicked()
     emit sectionClicked(3);
 }
 
-void ConfigToc::on_buttonRepository_clicked()
+void ConfigToc::on_buttonMcp_clicked()
 {
     emit sectionClicked(4);
+}
+
+void ConfigToc::on_buttonRepository_clicked()
+{
+    emit sectionClicked(5);
 }

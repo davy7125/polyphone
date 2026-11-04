@@ -27,6 +27,7 @@
 
 #include <QString>
 #include <QList>
+#include <QStringList>
 #include <QVector>
 #include <QMetaObject>
 class MidiProcessor;
@@ -43,6 +44,7 @@ public:
 
     /// Read the settings and the events, return false in case of error (see getError)
     bool readEvents(QString filePath);
+    bool readEventLines(QStringList lines);
 
     /// Synth playing the events:
     /// * SYNTH_CORE: SynthCore computing in the calling thread,
@@ -58,6 +60,11 @@ public:
 
     /// Play the events with the soundfont loaded at sf2Index and write a stereo 32-bit float wav file
     bool render(int sf2Index, QString outputFilePath, SynthType synthType);
+
+    /// Same, the result being interleaved stereo data (possibly longer than frameCount, the last block being complete)
+    bool render(int sf2Index, QVector<float> &data, quint32 &frameCount, SynthType synthType);
+
+    quint32 getSampleRate() { return _sampleRate; }
 
     QString getError() { return _error; }
 

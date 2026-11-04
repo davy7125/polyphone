@@ -60,7 +60,7 @@ public slots:
 
     /// Open the soundfont browser
     void openSoundfont(QString fileName, PlayerOptions * playerOptions, bool async, EltID initialSelection = EltID(), bool addToHistory = true);
-    void openNewSoundfont();
+    int openNewSoundfont(bool async = true); // Index of the new soundfont if not async, -1 otherwise
 
     /// Open the repository, initialized with a filter
     /// Note: this function delete the filter, no need to do it elsewhere
@@ -81,6 +81,12 @@ public slots:
 
     /// Get the current sf2 if an editor or player is displayed, or -1
     int getCurrentSf2();
+
+    /// Selection of the editor currently displayed (empty if no editor is displayed)
+    IdList getCurrentSelection();
+
+    /// Display the editor of a soundfont and select an element in it, return false if there is no editor
+    bool showElement(EltID id);
 
     /// Close the current tab
     void closeCurrentTab();

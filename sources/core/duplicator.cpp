@@ -142,6 +142,15 @@ EltID Duplicator::copy(EltID idSource, EltID idDest)
     return newId;
 }
 
+void Duplicator::setNonInteractive()
+{
+    _copieSmpl = DUPLIQUER_TOUT;
+    _copieInst = DUPLIQUER_TOUT;
+    _copiePrst = DUPLIQUER_TOUT;
+    _displayWarningGlobal = false;
+    _presetFull = true; // Warning already displayed
+}
+
 EltID Duplicator::duplicate(EltID idSource)
 {
     // Copy within the same soundfont

@@ -47,6 +47,7 @@ private slots:
     void on_buttonInterface_clicked();
     void on_buttonSound_clicked();
     void on_buttonKeyboard_clicked();
+    void on_buttonMcp_clicked();
     void on_buttonRepository_clicked();
 
 private:

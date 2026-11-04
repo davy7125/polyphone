@@ -110,7 +110,7 @@ void TabManager::openConfiguration()
     _stackedWidget->setCurrentIndex(index);
 }
 
-void TabManager::openNewSoundfont()
+int TabManager::openNewSoundfont(bool async)
 {
     // Create a new editor
     Editor * editor = new Editor(_dialogKeyboard, EltID(elementSf2));
@@ -123,8 +123,9 @@ void TabManager::openNewSoundfont()
     _soundfontTabs << editor;
 
     // Initialize and display it
-    editor->initialize(InputFactory::getInput(""), true);
+    editor->initialize(InputFactory::getInput(""), async);
     _stackedWidget->setCurrentIndex(index);
+    return async ? -1 : editor->getSf2Index();
 }
 
 void TabManager::openSoundfont(QString fileName, PlayerOptions *playerOptions, bool async, EltID initialSelection, bool addToHistory)
@@ -440,6 +441,30 @@ int TabManager::getCurrentSf2()
         return tab->getSf2Index();
     }
     return -1;
+}
+
+IdList TabManager::getCurrentSelection()
+{
+    Editor * editor = dynamic_cast<Editor *>(_stackedWidget->currentWidget());
+    if (editor == nullptr || !_soundfontTabs.contains(editor))
+        return IdList();
+    return editor->getSelection();
+}
+
+bool TabManager::showElement(EltID id)
+{
+    foreach (SoundfontTab * tab, _soundfontTabs)
+    {
+        Editor * editor = dynamic_cast<Editor *>(tab);
+        if (editor != nullptr && editor->getSf2Index() == id.indexSf2)
+        {
+            _stackedWidget->setCurrentIndex(_stackedWidget->indexOf(editor));
+            if (id.typeElement != elementSf2)
+                editor->selectElement(id);
+            return true;
+        }
+    }
+    return false;
 }
 
 void TabManager::closeCurrentTab()

@@ -80,12 +80,19 @@ bool OfflineRenderer::readEvents(QString filePath)
         return false;
     }
 
-    // A line is either a setting or an event starting with its time in seconds
     QTextStream stream(&file);
-    int line = 0;
+    QStringList lines;
     while (!stream.atEnd())
+        lines << stream.readLine();
+    return readEventLines(lines);
+}
+
+bool OfflineRenderer::readEventLines(QStringList lines)
+{
+    // A line is either a setting or an event starting with its time in seconds
+    int line = 0;
+    foreach (QString text, lines)
     {
-        QString text = stream.readLine();
         line++;
         int commentPosition = text.indexOf('#');
         if (commentPosition >= 0)
@@ -528,18 +535,24 @@ static void playElement(SynthCore * core, ElementType type, int sf2Index, int in
 
 bool OfflineRenderer::render(int sf2Index, QString outputFilePath, SynthType synthType)
 {
+    QVector<float> data;
+    quint32 frameCount;
+    return render(sf2Index, data, frameCount, synthType) && writeWavFile(outputFilePath, data, frameCount);
+}
+
+bool OfflineRenderer::render(int sf2Index, QVector<float> &data, quint32 &frameCount, SynthType synthType)
+{
     if (!applyModelChanges(sf2Index) || !resolveElements(sf2Index))
         return false;
 
-    quint32 frameCount = static_cast<quint32>(qRound64(_duration * _sampleRate));
+    frameCount = static_cast<quint32>(qRound64(_duration * _sampleRate));
     quint32 blockCount = (frameCount + _blockSize - 1) / _blockSize;
-    QVector<float> data(2 * static_cast<int>(blockCount * _blockSize), 0.f);
+    data.fill(0.f, 2 * static_cast<int>(blockCount * _blockSize));
     if (synthType == SYNTH_THREADED)
         renderWithThreads(sf2Index, data, blockCount);
     else if (!renderWithCore(sf2Index, data, blockCount, synthType == SYNTH_TWO_CORES))
         return false;
-
-    return writeWavFile(outputFilePath, data, frameCount);
+    return true;
 }
 
 SynthCoreConfig OfflineRenderer::getSynthConfig()

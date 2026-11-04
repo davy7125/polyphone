@@ -75,6 +75,9 @@ protected:
         return elementSf2;
     }
 
+    /// The soundfonts to export are in the parameters
+    bool canRunWithoutIds() const override { return true; }
+
 private:
     void process(SoundfontManager * sm, QString name, QMap<int,  QList<int> > presets, AbstractToolParameters *parameters);
     EltID mergeSoundfonts(SoundfontManager * sm, QMap<int,  QList<int> > presets);

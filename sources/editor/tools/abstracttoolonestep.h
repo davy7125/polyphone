@@ -46,6 +46,7 @@ signals:
 protected:
     /// Run the tool, emit the signal "finished" at the end
     void runInternal(SoundfontManager * sm, QWidget * parent, IdList ids, AbstractToolParameters * parameters) override;
+    bool runSynchronously(SoundfontManager * sm, IdList ids, AbstractToolParameters * parameters) override;
 
 private slots:
     void onProcessed();

@@ -50,7 +50,8 @@ public:
         SECTION_WARNINGS,
         SECTION_REPOSITORY,
         SECTION_EXTENSIONS,
-        SECTION_NOTIFICATIONS
+        SECTION_NOTIFICATIONS,
+        SECTION_MCP
     };
 
     enum Key

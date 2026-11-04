@@ -184,6 +184,7 @@ QString ConfManager::getFullKey(Section section, QString subSection, QString key
     case SECTION_REPOSITORY:   firstPart = "repository";    break;
     case SECTION_EXTENSIONS:   firstPart = "extensions";    break;
     case SECTION_NOTIFICATIONS: firstPart = "notifications"; break;
+    case SECTION_MCP:          firstPart = "mcp";           break;
     }
     if (firstPart != "")
         firstPart += "/";

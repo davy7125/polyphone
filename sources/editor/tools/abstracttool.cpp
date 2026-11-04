@@ -29,6 +29,7 @@
 #include "abstracttoolgui.h"
 #include "contextmanager.h"
 #include <QMessageBox>
+#include <QEventLoop>
 
 QWidget * AbstractTool::s_parent = nullptr;
 SoundfontManager * AbstractTool::s_sm = nullptr;
@@ -36,7 +37,8 @@ SoundfontManager * AbstractTool::s_sm = nullptr;
 AbstractTool::AbstractTool(AbstractToolParameters *parameters, AbstractToolGui *gui) :
     _toolParameters(parameters),
     _toolGui(gui),
-    _toolDialog(nullptr)
+    _toolDialog(nullptr),
+    _silent(false)
 {
     connect(this, SIGNAL(finished(bool)), this, SLOT(onFinished(bool)), Qt::QueuedConnection);
 }
@@ -66,7 +68,7 @@ ElementType AbstractTool::getCurrentType() const
     return _currentIds[0].typeElement;
 }
 
-void AbstractTool::run()
+void AbstractTool::completeIdsToProcess()
 {
     // Possibly complete the id list if stereo samples are found and if stereo editing is enabled
     _idsToProcess = _currentIds;
@@ -90,6 +92,11 @@ void AbstractTool::run()
             }
         }
     }
+}
+
+void AbstractTool::run()
+{
+    completeIdsToProcess();
 
     // Possibly display an error instead of running the tool
     QString error = getBlockingError(_idsToProcess);
@@ -134,6 +141,13 @@ void AbstractTool::onParametersValidated()
 
 void AbstractTool::onFinished(bool updateNeeded)
 {
+    // Run without dialog: the caller gets the messages and ends the editing
+    if (_silent)
+    {
+        _silent = false;
+        return;
+    }
+
     // Display a warning if there is one
     QString warning = getWarning();
     if (!warning.isEmpty())
@@ -146,6 +160,65 @@ void AbstractTool::onFinished(bool updateNeeded)
 
     if (updateNeeded)
         s_sm->endEditing("tool:" + getIdentifier(false));
+}
+
+QString AbstractTool::runWithoutDialog(IdList ids, std::function<QString(AbstractToolParameters *)> setParameters, QString &message)
+{
+    message.clear();
+    if (s_sm == nullptr)
+        s_sm = SoundfontManager::getInstance();
+    if (!setIds(ids) && !canRunWithoutIds())
+        return tr("The tool cannot be used with these elements.");
+    completeIdsToProcess();
+
+    QString error = getBlockingError(_idsToProcess);
+    if (!error.isEmpty())
+        return error;
+
+    // Parameters: those of the configuration, then the specified ones
+    if (_toolParameters != nullptr)
+    {
+        _toolParameters->setConfigurationSubSection(this->getIdentifier(true));
+        _toolParameters->loadConfiguration();
+    }
+    error = setParameters(_toolParameters);
+    if (!error.isEmpty())
+        return error;
+
+    if (!runSynchronously(s_sm, _idsToProcess, _toolParameters))
+    {
+        // The tool uses other threads and the event loop: wait for the end
+        QEventLoop loop;
+        bool isFinished = false;
+        _silent = true;
+        QMetaObject::Connection connection = connect(this, &AbstractTool::finished, &loop, [&](bool updateNeeded) {
+            Q_UNUSED(updateNeeded)
+            isFinished = true;
+            loop.quit();
+        });
+        runInternal(s_sm, s_parent, _idsToProcess, _toolParameters);
+        if (!isFinished)
+            loop.exec();
+        disconnect(connection);
+    }
+
+    QStringList messages;
+    QString warning = getWarning();
+    if (!warning.isEmpty())
+        messages << warning;
+    QString confirmation = getConfirmation();
+    if (!confirmation.isEmpty())
+        messages << confirmation;
+    message = messages.join("\n");
+    return "";
+}
+
+bool AbstractTool::runSynchronously(SoundfontManager * sm, IdList ids, AbstractToolParameters * parameters)
+{
+    Q_UNUSED(sm)
+    Q_UNUSED(ids)
+    Q_UNUSED(parameters)
+    return false;
 }
 
 QString AbstractTool::getIdentifier(bool forConfig) const

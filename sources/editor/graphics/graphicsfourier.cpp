@@ -176,12 +176,12 @@ QList<Peak> GraphicsFourier::computePeaks(QVector<float> fData, quint32 dwSmplRa
         // Portion de Fourier contenant la corrélation
         quint32 iMin, iMax;
         int coefFourier = 1;
-        iMin = (size - 1) / (posMinCor[i] + dMin + 1) - 1;
+        iMin = size / (posMinCor[i] + dMin + 1) - 1;
         if (iMin < 1) iMin = 1;
         if (posMinCor[0] + dMin - 1 <= 0)
             iMax = 0;
         else
-            iMax = (size - 1) / (posMinCor[i] + dMin - 1) + 1;
+            iMax = size / (posMinCor[i] + dMin - 1) + 1;
         if (iMax > size / 2) iMax = size / 2;
 
         // Un pic s'y trouve-t-il ?
@@ -216,7 +216,7 @@ QList<Peak> GraphicsFourier::computePeaks(QVector<float> fData, quint32 dwSmplRa
         if (rep)
         {
             // Fréquence et score corrélation
-            float freqCorrel = (static_cast<float>(size - 1) / (posMinCor[i] + dMin) * dwSmplRate) / (size - 1);
+            float freqCorrel = static_cast<float>(dwSmplRate) / (posMinCor[i] + dMin);
             float scoreCorrel;
             if (vectCorrel[static_cast<int>(posMinCor[i])] <= 0)
                 scoreCorrel = 1;
@@ -224,7 +224,7 @@ QList<Peak> GraphicsFourier::computePeaks(QVector<float> fData, quint32 dwSmplRa
                 scoreCorrel = vectCorrel[static_cast<int>(posMinCor[0])] / vectCorrel[static_cast<int>(posMinCor[i])];
 
             // Fréquence et score Fourier
-            float freqFourier = (static_cast<float>(posMaxFFT[numeroPic]) * dwSmplRate) / (size - 1) / coefFourier;
+            float freqFourier = (static_cast<float>(posMaxFFT[numeroPic]) * dwSmplRate) / size / coefFourier;
             float scoreFourier = vectFourier[static_cast<int>(posMaxFFT[numeroPic])] /
                     vectFourier[static_cast<int>(posMaxFFT[0])];
 
@@ -256,7 +256,7 @@ QList<Peak> GraphicsFourier::computePeaks(QVector<float> fData, quint32 dwSmplRa
     // Si aucune note n'a été trouvée, on prend la note la plus probable d'après Fourier
     if (score < 0)
     {
-        freq = static_cast<float>(posMaxFFT[0]) * dwSmplRate / (size - 1);
+        freq = static_cast<float>(posMaxFFT[0]) * dwSmplRate / size;
         score = 0;
     }
 
@@ -286,7 +286,7 @@ QList<Peak> GraphicsFourier::computePeaks(QVector<float> fData, quint32 dwSmplRa
                             vectFourier[static_cast<int>(posMaxFFT[0])]);
 
             // fréquence
-            double freq = static_cast<double>(posMaxFFT[i] * dwSmplRate) / (size - 1);
+            double freq = static_cast<double>(posMaxFFT[i]) * dwSmplRate / size; // Bin width: sample rate / FFT size
 
             // note la plus proche
             double note = 12. * qLn(freq) / 0.69314718056 - 36.3763;

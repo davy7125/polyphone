@@ -27,6 +27,7 @@
 
 #include "basetypes.h"
 #include <QObject>
+#include <functional>
 class QWidget;
 class SoundfontManager;
 class AbstractToolGui;
@@ -59,6 +60,12 @@ public:
     /// Run the tool on the specified list of ids
     void run();
 
+    /// Run the tool synchronously on a list of ids, without dialog (automation): the parameters are first loaded from
+    /// the configuration then given to "setParameters", which returns an error if they cannot be set
+    /// Return an error if the tool has not been run, otherwise "message" receives the possible warning and confirmation
+    /// The editing is not ended (endEditing is to be called)
+    QString runWithoutDialog(IdList ids, std::function<QString(AbstractToolParameters *)> setParameters, QString &message);
+
 signals:
     void finished(bool updateNeeded);
 
@@ -71,6 +78,13 @@ protected:
 
     /// Run the tool, emit the signal "finished" at the end
     virtual void runInternal(SoundfontManager * sm, QWidget * parent, IdList ids, AbstractToolParameters * parameters) = 0;
+
+    /// Run the tool in the calling thread, without dialog, and return false if this is not possible (the tool is then
+    /// run with "runInternal", waiting for the signal "finished")
+    virtual bool runSynchronously(SoundfontManager * sm, IdList ids, AbstractToolParameters * parameters);
+
+    /// Return true if the tool can be run without dialog whatever the ids (they are then not used)
+    virtual bool canRunWithoutIds() const { return false; }
 
     /// Get an error preventing the tool from running on the ids to process (displayed instead of running the tool)
     virtual QString getBlockingError(IdList ids) { Q_UNUSED(ids) return ""; }
@@ -93,10 +107,13 @@ private slots:
     void onParametersValidated();
 
 private:
+    void completeIdsToProcess();
+
     AbstractToolParameters * _toolParameters;
     AbstractToolGui * _toolGui;
     ToolDialog * _toolDialog;
     IdList _currentIds, _idsToProcess;
+    bool _silent; // No messages displayed and no endEditing at the end
 
     static QWidget * s_parent; // For opening dialogs
     static SoundfontManager * s_sm;
