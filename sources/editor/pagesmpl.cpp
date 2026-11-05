@@ -1328,7 +1328,7 @@ void PageSmpl::updateLoopQuality()
     if (ids.size() == 1 && ui->spinStartLoop->value() != ui->spinEndLoop->value())
     {
         QVector<float> vData = _sf2->getDataFloat(ids.first());
-        float loopQuality = SampleUtils::computeLoopQuality(vData, ui->spinStartLoop->value(), ui->spinEndLoop->value(), 3, false);
+        float loopQuality = SampleUtils::quickLoopError(vData, ui->spinStartLoop->value(), ui->spinEndLoop->value(), 3, false);
         if (loopQuality < 0.05)
             ui->iconLoopWarning->setPixmap(QPixmap());
         else if (loopQuality < 0.15)

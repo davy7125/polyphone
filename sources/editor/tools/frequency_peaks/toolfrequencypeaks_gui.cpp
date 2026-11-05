@@ -25,7 +25,7 @@
 #include "toolfrequencypeaks_gui.h"
 #include "ui_toolfrequencypeaks_gui.h"
 #include "contextmanager.h"
-#include "graphicsfourier.h"
+#include "soundanalyzer.h"
 #include "soundfontmanager.h"
 #include "utils.h"
 #include <QFileDialog>
@@ -49,7 +49,7 @@ public:
         int posMaxFourier;
         SampleFrequencyInfo sampleInfo;
         sampleInfo.name = sm->getQstr(_id, champ_name);
-        sampleInfo.frequencies = GraphicsFourier::computePeaks(
+        sampleInfo.frequencies = SoundAnalyzer::computePeaks(
                     vData, sm->get(_id, champ_dwSampleRate).dwValue,
                     sm->get(_id, champ_dwStartLoop).dwValue, sm->get(_id, champ_dwEndLoop).dwValue,
                     vectFourier, posMaxFourier);

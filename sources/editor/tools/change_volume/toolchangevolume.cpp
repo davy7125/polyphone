@@ -47,13 +47,13 @@ void ToolChangeVolume::process(SoundfontManager * sm, EltID id, AbstractToolPara
     {
     case 0: // Add dB
         // Compute the factor
-        vData = SampleUtils::multiply(vData, qPow(10, params->getAddValue() / 20.0), db);
+        vData = SampleUtils::multiply(std::move(vData), qPow(10, params->getAddValue() / 20.0), db);
         break;
     case 1: // Multiply by a factor
-        vData = SampleUtils::multiply(vData, params->getMultiplyValue(), db);
+        vData = SampleUtils::multiply(std::move(vData), params->getMultiplyValue(), db);
         break;
     case 2: // Normalize
-        vData = SampleUtils::normalize(vData, params->getNormalizeValue() / 100, db);
+        vData = SampleUtils::normalize(std::move(vData), params->getNormalizeValue() / 100, db);
         break;
     default:
         // Nothing

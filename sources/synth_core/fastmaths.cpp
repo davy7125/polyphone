@@ -268,23 +268,3 @@ bool FastMaths::isUnder(const float * values, unsigned int size, float level)
             return false;
     return true;
 }
-
-float FastMaths::multiply4(const float * __restrict coeffs, const float * __restrict srcDataF)
-{
-#ifdef __aarch64__
-    // Load all values
-    float32x4_t a = vld1q_f32(coeffs);
-    float32x4_t b = vld1q_f32(srcDataF);
-
-    // Multiply everything
-    float32x4_t prod = vmulq_f32(a, b);
-
-    // Return the sum
-    return vaddvq_f32(prod);
-#else
-    return coeffs[0] * srcDataF[0] +
-           coeffs[1] * srcDataF[1] +
-           coeffs[2] * srcDataF[2] +
-           coeffs[3] * srcDataF[3];
-#endif
-}

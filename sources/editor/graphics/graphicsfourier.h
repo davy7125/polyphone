@@ -28,33 +28,10 @@
 #include <QWidget>
 #include <QMetaType>
 #include "basetypes.h"
+#include "soundanalyzer.h"
 class QMenu;
 class ToolFrequencyPeaks;
 class GraphicsWavePainter;
-
-class Peak
-{
-public:
-    Peak() :
-        _factor(0),
-        _frequency(0),
-        _key(-1),
-        _correction(0)
-    {}
-
-    Peak(double factor, double frequency, int key, int correction) :
-        _factor(factor),
-        _frequency(frequency),
-        _key(key),
-        _correction(correction)
-    {}
-
-    double _factor;
-    double _frequency;
-    int _key;
-    int _correction;
-};
-Q_DECLARE_METATYPE(Peak)
 
 class GraphicsFourier : public QWidget
 {
@@ -68,9 +45,6 @@ public:
     void setSampleName(QString name) { _name = name; }
     void setPos(quint32 posStart, quint32 posEnd, bool withRepaint = true);
     void getEstimation(int &pitch, int &correction, float &score);
-    static QList<Peak> computePeaks(QVector<float> fData, quint32 dwSmplRate, quint32 posStart, quint32 posEnd,
-                                    QVector<float> &vectFourier, int &posMaxFourier,
-                                    int * key = nullptr, int * correction = nullptr, float *reliance = nullptr);
 
 protected:
     void mousePressEvent(QMouseEvent *event) override;
@@ -93,7 +67,7 @@ private:
     quint32 _dwSmplRate;
     QString _name;
     QMenu * _menu;
-    int _key, _delta;
+    int _key, _correction; // Estimated root key and pitch correction
     float _score;
     QList<Peak> _peaks;
     ToolFrequencyPeaks * _toolFrequencyPeak;

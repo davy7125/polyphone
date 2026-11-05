@@ -28,6 +28,34 @@
 #include <QVector>
 #include <QJsonObject>
 #include <QImage>
+#include <QMetaType>
+#include <map>
+#include "sampleutils.h"
+
+// Peak of a spectrum: level relative to the strongest peak, frequency, closest key and pitch correction (cents)
+class Peak
+{
+public:
+    Peak() :
+        _factor(0),
+        _frequency(0),
+        _key(-1),
+        _correction(0)
+    {}
+
+    Peak(double factor, double frequency, int key, int correction) :
+        _factor(factor),
+        _frequency(frequency),
+        _key(key),
+        _correction(correction)
+    {}
+
+    double _factor;
+    double _frequency;
+    int _key;
+    int _correction;
+};
+Q_DECLARE_METATYPE(Peak)
 
 // Measures on a mono signal (sample, rendered note), giving an AI objective data about a sound: regions, levels,
 // loudness, pitch, harmonics, spectrum, envelope, loop quality and defects.
@@ -53,6 +81,24 @@ public:
     // Spectrum curves for equalization decisions: third-octave levels and spectral envelope of the steady part
     QJsonObject getSpectrumCurves();
 
+    // Fast estimation of the pitch (Hz, 0 if not found) without prior, on a region analyzed as a loop, with the
+    // confidence of the estimation between 0 and 1
+    static double estimatePitch(const QVector<float> &data, quint32 sampleRate, quint32 start, quint32 end, float &confidence);
+
+    // Main peaks of the spectrum of the loop (start / end), otherwise of the steady part (0.5 s), with the estimation of
+    // the root key and of its correction (pitch correction of the sample, in cents); spectrum is the magnitude of the
+    // Fourier transform and spectrumMax the index of its maximum (-1 if no peak)
+    static QList<Peak> computePeaks(const QVector<float> &data, quint32 sampleRate, quint32 start, quint32 end,
+                                    QVector<float> &spectrum, int &spectrumMax,
+                                    int * key = nullptr, int * correction = nullptr, float * reliance = nullptr);
+
+    // Release of a rendered note: level at the release relative to the loudest part before (RMS on 20 ms windows) and
+    // times for the level to drop by 20, 40 and 60 dB after the release
+    static QJsonObject getRelease(const QVector<float> &data, quint32 sampleRate, int releasePosition);
+
+    // Rounded number for a JSON result, null if not finite
+    static QJsonValue jsonNumber(double value, int decimals);
+
     // Comparison of a sound with a reference (differences are "other - reference")
     static QJsonObject compare(SoundAnalyzer &reference, SoundAnalyzer &other);
 
@@ -65,6 +111,11 @@ public:
     QImage getLoopSeamImage(int width, int height);
 
     // Single values (keyboard consistency)
+    // Maximum number of frames for the pitch track (300 by default) and the averaged spectra (48 by default), fewer for
+    // a fast estimation
+    void setMaxPitchFrames(int count) { _maxPitchFrames = qMax(1, count); }
+    void setMaxSpectrumFrames(int count) { _maxSpectrumFrames = qMax(1, count); }
+
     bool isLooped();
     double getFundamental(); // Hz, 0 if not found
     double getSteadyLoudness(); // LUFS (mono)
@@ -92,11 +143,14 @@ private:
 
     // Regions and envelopes
     void computeRegions();
-    double rms(int start, int end) const;
-    QVector<double> rmsEnvelope(int windowLength, int hop, int start = 0, int end = -1) const;
-    static double toDb(double value, double floor = -200);
+    double rms(int start, int end) const { return SampleUtils::rms(_cumSquares, start, end); }
+    QVector<double> rmsEnvelope(int windowLength, int hop, int start = 0, int end = -1) const
+    {
+        return SampleUtils::rmsEnvelope(_cumSquares, windowLength, hop, start, end);
+    }
 
     // Spectra
+    const FourierTransform &getFourierTransform(int size) const; // Kept for the next transforms of the same size
     QVector<double> averagePowerSpectrum(int start, int end, int frameLength, int fftSize, bool blackmanHarris,
                                          double &windowSum, double &windowSquareSum) const;
     void computeSpectrum();
@@ -117,6 +171,7 @@ private:
     void computeLoop();
     double lpcClickScore() const;
 
+    QVector<float> _source; // Shared with the caller (implicit sharing)
     QVector<double> _data;
     QVector<double> _cumSquares; // Cumulative sum of the squares
     quint32 _sampleRate;
@@ -124,12 +179,16 @@ private:
     int _loopStart, _loopEnd;
     bool _looped;
     double _expectedFrequency;
+    int _maxPitchFrames;
+    int _maxSpectrumFrames;
+    mutable std::map<int, FourierTransform> _fourierTransforms;
 
     // Regions (frames)
     bool _regionsComputed;
     double _peak;
     int _peakPosition;
     int _onset, _attackStart, _attackEnd, _steadyStart, _steadyEnd;
+    bool _steadyPartFound;
     double _noiseFloorDb;
     QString _noiseReference;
 

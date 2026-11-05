@@ -24,6 +24,7 @@
 
 #include "mcpfunctions.h"
 #include "mcputils.h"
+#include "utils.h"
 #include "mcpattributes.h"
 #include "mcpmodulators.h"
 #include "soundfontmanager.h"
@@ -53,7 +54,7 @@ static QJsonObject describeSample(EltID id, bool detailed)
     quint32 loopEnd = sm->get(id, champ_dwEndLoop).dwValue;
     result["root_key"] = rootKey;
     result["root_key_name"] = McpUtils::keyName(rootKey);
-    result["duration_s"] = McpUtils::round(sampleRate > 0 ? static_cast<double>(length) / sampleRate : 0);
+    result["duration_s"] = Utils::roundSignificant(sampleRate > 0 ? static_cast<double>(length) / sampleRate : 0);
     result["looped"] = loopEnd > loopStart;
 
     SFSampleLink link = sm->get(id, champ_sfSampleType).sfLinkValue;

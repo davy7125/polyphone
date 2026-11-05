@@ -25,34 +25,22 @@
 #ifndef RUNNABLECHORDCREATOR_H
 #define RUNNABLECHORDCREATOR_H
 
-#include <QRunnable>
-#include "basetypes.h"
+#include "abstractrunnablemixer.h"
 #include "toolchords_parameters.h"
 class ToolChords;
 
-class RunnableChordCreator: public QRunnable
+class RunnableChordCreator: public AbstractRunnableMixer
 {
 public:
     RunnableChordCreator(ToolChords * tool, EltID idInst, ChordInfo ci, quint32 key, quint32 minKey, bool loop, bool stereo, int side);
-    ~RunnableChordCreator() override;
     void run() override;
 
 private:
-    EltID closestSample(EltID idInst, double pitch, double &ecart, int cote, EltID &idInstSmpl);
-    QVector<float> getSampleData(EltID idSmpl, quint32 nbRead);
-    void addSampleData(QVector<float> &vData1, QVector<float> &vData2, double mult);
     static QMap<int, int> getChordKeys(quint32 key, ChordInfo& chordInfo);
 
-    static double SAMPLE_DURATION; // In seconds
-    static quint32 SAMPLE_RATE; // In samples per second
-
     ToolChords * _tool;
-    EltID _idInst;
     ChordInfo _ci;
     quint32 _key, _minKey;
-    bool _loop;
-    bool _stereo;
-    int _side;
 };
 
 #endif // RUNNABLECHORDCREATOR_H

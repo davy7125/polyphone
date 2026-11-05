@@ -537,7 +537,14 @@ bool OfflineRenderer::render(int sf2Index, QString outputFilePath, SynthType syn
 {
     QVector<float> data;
     quint32 frameCount;
-    return render(sf2Index, data, frameCount, synthType) && writeWavFile(outputFilePath, data, frameCount);
+    if (!render(sf2Index, data, frameCount, synthType))
+        return false;
+    if (!writeWavFile(outputFilePath, data, frameCount, _sampleRate))
+    {
+        _error = "cannot write \"" + outputFilePath + "\"";
+        return false;
+    }
+    return true;
 }
 
 bool OfflineRenderer::render(int sf2Index, QVector<float> &data, quint32 &frameCount, SynthType synthType)
@@ -781,14 +788,11 @@ void OfflineRenderer::processEvents(T * synth, MidiProcessor * midiProcessor, in
     }
 }
 
-bool OfflineRenderer::writeWavFile(QString filePath, const QVector<float> &data, quint32 frameCount)
+bool OfflineRenderer::writeWavFile(QString filePath, const QVector<float> &data, quint32 frameCount, quint32 sampleRate)
 {
     QFile file(filePath);
     if (!file.open(QIODevice::WriteOnly))
-    {
-        _error = "cannot write \"" + filePath + "\"";
         return false;
-    }
 
     // Stereo, 32-bit float (format 3)
     quint32 dataSize = frameCount * 8;
@@ -799,8 +803,8 @@ bool OfflineRenderer::writeWavFile(QString filePath, const QVector<float> &data,
     stream << static_cast<quint32>(4 + 26 + 12 + 8 + dataSize);
     stream.writeRawData("WAVE", 4);
     stream.writeRawData("fmt ", 4);
-    stream << static_cast<quint32>(18) << static_cast<quint16>(3) << static_cast<quint16>(2) << _sampleRate
-           << static_cast<quint32>(_sampleRate * 8) << static_cast<quint16>(8) << static_cast<quint16>(32)
+    stream << static_cast<quint32>(18) << static_cast<quint16>(3) << static_cast<quint16>(2) << sampleRate
+           << static_cast<quint32>(sampleRate * 8) << static_cast<quint16>(8) << static_cast<quint16>(32)
            << static_cast<quint16>(0);
     stream.writeRawData("fact", 4);
     stream << static_cast<quint32>(4) << frameCount;
@@ -809,10 +813,5 @@ bool OfflineRenderer::writeWavFile(QString filePath, const QVector<float> &data,
     for (quint32 i = 0; i < 2 * frameCount; i++)
         stream << data[static_cast<int>(i)];
 
-    if (stream.status() != QDataStream::Ok)
-    {
-        _error = "cannot write \"" + filePath + "\"";
-        return false;
-    }
-    return true;
+    return stream.status() == QDataStream::Ok;
 }

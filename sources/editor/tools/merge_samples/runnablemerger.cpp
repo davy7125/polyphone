@@ -80,8 +80,8 @@ void RunnableMerger::run()
         bool result = SampleUtils::loopStep1(dataR, SAMPLE_RATE, loopStart, loopEnd, crossfadeLength);
         if (result)
         {
-            dataR = SampleUtils::loopStep2(dataR, loopStart, loopEnd, crossfadeLength, true);
-            dataL = SampleUtils::loopStep2(dataL, loopStart, loopEnd, crossfadeLength, true);
+            dataR = SampleUtils::loopStep2(std::move(dataR), loopStart, loopEnd, crossfadeLength, true);
+            dataL = SampleUtils::loopStep2(std::move(dataL), loopStart, loopEnd, crossfadeLength, true);
         }
     }
 

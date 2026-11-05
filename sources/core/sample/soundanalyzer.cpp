@@ -23,6 +23,7 @@
 ***************************************************************************/
 
 #include "soundanalyzer.h"
+#include "utils.h"
 #include <QJsonArray>
 #include <QPainter>
 #include <complex>
@@ -45,99 +46,12 @@ typedef std::complex<double> Complex;
 
 const double PI = 3.14159265358979323846;
 
-void fft(std::vector<Complex> &a, bool inverse)
-{
-    int n = static_cast<int>(a.size());
-    for (int i = 1, j = 0; i < n; i++)
-    {
-        int bit = n >> 1;
-        for (; j & bit; bit >>= 1)
-            j ^= bit;
-        j ^= bit;
-        if (i < j)
-            std::swap(a[i], a[j]);
-    }
-    for (int len = 2; len <= n; len <<= 1)
-    {
-        double angle = 2 * PI / len * (inverse ? 1 : -1);
-        Complex wlen(std::cos(angle), std::sin(angle));
-        for (int i = 0; i < n; i += len)
-        {
-            Complex w(1);
-            for (int j = 0; j < len / 2; j++)
-            {
-                Complex u = a[i + j], v = a[i + j + len / 2] * w;
-                a[i + j] = u + v;
-                a[i + j + len / 2] = u - v;
-                w *= wlen;
-            }
-        }
-    }
-    if (inverse)
-        for (int i = 0; i < n; i++)
-            a[i] /= n;
-}
-
-int nextPowerOfTwo(int n)
-{
-    int result = 1;
-    while (result < n)
-        result <<= 1;
-    return result;
-}
-
 int previousPowerOfTwo(int n)
 {
     int result = 1;
     while (result * 2 <= n)
         result <<= 1;
     return result;
-}
-
-double percentile(QVector<double> values, double fraction)
-{
-    if (values.isEmpty())
-        return 0;
-    std::sort(values.begin(), values.end());
-    double position = fraction * (values.size() - 1);
-    int index = static_cast<int>(position);
-    if (index >= values.size() - 1)
-        return values.last();
-    return values[index] + (position - index) * (values[index + 1] - values[index]);
-}
-
-double median(const QVector<double> &values)
-{
-    return percentile(values, 0.5);
-}
-
-// Weighted least squares y = slope * x + intercept, return false if not enough points
-bool regression(const QVector<double> &x, const QVector<double> &y, const QVector<double> &w, double &slope, double &intercept)
-{
-    double sw = 0, sx = 0, sy = 0, sxx = 0, sxy = 0;
-    for (int i = 0; i < x.size(); i++)
-    {
-        double weight = w.isEmpty() ? 1.0 : w[i];
-        sw += weight;
-        sx += weight * x[i];
-        sy += weight * y[i];
-        sxx += weight * x[i] * x[i];
-        sxy += weight * x[i] * y[i];
-    }
-    double denominator = sw * sxx - sx * sx;
-    if (x.size() < 2 || sw <= 0 || std::fabs(denominator) < 1e-30)
-        return false;
-    slope = (sw * sxy - sx * sy) / denominator;
-    intercept = (sy - slope * sx) / sw;
-    return true;
-}
-
-double roundValue(double value, int significantDigits = 4)
-{
-    if (value == 0 || !std::isfinite(value))
-        return std::isfinite(value) ? value : 0;
-    double magnitude = std::pow(10.0, significantDigits - 1 - static_cast<int>(std::floor(std::log10(std::fabs(value)))));
-    return std::round(value * magnitude) / magnitude;
 }
 
 double roundDecimals(double value, int decimals)
@@ -148,11 +62,14 @@ double roundDecimals(double value, int decimals)
     return std::round(value * factor) / factor;
 }
 
-QJsonValue jsonNumber(double value, int decimals)
+// Vertex of the parabola going through (-1, a), (0, b) and (1, c): offset of the position (between -1 and 1 for a local
+// maximum) and value at this position
+double parabolicPeak(double a, double b, double c, double &value)
 {
-    if (!std::isfinite(value))
-        return QJsonValue();
-    return roundDecimals(value, decimals);
+    double denominator = a - 2 * b + c;
+    double p = std::fabs(denominator) > 1e-12 ? 0.5 * (a - c) / denominator : 0;
+    value = b - 0.25 * (a - c) * p;
+    return p;
 }
 
 // A-weighting gain (linear amplitude) at a frequency
@@ -185,7 +102,7 @@ bool findModulation(QVector<double> times, QVector<double> values, double minRat
 
     // Remove the trend
     double slope, intercept;
-    if (regression(times, values, QVector<double>(), slope, intercept))
+    if (SampleUtils::linearRegression(times, values, QVector<double>(), slope, intercept))
         for (int i = 0; i < values.size(); i++)
             values[i] -= slope * times[i] + intercept;
 
@@ -203,7 +120,7 @@ bool findModulation(QVector<double> times, QVector<double> values, double minRat
     }
 
     // The peak must stand out
-    if (bestAmplitude <= 0 || bestAmplitude < 2.5 * median(amplitudes))
+    if (bestAmplitude <= 0 || bestAmplitude < 2.5 * SampleUtils::median(amplitudes))
         return false;
     rate = bestRate;
     amplitude = bestAmplitude;
@@ -218,6 +135,8 @@ SoundAnalyzer::SoundAnalyzer(const QVector<float> &data, quint32 sampleRate, qui
     _loopStart(static_cast<int>(loopStart)),
     _loopEnd(static_cast<int>(loopEnd)),
     _expectedFrequency(expectedFrequency),
+    _maxPitchFrames(300),
+    _maxSpectrumFrames(48),
     _regionsComputed(false),
     _pitchComputed(false),
     _harmonicsComputed(false),
@@ -226,43 +145,27 @@ SoundAnalyzer::SoundAnalyzer(const QVector<float> &data, quint32 sampleRate, qui
     _loopComputed(false),
     _loopCorrelation(std::nan(""))
 {
+    _source = data;
     _data.resize(_length);
-    _cumSquares.resize(_length + 1);
-    _cumSquares[0] = 0;
     for (int i = 0; i < _length; i++)
-    {
         _data[i] = static_cast<double>(data[i]);
-        _cumSquares[i + 1] = _cumSquares[i] + _data[i] * _data[i];
-    }
-    _looped = _loopEnd > _loopStart + 2 && _loopEnd <= _length; // Single-cycle loops included
+    _cumSquares = SampleUtils::cumulativeSquares(data);
+    _looped = SampleUtils::isLooped(loopStart, loopEnd, static_cast<quint32>(_length)); // Single-cycle loops included
 }
 
-double SoundAnalyzer::toDb(double value, double floor)
+const FourierTransform &SoundAnalyzer::getFourierTransform(int size) const
 {
-    return value > 0 ? qMax(floor, 20.0 * std::log10(value)) : floor;
+    auto it = _fourierTransforms.find(size);
+    if (it == _fourierTransforms.end())
+        it = _fourierTransforms.emplace(size, FourierTransform(size)).first;
+    return it->second;
 }
 
-double SoundAnalyzer::rms(int start, int end) const
+QJsonValue SoundAnalyzer::jsonNumber(double value, int decimals)
 {
-    start = qBound(0, start, _length);
-    end = qBound(start, end, _length);
-    if (end <= start)
-        return 0;
-    return std::sqrt(qMax(0.0, _cumSquares[end] - _cumSquares[start]) / (end - start));
-}
-
-QVector<double> SoundAnalyzer::rmsEnvelope(int windowLength, int hop, int start, int end) const
-{
-    if (end < 0 || end > _length)
-        end = _length;
-    QVector<double> result;
-    windowLength = qMax(1, windowLength);
-    hop = qMax(1, hop);
-    for (int position = start; position + windowLength <= end; position += hop)
-        result << rms(position, position + windowLength);
-    if (result.isEmpty() && end > start)
-        result << rms(start, end);
-    return result;
+    if (!std::isfinite(value))
+        return QJsonValue();
+    return roundDecimals(value, decimals);
 }
 
 //////////////////////////////////////////////////////////
@@ -286,56 +189,16 @@ void SoundAnalyzer::computeRegions()
         }
     }
 
-    // Envelope with frames of 20 ms every 10 ms
-    int window = qMax(1, static_cast<int>(0.02 * _sampleRate));
-    int hop = qMax(1, static_cast<int>(0.01 * _sampleRate));
-    QVector<double> envelope = rmsEnvelope(window, hop);
-    double maxEnvelope = 0;
-    foreach (double value, envelope)
-        maxEnvelope = qMax(maxEnvelope, value);
-    double maxDb = toDb(maxEnvelope);
-
-    // Tentative onset: first frame 40 dB below the loudest frame
-    int onsetFrame = 0;
-    while (onsetFrame < envelope.size() - 1 && toDb(envelope[onsetFrame]) < maxDb - 40)
-        onsetFrame++;
-
-    // Noise floor: before the onset, otherwise at the end of a decaying sound, otherwise the quietest frames
-    QVector<double> noiseFrames;
-    int preOnsetFrames = onsetFrame - 2;
-    if (preOnsetFrames * hop > 0.05 * _sampleRate)
-    {
-        for (int i = 0; i < preOnsetFrames; i++)
-            if (envelope[i] > 0)
-                noiseFrames << toDb(envelope[i]);
+    // Onset and noise floor
+    SampleUtils::NoiseReference noiseReference;
+    _onset = static_cast<int>(SampleUtils::findOnset(_source, _sampleRate, _looped, _noiseFloorDb, &noiseReference));
+    if (noiseReference == SampleUtils::NOISE_BEFORE_ONSET)
         _noiseReference = "before the onset";
-    }
-    if (noiseFrames.isEmpty() && !_looped && envelope.size() > 20)
-    {
-        int count = qMax(1, static_cast<int>(0.1 * _sampleRate / hop));
-        QVector<double> tail;
-        for (int i = qMax(0, static_cast<int>(envelope.size()) - count); i < envelope.size(); i++)
-            if (envelope[i] > 0)
-                tail << toDb(envelope[i]);
-        if (!tail.isEmpty() && median(tail) < maxDb - 40)
-        {
-            noiseFrames = tail;
-            _noiseReference = "end of the sample";
-        }
-    }
-    if (noiseFrames.isEmpty())
+    else if (noiseReference == SampleUtils::NOISE_AT_END)
+        _noiseReference = "end of the sample";
+    else
         _noiseReference = "";
-    _noiseFloorDb = noiseFrames.isEmpty() ? -200 : median(noiseFrames);
-
-    // Onset at the sample level: 50 dB below the peak, and 10 dB above the noise peaks if the noise is known
-    double threshold = _peak * std::pow(10.0, -50.0 / 20);
-    if (_noiseFloorDb > -199)
-        threshold = qMax(threshold, 3.16 * 1.41 * std::pow(10.0, _noiseFloorDb / 20));
-    _onset = 0;
-    while (_onset < _length - 1 && std::fabs(_data[_onset]) < threshold)
-        _onset++;
-    if (_onset >= _length - 1)
-        _onset = 0;
+    int hop = qMax(1, static_cast<int>(0.01 * _sampleRate));
 
     // Attack: end of the fast rise, i.e. the first point near the maximum (12 dB) where the level stops increasing
     // quickly (10 dB/s), robust to a later swell or a tremolo; start at 20 dB below the level reached
@@ -354,7 +217,7 @@ void SoundAnalyzer::computeRegions()
             sum += e[j] * e[j];
             count++;
         }
-        levels[i] = toDb(std::sqrt(sum / count));
+        levels[i] = SampleUtils::toDb(std::sqrt(sum / count));
     }
     double maxLevel = -200;
     foreach (double level, levels)
@@ -377,11 +240,20 @@ void SoundAnalyzer::computeRegions()
     _attackEnd = qMin(_length - 1, _onset + qMax(0, iEnd) * attackHop + attackWindow / 2);
     _attackEnd = qMax(_attackEnd, _attackStart);
 
-    // Steady part: the loop, otherwise after the attack until the level drops by 15 dB (1.5 s max)
+    // Steady part: the loop, otherwise the steady part found by a segmentation of the envelope (the same as the loop
+    // search of the editor), otherwise after the attack until the level drops by 15 dB (1.5 s max)
+    quint32 steadyStart, steadyEnd;
+    _steadyPartFound = false;
     if (_looped && _loopEnd - _loopStart >= 0.02 * _sampleRate)
     {
         _steadyStart = _loopStart;
         _steadyEnd = _loopEnd;
+    }
+    else if (SampleUtils::findSteadyPart(_source, _sampleRate, steadyStart, steadyEnd) && steadyEnd > steadyStart)
+    {
+        _steadyStart = static_cast<int>(steadyStart);
+        _steadyEnd = static_cast<int>(steadyEnd);
+        _steadyPartFound = true;
     }
     else
     {
@@ -393,7 +265,7 @@ void SoundAnalyzer::computeRegions()
         for (int i = 0; i < qMin(static_cast<int>(env.size()), count300ms); i++)
             maxAfter = qMax(maxAfter, env[i]);
         int endFrame = 0;
-        while (endFrame < env.size() && toDb(env[endFrame]) > toDb(maxAfter) - 15)
+        while (endFrame < env.size() && SampleUtils::toDb(env[endFrame]) > SampleUtils::toDb(maxAfter) - 15)
             endFrame++;
         _steadyEnd = qMin(_length, qMin(_steadyStart + endFrame * hop + steadyWindow,
                                         _steadyStart + static_cast<int>(1.5 * _sampleRate)));
@@ -421,7 +293,7 @@ QJsonObject SoundAnalyzer::getRegions()
     result["attack_ms"] = QJsonArray({ roundDecimals(1000 * _attackStart / sr, 1), roundDecimals(1000 * _attackEnd / sr, 1) });
     result["peak_time_ms"] = roundDecimals(1000 * _peakPosition / sr, 1);
     result["analyzed_part_s"] = QJsonArray({ roundDecimals(_steadyStart / sr, 3), roundDecimals(_steadyEnd / sr, 3) });
-    result["analyzed_part"] = (_looped && _steadyStart == _loopStart) ? "loop" : "after the attack";
+    result["analyzed_part"] = (_looped && _steadyStart == _loopStart) ? "loop" : (_steadyPartFound ? "steady part" : "after the attack");
     if (_looped)
         result["loop_s"] = QJsonArray({ roundDecimals(_loopStart / sr, 4), roundDecimals(_loopEnd / sr, 4) });
     return result;
@@ -541,9 +413,7 @@ double SoundAnalyzer::truePeak() const
 {
     // Oversampling with a windowed sinc of 49 taps (as libebur128)
     int factor = _sampleRate < 96000 ? 4 : (_sampleRate < 192000 ? 2 : 1);
-    double peak = 0;
-    for (int i = 0; i < _length; i++)
-        peak = qMax(peak, std::fabs(_data[i]));
+    double peak = _peak; // computeRegions() called before
     if (factor == 1)
         return peak;
 
@@ -582,11 +452,11 @@ QJsonObject SoundAnalyzer::getLevels()
 
     QJsonObject result;
     double steadyRms = rms(_steadyStart, _steadyEnd);
-    result["peak_dbfs"] = jsonNumber(toDb(_peak), 2);
-    result["true_peak_dbtp"] = jsonNumber(toDb(truePeak()), 2);
-    result["rms_dbfs"] = jsonNumber(toDb(rms(0, _length)), 2);
-    result["steady_rms_dbfs"] = jsonNumber(toDb(steadyRms), 2);
-    result["crest_factor_db"] = jsonNumber(toDb(_peak) - toDb(steadyRms), 2);
+    result["peak_dbfs"] = jsonNumber(SampleUtils::toDb(_peak), 2);
+    result["true_peak_dbtp"] = jsonNumber(SampleUtils::toDb(truePeak()), 2);
+    result["rms_dbfs"] = jsonNumber(SampleUtils::toDb(rms(0, _length)), 2);
+    result["steady_rms_dbfs"] = jsonNumber(SampleUtils::toDb(steadyRms), 2);
+    result["crest_factor_db"] = jsonNumber(SampleUtils::toDb(_peak) - SampleUtils::toDb(steadyRms), 2);
     result["steady_loudness_lufs"] = jsonNumber(_steadyLoudness, 2);
     result["momentary_max_lufs"] = jsonNumber(_momentaryMax, 2);
     if (_length >= 0.4 * _sampleRate)
@@ -627,17 +497,18 @@ double SoundAnalyzer::yin(int start, int length, double fMin, double fMax, doubl
         return 0;
 
     // Cross-correlation of the window with the following signal
-    int n = nextPowerOfTwo(2 * length + tauMax + 1);
+    int n = SampleUtils::nextPowerOfTwo(2 * length + tauMax + 1);
     std::vector<Complex> a(n, Complex(0)), b(n, Complex(0));
     for (int i = 0; i < length; i++)
         a[i] = _data[start + i];
     for (int i = 0; i < length + tauMax + 1; i++)
         b[i] = _data[start + i];
-    fft(a, false);
-    fft(b, false);
+    const FourierTransform &fourierTransform = getFourierTransform(n);
+    fourierTransform.transform(a, false);
+    fourierTransform.transform(b, false);
     for (int i = 0; i < n; i++)
         a[i] = std::conj(a[i]) * b[i];
-    fft(a, true);
+    fourierTransform.transform(a, true);
 
     // Cumulative mean normalized difference
     QVector<double> cmndf(tauMax + 1);
@@ -671,6 +542,21 @@ double SoundAnalyzer::yin(int start, int length, double fMin, double fMax, doubl
                 best = tau;
     }
 
+    // The first dip may be a harmonic (dominant third harmonic of a clarinet or a cromorne): a multiple of this lag
+    // giving a much deeper dip is the period
+    for (int k = 2; k <= 6 && best * k + k < tauMax; k++)
+    {
+        int multiple = best * k;
+        for (int tau = multiple - k; tau <= multiple + k; tau++)
+            if (cmndf[tau] < cmndf[multiple])
+                multiple = tau;
+        if (cmndf[multiple] < 0.5 * cmndf[best] && cmndf[multiple] < cmndf[best] - 0.05)
+        {
+            best = multiple;
+            break;
+        }
+    }
+
     double shift = 0;
     if (best > 1 && best < tauMax)
     {
@@ -691,8 +577,9 @@ void SoundAnalyzer::getPitchRange(double &fMin, double &fMax) const
     }
     else
     {
-        fMin = 25;
-        fMax = qMin(4200.0, _sampleRate / 4.0);
+        // Whole range of the instruments, from a 32' organ pipe to the highest ranks of a mixture
+        fMin = 16;
+        fMax = _sampleRate / 4.0;
     }
 }
 
@@ -728,7 +615,7 @@ void SoundAnalyzer::computePitch()
             return;
     }
     int lastStart = qMin(_length, end + tauMax) - window - tauMax - 1;
-    int hop = qMax(static_cast<int>(0.01 * _sampleRate), (lastStart - start) / 300 + 1);
+    int hop = qMax(static_cast<int>(0.01 * _sampleRate), (lastStart - start) / _maxPitchFrames + 1);
 
     QVector<double> times, frequencies, confidences;
     for (int position = start; position <= lastStart; position += hop)
@@ -746,8 +633,8 @@ void SoundAnalyzer::computePitch()
     if (frequencies.isEmpty())
         return;
 
-    _f0 = median(frequencies);
-    _f0Confidence = median(confidences);
+    _f0 = SampleUtils::median(frequencies);
+    _f0Confidence = SampleUtils::median(confidences);
 
     // Track in cents, without the outliers (octave errors)
     QVector<double> t, cents;
@@ -761,9 +648,9 @@ void SoundAnalyzer::computePitch()
         }
     }
     if (cents.size() >= 3)
-        _stabilityCents = percentile(cents, 0.95) - percentile(cents, 0.05);
+        _stabilityCents = SampleUtils::percentile(cents, 0.95) - SampleUtils::percentile(cents, 0.05);
     double slope, intercept;
-    if (cents.size() >= 5 && t.last() - t.first() >= 0.2 && regression(t, cents, QVector<double>(), slope, intercept))
+    if (cents.size() >= 5 && t.last() - t.first() >= 0.2 && SampleUtils::linearRegression(t, cents, QVector<double>(), slope, intercept))
         _driftCentsPerSecond = slope;
 
     double rate, amplitude;
@@ -772,6 +659,137 @@ void SoundAnalyzer::computePitch()
         _vibratoRate = rate;
         _vibratoDepth = amplitude;
     }
+}
+
+double SoundAnalyzer::estimatePitch(const QVector<float> &data, quint32 sampleRate, quint32 start, quint32 end, float &confidence)
+{
+    SoundAnalyzer analyzer(data, sampleRate, start, end, 0);
+    analyzer.setMaxPitchFrames(8);
+    analyzer.setMaxSpectrumFrames(8);
+    double frequency = analyzer.getFundamental();
+    confidence = frequency > 0 ? static_cast<float>(analyzer._f0Confidence) : 0.f;
+    return frequency;
+}
+
+QList<Peak> SoundAnalyzer::computePeaks(const QVector<float> &data, quint32 sampleRate, quint32 start, quint32 end,
+                                        QVector<float> &spectrum, int &spectrumMax, int * key, int * correction, float * reliance)
+{
+    spectrumMax = -1;
+    if (reliance != nullptr)
+        *reliance = -1.0f;
+    quint32 length = static_cast<quint32>(data.size());
+    if (length == 0 || sampleRate == 0)
+        return QList<Peak>();
+
+    // If there is no loop, the steady part (otherwise the most stable part) widened to 0.5 second if possible
+    if (start == end || end > length)
+    {
+        SampleUtils::findSteadyPart(data, sampleRate, start, end);
+        quint32 minimum = qMin(length, sampleRate / 2);
+        if (end < start + minimum)
+        {
+            qint64 position = (static_cast<qint64>(start) + end) / 2 - minimum / 2;
+            start = static_cast<quint32>(qBound(static_cast<qint64>(0), position, static_cast<qint64>(length - minimum)));
+            end = start + minimum;
+        }
+    }
+    if (end <= start)
+    {
+        start = 0;
+        end = length;
+    }
+
+    // Pitch: YIN algorithm on the portion, refined with the harmonics
+    float confidence;
+    double frequency = estimatePitch(data, sampleRate, start, end, confidence);
+    if (frequency > 0)
+    {
+        int closestKey, keyCorrection;
+        SampleUtils::toKeyAndCorrection(SampleUtils::frequencyToKey(frequency), closestKey, keyCorrection);
+        if (closestKey >= 0 && closestKey <= 127)
+        {
+            if (key != nullptr)
+                *key = closestKey;
+            if (correction != nullptr)
+                *correction = keyCorrection;
+            if (reliance != nullptr)
+                *reliance = confidence;
+        }
+    }
+
+    // Fourier transform of 0.5 second of the portion (repeated if shorter)
+    if (end > sampleRate / 2 + start)
+    {
+        quint32 offset = (end - sampleRate / 2 - start) / 2;
+        start += offset;
+        end -= offset;
+    }
+    QVector<float> portion = data.mid(static_cast<int>(start), static_cast<int>(end - start));
+    while (portion.size() < 0.5 * sampleRate)
+        portion += data.mid(static_cast<int>(start), static_cast<int>(end - start));
+    spectrum = SampleUtils::getFourierTransform(portion);
+    quint32 fftSize = static_cast<quint32>(spectrum.size()) * 2;
+
+    // Main peaks
+    QList<quint32> maxima = SampleUtils::findMax(spectrum, 50, 0.05f);
+    if (maxima.isEmpty())
+        return QList<Peak>();
+    spectrumMax = static_cast<int>(maxima[0]);
+
+    // Frequency and level of the peaks interpolated between the bins (parabola on the levels in dB)
+    QVector<double> frequencies, levels;
+    double maxLevel = -1000;
+    foreach (quint32 index, maxima)
+    {
+        auto db = [&](quint32 i) -> double { return 20 * std::log10(static_cast<double>(spectrum[static_cast<int>(i)]) + 1e-30); };
+        double level;
+        double offset = parabolicPeak(db(index - 1), db(index), db(index + 1), level); // findMax excludes the first and last bins
+        frequencies << (index + offset) * sampleRate / fftSize;
+        levels << level;
+        maxLevel = qMax(maxLevel, level);
+    }
+
+    QList<Peak> result;
+    for (int i = 0; i < maxima.size(); i++)
+    {
+        int peakKey, peakCorrection;
+        double fractionalKey = qBound(0.0, SampleUtils::frequencyToKey(frequencies[i]), 128.0);
+        SampleUtils::toKeyAndCorrection(fractionalKey, peakKey, peakCorrection);
+        result << Peak(std::pow(10.0, (levels[i] - maxLevel) / 20), frequencies[i], peakKey, peakCorrection);
+    }
+    return result;
+}
+
+QJsonObject SoundAnalyzer::getRelease(const QVector<float> &data, quint32 sampleRate, int releasePosition)
+{
+    QJsonObject result;
+    QVector<double> cumSquares = SampleUtils::cumulativeSquares(data);
+    int window = qMax(1, static_cast<int>(0.02 * sampleRate));
+    int hop = qMax(1, static_cast<int>(0.005 * sampleRate));
+    auto rmsAt = [&](int start) -> double { return SampleUtils::rms(cumSquares, start, start + window); };
+    double releaseLevel = rmsAt(qMax(0, releasePosition - window));
+    double peakRms = 0;
+    for (int i = 0; i + window < releasePosition; i += hop)
+        peakRms = qMax(peakRms, rmsAt(i));
+    if (releaseLevel > 0 && peakRms > 0)
+    {
+        result["level_at_release_db"] = jsonNumber(20 * std::log10(releaseLevel / peakRms), 1);
+        QJsonObject releaseTimes;
+        foreach (int drop, QList<int>({ 20, 40, 60 }))
+        {
+            double target = releaseLevel * std::pow(10.0, -drop / 20.0);
+            for (int i = releasePosition; i + window <= data.size(); i += hop)
+            {
+                if (rmsAt(i) < target)
+                {
+                    releaseTimes[QString("minus_%1_db_s").arg(drop)] = jsonNumber(static_cast<double>(i - releasePosition) / sampleRate, 3);
+                    break;
+                }
+            }
+        }
+        result["release"] = releaseTimes;
+    }
+    return result;
 }
 
 double SoundAnalyzer::getFundamental()
@@ -793,10 +811,10 @@ QJsonObject SoundAnalyzer::getPitch()
     }
 
     double f = _refinedF0 > 0 ? _refinedF0 : _f0;
-    double key = 69 + 12 * std::log2(f / 440.0);
+    double key = SampleUtils::frequencyToKey(f);
     int nearestKey = qRound(key);
     result["found"] = true;
-    result["frequency_hz"] = roundValue(f, 6);
+    result["frequency_hz"] = Utils::roundSignificant(f, 6);
     result["nearest_key"] = nearestKey;
     result["cents_from_nearest_key"] = roundDecimals(100 * (key - nearestKey), 1);
     result["confidence"] = roundDecimals(_f0Confidence, 3);
@@ -811,7 +829,7 @@ QJsonObject SoundAnalyzer::getPitch()
     }
     if (_harmonicsComputed && _inharmonicity > 0)
         result["first_partial_hz"] = _harmonics.isEmpty() || !_harmonics[0].found ? QJsonValue() :
-                                         QJsonValue(roundValue(_harmonics[0].frequency, 6));
+                                         QJsonValue(Utils::roundSignificant(_harmonics[0].frequency, 6));
     return result;
 }
 
@@ -840,16 +858,17 @@ QVector<double> SoundAnalyzer::averagePowerSpectrum(int start, int end, int fram
     if (end - start < frameLength)
         return power;
 
-    int frameCount = qMin(48, (end - start - frameLength) / qMax(1, frameLength / 4) + 1);
+    int frameCount = qMin(_maxSpectrumFrames, (end - start - frameLength) / qMax(1, frameLength / 4) + 1);
     double step = frameCount > 1 ? static_cast<double>(end - start - frameLength) / (frameCount - 1) : 0;
     std::vector<Complex> buffer(fftSize);
+    const FourierTransform &fourierTransform = getFourierTransform(fftSize);
     for (int frame = 0; frame < frameCount; frame++)
     {
         int position = start + static_cast<int>(frame * step);
         std::fill(buffer.begin(), buffer.end(), Complex(0));
         for (int i = 0; i < frameLength; i++)
             buffer[i] = _data[position + i] * window[i];
-        fft(buffer, false);
+        fourierTransform.transform(buffer, false);
         for (int k = 0; k <= fftSize / 2; k++)
             power[k] += std::norm(buffer[k]) / frameCount;
     }
@@ -994,7 +1013,7 @@ void SoundAnalyzer::computeSpectrum()
         }
     }
     double slope, intercept;
-    if (x.size() >= 4 && regression(x, y, QVector<double>(), slope, intercept))
+    if (x.size() >= 4 && SampleUtils::linearRegression(x, y, QVector<double>(), slope, intercept))
         _tilt = slope;
 }
 
@@ -1020,15 +1039,15 @@ QJsonObject SoundAnalyzer::getSpectrum()
         result["note"] = "sound too short for a spectral analysis";
         return result;
     }
-    result["centroid_hz"] = roundValue(_centroid, 4);
+    result["centroid_hz"] = Utils::roundSignificant(_centroid, 4);
     double f0 = getFundamental();
     if (f0 > 0)
         result["centroid_in_harmonics"] = roundDecimals(_centroid / f0, 2);
-    result["spread_hz"] = roundValue(_spread, 4);
+    result["spread_hz"] = Utils::roundSignificant(_spread, 4);
     result["skewness"] = roundDecimals(_skewness, 2);
     result["kurtosis"] = roundDecimals(_kurtosis, 2);
-    result["rolloff_85_hz"] = roundValue(_rolloff85, 4);
-    result["rolloff_95_hz"] = roundValue(_rolloff95, 4);
+    result["rolloff_85_hz"] = Utils::roundSignificant(_rolloff85, 4);
+    result["rolloff_95_hz"] = Utils::roundSignificant(_rolloff95, 4);
     result["flatness_db"] = jsonNumber(_flatness, 1);
     if (std::isfinite(_flatnessHigh))
         result["flatness_above_4khz_db"] = jsonNumber(_flatnessHigh, 1);
@@ -1063,7 +1082,7 @@ QJsonObject SoundAnalyzer::getSpectrumCurves()
     QJsonArray thirds;
     for (int i = 0; i < centers.size(); i++)
         if (levels[i] > -150 && levels[i] - maxLevel > -100)
-            thirds.append(QJsonArray({ roundValue(centers[i], 3), roundDecimals(levels[i] - maxLevel, 1) }));
+            thirds.append(QJsonArray({ Utils::roundSignificant(centers[i], 3), roundDecimals(levels[i] - maxLevel, 1) }));
     result["third_octave_db"] = thirds;
 
     // Spectral envelope: the harmonic peaks (frequency, dB relative to the strongest one)
@@ -1074,7 +1093,7 @@ QJsonObject SoundAnalyzer::getSpectrumCurves()
             maxAmplitude = qMax(maxAmplitude, harmonic.amplitude);
     foreach (Harmonic harmonic, _harmonics)
         if (harmonic.found && maxAmplitude > 0)
-            envelope.append(QJsonArray({ roundValue(harmonic.frequency, 5), roundDecimals(toDb(harmonic.amplitude / maxAmplitude), 1) }));
+            envelope.append(QJsonArray({ Utils::roundSignificant(harmonic.frequency, 5), roundDecimals(SampleUtils::toDb(harmonic.amplitude / maxAmplitude), 1) }));
     if (!envelope.isEmpty())
         result["harmonic_envelope_db"] = envelope;
     result["note"] = "[frequency in Hz, level in dB relative to the maximum]";
@@ -1100,7 +1119,7 @@ void SoundAnalyzer::computeHarmonics()
 
     // Window long enough to separate the harmonics (8 periods for Blackman-Harris)
     int start = _steadyStart, end = _steadyEnd;
-    int frameLength = qBound(2048, nextPowerOfTwo(static_cast<int>(8 * _sampleRate / _f0)), 65536);
+    int frameLength = qBound(2048, SampleUtils::nextPowerOfTwo(static_cast<int>(8 * _sampleRate / _f0)), 65536);
     if (end - start < frameLength)
     {
         start = _onset;
@@ -1136,10 +1155,8 @@ void SoundAnalyzer::computeHarmonics()
         if (best == k1 || best == k2)
             return harmonic; // Not a local maximum
 
-        double alpha = db(best - 1), beta = db(best), gamma = db(best + 1);
-        double denominator = alpha - 2 * beta + gamma;
-        double p = std::fabs(denominator) > 1e-12 ? 0.5 * (alpha - gamma) / denominator : 0;
-        double peakDb = beta - 0.25 * (alpha - gamma) * p;
+        double peakDb;
+        double p = parabolicPeak(db(best - 1), db(best), db(best + 1), peakDb);
         harmonic.frequency = (best + p) * binWidth;
         harmonic.amplitude = 2 * std::sqrt(std::pow(10.0, peakDb / 10)) / _harmonicWindowSum;
 
@@ -1180,7 +1197,7 @@ void SoundAnalyzer::computeHarmonics()
     }
     double f0 = weights > 0 ? weightedSum / weights : _f0;
     double slope, intercept;
-    if (x.size() >= 4 && regression(x, y, w, slope, intercept) && intercept > 0)
+    if (x.size() >= 4 && SampleUtils::linearRegression(x, y, w, slope, intercept) && intercept > 0)
     {
         // Residuals with and without stretching of the partials
         double meanSquare = 0;
@@ -1268,11 +1285,11 @@ double SoundAnalyzer::getHarmonicTilt()
         if (harmonic.found)
         {
             x << std::log2(harmonic.rank);
-            y << toDb(harmonic.amplitude);
+            y << SampleUtils::toDb(harmonic.amplitude);
         }
     }
     double slope, intercept;
-    if (x.size() >= 3 && regression(x, y, QVector<double>(), slope, intercept))
+    if (x.size() >= 3 && SampleUtils::linearRegression(x, y, QVector<double>(), slope, intercept))
         return slope;
     return std::nan("");
 }
@@ -1305,7 +1322,7 @@ QJsonObject SoundAnalyzer::getHarmonics(int maxListed)
     for (int i = 0; i < _harmonics.size(); i++)
     {
         const Harmonic &harmonic = _harmonics[i];
-        double level = harmonic.found ? toDb(harmonic.amplitude / maxAmplitude) : std::nan("");
+        double level = harmonic.found ? SampleUtils::toDb(harmonic.amplitude / maxAmplitude) : std::nan("");
         if (i < maxListed)
             levels.append(harmonic.found ? QJsonValue(roundDecimals(level, 1)) : QJsonValue());
         if (!harmonic.found)
@@ -1332,7 +1349,7 @@ QJsonObject SoundAnalyzer::getHarmonics(int maxListed)
     result["levels_db"] = levels;
     result["levels_note"] = "harmonics 1, 2, 3... in dB relative to the strongest one (null: not detected)";
     result["count_above_60db"] = audible;
-    result["fundamental_level_db"] = _harmonics[0].found ? QJsonValue(roundDecimals(toDb(_harmonics[0].amplitude / maxAmplitude), 1)) : QJsonValue();
+    result["fundamental_level_db"] = _harmonics[0].found ? QJsonValue(roundDecimals(SampleUtils::toDb(_harmonics[0].amplitude / maxAmplitude), 1)) : QJsonValue();
     result["centroid_in_harmonics"] = jsonNumber(getHarmonicCentroid(), 2);
     result["tilt_db_per_octave"] = jsonNumber(getHarmonicTilt(), 2);
     if (even > 0)
@@ -1344,7 +1361,7 @@ QJsonObject SoundAnalyzer::getHarmonics(int maxListed)
     if (sumAmplitudes > 0)
         result["tristimulus"] = QJsonArray({ roundDecimals(t1 / sumAmplitudes, 3), roundDecimals(t2 / sumAmplitudes, 3),
                                             roundDecimals(1 - (t1 + t2) / sumAmplitudes, 3) });
-    result["inharmonicity_b"] = _inharmonicity > 0 ? QJsonValue(roundValue(_inharmonicity, 3)) : QJsonValue(0);
+    result["inharmonicity_b"] = _inharmonicity > 0 ? QJsonValue(Utils::roundSignificant(_inharmonicity, 3)) : QJsonValue(0);
     result["harmonic_to_noise_db"] = jsonNumber(_hnr, 1);
 
     // Irregularity (Krimphoff): deviation from the local mean of the levels
@@ -1354,7 +1371,7 @@ QJsonObject SoundAnalyzer::getHarmonics(int maxListed)
     {
         if (_harmonics[i - 1].found && _harmonics[i].found && _harmonics[i + 1].found)
         {
-            double a = toDb(_harmonics[i - 1].amplitude), b = toDb(_harmonics[i].amplitude), c = toDb(_harmonics[i + 1].amplitude);
+            double a = SampleUtils::toDb(_harmonics[i - 1].amplitude), b = SampleUtils::toDb(_harmonics[i].amplitude), c = SampleUtils::toDb(_harmonics[i + 1].amplitude);
             irregularity += std::fabs(b - (a + b + c) / 3);
             counted++;
         }
@@ -1413,7 +1430,7 @@ QJsonObject SoundAnalyzer::getEnvelope()
             maxIndex = i;
         }
     }
-    double maxDb = toDb(maxEnv);
+    double maxDb = SampleUtils::toDb(maxEnv);
 
     // Temporal centroid and effective duration
     double sumE = 0, sumTE = 0;
@@ -1439,7 +1456,7 @@ QJsonObject SoundAnalyzer::getEnvelope()
     int startFrame = qMax(maxIndex, static_cast<int>(_attackEnd / hop10));
     for (int i = startFrame; i < env.size(); i++)
     {
-        double level = toDb(env[i]);
+        double level = SampleUtils::toDb(env[i]);
         if (level < stopDb)
             break;
         if (_looped && i * hop10 > _loopStart)
@@ -1448,7 +1465,7 @@ QJsonObject SoundAnalyzer::getEnvelope()
         levels << level;
     }
     double slope = 0, intercept;
-    bool decayFound = t.size() >= 5 && regression(t, levels, QVector<double>(), slope, intercept);
+    bool decayFound = t.size() >= 5 && SampleUtils::linearRegression(t, levels, QVector<double>(), slope, intercept);
     if (decayFound)
     {
         result["decay_rate_db_per_s"] = roundDecimals(slope, 2);
@@ -1481,7 +1498,7 @@ QJsonObject SoundAnalyzer::getEnvelope()
         if (steadyEnv[i] > 0)
         {
             times << (i * hop5) / sr;
-            steadyDb << toDb(steadyEnv[i]);
+            steadyDb << SampleUtils::toDb(steadyEnv[i]);
         }
     }
     double rate, amplitude;
@@ -1493,14 +1510,14 @@ QJsonObject SoundAnalyzer::getEnvelope()
 
     // End of the sample
     int tail = qMax(1, static_cast<int>(0.01 * sr));
-    double tailDb = toDb(rms(_length - tail, _length)) - toDb(_peak);
+    double tailDb = SampleUtils::toDb(rms(_length - tail, _length)) - SampleUtils::toDb(_peak);
     result["end_level_db"] = roundDecimals(qMax(-200.0, tailDb), 1);
 
     // Summary of the envelope: about 32 points (time in s, dB relative to the maximum)
     QJsonArray curve;
     int step = qMax(1, static_cast<int>(env.size()) / 32);
     for (int i = 0; i < env.size(); i += step)
-        curve.append(QJsonArray({ roundDecimals((i * hop10 + window50 / 2) / sr, 3), roundDecimals(qMax(-120.0, toDb(env[i]) - maxDb), 1) }));
+        curve.append(QJsonArray({ roundDecimals((i * hop10 + window50 / 2) / sr, 3), roundDecimals(qMax(-120.0, SampleUtils::toDb(env[i]) - maxDb), 1) }));
     result["curve"] = curve;
     result["note"] = "curve: [time in s, RMS level in dB relative to the maximum], 50 ms windows; "
                      "equivalent_vol_env_decay_s: decay setting of the soundfont giving the same decrease (100 dB in this time)";
@@ -1572,7 +1589,7 @@ double SoundAnalyzer::lpcClickScore() const
             seamMax = qMax(seamMax, std::fabs(e));
     }
     double signalRms = std::sqrt(r[0] / window);
-    double sigma = qMax(1.4826 * median(before), 3.16e-3 * signalRms); // Residuals below -50 dB are inaudible
+    double sigma = qMax(1.4826 * SampleUtils::median(before), 3.16e-3 * signalRms); // Residuals below -50 dB are inaudible
     if (sigma <= 0)
         return std::nan("");
     return 20 * std::log10(qMax(seamMax, 1e-12) / sigma);
@@ -1606,15 +1623,16 @@ void SoundAnalyzer::computeLoop()
         issues.append("the loop starts during the attack");
     result["starts_after_attack_end_ms"] = roundDecimals(1000 * (_loopStart - _attackEnd) / sr, 1);
 
-    // Number of periods
+    // Number of periods: a problem only if the waveforms don't match at the loop point (checked below), the count being
+    // meaningless for several fundamentals (celeste) and imprecise for long loops (error of the fundamental)
+    bool periodMismatch = false;
     if (f0 > 0)
     {
         double periods = length * f0 / sr;
         double mismatch = periods - std::round(periods);
         result["periods"] = roundDecimals(periods, 3);
         result["period_mismatch"] = roundDecimals(std::fabs(mismatch), 3);
-        if (std::fabs(mismatch) > 0.1 && _inharmonicity < 1e-4 && periods > 1)
-            issues.append("the loop length is not a whole number of periods");
+        periodMismatch = (std::fabs(mismatch) > 0.1 && _inharmonicity < 1e-4 && periods > 1);
 
         // Phase commensurability of the harmonics: 0 = all harmonics continue in phase
         double sum = 0, weighted = 0;
@@ -1662,6 +1680,8 @@ void SoundAnalyzer::computeLoop()
     result["seam_error_db"] = jsonNumber(errorDb, 1);
     if (std::isfinite(correlation) && correlation < 0.95)
         issues.append(QString("the waveforms around the loop point don't match (correlation %1)").arg(roundDecimals(correlation, 3)));
+    if (periodMismatch && !(std::isfinite(correlation) && correlation >= 0.99))
+        issues.append("the loop length is not a whole number of periods");
 
     // Junction: jump compared to the typical second difference
     if (length > 8 && _loopEnd >= 3)
@@ -1679,7 +1699,7 @@ void SoundAnalyzer::computeLoop()
         double reference = count > 0 ? std::sqrt(sum / count) : 0;
         if (reference > 0)
         {
-            double jumpDb = toDb(std::fabs(jump) / reference, -60);
+            double jumpDb = SampleUtils::toDb(std::fabs(jump) / reference, -60);
             result["junction_jump_db"] = roundDecimals(jumpDb, 1);
             if (jumpDb > 12)
                 issues.append("discontinuity at the loop point (click likely)");
@@ -1690,31 +1710,69 @@ void SoundAnalyzer::computeLoop()
     if (std::isfinite(click) && click > 25)
         issues.append("click detected at the loop point (prediction residual)");
 
-    // Level, spectrum and pitch at both ends of the loop
+    // Level and spectrum: what precedes the loop end compared with what precedes the loop start, that is with what the
+    // original sound does at the same point (a seamless loop gives the same signal whatever the slow modulations of the
+    // sound: beats of a celeste, tremulant...), also further before the loop points for covering a crossfade (until half
+    // of the loop, both windows being after the attack). Without signal between the attack and the loop start: the end
+    // of the loop is compared with its beginning and judged against the natural variations inside the loop
+    auto referenceDistances = [&](int window) -> QList<int> {
+        QList<int> distances;
+        int maxDistance = qMin(_loopStart - qMax(_attackEnd, 0) - window, length / 2 - window);
+        if (maxDistance >= 0)
+            for (int k = 0; k < 8; k++)
+                distances << static_cast<int>(static_cast<double>(k) / 7 * maxDistance);
+        return distances;
+    };
     int w = qMax(16, qMin(static_cast<int>(0.03 * sr), length / 4));
-    double levelJump = toDb(rms(_loopStart, _loopStart + w)) - toDb(rms(_loopEnd - w, _loopEnd));
     QVector<double> naturalLevel;
     for (int k = 1; k <= 8; k++)
     {
         int p = _loopStart + w + static_cast<int>(static_cast<double>(k) / 9 * (length - 2 * w));
         if (p - w >= _loopStart && p + w <= _loopEnd)
-            naturalLevel << std::fabs(toDb(rms(p, p + w)) - toDb(rms(p - w, p)));
+            naturalLevel << std::fabs(SampleUtils::toDb(rms(p, p + w)) - SampleUtils::toDb(rms(p - w, p)));
     }
-    double naturalLevelVariation = naturalLevel.isEmpty() ? 0 : median(naturalLevel);
+    double naturalLevelVariation = naturalLevel.isEmpty() ? 0 : SampleUtils::median(naturalLevel);
+    double levelThreshold = qMax(1.0, 3 * naturalLevelVariation);
+    QList<int> levelDistances = referenceDistances(w);
+    double levelJump = 0, maxLevelDifference = 0;
+    if (levelDistances.isEmpty())
+        levelJump = maxLevelDifference = SampleUtils::toDb(rms(_loopStart, _loopStart + w)) - SampleUtils::toDb(rms(_loopEnd - w, _loopEnd));
+    else
+    {
+        foreach (int d, levelDistances)
+        {
+            double difference = SampleUtils::toDb(rms(_loopStart - d - w, _loopStart - d)) - SampleUtils::toDb(rms(_loopEnd - d - w, _loopEnd - d));
+            if (d == 0)
+                levelJump = difference;
+            if (std::fabs(difference) > std::fabs(maxLevelDifference))
+                maxLevelDifference = difference;
+        }
+        result["max_level_difference_db"] = roundDecimals(maxLevelDifference, 2);
+    }
     result["level_jump_db"] = roundDecimals(levelJump, 2);
     result["natural_level_variation_db"] = roundDecimals(naturalLevelVariation, 2);
-    if (std::fabs(levelJump) > qMax(1.0, 3 * naturalLevelVariation))
+    if (std::fabs(levelJump) > levelThreshold)
         issues.append(QString("level jump of %1 dB at the loop point").arg(roundDecimals(levelJump, 1)));
+    else if (std::fabs(maxLevelDifference) > qMax(3.0, levelThreshold)) // Further from the loop point: natural evolution of the sound
+        issues.append(QString("level difference of %1 dB before the loop end compared with the same point before the loop "
+                              "start (crossfade attenuating the sound?)").arg(roundDecimals(maxLevelDifference, 1)));
     int quarter = length / 4;
     if (quarter > 16)
-        result["level_change_in_loop_db"] = roundDecimals(toDb(rms(_loopEnd - quarter, _loopEnd)) - toDb(rms(_loopStart, _loopStart + quarter)), 2);
+        result["level_change_in_loop_db"] = roundDecimals(SampleUtils::toDb(rms(_loopEnd - quarter, _loopEnd)) - SampleUtils::toDb(rms(_loopStart, _loopStart + quarter)), 2);
 
     int spectrumLength = previousPowerOfTwo(qMin(4096, length / 3));
     if (spectrumLength >= 256)
     {
         double ws, wss;
-        QVector<double> endSpectrum = averagePowerSpectrum(_loopEnd - spectrumLength, _loopEnd, spectrumLength, spectrumLength, false, ws, wss);
-        QVector<double> startSpectrum = averagePowerSpectrum(_loopStart, _loopStart + spectrumLength, spectrumLength, spectrumLength, false, ws, wss);
+        auto spectrumAt = [&](int start) -> QVector<double> {
+            return averagePowerSpectrum(start, start + spectrumLength, spectrumLength, spectrumLength, false, ws, wss);
+        };
+        QList<int> timbreDistances = referenceDistances(spectrumLength);
+        bool withReference = !timbreDistances.isEmpty();
+
+        // Spectra before and after the loop point (with a reference: what precedes the loop end and what precedes the loop start)
+        QVector<double> endSpectrum = spectrumAt(_loopEnd - spectrumLength);
+        QVector<double> startSpectrum = withReference ? spectrumAt(_loopStart - spectrumLength) : spectrumAt(_loopStart);
         double binWidth = sr / spectrumLength;
         double c1 = 0, c2 = 0, p1 = 0, p2 = 0;
         for (int k = qMax(1, static_cast<int>(50 / binWidth)); k < qMin(static_cast<int>(endSpectrum.size()), static_cast<int>(16000 / binWidth)); k++)
@@ -1751,25 +1809,41 @@ void SoundAnalyzer::computeLoop()
                 variance += (value - mean) * (value - mean) / diff.size();
             return std::sqrt(variance);
         };
-        double timbreJump = distance(endSpectrum, startSpectrum);
         QVector<double> naturalTimbre;
         for (int k = 1; k <= 3; k++)
         {
             int p = _loopStart + spectrumLength + k * (length - 2 * spectrumLength) / 4;
             if (p - spectrumLength < _loopStart || p + spectrumLength > _loopEnd)
                 continue;
-            double d = distance(averagePowerSpectrum(p - spectrumLength, p, spectrumLength, spectrumLength, false, ws, wss),
-                                averagePowerSpectrum(p, p + spectrumLength, spectrumLength, spectrumLength, false, ws, wss));
+            double d = distance(spectrumAt(p - spectrumLength), spectrumAt(p));
             if (std::isfinite(d))
                 naturalTimbre << d;
         }
-        double naturalTimbreVariation = naturalTimbre.isEmpty() ? 0 : median(naturalTimbre);
+        double naturalTimbreVariation = naturalTimbre.isEmpty() ? 0 : SampleUtils::median(naturalTimbre);
+        double timbreThreshold = qMax(3.0, 2 * naturalTimbreVariation);
+        double timbreJump = withReference ? distance(startSpectrum, endSpectrum) : distance(endSpectrum, startSpectrum);
+        double maxTimbreDifference = timbreJump;
+        foreach (int d, timbreDistances)
+        {
+            if (d == 0)
+                continue;
+            double difference = distance(spectrumAt(_loopStart - d - spectrumLength), spectrumAt(_loopEnd - d - spectrumLength));
+            if (std::isfinite(difference) && !(difference <= maxTimbreDifference)) // Also if maxTimbreDifference is NaN
+                maxTimbreDifference = difference;
+        }
         if (std::isfinite(timbreJump))
         {
             result["timbre_jump_db"] = roundDecimals(timbreJump, 2);
             result["natural_timbre_variation_db"] = roundDecimals(naturalTimbreVariation, 2);
-            if (timbreJump > qMax(3.0, 2 * naturalTimbreVariation))
+            if (timbreJump > timbreThreshold)
                 issues.append("timbre jump at the loop point");
+        }
+        if (withReference && std::isfinite(maxTimbreDifference))
+        {
+            result["max_timbre_difference_db"] = roundDecimals(maxTimbreDifference, 2);
+            if (!(timbreJump > timbreThreshold) && maxTimbreDifference > qMax(6.0, timbreThreshold)) // Idem
+                issues.append("timbre difference before the loop end compared with the same point before the loop start "
+                              "(crossfade attenuating some harmonics?)");
         }
         if (p1 > 0 && p2 > 0)
             result["brightness_jump_percent"] = roundDecimals(100 * (c2 / p2 - c1 / p1) / (c1 / p1), 1);
@@ -1799,8 +1873,11 @@ void SoundAnalyzer::computeLoop()
     result["issues"] = issues;
     result["verdict"] = issues.isEmpty() ? "good" : (issues.count() == 1 ? "acceptable" : "poor");
     result["note"] = "seam_correlation: 1 = perfect, < 0.95 audible; junction_jump_db and click_score_db: > 12 / 25 dB "
-                     "indicate a click; level / timbre / pitch jumps are judged against the natural variations inside the "
-                     "loop; harmonic_phase_mismatch: 0 = harmonics continue in phase, 1 = opposition";
+                     "indicate a click; level_jump_db and timbre_jump_db compare what precedes the loop end with what "
+                     "precedes the loop start (the original sound at the same point), max_level_difference_db and "
+                     "max_timbre_difference_db the same further before the loop points (attenuation by a crossfade); "
+                     "periods and harmonic_phase_mismatch (0 = harmonics continue in phase, 1 = opposition) assume a "
+                     "single fundamental and are meaningless for a celeste";
     _loopResult = result;
 }
 
@@ -1874,13 +1951,13 @@ QJsonObject SoundAnalyzer::getQuality()
     }
     for (int i = _steadyStart; i < _steadyStart + steadyLength && i < _length; i++)
         steadyMean += _data[i] / qMax(1, steadyLength);
-    result["dc_offset_dbfs"] = roundDecimals(toDb(std::fabs(mean)), 1);
-    result["dc_offset_steady_dbfs"] = roundDecimals(toDb(std::fabs(steadyMean)), 1);
+    result["dc_offset_dbfs"] = roundDecimals(SampleUtils::toDb(std::fabs(mean)), 1);
+    result["dc_offset_steady_dbfs"] = roundDecimals(SampleUtils::toDb(std::fabs(steadyMean)), 1);
     if (std::fabs(steadyMean) > 0.002)
         issues.append("DC offset (high-pass filter or remove the offset)");
 
     // Noise
-    double steadyDb = toDb(rms(_steadyStart, _steadyEnd));
+    double steadyDb = SampleUtils::toDb(rms(_steadyStart, _steadyEnd));
     if (_noiseFloorDb > -199)
     {
         double snr = steadyDb - _noiseFloorDb;
@@ -1918,7 +1995,7 @@ QJsonObject SoundAnalyzer::getQuality()
                     if (std::abs(j - k) > 1)
                         around << _power[qMin(j, static_cast<int>(_power.size()) - 1)];
                 double peak = qMax(_power[k], qMax(_power[k - 1], _power[k + 1]));
-                if (!around.isEmpty() && median(around) > 0 && 10 * std::log10(peak / median(around)) > 10)
+                if (!around.isEmpty() && SampleUtils::median(around) > 0 && 10 * std::log10(peak / SampleUtils::median(around)) > 10)
                     hum.append(f);
             }
         }
@@ -1936,7 +2013,7 @@ QJsonObject SoundAnalyzer::getQuality()
                 low += _power[k];
         }
         if (total > 0)
-            result["energy_below_20hz_db"] = roundDecimals(toDb(std::sqrt(low / total), -120), 1);
+            result["energy_below_20hz_db"] = roundDecimals(SampleUtils::toDb(std::sqrt(low / total), -120), 1);
     }
 
     // Resolution actually used (a 24-bit sample may only contain 16 bits)
@@ -1960,7 +2037,7 @@ QJsonObject SoundAnalyzer::getQuality()
     if (_onset > 0.005 * sr)
         issues.append("silence at the beginning (latency when playing): see trim_start");
     int tail = qMax(1, static_cast<int>(0.01 * sr));
-    double endDb = toDb(rms(_length - tail, _length)) - toDb(_peak);
+    double endDb = SampleUtils::toDb(rms(_length - tail, _length)) - SampleUtils::toDb(_peak);
     if (!_looped && endDb > -50)
         issues.append("the sample ends abruptly (no loop and the sound is not finished)");
     if (_peak <= 0)
@@ -2102,10 +2179,10 @@ double SoundAnalyzer::harmonicEnvelopeDb(double frequency)
             continue;
         if (_harmonics[i].frequency >= frequency)
         {
-            double level = toDb(_harmonics[i].amplitude / strongest);
+            double level = SampleUtils::toDb(_harmonics[i].amplitude / strongest);
             if (previous < 0)
                 return std::fabs(_harmonics[i].frequency - frequency) < 1e-9 ? level : std::nan("");
-            double previousLevel = toDb(_harmonics[previous].amplitude / strongest);
+            double previousLevel = SampleUtils::toDb(_harmonics[previous].amplitude / strongest);
             double ratio = std::log(frequency / _harmonics[previous].frequency) /
                            std::log(_harmonics[i].frequency / _harmonics[previous].frequency);
             return previousLevel + ratio * (level - previousLevel);
@@ -2249,12 +2326,13 @@ QImage SoundAnalyzer::getSpectrogram(int width, int height)
     QVector<QVector<double> > columns(plotWidth);
     double maxDb = -200;
     std::vector<Complex> buffer(frameLength);
+    const FourierTransform &fourierTransform = getFourierTransform(frameLength);
     for (int c = 0; c < plotWidth; c++)
     {
         int position = plotWidth > 1 ? static_cast<int>(static_cast<double>(c) * (_length - frameLength) / (plotWidth - 1)) : 0;
         for (int i = 0; i < frameLength; i++)
             buffer[i] = _data[position + i] * window[i];
-        fft(buffer, false);
+        fourierTransform.transform(buffer, false);
         QVector<double> column(plotHeight);
         for (int r = 0; r < plotHeight; r++)
         {

@@ -66,6 +66,9 @@ public:
 
     quint32 getSampleRate() { return _sampleRate; }
 
+    /// Write interleaved stereo data in a 32-bit float wav file
+    static bool writeWavFile(QString filePath, const QVector<float> &data, quint32 frameCount, quint32 sampleRate);
+
     QString getError() { return _error; }
 
 private:
@@ -115,7 +118,6 @@ private:
     void renderWithThreads(int sf2Index, QVector<float> &data, quint32 blockCount);
     template <class T> void processEvents(T * synth, MidiProcessor * midiProcessor, int sf2Index, quint64 blockEnd, int &eventIndex);
     void storeBlock(QVector<float> &data, quint32 block, const float * dataL, const float * dataR);
-    bool writeWavFile(QString filePath, const QVector<float> &data, quint32 frameCount);
     bool readInt(QString word, int min, int max, int &value, int line);
     bool readFloat(QString word, float min, float max, float &value, int line);
 

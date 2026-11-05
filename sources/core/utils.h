@@ -55,6 +55,7 @@ public:
     static qint8 round8(double value);
     static qint16 round16(double value);
     static qint32 round32(double value);
+    static double roundSignificant(double value, int significantDigits = 4); // 0 if value is not finite
     static qint32 floatToInt24(float f);
     static float int24ToFloat(qint32 i);
 

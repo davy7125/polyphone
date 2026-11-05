@@ -190,11 +190,3 @@ QList<int> McpUtils::getSoundfontIndexes()
             result << i;
     return result;
 }
-
-double McpUtils::round(double value, int significantDigits)
-{
-    if (value == 0 || !std::isfinite(value))
-        return std::isfinite(value) ? value : 0;
-    double magnitude = std::pow(10.0, significantDigits - 1 - static_cast<int>(std::floor(std::log10(std::fabs(value)))));
-    return std::round(value * magnitude) / magnitude;
-}

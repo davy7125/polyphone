@@ -55,9 +55,6 @@ public:
 
     // Indexes of the open soundfonts (temporary soundfonts of the explorer excluded)
     static QList<int> getSoundfontIndexes();
-
-    // Round a value to a number of significant digits
-    static double round(double value, int significantDigits = 4);
 };
 
 #endif // MCPUTILS_H

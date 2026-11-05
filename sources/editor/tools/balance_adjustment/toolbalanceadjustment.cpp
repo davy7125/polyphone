@@ -77,35 +77,47 @@ void ToolBalanceAdjustment::process(SoundfontManager * sm, EltID id, AbstractToo
     QVector<float> vData1 = sm->getDataFloat(id);
     QVector<float> vData2 = sm->getDataFloat(id2);
 
-    // Find steady areas
-    quint32 debut1, fin1;
-    if (sm->get(id, champ_dwStartLoop).dwValue == sm->get(id, champ_dwEndLoop).dwValue)
-        SampleUtils::regimePermanent(vData1, sm->get(id, champ_dwSampleRate).dwValue, debut1, fin1);
-    else
+    // Steady area common to both channels: a loop, otherwise the steady part of their mix
+    quint32 length = static_cast<quint32>(qMin(vData1.size(), vData2.size()));
+    quint32 debut, fin;
+    if (sm->get(id, champ_dwStartLoop).dwValue < sm->get(id, champ_dwEndLoop).dwValue)
     {
-        debut1 = sm->get(id, champ_dwStartLoop).dwValue;
-        fin1 = sm->get(id, champ_dwEndLoop).dwValue;
+        debut = sm->get(id, champ_dwStartLoop).dwValue;
+        fin = sm->get(id, champ_dwEndLoop).dwValue;
     }
-    quint32 debut2, fin2;
-    if (sm->get(id2, champ_dwStartLoop).dwValue == sm->get(id2, champ_dwEndLoop).dwValue)
-        SampleUtils::regimePermanent(vData2, sm->get(id2, champ_dwSampleRate).dwValue, debut2, fin2);
+    else if (sm->get(id2, champ_dwStartLoop).dwValue < sm->get(id2, champ_dwEndLoop).dwValue)
+    {
+        debut = sm->get(id2, champ_dwStartLoop).dwValue;
+        fin = sm->get(id2, champ_dwEndLoop).dwValue;
+    }
     else
     {
-        debut2 = sm->get(id2, champ_dwStartLoop).dwValue;
-        fin2 = sm->get(id2, champ_dwEndLoop).dwValue;
+        // Absolute values mixed, so that opposite phases don't cancel
+        QVector<float> mix(static_cast<int>(length));
+        for (int i = 0; i < mix.size(); i++)
+            mix[i] = 0.5f * (qAbs(vData1[i]) + qAbs(vData2[i]));
+        SampleUtils::findSteadyPart(mix, sm->get(id, champ_dwSampleRate).dwValue, debut, fin);
+    }
+    fin = qMin(fin, length);
+    if (fin <= debut)
+    {
+        debut = 0;
+        fin = length;
     }
 
     // Compute intensities
-    float intensite1 = SampleUtils::normDividedBySize(vData1.mid(debut1, fin1 - debut1));
-    float intensite2 = SampleUtils::normDividedBySize(vData2.mid(debut2, fin2 - debut2));
+    float intensite1 = SampleUtils::rms(vData1.constData() + debut, fin - debut);
+    float intensite2 = SampleUtils::rms(vData2.constData() + debut, fin - debut);
+    if (intensite1 <= 0 || intensite2 <= 0)
+        return; // A silent channel cannot be balanced
 
     // Mean intensity
     float intensiteMoy = sqrt(intensite1 * intensite2);
 
     // Adjust volume
     float gain1, gain2;
-    vData1 = SampleUtils::multiply(vData1, intensiteMoy / intensite1, gain1);
-    vData2 = SampleUtils::multiply(vData2, intensiteMoy / intensite2, gain2);
+    vData1 = SampleUtils::multiply(std::move(vData1), intensiteMoy / intensite1, gain1);
+    vData2 = SampleUtils::multiply(std::move(vData2), intensiteMoy / intensite2, gain2);
 
     // Update sample data
     sm->setData(id, vData1);

@@ -456,6 +456,7 @@ SOURCES	+= main.cpp \
     core/input/sf/sf2pdtapart_bag.cpp \
     editor/widgets/linkedtowidget.cpp \
     editor/tools/abstracttool.cpp \
+    editor/tools/abstractrunnablemixer.cpp \
     editor/tools/toolfactory.cpp \
     editor/tools/toolmenu.cpp \
     editor/tools/trim_end/tooltrimend.cpp \
@@ -500,7 +501,6 @@ SOURCES	+= main.cpp \
     editor/tools/global_settings/toolglobalsettings_parameters.cpp \
     editor/tools/global_settings/graphparamglobal.cpp \
     core/types/eltid.cpp \
-    core/types/complex.cpp \
     core/types/attribute.cpp \
     editor/tools/celeste_tuning/toolcelestetuning.cpp \
     editor/tools/celeste_tuning/toolcelestetuning_gui.cpp \
@@ -899,6 +899,7 @@ HEADERS += \
     repository/widgets/elidedlabel.h \
     editor/widgets/linkedtowidget.h \
     editor/tools/abstracttool.h \
+    editor/tools/abstractrunnablemixer.h \
     editor/tools/toolfactory.h \
     editor/tools/toolmenu.h \
     editor/tools/trim_end/tooltrimend.h \
@@ -945,7 +946,6 @@ HEADERS += \
     editor/tools/global_settings/toolglobalsettings_parameters.h \
     editor/tools/global_settings/graphparamglobal.h \
     core/types/eltid.h \
-    core/types/complex.h \
     core/types/attribute.h \
     core/types/basetypes.h \
     editor/tools/celeste_tuning/toolcelestetuning.h \

@@ -25,6 +25,7 @@
 #include "utils.h"
 #include "synthmath.h"
 #include <QStringList>
+#include <cmath>
 #include <QFile>
 #include <QRegularExpression>
 #include <QLocale>
@@ -246,6 +247,14 @@ qint16 Utils::round16(double value)
 qint32 Utils::round32(double value)
 {
     return SynthMath::round32(value);
+}
+
+double Utils::roundSignificant(double value, int significantDigits)
+{
+    if (value == 0 || !std::isfinite(value))
+        return 0;
+    double magnitude = std::pow(10.0, significantDigits - 1 - static_cast<int>(std::floor(std::log10(std::fabs(value)))));
+    return std::round(value * magnitude) / magnitude;
 }
 
 qint32 Utils::floatToInt24(float f)

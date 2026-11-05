@@ -26,7 +26,7 @@
 #define TOOLFREQUENCYPEAKS_PARAMETERS_H
 
 #include "abstracttoolparameters.h"
-#include "graphicsfourier.h"
+#include "soundanalyzer.h"
 #include <QList>
 #include <QString>
 

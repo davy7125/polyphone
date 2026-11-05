@@ -27,7 +27,7 @@
 #include "mcpattributes.h"
 #include "soundfontmanager.h"
 #include "contextmanager.h"
-#include "graphicsfourier.h"
+#include "soundanalyzer.h"
 #include "utils.h"
 #include "trim_end/tooltrimend.h"
 #include "auto_loop/toolautoloop.h"
@@ -291,8 +291,8 @@ static void addSampleTools(QList<McpFunction *> &functions)
 
     functions << toolFunction(
         "trim_start",
-        "Tool \"Remove blank at start\": remove the silence at the beginning of each sample (stereo pairs are trimmed "
-        "together, the loop points are shifted).",
+        "Tool \"Remove blank at start\": remove the silence or the background noise before the sound of each sample, "
+        "up to the onset given by analyze_sample (stereo pairs are trimmed together, the loop points are shifted).",
         samplesText, samples, "", {}, []() { return new ToolTrimStart(); });
 
     functions << toolFunction(
@@ -456,7 +456,7 @@ static void addSampleTools(QList<McpFunction *> &functions)
                 int posMax;
                 SampleFrequencyInfo info;
                 info.name = sm->getQstr(id, champ_name);
-                info.frequencies = GraphicsFourier::computePeaks(data, sm->get(id, champ_dwSampleRate).dwValue,
+                info.frequencies = SoundAnalyzer::computePeaks(data, sm->get(id, champ_dwSampleRate).dwValue,
                                                                  sm->get(id, champ_dwStartLoop).dwValue,
                                                                  sm->get(id, champ_dwEndLoop).dwValue, vectFourier, posMax);
                 if (!info.frequencies.isEmpty())
@@ -1051,7 +1051,7 @@ static void addPresetAndSoundfontTools(QList<McpFunction *> &functions)
             QJsonValue global = McpAttributes::getValue(id, name);
             result["global"] = global;
             if (global.isNull() && champ != champ_keyRange && champ != champ_velRange)
-                result["default"] = McpUtils::round(AttributeBase::getDefaultRealValue(champ, isPrst));
+                result["default"] = Utils::roundSignificant(AttributeBase::getDefaultRealValue(champ, isPrst));
 
             QJsonArray divisions;
             EltID idDiv(isPrst ? elementPrstInst : elementInstSmpl, id.indexSf2, id.indexElt);

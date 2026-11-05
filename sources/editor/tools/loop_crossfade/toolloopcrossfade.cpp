@@ -52,6 +52,6 @@ void ToolLoopCrossfade::process(SoundfontManager * sm, EltID id, AbstractToolPar
         crossfadeLength = loopStart;
 
     // Apply the crossfade
-    vData = SampleUtils::loopStep2(vData, loopStart, loopEnd, crossfadeLength, false);
+    vData = SampleUtils::loopStep2(std::move(vData), loopStart, loopEnd, crossfadeLength, false);
     sm->setData(id, vData);
 }

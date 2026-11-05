@@ -25,33 +25,20 @@
 #ifndef RUNNABLESAMPLECREATOR_H
 #define RUNNABLESAMPLECREATOR_H
 
-#include <QRunnable>
-#include "basetypes.h"
+#include "abstractrunnablemixer.h"
 #include "toolmixturecreation_parameters.h"
 class ToolMixtureCreation;
 
-class RunnableSampleCreator: public QRunnable
+class RunnableSampleCreator: public AbstractRunnableMixer
 {
 public:
     RunnableSampleCreator(ToolMixtureCreation * tool, EltID idInst, DivisionInfo di, int key, int minKey, bool loop, bool stereo, int side);
-    ~RunnableSampleCreator() override;
     void run() override;
 
 private:
-    EltID closestSample(EltID idInst, double pitch, double &ecart, int cote, EltID &idInstSmpl);
-    QVector<float> getSampleData(EltID idSmpl, quint32 nbRead);
-    void addSampleData(QVector<float> &vData1, QVector<float> &vData2, double mult);
-
-    static double SAMPLE_DURATION; // In seconds
-    static quint32 SAMPLE_RATE; // In samples per second
-
     ToolMixtureCreation * _tool;
-    EltID _idInst;
     DivisionInfo _di;
     int _key, _minKey;
-    bool _loop;
-    bool _stereo;
-    int _side;
 };
 
 #endif // RUNNABLESAMPLECREATOR_H

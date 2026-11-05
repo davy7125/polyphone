@@ -23,15 +23,14 @@
 ***************************************************************************/
 
 #include "graphicsfourier.h"
+#include "soundanalyzer.h"
 #include <QMouseEvent>
 #include <QPainterPath>
 #include "sound.h"
-#include "sampleutils.h"
 #include "soundfontmanager.h"
 #include "contextmanager.h"
 #include "frequency_peaks/toolfrequencypeaks.h"
 #include "graphicswavepainter.h"
-#include "utils.h"
 #include <QMenu>
 #include <QFileDialog>
 #include <QPainter>
@@ -99,7 +98,7 @@ void GraphicsFourier::setPos(quint32 posStart, quint32 posEnd, bool withRepaint)
 
     _peaks.clear();
     _key = -1;
-    _delta = 0;
+    _correction = 0;
 
     if (_fData.isEmpty())
         _wavePainter->clearData();
@@ -107,7 +106,7 @@ void GraphicsFourier::setPos(quint32 posStart, quint32 posEnd, bool withRepaint)
     {
         QVector<float> vectFourier;
         int posMaxFourier;
-        _peaks = computePeaks(_fData, _dwSmplRate, posStart, posEnd, vectFourier, posMaxFourier, &_key, &_delta, &_score);
+        _peaks = SoundAnalyzer::computePeaks(_fData, _dwSmplRate, posStart, posEnd, vectFourier, posMaxFourier, &_key, &_correction, &_score);
 
         // Display the Fourier transform?
         if (posMaxFourier == -1)
@@ -118,196 +117,6 @@ void GraphicsFourier::setPos(quint32 posStart, quint32 posEnd, bool withRepaint)
 
     if (withRepaint)
         this->update();
-}
-
-QList<Peak> GraphicsFourier::computePeaks(QVector<float> fData, quint32 dwSmplRate,
-                                           quint32 posStart, quint32 posEnd,
-                                           QVector<float> &vectFourier, int &posMaxFourier,
-                                           int *key, int *correction, float * reliance)
-{
-    // If there is no loop, determine a stable portion for the Fourier transform and the autocorrelation
-    if (posStart == posEnd)
-        SampleUtils::regimePermanent(fData, dwSmplRate, posStart, posEnd);
-
-    // Limit the portion to 0.5 second
-    if (posEnd > dwSmplRate / 2 + posStart)
-    {
-        quint32 offset = (posEnd - dwSmplRate / 2 - posStart) / 2;
-        posStart += offset;
-        posEnd -= offset;
-    }
-
-    // Extraction data from the stable portion
-    QVector<float> baData2 = fData.mid(static_cast<int>(posStart), static_cast<int>(posEnd - posStart));
-
-    // Duplicate existing data in case the length is less then 0.5s
-    while (baData2.size() < 0.5 * dwSmplRate)
-        baData2 += fData.mid(static_cast<int>(posStart), static_cast<int>(posEnd - posStart));
-
-    // Corrélation du signal de 20 à 20000Hz
-    quint32 dMin;
-    QVector<float> vectCorrel = SampleUtils::correlation(baData2.constData(),
-                                                         qMin(static_cast<quint32>(baData2.size()), 4000u),
-                                                         dwSmplRate, 20, 20000, dMin);
-
-    // Transformée de Fourier du signal
-    vectFourier = SampleUtils::getFourierTransform(baData2);
-    quint32 size = static_cast<quint32>(vectFourier.size()) * 2;
-
-    // Recherche des corrélations minimales (= plus grandes similitudes) et intensités fréquencielles maximales
-    QList<quint32> posMinCor = SampleUtils::findMins(vectCorrel, 20, 0.7f);
-    QList<quint32> posMaxFFT = SampleUtils::findMax(vectFourier, 50, 0.05f);
-    if (posMaxFFT.isEmpty())
-    {
-        posMaxFourier = -1;
-        return QList<Peak>();
-    }
-    else
-        posMaxFourier = posMaxFFT[0];
-
-    if (posMinCor.isEmpty())
-        return QList<Peak>();
-
-    // Pour chaque minimum de corrélation (considéré comme la base), on cherche un pic de fréquence
-    float freq = 0;
-    float score = -1;
-    for (int i = 0; i < posMinCor.size(); i++)
-    {
-        // Portion de Fourier contenant la corrélation
-        quint32 iMin, iMax;
-        int coefFourier = 1;
-        iMin = size / (posMinCor[i] + dMin + 1) - 1;
-        if (iMin < 1) iMin = 1;
-        if (posMinCor[0] + dMin - 1 <= 0)
-            iMax = 0;
-        else
-            iMax = size / (posMinCor[i] + dMin - 1) + 1;
-        if (iMax > size / 2) iMax = size / 2;
-
-        // Un pic s'y trouve-t-il ?
-        bool rep = false;
-        int numeroPic = 0;
-        while (rep == false && numeroPic < posMaxFFT.size())
-        {
-            rep = iMin < posMaxFFT[numeroPic] && posMaxFFT[numeroPic] < iMax;
-            if (!rep)
-                numeroPic++;
-        }
-
-        if (!rep)
-        {
-            // Recherche d'un pic à l'octave du dessus
-            coefFourier = 2;
-            iMin *= 2;
-            iMax *= 2;
-            if (iMin >= size / 2) iMin = size / 2;
-            if (iMax >= size / 2) iMax = size / 2;
-
-            // Un pic s'y trouve-t-il ?
-            numeroPic = 0;
-            while (!rep && numeroPic < posMaxFFT.size())
-            {
-                rep = iMin < posMaxFFT[numeroPic] && posMaxFFT[numeroPic] < iMax;
-                if (!rep)
-                    numeroPic++;
-            }
-        }
-
-        if (rep)
-        {
-            // Fréquence et score corrélation
-            float freqCorrel = static_cast<float>(dwSmplRate) / (posMinCor[i] + dMin);
-            float scoreCorrel;
-            if (vectCorrel[static_cast<int>(posMinCor[i])] <= 0)
-                scoreCorrel = 1;
-            else
-                scoreCorrel = vectCorrel[static_cast<int>(posMinCor[0])] / vectCorrel[static_cast<int>(posMinCor[i])];
-
-            // Fréquence et score Fourier
-            float freqFourier = (static_cast<float>(posMaxFFT[numeroPic]) * dwSmplRate) / size / coefFourier;
-            float scoreFourier = vectFourier[static_cast<int>(posMaxFFT[numeroPic])] /
-                    vectFourier[static_cast<int>(posMaxFFT[0])];
-
-            // Score global
-            float scoreGlobal = scoreCorrel * scoreFourier;
-            if (scoreGlobal > score)
-            {
-                score = scoreGlobal;
-
-                // Ajustement des scores en fonction de la hauteur de note
-                float noteTmp = 12.0f * static_cast<float>(qLn(static_cast<double>(freqCorrel))) / 0.69314718056f - 36.3763f;
-                if (noteTmp < 40 || posEnd - posStart < 4096)
-                    scoreFourier = 0;
-                else if (noteTmp < 90)
-                {
-                    noteTmp = (noteTmp - 40) / 50;
-                    scoreFourier *= noteTmp;
-                    scoreCorrel *=  1.f - noteTmp;
-                }
-                else
-                    scoreCorrel = 0;
-
-                // Détermination de la fréquence globale et enregistrement
-                freq = (scoreCorrel * freqCorrel + scoreFourier * freqFourier) / (scoreCorrel + scoreFourier);
-            }
-        }
-    }
-
-    // Si aucune note n'a été trouvée, on prend la note la plus probable d'après Fourier
-    if (score < 0)
-    {
-        freq = static_cast<float>(posMaxFFT[0]) * dwSmplRate / size;
-        score = 0;
-    }
-
-    // Numéro de la note correspondant à cette fréquence
-    double note3 = 12 * qLn(static_cast<double>(freq)) / 0.69314718056 - 36.3763;
-
-    // Note la plus proche
-    int note = qRound(note3);
-
-    // Affichage
-    QList<Peak> result;
-    if (note >= 0 && note <= 128)
-    {
-        // Closest key with the associated correction
-        if (key != nullptr)
-            *key = note;
-        if (correction != nullptr)
-            *correction = Utils::round32((note3 - static_cast<double>(note)) * 100.);
-        if (reliance != nullptr)
-            *reliance = score;
-
-        // Peaks
-        for (int i = 0; i < posMaxFFT.size(); i++)
-        {
-            // intensité
-            double factor = static_cast<double>(vectFourier[static_cast<int>(posMaxFFT[i])] /
-                            vectFourier[static_cast<int>(posMaxFFT[0])]);
-
-            // fréquence
-            double freq = static_cast<double>(posMaxFFT[i]) * dwSmplRate / size; // Bin width: sample rate / FFT size
-
-            // note la plus proche
-            double note = 12. * qLn(freq) / 0.69314718056 - 36.3763;
-            if (note < 0)
-                note = 0;
-            else if (note > 128)
-                note = 128;
-            int note2 = Utils::round32(note);
-            int delta = Utils::round32((static_cast<double>(note2) - note) * 100.);
-
-            // Prepare text
-            result << Peak(factor, freq, note2, delta);
-        }
-    }
-    else
-    {
-        if (reliance != nullptr)
-            *reliance = -1.0f;
-    }
-
-    return result;
 }
 
 void GraphicsFourier::dispFourier(QVector<float> vectFourier, float posMaxFourier)
@@ -485,14 +294,15 @@ void GraphicsFourier::paintEvent(QPaintEvent * event)
                              x, rect.top() + marginTop + tuneCellPadding + fontHeight / 2 + tickHalfHeight);
         }
 
-        // Delta
-        if (_delta != 0)
+        // Deviation from the key (opposite of the correction)
+        int delta = -_correction;
+        if (delta != 0)
         {
             // Text position
-            int pos = _delta > 0 ?
-                        (50 * x3 + (x4 - x3) * _delta) / 50 :
-                        (50 * x2 + (x2 - x1) * _delta) / 50;
-            QString txt = QString::number(_delta < 0 ? -_delta : _delta);
+            int pos = delta > 0 ?
+                        (50 * x3 + (x4 - x3) * delta) / 50 :
+                        (50 * x2 + (x2 - x1) * delta) / 50;
+            QString txt = QString::number(delta < 0 ? -delta : delta);
             int textWidth = fm.horizontalAdvance(txt);
 
             painter.setBrush(highlightColor);
@@ -514,8 +324,8 @@ void GraphicsFourier::paintEvent(QPaintEvent * event)
         textColor.setAlpha(255);
         path.addRoundedRect(QRect(rect.right() - marginRight - tuneWidth / 2 - textWidth / 2 - tuneCellPadding,
                                    rect.top() + marginTop, textWidth + 2 * tuneCellPadding, fontHeight + 2 * tuneCellPadding), 3, 3);
-        painter.fillPath(path, _delta == 0 ? highlightColor : textColor);
-        painter.setPen(_delta == 0 ? highlightTextColor : backgroundColor);
+        painter.fillPath(path, _correction == 0 ? highlightColor : textColor);
+        painter.setPen(_correction == 0 ? highlightTextColor : backgroundColor);
         painter.drawText(QRect(rect.right() - marginRight - tuneWidth / 2 - textWidth / 2 - tuneCellPadding,
                                rect.top() + marginTop + tuneCellPadding,
                                textWidth + 2 * tuneCellPadding, fontHeight), Qt::AlignCenter, keyName);
@@ -637,6 +447,6 @@ void GraphicsFourier::exportPeaks()
 void GraphicsFourier::getEstimation(int &pitch, int &correction, float &score)
 {
     pitch = _key;
-    correction = -_delta;
+    correction = _correction;
     score = _score;
 }

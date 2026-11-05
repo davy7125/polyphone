@@ -28,7 +28,6 @@
 #include <QtCore>
 #include "idlist.h"
 #include "eltid.h"
-#include "complex.h"
 #include "attribute.h"
 #include "modulatordata.h"
 #include "serializabletypes.h"

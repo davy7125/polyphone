@@ -24,6 +24,7 @@
 
 #include "mcpattributes.h"
 #include "mcputils.h"
+#include "utils.h"
 #include "mcpfunction.h"
 #include "soundfontmanager.h"
 
@@ -164,8 +165,8 @@ QJsonArray McpAttributes::getCatalog()
         {
             double min, max;
             getRealLimits(definition, false, min, max);
-            item["instrument_range"] = QJsonArray({ McpUtils::round(min), McpUtils::round(max) });
-            item["default"] = McpUtils::round(AttributeBase::getDefaultRealValue(definition.champ, false));
+            item["instrument_range"] = QJsonArray({ Utils::roundSignificant(min), Utils::roundSignificant(max) });
+            item["default"] = Utils::roundSignificant(AttributeBase::getDefaultRealValue(definition.champ, false));
         }
         result.append(item);
     }
@@ -189,7 +190,7 @@ QJsonValue McpAttributes::getValue(EltID id, QString name)
         return QJsonArray({ value.rValue.byLo, value.rValue.byHi });
     if (definition->coarseChamp != champ_unknown)
         return static_cast<int>(value.shValue) + 32768 * static_cast<int>(sm->get(id, definition->coarseChamp).shValue);
-    return McpUtils::round(Attribute::toRealValue(definition->champ, id.isPrst(), value));
+    return Utils::roundSignificant(Attribute::toRealValue(definition->champ, id.isPrst(), value));
 }
 
 QJsonObject McpAttributes::getValues(EltID id)
@@ -282,7 +283,7 @@ void McpAttributes::setValue(EltID id, QString name, QJsonValue value)
         number = 0; // Same meaning
     if (number < min - 1e-6 * std::fabs(min) - 1e-9 || number > max + 1e-6 * std::fabs(max) + 1e-9)
         throw McpException(QString("parameter \"%1\" must be between %2 and %3 in %4").arg(name)
-                               .arg(McpUtils::round(min)).arg(McpUtils::round(max)).arg(isPrst ? "a preset" : "an instrument"));
+                               .arg(Utils::roundSignificant(min)).arg(Utils::roundSignificant(max)).arg(isPrst ? "a preset" : "an instrument"));
     sm->set(id, definition->champ, Attribute::fromRealValue(definition->champ, isPrst, number));
 }
 

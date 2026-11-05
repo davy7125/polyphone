@@ -21,12 +21,13 @@ polyphone (2.7) UNRELEASED; urgency=low
   * (improvement) the sample, instrument or preset selected in the soundfont explorer can be played with the virtual keyboard or a MIDI keyboard
   * (improvement) size of the soundfonts displayed and filtered in the online repository, results sortable by trend or by size
   * (improvement) various ergonomic improvements
+  * (improvement) more reliable pitch estimation of the samples (YIN algorithm refined with the harmonics)
+  * (improvement) more accurate frequencies of the peaks shown in the Fourier graph
   * (fix) the calendar of the date field could appear when a soundfont was opened in the background
   * (fix) a soundfont opened again while it was still loading was opened in a second tab
   * (fix) the escape key hid the progress window of a tool without stopping the tool
   * (fix) the export to sf3 (tool or command line) did not compress the samples, and the command line conversion to sf2 kept them compressed
-  * (fix) the steady part of the samples was never detected (auto loop, balance adjustment, pitch estimation of samples without loop)
-  * (fix) frequency peaks of the samples shifted by half a step of the Fourier transform, now computed with a window
+  * (fix) the steady part of the samples was never detected
 
  -- Davy Triponney <contact@polyphone.io>  Fri, 30 Oct 2026 12:00:00 +0100
 

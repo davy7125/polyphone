@@ -75,26 +75,25 @@ void ToolTrimStart::trim(IdList ids)
     if (ids.isEmpty())
         return;
 
-    // Get the data of all samples and compute the position to remove the blank
+    // Get the data of all samples and compute the position where the sound starts (the earliest of all channels, so that
+    // the sound of no channel is cut)
     SoundfontManager * sm = SoundfontManager::getInstance();
     quint32 pos = 0;
-    quint32 maxPos = 0;
     QList<QVector<float> > vDataList;
     for (int i = 0; i < ids.count(); i++)
     {
-        quint32 tmp, maxTmp;
         vDataList << sm->getDataFloat(ids[i]);
-        SampleUtils::removeBlankStep1(vDataList[i], tmp, maxTmp);
-
-        if (i == 0 || tmp > pos)
-            pos = tmp;
-        if (i == 0 || maxTmp < maxPos)
-            maxPos = maxTmp;
+        quint32 length = static_cast<quint32>(vDataList[i].size());
+        bool looped = SampleUtils::isLooped(sm->get(ids[i], champ_dwStartLoop).dwValue, sm->get(ids[i], champ_dwEndLoop).dwValue, length);
+        quint32 start = SampleUtils::findTrimStart(vDataList[i], sm->get(ids[i], champ_dwSampleRate).dwValue, looped);
+        if (i == 0 || start < pos)
+            pos = start;
     }
-    if (pos > maxPos)
-        pos = maxPos;
     if (pos == 0)
         return;
+    foreach (QVector<float> vData, vDataList)
+        if (static_cast<quint32>(vData.size()) <= pos + 8)
+            return; // Not enough data would remain
 
     // Update the samples
     for (int i = 0; i < ids.count(); i++)
@@ -102,7 +101,7 @@ void ToolTrimStart::trim(IdList ids)
         EltID id = ids[i];
 
         // Data
-        vDataList[i] = SampleUtils::removeBlankStep2(vDataList[i], pos);
+        vDataList[i] = SampleUtils::trimStart(std::move(vDataList[i]), pos);
         sm->setData(id, vDataList[i]);
 
         // Update length

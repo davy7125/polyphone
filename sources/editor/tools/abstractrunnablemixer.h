@@ -22,16 +22,41 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include "complex.h"
+#ifndef ABSTRACTRUNNABLEMIXER_H
+#define ABSTRACTRUNNABLEMIXER_H
 
-Complex::Complex()
+#include <QRunnable>
+#include <QVector>
+#include "basetypes.h"
+
+// Base of the tasks creating a sample by mixing an instrument played at several keys (chords, mixtures)
+class AbstractRunnableMixer: public QRunnable
 {
+public:
+    AbstractRunnableMixer(EltID idInst, bool loop, bool stereo, int side);
 
-}
+protected:
+    // Lowest attenuation (dB) of the divisions playing the keys
+    double getMinimumAttenuation(const QList<double> &keys);
 
-Complex Complex::operator *= (const float factor)
-{
-    _real *= factor;
-    _imag *= factor;
-    return *this;
-}
+    // Add to data the instrument played at a key: the attenuation of the division relative to minAttenuation and an
+    // additional attenuation (dB) are applied if the division has an attenuation, then the result is divided by divisor
+    void addKey(QVector<float> &data, double key, double minAttenuation, double extraAttenuation, double divisor);
+
+    // Loop the data if required and create the sample, return its id
+    EltID createSample(QVector<float> data, int rootKey);
+
+    static const double SAMPLE_DURATION; // In seconds
+    static const quint32 SAMPLE_RATE; // In samples per second
+
+    EltID _idInst;
+
+private:
+    EltID closestSample(EltID idInst, double pitch, double &ecart, int cote, EltID &idInstSmpl);
+
+    bool _loop;
+    bool _stereo;
+    int _side;
+};
+
+#endif // ABSTRACTRUNNABLEMIXER_H

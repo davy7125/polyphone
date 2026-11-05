@@ -27,16 +27,10 @@
 #include "mcpattributes.h"
 #include "soundfontmanager.h"
 #include "soundanalyzer.h"
+#include "sampleutils.h"
 #include "offlinerenderer.h"
 #include <QBuffer>
-#include <QFile>
 #include <QFileInfo>
-#include <QDataStream>
-
-static double keyFrequency(double key)
-{
-    return 440.0 * std::pow(2.0, (key - 69) / 12);
-}
 
 static QByteArray toPng(const QImage &image)
 {
@@ -45,14 +39,6 @@ static QByteArray toPng(const QImage &image)
     buffer.open(QIODevice::WriteOnly);
     image.save(&buffer, "PNG");
     return bytes;
-}
-
-static QJsonValue number(double value, int decimals)
-{
-    if (!std::isfinite(value))
-        return QJsonValue();
-    double factor = std::pow(10.0, decimals);
-    return std::round(value * factor) / factor;
 }
 
 static EltID getLinkedSample(EltID idSmpl)
@@ -71,7 +57,7 @@ static SoundAnalyzer * createAnalyzer(EltID idSmpl)
     SoundfontManager * sm = SoundfontManager::getInstance();
     int rootKey = sm->get(idSmpl, champ_byOriginalPitch).bValue;
     int correction = sm->get(idSmpl, champ_chPitchCorrection).cValue;
-    double expected = keyFrequency(rootKey) * std::pow(2.0, -correction / 1200.0);
+    double expected = SampleUtils::keyToFrequency(rootKey - correction / 100.0);
     return new SoundAnalyzer(sm->getDataFloat(idSmpl), sm->get(idSmpl, champ_dwSampleRate).dwValue,
                              sm->get(idSmpl, champ_dwStartLoop).dwValue, sm->get(idSmpl, champ_dwEndLoop).dwValue, expected);
 }
@@ -88,13 +74,14 @@ static QJsonObject samplePitch(EltID idSmpl, SoundAnalyzer &analyzer)
     double f0 = analyzer.getFundamental();
     if (f0 > 0)
     {
-        double deviation = 1200 * std::log2(f0 / keyFrequency(rootKey));
-        pitch["deviation_from_root_key_cents"] = number(deviation, 1);
-        pitch["tuning_error_cents"] = number(deviation + correction, 1);
-        double key = 69 + 12 * std::log2(f0 / 440.0);
-        int nearest = qRound(key);
-        pitch["suggested_root_key"] = nearest;
-        pitch["suggested_pitch_correction"] = qBound(-99, qRound(-100 * (key - nearest)), 99);
+        double key = SampleUtils::frequencyToKey(f0);
+        double deviation = 100 * (key - rootKey);
+        pitch["deviation_from_root_key_cents"] = SoundAnalyzer::jsonNumber(deviation, 1);
+        pitch["tuning_error_cents"] = SoundAnalyzer::jsonNumber(deviation + correction, 1);
+        int suggestedKey, suggestedCorrection;
+        SampleUtils::toKeyAndCorrection(key, suggestedKey, suggestedCorrection);
+        pitch["suggested_root_key"] = suggestedKey;
+        pitch["suggested_pitch_correction"] = suggestedCorrection;
         pitch["tuning_note"] = "tuning_error_cents: pitch error when the sample is played at its root key with its "
                                "current correction (0 = in tune); a sample a little sharp needs a negative correction";
     }
@@ -154,31 +141,6 @@ static QJsonObject analyzeSample(EltID idSmpl, QStringList sections, int maxHarm
     return result;
 }
 
-static bool writeWav(QString filePath, const QVector<float> &interleaved, quint32 frameCount, quint32 sampleRate)
-{
-    QFile file(filePath);
-    if (!file.open(QIODevice::WriteOnly))
-        return false;
-    quint32 dataSize = frameCount * 8;
-    QDataStream stream(&file);
-    stream.setByteOrder(QDataStream::LittleEndian);
-    stream.setFloatingPointPrecision(QDataStream::SinglePrecision);
-    stream.writeRawData("RIFF", 4);
-    stream << static_cast<quint32>(4 + 26 + 12 + 8 + dataSize);
-    stream.writeRawData("WAVE", 4);
-    stream.writeRawData("fmt ", 4);
-    stream << static_cast<quint32>(18) << static_cast<quint16>(3) << static_cast<quint16>(2) << sampleRate
-           << static_cast<quint32>(sampleRate * 8) << static_cast<quint16>(8) << static_cast<quint16>(32)
-           << static_cast<quint16>(0);
-    stream.writeRawData("fact", 4);
-    stream << static_cast<quint32>(4) << frameCount;
-    stream.writeRawData("data", 4);
-    stream << dataSize;
-    for (quint32 i = 0; i < 2 * frameCount; i++)
-        stream << interleaved[static_cast<int>(i)];
-    return stream.status() == QDataStream::Ok;
-}
-
 // Statistics of a numeric column for the keyboard analysis: trend along the keys and outliers
 static void findOutliers(QString name, const QVector<double> &keys, const QVector<double> &values, double minimumDeviation,
                          const QStringList &ids, QJsonArray &outliers, QJsonObject &trends, QString unit)
@@ -197,20 +159,18 @@ static void findOutliers(QString name, const QVector<double> &keys, const QVecto
     if (x.size() < 4)
         return;
 
-    // Linear trend along the keyboard
-    double sx = 0, sy = 0, sxx = 0, sxy = 0;
+    // Linear trend along the keyboard (flat if all keys are the same)
     int n = static_cast<int>(x.size());
-    for (int i = 0; i < n; i++)
+    double slope, intercept;
+    if (!SampleUtils::linearRegression(x, y, QVector<double>(), slope, intercept))
     {
-        sx += x[i];
-        sy += y[i];
-        sxx += x[i] * x[i];
-        sxy += x[i] * y[i];
+        double sum = 0;
+        foreach (double value, y)
+            sum += value;
+        slope = 0;
+        intercept = sum / n;
     }
-    double denominator = n * sxx - sx * sx;
-    double slope = std::fabs(denominator) > 1e-12 ? (n * sxy - sx * sy) / denominator : 0;
-    double intercept = (sy - slope * sx) / n;
-    trends[name] = QJsonObject({ { "per_octave", number(12 * slope, 3) }, { "unit", unit } });
+    trends[name] = QJsonObject({ { "per_octave", SoundAnalyzer::jsonNumber(12 * slope, 3) }, { "unit", unit } });
 
     // Robust deviation of the residuals
     QVector<double> residuals, absolute;
@@ -219,9 +179,7 @@ static void findOutliers(QString name, const QVector<double> &keys, const QVecto
         residuals << y[i] - (slope * x[i] + intercept);
         absolute << std::fabs(residuals.last());
     }
-    QVector<double> sorted = absolute;
-    std::sort(sorted.begin(), sorted.end());
-    double mad = 1.4826 * sorted[n / 2];
+    double mad = 1.4826 * SampleUtils::median(absolute);
     for (int i = 0; i < n; i++)
     {
         double z = mad > 1e-9 ? residuals[i] / mad : 0;
@@ -230,7 +188,7 @@ static void findOutliers(QString name, const QVector<double> &keys, const QVecto
             QJsonObject outlier;
             outlier["division"] = ids[indexes[i]];
             outlier["measure"] = name;
-            outlier["deviation_from_trend"] = number(residuals[i], 2);
+            outlier["deviation_from_trend"] = SoundAnalyzer::jsonNumber(residuals[i], 2);
             outlier["unit"] = unit;
             outliers.append(outlier);
         }
@@ -353,7 +311,7 @@ void McpFunctions::addAnalysisFunctions(QList<McpFunction *> &functions)
                 double f0 = analyzer->getFundamental();
                 double pitchError = std::nan("");
                 if (f0 > 0)
-                    pitchError = 1200 * std::log2(f0 / keyFrequency(rootKey)) + sm->get(idSmpl, champ_chPitchCorrection).cValue +
+                    pitchError = 100 * (SampleUtils::frequencyToKey(f0) - rootKey) + sm->get(idSmpl, champ_chPitchCorrection).cValue +
                                  effective(idDiv, champ_fineTune) + 100 * effective(idDiv, champ_coarseTune);
 
                 QJsonArray row;
@@ -361,15 +319,15 @@ void McpFunctions::addAnalysisFunctions(QList<McpFunction *> &functions)
                 row.append(McpUtils::keyName(keyRange.byLo) + ".." + McpUtils::keyName(keyRange.byHi));
                 row.append(rootKey);
                 row.append(McpUtils::idToString(idSmpl));
-                row.append(number(lufs, 1));
-                row.append(number(lufs - attenuation, 1));
-                row.append(number(analyzer->getSpectralCentroid(), 0));
-                row.append(number(analyzer->getHarmonicCentroid(), 2));
-                row.append(number(analyzer->getHarmonicTilt(), 1));
-                row.append(number(analyzer->getHnr(), 1));
-                row.append(number(1000 * analyzer->getAttackTime(), 1));
-                row.append(number(pitchError, 1));
-                row.append(analyzer->isLooped() ? number(analyzer->getLoopCorrelation(), 3) : QJsonValue());
+                row.append(SoundAnalyzer::jsonNumber(lufs, 1));
+                row.append(SoundAnalyzer::jsonNumber(lufs - attenuation, 1));
+                row.append(SoundAnalyzer::jsonNumber(analyzer->getSpectralCentroid(), 0));
+                row.append(SoundAnalyzer::jsonNumber(analyzer->getHarmonicCentroid(), 2));
+                row.append(SoundAnalyzer::jsonNumber(analyzer->getHarmonicTilt(), 1));
+                row.append(SoundAnalyzer::jsonNumber(analyzer->getHnr(), 1));
+                row.append(SoundAnalyzer::jsonNumber(1000 * analyzer->getAttackTime(), 1));
+                row.append(SoundAnalyzer::jsonNumber(pitchError, 1));
+                row.append(analyzer->isLooped() ? SoundAnalyzer::jsonNumber(analyzer->getLoopCorrelation(), 3) : QJsonValue());
                 row.append(qMax(0, rootKey - keyRange.byLo));
                 row.append(qMax(0, keyRange.byHi - rootKey));
                 rows.append(row);
@@ -402,7 +360,7 @@ void McpFunctions::addAnalysisFunctions(QList<McpFunction *> &functions)
             QJsonArray tuning;
             for (int i = 0; i < pitchErrors.size(); i++)
                 if (std::isfinite(pitchErrors[i]) && std::fabs(pitchErrors[i]) > 5)
-                    tuning.append(QJsonObject({ { "division", ids[i] }, { "pitch_error_cents", number(pitchErrors[i], 1) } }));
+                    tuning.append(QJsonObject({ { "division", ids[i] }, { "pitch_error_cents", SoundAnalyzer::jsonNumber(pitchErrors[i], 1) } }));
             result["out_of_tune"] = tuning;
 
             // Keys not covered between the lowest and the highest covered keys
@@ -495,68 +453,36 @@ void McpFunctions::addAnalysisFunctions(QList<McpFunction *> &functions)
             if (!wavFile.isEmpty())
             {
                 wavFile = QFileInfo(wavFile).absoluteFilePath();
-                if (!writeWav(wavFile, data, frameCount, rate))
+                if (!OfflineRenderer::writeWavFile(wavFile, data, frameCount, rate))
                     throw McpException("cannot write \"" + wavFile + "\"");
             }
 
             // Analysis of the held part (before the release), then of the release
             int holdFrames = qMin(static_cast<int>(frameCount), static_cast<int>(hold * rate));
-            SoundAnalyzer analyzer(mid.mid(0, holdFrames), rate, 0, 0, keyFrequency(key));
+            SoundAnalyzer analyzer(mid.mid(0, holdFrames), rate, 0, 0, SampleUtils::keyToFrequency(key));
             QJsonObject result = McpUtils::brief(id);
             result["key"] = key;
             result["velocity"] = velocity;
             result["signal"] = "mid (L + R) / 2 of the rendering, held part";
 
             QJsonObject levels = analyzer.getLevels();
-            float peakLeft = 0, peakRight = 0;
-            for (int i = 0; i < static_cast<int>(frameCount); i++)
-            {
-                peakLeft = qMax(peakLeft, qAbs(left[i]));
-                peakRight = qMax(peakRight, qAbs(right[i]));
-            }
-            levels["peak_left_dbfs"] = number(peakLeft > 0 ? 20 * std::log10(peakLeft) : -200, 2);
-            levels["peak_right_dbfs"] = number(peakRight > 0 ? 20 * std::log10(peakRight) : -200, 2);
+            levels["peak_left_dbfs"] = SoundAnalyzer::jsonNumber(SampleUtils::toDb(SampleUtils::peak(left.constData(), frameCount)), 2);
+            levels["peak_right_dbfs"] = SoundAnalyzer::jsonNumber(SampleUtils::toDb(SampleUtils::peak(right.constData(), frameCount)), 2);
             result["levels"] = levels;
 
             QJsonObject pitch = analyzer.getPitch();
             double f0 = analyzer.getFundamental();
             if (f0 > 0)
-                pitch["cents_from_key"] = number(1200 * std::log2(f0 / keyFrequency(key)), 1);
+                pitch["cents_from_key"] = SoundAnalyzer::jsonNumber(100 * (SampleUtils::frequencyToKey(f0) - key), 1);
             result["pitch"] = pitch;
 
             QJsonObject envelope = analyzer.getEnvelope();
             envelope.remove("curve");
 
             // Release: time for the level to drop by 20, 40 and 60 dB after the key is released
-            int window = static_cast<int>(0.02 * rate), hop = static_cast<int>(0.005 * rate);
-            auto rmsAt = [&](int start) -> double {
-                double sum = 0;
-                for (int i = start; i < start + window && i < mid.size(); i++)
-                    sum += static_cast<double>(mid[i]) * mid[i];
-                return std::sqrt(sum / window);
-            };
-            double releaseLevel = rmsAt(qMax(0, holdFrames - window));
-            double peakRms = 0;
-            for (int i = 0; i + window < holdFrames; i += hop)
-                peakRms = qMax(peakRms, rmsAt(i));
-            if (releaseLevel > 0 && peakRms > 0)
-            {
-                envelope["level_at_release_db"] = number(20 * std::log10(releaseLevel / peakRms), 1);
-                QJsonObject releaseTimes;
-                foreach (int drop, QList<int>({ 20, 40, 60 }))
-                {
-                    double target = releaseLevel * std::pow(10.0, -drop / 20.0);
-                    for (int i = holdFrames; i + window <= mid.size(); i += hop)
-                    {
-                        if (rmsAt(i) < target)
-                        {
-                            releaseTimes[QString("minus_%1_db_s").arg(drop)] = number(static_cast<double>(i - holdFrames) / rate, 3);
-                            break;
-                        }
-                    }
-                }
-                envelope["release"] = releaseTimes;
-            }
+            QJsonObject releaseInfo = SoundAnalyzer::getRelease(mid, rate, holdFrames);
+            for (auto it = releaseInfo.constBegin(); it != releaseInfo.constEnd(); ++it)
+                envelope[it.key()] = it.value();
             result["envelope"] = envelope;
             result["spectrum"] = analyzer.getSpectrum();
             result["harmonics"] = analyzer.getHarmonics(12);
