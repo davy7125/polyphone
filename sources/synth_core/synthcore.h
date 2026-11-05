@@ -151,7 +151,7 @@ private:
 
     // Effects, only used by the audio thread which applies the settings given by configure
     SynthReverb _reverb;
-    SynthChorus _chorusRevL, _chorusRevR, _chorusL, _chorusR;
+    SynthChorus _chorusRev, _chorus; // Stereo, before the reverb or alone
     SynthCoreConfig _effectConfiguration;
     std::atomic<bool> _effectConfigurationChanged;
     std::atomic<int> _effectConfigurationLock; // The audio thread never waits for it

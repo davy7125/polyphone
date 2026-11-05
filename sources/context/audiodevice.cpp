@@ -25,12 +25,15 @@
 #include "audiodevice.h"
 #include "audiodevicewatcher.h"
 #include "synth.h"
-#include "rtaudio/RtAudio.h"
 #include "confmanager.h"
 #include "soundfontmanager.h"
 #include "soundfonts.h"
 
-#ifndef RT_AUDIO_5_2
+// RtAudio 5 only defines the version as a string, the numbers came with the new API of RtAudio 6
+// (device identifiers, errors given to a callback instead of exceptions)
+#ifndef RTAUDIO_VERSION_MAJOR
+#define RT_AUDIO_5
+#else
 class RtAudioError {
 public:
     void printMessage() {}
@@ -83,7 +86,7 @@ QList<AudioDevice::HostInfo> AudioDevice::getAllHosts()
         }
         if (audio)
         {
-            #ifdef RT_AUDIO_5_2
+            #ifdef RT_AUDIO_5
             for (unsigned int j = 0, end = audio->getDeviceCount(); j < end; ++j)
             #else
             std::vector<unsigned int> deviceIds;
@@ -234,7 +237,7 @@ void AudioDevice::initAudio()
 
     // Instantiate an RtAudio object with the selected api
     try {
-        #ifdef RT_AUDIO_5_2
+        #ifdef RT_AUDIO_5
         _rtAudio = new RtAudio((RtAudio::Api)_currentApi);
         #else
         _rtAudio = new RtAudio((RtAudio::Api)_currentApi, [this](RtAudioErrorType type, const std::string &errorText) {
@@ -251,7 +254,7 @@ void AudioDevice::initAudio()
         error.printMessage();
         return;
     }
-    #ifdef RT_AUDIO_5_2
+    #ifdef RT_AUDIO_5
     _rtAudio->showWarnings(false);
     #endif
 
@@ -283,7 +286,7 @@ int AudioDevice::findDevice(QString &deviceName, std::vector<unsigned int> &samp
 {
     // Browse the devices
     int defaultDevice = -1;
-    #ifdef RT_AUDIO_5_2
+    #ifdef RT_AUDIO_5
     for (unsigned int i = 0, end = _rtAudio->getDeviceCount(); i < end; ++i)
     #else
     std::vector<unsigned int> deviceIds;

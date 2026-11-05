@@ -77,7 +77,6 @@ jobs:
             libssl-dev \
             librtaudio-dev \
             librtmidi-dev \
-            libstk-dev \
             ca-certificates
             
       - name: Configure with qmake

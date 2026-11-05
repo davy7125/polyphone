@@ -20,9 +20,6 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
     endif()
 endif()
 
-# Reverb and chorus from STK (copy in the sources of Polyphone)
-set(STK_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../lib/_option_stk)
-
 add_library(polyphone_synth_core STATIC
     attributebase.cpp
     enveloppevol.cpp
@@ -42,18 +39,10 @@ add_library(polyphone_synth_core STATIC
     voicecontext.cpp
     voicelist.cpp
     voiceparam.cpp
-    ${STK_DIR}/stk/Stk.cpp
-    ${STK_DIR}/stk/SineWave.cpp
-    ${STK_DIR}/stk/OnePole.cpp
-    ${STK_DIR}/stk/Delay.cpp
-    ${STK_DIR}/stk/DelayL.cpp
-    ${STK_DIR}/stk/Chorus.cpp
-    ${STK_DIR}/stk/FreeVerb.cpp
 )
 
 target_include_directories(polyphone_synth_core PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
-    ${STK_DIR}
 )
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")

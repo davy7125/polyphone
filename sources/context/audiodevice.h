@@ -28,10 +28,10 @@
 #include <QObject>
 #include <QTimer>
 #include <vector>
+#include "rtaudio/RtAudio.h" // No forward declaration: the classes are in a namespace in RtAudio after 6.0
 
 class Synth;
 class ConfManager;
-class RtAudio;
 
 class AudioDevice : public QObject
 {

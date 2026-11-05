@@ -4,18 +4,14 @@
 #
 #-------------------------------------------------
 
-# Use local copies of RtAudio, RtMidi, and Stk libraries
+# Use local copies of RtAudio and RtMidi libraries
 # (this is forced to true for Windows or Mac OS X)
 # Uncomment a line if your distribution does not come with some of the following libraries
 #DEFINES += USE_LOCAL_RTAUDIO
 #DEFINES += USE_LOCAL_RTMIDI
-#DEFINES += USE_LOCAL_STK
 
 # Uncomment this line to use wolfssl instead of openssl
 #DEFINES += USE_WOLFSSL
-
-# Uncomment this line to be compatible with RtAudio version 5.2 (instead of 6)
-#DEFINES += RT_AUDIO_5_2
 
 # Uncomment lines for hiding features
 #DEFINES += NO_SF2_REPOSITORY
@@ -50,7 +46,7 @@ TEMPLATE = app
 
 win32 {
     # Compiler must be MinGW for the option -ffloat-store, required by sfArk
-    DEFINES += USE_LOCAL_RTAUDIO USE_LOCAL_RTMIDI USE_LOCAL_STK \
+    DEFINES += USE_LOCAL_RTAUDIO USE_LOCAL_RTMIDI \
         __WINDOWS_MM__ __WINDOWS_WASAPI__ __WINDOWS_ASIO__ #__WINDOWS_DS__
     RC_FILE = ../packaging/windows/polyphone.rc
     QMAKE_CXXFLAGS += -ffloat-store
@@ -117,7 +113,7 @@ macx {
     TARGET = Polyphone
     QMAKE_MACOSX_DEPLOYMENT_TARGET = 12.0
     CONFIG += sdk_no_version_check
-    DEFINES += USE_LOCAL_RTAUDIO USE_LOCAL_RTMIDI USE_LOCAL_STK \
+    DEFINES += USE_LOCAL_RTAUDIO USE_LOCAL_RTMIDI \
         __MACOSX_CORE__ TARGET_OS_IPHONE=0
     INCLUDEPATH += ../macos/include /opt/homebrew/include /usr/local/include
     LIBS += -L$$PWD/../macos/lib -L/opt/homebrew/lib -L/usr/local/lib -lssl -lcrypto -lz \
@@ -141,7 +137,6 @@ DEFINES += SFTOOLS_NOXML
 
 # Location of RtAudio
 contains(DEFINES, USE_LOCAL_RTAUDIO) {
-    DEFINES -= RT_AUDIO_5_2
     INCLUDEPATH += lib/_option_rtaudio \
         lib/_option_rtaudio/rtaudio/include
     HEADERS += lib/_option_rtaudio/rtaudio/RtAudio.h
@@ -157,32 +152,6 @@ contains(DEFINES, USE_LOCAL_RTMIDI) {
     SOURCES += lib/_option_rtmidi/rtmidi/RtMidi.cpp
 } else {
     PKGCONFIG += rtmidi
-}
-
-# Location of Stk
-contains(DEFINES, USE_LOCAL_STK) {
-    INCLUDEPATH += lib/_option_stk
-    HEADERS += lib/_option_stk/stk/Stk.h \
-        lib/_option_stk/stk/SineWave.h \
-        lib/_option_stk/stk/OnePole.h \
-        lib/_option_stk/stk/Generator.h \
-        lib/_option_stk/stk/Filter.h \
-        lib/_option_stk/stk/Effect.h \
-        lib/_option_stk/stk/Delay.h \
-        lib/_option_stk/stk/Chorus.h \
-        lib/_option_stk/stk/FreeVerb.h \
-        lib/_option_stk/stk/DelayL.h \
-        lib/_option_stk/stk/Iir.h
-    SOURCES += lib/_option_stk/stk/Stk.cpp \
-        lib/_option_stk/stk/SineWave.cpp \
-        lib/_option_stk/stk/OnePole.cpp \
-        lib/_option_stk/stk/Delay.cpp \
-        lib/_option_stk/stk/Chorus.cpp \
-        lib/_option_stk/stk/FreeVerb.cpp \
-        lib/_option_stk/stk/DelayL.cpp \
-        lib/_option_stk/stk/Iir.cpp
-} else {
-    LIBS += -lstk
 }
 
 INCLUDEPATH += clavier \

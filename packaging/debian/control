@@ -11,7 +11,6 @@ Build-Depends:
  libogg-dev,
  libqt6svg6-dev,
  librtmidi-dev,
- libstk-dev,
  libvorbis-dev,
  librtaudio-dev,
  qt6-base-dev,

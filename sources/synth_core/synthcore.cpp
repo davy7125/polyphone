@@ -427,7 +427,7 @@ void SynthCore::updateEffects(const SynthCoreConfig &configuration)
     _reverb.setWidth(0.01 * configuration.revWidth);
     _reverb.setDamping(0.01 * configuration.revDamping);
 
-    SynthChorus * choruses[4] = { &_chorusRevL, &_chorusRevR, &_chorusL, &_chorusR };
+    SynthChorus * choruses[2] = { &_chorusRev, &_chorus };
     for (SynthChorus * chorus : choruses)
     {
         chorus->setTargetMix(0.005 * configuration.choLevel);
@@ -450,9 +450,9 @@ void SynthCore::setSampleRate(uint32_t sampleRate)
     this->stop(true, true);
     _outputAvailable = 0;
     _voices.setSampleRate(sampleRate);
-
-    // Sample rate update
-    stk::Chorus::setSampleRate(sampleRate);
+    _reverb.setSampleRate(sampleRate);
+    _chorusRev.setSampleRate(sampleRate);
+    _chorus.setSampleRate(sampleRate);
 }
 
 void SynthCore::setSampleGain(double gain)
@@ -690,14 +690,11 @@ void SynthCore::applyEffects(float * dataL, float * dataR, SynthBuses &buses, ui
 
     // The effects are processed chunk by chunk: they decide for each one whether there is something to compute
     // (nothing when they are off)
-    if (_chorusRevL.isOn() || _chorusRevR.isOn())
+    if (_chorusRev.isOn())
     {
         // Apply chorus
         for (uint32_t pos = 0; pos < len; pos += COMPUTATION_CHUNK)
-        {
-            _chorusRevL.process(&dataL[pos], COMPUTATION_CHUNK);
-            _chorusRevR.process(&dataR[pos], COMPUTATION_CHUNK);
-        }
+            _chorusRev.process(&dataL[pos], &dataR[pos], COMPUTATION_CHUNK);
     }
 
     // Add the data rev
@@ -712,14 +709,11 @@ void SynthCore::applyEffects(float * dataL, float * dataR, SynthBuses &buses, ui
     }
 
     // Add the data cho, process the effect first
-    if (_chorusL.isOn() || _chorusR.isOn())
+    if (_chorus.isOn())
     {
         // Apply chorus
         for (uint32_t pos = 0; pos < len; pos += COMPUTATION_CHUNK)
-        {
-            _chorusL.process(&buses.dataChoL[pos], COMPUTATION_CHUNK);
-            _chorusR.process(&buses.dataChoR[pos], COMPUTATION_CHUNK);
-        }
+            _chorus.process(&buses.dataChoL[pos], &buses.dataChoR[pos], COMPUTATION_CHUNK);
     }
 
     FastMaths::addVectors(dataL, buses.dataChoL, len);

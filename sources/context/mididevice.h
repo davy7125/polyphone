@@ -29,8 +29,8 @@
 #include <QObject>
 #include <QVector>
 #include "midiprocessor.h"
+#include "rtmidi/RtMidi.h" // No forward declaration: the classes are in a namespace since RtMidi 6.1
 class ConfManager;
-class RtMidiIn;
 
 // MIDI input of the editor: the events are processed by MidiProcessor (synth core) and given to the listeners
 class MidiDevice: public QObject, public IMidiValues

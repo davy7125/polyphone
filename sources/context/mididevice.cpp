@@ -24,7 +24,6 @@
 
 #include "mididevice.h"
 #include <QApplication>
-#include "rtmidi/RtMidi.h"
 #include "confmanager.h"
 #include "soundfontmanager.h"
 #include "imidilistener.h"
