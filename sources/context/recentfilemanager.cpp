@@ -202,8 +202,9 @@ QDateTime RecentFileManager::getLastFileDateTime(FileType fileType, int num)
 
 QString RecentFileManager::getLastDirectory(FileType fileType)
 {
+    // The soundfont history may contain directories: in that case the directory itself is used, not its parent
     QString lastDir = getLastFile(fileType);
-    if (!lastDir.isEmpty())
+    if (!lastDir.isEmpty() && !QFileInfo(lastDir).isDir())
         lastDir = QFileInfo(lastDir).dir().path();
 
     if (lastDir.isEmpty() || !QDir(lastDir).exists())
