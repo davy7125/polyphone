@@ -573,6 +573,8 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event)
         QWidget *w = qobject_cast<QWidget*>(object);
         if (w == nullptr || w->window() != this)
         {
+            // The pointer left the main window: no resize can start until it comes back
+            _mousePositionEdges = QFlags<Qt::Edge>();
             this->unsetCursor();
             return false;
         }
@@ -636,6 +638,11 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event)
     }
     else if (event->type() == QEvent::MouseButtonPress)
     {
+        // Clicks in the other windows (virtual keyboard, recorder, ...) are not for the main window
+        QWidget *target = qobject_cast<QWidget*>(object);
+        if (target == nullptr || target->window() != this)
+            return false;
+
         QMouseEvent *mouseEvent = static_cast<QMouseEvent *>(event);
         if (mouseEvent->buttons() == Qt::LeftButton && (int)_mousePositionEdges > 0)
         {
