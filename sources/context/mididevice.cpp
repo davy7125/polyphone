@@ -221,38 +221,53 @@ void MidiDevice::check()
     }
 }
 
+// Channel of an event in a MIDI file, the first one being used for the channel -1 of the editor
+static quint8 getStatus(quint8 type, int channel)
+{
+    return type | static_cast<quint8>(qMax(channel, 0) & 0x0F);
+}
+
 void MidiDevice::processMidiMessage(const unsigned char * message, size_t length)
 {
+    if (length >= 2 && message[0] >= 0x80 && message[0] < 0xF0)
+        _recorder.processMessage(message[0], message[1], length >= 3 ? message[2] : 0);
     _processor.processMidiMessage(message, length);
 }
 
 void MidiDevice::processKeyOn(int channel, int key, int vel)
 {
+    _recorder.processMessage(getStatus(0x90, channel), static_cast<quint8>(key), static_cast<quint8>(vel));
     _processor.processKeyOn(channel, key, vel);
 }
 
 void MidiDevice::processKeyOff(int channel, int key)
 {
+    _recorder.processMessage(getStatus(0x80, channel), static_cast<quint8>(key), 0);
     _processor.processKeyOff(channel, key);
 }
 
 void MidiDevice::processPolyPressureChanged(int channel, int key, int pressure)
 {
+    _recorder.processMessage(getStatus(0xA0, channel), static_cast<quint8>(key), static_cast<quint8>(pressure));
     _processor.processPolyPressureChanged(channel, key, pressure);
 }
 
 void MidiDevice::processMonoPressureChanged(int channel, int value)
 {
+    _recorder.processMessage(getStatus(0xD0, channel), static_cast<quint8>(value), 0);
     _processor.processMonoPressureChanged(channel, value);
 }
 
 void MidiDevice::processControllerChanged(bool external, int channel, int num, int value)
 {
+    _recorder.processMessage(getStatus(0xB0, channel), static_cast<quint8>(num), static_cast<quint8>(value));
     _processor.processControllerChanged(external, channel, num, value);
 }
 
 void MidiDevice::processBendChanged(int channel, float value)
 {
+    int bend = qBound(0, qRound((value + 1.0f) * 8192.0f), 16383);
+    _recorder.processMessage(getStatus(0xE0, channel), static_cast<quint8>(bend & 0x7F), static_cast<quint8>(bend >> 7));
     _processor.processBendChanged(channel, value);
 }
 
@@ -263,6 +278,7 @@ void MidiDevice::processRPNChanged(int channel, int parameter, int value, bool i
 
 void MidiDevice::processProgramChanged(int channel, quint8 preset)
 {
+    _recorder.processMessage(getStatus(0xC0, channel), preset, 0);
     _processor.processProgramChanged(channel, preset);
 }
 

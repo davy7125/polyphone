@@ -99,6 +99,9 @@ signals:
     /// Emitted when the audio server or the buffer size changed
     void audioServerConfigurationChanged();
 
+    /// Emitted when the audio input changed
+    void audioInputConfigurationChanged();
+
     /// Emitted when the note names changed
     void interfaceChanged();
 

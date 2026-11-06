@@ -32,6 +32,7 @@
 #include "calibrationsinus.h"
 #include "liveeq.h"
 #include "imidilistener.h"
+#include "fileplayer.h"
 #include "recorder.h"
 
 // The channels 0 to 15 of the MIDI file player are the channels 16 to 31 of the synth, with their own controller values
@@ -71,9 +72,10 @@ public:
     void setPitchCorrection(qint16 correction, bool withLinkedSample);
 
     // Record
-    void startNewRecord(QString fileName);
-    void endRecord();
-    void pause(bool isOn);
+    Recorder * getRecorder() { return &_recorder; }
+
+    // Audio file played along with the output, which is not recorded
+    FilePlayer * getFilePlayer() { return &_filePlayer; }
 
     // Sample rate of the audio output, also used by the records
     quint32 getSampleRate() { return _core.getSampleRate(); }
@@ -109,7 +111,6 @@ public:
 signals:
     void currentPosChanged(quint32 pos);
     void readFinished(int token);
-    void dataWritten(quint32 sampleRate, quint32 number); // For updating the recorder
 
 private:
     // Values read by the voices: the ones of the MIDI input, or of the MIDI file player for its channels
@@ -162,6 +163,7 @@ private:
     CalibrationSinus _sinus;
     LiveEQ _eq;
     Recorder _recorder;
+    FilePlayer _filePlayer;
 };
 
 #endif // SYNTH_H

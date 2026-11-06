@@ -102,53 +102,21 @@ void ConfigSectionGeneral::initializeAudio()
 {
     _audioDevicesChanged = false;
     ui->comboAudioOuput->blockSignals(true);
+    ui->comboAudioInput->blockSignals(true);
     ui->comboBufferSize->blockSignals(true);
     ui->comboPolyphony->blockSignals(true);
     ui->comboCpuBudget->blockSignals(true);
 
-    // Configured device
-    QString audioType = ContextManager::configuration()->getValue(ConfManager::SECTION_AUDIO, "type", "").toString();
-    QString selectedHostIdentifier, selectedHostName, selectedDeviceName;
-    if (audioType != "none")
-        AudioDevice::getHostAndDeviceFromConfig(audioType, selectedHostIdentifier, selectedHostName, selectedDeviceName);
+    // Configured output, among the current hosts with devices
+    ConfManager * configuration = ContextManager::configuration();
+    QString audioType = configuration->getValue(ConfManager::SECTION_AUDIO, "type", "").toString();
+    fillAudioDevices(ui->comboAudioOuput, false, audioType);
 
-    // Current hosts with devices
-    QList<AudioDevice::HostInfo> hosts = ContextManager::audio()->getAllHosts();
-    ui->comboAudioOuput->clear();
-    ui->comboAudioOuput->addItem("-", "none");
-    int selectedIndex = -1;
-    int selectedHostEnd = -1;
-    for (int i = 0; i < hosts.count(); i++)
-    {
-        QString hostIdentifier = hosts[i].identifier;
-        QString hostName = hosts[i].name;
-        bool isSelectedHost = (hostIdentifier == selectedHostIdentifier);
-        if (hosts[i].canFollowDefault)
-        {
-            if (isSelectedHost && selectedDeviceName.isEmpty())
-                selectedIndex = ui->comboAudioOuput->count();
-            ui->comboAudioOuput->addItem(hostName + " - " + tr("System default"), hostIdentifier + "|");
-        }
-        for (int j = 0; j < hosts[i].devices.count(); j++)
-        {
-            QString deviceName = hosts[i].devices[j].name;
-            if (isSelectedHost && (deviceName == selectedDeviceName ||
-                                   (selectedDeviceName.isEmpty() && !hosts[i].canFollowDefault && hosts[i].devices[j].isDefault)))
-                selectedIndex = ui->comboAudioOuput->count();
-            ui->comboAudioOuput->addItem(hostName + " - " + deviceName, hostIdentifier + "|" + deviceName);
-        }
-        if (isSelectedHost)
-            selectedHostEnd = ui->comboAudioOuput->count();
-    }
-
-    // The configured device is still displayed if disconnected (the default device being used meanwhile)
-    if (selectedIndex == -1 && !selectedDeviceName.isEmpty())
-    {
-        selectedIndex = (selectedHostEnd == -1 ? ui->comboAudioOuput->count() : selectedHostEnd);
-        ui->comboAudioOuput->insertItem(selectedIndex, selectedHostName + " - " + selectedDeviceName + " (" + tr("disconnected") + ")",
-                                        selectedHostIdentifier + "|" + selectedDeviceName);
-    }
-    ui->comboAudioOuput->setCurrentIndex(qMax(0, selectedIndex));
+    // Configured input, by default the one of the host used for the output
+    QString audioInput = configuration->getValue(ConfManager::SECTION_AUDIO, "input", "").toString();
+    if (audioInput.isEmpty())
+        audioInput = audioType.section('|', 0, 0) + "|";
+    fillAudioDevices(ui->comboAudioInput, true, audioInput);
 
     int bufferSize = ContextManager::configuration()->getValue(ConfManager::SECTION_AUDIO, "buffer_size", 0).toInt();
     switch (bufferSize)
@@ -175,15 +143,65 @@ void ConfigSectionGeneral::initializeAudio()
     ui->comboCpuBudget->setCurrentIndex(qBound(0, (cpuBudget + 5) / 10 - 2, ui->comboCpuBudget->count() - 1));
 
     ui->comboAudioOuput->blockSignals(false);
+    ui->comboAudioInput->blockSignals(false);
     ui->comboBufferSize->blockSignals(false);
     ui->comboPolyphony->blockSignals(false);
     ui->comboCpuBudget->blockSignals(false);
+}
+
+void ConfigSectionGeneral::fillAudioDevices(QComboBox * combo, bool isInput, QString config)
+{
+    QList<AudioDevice::HostInfo> hosts = ContextManager::audio()->getAllHosts(isInput);
+    QString selectedHostIdentifier, selectedHostName, selectedDeviceName;
+    if (config != "none")
+        AudioDevice::getHostAndDeviceFromConfig(config, selectedHostIdentifier, selectedHostName, selectedDeviceName);
+
+    combo->clear();
+    combo->addItem("-", "none");
+    int selectedIndex = -1;
+    int selectedHostEnd = -1;
+    for (int i = 0; i < hosts.count(); i++)
+    {
+        QString hostIdentifier = hosts[i].identifier;
+        QString hostName = hosts[i].name;
+        bool isSelectedHost = (hostIdentifier == selectedHostIdentifier);
+        if (hosts[i].canFollowDefault)
+        {
+            if (isSelectedHost && selectedDeviceName.isEmpty())
+                selectedIndex = combo->count();
+            combo->addItem(hostName + " - " + tr("System default"), hostIdentifier + "|");
+        }
+        for (int j = 0; j < hosts[i].devices.count(); j++)
+        {
+            QString deviceName = hosts[i].devices[j].name;
+            if (isSelectedHost && (deviceName == selectedDeviceName ||
+                                   (selectedDeviceName.isEmpty() && !hosts[i].canFollowDefault && hosts[i].devices[j].isDefault)))
+                selectedIndex = combo->count();
+            combo->addItem(hostName + " - " + deviceName, hostIdentifier + "|" + deviceName);
+        }
+        if (isSelectedHost)
+            selectedHostEnd = combo->count();
+    }
+
+    // The configured device is still displayed if disconnected (the default device being used meanwhile)
+    if (selectedIndex == -1 && !selectedDeviceName.isEmpty())
+    {
+        selectedIndex = (selectedHostEnd == -1 ? combo->count() : selectedHostEnd);
+        combo->insertItem(selectedIndex, selectedHostName + " - " + selectedDeviceName + " (" + tr("disconnected") + ")",
+                          selectedHostIdentifier + "|" + selectedDeviceName);
+    }
+    combo->setCurrentIndex(qMax(0, selectedIndex));
 }
 
 void ConfigSectionGeneral::on_comboAudioOuput_currentIndexChanged(int index)
 {
     QString audioType = ui->comboAudioOuput->itemData(index).toString();
     ContextManager::configuration()->setValue(ConfManager::SECTION_AUDIO, "type", audioType);
+}
+
+void ConfigSectionGeneral::on_comboAudioInput_currentIndexChanged(int index)
+{
+    ContextManager::configuration()->setValue(ConfManager::SECTION_AUDIO, "input", ui->comboAudioInput->itemData(index).toString());
 }
 
 void ConfigSectionGeneral::on_comboBufferSize_currentIndexChanged(int index)

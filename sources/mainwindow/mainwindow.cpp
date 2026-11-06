@@ -140,6 +140,8 @@ MainWindow::MainWindow(bool playerMode, QWidget *parent) : QWidget(parent),
     connect(_tabManager, SIGNAL(recorderDisplayChanged(bool,bool)), this, SLOT(onRecorderDisplayChange(bool,bool)));
     connect(_tabManager, SIGNAL(midiPlayerDisplayChanged(bool,bool)), this, SLOT(onMidiPlayerDisplayChange(bool,bool)));
     connect(_tabManager, SIGNAL(tabOpen(bool,bool,bool)), ui->topRightWidget, SLOT(onTabOpen(bool,bool,bool)));
+    connect(_tabManager, SIGNAL(tabOpen(bool,bool,bool)), _recorder, SLOT(onEditorDisplayed(bool)));
+    connect(_recorder, SIGNAL(midiFileOpened(QString)), this, SLOT(onMidiFileOpened(QString)));
     connect(ui->tabBar, SIGNAL(openFile(QString)), this, SLOT(openFiles(QString)), Qt::QueuedConnection);
 
     // Possibly start the server giving access to the soundfonts to AI assistants
@@ -280,6 +282,13 @@ void MainWindow::closeEvent(QCloseEvent *event)
         }
     }
 
+    // Nothing is closed if the record in progress must continue
+    if (!_recorder->confirmStop())
+    {
+        event->ignore();
+        return;
+    }
+
     // Soundfonts and directories reopened at the next startup
     _tabManager->saveOpenTabs();
 
@@ -405,10 +414,21 @@ void MainWindow::onKeyboardDisplayChange(bool isDisplayed, bool propagate)
 
 void MainWindow::onRecorderDisplayChange(bool isDisplayed, bool propagate)
 {
+    // The window stays open if the record in progress must continue
+    if (!isDisplayed && !_recorder->confirmStop())
+        return;
+
     if (!propagate)
         _recorder->updateState(false);
     _recorder->setVisible(isDisplayed);
     _recorder->updateState(true);
+}
+
+void MainWindow::onMidiFileOpened(QString filePath)
+{
+    _midiPlayer->openFile(filePath);
+    onMidiPlayerDisplayChange(true, true);
+    _midiPlayer->raise();
 }
 
 void MainWindow::onMidiPlayerDisplayChange(bool isDisplayed, bool propagate)

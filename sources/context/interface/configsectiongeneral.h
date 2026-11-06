@@ -26,6 +26,7 @@
 #define CONFIGSECTIONGENERAL_H
 
 #include <QWidget>
+class QComboBox;
 
 namespace Ui {
 class ConfigSectionGeneral;
@@ -46,6 +47,7 @@ protected:
 
 private slots:
     void on_comboAudioOuput_currentIndexChanged(int index);
+    void on_comboAudioInput_currentIndexChanged(int index);
     void on_comboBufferSize_currentIndexChanged(int index);
     void on_comboPolyphony_currentIndexChanged(int index);
     void on_comboCpuBudget_currentIndexChanged(int index);
@@ -59,6 +61,7 @@ private slots:
 
 private:
     void initializeAudio();
+    void fillAudioDevices(QComboBox * combo, bool isInput, QString config);
     void initializeMidi();
 
     Ui::ConfigSectionGeneral *ui;

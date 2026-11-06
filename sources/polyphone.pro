@@ -347,6 +347,7 @@ SOURCES	+= main.cpp \
     repository/soundfont/editor/soundfontfilecell.cpp \
     sound_engine/elements/liveeq.cpp \
     synth_core/osctriangle.cpp \
+    sound_engine/elements/fileplayer.cpp \
     sound_engine/elements/recorder.cpp \
     synth_core/modulatedparameter.cpp \
     sound_engine/synth.cpp \
@@ -451,10 +452,12 @@ SOURCES	+= main.cpp \
     context/interface/configpanel.cpp \
     dialogs/dialogkeyboard.cpp \
     dialogs/dialogrecorder.cpp \
+    dialogs/recorderhistory.cpp \
     dialogs/dialogmidiplayer.cpp \
     midi_player/midifile.cpp \
     midi_player/midifileplayer.cpp \
     midi_player/midifilerenderer.cpp \
+    midi_player/midirecorder.cpp \
     midi_player/midiplayerchannel.cpp \
     midi_player/midiplayerdelegate.cpp \
     editor/tools/link_sample/toollinksample.cpp \
@@ -590,6 +593,7 @@ SOURCES	+= main.cpp \
     editor/widgets/bannermenu.cpp \
     editor/widgets/resettableslider.cpp \
     editor/widgets/ledbutton.cpp \
+    editor/widgets/levelmeter.cpp \
     synth_core/parametermodulator.cpp \
     synth_core/modulatorgroup.cpp \
     editor/modulator/modulatorlistwidget.cpp \
@@ -783,6 +787,7 @@ HEADERS += \
     repository/soundfont/editor/soundfontfilecell.h \
     sound_engine/elements/liveeq.h \
     synth_core/osctriangle.h \
+    sound_engine/elements/fileplayer.h \
     sound_engine/elements/recorder.h \
     synth_core/imidivalues.h \
     synth_core/isynthsoundfont.h \
@@ -897,10 +902,12 @@ HEADERS += \
     context/interface/configpanel.h \
     dialogs/dialogkeyboard.h \
     dialogs/dialogrecorder.h \
+    dialogs/recorderhistory.h \
     dialogs/dialogmidiplayer.h \
     midi_player/midifile.h \
     midi_player/midifileplayer.h \
     midi_player/midifilerenderer.h \
+    midi_player/midirecorder.h \
     midi_player/midiplayerchannel.h \
     midi_player/midiplayerdelegate.h \
     editor/tools/link_sample/toollinksample.h \
@@ -1040,6 +1047,7 @@ HEADERS += \
     editor/widgets/bannermenu.h \
     editor/widgets/resettableslider.h \
     editor/widgets/ledbutton.h \
+    editor/widgets/levelmeter.h \
     synth_core/parametermodulator.h \
     synth_core/modulatorgroup.h \
     synth_core/modulatordata.h \

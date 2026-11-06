@@ -24,6 +24,7 @@
 
 #include "audiodevice.h"
 #include "audiodevicewatcher.h"
+#include "recorder.h"
 #include "synth.h"
 #include "confmanager.h"
 #include "soundfontmanager.h"
@@ -40,7 +41,7 @@ public:
 };
 #endif
 
-QList<AudioDevice::HostInfo> AudioDevice::getAllHosts()
+QList<AudioDevice::HostInfo> AudioDevice::getAllHosts(bool isInput)
 {
     QList<HostInfo> hosts;
 
@@ -50,14 +51,16 @@ QList<AudioDevice::HostInfo> AudioDevice::getAllHosts()
     RtAudio::DeviceInfo info;
     for (unsigned int i = 0; i < apis.size(); i++)
     {
-        // Host details
+        // Host details (ASIO can only be used by one stream, the one of the output)
         RtAudio::Api availableApi = apis[i];
+        if (isInput && availableApi == RtAudio::WINDOWS_ASIO)
+            continue;
         HostInfo hostInfo;
         hostInfo.identifier = QString::fromStdString(RtAudio::getApiName(availableApi).c_str());
         hostInfo.name = QString::fromStdString(RtAudio::getApiDisplayName(availableApi).c_str());
         hostInfo.canFollowDefault = (availableApi == RtAudio::MACOSX_CORE || availableApi == RtAudio::WINDOWS_WASAPI);
 
-        if (availableApi == _currentApi && !_currentDeviceName.isEmpty())
+        if (!isInput && availableApi == _currentApi && !_currentDeviceName.isEmpty())
         {
             // ASIO cannot be probed while it is in use
             if (_currentApi == RtAudio::Api::WINDOWS_ASIO)
@@ -101,13 +104,13 @@ QList<AudioDevice::HostInfo> AudioDevice::getAllHosts()
             {
                 try {
                     info = audio->getDeviceInfo(j);
-                    if (info.outputChannels >= 2)
+                    if (isInput ? info.inputChannels >= 1 : info.outputChannels >= 2)
                     {
                         // Device details
                         DeviceInfo deviceInfo;
                         deviceInfo.name = QString::fromStdString(info.name.c_str());
-                        deviceInfo.channelCount = info.outputChannels;
-                        deviceInfo.isDefault = info.isDefaultOutput;
+                        deviceInfo.channelCount = isInput ? info.inputChannels : info.outputChannels;
+                        deviceInfo.isDefault = isInput ? info.isDefaultInput : info.isDefaultOutput;
                         hostInfo.devices << deviceInfo;
                     }
                 } catch (RtAudioError &error) {
@@ -180,6 +183,10 @@ int standardProcess(void *outputBuffer, void *inputBuffer, unsigned int nFrames,
 
 AudioDevice::AudioDevice(ConfManager *configuration) : QObject(nullptr),
     _rtAudio(nullptr),
+    _rtAudioInput(nullptr),
+    _inputRecorder(new Recorder()),
+    _inputSampleRate(0),
+    _inputChannelCount(2),
     _configuration(configuration)
 {
     _synth = new Synth(SoundfontManager::getInstance()->getSoundfonts(), SoundfontManager::getInstance()->getMutex());
@@ -196,6 +203,8 @@ AudioDevice::AudioDevice(ConfManager *configuration) : QObject(nullptr),
 
 AudioDevice::~AudioDevice()
 {
+    closeInput();
+    delete _inputRecorder;
     closeConnections();
     delete _synth;
 }
@@ -268,6 +277,12 @@ void AudioDevice::initAudio()
         return;
     }
 
+    // Open the connection
+    openConnection(selectedDevice, bufferSize, getClosestSampleRate(sampleRates));
+}
+
+quint32 AudioDevice::getClosestSampleRate(const std::vector<unsigned int> &sampleRates)
+{
     quint32 closestSampleRate = 0;
     for (auto const sampleRate : sampleRates)
     {
@@ -275,11 +290,7 @@ void AudioDevice::initAudio()
         if (closestSampleRate == 0 || qAbs(sampleRate - 48000) < qAbs(closestSampleRate - 48000))
             closestSampleRate = sampleRate;
     }
-    if (closestSampleRate == 0)
-        closestSampleRate = 48000;
-
-    // Open the connection
-    openConnection(selectedDevice, bufferSize, closestSampleRate);
+    return closestSampleRate == 0 ? 48000 : closestSampleRate;
 }
 
 int AudioDevice::findDevice(QString &deviceName, std::vector<unsigned int> &sampleRates)
@@ -325,6 +336,132 @@ int AudioDevice::findDevice(QString &deviceName, std::vector<unsigned int> &samp
 
     // No exact match, the default device is selected (if any)
     return defaultDevice;
+}
+
+int AudioDevice::findInputDevice(QString deviceName, RtAudio::DeviceInfo &deviceInfo)
+{
+    // Browse the devices
+    int defaultDevice = -1;
+    #ifdef RT_AUDIO_5
+    for (unsigned int i = 0, end = _rtAudioInput->getDeviceCount(); i < end; ++i)
+    #else
+    std::vector<unsigned int> deviceIds;
+    try {
+        deviceIds = _rtAudioInput->getDeviceIds();
+    } catch (RtAudioError &error) {
+        error.printMessage();
+    }
+    for (unsigned int i: deviceIds)
+    #endif
+    {
+        try {
+            RtAudio::DeviceInfo info = _rtAudioInput->getDeviceInfo(i);
+            if (info.inputChannels < 1)
+                continue;
+
+            if (QString::fromStdString(info.name.c_str()) == deviceName)
+            {
+                deviceInfo = info;
+                return i;
+            }
+            if (info.isDefaultInput || defaultDevice == -1)
+            {
+                deviceInfo = info;
+                defaultDevice = i;
+            }
+        } catch (RtAudioError &error) {
+            error.printMessage();
+            return -1;
+        }
+    }
+
+    // No exact match, the default device is selected (if any)
+    return defaultDevice;
+}
+
+// RtAudio callback of the audio input
+int inputProcess(void *outputBuffer, void *inputBuffer, unsigned int nFrames,
+                 double streamTime, RtAudioStreamStatus status, void *userData)
+{
+    Q_UNUSED(outputBuffer)
+    Q_UNUSED(streamTime)
+    Q_UNUSED(status)
+
+    AudioDevice * instance = static_cast<AudioDevice*>(userData);
+    const float * input = reinterpret_cast<const float*>(inputBuffer);
+    instance->getInputRecorder()->process(&input[0], instance->getInputChannelCount() == 2 ? &input[nFrames] : nullptr, nFrames);
+    return 0;
+}
+
+bool AudioDevice::openInput()
+{
+    closeInput();
+
+    // By default, the default input of the host used for the output
+    QString config = _configuration->getValue(ConfManager::SECTION_AUDIO, "input", "").toString();
+    if (config == "none")
+        return false;
+    if (config.isEmpty())
+        config = _configuration->getValue(ConfManager::SECTION_AUDIO, "type", "").toString().section('|', 0, 0) + "|";
+    int api;
+    QString deviceName;
+    getApiAndDeviceNameFromConfig(config, api, deviceName);
+
+    try {
+        #ifdef RT_AUDIO_5
+        _rtAudioInput = new RtAudio((RtAudio::Api)api);
+        #else
+        _rtAudioInput = new RtAudio((RtAudio::Api)api, [](RtAudioErrorType, const std::string &errorText) {
+            qWarning("%s", errorText.c_str());
+        });
+        #endif
+    } catch (RtAudioError &error) {
+        error.printMessage();
+        return false;
+    }
+    #ifdef RT_AUDIO_5
+    _rtAudioInput->showWarnings(false);
+    #endif
+
+    RtAudio::DeviceInfo deviceInfo;
+    int selectedDevice = findInputDevice(deviceName, deviceInfo);
+    if (selectedDevice == -1)
+    {
+        closeInput();
+        return false;
+    }
+
+    // Mono or stereo, depending on the device
+    _inputChannelCount = qMin(static_cast<int>(deviceInfo.inputChannels), 2);
+    _inputSampleRate = getClosestSampleRate(deviceInfo.sampleRates);
+    RtAudio::StreamParameters inParam;
+    inParam.deviceId = static_cast<unsigned int>(selectedDevice);
+    inParam.nChannels = static_cast<unsigned int>(_inputChannelCount);
+    inParam.firstChannel = 0;
+
+    RtAudio::StreamOptions options;
+    options.flags = RTAUDIO_NONINTERLEAVED;
+    options.streamName = "Polyphone input";
+    unsigned int bufferSize = 512;
+    try {
+        _rtAudioInput->openStream(nullptr, &inParam, RTAUDIO_FLOAT32, _inputSampleRate, &bufferSize, inputProcess, this, &options);
+        _rtAudioInput->startStream();
+    } catch (RtAudioError &error) {
+        error.printMessage();
+    }
+
+    if (!_rtAudioInput->isStreamRunning())
+    {
+        closeInput();
+        return false;
+    }
+    return true;
+}
+
+void AudioDevice::closeInput()
+{
+    delete _rtAudioInput;
+    _rtAudioInput = nullptr;
 }
 
 void AudioDevice::checkDevices()

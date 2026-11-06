@@ -35,11 +35,17 @@
    </property>
    <item>
     <widget class="QFrame" name="frameTop">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>42</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>42</height>
+      </size>
      </property>
      <layout class="QHBoxLayout" name="layoutTop">
       <property name="spacing">
@@ -49,13 +55,13 @@
        <number>10</number>
       </property>
       <property name="topMargin">
-       <number>4</number>
+       <number>0</number>
       </property>
       <property name="rightMargin">
        <number>4</number>
       </property>
       <property name="bottomMargin">
-       <number>4</number>
+       <number>0</number>
       </property>
       <item>
        <layout class="QGridLayout" name="layoutInfo">

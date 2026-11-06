@@ -24,6 +24,7 @@
 
 #include "samplereaderfile.h"
 #include <sndfile.hh>
+#include "utils.h"
 
 SampleReaderFile::SampleReaderFile(QString filename) : SampleReader(filename),
     _file(nullptr),
@@ -97,7 +98,24 @@ SampleReader::SampleReaderResult SampleReaderFile::launchDecoder(qint16* data16,
             _info->loops << QPair<quint32, quint32>(instrument.loops[i].start, instrument.loops[i].end);
     }
 
-    if (data16 != nullptr)
+    int subFormat = sfInfo.format & SF_FORMAT_SUBMASK;
+    if (data16 != nullptr && (subFormat == SF_FORMAT_FLOAT || subFormat == SF_FORMAT_DOUBLE))
+    {
+        // Floating point values are not scaled when they are read as integers: they would all be rounded to 0
+        float * interleavedData = new float[_info->wChannels * _info->dwLength];
+        sf_readf_float(sndFile, interleavedData, _info->dwLength);
+
+        // Extract a channel
+        int iTmp;
+        for (quint32 i = 0; i < _info->dwLength; i++)
+        {
+            iTmp = Utils::floatToInt24(interleavedData[i * _info->wChannels + _info->wChannel]);
+            data16[i] = iTmp >> 8;
+            data24[i] = iTmp & 0xFF;
+        }
+        delete [] interleavedData;
+    }
+    else if (data16 != nullptr)
     {
         int * interleavedData = new int[_info->wChannels * _info->dwLength];
         sf_readf_int(sndFile, interleavedData, _info->dwLength);

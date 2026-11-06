@@ -58,6 +58,9 @@ public:
     ~DialogMidiPlayer() override;
     void updateState(bool isOn) { _stateUpdate = isOn; }
 
+    // Load a MIDI file, as if it was chosen with the button
+    void openFile(QString filePath);
+
 protected:
     void showEvent(QShowEvent * event) override;
     void hideEvent(QHideEvent * event) override;

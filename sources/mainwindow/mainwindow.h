@@ -69,6 +69,7 @@ private slots:
     void onAboutClicked();
     void onKeyboardDisplayChange(bool isDisplayed, bool propagate);
     void onRecorderDisplayChange(bool isDisplayed, bool propagate);
+    void onMidiFileOpened(QString filePath);
     void onMidiPlayerDisplayChange(bool isDisplayed, bool propagate);
     void fullScreenTriggered();
     void onCloseTab();

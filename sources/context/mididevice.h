@@ -28,6 +28,7 @@
 #include <QString>
 #include <QObject>
 #include <QVector>
+#include "midirecorder.h"
 #include "midiprocessor.h"
 #include "rtmidi/RtMidi.h" // No forward declaration: the classes are in a namespace since RtMidi 6.1
 class ConfManager;
@@ -47,6 +48,9 @@ public:
 
     // Stop all keys
     void stopAll();
+
+    // Recording of the events received
+    MidiRecorder * getRecorder() { return &_recorder; }
 
     // Add / remove MIDI listener
     void addListener(IMidiListener * listener, int priority);
@@ -103,6 +107,7 @@ private:
 
     ConfManager * _configuration;
     RtMidiIn * _midiIn;
+    MidiRecorder _recorder;
 
     // MIDI listeners
     QVector<IMidiListener *> _listeners;

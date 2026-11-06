@@ -32,6 +32,7 @@
 
 class Synth;
 class ConfManager;
+class Recorder;
 
 class AudioDevice : public QObject
 {
@@ -56,7 +57,7 @@ public:
         QList<DeviceInfo> devices;
     };
 
-    QList<HostInfo> getAllHosts();
+    QList<HostInfo> getAllHosts(bool isInput = false);
     static void getHostAndDeviceFromConfig(QString config, QString &hostIdentifier, QString &hostName, QString &deviceName);
     /////////////////////////////////////
 
@@ -64,6 +65,17 @@ public:
     ~AudioDevice() override;
 
     Synth * getSynth() { return _synth; }
+
+    // True if the synth is currently heard (no output if none is configured or available)
+    bool isRunning() { return _rtAudio != nullptr && _rtAudio->isStreamRunning(); }
+
+    // Audio input of the configuration, open only while it is used, with its own recorder. False if there is none.
+    bool openInput();
+    void closeInput();
+    bool isInputRunning() { return _rtAudioInput != nullptr && _rtAudioInput->isStreamRunning(); }
+    quint32 getInputSampleRate() { return _inputSampleRate; }
+    int getInputChannelCount() { return _inputChannelCount; } // 1 or 2
+    Recorder * getInputRecorder() { return _inputRecorder; }
 
 signals:
     // Audio outputs have been plugged, unplugged or the default output changed
@@ -80,9 +92,15 @@ private:
     static void getApiAndDeviceNameFromConfig(QString config, int &api, QString &deviceName);
     static int getDefaultApi();
     int findDevice(QString &deviceName, std::vector<unsigned int> &sampleRates);
+    int findInputDevice(QString deviceName, RtAudio::DeviceInfo &deviceInfo);
     void openConnection(unsigned int deviceNumber, quint32 bufferSize, quint32 sampleRate);
+    static quint32 getClosestSampleRate(const std::vector<unsigned int> &sampleRates);
 
     RtAudio * _rtAudio;
+    RtAudio * _rtAudioInput;
+    Recorder * _inputRecorder;
+    quint32 _inputSampleRate;
+    int _inputChannelCount;
     ConfManager * _configuration;
     Synth * _synth;
     int _currentApi;

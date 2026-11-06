@@ -46,6 +46,7 @@ DialogKeyboard::DialogKeyboard(QWidget *parent) :
                                 "QComboBox::drop-down{border:0;width:14px}" +
                                 "QComboBox::down-arrow{image:url(:/icons/arrow_down.svg);height:12px;width:12px}");
     ui->toolButtonSettings->setIcon(theme->getBannerIcon(":/icons/menu.svg", 24));
+    ui->layoutTop->setAlignment(ui->layoutInfo, Qt::AlignVCenter); // Height of the other banners, the content centered
 
     // Bar between the effects and the controllers
     ui->lineAreas->setStyleSheet("QFrame{border:0;border-top:1px solid " + theme->getColor(ThemeManager::BORDER).name() + "}");

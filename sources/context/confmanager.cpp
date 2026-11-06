@@ -141,7 +141,9 @@ void ConfManager::setValue(Section section, QString subSection, QString key, QVa
         emit soundEngineConfigurationChanged();
         break;
     case Section::SECTION_AUDIO:
-        if (key != "stereo_playback")
+        if (key == "input")
+            emit audioInputConfigurationChanged();
+        else if (key != "stereo_playback")
         {
             emit soundEngineConfigurationChanged(); // First prepare the sound engine (the buffer can be adjusted)
             emit audioServerConfigurationChanged(); // Then update the audio server configuration

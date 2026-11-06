@@ -453,313 +453,313 @@
 <context>
     <name>ConfManager</name>
     <message>
-        <location filename="../../context/confmanager.cpp" line="213"/>
+        <location filename="../../context/confmanager.cpp" line="215"/>
         <source>Z</source>
         <comment>first key mapping for bottom left C</comment>
         <translation>W</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="214"/>
+        <location filename="../../context/confmanager.cpp" line="216"/>
         <source>S</source>
         <comment>first key mapping for bottom C#</comment>
         <translation>S</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="215"/>
+        <location filename="../../context/confmanager.cpp" line="217"/>
         <source>X</source>
         <comment>first key mapping for bottom D</comment>
         <translation>X</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="216"/>
+        <location filename="../../context/confmanager.cpp" line="218"/>
         <source>D</source>
         <comment>first key mapping for bottom D#</comment>
         <translation>D</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="217"/>
+        <location filename="../../context/confmanager.cpp" line="219"/>
         <source>C</source>
         <comment>first key mapping for bottom E</comment>
         <translation>C</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="218"/>
+        <location filename="../../context/confmanager.cpp" line="220"/>
         <source>V</source>
         <comment>first key mapping for bottom F</comment>
         <translation>V</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="219"/>
+        <location filename="../../context/confmanager.cpp" line="221"/>
         <source>G</source>
         <comment>first key mapping for bottom F#</comment>
         <translation>G</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="220"/>
+        <location filename="../../context/confmanager.cpp" line="222"/>
         <source>B</source>
         <comment>first key mapping for bottom G</comment>
         <translation>B</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="221"/>
+        <location filename="../../context/confmanager.cpp" line="223"/>
         <source>H</source>
         <comment>first key mapping for bottom G#</comment>
         <translation>H</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="222"/>
+        <location filename="../../context/confmanager.cpp" line="224"/>
         <source>N</source>
         <comment>first key mapping for bottom A</comment>
         <translation>N</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="223"/>
+        <location filename="../../context/confmanager.cpp" line="225"/>
         <source>J</source>
         <comment>first key mapping for bottom A#</comment>
         <translation>J</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="224"/>
+        <location filename="../../context/confmanager.cpp" line="226"/>
         <source>M</source>
         <comment>first key mapping for bottom B</comment>
         <translation>,</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="225"/>
+        <location filename="../../context/confmanager.cpp" line="227"/>
         <source>,</source>
         <comment>first key mapping for bottom right C</comment>
         <translation>;</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="231"/>
+        <location filename="../../context/confmanager.cpp" line="233"/>
         <source>Q</source>
         <comment>first key mapping for upper left C</comment>
         <translation>A</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="232"/>
+        <location filename="../../context/confmanager.cpp" line="234"/>
         <source>2</source>
         <comment>first key mapping for upper C#</comment>
         <translation>É</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="233"/>
+        <location filename="../../context/confmanager.cpp" line="235"/>
         <source>W</source>
         <comment>first key mapping for upper D</comment>
         <translation>Z</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="234"/>
+        <location filename="../../context/confmanager.cpp" line="236"/>
         <source>3</source>
         <comment>first key mapping for upper D#</comment>
         <translation>&quot;</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="235"/>
+        <location filename="../../context/confmanager.cpp" line="237"/>
         <source>E</source>
         <comment>first key mapping for upper E</comment>
         <translation>E</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="236"/>
+        <location filename="../../context/confmanager.cpp" line="238"/>
         <source>R</source>
         <comment>first key mapping for upper F</comment>
         <translation>R</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="237"/>
+        <location filename="../../context/confmanager.cpp" line="239"/>
         <source>5</source>
         <comment>first key mapping for upper F#</comment>
         <translation>(</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="238"/>
+        <location filename="../../context/confmanager.cpp" line="240"/>
         <source>T</source>
         <comment>first key mapping for upper G</comment>
         <translation>T</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="239"/>
+        <location filename="../../context/confmanager.cpp" line="241"/>
         <source>6</source>
         <comment>first key mapping for upper G#</comment>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="240"/>
+        <location filename="../../context/confmanager.cpp" line="242"/>
         <source>Y</source>
         <comment>first key mapping for upper A</comment>
         <translation>Y</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="241"/>
+        <location filename="../../context/confmanager.cpp" line="243"/>
         <source>7</source>
         <comment>first key mapping for upper A#</comment>
         <translation>È</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="242"/>
+        <location filename="../../context/confmanager.cpp" line="244"/>
         <source>U</source>
         <comment>first key mapping for upper B</comment>
         <translation>U</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="243"/>
+        <location filename="../../context/confmanager.cpp" line="245"/>
         <source>I</source>
         <comment>first key mapping for upper right C</comment>
         <translation>I</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="249"/>
+        <location filename="../../context/confmanager.cpp" line="251"/>
         <source>Shift+Z</source>
         <comment>second key mapping for bottom left C</comment>
         <translation>Shift+W</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="250"/>
+        <location filename="../../context/confmanager.cpp" line="252"/>
         <source>Shift+S</source>
         <comment>second key mapping for bottom C#</comment>
         <translation>Shift+S</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="251"/>
+        <location filename="../../context/confmanager.cpp" line="253"/>
         <source>Shift+X</source>
         <comment>second key mapping for bottom D</comment>
         <translation>Shift+X</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="252"/>
+        <location filename="../../context/confmanager.cpp" line="254"/>
         <source>Shift+D</source>
         <comment>second key mapping for bottom D#</comment>
         <translation>Shift+D</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="253"/>
+        <location filename="../../context/confmanager.cpp" line="255"/>
         <source>Shift+C</source>
         <comment>second key mapping for bottom E</comment>
         <translation>Shift+C</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="254"/>
+        <location filename="../../context/confmanager.cpp" line="256"/>
         <source>Shift+V</source>
         <comment>second key mapping for bottom F</comment>
         <translation>Shift+V</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="255"/>
+        <location filename="../../context/confmanager.cpp" line="257"/>
         <source>Shift+G</source>
         <comment>second key mapping for bottom F#</comment>
         <translation>Shift+G</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="256"/>
+        <location filename="../../context/confmanager.cpp" line="258"/>
         <source>Shift+B</source>
         <comment>second key mapping for bottom G</comment>
         <translation>Shift+B</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="257"/>
+        <location filename="../../context/confmanager.cpp" line="259"/>
         <source>Shift+H</source>
         <comment>second key mapping for bottom G#</comment>
         <translation>Shift+H</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="258"/>
+        <location filename="../../context/confmanager.cpp" line="260"/>
         <source>Shift+N</source>
         <comment>second key mapping for bottom A</comment>
         <translation>Shift+N</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="259"/>
+        <location filename="../../context/confmanager.cpp" line="261"/>
         <source>Shift+J</source>
         <comment>second key mapping for bottom A#</comment>
         <translation>Shift+J</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="260"/>
+        <location filename="../../context/confmanager.cpp" line="262"/>
         <source>Shift+M</source>
         <comment>second key mapping for bottom B</comment>
         <translation>Shift+?</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="261"/>
+        <location filename="../../context/confmanager.cpp" line="263"/>
         <source>Shift+&lt;</source>
         <comment>second key mapping for bottom right C</comment>
         <translation>Shift+.</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="267"/>
+        <location filename="../../context/confmanager.cpp" line="269"/>
         <source>Shift+Q</source>
         <comment>second key mapping for upper left C</comment>
         <translation>Shift+A</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="268"/>
+        <location filename="../../context/confmanager.cpp" line="270"/>
         <source>Shift+@</source>
         <comment>second key mapping for upper C#</comment>
         <translation>Shift+2</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="269"/>
+        <location filename="../../context/confmanager.cpp" line="271"/>
         <source>Shift+W</source>
         <comment>second key mapping for upper D</comment>
         <translation>Shift+Z</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="270"/>
+        <location filename="../../context/confmanager.cpp" line="272"/>
         <source>Shift+#</source>
         <comment>second key mapping for upper D#</comment>
         <translation>Shift+3</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="271"/>
+        <location filename="../../context/confmanager.cpp" line="273"/>
         <source>Shift+E</source>
         <comment>second key mapping for upper E</comment>
         <translation>Shift+E</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="272"/>
+        <location filename="../../context/confmanager.cpp" line="274"/>
         <source>Shift+R</source>
         <comment>second key mapping for upper F</comment>
         <translation>Shift+R</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="273"/>
+        <location filename="../../context/confmanager.cpp" line="275"/>
         <source>Shift+%</source>
         <comment>second key mapping for upper F#</comment>
         <translation>Shift+5</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="274"/>
+        <location filename="../../context/confmanager.cpp" line="276"/>
         <source>Shift+T</source>
         <comment>second key mapping for upper G</comment>
         <translation>Shift+T</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="275"/>
+        <location filename="../../context/confmanager.cpp" line="277"/>
         <source>Shift+^</source>
         <comment>second key mapping for upper G#</comment>
         <translation>Shift+6</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="276"/>
+        <location filename="../../context/confmanager.cpp" line="278"/>
         <source>Shift+Y</source>
         <comment>second key mapping for upper A</comment>
         <translation>Shift+Y</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="277"/>
+        <location filename="../../context/confmanager.cpp" line="279"/>
         <source>Shift+&amp;</source>
         <comment>second key mapping for upper A#</comment>
         <translation>Shift+7</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="278"/>
+        <location filename="../../context/confmanager.cpp" line="280"/>
         <source>Shift+U</source>
         <comment>second key mapping for upper B</comment>
         <translation>Shift+U</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="279"/>
+        <location filename="../../context/confmanager.cpp" line="281"/>
         <source>Shift+I</source>
         <comment>second key mapping for upper right C</comment>
         <translation>Shift+I</translation>
@@ -807,12 +807,12 @@
         <translation>Entrées / sorties</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectiongeneral.ui" line="264"/>
+        <location filename="../../context/interface/configsectiongeneral.ui" line="281"/>
         <source>Audio backend</source>
         <translation>Sortie audio</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectiongeneral.ui" line="271"/>
+        <location filename="../../context/interface/configsectiongeneral.ui" line="288"/>
         <source>Buffer size</source>
         <translation>Taille du tampon</translation>
     </message>
@@ -846,7 +846,12 @@
 (même effet que l&apos;outil &quot;Ajuster à la fin de boucle&quot;)</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectiongeneral.ui" line="278"/>
+        <location filename="../../context/interface/configsectiongeneral.ui" line="268"/>
+        <source>Audio input</source>
+        <translation>Entrée audio</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/configsectiongeneral.ui" line="295"/>
         <source>MIDI input</source>
         <translation>Entrée MIDI</translation>
     </message>
@@ -861,7 +866,7 @@
         <translation>Import d&apos;échantillons</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectiongeneral.ui" line="329"/>
+        <location filename="../../context/interface/configsectiongeneral.ui" line="346"/>
         <source>change linked sample</source>
         <translation>répercuter les modifications</translation>
     </message>
@@ -871,7 +876,7 @@
         <translation>ajuster à la boucle</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectiongeneral.ui" line="310"/>
+        <location filename="../../context/interface/configsectiongeneral.ui" line="327"/>
         <source>Stereo editing</source>
         <translation>Édition stéréo</translation>
     </message>
@@ -891,12 +896,12 @@
         <translation>Part maximale du temps processeur utilisée par les voix, au-delà de laquelle les notes les plus faibles s&apos;estompent</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectiongeneral.cpp" line="130"/>
+        <location filename="../../context/interface/configsectiongeneral.cpp" line="172"/>
         <source>System default</source>
         <translation>Défaut du système</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectiongeneral.cpp" line="148"/>
+        <location filename="../../context/interface/configsectiongeneral.cpp" line="190"/>
         <source>disconnected</source>
         <translation>déconnecté</translation>
     </message>
@@ -1924,57 +1929,57 @@ en ligne</translation>
         <translation>Clavier virtuel</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="76"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="82"/>
         <source>Keyboard type</source>
         <translation>Type de clavier</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="87"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="93"/>
         <source>5 octaves</source>
         <translation>5 octaves</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="92"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="98"/>
         <source>6 octaves</source>
         <translation>6 octaves</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="97"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="103"/>
         <source>88 keys (piano)</source>
         <translation>88 notes (piano)</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="102"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="108"/>
         <source>128 keys (full)</source>
         <translation>128 notes (complet)</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="115"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="121"/>
         <source>Key</source>
         <translation>Note</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="140"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="146"/>
         <source>Velocity</source>
         <translation>Vélocité</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="165"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="171"/>
         <source>Aftertouch</source>
         <translation>Aftertouch</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="218"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="224"/>
         <source>Display options</source>
         <translation>Options de visualisation</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="82"/>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="83"/>
         <source>MIDI controllers</source>
         <translation>Contrôleurs MIDI</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="85"/>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="86"/>
         <source>Effects</source>
         <translation>Effets</translation>
     </message>
@@ -2020,121 +2025,121 @@ en ligne</translation>
         <translation>Lecteur MIDI</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.ui" line="72"/>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="168"/>
+        <location filename="../../dialogs/dialogmidiplayer.ui" line="84"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="169"/>
         <source>Open a MIDI file</source>
         <translation>Ouvrir un fichier MIDI</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.ui" line="178"/>
+        <location filename="../../dialogs/dialogmidiplayer.ui" line="190"/>
         <source>Stop</source>
         <translation>Arrêt</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.ui" line="209"/>
+        <location filename="../../dialogs/dialogmidiplayer.ui" line="221"/>
         <source>Playback settings</source>
         <translation>Paramètres de lecture</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="356"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="362"/>
         <source>Tempo</source>
         <translation>Tempo</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="371"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="377"/>
         <source>The percussions (bank 128) are not transposed</source>
         <translation>Les percussions (banque 128) ne sont pas transposées</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="104"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="105"/>
         <source>Channel</source>
         <translation>Canal</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="104"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="105"/>
         <source>Soundfont</source>
         <translation>Banque de sons</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="104"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="105"/>
         <source>Preset</source>
         <translation>Ensemble</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="104"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="105"/>
         <source>Volume</source>
         <translation>Volume</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="124"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="125"/>
         <source>Open a MIDI file to play it with the soundfonts that are open.</source>
         <translation>Ouvrez un fichier MIDI pour le jouer avec les banques de sons ouvertes.</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="169"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="170"/>
         <source>MIDI files</source>
         <translation>Fichiers MIDI</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="352"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="358"/>
         <source>Loop playback</source>
         <translation>Lecture en boucle</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="362"/>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="423"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="368"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="429"/>
         <source>%1%</source>
         <comment>percentage</comment>
         <translation>%1 %</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="363"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="369"/>
         <source>Pitch</source>
         <translation>Hauteur</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="389"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="395"/>
         <source>Export audio...</source>
         <translation>Exporter l&apos;audio...</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="406"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="412"/>
         <source>Tempo of the file: %1 bpm, variable</source>
         <translation>Tempo du fichier : %1 bpm, variable</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="406"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="412"/>
         <source>Tempo of the file: %1 bpm</source>
         <translation>Tempo du fichier : %1 bpm</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="408"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="414"/>
         <source>File without tempo (SMPTE time code)</source>
         <translation>Fichier sans tempo (code temporel SMPTE)</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="468"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="474"/>
         <source>Pause</source>
         <translation>Pause</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="468"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="474"/>
         <source>Play</source>
         <translation>Lecture</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="532"/>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="567"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="538"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="573"/>
         <source>Export audio</source>
         <translation>Exporter l&apos;audio</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="535"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="541"/>
         <source>Wav file</source>
         <translation>Fichier .wav</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="606"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="612"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
@@ -2198,23 +2203,271 @@ en ligne</translation>
 <context>
     <name>DialogRecorder</name>
     <message>
-        <location filename="../../dialogs/dialogrecorder.ui" line="26"/>
+        <location filename="../../dialogs/dialogrecorder.ui" line="14"/>
         <source>Recorder</source>
         <translation>Magnétophone</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="92"/>
+        <location filename="../../dialogs/dialogrecorder.ui" line="82"/>
+        <source>Recording mode</source>
+        <translation>Mode d&apos;enregistrement</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.ui" line="93"/>
+        <source>Polyphone → wav</source>
+        <translation>Polyphone → wav</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.ui" line="98"/>
+        <source>Microphone → wav</source>
+        <translation>Micro → wav</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.ui" line="103"/>
+        <source>MIDI signals</source>
+        <translation>Signaux MIDI</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.ui" line="147"/>
+        <source>Recording settings</source>
+        <translation>Paramètres d&apos;enregistrement</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="182"/>
+        <source>Ask for a file name</source>
+        <translation>Demander un nom de fichier</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="186"/>
+        <source>Change the folder...</source>
+        <translation>Changer de répertoire...</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="203"/>
+        <source>No MIDI recording yet</source>
+        <translation>Aucun enregistrement MIDI pour l&apos;instant</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="203"/>
+        <source>No audio recording yet</source>
+        <translation>Aucun enregistrement audio pour l&apos;instant</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="288"/>
+        <source>Stop recording</source>
+        <translation>Arrêter l&apos;enregistrement</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="288"/>
+        <source>Start recording</source>
+        <translation>Démarrer l&apos;enregistrement</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="294"/>
+        <source>Resume</source>
+        <translation>Reprendre</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="294"/>
+        <source>Pause</source>
+        <translation>Pause</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="311"/>
+        <source>No audio output</source>
+        <translation>Pas de sortie audio</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="313"/>
+        <source>No audio input</source>
+        <translation>Pas d&apos;entrée audio</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="315"/>
+        <source>Waiting for a MIDI signal</source>
+        <translation>En attente d&apos;un signal MIDI</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="315"/>
+        <source>Waiting for a sound</source>
+        <translation>En attente d&apos;un son</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="339"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="708"/>
+        <source>Notes: %1</source>
+        <translation>Notes : %1</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="382"/>
+        <source>The file cannot be written anymore: the disk may be full.</source>
+        <translation>Le fichier ne peut plus être écrit : le disque est peut-être plein.</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="385"/>
+        <source>The disk is too slow.</source>
+        <translation>Le disque est trop lent.</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="388"/>
+        <source>The audio file cannot exceed 4 GB.</source>
+        <translation>Le fichier audio ne peut pas dépasser 4 Go.</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="391"/>
+        <source>The sample rate of the audio output has changed.</source>
+        <translation>La fréquence d&apos;échantillonnage de la sortie audio a changé.</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="394"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="410"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="430"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="435"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="469"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="514"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="530"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="592"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="594"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="642"/>
+        <source>Warning</source>
+        <translation>Attention</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="394"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="410"/>
+        <source>The recording has been stopped and the audio recorded so far has been saved.</source>
+        <translation>L&apos;enregistrement a été arrêté et l&apos;audio enregistré jusque-là a été sauvegardé.</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="411"/>
+        <source>The audio input has changed.</source>
+        <translation>L&apos;entrée audio a changé.</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="430"/>
+        <source>Nothing can be recorded without an audio output.</source>
+        <translation>Rien ne peut être enregistré sans sortie audio.</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="435"/>
+        <source>Nothing can be recorded without an audio input, which is chosen in the settings.</source>
+        <translation>Rien ne peut être enregistré sans entrée audio, qui se choisit dans les préférences.</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="444"/>
         <source>Save a record</source>
         <translation>Sauvegarder un enregistrement</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="93"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="445"/>
         <source>Wav file</source>
         <translation>Fichier .wav</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="150"/>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="152"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="445"/>
+        <source>MIDI file</source>
+        <translation>Fichier MIDI</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="469"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="514"/>
+        <source>Cannot write file &quot;%1&quot;.</source>
+        <translation>Impossible d&apos;écrire le fichier « %1 ».</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="531"/>
+        <source>A recording is in progress. Do you want to stop it?</source>
+        <translation>Un enregistrement est en cours. L&apos;arrêter ?</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="533"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="627"/>
+        <source>&amp;Yes</source>
+        <translation>&amp;Oui</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="534"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="628"/>
+        <source>&amp;No</source>
+        <translation>&amp;Non</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="592"/>
+        <source>Nothing can be played without an audio output.</source>
+        <translation>Rien ne peut être lu sans sortie audio.</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="594"/>
+        <source>Cannot open the file</source>
+        <translation>Impossible d&apos;ouvrir le fichier</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="624"/>
+        <source>Confirm deletion</source>
+        <translation>Confirmation de suppression</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="625"/>
+        <source>Are you sure you want to delete file &quot;%1&quot;?</source>
+        <translation>Supprimer le fichier « %1 » ?</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="642"/>
+        <source>Cannot delete file &quot;%1&quot;.</source>
+        <translation>Impossible de supprimer le fichier « %1 ».</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="261"/>
+        <source>Folder of the recordings</source>
+        <translation>Répertoire des enregistrements</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="133"/>
+        <source>Start automatically</source>
+        <translation>Démarrer automatiquement</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="135"/>
+        <source>The record button waits for a sound or a MIDI signal, and waits again after an automatic stop</source>
+        <translation>Le bouton d&apos;enregistrement attend un son ou un signal MIDI, et attend à nouveau après un arrêt automatique</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="138"/>
+        <source>Stop after a silence</source>
+        <translation>Arrêter après un blanc</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="147"/>
+        <source>Sound level</source>
+        <translation>Niveau du son</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="154"/>
+        <source>Level from which the audio input is considered as a sound, above its background noise</source>
+        <translation>Niveau à partir duquel l&apos;entrée audio est considérée comme un son, au-dessus de son bruit de fond</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="157"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="242"/>
+        <source>%1 s</source>
+        <comment>seconds</comment>
+        <translation>%1 s</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="157"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="242"/>
+        <source>disabled</source>
+        <translation>désactivé</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="158"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="249"/>
+        <source>dB</source>
+        <comment>unit for decibels</comment>
+        <translation>dB</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="718"/>
         <source>record</source>
         <translation>enregistrement</translation>
     </message>
@@ -3298,6 +3551,26 @@ en ligne</translation>
     </message>
 </context>
 <context>
+    <name>LevelMeter</name>
+    <message>
+        <location filename="../../editor/widgets/levelmeter.cpp" line="64"/>
+        <source>Highest level reached (a click resets it)</source>
+        <translation>Niveau le plus élevé atteint (un clic le réinitialise)</translation>
+    </message>
+    <message>
+        <location filename="../../editor/widgets/levelmeter.cpp" line="74"/>
+        <source>Highest velocity reached (a click resets it)</source>
+        <translation>Vélocité la plus élevée atteinte (un clic la réinitialise)</translation>
+    </message>
+    <message>
+        <location filename="../../editor/widgets/levelmeter.cpp" line="142"/>
+        <location filename="../../editor/widgets/levelmeter.cpp" line="158"/>
+        <source>dB</source>
+        <comment>unit for decibels</comment>
+        <translation>dB</translation>
+    </message>
+</context>
+<context>
     <name>MainMenu</name>
     <message>
         <location filename="../../mainwindow/mainmenu.cpp" line="50"/>
@@ -3359,22 +3632,22 @@ en ligne</translation>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="259"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="261"/>
         <source>&amp;Save</source>
         <translation>&amp;Enregistrer</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="260"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="262"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Annuler</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="261"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="263"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>&amp;Quitter sans enregistrer</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="245"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="247"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
@@ -3384,32 +3657,32 @@ en ligne</translation>
         <translation>Éditeur de soundfonts Polyphone</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="236"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="238"/>
         <source>Untitled</source>
         <translation>Sans titre</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="246"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="248"/>
         <source>Save before exiting?</source>
         <translation>Sauvegarder avant de quitter ?</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="249"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="251"/>
         <source>The following files have been modified:</source>
         <translation>Les fichiers suivants n&apos;ont pas été sauvegardés :</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="256"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="258"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>Le fichier « %1 » n&apos;a pas été sauvegardé.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="342"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="351"/>
         <source>Opening files</source>
         <translation>Ouverture de fichiers</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="352"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="361"/>
         <source>Opening a directory</source>
         <translation>Ouverture d&apos;un répertoire</translation>
     </message>
@@ -5179,6 +5452,40 @@ Les 2 divisions doivent partager les mêmes étendues de notes et de vélocités
         <location filename="../../core/input/dls/inputdls.h" line="35"/>
         <source>Dls files</source>
         <translation>Fichiers .dls</translation>
+    </message>
+</context>
+<context>
+    <name>RecorderHistory</name>
+    <message>
+        <location filename="../../dialogs/recorderhistory.cpp" line="84"/>
+        <location filename="../../dialogs/recorderhistory.cpp" line="204"/>
+        <source>Listen to the recording</source>
+        <translation>Écouter l&apos;enregistrement</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/recorderhistory.cpp" line="85"/>
+        <source>Open the folder of the recording</source>
+        <translation>Ouvrir le répertoire de l&apos;enregistrement</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/recorderhistory.cpp" line="86"/>
+        <source>Delete the recording</source>
+        <translation>Supprimer l&apos;enregistrement</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/recorderhistory.cpp" line="204"/>
+        <source>Stop listening</source>
+        <translation>Arrêter l&apos;écoute</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/recorderhistory.cpp" line="207"/>
+        <source>Import the recording in the soundfont displayed</source>
+        <translation>Importer l&apos;enregistrement dans la banque de sons affichée</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/recorderhistory.cpp" line="208"/>
+        <source>Display a soundfont in the editor for importing the recording</source>
+        <translation>Afficher une banque de sons dans l&apos;éditeur pour importer l&apos;enregistrement</translation>
     </message>
 </context>
 <context>

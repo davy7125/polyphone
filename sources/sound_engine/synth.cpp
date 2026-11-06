@@ -42,7 +42,6 @@ Synth::Synth(ISynthSoundfonts * soundfonts, QRecursiveMutex * mutexSoundfonts) :
     _outputAvailable(0)
 {
     _core.setMidiValues(&_midiValues);
-    connect(&_recorder, SIGNAL(dataWritten(quint32,quint32)), this, SIGNAL(dataWritten(quint32,quint32)));
 }
 
 Synth::~Synth()
@@ -78,7 +77,6 @@ void Synth::destroySoundEngines()
 
 void Synth::createSoundEngines()
 {
-    _recorder.setBufferSize(_bufferSize);
     _buses.reserve(_bufferSize);
     _core.setMaxBlockSize(_bufferSize);
 
@@ -269,21 +267,6 @@ void Synth::setPitchCorrection(qint16 correction, bool withLinkedSample)
     _core.setPitchCorrection(correction, withLinkedSample);
 }
 
-void Synth::startNewRecord(QString fileName)
-{
-    _recorder.startNewRecord(fileName, _core.getSampleRate());
-}
-
-void Synth::endRecord()
-{
-    _recorder.endRecord();
-}
-
-void Synth::pause(bool isOn)
-{
-    _recorder.pause(isOn);
-}
-
 bool Synth::processKey(int channel, int key, int vel)
 {
     Q_UNUSED(channel)
@@ -336,6 +319,8 @@ void Synth::setSampleRateAndBufferSize(quint32 sampleRate, quint32 bufferSize)
     _core.setSampleRate(sampleRate); // Voices are stopped
     _sinus.setSampleRate(sampleRate);
     _eq.setSampleRate(sampleRate);
+    _recorder.setSampleRate(sampleRate);
+    _filePlayer.setSampleRate(sampleRate);
     _outputAvailable = 0; // Frames computed with the previous sample rate
 
     // Update buffer size
@@ -433,6 +418,9 @@ void Synth::readData(float * dataL, float * dataR, quint32 len)
 
     // Possible recording
     _recorder.process(dataL, dataR, len);
+
+    // Possible audio file, added after the recording
+    _filePlayer.process(dataL, dataR, len);
 }
 
 void Synth::appendOutput(quint32 len)

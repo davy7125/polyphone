@@ -91,6 +91,7 @@ DialogMidiPlayer::DialogMidiPlayer(QWidget *parent) :
     ui->pushStop->setCursor(Qt::PointingHandCursor);
     ui->toolButtonSettings->setIcon(theme->getBannerIcon(":/icons/menu.svg", 24));
     ui->toolButtonSettings->setCursor(Qt::PointingHandCursor);
+    ui->layoutTop->setAlignment(ui->layoutPosition, Qt::AlignVCenter); // Height of the other banners, the content centered
     updatePlayPauseIcon(false);
     initializeSettingsMenu();
     ui->pushPlayPause->setCursor(Qt::PointingHandCursor);
@@ -169,6 +170,11 @@ void DialogMidiPlayer::on_pushOpen_clicked()
         tr("MIDI files") + " (*.mid *.midi *.kar *.rmi *.MID *.MIDI *.KAR *.RMI)");
     if (!filePath.isEmpty())
         loadFile(filePath);
+}
+
+void DialogMidiPlayer::openFile(QString filePath)
+{
+    loadFile(filePath);
 }
 
 void DialogMidiPlayer::loadFile(QString filePath)
