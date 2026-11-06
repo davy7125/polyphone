@@ -25,7 +25,7 @@ sudo dnf install qt-creator qt6-qtbase-devel qt6-qtsvg-devel qt6-qttools-devel
 Installez les dépendances suivantes (si vous avez un gestionnaire de paquets graphique, vous pouvez aussi l'utiliser)&nbsp;:
 
 ```
-sudo dnf install alsa-lib-devel jack-audio-connection-kit-devel rtaudio-devel zlib-devel libogg-devel flac-devel libvorbis-devel glib2-devel openssl-devel rtmidi-devel stk-devel libsndfile-devel
+sudo dnf install alsa-lib-devel jack-audio-connection-kit-devel rtaudio-devel zlib-devel libogg-devel flac-devel libvorbis-devel glib2-devel openssl-devel rtmidi-devel libsndfile-devel
 ```
 
 **Note&nbsp;:** avec les versions récentes de Fedora, le paquet :program:`jack-audio-connection-kit-devel` peut être remplacé par :program:`pipewire-jack-audio-connection-kit-devel`.

@@ -57,29 +57,80 @@ La vue choisie est conservée lorsqu'un autre instrument ou ensemble est sélect
 ## Magnétophone {#doc_recorder}
 
 
-En cliquant sur l'icône ![magnétophone](images/toolbar_recorder.png "magnétophone"){.inline}, une fenêtre s'ouvre présentant le magnétophone, qui peut enregistrer la sortie de Polyphone dans un fichier :file:`.wav`. Le temps écoulé est affiché dans la fenêtre.
+En cliquant sur l'icône ![magnétophone](images/toolbar_recorder.png "magnétophone"){.inline}, une fenêtre s'ouvre présentant le magnétophone, qui peut enregistrer dans un fichier ce que joue Polyphone, l'entrée audio ou les signaux MIDI. Le temps écoulé est affiché dans la fenêtre.
 
 
 ![Magnétophone](images/recorder.png "Magnétophone")
 
 
-Le bouton de gauche peut être dans deux états différents&nbsp;:
+La liste du bandeau choisit le mode d'enregistrement&nbsp;:
+
+Polyphone → wav
+: Enregistre la sortie de Polyphone dans un fichier :file:`.wav`.
+
+Micro → wav
+: Enregistre l'entrée audio choisie dans les [préférences](manual/settings.md#doc_general) dans un fichier :file:`.wav`, en stéréo ou en mono selon le périphérique.
+  L'entrée n'est pas envoyée vers la sortie audio.
+
+Signaux MIDI
+: Enregistre dans un fichier :file:`.mid` ce qui est joué avec un clavier MIDI ou le [clavier virtuel](#doc_keyboard).
+
+Le bouton de gauche peut être dans deux états différents (raccourci :kbd:`Ctrl`+:kbd:`R`, disponible dans toutes les fenêtres, le magnétophone s'ouvrant si nécessaire)&nbsp;:
 
 Enregistrer
 : Commence un nouvel enregistrement si l'acquisition n'est pas en cours.
-  Une fenêtre de dialogue demande le nom du fichier qui contiendra le signal audio enregistré.
+  Le fichier est créé dans le répertoire du dernier enregistrement, avec un numéro ajouté à son nom si un fichier de ce nom existe déjà.
 
 Arrêter
 : Arrête l'acquisition en cours.
-  L'acquisition est aussi arrêtée lorsque la fenêtre est fermée.
+  L'acquisition est aussi arrêtée lorsque la fenêtre est fermée, après confirmation.
 
-Le bouton de droite possède également deux états différents (accessibles seulement lorsque l'acquisition est en cours)&nbsp;:
+Le bouton de droite possède également deux états différents (accessibles seulement lorsque l'acquisition est en cours, raccourci :kbd:`Ctrl`+:kbd:`Maj`+:kbd:`R`)&nbsp;:
 
 Mettre en pause
 : Met en pause l'acquisition en cours.
 
 Reprendre
 : Reprend l'acquisition en cours.
+
+Sous ces boutons, l'indicateur affiche le niveau des canaux, même lorsque rien n'est enregistré&nbsp;: le volume peut ainsi être réglé avant un enregistrement. La valeur à sa droite est le niveau le plus élevé atteint depuis le début de l'enregistrement, affiché sur fond rouge si le niveau maximal a été atteint, le son étant alors écrêté. Un clic sur l'indicateur réinitialise cette valeur. Dans le mode :guilabel:`Signaux MIDI`, l'indicateur affiche la vélocité des notes jouées, ce qui confirme que les signaux sont reçus.
+
+Le bas de la fenêtre liste les 5 derniers enregistrements, audio ou MIDI selon le mode, avec leur taille ou leur nombre de notes. Un fichier qui n'existe plus est retiré de la liste à l'ouverture de la fenêtre. Un clic sélectionne une ligne, qui affiche alors quatre boutons&nbsp;:
+
+Écouter
+: Lit le fichier audio dans Polyphone, sur la sortie audio (un second clic l'arrête), ou ouvre le fichier MIDI dans le [lecteur MIDI](#doc_midi_player).
+
+Répertoire
+: Ouvre le répertoire du fichier.
+
+Supprimer
+: Place le fichier dans la corbeille, après confirmation.
+
+Importer
+: Importe le fichier audio comme échantillon dans la banque de sons affichée.
+  Ce bouton n'est disponible que si un éditeur de banque de sons est affiché.
+
+Le menu à droite du bandeau contient les options suivantes&nbsp;:
+
+Démarrer automatiquement
+: Le bouton d'enregistrement attend le premier son ou signal MIDI avant de commencer l'enregistrement.
+  Après un arrêt automatique, l'enregistrement suivant est attendu de la même manière, jusqu'à un clic sur le bouton d'arrêt.
+
+Arrêter après un blanc
+: Nombre de secondes sans son ni signal MIDI qui arrête un enregistrement, de 1 à 10 (:guilabel:`désactivé` pour ne pas arrêter automatiquement).
+  Le blanc est retiré du fichier, et une touche encore tenue n'est pas un blanc.
+
+Niveau du son
+: Pour l'entrée audio uniquement&nbsp;: niveau à partir duquel l'entrée est considérée comme un son, au-dessus de son bruit de fond.
+  Ce niveau est fixé à -90&nbsp;dB pour la sortie de Polyphone.
+
+Demander un nom de fichier
+: Une fenêtre de dialogue demande le nom du fichier au début d'un enregistrement.
+
+Changer de répertoire...
+: Choisit le répertoire des prochains enregistrements, commun aux fichiers audio et MIDI.
+
+Un message s'affiche si un enregistrement ne peut pas se poursuivre (disque plein ou trop lent, fichier atteignant 4&nbsp;Go, changement de l'entrée audio ou de la fréquence d'échantillonnage de la sortie audio)&nbsp;: ce qui a été enregistré jusque-là reste dans le fichier.
 
 
 ## Clavier virtuel {#doc_keyboard}

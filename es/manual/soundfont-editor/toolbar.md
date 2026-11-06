@@ -57,29 +57,80 @@ La vista elegida se mantiene al seleccionar otro instrumento o conjunto. La vist
 ## Grabadora {#doc_recorder}
 
 
-Al hacer clic en el icono ![grabadora](images/toolbar_recorder.png "grabadora"){.inline}, se abre una ventana con la grabadora, que puede grabar la salida de Polyphone en un archivo :file:`.wav`. El tiempo transcurrido se muestra en la ventana.
+Al hacer clic en el icono ![grabadora](images/toolbar_recorder.png "grabadora"){.inline}, se abre una ventana con la grabadora, que puede grabar en un archivo lo que reproduce Polyphone, la entrada de audio o las señales MIDI. El tiempo transcurrido se muestra en la ventana.
 
 
 ![Grabadora](images/recorder.png "Grabadora")
 
 
-El botón izquierdo puede tener dos estados:
+La lista del banner selecciona el modo de grabación:
+
+Polyphone → wav
+: Graba la salida de Polyphone en un archivo :file:`.wav`.
+
+Micrófono → wav
+: Graba la entrada de audio elegida en las [preferencias](manual/settings.md#doc_general) en un archivo :file:`.wav`, en estéreo o en mono según el dispositivo.
+  La entrada no se envía a la salida de audio.
+
+Señales MIDI
+: Graba en un archivo :file:`.mid` lo que se toca con un teclado MIDI o el [teclado virtual](#doc_keyboard).
+
+El botón izquierdo puede tener dos estados (atajo :kbd:`Ctrl`+:kbd:`R`, disponible en todas las ventanas, la grabadora se abre si es necesario):
 
 Grabar
 : Inicia una nueva grabación si la captura está detenida.
-  Un cuadro de diálogo pide el nombre del archivo que contendrá la señal de audio grabada.
+  El archivo se crea en el directorio de la última grabación, con un número añadido a su nombre si ya existe un archivo con ese nombre.
 
 Detener
 : Detiene la captura en curso.
-  La captura también se detiene al cerrar la ventana.
+  La captura también se detiene al cerrar la ventana, tras una confirmación.
 
-El botón derecho también puede tener dos estados (solo accesible si la captura está en marcha):
+El botón derecho también puede tener dos estados (solo accesible si la captura está en marcha, atajo :kbd:`Ctrl`+:kbd:`Shift`+:kbd:`R`):
 
 Pausa
 : Pone en pausa la captura en curso.
 
 Reanudar
 : Reanuda la captura en curso.
+
+Debajo de estos botones, el medidor muestra el nivel de los canales, incluso cuando no se graba nada: así se puede ajustar el volumen antes de una grabación. El valor a su derecha es el nivel más alto alcanzado desde el inicio de la grabación, mostrado sobre fondo rojo si se ha alcanzado el nivel máximo, en cuyo caso el sonido está recortado. Un clic en el medidor restablece este valor. En el modo :guilabel:`Señales MIDI`, el medidor muestra la velocidad de las notas tocadas, lo que confirma que las señales se reciben.
+
+La parte inferior de la ventana lista las 5 últimas grabaciones, de audio o MIDI según el modo, con su tamaño o su número de notas. Un archivo que ya no existe se retira de la lista al abrir la ventana. Un clic selecciona una línea, que entonces muestra cuatro botones:
+
+Escuchar
+: Reproduce el archivo de audio en Polyphone, por la salida de audio (un segundo clic lo detiene), o abre el archivo MIDI en el [reproductor MIDI](#doc_midi_player).
+
+Directorio
+: Abre el directorio del archivo.
+
+Eliminar
+: Mueve el archivo a la papelera, tras una confirmación.
+
+Importar
+: Importa el archivo de audio como muestra en el soundfont mostrado.
+  Este botón solo está disponible si se muestra un editor de soundfont.
+
+El menú a la derecha del banner contiene las siguientes opciones:
+
+Iniciar automáticamente
+: El botón de grabación espera el primer sonido o señal MIDI antes de iniciar la grabación.
+  Tras una parada automática, la siguiente grabación se espera de la misma manera, hasta un clic en el botón de parada.
+
+Detener tras un silencio
+: Número de segundos sin sonido ni señal MIDI que detiene una grabación, de 1 a 10 (:guilabel:`desactivado` para no detenerla automáticamente).
+  El silencio se retira del archivo, y una tecla aún pulsada no es un silencio.
+
+Nivel de sonido
+: Solo para la entrada de audio: nivel a partir del cual la entrada se considera un sonido, por encima de su ruido de fondo.
+  Este nivel está fijado en -90 dB para la salida de Polyphone.
+
+Pedir un nombre de archivo
+: Un cuadro de diálogo pide el nombre del archivo al inicio de una grabación.
+
+Cambiar el directorio...
+: Selecciona el directorio de las próximas grabaciones, común a los archivos de audio y MIDI.
+
+Se muestra un mensaje si una grabación no puede continuar (disco lleno o demasiado lento, archivo que alcanza 4 GB, cambio de la entrada de audio o de la frecuencia de muestreo de la salida de audio): lo grabado hasta entonces permanece en el archivo.
 
 
 ## Teclado virtual {#doc_keyboard}

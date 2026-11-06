@@ -20,6 +20,10 @@ Saída de áudio
   Os sistemas disponíveis dependem do sistema operacional (por exemplo, WASAPI e ASIO no Windows, ALSA e JACK no Linux, Core Audio no macOS).
   Escolher “-” desliga a saída de áudio.
 
+Entrada de áudio
+: Especifica o dispositivo gravado pelo [gravador](manual/soundfont-editor/toolbar.md#doc_recorder) no modo :guilabel:`Microfone → wav`, que só é aberto enquanto o gravador é exibido nesse modo.
+  ASIO não pode ser usado para a entrada.
+
 Tamanho do buffer
 : Especifica o tamanho do buffer de áudio.
   Um buffer pequeno resulta em uma latência pequena, mas o som pode ficar com estalos.

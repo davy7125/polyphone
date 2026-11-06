@@ -25,7 +25,7 @@ sudo dnf install qt-creator qt6-qtbase-devel qt6-qtsvg-devel qt6-qttools-devel
 安装以下依赖项（如果安装了图形化的软件包管理器，也可以用它来安装）：
 
 ```
-sudo dnf install alsa-lib-devel jack-audio-connection-kit-devel rtaudio-devel zlib-devel libogg-devel flac-devel libvorbis-devel glib2-devel openssl-devel rtmidi-devel stk-devel libsndfile-devel
+sudo dnf install alsa-lib-devel jack-audio-connection-kit-devel rtaudio-devel zlib-devel libogg-devel flac-devel libvorbis-devel glib2-devel openssl-devel rtmidi-devel libsndfile-devel
 ```
 
 **注意：**在较新版本的 Fedora 中，:program:`jack-audio-connection-kit-devel` 软件包可能会被 :program:`pipewire-jack-audio-connection-kit-devel` 取代。

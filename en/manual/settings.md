@@ -20,6 +20,10 @@ Audio backend
   The available systems depend on the operating system (for example WASAPI and ASIO on Windows, ALSA and JACK on Linux, Core Audio on macOS).
   Choosing “-” turns off the audio output.
 
+Audio input
+: Specifies the device recorded by the [recorder](manual/soundfont-editor/toolbar.md#doc_recorder) in the mode :guilabel:`Microphone → wav`, which is only open while the recorder is displayed in this mode.
+  ASIO cannot be used for the input.
+
 Buffer size
 : Specifies the size of the audio buffer.
   A small buffer results in a small latency, but the sound may become scratchy.

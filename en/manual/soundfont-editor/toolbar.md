@@ -57,29 +57,80 @@ The selected view is kept when another instrument or preset is selected. The vie
 ## Recorder {#doc_recorder}
 
 
-When clicking on the icon ![recorder](images/toolbar_recorder.png "recorder"){.inline}, a window opens showing the recorder that can record the output of Polyphone in a :file:`.wav` file. The elapsed time is displayed in the window.
+When clicking on the icon ![recorder](images/toolbar_recorder.png "recorder"){.inline}, a window opens showing the recorder, which can record in a file what Polyphone plays, the audio input or the MIDI signals. The elapsed time is displayed in the window.
 
 
 ![Recorder](images/recorder.png "Recorder")
 
 
-The left button can have two possible states:
+The list in the banner selects the recording mode:
+
+Polyphone → wav
+: Record the output of Polyphone in a :file:`.wav` file.
+
+Microphone → wav
+: Record the audio input chosen in the [settings](manual/settings.md#doc_general) in a :file:`.wav` file, in stereo or in mono depending on the device.
+  The input is not sent to the audio output.
+
+MIDI signals
+: Record in a :file:`.mid` file what is played with a MIDI keyboard or the [virtual keyboard](#doc_keyboard).
+
+The left button can have two possible states (shortcut :kbd:`Ctrl`+:kbd:`R`, available in all windows, the recorder being opened if needed):
 
 Record
 : Start a new record if the acquisition is off.
-  A dialog asks for the name of the file that will contain the recorded audio signal.
+  The file is created in the folder of the last record, with a number added to its name if a file with this name already exists.
 
 Stop
 : Stop the current acquisition.
-  The acquisition is also stopped when the window is closed.
+  The acquisition is also stopped when the window is closed, after a confirmation.
 
-The right button can also have two possible states (only accessible if the acquisition is on):
+The right button can also have two possible states (only accessible if the acquisition is on, shortcut :kbd:`Ctrl`+:kbd:`Shift`+:kbd:`R`):
 
 Pause
 : Pause the current acquisition.
 
 Resume
 : Resume the current acquisition.
+
+Below these buttons, the meter shows the level of the channels, even when nothing is recorded: the volume can be adjusted before a record. The value on its right is the highest level reached since the beginning of the record, displayed on a red background if the maximum level has been reached, the sound being then clipped. A click on the meter resets this value. In the mode :guilabel:`MIDI signals`, the meter shows the velocity of the notes played, which confirms that the signals are received.
+
+The bottom of the window lists the last 5 records, audio or MIDI depending on the mode, with their size or their number of notes. A file that no longer exists is removed from the list when the window opens. A click selects a line, which then shows four buttons:
+
+Listen
+: Play the audio file in Polyphone, on the audio output (a second click stops it), or open the MIDI file in the [MIDI player](#doc_midi_player).
+
+Folder
+: Open the folder of the file.
+
+Delete
+: Move the file to the trash, after a confirmation.
+
+Import
+: Import the audio file as a sample in the soundfont displayed.
+  This button is only available if a soundfont editor is displayed.
+
+The menu on the right of the banner contains the following options:
+
+Start automatically
+: The record button waits for the first sound or MIDI signal before starting the record.
+  After an automatic stop, the next record is awaited in the same way, until a click on the stop button.
+
+Stop after a silence
+: Number of seconds without sound or MIDI signal stopping a record, from 1 to 10 (:guilabel:`disabled` for no automatic stop).
+  The silence is removed from the file, and a key still held is not a silence.
+
+Sound level
+: Only for the audio input: level from which the input is considered as a sound, above its background noise.
+  This level is fixed at -90 dB for the output of Polyphone.
+
+Ask for a file name
+: A dialog asks for the name of the file at the beginning of a record.
+
+Change the folder...
+: Select the folder of the next records, common to the audio and MIDI files.
+
+A message is displayed if a record cannot continue (disk full or too slow, file reaching 4 GB, change of the audio input or of the sample rate of the audio output): what has been recorded until then stays in the file.
 
 
 ## Virtual keyboard {#doc_keyboard}

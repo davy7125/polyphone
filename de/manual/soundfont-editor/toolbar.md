@@ -57,29 +57,80 @@ Die gewählte Ansicht bleibt erhalten, wenn ein anderes Instrument oder Preset a
 ## Rekorder {#doc_recorder}
 
 
-Ein Klick auf das Symbol ![Rekorder](images/toolbar_recorder.png "Rekorder"){.inline} öffnet ein Fenster mit dem Rekorder, der die Ausgabe von Polyphone in einer :file:`.wav`-Datei aufnehmen kann. Die verstrichene Zeit wird im Fenster angezeigt.
+Ein Klick auf das Symbol ![Rekorder](images/toolbar_recorder.png "Rekorder"){.inline} öffnet ein Fenster mit dem Rekorder, der das, was Polyphone spielt, den Audioeingang oder die MIDI-Signale in einer Datei aufnehmen kann. Die verstrichene Zeit wird im Fenster angezeigt.
 
 
 ![Rekorder](images/recorder.png "Rekorder")
 
 
-Der linke Button kann zwei Zustände haben:
+Die Liste im Banner wählt den Aufnahmemodus:
+
+Polyphone → wav
+: Nimmt die Ausgabe von Polyphone in einer :file:`.wav`-Datei auf.
+
+Mikrofon → wav
+: Nimmt den in den [Einstellungen](manual/settings.md#doc_general) gewählten Audioeingang in einer :file:`.wav`-Datei auf, je nach Gerät in Stereo oder Mono.
+  Der Eingang wird nicht an die Audioausgabe gesendet.
+
+MIDI-Signale
+: Nimmt in einer :file:`.mid`-Datei auf, was mit einem MIDI-Keyboard oder der [virtuellen Tastatur](#doc_keyboard) gespielt wird.
+
+Der linke Button kann zwei Zustände haben (Tastenkürzel :kbd:`Ctrl`+:kbd:`R`, in allen Fenstern verfügbar, der Rekorder wird bei Bedarf geöffnet):
 
 Aufnehmen
 : Startet eine neue Aufnahme, wenn gerade nicht aufgenommen wird.
-  Ein Dialog fragt nach dem Namen der Datei, die das aufgenommene Audiosignal enthalten soll.
+  Die Datei wird im Verzeichnis der letzten Aufnahme erstellt, wobei dem Namen eine Nummer angefügt wird, falls bereits eine Datei mit diesem Namen existiert.
 
 Stopp
 : Beendet die laufende Aufnahme.
-  Die Aufnahme wird auch beendet, wenn das Fenster geschlossen wird.
+  Die Aufnahme wird nach einer Bestätigung auch beendet, wenn das Fenster geschlossen wird.
 
-Der rechte Button kann ebenfalls zwei Zustände haben (nur verfügbar, während aufgenommen wird):
+Der rechte Button kann ebenfalls zwei Zustände haben (nur verfügbar, während aufgenommen wird, Tastenkürzel :kbd:`Ctrl`+:kbd:`Shift`+:kbd:`R`):
 
 Pause
 : Unterbricht die laufende Aufnahme.
 
 Fortsetzen
 : Setzt die laufende Aufnahme fort.
+
+Unter diesen Buttons zeigt die Anzeige den Pegel der Kanäle, auch wenn nichts aufgenommen wird: So kann die Lautstärke vor einer Aufnahme eingestellt werden. Der Wert rechts daneben ist der höchste seit Beginn der Aufnahme erreichte Pegel. Er wird auf rotem Hintergrund angezeigt, wenn der maximale Pegel erreicht wurde und der Klang somit übersteuert ist. Ein Klick auf die Anzeige setzt diesen Wert zurück. Im Modus :guilabel:`MIDI-Signale` zeigt die Anzeige den Anschlag der gespielten Noten, was bestätigt, dass die Signale empfangen werden.
+
+Der untere Teil des Fensters listet die letzten 5 Aufnahmen auf, je nach Modus Audio oder MIDI, mit ihrer Größe oder der Anzahl ihrer Noten. Eine Datei, die nicht mehr existiert, wird beim Öffnen des Fensters aus der Liste entfernt. Ein Klick wählt eine Zeile aus, die dann vier Buttons anzeigt:
+
+Anhören
+: Spielt die Audiodatei in Polyphone über die Audioausgabe ab (ein zweiter Klick stoppt sie) oder öffnet die MIDI-Datei im [MIDI-Player](#doc_midi_player).
+
+Verzeichnis
+: Öffnet das Verzeichnis der Datei.
+
+Löschen
+: Verschiebt die Datei nach einer Bestätigung in den Papierkorb.
+
+Importieren
+: Importiert die Audiodatei als Sample in die angezeigte Soundfont.
+  Dieser Button ist nur verfügbar, wenn ein Soundfont-Editor angezeigt wird.
+
+Das Menü rechts im Banner enthält folgende Optionen:
+
+Automatisch starten
+: Die Aufnahmetaste wartet auf den ersten Klang oder das erste MIDI-Signal, bevor die Aufnahme beginnt.
+  Nach einem automatischen Stopp wird auf die gleiche Weise auf die nächste Aufnahme gewartet, bis zu einem Klick auf die Stopp-Taste.
+
+Nach einer Stille stoppen
+: Anzahl der Sekunden ohne Klang oder MIDI-Signal, nach denen eine Aufnahme stoppt, von 1 bis 10 (:guilabel:`deaktiviert` für keinen automatischen Stopp).
+  Die Stille wird aus der Datei entfernt, und eine noch gehaltene Taste gilt nicht als Stille.
+
+Klangpegel
+: Nur für den Audioeingang: Pegel, ab dem der Eingang als Klang gilt, über seinem Grundrauschen.
+  Für die Ausgabe von Polyphone ist dieser Pegel auf -90 dB festgelegt.
+
+Nach einem Dateinamen fragen
+: Ein Dialog fragt zu Beginn einer Aufnahme nach dem Dateinamen.
+
+Verzeichnis ändern...
+: Wählt das Verzeichnis der nächsten Aufnahmen, gemeinsam für Audio- und MIDI-Dateien.
+
+Eine Meldung erscheint, wenn eine Aufnahme nicht fortgesetzt werden kann (Datenträger voll oder zu langsam, Datei erreicht 4 GB, Änderung des Audioeingangs oder der Samplefrequenz der Audioausgabe): Das bis dahin Aufgenommene bleibt in der Datei erhalten.
 
 
 ## Virtuelle Tastatur {#doc_keyboard}

@@ -26,12 +26,12 @@
 ### 打开并配置项目
 
 
-首先打开 :file:`polyphone.pro` 文件并进行编辑：如果你的操作系统没有提供 :program:`rtmidi` 和 :program:`stk`，可以改用随附的版本（默认使用随附的 :program:`rtaudio`）。
+首先打开 :file:`polyphone.pro` 文件并进行编辑：如果你的操作系统没有提供 :program:`rtaudio` 和 :program:`rtmidi`，可以改用随附的版本。
 去掉以下各行开头的‘#’以取消注释：
 
 ```
+DEFINES += USE_LOCAL_RTAUDIO
 DEFINES += USE_LOCAL_RTMIDI
-DEFINES += USE_LOCAL_STK
 ```
 
 如果想使用电脑上已经安装的库，可以跳过这些修改（请确保这些库已经安装！）。

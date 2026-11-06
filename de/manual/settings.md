@@ -20,6 +20,10 @@ Audioausgang
   Die verfügbaren Systeme hängen vom Betriebssystem ab (zum Beispiel WASAPI und ASIO unter Windows, ALSA und JACK unter Linux, Core Audio unter macOS).
   Die Auswahl „-“ schaltet die Audioausgabe ab.
 
+Audioeingang
+: Legt das Gerät fest, das der [Rekorder](manual/soundfont-editor/toolbar.md#doc_recorder) im Modus :guilabel:`Mikrofon → wav` aufnimmt. Es ist nur geöffnet, solange der Rekorder in diesem Modus angezeigt wird.
+  ASIO kann für den Eingang nicht verwendet werden.
+
 Pufferlänge
 : Legt die Größe des Audiopuffers fest.
   Ein kleiner Puffer führt zu einer geringen Latenz, der Klang kann dabei aber kratzig werden.

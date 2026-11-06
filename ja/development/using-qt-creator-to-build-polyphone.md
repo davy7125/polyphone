@@ -26,12 +26,12 @@ Polyphoneのソースを<a href="software" target="_blank">こちら</a>また�
 ### プロジェクトを開いて設定する
 
 
-まず、ファイル :file:`polyphone.pro` を開き、お使いのOSが :program:`rtmidi` と :program:`stk` を提供していない場合は、同梱版を使うように編集します（:program:`rtaudio` はデフォルトで同梱版が使われます）。
+まず、ファイル :file:`polyphone.pro` を開き、お使いのOSが :program:`rtaudio` と :program:`rtmidi` を提供していない場合は、同梱版を使うように編集します。
 次の行の先頭にある「#」を削除して、コメントを解除します。
 
 ```
+DEFINES += USE_LOCAL_RTAUDIO
 DEFINES += USE_LOCAL_RTMIDI
-DEFINES += USE_LOCAL_STK
 ```
 
 コンピューターにすでにインストールされているライブラリを使う場合は、この変更は省略できます（ライブラリがあることを確認してください！）。

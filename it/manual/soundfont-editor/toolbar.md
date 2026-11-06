@@ -57,29 +57,80 @@ La vista scelta viene mantenuta quando si seleziona un altro strumento o preset.
 ## Registratore {#doc_recorder}
 
 
-Facendo clic sull'icona ![registratore](images/toolbar_recorder.png "registratore"){.inline} si apre una finestra con il registratore, che può registrare l'uscita di Polyphone in un file :file:`.wav`. Il tempo trascorso viene mostrato nella finestra.
+Facendo clic sull'icona ![registratore](images/toolbar_recorder.png "registratore"){.inline} si apre una finestra con il registratore, che può registrare in un file ciò che suona Polyphone, l'ingresso audio o i segnali MIDI. Il tempo trascorso viene mostrato nella finestra.
 
 
 ![Registratore](images/recorder.png "Registratore")
 
 
-Il pulsante sinistro può avere due stati:
+L'elenco nel banner seleziona la modalità di registrazione:
+
+Polyphone → wav
+: Registra l'uscita di Polyphone in un file :file:`.wav`.
+
+Microfono → wav
+: Registra l'ingresso audio scelto nelle [impostazioni](manual/settings.md#doc_general) in un file :file:`.wav`, in stereo o in mono a seconda del dispositivo.
+  L'ingresso non viene inviato all'uscita audio.
+
+Segnali MIDI
+: Registra in un file :file:`.mid` ciò che viene suonato con una tastiera MIDI o la [tastiera virtuale](#doc_keyboard).
+
+Il pulsante sinistro può avere due stati (scorciatoia :kbd:`Ctrl`+:kbd:`R`, disponibile in tutte le finestre, il registratore viene aperto se necessario):
 
 Registra
 : Avvia una nuova registrazione se non è in corso alcuna acquisizione.
-  Una finestra di dialogo chiede il nome del file che conterrà il segnale audio registrato.
+  Il file viene creato nella cartella dell'ultima registrazione, con un numero aggiunto al nome se esiste già un file con quel nome.
 
 Stop
 : Interrompe l'acquisizione in corso.
-  L'acquisizione si interrompe anche alla chiusura della finestra.
+  L'acquisizione si interrompe anche alla chiusura della finestra, dopo una conferma.
 
-Anche il pulsante destro può avere due stati (disponibile solo durante un'acquisizione):
+Anche il pulsante destro può avere due stati (disponibile solo durante un'acquisizione, scorciatoia :kbd:`Ctrl`+:kbd:`Shift`+:kbd:`R`):
 
 Pausa
 : Mette in pausa l'acquisizione in corso.
 
 Riprendi
 : Riprende l'acquisizione in corso.
+
+Sotto questi pulsanti, l'indicatore mostra il livello dei canali, anche quando non si sta registrando: il volume può così essere regolato prima di una registrazione. Il valore alla sua destra è il livello più alto raggiunto dall'inizio della registrazione, mostrato su sfondo rosso se è stato raggiunto il livello massimo, nel qual caso il suono è saturato. Un clic sull'indicatore azzera questo valore. Nella modalità :guilabel:`Segnali MIDI`, l'indicatore mostra la velocità delle note suonate, il che conferma che i segnali vengono ricevuti.
+
+La parte inferiore della finestra elenca le ultime 5 registrazioni, audio o MIDI a seconda della modalità, con la loro dimensione o il numero di note. Un file che non esiste più viene tolto dall'elenco all'apertura della finestra. Un clic seleziona una riga, che mostra allora quattro pulsanti:
+
+Ascolta
+: Riproduce il file audio in Polyphone, sull'uscita audio (un secondo clic lo ferma), oppure apre il file MIDI nel [lettore MIDI](#doc_midi_player).
+
+Cartella
+: Apre la cartella del file.
+
+Elimina
+: Sposta il file nel cestino, dopo una conferma.
+
+Importa
+: Importa il file audio come campione nel soundfont visualizzato.
+  Questo pulsante è disponibile solo se è visualizzato un editor di soundfont.
+
+Il menu a destra del banner contiene le seguenti opzioni:
+
+Avvia automaticamente
+: Il pulsante di registrazione attende il primo suono o segnale MIDI prima di avviare la registrazione.
+  Dopo un arresto automatico, la registrazione successiva viene attesa allo stesso modo, fino a un clic sul pulsante di arresto.
+
+Ferma dopo un silenzio
+: Numero di secondi senza suono né segnale MIDI che ferma una registrazione, da 1 a 10 (:guilabel:`disattivato` per nessun arresto automatico).
+  Il silenzio viene rimosso dal file, e un tasto ancora premuto non è un silenzio.
+
+Livello del suono
+: Solo per l'ingresso audio: livello a partire dal quale l'ingresso è considerato un suono, al di sopra del rumore di fondo.
+  Questo livello è fissato a -90 dB per l'uscita di Polyphone.
+
+Chiedi un nome di file
+: Una finestra di dialogo chiede il nome del file all'inizio di una registrazione.
+
+Cambia cartella...
+: Seleziona la cartella delle prossime registrazioni, comune ai file audio e MIDI.
+
+Viene mostrato un messaggio se una registrazione non può continuare (disco pieno o troppo lento, file che raggiunge 4 GB, cambio dell'ingresso audio o della frequenza di campionamento dell'uscita audio): ciò che è stato registrato fino a quel momento resta nel file.
 
 
 ## Tastiera virtuale {#doc_keyboard}

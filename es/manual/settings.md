@@ -20,6 +20,10 @@ Salida de audio
   Los sistemas disponibles dependen del sistema operativo (por ejemplo WASAPI y ASIO en Windows, ALSA y JACK en Linux, Core Audio en macOS).
   Elegir «-» desactiva la salida de audio.
 
+Entrada de audio
+: Especifica el dispositivo grabado por la [grabadora](manual/soundfont-editor/toolbar.md#doc_recorder) en el modo :guilabel:`Micrófono → wav`, que solo se abre mientras la grabadora se muestra en este modo.
+  ASIO no se puede usar para la entrada.
+
 Tamaño del búfer
 : Indica el tamaño del búfer de audio.
   Un búfer pequeño da una latencia baja, pero el sonido puede volverse entrecortado.

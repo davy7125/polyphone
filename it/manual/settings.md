@@ -20,6 +20,10 @@ Uscita audio
   I sistemi disponibili dipendono dal sistema operativo (ad esempio WASAPI e ASIO su Windows, ALSA e JACK su Linux, Core Audio su macOS).
   Scegliendo «-» si disattiva l'uscita audio.
 
+Ingresso audio
+: Specifica il dispositivo registrato dal [registratore](manual/soundfont-editor/toolbar.md#doc_recorder) nella modalità :guilabel:`Microfono → wav`, che viene aperto solo mentre il registratore è visualizzato in questa modalità.
+  ASIO non può essere usato per l'ingresso.
+
 Dimensione del buffer
 : Specifica la dimensione del buffer audio.
   Un buffer piccolo comporta una latenza ridotta, ma il suono può diventare graffiante.

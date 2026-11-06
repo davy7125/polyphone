@@ -13,7 +13,6 @@
 * jack (``libjack-jackd2-dev``)
 * rtaudio (``librtaudio-dev``)
 * rtmidi (``librtmidi-dev``)
-* stk (``libstk-dev``)
 * vorbis (``libvorbis-dev``)
 * ogg (``libogg-dev``)
 * flac (``libflac-dev``)
@@ -24,7 +23,7 @@
 Их можно установить следующей командой:
 
 ```
-sudo apt-get install build-essential qt6-base-dev qt6-svg-dev qt6-tools-dev qt6-tools-dev-tools qt6-l10n-tools libasound2-dev libjack-jackd2-dev librtaudio-dev librtmidi-dev libstk-dev libvorbis-dev libogg-dev libflac-dev zlib1g-dev libssl-dev libsndfile1-dev
+sudo apt-get install build-essential qt6-base-dev qt6-svg-dev qt6-tools-dev qt6-tools-dev-tools qt6-l10n-tools libasound2-dev libjack-jackd2-dev librtaudio-dev librtmidi-dev libvorbis-dev libogg-dev libflac-dev zlib1g-dev libssl-dev libsndfile1-dev
 ```
 
 Также нужен исходный код Polyphone, доступный <a href="software" target="_blank">здесь</a> или на <a href="https://github.com/davy7125/polyphone" target="_blank">GitHub</a>.
@@ -42,8 +41,7 @@ qmake6 polyphone.pro PREFIX=/usr && make
 Если всё прошло успешно, в каталоге :file:`bin` появится исполняемый файл :file:`polyphone`.
 Его можно установить в систему командой :command:`sudo make install`.
 
-По умолчанию используется локальная копия библиотеки :program:`RtAudio`.
-Если в вашем дистрибутиве отсутствуют такие библиотеки, как :program:`RtMidi` или :program:`Stk`, или их версии несовместимы, можно отредактировать файл :file:`.pro`, чтобы использовать их локальные копии.
+Если в вашем дистрибутиве отсутствуют такие библиотеки, как :program:`RtAudio` или :program:`RtMidi`, или их версии несовместимы, можно отредактировать файл :file:`.pro`, чтобы использовать их локальные копии.
 Для этого раскомментируйте соответствующие строки. Например,
 
 ```

@@ -26,12 +26,12 @@ Get Polyphone sources from <a href="software" target="_blank">here</a> or from <
 ### Open and configure the project
 
 
-First, open the file :file:`polyphone.pro` and edit it to possibly use the distributed versions of :program:`rtmidi` and :program:`stk` if your OS doesn't provide them (the distributed version of :program:`rtaudio` is used by default).
+First, open the file :file:`polyphone.pro` and edit it to possibly use the distributed versions of :program:`rtaudio` and :program:`rtmidi` if your OS doesn't provide them.
 Uncomment the following lines by removing the leading ‘#’:
 
 ```
+DEFINES += USE_LOCAL_RTAUDIO
 DEFINES += USE_LOCAL_RTMIDI
-DEFINES += USE_LOCAL_STK
 ```
 
 You can skip these modifications if you want to use libraries already installed in your computer (make sure you have them!).

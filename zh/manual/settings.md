@@ -20,6 +20,10 @@
   可用的系统取决于操作系统（例如 Windows 上的 WASAPI 和 ASIO，Linux 上的 ALSA 和 JACK，macOS 上的 Core Audio）。
   选择“-”会关闭音频输出。
 
+音频输入
+: 指定[录音机](manual/soundfont-editor/toolbar.md#doc_recorder)在 :guilabel:`麦克风 → wav` 模式下录制的设备，仅在录音机以此模式显示时才打开。
+  ASIO 不能用于输入。
+
 缓冲大小
 : 指定音频缓冲区的大小。
   缓冲区小则延迟低，但声音可能会出现爆音。

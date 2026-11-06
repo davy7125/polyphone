@@ -26,12 +26,12 @@ Obtenha o código-fonte do Polyphone <a href="software" target="_blank">aqui</a>
 ### Abrir e configurar o projeto
 
 
-Primeiro, abra o arquivo :file:`polyphone.pro` e edite-o para, eventualmente, usar as versões distribuídas de :program:`rtmidi` e de :program:`stk`, caso seu sistema operacional não as forneça (a versão distribuída de :program:`rtaudio` é usada por padrão).
+Primeiro, abra o arquivo :file:`polyphone.pro` e edite-o para, eventualmente, usar as versões distribuídas de :program:`rtaudio` e de :program:`rtmidi`, caso seu sistema operacional não as forneça.
 Descomente as linhas a seguir removendo o ‘#’ inicial:
 
 ```
+DEFINES += USE_LOCAL_RTAUDIO
 DEFINES += USE_LOCAL_RTMIDI
-DEFINES += USE_LOCAL_STK
 ```
 
 Você pode pular essas modificações se quiser usar as bibliotecas já instaladas no computador (verifique se elas estão presentes!).

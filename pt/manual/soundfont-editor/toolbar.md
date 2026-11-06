@@ -57,29 +57,80 @@ A visualização escolhida é mantida quando outro instrumento ou predefinição
 ## Gravador {#doc_recorder}
 
 
-Ao clicar no ícone ![gravador](images/toolbar_recorder.png "gravador"){.inline}, abre-se uma janela com o gravador, que pode gravar a saída do Polyphone em um arquivo :file:`.wav`. O tempo decorrido é exibido na janela.
+Ao clicar no ícone ![gravador](images/toolbar_recorder.png "gravador"){.inline}, abre-se uma janela com o gravador, que pode gravar em um arquivo o que o Polyphone toca, a entrada de áudio ou os sinais MIDI. O tempo decorrido é exibido na janela.
 
 
 ![Gravador](images/recorder.png "Gravador")
 
 
-O botão esquerdo pode ter dois estados:
+A lista do banner seleciona o modo de gravação:
+
+Polyphone → wav
+: Grava a saída do Polyphone em um arquivo :file:`.wav`.
+
+Microfone → wav
+: Grava a entrada de áudio escolhida nas [configurações](manual/settings.md#doc_general) em um arquivo :file:`.wav`, em estéreo ou mono conforme o dispositivo.
+  A entrada não é enviada para a saída de áudio.
+
+Sinais MIDI
+: Grava em um arquivo :file:`.mid` o que é tocado com um teclado MIDI ou o [teclado virtual](#doc_keyboard).
+
+O botão esquerdo pode ter dois estados (atalho :kbd:`Ctrl`+:kbd:`R`, disponível em todas as janelas, o gravador sendo aberto se necessário):
 
 Gravar
 : Inicia uma nova gravação se a captura estiver desligada.
-  Uma caixa de diálogo pede o nome do arquivo que conterá o sinal de áudio gravado.
+  O arquivo é criado na pasta da última gravação, com um número adicionado ao nome se já existir um arquivo com esse nome.
 
 Parar
 : Interrompe a captura em andamento.
-  A captura também é interrompida quando a janela é fechada.
+  A captura também é interrompida quando a janela é fechada, após uma confirmação.
 
-O botão direito também pode ter dois estados (acessível somente se a captura estiver ligada):
+O botão direito também pode ter dois estados (acessível somente se a captura estiver ligada, atalho :kbd:`Ctrl`+:kbd:`Shift`+:kbd:`R`):
 
 Pausar
 : Pausa a captura em andamento.
 
 Retomar
 : Retoma a captura em andamento.
+
+Abaixo desses botões, o medidor mostra o nível dos canais, mesmo quando nada está sendo gravado: assim o volume pode ser ajustado antes de uma gravação. O valor à sua direita é o nível mais alto alcançado desde o início da gravação, exibido em fundo vermelho se o nível máximo foi alcançado, o som estando então saturado. Um clique no medidor redefine esse valor. No modo :guilabel:`Sinais MIDI`, o medidor mostra a velocidade das notas tocadas, o que confirma que os sinais são recebidos.
+
+A parte inferior da janela lista as 5 últimas gravações, de áudio ou MIDI conforme o modo, com seu tamanho ou número de notas. Um arquivo que não existe mais é retirado da lista quando a janela é aberta. Um clique seleciona uma linha, que então mostra quatro botões:
+
+Ouvir
+: Reproduz o arquivo de áudio no Polyphone, pela saída de áudio (um segundo clique o interrompe), ou abre o arquivo MIDI no [reprodutor MIDI](#doc_midi_player).
+
+Pasta
+: Abre a pasta do arquivo.
+
+Excluir
+: Move o arquivo para a lixeira, após uma confirmação.
+
+Importar
+: Importa o arquivo de áudio como amostra na soundfont exibida.
+  Este botão só está disponível se um editor de soundfont estiver exibido.
+
+O menu à direita do banner contém as seguintes opções:
+
+Iniciar automaticamente
+: O botão de gravação aguarda o primeiro som ou sinal MIDI antes de iniciar a gravação.
+  Após uma parada automática, a próxima gravação é aguardada da mesma forma, até um clique no botão de parada.
+
+Parar após um silêncio
+: Número de segundos sem som nem sinal MIDI que interrompe uma gravação, de 1 a 10 (:guilabel:`desativado` para nenhuma parada automática).
+  O silêncio é retirado do arquivo, e uma tecla ainda pressionada não é um silêncio.
+
+Nível de som
+: Somente para a entrada de áudio: nível a partir do qual a entrada é considerada um som, acima do ruído de fundo.
+  Esse nível é fixado em -90 dB para a saída do Polyphone.
+
+Pedir um nome de arquivo
+: Uma caixa de diálogo pede o nome do arquivo no início de uma gravação.
+
+Alterar a pasta...
+: Seleciona a pasta das próximas gravações, comum aos arquivos de áudio e MIDI.
+
+Uma mensagem é exibida se uma gravação não puder continuar (disco cheio ou lento demais, arquivo atingindo 4 GB, mudança da entrada de áudio ou da taxa de amostragem da saída de áudio): o que foi gravado até então permanece no arquivo.
 
 
 ## Teclado virtual {#doc_keyboard}

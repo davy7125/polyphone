@@ -20,6 +20,10 @@ Sortie audio
   Les systèmes disponibles dépendent du système d'exploitation (par exemple WASAPI et ASIO sous Windows, ALSA et JACK sous Linux, Core Audio sous macOS).
   Le choix «&nbsp;-&nbsp;» désactive la sortie audio.
 
+Entrée audio
+: Définit le périphérique enregistré par le [magnétophone](manual/soundfont-editor/toolbar.md#doc_recorder) dans le mode :guilabel:`Micro → wav`, qui n'est ouvert que lorsque le magnétophone est affiché dans ce mode.
+  ASIO ne peut pas être utilisé pour l'entrée.
+
 Taille du tampon
 : Spécifie la taille du tampon audio.
   Une faible valeur induit une faible latence mais le son risque de craquer selon la performance de l'ordinateur.
