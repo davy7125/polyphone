@@ -29,11 +29,8 @@
 #include <QFileDialog>
 #include <QKeyEvent>
 #include <QHeaderView>
-#include <QMenu>
-#include <QWidgetAction>
 #include <QGridLayout>
 #include <QCheckBox>
-#include <QScreen>
 #include <QLabel>
 #include <QMessageBox>
 #include "contextmanager.h"
@@ -47,6 +44,7 @@
 #include "midiplayerchannel.h"
 #include "midiplayerdelegate.h"
 #include "editortoolbar.h"
+#include "bannermenu.h"
 #include "player.h"
 #include "resettableslider.h"
 #include "waitingtooldialog.h"
@@ -63,7 +61,6 @@ DialogMidiPlayer::DialogMidiPlayer(QWidget *parent) :
     _labelTempoTitle(nullptr),
     _labelTempo(nullptr),
     _labelPitch(nullptr),
-    _labelLoop(nullptr),
     _checkLoop(nullptr),
     _actionExport(nullptr),
     _renderer(nullptr),
@@ -78,26 +75,21 @@ DialogMidiPlayer::DialogMidiPlayer(QWidget *parent) :
     _player = new MidiFilePlayer(synth, sm->getSoundfonts(), sm->getMutex());
     synth->setMidiFileValues(_player->getChannelStates());
 
-    // Banner with the colors of the status bar of the virtual keyboard, its buttons being as the ones of the editor
-    // toolbar (lighter icon when hovered, arrow for the menu)
+    // Banner, its buttons being as the ones of the editor toolbar (lighter icon when hovered, arrow for the menu)
     ThemeManager * theme = ContextManager::theme();
     QColor bannerColor = theme->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
     QColor bannerTextColor = theme->getColor(ThemeManager::HIGHLIGHTED_TEXT);
-    ui->frameTop->setStyleSheet("QFrame#frameTop{background-color:" + bannerColor.name() + "}" +
-                                "QLabel{color:" + bannerTextColor.name() + "}" +
-                                "QToolButton{border:0;background:transparent}" +
-                                "QToolButton#toolButtonSettings{padding-right:6px}" +
-                                "QToolButton::menu-indicator{image:url(:/icons/arrow_down.svg);height:12px;width:12px}" +
+    ui->frameTop->setStyleSheet(theme->getBannerTheme() +
                                 "QSlider::groove:horizontal{height:4px;border-radius:2px;background:" +
                                 ThemeManager::mix(bannerColor, bannerTextColor, 0.35).name() + "}" +
                                 "QSlider::sub-page:horizontal{border-radius:2px;background:" + bannerTextColor.name() + "}" +
                                 "QSlider::handle:horizontal{width:12px;margin:-4px 0;border-radius:6px;background:" +
                                 bannerTextColor.name() + "}");
-    ui->pushOpen->setIcon(getBannerIcon(":/icons/folder.svg", 24));
+    ui->pushOpen->setIcon(theme->getBannerIcon(":/icons/folder.svg", 24));
     ui->pushOpen->setCursor(Qt::PointingHandCursor);
-    ui->pushStop->setIcon(getBannerIcon(":/icons/recorder_stop.svg", 28));
+    ui->pushStop->setIcon(theme->getBannerIcon(":/icons/recorder_stop.svg", 28));
     ui->pushStop->setCursor(Qt::PointingHandCursor);
-    ui->toolButtonSettings->setIcon(getBannerIcon(":/icons/menu.svg", 24));
+    ui->toolButtonSettings->setIcon(theme->getBannerIcon(":/icons/menu.svg", 24));
     ui->toolButtonSettings->setCursor(Qt::PointingHandCursor);
     updatePlayPauseIcon(false);
     initializeSettingsMenu();
@@ -352,26 +344,12 @@ void DialogMidiPlayer::on_sliderPosition_sliderReleased()
 
 void DialogMidiPlayer::initializeSettingsMenu()
 {
-    // Menu under the button on the right side of the banner (not a child of the banner, whose style would apply)
-    ThemeManager * theme = ContextManager::theme();
-    QMenu * menu = new QMenu(this);
-    menu->setStyleSheet(theme->getMenuTheme());
-    menu->installEventFilter(this); // Aligned on the right side of the button
-    QWidget * widget = new QWidget();
-    widget->setAttribute(Qt::WA_NoMousePropagation); // A click on a label does not close the menu
-    widget->setStyleSheet("QLabel,QCheckBox{color:" + theme->getColor(ThemeManager::LIST_TEXT).name() + "}");
-    QGridLayout * layout = new QGridLayout(widget);
-    layout->setContentsMargins(15, 5, 15, 5);
-    layout->setHorizontalSpacing(10);
-    layout->setVerticalSpacing(10);
+    // Menu under the button on the right side of the banner
+    BannerMenu * menu = new BannerMenu(ui->toolButtonSettings, this);
+    QGridLayout * layout = menu->getGrid();
 
-    // Loop, the checkbox being on the right side and toggled by a click on its label
-    _labelLoop = new QLabel(tr("Loop playback"));
-    _labelLoop->installEventFilter(this);
-    _checkLoop = new QCheckBox();
-    _checkLoop->setFocusPolicy(Qt::NoFocus);
-    layout->addWidget(_labelLoop, 0, 0, 1, 2);
-    layout->addWidget(_checkLoop, 0, 2, Qt::AlignRight);
+    // Loop
+    _checkLoop = menu->addCheckBox(tr("Loop playback"), 0, 3);
 
     // Tempo as a percentage of the one of the file (all its tempo changes being kept), and transposition except for the
     // percussions, both kept for all files and restored with a double click
@@ -406,15 +384,10 @@ void DialogMidiPlayer::initializeSettingsMenu()
     layout->addWidget(_sliderPitch, 2, 1);
     layout->addWidget(_labelPitch, 2, 2);
 
-    QWidgetAction * action = new QWidgetAction(menu);
-    action->setDefaultWidget(widget);
-    menu->addAction(action);
-
     // Export of the file as it is heard
     menu->addSeparator();
     _actionExport = menu->addAction(tr("Export audio..."));
     connect(_actionExport, SIGNAL(triggered()), this, SLOT(onExportTriggered()));
-    ui->toolButtonSettings->setMenu(menu);
 
     connect(_checkLoop, SIGNAL(toggled(bool)), this, SLOT(onLoopToggled(bool)));
     connect(_sliderTempo, SIGNAL(valueChanged(int)), this, SLOT(onTempoChanged(int)));
@@ -490,23 +463,9 @@ void DialogMidiPlayer::updateTime(qint64 position)
 void DialogMidiPlayer::updatePlayPauseIcon(bool isPlaying)
 {
     _isPlaying = isPlaying;
-    ui->pushPlayPause->setIcon(getBannerIcon(isPlaying ? ":/icons/recorder_pause.svg" : ":/icons/recorder_play.svg", 28));
+    QString svgPath = isPlaying ? ":/icons/recorder_pause.svg" : ":/icons/recorder_play.svg";
+    ui->pushPlayPause->setIcon(ContextManager::theme()->getBannerIcon(svgPath, 28));
     ui->pushPlayPause->setToolTip(isPlaying ? tr("Pause") : tr("Play"));
-}
-
-QIcon DialogMidiPlayer::getBannerIcon(QString svgPath, int size)
-{
-    // Text color of the banner, changed when the button is hovered (active mode of an auto-raise button) and dimmed
-    // when it is disabled
-    QIcon icon;
-    icon.addPixmap(ContextManager::theme()->getColoredSvg(svgPath, QSize(size, size), ThemeManager::HIGHLIGHTED_TEXT), QIcon::Normal);
-    QMap<QString, QString> replacement;
-    replacement["currentColor"] = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT, ThemeManager::HOVERED).name();
-    icon.addPixmap(ContextManager::theme()->getColoredSvg(svgPath, QSize(size, size), replacement), QIcon::Active);
-    replacement["currentColor"] = ThemeManager::mix(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
-                                                    ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT), 0.4).name();
-    icon.addPixmap(ContextManager::theme()->getColoredSvg(svgPath, QSize(size, size), replacement), QIcon::Disabled);
-    return icon;
 }
 
 QString DialogMidiPlayer::getTimeText(qint64 microseconds)
@@ -689,30 +648,6 @@ void DialogMidiPlayer::hideEvent(QHideEvent * event)
     _player->stop();
     updatePlayPauseIcon(false);
     updatePosition(0);
-}
-
-bool DialogMidiPlayer::eventFilter(QObject * watched, QEvent * event)
-{
-    // A click on the label of the loop toggles it
-    if (watched == _labelLoop && event->type() == QEvent::MouseButtonRelease &&
-        static_cast<QMouseEvent *>(event)->button() == Qt::LeftButton)
-    {
-        _checkLoop->toggle();
-        return true;
-    }
-
-    // The settings menu is aligned on the right side of its button (a right-to-left button would have its arrow on the
-    // left side), within the screen
-    if (watched == ui->toolButtonSettings->menu() && event->type() == QEvent::Show)
-    {
-        QWidget * menu = ui->toolButtonSettings->menu();
-        QPoint position = ui->toolButtonSettings->mapToGlobal(
-            QPoint(ui->toolButtonSettings->width() - menu->width(), ui->toolButtonSettings->height()));
-        if (menu->screen() != nullptr)
-            position.setX(qMax(position.x(), menu->screen()->availableGeometry().left()));
-        menu->move(position.x(), menu->y());
-    }
-    return QDialog::eventFilter(watched, event);
 }
 
 void DialogMidiPlayer::keyPressEvent(QKeyEvent * event)

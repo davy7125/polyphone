@@ -26,21 +26,29 @@
 #include "ui_dialogkeyboard.h"
 #include "contextmanager.h"
 #include "editortoolbar.h"
+#include "bannermenu.h"
 #include <QApplication>
+#include <QCheckBox>
 
 DialogKeyboard::DialogKeyboard(QWidget *parent) :
     QDialog(parent, Qt::Tool | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint),
     ui(new Ui::DialogKeyboard),
-    _stateUpdate(true),
-    _keyboardTop(0),
-    _keepKeyboardTop(false)
+    _stateUpdate(true)
 {
     ui->setupUi(this);
 
-    // Style
-    ui->frameBottom->setStyleSheet("QFrame#frameBottom{background-color:" +
-                                   ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() + ";}QLabel{color:" +
-                                   ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() + "}");
+    // Banner, with a flat list for the type of keyboard
+    ThemeManager * theme = ContextManager::theme();
+    ui->frameTop->setStyleSheet(theme->getBannerTheme() +
+                                "QComboBox{combobox-popup:0;border:0;padding:0;background:transparent;color:" +
+                                theme->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() + "}" +
+                                "QComboBox:hover{color:" + theme->getColor(ThemeManager::HIGHLIGHTED_TEXT, ThemeManager::HOVERED).name() + "}" +
+                                "QComboBox::drop-down{border:0;width:14px}" +
+                                "QComboBox::down-arrow{image:url(:/icons/arrow_down.svg);height:12px;width:12px}");
+    ui->toolButtonSettings->setIcon(theme->getBannerIcon(":/icons/menu.svg", 24));
+
+    // Bar between the effects and the controllers
+    ui->lineAreas->setStyleSheet("QFrame{border:0;border-top:1px solid " + theme->getColor(ThemeManager::BORDER).name() + "}");
 
     // Initialize the keyboard
     int type = ContextManager::configuration()->getValue(ConfManager::SECTION_KEYBOARD, "type", 1).toInt();
@@ -68,14 +76,15 @@ DialogKeyboard::DialogKeyboard(QWidget *parent) :
     connect(ui->keyboard, SIGNAL(mouseOver(int,int)), this, SLOT(onMouseHover(int,int)));
     connect(this, SIGNAL(processKeyMainThread(int,int,int)), this, SLOT(onProcessKeyMainThread(int,int,int)));
 
-    // Buttons toggling the controller and effect areas, styled as the stereo editing button
-    QString styleSheet = "QPushButton{border: 1px solid " + ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() +
-                         "; border-top: 0; border-right: 0; border-bottom: 0} QPushButton:hover {background-color:" +
-                         ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND, ThemeManager::HOVERED).name() + "}";
-    ui->pushControllers->setStyleSheet(styleSheet);
-    ui->pushControllers->setIcon(getToggleIcon(":/icons/MIDI.svg"));
-    ui->pushEffects->setStyleSheet(styleSheet);
-    ui->pushEffects->setIcon(getToggleIcon(":/icons/sound.svg"));
+    // Menu of the banner showing or hiding the controllers and the effects
+    ConfManager * configuration = ContextManager::configuration();
+    BannerMenu * menu = new BannerMenu(ui->toolButtonSettings, this);
+    QCheckBox * checkControllers = menu->addCheckBox(tr("MIDI controllers"), 0, 2);
+    checkControllers->setChecked(configuration->getValue(ConfManager::SECTION_DISPLAY, "control_area_expanded", false).toBool());
+    connect(checkControllers, SIGNAL(toggled(bool)), this, SLOT(onControllersToggled(bool)));
+    QCheckBox * checkEffects = menu->addCheckBox(tr("Effects"), 1, 2);
+    checkEffects->setChecked(configuration->getValue(ConfManager::SECTION_DISPLAY, "effect_area_expanded", false).toBool());
+    connect(checkEffects, SIGNAL(toggled(bool)), this, SLOT(onEffectsToggled(bool)));
     updateAreaVisibility();
 
     // The keys played with the computer keyboard are captured whatever the widget having the focus in this window
@@ -137,29 +146,22 @@ void DialogKeyboard::hideEvent(QHideEvent * event)
 void DialogKeyboard::resizeEvent(QResizeEvent * event)
 {
     QDialog::resizeEvent(event);
+    followKeyboardRatio();
+}
 
-    // The window follows the ratio of the keyboard: its height changes with its width, and conversely
+void DialogKeyboard::followKeyboardRatio()
+{
+    // The window keeps the ratio of the keyboard: its height is defined by its width. It is a constraint and not a resize
+    // because a window manager can ignore any resize while an edge of the window is dragged, whereas it follows the
+    // constraints
     // Not possible if the size is imposed (maximized window), the keyboard being then centered
-    QSize size = event->size();
-    if (event->oldSize().isValid() && !(this->windowState() & (Qt::WindowMaximized | Qt::WindowFullScreen)) &&
-        size.height() != getHeightForWidth(size.width()))
+    if (this->windowState() & (Qt::WindowMaximized | Qt::WindowFullScreen))
     {
-        int width = size.width();
-        if (width == event->oldSize().width())
-            width = getWidthForHeight(size.height());
-        this->resize(width, getHeightForWidth(width));
-        return;
+        this->setMinimumHeight(0);
+        this->setMaximumHeight(QWIDGETSIZE_MAX);
     }
-
-    // The window is moved so that the keyboard stays at the same place on the screen when the area above it is shown
-    // or hidden (not possible with Wayland)
-    if (_keepKeyboardTop)
-    {
-        _keepKeyboardTop = false;
-        int offset = ui->keyboard->y() - _keyboardTop;
-        if (offset != 0)
-            this->move(this->x(), this->y() - offset);
-    }
+    else
+        this->setFixedHeight(getHeightForWidth(this->width()));
 }
 
 void DialogKeyboard::changeEvent(QEvent * event)
@@ -170,6 +172,10 @@ void DialogKeyboard::changeEvent(QEvent * event)
     // all notes started by the computer keyboard are stopped as soon as the focus is lost
     if (event->type() == QEvent::ActivationChange && !this->isActiveWindow())
         ui->keyboard->releaseKeys();
+
+    // The constraint on the height depends on the state of the window
+    if (event->type() == QEvent::WindowStateChange)
+        followKeyboardRatio();
 }
 
 int DialogKeyboard::getHeightForWidth(int width)
@@ -178,32 +184,12 @@ int DialogKeyboard::getHeightForWidth(int width)
     return this->layout()->totalHeightForWidth(width);
 }
 
-int DialogKeyboard::getWidthForHeight(int height)
-{
-    // Largest width whose height doesn't exceed height (not less than the minimum width)
-    int low = this->minimumWidth();
-    int high = 16384;
-    while (low < high)
-    {
-        int middle = (low + high + 1) / 2;
-        if (getHeightForWidth(middle) <= height)
-            low = middle;
-        else
-            high = middle - 1;
-    }
-    return low;
-}
-
 void DialogKeyboard::adjustHeight()
 {
     // Same width (possibly increased by the minimum width of an area), the height following the content
     this->layout()->invalidate();
     this->layout()->activate();
-    int width = qMax(this->width(), this->minimumWidth());
-    int height = getHeightForWidth(width);
-    if (width == this->width() && height == this->height())
-        _keepKeyboardTop = false; // No resize event
-    this->resize(width, height);
+    followKeyboardRatio();
 }
 
 void DialogKeyboard::on_comboType_currentIndexChanged(int index)
@@ -260,40 +246,32 @@ void DialogKeyboard::displayKeyInfo()
     }
 }
 
-void DialogKeyboard::on_pushControllers_clicked()
+void DialogKeyboard::onControllersToggled(bool checked)
 {
-    // Position of the keyboard to keep, the window growing or shrinking from its top
-    _keyboardTop = ui->keyboard->y();
-    _keepKeyboardTop = this->isVisible() && !(this->windowState() & (Qt::WindowMaximized | Qt::WindowFullScreen));
-
-    // Toggle the visibility of the controller area
-    bool isVisible = ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "control_area_expanded", false).toBool();
-    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "control_area_expanded", !isVisible);
+    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "control_area_expanded", checked);
     updateAreaVisibility();
 }
 
-void DialogKeyboard::on_pushEffects_clicked()
+void DialogKeyboard::onEffectsToggled(bool checked)
 {
-    // Toggle the visibility of the effect area
-    bool isVisible = ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "effect_area_expanded", false).toBool();
-    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "effect_area_expanded", !isVisible);
+    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "effect_area_expanded", checked);
     updateAreaVisibility();
 }
 
 void DialogKeyboard::updateAreaVisibility()
 {
-    // Initialize the expanded / collapsed state
-    bool isVisible = ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "control_area_expanded", false).toBool();
-    ui->controllerArea->setVisible(isVisible);
-    ui->pushControllers->setChecked(isVisible);
-    ui->pushControllers->setToolTip(isVisible ? tr("Hide the controller area") : tr("Show the controller area"));
-
-    isVisible = ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "effect_area_expanded", false).toBool();
-    ui->effectArea->setVisible(isVisible);
-    ui->pushEffects->setChecked(isVisible);
-    ui->pushEffects->setToolTip(isVisible ? tr("Hide the effects") : tr("Show the effects"));
-
+    int keyboardTop = ui->keyboard->y();
+    bool controllersVisible = ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "control_area_expanded", false).toBool();
+    bool effectsVisible = ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "effect_area_expanded", false).toBool();
+    ui->controllerArea->setVisible(controllersVisible);
+    ui->effectArea->setVisible(effectsVisible);
+    ui->lineAreas->setVisible(controllersVisible && effectsVisible);
     adjustHeight();
+
+    // The window grows or shrinks from its top so that the keyboard stays at the same place on the screen (not possible
+    // with Wayland)
+    if (this->isVisible() && !(this->windowState() & (Qt::WindowMaximized | Qt::WindowFullScreen)))
+        this->move(this->x(), this->y() - (ui->keyboard->y() - keyboardTop));
 }
 
 void DialogKeyboard::keyPressEvent(QKeyEvent * event)
@@ -301,18 +279,6 @@ void DialogKeyboard::keyPressEvent(QKeyEvent * event)
     // Prevent the escape key from closing the window
     if (event->key() != Qt::Key_Escape)
           QDialog::keyPressEvent(event);
-}
-
-QIcon DialogKeyboard::getToggleIcon(QString svgPath)
-{
-    // Lit when checked, dimmed otherwise
-    QIcon icon;
-    icon.addPixmap(ContextManager::theme()->getColoredSvg(svgPath, QSize(16, 16), ThemeManager::HIGHLIGHTED_TEXT), QIcon::Normal, QIcon::On);
-    QMap<QString, QString> replacement;
-    replacement["currentColor"] = ThemeManager::mix(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
-                                                    ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT), 0.4).name();
-    icon.addPixmap(ContextManager::theme()->getColoredSvg(svgPath, QSize(16, 16), replacement), QIcon::Normal, QIcon::Off);
-    return icon;
 }
 
 bool DialogKeyboard::eventFilter(QObject * watched, QEvent * event)

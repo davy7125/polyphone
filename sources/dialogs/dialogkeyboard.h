@@ -68,22 +68,19 @@ private slots:
     void onProcessKeyMainThread(int channel, int key, int vel);
     void on_comboType_currentIndexChanged(int index);
     void onMouseHover(int key, int vel);
-    void on_pushControllers_clicked();
-    void on_pushEffects_clicked();
+    void onControllersToggled(bool checked);
+    void onEffectsToggled(bool checked);
 
 private:
     void displayKeyInfo();
     void updateAreaVisibility();
     void adjustHeight();
+    void followKeyboardRatio();
     int getHeightForWidth(int width);
-    int getWidthForHeight(int height);
-    static QIcon getToggleIcon(QString svgPath);
 
     Ui::DialogKeyboard *ui;
     QList<QPair<int, QPair<int, int> > > _triggeredKeys; // velocity and aftertouch by key
     bool _stateUpdate;
-    int _keyboardTop; // Position of the keyboard in the window, kept on the screen when the controllers are toggled
-    bool _keepKeyboardTop;
 };
 
 #endif // DIALOGKEYBOARD_H

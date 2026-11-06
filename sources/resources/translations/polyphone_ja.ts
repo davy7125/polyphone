@@ -1480,17 +1480,17 @@ repository</source>
 <context>
     <name>ControllerArea</name>
     <message>
-        <location filename="../../clavier/controllerarea.ui" line="203"/>
+        <location filename="../../clavier/controllerarea.ui" line="171"/>
         <source>Pitch wheel</source>
         <translation>ピッチホイール</translation>
     </message>
     <message>
-        <location filename="../../clavier/controllerarea.ui" line="227"/>
+        <location filename="../../clavier/controllerarea.ui" line="85"/>
         <source>Sensitivity</source>
         <translation>感度</translation>
     </message>
     <message>
-        <location filename="../../clavier/controllerarea.ui" line="251"/>
+        <location filename="../../clavier/controllerarea.ui" line="112"/>
         <source>Pressure</source>
         <translation>プレッシャー</translation>
     </message>
@@ -1934,59 +1934,59 @@ repository</source>
         <translation>仮想キーボード</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="150"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="76"/>
+        <source>Keyboard type</source>
+        <translation>キーボードの種類</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="87"/>
         <source>5 octaves</source>
         <translation>5オクターブ</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="155"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="92"/>
         <source>6 octaves</source>
         <translation>6オクターブ</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="160"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="97"/>
         <source>88 keys (piano)</source>
         <translation>88鍵 (ピアノ)</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="165"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="102"/>
         <source>128 keys (full)</source>
         <translation>128鍵 (フル)</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="191"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="115"/>
         <source>Key</source>
         <translation>キー</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="216"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="140"/>
         <source>Velocity</source>
         <translation>ベロシティ</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="241"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="165"/>
         <source>Aftertouch</source>
         <translation>アフタータッチ</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="289"/>
-        <source>Hide the controller area</source>
-        <translation>コントローラーエリアを隠す</translation>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="218"/>
+        <source>Display options</source>
+        <translation>表示オプション</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="289"/>
-        <source>Show the controller area</source>
-        <translation>コントローラーエリアを表示</translation>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="82"/>
+        <source>MIDI controllers</source>
+        <translation>MIDIコントローラー</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="294"/>
-        <source>Hide the effects</source>
-        <translation>エフェクトを隠す</translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="294"/>
-        <source>Show the effects</source>
-        <translation>エフェクトを表示</translation>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="85"/>
+        <source>Effects</source>
+        <translation>エフェクト</translation>
     </message>
 </context>
 <context>
@@ -2031,7 +2031,7 @@ repository</source>
     </message>
     <message>
         <location filename="../../dialogs/dialogmidiplayer.ui" line="72"/>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="176"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="168"/>
         <source>Open a MIDI file</source>
         <translation>MIDIファイルを開く</translation>
     </message>
@@ -2046,105 +2046,105 @@ repository</source>
         <translation>再生設定</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="378"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="356"/>
         <source>Tempo</source>
         <translation>テンポ</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="393"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="371"/>
         <source>The percussions (bank 128) are not transposed</source>
         <translation>パーカッション（バンク128）はトランスポーズされません</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="112"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="104"/>
         <source>Channel</source>
         <translation>チャンネル</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="112"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="104"/>
         <source>Soundfont</source>
         <translation>SoundFont</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="112"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="104"/>
         <source>Preset</source>
         <translation>プリセット</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="112"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="104"/>
         <source>Volume</source>
         <translation>ボリューム</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="132"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="124"/>
         <source>Open a MIDI file to play it with the soundfonts that are open.</source>
         <translation>MIDIファイルを開くと、開いているSoundFontで再生できます。</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="177"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="169"/>
         <source>MIDI files</source>
         <translation>MIDIファイル</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="369"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="352"/>
         <source>Loop playback</source>
         <translation>ループ再生</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="384"/>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="450"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="362"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="423"/>
         <source>%1%</source>
         <comment>percentage</comment>
         <translation>%1%</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="385"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="363"/>
         <source>Pitch</source>
         <translation>ピッチ</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="415"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="389"/>
         <source>Export audio...</source>
         <translation>オーディオをエクスポート...</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="433"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="406"/>
         <source>Tempo of the file: %1 bpm, variable</source>
         <translation>ファイルのテンポ：%1 bpm（可変）</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="433"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="406"/>
         <source>Tempo of the file: %1 bpm</source>
         <translation>ファイルのテンポ：%1 bpm</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="435"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="408"/>
         <source>File without tempo (SMPTE time code)</source>
         <translation>テンポのないファイル（SMPTEタイムコード）</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="494"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="468"/>
         <source>Pause</source>
         <translation>一時停止</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="494"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="468"/>
         <source>Play</source>
         <translation>再生</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="573"/>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="608"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="532"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="567"/>
         <source>Export audio</source>
         <translation>オーディオをエクスポート</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="576"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="535"/>
         <source>Wav file</source>
         <translation>Wavファイル</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="647"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="606"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
@@ -3172,38 +3172,38 @@ repository</source>
 <context>
     <name>GraphicsFourier</name>
     <message>
-        <location filename="../../editor/graphics/graphicsfourier.cpp" line="48"/>
+        <location filename="../../editor/graphics/graphicsfourier.cpp" line="47"/>
         <source>Export graph</source>
         <translation>グラフをエクスポート</translation>
     </message>
     <message>
-        <location filename="../../editor/graphics/graphicsfourier.cpp" line="50"/>
+        <location filename="../../editor/graphics/graphicsfourier.cpp" line="49"/>
         <source>Show peak frequencies</source>
         <translation>ピーク周波数を表示</translation>
     </message>
     <message>
-        <location filename="../../editor/graphics/graphicsfourier.cpp" line="366"/>
+        <location filename="../../editor/graphics/graphicsfourier.cpp" line="175"/>
         <source>Frequency (Hz)</source>
         <translation>周波数 (Hz)</translation>
     </message>
     <message>
-        <location filename="../../editor/graphics/graphicsfourier.cpp" line="371"/>
+        <location filename="../../editor/graphics/graphicsfourier.cpp" line="180"/>
         <source>Intensity</source>
         <translation>強度</translation>
     </message>
     <message>
-        <location filename="../../editor/graphics/graphicsfourier.cpp" line="537"/>
+        <location filename="../../editor/graphics/graphicsfourier.cpp" line="347"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
         <translation>Hz</translation>
     </message>
     <message>
-        <location filename="../../editor/graphics/graphicsfourier.cpp" line="601"/>
+        <location filename="../../editor/graphics/graphicsfourier.cpp" line="411"/>
         <source>Export a graph</source>
         <translation>グラフをエクスポート</translation>
     </message>
     <message>
-        <location filename="../../editor/graphics/graphicsfourier.cpp" line="602"/>
+        <location filename="../../editor/graphics/graphicsfourier.cpp" line="412"/>
         <source>Png file</source>
         <translation>PNGファイル</translation>
     </message>
@@ -4996,31 +4996,31 @@ Warning: quality will be reduced and the loop may be altered</source>
         <translation>ラ♯</translation>
     </message>
     <message>
-        <location filename="../../core/utils.cpp" line="331"/>
+        <location filename="../../core/utils.cpp" line="340"/>
         <source>bytes</source>
         <translation>バイト</translation>
     </message>
     <message>
-        <location filename="../../core/utils.cpp" line="333"/>
+        <location filename="../../core/utils.cpp" line="342"/>
         <source>kB</source>
         <comment>kilobytes</comment>
         <translation>kB</translation>
     </message>
     <message>
-        <location filename="../../core/utils.cpp" line="335"/>
+        <location filename="../../core/utils.cpp" line="344"/>
         <location filename="../../repository/browser/soundfontbrowser.cpp" line="80"/>
         <source>MB</source>
         <comment>megabytes</comment>
         <translation>MB</translation>
     </message>
     <message>
-        <location filename="../../core/utils.cpp" line="337"/>
+        <location filename="../../core/utils.cpp" line="346"/>
         <source>GB</source>
         <comment>gigabytes</comment>
         <translation>GB</translation>
     </message>
     <message>
-        <location filename="../../core/utils.cpp" line="338"/>
+        <location filename="../../core/utils.cpp" line="347"/>
         <source>TB</source>
         <comment>terabytes</comment>
         <translation>TB</translation>
@@ -6059,7 +6059,7 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ToolBalanceAdjustment</name>
     <message>
-        <location filename="../../editor/tools/balance_adjustment/toolbalanceadjustment.cpp" line="121"/>
+        <location filename="../../editor/tools/balance_adjustment/toolbalanceadjustment.cpp" line="133"/>
         <source>This tool cannot be used with mono samples:</source>
         <translation>このツールはモノラルサンプルでは使用できません:</translation>
     </message>

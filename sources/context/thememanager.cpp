@@ -640,6 +640,29 @@ QList<ThemeManager::ColorTheme> ThemeManager::getThemes()
     return themes;
 }
 
+QString ThemeManager::getBannerTheme()
+{
+    return "QFrame#frameTop{background-color:" + this->getColor(HIGHLIGHTED_BACKGROUND).name() + "}" +
+           "QLabel{color:" + this->getColor(HIGHLIGHTED_TEXT).name() + "}" +
+           "QToolButton{border:0;background:transparent}" +
+           "QToolButton#toolButtonSettings{padding-right:6px}" +
+           "QToolButton::menu-indicator{image:url(:/icons/arrow_down.svg);height:12px;width:12px}";
+}
+
+QIcon ThemeManager::getBannerIcon(QString svgPath, int size)
+{
+    // Text color of the banner, changed when the button is hovered (active mode of an auto-raise button) and dimmed
+    // when it is disabled
+    QIcon icon;
+    icon.addPixmap(this->getColoredSvg(svgPath, QSize(size, size), HIGHLIGHTED_TEXT), QIcon::Normal);
+    QMap<QString, QString> replacement;
+    replacement["currentColor"] = this->getColor(HIGHLIGHTED_TEXT, HOVERED).name();
+    icon.addPixmap(this->getColoredSvg(svgPath, QSize(size, size), replacement), QIcon::Active);
+    replacement["currentColor"] = mix(this->getColor(HIGHLIGHTED_BACKGROUND), this->getColor(HIGHLIGHTED_TEXT), 0.4).name();
+    icon.addPixmap(this->getColoredSvg(svgPath, QSize(size, size), replacement), QIcon::Disabled);
+    return icon;
+}
+
 QPixmap ThemeManager::getColoredSvg(QString filename, QSize maxSize, ColorType currentColor)
 {
     QMap<QString, QString> replacement;

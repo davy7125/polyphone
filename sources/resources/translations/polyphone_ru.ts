@@ -1476,17 +1476,17 @@ repository</source>
 <context>
     <name>ControllerArea</name>
     <message>
-        <location filename="../../clavier/controllerarea.ui" line="203"/>
+        <location filename="../../clavier/controllerarea.ui" line="171"/>
         <source>Pitch wheel</source>
         <translation>Колесо высоты тона</translation>
     </message>
     <message>
-        <location filename="../../clavier/controllerarea.ui" line="227"/>
+        <location filename="../../clavier/controllerarea.ui" line="85"/>
         <source>Sensitivity</source>
         <translation>Чувствительность</translation>
     </message>
     <message>
-        <location filename="../../clavier/controllerarea.ui" line="251"/>
+        <location filename="../../clavier/controllerarea.ui" line="112"/>
         <source>Pressure</source>
         <translation>Давление</translation>
     </message>
@@ -1947,59 +1947,59 @@ repository</source>
         <translation>Виртуальная клавиатура</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="150"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="76"/>
+        <source>Keyboard type</source>
+        <translation>Тип клавиатуры</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="87"/>
         <source>5 octaves</source>
         <translation>5 октав</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="155"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="92"/>
         <source>6 octaves</source>
         <translation>6 октав</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="160"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="97"/>
         <source>88 keys (piano)</source>
         <translation>88 клавиш (фортепиано)</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="165"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="102"/>
         <source>128 keys (full)</source>
         <translation>128 клавиш (полная)</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="191"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="115"/>
         <source>Key</source>
         <translation>Клавиша</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="216"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="140"/>
         <source>Velocity</source>
         <translation>Сила нажатия</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="241"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="165"/>
         <source>Aftertouch</source>
         <translation>Послекасание</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="289"/>
-        <source>Hide the controller area</source>
-        <translation>Скрыть область контроллеров</translation>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="218"/>
+        <source>Display options</source>
+        <translation>Опции отображения</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="289"/>
-        <source>Show the controller area</source>
-        <translation>Показать область контроллеров</translation>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="82"/>
+        <source>MIDI controllers</source>
+        <translation>MIDI-контроллеры</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="294"/>
-        <source>Hide the effects</source>
-        <translation>Скрыть эффекты</translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="294"/>
-        <source>Show the effects</source>
-        <translation>Показать эффекты</translation>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="85"/>
+        <source>Effects</source>
+        <translation>Эффекты</translation>
     </message>
 </context>
 <context>
@@ -2044,7 +2044,7 @@ repository</source>
     </message>
     <message>
         <location filename="../../dialogs/dialogmidiplayer.ui" line="72"/>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="176"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="168"/>
         <source>Open a MIDI file</source>
         <translation>Открыть MIDI-файл</translation>
     </message>
@@ -2059,105 +2059,105 @@ repository</source>
         <translation>Настройки воспроизведения</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="378"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="356"/>
         <source>Tempo</source>
         <translation>Темп</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="393"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="371"/>
         <source>The percussions (bank 128) are not transposed</source>
         <translation>Ударные (банк 128) не транспонируются</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="112"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="104"/>
         <source>Channel</source>
         <translation>Канал</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="112"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="104"/>
         <source>Soundfont</source>
         <translation>SoundFont</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="112"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="104"/>
         <source>Preset</source>
         <translation>Пресет</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="112"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="104"/>
         <source>Volume</source>
         <translation>Громкость</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="132"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="124"/>
         <source>Open a MIDI file to play it with the soundfonts that are open.</source>
         <translation>Откройте MIDI-файл, чтобы воспроизвести его с открытыми SoundFont.</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="177"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="169"/>
         <source>MIDI files</source>
         <translation>MIDI-файлы</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="369"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="352"/>
         <source>Loop playback</source>
         <translation>Воспроизведение по кругу</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="384"/>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="450"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="362"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="423"/>
         <source>%1%</source>
         <comment>percentage</comment>
         <translation>%1 %</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="385"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="363"/>
         <source>Pitch</source>
         <translation>Высота</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="415"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="389"/>
         <source>Export audio...</source>
         <translation>Экспорт аудио…</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="433"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="406"/>
         <source>Tempo of the file: %1 bpm, variable</source>
         <translation>Темп файла: %1 bpm, переменный</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="433"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="406"/>
         <source>Tempo of the file: %1 bpm</source>
         <translation>Темп файла: %1 bpm</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="435"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="408"/>
         <source>File without tempo (SMPTE time code)</source>
         <translation>Файл без темпа (тайм-код SMPTE)</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="494"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="468"/>
         <source>Pause</source>
         <translation>Пауза</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="494"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="468"/>
         <source>Play</source>
         <translation>Воспроизведение</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="573"/>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="608"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="532"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="567"/>
         <source>Export audio</source>
         <translation>Экспорт аудио</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="576"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="535"/>
         <source>Wav file</source>
         <translation>Файл wav</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="647"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="606"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
@@ -3197,38 +3197,38 @@ repository</source>
 <context>
     <name>GraphicsFourier</name>
     <message>
-        <location filename="../../editor/graphics/graphicsfourier.cpp" line="48"/>
+        <location filename="../../editor/graphics/graphicsfourier.cpp" line="47"/>
         <source>Export graph</source>
         <translation>Экспортировать график</translation>
     </message>
     <message>
-        <location filename="../../editor/graphics/graphicsfourier.cpp" line="50"/>
+        <location filename="../../editor/graphics/graphicsfourier.cpp" line="49"/>
         <source>Show peak frequencies</source>
         <translation>Показать пиковые частоты</translation>
     </message>
     <message>
-        <location filename="../../editor/graphics/graphicsfourier.cpp" line="366"/>
+        <location filename="../../editor/graphics/graphicsfourier.cpp" line="175"/>
         <source>Frequency (Hz)</source>
         <translation>Частота (Гц)</translation>
     </message>
     <message>
-        <location filename="../../editor/graphics/graphicsfourier.cpp" line="371"/>
+        <location filename="../../editor/graphics/graphicsfourier.cpp" line="180"/>
         <source>Intensity</source>
         <translation>Интенсивность</translation>
     </message>
     <message>
-        <location filename="../../editor/graphics/graphicsfourier.cpp" line="537"/>
+        <location filename="../../editor/graphics/graphicsfourier.cpp" line="347"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
         <translation>Гц</translation>
     </message>
     <message>
-        <location filename="../../editor/graphics/graphicsfourier.cpp" line="601"/>
+        <location filename="../../editor/graphics/graphicsfourier.cpp" line="411"/>
         <source>Export a graph</source>
         <translation>Экспорт графика</translation>
     </message>
     <message>
-        <location filename="../../editor/graphics/graphicsfourier.cpp" line="602"/>
+        <location filename="../../editor/graphics/graphicsfourier.cpp" line="412"/>
         <source>Png file</source>
         <translation>Изображение PNG</translation>
     </message>
@@ -5038,31 +5038,31 @@ Warning: quality will be reduced and the loop may be altered</source>
         <translation>Неизвестный автор</translation>
     </message>
     <message>
-        <location filename="../../core/utils.cpp" line="331"/>
+        <location filename="../../core/utils.cpp" line="340"/>
         <source>bytes</source>
         <translation>Б</translation>
     </message>
     <message>
-        <location filename="../../core/utils.cpp" line="333"/>
+        <location filename="../../core/utils.cpp" line="342"/>
         <source>kB</source>
         <comment>kilobytes</comment>
         <translation>КБ</translation>
     </message>
     <message>
-        <location filename="../../core/utils.cpp" line="335"/>
+        <location filename="../../core/utils.cpp" line="344"/>
         <location filename="../../repository/browser/soundfontbrowser.cpp" line="80"/>
         <source>MB</source>
         <comment>megabytes</comment>
         <translation>МБ</translation>
     </message>
     <message>
-        <location filename="../../core/utils.cpp" line="337"/>
+        <location filename="../../core/utils.cpp" line="346"/>
         <source>GB</source>
         <comment>gigabytes</comment>
         <translation>ГБ</translation>
     </message>
     <message>
-        <location filename="../../core/utils.cpp" line="338"/>
+        <location filename="../../core/utils.cpp" line="347"/>
         <source>TB</source>
         <comment>terabytes</comment>
         <translation>ТБ</translation>
@@ -6181,7 +6181,7 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ToolBalanceAdjustment</name>
     <message>
-        <location filename="../../editor/tools/balance_adjustment/toolbalanceadjustment.cpp" line="121"/>
+        <location filename="../../editor/tools/balance_adjustment/toolbalanceadjustment.cpp" line="133"/>
         <source>This tool cannot be used with mono samples:</source>
         <translation>Эту функцию нельзя использовать с моно-семплами:</translation>
     </message>

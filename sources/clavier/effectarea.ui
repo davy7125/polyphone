@@ -18,16 +18,16 @@
     <number>2</number>
    </property>
    <property name="leftMargin">
-    <number>0</number>
+    <number>6</number>
    </property>
    <property name="topMargin">
     <number>6</number>
    </property>
    <property name="rightMargin">
-    <number>0</number>
+    <number>6</number>
    </property>
    <property name="bottomMargin">
-    <number>0</number>
+    <number>6</number>
    </property>
    <item>
     <widget class="LedButton" name="pushReverb">
@@ -136,7 +136,7 @@
    <item>
     <spacer name="horizontalSpacer">
      <property name="orientation">
-      <enum>Qt::Orientation::Horizontal</enum>
+      <enum>Qt::Horizontal</enum>
      </property>
      <property name="sizeHint" stdset="0">
       <size>
@@ -231,7 +231,7 @@
    <item>
     <spacer name="horizontalSpacer_2">
      <property name="orientation">
-      <enum>Qt::Orientation::Horizontal</enum>
+      <enum>Qt::Horizontal</enum>
      </property>
      <property name="sizeHint" stdset="0">
       <size>
@@ -266,7 +266,7 @@
       <number>50</number>
      </property>
      <property name="orientation">
-      <enum>Qt::Orientation::Horizontal</enum>
+      <enum>Qt::Horizontal</enum>
      </property>
     </widget>
    </item>
@@ -282,7 +282,7 @@
       <string notr="true">+0 dB</string>
      </property>
      <property name="alignment">
-      <set>Qt::AlignmentFlag::AlignCenter</set>
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </item>
@@ -295,14 +295,14 @@
    <header>resettabledial.h</header>
   </customwidget>
   <customwidget>
-   <class>ResettableSlider</class>
-   <extends>QSlider</extends>
-   <header>resettableslider.h</header>
-  </customwidget>
-  <customwidget>
    <class>LedButton</class>
    <extends>QPushButton</extends>
    <header>ledbutton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ResettableSlider</class>
+   <extends>QSlider</extends>
+   <header>resettableslider.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

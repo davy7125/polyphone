@@ -1467,17 +1467,17 @@ repository</source>
 <context>
     <name>ControllerArea</name>
     <message>
-        <location filename="../../clavier/controllerarea.ui" line="203"/>
+        <location filename="../../clavier/controllerarea.ui" line="171"/>
         <source>Pitch wheel</source>
         <translation>弯音轮</translation>
     </message>
     <message>
-        <location filename="../../clavier/controllerarea.ui" line="227"/>
+        <location filename="../../clavier/controllerarea.ui" line="85"/>
         <source>Sensitivity</source>
         <translation>灵敏度</translation>
     </message>
     <message>
-        <location filename="../../clavier/controllerarea.ui" line="251"/>
+        <location filename="../../clavier/controllerarea.ui" line="112"/>
         <source>Pressure</source>
         <translation>压感</translation>
     </message>
@@ -1921,59 +1921,59 @@ repository</source>
         <translation>虚拟键盘</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="150"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="76"/>
+        <source>Keyboard type</source>
+        <translation>键盘类型</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="87"/>
         <source>5 octaves</source>
         <translation>5 个八度</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="155"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="92"/>
         <source>6 octaves</source>
         <translation>6 个八度</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="160"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="97"/>
         <source>88 keys (piano)</source>
         <translation>88 键(钢琴)</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="165"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="102"/>
         <source>128 keys (full)</source>
         <translation>128 键(全 MIDI 范围)</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="191"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="115"/>
         <source>Key</source>
         <translation>音符</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="216"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="140"/>
         <source>Velocity</source>
         <translation>力度</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.ui" line="241"/>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="165"/>
         <source>Aftertouch</source>
         <translation>触后</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="289"/>
-        <source>Hide the controller area</source>
-        <translation>隐藏控制器区域</translation>
+        <location filename="../../dialogs/dialogkeyboard.ui" line="218"/>
+        <source>Display options</source>
+        <translation>显示选项</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="289"/>
-        <source>Show the controller area</source>
-        <translation>显示控制器区域</translation>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="82"/>
+        <source>MIDI controllers</source>
+        <translation>MIDI控制器</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="294"/>
-        <source>Hide the effects</source>
-        <translation>隐藏效果</translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="294"/>
-        <source>Show the effects</source>
-        <translation>显示效果</translation>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="85"/>
+        <source>Effects</source>
+        <translation>效果</translation>
     </message>
 </context>
 <context>
@@ -2018,7 +2018,7 @@ repository</source>
     </message>
     <message>
         <location filename="../../dialogs/dialogmidiplayer.ui" line="72"/>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="176"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="168"/>
         <source>Open a MIDI file</source>
         <translation>打开 MIDI 文件</translation>
     </message>
@@ -2033,105 +2033,105 @@ repository</source>
         <translation>播放设置</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="378"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="356"/>
         <source>Tempo</source>
         <translation>速度</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="393"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="371"/>
         <source>The percussions (bank 128) are not transposed</source>
         <translation>打击乐（库 128）不移调</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="112"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="104"/>
         <source>Channel</source>
         <translation>通道</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="112"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="104"/>
         <source>Soundfont</source>
         <translation>音色库</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="112"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="104"/>
         <source>Preset</source>
         <translation>预设</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="112"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="104"/>
         <source>Volume</source>
         <translation>音量</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="132"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="124"/>
         <source>Open a MIDI file to play it with the soundfonts that are open.</source>
         <translation>打开一个 MIDI 文件，使用已打开的音色库播放。</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="177"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="169"/>
         <source>MIDI files</source>
         <translation>MIDI 文件</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="369"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="352"/>
         <source>Loop playback</source>
         <translation>循环播放</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="384"/>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="450"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="362"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="423"/>
         <source>%1%</source>
         <comment>percentage</comment>
         <translation>%1%</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="385"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="363"/>
         <source>Pitch</source>
         <translation>音高</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="415"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="389"/>
         <source>Export audio...</source>
         <translation>导出音频...</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="433"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="406"/>
         <source>Tempo of the file: %1 bpm, variable</source>
         <translation>文件速度：%1 bpm，可变</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="433"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="406"/>
         <source>Tempo of the file: %1 bpm</source>
         <translation>文件速度：%1 bpm</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="435"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="408"/>
         <source>File without tempo (SMPTE time code)</source>
         <translation>无速度的文件（SMPTE 时间码）</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="494"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="468"/>
         <source>Pause</source>
         <translation>暂停</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="494"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="468"/>
         <source>Play</source>
         <translation>播放</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="573"/>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="608"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="532"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="567"/>
         <source>Export audio</source>
         <translation>导出音频</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="576"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="535"/>
         <source>Wav file</source>
         <translation>WAV 文件</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="647"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="606"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
@@ -3150,38 +3150,38 @@ repository</source>
 <context>
     <name>GraphicsFourier</name>
     <message>
-        <location filename="../../editor/graphics/graphicsfourier.cpp" line="48"/>
+        <location filename="../../editor/graphics/graphicsfourier.cpp" line="47"/>
         <source>Export graph</source>
         <translation>导出图表</translation>
     </message>
     <message>
-        <location filename="../../editor/graphics/graphicsfourier.cpp" line="50"/>
+        <location filename="../../editor/graphics/graphicsfourier.cpp" line="49"/>
         <source>Show peak frequencies</source>
         <translation>显示峰值频率</translation>
     </message>
     <message>
-        <location filename="../../editor/graphics/graphicsfourier.cpp" line="366"/>
+        <location filename="../../editor/graphics/graphicsfourier.cpp" line="175"/>
         <source>Frequency (Hz)</source>
         <translation>频率(赫兹)</translation>
     </message>
     <message>
-        <location filename="../../editor/graphics/graphicsfourier.cpp" line="371"/>
+        <location filename="../../editor/graphics/graphicsfourier.cpp" line="180"/>
         <source>Intensity</source>
         <translation>强度</translation>
     </message>
     <message>
-        <location filename="../../editor/graphics/graphicsfourier.cpp" line="537"/>
+        <location filename="../../editor/graphics/graphicsfourier.cpp" line="347"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
         <translation>赫兹</translation>
     </message>
     <message>
-        <location filename="../../editor/graphics/graphicsfourier.cpp" line="601"/>
+        <location filename="../../editor/graphics/graphicsfourier.cpp" line="411"/>
         <source>Export a graph</source>
         <translation>导出图表</translation>
     </message>
     <message>
-        <location filename="../../editor/graphics/graphicsfourier.cpp" line="602"/>
+        <location filename="../../editor/graphics/graphicsfourier.cpp" line="412"/>
         <source>Png file</source>
         <translation>PNG 文件</translation>
     </message>
@@ -4955,31 +4955,31 @@ Warning: quality will be reduced and the loop may be altered</source>
         <translation>升A</translation>
     </message>
     <message>
-        <location filename="../../core/utils.cpp" line="331"/>
+        <location filename="../../core/utils.cpp" line="340"/>
         <source>bytes</source>
         <translation>字节</translation>
     </message>
     <message>
-        <location filename="../../core/utils.cpp" line="333"/>
+        <location filename="../../core/utils.cpp" line="342"/>
         <source>kB</source>
         <comment>kilobytes</comment>
         <translation>千字节</translation>
     </message>
     <message>
-        <location filename="../../core/utils.cpp" line="335"/>
+        <location filename="../../core/utils.cpp" line="344"/>
         <location filename="../../repository/browser/soundfontbrowser.cpp" line="80"/>
         <source>MB</source>
         <comment>megabytes</comment>
         <translation>兆字节</translation>
     </message>
     <message>
-        <location filename="../../core/utils.cpp" line="337"/>
+        <location filename="../../core/utils.cpp" line="346"/>
         <source>GB</source>
         <comment>gigabytes</comment>
         <translation>吉字节</translation>
     </message>
     <message>
-        <location filename="../../core/utils.cpp" line="338"/>
+        <location filename="../../core/utils.cpp" line="347"/>
         <source>TB</source>
         <comment>terabytes</comment>
         <translation>太字节</translation>
@@ -6016,7 +6016,7 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ToolBalanceAdjustment</name>
     <message>
-        <location filename="../../editor/tools/balance_adjustment/toolbalanceadjustment.cpp" line="121"/>
+        <location filename="../../editor/tools/balance_adjustment/toolbalanceadjustment.cpp" line="133"/>
         <source>This tool cannot be used with mono samples:</source>
         <translation>此工具不能用于单声道采样：</translation>
     </message>

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>528</width>
+    <width>480</width>
     <height>130</height>
    </rect>
   </property>
@@ -21,54 +21,99 @@
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
-    <number>0</number>
+    <number>6</number>
    </property>
    <property name="topMargin">
-    <number>0</number>
+    <number>6</number>
    </property>
    <property name="rightMargin">
-    <number>0</number>
+    <number>6</number>
    </property>
    <property name="bottomMargin">
     <number>6</number>
    </property>
-   <item row="2" column="5">
-    <widget class="QLabel" name="labelValue3">
+   <item row="0" column="1">
+    <widget class="QLabel" name="labelWheelValue">
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
      <property name="text">
-      <string notr="true">-</string>
+      <string notr="true"/>
      </property>
      <property name="alignment">
-      <set>Qt::AlignmentFlag::AlignCenter</set>
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
    </item>
    <item row="0" column="5">
     <widget class="ComboCC" name="comboControl3"/>
    </item>
-   <item row="1" column="5">
-    <widget class="ResettableDial" name="knob3">
-     <property name="maximum">
-      <number>127</number>
+   <item row="0" column="4">
+    <widget class="ComboCC" name="comboControl2"/>
+   </item>
+   <item row="2" column="1">
+    <widget class="QLabel" name="labelSensitivityValue">
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string notr="true"/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
    </item>
-   <item row="2" column="2">
-    <widget class="StyledSlider" name="sliderPressure">
-     <property name="maximum">
-      <number>127</number>
+   <item row="0" column="3">
+    <widget class="ComboCC" name="comboControl1"/>
+   </item>
+   <item row="0" column="6">
+    <widget class="ComboCC" name="comboControl4"/>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_4">
+     <property name="font">
+      <font>
+       <bold>true</bold>
+      </font>
      </property>
-     <property name="orientation">
-      <enum>Qt::Orientation::Horizontal</enum>
-     </property>
-     <property name="tickPosition">
-      <enum>QSlider::TickPosition::TicksBelow</enum>
-     </property>
-     <property name="tickInterval">
-      <number>32</number>
+     <property name="text">
+      <string>Sensitivity</string>
      </property>
     </widget>
    </item>
-   <item row="1" column="2">
+   <item row="4" column="1">
+    <widget class="QLabel" name="labelPressureValue">
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string notr="true"/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="label_5">
+     <property name="font">
+      <font>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Pressure</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0" colspan="2">
     <widget class="StyledSlider" name="sliderSensitivity">
      <property name="maximum">
       <number>1500</number>
@@ -80,17 +125,131 @@
       <number>200</number>
      </property>
      <property name="orientation">
-      <enum>Qt::Orientation::Horizontal</enum>
+      <enum>Qt::Horizontal</enum>
      </property>
      <property name="tickPosition">
-      <enum>QSlider::TickPosition::TicksBelow</enum>
+      <enum>QSlider::TicksBelow</enum>
      </property>
      <property name="tickInterval">
       <number>200</number>
      </property>
     </widget>
    </item>
-   <item row="1" column="6">
+   <item row="1" column="0" colspan="2">
+    <widget class="StyledSlider" name="sliderPitchWheel">
+     <property name="minimumSize">
+      <size>
+       <width>100</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="maximum">
+      <number>127</number>
+     </property>
+     <property name="value">
+      <number>64</number>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="tickPosition">
+      <enum>QSlider::TicksBelow</enum>
+     </property>
+     <property name="tickInterval">
+      <number>32</number>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="label_3">
+     <property name="font">
+      <font>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Pitch wheel</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0" colspan="2">
+    <widget class="StyledSlider" name="sliderPressure">
+     <property name="maximum">
+      <number>127</number>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="tickPosition">
+      <enum>QSlider::TicksBelow</enum>
+     </property>
+     <property name="tickInterval">
+      <number>32</number>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="3">
+    <widget class="QLabel" name="labelValue1">
+     <property name="text">
+      <string notr="true">-</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="4">
+    <widget class="QLabel" name="labelValue2">
+     <property name="text">
+      <string notr="true">-</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="5">
+    <widget class="QLabel" name="labelValue3">
+     <property name="text">
+      <string notr="true">-</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="6">
+    <widget class="QLabel" name="labelValue4">
+     <property name="text">
+      <string notr="true">off</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="3" rowspan="4">
+    <widget class="ResettableDial" name="knob1">
+     <property name="maximum">
+      <number>127</number>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="4" rowspan="4">
+    <widget class="ResettableDial" name="knob2">
+     <property name="maximum">
+      <number>127</number>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="5" rowspan="4">
+    <widget class="ResettableDial" name="knob3">
+     <property name="maximum">
+      <number>127</number>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="6" rowspan="4">
     <widget class="LedButton" name="push4">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -108,163 +267,6 @@
       </size>
      </property>
     </widget>
-   </item>
-   <item row="2" column="3">
-    <widget class="QLabel" name="labelValue1">
-     <property name="text">
-      <string notr="true">-</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignmentFlag::AlignCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="4">
-    <widget class="QLabel" name="labelValue2">
-     <property name="text">
-      <string notr="true">-</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignmentFlag::AlignCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="4">
-    <widget class="ResettableDial" name="knob2">
-     <property name="maximum">
-      <number>127</number>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="4">
-    <widget class="ComboCC" name="comboControl2"/>
-   </item>
-   <item row="0" column="6">
-    <widget class="ComboCC" name="comboControl4"/>
-   </item>
-   <item row="2" column="6">
-    <widget class="QLabel" name="labelValue4">
-     <property name="text">
-      <string notr="true">off</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignmentFlag::AlignCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="2">
-    <widget class="StyledSlider" name="sliderPitchWheel">
-     <property name="minimumSize">
-      <size>
-       <width>100</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="maximum">
-      <number>127</number>
-     </property>
-     <property name="value">
-      <number>64</number>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Orientation::Horizontal</enum>
-     </property>
-     <property name="tickPosition">
-      <enum>QSlider::TickPosition::TicksBelow</enum>
-     </property>
-     <property name="tickInterval">
-      <number>32</number>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="3">
-    <widget class="ResettableDial" name="knob1">
-     <property name="maximum">
-      <number>127</number>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="3">
-    <widget class="ComboCC" name="comboControl1"/>
-   </item>
-   <item row="0" column="1" rowspan="3">
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <property name="spacing">
-      <number>0</number>
-     </property>
-     <item>
-      <widget class="QLabel" name="label_3">
-       <property name="font">
-        <font>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Pitch wheel</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="labelWheelValue">
-       <property name="font">
-        <font>
-         <pointsize>9</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string notr="true"/>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_4">
-       <property name="font">
-        <font>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Sensitivity</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="labelSensitivityValue">
-       <property name="font">
-        <font>
-         <pointsize>9</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string notr="true"/>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_5">
-       <property name="font">
-        <font>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Pressure</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="labelPressureValue">
-       <property name="font">
-        <font>
-         <pointsize>9</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string notr="true"/>
-       </property>
-      </widget>
-     </item>
-    </layout>
    </item>
   </layout>
  </widget>
@@ -291,9 +293,6 @@
   </customwidget>
  </customwidgets>
  <tabstops>
-  <tabstop>sliderPitchWheel</tabstop>
-  <tabstop>sliderSensitivity</tabstop>
-  <tabstop>sliderPressure</tabstop>
   <tabstop>comboControl1</tabstop>
   <tabstop>knob1</tabstop>
   <tabstop>comboControl2</tabstop>

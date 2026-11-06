@@ -28,6 +28,7 @@
 #include <QList>
 #include <QColor>
 #include <QComboBox>
+#include <QIcon>
 #include <QMap>
 class ConfManager;
 
@@ -109,6 +110,13 @@ public:
     /// Get element themes
     QString getMenuTheme();
     QString getTableTheme();
+
+    /// Banner at the top of a window: style of a frame named "frameTop", with its labels and its tool buttons
+    /// (the one opening a menu on the right side being named "toolButtonSettings")
+    QString getBannerTheme();
+
+    /// Icon of a tool button in a banner: lighter when hovered and dimmed when disabled
+    QIcon getBannerIcon(QString svgPath, int size);
 
 private:
     class ColorTheme

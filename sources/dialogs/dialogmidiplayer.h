@@ -62,7 +62,6 @@ protected:
     void showEvent(QShowEvent * event) override;
     void hideEvent(QHideEvent * event) override;
     void keyPressEvent(QKeyEvent * event) override;
-    bool eventFilter(QObject * watched, QEvent * event) override;
 
 private slots:
     void on_pushOpen_clicked();
@@ -94,7 +93,6 @@ private:
     void initializeSettingsMenu();
     void updateTempoToolTip();
     static QString getTimeText(qint64 microseconds);
-    static QIcon getBannerIcon(QString svgPath, int size);
 
     Ui::DialogMidiPlayer * ui;
     MidiFilePlayer * _player;
@@ -111,7 +109,6 @@ private:
     QLabel * _labelTempoTitle;
     QLabel * _labelTempo;
     QLabel * _labelPitch;
-    QLabel * _labelLoop;
     QCheckBox * _checkLoop;
     QAction * _actionExport;
 

@@ -587,6 +587,7 @@ SOURCES	+= main.cpp \
     lib/iir/State.cpp \
     editor/widgets/spinboxcents.cpp \
     editor/widgets/resettabledial.cpp \
+    editor/widgets/bannermenu.cpp \
     editor/widgets/resettableslider.cpp \
     editor/widgets/ledbutton.cpp \
     synth_core/parametermodulator.cpp \
@@ -1036,6 +1037,7 @@ HEADERS += \
     lib/iir/Types.h \
     editor/widgets/spinboxcents.h \
     editor/widgets/resettabledial.h \
+    editor/widgets/bannermenu.h \
     editor/widgets/resettableslider.h \
     editor/widgets/ledbutton.h \
     synth_core/parametermodulator.h \
