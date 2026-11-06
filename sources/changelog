@@ -30,6 +30,7 @@ polyphone (2.7) UNRELEASED; urgency=low
   * (fix) the steady part of the samples was never detected
   * (fix) the duration of the reverb and of the chorus depended on the sample rate of the audio output
   * (fix) clicks in the virtual keyboard and other windows could be lost and resize the main window instead
+  * (fix) the mouse wheel did not scroll the sample and envelope graphs without the Alt key
 
  -- Davy Triponney <contact@polyphone.io>  Fri, 30 Oct 2026 12:00:00 +0100
 

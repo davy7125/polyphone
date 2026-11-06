@@ -706,11 +706,16 @@ void GraphicsViewEnvelop::leaveEvent(QEvent *event)
 void GraphicsViewEnvelop::wheelEvent(QWheelEvent *event)
 {
     if (!_dragFlag && !_zoomFlag && _editedEnvelop == -1)
+    {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
-        _qScrollX->setValue(_qScrollX->value() - 0.2 * event->angleDelta().x());
+        // The graph only scrolls horizontally: the wheel is vertical, or horizontal with Alt or a touchpad
+        QPoint angleDelta = event->angleDelta();
+        int delta = qAbs(angleDelta.x()) > qAbs(angleDelta.y()) ? angleDelta.x() : angleDelta.y();
 #else
-        _qScrollX->setValue(_qScrollX->value() - 0.2 * event->delta());
+        int delta = event->delta();
 #endif
+        _qScrollX->setValue(_qScrollX->value() - 0.2 * delta);
+    }
 }
 
 void GraphicsViewEnvelop::zoom(QPoint point)

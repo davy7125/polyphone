@@ -473,11 +473,16 @@ void GraphicsWave::wheelEvent(QWheelEvent *event)
         return;
 
     if (!_dragFlag && !_zoomFlag && !_cutFlag)
+    {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
-        _qScrollX->setValue(static_cast<qint32>(_qScrollX->value() - 0.2 * event->angleDelta().x()));
+        // The graph only scrolls horizontally: the wheel is vertical, or horizontal with Alt or a touchpad
+        QPoint angleDelta = event->angleDelta();
+        int delta = qAbs(angleDelta.x()) > qAbs(angleDelta.y()) ? angleDelta.x() : angleDelta.y();
 #else
-        _qScrollX->setValue(static_cast<qint32>(_qScrollX->value() - 0.2 * event->delta()));
+        int delta = event->delta();
 #endif
+        _qScrollX->setValue(static_cast<qint32>(_qScrollX->value() - 0.2 * delta));
+    }
 }
 
 int GraphicsWave::getSamplePosX(double zoomX, double shiftX, double x)
