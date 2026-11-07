@@ -25,6 +25,12 @@
 #include "graphicswavepainter.h"
 #include <QPainter>
 
+// Blocks of the first level of statistics contain 64 segments, each next level gathers 8 blocks of the previous one
+static const quint32 FIRST_LEVEL_SHIFT = 6;
+static const quint32 FIRST_LEVEL_SIZE = 1u << FIRST_LEVEL_SHIFT;
+static const quint32 LEVEL_SHIFT = 3;
+static const quint32 LEVEL_FACTOR = 1u << LEVEL_SHIFT;
+
 static float fastSqrt(float val)
 {
     union {
@@ -41,28 +47,26 @@ static float fastSqrt(float val)
     return I.f;
 }
 
-static quint32 fastCeil(float val)
+// Value of the curve joining the samples at a fractional position
+static float getValueAt(const float * data, quint32 segmentNumber, double position)
 {
-    quint32 i = static_cast<quint32>(val);
-    if (i < val)
-        i++;
-    return i;
+    quint32 segment = static_cast<quint32>(position);
+    if (segment >= segmentNumber)
+        return data[segmentNumber];
+    float ratio = static_cast<float>(position - segment);
+    return data[segment] + ratio * (data[segment + 1] - data[segment]);
 }
 
 GraphicsWavePainter::GraphicsWavePainter() :
-    _pixels(nullptr),
-    _image(nullptr),
-    _samplePlotMean(nullptr),
+    _levelsComputed(false),
+    _start(0),
+    _end(0),
+    _zoomY(1),
+    _imageColor(0),
     _drawPositiveValues(false),
-    _addMeanCurve(true)
+    _addMeanCurve(true),
+    _waveColor(0)
 {}
-
-GraphicsWavePainter::~GraphicsWavePainter()
-{
-    delete _image;
-    delete [] _pixels;
-    delete [] _samplePlotMean;
-}
 
 void GraphicsWavePainter::setData(const QVector<float> &vData)
 {
@@ -74,13 +78,11 @@ void GraphicsWavePainter::setData(const QVector<float> &vData)
 
 void GraphicsWavePainter::clearData()
 {
-    delete _image;
-    delete [] _pixels;
-    delete [] _samplePlotMean;
-    _image = nullptr;
-    _pixels = nullptr;
-    _samplePlotMean = nullptr;
+    _image = QImage();
+    _samplePlotMean.clear();
     _sampleData.clear();
+    _levels.clear();
+    _levelsComputed = false;
 }
 
 void GraphicsWavePainter::paint(QPainter * painter, QRect rect, quint32 start, quint32 end, float zoomY)
@@ -94,28 +96,26 @@ void GraphicsWavePainter::paint(QPainter * painter, QRect rect, quint32 start, q
 
     int width = rect.width();
     int height = rect.height();
+    if (width <= 0 || height <= 0)
+        return;
 
     // Possibly update the image
-    if (_image == nullptr || _start != start || _end != end || _zoomY != zoomY ||
-            _image->width() != width || _image->height() != height)
+    if (_image.isNull() || _start != start || _end != end || _zoomY != zoomY || _imageColor != _waveColor ||
+            _image.width() != width || _image.height() != height)
     {
-        delete _image;
-        delete [] _pixels;
-        _image = nullptr;
-        _pixels = nullptr;
-
         // Store the current parameters
         _start = start;
         _end = end;
         _zoomY = zoomY;
+        _imageColor = _waveColor;
 
         // Prepare a new image
-        prepareImage(width, height);
+        prepareImage(static_cast<quint32>(width), static_cast<quint32>(height));
     }
 
     // Draw the curve if valid
-    if (_image != nullptr)
-        painter->drawImage(rect.left(), rect.top(), *_image);
+    if (!_image.isNull())
+        painter->drawImage(rect.left(), rect.top(), _image);
 }
 
 void GraphicsWavePainter::prepareImage(quint32 width, quint32 height)
@@ -124,141 +124,245 @@ void GraphicsWavePainter::prepareImage(quint32 width, quint32 height)
     /// FIRST STEP: compute data ///
     ////////////////////////////////
 
-    delete [] _samplePlotMean;
-    _samplePlotMean = nullptr;
-
     if (_sampleData.empty())
-        return;
-
-    // Wave form larger than the number of pixels
-    float * samplePlotMin = new float[width];
-    float * samplePlotMax = new float[width];
-    _samplePlotMean = new QPointF[width];
-    float * samplePlotDeviation = new float[width];
-
-    // Temporary arrays
-    float * samplePlotSum = new float[width];
-    float * samplePlotSquareSum = new float[width];
-    memset(samplePlotSum, 0, width * sizeof(float));
-    memset(samplePlotSquareSum, 0, width * sizeof(float));
-
-    // Compute data
-    float pointSpace = 1.0f * width / (_end - _start);
-    float pointSpaceInv = 1.0f / pointSpace;
-    float previousPosition = 0.0f;
-    float currentPosition;
-    float previousValue = _sampleData[_start];
-    float currentValue;
-    quint32 previousPixelNumber = 999999;
-
-    for (quint32 i = 1; i <= _end - _start; i++)
     {
-        // Current value, current position
-        currentValue = _sampleData[_start + i];
-        currentPosition = pointSpace * i;
+        _image = QImage();
+        _samplePlotMean.clear();
+        return;
+    }
 
-        // Process the segment between {previousPosition, previousValue} and {currentPosition, currentValue}
-        float slope = pointSpaceInv * (currentValue - previousValue);
-        for (quint32 currentPixelNumber = static_cast<quint32>(previousPosition);
-             currentPixelNumber < fastCeil(currentPosition); currentPixelNumber++)
+    // Each pixel covers a part of the curve joining the samples, made of linear segments
+    const float * data = _sampleData.constData() + _start;
+    const quint32 segmentNumber = _end - _start;
+    const double pixelsPerSample = static_cast<double>(width) / segmentNumber;
+
+    // Statistics of the blocks of segments, useful if pixels cover many segments
+    if (!_levelsComputed && segmentNumber >= 2 * FIRST_LEVEL_SIZE * width)
+        computeLevels();
+
+    QVector<float> samplePlotMin(width);
+    QVector<float> samplePlotMax(width);
+    QVector<float> samplePlotDeviation(width);
+    _samplePlotMean.resize(width);
+
+    float coeff = -_zoomY * static_cast<float>(height) / (_drawPositiveValues ? 1 : 2);
+    float offsetY = _drawPositiveValues ? height : 0.5f * height;
+    double position2 = 0;
+    float value2 = data[0];
+    for (quint32 i = 0; i < width; i++)
+    {
+        // Part of the curve covered by the pixel, between position1 and position2 (in samples)
+        double position1 = position2;
+        float value1 = value2;
+        position2 = static_cast<double>(i + 1) * segmentNumber / width;
+        value2 = getValueAt(data, segmentNumber, position2);
+        quint32 segment1 = static_cast<quint32>(position1);
+        quint32 segment2 = static_cast<quint32>(position2); // Can be segmentNumber for the last pixel
+
+        // Min / max, sum of the middle values of the segment parts weighted by their width in pixel
+        float minValue = qMin(value1, value2);
+        float maxValue = qMax(value1, value2);
+        double sum, squareSum;
+        if (segment1 == segment2)
         {
-            if (currentPixelNumber >= width)
-                continue;
+            // The pixel is within a segment
+            double middleValue = 0.5 * (value1 + value2);
+            sum = middleValue;
+            squareSum = middleValue * middleValue;
+        }
+        else
+        {
+            // End of the first segment
+            double weight = (segment1 + 1 - position1) * pixelsPerSample;
+            double middleValue = 0.5 * (value1 + data[segment1 + 1]);
+            sum = middleValue * weight;
+            squareSum = middleValue * middleValue * weight;
 
-            // Part of the segment crossing pixel {pixelNumber}
-            float x1 = currentPixelNumber < previousPosition ? previousPosition : currentPixelNumber;
-            float x2 = (currentPixelNumber + 1) > currentPosition ? currentPosition : (currentPixelNumber + 1);
-            float y1 = previousValue + (x1 - previousPosition) * slope;
-            float y2 = previousValue + (x2 - previousPosition) * slope;
-
-            // Compute the weight and the middle value of the segment
-            float weight = x2 - x1;
-            float middleValue = 0.5f * (y1 + y2);
-
-            // Compute min / max
-            if (currentPixelNumber != previousPixelNumber)
+            // Full segments in between
+            if (segment2 > segment1 + 1)
             {
-                // First time we are seeing this pixel: min and max or defined
-                samplePlotMin[currentPixelNumber] = y1 < y2 ? y1 : y2;
-                samplePlotMax[currentPixelNumber] = y1 > y2 ? y1 : y2;
+                double segmentSum = 0, segmentSquareSum = 0;
+                addSegments(_start + segment1 + 1, _start + segment2, minValue, maxValue, segmentSum, segmentSquareSum);
+                sum += segmentSum * pixelsPerSample;
+                squareSum += segmentSquareSum * pixelsPerSample;
             }
             else
             {
-                float minY = y1 < y2 ? y1 : y2;
-                if (minY < samplePlotMin[currentPixelNumber])
-                    samplePlotMin[currentPixelNumber] = minY;
-                float maxY = y1 > y2 ? y1 : y2;
-                if (maxY > samplePlotMax[currentPixelNumber])
-                    samplePlotMax[currentPixelNumber] = maxY;
+                minValue = qMin(minValue, data[segment1 + 1]);
+                maxValue = qMax(maxValue, data[segment1 + 1]);
             }
 
-            // Sum values with ponderation
-            samplePlotSum[currentPixelNumber] += middleValue * weight;
-            samplePlotSquareSum[currentPixelNumber] += middleValue * middleValue * weight;
-
-            previousPixelNumber = currentPixelNumber;
+            // Beginning of the last segment
+            if (position2 > segment2)
+            {
+                weight = (position2 - segment2) * pixelsPerSample;
+                middleValue = 0.5 * (data[segment2] + value2);
+                sum += middleValue * weight;
+                squareSum += middleValue * middleValue * weight;
+            }
         }
 
-        previousPosition = currentPosition;
-        previousValue = currentValue;
-    }
-
-    // Compute mean, standard deviation, adjust min / max
-    float coeff = -_zoomY * static_cast<float>(height) / (_drawPositiveValues ? 1 : 2);
-    float offsetY = _drawPositiveValues ? height : 0.5f * height;
-    for (quint32 i = 0; i < width; i++)
-    {
+        // Mean, standard deviation, min / max in pixels
         _samplePlotMean[i].setX(i);
-        _samplePlotMean[i].setY(static_cast<double>(coeff * samplePlotSum[i] + offsetY));
-        samplePlotDeviation[i] = coeff * fastSqrt(static_cast<float>(samplePlotSquareSum[i] - samplePlotSum[i] * samplePlotSum[i]));
-        samplePlotMin[i] = coeff * samplePlotMin[i] + offsetY;
-        samplePlotMax[i] = coeff * samplePlotMax[i] + offsetY;
+        _samplePlotMean[i].setY(static_cast<double>(coeff * static_cast<float>(sum) + offsetY));
+        samplePlotDeviation[i] = coeff * fastSqrt(static_cast<float>(squareSum - sum * sum));
+        samplePlotMin[i] = coeff * minValue + offsetY;
+        samplePlotMax[i] = coeff * maxValue + offsetY;
     }
-
-    // Delete temporary arrays
-    delete [] samplePlotSum;
-    delete [] samplePlotSquareSum;
 
     //////////////////////////////////////
     /// SECOND STEP: compute the image ///
     //////////////////////////////////////
 
-    // Prepare a new image
-    _pixels = new QRgb[width * height];
-    _image = new QImage(reinterpret_cast<uchar*>(_pixels), static_cast<int>(width), static_cast<int>(height), QImage::Format_ARGB32);
-    memset(_pixels, 0 /* transparent */, width * height * sizeof(int));
+    // Prepare the image (premultiplied: faster to draw)
+    if (_image.width() != static_cast<int>(width) || _image.height() != static_cast<int>(height))
+        _image = QImage(static_cast<int>(width), static_cast<int>(height), QImage::Format_ARGB32_Premultiplied);
+    _image.fill(0 /* transparent */);
+
+    // Color for each opacity
+    const quint32 maxAlpha = qAlpha(_waveColor);
+    QRgb colors[256];
+    for (quint32 alpha = 0; alpha <= maxAlpha; alpha++)
+        colors[alpha] = qPremultiply(qRgba(qRed(_waveColor), qGreen(_waveColor), qBlue(_waveColor), static_cast<int>(alpha)));
 
     // Waveform
-    float mean, x;
-    quint32 currentPixelIndex;
+    QRgb * pixels = reinterpret_cast<QRgb *>(_image.bits());
+    const quint32 pixelsPerLine = static_cast<quint32>(_image.bytesPerLine()) / sizeof(QRgb);
+    float mean, deviation, x;
     for (quint32 i = 0; i < width; i++)
     {
         mean = static_cast<float>(_samplePlotMean[i].y());
-        for (quint32 j = 0; j < height; j++)
-        {
-            // Index of the current pixel
-            currentPixelIndex = i + j * width;
+        deviation = samplePlotDeviation[i]; // Negative
 
-            x = j < mean ? getValueX(samplePlotMax[i], 0, mean + samplePlotDeviation[i], 1, j) :
-                            getValueX(mean - samplePlotDeviation[i], 1, samplePlotMin[i], 0, j);
+        // Pixels outside [top; bottom] are transparent
+        float top = qMin(samplePlotMax[i], mean);
+        float bottom = qMax(samplePlotMin[i], mean - deviation);
+        quint32 firstLine = top > 0 ? (top < height ? static_cast<quint32>(top) : height) : 0;
+        quint32 lastLine = bottom >= 0 ? (bottom < height ? static_cast<quint32>(bottom) + 1 : height) : 0;
+
+        for (quint32 j = firstLine; j < lastLine; j++)
+        {
+            x = j < mean ? getValueX(samplePlotMax[i], 0, mean + deviation, 1, j) :
+                           getValueX(mean - deviation, 1, samplePlotMin[i], 0, j);
             if (x > 0)
-                _pixels[currentPixelIndex] = static_cast<quint32>(x * (_waveColor >> 24)) << 24 | (_waveColor & RGB_MASK);
+                pixels[i + j * pixelsPerLine] = colors[static_cast<quint32>(x * maxAlpha)];
         }
     }
 
     // Possibly add the mean value
     if (_addMeanCurve)
     {
-        QPainter painter(_image);
+        QPainter painter(&_image);
         painter.setRenderHint(QPainter::Antialiasing);
         painter.setPen(QPen(QColor::fromRgba(_waveColor), 1.0, Qt::SolidLine));
-        painter.drawPolyline(_samplePlotMean, _image->width());
+        painter.drawPolyline(_samplePlotMean.constData(), static_cast<int>(width));
     }
+}
 
-    // Finally, clear data
-    delete [] samplePlotMin;
-    delete [] samplePlotMax;
-    delete [] samplePlotDeviation;
+void GraphicsWavePainter::computeLevels()
+{
+    _levelsComputed = true;
+    _levels.clear();
+
+    const quint32 segmentNumber = _sampleData.size() > 1 ? static_cast<quint32>(_sampleData.size() - 1) : 0;
+    quint32 blockNumber = segmentNumber >> FIRST_LEVEL_SHIFT;
+    if (blockNumber == 0)
+        return;
+
+    // First level, computed from the samples
+    const float * data = _sampleData.constData();
+    QVector<SegmentStats> level(blockNumber);
+    for (quint32 block = 0; block < blockNumber; block++)
+    {
+        const float * blockData = data + (block << FIRST_LEVEL_SHIFT);
+        SegmentStats stats = { blockData[0], blockData[0], 0, 0 };
+        for (quint32 i = 0; i < FIRST_LEVEL_SIZE; i++)
+        {
+            float value = blockData[i + 1];
+            if (value < stats.min)
+                stats.min = value;
+            if (value > stats.max)
+                stats.max = value;
+            float middleValue = 0.5f * (blockData[i] + value);
+            stats.sum += middleValue;
+            stats.squareSum += middleValue * middleValue;
+        }
+        level[block] = stats;
+    }
+    _levels << level;
+
+    // Next levels, gathering the blocks of the previous one
+    while ((blockNumber >>= LEVEL_SHIFT) > 0)
+    {
+        const SegmentStats * previousLevel = _levels.last().constData();
+        level = QVector<SegmentStats>(blockNumber);
+        for (quint32 block = 0; block < blockNumber; block++)
+        {
+            const SegmentStats * subBlocks = previousLevel + (block << LEVEL_SHIFT);
+            SegmentStats stats = subBlocks[0];
+            for (quint32 i = 1; i < LEVEL_FACTOR; i++)
+            {
+                if (subBlocks[i].min < stats.min)
+                    stats.min = subBlocks[i].min;
+                if (subBlocks[i].max > stats.max)
+                    stats.max = subBlocks[i].max;
+                stats.sum += subBlocks[i].sum;
+                stats.squareSum += subBlocks[i].squareSum;
+            }
+            level[block] = stats;
+        }
+        _levels << level;
+    }
+}
+
+void GraphicsWavePainter::addSegments(quint32 first, quint32 last, float &minValue, float &maxValue, double &sum, double &squareSum) const
+{
+    // Add the statistics of the segments [first; last[, using the largest blocks possible
+    const float * data = _sampleData.constData();
+    while (first < last)
+    {
+        // Largest block starting at "first" and ending before "last"
+        int level = -1;
+        quint32 shift = FIRST_LEVEL_SHIFT;
+        while (level + 1 < _levels.size() && (first & ((1u << shift) - 1)) == 0 && last - first >= (1u << shift))
+        {
+            level++;
+            shift += LEVEL_SHIFT;
+        }
+
+        if (level >= 0)
+        {
+            shift -= LEVEL_SHIFT;
+            const SegmentStats &stats = _levels[level][first >> shift];
+            if (stats.min < minValue)
+                minValue = stats.min;
+            if (stats.max > maxValue)
+                maxValue = stats.max;
+            sum += stats.sum;
+            squareSum += stats.squareSum;
+            first += 1u << shift;
+        }
+        else
+        {
+            // Samples until the beginning of the next block
+            quint32 next = qMin(last, (first | (FIRST_LEVEL_SIZE - 1)) + 1);
+            if (data[first] < minValue)
+                minValue = data[first];
+            if (data[first] > maxValue)
+                maxValue = data[first];
+            for (; first < next; first++)
+            {
+                float value = data[first + 1];
+                if (value < minValue)
+                    minValue = value;
+                if (value > maxValue)
+                    maxValue = value;
+                float middleValue = 0.5f * (data[first] + value);
+                sum += middleValue;
+                squareSum += middleValue * middleValue;
+            }
+        }
+    }
 }
 
 float GraphicsWavePainter::getValueX(float pos1, float value1, float pos2, float value2, float posX)
@@ -285,8 +389,8 @@ QPointF * GraphicsWavePainter::getDataAround(quint32 position, quint32 desiredLe
         return nullptr;
 
     // Create data
-    float coeff = -_zoomY * static_cast<float>(_image->height()) / 2;
-    float offsetY = 0.5f * static_cast<float>(_image->height());
+    float coeff = -_zoomY * static_cast<float>(_image.height()) / 2;
+    float offsetY = 0.5f * static_cast<float>(_image.height());
     pointNumber = rightIndex - leftIndex + 1;
     QPointF * array = new QPointF[pointNumber];
     for (quint32 i = 0; i < pointNumber; i++)
