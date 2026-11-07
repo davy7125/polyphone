@@ -54,7 +54,8 @@ public:
     // The first file is being recorded: it can't be used
     void setFirstFileBusy(bool isBusy);
 
-    // File being played (empty if none): the play button of its line stops it
+    // File being played (empty if none): the play button of its line stops it, and selecting another line plays its
+    // file instead
     void setPlayingFile(QString file);
 
     // The button for importing a file is only there for the audio files and available in a soundfont editor
@@ -81,6 +82,7 @@ private:
 
     QToolButton * createButton(QString svgPath, QString toolTip);
     void select(int index);
+    bool isUsable(int index);
     void updateButtons();
 
     Line _lines[LINE_COUNT];

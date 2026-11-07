@@ -1922,6 +1922,14 @@ online</translation>
     </message>
 </context>
 <context>
+    <name>DialogDecoration</name>
+    <message>
+        <location filename="../../dialogs/dialogdecoration.cpp" line="96"/>
+        <source>Close</source>
+        <translation>Zamknij</translation>
+    </message>
+</context>
+<context>
     <name>DialogKeyboard</name>
     <message>
         <location filename="../../dialogs/dialogkeyboard.ui" line="14"/>
@@ -1974,12 +1982,12 @@ online</translation>
         <translation>Opcje wyświetlania</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="83"/>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="85"/>
         <source>MIDI controllers</source>
         <translation>Kontrolery MIDI</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="86"/>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="88"/>
         <source>Effects</source>
         <translation>Efekty</translation>
     </message>
@@ -2026,120 +2034,120 @@ online</translation>
     </message>
     <message>
         <location filename="../../dialogs/dialogmidiplayer.ui" line="84"/>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="169"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="171"/>
         <source>Open a MIDI file</source>
         <translation>Otwórz plik MIDI</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.ui" line="190"/>
+        <location filename="../../dialogs/dialogmidiplayer.ui" line="193"/>
         <source>Stop</source>
         <translation>Zatrzymaj</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.ui" line="221"/>
+        <location filename="../../dialogs/dialogmidiplayer.ui" line="224"/>
         <source>Playback settings</source>
         <translation>Ustawienia odtwarzania</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="362"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="364"/>
         <source>Tempo</source>
         <translation>Tempo</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="377"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="379"/>
         <source>The percussions (bank 128) are not transposed</source>
         <translation>Perkusja (bank 128) nie jest transponowana</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="105"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="107"/>
         <source>Channel</source>
         <translation>Kanał</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="105"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="107"/>
         <source>Soundfont</source>
         <translation>SoundFont</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="105"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="107"/>
         <source>Preset</source>
         <translation>Preset</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="105"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="107"/>
         <source>Volume</source>
         <translation>Głośność</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="125"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="127"/>
         <source>Open a MIDI file to play it with the soundfonts that are open.</source>
         <translation>Otwórz plik MIDI, aby odtworzyć go z otwartymi SoundFontami.</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="170"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="172"/>
         <source>MIDI files</source>
         <translation>Pliki MIDI</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="358"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="360"/>
         <source>Loop playback</source>
         <translation>Odtwarzanie w pętli</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="368"/>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="429"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="370"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="431"/>
         <source>%1%</source>
         <comment>percentage</comment>
         <translation>%1%</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="369"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="371"/>
         <source>Pitch</source>
         <translation>Wysokość</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="395"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="397"/>
         <source>Export audio...</source>
         <translation>Eksportuj dźwięk...</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="412"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="414"/>
         <source>Tempo of the file: %1 bpm, variable</source>
         <translation>Tempo pliku: %1 bpm, zmienne</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="412"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="414"/>
         <source>Tempo of the file: %1 bpm</source>
         <translation>Tempo pliku: %1 bpm</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="414"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="416"/>
         <source>File without tempo (SMPTE time code)</source>
         <translation>Plik bez tempa (kod czasowy SMPTE)</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="474"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="476"/>
         <source>Pause</source>
         <translation>Wstrzymaj</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="474"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="476"/>
         <source>Play</source>
         <translation>Odtwórz</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="538"/>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="573"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="540"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="575"/>
         <source>Export audio</source>
         <translation>Eksportuj dźwięk</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="541"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="543"/>
         <source>Wav file</source>
         <translation>Plik WAV</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="612"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="614"/>
         <source>Warning</source>
         <translation>Uwaga</translation>
     </message>
@@ -2228,246 +2236,254 @@ online</translation>
         <translation>Sygnały MIDI</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.ui" line="147"/>
+        <location filename="../../dialogs/dialogrecorder.ui" line="144"/>
         <source>Recording settings</source>
         <translation>Ustawienia nagrywania</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="182"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="219"/>
         <source>Ask for a file name</source>
         <translation>Pytaj o nazwę pliku</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="186"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="223"/>
         <source>Change the folder...</source>
         <translation>Zmień katalog...</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="203"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="240"/>
         <source>No MIDI recording yet</source>
         <translation>Nie ma jeszcze nagrań MIDI</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="203"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="240"/>
         <source>No audio recording yet</source>
         <translation>Nie ma jeszcze nagrań audio</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="288"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="325"/>
         <source>Stop recording</source>
         <translation>Zatrzymaj nagrywanie</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="288"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="325"/>
         <source>Start recording</source>
         <translation>Rozpocznij nagrywanie</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="294"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="331"/>
         <source>Resume</source>
         <translation>Wznów</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="294"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="331"/>
         <source>Pause</source>
         <translation>Wstrzymaj</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="311"/>
-        <source>No audio output</source>
-        <translation>Brak wyjścia audio</translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="313"/>
-        <source>No audio input</source>
-        <translation>Brak wejścia audio</translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="315"/>
-        <source>Waiting for a MIDI signal</source>
-        <translation>Oczekiwanie na sygnał MIDI</translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="315"/>
-        <source>Waiting for a sound</source>
-        <translation>Oczekiwanie na dźwięk</translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="339"/>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="708"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="387"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="756"/>
         <source>Notes: %1</source>
         <translation>Nuty: %1</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="382"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="430"/>
         <source>The file cannot be written anymore: the disk may be full.</source>
         <translation>Nie można dalej zapisywać pliku: dysk może być pełny.</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="385"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="433"/>
         <source>The disk is too slow.</source>
         <translation>Dysk jest zbyt wolny.</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="388"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="436"/>
         <source>The audio file cannot exceed 4 GB.</source>
         <translation>Plik dźwiękowy nie może przekraczać 4 GB.</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="391"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="439"/>
         <source>The sample rate of the audio output has changed.</source>
         <translation>Częstotliwość próbkowania wyjścia audio uległa zmianie.</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="394"/>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="410"/>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="430"/>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="435"/>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="469"/>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="514"/>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="530"/>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="592"/>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="594"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="442"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="458"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="478"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="483"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="517"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="562"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="578"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="640"/>
         <location filename="../../dialogs/dialogrecorder.cpp" line="642"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="690"/>
         <source>Warning</source>
         <translation>Uwaga</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="394"/>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="410"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="442"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="458"/>
         <source>The recording has been stopped and the audio recorded so far has been saved.</source>
         <translation>Nagrywanie zostało zatrzymane, a dotychczas nagrany dźwięk został zapisany.</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="411"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="459"/>
         <source>The audio input has changed.</source>
         <translation>Wejście audio zostało zmienione.</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="430"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="478"/>
         <source>Nothing can be recorded without an audio output.</source>
         <translation>Bez wyjścia audio nie można niczego nagrać.</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="435"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="483"/>
         <source>Nothing can be recorded without an audio input, which is chosen in the settings.</source>
         <translation>Bez wejścia audio nie można niczego nagrać; wybiera się je w ustawieniach.</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="444"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="492"/>
         <source>Save a record</source>
         <translation>Zapisz nagranie</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="445"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="493"/>
         <source>Wav file</source>
         <translation>Plik WAV</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="445"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="493"/>
         <source>MIDI file</source>
         <translation>Plik MIDI</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="469"/>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="514"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="517"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="562"/>
         <source>Cannot write file &quot;%1&quot;.</source>
         <translation>Nie można zapisać pliku &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="531"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="579"/>
         <source>A recording is in progress. Do you want to stop it?</source>
         <translation>Trwa nagrywanie. Czy chcesz je zatrzymać?</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="533"/>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="627"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="581"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="675"/>
         <source>&amp;Yes</source>
         <translation>&amp;Tak</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="534"/>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="628"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="582"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="676"/>
         <source>&amp;No</source>
         <translation>&amp;Nie</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="592"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="640"/>
         <source>Nothing can be played without an audio output.</source>
         <translation>Bez wyjścia audio nie można niczego odtworzyć.</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="594"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="642"/>
         <source>Cannot open the file</source>
         <translation>Nie można otworzyć pliku</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="624"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="672"/>
         <source>Confirm deletion</source>
         <translation>Potwierdź usunięcie</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="625"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="673"/>
         <source>Are you sure you want to delete file &quot;%1&quot;?</source>
         <translation>Czy na pewno chcesz usunąć plik &quot;%1&quot;?</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="642"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="690"/>
         <source>Cannot delete file &quot;%1&quot;.</source>
         <translation>Nie udało się usunąć pliku &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="261"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="298"/>
         <source>Folder of the recordings</source>
         <translation>Katalog nagrań</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="133"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="67"/>
+        <source>No audio
+output</source>
+        <translation>Brak wyjścia
+audio</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="68"/>
+        <source>No audio
+input</source>
+        <translation>Brak wejścia
+audio</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="69"/>
+        <source>Waiting
+for a sound</source>
+        <translation>Oczekiwanie
+na dźwięk</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="70"/>
+        <source>Waiting
+for a signal</source>
+        <translation>Oczekiwanie
+na sygnał</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="170"/>
         <source>Start automatically</source>
         <translation>Uruchamiaj automatycznie</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="135"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="172"/>
         <source>The record button waits for a sound or a MIDI signal, and waits again after an automatic stop</source>
         <translation>Przycisk nagrywania czeka na dźwięk lub sygnał MIDI i czeka ponownie po automatycznym zatrzymaniu</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="138"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="175"/>
         <source>Stop after a silence</source>
         <translation>Zatrzymaj po ciszy</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="147"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="184"/>
         <source>Sound level</source>
         <translation>Poziom dźwięku</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="154"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="191"/>
         <source>Level from which the audio input is considered as a sound, above its background noise</source>
         <translation>Poziom, od którego wejście audio jest uznawane za dźwięk, powyżej szumu tła</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="157"/>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="242"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="194"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="279"/>
         <source>%1 s</source>
         <comment>seconds</comment>
         <translation>%1 s</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="157"/>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="242"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="194"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="279"/>
         <source>disabled</source>
         <translation>wyłączone</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="158"/>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="249"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="195"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="286"/>
         <source>dB</source>
         <comment>unit for decibels</comment>
         <translation>dB</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogrecorder.cpp" line="718"/>
+        <location filename="../../dialogs/dialogrecorder.cpp" line="766"/>
         <source>record</source>
         <translation>nagraj</translation>
     </message>
@@ -3639,7 +3655,7 @@ online</translation>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="71"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="69"/>
         <source>Home screen</source>
         <translation>Strona domowa</translation>
     </message>
@@ -3709,57 +3725,57 @@ online</translation>
         <translation>  Ustawienia</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="69"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="67"/>
         <source>Polyphone SoundFont Editor</source>
         <translation>Edytor SoundFontów Polyphone</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="238"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="236"/>
         <source>Untitled</source>
         <translation>Bez tytułu</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="247"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="245"/>
         <source>Warning</source>
         <translation>Uwaga</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="248"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="246"/>
         <source>Save before exiting?</source>
         <translation>Zapisać przed wyjściem?</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="251"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="249"/>
         <source>The following files have been modified:</source>
         <translation>Następujące pliki zostały zmodyfikowane:</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="258"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="256"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>Plik &quot;%1&quot; został zmodyfikowany.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="261"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="259"/>
         <source>&amp;Save</source>
         <translation>&amp;Zapisz</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="262"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="260"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Anuluj</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="263"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="261"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>Ni&amp;e zapisuj</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="351"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="349"/>
         <source>Opening files</source>
         <translation>Otwieranie plików</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="361"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="359"/>
         <source>Opening a directory</source>
         <translation>Otwieranie katalogu</translation>
     </message>
@@ -3843,39 +3859,39 @@ online</translation>
         <translation>Wartości MIDI</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="173"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="174"/>
         <source>None</source>
         <translation>Brak</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="188"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="189"/>
         <source>Untitled</source>
         <translation>Bez tytułu</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="263"/>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="286"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="264"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="287"/>
         <source>Auto (%1)</source>
         <translation>Auto (%1)</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="290"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="291"/>
         <source>The soundfont has no preset with this bank and this number: the notes are not played.</source>
         <translation>SoundFont nie ma presetu z tym bankiem i tym numerem: nuty nie są odtwarzane.</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="358"/>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="361"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="359"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="362"/>
         <source>semitones</source>
         <translation>półtonów</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="366"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="367"/>
         <source>All controllers are at their default value.</source>
         <translation>Wszystkie kontrolery mają wartość domyślną.</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="376"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="377"/>
         <source>dB</source>
         <comment>unit for decibels</comment>
         <translation>dB</translation>
@@ -5458,33 +5474,33 @@ Obydwa przedziały muszą mieć takie same zakresy klawiszy i sił klawiszy.</tr
 <context>
     <name>RecorderHistory</name>
     <message>
-        <location filename="../../dialogs/recorderhistory.cpp" line="84"/>
-        <location filename="../../dialogs/recorderhistory.cpp" line="204"/>
+        <location filename="../../dialogs/recorderhistory.cpp" line="88"/>
+        <location filename="../../dialogs/recorderhistory.cpp" line="208"/>
         <source>Listen to the recording</source>
         <translation>Odsłuchaj nagranie</translation>
     </message>
     <message>
-        <location filename="../../dialogs/recorderhistory.cpp" line="85"/>
+        <location filename="../../dialogs/recorderhistory.cpp" line="89"/>
         <source>Open the folder of the recording</source>
         <translation>Otwórz katalog nagrania</translation>
     </message>
     <message>
-        <location filename="../../dialogs/recorderhistory.cpp" line="86"/>
+        <location filename="../../dialogs/recorderhistory.cpp" line="90"/>
         <source>Delete the recording</source>
         <translation>Usuń nagranie</translation>
     </message>
     <message>
-        <location filename="../../dialogs/recorderhistory.cpp" line="204"/>
+        <location filename="../../dialogs/recorderhistory.cpp" line="208"/>
         <source>Stop listening</source>
         <translation>Zatrzymaj odsłuch</translation>
     </message>
     <message>
-        <location filename="../../dialogs/recorderhistory.cpp" line="207"/>
+        <location filename="../../dialogs/recorderhistory.cpp" line="211"/>
         <source>Import the recording in the soundfont displayed</source>
         <translation>Importuj nagranie do wyświetlonego SoundFontu</translation>
     </message>
     <message>
-        <location filename="../../dialogs/recorderhistory.cpp" line="208"/>
+        <location filename="../../dialogs/recorderhistory.cpp" line="212"/>
         <source>Display a soundfont in the editor for importing the recording</source>
         <translation>Wyświetl SoundFont w edytorze, aby zaimportować nagranie</translation>
     </message>

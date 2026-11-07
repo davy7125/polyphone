@@ -161,11 +161,11 @@ void LevelMeter::paintEvent(QPaintEvent * event)
     painter.setFont(font);
     if (!_isShowingVelocities && _highest >= 1)
     {
-        painter.fillRect(textRect, theme->getFixedColor(ThemeManager::RED, ThemeManager::WINDOW_BACKGROUND));
-        painter.setPen(theme->getColor(ThemeManager::WINDOW_BACKGROUND));
+        painter.fillRect(textRect, theme->getFixedColor(ThemeManager::RED, ThemeManager::LIST_BACKGROUND));
+        painter.setPen(theme->getColor(ThemeManager::LIST_BACKGROUND));
     }
     else
-        painter.setPen(theme->getColor(ThemeManager::WINDOW_TEXT));
+        painter.setPen(theme->getColor(ThemeManager::LIST_TEXT));
     painter.drawText(textRect, Qt::AlignCenter, getHighestLevelText());
 
     // A bar for each channel on the left side, a single one taking the whole height
@@ -183,7 +183,7 @@ void LevelMeter::paintEvent(QPaintEvent * event)
 void LevelMeter::paintChannel(QPainter &painter, const QRect &rect, const Channel &channel)
 {
     ThemeManager * theme = ContextManager::theme();
-    QColor background = theme->getColor(ThemeManager::WINDOW_BACKGROUND);
+    QColor background = theme->getColor(ThemeManager::LIST_BACKGROUND);
 
     // Position of a level, the scale being linear in decibels
     auto toPosition = [&rect](float level) {
@@ -191,7 +191,7 @@ void LevelMeter::paintChannel(QPainter &painter, const QRect &rect, const Channe
     };
 
     // Empty bar
-    painter.fillRect(rect, ThemeManager::mix(background, theme->getColor(ThemeManager::WINDOW_TEXT), 0.15));
+    painter.fillRect(rect, ThemeManager::mix(background, theme->getColor(ThemeManager::LIST_TEXT), 0.15));
 
     // Colors of the level, a velocity being never too high
     struct Zone
@@ -214,7 +214,7 @@ void LevelMeter::paintChannel(QPainter &painter, const QRect &rect, const Channe
         int start = toPosition(zone.start);
         int end = toPosition(qMin(channel.level, zone.end));
         painter.fillRect(start, rect.top(), end - start, rect.height(),
-                         theme->getFixedColor(zone.color, ThemeManager::WINDOW_BACKGROUND));
+                         theme->getFixedColor(zone.color, ThemeManager::LIST_BACKGROUND));
     }
 
     // Last peak
@@ -226,7 +226,7 @@ void LevelMeter::paintChannel(QPainter &painter, const QRect &rect, const Channe
         else if (!_isShowingVelocities && channel.heldLevel > WARNING_LEVEL)
             color = ThemeManager::YELLOW;
         painter.fillRect(qMin(toPosition(channel.heldLevel), rect.right() - 1), rect.top(), 2, rect.height(),
-                         theme->getFixedColor(color, ThemeManager::WINDOW_BACKGROUND));
+                         theme->getFixedColor(color, ThemeManager::LIST_BACKGROUND));
     }
 
     // Graduations

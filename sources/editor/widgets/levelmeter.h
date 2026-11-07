@@ -30,7 +30,7 @@
 
 // Level meter: a bar per channel with the last peak held, and the highest level reached. This value stays on a red
 // background once the maximum level has been reached, until the next reset or a click on the widget.
-// It can also show the velocity of the MIDI notes played, with a single bar.
+// It can also show the velocity of the MIDI notes played, with a single bar. Drawn on the background of the lists.
 class LevelMeter : public QWidget
 {
     Q_OBJECT

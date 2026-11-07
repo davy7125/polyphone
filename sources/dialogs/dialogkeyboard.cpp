@@ -27,6 +27,7 @@
 #include "contextmanager.h"
 #include "editortoolbar.h"
 #include "bannermenu.h"
+#include "dialogdecoration.h"
 #include <QApplication>
 #include <QCheckBox>
 
@@ -47,6 +48,7 @@ DialogKeyboard::DialogKeyboard(QWidget *parent) :
                                 "QComboBox::down-arrow{image:url(:/icons/arrow_down.svg);height:12px;width:12px}");
     ui->toolButtonSettings->setIcon(theme->getBannerIcon(":/icons/menu.svg", 24));
     ui->layoutTop->setAlignment(ui->layoutInfo, Qt::AlignVCenter); // Height of the other banners, the content centered
+    DialogDecoration::apply(this, ui->frameTop);
 
     // Bar between the effects and the controllers
     ui->lineAreas->setStyleSheet("QFrame{border:0;border-top:1px solid " + theme->getColor(ThemeManager::BORDER).name() + "}");

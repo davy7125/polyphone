@@ -82,9 +82,7 @@ private slots:
     void onUserClicked();
 
 private:
-    bool eventFilter(QObject *object, QEvent *event) override;
     void setBigLeftMargin(bool isOn);
-    static const int RESIZE_BORDER_WIDTH;
 
     Ui::MainWindow * ui;
     TabManager * _tabManager;
@@ -92,7 +90,6 @@ private:
     DialogRecorder * _recorder;
     DialogMidiPlayer * _midiPlayer;
     DialogAbout _dialogAbout;
-    Qt::Edges _mousePositionEdges;
 };
 
 #endif // MAINWINDOW_H

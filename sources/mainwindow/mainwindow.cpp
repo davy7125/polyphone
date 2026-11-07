@@ -29,7 +29,6 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QCloseEvent>
-#include <QWindow>
 #include <QShortcut>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -51,8 +50,7 @@
 #include "playeroptions.h"
 #include "tab.h"
 #include "mcpserver.h"
-
-const int MainWindow::RESIZE_BORDER_WIDTH = 5;
+#include "windowresizer.h"
 
 MainWindow::MainWindow(bool playerMode, QWidget *parent) : QWidget(parent),
     ui(new Ui::MainWindow),
@@ -79,7 +77,7 @@ MainWindow::MainWindow(bool playerMode, QWidget *parent) : QWidget(parent),
     {
         this->setWindowFlags(windowFlags() | Qt::Window | Qt::FramelessWindowHint | Qt::WindowSystemMenuHint);
         this->setAttribute(Qt::WA_TranslucentBackground, true);
-        QApplication::instance()->installEventFilter(this);
+        new WindowResizer(this);
         ui->stackedWidget->setStyleSheet(
             QString("MainStackedWidget{border:1px solid %1;border-top: 0}")
                 .arg(ContextManager::theme()->getColor(ContextManager::theme()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT) ?
@@ -582,104 +580,6 @@ void MainWindow::on_lineSearch_returnPressed()
 {
     if (!ui->lineSearch->text().isEmpty())
         on_pushButtonSearch_clicked();
-}
-
-bool MainWindow::eventFilter(QObject *object, QEvent *event)
-{
-    Q_UNUSED(object)
-
-    if (event->type() == QEvent::MouseMove && !this->isMaximized())
-    {
-        QWidget *w = qobject_cast<QWidget*>(object);
-        if (w == nullptr || w->window() != this)
-        {
-            // The pointer left the main window: no resize can start until it comes back
-            _mousePositionEdges = QFlags<Qt::Edge>();
-            this->unsetCursor();
-            return false;
-        }
-
-        QMouseEvent *mouseEvent = static_cast<QMouseEvent *>(event);
-        if (mouseEvent->buttons() != Qt::NoButton)
-            return false;
-
-        _mousePositionEdges = QFlags<Qt::Edge>();
-#if QT_VERSION < 0x060000
-        QPoint pos = this->mapFromGlobal(mouseEvent->globalPos());
-#else
-        QPoint pos = this->mapFromGlobal(mouseEvent->globalPosition().toPoint());
-#endif
-        if (pos.x() >= 0 && pos.x() <= RESIZE_BORDER_WIDTH)
-            _mousePositionEdges |= Qt::LeftEdge;
-        else if (pos.x() >= this->width() - RESIZE_BORDER_WIDTH && pos.x() <= this->width())
-            _mousePositionEdges |= Qt::RightEdge;
-        if (pos.y() >= 0 && pos.y() <= RESIZE_BORDER_WIDTH)
-            _mousePositionEdges |= Qt::TopEdge;
-        else if (pos.y() >= this->height() - RESIZE_BORDER_WIDTH && pos.y() <= this->height())
-            _mousePositionEdges |= Qt::BottomEdge;
-
-        if ((int)_mousePositionEdges > 0)
-        {
-            switch (_mousePositionEdges)
-            {
-            case Qt::LeftEdge:
-                this->setCursor(Qt::SizeHorCursor);
-                break;
-            case Qt::LeftEdge | Qt::TopEdge:
-                this->setCursor(Qt::SizeFDiagCursor);
-                break;
-            case Qt::LeftEdge | Qt::BottomEdge:
-                this->setCursor(Qt::SizeBDiagCursor);
-                break;
-            case Qt::RightEdge:
-                this->setCursor(Qt::SizeHorCursor);
-                break;
-            case Qt::RightEdge | Qt::TopEdge:
-                this->setCursor(Qt::SizeBDiagCursor);
-                break;
-            case Qt::RightEdge | Qt::BottomEdge:
-                this->setCursor(Qt::SizeFDiagCursor);
-                break;
-            case Qt::TopEdge:
-                this->setCursor(Qt::SizeVerCursor);
-                break;
-            case Qt::BottomEdge:
-                this->setCursor(Qt::SizeVerCursor);
-                break;
-            default:
-                this->unsetCursor();
-                return false;
-            }
-            return true;
-        }
-
-        this->unsetCursor();
-        return false;
-    }
-    else if (event->type() == QEvent::MouseButtonPress)
-    {
-        // Clicks in the other windows (virtual keyboard, recorder, ...) are not for the main window
-        QWidget *target = qobject_cast<QWidget*>(object);
-        if (target == nullptr || target->window() != this)
-            return false;
-
-        QMouseEvent *mouseEvent = static_cast<QMouseEvent *>(event);
-        if (mouseEvent->buttons() == Qt::LeftButton && (int)_mousePositionEdges > 0)
-        {
-            QWindow * w = this->topLevelWidget()->windowHandle();
-            if (w != nullptr)
-                w->startSystemResize(_mousePositionEdges);
-            return true;
-        }
-        return false;
-    }
-    else if (event->type() == QEvent::MouseButtonRelease)
-    {
-        _mousePositionEdges = QFlags<Qt::Edge>();
-        this->unsetCursor();
-    }
-
-    return false;
 }
 
 void MainWindow::changeEvent(QEvent * event)

@@ -40,6 +40,7 @@
 #include <cmath>
 #include "bannermenu.h"
 #include "contextmanager.h"
+#include "dialogdecoration.h"
 #include "editortoolbar.h"
 #include "midifile.h"
 #include "player.h"
@@ -58,6 +59,16 @@ static const int REFRESH_PERIOD = 33;
 // input, which always has a background noise (dB)
 static const float OUTPUT_THRESHOLD = -90;
 static const int DEFAULT_INPUT_THRESHOLD = -50;
+
+// Messages on 2 lines on the right side of the record button: missing source (red) or record waiting (color of the
+// banner)
+enum StatusMessage { STATUS_NO_OUTPUT, STATUS_NO_INPUT, STATUS_WAITING_SOUND, STATUS_WAITING_MIDI, STATUS_COUNT };
+static const char * const STATUS_MESSAGES[STATUS_COUNT] = {
+    QT_TRANSLATE_NOOP("DialogRecorder", "No audio\noutput"),
+    QT_TRANSLATE_NOOP("DialogRecorder", "No audio\ninput"),
+    QT_TRANSLATE_NOOP("DialogRecorder", "Waiting\nfor a sound"),
+    QT_TRANSLATE_NOOP("DialogRecorder", "Waiting\nfor a signal")
+};
 
 // Shortcuts working in all windows
 static QKeySequence getRecordShortcut() { return QKeySequence(Qt::CTRL | Qt::Key_R); }
@@ -96,6 +107,32 @@ DialogRecorder::DialogRecorder(QWidget *parent) :
     ui->toolButtonSettings->setIcon(theme->getBannerIcon(":/icons/menu.svg", 24));
     ui->layoutTop->setAlignment(ui->layoutInfo, Qt::AlignVCenter); // Height of the other banners, the content centered
     initializeSettingsMenu();
+
+    // Buttons, elapsed time and level on the background of the lists, which goes with the color of the banner used by
+    // the messages
+    QPalette palette = ui->frameContent->palette();
+    palette.setColor(QPalette::Window, theme->getColor(ThemeManager::LIST_BACKGROUND));
+    palette.setColor(QPalette::WindowText, theme->getColor(ThemeManager::LIST_TEXT));
+    ui->frameContent->setPalette(palette);
+    ui->frameContent->setAutoFillBackground(true);
+
+    // The window is wide enough for the longest message on the right side of the record button, the elapsed time
+    // keeping the size of its digits (as high as possible when the width of a QLCDNumber is at least
+    // (6 * digitCount + 1) / 12 of its height). Without message, the elapsed time is centered.
+    QFont font = ui->labelStatus->font();
+    font.setBold(true);
+    if (font.pointSizeF() > 0)
+        font.setPointSizeF(0.9 * font.pointSizeF());
+    ui->labelStatus->setFont(font);
+    int messageWidth = 0;
+    for (int i = 0; i < STATUS_COUNT; i++)
+        messageWidth = qMax(messageWidth, ui->labelStatus->fontMetrics().size(0, tr(STATUS_MESSAGES[i])).width());
+    int timeWidth = (6 * ui->lcdNumber->digitCount() + 1) * ui->pushRecord->minimumHeight() / 12 + 1;
+    int rowWidth = ui->pushRecord->minimumWidth() + messageWidth + timeWidth + ui->pushPlayPause->minimumWidth() +
+                   3 * ui->horizontalLayout->spacing();
+    ui->layoutContent->addSpacerItem(new QSpacerItem(rowWidth, 0, QSizePolicy::Fixed, QSizePolicy::Fixed));
+    ui->labelStatus->hide();
+    DialogDecoration::apply(this, ui->frameTop);
 
     // History
     connect(ui->history, SIGNAL(listenRequested(QString)), this, SLOT(onListenRequested(QString)));
@@ -284,13 +321,13 @@ void DialogRecorder::updateInterface()
     ThemeManager * theme = ContextManager::theme();
     QString shortcut = " (" + getRecordShortcut().toString(QKeySequence::NativeText) + ")";
     ui->pushRecord->setIcon(theme->getColoredSvg(_isRecording ? ":/icons/recorder_stop.svg" : ":/icons/recorder_record.svg",
-                                                 QSize(32, 32), ThemeManager::WINDOW_TEXT));
+                                                 QSize(32, 32), ThemeManager::LIST_TEXT));
     ui->pushRecord->setToolTip((_isRecording ? tr("Stop recording") : tr("Start recording")) + shortcut);
 
     // The button on the right side only pauses or resumes a record
     shortcut = " (" + getPauseShortcut().toString(QKeySequence::NativeText) + ")";
     ui->pushPlayPause->setIcon(theme->getColoredSvg(_isPaused ? ":/icons/recorder_play.svg" : ":/icons/recorder_pause.svg",
-                                                    QSize(32, 32), ThemeManager::WINDOW_TEXT));
+                                                    QSize(32, 32), ThemeManager::LIST_TEXT));
     ui->pushPlayPause->setToolTip((_isPaused ? tr("Resume") : tr("Pause")) + shortcut);
 
     // The mode doesn't change during a record
@@ -304,16 +341,27 @@ void DialogRecorder::updateProgress()
     bool isWaiting = this->isWaiting();
     ui->pushPlayPause->setEnabled(_isRecording && !isWaiting);
 
-    // State of the source
+    // State of the source on the right side of the record button, hidden when there is nothing to say (the elapsed time
+    // being then centered)
     AudioDevice * audio = ContextManager::audio();
-    QString status;
+    int message = STATUS_COUNT;
     if (_mode == MODE_OUTPUT && !audio->isRunning())
-        status = tr("No audio output");
+        message = STATUS_NO_OUTPUT;
     else if (_mode == MODE_INPUT && !audio->isInputRunning())
-        status = tr("No audio input");
+        message = STATUS_NO_INPUT;
     else if (isWaiting)
-        status = (_mode == MODE_MIDI ? tr("Waiting for a MIDI signal") : tr("Waiting for a sound"));
-    ui->labelStatus->setText(status);
+        message = (_mode == MODE_MIDI ? STATUS_WAITING_MIDI : STATUS_WAITING_SOUND);
+    QString status = (message < STATUS_COUNT ? tr(STATUS_MESSAGES[message]) : "");
+    if (status != ui->labelStatus->text()) // Called periodically
+    {
+        ui->labelStatus->setText(status);
+        ThemeManager * theme = ContextManager::theme();
+        QColor color = (message >= STATUS_WAITING_SOUND) ?
+                           theme->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND) :
+                           theme->getFixedColor(ThemeManager::RED, ThemeManager::LIST_BACKGROUND);
+        ui->labelStatus->setStyleSheet("QLabel{color:" + color.name() + "}");
+        ui->labelStatus->setVisible(!status.isEmpty());
+    }
 
     if (!_isRecording)
         return;

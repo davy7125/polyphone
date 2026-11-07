@@ -45,6 +45,7 @@
 #include "midiplayerdelegate.h"
 #include "editortoolbar.h"
 #include "bannermenu.h"
+#include "dialogdecoration.h"
 #include "player.h"
 #include "resettableslider.h"
 #include "waitingtooldialog.h"
@@ -95,6 +96,7 @@ DialogMidiPlayer::DialogMidiPlayer(QWidget *parent) :
     updatePlayPauseIcon(false);
     initializeSettingsMenu();
     ui->pushPlayPause->setCursor(Qt::PointingHandCursor);
+    DialogDecoration::apply(this, ui->frameTop);
 
     // Table of the channels, in the style of the tables of the editor but its edges being the ones of the window: no
     // border, and no line on the right side of the last column and at the bottom of the last row (grid drawn by
@@ -121,7 +123,7 @@ DialogMidiPlayer::DialogMidiPlayer(QWidget *parent) :
     connect(table, SIGNAL(itemChanged(QTableWidgetItem*)), this, SLOT(onItemChanged(QTableWidgetItem*)));
 
     // No file at the beginning
-    ui->labelFile->setText("-");
+    ui->labelFile->setTextToElide("-");
     ui->labelMessage->setText(tr("Open a MIDI file to play it with the soundfonts that are open."));
     ui->tableChannels->hide();
     ui->pushPlayPause->setEnabled(false);
@@ -183,7 +185,7 @@ void DialogMidiPlayer::loadFile(QString filePath)
     _player->setFile(nullptr);
     _file.reset();
     updatePlayPauseIcon(false);
-    ui->labelFile->setText(QFileInfo(filePath).fileName());
+    ui->labelFile->setTextToElide(QFileInfo(filePath).fileName()); // All the room up to the time, elided in the middle
     ui->labelFile->setToolTip(filePath);
 
     std::shared_ptr<MidiFile> file(new MidiFile());

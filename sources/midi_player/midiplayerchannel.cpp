@@ -149,7 +149,8 @@ MidiPlayerChannel::MidiPlayerChannel(MidiFilePlayer * player, int channel, QStri
     layoutVolume->addWidget(_sliderVolume);
     layoutVolume->addWidget(_labelVolume);
 
-    // The cells with widgets are not edited
+    // The cells with widgets are not edited. The widgets are in place before the soundfont: its item updates the size
+    // of the window, the width of the columns of the widgets being then computed.
     foreach (int column, QList<int>() << MidiPlayerDelegate::COLUMN_CHANNEL << MidiPlayerDelegate::COLUMN_VOLUME)
     {
         QTableWidgetItem * item = new QTableWidgetItem();
@@ -157,9 +158,9 @@ MidiPlayerChannel::MidiPlayerChannel(MidiFilePlayer * player, int channel, QStri
         table->setItem(row, column, item);
     }
     table->setCellWidget(row, MidiPlayerDelegate::COLUMN_CHANNEL, widgetChannel);
+    table->setCellWidget(row, MidiPlayerDelegate::COLUMN_VOLUME, widgetVolume);
     table->setItem(row, MidiPlayerDelegate::COLUMN_SOUNDFONT, _itemSoundfont);
     table->setItem(row, MidiPlayerDelegate::COLUMN_PRESET, _itemPreset);
-    table->setCellWidget(row, MidiPlayerDelegate::COLUMN_VOLUME, widgetVolume);
 
     connect(_sliderVolume, SIGNAL(valueChanged(int)), this, SLOT(onVolumeChanged(int)));
     connect(_pushMute, SIGNAL(toggled(bool)), this, SIGNAL(mixChanged()));

@@ -63,7 +63,8 @@ RecorderHistory::RecorderHistory(QWidget * parent) : QFrame(parent),
         Line &line = _lines[i];
         line.widget = new QFrame(this);
         line.widget->setFixedHeight(LINE_HEIGHT);
-        line.widget->setProperty("alternate", i % 2 == 1);
+        // Alternative background from the first line, which then stands out from the area above (background of the lists)
+        line.widget->setProperty("alternate", i % 2 == 0);
         line.widget->installEventFilter(this);
 
         line.labelName = new ElidedLabel(line.widget);
@@ -198,9 +199,14 @@ void RecorderHistory::select(int index)
     updateButtons();
 }
 
+bool RecorderHistory::isUsable(int index)
+{
+    return !(index == 0 && _isFirstFileBusy);
+}
+
 void RecorderHistory::updateButtons()
 {
-    bool isUsable = !(_selectedIndex == 0 && _isFirstFileBusy);
+    bool isUsable = this->isUsable(_selectedIndex);
     bool isPlaying = !_playingFile.isEmpty() && _files.value(_selectedIndex) == _playingFile;
     _buttonListen->setEnabled(isUsable);
     _buttonListen->setIcon(ContextManager::theme()->getBannerIcon(isPlaying ? ":/icons/recorder_stop.svg" : ":/icons/recorder_play.svg", ICON_SIZE));
@@ -219,7 +225,11 @@ bool RecorderHistory::eventFilter(QObject * watched, QEvent * event)
         {
             if (watched == _lines[i].widget)
             {
+                // While a file is played, another file selected is played instead
+                bool playsAnotherFile = !_playingFile.isEmpty() && _files[i] != _playingFile && isUsable(i);
                 select(i);
+                if (playsAnotherFile)
+                    emit listenRequested(_files[i]);
                 return true;
             }
         }

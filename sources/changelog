@@ -22,6 +22,7 @@ polyphone (2.7) UNRELEASED; urgency=low
   * (improvement) size of the soundfonts displayed and filtered in the online repository, results sortable by trend or by size
   * (new) recorder with three modes: output of Polyphone or audio input (chosen in the settings) in a wav file, MIDI signals in a MIDI file
   * (improvement) the recorder can start with the first sound or MIDI signal and stop after a silence
+  * (improvement) when the window borders are hidden, the virtual keyboard, the recorder and the MIDI player have none either
   * (improvement) various ergonomic improvements
   * (improvement) more reliable pitch estimation of the samples (YIN algorithm refined with the harmonics)
   * (improvement) more accurate frequencies of the peaks shown in the Fourier graph

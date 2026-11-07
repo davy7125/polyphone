@@ -333,6 +333,7 @@ SOURCES	+= main.cpp \
     mainwindow/tab.cpp \
     mainwindow/tabmanager.cpp \
     mainwindow/topbackground.cpp \
+    mainwindow/windowresizer.cpp \
     player/player.cpp \
     player/playeroptions.cpp \
     player/playerpresetlist.cpp \
@@ -450,6 +451,7 @@ SOURCES	+= main.cpp \
     editor/tools/transpose_smpl/tooltransposesmpl_parameters.cpp \
     editor/tools/transpose_smpl/tooltransposesmpl_gui.cpp \
     context/interface/configpanel.cpp \
+    dialogs/dialogdecoration.cpp \
     dialogs/dialogkeyboard.cpp \
     dialogs/dialogrecorder.cpp \
     dialogs/recorderhistory.cpp \
@@ -773,6 +775,7 @@ HEADERS += \
     mainwindow/tab.h \
     mainwindow/tabmanager.h \
     mainwindow/topbackground.h \
+    mainwindow/windowresizer.h \
     player/player.h \
     player/playeroptions.h \
     player/playerpresetlist.h \
@@ -900,6 +903,7 @@ HEADERS += \
     editor/tools/transpose_smpl/tooltransposesmpl_parameters.h \
     editor/tools/transpose_smpl/tooltransposesmpl_gui.h \
     context/interface/configpanel.h \
+    dialogs/dialogdecoration.h \
     dialogs/dialogkeyboard.h \
     dialogs/dialogrecorder.h \
     dialogs/recorderhistory.h \

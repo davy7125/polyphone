@@ -39,6 +39,9 @@ public:
     // The pattern fades out before reaching this area, so that the icons it contains remain readable
     void setIconArea(QWidget * iconArea);
 
+    // Radius of the top corners of the window when its borders are hidden
+    static const int CORNER_RADIUS;
+
 protected:
     void paintEvent(QPaintEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
@@ -50,7 +53,6 @@ protected:
 private:
     void updatePattern();
 
-    static const int CORNER_RADIUS;
     static const int FADE_WIDTH;
 
     bool _withWindowBorders;
