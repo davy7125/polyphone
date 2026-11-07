@@ -67,13 +67,15 @@ Estas operaciones permiten gestionar y ordenar rápidamente una colección local
 ## Tocar los elementos {#doc_play}
 
 
-El botón ![piano](images/toolbar_piano.png "piano"){.inline}, a la derecha del botón :guilabel:`Visualización`, muestra u oculta el [teclado virtual](manual/soundfont-editor/toolbar.md#doc_keyboard), y el botón ![grabadora](images/toolbar_recorder.png "grabadora"){.inline} situado a su lado muestra u oculta la [grabadora](manual/soundfont-editor/toolbar.md#doc_recorder), igual que los botones de la barra de herramientas del editor.
+El botón ![MIDI](images/toolbar_midi.png "MIDI"){.inline}, a la derecha del botón :guilabel:`Visualización`, muestra u oculta el [reproductor MIDI](manual/soundfont-editor/toolbar.md#doc_midi_player), el botón ![piano](images/toolbar_piano.png "piano"){.inline} situado a su lado muestra u oculta el [teclado virtual](manual/soundfont-editor/toolbar.md#doc_keyboard), y el botón ![grabadora](images/toolbar_recorder.png "grabadora"){.inline} muestra u oculta la [grabadora](manual/soundfont-editor/toolbar.md#doc_recorder), igual que los botones de la barra de herramientas del editor.
 
 La muestra, el instrumento o el conjunto seleccionado en las listas de la derecha se puede tocar con el teclado virtual, o con un teclado MIDI externo aunque el teclado virtual esté oculto. Como en el editor, el teclado virtual muestra la extensión del elemento, o la nota raíz de una muestra. Una muestra se reproduce en bucle si tiene uno, y en estéreo si la opción :guilabel:`estéreo` del [reproductor](manual/soundfont-editor/editing-pages/sample-editor.md#doc_player) de muestras está marcada.
 
 La primera vez que se selecciona un elemento de un archivo, el soundfont se carga en segundo plano sin abrir ninguna pestaña. Después, el soundfont se conserva mientras se seleccionen elementos del mismo archivo, y se libera cuando se selecciona otro archivo en la lista principal.
 
 Un soundfont que ya está abierto en una pestaña se toca tal como está en el editor, con sus cambios no guardados.
+
+Los canales del reproductor MIDI ajustados en :guilabel:`Selección` tocan el archivo seleccionado en la lista principal, lo que permite escuchar un archivo MIDI con cada soundfont de un directorio sin abrirlos. El archivo se carga en segundo plano poco después de seleccionarlo (los archivos recorridos rápidamente con las flechas no se cargan) y se toca en cuanto está listo. Esto también funciona en [modo sintetizador](tutorials/use-polyphone-as-a-synthesizer.md), donde el reproductor MIDI es el único botón disponible.
 
 
 ## Abrir un soundfont {#doc_open_soundfont}
@@ -83,4 +85,4 @@ Un doble clic en un elemento de la lista principal abre el archivo —siempre qu
 
 Un doble clic en una [muestra](manual/soundfont-editor/editing-pages/sample-editor.md), en un [instrumento](manual/soundfont-editor/editing-pages/instrument-editor.md) o en un [conjunto](manual/soundfont-editor/editing-pages/preset-editor.md) abre el archivo en el elemento seleccionado.
 
-Si el soundfont ya se ha cargado para tocar uno de sus elementos, la pestaña se abre inmediatamente.
+Si el soundfont ya se ha cargado para tocar uno de sus elementos o para el reproductor MIDI, la pestaña se abre inmediatamente (salvo en modo sintetizador, donde el archivo se vuelve a cargar).

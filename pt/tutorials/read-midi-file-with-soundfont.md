@@ -59,6 +59,8 @@ O reprodutor também ajuda a ouvir os detalhes:
 
 Cada canal pode tocar uma soundfont diferente: abra várias soundfonts no Polyphone e dê um clique duplo em uma célula da coluna :guilabel:`Soundfont` para escolher a que o canal toca. Você pode, por exemplo, comparar os pianos de duas soundfonts na mesma parte, ou manter uma soundfont General MIDI para o acompanhamento enquanto a sua própria soundfont toca a melodia.
 
+Por padrão, os canais estão definidos como :guilabel:`Seleção`: eles tocam a soundfont da aba atual, ou o arquivo selecionado em um [explorador de soundfonts](manual/soundfont-explorer.md#doc_play). Para comparar todas as soundfonts de um diretório, abra-o no Polyphone e selecione seus arquivos um após o outro enquanto a música toca: cada soundfont é carregada em segundo plano e ouvida assim que estiver pronta, sem abrir uma aba.
+
 ![Escolher a soundfont de um canal](images/midi_player_soundfonts.png "Escolher a soundfont de um canal")
 
 Da mesma forma, um clique duplo em uma célula da coluna :guilabel:`Predefinição` impõe uma predefinição da soundfont no lugar da pedida pelo arquivo. É assim que se testa uma soundfont que não é compatível com o padrão General MIDI, por exemplo uma soundfont com um único instrumento: escolha a sua predefinição para o canal da melodia, e as mudanças de programa do arquivo passam a ser ignoradas nesse canal.

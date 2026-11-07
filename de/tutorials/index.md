@@ -17,6 +17,11 @@ Sie lernen, die Möglichkeiten eines solchen Samples voll auszuschöpfen, indem 
 Ein echtes Instrument klingt nicht nur lauter, wenn es stärker gespielt wird: Auch seine Klangfarbe ändert sich.
 Am Beispiel des Klaviers zeigt dieses Tutorial, wie mehrere Aufnahmen jeder Note in Anschlagsebenen gestapelt und ausgeglichen werden und welche weiteren Details ein Instrument realistischer machen.
 
+### [Soundfonts mit Claude bearbeiten](tutorials/edit-soundfonts-with-claude.md)
+
+Dank seines MCP-Servers lässt sich Polyphone von einem KI-Assistenten wie Claude steuern: Beschreiben Sie in Ihren eigenen Worten, was Sie möchten, und der Assistent bearbeitet die Soundfonts, verwendet die Werkzeuge und misst das Ergebnis.
+Dieses Tutorial erklärt, wie Claude mit Polyphone verbunden wird, und zeigt anhand von Audiobeispielen, wie man ein Instrument prüft und korrigiert oder eines von Grund auf erstellt.
+
 ### [Polyphone als Synthesizer verwenden](tutorials/use-polyphone-as-a-synthesizer.md)
 
 Polyphone ist nicht nur ein Soundfont-Editor, sondern auch ein vollwertiger Synthesizer, auf dem Sie mit einer MIDI-Tastatur spielen können.

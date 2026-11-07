@@ -1,10 +1,11 @@
 ソフトウェアの設定は、[ホーム画面](manual/index.md)または[メニュー](manual/menu.md#doc_shortcuts)から開けます（ショートカット :kbd:`Ctrl`+:kbd:`,`）。
-設定は次の5つのセクションに分かれています。
+設定は次の6つのセクションに分かれています。
 
 * [一般](#doc_general)
 * [インタフェース](#doc_interface)
 * [サウンド](#doc_sound)
 * [キーボード](#doc_keyboard)
+* [AIアシスタント](#doc_ai_assistant)
 * [オンラインリポジトリ](#doc_repository)
 
 変更はすべて即座に保存されます。
@@ -144,6 +145,35 @@ MIDI入力
 
 
 ![設定：キーボード](images/settings_keyboard.png "設定：キーボード")
+
+
+## AIアシスタント {#doc_ai_assistant}
+
+
+:guilabel:`AIアシスタント` セクションでは、ClaudeなどのModel Context Protocol（MCP）に対応したAIアシスタントに、Polyphoneで開いているSoundFontの閲覧、編集、分析を許可できます。
+アシスタントによる変更はすぐにエディターに表示され、ほかの変更と同じように元に戻せます。
+
+AIアシスタントに開いているSoundFontへのアクセスを許可する
+: PolyphoneのMCPサーバーを起動します（デフォルトでは無効）。
+  その下の行には、サーバーの状態とアドレスが表示されます（例：「サーバー起動中、アドレス：http://127.0.0.1:8642/mcp」）。
+  サーバーは、このコンピューターからの接続しか受け付けません。
+
+ポート
+: サーバーのポートで、デフォルトは8642です。
+  このポートがすでにほかのソフトウェアで使われている場合は、別のポートを選べます。
+
+PolyphoneをClaude Codeに追加するコマンド
+: Claude CodeがPolyphoneを使えるようにするために、ターミナルで実行するコマンドです。
+  :guilabel:`コピー` ボタンでクリップボードにコピーできます。
+
+AIが使用できる機能
+: アシスタントが呼び出せる機能の一覧で、:guilabel:`閲覧`、:guilabel:`編集`、:guilabel:`ツール`、:guilabel:`音の分析` の4つのカテゴリーに分かれています。
+  説明文はアシスタントが読むためのもので、英語で書かれています。
+
+チュートリアル「[ClaudeでSoundFontを編集する](tutorials/edit-soundfonts-with-claude.md)」では、ClaudeをPolyphoneに接続する方法を説明し、依頼の例を紹介しています。
+
+
+![設定：AIアシスタント](images/settings_ai_assistant.png "設定：AIアシスタント")
 
 
 ## オンラインリポジトリ {#doc_repository}

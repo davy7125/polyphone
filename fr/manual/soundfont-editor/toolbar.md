@@ -98,7 +98,7 @@ Sous ces boutons, l'indicateur affiche le niveau des canaux, même lorsque rien 
 Le bas de la fenêtre liste les 5 derniers enregistrements, audio ou MIDI selon le mode, avec leur taille ou leur nombre de notes. Un fichier qui n'existe plus est retiré de la liste à l'ouverture de la fenêtre. Un clic sélectionne une ligne, qui affiche alors quatre boutons&nbsp;:
 
 Écouter
-: Lit le fichier audio dans Polyphone, sur la sortie audio (un second clic l'arrête), ou ouvre le fichier MIDI dans le [lecteur MIDI](#doc_midi_player).
+: Lit le fichier audio dans Polyphone, sur la sortie audio (un second clic l'arrête, et sélectionner une autre ligne pendant la lecture lit son fichier à la place), ou ouvre le fichier MIDI dans le [lecteur MIDI](#doc_midi_player).
 
 Répertoire
 : Ouvre le répertoire du fichier.
@@ -270,7 +270,7 @@ Une modification est progressive et n'interrompt pas les notes en cours.
 ## Lecteur MIDI {#doc_midi_player}
 
 
-En cliquant sur l'icône ![MIDI](images/toolbar_midi.png "MIDI"){.inline}, une fenêtre s'ouvre présentant le lecteur MIDI, qui joue un fichier MIDI (:file:`.mid`, :file:`.midi`, :file:`.kar` ou :file:`.rmi`) avec les banques de sons ouvertes, pour les tester dans un morceau de musique.
+En cliquant sur l'icône ![MIDI](images/toolbar_midi.png "MIDI"){.inline}, une fenêtre s'ouvre présentant le lecteur MIDI, qui joue un fichier MIDI (:file:`.mid`, :file:`.midi`, :file:`.kar` ou :file:`.rmi`) avec les banques de sons ouvertes ou avec les fichiers sélectionnés dans un [explorateur de banques de sons](manual/soundfont-explorer.md#doc_play), pour les tester dans un morceau de musique.
 Les banques de sons sont jouées telles qu'elles sont dans l'éditeur, avec leurs modifications non enregistrées.
 Le lecteur MIDI est également disponible en [mode synthé](tutorials/use-polyphone-as-a-synthesizer.md).
 
@@ -303,8 +303,10 @@ Canal
   Le bouton MIDI affiche les valeurs MIDI actuelles du canal qui diffèrent de leur valeur par défaut&nbsp;: contrôleurs, Pitch Bend (en demi-tons), sensibilité du Pitch Bend et pression globale.
 
 Banque de sons
-: La banque de sons jouée par le canal, parmi les banques de sons ouvertes dans des onglets, ou :guilabel:`Aucune` pour ne rien jouer.
-  À l'ouverture d'un fichier, tous les canaux jouent la banque de sons de l'onglet courant (ou la première banque de sons ouverte).
+: La banque de sons jouée par le canal&nbsp;: :guilabel:`Sélection`, l'une des banques de sons ouvertes dans des onglets, ou :guilabel:`Aucune` pour ne rien jouer.
+  :guilabel:`Sélection`, choisie pour tous les canaux à l'ouverture d'un fichier, joue ce qui est sélectionné dans la fenêtre principale&nbsp;: la banque de sons de l'onglet courant, ou le fichier sélectionné dans un [explorateur de banques de sons](manual/soundfont-explorer.md#doc_play), dont le nom est affiché entre parenthèses.
+  Les autres onglets (écran d'accueil, préférences, dépôt en ligne…) conservent la banque de sons jouée.
+  Lorsque la sélection change, une icône de chargement tourne devant le nom pendant le chargement de la banque de sons, la précédente étant jouée en attendant, puis les ensembles de ces canaux reviennent sur :guilabel:`Auto`.
 
 Ensemble
 : Avec :guilabel:`Auto`, les ensembles sont choisis par les changements de programme du fichier (banque 128 sur le canal 10, pour les percussions) et l'ensemble en cours est affiché entre parenthèses.

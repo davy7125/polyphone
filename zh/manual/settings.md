@@ -1,10 +1,11 @@
 可以从[主屏幕](manual/index.md)或[菜单](manual/menu.md#doc_shortcuts)（快捷键 :kbd:`Ctrl`+:kbd:`,`）打开软件设置。
-设置分为五个部分：
+设置分为六个部分：
 
 * [通用](#doc_general)
 * [界面](#doc_interface)
 * [音频](#doc_sound)
 * [键盘](#doc_keyboard)
+* [AI助手](#doc_ai_assistant)
 * [在线仓库](#doc_repository)
 
 所有修改都会立即保存。
@@ -144,6 +145,35 @@ MIDI 输入
 
 
 ![设置：键盘](images/settings_keyboard.png "设置：键盘")
+
+
+## AI助手 {#doc_ai_assistant}
+
+
+在 :guilabel:`AI助手` 部分中，可以允许支持 Model Context Protocol（MCP）的 AI 助手（例如 Claude）浏览、编辑和分析在 Polyphone 中打开的音色库。
+助手所做的修改会立即显示在编辑器中，并且可以像其他修改一样撤销。
+
+允许 AI 助手访问已打开的音色库
+: 启动 Polyphone 的 MCP 服务器（默认关闭）。
+  下方的一行显示服务器的状态和地址，例如“服务器已启动，地址：http://127.0.0.1:8642/mcp”。
+  服务器只接受来自本机的连接。
+
+端口
+: 服务器的端口，默认为 8642。
+  如果该端口已被其他软件占用，可以选择另一个端口。
+
+将 Polyphone 添加到 Claude Code 的命令
+: 在终端中运行此命令后，Claude Code 即可使用 Polyphone。
+  :guilabel:`复制` 按钮可将其复制到剪贴板。
+
+AI 可用的功能
+: 助手可以调用的功能列表，分为四类：:guilabel:`浏览`、:guilabel:`编辑`、:guilabel:`工具` 和 :guilabel:`声音分析`。
+  这些描述是供助手阅读的，使用英文编写。
+
+教程“[用 Claude 编辑音色库](tutorials/edit-soundfonts-with-claude.md)”介绍了如何将 Claude 连接到 Polyphone，并给出了请求示例。
+
+
+![设置：AI助手](images/settings_ai_assistant.png "设置：AI助手")
 
 
 ## 在线仓库 {#doc_repository}

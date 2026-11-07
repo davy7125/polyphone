@@ -67,13 +67,15 @@ Polyphoneでは、[ホーム画面](manual/index.md#doc_left)の :guilabel:`デ�
 ## 要素を演奏する {#doc_play}
 
 
-:guilabel:`表示` ボタンの右にある ![piano](images/toolbar_piano.png "piano"){.inline} ボタンで[仮想キーボード](manual/soundfont-editor/toolbar.md#doc_keyboard)の表示 / 非表示を、その隣の ![レコーダー](images/toolbar_recorder.png "レコーダー"){.inline} ボタンで[レコーダー](manual/soundfont-editor/toolbar.md#doc_recorder)の表示 / 非表示を、エディターのツールバーのボタンと同じように切り替えられます。
+:guilabel:`表示` ボタンの右にある ![MIDI](images/toolbar_midi.png "MIDI"){.inline} ボタンで[MIDIプレーヤー](manual/soundfont-editor/toolbar.md#doc_midi_player)の表示 / 非表示を、その隣の ![piano](images/toolbar_piano.png "piano"){.inline} ボタンで[仮想キーボード](manual/soundfont-editor/toolbar.md#doc_keyboard)の表示 / 非表示を、さらに ![レコーダー](images/toolbar_recorder.png "レコーダー"){.inline} ボタンで[レコーダー](manual/soundfont-editor/toolbar.md#doc_recorder)の表示 / 非表示を、エディターのツールバーのボタンと同じように切り替えられます。
 
 右側のリストで選択したサンプル、インストゥルメント、プリセットは、仮想キーボードで演奏できるほか、仮想キーボードが非表示のときでも外部MIDIキーボードで演奏できます。エディターと同じく、仮想キーボードには要素の音域、またはサンプルのルートキーが表示されます。サンプルは、ループがあればループ再生され、サンプルの[プレーヤー](manual/soundfont-editor/editing-pages/sample-editor.md#doc_player)の :guilabel:`ステレオ` オプションがオンならステレオで再生されます。
 
 ファイルの要素を初めて選択すると、タブを開かずにバックグラウンドでSoundFontが読み込まれます。その後、同じファイルの要素を選択している間はSoundFontが保持され、メインリストで別のファイルを選択すると解放されます。
 
 すでにタブで開いているSoundFontは、保存していない変更も含め、エディター上の状態のまま演奏されます。
+
+:guilabel:`選択` に設定したMIDIプレーヤーのチャンネルは、メインリストで選択したファイルを演奏します。これにより、ディレクトリ内の各SoundFontを開かずに、MIDIファイルをそれぞれのSoundFontで聴くことができます。ファイルは選択の少し後にバックグラウンドで読み込まれ（矢印キーですばやく移動したファイルは読み込まれません）、準備ができ次第演奏されます。[シンセモード](tutorials/use-polyphone-as-a-synthesizer.md)でも同様に動作し、その場合に使えるボタンはMIDIプレーヤーだけです。
 
 
 ## SoundFontを開く {#doc_open_soundfont}
@@ -83,4 +85,4 @@ Polyphoneでは、[ホーム画面](manual/index.md#doc_left)の :guilabel:`デ�
 
 [サンプル](manual/soundfont-editor/editing-pages/sample-editor.md)、[インストゥルメント](manual/soundfont-editor/editing-pages/instrument-editor.md)、[プリセット](manual/soundfont-editor/editing-pages/preset-editor.md)をダブルクリックすると、選択した要素の位置でファイルが開きます。
 
-要素を演奏するためにSoundFontがすでに読み込まれている場合、タブはすぐに開きます。
+要素を演奏するため、またはMIDIプレーヤーのためにSoundFontがすでに読み込まれている場合、タブはすぐに開きます（シンセモードではファイルが改めて読み込まれます）。

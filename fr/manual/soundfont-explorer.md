@@ -67,13 +67,15 @@ Ces opérations permettent de gérer et de nettoyer rapidement une collection lo
 ## Jouer les éléments {#doc_play}
 
 
-Le bouton ![piano](images/toolbar_piano.png "piano"){.inline}, à droite du bouton :guilabel:`Affichage`, affiche ou masque le [clavier virtuel](manual/soundfont-editor/toolbar.md#doc_keyboard), et le bouton ![magnétophone](images/toolbar_recorder.png "magnétophone"){.inline} situé à côté affiche ou masque le [magnétophone](manual/soundfont-editor/toolbar.md#doc_recorder), comme les boutons de la barre d'outils de l'éditeur.
+Le bouton ![MIDI](images/toolbar_midi.png "MIDI"){.inline}, à droite du bouton :guilabel:`Affichage`, affiche ou masque le [lecteur MIDI](manual/soundfont-editor/toolbar.md#doc_midi_player), le bouton ![piano](images/toolbar_piano.png "piano"){.inline} situé à côté affiche ou masque le [clavier virtuel](manual/soundfont-editor/toolbar.md#doc_keyboard), et le bouton ![magnétophone](images/toolbar_recorder.png "magnétophone"){.inline} affiche ou masque le [magnétophone](manual/soundfont-editor/toolbar.md#doc_recorder), comme les boutons de la barre d'outils de l'éditeur.
 
 L'échantillon, l'instrument ou l'ensemble sélectionné dans les listes de droite peut être joué avec le clavier virtuel, ou avec un clavier MIDI externe même si le clavier virtuel est masqué. Comme dans l'éditeur, le clavier virtuel montre l'étendue de l'élément, ou la note de référence d'un échantillon. Un échantillon est joué en boucle s'il en possède une, et en stéréo si l'option :guilabel:`stéréo` du [lecteur](manual/soundfont-editor/editing-pages/sample-editor.md#doc_player) d'échantillon est cochée.
 
 La première fois qu'un élément d'un fichier est sélectionné, la banque de sons est chargée en arrière-plan sans ouvrir d'onglet. La banque de sons est ensuite conservée tant que les éléments sélectionnés appartiennent au même fichier, et libérée lorsqu'un autre fichier est sélectionné dans la liste principale.
 
 Une banque de sons déjà ouverte dans un onglet est jouée telle qu'elle est dans l'éditeur, avec ses modifications non enregistrées.
+
+Les canaux du lecteur MIDI réglés sur :guilabel:`Sélection` jouent le fichier sélectionné dans la liste principale, ce qui permet d'écouter un fichier MIDI avec chaque banque de sons d'un répertoire sans les ouvrir. Le fichier est chargé en arrière-plan peu après sa sélection (les fichiers parcourus rapidement avec les flèches ne sont pas chargés), puis joué dès qu'il est prêt. Cela fonctionne aussi en [mode synthé](tutorials/use-polyphone-as-a-synthesizer.md), où le lecteur MIDI est le seul bouton disponible.
 
 
 ## Ouvrir une banque de sons {#doc_open_soundfont}
@@ -83,4 +85,4 @@ Un double-clic sur un élément de la liste principale ouvre le fichier — dans
 
 Un double-clic sur un [échantillon](manual/soundfont-editor/editing-pages/sample-editor.md), un [instrument](manual/soundfont-editor/editing-pages/instrument-editor.md) ou un [ensemble](manual/soundfont-editor/editing-pages/preset-editor.md) ouvre le fichier sur l'élément sélectionné.
 
-Si la banque de sons a déjà été chargée pour jouer l'un de ses éléments, l'onglet s'ouvre immédiatement.
+Si la banque de sons a déjà été chargée pour jouer l'un de ses éléments ou pour le lecteur MIDI, l'onglet s'ouvre immédiatement (sauf en mode synthé, où le fichier est chargé à nouveau).

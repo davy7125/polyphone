@@ -59,6 +59,8 @@ The player also helps you to listen to the details:
 
 Each channel can play a different soundfont: open several soundfonts in Polyphone, then double click on a cell of the column :guilabel:`Soundfont` to choose the soundfont played by the channel. You can for instance compare the pianos of two soundfonts on the same part, or keep a General MIDI soundfont for the accompaniment while your own soundfont plays the melody.
 
+By default, the channels are set to :guilabel:`Selection`: they play the soundfont of the current tab, or the file selected in a [soundfont explorer](manual/soundfont-explorer.md#doc_play). To compare all the soundfonts of a directory, open it in Polyphone and select its files one after the other while the piece is playing: each soundfont is loaded in the background and heard as soon as it is ready, without opening a tab.
+
 ![Choosing the soundfont of a channel](images/midi_player_soundfonts.png "Choosing the soundfont of a channel")
 
 In the same way, a double click on a cell of the column :guilabel:`Preset` forces a preset of the soundfont instead of the one requested by the file. This is the way to test a soundfont that doesn't comply with the General MIDI standard, a soundfont containing a single instrument for instance: choose its preset for the channel of the melody, the program changes of the file being then ignored on this channel.

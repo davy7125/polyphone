@@ -3,6 +3,7 @@ index.md=Учебные руководства
 |how-to-prepare-a-sample.md=Как подготовить семпл
 |using-custom-releases-in-an-instrument.md=Собственное затухание в инструменте
 |realistic-instruments-with-multiple-velocity-layers.md=Реалистичные инструменты с несколькими слоями силы нажатия
+|edit-soundfonts-with-claude.md=Редактирование SoundFont с помощью Claude
 |use-polyphone-as-a-synthesizer.md=Polyphone как синтезатор
 |create-a-synthesizer-with-raspberry-pi.md=Синтезатор на Raspberry Pi
 |read-midi-file-with-soundfont.md=Воспроизведение MIDI-файла с SoundFont

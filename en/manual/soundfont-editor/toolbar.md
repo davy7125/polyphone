@@ -98,7 +98,7 @@ Below these buttons, the meter shows the level of the channels, even when nothin
 The bottom of the window lists the last 5 records, audio or MIDI depending on the mode, with their size or their number of notes. A file that no longer exists is removed from the list when the window opens. A click selects a line, which then shows four buttons:
 
 Listen
-: Play the audio file in Polyphone, on the audio output (a second click stops it), or open the MIDI file in the [MIDI player](#doc_midi_player).
+: Play the audio file in Polyphone, on the audio output (a second click stops it, and selecting another line during the playback plays its file instead), or open the MIDI file in the [MIDI player](#doc_midi_player).
 
 Folder
 : Open the folder of the file.
@@ -270,7 +270,7 @@ A change is progressive and doesn't interrupt the notes being played.
 ## MIDI player {#doc_midi_player}
 
 
-When clicking on the icon ![MIDI](images/toolbar_midi.png "MIDI"){.inline}, a window opens showing the MIDI player, which plays a MIDI file (:file:`.mid`, :file:`.midi`, :file:`.kar` or :file:`.rmi`) with the soundfonts that are open, for testing them in a piece of music.
+When clicking on the icon ![MIDI](images/toolbar_midi.png "MIDI"){.inline}, a window opens showing the MIDI player, which plays a MIDI file (:file:`.mid`, :file:`.midi`, :file:`.kar` or :file:`.rmi`) with the soundfonts that are open or with the files selected in a [soundfont explorer](manual/soundfont-explorer.md#doc_play), for testing them in a piece of music.
 The soundfonts are played as they are in the editor, with their unsaved changes.
 The MIDI player is also available in [synth mode](tutorials/use-polyphone-as-a-synthesizer.md).
 
@@ -303,8 +303,10 @@ Channel
   The MIDI button displays the current MIDI values of the channel that differ from their default value: controllers, pitch wheel (in semitones), its sensitivity and channel pressure.
 
 Soundfont
-: The soundfont played by the channel, among the soundfonts open in tabs, or :guilabel:`None` for silence.
-  When a file is opened, all channels play the soundfont of the current tab (or the first soundfont open).
+: The soundfont played by the channel: :guilabel:`Selection`, one of the soundfonts open in tabs, or :guilabel:`None` for silence.
+  :guilabel:`Selection`, chosen for all channels when a file is opened, plays what is selected in the main window: the soundfont of the current tab, or the file selected in a [soundfont explorer](manual/soundfont-explorer.md#doc_play), whose name is displayed in brackets.
+  The other tabs (home, settings, online repository…) keep the soundfont played.
+  When the selection changes, a spinner turns in front of the name while the soundfont is loading, the previous one being played meanwhile, then the presets of these channels go back to :guilabel:`Auto`.
 
 Preset
 : With :guilabel:`Auto`, the presets are chosen by the program changes of the file (bank 128 on channel 10, for the percussions) and the current one is displayed in brackets.

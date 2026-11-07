@@ -17,6 +17,11 @@ You will learn how to fully use the capabilities of such a sample, by using the 
 A real instrument doesn't only sound louder when it is played harder: its timbre changes too.
 Taking the piano as an example, this tutorial shows how to stack several recordings of each note in velocity layers, how to balance them, and which other details can make an instrument more realistic.
 
+### [Edit soundfonts with Claude](tutorials/edit-soundfonts-with-claude.md)
+
+Thanks to its MCP server, Polyphone can be driven by an AI assistant such as Claude: describe what you want in plain language, and the assistant edits the soundfonts, uses the tools and measures the result.
+This tutorial explains how to connect Claude to Polyphone and shows, with audio examples, how to check and fix an instrument or create one from scratch.
+
 ### [Use Polyphone as a synthesizer](tutorials/use-polyphone-as-a-synthesizer.md)
 
 Polyphone isn't just a soundfont editor, it's also a full-featured synthesizer that lets you play along with a MIDI keyboard.

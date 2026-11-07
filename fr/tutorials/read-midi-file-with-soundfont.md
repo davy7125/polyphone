@@ -59,6 +59,8 @@ Le lecteur aide aussi à écouter les détails&nbsp;:
 
 Chaque canal peut jouer une banque de sons différente&nbsp;: ouvrez plusieurs banques de sons dans Polyphone, puis double-cliquez sur une cellule de la colonne :guilabel:`Banque de sons` pour choisir celle que joue le canal. Vous pouvez par exemple comparer les pianos de deux banques de sons sur la même partie, ou garder une banque de sons General MIDI pour l'accompagnement pendant que votre propre banque de sons joue la mélodie.
 
+Par défaut, les canaux sont réglés sur :guilabel:`Sélection`&nbsp;: ils jouent la banque de sons de l'onglet courant, ou le fichier sélectionné dans un [explorateur de banques de sons](manual/soundfont-explorer.md#doc_play). Pour comparer toutes les banques de sons d'un répertoire, ouvrez-le dans Polyphone et sélectionnez ses fichiers les uns après les autres pendant la lecture du morceau&nbsp;: chaque banque de sons est chargée en arrière-plan et entendue dès qu'elle est prête, sans ouvrir d'onglet.
+
 ![Choisir la banque de sons d'un canal](images/midi_player_soundfonts.png "Choisir la banque de sons d'un canal")
 
 De la même manière, un double-clic sur une cellule de la colonne :guilabel:`Ensemble` impose un ensemble de la banque de sons à la place de celui demandé par le fichier. C'est ainsi que l'on teste une banque de sons qui ne respecte pas la norme General MIDI, par exemple une banque de sons ne contenant qu'un seul instrument&nbsp;: choisissez son ensemble pour le canal de la mélodie, les changements de programme du fichier étant alors ignorés sur ce canal.

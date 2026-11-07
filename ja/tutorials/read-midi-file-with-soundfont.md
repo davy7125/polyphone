@@ -59,6 +59,8 @@ SoundFontはエディターでの状態のまま、保存されていない変�
 
 チャンネルごとに異なるSoundFontを演奏させることができます。Polyphoneで複数のSoundFontを開き、:guilabel:`SoundFont` 列のセルをダブルクリックして、そのチャンネルが演奏するSoundFontを選びます。たとえば、同じパートで2つのSoundFontのピアノを比べたり、自分のSoundFontでメロディーを演奏しながら、伴奏にはGeneral MIDIのSoundFontを使ったりできます。
 
+初期設定では、チャンネルは :guilabel:`選択` に設定されており、現在のタブのSoundFont、または[SoundFontエクスプローラー](manual/soundfont-explorer.md#doc_play)で選択したファイルを演奏します。ディレクトリ内のすべてのSoundFontを比べるには、そのディレクトリをPolyphoneで開き、曲の再生中にファイルを1つずつ選択していきます。各SoundFontはタブを開かずにバックグラウンドで読み込まれ、準備ができ次第聴こえます。
+
 ![チャンネルのSoundFontの選択](images/midi_player_soundfonts.png "チャンネルのSoundFontの選択")
 
 同様に、:guilabel:`プリセット` 列のセルをダブルクリックすると、ファイルが指定したプリセットの代わりに、SoundFontのプリセットを強制的に使用できます。これにより、General MIDI規格に準拠していないSoundFont（たとえばインストゥルメントが1つだけのSoundFont）を試すことができます。メロディーのチャンネルにそのプリセットを選ぶと、そのチャンネルではファイルのプログラムチェンジが無視されます。

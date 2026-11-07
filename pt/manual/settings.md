@@ -1,10 +1,11 @@
 As configurações do software são acessíveis pela [tela inicial](manual/index.md) ou pelo [menu](manual/menu.md#doc_shortcuts) (atalho :kbd:`Ctrl`+:kbd:`,`).
-Elas são divididas em cinco seções:
+Elas são divididas em seis seções:
 
 * [Geral](#doc_general)
 * [Interface](#doc_interface)
 * [Som](#doc_sound)
 * [Teclado](#doc_keyboard)
+* [Assistente de IA](#doc_ai_assistant)
 * [Repositório online](#doc_repository)
 
 Todas as modificações são salvas imediatamente.
@@ -144,6 +145,35 @@ O tom de referência e o temperamento também podem ser alterados com mensagens 
 
 
 ![Configurações, teclado](images/settings_keyboard.png "Configurações, teclado")
+
+
+## Assistente de IA {#doc_ai_assistant}
+
+
+Na seção :guilabel:`Assistente de IA`, é possível permitir que um assistente de IA compatível com o Model Context Protocol (MCP), como o Claude, explore, modifique e analise as soundfonts abertas no Polyphone.
+Suas alterações aparecem imediatamente no editor e podem ser desfeitas como qualquer outra alteração.
+
+Permitir que assistentes de IA acessem as soundfonts abertas
+: Inicia o servidor MCP do Polyphone (desativado por padrão).
+  A linha abaixo mostra o estado do servidor e seu endereço, por exemplo “Servidor iniciado, endereço: http://127.0.0.1:8642/mcp”.
+  O servidor só aceita conexões vindas deste computador.
+
+Porta
+: Porta do servidor, 8642 por padrão.
+  Outra porta pode ser escolhida se esta já estiver sendo usada por outro programa.
+
+Comando para adicionar o Polyphone ao Claude Code
+: Comando a ser executado em um terminal para que o Claude Code possa usar o Polyphone.
+  O botão :guilabel:`Copiar` o copia para a área de transferência.
+
+Funções disponíveis para a IA
+: Lista das funções que o assistente pode chamar, agrupadas em quatro categorias: :guilabel:`Navegação`, :guilabel:`Edição`, :guilabel:`Ferramentas` e :guilabel:`Análise do som`.
+  Suas descrições são as que o assistente lê, em inglês.
+
+O tutorial “[Editar soundfonts com o Claude](tutorials/edit-soundfonts-with-claude.md)” explica como conectar o Claude ao Polyphone e dá exemplos de pedidos.
+
+
+![Configurações, assistente de IA](images/settings_ai_assistant.png "Configurações, assistente de IA")
 
 
 ## Repositório online {#doc_repository}

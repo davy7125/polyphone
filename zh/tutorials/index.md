@@ -17,6 +17,11 @@
 真实的乐器在用力演奏时不只是声音更大：音色也会变化。
 本教程以钢琴为例，介绍如何将每个音符的多段录音叠加为力度层、如何平衡它们，以及还有哪些细节可以让乐器更加逼真。
 
+### [用 Claude 编辑音色库](tutorials/edit-soundfonts-with-claude.md)
+
+借助内置的 MCP 服务器，Polyphone 可以由 Claude 这样的 AI 助手来操作：用您自己的话描述想要的效果，助手就会编辑音色库、使用工具并测量结果。
+本教程介绍如何将 Claude 连接到 Polyphone，并通过音频示例展示如何检查和修正乐器，或者从零开始创建乐器。
+
 ### [将 Polyphone 用作合成器](tutorials/use-polyphone-as-a-synthesizer.md)
 
 Polyphone 不仅是一个音色库编辑器，还是一个功能完备的合成器，可以配合 MIDI 键盘演奏。

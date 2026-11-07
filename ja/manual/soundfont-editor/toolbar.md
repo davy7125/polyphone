@@ -98,7 +98,7 @@ MIDI信号
 ウィンドウの下部には、モードに応じて直近5件のオーディオまたはMIDIの録音が、サイズまたはノート数とともに一覧表示されます。存在しなくなったファイルは、ウィンドウを開いたときに一覧から削除されます。行をクリックして選択すると、4つのボタンが表示されます。
 
 再生
-: オーディオファイルをPolyphoneのオーディオ出力で再生する（もう一度クリックすると停止します）か、MIDIファイルを[MIDIプレーヤー](#doc_midi_player)で開きます。
+: オーディオファイルをPolyphoneのオーディオ出力で再生する（もう一度クリックすると停止します。再生中に別の行を選択すると、代わりにその行のファイルが再生されます）か、MIDIファイルを[MIDIプレーヤー](#doc_midi_player)で開きます。
 
 フォルダ
 : ファイルのフォルダを開きます。
@@ -270,7 +270,7 @@ MIDI信号
 ## MIDIプレーヤー {#doc_midi_player}
 
 
-アイコン ![MIDI](images/toolbar_midi.png "MIDI"){.inline} をクリックするとMIDIプレーヤーのウィンドウが開き、開いているSoundFontでMIDIファイル（:file:`.mid`、:file:`.midi`、:file:`.kar`、:file:`.rmi`）を再生して、楽曲の中でSoundFontを試すことができます。
+アイコン ![MIDI](images/toolbar_midi.png "MIDI"){.inline} をクリックするとMIDIプレーヤーのウィンドウが開き、開いているSoundFont、または[SoundFontエクスプローラー](manual/soundfont-explorer.md#doc_play)で選択したファイルでMIDIファイル（:file:`.mid`、:file:`.midi`、:file:`.kar`、:file:`.rmi`）を再生して、楽曲の中でSoundFontを試すことができます。
 SoundFontはエディターでの状態のまま、保存されていない変更も含めて演奏されます。
 MIDIプレーヤーは[シンセモード](tutorials/use-polyphone-as-a-synthesizer.md)でも使用できます。
 
@@ -303,8 +303,10 @@ MIDIプレーヤーは[シンセモード](tutorials/use-polyphone-as-a-synthesi
   MIDIボタンは、チャンネルの現在のMIDI値のうち、初期値と異なるものを表示します：コントローラー、ピッチホイール（半音単位）、その感度、チャンネルプレッシャー。
 
 SoundFont
-: チャンネルが演奏するSoundFontです。タブで開いているSoundFontから選ぶか、無音にする場合は :guilabel:`なし` を選びます。
-  ファイルを開くと、すべてのチャンネルが現在のタブのSoundFont（または最初に開いているSoundFont）を演奏します。
+: チャンネルが演奏するSoundFontです。:guilabel:`選択`、タブで開いているSoundFontのいずれか、または無音にする場合は :guilabel:`なし` を選びます。
+  :guilabel:`選択` はファイルを開いたときにすべてのチャンネルで選ばれ、メインウィンドウで選択されているもの、つまり現在のタブのSoundFont、または[SoundFontエクスプローラー](manual/soundfont-explorer.md#doc_play)で選択したファイルを演奏します。その名前は括弧内に表示されます。
+  ほかのタブ（ホーム画面、設定、オンラインリポジトリなど）では、演奏中のSoundFontがそのまま使われます。
+  選択が変わると、SoundFontの読み込み中は名前の前で読み込みアイコンが回転し、その間は前のSoundFontが演奏されます。その後、これらのチャンネルのプリセットは :guilabel:`自動` に戻ります。
 
 プリセット
 : :guilabel:`自動` の場合、プリセットはファイルのプログラムチェンジによって選ばれ（パーカッション用に、チャンネル10ではバンク128）、現在のプリセットが括弧内に表示されます。

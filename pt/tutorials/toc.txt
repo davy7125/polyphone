@@ -3,6 +3,7 @@ index.md=Tutoriais
 |how-to-prepare-a-sample.md=Como preparar uma amostra
 |using-custom-releases-in-an-instrument.md=Usar releases personalizados em um instrumento
 |realistic-instruments-with-multiple-velocity-layers.md=Instrumentos realistas com várias camadas de velocidade
+|edit-soundfonts-with-claude.md=Editar soundfonts com o Claude
 |use-polyphone-as-a-synthesizer.md=Usar o Polyphone como sintetizador
 |create-a-synthesizer-with-raspberry-pi.md=Criar um sintetizador com um Raspberry Pi
 |read-midi-file-with-soundfont.md=Ler um arquivo MIDI com uma soundfont

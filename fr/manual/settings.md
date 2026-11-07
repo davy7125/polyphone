@@ -1,10 +1,11 @@
 Les préférences du logiciel sont accessibles soit depuis l'[écran d'accueil](manual/index.md), soit depuis le [menu](manual/menu.md#doc_shortcuts) (raccourci clavier :kbd:`Ctrl`+:kbd:`,`).
-Elles sont divisées en cinq sections&nbsp;:
+Elles sont divisées en six sections&nbsp;:
 
 * [Général](#doc_general)
 * [Interface](#doc_interface)
 * [Son](#doc_sound)
 * [Clavier](#doc_keyboard)
+* [Assistant IA](#doc_ai_assistant)
 * [Banques de sons en ligne](#doc_repository)
 
 Toutes les modifications sont enregistrées immédiatement.
@@ -144,6 +145,35 @@ Le diapason et le tempérament peuvent également être modifiés par des messag
 
 
 ![Préférences, clavier](images/settings_keyboard.png "Préférences, clavier")
+
+
+## Assistant IA {#doc_ai_assistant}
+
+
+La section :guilabel:`Assistant IA` permet d'autoriser un assistant IA compatible avec le Model Context Protocol (MCP), comme Claude, à parcourir, modifier et analyser les banques de sons ouvertes dans Polyphone.
+Ses modifications apparaissent immédiatement dans l'éditeur et peuvent être annulées comme toute autre modification.
+
+Autoriser les assistants IA à accéder aux banques de sons ouvertes
+: Démarre le serveur MCP de Polyphone (désactivé par défaut).
+  La ligne en dessous indique l'état du serveur et son adresse, par exemple «&nbsp;Serveur démarré, adresse&nbsp;: http://127.0.0.1:8642/mcp&nbsp;».
+  Le serveur n'accepte que les connexions venant de cet ordinateur.
+
+Port
+: Port du serveur, 8642 par défaut.
+  Un autre port peut être choisi si celui-ci est déjà utilisé par un autre logiciel.
+
+Commande ajoutant Polyphone à Claude Code
+: Commande à exécuter dans un terminal pour que Claude Code puisse utiliser Polyphone.
+  Le bouton :guilabel:`Copier` la copie dans le presse-papiers.
+
+Fonctions disponibles pour l'IA
+: Liste des fonctions que l'assistant peut appeler, regroupées en quatre catégories&nbsp;: :guilabel:`Navigation`, :guilabel:`Édition`, :guilabel:`Outils` et :guilabel:`Analyse du son`.
+  Leurs descriptions sont celles que lit l'assistant, en anglais.
+
+Le tutoriel «&nbsp;[Modifier des banques de sons avec Claude](tutorials/edit-soundfonts-with-claude.md)&nbsp;» explique comment connecter Claude à Polyphone et donne des exemples de demandes.
+
+
+![Préférences, assistant IA](images/settings_ai_assistant.png "Préférences, assistant IA")
 
 
 ## Banques de sons en ligne {#doc_repository}

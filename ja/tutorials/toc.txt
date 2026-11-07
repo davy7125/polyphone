@@ -3,6 +3,7 @@ index.md=チュートリアル
 |how-to-prepare-a-sample.md=サンプルの準備方法
 |using-custom-releases-in-an-instrument.md=インストゥルメントでカスタムリリースを使う
 |realistic-instruments-with-multiple-velocity-layers.md=複数のベロシティレイヤーでリアルなインストゥルメントを作る
+|edit-soundfonts-with-claude.md=ClaudeでSoundFontを編集する
 |use-polyphone-as-a-synthesizer.md=Polyphoneをシンセサイザーとして使う
 |create-a-synthesizer-with-raspberry-pi.md=Raspberry Piでシンセサイザーを作る
 |read-midi-file-with-soundfont.md=SoundFontでMIDIファイルを再生する

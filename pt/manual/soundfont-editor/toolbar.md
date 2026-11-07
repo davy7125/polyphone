@@ -98,7 +98,7 @@ Abaixo desses botões, o medidor mostra o nível dos canais, mesmo quando nada e
 A parte inferior da janela lista as 5 últimas gravações, de áudio ou MIDI conforme o modo, com seu tamanho ou número de notas. Um arquivo que não existe mais é retirado da lista quando a janela é aberta. Um clique seleciona uma linha, que então mostra quatro botões:
 
 Ouvir
-: Reproduz o arquivo de áudio no Polyphone, pela saída de áudio (um segundo clique o interrompe), ou abre o arquivo MIDI no [reprodutor MIDI](#doc_midi_player).
+: Reproduz o arquivo de áudio no Polyphone, pela saída de áudio (um segundo clique o interrompe, e selecionar outra linha durante a reprodução reproduz o arquivo dela em seu lugar), ou abre o arquivo MIDI no [reprodutor MIDI](#doc_midi_player).
 
 Pasta
 : Abre a pasta do arquivo.
@@ -270,7 +270,7 @@ Uma alteração é progressiva e não interrompe as notas que estão sendo tocad
 ## Reprodutor MIDI {#doc_midi_player}
 
 
-Ao clicar no ícone ![MIDI](images/toolbar_midi.png "MIDI"){.inline}, abre-se uma janela com o reprodutor MIDI, que toca um arquivo MIDI (:file:`.mid`, :file:`.midi`, :file:`.kar` ou :file:`.rmi`) com as soundfonts abertas, para testá-las em uma música.
+Ao clicar no ícone ![MIDI](images/toolbar_midi.png "MIDI"){.inline}, abre-se uma janela com o reprodutor MIDI, que toca um arquivo MIDI (:file:`.mid`, :file:`.midi`, :file:`.kar` ou :file:`.rmi`) com as soundfonts abertas ou com os arquivos selecionados em um [explorador de soundfonts](manual/soundfont-explorer.md#doc_play), para testá-las em uma música.
 As soundfonts são tocadas como estão no editor, com suas alterações não salvas.
 O reprodutor MIDI também está disponível no [modo sintetizador](tutorials/use-polyphone-as-a-synthesizer.md).
 
@@ -303,8 +303,10 @@ Canal
   O botão MIDI exibe os valores MIDI atuais do canal que diferem de seu valor padrão: controladores, roda de pitch (em semitons), sua sensibilidade e pressão de canal.
 
 Soundfont
-: A soundfont tocada pelo canal, entre as soundfonts abertas em abas, ou :guilabel:`Nenhuma` para o silêncio.
-  Ao abrir um arquivo, todos os canais tocam a soundfont da aba atual (ou a primeira soundfont aberta).
+: A soundfont tocada pelo canal: :guilabel:`Seleção`, uma das soundfonts abertas em abas, ou :guilabel:`Nenhuma` para o silêncio.
+  :guilabel:`Seleção`, escolhida para todos os canais ao abrir um arquivo, toca o que está selecionado na janela principal: a soundfont da aba atual, ou o arquivo selecionado em um [explorador de soundfonts](manual/soundfont-explorer.md#doc_play), cujo nome é exibido entre parênteses.
+  As outras abas (tela inicial, configurações, repositório online…) mantêm a soundfont tocada.
+  Quando a seleção muda, um indicador de carregamento gira na frente do nome enquanto a soundfont é carregada, a anterior continuando a tocar nesse meio-tempo; depois, os presets desses canais voltam para :guilabel:`Auto`.
 
 Predefinição
 : Com :guilabel:`Auto`, as predefinições são escolhidas pelas mudanças de programa do arquivo (banco 128 no canal 10, para a percussão) e a predefinição atual é exibida entre parênteses.

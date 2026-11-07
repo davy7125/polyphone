@@ -67,13 +67,15 @@ These operations allow you to quickly manage and clean up a local soundfont coll
 ## Playing the elements {#doc_play}
 
 
-The ![piano](images/toolbar_piano.png "piano"){.inline} button, on the right of the :guilabel:`Display` button, shows or hides the [virtual keyboard](manual/soundfont-editor/toolbar.md#doc_keyboard), and the ![recorder](images/toolbar_recorder.png "recorder"){.inline} button next to it shows or hides the [recorder](manual/soundfont-editor/toolbar.md#doc_recorder), like the buttons of the editor toolbar.
+The ![MIDI](images/toolbar_midi.png "MIDI"){.inline} button, on the right of the :guilabel:`Display` button, shows or hides the [MIDI player](manual/soundfont-editor/toolbar.md#doc_midi_player), the ![piano](images/toolbar_piano.png "piano"){.inline} button next to it shows or hides the [virtual keyboard](manual/soundfont-editor/toolbar.md#doc_keyboard), and the ![recorder](images/toolbar_recorder.png "recorder"){.inline} button shows or hides the [recorder](manual/soundfont-editor/toolbar.md#doc_recorder), like the buttons of the editor toolbar.
 
 The sample, instrument or preset selected in the lists on the right can be played with the virtual keyboard, or with an external MIDI keyboard even if the virtual keyboard is hidden. As in the editor, the virtual keyboard shows the range of the element, or the root key of a sample. A sample is played in a loop if it has one, and in stereo if the :guilabel:`stereo` option of the sample [player](manual/soundfont-editor/editing-pages/sample-editor.md#doc_player) is ticked.
 
 The first time an element of a file is selected, the soundfont is loaded in the background without opening a tab. The soundfont is then kept as long as elements of the same file are selected, and released when another file is selected in the main list.
 
 A soundfont already open in a tab is played as it is in the editor, with its unsaved changes.
+
+The channels of the MIDI player set to :guilabel:`Selection` play the file selected in the main list, so that a MIDI file can be heard with each soundfont of a directory without opening them. The file is loaded in the background shortly after its selection (the files browsed quickly with the arrow keys are not loaded), and played once ready. This also works in [synth mode](tutorials/use-polyphone-as-a-synthesizer.md), where the MIDI player is the only button available.
 
 
 ## Opening a soundfont {#doc_open_soundfont}
@@ -83,4 +85,4 @@ Double-clicking on an item in the main list opens the file — provided its form
 
 Double-clicking on a [sample](manual/soundfont-editor/editing-pages/sample-editor.md), [instrument](manual/soundfont-editor/editing-pages/instrument-editor.md) or [preset](manual/soundfont-editor/editing-pages/preset-editor.md) opens the file at the selected element.
 
-If the soundfont has already been loaded for playing one of its elements, the tab opens immediately.
+If the soundfont has already been loaded for playing one of its elements or for the MIDI player, the tab opens immediately (except in synth mode, where the file is loaded again).

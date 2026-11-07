@@ -1,10 +1,11 @@
 The software preferences are accessible either from the [home screen](manual/index.md) or from the [menu](manual/menu.md#doc_shortcuts) (shortcut :kbd:`Ctrl`+:kbd:`,`).
-They are divided into five sections:
+They are divided into six sections:
 
 * [General](#doc_general)
 * [Interface](#doc_interface)
 * [Sound](#doc_sound)
 * [Keyboard](#doc_keyboard)
+* [AI assistant](#doc_ai_assistant)
 * [Online repository](#doc_repository)
 
 All modifications are saved immediately.
@@ -144,6 +145,35 @@ The reference pitch and the temperament can also be changed with MIDI RPN messag
 
 
 ![Settings, keyboard](images/settings_keyboard.png "Settings, keyboard")
+
+
+## AI assistant {#doc_ai_assistant}
+
+
+In the :guilabel:`AI assistant` section, an AI assistant supporting the Model Context Protocol (MCP), such as Claude, can be allowed to browse, edit and analyze the soundfonts open in Polyphone.
+Its changes are visible immediately in the editor and can be undone like any other change.
+
+Allow AI assistants to access the open soundfonts
+: Starts the MCP server of Polyphone (disabled by default).
+  The line below shows the state of the server and its address, for instance “Server started, address: http://127.0.0.1:8642/mcp”.
+  The server only accepts connections from this computer.
+
+Port
+: Port of the server, 8642 by default.
+  Another port can be chosen if this one is already used by another program.
+
+Command adding Polyphone to Claude Code
+: Command to run in a terminal so that Claude Code can use Polyphone.
+  The button :guilabel:`Copy` copies it to the clipboard.
+
+Functions available for the AI
+: List of the functions that the assistant can call, grouped in four categories: :guilabel:`Browsing`, :guilabel:`Editing`, :guilabel:`Tools` and :guilabel:`Sound analysis`.
+  Their descriptions are the ones read by the assistant, in English.
+
+The tutorial “[Edit soundfonts with Claude](tutorials/edit-soundfonts-with-claude.md)” explains how to connect Claude to Polyphone and gives examples of requests.
+
+
+![Settings, AI assistant](images/settings_ai_assistant.png "Settings, AI assistant")
 
 
 ## Online repository {#doc_repository}

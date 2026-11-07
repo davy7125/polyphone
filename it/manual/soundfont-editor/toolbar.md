@@ -98,7 +98,7 @@ Sotto questi pulsanti, l'indicatore mostra il livello dei canali, anche quando n
 La parte inferiore della finestra elenca le ultime 5 registrazioni, audio o MIDI a seconda della modalità, con la loro dimensione o il numero di note. Un file che non esiste più viene tolto dall'elenco all'apertura della finestra. Un clic seleziona una riga, che mostra allora quattro pulsanti:
 
 Ascolta
-: Riproduce il file audio in Polyphone, sull'uscita audio (un secondo clic lo ferma), oppure apre il file MIDI nel [lettore MIDI](#doc_midi_player).
+: Riproduce il file audio in Polyphone, sull'uscita audio (un secondo clic lo ferma, e selezionando un'altra riga durante la riproduzione viene riprodotto invece il suo file), oppure apre il file MIDI nel [lettore MIDI](#doc_midi_player).
 
 Cartella
 : Apre la cartella del file.
@@ -270,7 +270,7 @@ Una modifica è progressiva e non interrompe le note in corso.
 ## Lettore MIDI {#doc_midi_player}
 
 
-Facendo clic sull'icona ![MIDI](images/toolbar_midi.png "MIDI"){.inline} si apre una finestra con il lettore MIDI, che riproduce un file MIDI (:file:`.mid`, :file:`.midi`, :file:`.kar` o :file:`.rmi`) con i soundfont aperti, per provarli in un brano musicale.
+Facendo clic sull'icona ![MIDI](images/toolbar_midi.png "MIDI"){.inline} si apre una finestra con il lettore MIDI, che riproduce un file MIDI (:file:`.mid`, :file:`.midi`, :file:`.kar` o :file:`.rmi`) con i soundfont aperti o con i file selezionati in un [esploratore di soundfont](manual/soundfont-explorer.md#doc_play), per provarli in un brano musicale.
 I soundfont vengono suonati così come sono nell'editor, con le modifiche non salvate.
 Il lettore MIDI è disponibile anche in [modalità sintetizzatore](tutorials/use-polyphone-as-a-synthesizer.md).
 
@@ -303,8 +303,10 @@ Canale
   Il pulsante MIDI mostra i valori MIDI attuali del canale che differiscono dal loro valore predefinito: controller, ruota del pitch (in semitoni), la sua sensibilità e pressione del canale.
 
 Soundfont
-: Il soundfont suonato dal canale, tra i soundfont aperti nelle schede, oppure :guilabel:`Nessuno` per il silenzio.
-  All'apertura di un file, tutti i canali suonano il soundfont della scheda corrente (o il primo soundfont aperto).
+: Il soundfont suonato dal canale: :guilabel:`Selezione`, uno dei soundfont aperti nelle schede, oppure :guilabel:`Nessuno` per il silenzio.
+  :guilabel:`Selezione`, scelta per tutti i canali all'apertura di un file, suona ciò che è selezionato nella finestra principale: il soundfont della scheda corrente, o il file selezionato in un [esploratore di soundfont](manual/soundfont-explorer.md#doc_play), il cui nome è indicato tra parentesi.
+  Le altre schede (schermata iniziale, impostazioni, archivio online…) mantengono il soundfont suonato.
+  Quando la selezione cambia, un indicatore di caricamento gira davanti al nome mentre il soundfont viene caricato, e nel frattempo continua a suonare il precedente; poi i preset di questi canali tornano su :guilabel:`Auto`.
 
 Preset
 : Con :guilabel:`Auto`, i preset vengono scelti dai cambi di programma del file (banco 128 sul canale 10, per le percussioni) e il preset corrente viene mostrato tra parentesi.

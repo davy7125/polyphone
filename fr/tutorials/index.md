@@ -17,6 +17,11 @@ Vous apprendrez ici comment utiliser complètement les possibilités de tels éc
 Un instrument réel ne sonne pas seulement plus fort lorsqu'il est joué plus fort&nbsp;: son timbre change aussi.
 En prenant le piano comme exemple, ce tutoriel montre comment superposer plusieurs enregistrements de chaque note en couches de vélocités, comment les équilibrer, et quels autres détails peuvent rendre un instrument plus réaliste.
 
+### [Modifier des banques de sons avec Claude](tutorials/edit-soundfonts-with-claude.md)
+
+Grâce à son serveur MCP, Polyphone peut être piloté par un assistant IA comme Claude&nbsp;: décrivez ce que vous voulez avec vos propres mots, et l'assistant modifie les banques de sons, utilise les outils et mesure le résultat.
+Ce tutoriel explique comment connecter Claude à Polyphone et montre, avec des exemples audio, comment vérifier et corriger un instrument ou en créer un à partir de zéro.
+
 ### [Utiliser Polyphone comme un synthétiseur](tutorials/use-polyphone-as-a-synthesizer.md)
 
 Polyphone n'est pas qu'un éditeur de banque de sons, c'est aussi un synthétiseur complet permettant de jouer avec un clavier MIDI.

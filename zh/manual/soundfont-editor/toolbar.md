@@ -98,7 +98,7 @@ MIDI 信号
 窗口底部根据模式列出最近 5 次音频或 MIDI 录音，以及它们的大小或音符数。不再存在的文件会在打开窗口时从列表中移除。单击可选中一行，该行随后显示四个按钮：
 
 试听
-: 在 Polyphone 中通过音频输出播放音频文件（再次单击可停止），或在 [MIDI 播放器](#doc_midi_player)中打开 MIDI 文件。
+: 在 Polyphone 中通过音频输出播放音频文件（再次单击可停止；播放期间选择另一行会改为播放该行的文件），或在 [MIDI 播放器](#doc_midi_player)中打开 MIDI 文件。
 
 文件夹
 : 打开文件所在的文件夹。
@@ -270,7 +270,7 @@ MIDI 信号
 ## MIDI 播放器 {#doc_midi_player}
 
 
-单击 ![MIDI](images/toolbar_midi.png "MIDI"){.inline} 图标会打开一个显示 MIDI 播放器的窗口，它可以用已打开的音色库播放 MIDI 文件（:file:`.mid`、:file:`.midi`、:file:`.kar` 或 :file:`.rmi`），以便在乐曲中测试这些音色库。
+单击 ![MIDI](images/toolbar_midi.png "MIDI"){.inline} 图标会打开一个显示 MIDI 播放器的窗口，它可以用已打开的音色库或在[音色库浏览器](manual/soundfont-explorer.md#doc_play)中选中的文件播放 MIDI 文件（:file:`.mid`、:file:`.midi`、:file:`.kar` 或 :file:`.rmi`），以便在乐曲中测试这些音色库。
 音色库按其在编辑器中的状态演奏，包括尚未保存的修改。
 在[合成器模式](tutorials/use-polyphone-as-a-synthesizer.md)下也可以使用 MIDI 播放器。
 
@@ -303,8 +303,10 @@ MIDI 信号
   MIDI 按钮显示该通道当前与默认值不同的 MIDI 值：控制器、弯音轮（以半音为单位）、弯音轮灵敏度和通道压力。
 
 音色库
-: 该通道演奏的音色库，可在标签页中已打开的音色库中选择，或选择 :guilabel:`无` 以静音。
-  打开文件时，所有通道都演奏当前标签页的音色库（或第一个已打开的音色库）。
+: 该通道演奏的音色库：:guilabel:`选择`、标签页中已打开的某个音色库，或选择 :guilabel:`无` 以静音。
+  打开文件时所有通道都设为 :guilabel:`选择`，它演奏主窗口中选中的内容：当前标签页的音色库，或在[音色库浏览器](manual/soundfont-explorer.md#doc_play)中选中的文件，其名称显示在括号中。
+  其他标签页（主屏幕、设置、在线仓库……）会保留正在演奏的音色库。
+  选中内容改变时，在音色库加载期间名称前会有一个加载图标旋转，同时继续演奏之前的音色库；之后这些通道的预设会恢复为 :guilabel:`自动`。
 
 预设
 : 选择 :guilabel:`自动` 时，预设由文件中的程序变更选择（打击乐使用通道 10 上的库 128），当前预设显示在括号中。

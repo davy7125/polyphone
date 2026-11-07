@@ -59,6 +59,8 @@ Der Player hilft Ihnen außerdem, auf Details zu hören:
 
 Jeder Kanal kann einen anderen Soundfont spielen: Öffnen Sie mehrere Soundfonts in Polyphone und doppelklicken Sie dann auf eine Zelle der Spalte :guilabel:`Soundfont`, um den Soundfont zu wählen, den der Kanal spielt. So können Sie zum Beispiel die Klaviere zweier Soundfonts in derselben Stimme vergleichen oder einen General-MIDI-Soundfont für die Begleitung behalten, während Ihr eigener Soundfont die Melodie spielt.
 
+Standardmäßig stehen die Kanäle auf :guilabel:`Auswahl`: Sie spielen den Soundfont des aktuellen Tabs oder die in einem [Soundfont-Explorer](manual/soundfont-explorer.md#doc_play) ausgewählte Datei. Um alle Soundfonts eines Verzeichnisses zu vergleichen, öffnen Sie es in Polyphone und wählen Sie seine Dateien nacheinander aus, während das Stück läuft: Jeder Soundfont wird im Hintergrund geladen und ist zu hören, sobald er bereit ist, ohne dass ein Tab geöffnet wird.
+
 ![Den Soundfont eines Kanals wählen](images/midi_player_soundfonts.png "Den Soundfont eines Kanals wählen")
 
 Auf dieselbe Weise erzwingt ein Doppelklick auf eine Zelle der Spalte :guilabel:`Preset` ein Preset des Soundfonts anstelle des von der Datei angeforderten. So testen Sie einen Soundfont, der dem General-MIDI-Standard nicht entspricht, zum Beispiel einen Soundfont mit einem einzigen Instrument: Wählen Sie sein Preset für den Kanal der Melodie, die Programmwechsel der Datei werden dann auf diesem Kanal ignoriert.

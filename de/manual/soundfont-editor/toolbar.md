@@ -98,7 +98,7 @@ Unter diesen Buttons zeigt die Anzeige den Pegel der Kanäle, auch wenn nichts a
 Der untere Teil des Fensters listet die letzten 5 Aufnahmen auf, je nach Modus Audio oder MIDI, mit ihrer Größe oder der Anzahl ihrer Noten. Eine Datei, die nicht mehr existiert, wird beim Öffnen des Fensters aus der Liste entfernt. Ein Klick wählt eine Zeile aus, die dann vier Buttons anzeigt:
 
 Anhören
-: Spielt die Audiodatei in Polyphone über die Audioausgabe ab (ein zweiter Klick stoppt sie) oder öffnet die MIDI-Datei im [MIDI-Player](#doc_midi_player).
+: Spielt die Audiodatei in Polyphone über die Audioausgabe ab (ein zweiter Klick stoppt sie, und die Auswahl einer anderen Zeile während der Wiedergabe spielt stattdessen deren Datei ab) oder öffnet die MIDI-Datei im [MIDI-Player](#doc_midi_player).
 
 Verzeichnis
 : Öffnet das Verzeichnis der Datei.
@@ -270,7 +270,7 @@ Eine Änderung erfolgt schrittweise und unterbricht die gespielten Noten nicht.
 ## MIDI-Player {#doc_midi_player}
 
 
-Ein Klick auf das Symbol ![MIDI](images/toolbar_midi.png "MIDI"){.inline} öffnet ein Fenster mit dem MIDI-Player, der eine MIDI-Datei (:file:`.mid`, :file:`.midi`, :file:`.kar` oder :file:`.rmi`) mit den geöffneten Soundfonts abspielt, um sie in einem Musikstück zu testen.
+Ein Klick auf das Symbol ![MIDI](images/toolbar_midi.png "MIDI"){.inline} öffnet ein Fenster mit dem MIDI-Player, der eine MIDI-Datei (:file:`.mid`, :file:`.midi`, :file:`.kar` oder :file:`.rmi`) mit den geöffneten Soundfonts oder mit den in einem [Soundfont-Explorer](manual/soundfont-explorer.md#doc_play) ausgewählten Dateien abspielt, um sie in einem Musikstück zu testen.
 Die Soundfonts werden so gespielt, wie sie im Editor sind, einschließlich ihrer nicht gespeicherten Änderungen.
 Der MIDI-Player ist auch im [Synth-Modus](tutorials/use-polyphone-as-a-synthesizer.md) verfügbar.
 
@@ -303,8 +303,10 @@ Kanal
   Die MIDI-Schaltfläche zeigt die aktuellen MIDI-Werte des Kanals an, die von ihrem Standardwert abweichen: Controller, Pitch-Rad (in Halbtönen), seine Empfindlichkeit und Kanaldruck.
 
 Soundfont
-: Der vom Kanal gespielte Soundfont unter den in Tabs geöffneten Soundfonts, oder :guilabel:`Keine` für Stille.
-  Beim Öffnen einer Datei spielen alle Kanäle den Soundfont des aktuellen Tabs (oder den ersten geöffneten Soundfont).
+: Der vom Kanal gespielte Soundfont: :guilabel:`Auswahl`, einer der in Tabs geöffneten Soundfonts, oder :guilabel:`Keine` für Stille.
+  :guilabel:`Auswahl`, die beim Öffnen einer Datei für alle Kanäle gewählt wird, spielt das, was im Hauptfenster ausgewählt ist: den Soundfont des aktuellen Tabs oder die in einem [Soundfont-Explorer](manual/soundfont-explorer.md#doc_play) ausgewählte Datei, deren Name in Klammern angezeigt wird.
+  Die anderen Tabs (Startbildschirm, Einstellungen, Online-Fundgrube…) behalten den gespielten Soundfont bei.
+  Wenn sich die Auswahl ändert, dreht sich vor dem Namen ein Ladesymbol, solange der Soundfont geladen wird, wobei der vorherige so lange weitergespielt wird; danach kehren die Presets dieser Kanäle zu :guilabel:`Auto` zurück.
 
 Preset
 : Mit :guilabel:`Auto` werden die Presets durch die Programmwechsel der Datei gewählt (Bank 128 auf Kanal 10, für das Schlagzeug), und das aktuelle Preset wird in Klammern angezeigt.

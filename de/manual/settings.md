@@ -1,10 +1,11 @@
 Die Einstellungen der Software sind entweder über den [Startbildschirm](manual/index.md) oder über das [Menü](manual/menu.md#doc_shortcuts) erreichbar (Tastenkombination :kbd:`Ctrl`+:kbd:`,`).
-Sie sind in fünf Bereiche unterteilt:
+Sie sind in sechs Bereiche unterteilt:
 
 * [Allgemein](#doc_general)
 * [Oberfläche](#doc_interface)
 * [Sound](#doc_sound)
 * [Tastatur](#doc_keyboard)
+* [KI-Assistent](#doc_ai_assistant)
 * [Online-Fundgrube](#doc_repository)
 
 Alle Änderungen werden sofort gespeichert.
@@ -144,6 +145,35 @@ Referenztonhöhe und Temperatur können auch über MIDI-RPN-Nachrichten geänder
 
 
 ![Einstellungen, Tastatur](images/settings_keyboard.png "Einstellungen, Tastatur")
+
+
+## KI-Assistent {#doc_ai_assistant}
+
+
+Im Bereich :guilabel:`KI-Assistent` kann einem KI-Assistenten, der das Model Context Protocol (MCP) unterstützt, etwa Claude, erlaubt werden, die in Polyphone geöffneten Soundfonts zu durchsuchen, zu bearbeiten und zu analysieren.
+Seine Änderungen erscheinen sofort im Editor und können wie jede andere Änderung rückgängig gemacht werden.
+
+KI-Assistenten den Zugriff auf die geöffneten Soundfonts erlauben
+: Startet den MCP-Server von Polyphone (standardmäßig deaktiviert).
+  Die Zeile darunter zeigt den Zustand des Servers und seine Adresse an, zum Beispiel „Server gestartet, Adresse: http://127.0.0.1:8642/mcp“.
+  Der Server nimmt nur Verbindungen von diesem Computer an.
+
+Port
+: Port des Servers, standardmäßig 8642.
+  Wenn dieser Port bereits von einem anderen Programm belegt ist, kann ein anderer gewählt werden.
+
+Befehl zum Hinzufügen von Polyphone zu Claude Code
+: Befehl, der in einem Terminal auszuführen ist, damit Claude Code Polyphone verwenden kann.
+  Die Schaltfläche :guilabel:`Kopieren` kopiert ihn in die Zwischenablage.
+
+Für die KI verfügbare Funktionen
+: Liste der Funktionen, die der Assistent aufrufen kann, gruppiert in vier Kategorien: :guilabel:`Durchsuchen`, :guilabel:`Bearbeitung`, :guilabel:`Werkzeuge` und :guilabel:`Klanganalyse`.
+  Ihre Beschreibungen sind die, die der Assistent liest, auf Englisch.
+
+Das Tutorial „[Soundfonts mit Claude bearbeiten](tutorials/edit-soundfonts-with-claude.md)“ erklärt, wie Claude mit Polyphone verbunden wird, und gibt Beispiele für Anfragen.
+
+
+![Einstellungen, KI-Assistent](images/settings_ai_assistant.png "Einstellungen, KI-Assistent")
 
 
 ## Online-Fundgrube {#doc_repository}
