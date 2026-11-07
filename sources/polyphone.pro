@@ -274,6 +274,7 @@ SOURCES	+= main.cpp \
     directory/directorylistmodel.cpp \
     directory/directorylistview.cpp \
     directory/directorypreview.cpp \
+    directory/temporarysoundfonts.cpp \
     directory/directorysortproxymodel.cpp \
     editor/footers/footerlinkedto.cpp \
     editor/footers/footeroverview.cpp \
@@ -462,6 +463,7 @@ SOURCES	+= main.cpp \
     midi_player/midirecorder.cpp \
     midi_player/midiplayerchannel.cpp \
     midi_player/midiplayerdelegate.cpp \
+    midi_player/midiplayerselection.cpp \
     editor/tools/link_sample/toollinksample.cpp \
     editor/tools/unlink_sample/toolunlinksample.cpp \
     editor/tools/mono_conversion/toolmonoconversion.cpp \
@@ -706,6 +708,7 @@ HEADERS += \
     directory/directorylistmodel.h \
     directory/directorylistview.h \
     directory/directorypreview.h \
+    directory/temporarysoundfonts.h \
     directory/directorysortproxymodel.h \
     editor/footers/abstractfooter.h \
     editor/footers/footerlinkedto.h \
@@ -914,6 +917,7 @@ HEADERS += \
     midi_player/midirecorder.h \
     midi_player/midiplayerchannel.h \
     midi_player/midiplayerdelegate.h \
+    midi_player/midiplayerselection.h \
     editor/tools/link_sample/toollinksample.h \
     editor/tools/unlink_sample/toolunlinksample.h \
     editor/tools/mono_conversion/toolmonoconversion.h \

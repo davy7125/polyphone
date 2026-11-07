@@ -71,6 +71,7 @@ void SoundfontTab::inputProcessed()
     {
         _filePath = "";
         tabInError(input->getError());
+        emit filePathChanged("");
     }
 
     delete input;

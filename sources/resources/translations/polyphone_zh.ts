@@ -2031,7 +2031,7 @@ repository</source>
     </message>
     <message>
         <location filename="../../dialogs/dialogmidiplayer.ui" line="84"/>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="171"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="186"/>
         <source>Open a MIDI file</source>
         <translation>打开 MIDI 文件</translation>
     </message>
@@ -2046,105 +2046,105 @@ repository</source>
         <translation>播放设置</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="364"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="369"/>
         <source>Tempo</source>
         <translation>速度</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="379"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="384"/>
         <source>The percussions (bank 128) are not transposed</source>
         <translation>打击乐（库 128）不移调</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="107"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="112"/>
         <source>Channel</source>
         <translation>通道</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="107"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="112"/>
         <source>Soundfont</source>
         <translation>音色库</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="107"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="112"/>
         <source>Preset</source>
         <translation>预设</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="107"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="112"/>
         <source>Volume</source>
         <translation>音量</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="127"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="132"/>
         <source>Open a MIDI file to play it with the soundfonts that are open.</source>
         <translation>打开一个 MIDI 文件，使用已打开的音色库播放。</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="172"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="187"/>
         <source>MIDI files</source>
         <translation>MIDI 文件</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="360"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="365"/>
         <source>Loop playback</source>
         <translation>循环播放</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="370"/>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="431"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="375"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="436"/>
         <source>%1%</source>
         <comment>percentage</comment>
         <translation>%1%</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="371"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="376"/>
         <source>Pitch</source>
         <translation>音高</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="397"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="402"/>
         <source>Export audio...</source>
         <translation>导出音频...</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="414"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="419"/>
         <source>Tempo of the file: %1 bpm, variable</source>
         <translation>文件速度：%1 bpm，可变</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="414"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="419"/>
         <source>Tempo of the file: %1 bpm</source>
         <translation>文件速度：%1 bpm</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="416"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="421"/>
         <source>File without tempo (SMPTE time code)</source>
         <translation>无速度的文件（SMPTE 时间码）</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="476"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="481"/>
         <source>Pause</source>
         <translation>暂停</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="476"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="481"/>
         <source>Play</source>
         <translation>播放</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="540"/>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="575"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="598"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="643"/>
         <source>Export audio</source>
         <translation>导出音频</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="543"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="601"/>
         <source>Wav file</source>
         <translation>WAV 文件</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="614"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="685"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
@@ -2650,84 +2650,89 @@ for a signal</source>
         <translation>搜索文件、采样、乐器或预设...</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="80"/>
+        <location filename="../../directory/directorybrowser.cpp" line="82"/>
+        <source>MIDI player</source>
+        <translation>MIDI 播放器</translation>
+    </message>
+    <message>
+        <location filename="../../directory/directorybrowser.cpp" line="83"/>
         <source>Virtual keyboard</source>
         <translation>虚拟键盘</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="81"/>
+        <location filename="../../directory/directorybrowser.cpp" line="84"/>
         <source>Recorder</source>
         <translation>录音机</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="156"/>
+        <location filename="../../directory/directorybrowser.cpp" line="160"/>
         <source>The directory &quot;%1&quot; does not exist.</source>
         <translation>目录&quot;%1&quot;不存在。</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="163"/>
+        <location filename="../../directory/directorybrowser.cpp" line="167"/>
         <source>The directory &quot;%1&quot; is not readable.</source>
         <translation>目录“%1”不可读。</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="306"/>
+        <location filename="../../directory/directorybrowser.cpp" line="314"/>
         <source>Rename</source>
         <translation>重命名</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="307"/>
+        <location filename="../../directory/directorybrowser.cpp" line="315"/>
         <source>New name:</source>
         <translation>新名称：</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="309"/>
+        <location filename="../../directory/directorybrowser.cpp" line="317"/>
         <source>&amp;Cancel</source>
         <translation>取消(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="310"/>
+        <location filename="../../directory/directorybrowser.cpp" line="318"/>
         <source>&amp;Ok</source>
         <translation>确定(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="321"/>
+        <location filename="../../directory/directorybrowser.cpp" line="329"/>
         <source>A file with this name already exists.</source>
         <translation>具有此名称的文件已存在。</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="321"/>
-        <location filename="../../directory/directorybrowser.cpp" line="326"/>
-        <location filename="../../directory/directorybrowser.cpp" line="344"/>
+        <location filename="../../directory/directorybrowser.cpp" line="329"/>
+        <location filename="../../directory/directorybrowser.cpp" line="334"/>
+        <location filename="../../directory/directorybrowser.cpp" line="352"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="326"/>
+        <location filename="../../directory/directorybrowser.cpp" line="334"/>
         <source>Cannot rename file &quot;%1&quot;.</source>
         <translation>无法重命名文件 &quot;%1&quot;。</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="334"/>
+        <location filename="../../directory/directorybrowser.cpp" line="342"/>
         <source>Confirm deletion</source>
         <translation>确认删除</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="335"/>
+        <location filename="../../directory/directorybrowser.cpp" line="343"/>
         <source>Are you sure you want to delete file &quot;%1&quot;?</source>
         <translation>您确定要删除文件“%1”吗？</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="337"/>
+        <location filename="../../directory/directorybrowser.cpp" line="345"/>
         <source>&amp;Yes</source>
         <translation>是(&amp;Y)</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="338"/>
+        <location filename="../../directory/directorybrowser.cpp" line="346"/>
         <source>&amp;No</source>
         <translation>否(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="344"/>
+        <location filename="../../directory/directorybrowser.cpp" line="352"/>
         <source>Cannot delete file &quot;%1&quot;.</source>
         <translation>无法删除文件 &quot;%1&quot;。</translation>
     </message>
@@ -3134,72 +3139,72 @@ for a signal</source>
 <context>
     <name>EditorToolBar</name>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="71"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="72"/>
         <source>Add a sample</source>
         <translation>添加采样</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="72"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="73"/>
         <source>Add an instrument</source>
         <translation>添加乐器</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="73"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="74"/>
         <source>Add a preset</source>
         <translation>添加预设</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="78"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="79"/>
         <source>Toolbox</source>
         <translation>工具箱</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="74"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="75"/>
         <source>Cancel</source>
         <translation>撤销</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="75"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="76"/>
         <source>Redo</source>
         <translation>重做</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="76"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="77"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="84"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="85"/>
         <source>Recorder</source>
         <translation>录音机</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="87"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="88"/>
         <source>Virtual keyboard</source>
         <translation>虚拟键盘</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="90"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="91"/>
         <source>MIDI player</source>
         <translation>MIDI 播放器</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="330"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="344"/>
         <source>Import an audio file</source>
         <translation>导入音频文件</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="332"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="346"/>
         <source>Audio files</source>
         <translation>音频文件</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="488"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="502"/>
         <source>Cannot create more presets.</source>
         <translation>无法创建更多预设。</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="488"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="502"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
@@ -3631,22 +3636,22 @@ for a signal</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="259"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="260"/>
         <source>&amp;Save</source>
         <translation>保存(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="260"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="261"/>
         <source>&amp;Cancel</source>
         <translation>取消(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="261"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="262"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>不保存(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="245"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="246"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
@@ -3656,32 +3661,32 @@ for a signal</source>
         <translation>Polyphone 音色库编辑器</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="236"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="237"/>
         <source>Untitled</source>
         <translation>未命名</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="246"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="247"/>
         <source>Save before exiting?</source>
         <translation>退出前是否保存文件？</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="249"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="250"/>
         <source>The following files have been modified:</source>
         <translation>下列文件已被修改：</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="256"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="257"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>文件 &quot;%1&quot; 已被修改。</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="349"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="350"/>
         <source>Opening files</source>
         <translation>正在打开文件</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="359"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="360"/>
         <source>Opening a directory</source>
         <translation>正在打开目录</translation>
     </message>
@@ -3794,76 +3799,87 @@ for a signal</source>
 <context>
     <name>MidiPlayerChannel</name>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="136"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="139"/>
         <source>Activity</source>
         <translation>活动</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="143"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="146"/>
         <source>Volume</source>
         <translation>音量</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="88"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="91"/>
         <source>M</source>
         <comment>short for Mute</comment>
         <translation>M</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="89"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="92"/>
         <source>Mute</source>
         <translation>静音</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="91"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="94"/>
         <source>S</source>
         <comment>short for Solo</comment>
         <translation>S</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="92"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="95"/>
         <source>Solo</source>
         <translation>独奏</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="107"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="110"/>
         <source>MIDI values</source>
         <translation>MIDI 值</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="174"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="178"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="224"/>
         <source>None</source>
         <translation>无</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="189"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="199"/>
         <source>Untitled</source>
         <translation>未命名</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="264"/>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="287"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="206"/>
+        <source>Selection</source>
+        <translation>选择</translation>
+    </message>
+    <message>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="206"/>
+        <source>Selection (%1)</source>
+        <translation>选择 (%1)</translation>
+    </message>
+    <message>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="314"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="337"/>
         <source>Auto (%1)</source>
         <translation>自动 (%1)</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="291"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="341"/>
         <source>The soundfont has no preset with this bank and this number: the notes are not played.</source>
         <translation>该音色库中没有此库号和编号的预设：这些音符不会被播放。</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="359"/>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="362"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="409"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="412"/>
         <source>semitones</source>
         <translation>半音</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="367"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="417"/>
         <source>All controllers are at their default value.</source>
         <translation>所有控制器均为默认值。</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="377"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="427"/>
         <source>dB</source>
         <comment>unit for decibels</comment>
         <translation>分贝</translation>
@@ -5431,7 +5447,7 @@ Both divisions must share the same note and velocity ranges.</source>
     <name>RecorderHistory</name>
     <message>
         <location filename="../../dialogs/recorderhistory.cpp" line="88"/>
-        <location filename="../../dialogs/recorderhistory.cpp" line="208"/>
+        <location filename="../../dialogs/recorderhistory.cpp" line="213"/>
         <source>Listen to the recording</source>
         <translation>试听录音</translation>
     </message>
@@ -5446,17 +5462,17 @@ Both divisions must share the same note and velocity ranges.</source>
         <translation>删除录音</translation>
     </message>
     <message>
-        <location filename="../../dialogs/recorderhistory.cpp" line="208"/>
+        <location filename="../../dialogs/recorderhistory.cpp" line="213"/>
         <source>Stop listening</source>
         <translation>停止试听</translation>
     </message>
     <message>
-        <location filename="../../dialogs/recorderhistory.cpp" line="211"/>
+        <location filename="../../dialogs/recorderhistory.cpp" line="216"/>
         <source>Import the recording in the soundfont displayed</source>
         <translation>将录音导入当前显示的音色库</translation>
     </message>
     <message>
-        <location filename="../../dialogs/recorderhistory.cpp" line="212"/>
+        <location filename="../../dialogs/recorderhistory.cpp" line="217"/>
         <source>Display a soundfont in the editor for importing the recording</source>
         <translation>在编辑器中显示音色库以导入录音</translation>
     </message>
@@ -6026,7 +6042,7 @@ download the list</source>
 <context>
     <name>SoundfontTab</name>
     <message>
-        <location filename="../../mainwindow/soundfonttab.cpp" line="102"/>
+        <location filename="../../mainwindow/soundfonttab.cpp" line="103"/>
         <source>Untitled</source>
         <translation>未命名</translation>
     </message>
@@ -6123,58 +6139,58 @@ download content</source>
 <context>
     <name>TabManager</name>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="109"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="112"/>
         <source>Settings</source>
         <translation>设置</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="138"/>
-        <location filename="../../mainwindow/tabmanager.cpp" line="325"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="141"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="350"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="139"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="142"/>
         <source>Cannot open file &quot;%1&quot;</source>
         <translation>无法打开文件 &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="282"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="299"/>
         <source>Online repository</source>
         <translation>在线仓库</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="320"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="345"/>
         <source>Save before exiting?</source>
         <translation>退出前是否保存文件？</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="323"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="348"/>
         <source>untitled</source>
         <translation>未命名</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="324"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="349"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>文件 &quot;%1&quot; 已被修改。</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="327"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="352"/>
         <source>&amp;Save</source>
         <translation>保存(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="328"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="353"/>
         <source>&amp;Cancel</source>
         <translation>取消(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="329"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="354"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>不保存(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="486"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="582"/>
         <source>User area</source>
         <translation>用户区</translation>
     </message>

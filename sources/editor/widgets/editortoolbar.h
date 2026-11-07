@@ -55,11 +55,13 @@ public:
     static bool isRecorderOpen() { return s_recorderOpen; }
     static bool isMidiPlayerOpen() { return s_midiPlayerOpen; }
 
-    // Other buttons showing the keyboard or the recorder (soundfont explorer), kept in the same state
+    // Other buttons showing the keyboard, the recorder or the MIDI player (soundfont explorer), kept in the same state
     static void addKeyboardButton(StyledAction * button);
     static void removeKeyboardButton(StyledAction * button);
     static void addRecorderButton(StyledAction * button);
     static void removeRecorderButton(StyledAction * button);
+    static void addMidiPlayerButton(StyledAction * button);
+    static void removeMidiPlayerButton(StyledAction * button);
 
 public slots:
     void onSelectionChanged(IdList ids);
@@ -103,6 +105,7 @@ private:
     static QList<EditorToolBar *> s_instances;
     static QList<StyledAction *> s_keyboardButtons;
     static QList<StyledAction *> s_recorderButtons;
+    static QList<StyledAction *> s_midiPlayerButtons;
     static bool s_recorderOpen;
     static bool s_keyboardOpen;
     static bool s_midiPlayerOpen;

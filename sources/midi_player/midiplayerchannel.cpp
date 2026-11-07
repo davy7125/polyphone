@@ -38,13 +38,16 @@
 #include "modulatorcombosrc.h"
 #include "contextmanager.h"
 #include "soundfontmanager.h"
+#include "midiplayerselection.h"
 
-MidiPlayerChannel::MidiPlayerChannel(MidiFilePlayer * player, int channel, QString name, QList<int> usedPrograms,
-                                     QTableWidget * table, int row) : QObject(),
+MidiPlayerChannel::MidiPlayerChannel(MidiFilePlayer * player, MidiPlayerSelection * selection, int channel, QString name,
+                                     QList<int> usedPrograms, QTableWidget * table, int row) : QObject(),
     _player(player),
+    _selection(selection),
     _channel(channel),
     _usedPrograms(usedPrograms),
     _sf2Index(-1),
+    _isSelection(false),
     _forcedProgram(-1),
     _displayedProgram(-2),
     _noteCount(player->getNoteCount(channel)),
@@ -169,53 +172,100 @@ MidiPlayerChannel::MidiPlayerChannel(MidiFilePlayer * player, int channel, QStri
 
 QList<QPair<QString, int> > MidiPlayerChannel::getSoundfontChoices()
 {
-    // "None" and the soundfonts that are open, named as their tab
+    // The selection, "None" and the soundfonts that are open, named as their tab
     QList<QPair<QString, int> > choices;
+    choices << QPair<QString, int>(getSelectionText(), SELECTION);
     choices << QPair<QString, int>(tr("None"), -1);
     SoundfontManager * sm = SoundfontManager::getInstance();
-    static QRegularExpression reg("(/|\\\\)");
     EltID idSf2(elementSf2);
     foreach (int sf2Index, sm->getSiblings(idSf2))
     {
         // Not the soundfonts loaded without tab by the soundfont explorer
-        if (sm->isTemporary(sf2Index))
-            continue;
-
-        idSf2.indexSf2 = sf2Index;
-        QString name = sm->getQstr(idSf2, champ_name);
-        if (name.isEmpty())
-            name = sm->getQstr(idSf2, champ_filenameInitial).split(reg).last();
-        if (name.isEmpty())
-            name = tr("Untitled");
-        choices << QPair<QString, int>(name, sf2Index);
+        if (!sm->isTemporary(sf2Index))
+            choices << QPair<QString, int>(getSoundfontName(sf2Index), sf2Index);
     }
     return choices;
 }
 
-void MidiPlayerChannel::setSoundfont(int sf2Index)
+QString MidiPlayerChannel::getSoundfontName(int sf2Index)
 {
-    // A soundfont that is not open is "None"
-    QList<QPair<QString, int> > choices = getSoundfontChoices();
-    QString name = choices.first().first;
-    bool isFound = false;
-    for (int i = 0; i < choices.count() && !isFound; i++)
+    SoundfontManager * sm = SoundfontManager::getInstance();
+    static QRegularExpression reg("(/|\\\\)");
+    EltID idSf2(elementSf2, sf2Index);
+    QString name = sm->getQstr(idSf2, champ_name);
+    if (name.isEmpty())
+        name = sm->getQstr(idSf2, champ_filenameInitial).split(reg).last();
+    if (name.isEmpty())
+        name = tr("Untitled");
+    return name;
+}
+
+QString MidiPlayerChannel::getSelectionText()
+{
+    QString name = _selection->getName();
+    return name.isEmpty() ? tr("Selection") : tr("Selection (%1)").arg(name);
+}
+
+void MidiPlayerChannel::setSoundfont(int choice, bool withSampleLoading)
+{
+    bool wasSelection = _isSelection;
+    if (choice == SELECTION)
     {
-        if (choices[i].second == sf2Index)
-        {
-            name = choices[i].first;
-            isFound = true;
-        }
+        // Soundfont selected in the main window
+        _isSelection = true;
+        _sf2Index = _selection->getSoundfont();
+        _itemSoundfont->setText(getSelectionText());
     }
-    _sf2Index = isFound ? sf2Index : -1;
-    _itemSoundfont->setText(name);
+    else
+    {
+        // A soundfont that is not open is "None"
+        _isSelection = false;
+        QList<QPair<QString, int> > choices = getSoundfontChoices();
+        QString name = tr("None");
+        bool isFound = false;
+        for (int i = 1; i < choices.count() && !isFound; i++)
+        {
+            if (choices[i].second == choice)
+            {
+                name = choices[i].first;
+                isFound = true;
+            }
+        }
+        _sf2Index = isFound ? choice : -1;
+        _itemSoundfont->setText(name);
+    }
 
     _player->setSoundfont(_channel, _sf2Index);
     updatePresetList();
-    loadSamples();
+    if (withSampleLoading)
+        loadSamples();
+    if (_isSelection != wasSelection)
+        emit selectionFollowingChanged();
+}
+
+void MidiPlayerChannel::onSelectionSoundfontChanged()
+{
+    if (!_isSelection)
+        return;
+
+    // Presets chosen by the file again
+    _sf2Index = _selection->getSoundfont();
+    _player->setSoundfont(_channel, _sf2Index);
+    _forcedProgram = -1;
+    _player->setForcedProgram(_channel, false, -1);
+    _itemSoundfont->setText(getSelectionText());
+    updatePresetList();
 }
 
 void MidiPlayerChannel::updateSoundfont()
 {
+    // Name of the selection (the selection updates the soundfont played)
+    if (_isSelection)
+    {
+        _itemSoundfont->setText(getSelectionText());
+        return;
+    }
+
     // Possibly a new name, or the soundfont has been closed
     QList<QPair<QString, int> > choices = getSoundfontChoices();
     for (int i = 0; i < choices.count(); i++)

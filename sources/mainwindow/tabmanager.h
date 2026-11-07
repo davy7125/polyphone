@@ -54,6 +54,16 @@ public:
     void saveOpenTabs();
     void restoreOpenTabs();
 
+    /// Soundfont selected, played by the channels of the MIDI player set to "Selection": the soundfont of the current tab
+    /// (possibly still loading) or the file selected in the current soundfont explorer (then named after the file)
+    enum SoundfontSelection
+    {
+        SELECTION_NONE,
+        SELECTION_PENDING,
+        SELECTION_READY
+    };
+    SoundfontSelection getSoundfontSelection(int &sf2Index, QString &fileName);
+
 public slots:
     /// Open the configuration
     void openConfiguration();
@@ -100,6 +110,9 @@ signals:
     /// Emitted when the current tab changed
     void tabOpen(bool canSave, bool canExport, bool canClose);
 
+    /// Emitted when the soundfont selected possibly changed (see getSoundfontSelection)
+    void soundfontSelectionChanged();
+
 private slots:
     /// Called when the name or the filepath of a soundfont changed
     void onTabTitleChanged(QString title);
@@ -113,11 +126,13 @@ private slots:
 
     /// Called by the directory browser
     void openSoundfont(QString filePath, EltID id);
+    void onPreviewChanged();
 
 private:
     explicit TabManager(DialogKeyboard * dialogKeyboard, MainStackedWidget * stackedWidget);
     ~TabManager();
     void saveWindowState();
+    void removeSoundfont(int sf2Index);
     bool isExplorerPlaying(); // A soundfont explorer uses the keyboard and recorder windows
 
     DialogKeyboard * _dialogKeyboard;

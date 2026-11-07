@@ -47,6 +47,7 @@ QMap<int, bool> EditorToolBar::s_midiExtensionOpen;
 QList<EditorToolBar *> EditorToolBar::s_instances;
 QList<StyledAction *> EditorToolBar::s_keyboardButtons;
 QList<StyledAction *> EditorToolBar::s_recorderButtons;
+QList<StyledAction *> EditorToolBar::s_midiPlayerButtons;
 
 EditorToolBar::EditorToolBar(QWidget * parent) : QWidget(parent),
     ui(new Ui::EditorToolBar),
@@ -305,6 +306,17 @@ void EditorToolBar::removeRecorderButton(StyledAction * button)
     s_recorderButtons.removeAll(button);
 }
 
+void EditorToolBar::addMidiPlayerButton(StyledAction * button)
+{
+    button->setChecked(s_midiPlayerOpen);
+    s_midiPlayerButtons << button;
+}
+
+void EditorToolBar::removeMidiPlayerButton(StyledAction * button)
+{
+    s_midiPlayerButtons.removeAll(button);
+}
+
 void EditorToolBar::updateMidiPlayerButtonsState(bool isChecked)
 {
     s_midiPlayerOpen = isChecked;
@@ -314,6 +326,8 @@ void EditorToolBar::updateMidiPlayerButtonsState(bool isChecked)
         toolBar->ui->pushShowMidiPlayer->setChecked(s_midiPlayerOpen);
         toolBar->blockSignals(false);
     }
+    foreach (StyledAction * button, s_midiPlayerButtons)
+        button->setChecked(s_midiPlayerOpen);
 }
 
 void EditorToolBar::on_pushAddSample_clicked()

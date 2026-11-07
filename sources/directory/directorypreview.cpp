@@ -31,42 +31,116 @@
 #include "pianokeybdcustom.h"
 #include "editor.h"
 #include "synth.h"
+#include "temporarysoundfonts.h"
 #include <QTimer>
 #include <QWidget>
 
-// The voices of a sample read the data of the soundfont until their release is over
-const int DirectoryPreview::DELETION_DELAY_MS = 5000;
+QList<DirectoryPreview *> DirectoryPreview::s_instances;
+bool DirectoryPreview::s_isFileLoadingRequested = false;
+
+// Files browsed with the arrow keys are not loaded for the MIDI player
+const int DirectoryPreview::LOADING_DELAY_MS = 200;
 
 DirectoryPreview::DirectoryPreview(DialogKeyboard * dialogKeyboard, QWidget * widget) : QObject(nullptr),
     _dialogKeyboard(dialogKeyboard),
     _widget(widget),
+    _isScanning(false),
+    _isLoadable(false),
     _element(elementUnknown),
     _status(NOT_LOADED),
     _parser(nullptr),
     _sf2Index(-1),
-    _isTemporary(false),
+    _isHeld(false),
+    _loadTimer(new QTimer(this)),
     _playedElement(elementUnknown)
 {
-    SoundfontManager * sm = SoundfontManager::getInstance();
-    connect(sm, SIGNAL(soundfontLoaded(int)), this, SLOT(onSoundfontLoaded(int)));
-    connect(sm, SIGNAL(soundfontClosed(int)), this, SLOT(onSoundfontClosed(int)));
-    connect(this, SIGNAL(processKeyMainThread(int,int)), this, SLOT(onProcessKeyMainThread(int,int)));
-    ContextManager::midi()->addListener(this, 0);
+    _loadTimer->setSingleShot(true);
+    _loadTimer->setInterval(LOADING_DELAY_MS);
+    connect(_loadTimer, SIGNAL(timeout()), this, SLOT(onLoadTimeout()));
+    connect(SoundfontManager::getInstance(), SIGNAL(soundfontClosed(int)), this, SLOT(onSoundfontClosed(int)));
+    if (_dialogKeyboard != nullptr)
+    {
+        connect(this, SIGNAL(processKeyMainThread(int,int)), this, SLOT(onProcessKeyMainThread(int,int)));
+        ContextManager::midi()->addListener(this, 0);
+    }
+    s_instances << this;
 }
 
 DirectoryPreview::~DirectoryPreview()
 {
-    ContextManager::midi()->removeListener(this);
-    release();
+    s_instances.removeAll(this);
+    if (_dialogKeyboard != nullptr)
+        ContextManager::midi()->removeListener(this);
+    this->blockSignals(true);
+    releaseSoundfont();
 }
 
-void DirectoryPreview::setFile(QString filePath)
+void DirectoryPreview::setFile(QString filePath, bool isScanning, bool isLoadable)
 {
-    if (filePath == _filePath)
+    if (filePath == _filePath && isScanning == _isScanning && isLoadable == _isLoadable)
         return;
 
-    release();
-    _filePath = filePath;
+    // The soundfont of another file is released
+    if (filePath != _filePath)
+    {
+        releaseSoundfont();
+        _filePath = filePath;
+    }
+    _isScanning = isScanning;
+    _isLoadable = isLoadable;
+    scheduleLoading();
+    emit fileStateChanged();
+}
+
+DirectoryPreview::FileState DirectoryPreview::getFileState(int &sf2Index)
+{
+    sf2Index = -1;
+    if (_filePath.isEmpty())
+        return FILE_NONE;
+
+    switch (_status)
+    {
+    case LOADED:
+        sf2Index = _sf2Index;
+        return FILE_READY;
+    case LOADING:
+        return FILE_PENDING;
+    case FAILED:
+        return FILE_NONE;
+    default:
+        break;
+    }
+
+    // Loaded once the file is scanned and selected for a while
+    return (s_isFileLoadingRequested && (_isScanning || _isLoadable)) ? FILE_PENDING : FILE_NONE;
+}
+
+void DirectoryPreview::setFileLoadingRequested(bool isRequested)
+{
+    if (isRequested == s_isFileLoadingRequested)
+        return;
+
+    s_isFileLoadingRequested = isRequested;
+    foreach (DirectoryPreview * preview, s_instances)
+    {
+        preview->scheduleLoading();
+        emit preview->fileStateChanged();
+    }
+}
+
+void DirectoryPreview::scheduleLoading()
+{
+    // Only the file of the explorer displayed is loaded for the MIDI player
+    if (s_isFileLoadingRequested && _status == NOT_LOADED && _isLoadable && !_filePath.isEmpty() && _widget->isVisible())
+        _loadTimer->start();
+    else
+        _loadTimer->stop();
+}
+
+void DirectoryPreview::onLoadTimeout()
+{
+    if (s_isFileLoadingRequested && _status == NOT_LOADED && _isLoadable && !_filePath.isEmpty())
+        load();
 }
 
 void DirectoryPreview::setElement(EltID id)
@@ -74,8 +148,8 @@ void DirectoryPreview::setElement(EltID id)
     _element = id;
     _element.indexSf2 = -1;
 
-    // The soundfont is loaded at the first selection of an element
-    if (_element.typeElement != elementUnknown && _status == NOT_LOADED && !_filePath.isEmpty())
+    // The soundfont is loaded at the first selection of an element, if it can be played
+    if (_dialogKeyboard != nullptr && _element.typeElement != elementUnknown && _status == NOT_LOADED && !_filePath.isEmpty())
         load();
     else
         updatePlayedElement();
@@ -83,6 +157,7 @@ void DirectoryPreview::setElement(EltID id)
 
 void DirectoryPreview::load()
 {
+    _loadTimer->stop();
     SoundfontManager * sm = SoundfontManager::getInstance();
 
     // A file already open in a tab is played with its current changes
@@ -93,7 +168,7 @@ void DirectoryPreview::load()
         if (!sm->isTemporary(index) && sm->getQstr(idSf2, champ_filenameInitial) == _filePath)
         {
             _sf2Index = index;
-            _isTemporary = false;
+            _isHeld = false;
             setStatus(LOADED);
             return;
         }
@@ -114,9 +189,11 @@ void DirectoryPreview::onInputProcessed()
     _parser = nullptr;
     if (parser->isSuccess())
     {
-        // Possibly opened in a tab meanwhile
+        // Possibly opened in a tab meanwhile, otherwise held until it is released
         _sf2Index = parser->getSf2Index();
-        _isTemporary = sm->isTemporary(_sf2Index);
+        _isHeld = sm->isTemporary(_sf2Index);
+        if (_isHeld)
+            TemporarySoundfonts::hold(_sf2Index);
         delete parser;
         setStatus(LOADED);
     }
@@ -133,6 +210,13 @@ void DirectoryPreview::onInputProcessed()
 
 void DirectoryPreview::release()
 {
+    releaseSoundfont();
+    scheduleLoading();
+}
+
+void DirectoryPreview::releaseSoundfont()
+{
+    _loadTimer->stop();
     SoundfontManager * sm = SoundfontManager::getInstance();
 
     // A loading in progress is abandoned, the soundfont being deleted when it is over
@@ -151,24 +235,13 @@ void DirectoryPreview::release()
 
     if (_sf2Index != -1)
     {
-        Synth * synth = ContextManager::audio()->getSynth();
-        if (_isTemporary)
-        {
-            // Mute the soundfont and delete it later, unless a tab has been opened with it meanwhile
-            synth->play(EltID(elementSf2, _sf2Index), -2, -2, 0);
-            int sf2Index = _sf2Index;
-            QTimer::singleShot(DELETION_DELAY_MS, sm, [sf2Index, sm]() {
-                if (sm->isTemporary(sf2Index))
-                    sm->remove(EltID(elementSf2, sf2Index));
-            });
-        }
-        else
-        {
-            // Only the notes played here are stopped
-            synth->play(EltID(elementSf2, _sf2Index), -1, -2, 0);
-        }
+        // The notes played with the keyboard are released, the MIDI player possibly going on playing the soundfont. A
+        // temporary soundfont is deleted when nothing uses it anymore, unless a tab has been opened with it.
+        ContextManager::audio()->getSynth()->play(EltID(elementSf2, _sf2Index), -1, -2, 0);
+        if (_isHeld)
+            TemporarySoundfonts::release(_sf2Index);
         _sf2Index = -1;
-        _isTemporary = false;
+        _isHeld = false;
     }
 
     if (_status != NOT_LOADED)
@@ -179,13 +252,14 @@ void DirectoryPreview::setStatus(Status status)
 {
     _status = status;
     updatePlayedElement();
+    emit fileStateChanged();
 }
 
 void DirectoryPreview::updatePlayedElement()
 {
     // Element played if its soundfont is loaded
     EltID id(elementUnknown);
-    if (_status == LOADED && _element.typeElement != elementUnknown)
+    if (_status == LOADED && _element.typeElement != elementUnknown && _dialogKeyboard != nullptr)
     {
         id = _element;
         id.indexSf2 = _sf2Index;
@@ -208,6 +282,9 @@ void DirectoryPreview::updatePlayedElement()
 
 void DirectoryPreview::updateKeyboardAndSynth()
 {
+    if (_dialogKeyboard == nullptr)
+        return;
+
     // Ranges and root keys displayed as in the editor
     EltID id = getPlayedElement();
     if (id.typeElement == elementUnknown)
@@ -245,12 +322,15 @@ EltID DirectoryPreview::getPlayedElement()
 void DirectoryPreview::onShown()
 {
     updateKeyboardAndSynth();
+    scheduleLoading();
 }
 
 void DirectoryPreview::onHidden()
 {
+    _loadTimer->stop();
     releaseNotes();
-    _dialogKeyboard->getKeyboard()->clearCustomization();
+    if (_dialogKeyboard != nullptr)
+        _dialogKeyboard->getKeyboard()->clearCustomization();
 }
 
 bool DirectoryPreview::processKey(int channel, int key, int vel)
@@ -291,23 +371,21 @@ void DirectoryPreview::onProcessKeyMainThread(int key, int vel)
         _dialogKeyboard->getKeyboard()->removeCurrentRange(key);
 }
 
-void DirectoryPreview::onSoundfontLoaded(int indexSf2)
-{
-    // A tab has been opened with the temporary soundfont, which is not to be deleted anymore
-    if (indexSf2 == _sf2Index && !SoundfontManager::getInstance()->isTemporary(indexSf2))
-        _isTemporary = false;
-}
-
 void DirectoryPreview::onSoundfontClosed(int indexSf2)
 {
-    // The soundfont was open in a tab that has been closed: the file is loaded again if an element is selected
+    // The soundfont was open in a tab that has been closed: the file is loaded again if it is still needed
     if (indexSf2 != _sf2Index)
         return;
 
+    if (_isHeld)
+        TemporarySoundfonts::release(indexSf2);
     _sf2Index = -1;
-    _isTemporary = false;
-    if (_element.typeElement != elementUnknown && !_filePath.isEmpty())
+    _isHeld = false;
+    if (_dialogKeyboard != nullptr && _element.typeElement != elementUnknown && !_filePath.isEmpty())
         load();
     else
+    {
         setStatus(NOT_LOADED);
+        scheduleLoading();
+    }
 }

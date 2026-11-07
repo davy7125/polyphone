@@ -137,6 +137,7 @@ MainWindow::MainWindow(bool playerMode, QWidget *parent) : QWidget(parent),
     connect(_tabManager, SIGNAL(keyboardDisplayChanged(bool,bool)), this, SLOT(onKeyboardDisplayChange(bool,bool)));
     connect(_tabManager, SIGNAL(recorderDisplayChanged(bool,bool)), this, SLOT(onRecorderDisplayChange(bool,bool)));
     connect(_tabManager, SIGNAL(midiPlayerDisplayChanged(bool,bool)), this, SLOT(onMidiPlayerDisplayChange(bool,bool)));
+    connect(_tabManager, SIGNAL(soundfontSelectionChanged()), _midiPlayer, SLOT(onSoundfontSelectionChanged()));
     connect(_tabManager, SIGNAL(tabOpen(bool,bool,bool)), ui->topRightWidget, SLOT(onTabOpen(bool,bool,bool)));
     connect(_tabManager, SIGNAL(tabOpen(bool,bool,bool)), _recorder, SLOT(onEditorDisplayed(bool)));
     connect(_recorder, SIGNAL(midiFileOpened(QString)), this, SLOT(onMidiFileOpened(QString)));

@@ -55,6 +55,8 @@ public:
     int play(EltID id, int channel, int key, int velocity);
     void stop(bool allChannels, bool fast);
     void releaseChannel(int channel, bool fast);
+    void releaseSoundfont(int sf2Index, bool fast); // All voices of a soundfont
+    bool hasVoices(int sf2Index); // Voices reading the sample data of a soundfont
     void setChannelGain(int channel, float gain); // dB
 
     // Configuration for reading samples

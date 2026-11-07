@@ -152,6 +152,16 @@ void Synth::releaseChannel(int channel, bool fast)
     _core.releaseVoices(-1, -1, channel, -2, fast);
 }
 
+void Synth::releaseSoundfont(int sf2Index, bool fast)
+{
+    _core.releaseVoices(sf2Index, -1, -2, -2, fast);
+}
+
+bool Synth::hasVoices(int sf2Index)
+{
+    return _core.hasVoices(sf2Index);
+}
+
 void Synth::setChannelGain(int channel, float gain)
 {
     _core.setChannelGain(channel, gain);

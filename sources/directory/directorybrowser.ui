@@ -716,6 +716,13 @@
            </layout>
           </item>
           <item>
+           <widget class="StyledAction" name="pushShowMidiPlayer">
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="StyledAction" name="pushShowKeyboard">
             <property name="checkable">
              <bool>true</bool>

@@ -28,6 +28,7 @@
 #include <QStyledItemDelegate>
 #include <QComboBox>
 class MidiPlayerChannel;
+class QVariantAnimation;
 
 // Editor of the table of the MIDI player: its list opens when it is shown (once the click that opened the editor is
 // released, otherwise the release would close it), and it is finished when the list closes (with or without a choice)
@@ -52,7 +53,8 @@ private:
 
 // Choice of the soundfont and of the preset of the channels in the table of the MIDI player, a row being a channel. The
 // grid is drawn without the lines on the right side of the last column and at the bottom of the last row, the edges of
-// the table being the ones of the window.
+// the table being the ones of the window. While the soundfont selected in the main window is loading, a spinner turns in
+// front of the soundfont of the channels following the selection (not in the list).
 class MidiPlayerDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
@@ -64,17 +66,34 @@ public:
     static constexpr int COLUMN_PRESET = 2;
     static constexpr int COLUMN_VOLUME = 3;
 
+    // The parent is the table
     MidiPlayerDelegate(const QList<MidiPlayerChannel *> &channels, QObject * parent = nullptr);
 
+    // Spinner shown or not, and the room it takes in front of the text
+    void setLoading(bool isLoading);
+    static int getSpinnerWidth();
+
 protected:
+    void initStyleOption(QStyleOptionViewItem * option, const QModelIndex &index) const override;
     void paint(QPainter * painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
     QWidget * createEditor(QWidget * parent, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
     void setEditorData(QWidget * editor, const QModelIndex &index) const override;
     void setModelData(QWidget * editor, QAbstractItemModel * model, const QModelIndex &index) const override;
 
+private slots:
+    void updateSoundfontColumn();
+
 private:
+    bool isSpinnerShown(const QModelIndex &index) const;
+
     const QList<MidiPlayerChannel *> &_channels;
     QColor _gridColor;
+    bool _isLoading;
+    QVariantAnimation * _animation;
+    QPixmap _spinner, _spinnerSelected; // Twice as big, for high resolution screens
+    QIcon _blankIcon; // Room of the spinner in front of the text
+
+    static const int SPINNER_SIZE;
 };
 
 #endif // MIDIPLAYERDELEGATE_H

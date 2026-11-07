@@ -375,6 +375,19 @@ void SynthCore::stop(bool allChannels, bool fast)
     releaseVoices(-1, -1, allChannels ? -2 : -1, -2, fast);
 }
 
+bool SynthCore::hasVoices(int sf2Id)
+{
+    // The finished voices are removed from the list before the next computation, the others are possibly computed
+    std::lock_guard<std::recursive_mutex> lock(_voicesMutex);
+    Voice ** voices1, ** voices2;
+    int count1, count2;
+    _voices.getVoices(voices1, count1, voices2, count2);
+    for (int i = 0; i < count1 + count2; ++i)
+        if ((i < count1 ? voices1[i] : voices2[i - count1])->getParam()->getSf2Id() == sf2Id)
+            return true;
+    return false;
+}
+
 void SynthCore::setChannelGain(int channel, float gain)
 {
     if (channel < -1 || channel > MAX_CHANNEL)

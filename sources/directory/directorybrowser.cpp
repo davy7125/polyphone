@@ -37,7 +37,8 @@
 DirectoryBrowser::DirectoryBrowser(DialogKeyboard * dialogKeyboard, QWidget *parent) : Tab(parent),
     ui(new Ui::DirectoryBrowser),
     _watcher(nullptr),
-    _preview(dialogKeyboard == nullptr ? nullptr : new DirectoryPreview(dialogKeyboard, this))
+    _hasKeyboard(dialogKeyboard != nullptr),
+    _preview(new DirectoryPreview(dialogKeyboard, this))
 {
     ui->setupUi(this);
 
@@ -76,19 +77,21 @@ DirectoryBrowser::DirectoryBrowser(DialogKeyboard * dialogKeyboard, QWidget *par
     ui->pushShowPresets->setStyleSheet("QPushButton:focus {border: 2px solid " + highlightedBackground + "; border-radius: 2px;}");
     updateShowIcon(ui->pushShowPresets);
 
-    // Virtual keyboard and recorder, in the same state as the buttons of the editor (nothing to play in player mode)
+    // MIDI player, virtual keyboard and recorder, in the same state as the buttons of the editor (the elements cannot be
+    // played in player mode, but the MIDI player can play the file selected)
+    ui->pushShowMidiPlayer->initialize(tr("MIDI player"), ":/icons/MIDI.svg");
     ui->pushShowKeyboard->initialize(tr("Virtual keyboard"), ":/icons/piano.svg");
     ui->pushShowRecorder->initialize(tr("Recorder"), ":/icons/recorder.svg");
-    if (_preview == nullptr)
-    {
-        ui->pushShowKeyboard->hide();
-        ui->pushShowRecorder->hide();
-        ui->frameTop->layout()->setContentsMargins(6, 2, 6, 2);
-    }
-    else
+    EditorToolBar::addMidiPlayerButton(ui->pushShowMidiPlayer);
+    if (_hasKeyboard)
     {
         EditorToolBar::addKeyboardButton(ui->pushShowKeyboard);
         EditorToolBar::addRecorderButton(ui->pushShowRecorder);
+    }
+    else
+    {
+        ui->pushShowKeyboard->hide();
+        ui->pushShowRecorder->hide();
     }
 
     // Connections
@@ -135,12 +138,13 @@ DirectoryBrowser::DirectoryBrowser(DialogKeyboard * dialogKeyboard, QWidget *par
 
 DirectoryBrowser::~DirectoryBrowser()
 {
-    if (_preview != nullptr)
+    EditorToolBar::removeMidiPlayerButton(ui->pushShowMidiPlayer);
+    if (_hasKeyboard)
     {
         EditorToolBar::removeKeyboardButton(ui->pushShowKeyboard);
         EditorToolBar::removeRecorderButton(ui->pushShowRecorder);
-        delete _preview;
     }
+    delete _preview;
     delete ui;
 }
 
@@ -166,7 +170,7 @@ void DirectoryBrowser::initialize(QString dirPath)
     }
 
     // The soundfont played is released if its file changed
-    if (_preview != nullptr && _currentFiles.contains(_preview->getFile()))
+    if (_currentFiles.contains(_preview->getFile()))
     {
         QFileInfo fileInfo(_preview->getFile());
         if (!fileInfo.exists() || fileInfo.lastModified() != _currentFiles[_preview->getFile()])
@@ -269,9 +273,13 @@ void DirectoryBrowser::onSelectionChanged(QItemSelection selected, QItemSelectio
         ui->listPresets->setData(d->getPresetDetails(), d->getPath(), elementPrst);
     }
 
-    // The lists have no selection anymore, the soundfont played is released if another file is selected
-    if (_preview != nullptr)
-        _preview->setFile(d == nullptr ? "" : d->getPath());
+    // The lists have no selection anymore, the soundfont played is released if another file is selected. The file can be
+    // loaded once it has been scanned.
+    if (d == nullptr)
+        _preview->setFile("", false, false);
+    else
+        _preview->setFile(d->getPath(), d->getStatus() == DirectoryFileData::NOT_INITIALIZED,
+                          d->getStatus() == DirectoryFileData::OK);
     setPreviewElement(EltID(elementUnknown));
 }
 
@@ -462,24 +470,26 @@ void DirectoryBrowser::on_pushShowRecorder_clicked()
     emit recorderDisplayChanged(ui->pushShowRecorder->isChecked());
 }
 
+void DirectoryBrowser::on_pushShowMidiPlayer_clicked()
+{
+    emit midiPlayerDisplayChanged(ui->pushShowMidiPlayer->isChecked());
+}
+
 void DirectoryBrowser::setPreviewElement(EltID id)
 {
-    if (_preview != nullptr)
-        _preview->setElement(id);
+    _preview->setElement(id);
 }
 
 void DirectoryBrowser::showEvent(QShowEvent * event)
 {
     Tab::showEvent(event);
-    if (_preview != nullptr)
-        _preview->onShown();
+    _preview->onShown();
 }
 
 void DirectoryBrowser::hideEvent(QHideEvent * event)
 {
     Tab::hideEvent(event);
-    if (_preview != nullptr)
-        _preview->onHidden();
+    _preview->onHidden();
 }
 
 void DirectoryBrowser::focusFileList()

@@ -36,13 +36,14 @@
 #include "contextmanager.h"
 #include "soundfontmanager.h"
 #include "soundfonts.h"
-#include "tabmanager.h"
 #include "synth.h"
 #include "midifile.h"
 #include "midifileplayer.h"
 #include "midifilerenderer.h"
 #include "midiplayerchannel.h"
 #include "midiplayerdelegate.h"
+#include "midiplayerselection.h"
+#include "temporarysoundfonts.h"
 #include "editortoolbar.h"
 #include "bannermenu.h"
 #include "dialogdecoration.h"
@@ -53,6 +54,9 @@
 DialogMidiPlayer::DialogMidiPlayer(QWidget *parent) :
     QDialog(parent, Qt::Tool | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint),
     ui(new Ui::DialogMidiPlayer),
+    _selection(new MidiPlayerSelection()),
+    _delegate(nullptr),
+    _isShown(false),
     _stateUpdate(true),
     _isPlaying(false),
     _updatingSlider(false),
@@ -102,7 +106,8 @@ DialogMidiPlayer::DialogMidiPlayer(QWidget *parent) :
     // border, and no line on the right side of the last column and at the bottom of the last row (grid drawn by
     // MidiPlayerDelegate). A list opens with a click on the selected cell or with a double click.
     QTableWidget * table = ui->tableChannels;
-    table->setItemDelegate(new MidiPlayerDelegate(_channels, table));
+    _delegate = new MidiPlayerDelegate(_channels, table);
+    table->setItemDelegate(_delegate);
     table->setColumnCount(4);
     table->setHorizontalHeaderLabels(QStringList() << tr("Channel") << tr("Soundfont") << tr("Preset") << tr("Volume"));
     table->setStyleSheet(theme->getTableTheme() + "QTableWidget{border:0}QHeaderView::section:last{border-right:0}");
@@ -144,10 +149,17 @@ DialogMidiPlayer::DialogMidiPlayer(QWidget *parent) :
     connect(sm, SIGNAL(soundfontClosed(int)), this, SLOT(onSoundfontClosed(int)));
     connect(sm, SIGNAL(editingDone(QString,QList<int>)), this, SLOT(onEditingDone(QString,QList<int>)));
     connect(sm, SIGNAL(inputModulatorChanged(int,bool,bool)), this, SLOT(onInputModulatorChanged(int,bool,bool)));
+
+    // Soundfont selected in the main window
+    connect(_selection, SIGNAL(soundfontChanged()), this, SLOT(onSelectionSoundfontChanged()));
+    connect(_selection, SIGNAL(stateChanged()), this, SLOT(onSelectionStateChanged()));
 }
 
 DialogMidiPlayer::~DialogMidiPlayer()
 {
+    // The selection is not followed anymore
+    _selection->setActive(false);
+
     // Possibly an export not finished
     if (_exportThread.joinable())
     {
@@ -155,8 +167,11 @@ DialogMidiPlayer::~DialogMidiPlayer()
         _exportThread.join();
     }
     delete _renderer;
+    foreach (int sf2Index, _exportSoundfonts)
+        TemporarySoundfonts::release(sf2Index);
 
     clearChannels();
+    delete _selection;
     ContextManager::audio()->getSynth()->setMidiFileValues(nullptr);
     delete _player;
     delete ui;
@@ -206,6 +221,7 @@ void DialogMidiPlayer::loadFile(QString filePath)
         updateTempoToolTip();
         updateTime(0);
         updateSize();
+        updateSelectionUse(); // Without channel
         return;
     }
     ui->labelMessage->hide();
@@ -217,25 +233,8 @@ void DialogMidiPlayer::loadFile(QString filePath)
     updateTempoToolTip();
     updatePosition(0);
 
-    // The channels play the soundfont of the current tab, otherwise the first one open
-    TabManager * tabManager = TabManager::getInstance();
-    int sf2Index = tabManager == nullptr ? -1 : tabManager->getCurrentSf2();
-    if (sf2Index < 0)
-    {
-        // Not the soundfonts loaded without tab by the soundfont explorer
-        SoundfontManager * sm = SoundfontManager::getInstance();
-        EltID idSf2(elementSf2);
-        foreach (int index, sm->getSiblings(idSf2))
-        {
-            if (!sm->isTemporary(index))
-            {
-                sf2Index = index;
-                break;
-            }
-        }
-    }
-
-    // A row for each channel having notes
+    // A row for each channel having notes, playing the soundfont selected in the main window (its samples are loaded by
+    // the selection)
     int rowCount = 0;
     for (int channel = 0; channel < 16; channel++)
         if (file->isChannelUsed(channel))
@@ -246,12 +245,14 @@ void DialogMidiPlayer::loadFile(QString filePath)
         if (!file->isChannelUsed(channel))
             continue;
         MidiPlayerChannel * playerChannel = new MidiPlayerChannel(
-            _player, channel, file->getChannelName(channel), MidiFilePlayer::getUsedPrograms(file.get(), channel),
+            _player, _selection, channel, file->getChannelName(channel), MidiFilePlayer::getUsedPrograms(file.get(), channel),
             ui->tableChannels, _channels.count());
         connect(playerChannel, SIGNAL(mixChanged()), this, SLOT(onMixChanged()));
         _channels << playerChannel;
-        playerChannel->setSoundfont(sf2Index);
+        playerChannel->setSoundfont(MidiPlayerChannel::SELECTION, false);
+        connect(playerChannel, SIGNAL(selectionFollowingChanged()), this, SLOT(updateSelectionUse()));
     }
+    updateSelectionUse();
 
     // Size once the rows are shown (the size hints of their widgets are then known)
     updateSize();
@@ -267,17 +268,21 @@ void DialogMidiPlayer::updateSize()
         height += table->rowHeight(i);
     table->setFixedHeight(height);
 
-    // Soundfont names as wide as needed (up to a limit), the presets having the remaining space
+    // Soundfont names as wide as needed (up to a limit), with the room of the spinner in front of the selection, the presets
+    // having the remaining space
     int charWidth = table->fontMetrics().averageCharWidth();
     int soundfontWidth = table->fontMetrics().horizontalAdvance(
                              table->horizontalHeaderItem(MidiPlayerDelegate::COLUMN_SOUNDFONT)->text()) + 4 * charWidth;
+    int spinnerWidth = 0;
     for (int i = 0; i < table->rowCount(); i++)
     {
         QTableWidgetItem * item = table->item(i, MidiPlayerDelegate::COLUMN_SOUNDFONT); // Null while the rows are created
         if (item != nullptr)
             soundfontWidth = qMax(soundfontWidth, table->fontMetrics().horizontalAdvance(item->text()) + 2 * charWidth);
+        if (i < _channels.count() && _channels[i]->isFollowingSelection())
+            spinnerWidth = MidiPlayerDelegate::getSpinnerWidth();
     }
-    soundfontWidth = qMin(soundfontWidth, 25 * charWidth);
+    soundfontWidth = qMin(soundfontWidth, 25 * charWidth) + spinnerWidth;
     table->horizontalHeader()->resizeSection(MidiPlayerDelegate::COLUMN_SOUNDFONT, soundfontWidth);
     int width = soundfontWidth + 25 * charWidth + 2 * table->frameWidth();
     foreach (int column, QList<int>() << MidiPlayerDelegate::COLUMN_CHANNEL << MidiPlayerDelegate::COLUMN_VOLUME)
@@ -495,22 +500,75 @@ void DialogMidiPlayer::onMixChanged()
 
 void DialogMidiPlayer::onSoundfontLoaded(int sf2Index)
 {
-    // The first soundfont opened is played by all channels, and the channels possibly playing it while it was loaded
-    // are updated
+    // The first soundfont opened is played by all channels if none plays a soundfont (the selection possibly plays it if
+    // it had no soundfont), and the channels possibly playing it while it was loaded are updated
     bool withoutSoundfont = true;
     foreach (MidiPlayerChannel * channel, _channels)
-        withoutSoundfont &= (channel->getSoundfont() == -1);
+        withoutSoundfont &= (!channel->isFollowingSelection() && channel->getSoundfont() == -1);
     foreach (MidiPlayerChannel * channel, _channels)
-        if (withoutSoundfont || channel->getSoundfont() == sf2Index)
+    {
+        if (channel->isFollowingSelection())
+        {
+            if (channel->getSoundfont() == sf2Index)
+                channel->updatePresetList();
+        }
+        else if (withoutSoundfont || channel->getSoundfont() == sf2Index)
             channel->setSoundfont(sf2Index);
+    }
+    _selection->update();
 }
 
 void DialogMidiPlayer::onSoundfontClosed(int sf2Index)
 {
-    // The channels playing it play nothing
-    Q_UNUSED(sf2Index)
+    // The channels playing it play nothing, or another soundfont selected
+    _selection->onSoundfontClosed(sf2Index);
     foreach (MidiPlayerChannel * channel, _channels)
         channel->updateSoundfont();
+}
+
+void DialogMidiPlayer::onSoundfontSelectionChanged()
+{
+    _selection->update();
+}
+
+void DialogMidiPlayer::updateSelectionUse()
+{
+    // Programs of the channels following the selection, which is followed while the window is visible
+    QList<int> programs;
+    bool isFollowed = false;
+    foreach (MidiPlayerChannel * channel, _channels)
+    {
+        if (!channel->isFollowingSelection())
+            continue;
+        isFollowed = true;
+        foreach (int program, channel->getUsedPrograms())
+            if (!programs.contains(program))
+                programs << program;
+    }
+    _selection->setPrograms(programs);
+    _selection->setActive(isFollowed && _isShown);
+    onSelectionStateChanged();
+}
+
+void DialogMidiPlayer::onSelectionSoundfontChanged()
+{
+    foreach (MidiPlayerChannel * channel, _channels)
+        channel->onSelectionSoundfontChanged();
+}
+
+void DialogMidiPlayer::onSelectionStateChanged()
+{
+    // Name of the selection, and spinner while it is loading
+    bool isFollowed = false;
+    foreach (MidiPlayerChannel * channel, _channels)
+    {
+        if (channel->isFollowingSelection())
+        {
+            isFollowed = true;
+            channel->updateSoundfont();
+        }
+    }
+    _delegate->setLoading(isFollowed && _selection->isLoading());
 }
 
 void DialogMidiPlayer::onEditingDone(QString editingSource, QList<int> sf2Indexes)
@@ -566,8 +624,18 @@ void DialogMidiPlayer::onExportTriggered()
     foreach (MidiPlayerChannel * channel, _channels)
         isSoloEnabled |= channel->isSolo();
     foreach (MidiPlayerChannel * channel, _channels)
+    {
         _renderer->setChannel(channel->getChannel(), channel->getSoundfont(), channel->getForcedProgram(),
                               channel->getGain(isSoloEnabled));
+
+        // The soundfonts loaded by the soundfont explorer are kept until the end of the export
+        int sf2Index = channel->getSoundfont();
+        if (sf2Index >= 0 && !_exportSoundfonts.contains(sf2Index))
+        {
+            _exportSoundfonts << sf2Index;
+            TemporarySoundfonts::hold(sf2Index);
+        }
+    }
     _renderer->setSpeed(_speed);
     _renderer->setTransposition(_sliderPitch->value());
 
@@ -605,6 +673,9 @@ void DialogMidiPlayer::onExportTimeout()
     // End of the export, possibly with an error
     _exportTimer->stop();
     _exportThread.join();
+    foreach (int sf2Index, _exportSoundfonts)
+        TemporarySoundfonts::release(sf2Index);
+    _exportSoundfonts.clear();
     QString error = _renderer->getError();
     delete _renderer;
     _renderer = nullptr;
@@ -628,13 +699,15 @@ void DialogMidiPlayer::showEvent(QShowEvent * event)
     if (!geometry.isEmpty())
         this->restoreGeometry(geometry);
 
-    // The last file is opened again if there is none
+    // The last file is opened again if there is none, the channels following the selection again
+    _isShown = true;
     if (_file == nullptr)
     {
         QString lastFile = ContextManager::recentFile()->getLastFile(RecentFileManager::FILE_TYPE_MIDI);
         if (!lastFile.isEmpty() && QFileInfo::exists(lastFile))
             loadFile(lastFile);
     }
+    updateSelectionUse();
 
     _timer->start(40);
 }
@@ -651,11 +724,13 @@ void DialogMidiPlayer::hideEvent(QHideEvent * event)
     // Save the geometry
     ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "midiPlayerGeometry", this->saveGeometry());
 
-    // Stop the playback
+    // Stop the playback, the selection being not followed anymore
     _timer->stop();
     _player->stop();
     updatePlayPauseIcon(false);
     updatePosition(0);
+    _isShown = false;
+    updateSelectionUse();
 }
 
 void DialogMidiPlayer::keyPressEvent(QKeyEvent * event)

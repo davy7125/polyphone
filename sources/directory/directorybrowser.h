@@ -41,12 +41,14 @@ class DirectoryBrowser : public Tab
     Q_OBJECT
 
 public:
-    // Without keyboard (player mode), the elements cannot be played
+    // Without keyboard (player mode), the elements cannot be played (the files selected can still be played by the MIDI
+    // player)
     DirectoryBrowser(DialogKeyboard * dialogKeyboard, QWidget *parent = nullptr);
     ~DirectoryBrowser();
 
     void initialize(QString dirPath);
     QString getDirectoryPath() { return _dirPath; }
+    DirectoryPreview * getPreview() { return _preview; }
 
     void onActionRequired(TabAction action) override;
 
@@ -54,6 +56,7 @@ signals:
     void itemDoubleClicked(QString filePath, EltID id);
     void keyboardDisplayChanged(bool isDisplayed);
     void recorderDisplayChanged(bool isDisplayed);
+    void midiPlayerDisplayChanged(bool isDisplayed);
 
 protected:
     bool eventFilter(QObject *obj, QEvent *event) override;
@@ -77,6 +80,7 @@ private slots:
     void on_pushShowPresets_toggled(bool checked);
     void on_pushShowKeyboard_clicked();
     void on_pushShowRecorder_clicked();
+    void on_pushShowMidiPlayer_clicked();
 
 private:
     void updateVerticalSpacer();
@@ -88,6 +92,7 @@ private:
     QString _dirPath;
     QFileSystemWatcher * _watcher;
     QMap<QString, QDateTime> _currentFiles;
+    bool _hasKeyboard;
     DirectoryPreview * _preview;
 };
 

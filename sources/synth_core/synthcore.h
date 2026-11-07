@@ -69,6 +69,9 @@ public:
     void releaseVoices(int sf2Id, int presetId, int channel, int key, bool fast);
     void stop(bool allChannels, bool fast);
 
+    // True if voices of a soundfont are running or about to start (they may read its sample data)
+    bool hasVoices(int sf2Id);
+
     // Gain (dB) added to the voices of a channel (-1 to MAX_CHANNEL), 0 by default: the voices playing reach it
     // progressively
     void setChannelGain(int channel, float gain);

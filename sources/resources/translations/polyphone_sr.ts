@@ -2034,7 +2034,7 @@ repository</source>
     </message>
     <message>
         <location filename="../../dialogs/dialogmidiplayer.ui" line="84"/>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="171"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="186"/>
         <source>Open a MIDI file</source>
         <translation>Отвори МИДИ датотеку</translation>
     </message>
@@ -2049,105 +2049,105 @@ repository</source>
         <translation>Подешавања репродукције</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="364"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="369"/>
         <source>Tempo</source>
         <translation>Темпо</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="379"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="384"/>
         <source>The percussions (bank 128) are not transposed</source>
         <translation>Удараљке (банка 128) се не транспонују</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="107"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="112"/>
         <source>Channel</source>
         <translation>Канал</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="107"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="112"/>
         <source>Soundfont</source>
         <translation>Звукотека</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="107"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="112"/>
         <source>Preset</source>
         <translation>Поставка</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="107"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="112"/>
         <source>Volume</source>
         <translation>Гласноћа</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="127"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="132"/>
         <source>Open a MIDI file to play it with the soundfonts that are open.</source>
         <translation>Отворите МИДИ датотеку да бисте је пустили са отвореним звукотекама.</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="172"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="187"/>
         <source>MIDI files</source>
         <translation>МИДИ датотеке</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="360"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="365"/>
         <source>Loop playback</source>
         <translation>Понављање репродукције</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="370"/>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="431"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="375"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="436"/>
         <source>%1%</source>
         <comment>percentage</comment>
         <translation>%1 %</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="371"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="376"/>
         <source>Pitch</source>
         <translation>Висина</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="397"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="402"/>
         <source>Export audio...</source>
         <translation>Извези звук...</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="414"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="419"/>
         <source>Tempo of the file: %1 bpm, variable</source>
         <translation>Темпо датотеке: %1 bpm, променљив</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="414"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="419"/>
         <source>Tempo of the file: %1 bpm</source>
         <translation>Темпо датотеке: %1 bpm</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="416"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="421"/>
         <source>File without tempo (SMPTE time code)</source>
         <translation>Датотека без темпа (SMPTE временски код)</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="476"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="481"/>
         <source>Pause</source>
         <translation>Паузирај</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="476"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="481"/>
         <source>Play</source>
         <translation>Пусти</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="540"/>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="575"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="598"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="643"/>
         <source>Export audio</source>
         <translation>Извоз звука</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="543"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="601"/>
         <source>Wav file</source>
         <translation>Вав-датотека</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="614"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="685"/>
         <source>Warning</source>
         <translation>Упозорење</translation>
     </message>
@@ -2657,84 +2657,89 @@ for a signal</source>
         <translation>Претражи датотеку, узорак, инструмент или поставку...</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="80"/>
+        <location filename="../../directory/directorybrowser.cpp" line="82"/>
+        <source>MIDI player</source>
+        <translation>МИДИ плејер</translation>
+    </message>
+    <message>
+        <location filename="../../directory/directorybrowser.cpp" line="83"/>
         <source>Virtual keyboard</source>
         <translation>Виртуелна клавијатура</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="81"/>
+        <location filename="../../directory/directorybrowser.cpp" line="84"/>
         <source>Recorder</source>
         <translation>Магнетофон (снимач)</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="156"/>
+        <location filename="../../directory/directorybrowser.cpp" line="160"/>
         <source>The directory &quot;%1&quot; does not exist.</source>
         <translation>Директоријум „%1“ не постоји.</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="163"/>
+        <location filename="../../directory/directorybrowser.cpp" line="167"/>
         <source>The directory &quot;%1&quot; is not readable.</source>
         <translation>Директоријум „%1“ није читљив.</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="306"/>
+        <location filename="../../directory/directorybrowser.cpp" line="314"/>
         <source>Rename</source>
         <translation>Преименуј</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="307"/>
+        <location filename="../../directory/directorybrowser.cpp" line="315"/>
         <source>New name:</source>
         <translation>Нови назив:</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="309"/>
+        <location filename="../../directory/directorybrowser.cpp" line="317"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Поништи</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="310"/>
+        <location filename="../../directory/directorybrowser.cpp" line="318"/>
         <source>&amp;Ok</source>
         <translation>&amp;У реду</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="321"/>
+        <location filename="../../directory/directorybrowser.cpp" line="329"/>
         <source>A file with this name already exists.</source>
         <translation>Датотека са овим називом већ постоји.</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="321"/>
-        <location filename="../../directory/directorybrowser.cpp" line="326"/>
-        <location filename="../../directory/directorybrowser.cpp" line="344"/>
+        <location filename="../../directory/directorybrowser.cpp" line="329"/>
+        <location filename="../../directory/directorybrowser.cpp" line="334"/>
+        <location filename="../../directory/directorybrowser.cpp" line="352"/>
         <source>Warning</source>
         <translation>Упозорење</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="326"/>
+        <location filename="../../directory/directorybrowser.cpp" line="334"/>
         <source>Cannot rename file &quot;%1&quot;.</source>
         <translation>Не могу да преименујем датотеку „%1”.</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="334"/>
+        <location filename="../../directory/directorybrowser.cpp" line="342"/>
         <source>Confirm deletion</source>
         <translation>Потврди брисање</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="335"/>
+        <location filename="../../directory/directorybrowser.cpp" line="343"/>
         <source>Are you sure you want to delete file &quot;%1&quot;?</source>
         <translation>Да ли сте сигурни да желите да обришете датотеку „%1“?</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="337"/>
+        <location filename="../../directory/directorybrowser.cpp" line="345"/>
         <source>&amp;Yes</source>
         <translation>&amp;Да</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="338"/>
+        <location filename="../../directory/directorybrowser.cpp" line="346"/>
         <source>&amp;No</source>
         <translation>&amp;Не</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="344"/>
+        <location filename="../../directory/directorybrowser.cpp" line="352"/>
         <source>Cannot delete file &quot;%1&quot;.</source>
         <translation>Не могу да обришем датотеку „%1”.</translation>
     </message>
@@ -3151,72 +3156,72 @@ for a signal</source>
 <context>
     <name>EditorToolBar</name>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="71"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="72"/>
         <source>Add a sample</source>
         <translation>Додај узорак</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="72"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="73"/>
         <source>Add an instrument</source>
         <translation>Додај инструмент</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="73"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="74"/>
         <source>Add a preset</source>
         <translation>Додај поставку</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="78"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="79"/>
         <source>Toolbox</source>
         <translation>Кутија са алатима</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="74"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="75"/>
         <source>Cancel</source>
         <translation>Опозови</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="75"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="76"/>
         <source>Redo</source>
         <translation>Понови</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="76"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="77"/>
         <source>Save</source>
         <translation>Сачувај</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="84"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="85"/>
         <source>Recorder</source>
         <translation>Магнетофон (снимач)</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="87"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="88"/>
         <source>Virtual keyboard</source>
         <translation>Виртуелна клавијатура</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="90"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="91"/>
         <source>MIDI player</source>
         <translation>МИДИ плејер</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="330"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="344"/>
         <source>Import an audio file</source>
         <translation>Увези звучну датотеку</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="332"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="346"/>
         <source>Audio files</source>
         <translation>Звучне датотеке</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="488"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="502"/>
         <source>Cannot create more presets.</source>
         <translation>Не могу да направим више поставки.</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="488"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="502"/>
         <source>Warning</source>
         <translation>Упозорење</translation>
     </message>
@@ -3650,12 +3655,12 @@ for a signal</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="259"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="260"/>
         <source>&amp;Save</source>
         <translation>&amp;Сачувај</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="245"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="246"/>
         <source>Warning</source>
         <translation>Упозорење</translation>
     </message>
@@ -3665,42 +3670,42 @@ for a signal</source>
         <translation>Полифон Уређивач звукотека</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="236"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="237"/>
         <source>Untitled</source>
         <translation>Без наслова</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="260"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="261"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Поништи</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="261"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="262"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>&amp;Изађи не сачувавши</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="349"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="350"/>
         <source>Opening files</source>
         <translation>Отварање датотека</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="359"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="360"/>
         <source>Opening a directory</source>
         <translation>Отварање директоријума</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="246"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="247"/>
         <source>Save before exiting?</source>
         <translation>Сачувати пре изласка?</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="249"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="250"/>
         <source>The following files have been modified:</source>
         <translation>Следеће датотеке су измењене:</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="256"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="257"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>Датотека „%1” је измењена.</translation>
     </message>
@@ -3817,76 +3822,87 @@ for a signal</source>
 <context>
     <name>MidiPlayerChannel</name>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="136"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="139"/>
         <source>Activity</source>
         <translation>Активност</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="143"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="146"/>
         <source>Volume</source>
         <translation>Гласноћа</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="88"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="91"/>
         <source>M</source>
         <comment>short for Mute</comment>
         <translation>M</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="89"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="92"/>
         <source>Mute</source>
         <translation>Искључи звук</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="91"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="94"/>
         <source>S</source>
         <comment>short for Solo</comment>
         <translation>S</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="92"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="95"/>
         <source>Solo</source>
         <translation>Соло</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="107"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="110"/>
         <source>MIDI values</source>
         <translation>МИДИ вредности</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="174"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="178"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="224"/>
         <source>None</source>
         <translation>Ниједна</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="189"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="199"/>
         <source>Untitled</source>
         <translation>Без наслова</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="264"/>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="287"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="206"/>
+        <source>Selection</source>
+        <translation>Избор</translation>
+    </message>
+    <message>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="206"/>
+        <source>Selection (%1)</source>
+        <translation>Избор (%1)</translation>
+    </message>
+    <message>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="314"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="337"/>
         <source>Auto (%1)</source>
         <translation>Ауто (%1)</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="291"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="341"/>
         <source>The soundfont has no preset with this bank and this number: the notes are not played.</source>
         <translation>Звукотека нема поставку са овом банком и овим бројем: ноте се не пуштају.</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="359"/>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="362"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="409"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="412"/>
         <source>semitones</source>
         <translation>полутонова</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="367"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="417"/>
         <source>All controllers are at their default value.</source>
         <translation>Сви контролери имају подразумевану вредност.</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midiplayerchannel.cpp" line="377"/>
+        <location filename="../../midi_player/midiplayerchannel.cpp" line="427"/>
         <source>dB</source>
         <comment>unit for decibels</comment>
         <translation>dB</translation>
@@ -5479,7 +5495,7 @@ Both divisions must share the same note and velocity ranges.</source>
     <name>RecorderHistory</name>
     <message>
         <location filename="../../dialogs/recorderhistory.cpp" line="88"/>
-        <location filename="../../dialogs/recorderhistory.cpp" line="208"/>
+        <location filename="../../dialogs/recorderhistory.cpp" line="213"/>
         <source>Listen to the recording</source>
         <translation>Преслушај снимак</translation>
     </message>
@@ -5494,17 +5510,17 @@ Both divisions must share the same note and velocity ranges.</source>
         <translation>Обриши снимак</translation>
     </message>
     <message>
-        <location filename="../../dialogs/recorderhistory.cpp" line="208"/>
+        <location filename="../../dialogs/recorderhistory.cpp" line="213"/>
         <source>Stop listening</source>
         <translation>Заустави преслушавање</translation>
     </message>
     <message>
-        <location filename="../../dialogs/recorderhistory.cpp" line="211"/>
+        <location filename="../../dialogs/recorderhistory.cpp" line="216"/>
         <source>Import the recording in the soundfont displayed</source>
         <translation>Увези снимак у приказану звукотеку</translation>
     </message>
     <message>
-        <location filename="../../dialogs/recorderhistory.cpp" line="212"/>
+        <location filename="../../dialogs/recorderhistory.cpp" line="217"/>
         <source>Display a soundfont in the editor for importing the recording</source>
         <translation>Прикажите звукотеку у уређивачу да бисте увезли снимак</translation>
     </message>
@@ -6074,7 +6090,7 @@ download the list</source>
 <context>
     <name>SoundfontTab</name>
     <message>
-        <location filename="../../mainwindow/soundfonttab.cpp" line="102"/>
+        <location filename="../../mainwindow/soundfonttab.cpp" line="103"/>
         <source>Untitled</source>
         <translation>Без наслова</translation>
     </message>
@@ -6171,58 +6187,58 @@ download content</source>
 <context>
     <name>TabManager</name>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="109"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="112"/>
         <source>Settings</source>
         <translation>Подешавања</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="138"/>
-        <location filename="../../mainwindow/tabmanager.cpp" line="325"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="141"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="350"/>
         <source>Warning</source>
         <translation>Упозорење</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="139"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="142"/>
         <source>Cannot open file &quot;%1&quot;</source>
         <translation>Не могу да отворим датотеку „%1”</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="282"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="299"/>
         <source>Online repository</source>
         <translation>Онлајн ризница</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="320"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="345"/>
         <source>Save before exiting?</source>
         <translation>Сачувати пре изласка?</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="323"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="348"/>
         <source>untitled</source>
         <translation>без назива</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="324"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="349"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>Датотека „%1” је измењена.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="327"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="352"/>
         <source>&amp;Save</source>
         <translation>&amp;Сачувај</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="328"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="353"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Поништи</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="329"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="354"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>&amp;Не чувај</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="486"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="582"/>
         <source>User area</source>
         <translation>Корисничка област</translation>
     </message>

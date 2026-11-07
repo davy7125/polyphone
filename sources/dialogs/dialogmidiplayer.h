@@ -34,6 +34,8 @@ class MidiFilePlayer;
 class MidiFileRenderer;
 class WaitingToolDialog;
 class MidiPlayerChannel;
+class MidiPlayerSelection;
+class MidiPlayerDelegate;
 class QTimer;
 class QTableWidgetItem;
 class QLabel;
@@ -48,6 +50,8 @@ class DialogMidiPlayer;
 // Plays a MIDI file with the soundfonts that are open, the soundfont, the preset and the volume of each channel being
 // chosen in a table, the loop, the tempo and the transposition in a menu. The last file is opened again, and the playback
 // stops when the window is closed. The height of the window depends on the number of channels.
+// By default the channels play the soundfont selected in the main window: soundfont of the current tab, or file selected
+// in a soundfont explorer.
 // The menu also exports the file in a wav file, as it is heard (without the loop).
 class DialogMidiPlayer : public QDialog
 {
@@ -60,6 +64,10 @@ public:
 
     // Load a MIDI file, as if it was chosen with the button
     void openFile(QString filePath);
+
+public slots:
+    // Current tab or file selected in a soundfont explorer possibly changed
+    void onSoundfontSelectionChanged();
 
 protected:
     void showEvent(QShowEvent * event) override;
@@ -86,6 +94,9 @@ private slots:
     void onExportTriggered();
     void onExportCanceled();
     void onExportTimeout();
+    void updateSelectionUse();
+    void onSelectionSoundfontChanged();
+    void onSelectionStateChanged();
 
 private:
     void loadFile(QString filePath);
@@ -99,6 +110,9 @@ private:
 
     Ui::DialogMidiPlayer * ui;
     MidiFilePlayer * _player;
+    MidiPlayerSelection * _selection;
+    MidiPlayerDelegate * _delegate;
+    bool _isShown;
     std::shared_ptr<MidiFile> _file;
     QString _filePath;
     QList<MidiPlayerChannel *> _channels; // By row of the table
@@ -121,6 +135,7 @@ private:
     std::atomic<bool> _isExportFinished;
     WaitingToolDialog * _exportDialog;
     QTimer * _exportTimer;
+    QList<int> _exportSoundfonts; // Held during the export
 };
 
 #endif // DIALOGMIDIPLAYER_H
