@@ -96,8 +96,10 @@ a setting or an event, `#` starts a comment.
 | `mute instrument\|preset <index> <zone>` | zone muted, as in the editor | |
 | `alwaysplayed instrument\|preset <index>` | element played with any other one of its kind, as in the editor | |
 
-An event starts with its time in seconds. Channels go from 0 to 15. The indexes of the instruments,
-samples and zones are their order in the soundfont, from 0.
+An event starts with its time in seconds. Channels go from 0 to 15, and -1 (the channel of the editor,
+where the instruments and samples are played alone) is also accepted by `cc`, `bend`, `bendrange`,
+`pressure` and `polypressure`. The indexes of the instruments, samples and zones are their order in
+the soundfont, from 0.
 
 | Event | Meaning |
 |---|---|

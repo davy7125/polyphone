@@ -26,22 +26,40 @@
 #define TOOLFREQUENCYFILTER_PARAMETERS_H
 
 #include "abstracttoolparameters.h"
-#include <QVector>
+#include "gaincurve.h"
 
 class ToolFrequencyFilter_parameters: public AbstractToolParameters
 {
 public:
+    ToolFrequencyFilter_parameters();
+
     /// Load the configuration from the ini file
     void loadConfiguration() override;
 
     /// Save the configuration in the ini file
     void saveConfiguration() override;
 
-    QVector<float> getCurve() { return _curve; }
-    void setCurve(QVector<float> curve) { _curve = curve; }
+    GainCurve::Mode getMode() const { return _mode; }
+    void setMode(GainCurve::Mode mode) { _mode = mode; }
+
+    bool isNoteTracking() const { return _noteTracking; }
+    void setNoteTracking(bool isEnabled) { _noteTracking = isEnabled; }
+
+    /// Points of the current mode and abscissa, each combination keeping its own curve
+    QList<QPointF> getPoints() const { return _points[getIndex(_mode, _noteTracking)]; }
+    void setPoints(const QList<QPointF> &points) { _points[getIndex(_mode, _noteTracking)] = points; }
+    QList<QPointF> getPoints(GainCurve::Mode mode, bool noteTracking) const { return _points[getIndex(mode, noteTracking)]; }
+    void setPoints(GainCurve::Mode mode, bool noteTracking, const QList<QPointF> &points) { _points[getIndex(mode, noteTracking)] = points; }
+
+    GainCurve getCurve() const { return GainCurve(_mode, _noteTracking, getPoints()); }
 
 private:
-    QVector<float> _curve;
+    static int getIndex(GainCurve::Mode mode, bool noteTracking) { return 2 * static_cast<int>(mode) + (noteTracking ? 1 : 0); }
+
+    GainCurve::Mode _mode;
+    bool _noteTracking;
+    QList<QPointF> _points[4];
+    static const char * POINT_KEYS[4];
 };
 
 #endif // TOOLFREQUENCYFILTER_PARAMETERS_H

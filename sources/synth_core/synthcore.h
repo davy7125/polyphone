@@ -27,6 +27,7 @@
 
 #include <atomic>
 #include <mutex>
+#include <vector>
 #include "voicelist.h"
 #include "synthbuses.h"
 #include "isynthsoundfont.h"
@@ -87,6 +88,11 @@ public:
     void setEndLoop(uint32_t endLoop, bool withLinkedSample);
     void setPitchCorrection(int16_t correction, bool withLinkedSample);
 
+    // Preview of a processing of a sample (editor): the voices playing the sample alone read this data instead of the
+    // sample data (same length, 16 bits plus the 8 least significant bits possibly null), the voices already playing
+    // from their next chunk. A null data16 restores the sample data.
+    void setSampleData(int sf2Id, int sampleIndex, const int16_t * data16, const uint8_t * data24, uint32_t length);
+
     // MIDI controllers (the values read by the modulators are given by IMidiValues)
     void processPolyPressureChanged(int channel, int key, int pressure);
     void processMonoPressureChanged(int channel, int value);
@@ -144,6 +150,8 @@ private:
                  ISynthInstPrst * prst = nullptr, ISynthZone * prstZone = nullptr);
     void configureVoice(Voice * voice);
     void configureVoices();
+    struct ReplacedSample;
+    void replaceVoiceData(Voice * voice, ISynthSample * smpl, const ReplacedSample * replacement);
     void renderChunks(uint32_t len);
     void renderFrames(const Outputs &outputs, uint32_t position, uint32_t len);
     void computeEffects(float * dataL, float * dataR, SynthBuses &buses, uint32_t len); // Without the part with no effect
@@ -160,6 +168,17 @@ private:
     bool _smplIsStereoEnabled;
     bool _smplIsLoopEnabled;
     VoiceContext _context; // Read by the voices
+
+    // Data replacing the data of samples played alone (setSampleData), protected by _voicesMutex
+    struct ReplacedSample
+    {
+        int sf2Id;
+        ISynthSample * smpl;
+        std::vector<int16_t> data16;
+        std::vector<uint8_t> data24;
+        float peak;
+    };
+    std::vector<ReplacedSample> _replacedSamples;
 
     // Voices, the other threads than the audio one using them one at a time
     VoiceList _voices;

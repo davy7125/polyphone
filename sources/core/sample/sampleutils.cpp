@@ -282,34 +282,6 @@ QVector<float> SampleUtils::bandFilter(const QVector<float> &vData, double dwSmp
     });
 }
 
-QVector<float> SampleUtils::cutFilter(const QVector<float> &vData, quint32 dwSmplRate, const QVector<float> &dValues, int maxFreq)
-{
-    // The modules are limited by dValues (fractions of the maximum module, from 0 to maxFreq), interpolated
-    int nbValues = dValues.count();
-    return filterSpectrum(vData, dwSmplRate, [&](double frequency, double module, double maxModule) -> double {
-        double limit = maxModule;
-        int index1 = static_cast<int>(frequency / maxFreq * nbValues);
-        if (index1 >= nbValues - 1)
-            limit *= dValues[nbValues - 1];
-        else
-        {
-            double x1 = static_cast<double>(index1) / nbValues * maxFreq;
-            double y1 = dValues[index1];
-            double x2 = static_cast<double>(index1 + 1) / nbValues * maxFreq;
-            double y2 = dValues[index1 + 1];
-            limit *= ((frequency - x1) / (x2 - x1)) * (y2 - y1) + y1;
-        }
-        return module > limit ? limit / module : 1.0;
-    });
-}
-
-QVector<float> SampleUtils::EQ(const QVector<float> &vData, quint32 dwSmplRate, const QVector<int> &eqGains)
-{
-    return filterSpectrum(vData, dwSmplRate, [&](double frequency, double, double) -> double {
-        return gainEQ(frequency, eqGains);
-    });
-}
-
 QVector<float> SampleUtils::getFourierTransform(const QVector<float> &input)
 {
     // Hann window, the amplitude being compensated (the peak of a sinusoid keeps the same value): the sum of the
@@ -1356,77 +1328,6 @@ QVector<float> SampleUtils::readWithLoop(const QVector<float> &vData, quint32 lo
     else
         memcpy(dataRet, data, length * sizeof(float));
     return vDataRet;
-}
-
-double SampleUtils::gainEQ(double freq, const QVector<int> &eqGains)
-{
-    int x1 = 0;
-    int x2 = 1;
-    int y1 = 0;
-    int y2 = 1;
-    if (freq < 32)
-    {
-        x1 = 32; x2 = 64;
-        y1 = qMin(eqGains[0], eqGains[1]); y2 = eqGains[1];
-    }
-    else if (freq < 64)
-    {
-        x1 = 32; x2 = 64;
-        y1 = eqGains[0]; y2 = eqGains[1];
-    }
-    else if (freq < 125)
-    {
-        x1 = 64; x2 = 125;
-        y1 = eqGains[1]; y2 = eqGains[2];
-    }
-    else if (freq < 250)
-    {
-        x1 = 125; x2 = 250;
-        y1 = eqGains[2]; y2 = eqGains[3];
-    }
-    else if (freq < 500)
-    {
-        x1 = 250; x2 = 500;
-        y1 = eqGains[3]; y2 = eqGains[4];
-    }
-    else if (freq < 1000)
-    {
-        x1 = 500; x2 = 1000;
-        y1 = eqGains[4]; y2 = eqGains[5];
-    }
-    else if (freq < 2000)
-    {
-        x1 = 1000; x2 = 2000;
-        y1 = eqGains[5]; y2 = eqGains[6];
-    }
-    else if (freq < 4000)
-    {
-        x1 = 2000; x2 = 4000;
-        y1 = eqGains[6]; y2 = eqGains[7];
-    }
-    else if (freq < 8000)
-    {
-        x1 = 4000; x2 = 8000;
-        y1 = eqGains[7]; y2 = eqGains[8];
-    }
-    else if (freq < 16000)
-    {
-        x1 = 8000; x2 = 16000;
-        y1 = eqGains[8]; y2 = eqGains[9];
-    }
-    else
-    {
-        x1 = 8000; x2 = 16000;
-        y1 = eqGains[8]; y2 = qMin(eqGains[8], eqGains[9]);
-    }
-    double a = static_cast<double>(y1 - y2) / (x1 - x2);
-    double b = static_cast<double>(y2) - a * x2;
-
-    // Gain en dB
-    double val = a * freq + b;
-
-    // Conversion
-    return pow(10.0, 0.1 * val);
 }
 
 void SampleUtils::fillSincTable(float * table, int order, int subdivisions, double kaiserBesserBeta)

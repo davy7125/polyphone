@@ -386,6 +386,7 @@ void PageSmpl::setStartLoop()
         }
     }
     _sf2->endEditing(_editingSource);
+    ui->widgetEqualizer->updateSamples(); // Preview depending on the loop and the pitch
 
     // Update the page
     ui->grapheFourier->setPos(ui->spinStartLoop->value(), ui->spinEndLoop->value());
@@ -442,6 +443,7 @@ void PageSmpl::setEndLoop()
         }
     }
     _sf2->endEditing(_editingSource);
+    ui->widgetEqualizer->updateSamples(); // Preview depending on the loop and the pitch
 
     // Update the page
     ui->grapheFourier->setPos(ui->spinStartLoop->value(), ui->spinEndLoop->value());
@@ -608,6 +610,7 @@ void PageSmpl::setRootKey()
         }
     }
     _sf2->endEditing(_editingSource);
+    ui->widgetEqualizer->updateSamples(); // Preview depending on the loop and the pitch
 }
 
 void PageSmpl::setRootKey(int val)
@@ -648,6 +651,7 @@ void PageSmpl::setTune()
         }
     }
     _sf2->endEditing(_editingSource);
+    ui->widgetEqualizer->updateSamples(); // Preview depending on the loop and the pitch
 }
 
 void PageSmpl::setTune(int val)
@@ -961,11 +965,7 @@ void PageSmpl::lecture()
 
         QList<EltID> listID = _currentIds.getSelectedIds(elementSmpl);
         if (listID.count() == 1)
-        {
-            _synth->setSmplEqValues(ui->widgetEqualizer->gatherEqVariables().data());
-            _synth->activateSmplEq(ui->widgetEqualizer->isPreviewEnabled());
             _currentPlayingToken = _synth->play(listID[0], -1, -1, 127);
-        }
 
         // Désactivations
         ui->comboLink->setEnabled(false);
@@ -999,7 +999,6 @@ void PageSmpl::lecteurFinished(int token)
         ui->pushLecture->setChecked(false);
         ui->pushLecture->blockSignals(false);
         updateSinus();
-        _synth->activateSmplEq(false);
     }
     updatePlayButton();
 }

@@ -6,13 +6,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>450</width>
-    <height>268</height>
+    <width>520</width>
+    <height>320</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>450</width>
+    <width>520</width>
     <height>0</height>
    </size>
   </property>
@@ -20,6 +20,47 @@
    <string notr="true">Form</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QComboBox" name="comboMode">
+       <item>
+        <property name="text">
+         <string>Cut frequencies</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Attenuate or amplify</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="checkNoteTracking">
+       <property name="toolTip">
+        <string>The abscissa is relative to the fundamental frequency of each sample (root key and pitch correction): ×1 is the fundamental, ×2 the octave, ×3 the twelfth…</string>
+       </property>
+       <property name="text">
+        <string>Note tracking</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
    <item>
     <widget class="QLabel" name="label">
      <property name="sizePolicy">
@@ -64,8 +105,8 @@
        <widget class="GraphFilterFrequencies" name="graphFilterFrequencies" native="true">
         <property name="minimumSize">
          <size>
-          <width>300</width>
-          <height>200</height>
+          <width>400</width>
+          <height>240</height>
          </size>
         </property>
        </widget>

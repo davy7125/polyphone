@@ -137,6 +137,8 @@ set(POLYPHONE_CORE_FILES
     core/output/sfz/sfzparamlist.h
     core/output/sfz/sfzwriter.cpp
     core/output/sfz/sfzwriter.h
+    core/sample/gaincurve.cpp
+    core/sample/gaincurve.h
     core/sample/infosound.h
     core/sample/sampleloader.cpp
     core/sample/sampleloader.h
@@ -709,21 +711,6 @@ set(POLYPHONE_APP_FILES
     extensions/extensionmanager_midi.h
     extensions/extensionmanager_view.cpp
     extensions/extensionmanager_view.h
-    lib/iir/Biquad.cpp
-    lib/iir/Biquad.h
-    lib/iir/Butterworth.cpp
-    lib/iir/Butterworth.h
-    lib/iir/Cascade.cpp
-    lib/iir/Cascade.h
-    lib/iir/Common.h
-    lib/iir/Iir_2.h
-    lib/iir/Layout.h
-    lib/iir/MathSupplement.h
-    lib/iir/PoleFilter.cpp
-    lib/iir/PoleFilter.h
-    lib/iir/State.cpp
-    lib/iir/State.h
-    lib/iir/Types.h
     lib/qtsingleapplication/qtlocalpeer.cpp
     lib/qtsingleapplication/qtlocalpeer.h
     lib/qtsingleapplication/qtsingleapplication.cpp
@@ -945,8 +932,6 @@ set(POLYPHONE_APP_FILES
     sound_engine/elements/calibrationsinus.h
     sound_engine/elements/fileplayer.cpp
     sound_engine/elements/fileplayer.h
-    sound_engine/elements/liveeq.cpp
-    sound_engine/elements/liveeq.h
     sound_engine/elements/oscsinus.cpp
     sound_engine/elements/oscsinus.h
     sound_engine/elements/recorder.cpp

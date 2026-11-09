@@ -26,7 +26,9 @@
 #define TOOLFREQUENCYFILTER_H
 
 #include "abstracttooliterating.h"
+#include "basetypes.h"
 #include <QObject>
+#include <QMutex>
 
 class ToolFrequencyFilter: public AbstractToolIterating
 {
@@ -53,13 +55,28 @@ public:
     }
 
     /// Process an element
+    void beforeProcess(IdList ids) override;
     void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
+
+    /// Measures of the last run for each processed sample
+    struct Report
+    {
+        EltID id;
+        double fundamental; // Hz, the abscissa 1 of the curve with the note tracking (0 otherwise)
+        double peakBefore;  // 1 = full scale
+        double peakAfter;   // Before the attenuation of the result if above the full scale
+    };
+    QList<Report> getReports();
 
 protected:
     QString getLabelInternal() const override
     {
         return tr("Filter frequencies");
     }
+
+private:
+    QMutex _mutex;
+    QList<Report> _reports;
 };
 
 #endif // TOOLFREQUENCYFILTER_H

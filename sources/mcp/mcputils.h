@@ -53,6 +53,9 @@ public:
     // Identifier and name of an element
     static QJsonObject brief(EltID id);
 
+    // Channel of a sample: "mono", "left", "right", "linked"
+    static QString sampleChannel(SFSampleLink link);
+
     // Indexes of the open soundfonts (temporary soundfonts of the explorer excluded)
     static QList<int> getSoundfontIndexes();
 };

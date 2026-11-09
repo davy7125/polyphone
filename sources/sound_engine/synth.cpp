@@ -249,17 +249,11 @@ void Synth::setSinus(bool isOn, int rootKey)
         _sinus.off();
 }
 
-void Synth::activateSmplEq(bool isActivated)
+void Synth::setSampleData(EltID id, const qint16 * data16, const quint8 * data24, quint32 length)
 {
-    if (isActivated)
-        _eq.on();
-    else
-        _eq.off();
-}
-
-void Synth::setSmplEqValues(int values[10])
-{
-    _eq.setValues(values);
+    // The soundfonts must not change while the voices are updated
+    QMutexLocker mutexLocker(_mutexSoundfonts); // Will do nothing if _mutexSoundfonts is null
+    _core.setSampleData(id.indexSf2, id.indexElt, data16, data24, length);
 }
 
 void Synth::setStartLoop(quint32 startLoop, bool withLinkedSample)
@@ -328,7 +322,6 @@ void Synth::setSampleRateAndBufferSize(quint32 sampleRate, quint32 bufferSize)
     // Mutex not mandatory: no data generation when "setFormat" is called
     _core.setSampleRate(sampleRate); // Voices are stopped
     _sinus.setSampleRate(sampleRate);
-    _eq.setSampleRate(sampleRate);
     _recorder.setSampleRate(sampleRate);
     _filePlayer.setSampleRate(sampleRate);
     _outputAvailable = 0; // Frames computed with the previous sample rate
@@ -449,9 +442,6 @@ void Synth::appendOutput(quint32 len)
 
     // Apply chorus / reverb on the gathered data
     _core.applyEffects(dataL, dataR, _buses, len);
-
-    // EQ filter (live preview of filtered samples)
-    _eq.filterData(dataL, dataR, len);
 
     // Add calibrating sinus
     _sinus.addData(dataL, dataR, len);

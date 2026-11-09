@@ -26,6 +26,7 @@
 #include "voicecontext.h"
 #include "fastmaths.h"
 #include "synthmath.h"
+#include <utility>
 
 alignas(32) float Voice::s_sinc_tables[8][RESAMPLING_SUBDIVISION][RESAMPLING_ORDER];
 float Voice::s_floatConversionCoef24;
@@ -46,9 +47,11 @@ void Voice::prepareTables()
 Voice::Voice(VoiceParam * voiceParam, ISynthListener * listener) :
     _listener(listener),
     _context(voiceParam->getContext()),
+    _smpl(nullptr),
     _dataSmpl16(nullptr),
     _dataSmpl24(nullptr),
-    _voiceParam(voiceParam)
+    _voiceParam(voiceParam),
+    _replacedData(nullptr)
 {
     _pendingFrames.position = 0;
     _pendingFrames.length = 0;
@@ -65,6 +68,7 @@ Voice::Voice(VoiceParam * voiceParam, ISynthListener * listener) :
 Voice::~Voice()
 {
     deleteArrays();
+    deleteReplacedData(_replacedData.exchange(nullptr));
     if (_voiceParam->getType() != 0 && _dataSmpl16 != nullptr)
     {
         delete [] _dataSmpl24; // Possibly null (16-bit sample)
@@ -113,6 +117,8 @@ void Voice::initialize(int sf2Id, ISynthInstPrst * prst, ISynthZone * prstZone, 
     }
 
     _voiceParam->initialize(sf2Id, prst, prstZone, inst, instZone, smpl, channel, key, vel, type);
+    deleteReplacedData(_replacedData.exchange(nullptr));
+    _smpl = smpl;
 
     // The 8 least significant bits are missing for 16-bit samples (_dataSmpl24 is then null)
     smpl->getData(_dataSmplLength, _dataSmpl16, _dataSmpl24, _voiceParam->getType() != 0 /* copy data at the sample level */);
@@ -175,6 +181,10 @@ bool Voice::generateData(float * data, uint32_t len)
         _currentSmplPos = _voiceParam->getPosition(champ_dwStart16);
         _loopMode = (char)_voiceParam->getInteger(champ_sampleModes);
     }
+
+    // Data replaced by another thread (a load first: no write in the usual case)
+    if (_replacedData.load(std::memory_order_acquire) != nullptr)
+        applyReplacedData();
 
     // Release asked by another thread (a load first: no write in the usual case)
     if (_releaseRequest.load(std::memory_order_acquire) != 0)
@@ -550,6 +560,43 @@ void Voice::getDataWithLoop(uint32_t goOn, uint32_t loopStart, uint32_t loopEnd,
 
     srcData16 = _srcData16;
     srcData24 = _srcData24;
+}
+
+void Voice::replaceData(int16_t * data16, uint8_t * data24, float peak)
+{
+    ReplacedData * replacedData = new ReplacedData();
+    replacedData->data16 = data16;
+    replacedData->data24 = data24;
+    replacedData->peak = peak;
+
+    // A replacement not applied yet is dropped
+    deleteReplacedData(_replacedData.exchange(replacedData, std::memory_order_acq_rel));
+}
+
+void Voice::applyReplacedData()
+{
+    ReplacedData * replacedData = _replacedData.exchange(nullptr, std::memory_order_acq_rel);
+    if (replacedData == nullptr)
+        return;
+
+    // Only the copies read by the voices playing a sample alone can be replaced
+    if (_voiceParam->getType() != 0)
+    {
+        std::swap(_dataSmpl16, replacedData->data16);
+        std::swap(_dataSmpl24, replacedData->data24);
+        _smplPeak = replacedData->peak;
+    }
+    deleteReplacedData(replacedData); // Previous data
+}
+
+void Voice::deleteReplacedData(ReplacedData * replacedData)
+{
+    if (replacedData != nullptr)
+    {
+        delete [] replacedData->data16;
+        delete [] replacedData->data24;
+        delete replacedData;
+    }
 }
 
 void Voice::release(bool quick)

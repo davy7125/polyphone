@@ -3347,34 +3347,50 @@ på et signal</translation>
 <context>
     <name>Equalizer</name>
     <message>
-        <location filename="../../editor/widgets/equalizer.ui" line="586"/>
+        <location filename="../../editor/widgets/equalizer.ui" line="573"/>
+        <source>The bands are relative to the fundamental frequency of each sample (root key and pitch correction): ×1 is the fundamental, ×2 the octave, ×4 the second octave…</source>
+        <translation>Båndene er relative til grundfrekvensen for hver sample (grundtangent og korrektion): ×1 er grundtonen, ×2 oktaven, ×4 dobbeltoktaven…</translation>
+    </message>
+    <message>
+        <location filename="../../editor/widgets/equalizer.ui" line="576"/>
+        <source>Note tracking</source>
+        <translation>Nodesporing</translation>
+    </message>
+    <message>
+        <location filename="../../editor/widgets/equalizer.ui" line="606"/>
         <source>preview</source>
         <translation>forhåndsvisning</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/equalizer.ui" line="618"/>
+        <location filename="../../editor/widgets/equalizer.ui" line="638"/>
         <source>Reset</source>
         <translation>Nulstil</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/equalizer.ui" line="644"/>
+        <location filename="../../editor/widgets/equalizer.ui" line="664"/>
         <source>Apply</source>
         <translation>Anvende</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/equalizer.cpp" line="122"/>
+        <location filename="../../editor/widgets/equalizer.cpp" line="131"/>
         <source>Information</source>
         <translation>Information</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/equalizer.cpp" line="123"/>
+        <location filename="../../editor/widgets/equalizer.cpp" line="132"/>
         <source>Equalization successfully applied on 1 sample.</source>
         <translation>Equalization blev anvendt på 1 sample.</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/equalizer.cpp" line="124"/>
+        <location filename="../../editor/widgets/equalizer.cpp" line="133"/>
         <source>Equalization successfully applied on %1 samples.</source>
         <translation>Equalization blev anvendt på %1 samples.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/widgets/equalizer.cpp" line="209"/>
+        <source>Hz</source>
+        <comment>unit for Herz</comment>
+        <translation>Hz</translation>
     </message>
 </context>
 <context>
@@ -3458,10 +3474,22 @@ på et signal</translation>
 <context>
     <name>GraphFilterFrequencies</name>
     <message>
-        <location filename="../../editor/tools/frequency_filter/graphfilterfrequencies.cpp" line="60"/>
+        <location filename="../../editor/tools/frequency_filter/graphfilterfrequencies.cpp" line="74"/>
+        <source>Hz</source>
+        <comment>unit for Herz</comment>
+        <translation>Hz</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/frequency_filter/graphfilterfrequencies.cpp" line="75"/>
         <source>kHz</source>
         <comment>unit for kilo Herz</comment>
         <translation>kHz</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/frequency_filter/graphfilterfrequencies.cpp" line="76"/>
+        <source>dB</source>
+        <comment>unit for decibels</comment>
+        <translation>dB</translation>
     </message>
 </context>
 <context>
@@ -4377,42 +4405,42 @@ standardmod.</translation>
         <translation>MIDI-filen, der skal afspilles, mangler.</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="608"/>
+        <location filename="../../options.cpp" line="664"/>
         <source>Usage:</source>
         <translation>Brug:</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="610"/>
+        <location filename="../../options.cpp" line="666"/>
         <source>Polyphone, a soundfont editor: the files and directories are opened in the editor, unless one of the options --convert, --render, --synth or --reset-config is used.</source>
         <translation>Polyphone, en soundfont-editor: filerne og mapperne åbnes i editoren, medmindre et af tilvalgene --convert, --render, --synth eller --reset-config bruges.</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="612"/>
+        <location filename="../../options.cpp" line="668"/>
         <source>Files:</source>
         <translation>Filer:</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="613"/>
+        <location filename="../../options.cpp" line="669"/>
         <source>Soundfonts (sf2, sf3, sfz, dls, sfArk, organ) or directories.</source>
         <translation>Soundfonts (sf2, sf3, sfz, dls, sfArk, organ) eller mapper.</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="614"/>
+        <location filename="../../options.cpp" line="670"/>
         <source>Options:</source>
         <translation>Tilvalg:</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="634"/>
+        <location filename="../../options.cpp" line="690"/>
         <source>Examples:</source>
         <translation>Eksempler:</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="641"/>
+        <location filename="../../options.cpp" line="697"/>
         <source>The options -1 to -6, -i and -c of the previous versions are still accepted.</source>
         <translation>Tilvalgene -1 til -6, -i og -c fra tidligere versioner accepteres stadig.</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="642"/>
+        <location filename="../../options.cpp" line="698"/>
         <source>Documentation: %1</source>
         <translation>Dokumentation: %1</translation>
     </message>
@@ -4983,7 +5011,7 @@ for at vise dets divisionsområder</translation>
     </message>
     <message>
         <location filename="../../editor/pagesmpl.ui" line="344"/>
-        <location filename="../../editor/pagesmpl.cpp" line="1135"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1134"/>
         <source>Play</source>
         <translation>Afspil</translation>
     </message>
@@ -5059,8 +5087,8 @@ for at vise dets divisionsområder</translation>
     </message>
     <message>
         <location filename="../../editor/pagesmpl.ui" line="694"/>
-        <location filename="../../editor/pagesmpl.cpp" line="578"/>
-        <location filename="../../editor/pagesmpl.cpp" line="1100"/>
+        <location filename="../../editor/pagesmpl.cpp" line="580"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1099"/>
         <source>Information</source>
         <translation>Information</translation>
     </message>
@@ -5080,26 +5108,26 @@ for at vise dets divisionsområder</translation>
     </message>
     <message>
         <location filename="../../editor/pagesmpl.cpp" line="249"/>
-        <location filename="../../editor/pagesmpl.cpp" line="708"/>
+        <location filename="../../editor/pagesmpl.cpp" line="712"/>
         <source>mono</source>
         <comment>opposite to stereo</comment>
         <translation>mono</translation>
     </message>
     <message>
         <location filename="../../editor/pagesmpl.cpp" line="259"/>
-        <location filename="../../editor/pagesmpl.cpp" line="847"/>
+        <location filename="../../editor/pagesmpl.cpp" line="851"/>
         <source>right</source>
         <translation>højre</translation>
     </message>
     <message>
         <location filename="../../editor/pagesmpl.cpp" line="260"/>
-        <location filename="../../editor/pagesmpl.cpp" line="848"/>
+        <location filename="../../editor/pagesmpl.cpp" line="852"/>
         <source>left</source>
         <translation>venstre</translation>
     </message>
     <message>
         <location filename="../../editor/pagesmpl.cpp" line="261"/>
-        <location filename="../../editor/pagesmpl.cpp" line="849"/>
+        <location filename="../../editor/pagesmpl.cpp" line="853"/>
         <source>link</source>
         <translation>link</translation>
     </message>
@@ -5121,45 +5149,45 @@ Advarsel: kvaliteten vil blive reduceret, og loopet kan blive ændret</translati
         <translation>De valgte samples er komprimeret for at reducere soundfont-størrelsen</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="579"/>
-        <location filename="../../editor/pagesmpl.cpp" line="1101"/>
+        <location filename="../../editor/pagesmpl.cpp" line="581"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1100"/>
         <source>Change successfully applied to the different samples</source>
         <translation>Ændringerne blev tilføjet de forskellige samples</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="846"/>
-        <location filename="../../editor/pagesmpl.cpp" line="871"/>
+        <location filename="../../editor/pagesmpl.cpp" line="850"/>
+        <location filename="../../editor/pagesmpl.cpp" line="875"/>
         <source>mono</source>
         <translation>mono</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="1129"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1128"/>
         <source>Stop</source>
         <translation>Stop</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="1148"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1147"/>
         <source>Warning</source>
         <translation>Advarsel</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="1149"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1148"/>
         <source>Are you sure to cut the sample from &lt;b&gt;%1&lt;/b&gt; to &lt;b&gt;%2&lt;/b&gt;?</source>
         <oldsource>Are you sure to cut the sample from &lt;b&gt;%0&lt;/b&gt; to &lt;b&gt;%1&lt;/b&gt;?</oldsource>
         <translation>Er du sikker på, at du vil klippe samplet fra &lt;b&gt;%1&lt;/b&gt; til &lt;b&gt;%2&lt;/b&gt;?</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="1151"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1150"/>
         <source>&amp;Yes</source>
         <translation>&amp;Ja</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="1152"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1151"/>
         <source>&amp;No</source>
         <translation>&amp;Nej</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="1153"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1152"/>
         <source>Yes and &amp;create another sample</source>
         <oldsource>Yes and create another &amp;sample</oldsource>
         <translation>Ja og &amp;opret en ny sample</translation>
@@ -7233,13 +7261,13 @@ Andre soundfont-editorer kan vise andre enheder.</translation>
 <context>
     <name>ToolFrequencyFilter</name>
     <message>
-        <location filename="../../editor/tools/frequency_filter/toolfrequencyfilter.h" line="46"/>
+        <location filename="../../editor/tools/frequency_filter/toolfrequencyfilter.h" line="48"/>
         <source>Audio processing</source>
         <oldsource>Sample processing</oldsource>
         <translation>Lydbehandling</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/frequency_filter/toolfrequencyfilter.h" line="61"/>
+        <location filename="../../editor/tools/frequency_filter/toolfrequencyfilter.h" line="74"/>
         <source>Filter frequencies</source>
         <translation>Filtrér frekvenser</translation>
     </message>
@@ -7247,17 +7275,43 @@ Andre soundfont-editorer kan vise andre enheder.</translation>
 <context>
     <name>ToolFrequencyFilter_gui</name>
     <message>
-        <location filename="../../editor/tools/frequency_filter/toolfrequencyfilter_gui.cpp" line="37"/>
+        <location filename="../../editor/tools/frequency_filter/toolfrequencyfilter_gui.cpp" line="40"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Afbryd</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/frequency_filter/toolfrequencyfilter_gui.cpp" line="36"/>
+        <location filename="../../editor/tools/frequency_filter/toolfrequencyfilter_gui.cpp" line="99"/>
+        <source>Draw the attenuation or the amplification of the frequencies:</source>
+        <translation>Tegn dæmpningen eller forstærkningen af frekvenserne:</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/frequency_filter/toolfrequencyfilter_gui.cpp" line="39"/>
         <source>&amp;Ok</source>
         <translation>&amp;Ok</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/frequency_filter/toolfrequencyfilter_gui.ui" line="32"/>
+        <location filename="../../editor/tools/frequency_filter/toolfrequencyfilter_gui.ui" line="29"/>
+        <source>Cut frequencies</source>
+        <translation>Skær frekvenser</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/frequency_filter/toolfrequencyfilter_gui.ui" line="34"/>
+        <source>Attenuate or amplify</source>
+        <translation>Dæmp eller forstærk</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/frequency_filter/toolfrequencyfilter_gui.ui" line="42"/>
+        <source>The abscissa is relative to the fundamental frequency of each sample (root key and pitch correction): ×1 is the fundamental, ×2 the octave, ×3 the twelfth…</source>
+        <translation>Abscissen er relativ til grundfrekvensen for hver sample (grundtangent og korrektion): ×1 er grundtonen, ×2 oktaven, ×3 duodecimen…</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/frequency_filter/toolfrequencyfilter_gui.ui" line="45"/>
+        <source>Note tracking</source>
+        <translation>Nodesporing</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/frequency_filter/toolfrequencyfilter_gui.ui" line="73"/>
+        <location filename="../../editor/tools/frequency_filter/toolfrequencyfilter_gui.cpp" line="100"/>
         <source>Mark with red color where you want to cut the frequencies:</source>
         <oldsource>Put in red the part of frequencies to filter:</oldsource>
         <translation>Marker med rød farve, hvor du vil skære frekvenserne:</translation>

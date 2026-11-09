@@ -280,6 +280,14 @@ int SynthCore::playSmpl(int sf2Id, ISynthSample * smpl, int channel, int key, in
                       _sampleRate, currentToken, _noteId);
     configureVoice(voice);
 
+    // Possibly another data for a sample played alone
+    if (inst == nullptr)
+    {
+        for (const ReplacedSample &replacement : _replacedSamples)
+            if (replacement.sf2Id == sf2Id && replacement.smpl == smpl)
+                replaceVoiceData(voice, smpl, &replacement);
+    }
+
     return currentToken;
 }
 
@@ -536,6 +544,95 @@ void SynthCore::setPitchCorrection(int16_t correction, bool withLinkedSample)
         if (voiceParam->getType() == 1 || (voiceParam->getType() == 2 && withLinkedSample))
             voiceParam->setFineTune(correction);
     }
+}
+
+void SynthCore::setSampleData(int sf2Id, int sampleIndex, const int16_t * data16, const uint8_t * data24, uint32_t length)
+{
+    std::lock_guard<std::recursive_mutex> lock(_voicesMutex);
+    ISynthSoundfont * soundfont = _soundfonts->getSynthSoundfont(sf2Id);
+    ISynthSample * smpl = (soundfont == nullptr) ? nullptr : soundfont->getSynthSample(sampleIndex);
+    if (smpl == nullptr)
+        return;
+
+    // New replacement, or none
+    for (size_t i = 0; i < _replacedSamples.size(); i++)
+    {
+        if (_replacedSamples[i].sf2Id == sf2Id && _replacedSamples[i].smpl == smpl)
+        {
+            _replacedSamples.erase(_replacedSamples.begin() + static_cast<std::ptrdiff_t>(i));
+            break;
+        }
+    }
+    const ReplacedSample * replacement = nullptr;
+    if (data16 != nullptr && length > 0)
+    {
+        ReplacedSample sample;
+        sample.sf2Id = sf2Id;
+        sample.smpl = smpl;
+        sample.data16.assign(data16, data16 + length);
+        if (data24 != nullptr)
+            sample.data24.assign(data24, data24 + length);
+
+        // Peak as Sound::getPeak
+        int32_t max = 0;
+        for (uint32_t i = 0; i < length; i++)
+        {
+            int32_t value = static_cast<int32_t>(data16[i]) * 256 + (data24 == nullptr ? 0 : data24[i]);
+            max = SynthMath::max(max, value < 0 ? -value : value);
+        }
+        sample.peak = static_cast<float>(max) / 8388608.0f;
+
+        _replacedSamples.push_back(sample);
+        replacement = &_replacedSamples.back();
+    }
+
+    // Voices already playing the sample alone
+    Voice ** voices1, ** voices2;
+    int count1, count2;
+    _voices.getVoices(voices1, count1, voices2, count2);
+    for (int i = 0; i < count1 + count2; ++i)
+    {
+        Voice * voice = i < count1 ? voices1[i] : voices2[i - count1];
+        if (voice->getParam()->getType() != 0 && voice->getParam()->getSf2Id() == sf2Id && voice->getSample() == smpl)
+            replaceVoiceData(voice, smpl, replacement);
+    }
+}
+
+void SynthCore::replaceVoiceData(Voice * voice, ISynthSample * smpl, const ReplacedSample * replacement)
+{
+    // Copy owned by the voice, with the length of the data it reads
+    uint32_t length = voice->getDataLength();
+    int16_t * data16 = nullptr;
+    uint8_t * data24 = nullptr;
+    float peak;
+    if (replacement != nullptr)
+    {
+        if (replacement->data16.size() != length)
+            return;
+        data16 = new int16_t[length];
+        memcpy(data16, replacement->data16.data(), length * sizeof(int16_t));
+        if (!replacement->data24.empty())
+        {
+            data24 = new uint8_t[length];
+            memcpy(data24, replacement->data24.data(), length * sizeof(uint8_t));
+        }
+        peak = replacement->peak;
+    }
+    else
+    {
+        // Sample data
+        uint32_t sampleLength;
+        smpl->loadData();
+        smpl->getData(sampleLength, data16, data24, true);
+        if (sampleLength != length)
+        {
+            delete [] data16;
+            delete [] data24;
+            return;
+        }
+        peak = smpl->getPeak();
+    }
+    voice->replaceData(data16, data24, peak);
 }
 
 void SynthCore::processPolyPressureChanged(int channel, int key, int pressure)

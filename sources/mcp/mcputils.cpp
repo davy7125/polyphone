@@ -180,6 +180,18 @@ QJsonObject McpUtils::brief(EltID id)
     return result;
 }
 
+QString McpUtils::sampleChannel(SFSampleLink link)
+{
+    switch (link)
+    {
+    case monoSample: case RomMonoSample: return "mono";
+    case leftSample: case RomLeftSample: return "left";
+    case rightSample: case RomRightSample: return "right";
+    case linkedSample: case RomLinkedSample: return "linked";
+    default: return "unknown";
+    }
+}
+
 QList<int> McpUtils::getSoundfontIndexes()
 {
     SoundfontManager * sm = SoundfontManager::getInstance();

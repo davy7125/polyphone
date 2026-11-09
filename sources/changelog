@@ -27,7 +27,10 @@ polyphone (2.7) UNRELEASED; urgency=low
   * (improvement) more reliable pitch estimation of the samples (YIN algorithm refined with the harmonics)
   * (improvement) more accurate frequencies of the peaks shown in the Fourier graph
   * (improvement) command line: readable options (--convert, --render, --synth...), conversion of several files, --force, --mcp to start the MCP server, a complete help and precise error messages (the previous options are still accepted)
+  * (improvement) tool "filter frequencies": attenuation or amplification in dB in addition to the cut, and note tracking (curve relative to the fundamental frequency of each sample) for giving the same correction to every note
+  * (improvement) equalizer of the sample page: note tracking option, and a preview identical to the result
   * (fix) audio files in floating point format, such as the records of the recorder, were silent when imported as samples
+  * (fix) the equalizer of the sample page applied twice the gain shown in dB
   * (fix) the calendar of the date field could appear when a soundfont was opened in the background
   * (fix) a soundfont opened again while it was still loading was opened in a second tab
   * (fix) the escape key hid the progress window of a tool without stopping the tool

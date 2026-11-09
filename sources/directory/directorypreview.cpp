@@ -293,7 +293,7 @@ void DirectoryPreview::updateKeyboardAndSynth()
         Editor::customizeKeyboard(_dialogKeyboard->getKeyboard(), IdList(id));
 
     // A sample is looped if it has a loop (as the checkbox of the editor), in stereo according to the option of the
-    // editor, without the equalizer and the calibration sine
+    // editor, without the calibration sine (the preview of the equalizer only concerns the samples of the editor)
     if (id.typeElement == elementSmpl)
     {
         SoundfontManager * sm = SoundfontManager::getInstance();
@@ -301,7 +301,6 @@ void DirectoryPreview::updateKeyboardAndSynth()
         Synth * synth = ContextManager::audio()->getSynth();
         synth->setLoopEnabled(qAbs(loopLength) > 10);
         synth->setStereo(ContextManager::configuration()->getValue(ConfManager::SECTION_AUDIO, "stereo_playback", false).toBool());
-        synth->activateSmplEq(false);
         synth->setSinus(false, sm->get(id, champ_byOriginalPitch).bValue);
     }
 }

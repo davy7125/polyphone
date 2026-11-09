@@ -27,6 +27,7 @@
 
 #include <QJsonObject>
 #include <QJsonArray>
+#include <QStringList>
 #include "basetypes.h"
 
 // Parameters of the instruments, presets and their divisions, named and expressed in real units for the AI
@@ -51,6 +52,15 @@ public:
 
     // Attribute type from a parameter name, champ_unknown if not found
     static AttributeType getChamp(QString name);
+
+    // Names of all parameters, in the order of list_parameters
+    static QStringList getNames();
+
+    // True for the parameters stored in two attributes (offsets in samples)
+    static bool isOffset(QString name);
+
+    // True for the parameters that cannot be set in a preset
+    static bool isInstrumentOnly(QString name);
 
 private:
     struct Definition

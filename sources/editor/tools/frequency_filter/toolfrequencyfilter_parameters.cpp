@@ -24,21 +24,42 @@
 
 #include "toolfrequencyfilter_parameters.h"
 #include "contextmanager.h"
+#include <qmath.h>
+
+// Indexed by 2 * mode + note tracking
+const char * ToolFrequencyFilter_parameters::POINT_KEYS[4] = {
+    "points_ceiling_hz", "points_ceiling_note", "points_gain_hz", "points_gain_note"
+};
+
+ToolFrequencyFilter_parameters::ToolFrequencyFilter_parameters() :
+    _mode(GainCurve::MODE_CEILING),
+    _noteTracking(false)
+{}
 
 void ToolFrequencyFilter_parameters::loadConfiguration()
 {
-    // Curve
-    QList<QVariant> listTmp = getToolValue("curve", QList<QVariant>()).toList();
-    _curve.resize(listTmp.size());
-    for (int i = 0; i < listTmp.size(); i++)
-        _curve[i] = listTmp.at(i).toFloat();
+    _mode = getToolValue("mode", 0).toInt() == 1 ? GainCurve::MODE_GAIN : GainCurve::MODE_CEILING;
+    _noteTracking = getToolValue("note_tracking", false).toBool();
+    for (int i = 0; i < 4; i++)
+        _points[i] = GainCurve::pointsFromVariant(getToolValue(POINT_KEYS[i], QVariantList()));
+
+    // Curve of the previous versions: 201 fractions of the strongest module from 0 to 20 kHz, linearly interpolated
+    if (_points[0].isEmpty())
+    {
+        QList<QVariant> previousCurve = getToolValue("curve", QList<QVariant>()).toList();
+        for (int i = 1; i < previousCurve.size(); i++)
+        {
+            double value = previousCurve.at(i).toDouble();
+            _points[0] << QPointF(i * 20000.0 / previousCurve.size(),
+                                  value <= 0 ? GainCurve::CEILING_REMOVED - 20 : qMin(0.0, 20 * log10(value)));
+        }
+    }
 }
 
 void ToolFrequencyFilter_parameters::saveConfiguration()
 {
-    // Curve
-    QVariantList listTmp;
-    for (int i = 0; i < _curve.size(); i++)
-        listTmp << _curve.at(i);
-    setToolValue("curve", listTmp);
+    setToolValue("mode", static_cast<int>(_mode));
+    setToolValue("note_tracking", _noteTracking);
+    for (int i = 0; i < 4; i++)
+        setToolValue(POINT_KEYS[i], GainCurve(GainCurve::MODE_GAIN, false, _points[i]).pointsToVariant());
 }

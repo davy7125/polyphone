@@ -30,7 +30,6 @@
 #include "synthcore.h"
 #include "soundengine.h"
 #include "calibrationsinus.h"
-#include "liveeq.h"
 #include "imidilistener.h"
 #include "fileplayer.h"
 #include "recorder.h"
@@ -38,8 +37,8 @@
 // The channels 0 to 15 of the MIDI file player are the channels 16 to 31 of the synth, with their own controller values
 #define MIDI_FILE_CHANNEL_OFFSET 16
 
-// Synth of the editor: SynthCore with the voices computed by several threads, the effects for
-// the samples (calibration sinus, equalizer), the recording and the Qt signals
+// Synth of the editor: SynthCore with the voices computed by several threads, the calibration sinus for the samples,
+// the recording and the Qt signals
 class Synth : public QObject, public IMidiListener, public ISynthListener
 {
     Q_OBJECT
@@ -65,8 +64,10 @@ public:
     bool isStereoEnabled();
     void setLoopEnabled(bool isEnabled);
     void setSinus(bool isOn, int rootKey);
-    void activateSmplEq(bool isActivated);
-    void setSmplEqValues(int values[10]);
+
+    // Preview of a processing of a sample (equalizer): data played instead of the sample data when the sample is played
+    // alone (same length, 16 bits plus the 8 least significant bits possibly null), null to read the sample data again
+    void setSampleData(EltID id, const qint16 * data16, const quint8 * data24, quint32 length);
 
     // Editing parameters of the playing samples
     void setStartLoop(quint32 startLoop, bool withLinkedSample);
@@ -163,7 +164,6 @@ private:
 
     // Post-processing
     CalibrationSinus _sinus;
-    LiveEQ _eq;
     Recorder _recorder;
     FilePlayer _filePlayer;
 };

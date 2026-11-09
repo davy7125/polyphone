@@ -63,8 +63,6 @@ public:
     // Low pass and / or high pass filter (frequency <= 0 if not used), Butterworth of the given order or brick wall if -1
     static QVector<float> bandFilter(const QVector<float> &vData, double dwSmplRate, double lowPassFrequency,
                                      double highPassFrequency, int order);
-    static QVector<float> cutFilter(const QVector<float> &vData, quint32 dwSmplRate, const QVector<float> &dValues, int maxFreq);
-    static QVector<float> EQ(const QVector<float> &vData, quint32 dwSmplRate, const QVector<int> &eqGains);
     static QVector<float> getFourierTransform(const QVector<float> &input);
 
     // These functions modify vData and return it: call them with std::move(vData) when the result replaces it, so that
@@ -146,7 +144,6 @@ private:
     // the spectrum), and transformed back
     static QVector<float> filterSpectrum(const QVector<float> &vData, double sampleRate,
                                          const std::function<double(double, double, double)> &gain);
-    static double gainEQ(double freq, const QVector<int> &eqGains);
     static QVector<quint32> loopErrorOffsets(quint32 checkNumber);
     static float loopError(const float * data, quint32 length, quint32 loopStart, quint32 loopEnd,
                            const QVector<quint32> &offsets, bool bipolar, float maxValue);

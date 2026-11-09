@@ -24,207 +24,251 @@
 
 #include "graphfilterfrequencies.h"
 #include "contextmanager.h"
-#include "graphicswavepainter.h"
 #include <QMouseEvent>
 #include <QPainter>
 #include <QPainterPath>
+#include <QLocale>
+#include <algorithm>
+#include <cmath>
 
-const int GraphFilterFrequencies::POINT_NUMBER = 201;
-const float GraphFilterFrequencies::MIN_Y = 0.0001;
+const int GraphFilterFrequencies::POINTS_PER_OCTAVE = 24;
+const int GraphFilterFrequencies::OCTAVES = 10;
+
+static const QChar TIMES(0x00D7);
 
 GraphFilterFrequencies::GraphFilterFrequencies(QWidget * parent) : QWidget(parent),
-    _flagEdit(false),
-    _stiffnessExp(50.0),
-    _previousX(-1)
+    _mode(GainCurve::MODE_CEILING),
+    _noteTracking(false),
+    _values(POINTS_PER_OCTAVE * OCTAVES + 1, 0.0),
+    _isEditing(false),
+    _previousIndex(-1),
+    _previousDb(0),
+    _currentIndex(-1)
 {
-    // Prepare data
-    _dValues.resize(POINT_NUMBER);
-    _dValues.fill(0.5);
-
     // Colors and pens
     _backgroundColor = ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND);
-    _removedAreaColor = ContextManager::theme()->getFixedColor(ThemeManager::RED, ThemeManager::LIST_BACKGROUND);
-    _penCurve = QPen(_removedAreaColor, 2);
-    _removedAreaColor.setAlpha(30);
+    QColor red = ContextManager::theme()->getFixedColor(ThemeManager::RED, ThemeManager::LIST_BACKGROUND);
+    QColor green = ContextManager::theme()->getFixedColor(ThemeManager::GREEN, ThemeManager::LIST_BACKGROUND);
+    _ceilingPen = QPen(red, 2);
+    _gainPen = QPen(green, 2);
+    _ceilingAreaColor = red;
+    _ceilingAreaColor.setAlpha(30);
+    _gainAreaColor = green;
+    _gainAreaColor.setAlpha(40);
+    _spectrumColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
     QColor color = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
     _currentPointPen = QPen(color, 2, Qt::SolidLine, Qt::RoundCap);
     _labelColor = color;
     _labelColor.setAlpha(180);
-    color.setAlpha(40);
-    _frequencyPen = QPen(color, 1);
+    color.setAlpha(110);
+    _zeroPen = QPen(color, 1);
+    color.setAlpha(50);
+    _gridPen = QPen(color, 1);
+    color.setAlpha(25);
+    _minorGridPen = QPen(color, 1);
 
     // Fonts
-    _fontLabels = QFont(font().family(), 9, QFont::Bold);
+    _fontLabels = QFont(font().family(), 8);
 
     // Translation
+    _hzUnit = tr("Hz", "unit for Herz");
     _kHzUnit = tr("kHz", "unit for kilo Herz");
+    _dbUnit = tr("dB", "unit for decibels");
 
     // Catch all mouse move events
     this->setMouseTracking(true);
 }
 
-GraphFilterFrequencies::~GraphFilterFrequencies()
-{
-    clearFourierTransforms();
-}
-
 void GraphFilterFrequencies::clearFourierTransforms()
 {
-    while (!_wavePainters.empty())
-        delete _wavePainters.takeLast();
+    _spectra.clear();
+    this->update();
 }
 
-void GraphFilterFrequencies::addFourierTransform(QVector<float> fData, quint32 sampleRate)
+void GraphFilterFrequencies::addFourierTransform(const QVector<float> &fData, quint32 sampleRate, double fundamental)
 {
-    // Get the maximum value for a normalization
-    float max = -1;
-    for (int i = 0; i < fData.size(); i++)
-        max = (max == -1 || max < fData[i]) ? fData[i] : max;
-    if (max <= 0)
-        max = 1;
+    if (fData.isEmpty() || sampleRate == 0)
+        return;
 
-    // Maximum length of the vector is 2 * 20000Hz
-    int newLength = (long int)(fData.size() * 40000) / sampleRate;
-    int initialLength = fData.size();
-    fData.resize(newLength);
-    for (int i = initialLength + 1; i < newLength; i++)
-        fData[i] = 0;
-
-    // Logarithmic scale
+    // Levels relative to the strongest module
+    float max = 0;
+    for (float value : fData)
+        max = qMax(max, value);
+    Spectrum spectrum;
+    spectrum.binWidth = 0.5 * sampleRate / fData.size();
+    spectrum.fundamental = fundamental;
+    spectrum.db.resize(fData.size());
     for (int i = 0; i < fData.size(); i++)
+        spectrum.db[i] = (max > 0 && fData[i] > 0) ? 20.f * std::log10(fData[i] / max) : -200.f;
+    _spectra << spectrum;
+
+    computeShapes();
+    this->update();
+}
+
+void GraphFilterFrequencies::setFundamentals(const QList<double> &fundamentals)
+{
+    _fundamentals = fundamentals;
+}
+
+void GraphFilterFrequencies::setMode(GainCurve::Mode mode, bool noteTracking)
+{
+    _mode = mode;
+    _noteTracking = noteTracking;
+    computeShapes();
+    this->update();
+}
+
+void GraphFilterFrequencies::setPoints(const QList<QPointF> &points)
+{
+    GainCurve curve(_mode, _noteTracking, points);
+    for (int i = 0; i < _values.size(); i++)
+        _values[i] = qBound(getMinDb(), points.isEmpty() ? 0.0 : curve.getDb(indexToX(i)), getMaxDb());
+    this->update();
+}
+
+QList<QPointF> GraphFilterFrequencies::getPoints() const
+{
+    QList<QPointF> points;
+    for (int i = 0; i < _values.size(); i++)
+        points << QPointF(indexToX(i), _values[i]);
+    return points;
+}
+
+double GraphFilterFrequencies::getMinX() const
+{
+    return _noteTracking ? 0.25 : 20.0;
+}
+
+double GraphFilterFrequencies::indexToX(double index) const
+{
+    return getMinX() * std::pow(2.0, index / POINTS_PER_OCTAVE);
+}
+
+float GraphFilterFrequencies::indexToPos(double index) const
+{
+    return static_cast<float>(index / (_values.size() - 1) * (this->width() - 1));
+}
+
+double GraphFilterFrequencies::posToIndex(double pos) const
+{
+    return pos / qMax(1, this->width() - 1) * (_values.size() - 1);
+}
+
+double GraphFilterFrequencies::getMinDb() const
+{
+    return _mode == GainCurve::MODE_GAIN ? GainCurve::MIN_GAIN : GainCurve::CEILING_REMOVED;
+}
+
+double GraphFilterFrequencies::getMaxDb() const
+{
+    return _mode == GainCurve::MODE_GAIN ? GainCurve::MAX_GAIN : 0.0;
+}
+
+float GraphFilterFrequencies::dbToPos(double db) const
+{
+    db = qBound(getMinDb(), db, getMaxDb());
+    return static_cast<float>((getMaxDb() - db) / (getMaxDb() - getMinDb()) * (this->height() - 1));
+}
+
+double GraphFilterFrequencies::posToDb(double pos) const
+{
+    return getMaxDb() - pos / qMax(1, this->height() - 1) * (getMaxDb() - getMinDb());
+}
+
+QString GraphFilterFrequencies::formatFrequency(double frequency) const
+{
+    if (frequency < 1000)
+        return QLocale::system().toString(frequency, 'f', frequency < 100 ? 1 : 0) + " " + _hzUnit;
+    return QLocale::system().toString(frequency / 1000, 'f', frequency < 10000 ? 2 : 1) + " " + _kHzUnit;
+}
+
+QString GraphFilterFrequencies::getHoverText() const
+{
+    double x = indexToX(_currentIndex);
+    QString text;
+    if (_noteTracking)
     {
-        float normalizedValue = fData[i] / max;
-        fData[i] = normalizedValue <= MIN_Y ? 0 : (log(MIN_Y) - log(normalizedValue)) / log(MIN_Y);
+        // Ratio, and the frequencies it gives for the samples to process
+        text = TIMES + QLocale::system().toString(x, 'f', x < 10 ? 2 : 1);
+        if (!_fundamentals.isEmpty())
+        {
+            double minFrequency = x * *std::min_element(_fundamentals.begin(), _fundamentals.end());
+            double maxFrequency = x * *std::max_element(_fundamentals.begin(), _fundamentals.end());
+            text += " (" + formatFrequency(minFrequency);
+            if (maxFrequency > 1.001 * minFrequency)
+                text += QString::fromUtf8(" – ") + formatFrequency(maxFrequency);
+            text += ")";
+        }
     }
+    else
+        text = formatFrequency(x);
 
-    GraphicsWavePainter * wavePainter = new GraphicsWavePainter();
-    wavePainter->addMeanCurve(false);
-    wavePainter->setData(fData);
-    wavePainter->setOnlyPositiveValues(true);
-
-    _wavePainters << wavePainter;
-
-    // Set the color
-    int nb = _wavePainters.count();
-    QColor color = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
-    color.setAlpha(255 / nb);
-    for (int i = 0; i < _wavePainters.count(); i++)
-        _wavePainters[i]->setWaveColor(color);
+    double db = _values[_currentIndex];
+    text += " | " + QString(db > 0.05 ? "+" : "") + QLocale::system().toString(db, 'f', 1) + " " + _dbUnit;
+    return text;
 }
 
-QVector<float> GraphFilterFrequencies::getValues()
+void GraphFilterFrequencies::computeShapes()
 {
-    return this->_dValues;
-}
-
-void GraphFilterFrequencies::setValues(QVector<float> val)
-{
-    for (int i = 0; i < qMin(POINT_NUMBER, val.size()); i++)
-        _dValues[i] = val.at(i);
+    // Strongest bin within each column of pixels, or the closest bin if a column covers less than a bin
+    int width = this->width();
+    double bottom = this->height() + 1;
+    for (Spectrum &spectrum : _spectra)
+    {
+        spectrum.shape.clear();
+        spectrum.shape << QPointF(-1, bottom);
+        double frequencyScale = _noteTracking ? spectrum.fundamental : 1.0;
+        int count = spectrum.db.size();
+        for (int pos = 0; pos < width; pos++)
+        {
+            double lowFrequency = indexToX(posToIndex(pos - 0.5)) * frequencyScale;
+            double highFrequency = indexToX(posToIndex(pos + 0.5)) * frequencyScale;
+            int lowBin = qMax(0, static_cast<int>(std::ceil(lowFrequency / spectrum.binWidth)));
+            int highBin = qMin(count - 1, static_cast<int>(std::floor(highFrequency / spectrum.binWidth)));
+            double db = -200;
+            if (lowBin > highBin)
+            {
+                int bin = qRound(0.5 * (lowFrequency + highFrequency) / spectrum.binWidth);
+                if (bin < count)
+                    db = spectrum.db[bin];
+            }
+            else
+            {
+                for (int bin = lowBin; bin <= highBin; bin++)
+                    db = qMax(db, static_cast<double>(spectrum.db[bin]));
+            }
+            spectrum.shape << QPointF(pos, dbToPos(db));
+        }
+        spectrum.shape << QPointF(width, bottom);
+    }
 }
 
 void GraphFilterFrequencies::write(QPoint pos)
 {
-    // Convert coordinates
-    int x = posToFreq(pos.x());
-    if (x < 0)
-        x = 0;
-    else if (x > POINT_NUMBER - 1)
-        x = POINT_NUMBER - 1;
-    float y = posToValue(pos.y());
-    if (y < 0)
-        y = 0;
-    else if (y > 1)
-        y = 1;
+    int index = qBound(0, qRound(posToIndex(pos.x())), _values.size() - 1);
+    double db = qBound(getMinDb(), posToDb(pos.y()), getMaxDb());
+    if (_mode == GainCurve::MODE_GAIN && qAbs(db) < 0.75)
+        db = 0; // Neutral gain easy to draw
 
-    // Modification valeur
-    if (this->_previousX >= 0 && this->_previousX != x)
+    // Values between the previous point and this one
+    if (_previousIndex >= 0 && _previousIndex != index)
     {
-        if (this->_previousX < x)
-        {
-            for (int i = this->_previousX + 1; i < x; i++)
-                this->_dValues[i] = this->_previousY +
-                                    (y - _previousY) * (i - this->_previousX) / (x - this->_previousX);
-        }
-        else
-        {
-            for (int i = this->_previousX - 1; i > x; i--)
-                this->_dValues[i] = this->_previousY +
-                                    (y - _previousY) * (i - this->_previousX) / (x - this->_previousX);
-        }
+        int step = index > _previousIndex ? 1 : -1;
+        for (int i = _previousIndex + step; i != index; i += step)
+            _values[i] = _previousDb + (db - _previousDb) * (i - _previousIndex) / (index - _previousIndex);
     }
-    this->_dValues[x] = y;
+    _values[index] = db;
 
-    // Mémorisation du point
-    this->_previousX = x;
-    this->_previousY = y;
-}
-
-float GraphFilterFrequencies::freqToPos(int freq)
-{
-    return static_cast<float>(freq) / (POINT_NUMBER - 1) * (this->width() - 1);
-}
-
-int GraphFilterFrequencies::posToFreq(int pos)
-{
-    int result = static_cast<int>(static_cast<float>(pos) / (this->width() - 1) * (POINT_NUMBER - 1) + 0.5f);
-    if (result < 0)
-        return 0;
-    if (result >= POINT_NUMBER)
-        return POINT_NUMBER - 1;
-    return result;
-}
-
-float GraphFilterFrequencies::posToValue(int pos)
-{
-    float tmp = log(MIN_Y) * static_cast<float>(pos) / (this->height() - 1);
-    float result = exp(tmp);
-    return result < MIN_Y ? 0 : result;
-}
-
-float GraphFilterFrequencies::valueToPos(float value)
-{
-    if (value < MIN_Y)
-        return this->height() - 1;
-    float tmp = (log(MIN_Y) - log(value)) / log(MIN_Y);
-    float result = (1.0 - tmp) * (this->height() - 1);
-    if (result < 0.f)
-        return 0.f;
-    if (result >= this->height())
-        return this->height() - 1;
-    return result;
+    _previousIndex = index;
+    _previousDb = db;
 }
 
 void GraphFilterFrequencies::mouseMoveEvent(QMouseEvent *event)
 {
-    if (this->_flagEdit)
-    {
-        _currentFreq = -1;
+    if (_isEditing)
         this->write(event->pos());
-    }
-    else
-    {
-        // Convert coordinates
-        QPoint pos = event->pos();
-        float posX = static_cast<float>(pos.x());
-        float posY = static_cast<float>(pos.y());
-
-        // Find the closest point
-        float minDist = -1;
-        _currentFreq = -1;
-        for (int i = 0; i < _dValues.size(); i++)
-        {
-            float y = valueToPos(_dValues[i]);
-            float x = freqToPos(i);
-            float dist = qAbs(posX - x) + qAbs(posY - y);
-            if (_currentFreq == -1 || dist < minDist)
-            {
-                minDist = dist;
-                _currentValue = _dValues[i];
-                _currentFreq = i;
-            }
-        }
-    }
+    _currentIndex = qBound(0, qRound(posToIndex(event->pos().x())), _values.size() - 1);
     this->update();
 }
 
@@ -233,32 +277,33 @@ void GraphFilterFrequencies::mousePressEvent(QMouseEvent *event)
     if (event->button() != Qt::LeftButton)
         return;
 
-    _currentFreq = -1;
-    _flagEdit = true;
-
-    // Write the first point
+    _isEditing = true;
+    _previousIndex = -1;
     this->write(event->pos());
+    this->update();
 }
 
 void GraphFilterFrequencies::mouseReleaseEvent(QMouseEvent *event)
 {
-    if (event->button() != Qt::LeftButton)
+    if (event->button() != Qt::LeftButton || !_isEditing)
         return;
 
-    if (this->_flagEdit)
-    {
-        _flagEdit = false;
-        _previousX = -1;
-        _currentFreq = -1;
-        this->update();
-    }
+    _isEditing = false;
+    _previousIndex = -1;
+    this->update();
 }
 
 void GraphFilterFrequencies::leaveEvent(QEvent *event)
 {
     Q_UNUSED(event)
-    _currentFreq = -1;
+    _currentIndex = -1;
     this->update();
+}
+
+void GraphFilterFrequencies::resizeEvent(QResizeEvent *event)
+{
+    QWidget::resizeEvent(event);
+    computeShapes();
 }
 
 void GraphFilterFrequencies::paintEvent(QPaintEvent *event)
@@ -266,81 +311,136 @@ void GraphFilterFrequencies::paintEvent(QPaintEvent *event)
     Q_UNUSED(event)
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
-
-    // Background
     QRect rect = this->rect();
     painter.fillRect(rect, _backgroundColor);
-
-    // Fourier transforms
-    for (int i = 0; i < _wavePainters.count(); i++)
-        _wavePainters[i]->paint(&painter, rect, 0, 0, 1);
-
-    // Frequencies
-    painter.setPen(_frequencyPen);
-    for (int f = 2000; f <= 18000; f += 2000)
-    {
-        float x = freqToPos(static_cast<float>(f) / 20000 * (POINT_NUMBER - 1));
-        painter.drawLine(x, rect.top(), x, rect.bottom());
-    }
-
-    // Values
-    painter.setBrush(_removedAreaColor);
-    painter.setPen(_penCurve);
-    QPainterPath path;
-    for (int i = 0; i < _dValues.size(); i++)
-    {
-        float x = freqToPos(i);
-        float y = valueToPos(_dValues[i]);
-        if (i == 0)
-            path.moveTo(- 10, y);
-        path.lineTo(x, y);
-        if (i == _dValues.size() - 1)
-        {
-            // Close the path
-            path.lineTo(x + 10, y);
-            path.lineTo(x + 10, -10);
-            path.lineTo(- 10, -10);
-            path.closeSubpath();
-        }
-    }
-    painter.drawPath(path);
-
-    // Frequency values
-    painter.setPen(_labelColor);
     painter.setFont(_fontLabels);
-    for (int f = 2000; f <= 18000; f += 2000)
+    QFontMetrics fm(_fontLabels);
+
+    // Spectra
+    if (!_spectra.isEmpty())
     {
-        float x = freqToPos(static_cast<float>(f) / 20000 * (POINT_NUMBER - 1));
-        painter.drawText(QRect(x - 200, rect.bottom() - 50, 400, 50), Qt::AlignHCenter | Qt::AlignBottom,
-                         QLocale::system().toString(f / 1000) + " " + _kHzUnit);
+        QColor color = _spectrumColor;
+        color.setAlpha(qMax(40, 200 / _spectra.count()));
+        painter.setPen(Qt::NoPen);
+        painter.setBrush(color);
+        for (const Spectrum &spectrum : _spectra)
+            painter.drawPolygon(spectrum.shape);
     }
 
-    // Current point
-    painter.setPen(_currentPointPen);
-    if (_currentFreq >= 0)
+    // Vertical lines: frequencies, or octaves and harmonics 3, 5, 6, 7 of the fundamental
+    QList<QPair<double, QString> > lines;
+    QList<double> minorLines;
+    if (_noteTracking)
     {
-        float x = freqToPos(_currentFreq);
-        float y = valueToPos(_currentValue);
+        for (int octave = 0; octave <= OCTAVES; octave++)
+        {
+            double ratio = getMinX() * std::pow(2.0, octave);
+            lines << qMakePair(ratio, TIMES + (ratio == 0.25 ? QString(QChar(0x00BC)) :
+                                               ratio == 0.5 ? QString(QChar(0x00BD)) : QString::number(ratio)));
+        }
+        minorLines << 3 << 5 << 6 << 7;
+    }
+    else
+    {
+        for (double frequency : { 20., 50., 100., 200., 500., 1000., 2000., 5000., 10000., 20000. })
+            lines << qMakePair(frequency, frequency < 1000 ? QString::number(frequency) + " " + _hzUnit :
+                                                             QString::number(frequency / 1000) + " " + _kHzUnit);
+    }
+    painter.setPen(_minorGridPen);
+    for (double x : minorLines)
+    {
+        float pos = indexToPos(POINTS_PER_OCTAVE * std::log2(x / getMinX()));
+        painter.drawLine(QPointF(pos, 0), QPointF(pos, rect.bottom()));
+    }
+    for (int i = 0; i < lines.count(); i++)
+    {
+        float pos = indexToPos(POINTS_PER_OCTAVE * std::log2(lines[i].first / getMinX()));
+        painter.setPen(_noteTracking && lines[i].first == 1.0 ? _zeroPen : _gridPen);
+        painter.drawLine(QPointF(pos, 0), QPointF(pos, rect.bottom()));
+    }
 
-        painter.drawLine(x - 5, y, x + 5, y);
-        painter.drawLine(x, y - 5, x, y + 5);
+    // Horizontal lines: levels in dB
+    QList<double> levels;
+    if (_mode == GainCurve::MODE_GAIN)
+        levels << 12 << 0 << -12 << -24 << -36 << -48;
+    else
+        levels << -20 << -40 << -60;
+    for (double level : levels)
+    {
+        float pos = dbToPos(level);
+        painter.setPen(level == 0 ? _zeroPen : _gridPen);
+        painter.drawLine(QPointF(0, pos), QPointF(rect.right(), pos));
+    }
 
-        // Text to display with its size
-        float kHz = static_cast<float>(_currentFreq) / (POINT_NUMBER - 1) * 20;
-        QString label = QLocale::system().toString(kHz, 'f', 1) + " " + _kHzUnit;
-        label += " | " + QLocale::system().toString(_currentValue, 'g', 2);
+    // Area changed by the curve and the curve itself
+    QPainterPath curvePath;
+    for (int i = 0; i < _values.size(); i++)
+    {
+        QPointF point(indexToPos(i), dbToPos(_values[i]));
+        if (i == 0)
+            curvePath.moveTo(point);
+        else
+            curvePath.lineTo(point);
+    }
+    QPainterPath area = curvePath;
+    if (_mode == GainCurve::MODE_GAIN)
+    {
+        // Between the curve and 0 dB
+        area.lineTo(indexToPos(_values.size() - 1), dbToPos(0));
+        area.lineTo(indexToPos(0), dbToPos(0));
+    }
+    else
+    {
+        // Above the curve (removed)
+        area.lineTo(rect.right() + 10, dbToPos(_values.last()));
+        area.lineTo(rect.right() + 10, -10);
+        area.lineTo(-10, -10);
+        area.lineTo(-10, dbToPos(_values.first()));
+    }
+    area.closeSubpath();
+    painter.setPen(Qt::NoPen);
+    painter.setBrush(_mode == GainCurve::MODE_GAIN ? _gainAreaColor : _ceilingAreaColor);
+    painter.drawPath(area);
+    painter.setBrush(Qt::NoBrush);
+    painter.setPen(_mode == GainCurve::MODE_GAIN ? _gainPen : _ceilingPen);
+    painter.drawPath(curvePath);
 
-        QFontMetrics fm(_fontLabels);
+    // Labels
+    painter.setPen(_labelColor);
+    for (int i = 0; i < lines.count(); i++)
+    {
+        float pos = indexToPos(POINTS_PER_OCTAVE * std::log2(lines[i].first / getMinX()));
+        int textWidth = fm.horizontalAdvance(lines[i].second);
+        int left = qBound(2, static_cast<int>(pos - 0.5f * textWidth), rect.width() - textWidth - 2);
+        painter.drawText(QRect(left, rect.bottom() - fm.height() - 1, textWidth, fm.height()),
+                         Qt::AlignCenter, lines[i].second);
+    }
+    for (double level : levels)
+    {
+        QString text = QString(level > 0 ? "+" : "") + QString::number(level) + " " + _dbUnit;
+        painter.drawText(QRectF(3, dbToPos(level) - fm.height() - 1, fm.horizontalAdvance(text) + 2, fm.height()),
+                         Qt::AlignLeft | Qt::AlignVCenter, text);
+    }
+
+    // Point under the mouse
+    if (_currentIndex >= 0)
+    {
+        float x = indexToPos(_currentIndex);
+        float y = dbToPos(_values[_currentIndex]);
+        painter.setPen(_currentPointPen);
+        painter.drawLine(QPointF(x - 5, y), QPointF(x + 5, y));
+        painter.drawLine(QPointF(x, y - 5), QPointF(x, y + 5));
+
+        // Text centered above or below the point, within the graph
+        QString label = getHoverText();
         float textHalfWidth = 0.5f * fm.horizontalAdvance(label) + 2.f;
         float textHeight = fm.height();
-
-        // Display the text
-        float textCenterX = x;
-        if (textCenterX + textHalfWidth > rect.width())
-            textCenterX = rect.width() - textHalfWidth;
-        if (textCenterX - textHalfWidth < 0)
-            textCenterX = textHalfWidth;
-        painter.drawText(textCenterX - textHalfWidth, 2 * y > rect.height() ? y - 1.5 * textHeight : y + 0.5f * textHeight,
-                         2 * textHalfWidth, textHeight, Qt::AlignVCenter | Qt::AlignHCenter, label);
+        float textCenterX = qBound(textHalfWidth, x, rect.width() - textHalfWidth);
+        float textY = 2 * y > rect.height() ? y - 1.5f * textHeight : y + 0.5f * textHeight;
+        QRectF textRect(textCenterX - textHalfWidth, textY, 2 * textHalfWidth, textHeight);
+        QColor background = _backgroundColor;
+        background.setAlpha(200);
+        painter.fillRect(textRect, background);
+        painter.drawText(textRect, Qt::AlignCenter, label);
     }
 }

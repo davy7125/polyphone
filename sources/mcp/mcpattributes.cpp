@@ -50,7 +50,8 @@ const QList<McpAttributes::Definition> &McpAttributes::getDefinitions()
         { "fixed_velocity", champ_velocity, champ_unknown, true, "velocity, -1 = not forced", "",
          "Velocity forced for all notes." },
         { "sample_modes", champ_sampleModes, champ_unknown, true,
-         "0 = no loop, 1 = continuous loop, 3 = loop then play the end of the sample when the key is released", "",
+         "0 = no loop, 1 = continuous loop, 2 = played only when the key is released (release sample, extension of "
+         "Polyphone, 0 for the other synths), 3 = loop then play the end of the sample when the key is released", "",
          "Loop mode of the sample." },
         { "exclusive_class", champ_exclusiveClass, champ_unknown, true, "0 (none) to 127", "",
          "A note stops the notes of the same class in the same preset (hi-hats for instance)." },
@@ -132,6 +133,26 @@ AttributeType McpAttributes::getChamp(QString name)
 {
     const Definition * definition = find(name);
     return definition == nullptr ? champ_unknown : definition->champ;
+}
+
+QStringList McpAttributes::getNames()
+{
+    QStringList result;
+    foreach (const Definition &definition, getDefinitions())
+        result << definition.name;
+    return result;
+}
+
+bool McpAttributes::isOffset(QString name)
+{
+    const Definition * definition = find(name);
+    return definition != nullptr && definition->coarseChamp != champ_unknown;
+}
+
+bool McpAttributes::isInstrumentOnly(QString name)
+{
+    const Definition * definition = find(name);
+    return definition != nullptr && definition->instrumentOnly;
 }
 
 void McpAttributes::getRealLimits(const Definition &definition, bool isPrst, double &min, double &max)
@@ -279,8 +300,6 @@ void McpAttributes::setValue(EltID id, QString name, QJsonValue value)
 
     double min, max;
     getRealLimits(*definition, isPrst, min, max);
-    if (definition->champ == champ_sampleModes && number == 2)
-        number = 0; // Same meaning
     if (number < min - 1e-6 * std::fabs(min) - 1e-9 || number > max + 1e-6 * std::fabs(max) + 1e-9)
         throw McpException(QString("parameter \"%1\" must be between %2 and %3 in %4").arg(name)
                                .arg(Utils::roundSignificant(min)).arg(Utils::roundSignificant(max)).arg(isPrst ? "a preset" : "an instrument"));

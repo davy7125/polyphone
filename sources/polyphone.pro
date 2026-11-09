@@ -260,6 +260,7 @@ SOURCES	+= main.cpp \
     core/output/dls/conversion_dls.cpp \
     core/sample/samplereaderfactory.cpp \
     core/sample/sampleutils.cpp \
+    core/sample/gaincurve.cpp \
     core/sample/samplewriterwav.cpp \
     core/sample/sound.cpp \
     core/sample/sampleloader.cpp \
@@ -361,7 +362,6 @@ SOURCES	+= main.cpp \
     repository/soundfont/editor/htmleditor.cpp \
     repository/soundfont/editor/soundfonteditorfiles.cpp \
     repository/soundfont/editor/soundfontfilecell.cpp \
-    sound_engine/elements/liveeq.cpp \
     synth_core/osctriangle.cpp \
     sound_engine/elements/fileplayer.cpp \
     sound_engine/elements/recorder.cpp \
@@ -607,11 +607,6 @@ SOURCES	+= main.cpp \
     clavier/controllerarea.cpp \
     clavier/effectarea.cpp \
     clavier/combocc.cpp \
-    lib/iir/Biquad.cpp \
-    lib/iir/Butterworth.cpp \
-    lib/iir/Cascade.cpp \
-    lib/iir/PoleFilter.cpp \
-    lib/iir/State.cpp \
     editor/widgets/spinboxcents.cpp \
     editor/widgets/resettabledial.cpp \
     editor/widgets/bannermenu.cpp \
@@ -699,6 +694,7 @@ HEADERS += \
     core/sample/samplereader.h \
     core/sample/samplereaderfactory.h \
     core/sample/sampleutils.h \
+    core/sample/gaincurve.h \
     core/sample/samplewriterwav.h \
     core/sample/sound.h \
     core/sample/sampleloader.h \
@@ -822,7 +818,6 @@ HEADERS += \
     repository/soundfont/editor/htmleditor.h \
     repository/soundfont/editor/soundfonteditorfiles.h \
     repository/soundfont/editor/soundfontfilecell.h \
-    sound_engine/elements/liveeq.h \
     synth_core/osctriangle.h \
     sound_engine/elements/fileplayer.h \
     sound_engine/elements/recorder.h \
@@ -1078,16 +1073,6 @@ HEADERS += \
     clavier/controllerarea.h \
     clavier/effectarea.h \
     clavier/combocc.h \
-    lib/iir/Iir_2.h \
-    lib/iir/Biquad.h \
-    lib/iir/Butterworth.h \
-    lib/iir/Cascade.h \
-    lib/iir/Common.h \
-    lib/iir/Layout.h \
-    lib/iir/MathSupplement.h \
-    lib/iir/PoleFilter.h \
-    lib/iir/State.h \
-    lib/iir/Types.h \
     editor/widgets/spinboxcents.h \
     editor/widgets/resettabledial.h \
     editor/widgets/bannermenu.h \

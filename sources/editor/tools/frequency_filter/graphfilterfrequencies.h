@@ -27,52 +27,82 @@
 
 #include <QWidget>
 #include <QPen>
-class GraphicsWavePainter;
+#include <QPolygonF>
+#include "gaincurve.h"
 
+// Curve of the tool "filter frequencies", drawn with the mouse on a logarithmic scale of frequencies (20 Hz to 20 kHz)
+// or, with the note tracking, of ratios to the fundamental frequency of each sample (x1/4 to x256). The spectra of the
+// samples are drawn behind with the same scale in dB, their strongest component being at 0 dB.
 class GraphFilterFrequencies : public QWidget
 {
     Q_OBJECT
 
 public:
     explicit GraphFilterFrequencies(QWidget *parent = nullptr);
-    ~GraphFilterFrequencies();
 
+    // Spectra: modules from 0 to the Nyquist frequency, and fundamental frequency of the sample
     void clearFourierTransforms();
-    void addFourierTransform(QVector<float> fData, quint32 sampleRate);
-    QVector<float> getValues();
-    void setValues(QVector<float> val);
+    void addFourierTransform(const QVector<float> &fData, quint32 sampleRate, double fundamental);
+
+    // Fundamental frequencies of all samples to process, for displaying the frequencies with the note tracking
+    void setFundamentals(const QList<double> &fundamentals);
+
+    void setMode(GainCurve::Mode mode, bool noteTracking);
+
+    // Points of the curve, resampled on the grid of the graph
+    void setPoints(const QList<QPointF> &points);
+    QList<QPointF> getPoints() const;
 
 protected:
     void mouseMoveEvent(QMouseEvent *event) override;
     void mousePressEvent(QMouseEvent *event) override;
     void mouseReleaseEvent(QMouseEvent *event) override;
     void leaveEvent(QEvent *event) override;
+    void resizeEvent(QResizeEvent *event) override;
     void paintEvent(QPaintEvent *event) override;
 
 private:
-    QVector<float> _dValues;
-    bool _flagEdit;
-    float _stiffnessExp;
-    int _previousX;
-    float _previousY;
-    QList<GraphicsWavePainter *> _wavePainters;
-    int _currentFreq;
-    float _currentValue;
+    struct Spectrum
+    {
+        QVector<float> db; // Relative to the strongest module
+        double binWidth;   // Hz
+        double fundamental;
+        QPolygonF shape;   // For the current size and abscissa
+    };
 
-    QString _kHzUnit;
-    QColor _backgroundColor, _labelColor, _removedAreaColor;
-    QPen _frequencyPen, _penCurve, _currentPointPen;
-    QFont _fontLabels;
-
-    float freqToPos(int freq);
-    int posToFreq(int pos);
-    float posToValue(int pos);
-    float valueToPos(float value);
-
+    double getMinX() const;
+    double indexToX(double index) const;
+    float indexToPos(double index) const;
+    double posToIndex(double pos) const;
+    double getMinDb() const;
+    double getMaxDb() const;
+    float dbToPos(double db) const;
+    double posToDb(double pos) const;
+    QString formatFrequency(double frequency) const;
+    QString getHoverText() const;
+    void computeShapes();
     void write(QPoint pos);
 
-    static const int POINT_NUMBER;
-    static const float MIN_Y;
+    GainCurve::Mode _mode;
+    bool _noteTracking;
+    QVector<double> _values; // dB on the grid
+    QList<Spectrum> _spectra;
+    QList<double> _fundamentals;
+
+    // Edition with the mouse
+    bool _isEditing;
+    int _previousIndex;
+    double _previousDb;
+    int _currentIndex; // Point under the mouse, -1 if none
+
+    // Style
+    QString _hzUnit, _kHzUnit, _dbUnit;
+    QColor _backgroundColor, _labelColor, _spectrumColor, _ceilingAreaColor, _gainAreaColor;
+    QPen _gridPen, _minorGridPen, _zeroPen, _ceilingPen, _gainPen, _currentPointPen;
+    QFont _fontLabels;
+
+    static const int POINTS_PER_OCTAVE;
+    static const int OCTAVES;
 };
 
 #endif // GRAPHFILTERFREQUENCIES_H

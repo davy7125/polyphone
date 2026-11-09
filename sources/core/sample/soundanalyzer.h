@@ -58,7 +58,7 @@ public:
 Q_DECLARE_METATYPE(Peak)
 
 // Measures on a mono signal (sample, rendered note), giving an AI objective data about a sound: regions, levels,
-// loudness, pitch, harmonics, spectrum, envelope, loop quality and defects.
+// loudness, pitch, harmonics, partials, spectrum, envelope, loop and quality measures.
 // Conventions: dBFS with 0 dBFS = full scale peak (a full scale sine has an RMS of -3 dBFS), keys with 60 = C4,
 // loop end = first frame after the loop (as in the soundfont format)
 class SoundAnalyzer
@@ -67,6 +67,11 @@ public:
     // The expected frequency (0 if unknown) restricts the pitch search around it (one fifth), avoiding octave errors
     SoundAnalyzer(const QVector<float> &data, quint32 sampleRate, quint32 loopStart = 0, quint32 loopEnd = 0,
                   double expectedFrequency = 0);
+
+    // Second channel of a stereo signal (same length), to give before any measure: its energy is added to the
+    // spectra, the harmonics, the partials, the levels (mean power of the channels) and the loudness (ITU-R BS.1770: sum
+    // of the channels), whereas the regions, the pitch and the envelope are measured on the first channel only
+    void setSecondChannel(const QVector<float> &data);
 
     // Groups of descriptors
     QJsonObject getRegions();
@@ -78,8 +83,28 @@ public:
     QJsonObject getLoop();
     QJsonObject getQuality();
 
-    // Spectrum curves for equalization decisions: third-octave levels and spectral envelope of the steady part
+    // Spectrum curves: third-octave levels and spectral envelope of the steady part
     QJsonObject getSpectrumCurves();
+
+    // Partial of a sound (peak of its spectrum)
+    struct Partial
+    {
+        double frequency; // Hz
+        double levelDb; // dBFS, amplitude of the sine
+        double bandHz; // Half-width of the band in which the level is followed over time
+        double variationDb; // Range of the level over time (5th to 95th percentile), NaN if not measured
+        double beatRate; // Hz of the periodic modulation of the level standing out, 0 if none, NaN if not measured
+        double beatDepthDb; // Peak to peak
+    };
+
+    // Partials of the sustained part (from the end of the attack to the end of the data, 10 s at most): the maxCount
+    // strongest peaks standing 10 dB above their neighborhood and at most 90 dB below the strongest one, sorted by
+    // frequency; the part analyzed is returned in seconds
+    QList<Partial> getPartials(int maxCount, double &startSeconds, double &endSeconds);
+
+    // Pitch over the whole signal (first channel), searched as for getPitch: a frequency in Hz every hop, 0 where no
+    // pitch is found; firstTime is the time of the first value (center of its window)
+    QVector<double> getPitchTrack(double hopSeconds, double &firstTime);
 
     // Fast estimation of the pitch (Hz, 0 if not found) without prior, on a region analyzed as a loop, with the
     // confidence of the estimation between 0 and 1
@@ -163,9 +188,10 @@ private:
     void computePitch();
 
     // Levels
-    double truePeak() const;
-    QVector<double> kWeighted() const;
+    double truePeak(const QVector<double> &data) const;
+    QVector<double> kWeighted(const QVector<double> &data) const;
     void computeLoudness();
+    double meanSquare(int start, int end) const; // Mean of the channels
 
     // Loop
     void computeLoop();
@@ -174,6 +200,7 @@ private:
     QVector<float> _source; // Shared with the caller (implicit sharing)
     QVector<double> _data;
     QVector<double> _cumSquares; // Cumulative sum of the squares
+    QVector<double> _data2, _cumSquares2; // Possible second channel
     quint32 _sampleRate;
     int _length;
     int _loopStart, _loopEnd;

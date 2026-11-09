@@ -560,6 +560,26 @@
     </layout>
    </item>
    <item>
+    <layout class="QHBoxLayout" name="horizontalLayoutNoteTracking">
+     <property name="leftMargin">
+      <number>3</number>
+     </property>
+     <property name="topMargin">
+      <number>6</number>
+     </property>
+     <item>
+      <widget class="QCheckBox" name="checkNoteTracking">
+       <property name="toolTip">
+        <string>The bands are relative to the fundamental frequency of each sample (root key and pitch correction): ×1 is the fundamental, ×2 the octave, ×4 the second octave…</string>
+       </property>
+       <property name="text">
+        <string>Note tracking</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
     <widget class="QFrame" name="frame_9">
      <property name="frameShape">
       <enum>QFrame::NoFrame</enum>
@@ -675,6 +695,7 @@
   <tabstop>verticalSlider_8</tabstop>
   <tabstop>verticalSlider_9</tabstop>
   <tabstop>verticalSlider_10</tabstop>
+  <tabstop>checkNoteTracking</tabstop>
   <tabstop>checkEqualizerPreview</tabstop>
   <tabstop>pushEgalRestore</tabstop>
   <tabstop>pushEgaliser</tabstop>

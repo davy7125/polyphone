@@ -3284,34 +3284,50 @@ for a signal</source>
 <context>
     <name>Equalizer</name>
     <message>
-        <location filename="../../editor/widgets/equalizer.ui" line="586"/>
+        <location filename="../../editor/widgets/equalizer.ui" line="573"/>
+        <source>The bands are relative to the fundamental frequency of each sample (root key and pitch correction): ×1 is the fundamental, ×2 the octave, ×4 the second octave…</source>
+        <translation>各频段相对于每个采样的基频（根音符和校正）：×1 为基音，×2 为高八度，×4 为高两个八度…</translation>
+    </message>
+    <message>
+        <location filename="../../editor/widgets/equalizer.ui" line="576"/>
+        <source>Note tracking</source>
+        <translation>音符跟踪</translation>
+    </message>
+    <message>
+        <location filename="../../editor/widgets/equalizer.ui" line="606"/>
         <source>preview</source>
         <translation>预览</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/equalizer.ui" line="618"/>
+        <location filename="../../editor/widgets/equalizer.ui" line="638"/>
         <source>Reset</source>
         <translation>重置</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/equalizer.ui" line="644"/>
+        <location filename="../../editor/widgets/equalizer.ui" line="664"/>
         <source>Apply</source>
         <translation>应用</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/equalizer.cpp" line="122"/>
+        <location filename="../../editor/widgets/equalizer.cpp" line="131"/>
         <source>Information</source>
         <translation>信息</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/equalizer.cpp" line="123"/>
+        <location filename="../../editor/widgets/equalizer.cpp" line="132"/>
         <source>Equalization successfully applied on 1 sample.</source>
         <translation>均衡已成功应用于 1 个采样。</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/equalizer.cpp" line="124"/>
+        <location filename="../../editor/widgets/equalizer.cpp" line="133"/>
         <source>Equalization successfully applied on %1 samples.</source>
         <translation>均衡已成功应用于 %1 个采样。</translation>
+    </message>
+    <message>
+        <location filename="../../editor/widgets/equalizer.cpp" line="209"/>
+        <source>Hz</source>
+        <comment>unit for Herz</comment>
+        <translation>赫兹</translation>
     </message>
 </context>
 <context>
@@ -3394,10 +3410,22 @@ for a signal</source>
 <context>
     <name>GraphFilterFrequencies</name>
     <message>
-        <location filename="../../editor/tools/frequency_filter/graphfilterfrequencies.cpp" line="60"/>
+        <location filename="../../editor/tools/frequency_filter/graphfilterfrequencies.cpp" line="74"/>
+        <source>Hz</source>
+        <comment>unit for Herz</comment>
+        <translation>赫兹</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/frequency_filter/graphfilterfrequencies.cpp" line="75"/>
         <source>kHz</source>
         <comment>unit for kilo Herz</comment>
         <translation>千赫</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/frequency_filter/graphfilterfrequencies.cpp" line="76"/>
+        <source>dB</source>
+        <comment>unit for decibels</comment>
+        <translation>分贝</translation>
     </message>
 </context>
 <context>
@@ -4305,42 +4333,42 @@ default mod.</source>
         <translation>缺少要播放的 MIDI 文件。</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="608"/>
+        <location filename="../../options.cpp" line="664"/>
         <source>Usage:</source>
         <translation>用法：</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="610"/>
+        <location filename="../../options.cpp" line="666"/>
         <source>Polyphone, a soundfont editor: the files and directories are opened in the editor, unless one of the options --convert, --render, --synth or --reset-config is used.</source>
         <translation>Polyphone，音色库编辑器：除非使用 --convert、--render、--synth 或 --reset-config 选项之一，否则文件和目录将在编辑器中打开。</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="612"/>
+        <location filename="../../options.cpp" line="668"/>
         <source>Files:</source>
         <translation>文件：</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="613"/>
+        <location filename="../../options.cpp" line="669"/>
         <source>Soundfonts (sf2, sf3, sfz, dls, sfArk, organ) or directories.</source>
         <translation>音色库（sf2、sf3、sfz、dls、sfArk、organ）或目录。</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="614"/>
+        <location filename="../../options.cpp" line="670"/>
         <source>Options:</source>
         <translation>选项：</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="634"/>
+        <location filename="../../options.cpp" line="690"/>
         <source>Examples:</source>
         <translation>示例：</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="641"/>
+        <location filename="../../options.cpp" line="697"/>
         <source>The options -1 to -6, -i and -c of the previous versions are still accepted.</source>
         <translation>仍然接受以前版本的选项 -1 到 -6、-i 和 -c。</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="642"/>
+        <location filename="../../options.cpp" line="698"/>
         <source>Documentation: %1</source>
         <translation>文档：%1</translation>
     </message>
@@ -4901,7 +4929,7 @@ to display its division ranges</source>
     </message>
     <message>
         <location filename="../../editor/pagesmpl.ui" line="344"/>
-        <location filename="../../editor/pagesmpl.cpp" line="1135"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1134"/>
         <source>Play</source>
         <translation>播放</translation>
     </message>
@@ -4977,8 +5005,8 @@ to display its division ranges</source>
     </message>
     <message>
         <location filename="../../editor/pagesmpl.ui" line="694"/>
-        <location filename="../../editor/pagesmpl.cpp" line="578"/>
-        <location filename="../../editor/pagesmpl.cpp" line="1100"/>
+        <location filename="../../editor/pagesmpl.cpp" line="580"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1099"/>
         <source>Information</source>
         <translation>信息</translation>
     </message>
@@ -4998,26 +5026,26 @@ to display its division ranges</source>
     </message>
     <message>
         <location filename="../../editor/pagesmpl.cpp" line="249"/>
-        <location filename="../../editor/pagesmpl.cpp" line="708"/>
+        <location filename="../../editor/pagesmpl.cpp" line="712"/>
         <source>mono</source>
         <comment>opposite to stereo</comment>
         <translation>单声道</translation>
     </message>
     <message>
         <location filename="../../editor/pagesmpl.cpp" line="259"/>
-        <location filename="../../editor/pagesmpl.cpp" line="847"/>
+        <location filename="../../editor/pagesmpl.cpp" line="851"/>
         <source>right</source>
         <translation>右</translation>
     </message>
     <message>
         <location filename="../../editor/pagesmpl.cpp" line="260"/>
-        <location filename="../../editor/pagesmpl.cpp" line="848"/>
+        <location filename="../../editor/pagesmpl.cpp" line="852"/>
         <source>left</source>
         <translation>左</translation>
     </message>
     <message>
         <location filename="../../editor/pagesmpl.cpp" line="261"/>
-        <location filename="../../editor/pagesmpl.cpp" line="849"/>
+        <location filename="../../editor/pagesmpl.cpp" line="853"/>
         <source>link</source>
         <translation>链接</translation>
     </message>
@@ -5039,44 +5067,44 @@ Warning: quality will be reduced and the loop may be altered</source>
         <translation>选定的采样已压缩以减小音色库大小</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="579"/>
-        <location filename="../../editor/pagesmpl.cpp" line="1101"/>
+        <location filename="../../editor/pagesmpl.cpp" line="581"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1100"/>
         <source>Change successfully applied to the different samples</source>
         <translation>更改已成功应用到不同采样</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="846"/>
-        <location filename="../../editor/pagesmpl.cpp" line="871"/>
+        <location filename="../../editor/pagesmpl.cpp" line="850"/>
+        <location filename="../../editor/pagesmpl.cpp" line="875"/>
         <source>mono</source>
         <translation>单声道</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="1129"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1128"/>
         <source>Stop</source>
         <translation>停止</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="1148"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1147"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="1149"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1148"/>
         <source>Are you sure to cut the sample from &lt;b&gt;%1&lt;/b&gt; to &lt;b&gt;%2&lt;/b&gt;?</source>
         <translation>确定要将采样从 &lt;b&gt;%1&lt;/b&gt; 剪切到 &lt;b&gt;%2&lt;/b&gt; 吗？</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="1151"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1150"/>
         <source>&amp;Yes</source>
         <translation>是(&amp;Y)</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="1152"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1151"/>
         <source>&amp;No</source>
         <translation>否(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesmpl.cpp" line="1153"/>
+        <location filename="../../editor/pagesmpl.cpp" line="1152"/>
         <source>Yes and &amp;create another sample</source>
         <translation>是并创建另一个采样(&amp;C)</translation>
     </message>
@@ -7139,12 +7167,12 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ToolFrequencyFilter</name>
     <message>
-        <location filename="../../editor/tools/frequency_filter/toolfrequencyfilter.h" line="46"/>
+        <location filename="../../editor/tools/frequency_filter/toolfrequencyfilter.h" line="48"/>
         <source>Audio processing</source>
         <translation>音频处理</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/frequency_filter/toolfrequencyfilter.h" line="61"/>
+        <location filename="../../editor/tools/frequency_filter/toolfrequencyfilter.h" line="74"/>
         <source>Filter frequencies</source>
         <translation>过滤频率</translation>
     </message>
@@ -7152,17 +7180,43 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ToolFrequencyFilter_gui</name>
     <message>
-        <location filename="../../editor/tools/frequency_filter/toolfrequencyfilter_gui.cpp" line="37"/>
+        <location filename="../../editor/tools/frequency_filter/toolfrequencyfilter_gui.cpp" line="40"/>
         <source>&amp;Cancel</source>
         <translation>取消(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/frequency_filter/toolfrequencyfilter_gui.cpp" line="36"/>
+        <location filename="../../editor/tools/frequency_filter/toolfrequencyfilter_gui.cpp" line="99"/>
+        <source>Draw the attenuation or the amplification of the frequencies:</source>
+        <translation>绘制各频率的衰减或增益：</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/frequency_filter/toolfrequencyfilter_gui.cpp" line="39"/>
         <source>&amp;Ok</source>
         <translation>确定(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/frequency_filter/toolfrequencyfilter_gui.ui" line="32"/>
+        <location filename="../../editor/tools/frequency_filter/toolfrequencyfilter_gui.ui" line="29"/>
+        <source>Cut frequencies</source>
+        <translation>剪切频率</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/frequency_filter/toolfrequencyfilter_gui.ui" line="34"/>
+        <source>Attenuate or amplify</source>
+        <translation>衰减或放大</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/frequency_filter/toolfrequencyfilter_gui.ui" line="42"/>
+        <source>The abscissa is relative to the fundamental frequency of each sample (root key and pitch correction): ×1 is the fundamental, ×2 the octave, ×3 the twelfth…</source>
+        <translation>横坐标相对于每个采样的基频（根音符和校正）：×1 为基音，×2 为高八度，×3 为高八度加五度…</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/frequency_filter/toolfrequencyfilter_gui.ui" line="45"/>
+        <source>Note tracking</source>
+        <translation>音符跟踪</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/frequency_filter/toolfrequencyfilter_gui.ui" line="73"/>
+        <location filename="../../editor/tools/frequency_filter/toolfrequencyfilter_gui.cpp" line="100"/>
         <source>Mark with red color where you want to cut the frequencies:</source>
         <translation>用红色标记您想剪切的频率部分：</translation>
     </message>

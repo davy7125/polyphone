@@ -29,19 +29,17 @@
 #include "mcpmodulators.h"
 #include "soundfontmanager.h"
 #include "mcpeditor.h"
+#include "soundfonts.h"
+#include "soundfont.h"
+#include "instprst.h"
+#include "division.h"
+#include "smpl.h"
+#include "voiceparam.h"
+#include "voicecontext.h"
+#include "midiprocessor.h"
+#include "offlinerenderer.h"
+#include "synthcoreconfig.h"
 #include <QRegularExpression>
-
-static QString sampleType(SFSampleLink link)
-{
-    switch (link)
-    {
-    case monoSample: case RomMonoSample: return "mono";
-    case leftSample: case RomLeftSample: return "left";
-    case rightSample: case RomRightSample: return "right";
-    case linkedSample: case RomLinkedSample: return "linked";
-    default: return "unknown";
-    }
-}
 
 static QJsonObject describeSample(EltID id, bool detailed)
 {
@@ -58,7 +56,7 @@ static QJsonObject describeSample(EltID id, bool detailed)
     result["looped"] = loopEnd > loopStart;
 
     SFSampleLink link = sm->get(id, champ_sfSampleType).sfLinkValue;
-    result["channel"] = sampleType(link);
+    result["channel"] = McpUtils::sampleChannel(link);
     if (link != monoSample && link != RomMonoSample)
         result["linked_sample"] = McpUtils::idToString(EltID(elementSmpl, id.indexSf2, sm->get(id, champ_wSampleLink).wValue));
 
@@ -105,7 +103,7 @@ static QJsonObject describeDivision(EltID idDiv)
         QJsonObject sample = McpUtils::brief(idSmpl);
         int rootKey = sm->get(idSmpl, champ_byOriginalPitch).bValue;
         sample["root_key"] = rootKey;
-        sample["channel"] = sampleType(sm->get(idSmpl, champ_sfSampleType).sfLinkValue);
+        sample["channel"] = McpUtils::sampleChannel(sm->get(idSmpl, champ_sfSampleType).sfLinkValue);
         result["sample"] = sample;
     }
     else
@@ -245,6 +243,171 @@ static QJsonObject describeElement(EltID id)
     default:
         return McpModulators::toJson(id);
     }
+}
+
+// Key or velocity range of a division, otherwise of the global division, otherwise the full range (as the synth)
+static RangesType zoneRange(ISynthZone * zone, ISynthZone * globalZone, AttributeType champ)
+{
+    if (zone->getAttributeSet()[champ])
+        return zone->getAttributeValues()[champ].rValue;
+    if (globalZone != nullptr && globalZone->getAttributeSet()[champ])
+        return globalZone->getAttributeValues()[champ].rValue;
+    RangesType full;
+    full.byLo = 0;
+    full.byHi = 127;
+    return full;
+}
+
+static bool inRanges(ISynthZone * zone, ISynthZone * globalZone, int key, int velocity)
+{
+    RangesType keyRange = zoneRange(zone, globalZone, champ_keyRange);
+    RangesType velRange = zoneRange(zone, globalZone, champ_velRange);
+    return keyRange.byLo <= key && key <= keyRange.byHi && velRange.byLo <= velocity && velocity <= velRange.byHi;
+}
+
+// Voice started by the synth for a division of an instrument (possibly reached from a preset division): parameters
+// computed by the same code as the sound engine (VoiceParam), modulators included
+static QJsonObject describeVoice(int indexSf2, Soundfont * soundfont, InstPrst * prst, int prstDivIndex,
+                                 InstPrst * inst, int instDivIndex, int key, int velocity)
+{
+    Division * prstDiv = prst != nullptr ? prst->getDivision(prstDivIndex) : nullptr;
+    Division * instDiv = inst->getDivision(instDivIndex);
+    int sampleIndex = instDiv->getAttributeSet()[champ_sampleID] ? instDiv->getAttributeValues()[champ_sampleID].wValue : -1;
+    Smpl * smpl = sampleIndex >= 0 ? soundfont->getSample(sampleIndex) : nullptr;
+    if (smpl == nullptr)
+        return QJsonObject();
+
+    // Default settings of the sound engine (as the offline rendering): A4 = 440 Hz, equal temperament, default values
+    // of the controllers as in the editor (volume and expression at 127, pan at 64, the controllers read by the
+    // modulators of the soundfont at 64 if bipolar, 127 if decreasing)
+    MidiProcessor midiValues;
+    OfflineRenderer::applyDefaultControllerValues(soundfont, midiValues);
+    VoiceContext context;
+    context.setMidiValues(&midiValues);
+    context.setModulatorVelToFilterType(SynthCoreConfig().modulatorVelToFilterType);
+    VoiceParam param(&context);
+    param.initialize(indexSf2, prst, prstDiv, inst, instDiv, smpl, static_cast<int8_t>(prst != nullptr ? 0 : -1),
+                     static_cast<int8_t>(key), static_cast<int8_t>(velocity), 0);
+
+    SoundfontManager * sm = SoundfontManager::getInstance();
+    QJsonObject voice;
+    if (prst != nullptr)
+        voice["preset_division"] = McpUtils::idToString(EltID(elementPrstInst, indexSf2, prst->getIndex(), prstDivIndex));
+    voice["instrument"] = McpUtils::brief(EltID(elementInst, indexSf2, inst->getIndex()));
+    voice["instrument_division"] = McpUtils::idToString(EltID(elementInstSmpl, indexSf2, inst->getIndex(), instDivIndex));
+    EltID idSmpl(elementSmpl, indexSf2, sampleIndex);
+    QJsonObject sample = McpUtils::brief(idSmpl);
+    sample["root_key"] = sm->get(idSmpl, champ_byOriginalPitch).bValue;
+    sample["pitch_correction"] = sm->get(idSmpl, champ_chPitchCorrection).cValue;
+    sample["sample_rate"] = static_cast<double>(sm->get(idSmpl, champ_dwSampleRate).dwValue);
+    sample["channel"] = McpUtils::sampleChannel(sm->get(idSmpl, champ_sfSampleType).sfLinkValue);
+    voice["sample"] = sample;
+
+    int playedKey = param.getCurrentInteger(champ_keynum);
+    int rootKey = param.getCurrentInteger(champ_overridingRootKey);
+    int scaleTuning = param.getCurrentInteger(champ_scaleTuning);
+    int fineTuneWithCorrection = param.getCurrentInteger(champ_fineTune);
+    int coarseTune = param.getCurrentInteger(champ_coarseTune);
+    voice["sample_mode"] = param.getCurrentInteger(champ_sampleModes);
+    voice["key_used"] = playedKey;
+    voice["velocity_used"] = param.getCurrentInteger(champ_velocity);
+    voice["root_key_used"] = rootKey;
+    voice["static_pitch_shift_cents"] = (playedKey - rootKey) * scaleTuning + fineTuneWithCorrection + 100 * coarseTune;
+
+    QJsonObject parameters;
+    foreach (QString name, McpAttributes::getNames())
+    {
+        if (name == "key_range" || name == "velocity_range" || name == "root_key" || name == "fixed_key" ||
+            name == "fixed_velocity" || name == "sample_modes" || McpAttributes::isOffset(name))
+            continue;
+        AttributeType champ = McpAttributes::getChamp(name);
+        if (champ == champ_exclusiveClass)
+            parameters[name] = param.getCurrentInteger(champ);
+        else
+            parameters[name] = Utils::roundSignificant(param.getCurrentFloat(champ));
+    }
+
+    // Hold and decay durations at this key
+    auto atKey = [&](AttributeType duration, AttributeType keyScaling) -> double {
+        return param.getCurrentFloat(duration) * std::pow(2.0, param.getCurrentInteger(keyScaling) / 1200.0 * (60 - playedKey));
+    };
+    parameters["vol_env_hold_at_key"] = Utils::roundSignificant(atKey(champ_holdVolEnv, champ_keynumToVolEnvHold));
+    parameters["vol_env_decay_at_key"] = Utils::roundSignificant(atKey(champ_decayVolEnv, champ_keynumToVolEnvDecay));
+    parameters["mod_env_hold_at_key"] = Utils::roundSignificant(atKey(champ_holdModEnv, champ_keynumToModEnvHold));
+    parameters["mod_env_decay_at_key"] = Utils::roundSignificant(atKey(champ_decayModEnv, champ_keynumToModEnvDecay));
+    voice["parameters"] = parameters;
+
+    QJsonObject positions;
+    positions["start"] = static_cast<double>(param.getPosition(champ_dwStart16));
+    positions["end"] = static_cast<double>(param.getPosition(champ_dwLength));
+    positions["loop_start"] = static_cast<double>(param.getPosition(champ_dwStartLoop));
+    positions["loop_end"] = static_cast<double>(param.getPosition(champ_dwEndLoop));
+    voice["sample_positions"] = positions;
+    return voice;
+}
+
+// Voices started by a key of an instrument or a preset
+static QJsonObject describeKey(EltID id, int key, int velocity)
+{
+    SoundfontManager * sm = SoundfontManager::getInstance();
+    Soundfont * soundfont = sm->getSoundfonts()->getSoundfont(id.indexSf2);
+    if (soundfont == nullptr)
+        throw McpException("the soundfont is not loaded");
+
+    QJsonArray voices;
+    auto addInstrumentVoices = [&](InstPrst * prst, int prstDivIndex, InstPrst * inst) {
+        EltID idDiv(elementInstSmpl, id.indexSf2, inst->getIndex());
+        foreach (int i, sm->getSiblings(idDiv))
+        {
+            Division * division = inst->getDivision(i);
+            if (division != nullptr && division->isPlayable() && inRanges(division, inst->getGlobalDivision(), key, velocity))
+            {
+                QJsonObject voice = describeVoice(id.indexSf2, soundfont, prst, prstDivIndex, inst, i, key, velocity);
+                if (!voice.isEmpty())
+                    voices.append(voice);
+            }
+        }
+    };
+
+    if (id.typeElement == elementPrst)
+    {
+        InstPrst * prst = soundfont->getPreset(id.indexElt);
+        EltID idDiv(elementPrstInst, id.indexSf2, id.indexElt);
+        foreach (int i, sm->getSiblings(idDiv))
+        {
+            Division * division = prst->getDivision(i);
+            if (division == nullptr || !division->isPlayable() || !inRanges(division, prst->getGlobalDivision(), key, velocity) ||
+                !division->getAttributeSet()[champ_instrument])
+                continue;
+            InstPrst * inst = soundfont->getInstrument(division->getAttributeValues()[champ_instrument].wValue);
+            if (inst != nullptr)
+                addInstrumentVoices(prst, i, inst);
+        }
+    }
+    else
+    {
+        InstPrst * inst = soundfont->getInstrument(id.indexElt);
+        if (inst != nullptr)
+            addInstrumentVoices(nullptr, -1, inst);
+    }
+
+    QJsonObject result = McpUtils::brief(id);
+    result["key"] = key;
+    result["key_name"] = McpUtils::keyName(key);
+    result["velocity"] = velocity;
+    result["voices"] = voices;
+    result["note"] = "one voice per division of instrument reached (a stereo pair gives two voices); values computed by "
+                     "the sound engine when the key is pressed: division value, otherwise global value, otherwise "
+                     "default, preset values added or multiplied, then the modulators (default modulators included) "
+                     "with the default values of the controllers as in the editor, in the units of list_parameters "
+                     "(attenuation in dB, times in s, filter cutoff in Hz, pan from -50 to 50); sample_mode 2: played when the key is "
+                     "released; static_pitch_shift_cents: transposition applied to the sample data = (key_used - "
+                     "root_key_used) x scale_tuning + fine tune + pitch correction of the sample + 100 x coarse tune, "
+                     "without what changes over time (modulation envelope and LFOs to the pitch, possibly compensated "
+                     "by the static values) nor the reference pitch and the temperament of the settings: render_note "
+                     "measures the pitch actually heard over time; *_at_key: hold and decay durations once scaled by the key; sample_positions: frames "
+                     "of the sample data played (offsets applied)";
+    return result;
 }
 
 void McpFunctions::addBrowsingFunctions(QList<McpFunction *> &functions)
@@ -427,6 +590,23 @@ void McpFunctions::addBrowsingFunctions(QList<McpFunction *> &functions)
                               "the global value of its instrument / preset, otherwise the default value.";
             result["modulator_format"] = McpModulators::FORMAT;
             return result;
+        });
+
+    functions << new McpFunction(
+        "describe_key", McpFunction::CATEGORY_BROWSING, true,
+        "What a key of a preset or an instrument plays, without rendering: each voice started (preset division, "
+        "instrument division, sample) with the values computed by the sound engine once all levels are combined and "
+        "the modulators applied at this velocity: root key used, static transposition applied to the sample, "
+        "attenuation, pan, filter, envelopes (hold and decay scaled by the key), LFOs, effects, sample positions. What "
+        "evolves over time (envelopes, LFOs) is given as parameters, not as a result: render_note measures it.",
+        R"JSON({"properties":{
+            "element":{"type":"string","description":"Preset or instrument"},
+            "key":{"type":["integer","string"],"description":"Key (number or note name)"},
+            "velocity":{"type":"integer","minimum":1,"maximum":127,"description":"Default 100"}},
+            "required":["element","key"]})JSON",
+        [](const McpArguments &args) -> McpResult {
+            return describeKey(args.getId("element", { elementPrst, elementInst }), args.getKey("key"),
+                               args.getInt("velocity", 1, 127, 100));
         });
 
     functions << new McpFunction(

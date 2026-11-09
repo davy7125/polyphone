@@ -26,24 +26,45 @@
 #include "toolfrequencyfilter_gui.h"
 #include "toolfrequencyfilter_parameters.h"
 #include "soundfontmanager.h"
-#include "sampleutils.h"
+#include "gaincurve.h"
 
 ToolFrequencyFilter::ToolFrequencyFilter() : AbstractToolIterating(elementSmpl, new ToolFrequencyFilter_parameters(), new ToolFrequencyFilter_gui())
 {
 
 }
 
+void ToolFrequencyFilter::beforeProcess(IdList ids)
+{
+    Q_UNUSED(ids)
+    QMutexLocker locker(&_mutex);
+    _reports.clear();
+}
+
 void ToolFrequencyFilter::process(SoundfontManager * sm, EltID id, AbstractToolParameters *parameters)
 {
-    // Get the curve used to cut frequencies
-    ToolFrequencyFilter_parameters * params = (ToolFrequencyFilter_parameters *)parameters;
-    QVector<float> dValues = params->getCurve();
+    GainCurve curve = dynamic_cast<ToolFrequencyFilter_parameters *>(parameters)->getCurve();
 
-    // Get data and sample rate of the sample
+    // Data, sample rate, fundamental frequency and loop of the sample
     QVector<float> vData = sm->getDataFloat(id);
-    quint32 dwSmplRate = sm->get(id, champ_dwSampleRate).dwValue;
+    double sampleRate = sm->get(id, champ_dwSampleRate).dwValue;
+    double fundamental = GainCurve::getFundamental(sm->get(id, champ_byOriginalPitch).bValue,
+                                                   sm->get(id, champ_chPitchCorrection).cValue);
+    quint32 loopStart = sm->get(id, champ_dwStartLoop).dwValue;
+    quint32 loopEnd = sm->get(id, champ_dwEndLoop).dwValue;
 
     // Apply the filter and update data
-    vData = SampleUtils::cutFilter(vData, dwSmplRate, dValues, 20000);
+    Report report;
+    report.id = id;
+    report.fundamental = curve.isNoteTracking() ? fundamental : 0;
+    vData = curve.apply(vData, sampleRate, fundamental, loopStart, loopEnd, &report.peakBefore, &report.peakAfter);
     sm->setData(id, vData);
+
+    QMutexLocker locker(&_mutex);
+    _reports << report;
+}
+
+QList<ToolFrequencyFilter::Report> ToolFrequencyFilter::getReports()
+{
+    QMutexLocker locker(&_mutex);
+    return _reports;
 }

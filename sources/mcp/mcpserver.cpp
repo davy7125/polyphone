@@ -50,9 +50,13 @@ static const char * INSTRUCTIONS =
     "Start with get_selection (what the user is looking at) or list_soundfonts, then get_soundfont / get_element. "
     "Each call changing something is one undoable step (undo / redo functions, also Ctrl+Z in Polyphone). Nothing is "
     "written on the disk until save_soundfont is called: save only if the user asks for it.\n"
-    "You cannot hear: use the analysis functions (analyze_sample, analyze_instrument, render_note, compare_samples, "
-    "get_spectrum, get_loop_analysis) to measure the sound before and after an edit, and to check the consistency of "
-    "the samples across the keyboard. Prefer gradual changes verified by measures.";
+    "You cannot hear: render_note and render_keyboard measure what the sound engine plays (several elements and keys "
+    "at once: registrations, chords), including what changes over time (pitch, level), whatever the parameters "
+    "producing it; start with them. The analysis functions (analyze_sample, analyze_instrument, compare_samples, "
+    "get_spectrum, get_loop_analysis) measure the samples alone, describe_key and get_parameter_map give the exact "
+    "parameters that explain what is heard. The measures describe the sound without judging it: what is right depends on the intended result (a "
+    "slight detuning, an irregularity or a noise can be wanted), so ask the user what is intended before correcting "
+    "something.";
 
 McpServer * McpServer::getInstance()
 {

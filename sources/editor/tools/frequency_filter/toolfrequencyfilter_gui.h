@@ -26,6 +26,7 @@
 #define TOOLFREQUENCYFILTER_GUI_H
 
 #include "abstracttoolgui.h"
+#include "gaincurve.h"
 
 namespace Ui {
 class ToolFrequencyFilter_gui;
@@ -48,9 +49,17 @@ public:
 private slots:
     void on_buttonBox_rejected();
     void on_buttonBox_accepted();
+    void on_comboMode_currentIndexChanged(int index);
+    void on_checkNoteTracking_toggled(bool checked);
 
 private:
+    void displayCurve(); // Curve of the current mode and abscissa
+
     Ui::ToolFrequencyFilter_gui *ui;
+    QList<QPointF> _points[4]; // Indexed by 2 * mode + note tracking
+    GainCurve::Mode _mode;
+    bool _noteTracking;
+    bool _initialization;
 };
 
 #endif // TOOLFREQUENCYFILTER_GUI_H

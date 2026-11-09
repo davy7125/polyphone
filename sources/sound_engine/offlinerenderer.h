@@ -33,6 +33,7 @@
 class MidiProcessor;
 class SynthCoreConfig;
 class ISynthSoundfonts;
+class ISynthSoundfont;
 
 /// Play a list of timed events with the synth, faster than real time, and write the result in a wav file.
 /// Used for comparing the sound before and after a change of the sound engine (see tests/render).
@@ -69,6 +70,14 @@ public:
     bool render(int sf2Index, QVector<float> &data, quint32 &frameCount, SynthType synthType);
 
     quint32 getSampleRate() { return _sampleRate; }
+
+    /// Default values of the controllers given by the modulators of the soundfont loaded at sf2Index, as the editor sets
+    /// them when it loads it: for a renderer created after the loading
+    bool applyDefaultControllerValues(int sf2Index);
+
+    /// Same for any processor: controllers read by the modulators of the soundfont, in the order the editor adds them
+    /// (instruments then presets, global zone then the other zones, source then amount source)
+    static void applyDefaultControllerValues(ISynthSoundfont * soundfont, MidiProcessor &processor);
 
     /// Write interleaved stereo data in a 32-bit float wav file
     static bool writeWavFile(QString filePath, const QVector<float> &data, quint32 frameCount, quint32 sampleRate);

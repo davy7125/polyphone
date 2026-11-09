@@ -28,6 +28,7 @@
 #include "soundfontmanager.h"
 #include "contextmanager.h"
 #include "soundanalyzer.h"
+#include "sampleutils.h"
 #include "utils.h"
 #include "trim_end/tooltrimend.h"
 #include "auto_loop/toolautoloop.h"
@@ -86,6 +87,7 @@
 #include <QDir>
 
 typedef std::function<void(const McpArguments &, AbstractTool *, AbstractToolParameters *)> ParameterSetter;
+typedef std::function<void(AbstractTool *, QJsonObject &)> ResultFiller;
 
 // Tools are created once, separately from the tools of the menus
 static AbstractTool * getTool(QString name, std::function<AbstractTool *()> create)
@@ -108,14 +110,14 @@ static QString cleanMessage(QString message)
 // Function running a tool on elements given in the argument "elements"
 static McpFunction * toolFunction(QString name, QString description, QString elementsDescription, QList<ElementType> types,
                                   QString properties, QStringList required, std::function<AbstractTool *()> create,
-                                  ParameterSetter setter = ParameterSetter())
+                                  ParameterSetter setter = ParameterSetter(), ResultFiller filler = ResultFiller())
 {
     QString schema = "{\"properties\":{\"elements\":{\"type\":[\"string\",\"array\"],\"items\":{\"type\":\"string\"},"
                      "\"description\":\"" + elementsDescription + "\"}" + (properties.isEmpty() ? "" : "," + properties) +
                      "},\"required\":[\"elements\"" + (required.isEmpty() ? "" : ",\"" + required.join("\",\"") + "\"") + "]}";
 
     return new McpFunction(name, McpFunction::CATEGORY_TOOLS, false, description, schema.toUtf8().constData(),
-        [name, types, create, setter](const McpArguments &args) -> McpResult {
+        [name, types, create, setter, filler](const McpArguments &args) -> McpResult {
             IdList ids = args.getIds("elements", types);
             AbstractTool * tool = getTool(name, create);
             QString message;
@@ -140,6 +142,8 @@ static McpFunction * toolFunction(QString name, QString description, QString ele
             result["done"] = true;
             if (!message.isEmpty())
                 result["message"] = cleanMessage(message);
+            if (filler)
+                filler(tool, result);
             return result;
         });
 }
@@ -297,25 +301,53 @@ static void addSampleTools(QList<McpFunction *> &functions)
 
     functions << toolFunction(
         "filter_frequencies",
-        "Tool \"Filter frequencies\": limit the spectrum of the samples. The curve gives, for each frequency, the "
-        "maximum level allowed relative to the strongest frequency of the sample (0 dB = nothing removed, -40 dB = "
-        "components above -40 dB are reduced to -40 dB, -90 dB or less = the band is removed). The level is "
-        "interpolated between the points on a logarithmic frequency scale; above 20 kHz the last point applies. "
-        "Example removing everything above 8 kHz: [[0,0],[7000,0],[8000,-100]]. It is a ceiling, not an equalizer: "
-        "to change the brightness while playing, prefer the parameters filter_cutoff / filter_resonance.",
+        "Tool \"Filter frequencies\": change the spectrum of the samples with a curve of points [x, dB], interpolated on a "
+        "logarithmic scale of x and constant beyond the first and the last points. x is a frequency in Hz or, with "
+        "note_tracking, a ratio to the fundamental frequency of each sample (its root key shifted by its pitch correction): "
+        "1 = fundamental, 0.5 = octave below, 2 = octave, 3 = twelfth, 4 = second octave... so that the same curve acts on "
+        "the same harmonics of every sample. Mode \"gain\": attenuation or amplification from -60 to +24 dB, applied with "
+        "a minimum phase (causal, no pre-echo before the attack), the loop being processed as if it were played endlessly "
+        "(it stays seamless). Mode \"ceiling\": maximum level allowed relative to the strongest frequency of the sample "
+        "(0 dB = nothing removed, -40 dB = components above -40 dB are reduced to -40 dB, -80 dB or less = removed). "
+        "If the result exceeds the full scale, the whole sample is attenuated to the full scale. Examples: "
+        "{\"mode\":\"ceiling\",\"curve\":[[7000,0],[8000,-100]]} removes everything above 8 kHz; "
+        "{\"mode\":\"gain\",\"note_tracking\":true,\"curve\":[[2,0],[4,3],[8,3],[16,0]]} raises the harmonics 4 to 8 "
+        "by 3 dB. Result for each sample: fundamental used (Hz, with note_tracking), peaks before and after the processing "
+        "(dBFS, the second one before the attenuation to the full scale).",
         samplesText, samples,
-        R"JSON("curve":{"type":"array","items":{"type":"array"},"description":"Points [frequency in Hz, maximum level in dB (<= 0)]"})JSON",
-        { "curve" }, []() { return new ToolFrequencyFilter(); },
+        R"JSON("mode":{"type":"string","enum":["gain","ceiling"],"description":"Gain in dB, or ceiling relative to the strongest frequency"},
+           "note_tracking":{"type":"boolean","description":"x is a ratio to the fundamental frequency of each sample (default: false, x in Hz)"},
+           "curve":{"type":"array","items":{"type":"array"},"description":"Points [x > 0, dB]: gain from -60 to 24, or ceiling <= 0"})JSON",
+        { "mode", "curve" }, []() { return new ToolFrequencyFilter(); },
         [](const McpArguments &args, AbstractTool *, AbstractToolParameters * parameters) {
+            ToolFrequencyFilter_parameters * params = dynamic_cast<ToolFrequencyFilter_parameters *>(parameters);
+            bool isGain = readChoice(args, "mode", { "ceiling", "gain" }) == 1;
             QList<QPointF> points = readPoints(args, "curve", false);
-            QVector<float> curve(201);
-            for (int i = 0; i < 201; i++)
+            for (const QPointF &point : points)
             {
-                double frequency = i * 20000.0 / 201; // As read by SampleUtils::cutFilter
-                double db = qMin(0.0, interpolate(points, qMax(frequency, 1.0), true));
-                curve[i] = db <= -80 ? 0.f : static_cast<float>(qPow(10.0, db / 20));
+                if (point.x() <= 0)
+                    throw McpException("argument \"curve\": x values must be greater than 0");
+                if (isGain && (point.y() < GainCurve::MIN_GAIN || point.y() > GainCurve::MAX_GAIN))
+                    throw McpException("argument \"curve\": gains must be between -60 and 24 dB");
+                if (!isGain && point.y() > 0)
+                    throw McpException("argument \"curve\": ceilings must be 0 dB or less");
             }
-            dynamic_cast<ToolFrequencyFilter_parameters *>(parameters)->setCurve(curve);
+            params->setMode(isGain ? GainCurve::MODE_GAIN : GainCurve::MODE_CEILING);
+            params->setNoteTracking(args.getBool("note_tracking", false));
+            params->setPoints(points);
+        },
+        [](AbstractTool * tool, QJsonObject &result) {
+            QJsonArray samples;
+            for (const ToolFrequencyFilter::Report &report : dynamic_cast<ToolFrequencyFilter *>(tool)->getReports())
+            {
+                QJsonObject sample = McpUtils::brief(report.id);
+                if (report.fundamental > 0)
+                    sample["fundamental_hz"] = SoundAnalyzer::jsonNumber(report.fundamental, 3);
+                sample["peak_before_dbfs"] = SoundAnalyzer::jsonNumber(SampleUtils::toDb(report.peakBefore), 2);
+                sample["peak_after_dbfs"] = SoundAnalyzer::jsonNumber(SampleUtils::toDb(report.peakAfter), 2);
+                samples << sample;
+            }
+            result["samples"] = samples;
         });
 
     functions << toolFunction(
@@ -1032,47 +1064,121 @@ static void addPresetAndSoundfontTools(QList<McpFunction *> &functions)
 
     functions << new McpFunction(
         "get_parameter_map", McpFunction::CATEGORY_TOOLS, true,
-        "Tool \"Display parameters\": value of one parameter in all divisions of an instrument or a preset, with their "
-        "key and velocity ranges, and the global value. Useful to see how a parameter evolves across the keyboard.",
+        "Tool \"Display parameters\": table of parameters in all divisions of an instrument or a preset, with their "
+        "key and velocity ranges. A cell is the value set in the division, null if not set (then the global value, "
+        "otherwise the default value applies: both are given). Without \"parameters\", all parameters set somewhere "
+        "in the element are listed. For an instrument, include_sample adds the properties of the sample of each "
+        "division (root key, pitch correction, loop, length, sample rate, channel). describe_key gives the values "
+        "combined for a key.",
         R"JSON({"properties":{
             "element":{"type":"string","description":"Instrument or preset"},
-            "parameter":{"type":"string","description":"Parameter name (see list_parameters)"}},
-            "required":["element","parameter"]})JSON",
+            "parameters":{"type":"array","items":{"type":"string"},"description":"Parameter names (see list_parameters)"},
+            "parameter":{"type":"string","description":"A single parameter name (same as parameters with one name)"},
+            "include_sample":{"type":"boolean","description":"Instrument only: add the sample properties (default false)"}},
+            "required":["element"]})JSON",
         [](const McpArguments &args) -> McpResult {
             EltID id = args.getId("element", { elementInst, elementPrst });
-            QString name = args.getString("parameter");
-            AttributeType champ = McpAttributes::getChamp(name);
-            if (champ == champ_unknown)
-                throw McpException("unknown parameter \"" + name + "\"");
             bool isPrst = id.typeElement == elementPrst;
             SoundfontManager * sm = SoundfontManager::getInstance();
-
-            QJsonObject result;
-            QJsonValue global = McpAttributes::getValue(id, name);
-            result["global"] = global;
-            if (global.isNull() && champ != champ_keyRange && champ != champ_velRange)
-                result["default"] = Utils::roundSignificant(AttributeBase::getDefaultRealValue(champ, isPrst));
-
-            QJsonArray divisions;
             EltID idDiv(isPrst ? elementPrstInst : elementInstSmpl, id.indexSf2, id.indexElt);
-            foreach (int i, sm->getSiblings(idDiv))
+            QList<int> divisionIndexes = sm->getSiblings(idDiv);
+
+            // Parameters listed
+            QStringList names;
+            if (args.contains("parameter"))
+                names << args.getString("parameter");
+            if (args.contains("parameters"))
+            {
+                for (const QJsonValue value : args.getArray("parameters"))
+                {
+                    if (!value.isString())
+                        throw McpException("\"parameters\" must contain parameter names");
+                    names << value.toString();
+                }
+            }
+            foreach (QString name, names)
+                if (McpAttributes::getChamp(name) == champ_unknown)
+                    throw McpException("unknown parameter \"" + name + "\" (see list_parameters)");
+            if (names.isEmpty())
+            {
+                // All parameters set in the global division or in a division
+                foreach (QString name, McpAttributes::getNames())
+                {
+                    if (name == "key_range" || name == "velocity_range")
+                        continue;
+                    bool isSet = !McpAttributes::getValue(id, name).isNull();
+                    for (int i = 0; i < divisionIndexes.count() && !isSet; i++)
+                    {
+                        idDiv.indexElt2 = divisionIndexes[i];
+                        isSet = !McpAttributes::getValue(idDiv, name).isNull();
+                    }
+                    if (isSet)
+                        names << name;
+                }
+            }
+            names.removeAll("key_range");
+            names.removeAll("velocity_range");
+            names.removeDuplicates();
+            bool includeSample = args.getBool("include_sample", false);
+            if (includeSample && isPrst)
+                throw McpException("include_sample is only for instruments");
+
+            QStringList columns = { "division", isPrst ? "instrument" : "sample", "key_range", "velocity_range" };
+            columns << names;
+            if (includeSample)
+                columns << "sample_root_key" << "sample_pitch_correction" << "sample_loop_start" << "sample_loop_end"
+                        << "sample_length" << "sample_rate" << "sample_channel";
+
+            QJsonObject global, defaults;
+            foreach (QString name, names)
+            {
+                global[name] = McpAttributes::getValue(id, name);
+                if (isPrst && McpAttributes::isInstrumentOnly(name))
+                    defaults[name] = QJsonValue();
+                else if (McpAttributes::isOffset(name))
+                    defaults[name] = 0;
+                else
+                    defaults[name] = Utils::roundSignificant(AttributeBase::getDefaultRealValue(McpAttributes::getChamp(name), isPrst));
+            }
+
+            QJsonArray rows;
+            foreach (int i, divisionIndexes)
             {
                 idDiv.indexElt2 = i;
-                QJsonObject division;
-                division["id"] = McpUtils::idToString(idDiv);
+                QJsonArray row;
+                row.append(McpUtils::idToString(idDiv));
+                EltID idElement(isPrst ? elementInst : elementSmpl, id.indexSf2,
+                                sm->get(idDiv, isPrst ? champ_instrument : champ_sampleID).wValue);
+                row.append(McpUtils::idToString(idElement));
                 RangesType keyRange = sm->isSet(idDiv, champ_keyRange) ? sm->get(idDiv, champ_keyRange).rValue :
                                           AttributeBase::getDefaultStoredValue(champ_keyRange, false).rValue;
                 RangesType velRange = sm->isSet(idDiv, champ_velRange) ? sm->get(idDiv, champ_velRange).rValue :
                                           AttributeBase::getDefaultStoredValue(champ_velRange, false).rValue;
-                division["key_range"] = QJsonArray({ keyRange.byLo, keyRange.byHi });
-                division["velocity_range"] = QJsonArray({ velRange.byLo, velRange.byHi });
-                QJsonValue value = McpAttributes::getValue(idDiv, name);
-                division["value"] = value.isNull() ? global : value;
-                if (value.isNull())
-                    division["inherited"] = true;
-                divisions.append(division);
+                row.append(QJsonArray({ keyRange.byLo, keyRange.byHi }));
+                row.append(QJsonArray({ velRange.byLo, velRange.byHi }));
+                foreach (QString name, names)
+                    row.append(McpAttributes::getValue(idDiv, name));
+                if (includeSample)
+                {
+                    row.append(sm->get(idElement, champ_byOriginalPitch).bValue);
+                    row.append(sm->get(idElement, champ_chPitchCorrection).cValue);
+                    row.append(static_cast<double>(sm->get(idElement, champ_dwStartLoop).dwValue));
+                    row.append(static_cast<double>(sm->get(idElement, champ_dwEndLoop).dwValue));
+                    row.append(static_cast<double>(sm->get(idElement, champ_dwLength).dwValue));
+                    row.append(static_cast<double>(sm->get(idElement, champ_dwSampleRate).dwValue));
+                    row.append(McpUtils::sampleChannel(sm->get(idElement, champ_sfSampleType).sfLinkValue));
+                }
+                rows.append(row);
             }
-            result["divisions"] = divisions;
+
+            QJsonObject result = McpUtils::brief(id);
+            result["columns"] = QJsonArray::fromStringList(columns);
+            result["divisions"] = rows;
+            result["global"] = global;
+            result["defaults"] = defaults;
+            result["note"] = QString("null cell: not set in the division, the global value applies, otherwise the "
+                                     "default value") + (isPrst ? "; preset values are added to or multiply the "
+                                     "instrument values (see list_parameters)" : "");
             return result;
         });
 }

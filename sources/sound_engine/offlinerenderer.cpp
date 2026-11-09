@@ -41,6 +41,7 @@
 #include "synthmath.h"
 #include "synthsoundfontfile.h"
 #include "synthsoundfontset.h"
+#include "modulatordata.h"
 #include "basetypes.h"
 
 OfflineRenderer::OfflineRenderer() :
@@ -72,6 +73,50 @@ OfflineRenderer::~OfflineRenderer()
 {
     QObject::disconnect(_modulatorConnection);
     delete _midiProcessor;
+}
+
+bool OfflineRenderer::applyDefaultControllerValues(int sf2Index)
+{
+    Soundfont * soundfont = SoundfontManager::getInstance()->getSoundfonts()->getSoundfont(sf2Index);
+    if (soundfont == nullptr)
+    {
+        _error = "the soundfont is not loaded";
+        return false;
+    }
+    applyDefaultControllerValues(soundfont, *_midiProcessor);
+    return true;
+}
+
+void OfflineRenderer::applyDefaultControllerValues(ISynthSoundfont * soundfont, MidiProcessor &processor)
+{
+    for (int type = 0; type < 2; type++)
+    {
+        int count = type == 0 ? soundfont->getInstrumentCount() : soundfont->getPresetCount();
+        for (int i = 0; i < count; i++)
+        {
+            ISynthInstPrst * element = type == 0 ? soundfont->getInstrumentAt(i) : soundfont->getPresetAt(i);
+            if (element == nullptr)
+                continue;
+            for (int z = -1; z < element->getZoneCount(); z++)
+            {
+                ISynthZone * zone = z < 0 ? element->getGlobalZone() : element->getZone(z);
+                if (zone == nullptr)
+                    continue;
+                for (int m = 0; m < zone->getModulatorCount(); m++)
+                {
+                    ModulatorData * modulator = zone->getModulatorData(m);
+                    if (modulator == nullptr)
+                        continue;
+                    if (modulator->srcOper.CC)
+                        processor.setDefaultControllerValue(modulator->srcOper.Index, modulator->srcOper.isBipolar,
+                                                            modulator->srcOper.isDescending);
+                    if (modulator->amtSrcOper.CC)
+                        processor.setDefaultControllerValue(modulator->amtSrcOper.Index, modulator->amtSrcOper.isBipolar,
+                                                            modulator->amtSrcOper.isDescending);
+                }
+            }
+        }
+    }
 }
 
 bool OfflineRenderer::readEvents(QString filePath)
@@ -323,7 +368,10 @@ bool OfflineRenderer::readEvent(double time, QStringList words, int line)
         return false;
     }
 
-    if (!readInt(words[0], 0, 15, event.channel, line))
+    // The controllers, bend and pressures can also be sent to the channel of the editor (-1), read by the modulators of
+    // the instruments and samples played alone
+    bool editorChannelAllowed = (event.type != EVENT_PROGRAM && event.type != EVENT_NOTE_ON && event.type != EVENT_NOTE_OFF);
+    if (!readInt(words[0], editorChannelAllowed ? -1 : 0, 15, event.channel, line))
         return false;
 
     bool ok = true;

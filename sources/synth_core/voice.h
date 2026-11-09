@@ -57,6 +57,15 @@ public:
     VoiceParam * getParam() { return _voiceParam; }
     int getNoteId() { return _noteId; }
 
+    // Sample read, and the length of its data when the voice started
+    ISynthSample * getSample() { return _smpl; }
+    uint32_t getDataLength() { return _dataSmplLength; }
+
+    // Data replacing the sample data from the next chunk computed (preview of a processing in the editor), for a voice
+    // playing a sample alone (type 1 or 2) which reads a copy: the arrays of the same length (24-bit part possibly null)
+    // are then owned by the voice
+    void replaceData(int16_t * data16, uint8_t * data24, float peak);
+
     // Allocate the arrays for computing up to chunkCount chunks at once (not in the audio thread)
     void reserve(uint32_t chunkCount);
 
@@ -106,6 +115,7 @@ private:
     EnveloppeVol _volEnvelope, _modEnvelope;
 
     // Sound data and parameters
+    ISynthSample * _smpl;
     int16_t * _dataSmpl16;
     uint8_t * _dataSmpl24;
     uint32_t _dataSmplLength;
@@ -117,6 +127,17 @@ private:
     int _token;
     int _noteId;
     char _loopMode;
+
+    // Data replacing the sample data, applied by the thread computing the voice
+    struct ReplacedData
+    {
+        int16_t * data16;
+        uint8_t * data24;
+        float peak;
+    };
+    std::atomic<ReplacedData *> _replacedData;
+    void applyReplacedData();
+    static void deleteReplacedData(ReplacedData * replacedData);
 
     // Sample playback
     bool _release;

@@ -422,88 +422,132 @@ void McpFunctions::addEditingFunctions(QList<McpFunction *> &functions)
         "set_parameters", McpFunction::CATEGORY_EDITING, false,
         "Set parameters of instruments, presets (global parameters) or divisions, in real units (see "
         "list_parameters). A null value removes the parameter (the division then inherits the global value). A global "
-        "value only applies to the divisions that don't define the parameter (see get_parameter_map). "
-        "Example: {\"elements\":[\"sf0/inst1\"],\"parameters\":{\"vol_env_release\":0.8,\"filter_cutoff\":4000}}.",
+        "value only applies to the divisions that don't define them (see get_parameter_map). Either the same "
+        "parameters for several elements (\"elements\" + \"parameters\"), or different values per element "
+        "(\"changes\"), all in one undoable step. Examples: {\"elements\":[\"sf0/inst1\"],\"parameters\":"
+        "{\"vol_env_release\":0.8,\"filter_cutoff\":4000}}, {\"changes\":{\"sf0/inst1/div0\":{\"attenuation\":3.5},"
+        "\"sf0/inst1/div1\":{\"attenuation\":2.8,\"fine_tune\":-3}}}.",
         R"JSON({"properties":{
             "elements":{"type":["string","array"],"items":{"type":"string"},"description":"Instruments, presets or divisions"},
-            "parameters":{"type":"object","description":"Parameter names and values"}},
-            "required":["elements","parameters"]})JSON",
+            "parameters":{"type":"object","description":"Parameter names and values, for all elements"},
+            "changes":{"type":"object","description":"Element identifiers and, for each, an object of parameter names and values"}}})JSON",
         [](const McpArguments &args) -> McpResult {
-            IdList ids = args.getIds("elements", { elementInst, elementPrst, elementInstSmpl, elementPrstInst });
-            QJsonObject parameters = args.getObject("parameters");
-            if (parameters.isEmpty())
-                throw McpException("no parameters to change");
-            foreach (EltID id, ids)
-                for (QJsonObject::const_iterator it = parameters.constBegin(); it != parameters.constEnd(); ++it)
-                    McpAttributes::setValue(id, it.key(), it.value());
+            QList<ElementType> allowed = { elementInst, elementPrst, elementInstSmpl, elementPrstInst };
+            QList<QPair<EltID, QJsonObject> > changes;
+            if (args.contains("elements") || args.contains("parameters"))
+            {
+                IdList ids = args.getIds("elements", allowed);
+                QJsonObject parameters = args.getObject("parameters");
+                if (parameters.isEmpty())
+                    throw McpException("no parameters to change");
+                foreach (EltID id, ids)
+                    changes << QPair<EltID, QJsonObject>(id, parameters);
+            }
+            if (args.contains("changes"))
+            {
+                QJsonObject perElement = args.getObject("changes");
+                for (QJsonObject::const_iterator it = perElement.constBegin(); it != perElement.constEnd(); ++it)
+                {
+                    if (!it.value().isObject() || it.value().toObject().isEmpty())
+                        throw McpException("\"changes\": parameters expected for \"" + it.key() + "\"");
+                    changes << QPair<EltID, QJsonObject>(McpUtils::readId(it.key(), allowed), it.value().toObject());
+                }
+            }
+            if (changes.isEmpty())
+                throw McpException("give \"elements\" and \"parameters\", or \"changes\"");
+
+            for (int i = 0; i < changes.count(); i++)
+                for (QJsonObject::const_iterator it = changes[i].second.constBegin(); it != changes[i].second.constEnd(); ++it)
+                    McpAttributes::setValue(changes[i].first, it.key(), it.value());
 
             // New values
             QJsonObject result;
-            foreach (EltID id, ids)
+            for (int i = 0; i < changes.count(); i++)
             {
-                QJsonObject values;
-                for (QJsonObject::const_iterator it = parameters.constBegin(); it != parameters.constEnd(); ++it)
-                    values[it.key()] = McpAttributes::getValue(id, it.key());
-                result[McpUtils::idToString(id)] = values;
+                QString key = McpUtils::idToString(changes[i].first);
+                QJsonObject values = result.value(key).toObject();
+                for (QJsonObject::const_iterator it = changes[i].second.constBegin(); it != changes[i].second.constEnd(); ++it)
+                    values[it.key()] = McpAttributes::getValue(changes[i].first, it.key());
+                result[key] = values;
             }
             return result;
         });
 
     functions << new McpFunction(
         "set_sample_properties", McpFunction::CATEGORY_EDITING, false,
-        "Change the properties of a sample: root key, pitch correction, loop points. By default the linked sample of a "
-        "stereo pair receives the same root key, correction and loop points.",
+        "Change the properties of samples: root key, pitch correction, loop points. By default the linked sample of a "
+        "stereo pair receives the same root key, correction and loop points. Either one sample (\"sample\" and the "
+        "properties), or several samples with their own values (\"changes\": array of objects with the same fields), "
+        "all in one undoable step.",
         R"JSON({"properties":{
             "sample":{"type":"string","description":"Sample identifier"},
             "root_key":{"type":["integer","string"],"description":"Key at which the sample plays at its original pitch"},
             "pitch_correction":{"type":"integer","minimum":-99,"maximum":99,"description":"Correction in cents applied when the sample is played"},
             "loop_start":{"type":"integer","minimum":0,"description":"First frame of the loop"},
             "loop_end":{"type":"integer","minimum":0,"description":"Frame after the last frame of the loop (loop_start = loop_end = 0: no loop)"},
-            "include_linked":{"type":"boolean","description":"Also change the linked sample (default true)"}},
-            "required":["sample"]})JSON",
+            "include_linked":{"type":"boolean","description":"Also change the linked sample (default true)"},
+            "changes":{"type":"array","items":{"type":"object"},"description":"Several samples: [{\"sample\":\"sf0/smpl3\",\"pitch_correction\":-4}, ...]"}}})JSON",
         [](const McpArguments &args) -> McpResult {
-            EltID id = args.getId("sample", { elementSmpl });
             SoundfontManager * sm = SoundfontManager::getInstance();
-            IdList ids(id);
-            SFSampleLink link = sm->get(id, champ_sfSampleType).sfLinkValue;
-            if (args.getBool("include_linked", true) && link != monoSample && link != RomMonoSample)
-            {
-                EltID idLinked(elementSmpl, id.indexSf2, sm->get(id, champ_wSampleLink).wValue);
-                if (sm->isValid(idLinked))
-                    ids << idLinked;
-            }
+            auto apply = [sm](const McpArguments &change) -> IdList {
+                EltID id = change.getId("sample", { elementSmpl });
+                IdList ids(id);
+                SFSampleLink link = sm->get(id, champ_sfSampleType).sfLinkValue;
+                if (change.getBool("include_linked", true) && link != monoSample && link != RomMonoSample)
+                {
+                    EltID idLinked(elementSmpl, id.indexSf2, sm->get(id, champ_wSampleLink).wValue);
+                    if (sm->isValid(idLinked))
+                        ids << idLinked;
+                }
 
-            AttributeValue val;
-            foreach (EltID idSmpl, ids)
+                AttributeValue val;
+                foreach (EltID idSmpl, ids)
+                {
+                    if (change.contains("root_key"))
+                    {
+                        val.bValue = static_cast<quint8>(change.getKey("root_key"));
+                        sm->set(idSmpl, champ_byOriginalPitch, val);
+                    }
+                    if (change.contains("pitch_correction"))
+                    {
+                        val.cValue = static_cast<qint8>(change.getInt("pitch_correction", -99, 99));
+                        sm->set(idSmpl, champ_chPitchCorrection, val);
+                    }
+                    if (change.contains("loop_start") || change.contains("loop_end"))
+                    {
+                        quint32 length = sm->get(idSmpl, champ_dwLength).dwValue;
+                        int start = change.getInt("loop_start", 0, static_cast<int>(length),
+                                                  static_cast<int>(sm->get(idSmpl, champ_dwStartLoop).dwValue));
+                        int end = change.getInt("loop_end", 0, static_cast<int>(length),
+                                                static_cast<int>(sm->get(idSmpl, champ_dwEndLoop).dwValue));
+                        if (start > end)
+                            throw McpException("loop_start must be lower than loop_end");
+                        val.dwValue = static_cast<quint32>(start);
+                        sm->set(idSmpl, champ_dwStartLoop, val);
+                        val.dwValue = static_cast<quint32>(end);
+                        sm->set(idSmpl, champ_dwEndLoop, val);
+                    }
+                }
+                return ids;
+            };
+
+            IdList changed;
+            if (args.contains("sample"))
+                changed << apply(args);
+            if (args.contains("changes"))
             {
-                if (args.contains("root_key"))
+                for (const QJsonValue value : args.getArray("changes"))
                 {
-                    val.bValue = static_cast<quint8>(args.getKey("root_key"));
-                    sm->set(idSmpl, champ_byOriginalPitch, val);
-                }
-                if (args.contains("pitch_correction"))
-                {
-                    val.cValue = static_cast<qint8>(args.getInt("pitch_correction", -99, 99));
-                    sm->set(idSmpl, champ_chPitchCorrection, val);
-                }
-                if (args.contains("loop_start") || args.contains("loop_end"))
-                {
-                    quint32 length = sm->get(idSmpl, champ_dwLength).dwValue;
-                    int start = args.getInt("loop_start", 0, static_cast<int>(length),
-                                            static_cast<int>(sm->get(idSmpl, champ_dwStartLoop).dwValue));
-                    int end = args.getInt("loop_end", 0, static_cast<int>(length),
-                                          static_cast<int>(sm->get(idSmpl, champ_dwEndLoop).dwValue));
-                    if (start > end)
-                        throw McpException("loop_start must be lower than loop_end");
-                    val.dwValue = static_cast<quint32>(start);
-                    sm->set(idSmpl, champ_dwStartLoop, val);
-                    val.dwValue = static_cast<quint32>(end);
-                    sm->set(idSmpl, champ_dwEndLoop, val);
+                    if (!value.isObject())
+                        throw McpException("\"changes\" must contain objects");
+                    changed << apply(McpArguments(value.toObject()));
                 }
             }
+            if (changed.isEmpty())
+                throw McpException("give \"sample\" or \"changes\"");
 
             QJsonObject result;
-            result["changed"] = idsToJson(ids);
+            result["changed"] = idsToJson(changed);
             return result;
         });
 
