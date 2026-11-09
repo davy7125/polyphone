@@ -5,9 +5,9 @@ name: Build Polyphone plugin
 # distributed: the editor plays the soundfonts.
 # Libraries: those of the system on Linux; built by vcpkg on macOS and Windows (static, triplets in
 # packaging/vcpkg-triplets), libsndfile then reading the samples of the sfz files in flac, ogg, opus and mp3.
-# Windows: built with clang-cl (the synth core uses builtins of GCC and Clang). The archive is signed by SignPath if
-# the variable SIGNPATH_PLUGIN_CONFIGURATION gives the slug of its artifact configuration (the 3 libraries of the
-# plugin with the product name "Polyphone" and the product version given by the parameter "version").
+# Windows: built with clang-cl (the synth core uses builtins of GCC and Clang). The archive is signed by SignPath
+# (artifact configuration windows-plugin: the 3 libraries of the plugin with the product name "Polyphone" and the
+# product version given by the parameter "version").
 
 env:
   VCPKG_TAG: '2026.10.16'
@@ -182,21 +182,21 @@ jobs:
         id: upload-artifact
         uses: actions/upload-artifact@v7
         with:
-          # Signed afterwards on Windows if SignPath is configured: the signed archive is the one released
-          name: polyphone-plugin-${{ matrix.name }}${{ (runner.os == 'Windows' && vars.SIGNPATH_PLUGIN_CONFIGURATION != '') && '-unsigned' || '' }}
+          # Signed afterwards on Windows: the signed archive is the one released
+          name: polyphone-plugin-${{ matrix.name }}${{ runner.os == 'Windows' && '-unsigned' || '' }}
           path: Polyphone-plugin_*
           retention-days: 7
           if-no-files-found: error
 
       - name: Sign the archive (Windows)
-        if: runner.os == 'Windows' && vars.SIGNPATH_PLUGIN_CONFIGURATION != ''
+        if: runner.os == 'Windows'
         uses: signpath/github-action-submit-signing-request@v2
         with:
           api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
           organization-id: ${{ vars.SIGNPATH_ORGANIZATION_ID }}
           project-slug: polyphone
           signing-policy-slug: release-signing
-          artifact-configuration-slug: ${{ vars.SIGNPATH_PLUGIN_CONFIGURATION }}
+          artifact-configuration-slug: windows-plugin
           parameters: |
             version: "${{ steps.package.outputs.product-version }}"
           wait-for-completion: true
@@ -204,7 +204,7 @@ jobs:
           output-artifact-directory: 'signed'
 
       - name: Upload the signed archive (Windows)
-        if: runner.os == 'Windows' && vars.SIGNPATH_PLUGIN_CONFIGURATION != ''
+        if: runner.os == 'Windows'
         uses: actions/upload-artifact@v7
         with:
           name: polyphone-plugin-${{ matrix.name }}
