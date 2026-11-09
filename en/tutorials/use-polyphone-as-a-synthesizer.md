@@ -94,7 +94,7 @@ All the options seen above can be called up when opening Polyphone by adding par
 For **Linux** or **macOS**, simply complete the command line. For **Windows**, create a shortcut by right-clicking on the executable file :file:`polyphone.exe`, then select :guilabel:`Send to` → :guilabel:`Desktop (create shortcut)` (from the :guilabel:`Show more options` of the context menu with Windows 11). Then, by displaying the properties of this shortcut, it is possible to add parameters to the target, which could be:
 
 ```
-"C:\Program Files\Polyphone\polyphone.exe" -s -c "all|on|toggle"
+"C:\Program Files\Polyphone\polyphone.exe" --synth --multiple-selection --key-selection toggle
 ```
 
 The various options are described on this [page](manual/annexes/command-line.md#doc_synth).

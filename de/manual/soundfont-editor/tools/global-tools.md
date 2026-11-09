@@ -15,6 +15,16 @@ Alle Samples, die von keinem Instrument verwendet werden, und alle Instrumente, 
 Eine Meldung gibt an, wie viele Elemente gelöscht wurden.
 
 
+### Duplikate bereinigen {#doc_duplicates}
+
+
+Identische Samples werden zusammengeführt: Daten, Samplefrequenz, Loop, Basisnote und Korrektur müssen gleich sein, und Stereo-Samples werden zusammen mit ihrem verknüpften Sample verglichen.
+Für jede Gruppe identischer Samples wird das erste (in der Reihenfolge der Datei) behalten und ersetzt die anderen in den Instrumenten; die anderen werden gelöscht.
+Eine Meldung gibt an, wie viele Samples gelöscht wurden.
+
+Die Duplikate sind vorab in der [Konfigurationsübersicht der Samples](manual/soundfont-editor/configuration-summaries.md#doc_sample) zu sehen.
+
+
 ## Modulatoren {#doc_cat_mod}
 
 

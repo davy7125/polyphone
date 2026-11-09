@@ -17,10 +17,11 @@ When clicking on the :guilabel:`Samples` header of a soundfont in the [tree](man
 ![Sample configuration summary](images/conf_summary_sample.png "Sample configuration summary")
 
 
-For each sample, the columns are: :guilabel:`Used`, :guilabel:`Total duration`, :guilabel:`Loop duration`, :guilabel:`Root key`, :guilabel:`Correction`, :guilabel:`Sample type`, :guilabel:`Linked sample`, :guilabel:`Sample rate` and :guilabel:`Compression`.
+For each sample, the columns are: :guilabel:`Used`, :guilabel:`Duplicate of`, :guilabel:`Total duration`, :guilabel:`Loop duration`, :guilabel:`Root key`, :guilabel:`Correction`, :guilabel:`Sample type`, :guilabel:`Linked sample`, :guilabel:`Sample rate` and :guilabel:`Compression`.
 This page allows for example to perform the following checks:
 
 * Is it used?
+* Is it a duplicate of another sample? (the name of the previous identical sample is then displayed)
 * Is its total duration (and possibly its loop duration) long enough?
 * Is the loop correct? (a loop that is likely to produce a click is highlighted)
 * Has the tuning been done?

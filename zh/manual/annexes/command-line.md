@@ -1,177 +1,134 @@
 可以通过命令行运行 Polyphone，将音色库转换为 [sf2](#doc_sf2)、[sf3](#doc_sf3)、[sfz](#doc_sfz)、[csv](#doc_csv) 或 [dls](#doc_dls) 格式。转换支持的文件格式有 [sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2)、[sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3)、[sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz)、[dls](manual/annexes/the-different-soundfont-formats.md#doc_dls)、[sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark) 和 [organ](manual/annexes/the-different-soundfont-formats.md#doc_organ)。
 
 还可以用音色库[播放 MIDI 文件](#doc_render)，并将结果写入 wav 文件。
-还可以使用一个选项以[合成器模式](#doc_synth)打开 Polyphone。
+还可以使用选项以[合成器模式](#doc_synth)打开 Polyphone，或在启动 [MCP 服务器](#doc_mcp)的情况下打开 Polyphone。
 
 也可以将文件和目录作为参数传入，以便在图形界面中打开它们，例如 :command:`polyphone file1.sf2 file2.sf3 /path/to/directory`（目录会在[音色库浏览器](manual/soundfont-explorer.md)中打开）。
-另外还有一些[其他选项](#doc_other)，用于重置配置或显示帮助。
+如果 Polyphone 已经打开，文件会在正在运行的实例中打开。
+另外还有一些[其他选项](#doc_other)，用于重置配置或显示帮助和版本。
 
-转换时，加载和写入过程会记录在控制台中。
-如果转换成功，返回码为 0；如果失败（输入文件不存在、文件无法读取或写入、sf2、sf3 和 dls 格式的输出文件已存在等），则返回其他值。
+使用 :command:`polyphone --help` 可以显示所有选项的列表。
+参数的顺序无关紧要。
+仍然接受[以前版本](#doc_legacy)的选项。
+
+**注意：**在 Windows 上，需要写出 Polyphone 的完整路径，而不只是 :command:`polyphone`，例如 :command:`C:/Program files/Polyphone/polyphone.exe`。
 
 
-## 转换为 sf2 {#doc_sf2}
+## 转换 {#doc_conversion}
 
 
 ### 命令行
 
 
 ```
-polyphone -1 -i <file/to/convert> -d <output/directory> -o <output_file_name>
+polyphone --convert <格式> <要转换的/文件> -d <输出/目录> -o <输出/文件> -f
 ```
-
-**注意：**在 Windows 上，需要写出 Polyphone 的完整路径，而不只是 :command:`polyphone`，例如 :command:`C:/Program files/Polyphone/polyphone.exe`。
 
 
 ### 参数
 
 
--1
-: 模式“1”表示“转换为 sf2”。
+--convert
+: 转换格式：“sf2”、“sf3”、“sfz”、“csv”或“dls”，各格式特有的选项见下文。
+  如果给出了带扩展名的输出文件，则此参数可以省略，例如 :command:`polyphone file.sf2 -o file.sf3`。
 
--d
-: 输入文件转换后的输出目录。
-  此参数是可选的，默认与输入文件位于同一目录。
+-d, --output-dir
+: 输出目录，该目录必须存在。
+  此参数是可选的，默认为每个输入文件所在的目录。
 
--o
-: 转换后文件的输出名称，不含扩展名（会自动添加扩展名“.sf2”）。
-  此参数是可选的，默认与输入文件同名。
+-o, --output
+: 输出文件，可以带或不带扩展名（会自动添加格式的扩展名）。
+  此参数是可选的，默认输出文件与输入文件同名。
+  仅有名称时写入输出目录，相对路径从当前目录开始（如果使用了 -d，则从输出目录开始）。
+  转换多个文件时不能使用此参数。
+
+-f, --force
+: 替换已存在的输出文件。
+  如果没有此参数，当输出文件已存在时转换会失败。
+  输入文件可以被其转换结果替换，例如 :command:`polyphone --convert sf2 file.sf2 -f` 会重写 :file:`file.sf2`。
+
+一条命令可以转换多个文件，每个输出文件与其输入文件同名。
+即使某个文件转换失败，其他文件仍会被转换。
 
 
 ### 示例
 
 
 ```
-polyphone -1 -i /path/to/file.sfArk
+polyphone --convert sf2 /path/to/file.sfArk
+polyphone /path/to/file.sf2 -o /path/to/converted.sf3
+polyphone --convert sf3 *.sf2 -d /path/to/directory
+```
+
+
+## 转换为 sf2 {#doc_sf2}
+
+
+此转换没有特定的选项。
+
+```
+polyphone --convert sf2 /path/to/file.dls
 ```
 
 
 ## 转换为 sf3 {#doc_sf3}
 
 
-### 命令行
-
-
-```
-polyphone -2 -i <file/to/convert> -d <output/directory> -o <output_file_name> -c <configuration>
-```
-
-**注意：**在 Windows 上，需要写出 Polyphone 的完整路径，而不只是 :command:`polyphone`，例如 :command:`C:/Program files/Polyphone/polyphone.exe`。
-
-
-### 参数
-
-
--2
-: 模式“2”表示“转换为 sf3”。
-
--d
-: 输入文件转换后的输出目录。
-  此参数是可选的，默认与输入文件位于同一目录。
-
--o
-: 转换后文件的输出名称，不含扩展名（会自动添加扩展名“.sf3”）。
-  此参数是可选的，默认与输入文件同名。
-
--c
-: 转换配置。
-  可以指定压缩质量：“0”为低，“1”为中，“2”为高。
-  此参数是可选的，默认为“1”（中等质量）。
-
-
-### 示例
-
+--quality
+: 压缩质量：“low”（低）、“medium”（中）或“high”（高）。
+  此参数是可选的，默认为“medium”。
 
 ```
-polyphone -2 -i /path/to/file.sf2 -c 2
+polyphone --convert sf3 /path/to/file.sf2 --quality high
 ```
 
 
 ## 转换为 sfz {#doc_sfz}
 
 
-### 命令行
+--preset-prefix
+: 在每个预设前加上其预设编号。
 
+--bank-dir
+: 为每个库创建一个目录。
 
-```
-polyphone -3 -i <file/to/convert> -d <output/directory> -o <output_file_name> -c <configuration>
-```
-
-**注意：**在 Windows 上，需要写出 Polyphone 的完整路径，而不只是 :command:`polyphone`，例如 :command:`C:/Program files/Polyphone/polyphone.exe`。
-
-
-### 参数
-
-
--3
-: 模式“3”表示“转换为 sfz”。
-
--d
-: 输入文件转换后的输出目录。
-  此参数是可选的，默认与输入文件位于同一目录。
-
--o
-: 转换后文件的输出名称，不含扩展名（会自动添加扩展名“.sfz”）。
-  此参数是可选的，默认与输入文件同名。
-
--c
-: 转换配置，由 3 个以字符“|”分隔的值组成。此参数是可选的，默认为“0|0|0”。
-  
-  * 如果每个预设都要以其预设编号作为前缀，第一个值为“1”，否则为“0”。
-  * 如果要为每个库创建一个目录，第二个值为“1”，否则为“0”。
-  * 如果要使用 General MIDI 分类来整理预设，第三个值为“1”，否则为“0”。
-
-
-### 示例
-
+--gm-sort
+: 使用通用 MIDI 分类对预设排序。
 
 ```
-polyphone -3 -i /path/to/file.sf3 -c '0|1|1'
+polyphone --convert sfz /path/to/file.sf3 --bank-dir --gm-sort
 ```
 
-转换时会创建一个目录（以输出名称命名），其中包含 sfz 文件和一个 :file:`samples` 子目录。如果该目录已存在，会在其名称后加上一个数字。
+转换会创建一个以输出文件命名的目录，其中包含 sfz 文件和子目录 :file:`samples`。
+如果该目录已存在，会在其名称后添加一个数字：即使使用 -f，也不会替换任何内容。
 
 
 ## 转换为 .csv {#doc_csv}
 
 
-### 命令行
-
-
-```
-polyphone -4 -i <file/to/convert> -d <output/directory> -o <output_file_name> -c <configuration>
-```
-
-**注意：**在 Windows 上，需要写出 Polyphone 的完整路径，而不只是 :command:`polyphone`，例如 :command:`C:/Program files/Polyphone/polyphone.exe`。
-
-
-### 参数
-
-
--4
-: 模式“4”表示“转换为 .csv”。
-
--d
-: 输入文件转换后的输出目录。
-  此参数是可选的，默认与输入文件位于同一目录。
-
--o
-: 转换后文件的输出名称，不含扩展名（会自动添加扩展名“.csv”）。
-  此参数是可选的，默认与输入文件同名。
-
--c
-: 转换配置。
-  可以使用选项“raw”导出原始值（即其在音色库文件中的存储形式），而不是带有可测量物理单位的值。例如，导出的释音时间为 0.491（秒），其原始形式则为 -1229。默认导出带物理单位的值。
-
-
-### 示例
-
+--raw
+: 导出原始值（即音色库文件中存储的值），而不是带有可测量物理单位的值。
+  例如，导出的释音时间将是 0.491（秒），原始形式则为 -1229。
+  默认导出带物理单位的值。
 
 ```
-polyphone -4 -i /path/to/file.sf2 -c 'raw'
+polyphone --convert csv /path/to/file.sf2 --raw
 ```
 
-转换时会创建一个目录（以输出名称命名），其中包含 :file:`samples.csv` 文件，以及每个乐器和每个预设各一个文件。如果该目录已存在，会在其名称后加上一个数字。
+转换会创建一个以输出文件命名的目录，其中包含文件 :file:`samples.csv`，以及每个乐器和每个预设各一个文件。
+如果该目录已存在，会在其名称后添加一个数字：即使使用 -f，也不会替换任何内容。
+
+
+## 转换为 dls {#doc_dls}
+
+
+此转换没有特定的选项。
+
+```
+polyphone --convert dls /path/to/file.sf2
+```
+
+文件以 DLS 2 级格式写入，转换的限制见[此处](manual/annexes/the-different-soundfont-formats.md#doc_dls)。
 
 
 ## 渲染 MIDI 文件 {#doc_render}
@@ -181,80 +138,40 @@ polyphone -4 -i /path/to/file.sf2 -c 'raw'
 
 
 ```
-polyphone -5 -i <soundfont> -c <MIDI/file> -d <output/directory> -o <output_file_name>
+polyphone --render <MIDI/文件> <音色库> -d <输出/目录> -o <输出/文件> -f
 ```
-
-**注意：**在 Windows 上，需要写出 Polyphone 的完整路径，而不只是 :command:`polyphone`，例如 :command:`C:/Program files/Polyphone/polyphone.exe`。
 
 
 ### 参数
 
 
--5
-: 模式“5”表示“渲染 MIDI 文件”：用音色库播放 MIDI 文件，并将结果写入 wav 文件。
+--render
+: 要播放的 MIDI 文件的路径（扩展名为 .mid、.midi、.kar 或 .rmi）：使用音色库播放该 MIDI 文件，并将结果写入 wav 文件。
 
--d
+-d, --output-dir
 : 写入 wav 文件的输出目录。
   此参数是可选的，默认与 MIDI 文件位于同一目录。
 
--o
-: wav 文件的输出名称，不含扩展名（会自动添加扩展名“.wav”）。
-  此参数是可选的，默认与 MIDI 文件同名。
+-o, --output
+: 输出的 wav 文件，可以带或不带扩展名。
+  此参数是可选的，默认 wav 文件与 MIDI 文件同名。
 
--c
-: 要播放的 MIDI 文件的路径（扩展名为 .mid、.midi、.kar 或 .rmi）。
+-f, --force
+: 替换已存在的 wav 文件。
 
 
 ### 示例
 
 
 ```
-polyphone -5 -i /path/to/file.sf2 -c /path/to/song.mid
+polyphone --render /path/to/song.mid /path/to/file.sf2
 ```
 
 MIDI 文件的所有通道都演奏该音色库，预设由文件中的程序变更（program change）选择（打击乐使用通道 10 上的库 128）。
 使用合成器的设置：[音频](manual/settings.md#doc_sound)（混响、合唱、总音量）、[复音数](manual/settings.md#doc_general)和[调音](manual/settings.md#doc_keyboard)。
-结果是 48,000 Hz 的立体声 32 位浮点 wav 文件，在最后几个音符的声音消失后结束。已存在的 wav 文件会被替换。
+结果是 48,000 Hz 的立体声 32 位浮点 wav 文件，在最后几个音符的声音消失后结束。
 音色库中没有的预设，其音符不会被演奏，并会针对该预设显示警告。
 在图形界面中，也可以从[MIDI 播放器](manual/soundfont-editor/toolbar.md#doc_midi_player_settings)导出 MIDI 文件，此时每个通道可以演奏不同的音色库或预设。
-
-
-## 转换为 dls {#doc_dls}
-
-
-### 命令行
-
-
-```
-polyphone -6 -i <file/to/convert> -d <output/directory> -o <output_file_name>
-```
-
-**注意：**在 Windows 上，需要写出 Polyphone 的完整路径，而不只是 :command:`polyphone`，例如 :command:`C:/Program files/Polyphone/polyphone.exe`。
-
-
-### 参数
-
-
--6
-: 模式“6”表示“转换为 dls”。
-
--d
-: 输入文件转换后的输出目录。
-  此参数是可选的，默认与输入文件位于同一目录。
-
--o
-: 转换后文件的输出名称，不含扩展名（会自动添加扩展名“.dls”）。
-  此参数是可选的，默认与输入文件同名。
-
-
-### 示例
-
-
-```
-polyphone -6 -i /path/to/file.sf2
-```
-
-文件以 DLS 2 级格式写入，转换的限制见[这里](manual/annexes/the-different-soundfont-formats.md#doc_dls)。
 
 
 ## 合成器模式 {#doc_synth}
@@ -264,10 +181,8 @@ polyphone -6 -i /path/to/file.sf2
 
 
 ```
-polyphone -s -i <file/to/read> -c <configuration>
+polyphone --synth <要读取的/文件> --channel <通道> --multiple-selection --key-selection <模式>
 ```
-
-**注意：**在 Windows 上，需要写出 Polyphone 的完整路径，而不只是 :command:`polyphone`，例如 :command:`C:/Program files/Polyphone/polyphone.exe`。
 
 ![以合成器模式选项打开的 Polyphone](images/synth_mode.png "以合成器模式选项打开的 Polyphone")
 
@@ -275,35 +190,134 @@ polyphone -s -i <file/to/read> -c <configuration>
 ### 参数
 
 
--s
-: 模式“s”表示“以合成器模式打开 Polyphone”。
+-s, --synth
+: 以合成器模式打开 Polyphone。
 
--c
-: 合成器配置，由 3 个以字符“|”分隔的值组成。此参数是可选的，默认为“0|off|off”。之后可以通过图形界面修改这些参数。
-  
-  * 第一个值是演奏时要监听的 MIDI 通道编号（1 到 16 之间）。值为 0 或“all”表示使用所有通道，并将其作为一个通道处理。值为 -1 或“each”表示分别监听每个通道，例如这是播放音序器 MIDI 输出的前提条件（也可以直接用[MIDI 播放器](manual/soundfont-editor/toolbar.md#doc_midi_player)播放 MIDI 文件）。
-  * 第二个值为“off”或“on”，用于禁用或启用同时选择多个预设进行演奏。
-  * 第三个值为“off”、“on”或“toggle”，用于禁用或启用通过与预设编号对应的琴键来选择预设（例如，琴键 0 激活预设 0）。
+--channel
+: 演奏时要监听的 MIDI 通道编号（1 到 16 之间）。
+  值“all”表示使用所有通道，并将其作为一个通道处理（默认值）。
+  值“each”表示分别监听每个通道，例如这是播放音序器 MIDI 输出的前提条件（也可以直接用[MIDI 播放器](manual/soundfont-editor/toolbar.md#doc_midi_player)播放 MIDI 文件）。
+
+--multiple-selection
+: 可以同时选择多个预设进行演奏。
+
+--key-selection
+: 值为“on”时，通过与预设编号对应的琴键选择预设（例如，琴键 0 激活预设 0）。
+  值为“toggle”时，琴键还可以取消选择其预设。
+
+这些参数是可选的，之后可以通过图形界面修改这些设置。
 
 
 ### 示例
 
 
 ```
-polyphone -s -i /path/to/file.sf2 -c '1|on|toggle'
+polyphone --synth /path/to/file.sf2 --channel 1 --multiple-selection --key-selection toggle
+```
+
+
+## MCP 服务器 {#doc_mcp}
+
+
+### 命令行
+
+
+```
+polyphone --mcp <要打开的/文件> --mcp-port <端口>
+```
+
+
+### 参数
+
+
+--mcp
+: 即使在[设置](manual/settings.md)中已禁用，也为本次会话启动 MCP 服务器，使 AI 助手能够浏览、编辑和分析已打开的音色库。
+  服务器地址会显示在控制台中。
+  即使 Polyphone 已经打开，也会打开一个新的 Polyphone 实例。
+
+--mcp-port
+: MCP 服务器的端口（此参数隐含 --mcp）。
+  此参数是可选的，默认为设置中的端口（8642）。
+
+在图形界面中更改 MCP 服务器的设置会取代这些选项。
+
+
+### 示例
+
+
+```
+polyphone --mcp-port 8700 /path/to/file.sf2
 ```
 
 
 ## 其他选项 {#doc_other}
 
 
--h
-: 显示简短的帮助信息。
+-h, --help
+: 显示所有选项的列表。
 
--r
-: 重置 Polyphone 的配置（设置、窗口位置和大小、历史记录等）。
+-v, --version
+: 显示 Polyphone 的版本。
+
+-r, --reset-config
+: 重置 Polyphone 的配置（设置、窗口布局、历史记录等）。
   出现问题时，这可能会有帮助。
 
 ```
-polyphone -r
+polyphone --reset-config
+```
+
+
+## 消息和返回码 {#doc_exit}
+
+
+加载和写入过程会记录在控制台中，错误会写入错误输出。
+消息和帮助使用[设置](manual/settings.md)中选择的语言。
+
+返回码如下：
+
+0
+: 成功。
+
+1
+: 输入文件或输出目录不存在，或输出文件已存在（未使用 -f）。
+
+2
+: 参数无效：未知选项、错误的值、选项不适用于所选模式、不支持的输入文件格式等。
+
+3
+: 无法读取输入文件（音色库、MIDI 文件）。
+
+4
+: 无法写入输出。
+
+转换多个文件时，返回码为第一次失败的返回码。
+
+
+## 以前版本的选项 {#doc_legacy}
+
+
+仍然接受 Polyphone 以前版本的选项：
+
+-1, -2, -3, -4, -6
+: 转换为 sf2、sf3、sfz、csv 和 dls，与 --convert 相同。
+
+-5
+: 渲染 MIDI 文件，其路径用 -c 给出。
+
+-i
+: 输入文件，也可以不使用此选项直接写出。
+
+-c
+: 配置，由以字符“|”分隔的值组成：
+  
+  * 转换为 sf3：压缩质量，“0”为低，“1”为中，“2”为高；
+  * 转换为 sfz：3 个值，“1”或“0”，分别对应 --preset-prefix、--bank-dir 和 --gm-sort，例如“0|1|1”；
+  * 转换为 csv：“raw”对应 --raw；
+  * 渲染 MIDI 文件（-5）：MIDI 文件的路径；
+  * 合成器模式：通道（“all”、“each”或 1 到 16，0 等同于“all”，-1 等同于“each”）、多选（“on”或“off”）以及按键选择（“on”、“off”或“toggle”），例如“all|on|toggle”。
+
+```
+polyphone -2 -i /path/to/file.sf2 -c 2
+polyphone -s -i /path/to/file.sf2 -c 'all|on|toggle'
 ```

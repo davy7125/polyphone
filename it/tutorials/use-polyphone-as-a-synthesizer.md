@@ -94,7 +94,7 @@ Tutte le opzioni viste sopra possono essere richiamate all'apertura di Polyphone
 Su **Linux** o **macOS**, basta completare la riga di comando. Su **Windows**, crea un collegamento facendo clic con il tasto destro sul file eseguibile :file:`polyphone.exe` e scegli :guilabel:`Invia a` → :guilabel:`Desktop (crea collegamento)` (da :guilabel:`Mostra altre opzioni` del menu contestuale in Windows 11). Poi, aprendo le proprietà di questo collegamento, puoi aggiungere parametri alla destinazione, ad esempio:
 
 ```
-"C:\Program Files\Polyphone\polyphone.exe" -s -c "all|on|toggle"
+"C:\Program Files\Polyphone\polyphone.exe" --synth --multiple-selection --key-selection toggle
 ```
 
 Le varie opzioni sono descritte in questa [pagina](manual/annexes/command-line.md#doc_synth).

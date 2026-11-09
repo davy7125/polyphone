@@ -70,7 +70,7 @@ File name and size
 
 A count is made on:
 
-* the number of [samples](manual/soundfont-editor/editing-pages/sample-editor.md) and unused samples,
+* the number of [samples](manual/soundfont-editor/editing-pages/sample-editor.md), unused samples and duplicate samples,
 * the number of [instruments](manual/soundfont-editor/editing-pages/instrument-editor.md) and unused instruments,
 * the number of [presets](manual/soundfont-editor/editing-pages/preset-editor.md),
 * the number of parameters and modulators edited for the instruments,
@@ -79,6 +79,7 @@ A count is made on:
 The button :guilabel:`Details` next to the samples, the instruments and the presets displays the corresponding [configuration summary](manual/soundfont-editor/configuration-summaries.md).
 
 Unused samples and instruments can be easily removed with the tool “[Remove unused elements](manual/soundfont-editor/tools/global-tools.md#doc_unused)”.
+Duplicate samples can be removed with the tool “[Clean duplicates](manual/soundfont-editor/tools/global-tools.md#doc_duplicates)”.
 
 **Note:** The number of 65536 parameters in the instruments and the presets should not be exceeded.
 Some synthesizers may not be able to read them all.

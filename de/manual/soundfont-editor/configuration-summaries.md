@@ -17,10 +17,11 @@ Ein Klick auf die Überschrift :guilabel:`Samples` eines Soundfonts in der [Baum
 ![Konfigurationsübersicht der Samples](images/conf_summary_sample.png "Konfigurationsübersicht der Samples")
 
 
-Für jedes Sample gibt es die Spalten :guilabel:`Verwendet`, :guilabel:`Gesamtdauer`, :guilabel:`Loop-Dauer`, :guilabel:`Basisnote`, :guilabel:`Korrektur`, :guilabel:`Sample-Typ`, :guilabel:`Verknüpftes Sample`, :guilabel:`Samplefrequenz` und :guilabel:`Kompression`.
+Für jedes Sample gibt es die Spalten :guilabel:`Verwendet`, :guilabel:`Duplikat von`, :guilabel:`Gesamtdauer`, :guilabel:`Loop-Dauer`, :guilabel:`Basisnote`, :guilabel:`Korrektur`, :guilabel:`Sample-Typ`, :guilabel:`Verknüpftes Sample`, :guilabel:`Samplefrequenz` und :guilabel:`Kompression`.
 Auf dieser Seite lassen sich zum Beispiel folgende Prüfungen durchführen:
 
 * Wird das Sample verwendet?
+* Ist es ein Duplikat eines anderen Samples? (dann wird der Name des vorherigen identischen Samples angezeigt)
 * Ist seine Gesamtdauer (und gegebenenfalls seine Loop-Dauer) lang genug?
 * Ist der Loop korrekt? (ein Loop, der wahrscheinlich ein Klicken erzeugt, wird hervorgehoben)
 * Wurde das Sample gestimmt?

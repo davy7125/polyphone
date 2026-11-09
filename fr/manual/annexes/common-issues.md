@@ -38,6 +38,7 @@ Les échantillons ne sont souvent utilisés que partiellement et enlever le supe
 
 * la zone utile dans les échantillons est parfois située avant le point de bouclage final&nbsp;: il est donc possible de supprimer la partie de l'échantillon située après la fin de boucle et cet [outil](manual/soundfont-editor/tools/sample-tools.md#doc_trimloop) permet de le faire en quelques clics&nbsp;;
 * les échantillons peuvent débuter par un blanc qu'il est important de supprimer pour diminuer la latence lors du déclenchement d'une note (il existe aussi un [outil](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank) pour le faire rapidement)&nbsp;;
+* un même échantillon peut être présent plusieurs fois&nbsp;: ce [résumé de configuration](manual/soundfont-editor/configuration-summaries.md#doc_sample) montre les doublons et cet [outil](manual/soundfont-editor/tools/global-tools.md#doc_duplicates) les enlève en mettant à jour les instruments&nbsp;;
 * enfin, des échantillons peuvent tout simplement ne pas être utilisés&nbsp;: ce [résumé de configuration](manual/soundfont-editor/configuration-summaries.md#doc_sample) les liste et cet [outil](manual/soundfont-editor/tools/global-tools.md#doc_unused) les enlève automatiquement.
 
 

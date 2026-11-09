@@ -38,6 +38,7 @@ Spesso i campioni vengono usati solo in parte, e rimuovere l'eccesso può ridurr
 
 * la parte utile di un campione si trova talvolta prima del punto finale del loop: è quindi possibile eliminare la parte del campione successiva alla fine del loop, e questa [funzione](manual/soundfont-editor/tools/sample-tools.md#doc_trimloop) permette di farlo in pochi clic;
 * i campioni possono iniziare con del silenzio, che andrebbe rimosso per ridurre la latenza quando si suona una nota (esiste anche una [funzione](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank) per farlo rapidamente);
+* lo stesso campione può essere presente più volte: questo [riepilogo della configurazione](manual/soundfont-editor/configuration-summaries.md#doc_sample) mostra i duplicati e questa [funzione](manual/soundfont-editor/tools/global-tools.md#doc_duplicates) li rimuove aggiornando gli strumenti;
 * infine, alcuni campioni potrebbero semplicemente non essere usati: questo [riepilogo della configurazione](manual/soundfont-editor/configuration-summaries.md#doc_sample) li elenca e questa [funzione](manual/soundfont-editor/tools/global-tools.md#doc_unused) li rimuove automaticamente.
 
 

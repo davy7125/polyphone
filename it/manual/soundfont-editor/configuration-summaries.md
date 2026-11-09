@@ -17,10 +17,11 @@ Facendo clic sull'intestazione :guilabel:`Campioni` di un soundfont nell'[albero
 ![Riepilogo della configurazione dei campioni](images/conf_summary_sample.png "Riepilogo della configurazione dei campioni")
 
 
-Per ogni campione, le colonne sono: :guilabel:`Utilizzato`, :guilabel:`Durata totale`, :guilabel:`Durata del loop`, :guilabel:`Nota di base`, :guilabel:`Correzione`, :guilabel:`Tipo di campione`, :guilabel:`Campione collegato`, :guilabel:`Frequenza di campionamento` e :guilabel:`Compressione`.
+Per ogni campione, le colonne sono: :guilabel:`Utilizzato`, :guilabel:`Duplicato di`, :guilabel:`Durata totale`, :guilabel:`Durata del loop`, :guilabel:`Nota di base`, :guilabel:`Correzione`, :guilabel:`Tipo di campione`, :guilabel:`Campione collegato`, :guilabel:`Frequenza di campionamento` e :guilabel:`Compressione`.
 Questa pagina permette ad esempio di effettuare i seguenti controlli:
 
 * Il campione è utilizzato?
+* È un duplicato di un altro campione? (viene allora mostrato il nome del campione identico precedente)
 * La sua durata totale (ed eventualmente la durata del loop) è sufficiente?
 * Il loop è corretto? (un loop che potrebbe produrre un clic viene evidenziato)
 * È stata fatta l'accordatura?

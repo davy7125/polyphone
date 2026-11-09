@@ -70,7 +70,7 @@
 
 Подсчитывается:
 
-* количество [семплов](manual/soundfont-editor/editing-pages/sample-editor.md) и неиспользуемых семплов,
+* количество [семплов](manual/soundfont-editor/editing-pages/sample-editor.md), неиспользуемых семплов и дубликатов семплов,
 * количество [инструментов](manual/soundfont-editor/editing-pages/instrument-editor.md) и неиспользуемых инструментов,
 * количество [пресетов](manual/soundfont-editor/editing-pages/preset-editor.md),
 * количество параметров и модуляторов, заданных для инструментов,
@@ -79,6 +79,7 @@
 Кнопка :guilabel:`Подробнее` рядом с семплами, инструментами и пресетами показывает соответствующую [сводку конфигурации](manual/soundfont-editor/configuration-summaries.md).
 
 Неиспользуемые семплы и инструменты легко удалить с помощью функции «[Удалить неиспользуемые элементы](manual/soundfont-editor/tools/global-tools.md#doc_unused)».
+Дубликаты семплов можно удалить с помощью функции «[Очистить дубликаты](manual/soundfont-editor/tools/global-tools.md#doc_duplicates)».
 
 **Примечание:** не следует превышать 65536 параметров в инструментах и пресетах.
 Некоторые синтезаторы могут не прочитать их все.

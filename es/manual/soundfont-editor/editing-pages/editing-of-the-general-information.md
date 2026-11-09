@@ -70,7 +70,7 @@ Nombre y tamaño del archivo
 
 Se hace un recuento de:
 
-* el número de [muestras](manual/soundfont-editor/editing-pages/sample-editor.md) y de muestras sin usar,
+* el número de [muestras](manual/soundfont-editor/editing-pages/sample-editor.md), de muestras sin usar y de muestras duplicadas,
 * el número de [instrumentos](manual/soundfont-editor/editing-pages/instrument-editor.md) y de instrumentos sin usar,
 * el número de [conjuntos](manual/soundfont-editor/editing-pages/preset-editor.md),
 * el número de parámetros y de moduladores editados en los instrumentos,
@@ -79,6 +79,7 @@ Se hace un recuento de:
 El botón :guilabel:`Detalles` junto a las muestras, los instrumentos y los conjuntos muestra el [resumen de configuración](manual/soundfont-editor/configuration-summaries.md) correspondiente.
 
 Las muestras y los instrumentos sin usar se pueden eliminar fácilmente con la herramienta «[Borrar elementos sin uso](manual/soundfont-editor/tools/global-tools.md#doc_unused)».
+Las muestras duplicadas se pueden eliminar con la herramienta «[Limpiar duplicados](manual/soundfont-editor/tools/global-tools.md#doc_duplicates)».
 
 **Nota:** no se debe superar el número de 65536 parámetros en los instrumentos y los conjuntos.
 Algunos sintetizadores podrían no ser capaces de leerlos todos.

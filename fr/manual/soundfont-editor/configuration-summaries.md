@@ -17,10 +17,11 @@ En cliquant sur l'entête :guilabel:`Échantillons` d'une banque de sons dans l'
 ![Résumé de configuration des échantillons](images/conf_summary_sample.png "Résumé de configuration des échantillons")
 
 
-Pour chaque échantillon, les colonnes sont&nbsp;: :guilabel:`Utilisé`, :guilabel:`Durée totale`, :guilabel:`Durée de la boucle`, :guilabel:`Note de base`, :guilabel:`Correction`, :guilabel:`Type d'échantillon`, :guilabel:`Échantillon lié`, :guilabel:`Taux d'échantillonnage` et :guilabel:`Compression`.
+Pour chaque échantillon, les colonnes sont&nbsp;: :guilabel:`Utilisé`, :guilabel:`Doublon de`, :guilabel:`Durée totale`, :guilabel:`Durée de la boucle`, :guilabel:`Note de base`, :guilabel:`Correction`, :guilabel:`Type d'échantillon`, :guilabel:`Échantillon lié`, :guilabel:`Taux d'échantillonnage` et :guilabel:`Compression`.
 Ce résumé permet par exemple d'effectuer les vérifications suivantes&nbsp;:
 
 * Est-il utilisé&nbsp;?
+* Est-il le doublon d'un autre échantillon&nbsp;? (le nom du précédent échantillon identique est alors affiché)
 * Sa durée totale (et éventuellement sa durée de boucle) est-elle suffisante&nbsp;?
 * La boucle est-elle correcte&nbsp;? (une boucle susceptible de produire un clic est mise en évidence)
 * L'accordage a-t-il été effectué&nbsp;?

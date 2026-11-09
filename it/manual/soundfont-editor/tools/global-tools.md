@@ -15,6 +15,16 @@ Tutti i campioni non utilizzati da alcuno strumento e tutti gli strumenti non ut
 Un messaggio indica quanti elementi sono stati eliminati.
 
 
+### Pulisci i duplicati {#doc_duplicates}
+
+
+I campioni identici vengono uniti: dati, frequenza di campionamento, loop, nota di base e correzione devono essere uguali, e i campioni stereo vengono confrontati insieme al loro campione collegato.
+Per ogni gruppo di campioni identici, il primo (nell'ordine del file) viene mantenuto e sostituisce gli altri negli strumenti, mentre gli altri vengono eliminati.
+Un messaggio indica quanti campioni sono stati eliminati.
+
+I duplicati sono visibili in anticipo nel [riepilogo della configurazione dei campioni](manual/soundfont-editor/configuration-summaries.md#doc_sample).
+
+
 ## Modulatori {#doc_cat_mod}
 
 

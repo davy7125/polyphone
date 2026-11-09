@@ -70,7 +70,7 @@ Dateiname und -größe
 
 Gezählt werden:
 
-* die Anzahl der [Samples](manual/soundfont-editor/editing-pages/sample-editor.md) und der nicht verwendeten Samples,
+* die Anzahl der [Samples](manual/soundfont-editor/editing-pages/sample-editor.md), der nicht verwendeten Samples und der doppelten Samples,
 * die Anzahl der [Instrumente](manual/soundfont-editor/editing-pages/instrument-editor.md) und der nicht verwendeten Instrumente,
 * die Anzahl der [Presets](manual/soundfont-editor/editing-pages/preset-editor.md),
 * die Anzahl der für die Instrumente bearbeiteten Parameter und Modulatoren,
@@ -79,6 +79,7 @@ Gezählt werden:
 Der Button :guilabel:`Details` neben den Samples, Instrumenten und Presets zeigt die zugehörige [Konfigurationsübersicht](manual/soundfont-editor/configuration-summaries.md) an.
 
 Nicht verwendete Samples und Instrumente lassen sich mit dem Werkzeug „[Nicht verwendete Elemente entfernen](manual/soundfont-editor/tools/global-tools.md#doc_unused)“ leicht entfernen.
+Doppelte Samples lassen sich mit dem Werkzeug „[Duplikate bereinigen](manual/soundfont-editor/tools/global-tools.md#doc_duplicates)“ entfernen.
 
 **Hinweis:** Die Anzahl von 65536 Parametern in den Instrumenten und Presets sollte nicht überschritten werden.
 Manche Synthesizer können sie sonst möglicherweise nicht alle lesen.

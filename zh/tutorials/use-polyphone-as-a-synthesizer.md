@@ -94,7 +94,7 @@ polyphone -s
 在 **Linux** 或 **macOS** 上，只需补全命令行即可。在 **Windows** 上，右键单击可执行文件 :file:`polyphone.exe`，然后选择 :guilabel:`发送到` → :guilabel:`桌面快捷方式`（在 Windows 11 上需先在右键菜单中选择 :guilabel:`显示更多选项`）来创建快捷方式。然后，打开该快捷方式的属性，就可以在目标中添加参数，例如：
 
 ```
-"C:\Program Files\Polyphone\polyphone.exe" -s -c "all|on|toggle"
+"C:\Program Files\Polyphone\polyphone.exe" --synth --multiple-selection --key-selection toggle
 ```
 
 各个选项的说明见这个[页面](manual/annexes/command-line.md#doc_synth)。

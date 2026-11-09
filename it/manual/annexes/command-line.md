@@ -1,177 +1,134 @@
 Polyphone può essere eseguito da riga di comando per convertire soundfont nel formato [sf2](#doc_sf2), [sf3](#doc_sf3), [sfz](#doc_sfz), [csv](#doc_csv) o [dls](#doc_dls). I formati di file supportati per la conversione sono [sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz), [dls](manual/annexes/the-different-soundfont-formats.md#doc_dls), [sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark) e [organ](manual/annexes/the-different-soundfont-formats.md#doc_organ).
 
 Un [file MIDI può essere riprodotto](#doc_render) con un soundfont e salvato in un file wav.
-È anche possibile richiamare un'opzione per aprire Polyphone in [modalità sintetizzatore](#doc_synth).
+È anche possibile richiamare delle opzioni per aprire Polyphone in [modalità sintetizzatore](#doc_synth) o con il [server MCP](#doc_mcp) avviato.
 
 File e cartelle possono anche essere passati come argomenti per aprirli nell'interfaccia grafica, ad esempio :command:`polyphone file1.sf2 file2.sf3 /path/to/directory` (una cartella viene aperta nell'[esploratore di soundfont](manual/soundfont-explorer.md)).
-Sono disponibili alcune [altre opzioni](#doc_other) per reimpostare la configurazione o mostrare la guida.
+Se Polyphone è già aperto, i file vengono aperti nell'istanza in esecuzione.
+Sono disponibili alcune [altre opzioni](#doc_other) per reimpostare la configurazione o mostrare la guida e la versione.
 
-Durante una conversione, il caricamento e la scrittura vengono registrati nella console.
-Il codice restituito è 0 se la conversione è riuscita e un altro valore in caso di errore (il file di ingresso non esiste, il file non può essere letto o scritto, esiste già un file di uscita per i formati sf2, sf3 e dls, ecc.).
+L'elenco di tutte le opzioni viene mostrato con :command:`polyphone --help`.
+L'ordine degli argomenti non ha importanza.
+Le opzioni delle [versioni precedenti](#doc_legacy) sono ancora accettate.
+
+**Nota:** su Windows devi scrivere il percorso completo di Polyphone invece di :command:`polyphone`, ad esempio :command:`C:/Program files/Polyphone/polyphone.exe`.
 
 
-## Conversione in sf2 {#doc_sf2}
+## Conversione {#doc_conversion}
 
 
 ### Riga di comando
 
 
 ```
-polyphone -1 -i <file/to/convert> -d <output/directory> -o <output_file_name>
+polyphone --convert <formato> <file/da/convertire> -d <cartella/di/uscita> -o <file/di/uscita> -f
 ```
-
-**Nota:** su Windows devi scrivere il percorso completo di Polyphone invece di :command:`polyphone`, ad esempio :command:`C:/Program files/Polyphone/polyphone.exe`.
 
 
 ### Argomenti
 
 
--1
-: La modalità «1» corrisponde a «converti in sf2».
+--convert
+: Formato della conversione: «sf2», «sf3», «sfz», «csv» o «dls»; le opzioni specifiche di ogni formato sono descritte più avanti.
+  Questo argomento è facoltativo se viene indicato un file di uscita con la sua estensione, ad esempio :command:`polyphone file.sf2 -o file.sf3`.
 
--d
-: Cartella di uscita in cui verrà convertito il file di ingresso.
-  Questo argomento è facoltativo; per impostazione predefinita è la stessa cartella del file di ingresso.
+-d, --output-dir
+: Cartella di uscita, che deve esistere.
+  Questo argomento è facoltativo; per impostazione predefinita è la cartella di ogni file di ingresso.
 
--o
-: Nome di uscita del file convertito, senza estensione (l'estensione «.sf2» viene aggiunta automaticamente).
-  Questo argomento è facoltativo; per impostazione predefinita è lo stesso nome del file di ingresso.
+-o, --output
+: File di uscita, con o senza estensione (l'estensione del formato viene aggiunta automaticamente).
+  Questo argomento è facoltativo; per impostazione predefinita il file di uscita ha il nome del file di ingresso.
+  Un nome da solo viene scritto nella cartella di uscita, un percorso relativo parte dalla cartella corrente (o dalla cartella di uscita se si usa -d).
+  Questo argomento non può essere usato se vengono convertiti più file.
+
+-f, --force
+: Sostituisce un file di uscita esistente.
+  Senza questo argomento, la conversione non riesce se il file di uscita esiste già.
+  Il file di ingresso può essere sostituito dalla sua conversione, ad esempio :command:`polyphone --convert sf2 file.sf2 -f` riscrive :file:`file.sf2`.
+
+Più file possono essere convertiti con un solo comando, e ogni file di uscita ha il nome del suo file di ingresso.
+In caso di errore, gli altri file vengono comunque convertiti.
 
 
-### Esempio
+### Esempi
 
 
 ```
-polyphone -1 -i /path/to/file.sfArk
+polyphone --convert sf2 /path/to/file.sfArk
+polyphone /path/to/file.sf2 -o /path/to/converted.sf3
+polyphone --convert sf3 *.sf2 -d /path/to/directory
+```
+
+
+## Conversione in sf2 {#doc_sf2}
+
+
+Per questa conversione non viene usata alcuna opzione particolare.
+
+```
+polyphone --convert sf2 /path/to/file.dls
 ```
 
 
 ## Conversione in sf3 {#doc_sf3}
 
 
-### Riga di comando
-
-
-```
-polyphone -2 -i <file/to/convert> -d <output/directory> -o <output_file_name> -c <configuration>
-```
-
-**Nota:** su Windows devi scrivere il percorso completo di Polyphone invece di :command:`polyphone`, ad esempio :command:`C:/Program files/Polyphone/polyphone.exe`.
-
-
-### Argomenti
-
-
--2
-: La modalità «2» corrisponde a «converti in sf3».
-
--d
-: Cartella di uscita in cui verrà convertito il file di ingresso.
-  Questo argomento è facoltativo; per impostazione predefinita è la stessa cartella del file di ingresso.
-
--o
-: Nome di uscita del file convertito, senza estensione (l'estensione «.sf3» viene aggiunta automaticamente).
-  Questo argomento è facoltativo; per impostazione predefinita è lo stesso nome del file di ingresso.
-
--c
-: Configurazione della conversione.
-  È possibile specificare la qualità della compressione: «0» è bassa, «1» media, «2» alta.
-  Questo argomento è facoltativo; per impostazione predefinita vale «1» (qualità media).
-
-
-### Esempio
-
+--quality
+: Qualità di compressione: «low» (bassa), «medium» (media) o «high» (alta).
+  Questo argomento è facoltativo; per impostazione predefinita vale «medium».
 
 ```
-polyphone -2 -i /path/to/file.sf2 -c 2
+polyphone --convert sf3 /path/to/file.sf2 --quality high
 ```
 
 
 ## Conversione in sfz {#doc_sfz}
 
 
-### Riga di comando
+--preset-prefix
+: Ogni preset ha come prefisso il suo numero di preset.
 
+--bank-dir
+: Viene creata una cartella per ogni banco.
 
-```
-polyphone -3 -i <file/to/convert> -d <output/directory> -o <output_file_name> -c <configuration>
-```
-
-**Nota:** su Windows devi scrivere il percorso completo di Polyphone invece di :command:`polyphone`, ad esempio :command:`C:/Program files/Polyphone/polyphone.exe`.
-
-
-### Argomenti
-
-
--3
-: La modalità «3» corrisponde a «converti in sfz».
-
--d
-: Cartella di uscita in cui verrà convertito il file di ingresso.
-  Questo argomento è facoltativo; per impostazione predefinita è la stessa cartella del file di ingresso.
-
--o
-: Nome di uscita del file convertito, senza estensione (l'estensione «.sfz» viene aggiunta automaticamente).
-  Questo argomento è facoltativo; per impostazione predefinita è lo stesso nome del file di ingresso.
-
--c
-: Configurazione della conversione, composta da 3 valori separati dal carattere «|». Questo argomento è facoltativo; per impostazione predefinita vale «0|0|0».
-  
-  * Il primo valore è «1» se ogni preset deve essere preceduto dal suo numero di preset, «0» altrimenti.
-  * Il secondo valore è «1» se deve essere creata una cartella per ogni banco, «0» altrimenti.
-  * Il terzo valore è «1» se per ordinare i preset deve essere usata la classificazione General MIDI, «0» altrimenti.
-
-
-### Esempio
-
+--gm-sort
+: La classificazione General MIDI viene usata per ordinare i preset.
 
 ```
-polyphone -3 -i /path/to/file.sf3 -c '0|1|1'
+polyphone --convert sfz /path/to/file.sf3 --bank-dir --gm-sort
 ```
 
-La conversione crea una cartella (con il nome di uscita) contenente i file sfz e una sottocartella :file:`samples`. Se questa cartella esiste già, al suo nome viene aggiunto un numero.
+La conversione crea una cartella (con il nome del file di uscita) che contiene i file sfz e una sottocartella :file:`samples`.
+Se questa cartella esiste già, al suo nome viene aggiunto un numero: nulla viene sostituito, nemmeno con -f.
 
 
 ## Conversione in .csv {#doc_csv}
 
 
-### Riga di comando
-
-
-```
-polyphone -4 -i <file/to/convert> -d <output/directory> -o <output_file_name> -c <configuration>
-```
-
-**Nota:** su Windows devi scrivere il percorso completo di Polyphone invece di :command:`polyphone`, ad esempio :command:`C:/Program files/Polyphone/polyphone.exe`.
-
-
-### Argomenti
-
-
--4
-: La modalità «4» corrisponde a «converti in .csv».
-
--d
-: Cartella di uscita in cui verrà convertito il file di ingresso.
-  Questo argomento è facoltativo; per impostazione predefinita è la stessa cartella del file di ingresso.
-
--o
-: Nome di uscita del file convertito, senza estensione (l'estensione «.csv» viene aggiunta automaticamente).
-  Questo argomento è facoltativo; per impostazione predefinita è lo stesso nome del file di ingresso.
-
--c
-: Configurazione della conversione.
-  L'opzione «raw» può essere usata per esportare i valori grezzi (così come sono memorizzati nel file soundfont) invece di valori con unità fisiche misurabili. Ad esempio, il tempo di release esportato sarà 0,491 (secondi), oppure -1229 nella sua forma grezza. Per impostazione predefinita vengono esportati i valori con unità fisiche.
-
-
-### Esempio
-
+--raw
+: Vengono esportati i valori grezzi (così come sono memorizzati nel file soundfont) invece dei valori con unità fisiche e misurabili.
+  Ad esempio, il tempo di rilascio esportato sarà 0,491 (secondi) oppure -1229 nella sua forma grezza.
+  Per impostazione predefinita vengono esportati i valori con unità fisiche.
 
 ```
-polyphone -4 -i /path/to/file.sf2 -c 'raw'
+polyphone --convert csv /path/to/file.sf2 --raw
 ```
 
-La conversione crea una cartella (con il nome di uscita) contenente il file :file:`samples.csv` e un file per ogni strumento e per ogni preset. Se questa cartella esiste già, al suo nome viene aggiunto un numero.
+La conversione crea una cartella (con il nome del file di uscita) che contiene il file :file:`samples.csv` e un file per ogni strumento e per ogni preset.
+Se questa cartella esiste già, al suo nome viene aggiunto un numero: nulla viene sostituito, nemmeno con -f.
+
+
+## Conversione in dls {#doc_dls}
+
+
+Per questa conversione non viene usata alcuna opzione particolare.
+
+```
+polyphone --convert dls /path/to/file.sf2
+```
+
+Il file viene scritto nel formato DLS livello 2; le limitazioni della conversione sono descritte [qui](manual/annexes/the-different-soundfont-formats.md#doc_dls).
 
 
 ## Rendering di un file MIDI {#doc_render}
@@ -181,80 +138,40 @@ La conversione crea una cartella (con il nome di uscita) contenente il file :fil
 
 
 ```
-polyphone -5 -i <soundfont> -c <MIDI/file> -d <output/directory> -o <output_file_name>
+polyphone --render <file/MIDI> <soundfont> -d <cartella/di/uscita> -o <file/di/uscita> -f
 ```
-
-**Nota:** su Windows devi scrivere il percorso completo di Polyphone invece di :command:`polyphone`, ad esempio :command:`C:/Program files/Polyphone/polyphone.exe`.
 
 
 ### Argomenti
 
 
--5
-: La modalità «5» corrisponde a «renderizza un file MIDI»: il file MIDI viene riprodotto con il soundfont e il risultato viene scritto in un file wav.
+--render
+: Percorso del file MIDI da riprodurre (estensione .mid, .midi, .kar o .rmi): il file MIDI viene riprodotto con il soundfont e il risultato viene scritto in un file wav.
 
--d
+-d, --output-dir
 : Cartella di uscita in cui verrà scritto il file wav.
-  Questo argomento è facoltativo; per impostazione predefinita è la stessa cartella del file MIDI.
+  Questo argomento è facoltativo; per impostazione predefinita è la cartella del file MIDI.
 
--o
-: Nome di uscita del file wav, senza estensione (l'estensione «.wav» viene aggiunta automaticamente).
-  Questo argomento è facoltativo; per impostazione predefinita è lo stesso nome del file MIDI.
+-o, --output
+: File wav di uscita, con o senza estensione.
+  Questo argomento è facoltativo; per impostazione predefinita il file wav ha il nome del file MIDI.
 
--c
-: Percorso del file MIDI da riprodurre (estensione .mid, .midi, .kar o .rmi).
+-f, --force
+: Sostituisce un file wav esistente.
 
 
 ### Esempio
 
 
 ```
-polyphone -5 -i /path/to/file.sf2 -c /path/to/song.mid
+polyphone --render /path/to/song.mid /path/to/file.sf2
 ```
 
 Tutti i canali del file MIDI suonano il soundfont, e i preset vengono scelti dai cambi di programma del file (banco 128 sul canale 10, per le percussioni).
 Vengono usate le impostazioni del sintetizzatore: [suono](manual/settings.md#doc_sound) (riverbero, chorus, volume generale), [polifonia](manual/settings.md#doc_general) e [accordatura](manual/settings.md#doc_keyboard).
-Il risultato è un file wav stereo a 32 bit in virgola mobile a 48.000 Hz, che termina quando il suono delle ultime note si è spento. Un file wav esistente viene sostituito.
+Il risultato è un file wav stereo a 32 bit in virgola mobile a 48.000 Hz, che termina quando il suono delle ultime note si è spento.
 Le note di un preset che il soundfont non contiene non vengono suonate, e viene mostrato un avviso per quel preset.
 Nell'interfaccia grafica, un file MIDI può anche essere esportato dal [lettore MIDI](manual/soundfont-editor/toolbar.md#doc_midi_player_settings), dove ogni canale può suonare un soundfont o un preset diverso.
-
-
-## Conversione in dls {#doc_dls}
-
-
-### Riga di comando
-
-
-```
-polyphone -6 -i <file/to/convert> -d <output/directory> -o <output_file_name>
-```
-
-**Nota:** su Windows devi scrivere il percorso completo di Polyphone invece di :command:`polyphone`, ad esempio :command:`C:/Program files/Polyphone/polyphone.exe`.
-
-
-### Argomenti
-
-
--6
-: La modalità «6» corrisponde a «converti in dls».
-
--d
-: Cartella di uscita in cui verrà convertito il file di ingresso.
-  Questo argomento è facoltativo; per impostazione predefinita è la stessa cartella del file di ingresso.
-
--o
-: Nome di uscita del file convertito, senza estensione (l'estensione «.dls» viene aggiunta automaticamente).
-  Questo argomento è facoltativo; per impostazione predefinita è lo stesso nome del file di ingresso.
-
-
-### Esempio
-
-
-```
-polyphone -6 -i /path/to/file.sf2
-```
-
-Il file viene scritto nel formato DLS livello 2; le limitazioni della conversione sono descritte [qui](manual/annexes/the-different-soundfont-formats.md#doc_dls).
 
 
 ## Modalità sintetizzatore {#doc_synth}
@@ -264,10 +181,8 @@ Il file viene scritto nel formato DLS livello 2; le limitazioni della conversion
 
 
 ```
-polyphone -s -i <file/to/read> -c <configuration>
+polyphone --synth <file/da/leggere> --channel <canale> --multiple-selection --key-selection <modalità>
 ```
-
-**Nota:** su Windows devi scrivere il percorso completo di Polyphone invece di :command:`polyphone`, ad esempio :command:`C:/Program files/Polyphone/polyphone.exe`.
 
 ![Polyphone aperto con l'opzione della modalità sintetizzatore](images/synth_mode.png "Polyphone aperto con l'opzione della modalità sintetizzatore")
 
@@ -275,35 +190,134 @@ polyphone -s -i <file/to/read> -c <configuration>
 ### Argomenti
 
 
--s
-: La modalità «s» corrisponde ad «apri Polyphone in modalità sintetizzatore».
+-s, --synth
+: Polyphone viene aperto in modalità sintetizzatore.
 
--c
-: Configurazione del sintetizzatore, composta da 3 valori separati dal carattere «|». Questo argomento è facoltativo; per impostazione predefinita vale «0|off|off». Questi parametri possono poi essere modificati tramite l'interfaccia grafica.
-  
-  * Il primo valore è il numero del canale MIDI (tra 1 e 16) da ascoltare per suonare. Un valore di 0 o «all» indica che verranno usati tutti i canali, elaborati come un unico canale. Un valore di -1 o «each» ascolta ogni canale separatamente, il che è un prerequisito ad esempio per suonare l'uscita MIDI di un sequencer (un file MIDI può anche essere riprodotto direttamente con il [lettore MIDI](manual/soundfont-editor/toolbar.md#doc_midi_player)).
-  * Il secondo valore è «off» o «on» e disattiva o attiva la selezione di più preset da suonare.
-  * Il terzo valore è «off», «on» o «toggle» e disattiva o attiva la selezione dei preset tramite i tasti corrispondenti al numero di preset (ad esempio, il tasto 0 attiva il preset 0).
+--channel
+: Numero del canale MIDI (tra 1 e 16) da ascoltare per suonare.
+  Il valore «all» indica che verranno usati tutti i canali, elaborati come un unico canale (valore predefinito).
+  Il valore «each» ascolta ogni canale separatamente, il che è un prerequisito ad esempio per suonare l'uscita MIDI di un sequencer (un file MIDI può anche essere riprodotto direttamente con il [lettore MIDI](manual/soundfont-editor/toolbar.md#doc_midi_player)).
+
+--multiple-selection
+: È possibile selezionare più preset da suonare.
+
+--key-selection
+: Con il valore «on», i preset vengono selezionati tramite i tasti corrispondenti al numero di preset (ad esempio, il tasto 0 attiva il preset 0).
+  Con il valore «toggle», un tasto deseleziona anche il suo preset.
+
+Questi argomenti sono facoltativi, e le impostazioni possono poi essere modificate tramite l'interfaccia grafica.
 
 
 ### Esempio
 
 
 ```
-polyphone -s -i /path/to/file.sf2 -c '1|on|toggle'
+polyphone --synth /path/to/file.sf2 --channel 1 --multiple-selection --key-selection toggle
+```
+
+
+## Server MCP {#doc_mcp}
+
+
+### Riga di comando
+
+
+```
+polyphone --mcp <file/da/aprire> --mcp-port <porta>
+```
+
+
+### Argomenti
+
+
+--mcp
+: Il server MCP, che permette a un assistente IA di esplorare, modificare e analizzare i soundfont aperti, viene avviato per questa sessione anche se è disattivato nelle [impostazioni](manual/settings.md).
+  L'indirizzo del server viene mostrato nella console.
+  Viene aperta una nuova istanza di Polyphone, anche se Polyphone è già aperto.
+
+--mcp-port
+: Porta del server MCP (questo argomento implica --mcp).
+  Questo argomento è facoltativo; per impostazione predefinita è la porta delle impostazioni (8642).
+
+Modificare le impostazioni del server MCP nell'interfaccia grafica sostituisce queste opzioni.
+
+
+### Esempio
+
+
+```
+polyphone --mcp-port 8700 /path/to/file.sf2
 ```
 
 
 ## Altre opzioni {#doc_other}
 
 
--h
-: Mostra un breve messaggio di aiuto.
+-h, --help
+: Mostra l'elenco di tutte le opzioni.
 
--r
+-v, --version
+: Mostra la versione di Polyphone.
+
+-r, --reset-config
 : Reimposta la configurazione di Polyphone (impostazioni, geometria della finestra, cronologia, ecc.).
   Può essere utile in caso di problemi.
 
 ```
-polyphone -r
+polyphone --reset-config
+```
+
+
+## Messaggi e codici restituiti {#doc_exit}
+
+
+Il caricamento e la scrittura vengono registrati nella console, e gli errori vengono scritti nell'uscita degli errori.
+I messaggi e la guida sono nella lingua scelta nelle [impostazioni](manual/settings.md).
+
+Il codice restituito è:
+
+0
+: Successo.
+
+1
+: Un file di ingresso o la cartella di uscita non esiste, oppure il file di uscita esiste già (senza -f).
+
+2
+: Gli argomenti non sono validi: opzione sconosciuta, valore errato, opzione non usata con la modalità scelta, formato del file di ingresso non supportato, ecc.
+
+3
+: Un file di ingresso non può essere letto (soundfont, file MIDI).
+
+4
+: L'uscita non può essere scritta.
+
+Quando vengono convertiti più file, il codice restituito è quello del primo errore.
+
+
+## Opzioni delle versioni precedenti {#doc_legacy}
+
+
+Le opzioni delle versioni precedenti di Polyphone sono ancora accettate:
+
+-1, -2, -3, -4, -6
+: Conversione in sf2, sf3, sfz, csv e dls, come con --convert.
+
+-5
+: Rendering di un file MIDI, il cui percorso viene indicato con -c.
+
+-i
+: File di ingresso, che può anche essere scritto senza questa opzione.
+
+-c
+: Configurazione, composta da valori separati dal carattere «|»:
+  
+  * conversione in sf3: qualità di compressione, «0» per bassa, «1» per media, «2» per alta;
+  * conversione in sfz: 3 valori, «1» o «0», per --preset-prefix, --bank-dir e --gm-sort, ad esempio «0|1|1»;
+  * conversione in csv: «raw» per --raw;
+  * rendering di un file MIDI (-5): percorso del file MIDI;
+  * modalità sintetizzatore: canale («all», «each» o da 1 a 16, dove 0 equivale ad «all» e -1 a «each»), selezione multipla («on» o «off») e selezione tramite i tasti («on», «off» o «toggle»), ad esempio «all|on|toggle».
+
+```
+polyphone -2 -i /path/to/file.sf2 -c 2
+polyphone -s -i /path/to/file.sf2 -c 'all|on|toggle'
 ```

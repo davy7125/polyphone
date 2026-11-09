@@ -38,6 +38,7 @@ Muitas vezes as amostras são usadas apenas parcialmente, e remover o excesso po
 
 * a parte útil de uma amostra às vezes fica antes do ponto final do loop: é então possível excluir a parte da amostra após o fim do loop, e esta [ferramenta](manual/soundfont-editor/tools/sample-tools.md#doc_trimloop) permite fazer isso em poucos cliques;
 * as amostras podem começar com um silêncio, que deve ser removido para reduzir a latência ao disparar uma nota (também existe uma [ferramenta](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank) para fazer isso rapidamente);
+* uma mesma amostra pode estar presente várias vezes: este [resumo de configuração](manual/soundfont-editor/configuration-summaries.md#doc_sample) mostra as duplicatas, e esta [ferramenta](manual/soundfont-editor/tools/global-tools.md#doc_duplicates) as remove atualizando os instrumentos;
 * por fim, algumas amostras podem simplesmente não ser usadas: este [resumo de configuração](manual/soundfont-editor/configuration-summaries.md#doc_sample) as lista, e esta [ferramenta](manual/soundfont-editor/tools/global-tools.md#doc_unused) as remove automaticamente.
 
 

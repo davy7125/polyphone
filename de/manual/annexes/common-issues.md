@@ -38,6 +38,7 @@ Samples werden oft nur teilweise genutzt, und das Entfernen des Überschusses ka
 
 * der nützliche Teil eines Samples liegt manchmal vor dem letzten Loop-Punkt: Der Teil des Samples nach dem Loop-Ende kann daher gelöscht werden, und mit diesem [Werkzeug](manual/soundfont-editor/tools/sample-tools.md#doc_trimloop) geht das mit wenigen Klicks;
 * Samples können mit Stille beginnen, die entfernt werden sollte, um die Latenz beim Auslösen einer Note zu verringern (auch dafür gibt es ein [Werkzeug](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank));
+* dasselbe Sample kann mehrfach vorhanden sein: Diese [Konfigurationsübersicht](manual/soundfont-editor/configuration-summaries.md#doc_sample) zeigt die Duplikate an, und dieses [Werkzeug](manual/soundfont-editor/tools/global-tools.md#doc_duplicates) entfernt sie und passt dabei die Instrumente an;
 * schließlich werden manche Samples möglicherweise gar nicht verwendet: Diese [Konfigurationsübersicht](manual/soundfont-editor/configuration-summaries.md#doc_sample) listet sie auf, und dieses [Werkzeug](manual/soundfont-editor/tools/global-tools.md#doc_unused) entfernt sie automatisch.
 
 

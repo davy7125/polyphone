@@ -38,6 +38,7 @@ SoundFontに説得力のあるインストゥルメントが1つもないこと�
 
 * サンプルの有効な部分が最後のループポイントより前にある場合があります。その場合はループの終了位置より後ろの部分を削除でき、この[ツール](manual/soundfont-editor/tools/sample-tools.md#doc_trimloop)を使えば数回のクリックで済みます。
 * サンプルの先頭に無音があることがあります。ノートを鳴らしたときのレイテンシーを減らすために取り除くべきです（すばやく行うための[ツール](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank)もあります）。
+* 同じサンプルが複数回含まれていることがあります。この[構成サマリー](manual/soundfont-editor/configuration-summaries.md#doc_sample)には重複が表示され、この[ツール](manual/soundfont-editor/tools/global-tools.md#doc_duplicates)を使うとインストゥルメントを更新しながら重複を削除できます。
 * 最後に、まったく使われていないサンプルもあるかもしれません。この[構成サマリー](manual/soundfont-editor/configuration-summaries.md#doc_sample)にはそれらが一覧表示され、この[ツール](manual/soundfont-editor/tools/global-tools.md#doc_unused)を使うと自動的に削除できます。
 
 

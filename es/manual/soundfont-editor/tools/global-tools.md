@@ -15,6 +15,16 @@ Se eliminan automáticamente todas las muestras que no usa ningún instrumento y
 Un mensaje indica cuántos elementos se han eliminado.
 
 
+### Limpiar duplicados {#doc_duplicates}
+
+
+Las muestras idénticas se fusionan: los datos, la frecuencia de muestreo, el bucle, la nota raíz y la corrección deben ser iguales, y las muestras estéreo se comparan junto con su muestra enlazada.
+En cada grupo de muestras idénticas, se conserva la primera (en el orden del archivo), que sustituye a las demás en los instrumentos, y las demás se eliminan.
+Un mensaje indica cuántas muestras se han eliminado.
+
+Los duplicados pueden verse antes en el [resumen de configuración de las muestras](manual/soundfont-editor/configuration-summaries.md#doc_sample).
+
+
 ## Moduladores {#doc_cat_mod}
 
 

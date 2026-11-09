@@ -94,7 +94,7 @@ Todas las opciones vistas arriba se pueden indicar al abrir Polyphone añadiendo
 En **Linux** o **macOS**, basta con completar la línea de comandos. En **Windows**, crea un acceso directo haciendo clic derecho en el archivo ejecutable :file:`polyphone.exe` y selecciona :guilabel:`Enviar a` → :guilabel:`Escritorio (crear acceso directo)` (desde :guilabel:`Mostrar más opciones` del menú contextual en Windows 11). Después, mostrando las propiedades de este acceso directo, se pueden añadir parámetros al destino, que podría ser:
 
 ```
-"C:\Program Files\Polyphone\polyphone.exe" -s -c "all|on|toggle"
+"C:\Program Files\Polyphone\polyphone.exe" --synth --multiple-selection --key-selection toggle
 ```
 
 Las distintas opciones se describen en esta [página](manual/annexes/command-line.md#doc_synth).

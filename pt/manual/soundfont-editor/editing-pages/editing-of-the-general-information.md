@@ -70,7 +70,7 @@ Nome e tamanho do arquivo
 
 É feita uma contagem:
 
-* do número de [amostras](manual/soundfont-editor/editing-pages/sample-editor.md) e de amostras não utilizadas,
+* do número de [amostras](manual/soundfont-editor/editing-pages/sample-editor.md), de amostras não utilizadas e de amostras duplicadas,
 * do número de [instrumentos](manual/soundfont-editor/editing-pages/instrument-editor.md) e de instrumentos não utilizados,
 * do número de [predefinições](manual/soundfont-editor/editing-pages/preset-editor.md),
 * do número de parâmetros e de moduladores editados nos instrumentos,
@@ -79,6 +79,7 @@ Nome e tamanho do arquivo
 O botão :guilabel:`Detalhes` ao lado das amostras, dos instrumentos e das predefinições exibe o [resumo de configuração](manual/soundfont-editor/configuration-summaries.md) correspondente.
 
 Amostras e instrumentos não utilizados podem ser removidos facilmente com a ferramenta “[Remover elementos não utilizados](manual/soundfont-editor/tools/global-tools.md#doc_unused)”.
+Amostras duplicadas podem ser removidas com a ferramenta “[Limpar duplicatas](manual/soundfont-editor/tools/global-tools.md#doc_duplicates)”.
 
 **Observação:** o número de 65536 parâmetros nos instrumentos e nas predefinições não deve ser ultrapassado.
 Alguns sintetizadores podem não conseguir ler todos eles.

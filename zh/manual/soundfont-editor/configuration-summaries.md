@@ -17,10 +17,11 @@
 ![采样配置概览](images/conf_summary_sample.png "采样配置概览")
 
 
-每个采样的列依次为：:guilabel:`已使用`、:guilabel:`总时长`、:guilabel:`循环时长`、:guilabel:`根音符`、:guilabel:`校正`、:guilabel:`采样类型`、:guilabel:`链接的采样`、:guilabel:`采样率` 和 :guilabel:`压缩`。
+每个采样的列依次为：:guilabel:`已使用`、:guilabel:`重复于`、:guilabel:`总时长`、:guilabel:`循环时长`、:guilabel:`根音符`、:guilabel:`校正`、:guilabel:`采样类型`、:guilabel:`链接的采样`、:guilabel:`采样率` 和 :guilabel:`压缩`。
 例如，可以通过此页面进行以下检查：
 
 * 该采样是否被使用？
+* 它是否与另一个采样重复？（如果是，会显示前面那个相同采样的名称）
 * 它的总时长（以及循环时长，如果有的话）是否足够长？
 * 循环是否正确？（可能产生咔嗒声的循环会被突出显示）
 * 是否已经调音？

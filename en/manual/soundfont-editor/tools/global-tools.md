@@ -15,6 +15,16 @@ All samples that are not used by any instrument and all instruments that are not
 A message indicates how many elements have been deleted.
 
 
+### Clean duplicates {#doc_duplicates}
+
+
+Identical samples are merged: data, sample rate, loop, root key and correction must be the same, and stereo samples are compared along with their linked sample.
+For each group of identical samples, the first one (in the order of the file) is kept and replaces the others in the instruments, the others being deleted.
+A message indicates how many samples have been deleted.
+
+Duplicates are shown beforehand in the [sample configuration summary](manual/soundfont-editor/configuration-summaries.md#doc_sample).
+
+
 ## Modulators {#doc_cat_mod}
 
 

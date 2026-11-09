@@ -70,7 +70,7 @@ ROM 名称和版本
 
 会统计以下数量：
 
-* [采样](manual/soundfont-editor/editing-pages/sample-editor.md)数量以及未使用的采样数量，
+* [采样](manual/soundfont-editor/editing-pages/sample-editor.md)数量、未使用的采样数量以及重复的采样数量，
 * [乐器](manual/soundfont-editor/editing-pages/instrument-editor.md)数量以及未使用的乐器数量，
 * [预设](manual/soundfont-editor/editing-pages/preset-editor.md)数量，
 * 乐器中已编辑的参数和调制器数量，
@@ -79,6 +79,7 @@ ROM 名称和版本
 采样、乐器和预设旁边的 :guilabel:`详细信息` 按钮会显示相应的[配置概览](manual/soundfont-editor/configuration-summaries.md)。
 
 未使用的采样和乐器可以用“[移除未使用的元素](manual/soundfont-editor/tools/global-tools.md#doc_unused)”工具轻松移除。
+重复的采样可以用“[清理重复项](manual/soundfont-editor/tools/global-tools.md#doc_duplicates)”工具移除。
 
 **注意：**乐器和预设中的参数数量不应超过 65536 个。
 某些合成器可能无法全部读取。

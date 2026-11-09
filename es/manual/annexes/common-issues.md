@@ -38,6 +38,7 @@ A menudo las muestras solo se usan en parte, y eliminar lo sobrante puede reduci
 
 * la parte útil de una muestra a veces se encuentra antes del punto final del bucle: entonces se puede eliminar la parte de la muestra posterior al final del bucle, y esta [herramienta](manual/soundfont-editor/tools/sample-tools.md#doc_trimloop) permite hacerlo en unos pocos clics;
 * las muestras pueden empezar con un silencio, que conviene eliminar para reducir la latencia al disparar una nota (también hay una [herramienta](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank) para hacerlo rápidamente);
+* una misma muestra puede estar presente varias veces: este [resumen de configuración](manual/soundfont-editor/configuration-summaries.md#doc_sample) muestra los duplicados y esta [herramienta](manual/soundfont-editor/tools/global-tools.md#doc_duplicates) los elimina actualizando los instrumentos;
 * por último, puede que algunas muestras simplemente no se usen: este [resumen de configuración](manual/soundfont-editor/configuration-summaries.md#doc_sample) las enumera y esta [herramienta](manual/soundfont-editor/tools/global-tools.md#doc_unused) las elimina automáticamente.
 
 

@@ -38,6 +38,7 @@
 
 * полезная часть семпла иногда находится до конечной точки петли — тогда часть семпла после конца петли можно удалить, и эта [функция](manual/soundfont-editor/tools/sample-tools.md#doc_trimloop) позволяет сделать это за несколько щелчков;
 * семплы могут начинаться с тишины, которую стоит удалить, чтобы уменьшить задержку при нажатии ноты (для этого тоже есть [функция](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank));
+* один и тот же семпл может присутствовать несколько раз: эта [сводка конфигурации](manual/soundfont-editor/configuration-summaries.md#doc_sample) показывает дубликаты, а эта [функция](manual/soundfont-editor/tools/global-tools.md#doc_duplicates) удаляет их, обновляя инструменты;
 * наконец, некоторые семплы могут вовсе не использоваться: эта [сводка конфигурации](manual/soundfont-editor/configuration-summaries.md#doc_sample) перечисляет их, а эта [функция](manual/soundfont-editor/tools/global-tools.md#doc_unused) автоматически их удаляет.
 
 

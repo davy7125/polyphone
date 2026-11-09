@@ -94,7 +94,7 @@ polyphone -s
 **Linux**または**macOS**では、コマンドラインに追記するだけです。**Windows**では、実行ファイル :file:`polyphone.exe` を右クリックし、:guilabel:`送る` → :guilabel:`デスクトップ (ショートカットを作成)` を選んでショートカットを作成します（Windows 11では、コンテキストメニューの :guilabel:`その他のオプションを確認` から選びます）。次に、このショートカットのプロパティを表示すると、リンク先にパラメーターを追加できます。たとえば次のようになります。
 
 ```
-"C:\Program Files\Polyphone\polyphone.exe" -s -c "all|on|toggle"
+"C:\Program Files\Polyphone\polyphone.exe" --synth --multiple-selection --key-selection toggle
 ```
 
 各オプションについては、この[ページ](manual/annexes/command-line.md#doc_synth)で説明しています。

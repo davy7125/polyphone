@@ -94,7 +94,7 @@ Todas as opções vistas acima podem ser chamadas ao abrir o Polyphone, adiciona
 No **Linux** ou no **macOS**, basta completar a linha de comando. No **Windows**, crie um atalho clicando com o botão direito no arquivo executável :file:`polyphone.exe` e selecione :guilabel:`Enviar para` → :guilabel:`Área de trabalho (criar atalho)` (em :guilabel:`Mostrar mais opções` do menu de contexto no Windows 11). Depois, exibindo as propriedades desse atalho, é possível adicionar parâmetros ao destino, que poderia ser:
 
 ```
-"C:\Program Files\Polyphone\polyphone.exe" -s -c "all|on|toggle"
+"C:\Program Files\Polyphone\polyphone.exe" --synth --multiple-selection --key-selection toggle
 ```
 
 As diferentes opções são descritas nesta [página](manual/annexes/command-line.md#doc_synth).

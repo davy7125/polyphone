@@ -17,10 +17,11 @@ Al hacer clic en el encabezado :guilabel:`Muestras` de un soundfont en el [árbo
 ![Resumen de configuración de las muestras](images/conf_summary_sample.png "Resumen de configuración de las muestras")
 
 
-Para cada muestra, las columnas son: :guilabel:`Utilizado`, :guilabel:`Duración total`, :guilabel:`Duración del bucle`, :guilabel:`Nota raíz`, :guilabel:`Corrección`, :guilabel:`Tipo de muestra`, :guilabel:`Muestra enlazada`, :guilabel:`Frecuencia de muestreo` y :guilabel:`Compresión`.
+Para cada muestra, las columnas son: :guilabel:`Utilizado`, :guilabel:`Duplicado de`, :guilabel:`Duración total`, :guilabel:`Duración del bucle`, :guilabel:`Nota raíz`, :guilabel:`Corrección`, :guilabel:`Tipo de muestra`, :guilabel:`Muestra enlazada`, :guilabel:`Frecuencia de muestreo` y :guilabel:`Compresión`.
 Esta página permite, por ejemplo, hacer las siguientes comprobaciones:
 
 * ¿Se usa la muestra?
+* ¿Es un duplicado de otra muestra? (en ese caso se muestra el nombre de la muestra idéntica anterior)
 * ¿Su duración total (y, en su caso, la duración del bucle) es suficiente?
 * ¿El bucle es correcto? (se resalta un bucle que puede producir un clic)
 * ¿Se ha hecho la afinación?

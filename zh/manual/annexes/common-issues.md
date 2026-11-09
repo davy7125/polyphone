@@ -38,6 +38,7 @@
 
 * 采样中有用的部分有时位于最终循环点之前：此时可以删除循环终点之后的部分，用这个[工具](manual/soundfont-editor/tools/sample-tools.md#doc_trimloop)只需点几下即可完成；
 * 采样开头可能有一段静音，应将其删除，以减少触发音符时的延迟（也有一个[工具](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank)可以快速完成）；
+* 同一个采样可能出现多次：这个[配置概览](manual/soundfont-editor/configuration-summaries.md#doc_sample)会显示重复项，而这个[工具](manual/soundfont-editor/tools/global-tools.md#doc_duplicates)会在更新乐器的同时移除它们；
 * 最后，有些采样可能根本没有被使用：这个[配置概览](manual/soundfont-editor/configuration-summaries.md#doc_sample)会列出它们，而这个[工具](manual/soundfont-editor/tools/global-tools.md#doc_unused)会自动移除它们。
 
 

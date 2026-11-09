@@ -15,6 +15,16 @@ Todas as amostras que não são usadas por nenhum instrumento e todos os instrum
 Uma mensagem indica quantos elementos foram excluídos.
 
 
+### Limpar duplicatas {#doc_duplicates}
+
+
+Amostras idênticas são mescladas: os dados, a taxa de amostragem, o loop, a nota base e a correção devem ser iguais, e as amostras estéreo são comparadas junto com a sua amostra vinculada.
+Para cada grupo de amostras idênticas, a primeira (na ordem do arquivo) é mantida e substitui as outras nos instrumentos, e as outras são excluídas.
+Uma mensagem indica quantas amostras foram excluídas.
+
+As duplicatas podem ser vistas antes no [resumo de configuração das amostras](manual/soundfont-editor/configuration-summaries.md#doc_sample).
+
+
 ## Moduladores {#doc_cat_mod}
 
 

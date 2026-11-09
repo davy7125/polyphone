@@ -94,7 +94,7 @@ polyphone -s
 В **Linux** или **macOS** просто дополните командную строку. В **Windows** создайте ярлык: щёлкните правой кнопкой мыши по исполняемому файлу :file:`polyphone.exe` и выберите :guilabel:`Отправить` → :guilabel:`Рабочий стол (создать ярлык)` (в Windows 11 — через :guilabel:`Показать дополнительные параметры` в контекстном меню). Затем в свойствах этого ярлыка можно добавить параметры к объекту, например:
 
 ```
-"C:\Program Files\Polyphone\polyphone.exe" -s -c "all|on|toggle"
+"C:\Program Files\Polyphone\polyphone.exe" --synth --multiple-selection --key-selection toggle
 ```
 
 Все параметры описаны на этой [странице](manual/annexes/command-line.md#doc_synth).

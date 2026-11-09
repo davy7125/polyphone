@@ -70,7 +70,7 @@ Nome e dimensione del file
 
 Vengono conteggiati:
 
-* il numero di [campioni](manual/soundfont-editor/editing-pages/sample-editor.md) e di campioni non utilizzati,
+* il numero di [campioni](manual/soundfont-editor/editing-pages/sample-editor.md), di campioni non utilizzati e di campioni duplicati,
 * il numero di [strumenti](manual/soundfont-editor/editing-pages/instrument-editor.md) e di strumenti non utilizzati,
 * il numero di [preset](manual/soundfont-editor/editing-pages/preset-editor.md),
 * il numero di parametri e modulatori modificati per gli strumenti,
@@ -79,6 +79,7 @@ Vengono conteggiati:
 Il pulsante :guilabel:`Dettagli` accanto ai campioni, agli strumenti e ai preset mostra il [riepilogo della configurazione](manual/soundfont-editor/configuration-summaries.md) corrispondente.
 
 I campioni e gli strumenti non utilizzati possono essere rimossi facilmente con la funzione «[Rimuovi elementi non utilizzati](manual/soundfont-editor/tools/global-tools.md#doc_unused)».
+I campioni duplicati possono essere rimossi con la funzione «[Pulisci i duplicati](manual/soundfont-editor/tools/global-tools.md#doc_duplicates)».
 
 **Nota:** il numero di 65536 parametri negli strumenti e nei preset non dovrebbe essere superato.
 Alcuni sintetizzatori potrebbero non riuscire a leggerli tutti.

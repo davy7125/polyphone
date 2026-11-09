@@ -17,10 +17,11 @@ Ao clicar no cabeçalho :guilabel:`Amostras` de uma soundfont na [árvore](manua
 ![Resumo de configuração das amostras](images/conf_summary_sample.png "Resumo de configuração das amostras")
 
 
-Para cada amostra, as colunas são: :guilabel:`Usada`, :guilabel:`Duração total`, :guilabel:`Duração do loop`, :guilabel:`Nota base`, :guilabel:`Correção`, :guilabel:`Tipo de amostra`, :guilabel:`Amostra vinculada`, :guilabel:`Taxa de amostragem` e :guilabel:`Compressão`.
+Para cada amostra, as colunas são: :guilabel:`Usada`, :guilabel:`Duplicata de`, :guilabel:`Duração total`, :guilabel:`Duração do loop`, :guilabel:`Nota base`, :guilabel:`Correção`, :guilabel:`Tipo de amostra`, :guilabel:`Amostra vinculada`, :guilabel:`Taxa de amostragem` e :guilabel:`Compressão`.
 Esta página permite, por exemplo, fazer as seguintes verificações:
 
 * A amostra é usada?
+* Ela é uma duplicata de outra amostra? (o nome da amostra idêntica anterior é então exibido)
 * Sua duração total (e eventualmente a duração do loop) é longa o suficiente?
 * O loop está correto? (um loop que pode produzir um clique é destacado)
 * A afinação foi feita?

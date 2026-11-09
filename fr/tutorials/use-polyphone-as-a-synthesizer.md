@@ -95,7 +95,7 @@ Toutes les options vues précédemment peuvent être appelées lors de l'ouvertu
 Pour **Linux** ou **macOS**, il suffit de compléter la ligne de commande. Pour **Windows**, il faut créer un raccourci en faisant un clic droit sur le fichier exécutable :file:`polyphone.exe`, puis sélectionner :guilabel:`Envoyer vers` → :guilabel:`Bureau (créer un raccourci)` (dans :guilabel:`Afficher plus d'options` du menu contextuel avec Windows 11). Ensuite, en affichant les propriétés de ce raccourci, il est possible d'ajouter les paramètres dans la cible qui pourra par exemple être&nbsp;:
 
 ```
-"C:\Program Files\Polyphone\polyphone.exe" -s -c "all|on|toggle"
+"C:\Program Files\Polyphone\polyphone.exe" --synth --multiple-selection --key-selection toggle
 ```
 
 Les différentes options sont décrites sur cette [page](manual/annexes/command-line.md#doc_synth).

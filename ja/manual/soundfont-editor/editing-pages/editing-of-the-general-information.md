@@ -70,7 +70,7 @@ ROM名とバージョン
 
 次の項目が集計されます。
 
-* [サンプル](manual/soundfont-editor/editing-pages/sample-editor.md)の数と未使用のサンプルの数
+* [サンプル](manual/soundfont-editor/editing-pages/sample-editor.md)の数、未使用のサンプルの数、重複したサンプルの数
 * [インストゥルメント](manual/soundfont-editor/editing-pages/instrument-editor.md)の数と未使用のインストゥルメントの数
 * [プリセット](manual/soundfont-editor/editing-pages/preset-editor.md)の数
 * インストゥルメントで編集されたパラメーターとモジュレーターの数
@@ -79,6 +79,7 @@ ROM名とバージョン
 サンプル、インストゥルメント、プリセットの横にある :guilabel:`詳細` ボタンを押すと、対応する[構成サマリー](manual/soundfont-editor/configuration-summaries.md)が表示されます。
 
 未使用のサンプルとインストゥルメントは、「[未使用要素を削除](manual/soundfont-editor/tools/global-tools.md#doc_unused)」ツールで簡単に削除できます。
+重複したサンプルは、「[重複をクリーンアップ](manual/soundfont-editor/tools/global-tools.md#doc_duplicates)」ツールで削除できます。
 
 **注意：**インストゥルメントとプリセットのパラメーター数は65536を超えないようにしてください。
 一部のシンセサイザーでは、すべてを読み込めない場合があります。

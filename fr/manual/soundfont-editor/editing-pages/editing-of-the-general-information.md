@@ -70,7 +70,7 @@ Nom et taille du fichier
 
 Un compte est effectué sur&nbsp;:
 
-* les [échantillons](manual/soundfont-editor/editing-pages/sample-editor.md) et les échantillons non utilisés,
+* les [échantillons](manual/soundfont-editor/editing-pages/sample-editor.md), les échantillons non utilisés et les échantillons en double,
 * les [instruments](manual/soundfont-editor/editing-pages/instrument-editor.md) et les instruments non utilisés,
 * les [ensembles](manual/soundfont-editor/editing-pages/preset-editor.md),
 * les paramètres et modulateurs édités dans les instruments,
@@ -79,6 +79,7 @@ Un compte est effectué sur&nbsp;:
 Le bouton :guilabel:`Détails` à côté des échantillons, des instruments et des ensembles affiche le [résumé de configuration](manual/soundfont-editor/configuration-summaries.md) correspondant.
 
 Les échantillons et instruments non utilisés peuvent être facilement enlevés avec l'outil «&nbsp;[Enlever les éléments non utilisés](manual/soundfont-editor/tools/global-tools.md#doc_unused)&nbsp;».
+Les échantillons en double peuvent être enlevés avec l'outil «&nbsp;[Nettoyer les doublons](manual/soundfont-editor/tools/global-tools.md#doc_duplicates)&nbsp;».
 
 **Note&nbsp;:** Le nombre de 65536 paramètres dans les instruments et les ensembles ne devrait pas être dépassé.
 Certains synthétiseurs pourraient ne pas être en mesure de tous les lire.
