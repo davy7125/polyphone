@@ -149,7 +149,7 @@ target_compile_definitions(PolyphonePlugin PUBLIC
     JUCE_WEB_BROWSER=0
     JUCE_USE_CURL=0
     JUCE_VST3_CAN_REPLACE_VST2=0
-    JUCE_DISPLAY_SPLASH_SCREEN=0)
+    JUCE_USE_OPUS=0) # Codec not used (its code triggers -Wstringop-overflow warnings with GCC)
 
 target_link_libraries(PolyphonePlugin
     PRIVATE
@@ -161,3 +161,6 @@ target_link_libraries(PolyphonePlugin
         juce::juce_recommended_config_flags
         juce::juce_recommended_lto_flags
         juce::juce_recommended_warning_flags)
+
+# GCC: parallel LTO link even without a make jobserver (Ninja), otherwise the link is serial with a warning
+target_link_options(PolyphonePlugin INTERFACE $<$<AND:$<CONFIG:Release>,$<CXX_COMPILER_ID:GNU>>:-flto=auto>)
