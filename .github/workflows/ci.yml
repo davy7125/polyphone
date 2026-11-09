@@ -290,9 +290,12 @@ jobs:
             xvfb-run -a tests/plugin/run_cases.sh $host $plugins/$plugin soundfonts renders/reference renders/plugin_$format || status=1
           done
 
-          # sfz file exported by the editor and DLS file of the DLS tests played by the plugin
+          # sfz file exported by the editor (in an existing directory) and DLS file of the DLS tests played by the plugin.
+          # sfz of the preset "Loop modes" (all keys, all channels): "Exclusive", the first one by name, is a percussion
+          # kit (channel 10, 3 keys) that the random messages of the check do not play.
+          mkdir -p renders/sfz
           QT_QPA_PLATFORM=offscreen build/editor/bin/polyphone -3 -i soundfonts/polyphone-test.sf2 -d renders/sfz
-          sfz=$(find renders/sfz -name '*.sfz' | sort | head -n 1)
+          sfz=$(find renders/sfz -name 'Loop modes.sfz' | head -n 1)
           xvfb-run -a $host formatchecks $plugins/VST3/Polyphone.vst3 "$sfz" renders/dls/files/dls1-test.dls || status=1
           exit $status
 
