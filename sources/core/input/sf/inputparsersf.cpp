@@ -22,13 +22,11 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
+
 #include "inputparsersf.h"
 #include "soundfontmanager.h"
+#include "sf2filesource.h"
 #include <QFile>
-#include <QDataStream>
-#include "sf2header.h"
-#include "sf2sdtapart.h"
-#include "sf2pdtapart.h"
 
 InputParserSf::InputParserSf() : AbstractInputParser() {}
 
@@ -56,45 +54,18 @@ void InputParserSf::processInternal(QString fileName, SoundfontManager * sm, boo
         return;
     }
 
-    // Parse the file
-    QDataStream stream(&fi);
-    this->parse(stream, success, error, sf2Index);
+    // Read the structure (the sample data is read when needed)
+    Sf2FileSource source(fi);
+    Sf2Reader reader;
+    success = reader.read(source);
     fi.close();
+    if (success)
+        fillSf2(reader, sf2Index);
+    else
+        error = QString::fromStdString(reader.getError());
 }
 
-void InputParserSf::parse(QDataStream &stream, bool &success, QString &error, int &sf2Index)
-{
-    // Parse the different parts of the file
-    Sf2Header header;
-    Sf2SdtaPart sdtaPart;
-    Sf2PdtaPart pdtaPart;
-    stream >> header >> sdtaPart >> pdtaPart;
-
-    if (!header._isValid)
-    {
-        success = false;
-        error = "invalid header";
-        return;
-    }
-
-    if (!sdtaPart._isValid)
-    {
-        success = false;
-        error = "corrupted file (sdta)";
-        return;
-    }
-
-    if (!pdtaPart._isValid)
-    {
-        success = false;
-        error = "corrupted file (pdta)";
-        return;
-    }
-
-    fillSf2(header, sdtaPart, pdtaPart, success, error, sf2Index);
-}
-
-void InputParserSf::fillSf2(Sf2Header &header, Sf2SdtaPart &sdtaPart, Sf2PdtaPart &pdtaPart, bool &success, QString &error, int &sf2Index)
+void InputParserSf::fillSf2(const Sf2Reader &reader, int &sf2Index)
 {
     // Create a new soundfont
     sf2Index = _sm->add(EltID(elementSf2));
@@ -102,380 +73,132 @@ void InputParserSf::fillSf2(Sf2Header &header, Sf2SdtaPart &sdtaPart, Sf2PdtaPar
 
     /// General data
 
-    _sm->set(id, champ_ISNG, header.getInfo("isng"));
-    _sm->set(id, champ_name, header.getInfo("INAM"));
-    _sm->set(id, champ_IROM, header.getInfo("irom"));
-    _sm->set(id, champ_ICRD, header.getInfo("ICRD"));
-    _sm->set(id, champ_IENG, header.getInfo("IENG"));
-    _sm->set(id, champ_IPRD, header.getInfo("IPRD"));
-    _sm->set(id, champ_ICOP, header.getInfo("ICOP"));
-    _sm->set(id, champ_ICMT, header.getInfo("ICMT"));
-    _sm->set(id, champ_ISFT, header.getInfo("ISFT"));
+    _sm->set(id, champ_ISNG, QString::fromStdString(reader.getInfo("isng")));
+    _sm->set(id, champ_name, QString::fromStdString(reader.getInfo("INAM")));
+    _sm->set(id, champ_IROM, QString::fromStdString(reader.getInfo("irom")));
+    _sm->set(id, champ_ICRD, QString::fromStdString(reader.getInfo("ICRD")));
+    _sm->set(id, champ_IENG, QString::fromStdString(reader.getInfo("IENG")));
+    _sm->set(id, champ_IPRD, QString::fromStdString(reader.getInfo("IPRD")));
+    _sm->set(id, champ_ICOP, QString::fromStdString(reader.getInfo("ICOP")));
+    _sm->set(id, champ_ICMT, QString::fromStdString(reader.getInfo("ICMT")));
+    _sm->set(id, champ_ISFT, QString::fromStdString(reader.getInfo("ISFT")));
     AttributeValue value;
-    value.sfVerValue = header.getVersion("ifil");
+    value.sfVerValue = reader.getVersion("ifil");
     _sm->set(id, champ_IFIL, value);
-    bool isSf3 = value.sfVerValue.wMajor >= 3;
-    value.sfVerValue = header.getVersion("iver");
+    value.sfVerValue = reader.getVersion("iver");
     _sm->set(id, champ_IVER, value);
 
-    // Mode 16 ou 24 bits au chargement
-    if (sdtaPart._startSm24Offset > 0)
-    {
-        value.wValue = 24;
-        _sm->set(id, champ_wBpsInit, value);
-        _sm->set(id, champ_wBpsSave, value);
-    }
-    else
-    {
-        value.wValue = 16;
-        _sm->set(id, champ_wBpsInit, value);
-        _sm->set(id, champ_wBpsSave, value);
-    }
+    // Mode 16 or 24 bits at loading
+    value.wValue = reader.has24BitSamples() ? 24 : 16;
+    _sm->set(id, champ_wBpsInit, value);
+    _sm->set(id, champ_wBpsSave, value);
 
     /// Samples
 
     id = EltID(elementSmpl, sf2Index);
-    for (int i = 0; i < pdtaPart._shdrs.count() - 1; i++) // Terminal sample (EOS) is not read
+    for (const Sf2Reader::Sample &sample : reader.getSamples())
     {
-        Sf2PdtaPart_shdr SHDR = pdtaPart._shdrs[i];
-
         id.indexElt = _sm->add(id);
-        _sm->set(id, champ_name, SHDR._name);
+        _sm->set(id, champ_name, QString::fromStdString(sample.name));
         _sm->set(id, champ_filenameForData, _filename);
 
         // Sample type + link
         Sound * sound = _sm->getSound(id);
-        value.wValue = SHDR._wSampleLink.value;
+        value.wValue = sample.sampleLink;
         _sm->set(id, champ_wSampleLink, value);
-        bool isCompressed = false;
-        if (isSf3 && SHDR._sfSampleType.value & 0x10)
-        {
-            SHDR._sfSampleType.value &= ~0x10;
-            value.cValue = 1;
-            sound->set(champ_rawDataAvailable, value);
-            isCompressed = true;
-        }
-        else
-        {
-            value.cValue = 0;
-            sound->set(champ_rawDataAvailable, value);
-        }
-        value.sfLinkValue = (SFSampleLink)SHDR._sfSampleType.value;
+        value.cValue = sample.isCompressed ? 1 : 0;
+        sound->set(champ_rawDataAvailable, value);
+        value.sfLinkValue = sample.sampleType;
         _sm->set(id, champ_sfSampleType, value);
 
         // Sample properties
-        value.bValue = SHDR._originalPitch;
+        value.bValue = sample.originalPitch;
         sound->set(champ_byOriginalPitch, value);
-        value.cValue = SHDR._correction;
+        value.cValue = sample.correction;
         sound->set(champ_chPitchCorrection, value);
         value.wValue = 1;
         sound->set(champ_wChannel, value);
-        value.dwValue = SHDR._sampleRate.value;
-        if (value.dwValue == 0)
-        {
-            // Bad configuration in the sf2 file => we try to find a valid sample rate somewhere else
-            // to avoid future arythmetic exceptions (divisions by 0)
-            for (int i = 0; i < pdtaPart._shdrs.count() - 1; i++) // Terminal sample (EOS) is not read
-            {
-                value.dwValue = pdtaPart._shdrs[i]._sampleRate.value;
-                if (value.dwValue != 0)
-                    break;
-            }
-            if (value.dwValue == 0)
-                value.dwValue = 44100; // Nothing else has been found, 44100 is set since this is common
-        }
+        value.dwValue = sample.sampleRate;
         sound->set(champ_dwSampleRate, value);
 
-        // Start / end / length of the sample
-        value.dwValue = SHDR._end.value - SHDR._start.value;
-        if (isSf3 && !isCompressed)
-            value.dwValue /= 2;
+        // Length, position of the data (16 and possibly 24 bits) and loop
+        value.dwValue = sample.length;
         sound->set(champ_dwLength, value);
-        value.dwValue = 20 + header._infoSize.value + sdtaPart._startSmplOffset + SHDR._start.value * (isSf3 ? 1 : 2);
+        value.dwValue = sample.start16;
         sound->set(champ_dwStart16, value);
-        if (sdtaPart._startSm24Offset > 0)
-        {
-            value.dwValue = 20 + header._infoSize.value + sdtaPart._startSm24Offset + SHDR._start.value;
-            sound->set(champ_dwStart24, value);
-            value.wValue = 24;
-            sound->set(champ_bpsFile, value);
-        }
-        else
-        {
-            value.dwValue = 0;
-            sound->set(champ_dwStart24, value);
-            value.wValue = 16;
-            sound->set(champ_bpsFile, value);
-        }
-
-        // Loop
-        if (isSf3)
-        {
-            // Already relative to the sample start
-            value.dwValue = SHDR._startLoop.value;
-            sound->set(champ_dwStartLoop, value);
-            value.dwValue = SHDR._endLoop.value;
-            sound->set(champ_dwEndLoop, value);
-        }
-        else
-        {
-            // Absolute position => relative position
-            value.dwValue = SHDR._startLoop.value - SHDR._start.value;
-            sound->set(champ_dwStartLoop, value);
-            value.dwValue = SHDR._endLoop.value - SHDR._start.value;
-            sound->set(champ_dwEndLoop, value);
-        }
+        value.dwValue = sample.start24;
+        sound->set(champ_dwStart24, value);
+        value.wValue = sample.start24 > 0 ? 24 : 16;
+        sound->set(champ_bpsFile, value);
+        value.dwValue = sample.loopStart;
+        sound->set(champ_dwStartLoop, value);
+        value.dwValue = sample.loopEnd;
+        sound->set(champ_dwEndLoop, value);
     }
 
-    /// Instruments
+    /// Instruments and presets
 
-    EltID id2;
-    id = EltID(elementInst, sf2Index);
-    id2.indexSf2 = sf2Index;
-    quint16 bagmin, bagmax, modmin, modmax, genmin, genmax;
-    int l, global;
-    for (int i = 0; i < pdtaPart._insts.count() - 1; i++) // Terminal instrument (EOI) is not read
+    addElements(reader.getInstruments(), sf2Index, false);
+    addElements(reader.getPresets(), sf2Index, true);
+}
+
+void InputParserSf::addElements(const std::vector<Sf2Reader::Element> &elements, int sf2Index, bool isPreset)
+{
+    EltID id(isPreset ? elementPrst : elementInst, sf2Index);
+    AttributeValue value;
+    for (const Sf2Reader::Element &element : elements)
     {
-        Sf2PdtaPart_inst inst = pdtaPart._insts[i];
-
-        l = 0;
         id.indexElt = _sm->add(id);
-        id2.indexElt = id.indexElt;
-        _sm->set(id, champ_name, inst._name);
-
-        // Indexes
-        bagmin = inst._iBagIndex.value;
-        bagmax = pdtaPart._insts[i + 1]._iBagIndex.value;
-
-        // Foreach ibag
-        for (int j = bagmin; j < bagmax; j++)
+        _sm->set(id, champ_name, QString::fromStdString(element.name));
+        if (isPreset)
         {
-            if (j >= pdtaPart._ibags.count())
-            {
-                error = "invalid ibag index";
-                return;
-            }
-            Sf2PdtaPart_bag bag = pdtaPart._ibags[j];
+            value.wValue = element.preset;
+            _sm->set(id, champ_wPreset, value);
+            value.wValue = element.bank;
+            _sm->set(id, champ_wBank, value);
+            value.dwValue = element.library;
+            _sm->set(id, champ_dwLibrary, value);
+            value.dwValue = element.genre;
+            _sm->set(id, champ_dwGenre, value);
+            value.dwValue = element.morphology;
+            _sm->set(id, champ_dwMorphology, value);
+        }
 
-            // Indexes of IMOD and IGEN
-            modmin = bag._modIndex.value;
-            genmin = bag._genIndex.value;
-            if (j < pdtaPart._ibags.count() - 1)
-            {
-                modmax = pdtaPart._ibags[j + 1]._modIndex.value;
-                genmax = pdtaPart._ibags[j + 1]._genIndex.value;
-            }
-            else
-            {
-                modmax = pdtaPart._imods.count();
-                genmax = pdtaPart._igens.count();
-            }
-
-            // Global zone?
-            global = 1;
-            for (int k = genmin; k < genmax; k++)
-            {
-                if (k >= pdtaPart._igens.count())
-                {
-                    error = "invalid igen index";
-                    return;
-                }
-                if (pdtaPart._igens[k]._sfGenOper.value == champ_sampleID)
-                    global = 0;
-            }
-            id2.indexElt2 = -1;
-
-            // Parameters
-            if (global)
-                id2.typeElement = elementInst;
-            else
-            {
-                // Add a sample to an instrument
-                id2.typeElement = elementInstSmpl;
-                id2.indexElt2 = _sm->add(id2);
-            }
-            for (int k = genmin; k < genmax; k++)
-            {
-                if (k >= pdtaPart._igens.count())
-                {
-                    error = "invalid igen index";
-                    return;
-                }
-                if (pdtaPart._igens[k]._sfGenOper.value < champ_endOper)
-                {
-                    value.wValue = pdtaPart._igens[k]._genAmount.value;
-                    _sm->set(id2, (AttributeType)pdtaPart._igens[k]._sfGenOper.value, value);
-                }
-            }
-
-            // Modulators
-            for (unsigned int k = modmin; k < modmax; k++)
-            {
-                if (k >= (quint32)pdtaPart._imods.count())
-                {
-                    error = "invalid imod index";
-                    return;
-                }
-                id2.indexMod = -1;
-                if (global)
-                {
-                    // Add a mod to an instrument
-                    id2.typeElement = elementInstMod;
-                    id2.indexMod = _sm->add(id2);
-                }
-                else
-                {
-                    // Add a mod to a sample linked to an instrument
-                    id2.typeElement = elementInstSmplMod;
-                    id2.indexMod = _sm->add(id2);
-                }
-
-                Sf2PdtaPart_mod mod = pdtaPart._imods[k];
-                value.sfModValue = mod._sfModSrcOper;
-                _sm->set(id2, champ_sfModSrcOper, value);
-                value.wValue = mod._sfModDestOper.value;
-                _sm->set(id2, champ_sfModDestOper, value);
-                value.shValue = mod._modAmount.value;
-                _sm->set(id2, champ_modAmount, value);
-                value.sfModValue = mod._sfModAmtSrcOper;
-                _sm->set(id2, champ_sfModAmtSrcOper, value);
-                value.sfTransValue = (SFTransform)mod._sfModTransOper.value;
-                _sm->set(id2, champ_sfModTransOper, value);
-                value.wValue = l;
-                _sm->set(id2, champ_indexMod, value);
-                l++;
-            }
+        // Global zone, then the divisions
+        addZone(id, element.globalZone, isPreset ? elementPrstMod : elementInstMod);
+        EltID idDivision(isPreset ? elementPrstInst : elementInstSmpl, sf2Index, id.indexElt);
+        for (const Sf2Reader::Zone &zone : element.zones)
+        {
+            idDivision.indexElt2 = _sm->add(idDivision);
+            addZone(idDivision, zone, isPreset ? elementPrstInstMod : elementInstSmplMod);
         }
     }
+}
 
-    /// Presets
+void InputParserSf::addZone(EltID id, const Sf2Reader::Zone &zone, ElementType modulatorType)
+{
+    // Attributes
+    for (int champ = 0; champ < champ_endOper; champ++)
+        if (zone.attributeSet[champ])
+            _sm->set(id, static_cast<AttributeType>(champ), zone.attributeValues[champ]);
 
-    id.typeElement = elementPrst;
-    id.indexSf2 = sf2Index;
-    id.indexElt = -1;
-    for (int i = 0; i < pdtaPart._phdrs.count() - 1; i++) // Terminal preset (EOP) is not read
+    // Modulators
+    id.typeElement = modulatorType;
+    AttributeValue value;
+    for (const ModulatorData &modulator : zone.modulators)
     {
-        Sf2PdtaPart_phdr prst = pdtaPart._phdrs[i];
-
-        l = 0;
-        id.indexElt = _sm->add(id);
-        id2.indexElt = id.indexElt;
-        _sm->set(id, champ_name, prst._name);
-        value.wValue = prst._preset.value;
-        _sm->set(id, champ_wPreset, value);
-        value.wValue = prst._bank.value;
-        _sm->set(id, champ_wBank, value);
-        value.dwValue = prst._library.value;
-        _sm->set(id, champ_dwLibrary, value);
-        value.dwValue = prst._genre.value;
-        _sm->set(id, champ_dwGenre, value);
-        value.dwValue = prst._morphology.value;
-        _sm->set(id, champ_dwMorphology, value);
-
-        // Indexes
-        bagmin = prst._pBagIndex.value;
-        bagmax = pdtaPart._phdrs[i + 1]._pBagIndex.value;
-
-        // Foreach pbag
-        for (int j = bagmin; j < bagmax; j++)
-        {
-            if (j >= pdtaPart._pbags.count())
-            {
-                error = "invalid pbag index";
-                return;
-            }
-            Sf2PdtaPart_bag bag = pdtaPart._pbags[j];
-
-            // Indexes of PMOD and PGEN
-            modmin = bag._modIndex.value;
-            genmin = bag._genIndex.value;
-            if (j < pdtaPart._pbags.count() - 1)
-            {
-                modmax = pdtaPart._pbags[j + 1]._modIndex.value;
-                genmax = pdtaPart._pbags[j + 1]._genIndex.value;
-            }
-            else
-            {
-                modmax = pdtaPart._pmods.count();
-                genmax = pdtaPart._pgens.count();
-            }
-
-            // Global zone?
-            global = 1;
-            for (int k = genmin; k < genmax; k++)
-            {
-                if (k >= pdtaPart._pgens.count())
-                {
-                    error = "invalid pgen index";
-                    return;
-                }
-                if (pdtaPart._pgens[k]._sfGenOper.value == champ_instrument)
-                    global = 0;
-            }
-
-            // Parameters
-            id2.indexElt2 = -1;
-            if (global)
-                id2.typeElement = elementPrst;
-            else
-            {
-                // Add an instrument to a preset
-                id2.typeElement = elementPrstInst;
-                id2.indexElt2 = _sm->add(id2);
-            }
-            for (int k = genmin; k < genmax; k++)
-            {
-                if (k >= pdtaPart._pgens.count())
-                {
-                    error = "invalid pgen index";
-                    return;
-                }
-                if (pdtaPart._pgens[k]._sfGenOper.value < champ_endOper)
-                {
-                    value.wValue = pdtaPart._pgens[k]._genAmount.value;
-                    _sm->set(id2, (AttributeType)pdtaPart._pgens[k]._sfGenOper.value, value);
-                }
-            }
-
-            // Modulators
-            for (int k = modmin; k < modmax; k++)
-            {
-                if (k >= pdtaPart._pmods.count())
-                {
-                    error = "invalid pmod index";
-                    return;
-                }
-                id2.indexMod = -1;
-                if (global)
-                {
-                    // Add a mod to a preset
-                    id2.typeElement = elementPrstMod;
-                    id2.indexMod = _sm->add(id2);
-                }
-                else
-                {
-                    // Add a mod to an instrument linked to a preset
-                    id2.typeElement = elementPrstInstMod;
-                    id2.indexMod = _sm->add(id2);
-                }
-
-                Sf2PdtaPart_mod mod = pdtaPart._pmods[k];
-                value.sfModValue = mod._sfModSrcOper;
-                _sm->set(id2, champ_sfModSrcOper, value);
-                value.wValue = mod._sfModDestOper.value;
-                _sm->set(id2, champ_sfModDestOper, value);
-                value.shValue = mod._modAmount.value;
-                _sm->set(id2, champ_modAmount, value);
-                value.sfModValue = mod._sfModAmtSrcOper;
-                _sm->set(id2, champ_sfModAmtSrcOper, value);
-                value.sfTransValue = (SFTransform)mod._sfModTransOper.value;
-                _sm->set(id2, champ_sfModTransOper, value);
-                value.wValue = l;
-                _sm->set(id2, champ_indexMod, value);
-                l++;
-            }
-        }
+        id.indexMod = _sm->add(id);
+        value.sfModValue = modulator.srcOper;
+        _sm->set(id, champ_sfModSrcOper, value);
+        value.wValue = modulator.destOper;
+        _sm->set(id, champ_sfModDestOper, value);
+        value.shValue = modulator.amount;
+        _sm->set(id, champ_modAmount, value);
+        value.sfModValue = modulator.amtSrcOper;
+        _sm->set(id, champ_sfModAmtSrcOper, value);
+        value.sfTransValue = modulator.transOper;
+        _sm->set(id, champ_sfModTransOper, value);
+        value.wValue = modulator.index;
+        _sm->set(id, champ_indexMod, value);
     }
-
-    success = true;
 }

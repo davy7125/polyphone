@@ -33,23 +33,24 @@
 #include "synthcoreconfig.h"
 class MidiFile;
 class SynthCore;
+class SynthChannels;
 class ISynthSoundfonts;
 class QRecursiveMutex;
 class QDataStream;
 
 // Plays a MIDI file with a synth faster than real time and writes a stereo 32-bit float wav file, as the recorder does.
 // As in MidiFilePlayer, each channel plays the presets of a soundfont chosen by the program changes of the file or
-// forced, with a gain, a speed and a transposition. The notes still held at the end of the file are released, and the
+// forced (SynthChannels), with a gain, a speed and a transposition. The notes still held at the end of the file are released, and the
 // file ends once the sound has faded out.
 // The renderer is created, configured and deleted by the same thread, render being possibly called by another one.
-class MidiFileRenderer: public IMidiListener
+class MidiFileRenderer
 {
     Q_DECLARE_TR_FUNCTIONS(MidiFileRenderer)
 
 public:
     // Created before loading the soundfonts: the default controller values depend on their modulators
     MidiFileRenderer();
-    ~MidiFileRenderer() override;
+    ~MidiFileRenderer();
 
     // Settings of the synth (the computation time does not limit the voices), maximum number of voices and sample rate,
     // to give before rendering
@@ -61,7 +62,7 @@ public:
 
     // Speed (1 for the tempo of the file), and transposition in semitones except for the percussions (bank 128)
     void setSpeed(double speed) { _speed = speed; }
-    void setTransposition(int semitones) { _transposition = semitones; }
+    void setTransposition(int semitones);
 
     // Default values of the controllers taken from another processor (the MIDI player)
     void copyDefaultControllerValues(MidiProcessor &other) { _processor.copyDefaultControllerValues(other); }
@@ -74,34 +75,19 @@ public:
     int getProgress() { return _progress; }
     void cancel() { _isCanceled = true; }
 
-    // IMidiListener implementation: events processed by MidiProcessor
-    bool processKey(int channel, int key, int vel) override;
-    bool processPolyPressureChanged(int channel, int key, int pressure) override;
-    bool processMonoPressureChanged(int channel, int value) override;
-    bool processControllerChanged(int channel, int num, int value) override;
-    bool processBendChanged(int channel, float value) override;
-    bool processProgramChanged(int channel, uint16_t bank, uint8_t preset) override;
-    bool processRPNChanged(int channel, int parameter, int value, bool isRegistered, int trigger) override;
-
 private:
     void writeHeader(QDataStream &stream, quint32 frameCount);
 
     ISynthSoundfonts * _soundfonts;
     QRecursiveMutex * _mutexSoundfonts;
     SynthCore * _core;
+    SynthChannels * _channels; // Receiving the events processed by _processor
     MidiProcessor _processor; // Values of the controllers read by the synth
     QMetaObject::Connection _modulatorConnection;
     quint32 _sampleRate;
-
-    // Configuration of the channels
-    int _sf2Indexes[16];
-    int _forcedPrograms[16];
     double _speed;
-    int _transposition;
 
     // Rendering
-    int _filePrograms[16];
-    int _playedKeys[16][128]; // Key played (transposed) by each key of the channels, -1 if none
     std::atomic<int> _progress;
     std::atomic<bool> _isCanceled;
     QString _error;

@@ -23,6 +23,7 @@
 ***************************************************************************/
 
 #include "offlinerenderer.h"
+#include "contextmanager.h"
 #include <QFile>
 #include <QTextStream>
 #include <QDataStream>
@@ -38,6 +39,8 @@
 #include "midiprocessor.h"
 #include "synthmidi.h"
 #include "synthmath.h"
+#include "synthsoundfontfile.h"
+#include "synthsoundfontset.h"
 #include "basetypes.h"
 
 OfflineRenderer::OfflineRenderer() :
@@ -557,7 +560,10 @@ bool OfflineRenderer::render(int sf2Index, QVector<float> &data, quint32 &frameC
     data.fill(0.f, 2 * static_cast<int>(blockCount * _blockSize));
     if (synthType == SYNTH_THREADED)
         renderWithThreads(sf2Index, data, blockCount);
-    else if (!renderWithCore(sf2Index, data, blockCount, synthType == SYNTH_TWO_CORES))
+    else if (synthType == SYNTH_FILE)
+        return renderWithFile(sf2Index, data, blockCount);
+    else if (!renderWithCore(SoundfontManager::getInstance()->getSoundfonts(), sf2Index, _midiProcessor, data, blockCount,
+                             synthType == SYNTH_TWO_CORES))
         return false;
     return true;
 }
@@ -579,13 +585,13 @@ SynthCoreConfig OfflineRenderer::getSynthConfig()
     return configuration;
 }
 
-bool OfflineRenderer::renderWithCore(int sf2Index, QVector<float> &data, quint32 blockCount, bool withOtherCore)
+bool OfflineRenderer::renderWithCore(ISynthSoundfonts * soundfonts, int sf2Index, MidiProcessor * midiProcessor,
+                                     QVector<float> &data, quint32 blockCount, bool withOtherCore)
 {
-    ISynthSoundfonts * soundfonts = SoundfontManager::getInstance()->getSoundfonts();
     SynthCore * core = new SynthCore(soundfonts);
-    core->setMidiValues(_midiProcessor);
+    core->setMidiValues(midiProcessor);
     SynthMidi synthMidi(core, soundfonts, sf2Index);
-    _midiProcessor->setListener(&synthMidi);
+    midiProcessor->setListener(&synthMidi);
     core->configure(getSynthConfig());
     core->setSampleRate(_sampleRate);
     core->setMaxBlockSize(_blockSize);
@@ -650,7 +656,7 @@ bool OfflineRenderer::renderWithCore(int sf2Index, QVector<float> &data, quint32
     for (quint32 block = 0; block < blockCount; block++)
     {
         quint64 blockEnd = static_cast<quint64>(block + 1) * _blockSize;
-        processEvents(core, _midiProcessor, sf2Index, blockEnd, eventIndex);
+        processEvents(core, midiProcessor, sf2Index, blockEnd, eventIndex);
         if (otherCore != nullptr)
         {
             processEvents(otherCore, otherMidiProcessor, sf2Index, blockEnd, otherEventIndex);
@@ -663,7 +669,7 @@ bool OfflineRenderer::renderWithCore(int sf2Index, QVector<float> &data, quint32
             otherRenderingDiffers = memcmp(dataL, otherDataL, _blockSize * sizeof(float)) != 0 ||
                                     memcmp(dataR, otherDataR, _blockSize * sizeof(float)) != 0;
     }
-    _midiProcessor->setListener(nullptr);
+    midiProcessor->setListener(nullptr);
     delete [] dataL;
     delete [] dataR;
     delete [] otherDataL;
@@ -680,6 +686,46 @@ bool OfflineRenderer::renderWithCore(int sf2Index, QVector<float> &data, quint32
         return false;
     }
     return true;
+}
+
+static std::filesystem::path toPath(const QString &filePath)
+{
+#ifdef Q_OS_WIN
+    return std::filesystem::path(filePath.toStdWString());
+#else
+    return std::filesystem::path(QFile::encodeName(filePath).toStdString());
+#endif
+}
+
+bool OfflineRenderer::renderWithFile(int sf2Index, QVector<float> &data, quint32 blockCount)
+{
+    // The file read again as a plugin does, with the changes of the event file (checked with the model of the editor)
+    QString filePath = SoundfontManager::getInstance()->getQstr(EltID(elementSf2, sf2Index), champ_filenameInitial);
+    std::string error;
+    SynthSoundfontFile * soundfont = SynthSoundfontFile::load(
+        toPath(filePath), error, ContextManager::configuration()->getModulatorVelToFilterType()); // As the sfz import
+    if (soundfont == nullptr)
+    {
+        _error = "the file cannot be read without the editor: " + QString::fromStdString(error);
+        return false;
+    }
+    foreach (ModelChange change, _modelChanges)
+    {
+        if (change.mute ? !soundfont->setZoneMuted(change.isPreset, change.index, change.zone, true) :
+                !soundfont->setAlwaysPlayed(change.isPreset, change.index, true))
+        {
+            _error = QString("line %1: no such element in the file read without the editor").arg(change.line);
+            delete soundfont;
+            return false;
+        }
+    }
+
+    // Its own default values of the controllers, not the ones given by the editor while loading the soundfont
+    SynthSoundfontSet soundfonts(1);
+    int index = soundfonts.add(std::shared_ptr<ISynthSoundfont>(soundfont));
+    MidiProcessor midiProcessor;
+    soundfont->applyDefaultControllerValues(midiProcessor);
+    return renderWithCore(&soundfonts, index, &midiProcessor, data, blockCount, false);
 }
 
 void OfflineRenderer::renderWithThreads(int sf2Index, QVector<float> &data, quint32 blockCount)

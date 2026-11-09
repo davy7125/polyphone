@@ -1,7 +1,7 @@
 /***************************************************************************
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
-**  Copyright (C) 2013-2024 Davy Triponney                                **
+**  Copyright (C) 2013-2026 Davy Triponney                                **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -22,63 +22,118 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include "sfzparameterregion.h"
-#include "soundfontmanager.h"
-#include "contextmanager.h"
 
-QList<int> SfzParameterRegion::getSampleIndex(SoundfontManager *sf2, EltID idElt, QString pathSfz) const
+#include "sfzparameterregion.h"
+#include <algorithm>
+#include <filesystem>
+#include "samplefilereader.h"
+#include "synthconstants.h"
+#include "textconversions.h"
+using namespace TextConversions;
+
+typedef ISoundfontBuilder::Id Id;
+
+// Path of a file from a UTF-8 text
+static std::filesystem::path toPath(const std::string &text)
 {
-    QList<int> sampleIndex;
+#if defined(__cpp_char8_t)
+    return std::filesystem::path(std::u8string(text.begin(), text.end()));
+#else
+    return std::filesystem::u8path(text);
+#endif
+}
+
+static std::string toText(const std::filesystem::path &path)
+{
+#if defined(__cpp_char8_t)
+    std::u8string text = path.u8string();
+    return std::string(text.begin(), text.end());
+#else
+    return path.u8string();
+#endif
+}
+
+// Name of a file without its directory and its last extension (QFileInfo::completeBaseName)
+static std::string getCompleteBaseName(const std::string &filePath)
+{
+    size_t slash = filePath.find_last_of('/');
+    std::string name = (slash == std::string::npos) ? filePath : filePath.substr(slash + 1);
+    size_t dot = name.find_last_of('.');
+    return dot == std::string::npos ? name : name.substr(0, dot);
+}
+
+// Information of a sample file (Sound::setFileName of the editor), false if it cannot be read
+static bool getSampleInfo(const std::string &filePath, SampleFileReader::Info &info)
+{
+    std::unique_ptr<SampleFileReader> reader = SampleFileReader::open(toPath(filePath));
+    if (reader == nullptr)
+        return false;
+    reader->getInfo(info);
+    return true;
+}
+
+// Text in a list, ignoring the case of the ASCII letters
+static bool containsIgnoreCase(const std::vector<std::string> &list, const std::string &text)
+{
+    std::string lowerText = toLower(text);
+    for (const std::string &element : list)
+        if (toLower(element) == lowerText)
+            return true;
+    return false;
+}
+
+std::vector<int> SfzParameterRegion::getSampleIndex(ISoundfontBuilder * sf2, Id idElt, const std::string &pathSfz) const
+{
+    std::vector<int> sampleIndex;
 
     int indexOpSample = -1;
-    for (int i = 0; i < _listeParam.size(); i++)
+    for (size_t i = 0; i < _listeParam.size(); i++)
         if (_listeParam.at(i).getOpCode() == SfzParameter::op_sample)
-            indexOpSample = i;
+            indexOpSample = static_cast<int>(i);
 
     if (indexOpSample == -1)
         return sampleIndex;
 
     // Build the file path
-    QString filePath =  _listeParam.at(indexOpSample).getStringValue();
-    QString fileName = pathSfz + "/" + filePath;
-    if (!QFile(fileName).exists())
+    std::string filePath = _listeParam.at(static_cast<size_t>(indexOpSample)).getStringValue();
+    std::string fileName = pathSfz + "/" + filePath;
+    std::error_code error;
+    if (!std::filesystem::exists(toPath(fileName), error))
     {
-        QStringList list = getFullPath(pathSfz, filePath.split("/", Qt::SkipEmptyParts));
-        if (!list.isEmpty())
-            fileName = list.first();
+        std::vector<std::string> list = getFullPath(pathSfz, split(filePath, "/", false));
+        if (!list.empty())
+            fileName = list.front();
         else
             return sampleIndex;
     }
 
     // Sample already loaded?
-    idElt.typeElement = elementSmpl;
-    QStringList names;
-    foreach (int i, sf2->getSiblings(idElt))
+    idElt.type = ISoundfontBuilder::TYPE_SAMPLE;
+    std::vector<std::string> names;
+    for (int i : sf2->getSiblings(idElt))
     {
-        idElt.indexElt = i;
-        if (sf2->getQstr(idElt, champ_filenameForData) == fileName)
-            sampleIndex << i;
-        names << sf2->getQstr(idElt, champ_name);
+        idElt.element = i;
+        if (sf2->getText(idElt, champ_filenameForData) == fileName)
+            sampleIndex.push_back(i);
+        names.push_back(sf2->getText(idElt, champ_name));
     }
-    if (!sampleIndex.isEmpty())
+    if (!sampleIndex.empty())
         return sampleIndex;
 
     // Gather sample information
-    Sound son;
-    if (!son.setFileName(fileName, false))
-    {
+    SampleFileReader::Info info;
+    if (!getSampleInfo(fileName, info))
         return sampleIndex;
-    }
-    int nChannels = son.getUInt32(champ_wChannels);
-    QString nom = QFileInfo(fileName).completeBaseName();
-    QString nom2 = nom;
+    int nChannels = info.channels;
+    std::string nom = getCompleteBaseName(fileName);
+    std::string nom2 = nom;
 
     // Possibly adapt the name
     int suffixNumber = 0;
     if (nChannels == 2)
     {
-        while ((names.contains(getName(nom, 20, suffixNumber, "L"), Qt::CaseInsensitive) ||
-                names.contains(getName(nom, 20, suffixNumber, "R"), Qt::CaseInsensitive)) &&
+        while ((containsIgnoreCase(names, getName(nom, 20, suffixNumber, "L")) ||
+                containsIgnoreCase(names, getName(nom, 20, suffixNumber, "R"))) &&
                suffixNumber < 100)
         {
             suffixNumber++;
@@ -88,7 +143,7 @@ QList<int> SfzParameterRegion::getSampleIndex(SoundfontManager *sf2, EltID idElt
     }
     else
     {
-        while (names.contains(getName(nom, 20, suffixNumber), Qt::CaseInsensitive) && suffixNumber < 100)
+        while (containsIgnoreCase(names, getName(nom, 20, suffixNumber)) && suffixNumber < 100)
         {
             suffixNumber++;
         }
@@ -99,15 +154,15 @@ QList<int> SfzParameterRegion::getSampleIndex(SoundfontManager *sf2, EltID idElt
     AttributeValue val;
     for (int numChannel = 0; numChannel < nChannels; numChannel++)
     {
-        idElt.indexElt = sf2->add(idElt);
-        sampleIndex << idElt.indexElt;
+        idElt.element = sf2->add(idElt);
+        sampleIndex.push_back(idElt.element);
         if (nChannels == 2)
         {
             if (numChannel == 0)
             {
                 // Left
-                sf2->set(idElt, champ_name, nom2);
-                val.wValue = idElt.indexElt + 1;
+                sf2->setText(idElt, champ_name, nom2);
+                val.wValue = static_cast<uint16_t>(idElt.element + 1);
                 sf2->set(idElt, champ_wSampleLink, val);
                 val.sfLinkValue = leftSample;
                 sf2->set(idElt, champ_sfSampleType, val);
@@ -115,8 +170,8 @@ QList<int> SfzParameterRegion::getSampleIndex(SoundfontManager *sf2, EltID idElt
             else
             {
                 // Right
-                sf2->set(idElt, champ_name, nom);
-                val.wValue = idElt.indexElt - 1;
+                sf2->setText(idElt, champ_name, nom);
+                val.wValue = static_cast<uint16_t>(idElt.element - 1);
                 sf2->set(idElt, champ_wSampleLink, val);
                 val.sfLinkValue = rightSample;
                 sf2->set(idElt, champ_sfSampleType, val);
@@ -124,32 +179,32 @@ QList<int> SfzParameterRegion::getSampleIndex(SoundfontManager *sf2, EltID idElt
         }
         else
         {
-            sf2->set(idElt, champ_name, nom);
+            sf2->setText(idElt, champ_name, nom);
             val.wValue = 0;
             sf2->set(idElt, champ_wSampleLink, val);
             val.sfLinkValue = monoSample;
             sf2->set(idElt, champ_sfSampleType, val);
         }
-        sf2->set(idElt, champ_filenameForData, fileName);
-        val.dwValue = son.getUInt32(champ_dwStart16);
+        sf2->setText(idElt, champ_filenameForData, fileName);
+        val.dwValue = 0;
         sf2->set(idElt, champ_dwStart16, val);
-        val.dwValue = son.getUInt32(champ_dwStart24);
+        val.dwValue = 0;
         sf2->set(idElt, champ_dwStart24, val);
-        val.wValue = numChannel;
+        val.wValue = static_cast<uint16_t>(numChannel);
         sf2->set(idElt, champ_wChannel, val);
-        val.dwValue = son.getUInt32(champ_dwLength);
+        val.dwValue = info.length;
         sf2->set(idElt, champ_dwLength, val);
-        val.dwValue = son.getUInt32(champ_dwSampleRate);
+        val.dwValue = info.sampleRate;
         sf2->set(idElt, champ_dwSampleRate, val);
-        val.dwValue = son.getUInt32(champ_dwStartLoop);
+        val.dwValue = info.loops.empty() ? 0 : info.loops[0].first;
         sf2->set(idElt, champ_dwStartLoop, val);
-        val.dwValue = son.getUInt32(champ_dwEndLoop);
+        val.dwValue = info.loops.empty() ? 0 : info.loops[0].second;
         sf2->set(idElt, champ_dwEndLoop, val);
-        val.bValue = (quint8)son.getUInt32(champ_byOriginalPitch);
+        val.bValue = static_cast<uint8_t>(info.rootKey);
         sf2->set(idElt, champ_byOriginalPitch, val);
-        val.cValue = (char)son.getInt32(champ_chPitchCorrection);
+        val.cValue = static_cast<char>(-info.fineTune); // The correction is the opposite value
         sf2->set(idElt, champ_chPitchCorrection, val);
-        val.wValue = son.getUInt32(champ_bpsFile);
+        val.wValue = 0;
         sf2->set(idElt, champ_bpsFile, val);
     }
 
@@ -158,7 +213,7 @@ QList<int> SfzParameterRegion::getSampleIndex(SoundfontManager *sf2, EltID idElt
 
 void SfzParameterRegion::adaptLoop(int startLoop, int endLoop, int length)
 {
-    for (int i = 0; i < _listeParam.size(); i++)
+    for (size_t i = 0; i < _listeParam.size(); i++)
     {
         if (_listeParam.at(i).getOpCode() == SfzParameter::op_loop_start)
             _listeParam[i].setIntValue(_listeParam.at(i).getIntValue() - startLoop);
@@ -169,35 +224,36 @@ void SfzParameterRegion::adaptLoop(int startLoop, int endLoop, int length)
     }
 
     if (startLoop != endLoop && !isDefined(SfzParameter::op_loop_mode) && (startLoop != 0 || endLoop != 1))
-        _listeParam << SfzParameter("loop_mode", "loop_continuous");
+        _listeParam.push_back(SfzParameter("loop_mode", "loop_continuous"));
 
-    if (isDefined(SfzParameter::op_trigger) && getStrValue(SfzParameter::op_trigger).startsWith("release"))
+    if (isDefined(SfzParameter::op_trigger) && getStrValue(SfzParameter::op_trigger).rfind("release", 0) == 0)
     {
         removeOpCode(SfzParameter::op_loop_mode);
-        _listeParam << SfzParameter("loop_mode", "one_shot");
+        _listeParam.push_back(SfzParameter("loop_mode", "one_shot"));
     }
 }
 
-void SfzParameterRegion::adjustCorrection(QString path, int defaultCorrection)
+void SfzParameterRegion::adjustCorrection(const std::string &path, int defaultCorrection)
 {
-    QString sample = getStrValue(SfzParameter::op_sample);
-    if (!sample.isEmpty())
+    std::string sample = getStrValue(SfzParameter::op_sample);
+    if (!sample.empty())
     {
-        Sound son;
-        son.setFileName(path + "/" + sample);
-        int correctionSample = son.getInt32(champ_chPitchCorrection);
+        SampleFileReader::Info info;
+        getSampleInfo(path + "/" + sample, info);
+        int correctionSample = -info.fineTune; // The correction is the opposite value
         if (correctionSample != 0)
             adjustCorrection(correctionSample, defaultCorrection);
     }
 }
 
-bool SfzParameterRegion::sampleValid(QString path)
+bool SfzParameterRegion::sampleValid(const std::string &path)
 {
     bool bRet = false;
     if (this->isDefined(SfzParameter::op_sample))
     {
-        QString sample = getStrValue(SfzParameter::op_sample);
-        bRet = QFile(path + "/" + sample).exists();
+        std::string sample = getStrValue(SfzParameter::op_sample);
+        std::error_code error;
+        bRet = std::filesystem::exists(toPath(path + "/" + sample), error);
     }
     return bRet;
 }
@@ -207,20 +263,21 @@ void SfzParameterRegion::checkFilter()
     bool removeFilter = false;
     if (isDefined(SfzParameter::op_filterType))
     {
-        QString type = getStrValue(SfzParameter::op_filterType);
+        std::string type = getStrValue(SfzParameter::op_filterType);
         if (type != "lpf_2p" && type != "lpf_1p") // 1 pôle : acceptable
             removeFilter = true;
     }
 
     if (removeFilter)
     {
-        for (int i = _listeParam.size() - 1; i >= 0; i--)
+        for (int i = static_cast<int>(_listeParam.size()) - 1; i >= 0; i--)
         {
-            if (_listeParam.at(i).getOpCode() == SfzParameter::op_filterFreq ||
-                _listeParam.at(i).getOpCode() == SfzParameter::op_filterType ||
-                _listeParam.at(i).getOpCode() == SfzParameter::op_filterQ ||
-                _listeParam.at(i).getOpCode() == SfzParameter::op_fil_veltrack)
-                _listeParam.removeAt(i);
+            SfzParameter::OpCode opCode = _listeParam.at(static_cast<size_t>(i)).getOpCode();
+            if (opCode == SfzParameter::op_filterFreq ||
+                opCode == SfzParameter::op_filterType ||
+                opCode == SfzParameter::op_filterQ ||
+                opCode == SfzParameter::op_fil_veltrack)
+                _listeParam.erase(_listeParam.begin() + i);
         }
     }
 }
@@ -246,7 +303,7 @@ void SfzParameterRegion::checkKeyTrackedFilter(bool remove)
         int diff = 64 - keyCenter;
         int cents = getIntValue(SfzParameter::op_fil_keytrack);
 
-        for (int i = 0; i < _listeParam.size(); i++)
+        for (size_t i = 0; i < _listeParam.size(); i++)
         {
             if (_listeParam.at(i).getOpCode() == SfzParameter::op_filterFreq)
             {
@@ -261,7 +318,7 @@ void SfzParameterRegion::checkKeyTrackedFilter(bool remove)
 void SfzParameterRegion::adjustVolume(double offset)
 {
     bool isDefined = false;
-    for (int i = 0; i < _listeParam.size(); i++)
+    for (size_t i = 0; i < _listeParam.size(); i++)
     {
         if (_listeParam.at(i).getOpCode() == SfzParameter::op_volume)
         {
@@ -270,13 +327,13 @@ void SfzParameterRegion::adjustVolume(double offset)
         }
     }
     if (!isDefined)
-        _listeParam << SfzParameter(SfzParameter::op_volume, -offset);
+        _listeParam.push_back(SfzParameter(SfzParameter::op_volume, -offset));
 }
 
 void SfzParameterRegion::adjustCorrection(int offset, int defaultCorrection)
 {
     bool isDefined = false;
-    for (int i = 0; i < _listeParam.size(); i++)
+    for (size_t i = 0; i < _listeParam.size(); i++)
     {
         if (_listeParam.at(i).getOpCode() == SfzParameter::op_tuningFine)
         {
@@ -285,32 +342,46 @@ void SfzParameterRegion::adjustCorrection(int offset, int defaultCorrection)
         }
     }
     if (!isDefined)
-        _listeParam << SfzParameter(SfzParameter::op_tuningFine, defaultCorrection - offset);
+        _listeParam.push_back(SfzParameter(SfzParameter::op_tuningFine, defaultCorrection - offset));
 }
 
-QStringList SfzParameterRegion::getFullPath(QString base, QStringList directories)
+std::vector<std::string> SfzParameterRegion::getFullPath(const std::string &base, std::vector<std::string> directories)
 {
-    QStringList listRet;
-    if (directories.isEmpty())
-        listRet << base;
+    std::vector<std::string> listRet;
+    if (directories.empty())
+        listRet.push_back(base);
     else
     {
-        QDir dir(base);
-        dir.setFilter(QDir::Dirs | QDir::Files | QDir::NoSymLinks | QDir::NoDotAndDotDot);
-        QStringList childs = dir.entryList();
-        QString nextDirectory = directories.takeFirst();
-        for (int i = 0; i < childs.size(); i++)
-            if (childs.at(i).compare(nextDirectory, Qt::CaseInsensitive) == 0)
-                listRet << getFullPath(base + "/" + childs.at(i), directories);
+        // Files and directories, not the symbolic links, sorted by name ignoring the case
+        std::vector<std::string> childs;
+        std::error_code error;
+        for (std::filesystem::directory_iterator it(toPath(base), error), end; !error && it != end; it.increment(error))
+            if (!it->is_symlink(error))
+                childs.push_back(toText(it->path().filename()));
+        std::sort(childs.begin(), childs.end(), [](const std::string &a, const std::string &b) {
+            std::string lowerA = toLower(a), lowerB = toLower(b);
+            return lowerA != lowerB ? lowerA < lowerB : a < b;
+        });
+
+        std::string nextDirectory = toLower(directories.front());
+        directories.erase(directories.begin());
+        for (size_t i = 0; i < childs.size(); i++)
+        {
+            if (toLower(childs.at(i)) == nextDirectory)
+            {
+                std::vector<std::string> paths = getFullPath(base + "/" + childs.at(i), directories);
+                listRet.insert(listRet.end(), paths.begin(), paths.end());
+            }
+        }
     }
     return listRet;
 }
 
-void SfzParameterRegion::decode(SoundfontManager * sf2, EltID idElt)
+void SfzParameterRegion::decode(ISoundfontBuilder * sf2, Id idElt, int velToFilterType)
 {
     AttributeValue val;
     double dTmp;
-    for (int i = 0; i < _listeParam.size(); i++)
+    for (size_t i = 0; i < _listeParam.size(); i++)
     {
         switch (_listeParam.at(i).getOpCode())
         {
@@ -379,7 +450,7 @@ void SfzParameterRegion::decode(SoundfontManager * sf2, EltID idElt)
             addSeconds(dTmp, champ_delayVolEnv, sf2, idElt);
             break;
         case SfzParameter::op_offset:
-            if (idElt.typeElement == elementInstSmpl && _listeParam.at(i).getIntValue() != 0)
+            if (idElt.type == ISoundfontBuilder::TYPE_INSTRUMENT_ZONE && _listeParam.at(i).getIntValue() != 0)
             {
                 val.shValue = _listeParam.at(i).getIntValue() % 32768;
                 sf2->set(idElt, champ_startAddrsOffset, val);
@@ -388,7 +459,7 @@ void SfzParameterRegion::decode(SoundfontManager * sf2, EltID idElt)
             }
             break;
         case SfzParameter::op_end:
-            if (idElt.typeElement == elementInstSmpl && _listeParam.at(i).getIntValue() != 0)
+            if (idElt.type == ISoundfontBuilder::TYPE_INSTRUMENT_ZONE && _listeParam.at(i).getIntValue() != 0)
             {
                 val.shValue = _listeParam.at(i).getIntValue() % 32768;
                 sf2->set(idElt, champ_endAddrsOffset, val);
@@ -397,7 +468,7 @@ void SfzParameterRegion::decode(SoundfontManager * sf2, EltID idElt)
             }
             break;
         case SfzParameter::op_loop_start:
-            if (idElt.typeElement == elementInstSmpl && _listeParam.at(i).getIntValue() != 0)
+            if (idElt.type == ISoundfontBuilder::TYPE_INSTRUMENT_ZONE && _listeParam.at(i).getIntValue() != 0)
             {
                 val.shValue = _listeParam.at(i).getIntValue() % 32768;
                 sf2->set(idElt, champ_startloopAddrsOffset, val);
@@ -406,7 +477,7 @@ void SfzParameterRegion::decode(SoundfontManager * sf2, EltID idElt)
             }
             break;
         case SfzParameter::op_loop_end:
-            if (idElt.typeElement == elementInstSmpl && _listeParam.at(i).getIntValue() != 0)
+            if (idElt.type == ISoundfontBuilder::TYPE_INSTRUMENT_ZONE && _listeParam.at(i).getIntValue() != 0)
             {
                 val.shValue = _listeParam.at(i).getIntValue() % 32768;
                 sf2->set(idElt, champ_endloopAddrsOffset, val);
@@ -415,7 +486,7 @@ void SfzParameterRegion::decode(SoundfontManager * sf2, EltID idElt)
             }
             break;
         case SfzParameter::op_loop_mode:
-            if (this->isDefined(SfzParameter::op_trigger) && getStrValue(SfzParameter::op_trigger).startsWith("release"))
+            if (this->isDefined(SfzParameter::op_trigger) && getStrValue(SfzParameter::op_trigger).rfind("release", 0) == 0)
             {
                 val.wValue = 2;
                 addSeconds(100, champ_releaseVolEnv, sf2, idElt);
@@ -442,7 +513,7 @@ void SfzParameterRegion::decode(SoundfontManager * sf2, EltID idElt)
             dTmp = -_listeParam.at(i).getDoubleValue() / DB_SF2_TO_REAL_DB;
             if (sf2->isSet(idElt, champ_initialAttenuation))
                 dTmp += (double)sf2->get(idElt, champ_initialAttenuation).shValue / 10.;
-            val.shValue = qRound(10. * dTmp);
+            val.shValue = qtRound(10. * dTmp);
             sf2->set(idElt, champ_initialAttenuation, val);
             break;
         case SfzParameter::op_tuningScale:
@@ -466,33 +537,33 @@ void SfzParameterRegion::decode(SoundfontManager * sf2, EltID idElt)
             if (_listeParam.at(i).getDoubleValue() == 0.001)
                 val.shValue = -12000;
             else
-                val.shValue = qRound(log2m1200(_listeParam.at(i).getDoubleValue()));
+                val.shValue = qtRound(log2m1200(_listeParam.at(i).getDoubleValue()));
             sf2->set(idElt, champ_attackVolEnv, val);
             break;
         case SfzParameter::op_ampeg_hold:
             if (!isDefined(SfzParameter::op_noteToVolEnvHold))
             {
-                val.shValue = qRound(log2m1200(_listeParam.at(i).getDoubleValue()));
+                val.shValue = qtRound(log2m1200(_listeParam.at(i).getDoubleValue()));
                 sf2->set(idElt, champ_holdVolEnv, val);
             }
             break;
         case SfzParameter::op_ampeg_decay:
             if (!isDefined(SfzParameter::op_noteToVolEnvDecay))
             {
-                val.shValue = qRound(log2m1200(_listeParam.at(i).getDoubleValue()));
+                val.shValue = qtRound(log2m1200(_listeParam.at(i).getDoubleValue()));
                 sf2->set(idElt, champ_decayVolEnv, val);
             }
             break;
         case SfzParameter::op_ampeg_sustain:
             dTmp = _listeParam.at(i).getDoubleValue();
             if (dTmp >= 0.1)
-                val.shValue = qRound(-10. * gainToDB(dTmp / 100.));
+                val.shValue = qtRound(-10. * gainToDB(dTmp / 100.));
             else
                 val.shValue = 1440;
             sf2->set(idElt, champ_sustainVolEnv, val);
             break;
         case SfzParameter::op_ampeg_release:
-            val.shValue = qRound(log2m1200(_listeParam.at(i).getDoubleValue()));
+            val.shValue = qtRound(log2m1200(_listeParam.at(i).getDoubleValue()));
             sf2->set(idElt, champ_releaseVolEnv, val);
             break;
         case SfzParameter::op_noteToVolEnvHold:
@@ -502,7 +573,7 @@ void SfzParameterRegion::decode(SoundfontManager * sf2, EltID idElt)
             getKeynumValues(baseValue, keynum, SfzParameter::op_noteToVolEnvHold, SfzParameter::op_ampeg_hold);
             val.shValue = keynum;
             sf2->set(idElt, champ_keynumToVolEnvHold, val);
-            val.shValue = qRound(log2m1200(baseValue));
+            val.shValue = qtRound(log2m1200(baseValue));
             sf2->set(idElt, champ_holdVolEnv, val);
         }break;
         case SfzParameter::op_noteToVolEnvDecay:
@@ -512,24 +583,24 @@ void SfzParameterRegion::decode(SoundfontManager * sf2, EltID idElt)
             getKeynumValues(baseValue, keynum, SfzParameter::op_noteToVolEnvDecay, SfzParameter::op_ampeg_decay);
             val.shValue = keynum;
             sf2->set(idElt, champ_keynumToVolEnvDecay, val);
-            val.shValue = qRound(log2m1200(baseValue));
+            val.shValue = qtRound(log2m1200(baseValue));
             sf2->set(idElt, champ_decayVolEnv, val);
         }break;
         case SfzParameter::op_reverb:
-            val.wValue = qRound(10. * _listeParam.at(i).getDoubleValue());
+            val.wValue = qtRound(10. * _listeParam.at(i).getDoubleValue());
             sf2->set(idElt, champ_reverbEffectsSend, val);
             break;
         case SfzParameter::op_chorus:
-            val.wValue = qRound(10. * _listeParam.at(i).getDoubleValue());
+            val.wValue = qtRound(10. * _listeParam.at(i).getDoubleValue());
             sf2->set(idElt, champ_chorusEffectsSend, val);
             break;
         case SfzParameter::op_filterFreq: {
             int modifier = this->getIntValue(SfzParameter::op_fil_veltrack);
-            val.shValue = qRound(log2m1200(_listeParam.at(i).getDoubleValue() / 8.176) + modifier);
+            val.shValue = qtRound(log2m1200(_listeParam.at(i).getDoubleValue() / 8.176) + modifier);
             sf2->set(idElt, champ_initialFilterFc, val);
         } break;
         case SfzParameter::op_filterQ:
-            val.shValue = qRound(10. * _listeParam.at(i).getDoubleValue());
+            val.shValue = qtRound(10. * _listeParam.at(i).getDoubleValue());
             sf2->set(idElt, champ_initialFilterQ, val);
             break;
         case SfzParameter::op_fil_veltrack: {
@@ -568,7 +639,7 @@ void SfzParameterRegion::decode(SoundfontManager * sf2, EltID idElt)
                 addSeconds(_listeParam.at(i).getDoubleValue(), champ_delayVibLFO, sf2, idElt);
             break;
         case SfzParameter::op_vibLFOfreq:
-            val.shValue = qRound(log2m1200(_listeParam.at(i).getDoubleValue() / 8.176));
+            val.shValue = qtRound(log2m1200(_listeParam.at(i).getDoubleValue() / 8.176));
             sf2->set(idElt, champ_freqVibLFO, val);
             break;
         case SfzParameter::op_vibLFOtoTon:
@@ -580,29 +651,29 @@ void SfzParameterRegion::decode(SoundfontManager * sf2, EltID idElt)
                 addSeconds(_listeParam.at(i).getDoubleValue(), champ_delayModEnv, sf2, idElt);
             break;
         case SfzParameter::op_pitcheg_attack:
-            val.shValue = qRound(log2m1200(_listeParam.at(i).getDoubleValue()));
+            val.shValue = qtRound(log2m1200(_listeParam.at(i).getDoubleValue()));
             sf2->set(idElt, champ_attackModEnv, val);
             break;
         case SfzParameter::op_pitcheg_hold:
             if (!isDefined(SfzParameter::op_noteToModEnvHold))
             {
-                val.shValue = qRound(log2m1200(_listeParam.at(i).getDoubleValue()));
+                val.shValue = qtRound(log2m1200(_listeParam.at(i).getDoubleValue()));
                 sf2->set(idElt, champ_holdModEnv, val);
             }
             break;
         case SfzParameter::op_pitcheg_decay:
             if (!isDefined(SfzParameter::op_noteToModEnvDecay))
             {
-                val.shValue = qRound(log2m1200(_listeParam.at(i).getDoubleValue()));
+                val.shValue = qtRound(log2m1200(_listeParam.at(i).getDoubleValue()));
                 sf2->set(idElt, champ_decayModEnv, val);
             }
             break;
         case SfzParameter::op_pitcheg_sustain:
-            val.shValue = qRound(1000. - 10. * _listeParam.at(i).getDoubleValue());
+            val.shValue = qtRound(1000. - 10. * _listeParam.at(i).getDoubleValue());
             sf2->set(idElt, champ_sustainModEnv, val);
             break;
         case SfzParameter::op_pitcheg_release:
-            val.shValue = qRound(log2m1200(_listeParam.at(i).getDoubleValue()));
+            val.shValue = qtRound(log2m1200(_listeParam.at(i).getDoubleValue()));
             sf2->set(idElt, champ_releaseModEnv, val);
             break;
         case SfzParameter::op_modEnvToTon:
@@ -616,7 +687,7 @@ void SfzParameterRegion::decode(SoundfontManager * sf2, EltID idElt)
             getKeynumValues(baseValue, keynum, SfzParameter::op_noteToModEnvHold, SfzParameter::op_pitcheg_hold);
             val.shValue = keynum;
             sf2->set(idElt, champ_keynumToModEnvHold, val);
-            val.shValue = qRound(log2m1200(baseValue));
+            val.shValue = qtRound(log2m1200(baseValue));
             sf2->set(idElt, champ_holdModEnv, val);
         }break;
         case SfzParameter::op_noteToModEnvDecay:
@@ -626,18 +697,18 @@ void SfzParameterRegion::decode(SoundfontManager * sf2, EltID idElt)
             getKeynumValues(baseValue, keynum, SfzParameter::op_noteToModEnvDecay, SfzParameter::op_pitcheg_decay);
             val.shValue = keynum;
             sf2->set(idElt, champ_keynumToModEnvDecay, val);
-            val.shValue = qRound(log2m1200(baseValue));
+            val.shValue = qtRound(log2m1200(baseValue));
             sf2->set(idElt, champ_decayModEnv, val);
         }break;
         case SfzParameter::op_modLFOdelay:
             addSeconds(_listeParam.at(i).getDoubleValue(), champ_delayModLFO, sf2, idElt);
             break;
         case SfzParameter::op_modLFOfreq:
-            val.shValue = qRound(log2m1200(_listeParam.at(i).getDoubleValue() / 8.176));
+            val.shValue = qtRound(log2m1200(_listeParam.at(i).getDoubleValue() / 8.176));
             sf2->set(idElt, champ_freqModLFO, val);
             break;
         case SfzParameter::op_modLFOtoVolume:
-            val.shValue = qRound(10. * _listeParam.at(i).getDoubleValue());
+            val.shValue = qtRound(10. * _listeParam.at(i).getDoubleValue());
             sf2->set(idElt, champ_modLfoToVolume, val);
             break;
         default:
@@ -648,8 +719,8 @@ void SfzParameterRegion::decode(SoundfontManager * sf2, EltID idElt)
     // Fixed velocity
     if (isDefined(SfzParameter::op_amp_velcurve_1) && isDefined(SfzParameter::op_amp_velcurve_127))
     {
-        int velMin = qRound(127. * getDoubleValue(SfzParameter::op_amp_velcurve_1));
-        int velMax = qRound(127. * getDoubleValue(SfzParameter::op_amp_velcurve_127));
+        int velMin = qtRound(127. * getDoubleValue(SfzParameter::op_amp_velcurve_1));
+        int velMax = qtRound(127. * getDoubleValue(SfzParameter::op_amp_velcurve_127));
         if (velMin == velMax)
         {
             val.wValue = velMin;
@@ -682,27 +753,27 @@ void SfzParameterRegion::decode(SoundfontManager * sf2, EltID idElt)
                 addSeconds(getDoubleValue(SfzParameter::op_fileg_delay), champ_delayModEnv, sf2, idElt);
             if (isDefined(SfzParameter::op_fileg_attack))
             {
-                val.shValue = qRound(log2m1200(getDoubleValue(SfzParameter::op_fileg_attack)));
+                val.shValue = qtRound(log2m1200(getDoubleValue(SfzParameter::op_fileg_attack)));
                 sf2->set(idElt, champ_attackModEnv, val);
             }
             if (isDefined(SfzParameter::op_fileg_hold) && !isDefined(SfzParameter::op_fileg_holdcc133))
             {
-                val.shValue = qRound(log2m1200(getDoubleValue(SfzParameter::op_fileg_hold)));
+                val.shValue = qtRound(log2m1200(getDoubleValue(SfzParameter::op_fileg_hold)));
                 sf2->set(idElt, champ_holdModEnv, val);
             }
             if (isDefined(SfzParameter::op_fileg_decay) && !isDefined(SfzParameter::op_fileg_decaycc133))
             {
-                val.shValue = qRound(log2m1200(getDoubleValue(SfzParameter::op_fileg_decay)));
+                val.shValue = qtRound(log2m1200(getDoubleValue(SfzParameter::op_fileg_decay)));
                 sf2->set(idElt, champ_decayModEnv, val);
             }
             if (isDefined(SfzParameter::op_fileg_sustain))
             {
-                val.shValue = qRound(1000. - 10. * getDoubleValue(SfzParameter::op_fileg_sustain));
+                val.shValue = qtRound(1000. - 10. * getDoubleValue(SfzParameter::op_fileg_sustain));
                 sf2->set(idElt, champ_sustainModEnv, val);
             }
             if (isDefined(SfzParameter::op_fileg_release))
             {
-                val.shValue = qRound(log2m1200(getDoubleValue(SfzParameter::op_fileg_release)));
+                val.shValue = qtRound(log2m1200(getDoubleValue(SfzParameter::op_fileg_release)));
                 sf2->set(idElt, champ_releaseModEnv, val);
             }
             if (isDefined(SfzParameter::op_fileg_holdcc133))
@@ -712,7 +783,7 @@ void SfzParameterRegion::decode(SoundfontManager * sf2, EltID idElt)
                 getKeynumValues(baseValue, keynum, SfzParameter::op_fileg_holdcc133, SfzParameter::op_fileg_hold);
                 val.shValue = keynum;
                 sf2->set(idElt, champ_keynumToModEnvHold, val);
-                val.shValue = qRound(log2m1200(baseValue));
+                val.shValue = qtRound(log2m1200(baseValue));
                 sf2->set(idElt, champ_holdModEnv, val);
             }
             if (isDefined(SfzParameter::op_fileg_decaycc133))
@@ -722,7 +793,7 @@ void SfzParameterRegion::decode(SoundfontManager * sf2, EltID idElt)
                 getKeynumValues(baseValue, keynum, SfzParameter::op_fileg_decaycc133, SfzParameter::op_fileg_decay);
                 val.shValue = keynum;
                 sf2->set(idElt, champ_keynumToModEnvDecay, val);
-                val.shValue = qRound(log2m1200(baseValue));
+                val.shValue = qtRound(log2m1200(baseValue));
                 sf2->set(idElt, champ_decayModEnv, val);
             }
 
@@ -750,7 +821,7 @@ void SfzParameterRegion::decode(SoundfontManager * sf2, EltID idElt)
                 addSeconds(getDoubleValue(SfzParameter::op_filLFOdelay), champ_delayModLFO, sf2, idElt);
             if (isDefined(SfzParameter::op_filLFOfreq))
             {
-                val.shValue = qRound(log2m1200(getDoubleValue(SfzParameter::op_filLFOfreq) / 8.176));
+                val.shValue = qtRound(log2m1200(getDoubleValue(SfzParameter::op_filLFOfreq) / 8.176));
                 sf2->set(idElt, champ_freqModLFO, val);
             }
             val.shValue = getIntValue(SfzParameter::op_modLFOtoFilter);
@@ -759,12 +830,12 @@ void SfzParameterRegion::decode(SoundfontManager * sf2, EltID idElt)
     }
 
     // Disable the default modulators if they are not already defined and
-    if (idElt.typeElement == elementInst)
+    if (idElt.type == ISoundfontBuilder::TYPE_INSTRUMENT)
         disableDefaultModulators();
 
     // Save the modulator list in the soundfont
-    foreach (ModulatorData modData, _decodedModulators)
-        saveModulator(sf2, idElt, modData);
+    for (ModulatorData modData : _decodedModulators)
+        saveModulator(sf2, idElt, modData, velToFilterType);
 }
 
 void SfzParameterRegion::getKeynumValues(double &baseValue, int &keynum,
@@ -797,12 +868,12 @@ void SfzParameterRegion::getKeynumValues(double &baseValue, int &keynum,
     }
     else
     {
-        keynum = qRound(1200. * log2(valMin / valMax) / (noteMax - noteMin));
-        baseValue = valMin * qPow(valMin / valMax, (double)(noteMin - 60) / (noteMax - noteMin));
+        keynum = qtRound(1200. * log2(valMin / valMax) / (noteMax - noteMin));
+        baseValue = valMin * std::pow(valMin / valMax, (double)(noteMin - 60) / (noteMax - noteMin));
     }
 }
 
-void SfzParameterRegion::addSeconds(double value, AttributeType champ, SoundfontManager * sf2, EltID id)
+void SfzParameterRegion::addSeconds(double value, AttributeType champ, ISoundfontBuilder * sf2, const Id &id)
 {
     double dTmp;
     AttributeValue val;
@@ -810,56 +881,55 @@ void SfzParameterRegion::addSeconds(double value, AttributeType champ, Soundfont
         dTmp = d1200e2(sf2->get(id, champ).shValue);
     else
         dTmp = 0;
-    val.shValue = qRound(log2m1200(dTmp + value));
+    val.shValue = qtRound(log2m1200(dTmp + value));
     sf2->set(id, champ, val);
 }
 
-QString SfzParameterRegion::getName(QString name, int maxCharacters, int suffixNumber, QString suffix)
+std::string SfzParameterRegion::getName(const std::string &name, int maxCharacters, int suffixNumber, const std::string &suffix)
 {
-    int suffixSize = suffix.size();
+    int suffixSize = utf16Length(suffix);
 
     // Case when the suffix size is higher than the maximum number of characters
     if (suffixSize > maxCharacters)
-        return name.left(maxCharacters);
+        return utf16Left(name, maxCharacters);
 
     // Case when a number is not necessary
     if (suffixNumber == 0)
-        return name.left(maxCharacters - suffixSize) + suffix;
+        return utf16Left(name, maxCharacters - suffixSize) + suffix;
 
-    QString suffixNum = QString::number(suffixNumber);
-    int suffixNumSize = suffixNum.length() + 1;
+    std::string suffixNum = std::to_string(suffixNumber);
+    int suffixNumSize = static_cast<int>(suffixNum.length()) + 1;
 
     // Case when the numerical suffix is too high
     if (suffixNumSize > 3 || maxCharacters - suffixSize < suffixNumSize)
-        return name.left(maxCharacters - suffixSize) + suffix;
+        return utf16Left(name, maxCharacters - suffixSize) + suffix;
 
-    return name.left(maxCharacters - suffixNumSize - suffixSize) + suffix + "-" + suffixNum;
+    return utf16Left(name, maxCharacters - suffixNumSize - suffixSize) + suffix + "-" + suffixNum;
 }
 
 void SfzParameterRegion::mergeIfNotDefined(SfzParameterRegion &groupToMerge)
 {
-    foreach (SfzParameter param, groupToMerge._listeParam)
-    if (!this->isDefined(param.getOpCode()))
-        _listeParam << param;
+    for (const SfzParameter &param : groupToMerge._listeParam)
+        if (!this->isDefined(param.getOpCode()))
+            _listeParam.push_back(param);
 }
 
 void SfzParameterRegion::addModulator(ModulatorData modData)
 {
     // Store the modulator only if it's not already defined
-    foreach (ModulatorData existingModData, _decodedModulators)
+    for (const ModulatorData &existingModData : _decodedModulators)
         if (existingModData == modData)
             return;
-    _decodedModulators << modData;
+    _decodedModulators.push_back(modData);
 }
 
-void SfzParameterRegion::saveModulator(SoundfontManager * sf2, EltID idElt, ModulatorData &modData)
+void SfzParameterRegion::saveModulator(ISoundfontBuilder * sf2, const Id &idElt, ModulatorData &modData, int velToFilterType)
 {
     // If we are about to add a modulator for the global division, first check that it's not the definition of a default modulator
-    if (idElt.typeElement == elementInst)
+    if (idElt.type == ISoundfontBuilder::TYPE_INSTRUMENT)
     {
         int defaultModulatorCount;
-        const ModulatorData * defaultModulators = ModulatorData::getDefaultModulators(
-            ContextManager::configuration()->getModulatorVelToFilterType(), defaultModulatorCount);
+        const ModulatorData * defaultModulators = ModulatorData::getDefaultModulators(velToFilterType, defaultModulatorCount);
         for (int i = 0; i < defaultModulatorCount; i++)
         {
             if (defaultModulators[i] == modData && defaultModulators[i].amount == modData.amount)
@@ -868,8 +938,10 @@ void SfzParameterRegion::saveModulator(SoundfontManager * sf2, EltID idElt, Modu
     }
 
     // Add a new modulator
-    EltID idMod(idElt.typeElement == elementInst ? elementInstMod : elementInstSmplMod, idElt.indexSf2, idElt.indexElt, idElt.indexElt2);
-    idMod.indexMod = sf2->add(idMod);
+    Id idMod(idElt.type == ISoundfontBuilder::TYPE_INSTRUMENT ? ISoundfontBuilder::TYPE_INSTRUMENT_MOD :
+                                                                ISoundfontBuilder::TYPE_INSTRUMENT_ZONE_MOD,
+             idElt.element, idElt.zone);
+    idMod.modulator = sf2->add(idMod);
 
     // And configure it
     AttributeValue val;

@@ -24,7 +24,7 @@
 
 #include "conversion_dls.h"
 #include "soundfontmanager.h"
-#include "dls/dlsarticulation.h"
+#include "dlsarticulation.h"
 #include <QFile>
 
 ConversionDls::ConversionDls() : QObject(),
@@ -313,10 +313,11 @@ QList<ModulatorData> ConversionDls::getModulators(EltID idPrstInst, EltID idInst
     idPrst.typeElement = elementPrst;
     overrideModulators(prstModulators, readModulators(idPrst));
     overrideModulators(prstModulators, readModulators(idPrstInst));
+    std::vector<ModulatorData> merged(modulators.begin(), modulators.end());
     foreach (const ModulatorData &modulator, prstModulators)
-        DlsArticulation::mergeModulator(modulators, modulator);
+        DlsArticulation::mergeModulator(merged, modulator);
 
-    return modulators;
+    return QList<ModulatorData>(merged.begin(), merged.end());
 }
 
 QList<ModulatorData> ConversionDls::readModulators(EltID id)

@@ -33,14 +33,6 @@ Sf2PdtaPart_gen::Sf2PdtaPart_gen() :
 
 }
 
-QDataStream & operator >> (QDataStream &in, Sf2PdtaPart_gen &gen)
-{
-    in >> gen._sfGenOper >> gen._genAmount;
-
-    gen._isValid = true;
-    return in;
-}
-
 QDataStream & operator << (QDataStream &out, Sf2PdtaPart_gen &gen)
 {
     out << gen._sfGenOper << gen._genAmount;

@@ -23,7 +23,9 @@
 ***************************************************************************/
 
 #include "utils.h"
+#include "samplefilereader.h"
 #include "synthmath.h"
+#include "sf2reader.h"
 #include <QStringList>
 #include <cmath>
 #include <QFile>
@@ -259,22 +261,7 @@ double Utils::roundSignificant(double value, int significantDigits)
 
 qint32 Utils::floatToInt24(float f)
 {
-    // Limit the input
-    if (f > 1.0f)
-        f = 1.0f;
-    else if (f < -1.0f)
-        f = -1.0f;
-
-    f = f * 8388607.5f /*(.5f + 0x7FFFFF)*/ - .5f;
-    qint32 result = static_cast<qint32>(f + (f > 0 ? 0.5f : -0.5f));
-
-    // Limit the output
-    if (result > 8388607)
-        return 8388607;
-    else if (result < -8388608)
-        return -8388608;
-
-    return result;
+    return SampleFileReader::floatToInt24(f);
 }
 
 float Utils::int24ToFloat(qint32 i)
@@ -310,28 +297,8 @@ QString Utils::removeForbiddenFilePathCharacters(QString str)
 
 bool Utils::isValidUtf8(QByteArray data)
 {
-    int inSequence = 0;
-    unsigned char c;
-    for (int i = 0; i < data.length(); i++)
-    {
-        c = (unsigned)data[i];
-        if (inSequence)
-        {
-            if ((c & 0b11000000) != 0b10000000)
-                return false; // Not possible with the utf8 format
-            inSequence--;
-        }
-        else if (c >= 0b11111000)
-            return false; // Not possible with the utf8 format
-        else if (c >= 0b11110000)
-            inSequence = 3;
-        else if (c >= 0b11100000)
-            inSequence = 2;
-        else if (c >= 0b11000000)
-            inSequence = 1;
-    }
-
-    return true;
+    // Same test as for the comments of the soundfonts
+    return Sf2Reader::isValidUtf8(data.constData(), static_cast<size_t>(data.size()));
 }
 
 QString Utils::getFormattedSize(qint64 bytes)

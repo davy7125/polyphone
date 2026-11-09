@@ -12,8 +12,9 @@ before the change are kept as references, and the renderings of the new version 
    tests/render/render.sh <polyphone executable> <soundfont directory> ~/polyphone-render/reference
    ```
 3. After a change, render again and compare, with the synth core (`sources/synth_core`), with the
-   synth core next to a second one, and with the synth of the editor, which computes the voices with
-   several threads:
+   synth core next to a second one, with the synth of the editor, which computes the voices with
+   several threads, and with the synth core playing the soundfont read without the editor (as the
+   plugin does):
    ```bash
    tests/render/render.sh <polyphone executable> <soundfont directory> ~/polyphone-render/core
    tests/render/compare.py ~/polyphone-render/reference ~/polyphone-render/core
@@ -21,6 +22,8 @@ before the change are kept as references, and the renderings of the new version 
    tests/render/compare.py ~/polyphone-render/reference ~/polyphone-render/two
    tests/render/render.sh <polyphone executable> <soundfont directory> ~/polyphone-render/threaded threaded
    tests/render/compare.py ~/polyphone-render/reference ~/polyphone-render/threaded
+   tests/render/render.sh <polyphone executable> <soundfont directory> ~/polyphone-render/file file
+   tests/render/compare.py ~/polyphone-render/reference ~/polyphone-render/file
    ```
 
 `compare.py` fails when a rendering is missing, has another format or length, or when two samples
@@ -55,18 +58,20 @@ level. Its samples are computed, so the file is the same on every machine.
 ## The command
 
 ```bash
-polyphone -5 -i <soundfont> -c <event file>[|two_cores|threaded] [-d <output directory>] [-o <output name>]
+polyphone -5 -i <soundfont> -c <event file>[|two_cores|threaded|file] [-d <output directory>] [-o <output name>]
 ```
 
 The synth core renders the events, next to a second synth core if `|two_cores` follows the event
-file (see below), or the synth of the editor if `|threaded` follows it.
+file (see below), or the synth of the editor if `|threaded` follows it. With `|file`, the synth
+core plays the soundfont file read again by `SynthSoundfontFile` (`sources/synth_core`), the reading
+of the plugin, instead of the model of the editor (see below).
 The output is a stereo 32-bit float wav file, next to the event file by default. An existing file
 is replaced. Exit codes: 1 for a missing input file or output directory, 2 for a wrong event file,
 4 when a preset or a program is missing, the output cannot be written or the second synth core gives
 the same rendering as the first one.
 
 A MIDI file (`.mid`, `.midi`, `.kar` or `.rmi`) can be given instead of an event file, without
-`|two_cores` or `|threaded`: it is played as the MIDI player does, with the settings of the synth
+`|two_cores`, `|threaded` or `|file`: it is played as the MIDI player does, with the settings of the synth
 saved by Polyphone (see the command line in the user manual). It is not used by these tests.
 
 ## Event files
@@ -143,6 +148,15 @@ samples and zones are their order in the soundfont, from 0.
   modulators) belong to each synth, as for instances of a plugin in the same process: when they were
   shared, every case failed. The rendering fails (exit code 4) if the second synth gives the same data
   as the first one, which would test nothing.
+- With `file`, the soundfont is read again by `SynthSoundfontFile`, which reads everything at once
+  and does not depend on Qt, for the plugin (an sfz or a dls file can also be given: it is converted
+  by the same readers as the import of the editor, `SfzReader` and `DlsReader`, and must sound the
+  same as the import). The file is read by `Sf2Reader` (`sources/synth_core`)
+  as in the editor, but the soundfont played is built differently: its own `MidiProcessor` receives
+  the default values of the controllers given by `SynthSoundfontFile`, not by the editor. The
+  renderings must be the ones of the editor bit for bit: they check that both give the same
+  soundfont (the muted zones and the elements always played of the event files are applied to it as
+  in the editor).
 - The pedals are checked without reference: `pedal_sustain` must sound exactly like
   `pedal_sustain_equivalent`, where each note is released when the pedal releases it (same for the
   sostenuto, and a key pressed again while it is held). Likewise `key_restarted` must sound like

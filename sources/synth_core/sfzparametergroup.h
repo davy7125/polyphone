@@ -1,7 +1,7 @@
 /***************************************************************************
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
-**  Copyright (C) 2013-2024 Davy Triponney                                **
+**  Copyright (C) 2013-2026 Davy Triponney                                **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -22,52 +22,64 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
+
 #ifndef SFZPARAMETERGROUP_H
 #define SFZPARAMETERGROUP_H
 
+#include <string>
+#include <vector>
 #include "sfzparameterregion.h"
+
+// Group of an sfz file: its global part and its regions, converted into an instrument
 
 class SfzParameterGroup
 {
 public:
     SfzParameterGroup() {}
-    void newGroup() { _regionList << SfzParameterRegion(); }
-    void addParam(QString opcode, QString valeur)
+    void newGroup() { _regionList.push_back(SfzParameterRegion()); }
+    void addParam(const std::string &opcode, const std::string &valeur, const SfzContext &context)
     {
         if (_regionList.size() == 0)
         {
             if (opcode == "group_label")
                 _label = valeur;
             else
-                _paramGlobaux << SfzParameter(opcode, valeur);
+                _paramGlobaux << SfzParameter(opcode, valeur, &context);
         }
         else
-            _regionList.last() << SfzParameter(opcode, valeur);
+            _regionList.back() << SfzParameter(opcode, valeur, &context);
     }
     void moveOpcodesInGlobal(SfzParameterRegion &globalZone);
     void moveKeynumInSamples(SfzParameter::OpCode opCodeKeynum, SfzParameter::OpCode opCodeBase);
-    void moveOpcodeInSamples(SfzParameter::OpCode opcode, QMetaType::Type type);
+    enum ValueType
+    {
+        VALUE_DOUBLE,
+        VALUE_INT,
+        VALUE_STRING
+    };
+
+    void moveOpcodeInSamples(SfzParameter::OpCode opcode, ValueType type);
     void moveModInSamples();
-    void moveModInSamples(QList<SfzParameter::OpCode> opCodeList);
-    void checkSampleValid(QString path);
+    void moveModInSamples(const std::vector<SfzParameter::OpCode> &opCodeList);
+    void checkSampleValid(const std::string &path);
     void checkFilter();
     void checkKeyTrackedFilter();
-    void adjustCorrection(QString path);
+    void adjustCorrection(const std::string &path);
     void adjustModulationVolume();
     bool isChannel10();
     double getAmpliMax();
     void adjustVolume(double offset);
-    QString getLabel() { return _label; }
+    std::string getLabel() { return _label; }
 
-    // Decode
-    void decode(SoundfontManager * sf2, EltID idInst, QString pathSfz);
+    // Decode (velToFilterType: default modulator of the velocity to the filter, see ModulatorData)
+    void decode(ISoundfontBuilder * sf2, ISoundfontBuilder::Id idInst, const std::string &pathSfz, int velToFilterType);
 
 private:
     static double limit(double value, double min, double max);
 
     SfzParameterRegion _paramGlobaux;
-    QList<SfzParameterRegion> _regionList;
-    QString _label;
+    std::vector<SfzParameterRegion> _regionList;
+    std::string _label;
 };
 
 #endif // SFZPARAMETERGROUP_H

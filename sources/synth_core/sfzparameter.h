@@ -1,7 +1,7 @@
 /***************************************************************************
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
-**  Copyright (C) 2013-2024 Davy Triponney                                **
+**  Copyright (C) 2013-2026 Davy Triponney                                **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -22,11 +22,27 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
+
 #ifndef SFZPARAMETER_H
 #define SFZPARAMETER_H
 
-#include <QString>
+#include <functional>
+#include <string>
 
+// Settings of the reading of an sfz file
+struct SfzContext
+{
+    // Path of the samples in the directory of the file (opcode default_path)
+    std::string defaultPath;
+
+    // Key number of a name (lower case) or of a number, -1 if not valid
+    std::function<int(const std::string &)> getKeyNumber;
+
+    // Opcode not supported (name without "_" and value), possibly null
+    std::function<void(const std::string &, const std::string &)> onUnsupportedOpcode;
+};
+
+// Opcode of an sfz file, with its value converted
 class SfzParameter
 {
 public:
@@ -120,7 +136,8 @@ public:
         op_modLFOtoFilter
     };
 
-    SfzParameter(QString opcode, QString valeur);
+    // The context is needed for the opcodes of the sample and of the keys
+    SfzParameter(std::string opcode, std::string valeur, const SfzContext * context = nullptr);
     SfzParameter(OpCode opcode, int valeur) :
         _opcode(opcode),
         _intValue(valeur),
@@ -131,7 +148,7 @@ public:
         _intValue(0),
         _dblValue(valeur)
     {}
-    SfzParameter(OpCode opcode, QString valeur) :
+    SfzParameter(OpCode opcode, const std::string &valeur) :
         _opcode(opcode),
         _intValue(0),
         _dblValue(0),
@@ -140,16 +157,18 @@ public:
     OpCode  getOpCode()      const       { return _opcode;   }
     int     getIntValue()    const       { return _intValue; }
     double  getDoubleValue() const       { return _dblValue; }
-    QString getStringValue() const       { return _strValue; }
+    std::string getStringValue() const   { return _strValue; }
     void    setIntValue(int value)       { _intValue = value; }
     void    setDoubleValue(double value) { _dblValue = value; }
 
-    static QString DEFAULT_PATH;
+    // Key number of a name (sfz: C4 = 60) or of a number, -1 if not valid
+    static int getDefaultKeyNumber(std::string keyName);
+
 private:
     OpCode  _opcode;
     int     _intValue;
     double  _dblValue;
-    QString _strValue;
+    std::string _strValue;
 };
 
 #endif // SFZPARAMETER_H

@@ -26,11 +26,12 @@
 #define INPUTPARSERSF_H
 
 #include "abstractinputparser.h"
+#include "basetypes.h"
+#include "sf2reader.h"
 class SoundfontManager;
-class Sf2Header;
-class Sf2SdtaPart;
-class Sf2PdtaPart;
 
+// Soundfont read by Sf2Reader (shared with the synth of the plugin), the sample data being read when needed by
+// SampleReaderSf
 class InputParserSf : public AbstractInputParser
 {
     Q_OBJECT
@@ -43,8 +44,9 @@ protected slots:
     void processInternal(QString fileName, SoundfontManager * sm, bool &success, QString &error, int &sf2Index, QString &tempFilePath) override;
 
 private:
-    void parse(QDataStream &stream, bool &success, QString &error, int &sf2Index);
-    void fillSf2(Sf2Header &header, Sf2SdtaPart &sdtaPart, Sf2PdtaPart &pdtaPart, bool &success, QString &error, int &sf2Index);
+    void fillSf2(const Sf2Reader &reader, int &sf2Index);
+    void addElements(const std::vector<Sf2Reader::Element> &elements, int sf2Index, bool isPreset);
+    void addZone(EltID id, const Sf2Reader::Zone &zone, ElementType modulatorType);
 
     SoundfontManager * _sm;
     QString _filename;

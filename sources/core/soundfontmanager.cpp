@@ -23,6 +23,7 @@
 ***************************************************************************/
 
 #include "soundfontmanager.h"
+#include "soundfontbuilder.h"
 #include "actionmanager.h"
 #include "soundfonts.h"
 #include "soundfont.h"
@@ -1973,27 +1974,9 @@ void SoundfontManager::firstAvailablePresetBank(EltID id, int &nBank, int &nPres
 int SoundfontManager::closestAvailablePreset(EltID id, quint16 wBank, quint16 wPreset)
 {
     QMutexLocker locker(&_mutex);
-    int initVal = wPreset;
-    int delta = 0;
-    int sens = 0;
-    do
-    {
-        if (initVal + delta < 128)
-        {
-            if (isAvailable(id, wBank, initVal + delta))
-                sens = 1;
-        }
-        if (initVal - delta > -1 && sens == 0)
-        {
-            if (isAvailable(id, wBank, initVal - delta))
-                sens = -1;
-        }
-        delta++;
-    } while (sens == 0 && delta < 128);
-    if (sens == 1 || sens == -1)
-        return initVal + sens * (delta-1);
-    else
-        return -1;
+    return ISoundfontBuilder::findClosestAvailablePreset(wPreset, [this, id, wBank](int preset) {
+        return isAvailable(id, wBank, static_cast<quint16>(preset));
+    });
 }
 
 bool SoundfontManager::isAvailable(EltID id, quint16 wBank, quint16 wPreset)

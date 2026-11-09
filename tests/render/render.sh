@@ -1,12 +1,13 @@
 #!/bin/bash
 # Render every case of tests/render/cases with a Polyphone executable.
-# Usage: render.sh <polyphone executable> <soundfont directory> <output directory> [two_cores|threaded]
+# Usage: render.sh <polyphone executable> <soundfont directory> <output directory> [two_cores|threaded|file]
 # The soundfont of a case is named on its first line: "# soundfont: <file name>".
 # The synth core computes the voices in the calling thread, next to a second synth core with other
 # settings if "two_cores" is given, or the synth of the editor with its threads if "threaded" is given.
+# With "file", the synth core plays the soundfont read without the editor, as the plugin does.
 
-if [ $# -ne 3 ] && { [ $# -ne 4 ] || { [ "$4" != "two_cores" ] && [ "$4" != "threaded" ]; }; }; then
-    echo "Usage: $0 <polyphone executable> <soundfont directory> <output directory> [two_cores|threaded]"
+if [ $# -ne 3 ] && { [ $# -ne 4 ] || { [ "$4" != "two_cores" ] && [ "$4" != "threaded" ] && [ "$4" != "file" ]; }; }; then
+    echo "Usage: $0 <polyphone executable> <soundfont directory> <output directory> [two_cores|threaded|file]"
     exit 1
 fi
 polyphone=$1

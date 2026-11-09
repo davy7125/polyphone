@@ -39,29 +39,6 @@ Sf2PdtaPart_shdr::Sf2PdtaPart_shdr() :
 
 }
 
-QDataStream & operator >> (QDataStream &in, Sf2PdtaPart_shdr &shdr)
-{
-    // Name
-    int length = 20;
-    QByteArray buffer(length + 1, Qt::Uninitialized);
-    if (in.readRawData(buffer.data(), length) != length)
-        return in;
-    buffer[20] = 0;
-    shdr._name = QString::fromLatin1(buffer.data()).trimmed();
-
-    // Positions
-    in >> shdr._start >> shdr._end >> shdr._startLoop >> shdr._endLoop;
-
-    // Pitch
-    in >> shdr._sampleRate >> shdr._originalPitch >> shdr._correction;
-
-    // Link
-    in >> shdr._wSampleLink >> shdr._sfSampleType;
-
-    shdr._isValid = true;
-    return in;
-}
-
 QDataStream & operator << (QDataStream &out, Sf2PdtaPart_shdr &shdr)
 {
     // Name

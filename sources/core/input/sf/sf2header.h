@@ -35,9 +35,6 @@ class Sf2Header
 public:
     Sf2Header();
 
-    QString getInfo(QString key);
-    SfVersionTag getVersion(QString key);
-
     void prepareBeforeWritingData(Sf2SdtaPart * sdtaPart, Sf2PdtaPart * pdtaPart, bool isSf3, double qualityValue);
 
     bool _isValid;
@@ -52,8 +49,7 @@ public:
     QMap<QString, SfVersionTag> _versions;
 };
 
-// Extension methods for QDataStream to serialize / deserialize
-QDataStream & operator >> (QDataStream &in, Sf2Header &header);
+// Extension methods for QDataStream to serialize
 QDataStream & operator << (QDataStream &out, Sf2Header &header);
 
 #endif // SF2HEADER_H

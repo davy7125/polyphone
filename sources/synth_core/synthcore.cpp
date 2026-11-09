@@ -73,6 +73,7 @@ SynthCore::SynthCore(ISynthSoundfonts * soundfonts, ISynthListener * listener) :
     _outputR(nullptr),
     _outputPosition(0),
     _outputAvailable(0),
+    _effectPosition(0),
     _effectConfigurationChanged(false),
     _effectConfigurationLock(0)
 {
@@ -88,10 +89,10 @@ SynthCore::~SynthCore()
     FastMaths::deleteAlignedBuffer(_outputR);
 }
 
-void SynthCore::setMaxBlockSize(uint32_t maxBlockSize)
+void SynthCore::setMaxBlockSize(uint32_t maxBlockSize, bool withChannelOutputs)
 {
     uint32_t previousCapacity = _buses.capacity();
-    _buses.reserve(maxBlockSize);
+    _buses.reserve(maxBlockSize, withChannelOutputs);
     if (_buses.capacity() == previousCapacity)
         return;
 
@@ -655,6 +656,85 @@ void SynthCore::render(float * dataL, float * dataR, uint32_t len)
     }
 }
 
+void SynthCore::renderExact(const Outputs &outputs, uint32_t len)
+{
+    DenormalsDisabled denormalsDisabled;
+    _outputAvailable = 0; // Not rendered by render
+
+    // Channels with their own output
+    for (int channel = 0; channel < SynthBuses::CHANNEL_BUS_COUNT; channel++)
+        _buses.setChannelBus(channel, outputs.channelLeft[channel] != nullptr && outputs.channelRight[channel] != nullptr);
+
+    // As much as the buffers can contain at once
+    for (uint32_t position = 0; position < len; )
+    {
+        uint32_t count = SynthMath::min(len - position, _buses.capacity());
+        renderFrames(outputs, position, count);
+        position += count;
+    }
+}
+
+void SynthCore::renderFrames(const Outputs &outputs, uint32_t position, uint32_t len)
+{
+    // Include the voices added and remove the voices that are finished (or fade out some of them)
+    _voices.prepareComputation();
+
+    // Mix the voices, which compute their chunks when needed
+    std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
+    _buses.clear(len);
+    bool leftInitialized = false;
+    bool rightInitialized = false;
+    Voice * voice;
+    uint32_t voiceChunkCount = 0;
+    while ((voice = _voices.getNextVoiceToCompute()) != nullptr)
+        voiceChunkCount += _buses.addVoiceFrames(voice, len, leftInitialized, rightInitialized);
+    std::chrono::steady_clock::time_point voicesComputed = std::chrono::steady_clock::now();
+
+    // Effects in their output or with the part without effect, clipping (the buffers of the synth being aligned)
+    computeEffects(_outputL, _outputR, _buses, len);
+    if (outputs.effectsLeft != nullptr && outputs.effectsRight != nullptr)
+    {
+        FastMaths::clamp(_outputL, len);
+        FastMaths::clamp(_outputR, len);
+        memcpy(&outputs.effectsLeft[position], _outputL, len * sizeof(float));
+        memcpy(&outputs.effectsRight[position], _outputR, len * sizeof(float));
+        memcpy(_outputL, _buses.dataL, len * sizeof(float));
+        memcpy(_outputR, _buses.dataR, len * sizeof(float));
+    }
+    else
+    {
+        FastMaths::addVectors(_outputL, _buses.dataL, len);
+        FastMaths::addVectors(_outputR, _buses.dataR, len);
+    }
+    FastMaths::clamp(_outputL, len);
+    FastMaths::clamp(_outputR, len);
+    memcpy(&outputs.left[position], _outputL, len * sizeof(float));
+    memcpy(&outputs.right[position], _outputR, len * sizeof(float));
+
+    // Outputs of the channels
+    for (int channel = 0; channel < SynthBuses::CHANNEL_BUS_COUNT; channel++)
+    {
+        if (_buses.hasChannelBus(channel))
+        {
+            FastMaths::clamp(_buses.channelL[channel], len);
+            FastMaths::clamp(_buses.channelR[channel], len);
+            memcpy(&outputs.channelLeft[channel][position], _buses.channelL[channel], len * sizeof(float));
+            memcpy(&outputs.channelRight[channel][position], _buses.channelR[channel], len * sizeof(float));
+        }
+        else if (outputs.channelLeft[channel] != nullptr && outputs.channelRight[channel] != nullptr)
+        {
+            // No buffer for it (setMaxBlockSize without channel outputs): silent, the channel being in the main output
+            memset(&outputs.channelLeft[channel][position], 0, len * sizeof(float));
+            memset(&outputs.channelRight[channel][position], 0, len * sizeof(float));
+        }
+    }
+
+    // Measures for limiting the voices in real time
+    _voices.addComputationTime(std::chrono::duration<double>(voicesComputed - start).count(), voiceChunkCount,
+                               std::chrono::duration<double>(std::chrono::steady_clock::now() - voicesComputed).count(),
+                               SynthMath::roundToChunks(len) >> COMPUTATION_CHUNK_SHIFT);
+}
+
 void SynthCore::renderChunks(uint32_t len)
 {
     // Include the voices added and remove the voices that are finished (or fade out some of them)
@@ -688,6 +768,15 @@ void SynthCore::renderChunks(uint32_t len)
 
 void SynthCore::applyEffects(float * dataL, float * dataR, SynthBuses &buses, uint32_t len)
 {
+    computeEffects(dataL, dataR, buses, len);
+
+    // Add the data with no effects
+    FastMaths::addVectors(dataL, buses.dataL, len);
+    FastMaths::addVectors(dataR, buses.dataR, len);
+}
+
+void SynthCore::computeEffects(float * dataL, float * dataR, SynthBuses &buses, uint32_t len)
+{
     // New settings given by configure (taken at the next call if configure is writing them)
     if (_effectConfigurationChanged.load(std::memory_order_relaxed) && tryLock(_effectConfigurationLock))
     {
@@ -697,17 +786,28 @@ void SynthCore::applyEffects(float * dataL, float * dataR, SynthBuses &buses, ui
         updateEffects(configuration);
     }
 
+    // The effects are processed chunk by chunk: they decide for each one whether there is something to compute
+    // (nothing when they are off). The chunks are the ones of the stream: with the rendering at the frame, the first
+    // and the last ones of a call can be parts of chunks.
+    const uint32_t firstChunkPosition = _effectPosition;
+    auto forEachChunk = [firstChunkPosition, len](const auto &process) {
+        for (uint32_t pos = 0, chunkPosition = firstChunkPosition; pos < len; chunkPosition = 0)
+        {
+            uint32_t count = SynthMath::min(COMPUTATION_CHUNK - chunkPosition, len - pos);
+            process(pos, count);
+            pos += count;
+        }
+    };
+    _effectPosition = (_effectPosition + len) % COMPUTATION_CHUNK;
+
     // Copy the data rev + chorus
     memcpy(dataL, buses.dataChoRevL, len * sizeof(float));
     memcpy(dataR, buses.dataChoRevR, len * sizeof(float));
 
-    // The effects are processed chunk by chunk: they decide for each one whether there is something to compute
-    // (nothing when they are off)
     if (_chorusRev.isOn())
     {
         // Apply chorus
-        for (uint32_t pos = 0; pos < len; pos += COMPUTATION_CHUNK)
-            _chorusRev.process(&dataL[pos], &dataR[pos], COMPUTATION_CHUNK);
+        forEachChunk([&](uint32_t pos, uint32_t count) { _chorusRev.process(&dataL[pos], &dataR[pos], count); });
     }
 
     // Add the data rev
@@ -717,22 +817,18 @@ void SynthCore::applyEffects(float * dataL, float * dataR, SynthBuses &buses, ui
     if (_reverb.isOn())
     {
         // Apply reverb
-        for (uint32_t pos = 0; pos < len; pos += COMPUTATION_CHUNK)
-            _reverb.process(&dataL[pos], &dataR[pos], COMPUTATION_CHUNK);
+        forEachChunk([&](uint32_t pos, uint32_t count) { _reverb.process(&dataL[pos], &dataR[pos], count); });
     }
 
     // Add the data cho, process the effect first
     if (_chorus.isOn())
     {
         // Apply chorus
-        for (uint32_t pos = 0; pos < len; pos += COMPUTATION_CHUNK)
-            _chorus.process(&buses.dataChoL[pos], &buses.dataChoR[pos], COMPUTATION_CHUNK);
+        forEachChunk([&](uint32_t pos, uint32_t count) {
+            _chorus.process(&buses.dataChoL[pos], &buses.dataChoR[pos], count);
+        });
     }
 
     FastMaths::addVectors(dataL, buses.dataChoL, len);
     FastMaths::addVectors(dataR, buses.dataChoR, len);
-
-    // Add the data with no effects
-    FastMaths::addVectors(dataL, buses.dataL, len);
-    FastMaths::addVectors(dataR, buses.dataR, len);
 }

@@ -62,7 +62,7 @@ public:
     static QString fixFilePath(QString filePath);
     static QString removeForbiddenFilePathCharacters(QString str);
 
-    static bool isValidUtf8(QByteArray data);
+    static bool isValidUtf8(QByteArray data); // Read by QString::fromUtf8 without replacing anything
     static QString getFormattedSize(qint64 bytes);
 
 private:

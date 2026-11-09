@@ -26,6 +26,8 @@
 #include "utils.h"
 
 Smpl::Smpl(int row, TreeItem *parent, EltID id) : TreeItem(id, parent),
+    _wSampleLink(0), // A mono sample may never receive a link (import of a DLS file)
+    _sfSampleType(monoSample),
     _row(row)
 {
 

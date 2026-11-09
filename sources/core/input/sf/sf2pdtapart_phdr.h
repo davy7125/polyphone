@@ -44,8 +44,7 @@ public:
     quint32Reversed _morphology;
 };
 
-// Extension methods for QDataStream to serialize / deserialize
-QDataStream & operator >> (QDataStream &in, Sf2PdtaPart_phdr &phdr);
+// Extension methods for QDataStream to serialize
 QDataStream & operator << (QDataStream &out, Sf2PdtaPart_phdr &phdr);
 
 #endif // SF2PDTAPART_PHDR_H

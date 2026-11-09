@@ -25,12 +25,27 @@
 #include "midiprocessor.h"
 #include <cstring>
 
+// MPE: initial ranges of the pitch bend (hundredths of semitone)
+static const int MPE_MASTER_RANGE = 200;
+static const int MPE_MEMBER_RANGE = 4800;
+
 MidiProcessor::MidiProcessor() :
-    _listener(nullptr)
+    _listener(nullptr),
+    _isMpeEnabled(false)
 {
     memset((MIDI_State *)_midiStates, 0, 17 * sizeof(MIDI_State));
+    resetMpeZone(0);
+    resetMpeZone(1);
+    for (float &bend : _mpeBends)
+        bend = 0.0f;
 
     // Default values of the controllers, then the other values
+    resetDefaultControllerValues();
+    resetChannels();
+}
+
+void MidiProcessor::resetDefaultControllerValues()
+{
     for (int channel = 0; channel <= 16; channel++)
     {
         for (int i = 0; i < 128; i++)
@@ -59,9 +74,10 @@ MidiProcessor::MidiProcessor() :
             }
 
             _midiStates[channel]._controllerDefaultValues[i] = defaultValue;
+            if (!_midiStates[channel]._controllerValueSpecified[i])
+                _midiStates[channel]._controllerValues[i] = defaultValue;
         }
     }
-    resetChannels();
 }
 
 void MidiProcessor::resetChannels()
@@ -87,9 +103,126 @@ void MidiProcessor::resetChannels()
         midiState->_rpnLSBvalue = 0;
         midiState->_rpnIsRegistered = false;
     }
+
+    // Initial ranges of the pitch bend in the MPE zones
+    for (float &bend : _mpeBends)
+        bend = 0.0f;
+    if (_isMpeEnabled)
+    {
+        for (int zone = 0; zone < 2; zone++)
+        {
+            _mpeZones[zone].masterRange = MPE_MASTER_RANGE;
+            _mpeZones[zone].memberRange = MPE_MEMBER_RANGE;
+            updateMpeZone(zone, false);
+        }
+    }
 }
 
-void MidiProcessor::processMidiMessage(const unsigned char * message, size_t length)
+void MidiProcessor::setMpeEnabled(bool isEnabled)
+{
+    if (isEnabled == _isMpeEnabled)
+        return;
+    _isMpeEnabled = isEnabled;
+
+    // A lower zone of 15 member channels
+    resetMpeZone(0);
+    resetMpeZone(1);
+    resetChannels();
+}
+
+void MidiProcessor::resetMpeZone(int zone)
+{
+    _mpeZones[zone].memberCount = (zone == 0 ? 15 : 0);
+    _mpeZones[zone].masterRange = MPE_MASTER_RANGE;
+    _mpeZones[zone].memberRange = MPE_MEMBER_RANGE;
+}
+
+int MidiProcessor::getMpeZone(int channel, bool &isMaster)
+{
+    isMaster = false;
+    if (!_isMpeEnabled || channel < 0 || channel > 15)
+        return -1;
+    int lowerCount = _mpeZones[0].memberCount;
+    if (lowerCount > 0 && channel <= lowerCount)
+    {
+        isMaster = (channel == 0);
+        return 0;
+    }
+    int upperCount = _mpeZones[1].memberCount;
+    if (upperCount > 0 && channel >= 15 - upperCount)
+    {
+        isMaster = (channel == 15);
+        return 1;
+    }
+    return -1;
+}
+
+// Sensitivity of the pitch bend from a range in hundredths of semitone, as the RPN 0 gives it
+static float toSensitivity(int range)
+{
+    return static_cast<float>(range / 100) + 0.01f * static_cast<float>(range % 100);
+}
+
+static int toRpnValue(int range)
+{
+    return ((range / 100) << 7) | (range % 100);
+}
+
+void MidiProcessor::updateMpeChannel(int channel, bool notify)
+{
+    bool isMaster;
+    int zone = getMpeZone(channel, isMaster);
+    float bend = _mpeBends[channel];
+    int range = 200; // Channel not in a zone anymore
+    if (zone >= 0)
+    {
+        // The pitch bend of the master channel is added to the one of the member channel: the sensitivity is the sum of
+        // both ranges
+        const MpeZone &mpeZone = _mpeZones[zone];
+        range = isMaster ? mpeZone.masterRange : mpeZone.memberRange + mpeZone.masterRange;
+        if (!isMaster)
+        {
+            int masterChannel = (zone == 0 ? 0 : 15);
+            bend = range == 0 ? 0.0f : static_cast<float>(
+                (static_cast<double>(_mpeBends[channel]) * mpeZone.memberRange +
+                 static_cast<double>(_mpeBends[masterChannel]) * mpeZone.masterRange) / range);
+        }
+    }
+
+    MIDI_State * midiState = &_midiStates[channel + 1];
+    float sensitivity = toSensitivity(range);
+    if (midiState->_bendSensitivityValue != sensitivity)
+    {
+        midiState->_bendSensitivityValue = sensitivity;
+        if (notify && _listener != nullptr)
+            _listener->processRPNChanged(channel, 0, toRpnValue(range), true, 4);
+    }
+    if (midiState->_bendValue != bend)
+    {
+        midiState->_bendValue = bend;
+        if (notify && _listener != nullptr)
+            _listener->processBendChanged(channel, bend);
+    }
+}
+
+void MidiProcessor::updateMpeZone(int zone, bool notify)
+{
+    int count = _mpeZones[zone].memberCount;
+    if (count == 0)
+        return;
+    if (zone == 0)
+    {
+        for (int channel = 0; channel <= count; channel++)
+            updateMpeChannel(channel, notify);
+    }
+    else
+    {
+        for (int channel = 15 - count; channel <= 15; channel++)
+            updateMpeChannel(channel, notify);
+    }
+}
+
+void MidiProcessor::processMidiMessage(const unsigned char * message, size_t length, bool external)
 {
     if (length < 2)
         return;
@@ -118,7 +251,7 @@ void MidiProcessor::processMidiMessage(const unsigned char * message, size_t len
     case 0xB0: // CONTROLLER CHANGE
         // First message is the controller number, second is its value
         if (length >= 3)
-            processControllerChanged(true, channel, message[1], message[2]);
+            processControllerChanged(external, channel, message[1], message[2]);
         break;
     case 0xC0: // PROGRAM CHANGED
         // First message is the program number
@@ -332,6 +465,17 @@ void MidiProcessor::processControllerChanged(bool external, int channel, int num
                 processKeyOff(channel, key);
         }
     }
+
+    // MPE: a controller of a master channel is repeated on its member channels, except the timbre (a dimension of each
+    // note) and the bank
+    bool isMaster;
+    int zone = getMpeZone(channel, isMaster);
+    if (zone >= 0 && isMaster && numController != 74 && numController != 0 && numController != 32)
+    {
+        int count = _mpeZones[zone].memberCount;
+        for (int member = (zone == 0 ? 1 : 15 - count); member <= (zone == 0 ? count : 14); member++)
+            processControllerChanged(false, member, numController, value);
+    }
 }
 
 void MidiProcessor::processKeyOn(int channel, int key, int vel)
@@ -406,6 +550,21 @@ void MidiProcessor::processMonoPressureChanged(int channel, int value)
 
 void MidiProcessor::processBendChanged(int channel, float value)
 {
+    // MPE: the pitch bend of a master channel is added to the ones of its member channels
+    bool isMaster;
+    int zone = getMpeZone(channel, isMaster);
+    if (zone >= 0)
+    {
+        _mpeBends[channel] = value;
+        if (isMaster)
+            updateMpeZone(zone, true);
+        else
+            updateMpeChannel(channel, true);
+        return;
+    }
+    if (_isMpeEnabled && channel >= 0 && channel <= 15)
+        _mpeBends[channel] = value; // Kept if the channel goes into a zone
+
     // Update the current channel state
     _midiStates[channel + 1]._bendValue = value;
 
@@ -418,6 +577,35 @@ void MidiProcessor::processBendChanged(int channel, float value)
 
 void MidiProcessor::processRPNChanged(int channel, int parameter, int value, bool isRegistered, int trigger)
 {
+    if (_isMpeEnabled && isRegistered && parameter == 6 && trigger == 3 && (channel == 0 || channel == 15))
+    {
+        // MPE configuration message: number of member channels of a zone, the other zone being reduced if they overlap.
+        // The ranges of the pitch bend are back to their initial values.
+        int zone = (channel == 0 ? 0 : 1);
+        _mpeZones[zone].memberCount = value > 15 ? 15 : value;
+        _mpeZones[zone].masterRange = MPE_MASTER_RANGE;
+        _mpeZones[zone].memberRange = MPE_MEMBER_RANGE;
+        if (_mpeZones[0].memberCount + _mpeZones[1].memberCount > 14)
+            _mpeZones[1 - zone].memberCount = _mpeZones[zone].memberCount >= 14 ? 0 : 14 - _mpeZones[zone].memberCount;
+        for (int i = 0; i < 16; i++)
+            updateMpeChannel(i, true);
+        return;
+    }
+
+    bool isMaster;
+    int zone = getMpeZone(channel, isMaster);
+    if (zone >= 0 && isRegistered && parameter == 0 && (trigger == 3 || trigger == 4))
+    {
+        // MPE: range of the pitch bend of the master channel, or of all member channels
+        int range = (trigger == 3) ? value * 100 : (value >> 7) * 100 + (value & 0x7F);
+        if (isMaster)
+            _mpeZones[zone].masterRange = range;
+        else
+            _mpeZones[zone].memberRange = range;
+        updateMpeZone(zone, true);
+        return;
+    }
+
     // Possibly update the bend sensitivity value
     if (isRegistered && parameter == 0 && trigger == 4)
         _midiStates[channel + 1]._bendSensitivityValue = static_cast<float>(value >> 7) + 0.01f * static_cast<float>(value & 0x7F);

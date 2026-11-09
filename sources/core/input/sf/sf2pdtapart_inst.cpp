@@ -32,23 +32,6 @@ Sf2PdtaPart_inst::Sf2PdtaPart_inst() :
 
 }
 
-QDataStream & operator >> (QDataStream &in, Sf2PdtaPart_inst &inst)
-{
-    // Name
-    int length = 20;
-    QByteArray buffer(length + 1, Qt::Uninitialized);
-    if (in.readRawData(buffer.data(), length) != length)
-        return in;
-    buffer[20] = 0;
-    inst._name = QString::fromLatin1(buffer.data()).trimmed();
-
-    // Min index for pBag
-    in >> inst._iBagIndex;
-
-    inst._isValid = true;
-    return in;
-}
-
 QDataStream & operator << (QDataStream &out, Sf2PdtaPart_inst &inst)
 {
     // Name

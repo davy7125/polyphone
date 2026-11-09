@@ -32,6 +32,7 @@
 #include <QMetaObject>
 class MidiProcessor;
 class SynthCoreConfig;
+class ISynthSoundfonts;
 
 /// Play a list of timed events with the synth, faster than real time, and write the result in a wav file.
 /// Used for comparing the sound before and after a change of the sound engine (see tests/render).
@@ -50,12 +51,15 @@ public:
     /// * SYNTH_CORE: SynthCore computing in the calling thread,
     /// * SYNTH_TWO_CORES: the same, next to a second SynthCore with other settings whose rendering must not change the
     ///   first one (as two instances of a plugin) and is not written,
-    /// * SYNTH_THREADED: Synth (editor) with its threads.
+    /// * SYNTH_THREADED: Synth (editor) with its threads,
+    /// * SYNTH_FILE: SynthCore playing the file of the soundfont read again by SynthSoundfontFile (as a plugin does)
+    ///   instead of the model of the editor, with the default values of the controllers it gives.
     enum SynthType
     {
         SYNTH_CORE,
         SYNTH_TWO_CORES,
-        SYNTH_THREADED
+        SYNTH_THREADED,
+        SYNTH_FILE
     };
 
     /// Play the events with the soundfont loaded at sf2Index and write a stereo 32-bit float wav file
@@ -114,7 +118,9 @@ private:
     bool applyModelChanges(int sf2Index);
     bool resolveElements(int sf2Index);
     SynthCoreConfig getSynthConfig();
-    bool renderWithCore(int sf2Index, QVector<float> &data, quint32 blockCount, bool withOtherCore);
+    bool renderWithCore(ISynthSoundfonts * soundfonts, int sf2Index, MidiProcessor * midiProcessor, QVector<float> &data,
+                        quint32 blockCount, bool withOtherCore);
+    bool renderWithFile(int sf2Index, QVector<float> &data, quint32 blockCount);
     void renderWithThreads(int sf2Index, QVector<float> &data, quint32 blockCount);
     template <class T> void processEvents(T * synth, MidiProcessor * midiProcessor, int sf2Index, quint64 blockEnd, int &eventIndex);
     void storeBlock(QVector<float> &data, quint32 block, const float * dataL, const float * dataR);

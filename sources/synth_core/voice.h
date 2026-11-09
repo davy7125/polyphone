@@ -26,6 +26,7 @@
 #define VOICE_H
 
 #include <atomic>
+#include "synthconstants.h"
 #include "voiceparam.h"
 #include "enveloppevol.h"
 #include "osctriangle.h"
@@ -81,6 +82,18 @@ public:
     // Return false if the voice is silent: the data is then not written
     bool generateData(float *data, uint32_t len);
 
+    // Rendering at the frame (SynthCore::renderExact): frames of the last chunk computed that have not been mixed yet,
+    // with what SynthBuses needs for mixing them as the other frames of their chunk. Empty with the other renderings.
+    struct PendingFrames
+    {
+        alignas(BUFFER_ALIGNMENT) float data[COMPUTATION_CHUNK];
+        uint32_t position; // First frame not mixed
+        uint32_t length;   // Frames not mixed
+        float coefficients[8];
+        bool hasLeft, hasRight, isAudible;
+    };
+    PendingFrames &getPendingFrames() { return _pendingFrames; }
+
     // Maths
     static void prepareTables();
 
@@ -130,6 +143,9 @@ private:
 
     // Evolving volume coefficient
     float _volumeCoeff;
+
+    // Frames computed and not mixed yet (rendering at the frame)
+    PendingFrames _pendingFrames;
 
     // Arrays
     uint32_t _arrayLength;

@@ -30,6 +30,12 @@
 #include "voice.h"
 #include "voiceparam.h"
 
+// Rendering at the frame: a finished voice stays in the list until its last frames are mixed
+static bool isMixingLastFrames(Voice * voice)
+{
+    return voice->isFinished() && voice->getPendingFrames().length > 0;
+}
+
 VoiceList::VoiceList() :
     _listener(nullptr),
     _context(nullptr),
@@ -309,11 +315,12 @@ void VoiceList::prepareComputation()
         }
     }
 
-    // Remove the finished voices, and quickly release the ones having the exclusive class of a new voice
+    // Remove the finished voices (once their frames are all mixed), and quickly release the ones having the exclusive
+    // class of a new voice
     for (int index = first; index != last; index = (index + 1) & _indexMask)
     {
         voice = _voices[index];
-        if (voice->isFinished())
+        if (voice->isFinished() && voice->getPendingFrames().length == 0)
         {
             voice->finish();
             _voices[index] = _voices[first];
@@ -341,10 +348,10 @@ void VoiceList::prepareComputation()
 
     // Too many voices for the polyphony or, in real time, for the processor: notes fade out
     // The voices already fading out are not counted, they stop by themselves (otherwise other notes would fade out
-    // until then)
+    // until then), nor the finished ones whose last frames are not mixed yet
     int activeCount = 0;
     for (int index = first; index != last; index = (index + 1) & _indexMask)
-        if (!_voices[index]->isFadingOut())
+        if (!_voices[index]->isFadingOut() && !isMixingLastFrames(_voices[index]))
             activeCount++;
     int excess = activeCount - _maxPolyphony;
     if (_isRealTime.load(std::memory_order_relaxed))
@@ -382,7 +389,7 @@ void VoiceList::fadeOutNotes(int first, int last, int voiceCount)
     for (int index = first; index != last; index = (index + 1) & _indexMask)
     {
         voice = _voices[index];
-        if (voice->isFadingOut() || voice->isInRelease())
+        if (voice->isFadingOut() || voice->isInRelease() || isMixingLastFrames(voice))
             continue;
         voiceParam = voice->getParam();
         channel = voiceParam->getChannel() + 1;
@@ -395,12 +402,12 @@ void VoiceList::fadeOutNotes(int first, int last, int voiceCount)
             highestKeys[channel] = key;
     }
 
-    // Priority of the voices that are not fading out
+    // Priority of the voices that are not fading out (nor finished)
     int priorityCount = 0;
     for (int index = first; index != last; index = (index + 1) & _indexMask)
     {
         voice = _voices[index];
-        if (voice->isFadingOut())
+        if (voice->isFadingOut() || isMixingLastFrames(voice))
             continue;
         VoicePriority &priority = _voicePriorities[priorityCount++];
         priority.noteId = voice->getNoteId();
@@ -469,7 +476,7 @@ void VoiceList::fadeOutNotes(int first, int last, int voiceCount)
                 _sortedVoices[count++] = _voices[_voicePriorities[i].index];
         }
         for (int index = first; index != last; index = (index + 1) & _indexMask)
-            if (_voices[index]->isFadingOut())
+            if (_voices[index]->isFadingOut() || isMixingLastFrames(_voices[index]))
                 _sortedVoices[count++] = _voices[index];
         for (int i = 0, index = first; i < count; i++, index = (index + 1) & _indexMask)
             _voices[index] = _sortedVoices[i];

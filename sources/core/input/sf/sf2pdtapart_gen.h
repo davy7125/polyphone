@@ -38,8 +38,7 @@ public:
     quint16Reversed _genAmount;
 };
 
-// Extension methods for QDataStream to serialize / deserialize
-QDataStream & operator >> (QDataStream &in, Sf2PdtaPart_gen &gen);
+// Extension methods for QDataStream to serialize
 QDataStream & operator << (QDataStream &out, Sf2PdtaPart_gen &gen);
 
 #endif // SF2PDTAPART_GEN_H

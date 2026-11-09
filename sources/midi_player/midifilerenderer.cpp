@@ -30,7 +30,7 @@
 #include "soundfontmanager.h"
 #include "soundfonts.h"
 #include "synthcore.h"
-#include "synthmidi.h"
+#include "synthchannels.h"
 #include "midifile.h"
 #include "midifileplayer.h"
 
@@ -49,7 +49,6 @@ static const quint64 MAX_FRAME_COUNT = (0xFFFFFFFFULL - 50) / 8;
 MidiFileRenderer::MidiFileRenderer() :
     _sampleRate(44100),
     _speed(1.0),
-    _transposition(0),
     _progress(0),
     _isCanceled(false)
 {
@@ -62,16 +61,8 @@ MidiFileRenderer::MidiFileRenderer() :
     _core->setMidiValues(&_processor);
     _core->setMaxBlockSize(BLOCK_SIZE);
     _core->setRealTime(false);
-    _processor.setListener(this);
-
-    for (int i = 0; i < 16; i++)
-    {
-        _sf2Indexes[i] = -1;
-        _forcedPrograms[i] = -1;
-        _filePrograms[i] = MidiFilePlayer::getDefaultProgram(i);
-        for (int key = 0; key < 128; key++)
-            _playedKeys[i][key] = -1;
-    }
+    _channels = new SynthChannels(_core, _soundfonts);
+    _processor.setListener(_channels);
 
     // The parser emits this signal for each modulator source that is a MIDI controller
     _modulatorConnection = QObject::connect(sm, &SoundfontManager::inputModulatorChanged,
@@ -84,6 +75,7 @@ MidiFileRenderer::~MidiFileRenderer()
 {
     QObject::disconnect(_modulatorConnection);
     _processor.setListener(nullptr);
+    delete _channels;
     delete _core;
 }
 
@@ -100,9 +92,13 @@ void MidiFileRenderer::setChannel(int channel, int sf2Index, int forcedProgram, 
 {
     if (channel < 0 || channel >= 16)
         return;
-    _sf2Indexes[channel] = sf2Index;
-    _forcedPrograms[channel] = forcedProgram;
+    _channels->setChannel(channel, sf2Index, forcedProgram);
     _core->setChannelGain(channel, gain);
+}
+
+void MidiFileRenderer::setTransposition(int semitones)
+{
+    _channels->setTransposition(semitones);
 }
 
 bool MidiFileRenderer::render(const MidiFile * file, QString outputFilePath)
@@ -143,13 +139,17 @@ bool MidiFileRenderer::render(const MidiFile * file, QString outputFilePath)
             break;
         }
 
-        // Events of the block, then the notes still held are released at the end of the file
+        // Events of the block (the soundfonts must not change while the voices are prepared), then the notes still held
+        // are released at the end of the file
         quint64 blockEnd = frameCount + BLOCK_SIZE;
-        for (; eventIndex < events.size(); eventIndex++)
         {
-            if (static_cast<quint64>(qRound64(static_cast<double>(events[eventIndex].time) * framesPerMicrosecond)) >= blockEnd)
-                break;
-            MidiFilePlayer::dispatch(_processor, events[eventIndex]);
+            QMutexLocker locker(_mutexSoundfonts);
+            for (; eventIndex < events.size(); eventIndex++)
+            {
+                if (static_cast<quint64>(qRound64(static_cast<double>(events[eventIndex].time) * framesPerMicrosecond)) >= blockEnd)
+                    break;
+                MidiFilePlayer::dispatch(_processor, events[eventIndex]);
+            }
         }
         if (!isReleased && endFrame < blockEnd)
         {
@@ -223,88 +223,4 @@ void MidiFileRenderer::writeHeader(QDataStream &stream, quint32 frameCount)
     stream << static_cast<quint32>(4) << frameCount;
     stream.writeRawData("data", 4);
     stream << dataSize;
-}
-
-bool MidiFileRenderer::processKey(int channel, int key, int vel)
-{
-    // The events repeated on the channel -1 by MidiProcessor are ignored
-    if (channel < 0 || channel >= 16)
-        return true;
-
-    if (vel == 0)
-    {
-        // Key released whatever the preset playing it, with the transposition it had when it started
-        int playedKey = _playedKeys[channel][key];
-        if (playedKey >= 0)
-        {
-            _playedKeys[channel][key] = -1;
-            _core->releaseVoices(-1, -1, channel, playedKey, false);
-        }
-        return true;
-    }
-
-    int sf2Index = _sf2Indexes[channel];
-    int program = _forcedPrograms[channel] >= 0 ? _forcedPrograms[channel] : _filePrograms[channel];
-    if (sf2Index < 0 || program < 0)
-        return true;
-
-    // Transposition, except for the percussions
-    int playedKey = key;
-    if (program / 128 != 128)
-        playedKey += _transposition;
-    if (playedKey < 0 || playedKey > 127)
-        return true;
-
-    // The soundfonts must not change while the voices are prepared
-    QMutexLocker locker(_mutexSoundfonts);
-    ISynthSoundfont * soundfont = _soundfonts->getSynthSoundfont(sf2Index);
-    int presetIndex = soundfont == nullptr ? -1 : SynthMidi::findPreset(soundfont, program / 128, program % 128);
-    if (presetIndex >= 0)
-    {
-        _playedKeys[channel][key] = playedKey;
-        _core->playPreset(sf2Index, presetIndex, channel, playedKey, vel);
-    }
-    return true;
-}
-
-bool MidiFileRenderer::processPolyPressureChanged(int channel, int key, int pressure)
-{
-    if (channel >= 0 && channel < 16 && _playedKeys[channel][key] >= 0)
-        _core->processPolyPressureChanged(channel, _playedKeys[channel][key], pressure);
-    return true;
-}
-
-bool MidiFileRenderer::processMonoPressureChanged(int channel, int value)
-{
-    if (channel >= 0 && channel < 16)
-        _core->processMonoPressureChanged(channel, value);
-    return true;
-}
-
-bool MidiFileRenderer::processControllerChanged(int channel, int num, int value)
-{
-    if (channel >= 0 && channel < 16)
-        _core->processControllerChanged(channel, num, value);
-    return true;
-}
-
-bool MidiFileRenderer::processBendChanged(int channel, float value)
-{
-    if (channel >= 0 && channel < 16)
-        _core->processBendChanged(channel, value);
-    return true;
-}
-
-bool MidiFileRenderer::processProgramChanged(int channel, uint16_t bank, uint8_t preset)
-{
-    if (channel >= 0 && channel < 16)
-        _filePrograms[channel] = bank * 128 + preset;
-    return true;
-}
-
-bool MidiFileRenderer::processRPNChanged(int channel, int parameter, int value, bool isRegistered, int trigger)
-{
-    if (channel >= 0 && channel < 16)
-        _core->processRPNChanged(channel, parameter, value, isRegistered, trigger);
-    return true;
 }

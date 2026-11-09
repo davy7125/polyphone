@@ -306,6 +306,8 @@ int render(Options &options)
         synthType = OfflineRenderer::SYNTH_TWO_CORES;
     else if (options.renderSynth() == "threaded")
         synthType = OfflineRenderer::SYNTH_THREADED;
+    else if (options.renderSynth() == "file")
+        synthType = OfflineRenderer::SYNTH_FILE;
     if (!renderer.render(sf2Index, outputFile, synthType))
     {
         writeLine(QObject::tr("An error occurred: %1.").arg(renderer.getError()));

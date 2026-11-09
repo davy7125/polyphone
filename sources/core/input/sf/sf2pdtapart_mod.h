@@ -41,8 +41,7 @@ public:
     quint16Reversed _sfModTransOper;
 };
 
-// Extension methods for QDataStream to serialize / deserialize
-QDataStream & operator >> (QDataStream &in, Sf2PdtaPart_mod &mod);
+// Extension methods for QDataStream to serialize
 QDataStream & operator << (QDataStream &out, Sf2PdtaPart_mod &mod);
 
 #endif // SF2PDTAPART_MOD_H

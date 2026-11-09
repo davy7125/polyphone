@@ -40,8 +40,9 @@ public:
     // Receiver of the processed events (possibly null)
     void setListener(IMidiListener * listener) { _listener = listener; }
 
-    // Raw MIDI message: status byte and its data
-    void processMidiMessage(const unsigned char * message, size_t length);
+    // Raw MIDI message: status byte and its data. The controllers of a device (external) can send relative values,
+    // detected and converted; the ones of a host or of a file are always absolute.
+    void processMidiMessage(const unsigned char * message, size_t length, bool external = true);
 
     // MIDI events, external being true for the controllers of a device (whose relative values are detected)
     void processKeyOn(int channel, int key, int vel);
@@ -63,6 +64,10 @@ public:
     // Default value of a controller used as the source of a modulator, if it has not been received
     void setDefaultControllerValue(int controllerNumber, bool isBipolar, bool isDescending);
 
+    // Default values of all controllers back to the ones of a processor just created, before setting the ones of
+    // another soundfont (the controllers received keep their value)
+    void resetDefaultControllerValues();
+
     // Default values of all controllers copied from another processor
     void copyDefaultControllerValues(MidiProcessor &other);
 
@@ -72,6 +77,16 @@ public:
     // Bend sensitivity in semitones (and hundredths)
     void setBendSensitivityValue(int channel, float value);
 
+    // MPE (MIDI Polyphonic Expression), disabled by default: each note is played on its own channel (member channel of a
+    // zone) with its own pitch bend, pressure and controllers. The master channel of a zone (first channel for the lower
+    // zone, last one for the upper zone) sends the messages for all its notes: its pitch bend is added to the one of each
+    // member channel, its controllers are repeated on them (except the timbre, CC 74). Once enabled: a lower zone of 15
+    // member channels, changed by the MPE configuration messages (RPN 6). The pitch bend range is 48 semitones on the
+    // member channels and 2 on the master ones, changed by the RPN 0 (a member channel changing all of them).
+    // The channels go back to their initial state when it is enabled or disabled, without notifying the listener.
+    void setMpeEnabled(bool isEnabled);
+    bool isMpeEnabled() { return _isMpeEnabled; }
+
     // IMidiValues implementation
     int getControllerValue(int channel, int controllerNumber) override;
     float getBendValue(int channel) override;
@@ -80,6 +95,19 @@ public:
     int getPolyPressure(int channel, int key) override;
 
 private:
+    // MPE zone: lower (master channel 0) or upper (master channel 15), ranges in hundredths of semitone
+    struct MpeZone
+    {
+        int memberCount;
+        int masterRange;
+        int memberRange;
+    };
+
+    int getMpeZone(int channel, bool &isMaster);
+    void resetMpeZone(int zone);
+    void updateMpeChannel(int channel, bool notify); // Bend and sensitivity of a channel
+    void updateMpeZone(int zone, bool notify);
+
     struct MIDI_State
     {
         // Configuration of a channel, the values being written and read by different threads
@@ -117,6 +145,11 @@ private:
 
     // Sustain / Sostenuto pedals
     Sustain_State _sustainStates[17];
+
+    // MPE
+    bool _isMpeEnabled;
+    MpeZone _mpeZones[2];
+    float _mpeBends[16]; // Pitch bend received on each channel
 };
 
 #endif // MIDIPROCESSOR_H

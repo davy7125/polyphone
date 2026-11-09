@@ -37,29 +37,6 @@ Sf2PdtaPart_phdr::Sf2PdtaPart_phdr() :
 
 }
 
-QDataStream & operator >> (QDataStream &in, Sf2PdtaPart_phdr &phdr)
-{
-    // Name
-    int length = 20;
-    QByteArray buffer(length + 1, Qt::Uninitialized);
-    if (in.readRawData(buffer.data(), length) != length)
-        return in;
-    buffer[20] = 0;
-    phdr._name = QString::fromLatin1(buffer.data()).trimmed();
-
-    // Preset, bank
-    in >> phdr._preset >> phdr._bank;
-
-    // Min index for pBag
-    in >> phdr._pBagIndex;
-
-    // Characteristics
-    in >> phdr._library >> phdr._genre >> phdr._morphology;
-
-    phdr._isValid = true;
-    return in;
-}
-
 QDataStream & operator << (QDataStream &out, Sf2PdtaPart_phdr &phdr)
 {
     // Name

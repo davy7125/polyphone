@@ -27,7 +27,7 @@
 
 #include <QObject>
 #include "basetypes.h"
-#include "dls/dlsdefinitions.h"
+#include "dlsdefinitions.h"
 class SoundfontManager;
 class QFile;
 

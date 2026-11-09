@@ -36,6 +36,7 @@
 #define NOISE_FLOOR 0.000001f // -120 dBFS: a voice in its release is stopped under this amplitude
 #define FADE_OUT_DURATION 0.01f // Seconds: fade of a voice stopped to free the polyphony or the processor
 #define YOUNG_VOICE_DURATION 0.05f // Seconds: a voice starting is not stopped to free the polyphony or the processor
+#define MAX_PITCH_RATIO 65536.0 // Speed in the sample compared to the output, at most (16 octaves higher)
 
 // In synthcore.h: frames computed at once if no other maximum is given (setMaxBlockSize)
 #define DEFAULT_MAX_BLOCK_SIZE 4096

@@ -213,9 +213,10 @@ void Options::processType2(QString arg)
             _csvRawValues = configurations[0] == "raw";
             break;
         case MODE_RENDER:
-            // Path of the event file, possibly followed by "two_cores" or "threaded"
+            // Path of the event file, possibly followed by "two_cores", "threaded" or "file"
             _renderEventFile = configurations[0];
-            if (configurations.count() == 2 && (configurations[1] == "two_cores" || configurations[1] == "threaded"))
+            if (configurations.count() == 2 &&
+                (configurations[1] == "two_cores" || configurations[1] == "threaded" || configurations[1] == "file"))
                 _renderSynth = configurations[1];
             else if (configurations.count() > 1)
                 _error = true;

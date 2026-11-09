@@ -47,8 +47,7 @@ public:
     quint16Reversed _sfSampleType;
 };
 
-// Extension methods for QDataStream to serialize / deserialize
-QDataStream & operator >> (QDataStream &in, Sf2PdtaPart_shdr &shdr);
+// Extension methods for QDataStream to serialize
 QDataStream & operator << (QDataStream &out, Sf2PdtaPart_shdr &shdr);
 
 #endif // SF2PDTAPART_SHDR_H

@@ -96,7 +96,8 @@ public:
 
     // Maximum number of frames computed at once, for allocating the buffers (not by the audio thread)
     // The default is DEFAULT_MAX_BLOCK_SIZE, render accepts more but computes them in several times
-    void setMaxBlockSize(uint32_t maxBlockSize);
+    // With channel outputs, the buffers for the outputs of the channels (renderExact) are allocated too
+    void setMaxBlockSize(uint32_t maxBlockSize, bool withChannelOutputs = false);
 
     // Maximum number of voices that are not fading out (DEFAULT_POLYPHONY by default), the quietest notes fading out
     // above it. The voices are allocated for it: if the number changes all notes are stopped, and no audio must be
@@ -112,6 +113,24 @@ public:
     // first by the next call, and an event (note, controller...) is heard from the next chunk computed
     void render(float * dataL, float * dataR, uint32_t len);
 
+    // Outputs of renderExact: the main one, and possibly one for each channel (the part of its voices without effect)
+    // and one for the effects (the part of the voices sent to the effects, after them). An output that is not given
+    // (null) is mixed in the main one. The outputs of the channels need setMaxBlockSize with channel outputs.
+    struct Outputs
+    {
+        float * left = nullptr, * right = nullptr;
+        float * channelLeft[SynthBuses::CHANNEL_BUS_COUNT] = {}, * channelRight[SynthBuses::CHANNEL_BUS_COUNT] = {};
+        float * effectsLeft = nullptr, * effectsRight = nullptr;
+    };
+
+    // Compute len frames (any length) in the calling thread at the frame, instead of render (not both on a same synth):
+    // a note starts at the frame where it is played, between two calls. Each voice computes whole chunks from its own
+    // start and keeps the frames not asked for the next call: the events changing a voice (release, controllers) are
+    // applied from the next chunk it computes. The result does not depend on the length of the calls, except rounding
+    // errors when the voices are summed in another order and except the settings changed (configure), applied by the
+    // next call.
+    void renderExact(const Outputs &outputs, uint32_t len);
+
     // For a computation of the voices by several threads (editor)
     VoiceList * getVoiceList() { return &_voices; }
     void applyEffects(float * dataL, float * dataR, SynthBuses &buses, uint32_t len); // Aligned as the buses, whole chunks
@@ -126,6 +145,8 @@ private:
     void configureVoice(Voice * voice);
     void configureVoices();
     void renderChunks(uint32_t len);
+    void renderFrames(const Outputs &outputs, uint32_t position, uint32_t len);
+    void computeEffects(float * dataL, float * dataR, SynthBuses &buses, uint32_t len); // Without the part with no effect
     void updateEffects(const SynthCoreConfig &configuration);
 
     // Soundfonts
@@ -156,6 +177,7 @@ private:
     SynthReverb _reverb;
     SynthChorus _chorusRev, _chorus; // Stereo, before the reverb or alone
     SynthCoreConfig _effectConfiguration;
+    uint32_t _effectPosition; // Frames already processed in the current chunk (rendering at the frame)
     std::atomic<bool> _effectConfigurationChanged;
     std::atomic<int> _effectConfigurationLock; // The audio thread never waits for it
 };

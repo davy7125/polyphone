@@ -27,17 +27,10 @@
 
 #include "samplereader.h"
 
+// Sample data of an sf2 or sf3 file, read by Sf2Reader (shared with the synth of the plugin)
 class SampleReaderSf: public SampleReader
 {
 public:
-    // For the OGG callback
-    struct VorbisData
-    {
-        quint32 pos;
-        quint32 length;
-        const char* data;
-    };
-
     SampleReaderSf(QString filename);
     ~SampleReaderSf() override {}
 
@@ -50,7 +43,6 @@ public:
 
 private:
     InfoSound* _info;
-    VorbisData _vorbisData;
 };
 
 #endif // SAMPLEREADERSF_H

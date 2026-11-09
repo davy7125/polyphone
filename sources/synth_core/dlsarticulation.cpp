@@ -1,7 +1,7 @@
 /***************************************************************************
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
-**  Copyright (C) 2013-2024 Davy Triponney                                **
+**  Copyright (C) 2013-2026 Davy Triponney                                **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -22,23 +22,33 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
+
 #include "dlsarticulation.h"
+#include <algorithm>
+#include "textconversions.h"
+using TextConversions::qtRound;
+
+// Value limited between two bounds (qBound)
+template <typename T> static T bound(T minimum, T value, T maximum)
+{
+    return std::max(minimum, std::min(maximum, value));
+}
 
 // Default frequency (5 Hz, in absolute cents) and delay (10 ms, in timecents) of the DLS LFOs
 static const double DEFAULT_LFO_FREQUENCY = -851;
 static const double DEFAULT_LFO_DELAY = -7973;
 
-DlsArticulation::DlsArticulation(const QList<Dls::Connection> &connections) :
+DlsArticulation::DlsArticulation(const std::vector<Dls::Connection> &connections) :
     _gain(0),
     _tuning(0),
     _modLfoUsed(false),
     _vibLfoUsed(false)
 {
     // A combination source / control / destination is unique, the last one is kept
-    foreach (Dls::Connection connection, connections)
+    for (Dls::Connection connection : connections)
     {
         bool found = false;
-        for (int i = 0; i < _connections.count(); i++)
+        for (size_t i = 0; i < _connections.size(); i++)
         {
             if (_connections[i].source == connection.source && _connections[i].control == connection.control &&
                 _connections[i].destination == connection.destination)
@@ -49,15 +59,15 @@ DlsArticulation::DlsArticulation(const QList<Dls::Connection> &connections) :
             }
         }
         if (!found)
-            _connections << connection;
+            _connections.push_back(connection);
     }
 
     // Static values first, they are required for converting the modulations
-    foreach (Dls::Connection connection, _connections)
+    for (Dls::Connection connection : _connections)
         if (connection.source == Dls::SRC_NONE && connection.control == Dls::SRC_NONE)
             _staticScales[connection.destination] = connection.scale;
 
-    foreach (Dls::Connection connection, _connections)
+    for (Dls::Connection connection : _connections)
     {
         if (connection.source == Dls::SRC_NONE && connection.control == Dls::SRC_NONE)
             processStaticConnection(connection);
@@ -69,23 +79,23 @@ DlsArticulation::DlsArticulation(const QList<Dls::Connection> &connections) :
     // Default frequency and delay of the LFOs if they are used
     if (_modLfoUsed)
     {
-        if (!_staticScales.contains(Dls::DST_LFO_FREQUENCY))
+        if (!_staticScales.count(Dls::DST_LFO_FREQUENCY))
             setGenerator(champ_freqModLFO, DEFAULT_LFO_FREQUENCY);
-        if (!_staticScales.contains(Dls::DST_LFO_STARTDELAY))
+        if (!_staticScales.count(Dls::DST_LFO_STARTDELAY))
             setGenerator(champ_delayModLFO, DEFAULT_LFO_DELAY);
     }
     if (_vibLfoUsed)
     {
-        if (!_staticScales.contains(Dls::DST_VIB_FREQUENCY))
+        if (!_staticScales.count(Dls::DST_VIB_FREQUENCY))
             setGenerator(champ_freqVibLFO, DEFAULT_LFO_FREQUENCY);
-        if (!_staticScales.contains(Dls::DST_VIB_STARTDELAY))
+        if (!_staticScales.count(Dls::DST_VIB_STARTDELAY))
             setGenerator(champ_delayVibLFO, DEFAULT_LFO_DELAY);
     }
 
     // Remove the modulators that are already default modulators in the sf2 format
-    for (int i = _modulators.count() - 1; i >= 0; i--)
-        if (isDefaultModulator(_modulators[i]))
-            _modulators.removeAt(i);
+    for (int i = static_cast<int>(_modulators.size()) - 1; i >= 0; i--)
+        if (isDefaultModulator(_modulators[static_cast<size_t>(i)]))
+            _modulators.erase(_modulators.begin() + i);
 }
 
 void DlsArticulation::processStaticConnection(const Dls::Connection &connection)
@@ -202,11 +212,11 @@ void DlsArticulation::processModulatedConnection(Dls::Connection connection)
     }
 
     // A connection without source is equivalent to a connection whose source is the control
-    quint16 source = connection.source;
-    quint16 sourceTransform = connection.sourceTransform();
+    uint16_t source = connection.source;
+    uint16_t sourceTransform = connection.sourceTransform();
     bool isSourceBipolar = connection.isSourceBipolar();
     bool isSourceInverted = connection.isSourceInverted();
-    quint16 control = connection.control;
+    uint16_t control = connection.control;
     if (source == Dls::SRC_NONE)
     {
         source = control;
@@ -275,7 +285,7 @@ void DlsArticulation::processModulatedConnection(Dls::Connection connection)
             modSource.isDescending = true;
 
         // Some corrupted banks also specify huge attenuations
-        amount = qBound(-960.0, amount, 960.0);
+        amount = bound(-960.0, amount, 960.0);
     }
 
     addModulator(modSource, modAmountSource, destination, amount);
@@ -286,12 +296,12 @@ void DlsArticulation::processKeyScaling()
     // DLS: time = base time + scale * key / 128
     // sf2: time = base time + keynumTo * (60 - key)
     // => keynumTo = -scale / 128 and the base time is corrected by 60 * scale / 128
-    const quint16 destinations[4] = { Dls::DST_EG1_HOLDTIME, Dls::DST_EG1_DECAYTIME, Dls::DST_EG2_HOLDTIME, Dls::DST_EG2_DECAYTIME };
+    const uint16_t destinations[4] = { Dls::DST_EG1_HOLDTIME, Dls::DST_EG1_DECAYTIME, Dls::DST_EG2_HOLDTIME, Dls::DST_EG2_DECAYTIME };
     const AttributeType keyChamps[4] = { champ_keynumToVolEnvHold, champ_keynumToVolEnvDecay, champ_keynumToModEnvHold, champ_keynumToModEnvDecay };
     const AttributeType baseChamps[4] = { champ_holdVolEnv, champ_decayVolEnv, champ_holdModEnv, champ_decayModEnv };
     for (int i = 0; i < 4; i++)
     {
-        if (!_keyScalings.contains(destinations[i]) || isAbsoluteZero(destinations[i]))
+        if (!_keyScalings.count(destinations[i]) || isAbsoluteZero(destinations[i]))
             continue;
         double scale = _keyScalings[destinations[i]];
         setGenerator(keyChamps[i], -scale / 128.0);
@@ -299,7 +309,7 @@ void DlsArticulation::processKeyScaling()
     }
 }
 
-bool DlsArticulation::isAbsoluteZero(quint16 destination)
+bool DlsArticulation::isAbsoluteZero(uint16_t destination)
 {
     switch (destination)
     {
@@ -308,10 +318,10 @@ bool DlsArticulation::isAbsoluteZero(quint16 destination)
     case Dls::DST_EG2_DELAYTIME: case Dls::DST_EG2_ATTACKTIME: case Dls::DST_EG2_HOLDTIME:
     case Dls::DST_EG2_DECAYTIME: case Dls::DST_EG2_RELEASETIME:
         // 0 second by default
-        return !_staticScales.contains(destination) || _staticScales[destination] == Dls::ABSOLUTE_ZERO_TIME;
+        return !_staticScales.count(destination) || _staticScales[destination] == Dls::ABSOLUTE_ZERO_TIME;
     case Dls::DST_LFO_STARTDELAY: case Dls::DST_VIB_STARTDELAY:
         // 10 ms by default
-        return _staticScales.contains(destination) && _staticScales[destination] == Dls::ABSOLUTE_ZERO_TIME;
+        return _staticScales.count(destination) && _staticScales[destination] == Dls::ABSOLUTE_ZERO_TIME;
     default:
         break;
     }
@@ -321,7 +331,7 @@ bool DlsArticulation::isAbsoluteZero(quint16 destination)
 void DlsArticulation::setGenerator(AttributeType champ, double value)
 {
     // Not limited yet: as in a synthesizer, the limits apply once the modulations are added
-    _generators[champ] = static_cast<qint16>(qBound(-32768, qRound(value), 32767));
+    _generators[champ] = static_cast<int16_t>(bound(-32768, qtRound(value), 32767));
 }
 
 void DlsArticulation::addModulator(SFModulator source, SFModulator amountSource, AttributeType destination, double amount)
@@ -331,26 +341,26 @@ void DlsArticulation::addModulator(SFModulator source, SFModulator amountSource,
     modulator.amtSrcOper = amountSource;
     modulator.destOper = static_cast<uint16_t>(destination);
     modulator.transOper = SFTransform::linear;
-    modulator.amount = static_cast<int16_t>(qBound(-32768, qRound(amount), 32767));
+    modulator.amount = static_cast<int16_t>(bound(-32768, qtRound(amount), 32767));
     mergeModulator(_modulators, modulator);
 }
 
-void DlsArticulation::mergeModulator(QList<ModulatorData> &modulators, const ModulatorData &modulator)
+void DlsArticulation::mergeModulator(std::vector<ModulatorData> &modulators, const ModulatorData &modulator)
 {
-    for (int i = 0; i < modulators.count(); i++)
+    for (size_t i = 0; i < modulators.size(); i++)
     {
         if (modulators[i] == modulator)
         {
-            modulators[i].amount = static_cast<int16_t>(qBound(-32768, modulators[i].amount + modulator.amount, 32767));
+            modulators[i].amount = static_cast<int16_t>(bound(-32768, modulators[i].amount + modulator.amount, 32767));
             return;
         }
     }
-    modulators << modulator;
+    modulators.push_back(modulator);
 }
 
-QList<ModulatorData> DlsArticulation::getDefaultModulatorCompensation()
+std::vector<ModulatorData> DlsArticulation::getDefaultModulatorCompensation()
 {
-    QList<ModulatorData> modulators;
+    std::vector<ModulatorData> modulators;
     ModulatorData modulator;
     modulator.transOper = SFTransform::linear;
 
@@ -358,24 +368,24 @@ QList<ModulatorData> DlsArticulation::getDefaultModulatorCompensation()
     modulator.srcOper = SFModulator(GC_noteOnVelocity, typeLinear, true, false);
     modulator.destOper = champ_initialFilterFc;
     modulator.amount = 0;
-    modulators << modulator;
+    modulators.push_back(modulator);
 
     // No vibrato with the modulation wheel and the channel pressure
     modulator.srcOper = SFModulator(static_cast<uint8_t>(1), typeLinear, false, false);
     modulator.destOper = champ_vibLfoToPitch;
     modulator.amount = 0;
-    modulators << modulator;
+    modulators.push_back(modulator);
     modulator.srcOper = SFModulator(GC_channelPressure, typeLinear, false, false);
-    modulators << modulator;
+    modulators.push_back(modulator);
 
     // Reverb and chorus sends up to 100%
     modulator.srcOper = SFModulator(static_cast<uint8_t>(91), typeLinear, false, false);
     modulator.destOper = champ_reverbEffectsSend;
     modulator.amount = 1000;
-    modulators << modulator;
+    modulators.push_back(modulator);
     modulator.srcOper = SFModulator(static_cast<uint8_t>(93), typeLinear, false, false);
     modulator.destOper = champ_chorusEffectsSend;
-    modulators << modulator;
+    modulators.push_back(modulator);
 
     return modulators;
 }
@@ -383,7 +393,7 @@ QList<ModulatorData> DlsArticulation::getDefaultModulatorCompensation()
 bool DlsArticulation::isDefaultModulator(const ModulatorData &modulator)
 {
     // Modulators compensating a default modulator are always kept
-    foreach (ModulatorData compensation, getDefaultModulatorCompensation())
+    for (const ModulatorData &compensation : getDefaultModulatorCompensation())
         if (compensation == modulator)
             return false;
 
@@ -395,7 +405,7 @@ bool DlsArticulation::isDefaultModulator(const ModulatorData &modulator)
     return false;
 }
 
-AttributeType DlsArticulation::getCombinedGenerator(quint16 source, quint16 destination)
+AttributeType DlsArticulation::getCombinedGenerator(uint16_t source, uint16_t destination)
 {
     switch (source)
     {
@@ -423,7 +433,7 @@ AttributeType DlsArticulation::getCombinedGenerator(quint16 source, quint16 dest
     return champ_unknown;
 }
 
-AttributeType DlsArticulation::getModulatorDestination(quint16 destination, double &amount)
+AttributeType DlsArticulation::getModulatorDestination(uint16_t destination, double &amount)
 {
     switch (destination)
     {
@@ -482,7 +492,7 @@ AttributeType DlsArticulation::getModulatorDestination(quint16 destination, doub
     return champ_unknown;
 }
 
-bool DlsArticulation::getModulatorSource(quint16 source, quint16 curve, bool isBipolar, bool isInverted, SFModulator &result)
+bool DlsArticulation::getModulatorSource(uint16_t source, uint16_t curve, bool isBipolar, bool isInverted, SFModulator &result)
 {
     ModType type;
     switch (curve)
@@ -534,9 +544,9 @@ bool DlsArticulation::getModulatorSource(quint16 source, quint16 curve, bool isB
     return false;
 }
 
-qint16 DlsArticulation::toTimecents(qint32 scale)
+int16_t DlsArticulation::toTimecents(int32_t scale)
 {
     if (scale == Dls::ABSOLUTE_ZERO_TIME)
         return -12000; // Minimum value, no modulation is possible
-    return static_cast<qint16>(qBound(-32768, qRound(scale / Dls::UNIT_SCALE), 32767));
+    return static_cast<int16_t>(bound(-32768, qtRound(scale / Dls::UNIT_SCALE), 32767));
 }

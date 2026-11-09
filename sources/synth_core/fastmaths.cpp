@@ -127,6 +127,9 @@ void FastMaths::addVectors(float * __restrict a, const float * __restrict b, uns
         vst1q_f32(a + i + 8,  a2);
         vst1q_f32(a + i + 12, a3);
     }
+    // Remaining values (sizes that are not a multiple of 16)
+    for (; i < size; ++i)
+        a[i] += b[i];
 #else
     for (unsigned int i = 0; i < size; ++i)
         a[i] += b[i];
@@ -162,6 +165,9 @@ void FastMaths::clamp(float * values, unsigned int size)
         vst1q_f32(values + i + 8,  v2);
         vst1q_f32(values + i + 12, v3);
     }
+    // Remaining values (sizes that are not a multiple of 16)
+    for (; i < size; ++i)
+        values[i] = values[i] > 1.0f ? 1.0f : (values[i] < -1.0f ? -1.0f : values[i]);
 #else
     for (unsigned int i = 0; i < size; ++i)
     {
@@ -211,6 +217,9 @@ void FastMaths::multiplyAdd(float * __restrict data, const float * __restrict da
         vst1q_f32(data + i + 8,  d2);
         vst1q_f32(data + i + 12, d3);
     }
+    // Remaining values (sizes that are not a multiple of 16)
+    for (; i < size; ++i)
+        data[i] = std::fma(dataToMultiplyAndAdd[i], coeff, data[i]);
 #else
     for (unsigned int i = 0; i < size; ++i)
         data[i] += coeff * dataToMultiplyAndAdd[i];
@@ -247,6 +256,9 @@ void FastMaths::multiply(float * __restrict data, const float * __restrict dataT
         vst1q_f32(data + i + 8,  v2);
         vst1q_f32(data + i + 12, v3);
     }
+    // Remaining values (sizes that are not a multiple of 16)
+    for (; i < size; ++i)
+        data[i] = dataToMultiply[i] * coeff;
 #else
     for (unsigned int i = 0; i < size; ++i)
         data[i] = coeff * dataToMultiply[i];

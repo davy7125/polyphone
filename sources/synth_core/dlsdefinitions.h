@@ -1,7 +1,7 @@
 /***************************************************************************
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
-**  Copyright (C) 2013-2024 Davy Triponney                                **
+**  Copyright (C) 2013-2026 Davy Triponney                                **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -22,12 +22,13 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
+
 #ifndef DLSDEFINITIONS_H
 #define DLSDEFINITIONS_H
 
-#include <QtGlobal>
+#include <cstdint>
 
-// Constants of the DLS format (levels 1 and 2), shared by the import and the export
+// Constants of the DLS format (levels 1 and 2), shared by the import (editor and plugin) and the export
 
 namespace Dls
 {
@@ -97,23 +98,23 @@ namespace Dls
     };
 
     // Values with a special meaning
-    const qint32 ABSOLUTE_ZERO_TIME = static_cast<qint32>(0x80000000); // Time of 0 second that cannot be modulated
-    const qint32 FILTER_DISABLED = 0x7FFFFFFF; // Initial cutoff frequency when no filter is applied
+    const int32_t ABSOLUTE_ZERO_TIME = static_cast<int32_t>(0x80000000); // Time of 0 second that cannot be modulated
+    const int32_t FILTER_DISABLED = 0x7FFFFFFF; // Initial cutoff frequency when no filter is applied
 
     // Flags
-    const quint32 F_INSTRUMENT_DRUMS = 0x80000000;
-    const quint16 F_RGN_OPTION_SELFNONEXCLUSIVE = 0x0001;
-    const quint16 F_WAVELINK_PHASE_MASTER = 0x0001;
-    const quint16 F_WAVELINK_MULTICHANNEL = 0x0002;
-    const quint32 WAVELINK_CHANNEL_LEFT = 0x0001;
-    const quint32 WAVELINK_CHANNEL_RIGHT = 0x0002;
-    const quint32 F_WSMP_NO_TRUNCATION = 0x0001;
-    const quint32 F_WSMP_NO_COMPRESSION = 0x0002;
-    const quint32 WLOOP_TYPE_FORWARD = 0x0000;
-    const quint32 WLOOP_TYPE_RELEASE = 0x0001;
+    const uint32_t F_INSTRUMENT_DRUMS = 0x80000000;
+    const uint16_t F_RGN_OPTION_SELFNONEXCLUSIVE = 0x0001;
+    const uint16_t F_WAVELINK_PHASE_MASTER = 0x0001;
+    const uint16_t F_WAVELINK_MULTICHANNEL = 0x0002;
+    const uint32_t WAVELINK_CHANNEL_LEFT = 0x0001;
+    const uint32_t WAVELINK_CHANNEL_RIGHT = 0x0002;
+    const uint32_t F_WSMP_NO_TRUNCATION = 0x0001;
+    const uint32_t F_WSMP_NO_COMPRESSION = 0x0002;
+    const uint32_t WLOOP_TYPE_FORWARD = 0x0000;
+    const uint32_t WLOOP_TYPE_RELEASE = 0x0001;
 
     // Wave formats (not "WAVE_FORMAT_PCM", already a macro in the Windows headers)
-    const quint16 FORMAT_TAG_PCM = 0x0001;
+    const uint16_t FORMAT_TAG_PCM = 0x0001;
 
     // Gains are in 1/655360 dB, times in 1/65536 timecents, pitches in 1/65536 cents and percentages in 1/65536 of 0.1%
     const double UNIT_SCALE = 65536.0;
@@ -124,26 +125,26 @@ namespace Dls
     // A connection block (art1 or art2 chunk)
     struct Connection
     {
-        quint16 source;
-        quint16 control;
-        quint16 destination;
-        quint16 transform;
-        qint32 scale;
+        uint16_t source;
+        uint16_t control;
+        uint16_t destination;
+        uint16_t transform;
+        int32_t scale;
 
         // Accessors to the bitfields of the transform (only the output transform is used in DLS level 1)
-        quint16 outputTransform() const { return transform & 0x000F; }
-        quint16 controlTransform() const { return (transform >> 4) & 0x000F; }
+        uint16_t outputTransform() const { return transform & 0x000F; }
+        uint16_t controlTransform() const { return (transform >> 4) & 0x000F; }
         bool isControlBipolar() const { return (transform & 0x0100) != 0; }
         bool isControlInverted() const { return (transform & 0x0200) != 0; }
-        quint16 sourceTransform() const { return (transform >> 10) & 0x000F; }
+        uint16_t sourceTransform() const { return (transform >> 10) & 0x000F; }
         bool isSourceBipolar() const { return (transform & 0x4000) != 0; }
         bool isSourceInverted() const { return (transform & 0x8000) != 0; }
 
-        static quint16 buildTransform(quint16 sourceTransform, bool sourceBipolar, bool sourceInverted,
-                                      quint16 controlTransform, bool controlBipolar, bool controlInverted,
-                                      quint16 outputTransform)
+        static uint16_t buildTransform(uint16_t sourceTransform, bool sourceBipolar, bool sourceInverted,
+                                      uint16_t controlTransform, bool controlBipolar, bool controlInverted,
+                                      uint16_t outputTransform)
         {
-            return static_cast<quint16>((sourceInverted ? 0x8000 : 0) | (sourceBipolar ? 0x4000 : 0) |
+            return static_cast<uint16_t>((sourceInverted ? 0x8000 : 0) | (sourceBipolar ? 0x4000 : 0) |
                                         ((sourceTransform & 0x000F) << 10) |
                                         (controlInverted ? 0x0200 : 0) | (controlBipolar ? 0x0100 : 0) |
                                         ((controlTransform & 0x000F) << 4) |

@@ -23,8 +23,7 @@
 ***************************************************************************/
 
 #include "samplereaderfile.h"
-#include <sndfile.hh>
-#include "utils.h"
+#include "samplefilereader.h"
 
 SampleReaderFile::SampleReaderFile(QString filename) : SampleReader(filename),
     _file(nullptr),
@@ -70,67 +69,34 @@ SampleReader::SampleReaderResult SampleReaderFile::getData(QFile &fi, qint16* &d
 
 SampleReader::SampleReaderResult SampleReaderFile::launchDecoder(qint16* data16, quint8* data24)
 {
-    // Open the file and get the details
-    SF_INFO sfInfo;
-    memset(&sfInfo, 0, sizeof(SF_INFO));
+    // Open the file and get the details (SampleFileReader, shared with the plugin)
 #if defined(Q_OS_WIN)
     // Reopen the file for preventing a bug
-    SNDFILE * sndFile = sf_open(_file->fileName().toStdString().c_str(), SFM_READ, &sfInfo);
+    std::unique_ptr<SampleFileReader> reader = SampleFileReader::open(std::filesystem::path(_file->fileName().toStdWString()));
 #else
-    SNDFILE * sndFile = sf_open_fd(_file->handle(), SFM_READ, &sfInfo, false);
+    std::unique_ptr<SampleFileReader> reader = SampleFileReader::openDescriptor(_file->handle());
 #endif
-    if (sndFile == nullptr)
+    if (reader == nullptr)
         return SampleReader::FILE_NOT_SUPPORTED;
 
-    // General info
-    _info->wChannels = sfInfo.channels;
-    _info->dwSampleRate = sfInfo.samplerate;
-    _info->dwLength = sfInfo.frames;
+    // General info, loop / root key / fine tune
+    SampleFileReader::Info info;
+    reader->getInfo(info);
+    _info->wChannels = info.channels;
+    _info->dwSampleRate = info.sampleRate;
+    _info->dwLength = info.length;
     _info->rawDataAvailable = false; // Maybe later it will be true if we keep OGG data as it it stored
-
-    // Loop / root key / fine tune
-    SF_INSTRUMENT instrument;
-    if (sf_command(sndFile, SFC_GET_INSTRUMENT, &instrument, sizeof(instrument)) == SF_TRUE)
+    if (info.hasInstrument)
     {
-        _info->dwRootKey = instrument.basenote;
-        _info->iFineTune = instrument.detune;
-        for (int i = 0; i < instrument.loop_count; i++)
-            _info->loops << QPair<quint32, quint32>(instrument.loops[i].start, instrument.loops[i].end);
+        _info->dwRootKey = info.rootKey;
+        _info->iFineTune = info.fineTune;
+        for (const std::pair<uint32_t, uint32_t> &loop : info.loops)
+            _info->loops << QPair<quint32, quint32>(loop.first, loop.second);
     }
 
-    int subFormat = sfInfo.format & SF_FORMAT_SUBMASK;
-    if (data16 != nullptr && (subFormat == SF_FORMAT_FLOAT || subFormat == SF_FORMAT_DOUBLE))
-    {
-        // Floating point values are not scaled when they are read as integers: they would all be rounded to 0
-        float * interleavedData = new float[_info->wChannels * _info->dwLength];
-        sf_readf_float(sndFile, interleavedData, _info->dwLength);
+    // Data of a channel
+    if (data16 != nullptr)
+        reader->readChannel(_info->wChannel, _info->dwLength, data16, data24);
 
-        // Extract a channel
-        int iTmp;
-        for (quint32 i = 0; i < _info->dwLength; i++)
-        {
-            iTmp = Utils::floatToInt24(interleavedData[i * _info->wChannels + _info->wChannel]);
-            data16[i] = iTmp >> 8;
-            data24[i] = iTmp & 0xFF;
-        }
-        delete [] interleavedData;
-    }
-    else if (data16 != nullptr)
-    {
-        int * interleavedData = new int[_info->wChannels * _info->dwLength];
-        sf_readf_int(sndFile, interleavedData, _info->dwLength);
-
-        // Extract a channel
-        int iTmp;
-        for (quint32 i = 0; i < _info->dwLength; i++)
-        {
-            iTmp = interleavedData[i * _info->wChannels + _info->wChannel];
-            data16[i] = iTmp >> 16;
-            data24[i] = (iTmp >> 8) & 0xFF;
-        }
-        delete [] interleavedData;
-    }
-
-    sf_close(sndFile);
     return SampleReader::FILE_OK;
 }

@@ -43,8 +43,6 @@ public:
     quint32Reversed _sm24Size;
 
     // Import
-    unsigned int _startSmplOffset; // Relative position of the first sample in the section "smpl" (absolute is 20 + infoSize + this value)
-    unsigned int _startSm24Offset; // Same for the section "sm24"
 
     // Export
     quint32 _position;
@@ -57,8 +55,7 @@ private:
     static const quint32 BLOCK_SIZE;
 };
 
-// Extension methods for QDataStream to serialize / deserialize
-QDataStream & operator >> (QDataStream &in, Sf2SdtaPart &sdta);
+// Extension methods for QDataStream to serialize
 QDataStream & operator << (QDataStream &out, Sf2SdtaPart &sdta);
 
 #endif // SF2SDTAPART_H

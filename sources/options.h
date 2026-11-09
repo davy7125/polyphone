@@ -82,7 +82,7 @@ public:
 
     /// Render options: file describing the events to play, and synth used
     /// (empty: the synth core in the calling thread, "two_cores": the same next to another one,
-    /// "threaded": the synth of the editor with its threads)
+    /// "threaded": the synth of the editor with its threads, "file": the synth core playing the file read without the editor)
     QString renderEventFile() { return _renderEventFile; }
     QString renderSynth() { return _renderSynth; }
 

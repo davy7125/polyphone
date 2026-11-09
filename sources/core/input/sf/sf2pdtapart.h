@@ -85,8 +85,7 @@ public:
     QVector<Sf2PdtaPart_shdr> _shdrs;
 };
 
-// Extension methods for QDataStream to serialize / deserialize
-QDataStream & operator >> (QDataStream &in, Sf2PdtaPart &pdta);
+// Extension methods for QDataStream to serialize
 QDataStream & operator << (QDataStream &out, Sf2PdtaPart &pdta);
 
 #endif // SF2PDTAPART_H

@@ -38,8 +38,7 @@ public:
     quint16Reversed _modIndex;
 };
 
-// Extension methods for QDataStream to serialize / deserialize
-QDataStream & operator >> (QDataStream &in, Sf2PdtaPart_bag &bag);
+// Extension methods for QDataStream to serialize
 QDataStream & operator << (QDataStream &out, Sf2PdtaPart_bag &bag);
 
 #endif // SF2PDTAPART_BAG_H

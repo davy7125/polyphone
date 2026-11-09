@@ -27,15 +27,12 @@
 
 #include "samplereader.h"
 
-// Read a wave of a DLS file, the position of its "LIST wave" chunk being dwStart
+// Read a wave of a DLS file, the position of its "LIST wave" chunk being dwStart (with DlsReader, shared with the plugin)
 class SampleReaderDls: public SampleReader
 {
 public:
     SampleReaderDls(QString filename);
     ~SampleReaderDls() override {}
-
-    // Number of frames, channels and sample rate of a wave, when they cannot be computed from the format
-    static SampleReaderResult readWaveInfo(QFile &fi, quint32 waveListPosition, quint32 &length, quint16 &channels, quint32 &sampleRate);
 
 protected:
     SampleReaderResult getInfo(QFile &fi, InfoSound *info) override;
@@ -43,9 +40,6 @@ protected:
     SampleReaderResult getData(QFile &fi, qint16* &data16, quint8* &data24, const char* rawData, quint32 rawDataLength) override;
 
 private:
-    // Build a wav file in memory with the chunks "fmt ", "fact" and "data" of a wave
-    static SampleReaderResult extractWaveFile(QFile &fi, quint32 waveListPosition, QByteArray &waveFile);
-
     InfoSound * _info;
 };
 

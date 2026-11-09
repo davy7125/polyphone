@@ -1,7 +1,7 @@
 /***************************************************************************
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
-**  Copyright (C) 2013-2024 Davy Triponney                                **
+**  Copyright (C) 2013-2026 Davy Triponney                                **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -22,8 +22,15 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
+
 #include "sfzparametergroup.h"
-#include "soundfontmanager.h"
+#include <cmath>
+#include "synthconstants.h"
+#include "textconversions.h"
+using namespace TextConversions;
+
+typedef ISoundfontBuilder::Id Id;
+static const double PI = 3.14159265358979323846; // Same value as M_PI
 
 void SfzParameterGroup::moveOpcodesInGlobal(SfzParameterRegion &globalZone)
 {
@@ -38,7 +45,7 @@ void SfzParameterGroup::moveKeynumInSamples(SfzParameter::OpCode opCodeKeynum, S
         double valueBase = 0.001;
         if (_paramGlobaux.isDefined(opCodeBase))
             valueBase = _paramGlobaux.getDoubleValue(opCodeBase);
-        for (int i = 0; i < _regionList.size(); i++)
+        for (size_t i = 0; i < _regionList.size(); i++)
         {
             if (!_regionList.at(i).isDefined(opCodeKeynum))
                 _regionList[i] << SfzParameter(opCodeKeynum, valueKeynum);
@@ -50,38 +57,36 @@ void SfzParameterGroup::moveKeynumInSamples(SfzParameter::OpCode opCodeKeynum, S
     }
 }
 
-void SfzParameterGroup::moveOpcodeInSamples(SfzParameter::OpCode opcode, QMetaType::Type type)
+void SfzParameterGroup::moveOpcodeInSamples(SfzParameter::OpCode opcode, ValueType type)
 {
     switch (type)
     {
-    case QMetaType::Double:
+    case VALUE_DOUBLE:
         if (_paramGlobaux.isDefined(opcode))
         {
             double value = _paramGlobaux.getDoubleValue(opcode);
-            for (int i = 0; i < _regionList.size(); i++)
+            for (size_t i = 0; i < _regionList.size(); i++)
                 if (!_regionList.at(i).isDefined(opcode))
                     _regionList[i] << SfzParameter(opcode, value);
         }
         break;
-    case QMetaType::Int:
+    case VALUE_INT:
         if (_paramGlobaux.isDefined(opcode))
         {
             int value = _paramGlobaux.getIntValue(opcode);
-            for (int i = 0; i < _regionList.size(); i++)
+            for (size_t i = 0; i < _regionList.size(); i++)
                 if (!_regionList.at(i).isDefined(opcode))
                     _regionList[i] << SfzParameter(opcode, value);
         }
         break;
-    case QMetaType::QString:
+    case VALUE_STRING:
         if (_paramGlobaux.isDefined(opcode))
         {
-            QString value = _paramGlobaux.getStrValue(opcode);
-            for (int i = 0; i < _regionList.size(); i++)
+            std::string value = _paramGlobaux.getStrValue(opcode);
+            for (size_t i = 0; i < _regionList.size(); i++)
                 if (!_regionList.at(i).isDefined(opcode))
                     _regionList[i] << SfzParameter(opcode, value);
         }
-        break;
-    default:
         break;
     }
     _paramGlobaux.removeOpCode(opcode);
@@ -89,51 +94,40 @@ void SfzParameterGroup::moveOpcodeInSamples(SfzParameter::OpCode opcode, QMetaTy
 
 void SfzParameterGroup::moveModInSamples()
 {
-    QList<SfzParameter::OpCode> listTmp;
-    listTmp << SfzParameter::op_modEnvToTon
-            << SfzParameter::op_pitcheg_attack
-            << SfzParameter::op_pitcheg_decay
-            << SfzParameter::op_pitcheg_delay
-            << SfzParameter::op_pitcheg_hold
-            << SfzParameter::op_pitcheg_release
-            << SfzParameter::op_pitcheg_sustain;
-    moveModInSamples(listTmp);
-
-    listTmp.clear();
-    listTmp << SfzParameter::op_modEnvToFilter
-            << SfzParameter::op_fileg_attack
-            << SfzParameter::op_fileg_decay
-            << SfzParameter::op_fileg_delay
-            << SfzParameter::op_fileg_hold
-            << SfzParameter::op_fileg_release
-            << SfzParameter::op_fileg_sustain;
-    moveModInSamples(listTmp);
-
-    listTmp.clear();
-    listTmp << SfzParameter::op_modLFOtoVolume
-            << SfzParameter::op_modLFOdelay
-            << SfzParameter::op_modLFOfreq;
-    moveModInSamples(listTmp);
-
-    listTmp.clear();
-    listTmp << SfzParameter::op_modLFOtoFilter
-            << SfzParameter::op_filLFOdelay
-            << SfzParameter::op_filLFOfreq;
-    moveModInSamples(listTmp);
+    moveModInSamples({ SfzParameter::op_modEnvToTon,
+                       SfzParameter::op_pitcheg_attack,
+                       SfzParameter::op_pitcheg_decay,
+                       SfzParameter::op_pitcheg_delay,
+                       SfzParameter::op_pitcheg_hold,
+                       SfzParameter::op_pitcheg_release,
+                       SfzParameter::op_pitcheg_sustain });
+    moveModInSamples({ SfzParameter::op_modEnvToFilter,
+                       SfzParameter::op_fileg_attack,
+                       SfzParameter::op_fileg_decay,
+                       SfzParameter::op_fileg_delay,
+                       SfzParameter::op_fileg_hold,
+                       SfzParameter::op_fileg_release,
+                       SfzParameter::op_fileg_sustain });
+    moveModInSamples({ SfzParameter::op_modLFOtoVolume,
+                       SfzParameter::op_modLFOdelay,
+                       SfzParameter::op_modLFOfreq });
+    moveModInSamples({ SfzParameter::op_modLFOtoFilter,
+                       SfzParameter::op_filLFOdelay,
+                       SfzParameter::op_filLFOfreq });
 }
 
-void SfzParameterGroup::moveModInSamples(QList<SfzParameter::OpCode> opCodeList)
+void SfzParameterGroup::moveModInSamples(const std::vector<SfzParameter::OpCode> &opCodeList)
 {
-    for (int i = 0; i < _regionList.size(); i++)
+    for (size_t i = 0; i < _regionList.size(); i++)
     {
-        for (int j = 0; j < opCodeList.size(); j++)
+        for (size_t j = 0; j < opCodeList.size(); j++)
         {
             SfzParameter::OpCode opCode = opCodeList.at(j);
             if (!_regionList.at(i).isDefined(opCode) && _paramGlobaux.isDefined(opCode))
             {
                 // Other associated opcodes?
                 bool isPresent = false;
-                for (int k = 0; k < opCodeList.size(); k++)
+                for (size_t k = 0; k < opCodeList.size(); k++)
                     if (k != j)
                         isPresent |= _regionList.at(i).isDefined(opCodeList.at(k));
                 if (isPresent)
@@ -152,14 +146,14 @@ void SfzParameterGroup::moveModInSamples(QList<SfzParameter::OpCode> opCodeList)
 void SfzParameterGroup::adjustVolume(double offset)
 {
     _paramGlobaux.adjustVolume(offset);
-    for (int i = 0; i < _regionList.size(); i++)
+    for (size_t i = 0; i < _regionList.size(); i++)
         _regionList[i].adjustVolume(offset);
 }
 
-void SfzParameterGroup::adjustCorrection(QString path)
+void SfzParameterGroup::adjustCorrection(const std::string &path)
 {
     int defaultCorrection = _paramGlobaux.getIntValue(SfzParameter::op_tuningFine);
-    for (int i = 0; i < _regionList.size(); i++)
+    for (size_t i = 0; i < _regionList.size(); i++)
         _regionList[i].adjustCorrection(path, defaultCorrection);
 }
 
@@ -168,14 +162,14 @@ void SfzParameterGroup::adjustModulationVolume()
     double correctionGlobale = 0;
     if (_paramGlobaux.isDefined(SfzParameter::op_modLFOtoVolume))
     {
-        correctionGlobale = qAbs(_paramGlobaux.getDoubleValue(SfzParameter::op_modLFOtoVolume));
+        correctionGlobale = std::abs(_paramGlobaux.getDoubleValue(SfzParameter::op_modLFOtoVolume));
         _paramGlobaux.adjustVolume(-correctionGlobale);
     }
-    for (int i = 0; i < _regionList.size(); i++)
+    for (size_t i = 0; i < _regionList.size(); i++)
     {
         double correction;
         if (_regionList.at(i).isDefined(SfzParameter::op_modLFOtoVolume))
-            correction = qAbs(_regionList.at(i).getDoubleValue(SfzParameter::op_modLFOtoVolume));
+            correction = std::abs(_regionList.at(i).getDoubleValue(SfzParameter::op_modLFOtoVolume));
         else
             correction = correctionGlobale;
         if (correction != 0)
@@ -183,25 +177,25 @@ void SfzParameterGroup::adjustModulationVolume()
     }
 }
 
-void SfzParameterGroup::checkSampleValid(QString path)
+void SfzParameterGroup::checkSampleValid(const std::string &path)
 {
-    int size = _regionList.size();
+    int size = static_cast<int>(_regionList.size());
     for (int i = size - 1; i >= 0; i--)
-        if (!_regionList[i].sampleValid(path))
-            _regionList.removeAt(i);
+        if (!_regionList[static_cast<size_t>(i)].sampleValid(path))
+            _regionList.erase(_regionList.begin() + i);
 }
 
 void SfzParameterGroup::checkFilter()
 {
     _paramGlobaux.checkFilter();
-    for (int i = 0; i < _regionList.size(); i++)
+    for (size_t i = 0; i < _regionList.size(); i++)
         _regionList[i].checkFilter();
 }
 
 void SfzParameterGroup::checkKeyTrackedFilter()
 {
     _paramGlobaux.checkKeyTrackedFilter(false);
-    for (int i = 0; i < _regionList.size(); i++)
+    for (size_t i = 0; i < _regionList.size(); i++)
         _regionList[i].checkKeyTrackedFilter(true);
 }
 
@@ -214,31 +208,31 @@ bool SfzParameterGroup::isChannel10()
 double SfzParameterGroup::getAmpliMax()
 {
     double ampliMax = _paramGlobaux.getDoubleValue(SfzParameter::op_volume);
-    for (int i = 0; i < _regionList.size(); i++)
-        ampliMax = qMax(ampliMax, _regionList.at(i).getDoubleValue(SfzParameter::op_volume));
+    for (size_t i = 0; i < _regionList.size(); i++)
+        ampliMax = std::max(ampliMax, _regionList.at(i).getDoubleValue(SfzParameter::op_volume));
     return ampliMax;
 }
 
-void SfzParameterGroup::decode(SoundfontManager * sf2, EltID idInst, QString pathSfz)
+void SfzParameterGroup::decode(ISoundfontBuilder * sf2, Id idInst, const std::string &pathSfz, int velToFilterType)
 {
     // Fill the parameters of the global division
-    _paramGlobaux.decode(sf2, idInst);
+    _paramGlobaux.decode(sf2, idInst, velToFilterType);
 
     // Link to samples
-    EltID idInstSmpl = idInst;
-    idInstSmpl.typeElement = elementInstSmpl;
-    EltID idSmpl = idInst;
-    idSmpl.typeElement = elementSmpl;
+    Id idInstSmpl = idInst;
+    idInstSmpl.type = ISoundfontBuilder::TYPE_INSTRUMENT_ZONE;
+    Id idSmpl = idInst;
+    idSmpl.type = ISoundfontBuilder::TYPE_SAMPLE;
     AttributeValue val;
-    for (int i = 0; i < _regionList.size(); i++)
+    for (size_t i = 0; i < _regionList.size(); i++)
     {
         // Create samples if needed and get their index
-        QList<int> listeIndexSmpl = _regionList.at(i).getSampleIndex(sf2, idInst, pathSfz);
+        std::vector<int> listeIndexSmpl = _regionList.at(i).getSampleIndex(sf2, idInst, pathSfz);
 
         // Process possible offsets
-        if (!listeIndexSmpl.isEmpty())
+        if (!listeIndexSmpl.empty())
         {
-            idSmpl.indexElt = listeIndexSmpl.first();
+            idSmpl.element = listeIndexSmpl.front();
             _regionList[i].adaptLoop(sf2->get(idSmpl, champ_dwStartLoop).dwValue,
                                             sf2->get(idSmpl, champ_dwEndLoop).dwValue,
                                             sf2->get(idSmpl, champ_dwLength).dwValue);
@@ -247,27 +241,27 @@ void SfzParameterGroup::decode(SoundfontManager * sf2, EltID idInst, QString pat
         if (_regionList.at(i).isDefined(SfzParameter::op_pan) && listeIndexSmpl.size() == 2)
         {
             double pan = _regionList.at(i).getDoubleValue(SfzParameter::op_pan);
-            if (qAbs(pan) >= 99.9)
+            if (std::abs(pan) >= 99.9)
             {
                 // Passage en mono
                 if (pan < 0)
-                    listeIndexSmpl.removeAt(1);
+                    listeIndexSmpl.erase(listeIndexSmpl.begin() + 1);
                 else
-                    listeIndexSmpl.removeAt(0);
+                    listeIndexSmpl.erase(listeIndexSmpl.begin());
             }
         }
 
         if (listeIndexSmpl.size() == 1) // Mono sample
         {
             // Create a division InstSmpl
-            idInstSmpl.indexElt2 = sf2->add(idInstSmpl);
+            idInstSmpl.zone = sf2->add(idInstSmpl);
 
             // Link to the sample
-            val.wValue = listeIndexSmpl.first();
+            val.wValue = static_cast<uint16_t>(listeIndexSmpl.front());
             sf2->set(idInstSmpl, champ_sampleID, val);
 
             // Fill the parameters of this division
-            _regionList[i].decode(sf2, idInstSmpl);
+            _regionList[i].decode(sf2, idInstSmpl, velToFilterType);
 
             if (_regionList.at(i).isDefined(SfzParameter::op_pan))
             {
@@ -306,49 +300,49 @@ void SfzParameterGroup::decode(SoundfontManager * sf2, EltID idInst, QString pat
             if (_regionList.at(i).isDefined(SfzParameter::op_pan))
             {
                 double pan = limit(_regionList.at(i).getDoubleValue(SfzParameter::op_pan) + 100, 0, 200);
-                pan = pan * M_PI / 400.; // Between 0 and PI/2
+                pan = pan * PI / 400.; // Between 0 and PI/2
                 coeffLeft = cos(pan);
                 coeffRight = sin(pan);
             }
             else
-                coeffLeft = coeffRight = cos(M_PI / 4);
+                coeffLeft = coeffRight = cos(PI / 4);
 
             // Attenuation in dB for the left and right samples
             double attenuationLeft = -SfzParameterRegion::gainToDB(coeffLeft);
             double attenuationRight = -SfzParameterRegion::gainToDB(coeffRight);
 
-            for (int j = 0; j < listeIndexSmpl.size(); j++)
+            for (size_t j = 0; j < listeIndexSmpl.size(); j++)
             {
                 // Creation a division InstSmpl
-                idInstSmpl.indexElt2 = sf2->add(idInstSmpl);
+                idInstSmpl.zone = sf2->add(idInstSmpl);
 
                 // Link to the sample
-                val.wValue = listeIndexSmpl.at(j);
+                val.wValue = static_cast<uint16_t>(listeIndexSmpl.at(j));
                 sf2->set(idInstSmpl, champ_sampleID, val);
 
                 if ((j == 0 && !reversed) || (j == 1 && reversed)) // Left, if not reversed
                 {
                     // Attenuation
-                    val.shValue = qRound(10.f * attenuationLeft / DB_SF2_TO_REAL_DB);
+                    val.shValue = qtRound(10.f * attenuationLeft / DB_SF2_TO_REAL_DB);
                     sf2->set(idInstSmpl, champ_initialAttenuation, val);
 
                     // Pan
-                    val.shValue = qRound((positionLeft - 0.5) * 1000);
+                    val.shValue = qtRound((positionLeft - 0.5) * 1000);
                     sf2->set(idInstSmpl, champ_pan, val);
                 }
                 else // Right
                 {
                     // Attenuation
-                    val.shValue = qRound(10.f * attenuationRight / DB_SF2_TO_REAL_DB);
+                    val.shValue = qtRound(10.f * attenuationRight / DB_SF2_TO_REAL_DB);
                     sf2->set(idInstSmpl, champ_initialAttenuation, val);
 
                     // Pan
-                    val.shValue = qRound((positionRight - 0.5) * 1000);
+                    val.shValue = qtRound((positionRight - 0.5) * 1000);
                     sf2->set(idInstSmpl, champ_pan, val);
                 }
 
                 // Fill the parameters of this division
-                _regionList[i].decode(sf2, idInstSmpl);
+                _regionList[i].decode(sf2, idInstSmpl, velToFilterType);
             }
         }
     }

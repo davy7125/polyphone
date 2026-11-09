@@ -223,8 +223,15 @@ SOURCES	+= main.cpp \
     core/input/grandorgue/grandorgueranklink.cpp \
     core/input/grandorgue/grandorgueswitch.cpp \
     core/input/sf/inputsf.cpp \
-    core/input/sfz/sfzparametergroup.cpp \
-    core/input/sfz/sfzparameterregion.cpp \
+    synth_core/sfzparametergroup.cpp \
+    synth_core/sfzparameterregion.cpp \
+    synth_core/sfzparameter.cpp \
+    synth_core/sfzreader.cpp \
+    synth_core/samplefilereader.cpp \
+    synth_core/textconversions.cpp \
+    synth_core/dlsreader.cpp \
+    synth_core/soundfontbuilder.cpp \
+    core/input/soundfontmanagerbuilder.cpp \
     core/output/sfz/balanceparameters.cpp \
     core/output/sfz/sfzwriter.cpp \
     core/sample/samplereaderfile.cpp \
@@ -243,7 +250,7 @@ SOURCES	+= main.cpp \
     core/input/sfz/inputsfz.cpp \
     core/input/dls/inputdls.cpp \
     core/input/dls/inputparserdls.cpp \
-    core/input/dls/dlsarticulation.cpp \
+    synth_core/dlsarticulation.cpp \
     core/sample/samplereaderdls.cpp \
     core/output/dls/outputdls.cpp \
     core/output/dls/conversion_dls.cpp \
@@ -361,6 +368,10 @@ SOURCES	+= main.cpp \
     synth_core/syntheffects.cpp \
     synth_core/midiprocessor.cpp \
     synth_core/synthmidi.cpp \
+    synth_core/synthchannels.cpp \
+    synth_core/sf2reader.cpp \
+    synth_core/synthsoundfontfile.cpp \
+    synth_core/synthsoundfontset.cpp \
     synth_core/voicecontext.cpp \
     synth_core/voicelist.cpp \
     synth_core/voiceparam.cpp \
@@ -531,7 +542,6 @@ SOURCES	+= main.cpp \
     core/output/sfz/outputsfz.cpp \
     core/output/not_supported/outputnotsupported.cpp \
     core/output/sfz/sfzparamlist.cpp \
-    core/input/sfz/sfzparameter.cpp \
     dialogs/dialogcreateelements.cpp \
     editor/widgets/tableheaderview.cpp \
     context/interface/configtoc.cpp \
@@ -635,14 +645,22 @@ HEADERS += \
     core/output/csv/csvfilesamples.h \
     core/output/csv/outputcsv.h \
     core/sample/samplereadersf.h \
+    core/sample/sf2filesource.h \
     context/tuningprogrammanager.h \
     synth_core/fastmaths.h \
     core/input/grandorgue/grandorguedatathrough.h \
     core/input/grandorgue/grandorgueranklink.h \
     core/input/grandorgue/grandorgueswitch.h \
     core/input/sf/inputsf.h \
-    core/input/sfz/sfzparametergroup.h \
-    core/input/sfz/sfzparameterregion.h \
+    synth_core/sfzparametergroup.h \
+    synth_core/sfzparameterregion.h \
+    synth_core/sfzparameter.h \
+    synth_core/sfzreader.h \
+    synth_core/samplefilereader.h \
+    synth_core/textconversions.h \
+    synth_core/dlsreader.h \
+    synth_core/soundfontbuilder.h \
+    core/input/soundfontmanagerbuilder.h \
     core/output/sfz/balanceparameters.h \
     core/output/sfz/sfzwriter.h \
     core/sample/samplereaderfile.h \
@@ -662,8 +680,8 @@ HEADERS += \
     core/input/sfz/inputsfz.h \
     core/input/dls/inputdls.h \
     core/input/dls/inputparserdls.h \
-    core/input/dls/dlsarticulation.h \
-    core/input/dls/dlsdefinitions.h \
+    synth_core/dlsarticulation.h \
+    synth_core/dlsdefinitions.h \
     core/sample/samplereaderdls.h \
     core/output/dls/outputdls.h \
     core/output/dls/conversion_dls.h \
@@ -811,6 +829,11 @@ HEADERS += \
     synth_core/synthcoreconfig.h \
     synth_core/midiprocessor.h \
     synth_core/synthmidi.h \
+    synth_core/synthchannels.h \
+    synth_core/synthqueue.h \
+    synth_core/sf2reader.h \
+    synth_core/synthsoundfontfile.h \
+    synth_core/synthsoundfontset.h \
     synth_core/voicecontext.h \
     synth_core/voicelist.h \
     synth_core/voiceparam.h \
@@ -986,7 +1009,6 @@ HEADERS += \
     core/output/sfz/outputsfz.h \
     core/output/not_supported/outputnotsupported.h \
     core/output/sfz/sfzparamlist.h \
-    core/input/sfz/sfzparameter.h \
     dialogs/dialogcreateelements.h \
     editor/widgets/tableheaderview.h \
     context/interface/configtoc.h \

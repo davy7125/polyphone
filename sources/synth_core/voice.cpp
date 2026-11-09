@@ -50,6 +50,9 @@ Voice::Voice(VoiceParam * voiceParam, ISynthListener * listener) :
     _dataSmpl24(nullptr),
     _voiceParam(voiceParam)
 {
+    _pendingFrames.position = 0;
+    _pendingFrames.length = 0;
+
     // Array initialization
     _arrayLength = 0;
     _dataVolArray = nullptr;
@@ -96,6 +99,10 @@ void Voice::initialize(int sf2Id, ISynthInstPrst * prst, ISynthZone * prstZone, 
                        ISynthSample * smpl, int8_t channel, int8_t key, int8_t vel, int8_t type, uint32_t audioSmplRate, int token,
                        int noteId)
 {
+    // Nothing computed yet
+    _pendingFrames.position = 0;
+    _pendingFrames.length = 0;
+
     // Possibly delete previous sample data that has been copied
     if (_voiceParam->getType() != 0 && _dataSmpl16 != nullptr)
     {
@@ -281,6 +288,11 @@ bool Voice::generateData(float * data, uint32_t len)
             float pitchModulation = v_modEnvToPitch * _dataModArray[chunk] + v_modLfoToPitch * _modLfoArray[chunk] + v_vibLfoToPitch * _vibLfoArray[chunk];
             double ratio = pitchModulation == 0.0f ? fixedRatio :
                                fixedRatio * FastMaths::fastPow2(pitchModulation * 0.000833333f /* 1:1200 */);
+
+            // At most 16 octaves higher (an extreme scale tuning gives absurd ratios): the positions computed must stay
+            // far from the limit of 2^31 frames per chunk, and the fixed point value must be valid
+            if (!(ratio < MAX_PITCH_RATIO))
+                ratio = MAX_PITCH_RATIO;
             uint64_t fixedGap = static_cast<uint64_t>(ratio * 4294967296.0 /* 2^32 */ + 0.5);
 
             // Resampling (sinc interpolation)

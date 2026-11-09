@@ -22,6 +22,8 @@ endif()
 
 add_library(polyphone_synth_core STATIC
     attributebase.cpp
+    dlsarticulation.cpp
+    dlsreader.cpp
     enveloppevol.cpp
     fastmaths.cpp
     modulatedparameter.cpp
@@ -29,12 +31,23 @@ add_library(polyphone_synth_core STATIC
     modulatorgroup.cpp
     osctriangle.cpp
     parametermodulator.cpp
+    samplefilereader.cpp
+    sf2reader.cpp
+    sfzparameter.cpp
+    sfzparametergroup.cpp
+    sfzparameterregion.cpp
+    sfzreader.cpp
+    soundfontbuilder.cpp
     synthbuses.cpp
     synthcore.cpp
     syntheffects.cpp
     synthmath.cpp
     midiprocessor.cpp
+    synthchannels.cpp
     synthmidi.cpp
+    synthsoundfontfile.cpp
+    synthsoundfontset.cpp
+    textconversions.cpp
     voice.cpp
     voicecontext.cpp
     voicelist.cpp
@@ -44,6 +57,35 @@ add_library(polyphone_synth_core STATIC
 target_include_directories(polyphone_synth_core PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
 )
+
+# Possibly linked in a shared library (plugin)
+set_target_properties(polyphone_synth_core PROPERTIES POSITION_INDEPENDENT_CODE ON)
+
+# libvorbisfile decompresses the samples of the sf3 files (SynthSoundfontFile): the target Vorbis::vorbisfile if the
+# project including this library provides it, otherwise the package found by CMake or by pkg-config
+if(NOT TARGET Vorbis::vorbisfile)
+    find_package(Vorbis CONFIG QUIET)
+endif()
+if(TARGET Vorbis::vorbisfile)
+    target_link_libraries(polyphone_synth_core PUBLIC Vorbis::vorbisfile)
+else()
+    find_package(PkgConfig REQUIRED)
+    pkg_check_modules(VORBISFILE REQUIRED IMPORTED_TARGET vorbisfile)
+    target_link_libraries(polyphone_synth_core PUBLIC PkgConfig::VORBISFILE)
+endif()
+
+# libsndfile reads the samples of the sfz files and of the DLS files (SampleFileReader): the target SndFile::sndfile if
+# the project including this library provides it, otherwise the package found by CMake or by pkg-config
+if(NOT TARGET SndFile::sndfile)
+    find_package(SndFile CONFIG QUIET)
+endif()
+if(TARGET SndFile::sndfile)
+    target_link_libraries(polyphone_synth_core PUBLIC SndFile::sndfile)
+else()
+    find_package(PkgConfig REQUIRED)
+    pkg_check_modules(SNDFILE REQUIRED IMPORTED_TARGET sndfile)
+    target_link_libraries(polyphone_synth_core PUBLIC PkgConfig::SNDFILE)
+endif()
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
     target_compile_options(polyphone_synth_core PRIVATE -Wall -Wextra ${SYNTH_CORE_OPTIMIZATION})
