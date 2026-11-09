@@ -26,10 +26,10 @@ jobs:
     
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: '3.x'
 
@@ -168,7 +168,7 @@ jobs:
 
       - name: Upload installer artifact
         id: upload-installer-artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: polyphone-windows-x64-installer
           path: packaging/windows/*.exe
@@ -177,7 +177,7 @@ jobs:
 
       - name: Upload portable artifact
         id: upload-portable-artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: polyphone-windows-x64-portable
           path: polyphone_*-portable.zip
@@ -209,14 +209,14 @@ jobs:
           output-artifact-directory: 'signed'
 
       - name: Upload the signed installer as an artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           path: "signed/*.exe"
           name: polyphone-windows-x64-installer-signed
           if-no-files-found: error
 
       - name: Upload the signed archive as an artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           path: "signed/*.zip"
           name: polyphone-windows-x64-portable-signed

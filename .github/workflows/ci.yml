@@ -34,7 +34,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Dependencies between the parts of the sources
         run: python3 tests/ci/check_dependencies.py
@@ -47,13 +47,13 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Install dependencies
         run: tests/ci/install_dependencies.sh editor
 
       - name: Restore the compilation cache
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: .ccache
           key: ccache-editor-${{ github.sha }}
@@ -63,7 +63,7 @@ jobs:
         run: tests/ci/build_editor.sh . build/editor && ccache -s
 
       - name: Upload the executable
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ci-editor
           path: build/editor/bin/polyphone
@@ -75,13 +75,13 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Install dependencies
         run: tests/ci/install_dependencies.sh editor
 
       - name: Restore the compilation cache
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: .ccache
           key: ccache-editor-qmake-${{ github.sha }}
@@ -91,7 +91,7 @@ jobs:
         run: BUILD_SYSTEM=qmake tests/ci/build_editor.sh . build/editor-qmake && ccache -s
 
       - name: Upload the executable
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ci-editor-qmake
           path: build/editor-qmake/bin/polyphone
@@ -103,13 +103,13 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Install dependencies
         run: tests/ci/install_dependencies.sh qt5
 
       - name: Restore the compilation cache
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: .ccache
           key: ccache-editor-qt5-${{ github.sha }}
@@ -127,7 +127,7 @@ jobs:
         sanitizer: [thread, address]
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Install dependencies
         run: tests/ci/install_dependencies.sh synth_core tests
@@ -153,13 +153,13 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Install dependencies
         run: tests/ci/install_dependencies.sh plugin tests
 
       - name: Restore the compilation cache
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: .ccache
           key: ccache-plugin-${{ github.sha }}
@@ -210,7 +210,7 @@ jobs:
           exit $status
 
       - name: Upload the plugin and the test host
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ci-plugin
           path: |
@@ -227,25 +227,25 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Install dependencies
         run: tests/ci/install_dependencies.sh editor plugin tests
 
       - name: Download the editor
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: ci-editor
           path: build/editor/bin
 
       - name: Download the editor built by qmake
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: ci-editor-qmake
           path: build/editor-qmake/bin
 
       - name: Download the plugin and the test host
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: ci-plugin
           path: build
@@ -298,7 +298,7 @@ jobs:
 
       - name: Upload the renderings
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ci-renderings
           path: renders
@@ -311,7 +311,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
@@ -338,7 +338,7 @@ jobs:
 
       - name: Restore the compilation cache
         if: steps.previous.outputs.sha != ''
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v6
         with:
           path: .ccache
           key: ccache-editor-${{ steps.previous.outputs.sha }}
@@ -346,13 +346,19 @@ jobs:
 
       - name: Build the previous version
         if: steps.previous.outputs.sha != ''
+        # Built by qmake if CMake fails (029d4804: its CMakeLists.txt is refused by CMake < 4.1). Same renderings, as the
+        # step "Editor built by qmake" of the job renderings checks it.
         run: |
           git worktree add ../previous ${{ steps.previous.outputs.sha }}
-          tests/ci/build_editor.sh ../previous build/previous
+          if ! tests/ci/build_editor.sh ../previous build/previous; then
+            echo "::warning::Previous version not built by CMake: built by qmake"
+            rm -rf build/previous
+            BUILD_SYSTEM=qmake tests/ci/build_editor.sh ../previous build/previous
+          fi
 
       - name: Download the editor
         if: steps.previous.outputs.sha != ''
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: ci-editor
           path: build/editor/bin
@@ -368,7 +374,7 @@ jobs:
 
       - name: Upload the renderings
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ci-renderings-previous-version
           path: renders

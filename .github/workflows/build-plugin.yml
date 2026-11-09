@@ -62,10 +62,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: '3.x'
 
@@ -90,7 +90,7 @@ jobs:
 
       - name: Restore the libraries built by vcpkg
         if: matrix.vcpkg_triplet != ''
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
           key: vcpkg-${{ matrix.vcpkg_triplet }}-${{ env.VCPKG_TAG }}-${{ hashFiles('packaging/vcpkg-triplets/**') }}
@@ -175,7 +175,7 @@ jobs:
 
       - name: Upload the archive
         id: upload-artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           # Signed afterwards on Windows if SignPath is configured: the signed archive is the one released
           name: polyphone-plugin-${{ matrix.name }}${{ (runner.os == 'Windows' && vars.SIGNPATH_PLUGIN_CONFIGURATION != '') && '-unsigned' || '' }}
@@ -198,7 +198,7 @@ jobs:
 
       - name: Upload the signed archive (Windows)
         if: runner.os == 'Windows' && vars.SIGNPATH_PLUGIN_CONFIGURATION != ''
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: polyphone-plugin-${{ matrix.name }}
           path: signed/*.zip
