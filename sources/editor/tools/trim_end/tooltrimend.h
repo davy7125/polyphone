@@ -55,9 +55,6 @@ public:
     /// Process an element
     void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
 
-    /// Trim a sample
-    static void trim(EltID id);
-
 protected:
     QString getLabelInternal() const override
     {

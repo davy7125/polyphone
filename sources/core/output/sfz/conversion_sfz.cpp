@@ -30,7 +30,6 @@
 #include <QFileInfo>
 #include <QDir>
 #include <QDate>
-#include "contextmanager.h"
 #include "attribute.h"
 #include "sfzparamlist.h"
 #include "balanceparameters.h"
@@ -387,7 +386,7 @@ void ConversionSfz::writeElement(AttributeType champ, double value)
     case champ_modLfoToFilterFc:        _sfzWriter->addLine("fillfo_depth", value);                    break;
     case champ_modLfoToPitch:           /* IMPOSSIBLE !!! */                                           break;
     case champ_keynum:
-        _sfzWriter->addLine("pitch_keycenter", ContextManager::keyName()->getKeyName(qRound(value), false, false, true));
+        _sfzWriter->addLine("pitch_keycenter", QString::number(qRound(value)));
         _sfzWriter->addLine("pitch_keytrack", 0);
         break;
     case champ_reverbEffectsSend:       _sfzWriter->addLine("effect1", value);                         break;
@@ -401,7 +400,7 @@ void ConversionSfz::writeElement(AttributeType champ, double value)
     case champ_keynumToVolEnvDecay:     _sfzWriter->addLine("ampeg_decaycc133", value);                break;
     case champ_releaseVolEnv:           _sfzWriter->addLine("ampeg_release", value);                   break;
     case champ_overridingRootKey:
-        _sfzWriter->addLine("pitch_keycenter", ContextManager::keyName()->getKeyName(qRound(value), false, false, true));
+        _sfzWriter->addLine("pitch_keycenter", QString::number(qRound(value)));
         break;
     case champ_delayVibLFO:             _sfzWriter->addLine("pitchlfo_delay", value);                  break;
     case champ_freqVibLFO:              _sfzWriter->addLine("pitchlfo_freq", value);                   break;
@@ -432,11 +431,11 @@ void ConversionSfz::writeElement(AttributeType champ, double value)
         }
         if (lokey != hikey)
         {
-            _sfzWriter->addLine("lokey", ContextManager::keyName()->getKeyName(lokey, false, false, true));
-            _sfzWriter->addLine("hikey", ContextManager::keyName()->getKeyName(hikey, false, false, true));
+            _sfzWriter->addLine("lokey", QString::number(lokey));
+            _sfzWriter->addLine("hikey", QString::number(hikey));
         }
         else
-            _sfzWriter->addLine("key", ContextManager::keyName()->getKeyName(lokey, false, false, true));
+            _sfzWriter->addLine("key", QString::number(lokey));
     }break;
     case champ_velRange:{
         int lovel = qRound(value / 1000.);

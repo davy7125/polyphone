@@ -98,8 +98,8 @@ float FastMaths::fastPow10(float value)
 
 void FastMaths::addVectors(float * __restrict a, const float * __restrict b, unsigned int size)
 {
-    a = (float*)__builtin_assume_aligned(a, 32);
-    b = (const float*)__builtin_assume_aligned(b, 32);
+    a = (float*)FASTMATHS_ASSUME_ALIGNED(a, 32);
+    b = (const float*)FASTMATHS_ASSUME_ALIGNED(b, 32);
 
 #ifdef __aarch64__
     unsigned int i = 0;
@@ -138,7 +138,7 @@ void FastMaths::addVectors(float * __restrict a, const float * __restrict b, uns
 
 void FastMaths::clamp(float * values, unsigned int size)
 {
-    values = (float*)__builtin_assume_aligned(values, 32);
+    values = (float*)FASTMATHS_ASSUME_ALIGNED(values, 32);
 
 #ifdef __aarch64__
 
@@ -182,8 +182,8 @@ void FastMaths::clamp(float * values, unsigned int size)
 void FastMaths::multiplyAdd(float * __restrict data, const float * __restrict dataToMultiplyAndAdd,
                             unsigned int size, float coeff)
 {
-    data = (float*)__builtin_assume_aligned(data, 32);
-    dataToMultiplyAndAdd = (const float*)__builtin_assume_aligned(dataToMultiplyAndAdd, 32);
+    data = (float*)FASTMATHS_ASSUME_ALIGNED(data, 32);
+    dataToMultiplyAndAdd = (const float*)FASTMATHS_ASSUME_ALIGNED(dataToMultiplyAndAdd, 32);
 
 #ifdef __aarch64__
 
@@ -228,8 +228,8 @@ void FastMaths::multiplyAdd(float * __restrict data, const float * __restrict da
 
 void FastMaths::multiply(float * __restrict data, const float * __restrict dataToMultiply, unsigned int size, float coeff)
 {
-    data = (float*)__builtin_assume_aligned(data, 32);
-    dataToMultiply = (const float*)__builtin_assume_aligned(dataToMultiply, 32);
+    data = (float*)FASTMATHS_ASSUME_ALIGNED(data, 32);
+    dataToMultiply = (const float*)FASTMATHS_ASSUME_ALIGNED(dataToMultiply, 32);
 
 #ifdef __aarch64__
     const float32x4_t vCoeff = vdupq_n_f32(coeff);

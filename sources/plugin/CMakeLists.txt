@@ -6,8 +6,14 @@
 
 cmake_minimum_required(VERSION 3.22)
 
-# Same version as the editor (SOFT_VERSION in polyphone.pro)
-project(PolyphonePlugin VERSION 2.7.0 LANGUAGES C CXX)
+# Same version as the editor, read in sources/VERSION ("2.7.0-BETA": the numbers only)
+file(STRINGS ${CMAKE_CURRENT_SOURCE_DIR}/../VERSION POLYPHONE_VERSION_FULL LIMIT_COUNT 1)
+string(REGEX MATCH "^[0-9]+(\\.[0-9]+)*" POLYPHONE_VERSION "${POLYPHONE_VERSION_FULL}")
+if(NOT POLYPHONE_VERSION)
+    message(FATAL_ERROR "No version found in sources/VERSION")
+endif()
+project(PolyphonePlugin VERSION ${POLYPHONE_VERSION} LANGUAGES C CXX)
+set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/../VERSION)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -89,7 +95,9 @@ if(POLYPHONE_FETCH_SNDFILE)
 endif()
 
 # Synth core of the editor
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../synth_core synth_core)
+if(NOT TARGET polyphone_synth_core) # Already there if built from sources/CMakeLists.txt
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../synth_core synth_core)
+endif()
 
 # Logo and temperaments of the editor
 juce_add_binary_data(PolyphonePluginData SOURCES
@@ -118,6 +126,14 @@ juce_add_plugin(PolyphonePlugin
     FORMATS VST3 AU LV2 Standalone
     NEEDS_WEB_BROWSER FALSE
     NEEDS_CURL FALSE)
+
+# Standalone application: another name than the editor (Polyphone.app, Polyphone.exe, polyphone), the plugins keep
+# the name "Polyphone"
+if(APPLE OR WIN32)
+    set_target_properties(PolyphonePlugin_Standalone PROPERTIES OUTPUT_NAME "Polyphone Player")
+else()
+    set_target_properties(PolyphonePlugin_Standalone PROPERTIES OUTPUT_NAME "polyphone-player")
+endif()
 
 clap_juce_extensions_plugin(TARGET PolyphonePlugin
     CLAP_ID io.polyphone.plugin

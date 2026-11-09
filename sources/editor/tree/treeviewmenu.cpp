@@ -29,7 +29,7 @@
 #include "QInputDialog"
 #include <QMessageBox>
 #include "contextmanager.h"
-#include "duplicator.h"
+#include "interactiveduplicator.h"
 #include "dialogquestion.h"
 #include "utils.h"
 #include "auto_distribution/toolautodistribution.h"
@@ -286,7 +286,7 @@ void TreeViewMenu::associate(IdList ids, EltID idDest)
 
     // For each element to associate
     SoundfontManager * sm = SoundfontManager::getInstance();
-    Duplicator duplicator;
+    InteractiveDuplicator duplicator;
     if (idDest.typeElement == elementInst)
     {
         // If the instrument is empty, the distribution tool will be triggered
@@ -604,7 +604,7 @@ void TreeViewMenu::paste()
 
         // Paste all copied elements
         SoundfontManager * sm = SoundfontManager::getInstance();
-        Duplicator duplicator;
+        InteractiveDuplicator duplicator;
         IdList newIds;
         foreach (EltID idSource, s_copy)
         {
@@ -632,7 +632,7 @@ void TreeViewMenu::duplicate()
 
     // Duplicate all elements
     SoundfontManager * sm = SoundfontManager::getInstance();
-    Duplicator duplicator;
+    InteractiveDuplicator duplicator;
     IdList newIds;
     foreach (EltID idSource, _currentIds)
     {

@@ -4,6 +4,7 @@ Priority: optional
 Maintainer: Davy Triponney <contact@polyphone.io>
 Build-Depends:
  alsa-utils,
+ cmake (>= 3.16),
  debhelper (>= 9.0.0),
  dpkg-dev (>= 1.16.1~),
  libasound2-dev,
@@ -13,7 +14,9 @@ Build-Depends:
  librtmidi-dev,
  libvorbis-dev,
  librtaudio-dev,
+ pkgconf,
  qt6-base-dev,
+ qt6-l10n-tools,
  zlib1g-dev,
  libssl-dev,
  libflac-dev,

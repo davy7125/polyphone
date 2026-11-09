@@ -33,17 +33,13 @@ class PushStereoEditing: public QPushButton
 
 public:
     explicit PushStereoEditing(QWidget *parent = nullptr);
-    ~PushStereoEditing();
-
-    static void SetState(bool isOn);
 
 private slots:
     void onToggle(bool checked);
 
 private:
-    void SetStateInstance(bool isOn);
-
-    static QList<PushStereoEditing *> s_instances;
+    // State of the button, updated when the configuration changes (all buttons have the same state)
+    void setState(bool isOn);
 };
 
 #endif // PUSHSTEREOEDITING_H

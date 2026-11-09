@@ -24,38 +24,11 @@
 
 #include "tooltrimend.h"
 #include "soundfontmanager.h"
-#include "sampleutils.h"
+#include "sampletrimming.h"
 
 void ToolTrimEnd::process(SoundfontManager * sm, EltID id, AbstractToolParameters *parameters)
 {
     Q_UNUSED(parameters);
-    Q_UNUSED(sm);
 
-    trim(id);
-}
-
-void ToolTrimEnd::trim(EltID id)
-{
-    SoundfontManager * sm = SoundfontManager::getInstance();
-    QVector<float> baData = sm->getDataFloat(id);
-
-    // Loop
-    quint32 startLoop = sm->get(id, champ_dwStartLoop).dwValue;
-    quint32 endLoop = sm->get(id, champ_dwEndLoop).dwValue;
-
-    // Possibly resize data
-    if (endLoop != 0 && endLoop + 8 < static_cast<quint32>(baData.size()))
-    {
-        // Crop data, the 8 values after the loop end being those after the loop start (interpolation at the loop point)
-        if (startLoop < endLoop)
-            baData = SampleUtils::loopStep2(std::move(baData), startLoop, endLoop, 0, true);
-        else
-            baData.resize(endLoop + 8);
-        sm->setData(id, baData);
-
-        // Update length
-        AttributeValue val;
-        val.dwValue = baData.size();
-        sm->set(id, champ_dwLength, val);
-    }
+    SampleTrimming::trimToLoop(sm, id);
 }

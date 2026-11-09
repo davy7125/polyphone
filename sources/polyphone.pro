@@ -20,10 +20,16 @@
 # Only for the official builds (GitHub workflows, packaging scripts), given to qmake: "DEFINES+=OFFICIAL_BUILD"
 # The notifications of a new version are then shown. Not for the package of a distribution, which updates the software itself
 
-# Polyphone version
-DEFINES += SOFT_VERSION=\\\"2.7.0\\\"
-DEFINES += IDENTIFIER=\\\"BETA\\\"
-DEFINES += CURRENT_YEAR=\\\"2026\\\"
+# Polyphone version, read in the file VERSION shared with the plugin: "<version>[-<identifier>]", for instance
+# "2.7.0-BETA" (set from a tag by packaging/set_version.py). The year is the one of the build.
+POLYPHONE_VERSION = $$cat($$PWD/VERSION)
+POLYPHONE_VERSION = $$first(POLYPHONE_VERSION)
+POLYPHONE_SOFT_VERSION = $$section(POLYPHONE_VERSION, -, 0, 0)
+POLYPHONE_IDENTIFIER = $$section(POLYPHONE_VERSION, -, 1, -1)
+POLYPHONE_YEAR = $$section(_DATE_, " ", -1, -1)
+DEFINES += SOFT_VERSION=\\\"$${POLYPHONE_SOFT_VERSION}\\\"
+DEFINES += IDENTIFIER=\\\"$${POLYPHONE_IDENTIFIER}\\\"
+DEFINES += CURRENT_YEAR=\\\"$${POLYPHONE_YEAR}\\\"
 
 # All translations in resources/translations are compiled and embedded
 # Format: polyphone_XX.ts, XX being the language code
@@ -33,12 +39,11 @@ PRECOMPILED_HEADER = precompiled_header.h
 CONFIG += lrelease embed_translations precompile_header
 QMAKE_LRELEASE_FLAGS = -nounfinished -removeidentical
 
-CONFIG(debug, debug|release) {
-    QMAKE_CXXFLAGS += -std=c++17
-} else {
-    QMAKE_CXXFLAGS += -std=c++17 -O3
-    #QMAKE_CXXFLAGS += -std=c++17 -O3 -mcpu=native -march=native
-}
+# -O3 replaces the -O2 of qmake in release (both given, the last one would apply)
+QMAKE_CXXFLAGS += -std=c++17
+QMAKE_CXXFLAGS_RELEASE -= -O2
+QMAKE_CXXFLAGS_RELEASE += -O3
+#QMAKE_CXXFLAGS_RELEASE += -mcpu=native -march=native
 
 QT += core gui printsupport svg network #testlib
 TARGET = polyphone
@@ -161,7 +166,6 @@ INCLUDEPATH += clavier \
     core/input \
     core/output \
     core/model \
-    core/render \
     core/sample \
     core/types \
     dialogs \
@@ -259,7 +263,9 @@ SOURCES	+= main.cpp \
     core/sample/samplewriterwav.cpp \
     core/sample/sound.cpp \
     core/sample/sampleloader.cpp \
+    core/sample/sampletrimming.cpp \
     core/duplicator.cpp \
+    core/coresettings.cpp \
     core/types/serializabletypes.cpp \
     core/utils.cpp \
     core/input/sfark/sfarkglobal.cpp \
@@ -340,6 +346,7 @@ SOURCES	+= main.cpp \
     mainwindow/soundfonttab.cpp \
     mainwindow/tab.cpp \
     mainwindow/tabmanager.cpp \
+    mainwindow/soundfontsaver.cpp \
     mainwindow/topbackground.cpp \
     mainwindow/windowresizer.cpp \
     player/player.cpp \
@@ -402,6 +409,8 @@ SOURCES	+= main.cpp \
     repository/widgets/fivestarswidget.cpp \
     repository/widgets/flowlayout.cpp \
     editor/editor.cpp \
+    editor/interactivesampleloader.cpp \
+    editor/interactiveduplicator.cpp \
     editor/widgets/editortoolbar.cpp \
     editor/pageinst.cpp \
     editor/pagesf2.cpp \
@@ -537,7 +546,7 @@ SOURCES	+= main.cpp \
     editor/tools/abstracttoolonestep.cpp \
     core/output/abstractoutput.cpp \
     core/output/outputfactory.cpp \
-    core/render/offlinerenderer.cpp \
+    sound_engine/offlinerenderer.cpp \
     core/output/empty/outputdummy.cpp \
     core/output/sfz/outputsfz.cpp \
     core/output/not_supported/outputnotsupported.cpp \
@@ -557,6 +566,7 @@ SOURCES	+= main.cpp \
     mcp/mcpbrowsingfunctions.cpp \
     mcp/mcpeditingfunctions.cpp \
     mcp/mcpfunction.cpp \
+    mcp/mcpeditor.cpp \
     mcp/mcpfunctions.cpp \
     mcp/mcpmodulators.cpp \
     mcp/mcpserver.cpp \
@@ -692,7 +702,9 @@ HEADERS += \
     core/sample/samplewriterwav.h \
     core/sample/sound.h \
     core/sample/sampleloader.h \
+    core/sample/sampletrimming.h \
     core/duplicator.h \
+    core/coresettings.h \
     core/types/serializabletypes.h \
     core/utils.h \
     core/input/sfark/sfarkglobal.h \
@@ -795,6 +807,7 @@ HEADERS += \
     mainwindow/soundfonttab.h \
     mainwindow/tab.h \
     mainwindow/tabmanager.h \
+    mainwindow/soundfontsaver.h \
     mainwindow/topbackground.h \
     mainwindow/windowresizer.h \
     player/player.h \
@@ -864,6 +877,8 @@ HEADERS += \
     repository/widgets/flowlayout.h \
     repository/widgets/fivestarswidget.h \
     editor/editor.h \
+    editor/interactivesampleloader.h \
+    editor/interactiveduplicator.h \
     editor/widgets/editortoolbar.h\
     editor/pageinst.h \
     editor/pageprst.h \
@@ -1004,7 +1019,7 @@ HEADERS += \
     editor/tools/abstracttoolonestep.h \
     core/output/abstractoutput.h \
     core/output/outputfactory.h \
-    core/render/offlinerenderer.h \
+    sound_engine/offlinerenderer.h \
     core/output/empty/outputdummy.h \
     core/output/sfz/outputsfz.h \
     core/output/not_supported/outputnotsupported.h \
@@ -1021,6 +1036,7 @@ HEADERS += \
     core/sample/soundanalyzer.h \
     mcp/mcpattributes.h \
     mcp/mcpfunction.h \
+    mcp/mcpeditor.h \
     mcp/mcpfunctions.h \
     mcp/mcpmodulators.h \
     mcp/mcpserver.h \

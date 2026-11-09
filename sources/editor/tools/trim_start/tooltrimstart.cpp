@@ -24,7 +24,7 @@
 
 #include "tooltrimstart.h"
 #include "soundfontmanager.h"
-#include "sampleutils.h"
+#include "sampletrimming.h"
 
 void ToolTrimStart::beforeProcess(IdList ids)
 {
@@ -67,60 +67,5 @@ void ToolTrimStart::process(SoundfontManager * sm, EltID id, AbstractToolParamet
     IdList ids(id);
     if (withLink)
         ids << id2;
-    trim(ids);
-}
-
-void ToolTrimStart::trim(IdList ids)
-{
-    if (ids.isEmpty())
-        return;
-
-    // Get the data of all samples and compute the position where the sound starts (the earliest of all channels, so that
-    // the sound of no channel is cut)
-    SoundfontManager * sm = SoundfontManager::getInstance();
-    quint32 pos = 0;
-    QList<QVector<float> > vDataList;
-    for (int i = 0; i < ids.count(); i++)
-    {
-        vDataList << sm->getDataFloat(ids[i]);
-        quint32 length = static_cast<quint32>(vDataList[i].size());
-        bool looped = SampleUtils::isLooped(sm->get(ids[i], champ_dwStartLoop).dwValue, sm->get(ids[i], champ_dwEndLoop).dwValue, length);
-        quint32 start = SampleUtils::findTrimStart(vDataList[i], sm->get(ids[i], champ_dwSampleRate).dwValue, looped);
-        if (i == 0 || start < pos)
-            pos = start;
-    }
-    if (pos == 0)
-        return;
-    foreach (QVector<float> vData, vDataList)
-        if (static_cast<quint32>(vData.size()) <= pos + 8)
-            return; // Not enough data would remain
-
-    // Update the samples
-    for (int i = 0; i < ids.count(); i++)
-    {
-        EltID id = ids[i];
-
-        // Data
-        vDataList[i] = SampleUtils::trimStart(std::move(vDataList[i]), pos);
-        sm->setData(id, vDataList[i]);
-
-        // Update length
-        AttributeValue val;
-        val.dwValue = vDataList[i].size();
-        sm->set(id, champ_dwLength, val);
-
-        // Update loop start
-        if (sm->get(id, champ_dwStartLoop).dwValue > pos)
-            val.dwValue = sm->get(id, champ_dwStartLoop).dwValue - pos;
-        else
-            val.dwValue = 0;
-        sm->set(id, champ_dwStartLoop, val);
-
-        // Update loop end
-        if (sm->get(id, champ_dwEndLoop).dwValue > pos)
-            val.dwValue = sm->get(id, champ_dwEndLoop).dwValue - pos;
-        else
-            val.dwValue = 0;
-        sm->set(id, champ_dwEndLoop, val);
-    }
+    SampleTrimming::trimStart(sm, ids);
 }

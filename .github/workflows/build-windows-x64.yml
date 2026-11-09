@@ -28,26 +28,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         
-      - name: Update version info in polyphone.pro
-        shell: bash
-        run: |
-          TAG="${{ inputs.tag }}"
-          SOFT_VERSION="${TAG%%-*}"
-          if [[ "$TAG" == *"-"* ]]; then
-            IDENTIFIER="${TAG#*-}"
-          else
-            IDENTIFIER=""
-          fi
-          CURRENT_YEAR=$(date +%Y)
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
 
-          echo "Tag: $TAG"
-          echo "SOFT_VERSION: $SOFT_VERSION"
-          echo "IDENTIFIER: $IDENTIFIER"
-          echo "CURRENT_YEAR: $CURRENT_YEAR"
-
-          sed -i 's/SOFT_VERSION=\\\\\\\"[^\\]*\\\\\\\"/SOFT_VERSION=\\\\\\\"'${SOFT_VERSION}'\\\\\\\"/' sources/polyphone.pro
-          sed -i 's/IDENTIFIER=\\\\\\\"[^\\]*\\\\\\\"/IDENTIFIER=\\\\\\\"'${IDENTIFIER}'\\\\\\\"/' sources/polyphone.pro
-          sed -i 's/CURRENT_YEAR=\\\\\\\"[^\\]*\\\\\\\"/CURRENT_YEAR=\\\\\\\"'${CURRENT_YEAR}'\\\\\\\"/' sources/polyphone.pro
+      - name: Set the version
+        run: python packaging/set_version.py "${{ inputs.tag }}"
 
       - name: Install Qt (MinGW)
         uses: jurplel/install-qt-action@v4
@@ -63,6 +50,9 @@ jobs:
           msystem: MINGW64
           install: >
             mingw-w64-x86_64-toolchain
+            mingw-w64-x86_64-cmake
+            mingw-w64-x86_64-ninja
+            mingw-w64-x86_64-pkgconf
             mingw-w64-x86_64-zlib
             mingw-w64-x86_64-libogg
             mingw-w64-x86_64-libvorbis
@@ -70,25 +60,26 @@ jobs:
             mingw-w64-x86_64-flac
             mingw-w64-x86_64-libsndfile
 
-      - name: Configure with qmake
+      - name: Configure with CMake
         shell: msys2 {0}
         run: |
           export PATH="/mingw64/bin:$(cygpath -u "$QT_ROOT_DIR/bin"):$PATH"
-          mkdir build
-          cd build
-          qmake ../sources/polyphone.pro CONFIG+=release DEFINES+=OFFICIAL_BUILD
+          cmake -S sources -B build -G Ninja \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_PREFIX_PATH="$(cygpath -m "$QT_ROOT_DIR")" \
+            -DPOLYPHONE_OFFICIAL_BUILD=ON
 
       - name: Build Polyphone
         shell: msys2 {0}
         run: |
-          cd build
-          mingw32-make -j$(nproc)
-          
+          export PATH="/mingw64/bin:$(cygpath -u "$QT_ROOT_DIR/bin"):$PATH"
+          cmake --build build --parallel $(nproc)
+
       - name: Prepare deployment with windeployqt
         shell: cmd
         run: |
           mkdir deploy
-          copy build\release\polyphone.exe deploy\
+          copy build\bin\polyphone.exe deploy\
           "%QT_ROOT_DIR%\bin\windeployqt.exe" ^
             --release ^
             --no-translations ^

@@ -114,6 +114,9 @@ signals:
     /// Emitted when the key mapping octave changed (Ctrl+1, Ctrl+2, ...)
     void keyboardOctaveChanged();
 
+    /// Emitted when the stereo editing is switched on or off
+    void stereoEditingChanged(bool isOn);
+
 private:
     /// Clear everything
     void clear();

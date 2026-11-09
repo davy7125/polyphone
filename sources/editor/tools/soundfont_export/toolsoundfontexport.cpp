@@ -26,7 +26,7 @@
 #include "toolsoundfontexport_gui.h"
 #include "toolsoundfontexport_parameters.h"
 #include "soundfontmanager.h"
-#include "duplicator.h"
+#include "interactiveduplicator.h"
 #include "outputfactory.h"
 #include "abstractoutput.h"
 #include "utils.h"
@@ -164,7 +164,7 @@ EltID ToolSoundfontExport::mergeSoundfonts(SoundfontManager * sm, QMap<int,  QLi
     sm->set(idDest, champ_ICMT, comment);
 
     // Ajout des presets
-    Duplicator duplicator;
+    InteractiveDuplicator duplicator;
     for (int nbBank = 0; nbBank < presets.keys().count(); nbBank++)
     {
         QList<EltID> subList;

@@ -2,14 +2,14 @@
 
 DPKG_EXPORT_BUILDFLAGS = 1
 include /usr/share/dpkg/buildflags.mk
-export QT_SELECT=qt6
 
 %:
-	dh $@ --parallel
+	dh $@ --parallel --buildsystem=cmake
 
-# Official package: the notifications of a new version are shown
+# Official package: the notifications of a new version are shown. Release: optimized as the other official builds
+# (-O3 after the flags of dpkg)
 override_dh_auto_configure:
-	dh_auto_configure -- DEFINES+=OFFICIAL_BUILD
+	dh_auto_configure -- -DCMAKE_BUILD_TYPE=Release -DPOLYPHONE_OFFICIAL_BUILD=ON
 
 override_dh_shlibdeps:
 	dh_shlibdeps --dpkg-shlibdeps-params=--ignore-missing-info

@@ -17,7 +17,9 @@ if(SANITIZER)
     add_link_options(-fsanitize=${SANITIZER})
 endif()
 
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../../sources/synth_core synth_core)
+if(NOT TARGET polyphone_synth_core) # Already there if built from sources/CMakeLists.txt
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../../sources/synth_core synth_core)
+endif()
 
 find_package(Threads REQUIRED)
 add_executable(stress_threads stress_threads.cpp)

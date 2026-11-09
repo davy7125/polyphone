@@ -25,8 +25,6 @@
 #include "pushstereoediting.h"
 #include "contextmanager.h"
 
-QList<PushStereoEditing *> PushStereoEditing::s_instances;
-
 PushStereoEditing::PushStereoEditing(QWidget * parent) : QPushButton(parent)
 {
     // Button configuration
@@ -37,26 +35,13 @@ PushStereoEditing::PushStereoEditing(QWidget * parent) : QPushButton(parent)
     this->setStyleSheet("QPushButton{border: 1px solid " + ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() +
                         "; border-top: 0; border-right: 0; border-bottom: 0} QPushButton:hover {background-color:" +
                         ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND, ThemeManager::HOVERED).name() + "}");
-    SetStateInstance(ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "stereo_modification", true).toBool());
+    setState(ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "stereo_modification", true).toBool());
 
     connect(this, SIGNAL(toggled(bool)), this, SLOT(onToggle(bool)));
-
-    s_instances << this;
+    connect(ContextManager::configuration(), &ConfManager::stereoEditingChanged, this, &PushStereoEditing::setState);
 }
 
-PushStereoEditing::~PushStereoEditing()
-{
-    s_instances.removeOne(this);
-}
-
-void PushStereoEditing::SetState(bool isOn)
-{
-    // Update the state of all buttons
-    foreach (PushStereoEditing * button, s_instances)
-        button->SetStateInstance(isOn);
-}
-
-void PushStereoEditing::SetStateInstance(bool isOn)
+void PushStereoEditing::setState(bool isOn)
 {
     this->blockSignals(true);
     if (isOn)

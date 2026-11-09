@@ -32,6 +32,13 @@
 #include <emmintrin.h>
 #endif
 
+// Alignment of a pointer given to the compiler (vectorization), ignored by the compilers without this builtin (MSVC)
+#if defined(__GNUC__) || defined(__clang__)
+#define FASTMATHS_ASSUME_ALIGNED(pointer, alignment) __builtin_assume_aligned(pointer, alignment)
+#else
+#define FASTMATHS_ASSUME_ALIGNED(pointer, alignment) (pointer)
+#endif
+
 // While an instance exists, the denormal numbers (much slower to compute, in the tails of the filters and of the
 // reverb) are flushed to zero in the current thread, as the inputs and as the results
 class DenormalsDisabled
@@ -103,7 +110,7 @@ public:
     // Inline: called for each point computed by the voices
     static float multiply8(const float * __restrict coeffs, const int16_t * __restrict srcData16, const uint8_t * __restrict srcData24)
     {
-        coeffs  = (const float*)__builtin_assume_aligned(coeffs, 32);
+        coeffs  = (const float*)FASTMATHS_ASSUME_ALIGNED(coeffs, 32);
 
 #if defined(__aarch64__)
         // Load 8 int16 and convert to int32
@@ -167,7 +174,7 @@ public:
     // Same for 16-bit data, the 8 least significant bits being 0
     static float multiply8(const float * __restrict coeffs, const int16_t * __restrict srcData16)
     {
-        coeffs  = (const float*)__builtin_assume_aligned(coeffs, 32);
+        coeffs  = (const float*)FASTMATHS_ASSUME_ALIGNED(coeffs, 32);
 
 #if defined(__aarch64__)
         // Load 8 int16, convert to int32 shifted by 8 bits

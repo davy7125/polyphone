@@ -25,7 +25,6 @@
 #include "confmanager.h"
 #include <QFileInfo>
 #include <QDir>
-#include "pushstereoediting.h"
 
 ConfManager::ConfManager(): QObject(),
     _settings(this)
@@ -135,7 +134,7 @@ void ConfManager::setValue(Section section, QString subSection, QString key, QVa
     {
     case Section::SECTION_NONE:
         if (key == "stereo_modification")
-            PushStereoEditing::SetState(value.toBool());
+            emit stereoEditingChanged(value.toBool());
         break;
     case Section::SECTION_SOUND_ENGINE:
         emit soundEngineConfigurationChanged();

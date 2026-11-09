@@ -16,8 +16,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.workflow_run.head_sha }}
           
       - name: Download all artifacts
         uses: actions/download-artifact@v4
@@ -97,3 +95,8 @@ jobs:
             artifacts/polyphone-linux-aarch64-appimage/*
             artifacts/polyphone-macos-x64-installer/*
             artifacts/polyphone-macos-aarch64-installer/*
+            artifacts/polyphone-plugin-windows-x64/*
+            artifacts/polyphone-plugin-linux-x64/*
+            artifacts/polyphone-plugin-linux-aarch64/*
+            artifacts/polyphone-plugin-macos-x64/*
+            artifacts/polyphone-plugin-macos-aarch64/*

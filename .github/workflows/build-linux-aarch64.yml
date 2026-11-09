@@ -13,9 +13,6 @@ on:
         default: '0.0.0'
         type: string
       
-env:
-  QT_VERSION: '6.6.2'
-
 jobs:
   build-linux-aarch64:
     environment: production
@@ -25,43 +22,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Update metainfo XML
-        run: |
-          SHORT_VERSION=$(echo "${{ inputs.tag }}" | grep -oE '^[0-9]+\.[0-9]+')
-          TODAY=$(date +%F)
-          URL="https://www.polyphone.io/en/news/version-$SHORT_VERSION"
-          METAFILE="packaging/io.polyphone.polyphone.metainfo.xml"
-          sed -i -E \
-            -e "s/(<release[^>]*version=\")[^\"]+/\1$SHORT_VERSION/" \
-            -e "s/(<release[^>]*date=\")[^\"]+/\1$TODAY/" \
-            -e "s|(</release>.*<url>)[^<]+|\1$URL|" \
-            "$METAFILE"
-        
-      - name: Update version info in polyphone.pro
-        run: |
-          TAG="${{ inputs.tag }}"
-          SOFT_VERSION="${TAG%%-*}"
-          if [[ "$TAG" == *"-"* ]]; then
-            IDENTIFIER="${TAG#*-}"
-          else
-            IDENTIFIER=""
-          fi
-          CURRENT_YEAR=$(date +%Y)
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
 
-          echo "Tag: $TAG"
-          echo "SOFT_VERSION: $SOFT_VERSION"
-          echo "IDENTIFIER: $IDENTIFIER"
-          echo "CURRENT_YEAR: $CURRENT_YEAR"
-
-          sed -i 's/SOFT_VERSION=\\\\\\\"[^\\]*\\\\\\\"/SOFT_VERSION=\\\\\\\"'${SOFT_VERSION}'\\\\\\\"/' sources/polyphone.pro
-          sed -i 's/IDENTIFIER=\\\\\\\"[^\\]*\\\\\\\"/IDENTIFIER=\\\\\\\"'${IDENTIFIER}'\\\\\\\"/' sources/polyphone.pro
-          sed -i 's/CURRENT_YEAR=\\\\\\\"[^\\]*\\\\\\\"/CURRENT_YEAR=\\\\\\\"'${CURRENT_YEAR}'\\\\\\\"/' sources/polyphone.pro
+      - name: Set the version
+        run: python packaging/set_version.py "${{ inputs.tag }}"
 
       - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y \
             build-essential \
+            cmake \
             qt6-base-dev \
             qt6-svg-dev \
             qt6-tools-dev \
@@ -79,19 +53,16 @@ jobs:
             librtmidi-dev \
             ca-certificates
             
-      - name: Configure with qmake
+      - name: Configure with CMake
         run: |
-          cd sources
-          qmake6 polyphone.pro \
-            PREFIX=/usr \
-            CONFIG+=release \
-            DEFINES+=USE_LOCAL_RTAUDIO \
-            DEFINES+=OFFICIAL_BUILD
+          cmake -S sources -B build \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_INSTALL_PREFIX=/usr \
+            -DPOLYPHONE_LOCAL_RTAUDIO=ON \
+            -DPOLYPHONE_OFFICIAL_BUILD=ON
 
       - name: Build Polyphone
-        run: |
-          cd sources
-          make -j$(nproc)
+        run: cmake --build build --parallel $(nproc)
 
       - name: Create AppImage
         env:
@@ -110,7 +81,7 @@ jobs:
           mkdir -p AppDir/etc
           mkdir -p AppDir/etc/ssl
           
-          cp sources/bin/polyphone AppDir/usr/bin/
+          cp build/bin/polyphone AppDir/usr/bin/
           cp packaging/io.polyphone.polyphone.desktop AppDir/usr/share/applications/
           cp sources/resources/polyphone.png AppDir/usr/share/icons/hicolor/512x512/apps/
           

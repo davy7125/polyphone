@@ -52,7 +52,9 @@ if(SANITIZER)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=${SANITIZER} -fno-omit-frame-pointer -g")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fsanitize=${SANITIZER}")
 endif()
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../../sources/synth_core synth_core)
+if(NOT TARGET polyphone_synth_core) # Already there if built from sources/CMakeLists.txt
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../../sources/synth_core synth_core)
+endif()
 juce_add_binary_data(PluginSnapshotData SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/../../logo.png
     ${CMAKE_CURRENT_SOURCE_DIR}/../../sources/resources/misc/temperaments.csv)

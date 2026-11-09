@@ -6,6 +6,10 @@ on:
       - '*'
 
 jobs:
+  # Tests of the version released, run next to the builds: the release is created only if they pass
+  ci:
+    uses: ./.github/workflows/ci.yml
+
   build-windows-x64:
     uses: ./.github/workflows/build-windows-x64.yml
     with:
@@ -33,13 +37,21 @@ jobs:
     with:
       tag: ${{ github.ref_name }}
 
+  build-plugin:
+    uses: ./.github/workflows/build-plugin.yml
+    with:
+      tag: ${{ github.ref_name }}
+    secrets: inherit
+
   create-release:
     needs:
+      - ci
       - build-windows-x64
       - build-linux-x64
       - build-linux-aarch64
       - build-macos-x64
       - build-macos-aarch64
+      - build-plugin
     uses: ./.github/workflows/create-release.yml
     with:
       tag: ${{ github.ref_name }}

@@ -43,7 +43,8 @@
 #include "dialogrecorder.h"
 #include "dialogmidiplayer.h"
 #include "editortoolbar.h"
-#include "outputfactory.h"
+#include "soundfontsaver.h"
+#include "coresettings.h"
 #include "inputfactory.h"
 #include "extensionmanager.h"
 #include "utils.h"
@@ -63,6 +64,7 @@ MainWindow::MainWindow(bool playerMode, QWidget *parent) : QWidget(parent),
     ///////////
 
     ContextManager::s_playerMode = playerMode;
+    CoreSettings::loadAllSamples = playerMode; // Soundfonts played: all samples loaded when opened
     ui->setupUi(this);
     this->setWindowTitle(tr("Polyphone SoundFont Editor"));
     this->setWindowIcon(QIcon(":/misc/polyphone.png"));
@@ -271,7 +273,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
             foreach (int i, nbSf2)
             {
                 id.indexSf2 = i;
-                if (sm->isEdited(i) && !OutputFactory::save(i, false))
+                if (sm->isEdited(i) && !SoundfontSaver::save(i, false))
                 {
                     event->ignore();
                     return;
@@ -561,7 +563,7 @@ void MainWindow::onSave()
     // Remove the focus from the interface (so that all changes are taken into account)
     this->setFocus();
 
-    OutputFactory::save(_tabManager->getCurrentSf2(), false);
+    SoundfontSaver::save(_tabManager->getCurrentSf2(), false);
 }
 
 void MainWindow::onSaveAs()
@@ -569,7 +571,7 @@ void MainWindow::onSaveAs()
     // Remove the focus from the interface (so that all changes are taken into account)
     this->setFocus();
 
-    OutputFactory::save(_tabManager->getCurrentSf2(), true);
+    SoundfontSaver::save(_tabManager->getCurrentSf2(), true);
 }
 
 void MainWindow::onUserClicked()

@@ -27,7 +27,7 @@
 #include "mcpattributes.h"
 #include "mcpmodulators.h"
 #include "soundfontmanager.h"
-#include "tabmanager.h"
+#include "mcpeditor.h"
 #include "inputfactory.h"
 #include "outputfactory.h"
 #include "abstractoutput.h"
@@ -145,9 +145,9 @@ void McpFunctions::addEditingFunctions(QList<McpFunction *> &functions)
         R"JSON({"properties":{
             "name":{"type":"string","description":"Name of the soundfont"}}})JSON",
         [](const McpArguments &args) -> McpResult {
-            if (TabManager::getInstance() == nullptr)
+            if (McpEditor::getInstance() == nullptr)
                 throw McpException("the editor is not available");
-            int index = TabManager::getInstance()->openNewSoundfont(false);
+            int index = McpEditor::getInstance()->openNewSoundfont();
             if (index < 0)
                 throw McpException("cannot create a soundfont");
             QString name = args.getString("name", "");
@@ -169,7 +169,7 @@ void McpFunctions::addEditingFunctions(QList<McpFunction *> &functions)
                 throw McpException("file \"" + file + "\" doesn't exist");
             if (!InputFactory::isSuffixSupported(QFileInfo(file).suffix()))
                 throw McpException("this kind of file is not supported");
-            if (TabManager::getInstance() == nullptr)
+            if (McpEditor::getInstance() == nullptr)
                 throw McpException("the editor is not available");
 
             SoundfontManager * sm = SoundfontManager::getInstance();
@@ -183,13 +183,13 @@ void McpFunctions::addEditingFunctions(QList<McpFunction *> &functions)
             int index = findOpenFile();
             if (index < 0)
             {
-                TabManager::getInstance()->openSoundfont(file, nullptr, false);
+                McpEditor::getInstance()->openSoundfont(file);
                 index = findOpenFile();
                 if (index < 0)
                     throw McpException("cannot open the file (see the error displayed in Polyphone)");
             }
             else
-                TabManager::getInstance()->showElement(EltID(elementSf2, index));
+                McpEditor::getInstance()->showElement(EltID(elementSf2, index));
             return McpUtils::brief(EltID(elementSf2, index));
         });
 
@@ -295,11 +295,18 @@ void McpFunctions::addEditingFunctions(QList<McpFunction *> &functions)
                 paths << path;
             }
 
+            // As in the editor: processing of the configuration, recent files
             SampleLoader loader;
+            loader.setProcessing(
+                ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "wav_auto_loop", false).toBool(),
+                ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "wav_remove_blank", false).toBool());
             int replace = -1; // Duplicate if a name already exists, no questions
             IdList ids;
             foreach (QString path, paths)
+            {
+                ContextManager::recentFile()->addRecentFile(RecentFileManager::FILE_TYPE_SAMPLE, path);
                 ids << loader.load(path, idSf2.indexSf2, &replace);
+            }
             QJsonObject result;
             result["samples"] = idsToJson(ids);
             return result;

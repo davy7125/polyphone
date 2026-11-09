@@ -1,0 +1,375 @@
+name: CI
+
+# Builds and tests of each change (Linux), also run before a release (release-on-tag.yml):
+# - dependencies between the parts of the sources, same files built by qmake and CMake (tests/ci/check_*.py);
+# - editor built with Qt 6 by CMake, and by qmake while polyphone.pro exists (same renderings), with Qt 5 by CMake
+#   (compilation only);
+# - synth core alone, with ThreadSanitizer and AddressSanitizer (tests/synth_core);
+# - plugin built, checked by pluginval, clap-validator and the test host (tests/plugin);
+# - renderings of tests/render: modes of the editor and formats of the plugin compared with the synth core of the
+#   same version, DLS import and export (tests/dls), and renderings compared with the previous version when the
+#   sources changed (expected to fail when the sound is changed on purpose: listen to the renderings uploaded).
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+  workflow_call:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  CCACHE_DIR: ${{ github.workspace }}/.ccache
+  CCACHE_MAXSIZE: 500M
+
+jobs:
+  sources:
+    name: Sources (dependencies, files of the builds)
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Dependencies between the parts of the sources
+        run: python3 tests/ci/check_dependencies.py
+
+      - name: Same files built by polyphone.pro and CMake
+        run: python3 tests/ci/check_build_files.py
+
+  editor:
+    name: Editor (Qt 6, CMake)
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: tests/ci/install_dependencies.sh editor
+
+      - name: Restore the compilation cache
+        uses: actions/cache@v4
+        with:
+          path: .ccache
+          key: ccache-editor-${{ github.sha }}
+          restore-keys: ccache-editor-
+
+      - name: Build
+        run: tests/ci/build_editor.sh . build/editor && ccache -s
+
+      - name: Upload the executable
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-editor
+          path: build/editor/bin/polyphone
+          retention-days: 3
+          if-no-files-found: error
+
+  editor-qmake:
+    name: Editor (Qt 6, qmake)
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: tests/ci/install_dependencies.sh editor
+
+      - name: Restore the compilation cache
+        uses: actions/cache@v4
+        with:
+          path: .ccache
+          key: ccache-editor-qmake-${{ github.sha }}
+          restore-keys: ccache-editor-qmake-
+
+      - name: Build
+        run: BUILD_SYSTEM=qmake tests/ci/build_editor.sh . build/editor-qmake && ccache -s
+
+      - name: Upload the executable
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-editor-qmake
+          path: build/editor-qmake/bin/polyphone
+          retention-days: 3
+          if-no-files-found: error
+
+  editor-qt5:
+    name: Editor (Qt 5, CMake, compilation only)
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: tests/ci/install_dependencies.sh qt5
+
+      - name: Restore the compilation cache
+        uses: actions/cache@v4
+        with:
+          path: .ccache
+          key: ccache-editor-qt5-${{ github.sha }}
+          restore-keys: ccache-editor-qt5-
+
+      - name: Build
+        run: tests/ci/build_editor.sh . build/editor-qt5 -DPOLYPHONE_QT_VERSION=5 && ccache -s
+
+  synth-core:
+    name: Synth core (${{ matrix.sanitizer }} sanitizer)
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        sanitizer: [thread, address]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: tests/ci/install_dependencies.sh synth_core tests
+
+      - name: Build
+        run: |
+          cmake -S tests/synth_core -B build/synth_core -DSANITIZER=${{ matrix.sanitizer }}
+          cmake --build build/synth_core --parallel 4
+
+      - name: Soundfonts
+        run: |
+          tests/ci/get_soundfonts.sh soundfonts
+          python3 tests/render/make_test_soundfont.py soundfonts/polyphone-test.sf2
+
+      - name: Stress test of the threads
+        # Without address randomization: ThreadSanitizer does not support the mappings of recent kernels
+        run: |
+          setarch "$(uname -m)" -R build/synth_core/stress_threads 20 \
+            soundfonts/polyphone-test.sf2 soundfonts/VintageDreamsWaves-v2.sf3 soundfonts/FluidR3_GM.sf2
+
+  plugin:
+    name: Plugin
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: tests/ci/install_dependencies.sh plugin tests
+
+      - name: Restore the compilation cache
+        uses: actions/cache@v4
+        with:
+          path: .ccache
+          key: ccache-plugin-${{ github.sha }}
+          restore-keys: ccache-plugin-
+
+      - name: Build the plugin
+        run: |
+          cmake -S sources/plugin -B build/plugin -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache
+          cmake --build build/plugin --parallel 4
+
+      - name: Build the test host
+        run: |
+          cmake -S tests/plugin -B build/plugin_tests -DPOLYPHONE_JUCE_DIR="$PWD/build/plugin/_deps/juce-src" \
+            -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache
+          cmake --build build/plugin_tests --target plugin_host --parallel 4
+          ccache -s
+
+      - name: Soundfonts
+        run: |
+          tests/ci/get_soundfonts.sh soundfonts
+          python3 tests/render/make_test_soundfont.py soundfonts/polyphone-test.sf2
+
+      - name: Validate with pluginval and clap-validator
+        run: |
+          plugins=build/plugin/PolyphonePlugin_artefacts/Release
+          curl -sSfL --retry 3 -o pluginval.zip https://github.com/Tracktion/pluginval/releases/download/v1.0.4/pluginval_Linux.zip
+          unzip -q pluginval.zip -d validators
+          curl -sSfL --retry 3 -o clap-validator.zip https://github.com/free-audio/clap-validator/releases/download/0.4.1/clap-validator-0.4.1-127-g152b982-ubuntu-22.04.zip
+          unzip -q clap-validator.zip -d validators
+          tar -xzf validators/clap-validator-*.tar.gz -C validators
+          chmod +x validators/pluginval validators/clap-validator
+          status=0
+          xvfb-run -a validators/pluginval --strictness-level 10 --skip-gui-tests --validate $plugins/VST3/Polyphone.vst3 || status=1
+          xvfb-run -a validators/pluginval --strictness-level 10 --skip-gui-tests --validate $plugins/LV2/Polyphone.lv2 || status=1
+          validators/clap-validator validate $plugins/CLAP/Polyphone.clap || status=1
+          exit $status
+
+      - name: Checks of the test host
+        run: |
+          plugins=build/plugin/PolyphonePlugin_artefacts/Release
+          host=build/plugin_tests/plugin_host_artefacts/Release/plugin_host
+          status=0
+          for plugin in $plugins/VST3/Polyphone.vst3 $plugins/LV2/Polyphone.lv2; do
+            xvfb-run -a $host checks $plugin soundfonts/polyphone-test.sf2 soundfonts/VintageDreamsWaves-v2.sf3 || status=1
+          done
+          xvfb-run -a $host clapchecks $plugins/CLAP/Polyphone.clap soundfonts/polyphone-test.sf2 || status=1
+          exit $status
+
+      - name: Upload the plugin and the test host
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-plugin
+          path: |
+            build/plugin/PolyphonePlugin_artefacts/Release/VST3
+            build/plugin/PolyphonePlugin_artefacts/Release/LV2
+            build/plugin/PolyphonePlugin_artefacts/Release/CLAP
+            build/plugin_tests/plugin_host_artefacts/Release/plugin_host
+          retention-days: 3
+          if-no-files-found: error
+
+  renderings:
+    name: Renderings (editor and plugin)
+    needs: [editor, editor-qmake, plugin]
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: tests/ci/install_dependencies.sh editor plugin tests
+
+      - name: Download the editor
+        uses: actions/download-artifact@v4
+        with:
+          name: ci-editor
+          path: build/editor/bin
+
+      - name: Download the editor built by qmake
+        uses: actions/download-artifact@v4
+        with:
+          name: ci-editor-qmake
+          path: build/editor-qmake/bin
+
+      - name: Download the plugin and the test host
+        uses: actions/download-artifact@v4
+        with:
+          name: ci-plugin
+          path: build
+
+      - name: Soundfonts
+        run: |
+          chmod +x build/editor/bin/polyphone build/editor-qmake/bin/polyphone \
+            build/plugin_tests/plugin_host_artefacts/Release/plugin_host
+          tests/ci/get_soundfonts.sh soundfonts
+
+      - name: Modes of the editor
+        # The synth core is the reference: the other modes must give the same renderings
+        run: |
+          editor=build/editor/bin/polyphone
+          tests/render/render.sh $editor soundfonts renders/reference
+          status=0
+          for mode in two_cores threaded file; do
+            echo "== $mode"
+            tests/render/render.sh $editor soundfonts renders/$mode $mode || status=1
+            python3 tests/render/compare.py renders/reference renders/$mode || status=1
+          done
+          exit $status
+
+      - name: Editor built by qmake
+        # Same renderings as the editor built by CMake
+        run: |
+          tests/render/render.sh build/editor-qmake/bin/polyphone soundfonts renders/qmake
+          python3 tests/render/compare.py renders/reference renders/qmake
+
+      - name: DLS import and export
+        run: tests/dls/run_tests.sh build/editor/bin/polyphone renders/dls
+
+      - name: Formats of the plugin
+        # Same renderings as the editor, bit for bit (both are built by the same compiler)
+        run: |
+          plugins=build/plugin/PolyphonePlugin_artefacts/Release
+          host=build/plugin_tests/plugin_host_artefacts/Release/plugin_host
+          status=0
+          for plugin in VST3/Polyphone.vst3 LV2/Polyphone.lv2 CLAP/Polyphone.clap; do
+            format=$(dirname $plugin)
+            echo "== $format"
+            xvfb-run -a tests/plugin/run_cases.sh $host $plugins/$plugin soundfonts renders/reference renders/plugin_$format || status=1
+          done
+
+          # sfz file exported by the editor and DLS file of the DLS tests played by the plugin
+          QT_QPA_PLATFORM=offscreen build/editor/bin/polyphone -3 -i soundfonts/polyphone-test.sf2 -d renders/sfz
+          sfz=$(find renders/sfz -name '*.sfz' | sort | head -n 1)
+          xvfb-run -a $host formatchecks $plugins/VST3/Polyphone.vst3 "$sfz" renders/dls/files/dls1-test.dls || status=1
+          exit $status
+
+      - name: Upload the renderings
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-renderings
+          path: renders
+          retention-days: 7
+
+  renderings-previous-version:
+    name: Renderings compared with the previous version
+    needs: editor
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Find the previous version
+        id: previous
+        run: |
+          if [ "${{ github.event_name }}" = pull_request ]; then
+            previous=${{ github.event.pull_request.base.sha }}
+          else
+            previous=${{ github.event.before }}
+          fi
+          if [ -z "$previous" ] || ! git cat-file -e "$previous^{commit}" 2> /dev/null; then
+            echo "No previous version to compare with"
+          elif git diff --quiet "$previous" HEAD -- sources ':!sources/resources/translations' ':!sources/changelog'; then
+            echo "The sources did not change"
+          else
+            echo "Previous version: $previous"
+            echo "sha=$previous" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install dependencies
+        if: steps.previous.outputs.sha != ''
+        run: tests/ci/install_dependencies.sh editor tests
+
+      - name: Restore the compilation cache
+        if: steps.previous.outputs.sha != ''
+        uses: actions/cache/restore@v4
+        with:
+          path: .ccache
+          key: ccache-editor-${{ steps.previous.outputs.sha }}
+          restore-keys: ccache-editor-
+
+      - name: Build the previous version
+        if: steps.previous.outputs.sha != ''
+        run: |
+          git worktree add ../previous ${{ steps.previous.outputs.sha }}
+          tests/ci/build_editor.sh ../previous build/previous
+
+      - name: Download the editor
+        if: steps.previous.outputs.sha != ''
+        uses: actions/download-artifact@v4
+        with:
+          name: ci-editor
+          path: build/editor/bin
+
+      - name: Compare the renderings
+        if: steps.previous.outputs.sha != ''
+        run: |
+          chmod +x build/editor/bin/polyphone
+          tests/ci/get_soundfonts.sh soundfonts
+          tests/render/render.sh build/previous/bin/polyphone soundfonts renders/previous
+          tests/render/render.sh build/editor/bin/polyphone soundfonts renders/current
+          python3 tests/render/compare.py renders/previous renders/current
+
+      - name: Upload the renderings
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-renderings-previous-version
+          path: renders
+          retention-days: 7

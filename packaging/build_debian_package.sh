@@ -53,6 +53,7 @@ rm -f polyphone-dbg*
 rm -rf sources/debian
 rm -rf sources/generated_files
 rm -rf sources/bin
+rm -rf sources/obj-*
 rm -rf sources/.qm
 rm -f sources/*.o
 rm -f sources/ui_*

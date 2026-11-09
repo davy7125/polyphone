@@ -40,6 +40,9 @@ class ContextManager: public QObject
 public:
     static void initializeNoAudioMidi();
 
+    // Give to core the preferences it reads (CoreSettings), taken from the configuration when they are needed
+    static void provideCoreSettings();
+
     // Access to the configuration (key / value)
     static ConfManager * configuration();
 

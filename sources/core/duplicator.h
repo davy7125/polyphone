@@ -29,16 +29,18 @@
 #include <QList>
 #include <QMap>
 
-class QWidget;
 class SoundfontManager;
 
+// Copy of elements within a soundfont or toward another one. Without interaction, the elements having the same name as
+// existing ones are duplicated and no warnings are shown: the user interface derives this class to ask what to do
+// and to show the warnings (InteractiveDuplicator).
 class Duplicator: public QObject
 {
     Q_OBJECT
 
 public:
     Duplicator();
-    ~Duplicator() {}
+    virtual ~Duplicator() {}
 
     // Copy idSrc toward idDest if sf2 different
     // Else add a division (InstSmpl or PrstInst)
@@ -52,7 +54,7 @@ public:
     // not overwritten and no warnings are displayed
     void setNonInteractive();
 
-private:
+protected:
     enum EtatMessage
     {
         DUPLIQUER_TOUT = -1,
@@ -63,7 +65,16 @@ private:
         IGNORER_TOUT
     };
 
-    QWidget * _parent;
+    /// An element has the same name as an existing one: return what to do with it (and possibly with the next ones)
+    virtual EtatMessage askReplacement(QString question) { Q_UNUSED(question) return DUPLIQUER_TOUT; }
+
+    /// Warning: the global division is not copied, the destination having one
+    virtual void warnGlobalNotCopied() {}
+
+    /// Warning: no preset is available in the destination
+    virtual void warnNoPresetAvailable() {}
+
+private:
     SoundfontManager * _sm;
 
     // Correspondances
@@ -88,7 +99,6 @@ private:
     // Utils
     void copyGen(EltID idSource, EltID idDest);
     void copyMod(EltID idSource, EltID idDest);
-    EtatMessage openDialog(QString question);
     void reset(EltID idDest);
     bool isGlobalEmpty(EltID id);
     QString adaptName(QString name, EltID idDest);

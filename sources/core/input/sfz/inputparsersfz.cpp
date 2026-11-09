@@ -25,7 +25,7 @@
 #include "inputparsersfz.h"
 #include "soundfontmanager.h"
 #include "soundfontmanagerbuilder.h"
-#include "contextmanager.h"
+#include "coresettings.h"
 #include "sfzreader.h"
 
 InputParserSfz::InputParserSfz() : AbstractInputParser() {}
@@ -36,9 +36,9 @@ void InputParserSfz::processInternal(QString fileName, SoundfontManager * sm, bo
 
     // Key names possibly translated, default modulators of the configuration
     SfzReader::Options options;
-    options.velToFilterType = ContextManager::configuration()->getModulatorVelToFilterType();
+    options.velToFilterType = CoreSettings::modulatorVelToFilterType();
     options.getKeyNumber = [](const std::string &keyName) {
-        return ContextManager::keyName()->getKeyNum(QString::fromStdString(keyName), true);
+        return CoreSettings::sfzKeyNumber(QString::fromStdString(keyName));
     };
     options.onUnsupportedOpcode = [](const std::string &opcode, const std::string &value) {
         qWarning() << "opcode not supported: " + QString::fromStdString(opcode) + " (" + QString::fromStdString(value) + ")";

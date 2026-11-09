@@ -2,7 +2,7 @@
 
 Soundfont player (sf2, sf3, sfz and dls) for the hosts of audio plugins, made with the synth of the
 editor (`sources/synth_core`): a soundfont sounds the same in a host and in Polyphone. Formats: VST3, CLAP,
-LV2, AU (macOS) and a standalone application, made with [JUCE](https://juce.com) and
+LV2, AU (macOS) and a standalone application ("Polyphone Player", not distributed), made with [JUCE](https://juce.com) and
 [clap-juce-extensions](https://github.com/free-audio/clap-juce-extensions).
 
 ## Features
@@ -58,7 +58,8 @@ cmake --build build/plugin
 ```
 
 The plugins are in `build/plugin/PolyphonePlugin_artefacts/Release`: `VST3/Polyphone.vst3`,
-`CLAP/Polyphone.clap`, `LV2/Polyphone.lv2`, `Standalone/Polyphone` (and `AU/Polyphone.component` on
+`CLAP/Polyphone.clap`, `LV2/Polyphone.lv2`, `Standalone/polyphone-player` (`Polyphone Player` on macOS and
+Windows, another name than the editor) (and `AU/Polyphone.component` on
 macOS). Copy them in the folders of the hosts, for instance `~/.vst3`, `~/.clap` and `~/.lv2` on Linux.
 
 Requirements:
@@ -68,6 +69,12 @@ Requirements:
 - libsndfile (samples of the sfz files, waves of the dls files), found by CMake or pkg-config, or
   downloaded and built with `-DPOLYPHONE_FETCH_SNDFILE=ON` (Windows, macOS): built this way, it has no
   external library and cannot read the samples in flac, ogg or opus (wav and aiff can be read);
+- on Windows and macOS, both libraries can also come from [vcpkg](https://vcpkg.io), static and complete
+  (flac, ogg, opus and mp3 read), as the official builds do (`.github/workflows/build-plugin.yml`):
+  `vcpkg install --triplet <triplet> --overlay-triplets=packaging/vcpkg-triplets libsndfile libvorbis`,
+  then `-DCMAKE_TOOLCHAIN_FILE=<vcpkg>/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=<triplet>
+  -DVCPKG_OVERLAY_TRIPLETS=packaging/vcpkg-triplets -DVCPKG_MANIFEST_MODE=OFF`, the triplets being
+  `x64-windows-polyphone` (with `-T ClangCL`), `arm64-osx-polyphone` and `x64-osx-polyphone`;
 - on Linux, the packages needed by JUCE: ALSA, freetype, fontconfig and the X11 libraries
   (Fedora: `alsa-lib-devel freetype-devel fontconfig-devel libX11-devel libXcomposite-devel
   libXcursor-devel libXext-devel libXinerama-devel libXi-devel libXrandr-devel libXrender-devel
@@ -79,8 +86,8 @@ JUCE and clap-juce-extensions are downloaded at the configuration (versions fixe
 `CMakeLists.txt`), unless local copies are given with `-DPOLYPHONE_JUCE_DIR=<path>` and
 `-DPOLYPHONE_CLAP_JUCE_EXTENSIONS_DIR=<path>`.
 
-The version is the one of the editor (`SOFT_VERSION` in `polyphone.pro`), written again in
-`CMakeLists.txt`.
+The version is the one of the editor, read in `sources/VERSION` (its numbers only: `2.7.0` for
+`2.7.0-BETA`).
 
 ## Sources
 

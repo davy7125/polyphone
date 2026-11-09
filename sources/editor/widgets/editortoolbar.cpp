@@ -28,12 +28,12 @@
 #include "styledaction.h"
 #include "soundfontmanager.h"
 #include "toolmenu.h"
-#include "sampleloader.h"
+#include "interactivesampleloader.h"
 #include <QInputDialog>
 #include <QMessageBox>
 #include <QFileDialog>
 #include "tabmanager.h"
-#include "outputfactory.h"
+#include "soundfontsaver.h"
 #include "dialognewelement.h"
 #include "utils.h"
 #include "tools/auto_distribution/toolautodistribution.h"
@@ -348,7 +348,7 @@ void EditorToolBar::on_pushAddSample_clicked()
         return;
 
     // Add samples
-    SampleLoader sl(this);
+    InteractiveSampleLoader sl(this);
     int replace = 0;
     IdList smplList;
     while (!strList.isEmpty())
@@ -542,7 +542,7 @@ void EditorToolBar::on_pushSave_clicked()
     // Remove the focus from the interface (so that all changes are taken into account)
     this->setFocus();
 
-    OutputFactory::save(TabManager::getInstance()->getCurrentSf2(), false);
+    SoundfontSaver::save(TabManager::getInstance()->getCurrentSf2(), false);
 }
 
 void EditorToolBar::onMidiExtensionActionClicked()

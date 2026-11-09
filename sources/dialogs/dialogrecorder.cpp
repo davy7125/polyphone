@@ -46,7 +46,7 @@
 #include "player.h"
 #include "recorder.h"
 #include "resettableslider.h"
-#include "sampleloader.h"
+#include "interactivesampleloader.h"
 #include "soundfontmanager.h"
 #include "synth.h"
 #include "tabmanager.h"
@@ -696,7 +696,7 @@ void DialogRecorder::onImportRequested(QString filePath)
     int sf2Index = TabManager::getInstance()->getCurrentSf2();
     if (sf2Index < 0)
         return;
-    SampleLoader loader(this);
+    InteractiveSampleLoader loader(this);
     int replace = 0;
     IdList ids = loader.load(filePath, sf2Index, &replace);
     SoundfontManager::getInstance()->endEditing("command:newSmpl");

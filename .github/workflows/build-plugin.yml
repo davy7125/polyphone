@@ -1,0 +1,206 @@
+name: Build Polyphone plugin
+
+# Plugin (VST3, CLAP, LV2, AU on macOS) built from sources/plugin for each platform, checked by pluginval (and auval
+# on macOS), archived with packaging/plugin/README.txt. The standalone application of JUCE ("Polyphone Player") is not
+# distributed: the editor plays the soundfonts.
+# Libraries: those of the system on Linux; built by vcpkg on macOS and Windows (static, triplets in
+# packaging/vcpkg-triplets), libsndfile then reading the samples of the sfz files in flac, ogg, opus and mp3.
+# Windows: built with clang-cl (the synth core uses builtins of GCC and Clang). The archive is signed by SignPath if
+# the variable SIGNPATH_PLUGIN_CONFIGURATION gives the slug of its artifact configuration.
+
+env:
+  VCPKG_TAG: '2026.10.16'
+
+on:
+  workflow_call:
+    inputs:
+      tag:
+        required: true
+        type: string
+  workflow_dispatch:
+    inputs:
+      tag:
+        required: true
+        default: '0.0.0'
+        type: string
+
+jobs:
+  build-plugin:
+    name: Plugin ${{ matrix.name }}
+    environment: production
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: linux-x64
+            os: ubuntu-24.04
+            suffix: linux_x64
+            pluginval: pluginval_Linux.zip
+          - name: linux-aarch64
+            os: ubuntu-24.04-arm
+            suffix: linux_aarch64
+            pluginval: '' # No build of pluginval for this platform
+          - name: macos-aarch64
+            os: macos-15
+            suffix: macOS_12
+            cmake: -DCMAKE_OSX_DEPLOYMENT_TARGET=12.0 -DCMAKE_OSX_ARCHITECTURES=arm64
+            vcpkg_triplet: arm64-osx-polyphone
+            pluginval: pluginval_macOS.zip
+          - name: macos-x64
+            os: macos-15-intel
+            suffix: macOS_12_Intel
+            cmake: -DCMAKE_OSX_DEPLOYMENT_TARGET=12.0 -DCMAKE_OSX_ARCHITECTURES=x86_64
+            vcpkg_triplet: x64-osx-polyphone
+            pluginval: pluginval_macOS.zip
+          - name: windows-x64
+            os: windows-latest
+            suffix: windows_x64
+            cmake: -T ClangCL -A x64
+            vcpkg_triplet: x64-windows-polyphone
+            pluginval: pluginval_Windows.zip
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Set the version
+        run: python packaging/set_version.py "${{ inputs.tag }}"
+
+      - name: Install dependencies (Linux)
+        if: runner.os == 'Linux'
+        run: tests/ci/install_dependencies.sh plugin
+
+      - name: Get vcpkg (macOS, Windows)
+        if: matrix.vcpkg_triplet != ''
+        shell: bash
+        run: |
+          root="$RUNNER_TEMP/vcpkg"
+          if [ "$RUNNER_OS" = Windows ]; then root=$(cygpath -m "$root"); fi
+          git clone --depth 1 --branch "$VCPKG_TAG" https://github.com/microsoft/vcpkg.git "$root"
+          if [ "$RUNNER_OS" = Windows ]; then "$root/bootstrap-vcpkg.bat" -disableMetrics; else "$root/bootstrap-vcpkg.sh" -disableMetrics; fi
+          mkdir -p "$root/binary-cache"
+          echo "VCPKG_ROOT=$root" >> "$GITHUB_ENV"
+          echo "VCPKG_DEFAULT_BINARY_CACHE=$root/binary-cache" >> "$GITHUB_ENV"
+
+      - name: Restore the libraries built by vcpkg
+        if: matrix.vcpkg_triplet != ''
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
+          key: vcpkg-${{ matrix.vcpkg_triplet }}-${{ env.VCPKG_TAG }}-${{ hashFiles('packaging/vcpkg-triplets/**') }}
+
+      - name: Build the libraries with vcpkg (macOS, Windows)
+        if: matrix.vcpkg_triplet != ''
+        shell: bash
+        run: |
+          "$VCPKG_ROOT/vcpkg" install --triplet ${{ matrix.vcpkg_triplet }} \
+            --overlay-triplets="$PWD/packaging/vcpkg-triplets" libsndfile libvorbis
+
+      - name: Configure
+        shell: bash
+        run: |
+          options=()
+          if [ -n "${{ matrix.vcpkg_triplet }}" ]; then
+            options+=("-DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake"
+                      "-DVCPKG_TARGET_TRIPLET=${{ matrix.vcpkg_triplet }}"
+                      "-DVCPKG_OVERLAY_TRIPLETS=$PWD/packaging/vcpkg-triplets"
+                      "-DVCPKG_MANIFEST_MODE=OFF")
+          fi
+          cmake -S sources/plugin -B build/plugin -DCMAKE_BUILD_TYPE=Release ${{ matrix.cmake }} "${options[@]}"
+
+      - name: Build
+        run: cmake --build build/plugin --config Release --parallel 4
+
+      - name: Validate with pluginval
+        if: matrix.pluginval != ''
+        shell: bash
+        run: |
+          curl -sSfL --retry 3 -o pluginval.zip "https://github.com/Tracktion/pluginval/releases/download/v1.0.4/${{ matrix.pluginval }}"
+          unzip -q pluginval.zip -d pluginval
+          artefacts=build/plugin/PolyphonePlugin_artefacts/Release
+          case "$RUNNER_OS" in
+            Linux)   pluginval="xvfb-run -a pluginval/pluginval" ;;
+            macOS)   pluginval=pluginval/pluginval.app/Contents/MacOS/pluginval ;;
+            Windows) pluginval=pluginval/pluginval.exe ;;
+          esac
+          $pluginval --strictness-level 5 --skip-gui-tests --validate "$artefacts/VST3/Polyphone.vst3"
+          if [ "$RUNNER_OS" = Linux ]; then
+            $pluginval --strictness-level 5 --skip-gui-tests --validate "$artefacts/LV2/Polyphone.lv2"
+          fi
+
+      - name: Validate with auval (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          mkdir -p ~/Library/Audio/Plug-Ins/Components
+          cp -R build/plugin/PolyphonePlugin_artefacts/Release/AU/Polyphone.component ~/Library/Audio/Plug-Ins/Components/
+          killall -9 AudioComponentRegistrar || true
+          auval -v aumu Pply Plph
+
+      - name: Package
+        shell: bash
+        run: |
+          artefacts=build/plugin/PolyphonePlugin_artefacts/Release
+          name="Polyphone-plugin_${{ inputs.tag }}-${{ matrix.suffix }}"
+          mkdir -p "dist/$name"
+          for plugin in VST3/Polyphone.vst3 CLAP/Polyphone.clap LV2/Polyphone.lv2 AU/Polyphone.component; do
+            if [ -e "$artefacts/$plugin" ]; then
+              cp -R "$artefacts/$plugin" "dist/$name/"
+            fi
+          done
+          cp packaging/plugin/README.txt "dist/$name/"
+          case "$RUNNER_OS" in
+            Linux)
+              tar -C dist -czf "$name.tar.gz" "$name"
+              ;;
+            macOS)
+              # Ad hoc signature, as the editor (no notarization)
+              for bundle in "dist/$name"/*.vst3 "dist/$name"/*.clap "dist/$name"/*.component; do
+                if [ -e "$bundle" ]; then
+                  codesign --force --deep --sign - "$bundle"
+                fi
+              done
+              ditto -c -k --keepParent "dist/$name" "$name.zip"
+              ;;
+            Windows)
+              (cd dist && 7z a -tzip "../$name.zip" "$name")
+              ;;
+          esac
+          ls -l Polyphone-plugin_*
+
+      - name: Upload the archive
+        id: upload-artifact
+        uses: actions/upload-artifact@v4
+        with:
+          # Signed afterwards on Windows if SignPath is configured: the signed archive is the one released
+          name: polyphone-plugin-${{ matrix.name }}${{ (runner.os == 'Windows' && vars.SIGNPATH_PLUGIN_CONFIGURATION != '') && '-unsigned' || '' }}
+          path: Polyphone-plugin_*
+          retention-days: 7
+          if-no-files-found: error
+
+      - name: Sign the archive (Windows)
+        if: runner.os == 'Windows' && vars.SIGNPATH_PLUGIN_CONFIGURATION != ''
+        uses: signpath/github-action-submit-signing-request@v2
+        with:
+          api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
+          organization-id: ${{ vars.SIGNPATH_ORGANIZATION_ID }}
+          project-slug: polyphone
+          signing-policy-slug: release-signing
+          artifact-configuration-slug: ${{ vars.SIGNPATH_PLUGIN_CONFIGURATION }}
+          wait-for-completion: true
+          github-artifact-id: '${{ steps.upload-artifact.outputs.artifact-id }}'
+          output-artifact-directory: 'signed'
+
+      - name: Upload the signed archive (Windows)
+        if: runner.os == 'Windows' && vars.SIGNPATH_PLUGIN_CONFIGURATION != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: polyphone-plugin-${{ matrix.name }}
+          path: signed/*.zip
+          retention-days: 7
+          if-no-files-found: error

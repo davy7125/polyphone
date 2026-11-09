@@ -23,18 +23,23 @@
 ***************************************************************************/
 
 #include "sampleloader.h"
-#include "contextmanager.h"
 #include "soundfontmanager.h"
-#include <QMessageBox>
-#include "qabstractbutton.h"
-#include "trim_end/tooltrimend.h"
-#include "trim_start/tooltrimstart.h"
+#include "sampletrimming.h"
+#include "sound.h"
+#include <QFileInfo>
 
-SampleLoader::SampleLoader(QWidget *parent) :
-    _parent(parent),
-    _sm(SoundfontManager::getInstance())
+SampleLoader::SampleLoader() :
+    _sm(SoundfontManager::getInstance()),
+    _trimToLoop(false),
+    _trimStart(false)
 {
 
+}
+
+void SampleLoader::setProcessing(bool trimToLoop, bool trimStart)
+{
+    _trimToLoop = trimToLoop;
+    _trimStart = trimStart;
 }
 
 // Replace status
@@ -50,14 +55,14 @@ IdList SampleLoader::load(QString path, int numSf2, int *replace)
     EltID id(elementSmpl, numSf2);
     IdList loadedSmpl;
 
-    ContextManager::recentFile()->addRecentFile(RecentFileManager::FILE_TYPE_SAMPLE, path);
+    loading(path);
     QFileInfo qFileInfo(path);
 
     // Get information about a sample
     Sound sound;
     if (!sound.setFileName(path))
     {
-        QMessageBox::warning(_parent, QObject::tr("Warning"), sound.getError());
+        showError(sound.getError());
         return loadedSmpl;
     }
     unsigned int nChannels = sound.getUInt32(champ_wChannels);
@@ -101,28 +106,7 @@ IdList SampleLoader::load(QString path, int numSf2, int *replace)
         if (*replace != 2 && *replace != 4 && (indexL != -1 || indexR != -1))
         {
             // Replacement?
-            QMessageBox msgBox(_parent);
-            msgBox.setIcon(QMessageBox::Warning);
-            msgBox.setText(qStr3);
-            msgBox.setInformativeText("");
-            msgBox.setStandardButtons(QMessageBox::YesAll | QMessageBox::Yes | QMessageBox::SaveAll | QMessageBox::Save |
-                                      QMessageBox::NoAll | QMessageBox::No);
-            msgBox.button(QMessageBox::Yes)->setText(QObject::tr("&Replace"));
-            msgBox.button(QMessageBox::YesAll)->setText(QObject::tr("R&eplace all"));
-            msgBox.button(QMessageBox::Save)->setText(QObject::tr("&Duplicate"));
-            msgBox.button(QMessageBox::SaveAll)->setText(QObject::tr("D&uplicate all"));
-            msgBox.button(QMessageBox::No)->setText(QObject::tr("&Ignore"));
-            msgBox.button(QMessageBox::NoAll)->setText(QObject::tr("I&gnore all"));
-            msgBox.setDefaultButton(QMessageBox::YesAll);
-            switch (msgBox.exec())
-            {
-            case QMessageBox::NoAll:    *replace =  4; break;
-            case QMessageBox::No:       *replace =  3; break;
-            case QMessageBox::YesAll:   *replace =  2; break;
-            case QMessageBox::Yes:      *replace =  1; break;
-            case QMessageBox::Save:     *replace =  0; break;
-            case QMessageBox::SaveAll:  *replace = -1; break;
-            }
+            *replace = askReplacement(qStr3, *replace);
         }
     }
 
@@ -236,14 +220,14 @@ IdList SampleLoader::load(QString path, int numSf2, int *replace)
             sm->set(id, champ_chPitchCorrection, val);
 
             // Automatically trim to loop?
-            if (ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "wav_auto_loop", false).toBool())
-                ToolTrimEnd::trim(id);
+            if (_trimToLoop)
+                SampleTrimming::trimToLoop(_sm, id);
         }
     }
 
     // Automatically remove leading blank?
-    if (ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "wav_remove_blank", false).toBool())
-        ToolTrimStart::trim(loadedSmpl);
+    if (_trimStart)
+        SampleTrimming::trimStart(_sm, loadedSmpl);
 
     return loadedSmpl;
 }

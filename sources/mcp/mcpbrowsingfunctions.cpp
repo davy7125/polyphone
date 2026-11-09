@@ -28,7 +28,7 @@
 #include "mcpattributes.h"
 #include "mcpmodulators.h"
 #include "soundfontmanager.h"
-#include "tabmanager.h"
+#include "mcpeditor.h"
 #include <QRegularExpression>
 
 static QString sampleType(SFSampleLink link)
@@ -255,7 +255,7 @@ void McpFunctions::addBrowsingFunctions(QList<McpFunction *> &functions)
         R"JSON({"properties":{}})JSON",
         [](const McpArguments &) -> McpResult {
             SoundfontManager * sm = SoundfontManager::getInstance();
-            int current = TabManager::getInstance() == nullptr ? -1 : TabManager::getInstance()->getCurrentSf2();
+            int current = McpEditor::getInstance() == nullptr ? -1 : McpEditor::getInstance()->getCurrentSoundfont();
             QJsonArray soundfonts;
             foreach (int i, McpUtils::getSoundfontIndexes())
             {
@@ -283,13 +283,13 @@ void McpFunctions::addBrowsingFunctions(QList<McpFunction *> &functions)
         R"JSON({"properties":{}})JSON",
         [](const McpArguments &) -> McpResult {
             QJsonObject result;
-            int current = TabManager::getInstance() == nullptr ? -1 : TabManager::getInstance()->getCurrentSf2();
+            int current = McpEditor::getInstance() == nullptr ? -1 : McpEditor::getInstance()->getCurrentSoundfont();
             result["soundfont"] = current >= 0 ? QJsonValue(McpUtils::idToString(EltID(elementSf2, current))) : QJsonValue();
             QJsonArray selection;
             if (current >= 0)
             {
                 SoundfontManager * sm = SoundfontManager::getInstance();
-                foreach (EltID id, TabManager::getInstance()->getCurrentSelection())
+                foreach (EltID id, McpEditor::getInstance()->getCurrentSelection())
                 {
                     if (!sm->isValid(id))
                         continue;
@@ -437,7 +437,7 @@ void McpFunctions::addBrowsingFunctions(QList<McpFunction *> &functions)
             "required":["id"]})JSON",
         [](const McpArguments &args) -> McpResult {
             EltID id = args.getId("id");
-            if (TabManager::getInstance() == nullptr || !TabManager::getInstance()->showElement(id))
+            if (McpEditor::getInstance() == nullptr || !McpEditor::getInstance()->showElement(id))
                 throw McpException("the soundfont is not displayed in an editor");
             return QString("Element displayed.");
         });

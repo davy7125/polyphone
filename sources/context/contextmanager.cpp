@@ -23,6 +23,7 @@
 ***************************************************************************/
 
 #include "contextmanager.h"
+#include "coresettings.h"
 #include "synth.h"
 
 ContextManager * ContextManager::s_instance = nullptr;
@@ -32,6 +33,16 @@ void ContextManager::initializeNoAudioMidi()
 {
     if (s_instance == nullptr)
         s_instance = new ContextManager(false);
+}
+
+void ContextManager::provideCoreSettings()
+{
+    CoreSettings::modulatorVelToFilterType = []() {
+        return ContextManager::configuration()->getModulatorVelToFilterType();
+    };
+    CoreSettings::sfzKeyNumber = [](QString keyName) {
+        return ContextManager::keyName()->getKeyNum(keyName, true);
+    };
 }
 
 ConfManager * ContextManager::configuration()

@@ -435,6 +435,7 @@ int main(int argc, char *argv[])
 
     Options options(argc, argv);
     int valRet = 0;
+    ContextManager::provideCoreSettings();
 
     // Possibly launch the application
     if (!options.error() && !options.help() && (options.mode() == Options::MODE_GUI || options.mode() == Options::MODE_SYNTHESIZER))

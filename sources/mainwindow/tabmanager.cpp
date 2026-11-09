@@ -41,7 +41,8 @@
 #include "player.h"
 #include "userarea.h"
 #include "inputfactory.h"
-#include "outputfactory.h"
+#include "soundfontsaver.h"
+#include "mcpeditor.h"
 #include "repositorymanager.h"
 #include "utils.h"
 #include "synth.h"
@@ -51,10 +52,23 @@
 
 TabManager * TabManager::s_instance = nullptr;
 
+// Editor seen by the MCP server
+class TabManagerMcpEditor: public McpEditor
+{
+public:
+    int openNewSoundfont() override { return TabManager::getInstance()->openNewSoundfont(false); }
+    void openSoundfont(QString filePath) override { TabManager::getInstance()->openSoundfont(filePath, nullptr, false); }
+    bool showElement(EltID id) override { return TabManager::getInstance()->showElement(id); }
+    int getCurrentSoundfont() override { return TabManager::getInstance()->getCurrentSf2(); }
+    IdList getCurrentSelection() override { return TabManager::getInstance()->getCurrentSelection(); }
+};
+static TabManagerMcpEditor s_mcpEditor;
+
 TabManager * TabManager::prepareInstance(DialogKeyboard * dialogKeyboard, MainStackedWidget * stackedWidget)
 {
     delete s_instance;
     s_instance = new TabManager(dialogKeyboard, stackedWidget);
+    McpEditor::setInstance(&s_mcpEditor);
     return s_instance;
 }
 
@@ -65,6 +79,7 @@ TabManager * TabManager::getInstance()
 
 void TabManager::kill()
 {
+    McpEditor::setInstance(nullptr);
     delete s_instance;
     s_instance = nullptr;
 }
@@ -365,7 +380,7 @@ void TabManager::onTabCloseRequested(QWidget * widget)
         case QMessageBox::Cancel:
             return;
         case QMessageBox::Save:
-            if (!OutputFactory::save(id.indexSf2, false))
+            if (!SoundfontSaver::save(id.indexSf2, false))
                 return;
             break;
         case QMessageBox::Discard:

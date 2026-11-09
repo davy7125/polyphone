@@ -23,20 +23,15 @@
 ***************************************************************************/
 
 #include "duplicator.h"
-#include <QApplication>
 #include "soundfontmanager.h"
-#include "contextmanager.h"
-#include <QMessageBox>
-#include <QAbstractButton>
 
 Duplicator::Duplicator() :
-    _parent(QApplication::activeWindow()),
     _sm(SoundfontManager::getInstance()),
     _copieSmpl(DUPLIQUER),
     _copieInst(DUPLIQUER),
     _copiePrst(DUPLIQUER),
     _presetFull(false),
-    _displayWarningGlobal(ContextManager::configuration()->getValue(ConfManager::SECTION_WARNINGS, "global_not_overwritten", true).toBool())
+    _displayWarningGlobal(true)
 {
     // Initial counts
     EltID id = EltID(elementSf2, -1, -1, -1, -1);
@@ -270,19 +265,7 @@ void Duplicator::copyGlobal(EltID idSource, EltID idDest)
         copyMod(idSource, idDest);
     }
     else if (_displayWarningGlobal)
-    {
-        // Affichage warning
-        QMessageBox msgBox(_parent);
-        msgBox.setIcon(QMessageBox::Warning);
-        msgBox.setText("<b>" + tr("Global parameters are already filled.") + "</b>");
-        msgBox.setInformativeText(tr("The global division will not be copied."));
-        msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::YesAll);
-        msgBox.button(QMessageBox::Yes)->setText(tr("&Ok"));
-        msgBox.button(QMessageBox::YesAll)->setText(tr("Ok, &disable this message"));
-        msgBox.setDefaultButton(QMessageBox::Yes);
-        if (msgBox.exec() == QMessageBox::YesAll)
-            ContextManager::configuration()->setValue(ConfManager::SECTION_WARNINGS, "global_not_overwritten", false);
-    }
+        warnGlobalNotCopied();
     _displayWarningGlobal = false;
 }
 
@@ -310,7 +293,7 @@ EltID Duplicator::copySmpl(EltID idSource, EltID idDest)
 
         // Replacement?
         if (_copieSmpl != REMPLACER_TOUT && _copieSmpl != IGNORER_TOUT && index != -1)
-            _copieSmpl = openDialog(tr("The sample \"%1\" already exists.<br />Replace?").arg(nom.left(20)));
+            _copieSmpl = askReplacement(tr("The sample \"%1\" already exists.<br />Replace?").arg(nom.left(20)));
     }
     if (index != -1 && _copieSmpl != DUPLIQUER_TOUT && _copieSmpl != DUPLIQUER)
     {
@@ -458,7 +441,7 @@ EltID Duplicator::copyInst(EltID idSource, EltID idDest, bool withSmpl)
 
         // Remplacement ?
         if (_copieInst != REMPLACER_TOUT && _copieInst != IGNORER_TOUT && (index != -1))
-            _copieInst = openDialog(tr("The instrument \"%1\" already exists.<br />Replace?").arg(nom.left(20)));
+            _copieInst = askReplacement(tr("The instrument \"%1\" already exists.<br />Replace?").arg(nom.left(20)));
     }
     if (index != -1 && _copieInst != DUPLIQUER_TOUT && _copieInst != DUPLIQUER)
     {
@@ -553,7 +536,7 @@ EltID Duplicator::copyPrst(EltID idSource, EltID idDest, bool withInst)
 
         // Remplacement ?
         if (_copiePrst != REMPLACER_TOUT && _copiePrst != IGNORER_TOUT && (index != -1))
-            _copiePrst = openDialog(tr("The preset \"%1\" already exists.<br/>Replace?").arg(nom.left(20)));
+            _copiePrst = askReplacement(tr("The preset \"%1\" already exists.<br/>Replace?").arg(nom.left(20)));
     }
     if (index != -1 && _copiePrst != DUPLIQUER_TOUT && _copiePrst != DUPLIQUER)
     {
@@ -575,8 +558,7 @@ EltID Duplicator::copyPrst(EltID idSource, EltID idDest, bool withInst)
             // Aucun preset disponible
             if (!_presetFull)
             {
-                QMessageBox::warning(_parent, tr("Warning"),
-                                     tr("No preset available."));
+                warnNoPresetAvailable();
                 _presetFull = true;
             }
             idDest.indexElt = -1;
@@ -763,35 +745,6 @@ void Duplicator::copyMod(EltID idSource, EltID idDest)
             _sm->set(idDest, champ_sfModDestOper, val);
         }
     }
-}
-
-// Ouverture d'un dialogue concernant le remplacement
-Duplicator::EtatMessage Duplicator::openDialog(QString question)
-{
-    QMessageBox msgBox(_parent);
-    msgBox.setIcon(QMessageBox::Warning);
-    msgBox.setText(question);
-    msgBox.setInformativeText("");
-    msgBox.setStandardButtons(QMessageBox::YesAll | QMessageBox::Yes | QMessageBox::SaveAll | QMessageBox::Save |
-                              QMessageBox::NoAll | QMessageBox::No);
-    msgBox.button(QMessageBox::Yes)->setText(tr("&Replace"));
-    msgBox.button(QMessageBox::YesAll)->setText(tr("R&eplace all"));
-    msgBox.button(QMessageBox::Save)->setText(tr("&Duplicate"));
-    msgBox.button(QMessageBox::SaveAll)->setText(tr("D&uplicate all"));
-    msgBox.button(QMessageBox::No)->setText(tr("&Ignore"));
-    msgBox.button(QMessageBox::NoAll)->setText(tr("I&gnore all"));
-    msgBox.setDefaultButton(QMessageBox::YesAll);
-    EtatMessage reponse = IGNORER_TOUT;
-    switch (msgBox.exec())
-    {
-    case QMessageBox::NoAll:    reponse = IGNORER_TOUT;   break;
-    case QMessageBox::No:       reponse = IGNORER;        break;
-    case QMessageBox::YesAll:   reponse = REMPLACER_TOUT; break;
-    case QMessageBox::Yes:      reponse = REMPLACER;      break;
-    case QMessageBox::Save:     reponse = DUPLIQUER;      break;
-    case QMessageBox::SaveAll:  reponse = DUPLIQUER_TOUT; break;
-    }
-    return reponse;
 }
 
 // Réinitialisation d'un instrument ou preset

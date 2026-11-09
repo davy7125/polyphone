@@ -31,8 +31,8 @@
 #include <QApplication>
 #include <QMessageBox>
 #include "treeviewmenu.h"
-#include "duplicator.h"
-#include "sampleloader.h"
+#include "interactiveduplicator.h"
+#include "interactivesampleloader.h"
 #include "dialogcreateelements.h"
 #include "utils.h"
 #include "tools/auto_distribution/toolautodistribution.h"
@@ -795,7 +795,7 @@ void TreeView::dropEvent(QDropEvent *event)
         QList<QUrl> urls = event->mimeData()->urls();
         SoundfontManager * sm = SoundfontManager::getInstance();
         int replace = 0;
-        SampleLoader sl(dynamic_cast<QWidget*>(this->parent()));
+        InteractiveSampleLoader sl(dynamic_cast<QWidget*>(this->parent()));
         IdList smplList;
 
         QStringList possibleExtensions = SampleReaderFactory::getPossibleExtensions();
@@ -855,7 +855,7 @@ void TreeView::dropEvent(QDropEvent *event)
         else
         {
             SoundfontManager * sm = SoundfontManager::getInstance();
-            Duplicator duplicator;
+            InteractiveDuplicator duplicator;
             IdList newIds;
             foreach (EltID idSource, _draggedIds)
             {
@@ -891,7 +891,7 @@ void TreeView::onCreateElements(IdList ids, bool oneForEach)
     foreach (int i, sm->getSiblings(idTmp))
         names << sm->getQstr(EltID(isSmpl ? elementInst : elementPrst, indexSf2, i), champ_name);
 
-    Duplicator duplicator;
+    InteractiveDuplicator duplicator;
     IdList createdElements;
     if (oneForEach)
     {
