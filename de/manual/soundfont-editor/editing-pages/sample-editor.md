@@ -128,8 +128,13 @@ Ein Rechtsklick auf die Grafik öffnet ein Kontextmenü, mit dem Sie:
 ## Equalizer {#doc_eq}
 
 
-Mit dem Equalizer lassen sich bestimmte Frequenzen um -15 bis 15 dB anheben oder absenken.
-Bei aktivierter Option :guilabel:`Vorhören` kann der Effekt angehört und anschließend mit dem Button :guilabel:`Anwenden` endgültig übernommen werden.
+Mit dem Equalizer lassen sich bestimmte Frequenzen um -15 bis 15 dB anheben oder absenken, in 10 Bändern von 32 Hz bis 16 kHz.
+Mit der Option :guilabel:`Notenverfolgung` beziehen sich die Bänder auf die Grundfrequenz jedes Samples (Basisnote und Korrektur), von ×½ bis ×256: ×1 ist der Grundton, ×2 die Oktave, ×4 die Doppeloktave…
+Dieselbe Einstellung verändert dann dieselben Obertöne jedes ausgewählten Samples.
+Der Tooltip jedes Reglers zeigt seine Frequenz an, und die Regler ohne Wirkung (oberhalb der höchsten Frequenz der Samples) sind deaktiviert.
+
+Bei aktivierter Option :guilabel:`Vorhören` kann der Effekt angehört werden: Das Sample wird mit der Bearbeitung abgespielt, die angewendet wird, und nach jeder Änderung neu berechnet.
+Mit dem Button :guilabel:`Anwenden` wird der Effekt anschließend endgültig übernommen.
 Ein Klick auf :guilabel:`Zurücksetzen` setzt alle Regler auf 0 dB zurück (entfernt aber keinen Effekt, der bereits auf den Klang angewendet wurde: Verwenden Sie dafür den Button :guilabel:`Rückgängig` in der [Werkzeugleiste](manual/soundfont-editor/toolbar.md#doc_edit)).
 
 Jede Änderung an einem Stereo-Sample kann automatisch auf das verknüpfte Sample übertragen werden, wenn die Option in den [Einstellungen](manual/settings.md#doc_general) aktiviert ist.

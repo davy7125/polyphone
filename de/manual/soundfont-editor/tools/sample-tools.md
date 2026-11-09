@@ -52,14 +52,20 @@ Sample-Informationen, wenn möglich, ersetzen
 
 ### Frequenzen filtern {#doc_filter}
 
-Bei Verwendung dieses Werkzeugs erscheint ein Fenster mit den Frequenzen, die in den ausgewählten Samples enthalten sind.
-Mit der Maus kann dann ein roter Bereich gezeichnet werden.
-Alles, was sich in diesem Bereich befindet, wird entfernt: Bestimmte Frequenzen lassen sich so von Hand absenken oder entfernen.
+Bei Verwendung dieses Werkzeugs erscheint ein Fenster mit den Frequenzen, die in den ausgewählten Samples enthalten sind, auf einer logarithmischen Skala.
+Zwei Modi stehen zur Verfügung:
+
+* :guilabel:`Frequenzen abschneiden`: Mit der Maus wird ein roter Bereich gezeichnet. Alles, was sich in diesem Bereich befindet, wird entfernt: Die Kurve gibt für jede Frequenz den maximal zulässigen Pegel an, bezogen auf die stärkste Frequenz des Samples.
+* :guilabel:`Dämpfen oder verstärken`: Die Dämpfung oder Verstärkung jeder Frequenz wird in dB gezeichnet (von -60 bis +24 dB). Die Bearbeitung erzeugt kein Vorecho vor dem Anschlag, und die Schleife bleibt nahtlos.
+
+Mit der Option :guilabel:`Notenverfolgung` bezieht sich die horizontale Achse auf die Grundfrequenz jedes Samples, die sich aus seiner Basisnote und seiner Korrektur ergibt: ×1 ist der Grundton, ×2 die Oktave, ×3 die Duodezime, ×4 die Doppeloktave…
+Dieselbe Kurve wirkt dann unabhängig von der Tonhöhe des Samples auf dieselben Obertöne: So erhalten alle Samples eines Instruments eine einheitliche Klangfarbe, zum Beispiel beim Intonieren eines Orgelregisters.
+Beim Überfahren der Grafik mit der Maus werden die entsprechenden Frequenzen der ausgewählten Samples angezeigt.
 
 ![Werkzeug „Frequenzen filtern“](images/tool_filter_frequencies.png "Werkzeug „Frequenzen filtern“")
 
-**Hinweis:** Dieser Filter ist ungewöhnlich, da er Frequenzen hart abschneidet.
-Das Werkzeug kann nützlich sein, um einen Brickwall-Filter zu erstellen, in den meisten Fällen werden Sie aber eher den [Equalizer](manual/soundfont-editor/editing-pages/sample-editor.md#doc_eq) verwenden wollen.
+**Hinweis:** Der Modus :guilabel:`Frequenzen abschneiden` schneidet Frequenzen hart ab: Er ist nützlich, um einen Brickwall-Filter zu erstellen oder ein Rauschen zu entfernen.
+Für eine schnelle Korrektur ist der [Equalizer](manual/soundfont-editor/editing-pages/sample-editor.md#doc_eq) der Sample-Seite einfacher zu bedienen.
 
 
 ### Transponieren {#doc_transpose}

@@ -102,7 +102,7 @@ claude mcp add --scope user --transport http polyphone http://127.0.0.1:8642/mcp
 接着提出请求：*“修正这些问题。”*
 
 助手会把“Flute 63”的音符范围扩展到 E4，将“Flute 69”的根音符设为 A4、“Flute 78”的校正值设为 0，为“Flute 84”的分区设置 6 分贝的衰减（采样本身不做修改），并对“Flute 90”使用[自动循环](manual/soundfont-editor/tools/sample-tools.md#doc_autoloop)工具。
-重新分析确认了结果：没有无声的琴键，没有走音的音符，各处音量一致，循环被评为“良好”。
+重新分析确认了结果：没有无声的琴键，没有走音的音符，各处音量一致，循环点处的波形现在也已吻合。
 修正后的同一音阶：
 
 ![](files/ai-assistant-flute-after.mp3)

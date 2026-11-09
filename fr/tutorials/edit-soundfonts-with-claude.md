@@ -102,7 +102,7 @@ Sa réponse liste les problèmes&nbsp;:
 Demandez alors&nbsp;: *«&nbsp;Corrige ces problèmes.&nbsp;»*
 
 L'assistant étend l'étendue de notes de «&nbsp;Flute 63&nbsp;» jusqu'à Mi4, règle la note de base de «&nbsp;Flute 69&nbsp;» sur La4 et la correction de «&nbsp;Flute 78&nbsp;» sur 0, donne une atténuation de 6 dB à la division de «&nbsp;Flute 84&nbsp;» (l'échantillon lui-même n'est pas modifié), et utilise l'outil [Bouclage automatique](manual/soundfont-editor/tools/sample-tools.md#doc_autoloop) sur «&nbsp;Flute 90&nbsp;».
-Une nouvelle analyse confirme le résultat&nbsp;: plus de touche muette, plus de note fausse, le même volume partout et une boucle jugée «&nbsp;bonne&nbsp;».
+Une nouvelle analyse confirme le résultat&nbsp;: plus de touche muette, plus de note fausse, le même volume partout et une boucle dont les formes d'onde se raccordent désormais au point de bouclage.
 La même gamme après les corrections&nbsp;:
 
 ![](files/ai-assistant-flute-after.mp3)

@@ -128,8 +128,13 @@ Un clic destro sul grafico apre un menu contestuale che permette di:
 ## Equalizzatore {#doc_eq}
 
 
-L'equalizzatore permette di aumentare o diminuire alcune frequenze, da -15 a 15 dB.
-È possibile ascoltare l'effetto con l'opzione :guilabel:`anteprima` attiva e poi applicarlo definitivamente premendo il pulsante :guilabel:`Applica`.
+L'equalizzatore permette di aumentare o diminuire alcune frequenze, da -15 a 15 dB, su 10 bande da 32 Hz a 16 kHz.
+Con l'opzione :guilabel:`Inseguimento della nota`, le bande sono relative alla frequenza fondamentale di ciascun campione (nota di base e correzione), da ×½ a ×256: ×1 è la fondamentale, ×2 l'ottava, ×4 la doppia ottava…
+La stessa regolazione modifica quindi le stesse armoniche di ogni campione selezionato.
+Il suggerimento di ogni cursore indica la sua frequenza, e i cursori senza effetto (sopra la frequenza più alta dei campioni) sono disattivati.
+
+È possibile ascoltare l'effetto con l'opzione :guilabel:`anteprima` attiva: il campione viene riprodotto con l'elaborazione che sarà applicata, ricalcolata dopo ogni modifica.
+L'effetto viene poi applicato definitivamente premendo il pulsante :guilabel:`Applica`.
 Premendo :guilabel:`Reimposta` tutti i cursori tornano a 0 dB (ma un effetto già applicato al suono non viene rimosso: per questo usa il pulsante :guilabel:`Annulla` della [barra degli strumenti](manual/soundfont-editor/toolbar.md#doc_edit)).
 
 Qualsiasi modifica a un campione stereo può essere applicata automaticamente al campione collegato se l'opzione è spuntata nelle [impostazioni](manual/settings.md#doc_general).

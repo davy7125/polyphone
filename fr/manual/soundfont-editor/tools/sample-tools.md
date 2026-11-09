@@ -189,14 +189,20 @@ Remplacer les informations de l'échantillon si possible
 
 ### Filtrer des fréquences {#doc_filter}
 
-Quand vous appelez cet outil, une fenêtre apparaît pour vous présenter les fréquences contenues dans les échantillons sélectionnés.
-Vous pouvez ensuite utiliser la souris pour dessiner une zone rouge.
-Tout ce qui se trouve dans cette zone sera supprimé&nbsp;: vous pouvez manuellement réduire ou supprimer certaines fréquences.
+Quand vous appelez cet outil, une fenêtre apparaît pour vous présenter les fréquences contenues dans les échantillons sélectionnés, sur une échelle logarithmique.
+Deux modes sont disponibles&nbsp;:
+
+* :guilabel:`Couper les fréquences`&nbsp;: utilisez la souris pour dessiner une zone rouge. Tout ce qui se trouve dans cette zone sera supprimé&nbsp;: la courbe donne le niveau maximal autorisé pour chaque fréquence, relativement à la fréquence la plus forte de l'échantillon.
+* :guilabel:`Atténuer ou amplifier`&nbsp;: dessinez l'atténuation ou l'amplification en dB (de -60 à +24 dB) de chaque fréquence. Le traitement ne crée pas de pré-écho avant l'attaque et la boucle reste sans raccord audible.
+
+Avec l'option :guilabel:`Suivi de note`, l'axe horizontal est relatif à la fréquence fondamentale de chaque échantillon, donnée par sa note de base et sa correction&nbsp;: ×1 est la fondamentale, ×2 l'octave, ×3 la douzième, ×4 la double octave…
+La même courbe agit alors sur les mêmes harmoniques quelle que soit la hauteur de l'échantillon&nbsp;: c'est utile pour donner un timbre homogène à tous les échantillons d'un instrument, par exemple pour harmoniser un jeu d'orgue.
+Le survol du graphique indique les fréquences correspondantes pour les échantillons sélectionnés.
 
 ![Outil de filtrage des fréquences](images/tool_filter_frequencies.png "Outil de filtrage des fréquences")
 
-**Note&nbsp;:** Ce filtre n'est pas commun puisqu'il coupe les fréquences de manière brutale.
-Cet outil peut être utile pour concevoir un filtre «&nbsp;mur de brique&nbsp;» mais dans la plupart des cas vous voudrez probablement utiliser l'[égaliseur](manual/soundfont-editor/editing-pages/sample-editor.md#doc_eq).
+**Note&nbsp;:** le mode :guilabel:`Couper les fréquences` coupe les fréquences de manière brutale&nbsp;: il est utile pour concevoir un filtre «&nbsp;mur de brique&nbsp;» ou supprimer un bruit.
+Pour une correction rapide, l'[égaliseur](manual/soundfont-editor/editing-pages/sample-editor.md#doc_eq) de la page des échantillons est plus simple à utiliser.
 
 
 ### Modifier le volume {#doc_volume}

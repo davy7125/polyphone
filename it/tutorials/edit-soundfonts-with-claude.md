@@ -102,7 +102,7 @@ La sua risposta elenca i problemi:
 Chiedi allora: *«Correggi questi problemi.»*
 
 L'assistente estende l'intervallo di note di «Flute 63» fino a Mi4, imposta la nota di base di «Flute 69» su La4 e la correzione di «Flute 78» su 0, dà un'attenuazione di 6 dB alla divisione di «Flute 84» (il campione stesso non viene modificato) e usa lo strumento [Auto loop](manual/soundfont-editor/tools/sample-tools.md#doc_autoloop) su «Flute 90».
-Una nuova analisi conferma il risultato: nessun tasto muto, nessuna nota stonata, lo stesso volume ovunque e un loop giudicato «buono».
+Una nuova analisi conferma il risultato: nessun tasto muto, nessuna nota stonata, lo stesso volume ovunque e un loop le cui forme d'onda ora coincidono nel punto di loop.
 La stessa scala dopo le correzioni:
 
 ![](files/ai-assistant-flute-after.mp3)

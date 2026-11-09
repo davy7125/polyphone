@@ -52,14 +52,20 @@ Reemplazar información de la muestra si es posible
 
 ### Filtrar frecuencias {#doc_filter}
 
-Al usar esta herramienta, se muestra una ventana con las frecuencias contenidas en las muestras seleccionadas.
-Entonces puedes usar el ratón para dibujar una zona roja.
-Todo lo que esté en esa zona se eliminará: esto significa que puedes reducir o eliminar manualmente algunas frecuencias.
+Al usar esta herramienta, se muestra una ventana con las frecuencias contenidas en las muestras seleccionadas, en una escala logarítmica.
+Hay dos modos disponibles:
+
+* :guilabel:`Cortar frecuencias`: usa el ratón para dibujar una zona roja. Todo lo que esté en esa zona se eliminará: la curva indica el nivel máximo permitido para cada frecuencia, en relación con la frecuencia más fuerte de la muestra.
+* :guilabel:`Atenuar o amplificar`: dibuja la atenuación o la amplificación en dB (de -60 a +24 dB) de cada frecuencia. El procesamiento no crea ningún pre-eco antes del ataque y el bucle sigue siendo continuo.
+
+Con la opción :guilabel:`Seguimiento de nota`, el eje horizontal es relativo a la frecuencia fundamental de cada muestra, dada por su nota raíz y su corrección: ×1 es la fundamental, ×2 la octava, ×3 la duodécima, ×4 la doble octava…
+La misma curva actúa entonces sobre los mismos armónicos sea cual sea la altura de la muestra: es útil para dar un timbre homogéneo a todas las muestras de un instrumento, por ejemplo al armonizar un registro de órgano.
+Al pasar el ratón sobre el gráfico se muestran las frecuencias correspondientes de las muestras seleccionadas.
 
 ![Herramienta de filtrado de frecuencias](images/tool_filter_frequencies.png "Herramienta de filtrado de frecuencias")
 
-**Nota:** este filtro no es habitual, ya que corta las frecuencias de forma abrupta.
-Esta herramienta puede ser útil para diseñar un filtro de tipo «brick-wall», pero en la mayoría de los casos probablemente querrás usar el [ecualizador](manual/soundfont-editor/editing-pages/sample-editor.md#doc_eq).
+**Nota:** el modo :guilabel:`Cortar frecuencias` corta las frecuencias de forma abrupta: es útil para diseñar un filtro de tipo «brick-wall» o eliminar un ruido.
+Para una corrección rápida, el [ecualizador](manual/soundfont-editor/editing-pages/sample-editor.md#doc_eq) de la página de muestras es más sencillo de usar.
 
 
 ### Transportar {#doc_transpose}

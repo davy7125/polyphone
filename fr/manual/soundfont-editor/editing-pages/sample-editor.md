@@ -128,8 +128,13 @@ Un clic droit sur le graphique ouvre un menu contextuel qui permet&nbsp;:
 ## Égaliseur {#doc_eq}
 
 
-L'égaliseur permet d'amplifier ou d'atténuer certaines fréquences, de -15 à 15 dB.
-Il est possible d'écouter l'effet en direct en activant l'option :guilabel:`aperçu` et ensuite d'appliquer définitivement l'effet avec le bouton :guilabel:`Appliquer`.
+L'égaliseur permet d'amplifier ou d'atténuer certaines fréquences, de -15 à 15 dB, sur 10 bandes de 32 Hz à 16 kHz.
+Avec l'option :guilabel:`Suivi de note`, les bandes sont relatives à la fréquence fondamentale de chaque échantillon (note de base et correction), de ×½ à ×256&nbsp;: ×1 est la fondamentale, ×2 l'octave, ×4 la double octave…
+Un même réglage modifie alors les mêmes harmoniques de chaque échantillon sélectionné.
+L'infobulle de chaque curseur indique sa fréquence, et les curseurs sans effet (au-delà de la fréquence la plus haute des échantillons) sont désactivés.
+
+Il est possible d'écouter l'effet en activant l'option :guilabel:`aperçu`&nbsp;: l'échantillon est joué avec le traitement qui sera appliqué, recalculé après chaque modification.
+L'effet est ensuite appliqué définitivement avec le bouton :guilabel:`Appliquer`.
 Le bouton :guilabel:`Réinitialiser` remet tous les curseurs à 0 dB (mais n'enlève pas un effet déjà appliqué au son&nbsp;: pour cela utilisez le bouton :guilabel:`Annuler` dans la [barre d'outils](manual/soundfont-editor/toolbar.md#doc_edit)).
 
 Chaque modification sur un échantillon stéréo peut être automatiquement répercutée sur l'échantillon lié si l'option est cochée dans les [préférences](manual/settings.md#doc_general).

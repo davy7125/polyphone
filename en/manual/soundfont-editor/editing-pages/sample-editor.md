@@ -128,8 +128,13 @@ A right click on the graph opens a contextual menu that allows you to:
 ## Equalizer {#doc_eq}
 
 
-The equalizer makes it possible to increase or decrease some frequencies, from -15 to 15 dB.
-It is possible to listen to the effect with the option :guilabel:`preview` enabled and then definitely apply the effect by pressing the :guilabel:`Apply` button.
+The equalizer makes it possible to increase or decrease some frequencies, from -15 to 15 dB, in 10 bands from 32 Hz to 16 kHz.
+With the option :guilabel:`Note tracking`, the bands are relative to the fundamental frequency of each sample (root key and pitch correction), from ×½ to ×256: ×1 is the fundamental, ×2 the octave, ×4 the double octave…
+The same settings then change the same harmonics of each selected sample.
+The tooltip of each slider gives its frequency, and the sliders that have no effect (above the highest frequency of the samples) are disabled.
+
+It is possible to listen to the effect with the option :guilabel:`preview` enabled: the sample is played with the processing that will be applied, computed again after each change.
+The effect is then definitely applied by pressing the :guilabel:`Apply` button.
 Pressing :guilabel:`Reset` resets all the sliders to 0 dB (but does not remove an effect that has already been applied to the sound: for that use the :guilabel:`Undo` button in the [toolbar](manual/soundfont-editor/toolbar.md#doc_edit)).
 
 Any change on a stereo sample may be automatically applied on the linked sample if the option is checked in the [preferences](manual/settings.md#doc_general).

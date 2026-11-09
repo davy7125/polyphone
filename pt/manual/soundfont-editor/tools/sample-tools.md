@@ -52,14 +52,20 @@ Substituir informação da amostra se possível
 
 ### Filtrar frequências {#doc_filter}
 
-Ao usar esta ferramenta, é exibida uma janela que mostra as frequências contidas nas amostras selecionadas.
-Você pode então usar o mouse para desenhar uma área vermelha.
-Tudo o que estiver nessa área será removido: isso significa que você pode diminuir ou remover manualmente algumas frequências.
+Ao usar esta ferramenta, é exibida uma janela que mostra as frequências contidas nas amostras selecionadas, em escala logarítmica.
+Dois modos estão disponíveis:
+
+* :guilabel:`Cortar frequências`: use o mouse para desenhar uma área vermelha. Tudo o que estiver nessa área será removido: a curva indica o nível máximo permitido para cada frequência, em relação à frequência mais forte da amostra.
+* :guilabel:`Atenuar ou amplificar`: desenhe a atenuação ou a amplificação em dB (de -60 a +24 dB) de cada frequência. O processamento não cria pré-eco antes do ataque e o loop continua sem emenda audível.
+
+Com a opção :guilabel:`Acompanhamento de nota`, o eixo horizontal é relativo à frequência fundamental de cada amostra, dada por sua nota base e sua correção: ×1 é a fundamental, ×2 a oitava, ×3 a décima segunda, ×4 a dupla oitava…
+A mesma curva age então sobre os mesmos harmônicos qualquer que seja a altura da amostra: isso é útil para dar um timbre homogêneo a todas as amostras de um instrumento, por exemplo ao harmonizar um registro de órgão.
+Ao passar o mouse sobre o gráfico, são exibidas as frequências correspondentes das amostras selecionadas.
 
 ![Ferramenta de filtragem de frequências](images/tool_filter_frequencies.png "Ferramenta de filtragem de frequências")
 
-**Observação:** esse filtro não é comum, pois corta as frequências de forma abrupta.
-Esta ferramenta pode ser útil para criar um filtro “brick-wall”, mas na maioria dos casos você provavelmente vai preferir usar o [equalizador](manual/soundfont-editor/editing-pages/sample-editor.md#doc_eq).
+**Observação:** o modo :guilabel:`Cortar frequências` corta as frequências de forma abrupta: é útil para criar um filtro “brick-wall” ou remover um ruído.
+Para uma correção rápida, o [equalizador](manual/soundfont-editor/editing-pages/sample-editor.md#doc_eq) da página de amostras é mais simples de usar.
 
 
 ### Transpor {#doc_transpose}

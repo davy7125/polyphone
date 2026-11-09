@@ -102,7 +102,7 @@ A resposta lista os problemas:
 Peça então: *“Corrija esses problemas.”*
 
 O assistente estende o alcance de notas de “Flute 63” até Mi4, define a nota base de “Flute 69” como Lá4 e a correção de “Flute 78” como 0, dá uma atenuação de 6 dB à divisão de “Flute 84” (a amostra em si não é alterada) e usa a ferramenta [Loop automático](manual/soundfont-editor/tools/sample-tools.md#doc_autoloop) em “Flute 90”.
-Uma nova análise confirma o resultado: nenhuma tecla sem som, nenhuma nota desafinada, o mesmo volume em toda parte e um loop avaliado como “bom”.
+Uma nova análise confirma o resultado: nenhuma tecla sem som, nenhuma nota desafinada, o mesmo volume em toda parte e um loop cujas formas de onda agora coincidem no ponto de loop.
 A mesma escala depois das correções:
 
 ![](files/ai-assistant-flute-after.mp3)

@@ -52,14 +52,20 @@ Sostituisci le informazioni del campione se possibile
 
 ### Filtra frequenze {#doc_filter}
 
-Quando usi questa funzione, compare una finestra che mostra le frequenze contenute nei campioni selezionati.
-Puoi quindi usare il mouse per disegnare un'area rossa.
-Tutto ciò che si trova in quest'area verrà rimosso: in questo modo puoi ridurre o eliminare manualmente alcune frequenze.
+Quando usi questa funzione, compare una finestra che mostra le frequenze contenute nei campioni selezionati, su una scala logaritmica.
+Sono disponibili due modalità:
+
+* :guilabel:`Taglia frequenze`: usa il mouse per disegnare un'area rossa. Tutto ciò che si trova in quest'area verrà rimosso: la curva indica il livello massimo consentito per ogni frequenza, rispetto alla frequenza più forte del campione.
+* :guilabel:`Attenua o amplifica`: disegna l'attenuazione o l'amplificazione in dB (da -60 a +24 dB) di ogni frequenza. L'elaborazione non crea alcun pre-eco prima dell'attacco e il loop resta senza giunture udibili.
+
+Con l'opzione :guilabel:`Inseguimento della nota`, l'asse orizzontale è relativo alla frequenza fondamentale di ciascun campione, data dalla sua nota di base e dalla sua correzione: ×1 è la fondamentale, ×2 l'ottava, ×3 la dodicesima, ×4 la doppia ottava…
+La stessa curva agisce quindi sulle stesse armoniche qualunque sia l'altezza del campione: è utile per dare un timbro omogeneo a tutti i campioni di uno strumento, per esempio per intonare un registro d'organo.
+Passando il mouse sul grafico vengono mostrate le frequenze corrispondenti dei campioni selezionati.
 
 ![Funzione Filtra frequenze](images/tool_filter_frequencies.png "Funzione Filtra frequenze")
 
-**Nota:** questo filtro non è comune perché taglia le frequenze in modo netto.
-Può essere utile per realizzare un filtro «brick-wall», ma nella maggior parte dei casi probabilmente vorrai usare l'[equalizzatore](manual/soundfont-editor/editing-pages/sample-editor.md#doc_eq).
+**Nota:** la modalità :guilabel:`Taglia frequenze` taglia le frequenze in modo netto: è utile per realizzare un filtro «brick-wall» o eliminare un rumore.
+Per una correzione rapida, l'[equalizzatore](manual/soundfont-editor/editing-pages/sample-editor.md#doc_eq) della pagina dei campioni è più semplice da usare.
 
 
 ### Trasponi {#doc_transpose}

@@ -52,14 +52,20 @@ Replace sample information if possible
 
 ### Filter frequencies {#doc_filter}
 
-When you use this tool, a window will be displayed showing the frequencies contained in the sample(s) you selected.
-You can then use the mouse to draw a red area.
-Everything that is in this area will be removed: this means that you can manually decrease or remove some frequencies.
+When you use this tool, a window will be displayed showing the frequencies contained in the sample(s) you selected, on a logarithmic scale.
+Two modes are available:
+
+* :guilabel:`Cut frequencies`: use the mouse to draw a red area. Everything that is in this area will be removed: the curve gives the maximum level allowed for each frequency, relative to the strongest frequency of the sample.
+* :guilabel:`Attenuate or amplify`: draw the attenuation or the amplification in dB (from -60 to +24 dB) of each frequency. The processing does not create any pre-echo before the attack, and the loop stays seamless.
+
+With the option :guilabel:`Note tracking`, the horizontal axis is relative to the fundamental frequency of each sample, given by its root key and its pitch correction: ×1 is the fundamental, ×2 the octave, ×3 the twelfth, ×4 the double octave…
+The same curve then acts on the same harmonics whatever the pitch of the sample: this is useful for giving a consistent timbre to all the samples of an instrument, for example when voicing an organ stop.
+Hovering over the graph shows the corresponding frequencies for the selected samples.
 
 ![Filter frequency tool](images/tool_filter_frequencies.png "Filter frequency tool")
 
-**Note:** This filter is not common since it cuts frequencies in a hard way.
-This tool can be useful to design a brick-wall filter but in most cases you will probably want to use the [equalizer](manual/soundfont-editor/editing-pages/sample-editor.md#doc_eq).
+**Note:** the mode :guilabel:`Cut frequencies` cuts the frequencies in a hard way: it is useful for designing a brick-wall filter or removing a noise.
+For a quick correction, the [equalizer](manual/soundfont-editor/editing-pages/sample-editor.md#doc_eq) of the sample page is simpler to use.
 
 
 ### Transpose {#doc_transpose}

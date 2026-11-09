@@ -102,7 +102,7 @@ Its answer lists the problems:
 Then ask: *“Fix these problems.”*
 
 The assistant extends the key range of “Flute 63” to E4, sets the root key of “Flute 69” to A4 and the correction of “Flute 78” to 0, gives an attenuation of 6 dB to the division of “Flute 84” (the sample itself is not changed), and uses the tool [Auto loop](manual/soundfont-editor/tools/sample-tools.md#doc_autoloop) on “Flute 90”.
-A new analysis confirms the result: no missing key, no note out of tune, the same volume everywhere and a loop rated “good”.
+A new analysis confirms the result: no missing key, no note out of tune, the same volume everywhere and a loop whose waveforms now match at the loop point.
 The same scale after the corrections:
 
 ![](files/ai-assistant-flute-after.mp3)

@@ -102,7 +102,7 @@ Seine Antwort listet die Probleme auf:
 Fragen Sie dann: *„Behebe diese Probleme.“*
 
 Der Assistent erweitert den Tastenbereich von „Flute 63“ bis E4, setzt die Basisnote von „Flute 69“ auf A4 und die Korrektur von „Flute 78“ auf 0, gibt dem Bereich von „Flute 84“ eine Dämpfung von 6 dB (das Sample selbst wird nicht verändert) und wendet das Werkzeug [Auto-Loop](manual/soundfont-editor/tools/sample-tools.md#doc_autoloop) auf „Flute 90“ an.
-Eine neue Analyse bestätigt das Ergebnis: keine fehlende Taste, keine verstimmte Note, überall dieselbe Lautstärke und ein als „gut“ bewerteter Loop.
+Eine neue Analyse bestätigt das Ergebnis: keine fehlende Taste, keine verstimmte Note, überall dieselbe Lautstärke und ein Loop, dessen Wellenformen am Loop-Punkt jetzt übereinstimmen.
 Dieselbe Tonleiter nach den Korrekturen:
 
 ![](files/ai-assistant-flute-after.mp3)

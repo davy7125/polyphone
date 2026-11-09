@@ -102,7 +102,7 @@ Su respuesta enumera los problemas:
 Pide entonces: *«Corrige estos problemas.»*
 
 El asistente amplía el rango de notas de «Flute 63» hasta Mi4, pone la nota raíz de «Flute 69» en La4 y la corrección de «Flute 78» en 0, da una atenuación de 6 dB a la división de «Flute 84» (la muestra en sí no se modifica) y usa la herramienta [Bucle automático](manual/soundfont-editor/tools/sample-tools.md#doc_autoloop) en «Flute 90».
-Un nuevo análisis confirma el resultado: ninguna tecla sin sonido, ninguna nota desafinada, el mismo volumen en todas partes y un bucle calificado de «bueno».
+Un nuevo análisis confirma el resultado: ninguna tecla sin sonido, ninguna nota desafinada, el mismo volumen en todas partes y un bucle cuyas formas de onda ahora coinciden en el punto de bucle.
 La misma escala después de las correcciones:
 
 ![](files/ai-assistant-flute-after.mp3)

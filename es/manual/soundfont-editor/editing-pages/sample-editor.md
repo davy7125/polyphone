@@ -128,8 +128,13 @@ Un clic derecho en el gráfico abre un menú contextual que permite:
 ## Ecualizador {#doc_eq}
 
 
-El ecualizador permite aumentar o reducir algunas frecuencias, de -15 a 15 dB.
-Se puede escuchar el efecto con la opción :guilabel:`vista previa` activada y luego aplicarlo definitivamente pulsando el botón :guilabel:`Aplicar`.
+El ecualizador permite aumentar o reducir algunas frecuencias, de -15 a 15 dB, en 10 bandas de 32 Hz a 16 kHz.
+Con la opción :guilabel:`Seguimiento de nota`, las bandas son relativas a la frecuencia fundamental de cada muestra (nota raíz y corrección), de ×½ a ×256: ×1 es la fundamental, ×2 la octava, ×4 la doble octava…
+El mismo ajuste modifica entonces los mismos armónicos de cada muestra seleccionada.
+La información emergente de cada deslizador indica su frecuencia, y los deslizadores sin efecto (por encima de la frecuencia más alta de las muestras) están desactivados.
+
+Se puede escuchar el efecto con la opción :guilabel:`vista previa` activada: la muestra se reproduce con el procesamiento que se aplicará, recalculado tras cada cambio.
+Luego se aplica el efecto definitivamente pulsando el botón :guilabel:`Aplicar`.
 Al pulsar :guilabel:`Restablecer`, todos los deslizadores vuelven a 0 dB (pero no se elimina un efecto ya aplicado al sonido: para ello, usa el botón :guilabel:`Deshacer` de la [barra de herramientas](manual/soundfont-editor/toolbar.md#doc_edit)).
 
 Cualquier cambio en una muestra estéreo se puede aplicar automáticamente a la muestra enlazada si la opción está marcada en las [preferencias](manual/settings.md#doc_general).
