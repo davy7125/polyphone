@@ -35,6 +35,17 @@ DEFINES += CURRENT_YEAR=\\\"$${POLYPHONE_YEAR}\\\"
 # Format: polyphone_XX.ts, XX being the language code
 TRANSLATIONS = $$files(resources/translations/polyphone_*.ts)
 
+# The texts of the plugin are in the same files (contexts "Plugin...", see plugin/plugintranslator.h): read by lupdate,
+# not built
+lupdate_only {
+    SOURCES += plugin/plugineditor.cpp \
+        plugin/pluginprocessor.cpp \
+        plugin/plugintranslator.cpp
+    HEADERS += plugin/plugineditor.h \
+        plugin/pluginprocessor.h \
+        plugin/plugintranslator.h
+}
+
 PRECOMPILED_HEADER = precompiled_header.h
 CONFIG += lrelease embed_translations precompile_header
 QMAKE_LRELEASE_FLAGS = -nounfinished -removeidentical

@@ -31,6 +31,7 @@
 #include <juce_gui_extra/juce_gui_extra.h>
 #include <atomic>
 #include "pluginengine.h"
+#include "plugintranslator.h"
 class PluginSoundfont;
 
 // Polyphone as a plugin: a soundfont (sf2 or sf3) played by the synth of the editor on the 16 MIDI channels.
@@ -40,6 +41,8 @@ class PluginProcessor: public juce::AudioProcessor,
                        public juce::ChangeBroadcaster,
                        private juce::Timer
 {
+    Q_DECLARE_TR_FUNCTIONS(PluginProcessor)
+
 public:
     // A temperament: fine tune in cents of each key from C to B
     struct Temperament
@@ -57,7 +60,8 @@ public:
     void loadSoundfont(const juce::File &file);
     bool isLoading() const { return _isLoading.load(); }
 
-    // File played (possibly missing if its content was stored in the state), error of the last loading
+    // File played (possibly missing if its content was stored in the state), error of the last loading (in English, see
+    // PluginEditor::translateError)
     juce::File getSoundfontFile() const;
     juce::String getError() const;
 
@@ -85,6 +89,10 @@ public:
     juce::AudioProcessorValueTreeState &getParameterState() { return _parameters; }
     juce::MidiKeyboardState &getKeyboardState() { return _keyboardState; }
     static const std::vector<Temperament> &getTemperaments();
+    static juce::String getTemperamentName(size_t index); // Translated
+
+    // Settings shared by all instances (recent files, language)
+    static juce::PropertiesFile::Options getSettingsOptions();
 
     /// AudioProcessor implementation
 

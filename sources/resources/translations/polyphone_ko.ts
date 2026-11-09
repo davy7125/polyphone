@@ -5255,6 +5255,724 @@ Warning: quality will be reduced and the loop may be altered</source>
     </message>
 </context>
 <context>
+    <name>PluginEditor</name>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="55"/>
+        <source>cannot open the file</source>
+        <translation>파일을 열 수 없음</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="56"/>
+        <source>file recursion (#include)</source>
+        <translation>파일 재귀 포함 (#include)</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="57"/>
+        <source>not enough memory</source>
+        <translation>메모리 부족</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="58"/>
+        <source>this is not a DLS file</source>
+        <translation>DLS 파일이 아님</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="59"/>
+        <source>invalid header</source>
+        <translation>잘못된 헤더</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="60"/>
+        <source>corrupted file (sdta)</source>
+        <translation>손상된 파일 (sdta)</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="61"/>
+        <source>corrupted file (pdta)</source>
+        <translation>손상된 파일 (pdta)</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="191"/>
+        <source>Preset played by the channel, or the one chosen by the program changes it receives</source>
+        <translation>채널에서 연주되는 프리셋, 또는 수신한 프로그램 체인지로 선택된 프리셋</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="194"/>
+        <source>Program change (drums)</source>
+        <translation>프로그램 체인지 (드럼)</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="194"/>
+        <source>Program change</source>
+        <translation>프로그램 체인지</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="379"/>
+        <source>(no preset)</source>
+        <translation>(프리셋 없음)</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="386"/>
+        <source>Open...</source>
+        <translation>열기...</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="387"/>
+        <source>Open a soundfont (sf2, sf3, sfz or dls), which can also be dropped on the window</source>
+        <translation>사운드폰트(sf2, sf3, sfz 또는 dls)를 엽니다. 창에 끌어다 놓을 수도 있습니다</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="388"/>
+        <source>Recent soundfonts</source>
+        <translation>최근 사운드폰트</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="389"/>
+        <source>One preset</source>
+        <translation>단일 프리셋</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="390"/>
+        <source>The same preset is played on all MIDI channels</source>
+        <translation>모든 MIDI 채널에서 같은 프리셋을 연주합니다</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="391"/>
+        <source>16 channels</source>
+        <translation>16 채널</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="392"/>
+        <source>Each MIDI channel plays its preset, or the one chosen by its program changes (General MIDI)</source>
+        <translation>각 MIDI 채널이 자신의 프리셋 또는 프로그램 체인지로 선택된 프리셋을 연주합니다 (General MIDI)</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="394"/>
+        <source>The same preset is played by an MPE controller: each note has its own pitch bend, pressure and timbre (lower zone of 15 channels, or the zones given by the controller)</source>
+        <translation>같은 프리셋을 MPE 컨트롤러로 연주합니다. 각 노트가 고유한 피치 벤드, 압력, 음색을 가집니다 (15채널 하위 존 또는 컨트롤러가 지정한 존)</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="399"/>
+        <source>Gain</source>
+        <translation>게인</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="399"/>
+        <source>Transpose</source>
+        <translation>조옮김</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="399"/>
+        <source>Tuning</source>
+        <translation>튜닝</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="400"/>
+        <source>Level</source>
+        <comment>reverb</comment>
+        <translation>레벨</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="400"/>
+        <source>Size</source>
+        <comment>reverb</comment>
+        <translation>크기</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="400"/>
+        <source>Width</source>
+        <comment>reverb</comment>
+        <translation>너비</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="400"/>
+        <source>Damping</source>
+        <comment>reverb</comment>
+        <translation>댐프</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="401"/>
+        <source>Level</source>
+        <comment>chorus</comment>
+        <translation>레벨</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="401"/>
+        <source>Depth</source>
+        <comment>chorus</comment>
+        <translation>깊이</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="401"/>
+        <source>Frequency</source>
+        <comment>chorus</comment>
+        <translation>주파수</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="405"/>
+        <source>Temperament</source>
+        <translation>음률</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="407"/>
+        <source>Temperament, its fine tunes being relative to the key chosen on the right</source>
+        <translation>음률. 미세 조정은 오른쪽에서 선택한 기준 키에 대한 값입니다</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="408"/>
+        <source>Key of reference of the temperament</source>
+        <translation>음률의 기준 키</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="410"/>
+        <source>Panic</source>
+        <translation>패닉</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="411"/>
+        <source>Stop all sounds and reset the controllers</source>
+        <translation>모든 소리를 멈추고 컨트롤러를 초기화합니다</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="412"/>
+        <source>Settings</source>
+        <translation>설정</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="459"/>
+        <source>cannot open the file %1</source>
+        <translation>%1 파일을 열 수 없음</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="461"/>
+        <source>invalid %1 index</source>
+        <translation>잘못된 %1 인덱스</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="473"/>
+        <source>No soundfont</source>
+        <translation>사운드폰트 없음</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="481"/>
+        <source>Loading...</source>
+        <translation>불러오는 중...</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="486"/>
+        <source>Cannot read the soundfont: %1</source>
+        <translation>사운드폰트를 읽을 수 없음: %1</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="493"/>
+        <source>Open a soundfont or drop it here</source>
+        <translation>사운드폰트를 열거나 여기에 끌어다 놓으세요</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="536"/>
+        <source>Voices: %1</source>
+        <translation>보이스: %1</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="537"/>
+        <source>CPU: %1 %</source>
+        <translation>CPU: %1%</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="551"/>
+        <source>Open a soundfont</source>
+        <translation>사운드폰트 열기</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="565"/>
+        <source>No recent soundfont</source>
+        <translation>최근 사운드폰트 없음</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="614"/>
+        <source>%1 voices</source>
+        <translation>%1 보이스</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="619"/>
+        <source>Channel %1</source>
+        <translation>채널 %1</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="626"/>
+        <source>System language</source>
+        <translation>시스템 언어</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="633"/>
+        <source>Polyphony</source>
+        <translation>동시 발음 수</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="634"/>
+        <source>Keyboard</source>
+        <translation>키보드</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="635"/>
+        <source>Language</source>
+        <translation>언어</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="640"/>
+        <source>Store the soundfont in the project (not possible with an sfz file)</source>
+        <translation>사운드폰트를 프로젝트에 저장 (sfz 파일은 불가)</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="641"/>
+        <source>Store the soundfont in the project</source>
+        <translation>사운드폰트를 프로젝트에 저장</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="643"/>
+        <source>Channels and effects on their own outputs</source>
+        <translation>채널과 효과를 개별 출력으로</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="684"/>
+        <source>Synth</source>
+        <translation>신스</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="684"/>
+        <source>Reverb</source>
+        <translation>리버브</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="685"/>
+        <source>Chorus</source>
+        <translation>코러스</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="213"/>
+        <source>too many soundfonts are still playing, try again in a moment</source>
+        <translation>아직 너무 많은 사운드폰트가 재생 중입니다. 잠시 후 다시 시도하세요</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="554"/>
+        <source>file not found</source>
+        <translation>파일을 찾을 수 없음</translation>
+    </message>
+</context>
+<context>
+    <name>PluginJuce</name>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="443"/>
+        <location filename="../../plugin/plugintranslator.cpp" line="60"/>
+        <source>Options</source>
+        <translation>옵션</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="61"/>
+        <source>Audio/MIDI Settings...</source>
+        <translation>오디오/MIDI 설정...</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="62"/>
+        <source>Save current state...</source>
+        <translation>현재 상태 저장...</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="63"/>
+        <source>Load a saved state...</source>
+        <translation>저장된 상태 불러오기...</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="64"/>
+        <source>Reset to default state</source>
+        <translation>기본 상태로 초기화</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="65"/>
+        <source>Audio/MIDI Settings</source>
+        <translation>오디오/MIDI 설정</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="66"/>
+        <source>Save current state</source>
+        <translation>현재 상태 저장</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="67"/>
+        <source>Load a saved state</source>
+        <translation>저장된 상태 불러오기</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="68"/>
+        <source>Error whilst saving</source>
+        <translation>저장 중 오류</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="69"/>
+        <source>Couldn&apos;t write to the specified file!</source>
+        <translation>지정한 파일에 쓸 수 없습니다!</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="70"/>
+        <source>Error whilst loading</source>
+        <translation>불러오기 중 오류</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="71"/>
+        <source>Couldn&apos;t read from the specified file!</source>
+        <translation>지정한 파일을 읽을 수 없습니다!</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="74"/>
+        <source>Audio device type:</source>
+        <translation>오디오 장치 유형:</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="75"/>
+        <source>Output:</source>
+        <translation>출력:</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="76"/>
+        <source>Input:</source>
+        <translation>입력:</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="77"/>
+        <source>Device:</source>
+        <translation>장치:</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="78"/>
+        <source>Test</source>
+        <translation>테스트</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="79"/>
+        <source>Plays a test tone</source>
+        <translation>테스트 톤을 재생합니다</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="80"/>
+        <source>Control Panel</source>
+        <translation>제어판</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="81"/>
+        <source>Opens the device&apos;s own control panel</source>
+        <translation>장치 자체의 제어판을 엽니다</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="82"/>
+        <source>Reset Device</source>
+        <translation>장치 초기화</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="83"/>
+        <source>Resets the audio interface - sometimes needed after changing a device&apos;s properties in its custom control panel</source>
+        <translation>오디오 인터페이스를 초기화합니다. 장치 자체 제어판에서 속성을 변경한 후에 필요할 수 있습니다</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="85"/>
+        <source>Active output channels:</source>
+        <translation>활성 출력 채널:</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="86"/>
+        <source>Active input channels:</source>
+        <translation>활성 입력 채널:</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="87"/>
+        <source>(no audio output channels found)</source>
+        <translation>(오디오 출력 채널을 찾을 수 없음)</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="88"/>
+        <source>(no audio input channels found)</source>
+        <translation>(오디오 입력 채널을 찾을 수 없음)</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="89"/>
+        <source>Sample rate:</source>
+        <translation>샘플 레이트:</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="90"/>
+        <source>Audio buffer size:</source>
+        <translation>오디오 버퍼 크기:</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="91"/>
+        <source>Show advanced settings...</source>
+        <translation>고급 설정 표시...</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="92"/>
+        <source>Active MIDI inputs:</source>
+        <translation>활성 MIDI 입력:</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="93"/>
+        <source>No MIDI inputs available</source>
+        <translation>사용 가능한 MIDI 입력 없음</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="94"/>
+        <source>MIDI Output:</source>
+        <translation>MIDI 출력:</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="95"/>
+        <source>none</source>
+        <translation>없음</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="96"/>
+        <source>Bluetooth MIDI</source>
+        <translation>블루투스 MIDI</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="97"/>
+        <source>Scan for bluetooth MIDI devices</source>
+        <translation>블루투스 MIDI 장치 검색</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="98"/>
+        <source>Error when trying to open audio device!</source>
+        <translation>오디오 장치를 여는 중 오류가 발생했습니다!</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="101"/>
+        <source>Open</source>
+        <translation>열기</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="102"/>
+        <source>Save</source>
+        <translation>저장</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="103"/>
+        <source>Choose</source>
+        <translation>선택</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="104"/>
+        <source>file:</source>
+        <translation>파일:</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="105"/>
+        <source>Go up to parent directory</source>
+        <translation>상위 폴더로 이동</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="106"/>
+        <source>Home folder</source>
+        <translation>홈 폴더</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="107"/>
+        <source>Desktop</source>
+        <translation>바탕 화면</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="108"/>
+        <source>Documents</source>
+        <translation>문서</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="109"/>
+        <source>Music</source>
+        <translation>음악</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="110"/>
+        <source>Pictures</source>
+        <translation>사진</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="111"/>
+        <source>Hard Drive</source>
+        <translation>하드 드라이브</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="112"/>
+        <source>CD/DVD drive</source>
+        <translation>CD/DVD 드라이브</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="113"/>
+        <source>New Folder</source>
+        <translation>새 폴더</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="114"/>
+        <source>Create Folder</source>
+        <translation>폴더 만들기</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="115"/>
+        <source>Please enter the name for the folder</source>
+        <translation>폴더 이름을 입력하세요</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="116"/>
+        <source>Couldn&apos;t create the folder!</source>
+        <translation>폴더를 만들 수 없습니다!</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="117"/>
+        <source>File already exists</source>
+        <translation>파일이 이미 있습니다</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="118"/>
+        <source>There&apos;s already a file called: FLNM</source>
+        <translation>같은 이름의 파일이 이미 있습니다: FLNM</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="119"/>
+        <source>Are you sure you want to overwrite it?</source>
+        <translation>덮어쓰시겠습니까?</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="120"/>
+        <source>Overwrite</source>
+        <translation>덮어쓰기</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="123"/>
+        <source>OK</source>
+        <translation>확인</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="124"/>
+        <source>Cancel</source>
+        <translation>취소</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="125"/>
+        <source>Yes</source>
+        <translation>예</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="126"/>
+        <source>No</source>
+        <translation>아니요</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="127"/>
+        <source>(no choices)</source>
+        <translation>(선택 항목 없음)</translation>
+    </message>
+</context>
+<context>
+    <name>PluginProcessor</name>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="51"/>
+        <source>Main</source>
+        <translation>메인</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="53"/>
+        <source>Channel %1</source>
+        <translation>채널 %1</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="55"/>
+        <source>Effects</source>
+        <translation>효과</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="122"/>
+        <source>Gain</source>
+        <translation>게인</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="125"/>
+        <source>Reverb</source>
+        <translation>리버브</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="125"/>
+        <source>Reverb level</source>
+        <translation>리버브 레벨</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="126"/>
+        <source>Reverb size</source>
+        <translation>리버브 크기</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="126"/>
+        <source>Reverb width</source>
+        <translation>리버브 너비</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="127"/>
+        <source>Reverb damping</source>
+        <translation>리버브 댐프</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="129"/>
+        <source>Chorus</source>
+        <translation>코러스</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="129"/>
+        <source>Chorus level</source>
+        <translation>코러스 레벨</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="130"/>
+        <source>Chorus depth</source>
+        <translation>코러스 깊이</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="130"/>
+        <source>Chorus frequency</source>
+        <translation>코러스 주파수</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="136"/>
+        <source>Tuning</source>
+        <translation>튜닝</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="137"/>
+        <source>Transposition</source>
+        <translation>조옮김</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="138"/>
+        <source>semitones</source>
+        <translation>반음</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="139"/>
+        <source>Reference pitch</source>
+        <translation>기준 음높이</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="142"/>
+        <source>Temperament</source>
+        <translation>음률</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="145"/>
+        <source>Temperament key</source>
+        <translation>음률 기준 키</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="183"/>
+        <source>Equal</source>
+        <comment>Equal musical temperament</comment>
+        <translation>평균율</translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <location filename="../../core/input/grandorgue/grandorguerank.cpp" line="142"/>

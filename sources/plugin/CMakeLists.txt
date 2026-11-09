@@ -104,6 +104,10 @@ juce_add_binary_data(PolyphonePluginData SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/../../logo.png
     ${CMAKE_CURRENT_SOURCE_DIR}/../resources/misc/temperaments.csv)
 
+# Translations, extracted from the ones of the editor
+include(${CMAKE_CURRENT_SOURCE_DIR}/translations.cmake)
+polyphone_add_plugin_translations(PolyphonePluginTranslations)
+
 # The codes identify the plugin in the hosts: they must never change once the plugin is published
 juce_add_plugin(PolyphonePlugin
     PRODUCT_NAME "Polyphone"
@@ -143,7 +147,8 @@ target_sources(PolyphonePlugin PRIVATE
     pluginengine.cpp
     pluginsoundfont.cpp
     pluginprocessor.cpp
-    plugineditor.cpp)
+    plugineditor.cpp
+    plugintranslator.cpp)
 
 target_compile_definitions(PolyphonePlugin PUBLIC
     JUCE_WEB_BROWSER=0
@@ -155,6 +160,7 @@ target_link_libraries(PolyphonePlugin
     PRIVATE
         polyphone_synth_core
         PolyphonePluginData
+        PolyphonePluginTranslations
         juce::juce_audio_utils
         juce::juce_gui_extra
     PUBLIC

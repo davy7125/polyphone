@@ -7,7 +7,7 @@
 #
 # Qt Creator: open this file, choose the kits (Qt 5 or Qt 6), the options are in Projects > Build > CMake.
 # Translations: "cmake --build <build> --target update_translations" updates the .ts files with lupdate, as lupdate
-# on polyphone.pro.
+# on polyphone.pro (texts of the editor and of the plugin).
 
 cmake_minimum_required(VERSION 3.16)
 
@@ -268,9 +268,18 @@ if(POLYPHONE_BUILD_EDITOR)
                   /usr/lib/qt${QT_VERSION_MAJOR}/bin)
     endif()
     if(POLYPHONE_LUPDATE)
+        # The texts of the plugin are in the same files (contexts "Plugin...", see plugin/plugintranslator.h)
+        set(POLYPHONE_PLUGIN_TRANSLATED_FILES
+            plugin/plugineditor.cpp
+            plugin/plugineditor.h
+            plugin/pluginprocessor.cpp
+            plugin/pluginprocessor.h
+            plugin/plugintranslator.cpp
+            plugin/plugintranslator.h)
         list(JOIN POLYPHONE_APP_FILES "\n" app_files)
         list(JOIN POLYPHONE_CORE_FILES "\n" core_files)
-        file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/i18n/files.txt "${core_files}\n${app_files}\n")
+        list(JOIN POLYPHONE_PLUGIN_TRANSLATED_FILES "\n" plugin_files)
+        file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/i18n/files.txt "${core_files}\n${app_files}\n${plugin_files}\n")
         add_custom_target(update_translations
             COMMAND ${POLYPHONE_LUPDATE} @${CMAKE_CURRENT_BINARY_DIR}/i18n/files.txt -ts ${POLYPHONE_TS_FILES}
             WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}

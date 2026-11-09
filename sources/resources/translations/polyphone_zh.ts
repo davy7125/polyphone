@@ -5216,6 +5216,724 @@ Warning: quality will be reduced and the loop may be altered</source>
     </message>
 </context>
 <context>
+    <name>PluginEditor</name>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="55"/>
+        <source>cannot open the file</source>
+        <translation>无法打开文件</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="56"/>
+        <source>file recursion (#include)</source>
+        <translation>文件递归包含 (#include)</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="57"/>
+        <source>not enough memory</source>
+        <translation>内存不足</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="58"/>
+        <source>this is not a DLS file</source>
+        <translation>不是 DLS 文件</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="59"/>
+        <source>invalid header</source>
+        <translation>无效的文件头</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="60"/>
+        <source>corrupted file (sdta)</source>
+        <translation>文件已损坏 (sdta)</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="61"/>
+        <source>corrupted file (pdta)</source>
+        <translation>文件已损坏 (pdta)</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="191"/>
+        <source>Preset played by the channel, or the one chosen by the program changes it receives</source>
+        <translation>该通道演奏的预设，或由其接收的程序变更选择的预设</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="194"/>
+        <source>Program change (drums)</source>
+        <translation>程序变更 (鼓)</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="194"/>
+        <source>Program change</source>
+        <translation>程序变更</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="379"/>
+        <source>(no preset)</source>
+        <translation>(无预设)</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="386"/>
+        <source>Open...</source>
+        <translation>打开...</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="387"/>
+        <source>Open a soundfont (sf2, sf3, sfz or dls), which can also be dropped on the window</source>
+        <translation>打开音色库 (sf2、sf3、sfz 或 dls)，也可以将其拖放到窗口中</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="388"/>
+        <source>Recent soundfonts</source>
+        <translation>最近的音色库</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="389"/>
+        <source>One preset</source>
+        <translation>单一预设</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="390"/>
+        <source>The same preset is played on all MIDI channels</source>
+        <translation>所有 MIDI 通道演奏同一个预设</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="391"/>
+        <source>16 channels</source>
+        <translation>16 通道</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="392"/>
+        <source>Each MIDI channel plays its preset, or the one chosen by its program changes (General MIDI)</source>
+        <translation>每个 MIDI 通道演奏各自的预设，或由其程序变更选择的预设 (General MIDI)</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="394"/>
+        <source>The same preset is played by an MPE controller: each note has its own pitch bend, pressure and timbre (lower zone of 15 channels, or the zones given by the controller)</source>
+        <translation>由 MPE 控制器演奏同一个预设：每个音符都有各自的弯音、压力和音色 (15 个通道的下部区域，或由控制器指定的区域)</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="399"/>
+        <source>Gain</source>
+        <translation>增益</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="399"/>
+        <source>Transpose</source>
+        <translation>移调</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="399"/>
+        <source>Tuning</source>
+        <translation>调音</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="400"/>
+        <source>Level</source>
+        <comment>reverb</comment>
+        <translation>电平</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="400"/>
+        <source>Size</source>
+        <comment>reverb</comment>
+        <translation>大小</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="400"/>
+        <source>Width</source>
+        <comment>reverb</comment>
+        <translation>宽度</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="400"/>
+        <source>Damping</source>
+        <comment>reverb</comment>
+        <translation>阻尼</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="401"/>
+        <source>Level</source>
+        <comment>chorus</comment>
+        <translation>电平</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="401"/>
+        <source>Depth</source>
+        <comment>chorus</comment>
+        <translation>深度</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="401"/>
+        <source>Frequency</source>
+        <comment>chorus</comment>
+        <translation>频率</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="405"/>
+        <source>Temperament</source>
+        <translation>律制</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="407"/>
+        <source>Temperament, its fine tunes being relative to the key chosen on the right</source>
+        <translation>律制，其微调相对于右侧选择的调</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="408"/>
+        <source>Key of reference of the temperament</source>
+        <translation>律制的参考调</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="410"/>
+        <source>Panic</source>
+        <translation>紧急停止</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="411"/>
+        <source>Stop all sounds and reset the controllers</source>
+        <translation>停止所有声音并重置控制器</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="412"/>
+        <source>Settings</source>
+        <translation>设置</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="459"/>
+        <source>cannot open the file %1</source>
+        <translation>无法打开文件 %1</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="461"/>
+        <source>invalid %1 index</source>
+        <translation>无效的 %1 索引</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="473"/>
+        <source>No soundfont</source>
+        <translation>无音色库</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="481"/>
+        <source>Loading...</source>
+        <translation>正在加载...</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="486"/>
+        <source>Cannot read the soundfont: %1</source>
+        <translation>无法读取音色库：%1</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="493"/>
+        <source>Open a soundfont or drop it here</source>
+        <translation>打开音色库或将其拖放到此处</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="536"/>
+        <source>Voices: %1</source>
+        <translation>复音：%1</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="537"/>
+        <source>CPU: %1 %</source>
+        <translation>CPU：%1%</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="551"/>
+        <source>Open a soundfont</source>
+        <translation>打开音色库</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="565"/>
+        <source>No recent soundfont</source>
+        <translation>没有最近的音色库</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="614"/>
+        <source>%1 voices</source>
+        <translation>%1 个复音</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="619"/>
+        <source>Channel %1</source>
+        <translation>通道 %1</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="626"/>
+        <source>System language</source>
+        <translation>系统语言</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="633"/>
+        <source>Polyphony</source>
+        <translation>复音数</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="634"/>
+        <source>Keyboard</source>
+        <translation>键盘</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="635"/>
+        <source>Language</source>
+        <translation>语言</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="640"/>
+        <source>Store the soundfont in the project (not possible with an sfz file)</source>
+        <translation>将音色库存储在工程中 (sfz 文件不可用)</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="641"/>
+        <source>Store the soundfont in the project</source>
+        <translation>将音色库存储在工程中</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="643"/>
+        <source>Channels and effects on their own outputs</source>
+        <translation>通道和效果使用各自的输出</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="684"/>
+        <source>Synth</source>
+        <translation>合成器</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="684"/>
+        <source>Reverb</source>
+        <translation>混响</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="685"/>
+        <source>Chorus</source>
+        <translation>合唱</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="213"/>
+        <source>too many soundfonts are still playing, try again in a moment</source>
+        <translation>仍有过多音色库正在播放，请稍后再试</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="554"/>
+        <source>file not found</source>
+        <translation>找不到文件</translation>
+    </message>
+</context>
+<context>
+    <name>PluginJuce</name>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="443"/>
+        <location filename="../../plugin/plugintranslator.cpp" line="60"/>
+        <source>Options</source>
+        <translation>选项</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="61"/>
+        <source>Audio/MIDI Settings...</source>
+        <translation>音频/MIDI 设置...</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="62"/>
+        <source>Save current state...</source>
+        <translation>保存当前状态...</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="63"/>
+        <source>Load a saved state...</source>
+        <translation>加载已保存的状态...</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="64"/>
+        <source>Reset to default state</source>
+        <translation>恢复默认状态</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="65"/>
+        <source>Audio/MIDI Settings</source>
+        <translation>音频/MIDI 设置</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="66"/>
+        <source>Save current state</source>
+        <translation>保存当前状态</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="67"/>
+        <source>Load a saved state</source>
+        <translation>加载已保存的状态</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="68"/>
+        <source>Error whilst saving</source>
+        <translation>保存时出错</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="69"/>
+        <source>Couldn&apos;t write to the specified file!</source>
+        <translation>无法写入指定的文件！</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="70"/>
+        <source>Error whilst loading</source>
+        <translation>加载时出错</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="71"/>
+        <source>Couldn&apos;t read from the specified file!</source>
+        <translation>无法读取指定的文件！</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="74"/>
+        <source>Audio device type:</source>
+        <translation>音频设备类型：</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="75"/>
+        <source>Output:</source>
+        <translation>输出：</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="76"/>
+        <source>Input:</source>
+        <translation>输入：</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="77"/>
+        <source>Device:</source>
+        <translation>设备：</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="78"/>
+        <source>Test</source>
+        <translation>测试</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="79"/>
+        <source>Plays a test tone</source>
+        <translation>播放测试音</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="80"/>
+        <source>Control Panel</source>
+        <translation>控制面板</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="81"/>
+        <source>Opens the device&apos;s own control panel</source>
+        <translation>打开设备自带的控制面板</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="82"/>
+        <source>Reset Device</source>
+        <translation>重置设备</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="83"/>
+        <source>Resets the audio interface - sometimes needed after changing a device&apos;s properties in its custom control panel</source>
+        <translation>重置音频接口——在设备自带的控制面板中更改其属性后有时需要这样做</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="85"/>
+        <source>Active output channels:</source>
+        <translation>已启用的输出通道：</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="86"/>
+        <source>Active input channels:</source>
+        <translation>已启用的输入通道：</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="87"/>
+        <source>(no audio output channels found)</source>
+        <translation>(未找到音频输出通道)</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="88"/>
+        <source>(no audio input channels found)</source>
+        <translation>(未找到音频输入通道)</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="89"/>
+        <source>Sample rate:</source>
+        <translation>采样率：</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="90"/>
+        <source>Audio buffer size:</source>
+        <translation>音频缓冲区大小：</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="91"/>
+        <source>Show advanced settings...</source>
+        <translation>显示高级设置...</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="92"/>
+        <source>Active MIDI inputs:</source>
+        <translation>已启用的 MIDI 输入：</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="93"/>
+        <source>No MIDI inputs available</source>
+        <translation>没有可用的 MIDI 输入</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="94"/>
+        <source>MIDI Output:</source>
+        <translation>MIDI 输出：</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="95"/>
+        <source>none</source>
+        <translation>无</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="96"/>
+        <source>Bluetooth MIDI</source>
+        <translation>蓝牙 MIDI</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="97"/>
+        <source>Scan for bluetooth MIDI devices</source>
+        <translation>扫描蓝牙 MIDI 设备</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="98"/>
+        <source>Error when trying to open audio device!</source>
+        <translation>打开音频设备时出错！</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="101"/>
+        <source>Open</source>
+        <translation>打开</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="102"/>
+        <source>Save</source>
+        <translation>保存</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="103"/>
+        <source>Choose</source>
+        <translation>选择</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="104"/>
+        <source>file:</source>
+        <translation>文件：</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="105"/>
+        <source>Go up to parent directory</source>
+        <translation>转到上级目录</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="106"/>
+        <source>Home folder</source>
+        <translation>主文件夹</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="107"/>
+        <source>Desktop</source>
+        <translation>桌面</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="108"/>
+        <source>Documents</source>
+        <translation>文档</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="109"/>
+        <source>Music</source>
+        <translation>音乐</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="110"/>
+        <source>Pictures</source>
+        <translation>图片</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="111"/>
+        <source>Hard Drive</source>
+        <translation>硬盘</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="112"/>
+        <source>CD/DVD drive</source>
+        <translation>CD/DVD 驱动器</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="113"/>
+        <source>New Folder</source>
+        <translation>新建文件夹</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="114"/>
+        <source>Create Folder</source>
+        <translation>创建文件夹</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="115"/>
+        <source>Please enter the name for the folder</source>
+        <translation>请输入文件夹名称</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="116"/>
+        <source>Couldn&apos;t create the folder!</source>
+        <translation>无法创建文件夹！</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="117"/>
+        <source>File already exists</source>
+        <translation>文件已存在</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="118"/>
+        <source>There&apos;s already a file called: FLNM</source>
+        <translation>已存在同名文件：FLNM</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="119"/>
+        <source>Are you sure you want to overwrite it?</source>
+        <translation>确定要覆盖它吗？</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="120"/>
+        <source>Overwrite</source>
+        <translation>覆盖</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="123"/>
+        <source>OK</source>
+        <translation>确定</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="124"/>
+        <source>Cancel</source>
+        <translation>取消</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="125"/>
+        <source>Yes</source>
+        <translation>是</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="126"/>
+        <source>No</source>
+        <translation>否</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintranslator.cpp" line="127"/>
+        <source>(no choices)</source>
+        <translation>(无选项)</translation>
+    </message>
+</context>
+<context>
+    <name>PluginProcessor</name>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="51"/>
+        <source>Main</source>
+        <translation>主输出</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="53"/>
+        <source>Channel %1</source>
+        <translation>通道 %1</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="55"/>
+        <source>Effects</source>
+        <translation>效果</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="122"/>
+        <source>Gain</source>
+        <translation>增益</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="125"/>
+        <source>Reverb</source>
+        <translation>混响</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="125"/>
+        <source>Reverb level</source>
+        <translation>混响电平</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="126"/>
+        <source>Reverb size</source>
+        <translation>混响大小</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="126"/>
+        <source>Reverb width</source>
+        <translation>混响宽度</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="127"/>
+        <source>Reverb damping</source>
+        <translation>混响阻尼</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="129"/>
+        <source>Chorus</source>
+        <translation>合唱</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="129"/>
+        <source>Chorus level</source>
+        <translation>合唱电平</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="130"/>
+        <source>Chorus depth</source>
+        <translation>合唱深度</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="130"/>
+        <source>Chorus frequency</source>
+        <translation>合唱频率</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="136"/>
+        <source>Tuning</source>
+        <translation>调音</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="137"/>
+        <source>Transposition</source>
+        <translation>移调</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="138"/>
+        <source>semitones</source>
+        <translation>半音</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="139"/>
+        <source>Reference pitch</source>
+        <translation>参考音高</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="142"/>
+        <source>Temperament</source>
+        <translation>律制</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="145"/>
+        <source>Temperament key</source>
+        <translation>律制基准调</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="183"/>
+        <source>Equal</source>
+        <comment>Equal musical temperament</comment>
+        <translation>平均律</translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <location filename="../../core/input/grandorgue/grandorguerank.cpp" line="142"/>

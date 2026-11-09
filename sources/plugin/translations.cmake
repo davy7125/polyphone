@@ -1,0 +1,51 @@
+# Translations of the plugin (see plugintranslator.h): the contexts whose name starts with "Plugin" in the translation
+# files of the editor (sources/resources/translations/polyphone_XX.ts) are extracted at the configuration, without Qt,
+# into <language>.xml files embedded in a binary data target (namespace PluginTranslations, header
+# PluginTranslations.h). English is the language of the sources: it has no file. A change of a .ts file configures
+# again the project.
+function(polyphone_add_plugin_translations target)
+    set(output_directory ${CMAKE_CURRENT_BINARY_DIR}/plugin_translations)
+    file(GLOB ts_files ${CMAKE_CURRENT_FUNCTION_LIST_DIR}/../resources/translations/polyphone_*.ts)
+    set(outputs "")
+    foreach(ts_file ${ts_files})
+        get_filename_component(language ${ts_file} NAME_WE)
+        string(REGEX REPLACE "^polyphone_" "" language "${language}")
+        if(language STREQUAL "en")
+            continue()
+        endif()
+        set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS ${ts_file})
+
+        # Contexts "Plugin...": from their name to the end of the context (the tag <name> is only used by the contexts,
+        # a "<" in a text being written "&lt;")
+        file(READ ${ts_file} content)
+        set(extracted "")
+        while(TRUE)
+            string(FIND "${content}" "<name>Plugin" start)
+            if(start EQUAL -1)
+                break()
+            endif()
+            string(SUBSTRING "${content}" ${start} -1 content)
+            string(FIND "${content}" "</context>" end)
+            if(end EQUAL -1)
+                message(FATAL_ERROR "Context not closed in ${ts_file}")
+            endif()
+            string(SUBSTRING "${content}" 0 ${end} context)
+            string(APPEND extracted "<context>\n    ${context}</context>\n")
+            string(SUBSTRING "${content}" ${end} -1 content)
+        endwhile()
+
+        # Without the locations of the texts in the sources (smaller, and not changed by a change of line)
+        string(REGEX REPLACE "[ ]*<location [^>]*/>\n" "" extracted "${extracted}")
+
+        # Written if it changed only (the binary data is not built again otherwise)
+        set(output ${output_directory}/${language}.xml)
+        file(WRITE ${output}.tmp "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<TS>\n${extracted}</TS>\n")
+        file(COPY_FILE ${output}.tmp ${output} ONLY_IF_DIFFERENT)
+        file(REMOVE ${output}.tmp)
+        list(APPEND outputs ${output})
+    endforeach()
+    if(NOT outputs)
+        message(FATAL_ERROR "No translation found in ${CMAKE_CURRENT_FUNCTION_LIST_DIR}/../resources/translations")
+    endif()
+    juce_add_binary_data(${target} HEADER_NAME PluginTranslations.h NAMESPACE PluginTranslations SOURCES ${outputs})
+endfunction()

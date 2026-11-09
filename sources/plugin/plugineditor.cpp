@@ -24,6 +24,7 @@
 
 
 #include "plugineditor.h"
+#include <iterator>
 #include "BinaryData.h"
 
 // Colors of the theme "Dark, orange" of the editor
@@ -40,6 +41,25 @@ static const juce::Colour HIGHLIGHTED_TEXT_COLOR(0xff000000);
 static const juce::Colour ERROR_COLOR(0xffff5050);
 
 static const int POLYPHONIES[] = { 64, 128, 256, 512, 1024, 2048, 4096 };
+
+// Identifiers of the items of the settings menu
+static const int MENU_CHANNEL = 10000; // + channel
+static const int MENU_STORE_SOUNDFONT = 20000;
+static const int MENU_MULTIPLE_OUTPUTS = 20001;
+static const int MENU_SYSTEM_LANGUAGE = 30000;
+static const int MENU_LANGUAGE = 30001; // + index of the language
+
+// Errors given by the synth core (SynthSoundfontFile, Sf2Reader) and by the processor, translated when they are shown.
+// The other ones are "cannot open the file <path>" and "invalid <chunk> index" (see translateError).
+static const char * const ERRORS[] = {
+    QT_TRANSLATE_NOOP("PluginEditor", "cannot open the file"),
+    QT_TRANSLATE_NOOP("PluginEditor", "file recursion (#include)"),
+    QT_TRANSLATE_NOOP("PluginEditor", "not enough memory"),
+    QT_TRANSLATE_NOOP("PluginEditor", "this is not a DLS file"),
+    QT_TRANSLATE_NOOP("PluginEditor", "invalid header"),
+    QT_TRANSLATE_NOOP("PluginEditor", "corrupted file (sdta)"),
+    QT_TRANSLATE_NOOP("PluginEditor", "corrupted file (pdta)")
+};
 
 static bool isSoundfontFile(const juce::String &path)
 {
@@ -153,7 +173,6 @@ public:
         _numberLabel.setJustificationType(juce::Justification::centredRight);
         _numberLabel.setColour(juce::Label::textColourId, DIM_TEXT_COLOR);
         addAndMakeVisible(_numberLabel);
-        _programBox.setTooltip("Preset played by the channel, or the one chosen by the program changes it receives");
         _programBox.onChange = [this] {
             int id = _programBox.getSelectedId();
             if (onProgramChange && id > 0)
@@ -169,8 +188,10 @@ public:
 
     void setPresets(const PluginEditor &editor, const std::vector<PluginEngine::Preset> &presets, int program)
     {
+        _programBox.setTooltip(tr("Preset played by the channel, or the one chosen by the program changes it "
+                                  "receives"));
         _programBox.clear(juce::dontSendNotification);
-        _programBox.addItem(_channel == 9 ? "Program change (drums)" : "Program change", 1);
+        _programBox.addItem(_channel == 9 ? tr("Program change (drums)") : tr("Program change"), 1);
         bool found = (program < 0);
         for (const PluginEngine::Preset &preset : presets)
         {
@@ -245,6 +266,7 @@ PluginEditor::PluginEditor(PluginProcessor &pluginProcessor) :
     AudioProcessorEditor(&pluginProcessor),
     _processor(pluginProcessor),
     _lookAndFeel(new LookAndFeel()),
+    _languageVersion(-1),
     _isDragging(false),
     _keyboard(pluginProcessor.getKeyboardState(), juce::MidiKeyboardComponent::horizontalKeyboard)
 {
@@ -256,28 +278,19 @@ PluginEditor::PluginEditor(PluginProcessor &pluginProcessor) :
     addAndMakeVisible(_soundfontLabel);
     _messageLabel.setFont(juce::FontOptions(13.0f));
     addAndMakeVisible(_messageLabel);
-    _openButton.setButtonText("Open...");
-    _openButton.setTooltip("Open a soundfont (sf2, sf3, sfz or dls), which can also be dropped on the window");
     _openButton.onClick = [this] { openFile(); };
     addAndMakeVisible(_openButton);
     _recentButton.setButtonText(juce::String::fromUTF8("\xe2\x96\xbe"));
-    _recentButton.setTooltip("Recent soundfonts");
     _recentButton.onClick = [this] { showRecentFiles(); };
     addAndMakeVisible(_recentButton);
 
     // Presets played
-    _onePresetButton.setButtonText("One preset");
-    _onePresetButton.setTooltip("The same preset is played on all MIDI channels");
     _onePresetButton.setClickingTogglesState(false);
     _onePresetButton.onClick = [this] { setMode(PluginEngine::MODE_ONE_PRESET); };
     addAndMakeVisible(_onePresetButton);
-    _channelsButton.setButtonText("16 channels");
-    _channelsButton.setTooltip("Each MIDI channel plays its preset, or the one chosen by its program changes (General MIDI)");
     _channelsButton.onClick = [this] { setMode(PluginEngine::MODE_CHANNELS); };
     addAndMakeVisible(_channelsButton);
     _mpeButton.setButtonText("MPE");
-    _mpeButton.setTooltip("The same preset is played by an MPE controller: each note has its own pitch bend, pressure and "
-                          "timbre (lower zone of 15 channels, or the zones given by the controller)");
     _mpeButton.onClick = [this] { setMode(PluginEngine::MODE_MPE); };
     addAndMakeVisible(_mpeButton);
     _presetList.reset(new PresetList(*this));
@@ -295,31 +308,20 @@ PluginEditor::PluginEditor(PluginProcessor &pluginProcessor) :
     _channelViewport.setScrollBarsShown(true, false);
     addChildComponent(_channelViewport);
 
-    // Parameters
-    addKnob("gain", "Gain");
-    addKnob("transpose", "Transpose");
-    addKnob("tuning", "Tuning");
-    addKnob("reverbLevel", "Level");
-    addKnob("reverbSize", "Size");
-    addKnob("reverbWidth", "Width");
-    addKnob("reverbDamping", "Damping");
-    addKnob("chorusLevel", "Level");
-    addKnob("chorusDepth", "Depth");
-    addKnob("chorusFrequency", "Frequency");
-    _temperamentLabel.setText("Temperament", juce::dontSendNotification);
+    // Parameters (names in updateTexts)
+    for (const char * parameterId : { "gain", "transpose", "tuning", "reverbLevel", "reverbSize", "reverbWidth",
+                                      "reverbDamping", "chorusLevel", "chorusDepth", "chorusFrequency" })
+        addKnob(parameterId);
     _temperamentLabel.setJustificationType(juce::Justification::centred);
     addAndMakeVisible(_temperamentLabel);
-    int id = 1;
-    for (const PluginProcessor::Temperament &temperament : PluginProcessor::getTemperaments())
-        _temperamentBox.addItem(temperament.name, id++);
-    _temperamentBox.setTooltip("Temperament, its fine tunes being relative to the key chosen on the right");
+    for (size_t i = 0; i < PluginProcessor::getTemperaments().size(); i++)
+        _temperamentBox.addItem(PluginProcessor::getTemperamentName(i), static_cast<int>(i) + 1);
     addAndMakeVisible(_temperamentBox);
     _temperamentAttachment.reset(new juce::AudioProcessorValueTreeState::ComboBoxAttachment(
         _processor.getParameterState(), "temperament", _temperamentBox));
-    id = 1;
+    int id = 1;
     for (const char * key : { "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" })
         _temperamentKeyBox.addItem(key, id++);
-    _temperamentKeyBox.setTooltip("Key of reference of the temperament");
     addAndMakeVisible(_temperamentKeyBox);
     _temperamentKeyAttachment.reset(new juce::AudioProcessorValueTreeState::ComboBoxAttachment(
         _processor.getParameterState(), "temperamentKey", _temperamentKeyBox));
@@ -331,11 +333,8 @@ PluginEditor::PluginEditor(PluginProcessor &pluginProcessor) :
     addAndMakeVisible(_keyboard);
     _statusLabel.setColour(juce::Label::textColourId, DIM_TEXT_COLOR);
     addAndMakeVisible(_statusLabel);
-    _panicButton.setButtonText("Panic");
-    _panicButton.setTooltip("Stop all sounds and reset the controllers");
     _panicButton.onClick = [this] { _processor.getEngine().panic(); };
     addAndMakeVisible(_panicButton);
-    _settingsButton.setButtonText("Settings");
     _settingsButton.onClick = [this] { showSettings(); };
     addAndMakeVisible(_settingsButton);
 
@@ -344,8 +343,7 @@ PluginEditor::PluginEditor(PluginProcessor &pluginProcessor) :
     setSize(900, 600);
 
     _processor.addChangeListener(this);
-    refresh();
-    timerCallback();
+    timerCallback(); // Texts, soundfont and what is played
     startTimerHz(20);
 }
 
@@ -355,7 +353,7 @@ PluginEditor::~PluginEditor()
     setLookAndFeel(nullptr);
 }
 
-PluginEditor::Knob * PluginEditor::addKnob(const juce::String &parameterId, const juce::String &name)
+PluginEditor::Knob * PluginEditor::addKnob(const juce::String &parameterId)
 {
     Knob * knob = new Knob();
     _knobs.emplace_back(knob);
@@ -363,7 +361,6 @@ PluginEditor::Knob * PluginEditor::addKnob(const juce::String &parameterId, cons
     knob->slider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 72, 18);
     knob->slider.setPopupDisplayEnabled(false, false, this);
     addAndMakeVisible(knob->slider);
-    knob->label.setText(name, juce::dontSendNotification);
     knob->label.setJustificationType(juce::Justification::centred);
     knob->label.setFont(juce::FontOptions(13.0f));
     addAndMakeVisible(knob->label);
@@ -379,7 +376,90 @@ juce::String PluginEditor::getPresetText(int program) const
     for (const PluginEngine::Preset &preset : _presets)
         if (preset.program == program)
             return text + " " + juce::String::fromUTF8(preset.name.c_str());
-    return text + " (no preset)";
+    return text + " " + tr("(no preset)");
+}
+
+void PluginEditor::updateTexts()
+{
+    _languageVersion = PluginTranslator::getLanguageVersion();
+
+    _openButton.setButtonText(tr("Open..."));
+    _openButton.setTooltip(tr("Open a soundfont (sf2, sf3, sfz or dls), which can also be dropped on the window"));
+    _recentButton.setTooltip(tr("Recent soundfonts"));
+    _onePresetButton.setButtonText(tr("One preset"));
+    _onePresetButton.setTooltip(tr("The same preset is played on all MIDI channels"));
+    _channelsButton.setButtonText(tr("16 channels"));
+    _channelsButton.setTooltip(tr("Each MIDI channel plays its preset, or the one chosen by its program changes "
+                                  "(General MIDI)"));
+    _mpeButton.setTooltip(tr("The same preset is played by an MPE controller: each note has its own pitch bend, "
+                             "pressure and timbre (lower zone of 15 channels, or the zones given by the controller)"));
+
+    // Knobs, in the order of their creation
+    const juce::String knobNames[] = {
+        tr("Gain"), tr("Transpose"), tr("Tuning"),
+        tr("Level", "reverb"), tr("Size", "reverb"), tr("Width", "reverb"), tr("Damping", "reverb"),
+        tr("Level", "chorus"), tr("Depth", "chorus"), tr("Frequency", "chorus")
+    };
+    for (size_t i = 0; i < _knobs.size() && i < std::size(knobNames); i++)
+        _knobs[i]->label.setText(knobNames[i], juce::dontSendNotification);
+    _temperamentLabel.setText(tr("Temperament"), juce::dontSendNotification);
+    _temperamentBox.changeItemText(1, PluginProcessor::getTemperamentName(0));
+    _temperamentBox.setTooltip(tr("Temperament, its fine tunes being relative to the key chosen on the right"));
+    _temperamentKeyBox.setTooltip(tr("Key of reference of the temperament"));
+
+    _panicButton.setButtonText(tr("Panic"));
+    _panicButton.setTooltip(tr("Stop all sounds and reset the controllers"));
+    _settingsButton.setButtonText(tr("Settings"));
+
+    updateStandaloneTexts();
+    refresh();
+    resized(); // Widths of the buttons
+    repaint(); // Titles of the groups
+}
+
+void PluginEditor::parentHierarchyChanged()
+{
+    AudioProcessorEditor::parentHierarchyChanged();
+    updateStandaloneTexts();
+}
+
+void PluginEditor::updateStandaloneTexts()
+{
+    // The button "Options" of the window of the standalone application is not translated by JUCE (the items of its
+    // menu are): it is the only text button of the window
+    if (_processor.wrapperType != juce::AudioProcessor::wrapperType_Standalone)
+        return;
+    juce::Component * window = getTopLevelComponent();
+    if (window == this)
+        return;
+    for (juce::Component * child : window->getChildren())
+    {
+        if (juce::TextButton * button = dynamic_cast<juce::TextButton *>(child))
+        {
+            juce::NamedValueSet &buttonProperties = button->getProperties();
+            if (!buttonProperties.contains("sourceText"))
+                buttonProperties.set("sourceText", button->getButtonText());
+            if (buttonProperties["sourceText"].toString() == "Options")
+                button->setButtonText(PluginTranslator::translate("PluginJuce", "Options"));
+        }
+    }
+}
+
+juce::String PluginEditor::translateError(const juce::String &error)
+{
+    for (const char * text : ERRORS)
+        if (error == text)
+            return tr(text);
+    if (error == "too many soundfonts are still playing, try again in a moment" || error == "file not found")
+        return tr(error.toRawUTF8());
+
+    // "cannot open the file <path>" (sfz), "invalid <chunk> index" (sf2)
+    const juce::String cannotOpen = "cannot open the file ";
+    if (error.startsWith(cannotOpen))
+        return PluginTranslator::arg(tr("cannot open the file %1"), error.substring(cannotOpen.length()));
+    if (error.startsWith("invalid ") && error.endsWith(" index"))
+        return PluginTranslator::arg(tr("invalid %1 index"), error.substring(8, error.length() - 6));
+    return error;
 }
 
 void PluginEditor::refresh()
@@ -390,7 +470,7 @@ void PluginEditor::refresh()
     juce::File file = _processor.getSoundfontFile();
     juce::String name = juce::String::fromUTF8(engine.getSoundfontInfo("INAM").c_str()).trim();
     if (!engine.hasSoundfont())
-        name = file == juce::File() ? juce::String("No soundfont") : file.getFileName();
+        name = file == juce::File() ? tr("No soundfont") : file.getFileName();
     else if (name.isEmpty())
         name = file.getFileNameWithoutExtension();
     _soundfontLabel.setText(name, juce::dontSendNotification);
@@ -398,20 +478,20 @@ void PluginEditor::refresh()
     juce::String error = _processor.getError();
     if (_processor.isLoading())
     {
-        _messageLabel.setText("Loading...", juce::dontSendNotification);
+        _messageLabel.setText(tr("Loading..."), juce::dontSendNotification);
         _messageLabel.setColour(juce::Label::textColourId, HIGHLIGHT_COLOR);
     }
     else if (error.isNotEmpty())
     {
-        _messageLabel.setText("Cannot read the soundfont: " + error +
+        _messageLabel.setText(PluginTranslator::arg(tr("Cannot read the soundfont: %1"), translateError(error)) +
                                   (file == juce::File() ? juce::String() : " (" + file.getFullPathName() + ")"),
                               juce::dontSendNotification);
         _messageLabel.setColour(juce::Label::textColourId, ERROR_COLOR);
     }
     else
     {
-        _messageLabel.setText(engine.hasSoundfont() ? file.getFullPathName() :
-                                  juce::String("Open a soundfont or drop it here"), juce::dontSendNotification);
+        _messageLabel.setText(engine.hasSoundfont() ? file.getFullPathName() : tr("Open a soundfont or drop it here"),
+                              juce::dontSendNotification);
         _messageLabel.setColour(juce::Label::textColourId, DIM_TEXT_COLOR);
     }
     _soundfontLabel.setTooltip(juce::String::fromUTF8(engine.getSoundfontInfo("ICOP").c_str()));
@@ -447,10 +527,14 @@ void PluginEditor::changeListenerCallback(juce::ChangeBroadcaster *)
 
 void PluginEditor::timerCallback()
 {
+    // Language changed (possibly by another instance)
+    if (PluginTranslator::getLanguageVersion() != _languageVersion)
+        updateTexts();
+
     PluginEngine &engine = _processor.getEngine();
-    _statusLabel.setText("Voices: " + juce::String(engine.getVoiceCount()) + "    CPU: " +
-                             juce::String(juce::roundToInt(100.0f * engine.getLoad())) + " %",
-                         juce::dontSendNotification);
+    juce::String load(juce::roundToInt(100.0f * engine.getLoad()));
+    _statusLabel.setText(PluginTranslator::arg(tr("Voices: %1"), juce::String(engine.getVoiceCount())) + "    " +
+                             PluginTranslator::arg(tr("CPU: %1 %"), load), juce::dontSendNotification);
     if (_channelViewport.isVisible())
         for (int channel = 0; channel < 16; channel++)
             _channelRows[static_cast<size_t>(channel)]->update(*this, engine.getPlayedProgram(channel),
@@ -464,7 +548,7 @@ void PluginEditor::openFile()
     juce::File file = _processor.getSoundfontFile();
     juce::File directory = file.getParentDirectory().isDirectory() ? file.getParentDirectory() :
                                juce::File::getSpecialLocation(juce::File::userHomeDirectory);
-    _fileChooser.reset(new juce::FileChooser("Open a soundfont", directory, "*.sf2;*.sf3;*.sfz;*.dls"));
+    _fileChooser.reset(new juce::FileChooser(tr("Open a soundfont"), directory, "*.sf2;*.sf3;*.sfz;*.dls"));
     _fileChooser->launchAsync(juce::FileBrowserComponent::openMode | juce::FileBrowserComponent::canSelectFiles,
                               [this](const juce::FileChooser &chooser) {
         juce::File chosen = chooser.getResult();
@@ -478,7 +562,7 @@ void PluginEditor::showRecentFiles()
     juce::PopupMenu menu;
     juce::StringArray files = _processor.getRecentFiles();
     if (files.isEmpty())
-        menu.addItem(-1, "No recent soundfont", false);
+        menu.addItem(-1, tr("No recent soundfont"), false);
     for (int i = 0; i < files.size(); i++)
         menu.addItem(i + 1, juce::File(files[i]).getFileName() + "   (" + juce::File(files[i]).getParentDirectory().getFullPathName() + ")");
     menu.showMenuAsync(juce::PopupMenu::Options().withTargetComponent(&_recentButton), [this, files](int result) {
@@ -527,30 +611,54 @@ void PluginEditor::showSettings()
 {
     juce::PopupMenu polyphonyMenu;
     for (int polyphony : POLYPHONIES)
-        polyphonyMenu.addItem(polyphony, juce::String(polyphony) + " voices", true, _processor.getPolyphony() == polyphony);
+        polyphonyMenu.addItem(polyphony, PluginTranslator::arg(tr("%1 voices"), juce::String(polyphony)), true,
+                              _processor.getPolyphony() == polyphony);
 
     juce::PopupMenu channelMenu;
     for (int channel = 1; channel <= 16; channel++)
-        channelMenu.addItem(10000 + channel, "Channel " + juce::String(channel), true,
-                            _keyboard.getMidiChannel() == channel);
+        channelMenu.addItem(MENU_CHANNEL + channel, PluginTranslator::arg(tr("Channel %1"), juce::String(channel)),
+                            true, _keyboard.getMidiChannel() == channel);
+
+    // Languages in their own names, the language of the system being the default one
+    std::vector<PluginTranslator::Language> languages = PluginTranslator::getLanguages();
+    juce::String languageSetting = PluginTranslator::getLanguageSetting();
+    juce::PopupMenu languageMenu;
+    languageMenu.addItem(MENU_SYSTEM_LANGUAGE, tr("System language"), true, languageSetting.isEmpty());
+    languageMenu.addSeparator();
+    for (size_t i = 0; i < languages.size(); i++)
+        languageMenu.addItem(MENU_LANGUAGE + static_cast<int>(i), languages[i].name, true,
+                             languages[i].code == languageSetting);
 
     juce::PopupMenu menu;
-    menu.addSubMenu("Polyphony", polyphonyMenu);
-    menu.addSubMenu("Keyboard", channelMenu);
+    menu.addSubMenu(tr("Polyphony"), polyphonyMenu);
+    menu.addSubMenu(tr("Keyboard"), channelMenu);
+    menu.addSubMenu(tr("Language"), languageMenu);
+    menu.addSeparator();
     // An sfz file is not stored: its samples are other files
     bool isSfz = _processor.getSoundfontFile().hasFileExtension("sfz");
-    menu.addItem(20000, isSfz ? "Store the soundfont in the project (not possible with an sfz file)" :
-                                "Store the soundfont in the project", !isSfz, _processor.isSoundfontStored() && !isSfz);
-    menu.addItem(20001, "Channels and effects on their own outputs", true, _processor.hasMultipleOutputs());
-    menu.showMenuAsync(juce::PopupMenu::Options().withTargetComponent(&_settingsButton), [this](int result) {
-        if (result == 20000)
+    menu.addItem(MENU_STORE_SOUNDFONT,
+                 isSfz ? tr("Store the soundfont in the project (not possible with an sfz file)") :
+                         tr("Store the soundfont in the project"),
+                 !isSfz, _processor.isSoundfontStored() && !isSfz);
+    menu.addItem(MENU_MULTIPLE_OUTPUTS, tr("Channels and effects on their own outputs"), true,
+                 _processor.hasMultipleOutputs());
+    menu.showMenuAsync(juce::PopupMenu::Options().withTargetComponent(&_settingsButton), [this, languages](int result) {
+        if (result == MENU_STORE_SOUNDFONT)
             _processor.setSoundfontStored(!_processor.isSoundfontStored());
-        else if (result == 20001)
+        else if (result == MENU_MULTIPLE_OUTPUTS)
             _processor.setMultipleOutputs(!_processor.hasMultipleOutputs());
-        else if (result > 10000 && result <= 10016)
+        else if (result == MENU_SYSTEM_LANGUAGE ||
+                 (result >= MENU_LANGUAGE && result < MENU_LANGUAGE + static_cast<int>(languages.size())))
         {
-            _keyboard.setMidiChannel(result - 10000);
-            _keyboard.setMidiChannelsToDisplay(1 << (result - 10001));
+            // Texts in the language chosen at once (the other instances follow with their timer)
+            PluginTranslator::setLanguageSetting(result == MENU_SYSTEM_LANGUAGE ? juce::String() :
+                                                     languages[static_cast<size_t>(result - MENU_LANGUAGE)].code);
+            updateTexts();
+        }
+        else if (result > MENU_CHANNEL && result <= MENU_CHANNEL + 16)
+        {
+            _keyboard.setMidiChannel(result - MENU_CHANNEL);
+            _keyboard.setMidiChannelsToDisplay(1 << (result - MENU_CHANNEL - 1));
         }
         else if (result > 0 && result <= 4096)
             _processor.setPolyphony(result);
@@ -571,9 +679,10 @@ void PluginEditor::paint(juce::Graphics &g)
     struct Group
     {
         juce::Rectangle<int> area;
-        const char * title;
+        juce::String title;
     };
-    for (const Group &group : { Group { _synthArea, "Synth" }, Group { _reverbArea, "Reverb" }, Group { _chorusArea, "Chorus" } })
+    for (const Group &group : { Group { _synthArea, tr("Synth") }, Group { _reverbArea, tr("Reverb") },
+                                Group { _chorusArea, tr("Chorus") } })
     {
         g.setColour(HEADER_COLOR);
         g.fillRoundedRectangle(group.area.toFloat(), 6.0f);
@@ -599,11 +708,16 @@ void PluginEditor::resized()
     juce::Rectangle<int> area = getLocalBounds();
 
     // Header: logo, soundfont and buttons
+    // The buttons are as wide as their text, at least (translations)
+    auto buttonWidth = [](juce::TextButton &button, int minimumWidth) {
+        return juce::jmax(minimumWidth, button.getBestWidthForHeight(28));
+    };
     juce::Rectangle<int> header = area.removeFromTop(60).reduced(8, 8);
     header.removeFromLeft(56);
     _recentButton.setBounds(header.removeFromRight(28).withSizeKeepingCentre(28, 28));
     header.removeFromRight(2);
-    _openButton.setBounds(header.removeFromRight(90).withSizeKeepingCentre(90, 28));
+    int openWidth = buttonWidth(_openButton, 90);
+    _openButton.setBounds(header.removeFromRight(openWidth).withSizeKeepingCentre(openWidth, 28));
     header.removeFromRight(8);
     _soundfontLabel.setBounds(header.removeFromTop(24));
     _messageLabel.setBounds(header);
@@ -611,9 +725,9 @@ void PluginEditor::resized()
     // Footer: what is played and buttons, then the keyboard
     juce::Rectangle<int> footer = area.removeFromBottom(36).reduced(8, 4);
     footer.removeFromRight(10); // Corner for resizing the window
-    _settingsButton.setBounds(footer.removeFromRight(90));
+    _settingsButton.setBounds(footer.removeFromRight(buttonWidth(_settingsButton, 90)));
     footer.removeFromRight(6);
-    _panicButton.setBounds(footer.removeFromRight(80));
+    _panicButton.setBounds(footer.removeFromRight(buttonWidth(_panicButton, 80)));
     _statusLabel.setBounds(footer);
     _keyboard.setBounds(area.removeFromBottom(90).reduced(8, 2));
 

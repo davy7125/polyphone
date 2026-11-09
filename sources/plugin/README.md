@@ -38,9 +38,15 @@ LV2, AU (macOS) and a standalone application ("Polyphone Player", not distribute
   percussions), reference pitch and temperament (the ones of the editor).
 - A keyboard showing the notes received and played with the mouse, the number of voices, the share of
   the processor taken and a panic button (all sounds stopped, controllers reset).
-- Settings: polyphony, channel of the keyboard, and the soundfont stored in the project of the host
-  (the project can then be opened without the file; not possible with an sfz file, whose samples are
-  other files).
+- Settings: polyphony, channel of the keyboard, language, and the soundfont stored in the project of
+  the host (the project can then be opened without the file; not possible with an sfz file, whose
+  samples are other files).
+- Interface in the languages of the editor: the language of the system by default, or the one chosen
+  in Settings > Language (shared by all instances, saved with the recent files). The open windows
+  change at once; the names of the parameters and of the outputs given to the host are the ones of
+  the language when the plugin is loaded (always English in LV2, whose description is written during
+  the build). The standalone application is translated too (audio and MIDI settings, file chooser of
+  JUCE).
 - Offline rendering of the host: the computation time never limits the voices.
 
 The state saved by the host contains the parameters, the presets, the polyphony and the path of the
@@ -107,6 +113,22 @@ into its own (`SampleFileReader` reading the samples with libsndfile).
 - `pluginprocessor`: the `juce::AudioProcessor` (parameters, state, soundfont read in another thread
   when it is opened by the interface, in the calling thread when a state is restored).
 - `plugineditor`: the interface, with the colors of the theme "Dark, orange" of the editor.
+- `plugintranslator`: the translations, without Qt (see below).
+
+## Translations
+
+The texts of the plugin are in the translation files of the editor
+(`sources/resources/translations/polyphone_XX.ts`), in the contexts `PluginEditor`, `PluginProcessor`
+and `PluginJuce`: they are updated with the ones of the editor (`update_translations` target of
+`sources/CMakeLists.txt`, or lupdate on `polyphone.pro`) and translated with Qt Linguist. In the
+sources, a class declares `Q_DECLARE_TR_FUNCTIONS(Class)` and calls `tr("text")`, as with Qt (the
+macros are defined in `plugintranslator.h`).
+
+`translations.cmake` extracts these contexts at the configuration, without Qt, and embeds them in the
+plugin (a .ts file changed configures the project again). The context `PluginJuce` holds the texts of
+JUCE shown by the plugin (`TRANS`), listed in `plugintranslator.cpp`: the list is to be checked when
+JUCE is updated. A new language needs its name in `plugintranslator.cpp` (its code is shown
+otherwise).
 
 ## Identifiers
 

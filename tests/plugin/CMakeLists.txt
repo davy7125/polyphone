@@ -58,13 +58,16 @@ endif()
 juce_add_binary_data(PluginSnapshotData SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/../../logo.png
     ${CMAKE_CURRENT_SOURCE_DIR}/../../sources/resources/misc/temperaments.csv)
+include(${CMAKE_CURRENT_SOURCE_DIR}/../../sources/plugin/translations.cmake)
+polyphone_add_plugin_translations(PluginSnapshotTranslations)
 juce_add_console_app(plugin_snapshot PRODUCT_NAME "plugin_snapshot")
 target_sources(plugin_snapshot PRIVATE
     plugin_snapshot.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/../../sources/plugin/pluginengine.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/../../sources/plugin/pluginsoundfont.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/../../sources/plugin/pluginprocessor.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/../../sources/plugin/plugineditor.cpp)
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../sources/plugin/plugineditor.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../sources/plugin/plugintranslator.cpp)
 target_include_directories(plugin_snapshot PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../sources/plugin)
 target_compile_definitions(plugin_snapshot PRIVATE
     JucePlugin_Name="Polyphone"
@@ -73,6 +76,7 @@ target_compile_definitions(plugin_snapshot PRIVATE
 target_link_libraries(plugin_snapshot PRIVATE
     polyphone_synth_core
     PluginSnapshotData
+    PluginSnapshotTranslations
     juce::juce_audio_utils
     juce::juce_gui_extra
     juce::juce_recommended_config_flags)
@@ -83,7 +87,8 @@ target_sources(plugin_threads PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/../../sources/plugin/pluginengine.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/../../sources/plugin/pluginsoundfont.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/../../sources/plugin/pluginprocessor.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/../../sources/plugin/plugineditor.cpp)
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../sources/plugin/plugineditor.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../sources/plugin/plugintranslator.cpp)
 target_include_directories(plugin_threads PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../sources/plugin)
 target_compile_definitions(plugin_threads PRIVATE
     JucePlugin_Name="Polyphone"
@@ -92,6 +97,7 @@ target_compile_definitions(plugin_threads PRIVATE
 target_link_libraries(plugin_threads PRIVATE
     polyphone_synth_core
     PluginSnapshotData
+    PluginSnapshotTranslations
     juce::juce_audio_utils
     juce::juce_gui_extra
     juce::juce_recommended_config_flags)

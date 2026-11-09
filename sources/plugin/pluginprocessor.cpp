@@ -48,10 +48,11 @@ static const int EFFECTS_BUS = CHANNEL_BUS_COUNT + 1;
 juce::AudioProcessor::BusesProperties PluginProcessor::createBuses()
 {
     BusesProperties buses;
-    buses = buses.withOutput("Main", juce::AudioChannelSet::stereo(), true);
+    buses = buses.withOutput(tr("Main"), juce::AudioChannelSet::stereo(), true);
     for (int channel = 1; channel <= CHANNEL_BUS_COUNT; channel++)
-        buses = buses.withOutput("Channel " + juce::String(channel), juce::AudioChannelSet::stereo(), false);
-    return buses.withOutput("Effects", juce::AudioChannelSet::stereo(), false);
+        buses = buses.withOutput(PluginTranslator::arg(tr("Channel %1"), juce::String(channel)),
+                                 juce::AudioChannelSet::stereo(), false);
+    return buses.withOutput(tr("Effects"), juce::AudioChannelSet::stereo(), false);
 }
 
 static std::filesystem::path toPath(const juce::File &file)
@@ -83,12 +84,7 @@ PluginProcessor::PluginProcessor() :
     }
 
     // Settings shared by all instances
-    juce::PropertiesFile::Options options;
-    options.applicationName = "Polyphone plugin";
-    options.filenameSuffix = ".settings";
-    options.folderName = "Polyphone";
-    options.osxLibrarySubFolder = "Application Support";
-    _settings.setStorageParameters(options);
+    _settings.setStorageParameters(getSettingsOptions());
     _settings.getUserSettings();
 
     // Soundfonts replaced that are not played anymore
@@ -102,38 +98,51 @@ PluginProcessor::~PluginProcessor()
     _loadingThread.removeAllJobs(true, -1);
 }
 
+juce::PropertiesFile::Options PluginProcessor::getSettingsOptions()
+{
+    juce::PropertiesFile::Options options;
+    options.applicationName = "Polyphone plugin";
+    options.filenameSuffix = ".settings";
+    options.folderName = "Polyphone";
+    options.osxLibrarySubFolder = "Application Support";
+    return options;
+}
+
 juce::AudioProcessorValueTreeState::ParameterLayout PluginProcessor::createParameters()
 {
-    // Same ranges and default values as the settings of the editor
-    auto percentage = [](const char * id, const char * name) {
+    // Same ranges and default values as the settings of the editor. The names are translated in the language of the
+    // moment (the parameters of an instance keep them).
+    auto percentage = [](const char * id, const juce::String &name) {
         return std::make_unique<juce::AudioParameterInt>(juce::ParameterID(id, 1), name, 0, 100, 0,
                                                          juce::AudioParameterIntAttributes().withLabel("%"));
     };
 
     juce::AudioProcessorValueTreeState::ParameterLayout layout;
     layout.add(std::make_unique<juce::AudioParameterFloat>(
-        juce::ParameterID("gain", 1), "Gain", juce::NormalisableRange<float>(-50.0f, 50.0f, 0.1f), 0.0f,
+        juce::ParameterID("gain", 1), tr("Gain"), juce::NormalisableRange<float>(-50.0f, 50.0f, 0.1f), 0.0f,
         juce::AudioParameterFloatAttributes().withLabel("dB")));
     layout.add(std::make_unique<juce::AudioProcessorParameterGroup>(
-        "reverb", "Reverb", "|", percentage("reverbLevel", "Reverb level"), percentage("reverbSize", "Reverb size"),
-        percentage("reverbWidth", "Reverb width"), percentage("reverbDamping", "Reverb damping")));
+        "reverb", tr("Reverb"), "|", percentage("reverbLevel", tr("Reverb level")),
+        percentage("reverbSize", tr("Reverb size")), percentage("reverbWidth", tr("Reverb width")),
+        percentage("reverbDamping", tr("Reverb damping"))));
     layout.add(std::make_unique<juce::AudioProcessorParameterGroup>(
-        "chorus", "Chorus", "|", percentage("chorusLevel", "Chorus level"), percentage("chorusDepth", "Chorus depth"),
-        percentage("chorusFrequency", "Chorus frequency")));
+        "chorus", tr("Chorus"), "|", percentage("chorusLevel", tr("Chorus level")),
+        percentage("chorusDepth", tr("Chorus depth")), percentage("chorusFrequency", tr("Chorus frequency"))));
 
     juce::StringArray temperaments;
-    for (const Temperament &temperament : getTemperaments())
-        temperaments.add(temperament.name);
+    for (size_t i = 0; i < getTemperaments().size(); i++)
+        temperaments.add(getTemperamentName(i));
     layout.add(std::make_unique<juce::AudioProcessorParameterGroup>(
-        "tuning", "Tuning", "|",
-        std::make_unique<juce::AudioParameterInt>(juce::ParameterID("transpose", 1), "Transposition", -24, 24, 0,
-                                                  juce::AudioParameterIntAttributes().withLabel("semitones")),
-        std::make_unique<juce::AudioParameterFloat>(juce::ParameterID("tuning", 1), "Reference pitch",
+        "tuning", tr("Tuning"), "|",
+        std::make_unique<juce::AudioParameterInt>(juce::ParameterID("transpose", 1), tr("Transposition"), -24, 24, 0,
+                                                  juce::AudioParameterIntAttributes().withLabel(tr("semitones"))),
+        std::make_unique<juce::AudioParameterFloat>(juce::ParameterID("tuning", 1), tr("Reference pitch"),
                                                     juce::NormalisableRange<float>(400.0f, 480.0f, 0.1f), 440.0f,
                                                     juce::AudioParameterFloatAttributes().withLabel("Hz")),
-        std::make_unique<juce::AudioParameterChoice>(juce::ParameterID("temperament", 1), "Temperament", temperaments, 0),
+        std::make_unique<juce::AudioParameterChoice>(juce::ParameterID("temperament", 1), tr("Temperament"),
+                                                     temperaments, 0),
         std::make_unique<juce::AudioParameterChoice>(
-            juce::ParameterID("temperamentKey", 1), "Temperament key",
+            juce::ParameterID("temperamentKey", 1), tr("Temperament key"),
             juce::StringArray { "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" }, 0)));
     return layout;
 }
@@ -167,6 +176,14 @@ const std::vector<PluginProcessor::Temperament> &PluginProcessor::getTemperament
     return temperaments;
 }
 
+juce::String PluginProcessor::getTemperamentName(size_t index)
+{
+    // The names of the editor are not translated, except the first one
+    if (index == 0)
+        return tr("Equal", "Equal musical temperament");
+    return index < getTemperaments().size() ? getTemperaments()[index].name : juce::String();
+}
+
 /// Soundfont
 
 void PluginProcessor::loadSoundfont(const juce::File &file)
@@ -193,7 +210,7 @@ void PluginProcessor::setSoundfont(std::shared_ptr<PluginSoundfont> soundfont, c
     // A soundfont that cannot be read does not replace the current one
     juce::String message = error;
     if (soundfont != nullptr && !_engine.setSoundfont(soundfont->getSynthSoundfont()))
-        message = "too many soundfonts are still playing, try again in a moment";
+        message = QT_TRANSLATE_NOOP("PluginEditor", "too many soundfonts are still playing, try again in a moment");
     else if (soundfont != nullptr)
     {
         const juce::ScopedLock lock(_soundfontLock);
@@ -533,7 +550,8 @@ void PluginProcessor::setStateInformation(const void * data, int sizeInBytes)
         const juce::ScopedLock lock(_soundfontLock);
         _soundfontFile = file;
         _soundfont.reset();
-        _error = path.isEmpty() ? juce::String() : (file.existsAsFile() ? juce::String(error) : "file not found");
+        _error = path.isEmpty() ? juce::String() : (file.existsAsFile() ? juce::String(error) :
+                                                            QT_TRANSLATE_NOOP("PluginEditor", "file not found"));
     }
     _isLoading = false;
 

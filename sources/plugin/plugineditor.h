@@ -38,6 +38,8 @@ class PluginEditor: public juce::AudioProcessorEditor,
                     private juce::ChangeListener,
                     private juce::Timer
 {
+    Q_DECLARE_TR_FUNCTIONS(PluginEditor)
+
 public:
     explicit PluginEditor(PluginProcessor &pluginProcessor);
     ~PluginEditor() override;
@@ -45,6 +47,7 @@ public:
     void paint(juce::Graphics &g) override;
     void paintOverChildren(juce::Graphics &g) override;
     void resized() override;
+    void parentHierarchyChanged() override;
 
     // FileDragAndDropTarget implementation
     bool isInterestedInFileDrag(const juce::StringArray &files) override;
@@ -60,18 +63,22 @@ private:
 
     void changeListenerCallback(juce::ChangeBroadcaster * source) override;
     void timerCallback() override;
+    void updateTexts(); // In the current language
+    void updateStandaloneTexts();
     void refresh(); // Soundfont, presets and settings
     void openFile();
     void showRecentFiles();
     void showSettings();
     void setMode(PluginEngine::Mode mode);
     juce::String getPresetText(int program) const; // "bank:number name"
-    Knob * addKnob(const juce::String &parameterId, const juce::String &name);
+    static juce::String translateError(const juce::String &error);
+    Knob * addKnob(const juce::String &parameterId);
 
     PluginProcessor &_processor;
     std::unique_ptr<LookAndFeel> _lookAndFeel;
     juce::TooltipWindow _tooltipWindow;
     juce::Image _logo;
+    int _languageVersion;
 
     // Soundfont
     juce::Label _soundfontLabel;
