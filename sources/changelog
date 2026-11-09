@@ -1,5 +1,6 @@
 polyphone (2.7) UNRELEASED; urgency=low
 
+  * (new) plugin for the DAWs (VST3, CLAP, LV2 and AU on macOS) playing sf2, sf3, sfz and dls soundfonts with the synth of Polyphone: one preset, 16 channels or MPE, optional outputs per channel
   * (new) DLS import (levels 1 and 2) and export (level 2)
   * (new) MIDI player, with an audio export to a wav file (also available with the command line)
   * (new) voice overflow management: above a maximum polyphony or processor load, the quietest notes fade out
