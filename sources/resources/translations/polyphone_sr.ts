@@ -5538,22 +5538,27 @@ Warning: quality will be reduced and the loop may be altered</source>
         <translation>Сачувај звукотеку у пројекту</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="643"/>
+        <location filename="../../plugin/plugineditor.cpp" line="647"/>
+        <source>Channels and effects on their own outputs (not possible in the standalone application)</source>
+        <translation>Канали и ефекти на сопственим излазима (није могуће у самосталној апликацији)</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="649"/>
         <source>Channels and effects on their own outputs</source>
         <translation>Канали и ефекти на сопственим излазима</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="684"/>
+        <location filename="../../plugin/plugineditor.cpp" line="690"/>
         <source>Synth</source>
         <translation>Синтисајзер</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="684"/>
+        <location filename="../../plugin/plugineditor.cpp" line="690"/>
         <source>Reverb</source>
         <translation>Јека</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="685"/>
+        <location filename="../../plugin/plugineditor.cpp" line="691"/>
         <source>Chorus</source>
         <translation>Хорус</translation>
     </message>

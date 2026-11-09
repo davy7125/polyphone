@@ -5575,22 +5575,27 @@ Advarsel: kvaliteten vil blive reduceret, og loopet kan blive ændret</translati
         <translation>Gem soundfonten i projektet</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="643"/>
+        <location filename="../../plugin/plugineditor.cpp" line="647"/>
+        <source>Channels and effects on their own outputs (not possible in the standalone application)</source>
+        <translation>Kanaler og effekter på egne udgange (ikke muligt i det selvstændige program)</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="649"/>
         <source>Channels and effects on their own outputs</source>
         <translation>Kanaler og effekter på egne udgange</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="684"/>
+        <location filename="../../plugin/plugineditor.cpp" line="690"/>
         <source>Synth</source>
         <translation>Synth</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="684"/>
+        <location filename="../../plugin/plugineditor.cpp" line="690"/>
         <source>Reverb</source>
         <translation>Rumklang</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="685"/>
+        <location filename="../../plugin/plugineditor.cpp" line="691"/>
         <source>Chorus</source>
         <translation>Chorus</translation>
     </message>

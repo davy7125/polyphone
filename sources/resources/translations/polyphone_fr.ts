@@ -5533,22 +5533,27 @@ Attention : la qualité sera réduite et les boucles peuvent être altérés</tr
         <translation>Enregistrer la banque de sons dans le projet</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="643"/>
+        <location filename="../../plugin/plugineditor.cpp" line="647"/>
+        <source>Channels and effects on their own outputs (not possible in the standalone application)</source>
+        <translation>Canaux et effets sur leurs propres sorties (impossible dans l&apos;application autonome)</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="649"/>
         <source>Channels and effects on their own outputs</source>
         <translation>Canaux et effets sur leurs propres sorties</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="684"/>
+        <location filename="../../plugin/plugineditor.cpp" line="690"/>
         <source>Synth</source>
         <translation>Synthé</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="684"/>
+        <location filename="../../plugin/plugineditor.cpp" line="690"/>
         <source>Reverb</source>
         <translation>Réverbération</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="685"/>
+        <location filename="../../plugin/plugineditor.cpp" line="691"/>
         <source>Chorus</source>
         <translation>Chorus</translation>
     </message>

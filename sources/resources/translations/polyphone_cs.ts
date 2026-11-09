@@ -5568,22 +5568,27 @@ Upozornění: kvalita bude snížena a smyčka může být změněna</translatio
         <translation>Uložit zvukovou banku do projektu</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="643"/>
+        <location filename="../../plugin/plugineditor.cpp" line="647"/>
+        <source>Channels and effects on their own outputs (not possible in the standalone application)</source>
+        <translation>Kanály a efekty na vlastních výstupech (v samostatné aplikaci není možné)</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="649"/>
         <source>Channels and effects on their own outputs</source>
         <translation>Kanály a efekty na vlastních výstupech</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="684"/>
+        <location filename="../../plugin/plugineditor.cpp" line="690"/>
         <source>Synth</source>
         <translation>Syntezátor</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="684"/>
+        <location filename="../../plugin/plugineditor.cpp" line="690"/>
         <source>Reverb</source>
         <translation>Dozvuk</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="685"/>
+        <location filename="../../plugin/plugineditor.cpp" line="691"/>
         <source>Chorus</source>
         <translation>Sbor (chorus)</translation>
     </message>

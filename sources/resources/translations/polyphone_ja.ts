@@ -5530,22 +5530,27 @@ Warning: quality will be reduced and the loop may be altered</source>
         <translation>SoundFont をプロジェクトに保存</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="643"/>
+        <location filename="../../plugin/plugineditor.cpp" line="647"/>
+        <source>Channels and effects on their own outputs (not possible in the standalone application)</source>
+        <translation>チャンネルとエフェクトを個別の出力へ (スタンドアロンアプリでは不可)</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="649"/>
         <source>Channels and effects on their own outputs</source>
         <translation>チャンネルとエフェクトを個別の出力へ</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="684"/>
+        <location filename="../../plugin/plugineditor.cpp" line="690"/>
         <source>Synth</source>
         <translation>シンセ</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="684"/>
+        <location filename="../../plugin/plugineditor.cpp" line="690"/>
         <source>Reverb</source>
         <translation>リバーブ</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="685"/>
+        <location filename="../../plugin/plugineditor.cpp" line="691"/>
         <source>Chorus</source>
         <translation>コーラス</translation>
     </message>

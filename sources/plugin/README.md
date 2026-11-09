@@ -32,7 +32,8 @@ LV2, AU (macOS) and a standalone application ("Polyphone Player", not distribute
   the part of the notes of their channel without effect, and the output "Effects" the part sent to
   the reverb and the chorus, after them. A channel goes to the main output if its output is not
   enabled by the host. Without this setting, all is mixed in the main output and the other outputs
-  are silent: some formats (LV2) or hosts always enable all outputs.
+  are silent: some formats (LV2) or hosts always enable all outputs. The setting is disabled in the
+  standalone application, which only plays the main output (the player of JUCE).
 - Parameters that the host can automate, with the ranges of the settings of the editor: gain,
   reverb (level, size, width, damping), chorus (level, depth, frequency), transposition (except the
   percussions), reference pitch and temperament (the ones of the editor).

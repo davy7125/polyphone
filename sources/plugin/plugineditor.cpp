@@ -640,8 +640,14 @@ void PluginEditor::showSettings()
                  isSfz ? tr("Store the soundfont in the project (not possible with an sfz file)") :
                          tr("Store the soundfont in the project"),
                  !isSfz, _processor.isSoundfontStored() && !isSfz);
-    menu.addItem(MENU_MULTIPLE_OUTPUTS, tr("Channels and effects on their own outputs"), true,
-                 _processor.hasMultipleOutputs());
+    // The standalone application of JUCE only plays the main output (AudioProcessorPlayer), the other ones being
+    // disabled: all is mixed in the main output
+    bool isStandalone = _processor.wrapperType == juce::AudioProcessor::wrapperType_Standalone;
+    menu.addItem(MENU_MULTIPLE_OUTPUTS,
+                 isStandalone ? tr("Channels and effects on their own outputs (not possible in the standalone "
+                                   "application)") :
+                                tr("Channels and effects on their own outputs"),
+                 !isStandalone, _processor.hasMultipleOutputs() && !isStandalone);
     menu.showMenuAsync(juce::PopupMenu::Options().withTargetComponent(&_settingsButton), [this, languages](int result) {
         if (result == MENU_STORE_SOUNDFONT)
             _processor.setSoundfontStored(!_processor.isSoundfontStored());
