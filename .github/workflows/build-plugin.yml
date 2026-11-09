@@ -6,7 +6,8 @@ name: Build Polyphone plugin
 # Libraries: those of the system on Linux; built by vcpkg on macOS and Windows (static, triplets in
 # packaging/vcpkg-triplets), libsndfile then reading the samples of the sfz files in flac, ogg, opus and mp3.
 # Windows: built with clang-cl (the synth core uses builtins of GCC and Clang). The archive is signed by SignPath if
-# the variable SIGNPATH_PLUGIN_CONFIGURATION gives the slug of its artifact configuration.
+# the variable SIGNPATH_PLUGIN_CONFIGURATION gives the slug of its artifact configuration (the 3 libraries of the
+# plugin with the product name "Polyphone" and the product version given by the parameter "version").
 
 env:
   VCPKG_TAG: '2026.10.16'
@@ -143,6 +144,7 @@ jobs:
           auval -v aumu Pply Plph
 
       - name: Package
+        id: package
         shell: bash
         run: |
           artefacts=build/plugin/PolyphonePlugin_artefacts/Release
@@ -169,6 +171,9 @@ jobs:
               ;;
             Windows)
               (cd dist && 7z a -tzip "../$name.zip" "$name")
+              # Product version written by JUCE in the version information of the libraries (numbers of
+              # sources/VERSION, as read by sources/plugin/CMakeLists.txt), checked by SignPath
+              echo "product-version=$(grep -oE '^[0-9]+(\.[0-9]+)*' sources/VERSION)" >> "$GITHUB_OUTPUT"
               ;;
           esac
           ls -l Polyphone-plugin_*
@@ -192,6 +197,8 @@ jobs:
           project-slug: polyphone
           signing-policy-slug: release-signing
           artifact-configuration-slug: ${{ vars.SIGNPATH_PLUGIN_CONFIGURATION }}
+          parameters: |
+            version: "${{ steps.package.outputs.product-version }}"
           wait-for-completion: true
           github-artifact-id: '${{ steps.upload-artifact.outputs.artifact-id }}'
           output-artifact-directory: 'signed'
