@@ -44,8 +44,10 @@ static const int CHUNK = 64; // COMPUTATION_CHUNK of the synth core
 
 /// Plugin
 
-static std::unique_ptr<juce::AudioPluginInstance> loadPlugin(const juce::String &path, double sampleRate, int blockSize)
+static std::unique_ptr<juce::AudioPluginInstance> loadPlugin(const juce::String &pluginPath, double sampleRate, int blockSize)
 {
+    // Absolute path: the LV2 format of JUCE only loads a bundle given by an absolute path ("No plugin" otherwise)
+    juce::String path = juce::File::getCurrentWorkingDirectory().getChildFile(pluginPath).getFullPathName();
     juce::AudioPluginFormatManager formats;
     juce::addDefaultFormatsToManager(formats);
     juce::OwnedArray<juce::PluginDescription> descriptions;
@@ -614,10 +616,23 @@ static int runChecks(const juce::String &pluginPath, const juce::String &soundfo
         PluginState multipleState;
         multipleState.soundfont = soundfont;
         multipleState.parameters = { { "gain", -12.0f }, { "reverbLevel", 40.0f }, { "chorusLevel", 40.0f } };
+        // Notes on the channels 1 to 4 with their default preset (3 key ranges), sent to the effects by the controllers 91
+        // and 93 (default modulators). Not the random messages: they may select a missing preset for a channel (channel 4
+        // silent with polyphone-test.sf2), and the soundfont may have no effect send (effects silent).
         std::vector<std::pair<int64_t, juce::MidiMessage>> fourChannels;
-        for (const auto &event : events)
-            if (event.second.getChannel() <= 4)
-                fourChannels.push_back(event);
+        for (int channel = 1; channel <= 4; channel++)
+        {
+            fourChannels.push_back({ 0, juce::MidiMessage::controllerEvent(channel, 91, 127) });
+            fourChannels.push_back({ 0, juce::MidiMessage::controllerEvent(channel, 93, 127) });
+            for (int key : { 40, 64, 76 })
+            {
+                int64_t frame = 1000 * channel + 37 * key;
+                fourChannels.push_back({ frame, juce::MidiMessage::noteOn(channel, key + channel, static_cast<juce::uint8>(100)) });
+                fourChannels.push_back({ frame + 72000, juce::MidiMessage::noteOff(channel, key + channel) });
+            }
+        }
+        std::stable_sort(fourChannels.begin(), fourChannels.end(),
+                         [](const auto &a, const auto &b) { return a.first < b.first; });
         std::vector<float> mainOnly = render(*createInstance(pluginPath, multipleState.write()), 48000, 512, fourChannels, 3.0);
         multipleState.hasMultipleOutputs = true;
         std::unique_ptr<juce::AudioPluginInstance> multiple = createInstance(pluginPath, multipleState.write());
