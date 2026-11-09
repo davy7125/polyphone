@@ -1,186 +1,162 @@
-.TH POLYPHONE "1" "Decembre 22nd, 2024" "polyphone 2.5" "Polyphone Manual Page"
-
+.TH POLYPHONE 1 "November 2026" "polyphone 2.7" "Polyphone Manual Page"
 .SH NAME
-\fBpolyphone\fP \- soundfont editor
-
+polyphone \- soundfont editor
 .SH SYNOPSIS
 .B polyphone
+[\fIFILE\fR]...
 .br
 .B polyphone
-[\fIFILE\fR]
+\fB\-\-convert\fR \fIFORMAT\fR [\fIOPTION\fR]... \fIFILE\fR...
 .br
 .B polyphone
-[\fIFILE_1\fR] [\fIFILE_2\fR] ...
+\fIFILE\fR \fB\-o\fR \fIOUTPUT_FILE\fR [\fIOPTION\fR]...
 .br
 .B polyphone
--1 [\fB\-i\fR \fIINPUT_FILEPATH\fR] [\fB\-d\fR \fIOUTPUT_DIR\fR] [\fB\-o\fR \fIOUTPUT_NAME\fR]
+\fB\-\-render\fR \fIMIDI_FILE\fR [\fIOPTION\fR]... \fISOUNDFONT\fR
 .br
 .B polyphone
--2 [\fB\-i\fR \fIINPUT_FILEPATH\fR] [\fB\-d\fR \fIOUTPUT_DIR\fR] [\fB\-o\fR \fIOUTPUT_NAME\fR] [\fB\-c\fR \fICONFIG\fR]
+\fB\-\-synth\fR [\fIOPTION\fR]... [\fIFILE\fR]...
 .br
 .B polyphone
--3 [\fB\-i\fR \fIINPUT_FILEPATH\fR] [\fB\-d\fR \fIOUTPUT_DIR\fR] [\fB\-o\fR \fIOUTPUT_NAME\fR] [\fB\-c\fR \fICONFIG\fR]
+\fB\-\-mcp\fR [\fB\-\-mcp\-port\fR \fIPORT\fR] [\fIFILE\fR]...
 .br
 .B polyphone
--4 [\fB\-i\fR \fIINPUT_FILEPATH\fR] [\fB\-d\fR \fIOUTPUT_DIR\fR] [\fB\-o\fR \fIOUTPUT_NAME\fR] [\fB\-c\fR \fICONFIG\fR]
-.br
-.B polyphone
--5 [\fB\-i\fR \fIINPUT_FILEPATH\fR] [\fB\-d\fR \fIOUTPUT_DIR\fR] [\fB\-o\fR \fIOUTPUT_NAME\fR] [\fB\-c\fR \fIMIDI_FILEPATH\fR]
-.br
-.B polyphone
--6 [\fB\-i\fR \fIINPUT_FILEPATH\fR] [\fB\-d\fR \fIOUTPUT_DIR\fR] [\fB\-o\fR \fIOUTPUT_NAME\fR]
-.br
-.B polyphone
--s [\fB\-i\fR \fIINPUT_FILEPATH\fR] [\fB\-c\fR \fICONFIG\fR]
-
+\fB\-\-reset\-config\fR | \fB\-\-help\fR | \fB\-\-version\fR
 .SH DESCRIPTION
 .B polyphone
-provides a simple and efficient interface for creating and editing .sf2 files. This software comprises tools to facilitate and automate the editing of different parameters, making it possible to handle a large amount of data.
-.br
+provides a simple and efficient interface for creating and editing soundfonts. This software comprises tools to facilitate and automate the editing of different parameters, making it possible to handle a large amount of data.
 .PP
-sf2, sf3, sfz, dls (import / export), sfArk (import only) and GrandOrgue (import only) formats are supported. Command lines can be used to convert files, render a MIDI file into a wav file, open Polyphone in synthesizer mode or reset configurations in case of trouble.
-.br
+The formats sf2 (version 2.01 or 2.04), sf3, sfz, dls (level 1 or 2), sfArk (version 1 or 2) and GrandOrgue (organ) can be opened, and the files can be converted into sf2, sf3, sfz, csv or dls. The command line can be used to convert files, render a MIDI file into a wav file, open Polyphone in synthesizer mode or with its MCP server started, or reset the configuration in case of trouble.
 .PP
-More information can be found at https://www.polyphone.io .
-
+Without \fB\-\-convert\fR, \fB\-\-render\fR, \fB\-\-synth\fR or \fB\-\-reset\-config\fR, the files and directories given are opened in the editor (a directory in the soundfont explorer). If Polyphone is already open, they are opened in the running instance.
+.PP
+The order of the arguments doesn't matter. The messages and the help are in the language chosen in the settings.
 .SH OPTIONS
 .TP
-.BR \fBFILE\fR
-Specifies the file to open when
-.B polyphone
-starts. Multiple files can be loaded if they are separated by spaces.
-sf2 (version 2.01 or 2.04), sf3, sfz, dls (level 1 or 2), sfArk (version 1 or 2) and GrandOrgue formats are supported.
+\fB\-h\fR, \fB\-\-help\fR
+Display the list of all options.
 .TP
-.BR \fB-1\fR
-Use
-.B polyphone
-to convert a file into the sf2 format.
+\fB\-v\fR, \fB\-\-version\fR
+Display the version of Polyphone.
 .TP
-.BR \fB-2\fR
-Use
-.B polyphone
-to convert a file into the sf3 format.
+\fB\-r\fR, \fB\-\-reset\-config\fR
+Reset the configuration of Polyphone (settings, window geometry, history, etc.).
+.SS Conversion
 .TP
-.BR \fB-3\fR
-Use
-.B polyphone
-to convert a file into the sfz format.
+\fB\-\-convert\fR \fIFORMAT\fR
+Convert each \fIFILE\fR into \fIFORMAT\fR: sf2, sf3, sfz, csv or dls. This option can be omitted if \fB\-\-output\fR gives a file with the extension of the format. Several files can be converted with a single command, each output file having the name of its input file; in case of failure, the other files are still converted.
 .TP
-.BR \fB-4\fR
-Use
-.B polyphone
-to convert a file into the csv format.
+\fB\-o\fR, \fB\-\-output\fR \fIPATH\fR
+Output file, for a single input file. The extension is optional. A name alone is written in the output directory, a relative path starts from the current directory (or from the output directory if \fB\-d\fR is used). By default, the output file has the name of the input file.
 .TP
-.BR \fB-5\fR
-Use
-.B polyphone
-to play a MIDI file with a soundfont and write the result in a wav file.
+\fB\-d\fR, \fB\-\-output\-dir\fR \fIDIRECTORY\fR
+Output directory, which must exist. By default, this is the directory of each input file.
 .TP
-.BR \fB-6\fR
-Use
-.B polyphone
-to convert a file into the dls format (level 2).
+\fB\-f\fR, \fB\-\-force\fR
+Replace an existing output file. Without this option, the conversion fails if the output file exists. The input file can be replaced by its conversion. The sfz and csv conversions create a directory and never replace anything: a number is added to the name of the directory if it already exists.
 .TP
-.BR \fB-s\fR
-Open
-.B polyphone
-in synthesizer mode.
+\fB\-\-quality\fR \fIQUALITY\fR
+Conversion to sf3: compression quality, \fBlow\fR, \fBmedium\fR (default) or \fBhigh\fR.
 .TP
-[\fB\-i\fR \fIINPUT_FILEPATH\fR]
-Input file path to convert or open. The input file format must be sf2, sf3, sfz, dls, sfArk or organ.
+\fB\-\-preset\-prefix\fR
+Conversion to sfz: each preset is prefixed by its preset number.
 .TP
-[\fB\-d\fR \fIOUTPUT_DIR\fR]
-Output directory in which the input file will be converted. By default, this is the same directory than the input file.
+\fB\-\-bank\-dir\fR
+Conversion to sfz: a directory per bank is created.
 .TP
-[\fB\-o\fR \fIOUTPUT_NAME\fR]
-Output name of the converted file. The extension will be automatically added depending on the conversion. By default, this is the same name than the input file.
+\fB\-\-gm\-sort\fR
+Conversion to sfz: the General MIDI classification is used to sort presets.
 .TP
-[\fB\-c\fR \fICONFIG\fR]
-Conversion configuration, the content being dependent on the conversion type.
-.BR \fB-r\fR
-Remove the existing configuration.
-.br
-.BR
- * 
-.B sf2 conversion
-.br
-No configuration for this conversion.
-.br
-.BR
- * 
-.B sf3 conversion
-.br
-The configuration is made of one character indicating the compression quality. '0' for low, '1' for medium and '2' for high quality. Default is '1'.
-.br
-.BR
- * 
-.B sfz conversion
-.br
-The configuration is made up of 3 values separated by a '|'. The first value is '1' if each preset must be prefixed by its preset number, '0' otherwise. The second value is '1' if a directory per bank must be created, '0' otherwise. The third value is '1' if the general midi classification must be used to sort presets, '0' otherwise. Default is '0|0|0'.
-.br
-.BR
- * 
-.B csv conversion
-.br
-The option 'raw' can be used to export raw values (as they are stored in the soundfont file) rather than values with physical, measurable units. For example, the exported release time will be 0.491 (milliseconds) or -1229 in its raw form. By default, values with physical units are exported.
-.br
-.BR
- * 
-.B MIDI file rendering
-.br
-The configuration is the path of the MIDI file to play (mid, midi, kar or rmi). All its channels play the input soundfont, the presets being chosen by the program changes of the file (bank 128 on channel 10), with the settings of the synthesizer (reverb, chorus, gain, polyphony, tuning). The result is a stereo 32-bit float wav file at 48000 Hz, written by default next to the MIDI file and with its name. An existing file is replaced. The notes of a preset that the soundfont does not have are not played and a warning is displayed.
-.br
-.BR
- * 
-.B dls conversion
-.br
-No configuration for this conversion.
-.br
-.BR
- * 
-.B synthesizer mode
-.br
-The configuration is made up of 3 values separated by a '|'. The first value specifies the MIDI channel to be listened to, which can be a value from 1 to 16. A value of 0 or “all” to indicates that all channels will be used and processed as one channel. A value of -1 or “each” listens to each channel separately, which is a prerequisite for playing MIDI files for instance. The second value is 'on' or 'off' to enable playback of several presets at the same time. The third value is 'on', 'off' or 'toggle' to enable presets to be activated or deactivated by the lowest notes on the keyboard. Default is 'all|off|off'.
+\fB\-\-raw\fR
+Conversion to csv: raw values are exported (as they are stored in the soundfont file) rather than values with physical units. For example, the exported release time will be \-1229 instead of 0.491 (seconds).
+.SS Rendering of a MIDI file
+.TP
+\fB\-\-render\fR \fIMIDI_FILE\fR
+Play \fIMIDI_FILE\fR (mid, midi, kar or rmi) with the soundfont given as input file, and write the result in a wav file. All channels play the soundfont, the presets being chosen by the program changes of the file (bank 128 on channel 10), with the settings of the synthesizer (reverb, chorus, general volume, polyphony, tuning). The result is a stereo 32-bit float wav file at 48000 Hz. The notes of a preset that the soundfont doesn't have are not played and a warning is displayed.
+.IP
+The options \fB\-o\fR, \fB\-d\fR and \fB\-f\fR are used as for a conversion, the output file having by default the name and the directory of the MIDI file.
+.SS Synthesizer mode
+.TP
+\fB\-s\fR, \fB\-\-synth\fR
+Open Polyphone in synthesizer mode. The following settings can then be changed in the interface.
+.TP
+\fB\-\-channel\fR \fICHANNEL\fR
+MIDI channel listened to for playing: a number from 1 to 16, \fBall\fR (default) for all channels processed as one channel, or \fBeach\fR for each channel separately, which is a prerequisite for playing the MIDI output of a sequencer for instance.
+.TP
+\fB\-\-multiple\-selection\fR
+Several presets can be selected and played at the same time.
+.TP
+\fB\-\-key\-selection\fR \fIMODE\fR
+With \fBon\fR, presets are selected by the keys corresponding to their number (key 0 selects preset 0, for example). With \fBtoggle\fR, a key also deselects its preset.
+.SS MCP server
+.TP
+\fB\-\-mcp\fR
+Start the MCP server, allowing an AI assistant to browse, edit and analyze the open soundfonts, for this session even if it is disabled in the settings. The address of the server is displayed on the standard output. A new instance of Polyphone is opened, even if Polyphone is already open. Changing the MCP server settings in the interface replaces this option.
+.TP
+\fB\-\-mcp\-port\fR \fIPORT\fR
+Port of the MCP server, implying \fB\-\-mcp\fR. By default, this is the port of the settings (8642).
+.SH OPTIONS OF THE PREVIOUS VERSIONS
+These options are still accepted.
+.TP
+\fB\-1\fR, \fB\-2\fR, \fB\-3\fR, \fB\-4\fR, \fB\-6\fR
+Conversion to sf2, sf3, sfz, csv and dls, the same as \fB\-\-convert\fR.
+.TP
+\fB\-5\fR
+Rendering of a MIDI file, whose path is given with \fB\-c\fR.
+.TP
+\fB\-i\fR \fIFILE\fR
+Input file, which can also be written without this option.
+.TP
+\fB\-c\fR \fICONFIG\fR
+Configuration, made of values separated by '|': compression quality for sf3 ('0' low, '1' medium, '2' high); 3 values '1' or '0' for sfz (\fB\-\-preset\-prefix\fR, \fB\-\-bank\-dir\fR, \fB\-\-gm\-sort\fR), for instance '0|1|1'; 'raw' for csv; path of the MIDI file for \fB\-5\fR; channel ('all', 'each' or 1 to 16, 0 being the same as 'all' and \-1 as 'each'), multiple selection ('on' or 'off') and selection by keys ('on', 'off' or 'toggle') for the synthesizer mode, for instance 'all|on|toggle'.
+.SH EXIT STATUS
+The loading and the writing are logged on the standard output, the errors on the standard error output.
+.TP
+.B 0
+Success.
+.TP
+.B 1
+An input file or the output directory doesn't exist, or the output file already exists (without \fB\-f\fR).
+.TP
+.B 2
+Invalid arguments: unknown option, wrong value, option not used with the chosen mode, unsupported input file format, etc.
+.TP
+.B 3
+An input file cannot be read (soundfont, MIDI file).
+.TP
+.B 4
+The output cannot be written.
+.PP
+When several files are converted, the exit status is the one of the first failure.
 .SH EXAMPLES
- * Conversion from sfArk to sf2:
-.br
-.BR polyphone
--1 -i /path/to/file.sfArk
-.br
-.BR
- * Conversion from sf2 to sf3 (good quality):
-.br
-.BR polyphone
--2 -i /path/to/file.sf2 -c 2
-.br
-.BR
- * Conversion from sf3 to sfz (sub-directories for bank and gm classification):
-.br
-.BR polyphone
--3 -i /path/to/file.sf3 -c '0|1|1'
-.br
-.BR
- * Conversion from dls to sf2:
-.br
-.BR polyphone
--1 -i /path/to/file.dls
-.br
-.BR
- * Conversion from sf2 to dls:
-.br
-.BR polyphone
--6 -i /path/to/file.sf2
-.br
-.BR
- * Rendering of a MIDI file with a soundfont (file.wav is written next to file.mid):
-.br
-.BR polyphone
--5 -i /path/to/soundfont.sf2 -c /path/to/file.mid
-.br
-.BR
- * Open Polyphone in synthesizer mode, allowing use of the bass keys to select the ensemble to be played with a MIDI keyboard:
-.br
-.BR polyphone
--s -i /path/to/file.sf2 -c 'all|off|toggle'
+Conversion from sfArk to sf2:
+.IP
+polyphone \-\-convert sf2 /path/to/file.sfArk
+.PP
+Conversion from sf2 to sf3 (high quality), the format being given by the output file:
+.IP
+polyphone /path/to/file.sf2 \-o /path/to/file.sf3 \-\-quality high
+.PP
+Conversion of all sf2 files of the current directory into sf3, in another directory:
+.IP
+polyphone \-\-convert sf3 *.sf2 \-d /path/to/directory
+.PP
+Conversion from sf3 to sfz (sub-directories for banks and General MIDI classification):
+.IP
+polyphone \-\-convert sfz /path/to/file.sf3 \-\-bank\-dir \-\-gm\-sort
+.PP
+Rendering of a MIDI file with a soundfont (song.wav is written next to song.mid):
+.IP
+polyphone \-\-render /path/to/song.mid /path/to/file.sf2
+.PP
+Synthesizer mode, the lowest keys of a MIDI keyboard selecting and deselecting the presets to play:
+.IP
+polyphone \-\-synth /path/to/file.sf2 \-\-multiple\-selection \-\-key\-selection toggle
+.PP
+Soundfont opened with the MCP server listening on the port 8700:
+.IP
+polyphone \-\-mcp\-port 8700 /path/to/file.sf2
+.SH SEE ALSO
+https://www.polyphone.io/documentation/manual/annexes/command-line
 .SH AUTHOR
 Davy Triponney (contact@polyphone.io)

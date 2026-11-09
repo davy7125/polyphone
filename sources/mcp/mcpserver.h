@@ -46,6 +46,10 @@ public:
     // Start or stop the server according to the configuration
     void applyConfiguration();
 
+    // Server started for this session on a port, whatever the configuration (option --mcp of the command line),
+    // until the settings of the server are changed (0: the configuration only is used)
+    void setSessionPort(quint16 port) { _sessionPort = port; }
+
     bool isListening();
     quint16 getPort();
     QString getUrl();
@@ -92,6 +96,7 @@ private:
     QList<QPointer<QTcpSocket> > _pendingSockets;
     bool _busy;
     QString _error;
+    quint16 _sessionPort;
 };
 
 #endif // MCPSERVER_H

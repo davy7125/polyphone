@@ -1,0 +1,162 @@
+.TH POLYPHONE 1 "2026年11月" "polyphone 2.7" "Polyphone 手册页"
+.SH 名称
+polyphone \- 音色库编辑器
+.SH 概述
+.B polyphone
+[\fI文件\fR]...
+.br
+.B polyphone
+\fB\-\-convert\fR \fI格式\fR [\fI选项\fR]... \fI文件\fR...
+.br
+.B polyphone
+\fI文件\fR \fB\-o\fR \fI输出文件\fR [\fI选项\fR]...
+.br
+.B polyphone
+\fB\-\-render\fR \fIMIDI文件\fR [\fI选项\fR]... \fI音色库\fR
+.br
+.B polyphone
+\fB\-\-synth\fR [\fI选项\fR]... [\fI文件\fR]...
+.br
+.B polyphone
+\fB\-\-mcp\fR [\fB\-\-mcp\-port\fR \fI端口\fR] [\fI文件\fR]...
+.br
+.B polyphone
+\fB\-\-reset\-config\fR | \fB\-\-help\fR | \fB\-\-version\fR
+.SH 描述
+.B polyphone
+提供了一个简单高效的界面，用于创建和编辑音色库。该软件包含多种工具，可以简化并自动完成各种参数的编辑，从而能够处理大量数据。
+.PP
+可以打开 sf2（2.01 或 2.04 版）、sf3、sfz、dls（1 级或 2 级）、sfArk（1 版或 2 版）和 GrandOrgue（organ）格式，并可将文件转换为 sf2、sf3、sfz、csv 或 dls。通过命令行可以转换文件、将 MIDI 文件渲染为 wav 文件、以合成器模式或启动 MCP 服务器的方式打开 Polyphone，或在出现问题时重置配置。
+.PP
+如果没有使用 \fB\-\-convert\fR、\fB\-\-render\fR、\fB\-\-synth\fR 或 \fB\-\-reset\-config\fR，给出的文件和目录将在编辑器中打开（目录在音色库浏览器中打开）。如果 Polyphone 已经打开，它们会在正在运行的实例中打开。
+.PP
+参数的顺序无关紧要。消息和帮助使用设置中选择的语言。
+.SH 选项
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+显示所有选项的列表。
+.TP
+\fB\-v\fR, \fB\-\-version\fR
+显示 Polyphone 的版本。
+.TP
+\fB\-r\fR, \fB\-\-reset\-config\fR
+重置 Polyphone 的配置（设置、窗口布局、历史记录等）。
+.SS 转换
+.TP
+\fB\-\-convert\fR \fI格式\fR
+将每个\fI文件\fR转换为\fI格式\fR：sf2、sf3、sfz、csv 或 dls。如果 \fB\-\-output\fR 给出了带有该格式扩展名的文件，则可以省略此选项。一条命令可以转换多个文件，每个输出文件与其输入文件同名；即使某个文件转换失败，其他文件仍会被转换。
+.TP
+\fB\-o\fR, \fB\-\-output\fR \fI路径\fR
+输出文件，仅用于单个输入文件。扩展名是可选的。仅有名称时写入输出目录，相对路径从当前目录开始（如果使用了 \fB\-d\fR，则从输出目录开始）。默认输出文件与输入文件同名。
+.TP
+\fB\-d\fR, \fB\-\-output\-dir\fR \fI目录\fR
+输出目录，该目录必须存在。默认为每个输入文件所在的目录。
+.TP
+\fB\-f\fR, \fB\-\-force\fR
+替换已存在的输出文件。如果没有此选项，当输出文件存在时转换会失败。输入文件可以被其转换结果替换。转换为 sfz 和 csv 时会创建一个目录，并且从不替换任何内容：如果该目录已存在，会在其名称后添加一个数字。
+.TP
+\fB\-\-quality\fR \fI质量\fR
+转换为 sf3：压缩质量，\fBlow\fR（低）、\fBmedium\fR（中，默认）或 \fBhigh\fR（高）。
+.TP
+\fB\-\-preset\-prefix\fR
+转换为 sfz：在每个预设前加上其预设编号。
+.TP
+\fB\-\-bank\-dir\fR
+转换为 sfz：为每个库创建一个目录。
+.TP
+\fB\-\-gm\-sort\fR
+转换为 sfz：使用通用 MIDI 分类对预设排序。
+.TP
+\fB\-\-raw\fR
+转换为 csv：导出原始值（即音色库文件中存储的值），而不是带物理单位的值。例如，导出的释音时间将是 \-1229，而不是 0.491（秒）。
+.SS 渲染 MIDI 文件
+.TP
+\fB\-\-render\fR \fIMIDI文件\fR
+使用作为输入文件给出的音色库播放\fIMIDI文件\fR（mid、midi、kar 或 rmi），并将结果写入 wav 文件。所有通道都演奏该音色库，预设由文件中的程序变更选择（通道 10 上使用库 128），并使用合成器的设置（混响、合唱、总音量、复音数、调音）。结果是 48000 Hz 的立体声 32 位浮点 wav 文件。音色库中没有的预设，其音符不会被演奏，并会显示警告。
+.IP
+选项 \fB\-o\fR、\fB\-d\fR 和 \fB\-f\fR 的用法与转换相同，默认输出文件与 MIDI 文件同名且位于同一目录。
+.SS 合成器模式
+.TP
+\fB\-s\fR, \fB\-\-synth\fR
+以合成器模式打开 Polyphone。之后可以在界面中修改以下设置。
+.TP
+\fB\-\-channel\fR \fI通道\fR
+演奏时监听的 MIDI 通道：1 到 16 的编号，\fBall\fR（默认）表示所有通道作为一个通道处理，\fBeach\fR 表示分别监听每个通道，例如这是播放音序器 MIDI 输出的前提条件。
+.TP
+\fB\-\-multiple\-selection\fR
+可以同时选择并演奏多个预设。
+.TP
+\fB\-\-key\-selection\fR \fI模式\fR
+使用 \fBon\fR 时，通过与预设编号对应的琴键选择预设（例如，琴键 0 选择预设 0）。使用 \fBtoggle\fR 时，琴键还可以取消选择其预设。
+.SS MCP 服务器
+.TP
+\fB\-\-mcp\fR
+即使在设置中已禁用，也为本次会话启动 MCP 服务器，使 AI 助手能够浏览、编辑和分析已打开的音色库。服务器地址会显示在标准输出中。即使 Polyphone 已经打开，也会打开一个新的 Polyphone 实例。在界面中更改 MCP 服务器的设置会取代此选项。
+.TP
+\fB\-\-mcp\-port\fR \fI端口\fR
+MCP 服务器的端口，隐含 \fB\-\-mcp\fR。默认为设置中的端口（8642）。
+.SH 以前版本的选项
+仍然接受这些选项。
+.TP
+\fB\-1\fR, \fB\-2\fR, \fB\-3\fR, \fB\-4\fR, \fB\-6\fR
+转换为 sf2、sf3、sfz、csv 和 dls，与 \fB\-\-convert\fR 相同。
+.TP
+\fB\-5\fR
+渲染 MIDI 文件，其路径用 \fB\-c\fR 给出。
+.TP
+\fB\-i\fR \fI文件\fR
+输入文件，也可以不使用此选项直接写出。
+.TP
+\fB\-c\fR \fI配置\fR
+由“|”分隔的值组成的配置：sf3 的压缩质量（“0”低，“1”中，“2”高）；sfz 的 3 个值“1”或“0”（\fB\-\-preset\-prefix\fR、\fB\-\-bank\-dir\fR、\fB\-\-gm\-sort\fR），例如“0|1|1”；csv 的“raw”；\fB\-5\fR 的 MIDI 文件路径；合成器模式的通道（“all”、“each”或 1 到 16，0 等同于“all”，\-1 等同于“each”）、多选（“on”或“off”）以及按键选择（“on”、“off”或“toggle”），例如“all|on|toggle”。
+.SH 退出状态
+加载和写入过程会输出到标准输出，错误会输出到标准错误。
+.TP
+.B 0
+成功。
+.TP
+.B 1
+输入文件或输出目录不存在，或输出文件已存在（未使用 \fB\-f\fR）。
+.TP
+.B 2
+参数无效：未知选项、错误的值、选项不适用于所选模式、不支持的输入文件格式等。
+.TP
+.B 3
+无法读取输入文件（音色库、MIDI 文件）。
+.TP
+.B 4
+无法写入输出。
+.PP
+转换多个文件时，退出状态为第一次失败的状态。
+.SH 示例
+从 sfArk 转换为 sf2：
+.IP
+polyphone \-\-convert sf2 /path/to/file.sfArk
+.PP
+从 sf2 转换为 sf3（高质量），格式由输出文件给出：
+.IP
+polyphone /path/to/file.sf2 \-o /path/to/file.sf3 \-\-quality high
+.PP
+将当前目录下的所有 sf2 文件转换为 sf3，并写入另一个目录：
+.IP
+polyphone \-\-convert sf3 *.sf2 \-d /path/to/directory
+.PP
+从 sf3 转换为 sfz（为各个库创建子目录并使用通用 MIDI 分类）：
+.IP
+polyphone \-\-convert sfz /path/to/file.sf3 \-\-bank\-dir \-\-gm\-sort
+.PP
+使用音色库渲染 MIDI 文件（song.wav 写在 song.mid 旁边）：
+.IP
+polyphone \-\-render /path/to/song.mid /path/to/file.sf2
+.PP
+合成器模式，用 MIDI 键盘最低的几个键选择和取消选择要演奏的预设：
+.IP
+polyphone \-\-synth /path/to/file.sf2 \-\-multiple\-selection \-\-key\-selection toggle
+.PP
+打开音色库，并启动在端口 8700 上监听的 MCP 服务器：
+.IP
+polyphone \-\-mcp\-port 8700 /path/to/file.sf2
+.SH 参见
+https://www.polyphone.io/documentation/manual/annexes/command-line
+.SH 作者
+Davy Triponney (contact@polyphone.io)

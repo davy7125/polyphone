@@ -69,7 +69,8 @@ void McpServer::kill()
 
 McpServer::McpServer() : QObject(),
     _server(new QTcpServer(this)),
-    _busy(false)
+    _busy(false),
+    _sessionPort(0)
 {
     connect(_server, SIGNAL(newConnection()), this, SLOT(onNewConnection()));
 }
@@ -81,8 +82,9 @@ McpServer::~McpServer()
 
 void McpServer::applyConfiguration()
 {
-    bool enabled = ContextManager::configuration()->getValue(ConfManager::SECTION_MCP, "enabled", false).toBool();
-    quint16 port = static_cast<quint16>(
+    bool enabled = _sessionPort != 0 ||
+                   ContextManager::configuration()->getValue(ConfManager::SECTION_MCP, "enabled", false).toBool();
+    quint16 port = _sessionPort != 0 ? _sessionPort : static_cast<quint16>(
         ContextManager::configuration()->getValue(ConfManager::SECTION_MCP, "port", DEFAULT_PORT).toUInt());
 
     if (!enabled)
@@ -109,7 +111,9 @@ bool McpServer::isListening()
 
 quint16 McpServer::getPort()
 {
-    return _server->isListening() ? _server->serverPort() : static_cast<quint16>(
+    if (_server->isListening())
+        return _server->serverPort();
+    return _sessionPort != 0 ? _sessionPort : static_cast<quint16>(
         ContextManager::configuration()->getValue(ConfManager::SECTION_MCP, "port", DEFAULT_PORT).toUInt());
 }
 

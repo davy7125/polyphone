@@ -44,6 +44,8 @@ for case in "$casesDir"/*.txt; do
         continue
     fi
 
+    # A previous rendering is removed (an existing file is replaced only with -f, unknown to the versions before 2.7)
+    rm -f "$outputDir/$name.wav"
     start=$(date +%s%N)
     if $runner "$polyphone" -5 -i "$soundfontDir/$soundfont" -c "$case$option" -d "$outputDir" -o "$name" > "$outputDir/$name.log" 2>&1; then
         printf "OK      %-32s %d ms\n" "$name" $((($(date +%s%N) - start) / 1000000))

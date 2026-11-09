@@ -453,313 +453,313 @@
 <context>
     <name>ConfManager</name>
     <message>
-        <location filename="../../context/confmanager.cpp" line="215"/>
+        <location filename="../../context/confmanager.cpp" line="214"/>
         <source>Z</source>
         <comment>first key mapping for bottom left C</comment>
         <translation>Ѕ</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="216"/>
+        <location filename="../../context/confmanager.cpp" line="215"/>
         <source>S</source>
         <comment>first key mapping for bottom C#</comment>
         <translation>С</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="217"/>
+        <location filename="../../context/confmanager.cpp" line="216"/>
         <source>X</source>
         <comment>first key mapping for bottom D</comment>
         <translation>Џ</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="218"/>
+        <location filename="../../context/confmanager.cpp" line="217"/>
         <source>D</source>
         <comment>first key mapping for bottom D#</comment>
         <translation>Д</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="219"/>
+        <location filename="../../context/confmanager.cpp" line="218"/>
         <source>C</source>
         <comment>first key mapping for bottom E</comment>
         <translation>Ц</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="220"/>
+        <location filename="../../context/confmanager.cpp" line="219"/>
         <source>V</source>
         <comment>first key mapping for bottom F</comment>
         <translation>В</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="221"/>
+        <location filename="../../context/confmanager.cpp" line="220"/>
         <source>G</source>
         <comment>first key mapping for bottom F#</comment>
         <translation>Г</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="222"/>
+        <location filename="../../context/confmanager.cpp" line="221"/>
         <source>B</source>
         <comment>first key mapping for bottom G</comment>
         <translation>Б</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="223"/>
+        <location filename="../../context/confmanager.cpp" line="222"/>
         <source>H</source>
         <comment>first key mapping for bottom G#</comment>
         <translation>Х</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="224"/>
+        <location filename="../../context/confmanager.cpp" line="223"/>
         <source>N</source>
         <comment>first key mapping for bottom A</comment>
         <translation>Н</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="225"/>
+        <location filename="../../context/confmanager.cpp" line="224"/>
         <source>J</source>
         <comment>first key mapping for bottom A#</comment>
         <translation>Ј</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="226"/>
+        <location filename="../../context/confmanager.cpp" line="225"/>
         <source>M</source>
         <comment>first key mapping for bottom B</comment>
         <translation>М</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="227"/>
+        <location filename="../../context/confmanager.cpp" line="226"/>
         <source>,</source>
         <comment>first key mapping for bottom right C</comment>
         <translation>,</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="233"/>
+        <location filename="../../context/confmanager.cpp" line="232"/>
         <source>Q</source>
         <comment>first key mapping for upper left C</comment>
         <translation>Љ</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="234"/>
+        <location filename="../../context/confmanager.cpp" line="233"/>
         <source>2</source>
         <comment>first key mapping for upper C#</comment>
         <translation>2</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="235"/>
+        <location filename="../../context/confmanager.cpp" line="234"/>
         <source>W</source>
         <comment>first key mapping for upper D</comment>
         <translation>Њ</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="236"/>
+        <location filename="../../context/confmanager.cpp" line="235"/>
         <source>3</source>
         <comment>first key mapping for upper D#</comment>
         <translation>3</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="237"/>
+        <location filename="../../context/confmanager.cpp" line="236"/>
         <source>E</source>
         <comment>first key mapping for upper E</comment>
         <translation>Е</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="238"/>
+        <location filename="../../context/confmanager.cpp" line="237"/>
         <source>R</source>
         <comment>first key mapping for upper F</comment>
         <translation>Р</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="239"/>
+        <location filename="../../context/confmanager.cpp" line="238"/>
         <source>5</source>
         <comment>first key mapping for upper F#</comment>
         <translation>5</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="240"/>
+        <location filename="../../context/confmanager.cpp" line="239"/>
         <source>T</source>
         <comment>first key mapping for upper G</comment>
         <translation>Т</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="241"/>
+        <location filename="../../context/confmanager.cpp" line="240"/>
         <source>6</source>
         <comment>first key mapping for upper G#</comment>
         <translation>6</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="242"/>
+        <location filename="../../context/confmanager.cpp" line="241"/>
         <source>Y</source>
         <comment>first key mapping for upper A</comment>
         <translation>З</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="243"/>
+        <location filename="../../context/confmanager.cpp" line="242"/>
         <source>7</source>
         <comment>first key mapping for upper A#</comment>
         <translation>7</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="244"/>
+        <location filename="../../context/confmanager.cpp" line="243"/>
         <source>U</source>
         <comment>first key mapping for upper B</comment>
         <translation>У</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="245"/>
+        <location filename="../../context/confmanager.cpp" line="244"/>
         <source>I</source>
         <comment>first key mapping for upper right C</comment>
         <translation>И</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="251"/>
+        <location filename="../../context/confmanager.cpp" line="250"/>
         <source>Shift+Z</source>
         <comment>second key mapping for bottom left C</comment>
         <translation>Shift+Ѕ</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="252"/>
+        <location filename="../../context/confmanager.cpp" line="251"/>
         <source>Shift+S</source>
         <comment>second key mapping for bottom C#</comment>
         <translation>Shift+С</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="253"/>
+        <location filename="../../context/confmanager.cpp" line="252"/>
         <source>Shift+X</source>
         <comment>second key mapping for bottom D</comment>
         <translation>Shift+Џ</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="254"/>
+        <location filename="../../context/confmanager.cpp" line="253"/>
         <source>Shift+D</source>
         <comment>second key mapping for bottom D#</comment>
         <translation>Shift+Д</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="255"/>
+        <location filename="../../context/confmanager.cpp" line="254"/>
         <source>Shift+C</source>
         <comment>second key mapping for bottom E</comment>
         <translation>Shift+Ц</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="256"/>
+        <location filename="../../context/confmanager.cpp" line="255"/>
         <source>Shift+V</source>
         <comment>second key mapping for bottom F</comment>
         <translation>Shift+В</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="257"/>
+        <location filename="../../context/confmanager.cpp" line="256"/>
         <source>Shift+G</source>
         <comment>second key mapping for bottom F#</comment>
         <translation>Shift+Г</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="258"/>
+        <location filename="../../context/confmanager.cpp" line="257"/>
         <source>Shift+B</source>
         <comment>second key mapping for bottom G</comment>
         <translation>Shift+Б</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="259"/>
+        <location filename="../../context/confmanager.cpp" line="258"/>
         <source>Shift+H</source>
         <comment>second key mapping for bottom G#</comment>
         <translation>Shift+Х</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="260"/>
+        <location filename="../../context/confmanager.cpp" line="259"/>
         <source>Shift+N</source>
         <comment>second key mapping for bottom A</comment>
         <translation>Shift+Н</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="261"/>
+        <location filename="../../context/confmanager.cpp" line="260"/>
         <source>Shift+J</source>
         <comment>second key mapping for bottom A#</comment>
         <translation>Shift+Ј</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="262"/>
+        <location filename="../../context/confmanager.cpp" line="261"/>
         <source>Shift+M</source>
         <comment>second key mapping for bottom B</comment>
         <translation>Shift+М</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="263"/>
+        <location filename="../../context/confmanager.cpp" line="262"/>
         <source>Shift+&lt;</source>
         <comment>second key mapping for bottom right C</comment>
         <translation>Shift+;</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="269"/>
+        <location filename="../../context/confmanager.cpp" line="268"/>
         <source>Shift+Q</source>
         <comment>second key mapping for upper left C</comment>
         <translation>Shift+Љ</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="270"/>
+        <location filename="../../context/confmanager.cpp" line="269"/>
         <source>Shift+@</source>
         <comment>second key mapping for upper C#</comment>
         <translation>Shift+&quot;</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="271"/>
+        <location filename="../../context/confmanager.cpp" line="270"/>
         <source>Shift+W</source>
         <comment>second key mapping for upper D</comment>
         <translation>Shift+Њ</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="272"/>
+        <location filename="../../context/confmanager.cpp" line="271"/>
         <source>Shift+#</source>
         <comment>second key mapping for upper D#</comment>
         <translation>Shift+#</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="273"/>
+        <location filename="../../context/confmanager.cpp" line="272"/>
         <source>Shift+E</source>
         <comment>second key mapping for upper E</comment>
         <translation>Shift+Е</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="274"/>
+        <location filename="../../context/confmanager.cpp" line="273"/>
         <source>Shift+R</source>
         <comment>second key mapping for upper F</comment>
         <translation>Shift+Р</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="275"/>
+        <location filename="../../context/confmanager.cpp" line="274"/>
         <source>Shift+%</source>
         <comment>second key mapping for upper F#</comment>
         <translation>Shift+%</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="276"/>
+        <location filename="../../context/confmanager.cpp" line="275"/>
         <source>Shift+T</source>
         <comment>second key mapping for upper G</comment>
         <translation>Shift+Т</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="277"/>
+        <location filename="../../context/confmanager.cpp" line="276"/>
         <source>Shift+^</source>
         <comment>second key mapping for upper G#</comment>
         <translation>Shift+&amp;</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="278"/>
+        <location filename="../../context/confmanager.cpp" line="277"/>
         <source>Shift+Y</source>
         <comment>second key mapping for upper A</comment>
         <translation>Shift+З</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="279"/>
+        <location filename="../../context/confmanager.cpp" line="278"/>
         <source>Shift+&amp;</source>
         <comment>second key mapping for upper A#</comment>
         <translation>Shift+/</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="280"/>
+        <location filename="../../context/confmanager.cpp" line="279"/>
         <source>Shift+U</source>
         <comment>second key mapping for upper B</comment>
         <translation>Shift+У</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="281"/>
+        <location filename="../../context/confmanager.cpp" line="280"/>
         <source>Shift+I</source>
         <comment>second key mapping for upper right C</comment>
         <translation>Shift+И</translation>
@@ -1232,37 +1232,39 @@
         <translation>Опис</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionmcp.cpp" line="90"/>
+        <location filename="../../context/interface/configsectionmcp.cpp" line="92"/>
+        <location filename="../../main.cpp" line="120"/>
         <source>Server started, address: %1</source>
         <translation>Сервер покренут, адреса: %1</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionmcp.cpp" line="92"/>
+        <location filename="../../context/interface/configsectionmcp.cpp" line="94"/>
+        <location filename="../../main.cpp" line="122"/>
         <source>The server cannot start: %1</source>
         <translation>Сервер не може да се покрене: %1</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionmcp.cpp" line="94"/>
+        <location filename="../../context/interface/configsectionmcp.cpp" line="96"/>
         <source>Server stopped</source>
         <translation>Сервер заустављен</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionmcp.cpp" line="101"/>
+        <location filename="../../context/interface/configsectionmcp.cpp" line="103"/>
         <source>Browsing</source>
         <translation>Прегледање</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionmcp.cpp" line="102"/>
+        <location filename="../../context/interface/configsectionmcp.cpp" line="104"/>
         <source>Editing</source>
         <translation>Уређивање</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionmcp.cpp" line="103"/>
+        <location filename="../../context/interface/configsectionmcp.cpp" line="105"/>
         <source>Tools</source>
         <translation>Алатке</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionmcp.cpp" line="104"/>
+        <location filename="../../context/interface/configsectionmcp.cpp" line="106"/>
         <source>Sound analysis</source>
         <translation>Анализа звука</translation>
     </message>
@@ -1516,103 +1518,103 @@ repository</source>
 <context>
     <name>ConversionSfz</name>
     <message>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="56"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="55"/>
         <source>cannot create directory &quot;%1&quot;</source>
         <translation>не могу да направим директоријум „%1”</translation>
     </message>
     <message>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="241"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="240"/>
         <source>untitled</source>
         <translation>без назива</translation>
     </message>
     <message>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="673"/>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="715"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="672"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="714"/>
         <source>other</source>
         <translation>друго</translation>
     </message>
     <message>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="676"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="675"/>
         <source>Piano</source>
         <translation>Клавир</translation>
     </message>
     <message>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="678"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="677"/>
         <source>Chromatic percussion</source>
         <translation>Удараљке, хроматске</translation>
     </message>
     <message>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="680"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="679"/>
         <source>Organ</source>
         <translation>Оргуље</translation>
     </message>
     <message>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="682"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="681"/>
         <source>Guitar</source>
         <translation>Гитаре</translation>
     </message>
     <message>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="684"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="683"/>
         <source>Bass</source>
         <translation>Бас гитаре</translation>
     </message>
     <message>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="686"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="685"/>
         <source>Strings</source>
         <translation>Жичани</translation>
     </message>
     <message>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="688"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="687"/>
         <source>Ensemble</source>
         <translation>Оркестар</translation>
     </message>
     <message>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="690"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="689"/>
         <source>Brass</source>
         <translation>Дувачки, лимени</translation>
     </message>
     <message>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="692"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="691"/>
         <source>Reed</source>
         <translation>Дувачки, дрвени</translation>
     </message>
     <message>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="694"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="693"/>
         <source>Pipe</source>
         <translation>Дувачки, дрвени без језичка</translation>
     </message>
     <message>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="696"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="695"/>
         <source>Synth lead</source>
         <translation>Синтесајзер — главни</translation>
     </message>
     <message>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="698"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="697"/>
         <source>Synth pad</source>
         <translation>Синтесајзер — блок</translation>
     </message>
     <message>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="700"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="699"/>
         <source>Synth effects</source>
         <translation>Синт-ефекти</translation>
     </message>
     <message>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="702"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="701"/>
         <source>Ethnic</source>
         <translation>Традиционални</translation>
     </message>
     <message>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="704"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="703"/>
         <source>Percussive</source>
         <translation>Удараљке</translation>
     </message>
     <message>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="706"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="705"/>
         <source>Sound effects</source>
         <translation>Звучни ефекти</translation>
     </message>
     <message>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="708"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="707"/>
         <source>Percussion kit</source>
         <translation>Скупина удараљки</translation>
     </message>
@@ -2993,77 +2995,77 @@ for a signal</source>
 <context>
     <name>Duplicator</name>
     <message>
-        <location filename="../../core/duplicator.cpp" line="277"/>
+        <location filename="../../editor/interactiveduplicator.cpp" line="72"/>
         <source>Global parameters are already filled.</source>
         <translation>Глобални параметри су већ попуњени.</translation>
     </message>
     <message>
-        <location filename="../../core/duplicator.cpp" line="278"/>
+        <location filename="../../editor/interactiveduplicator.cpp" line="73"/>
         <source>The global division will not be copied.</source>
         <translation>Глобална подела неће бити копирана.</translation>
     </message>
     <message>
-        <location filename="../../core/duplicator.cpp" line="280"/>
+        <location filename="../../editor/interactiveduplicator.cpp" line="75"/>
         <source>&amp;Ok</source>
         <translation>&amp;У реду</translation>
     </message>
     <message>
-        <location filename="../../core/duplicator.cpp" line="281"/>
+        <location filename="../../editor/interactiveduplicator.cpp" line="76"/>
         <source>Ok, &amp;disable this message</source>
         <translation>У реду, &amp;онемогући ову поруку</translation>
     </message>
     <message>
-        <location filename="../../core/duplicator.cpp" line="313"/>
+        <location filename="../../core/duplicator.cpp" line="296"/>
         <source>The sample &quot;%1&quot; already exists.&lt;br /&gt;Replace?</source>
         <translation>Узорак „%1” већ постоји.&lt;br /&gt;Заменити?</translation>
     </message>
     <message>
-        <location filename="../../core/duplicator.cpp" line="461"/>
+        <location filename="../../core/duplicator.cpp" line="444"/>
         <source>The instrument &quot;%1&quot; already exists.&lt;br /&gt;Replace?</source>
         <translation>Инструмент „%1” већ постоји.&lt;br /&gt;Заменити?</translation>
     </message>
     <message>
-        <location filename="../../core/duplicator.cpp" line="556"/>
+        <location filename="../../core/duplicator.cpp" line="539"/>
         <source>The preset &quot;%1&quot; already exists.&lt;br/&gt;Replace?</source>
         <translation>Поставка „%1” већ постоји.&lt;br/&gt;Заменити?</translation>
     </message>
     <message>
-        <location filename="../../core/duplicator.cpp" line="578"/>
+        <location filename="../../editor/interactiveduplicator.cpp" line="84"/>
         <source>Warning</source>
         <translation>Упозорење</translation>
     </message>
     <message>
-        <location filename="../../core/duplicator.cpp" line="579"/>
+        <location filename="../../editor/interactiveduplicator.cpp" line="84"/>
         <source>No preset available.</source>
         <translation>Нема доступне поставке.</translation>
     </message>
     <message>
-        <location filename="../../core/duplicator.cpp" line="777"/>
+        <location filename="../../editor/interactiveduplicator.cpp" line="45"/>
         <source>&amp;Replace</source>
         <translation>За&amp;мени</translation>
     </message>
     <message>
-        <location filename="../../core/duplicator.cpp" line="778"/>
+        <location filename="../../editor/interactiveduplicator.cpp" line="46"/>
         <source>R&amp;eplace all</source>
         <translation>Замени св&amp;е</translation>
     </message>
     <message>
-        <location filename="../../core/duplicator.cpp" line="779"/>
+        <location filename="../../editor/interactiveduplicator.cpp" line="47"/>
         <source>&amp;Duplicate</source>
         <translation>У&amp;двостручи</translation>
     </message>
     <message>
-        <location filename="../../core/duplicator.cpp" line="780"/>
+        <location filename="../../editor/interactiveduplicator.cpp" line="48"/>
         <source>D&amp;uplicate all</source>
         <translation>&amp;Удвостручи све</translation>
     </message>
     <message>
-        <location filename="../../core/duplicator.cpp" line="781"/>
+        <location filename="../../editor/interactiveduplicator.cpp" line="49"/>
         <source>&amp;Ignore</source>
         <translation>Занемар&amp;и</translation>
     </message>
     <message>
-        <location filename="../../core/duplicator.cpp" line="782"/>
+        <location filename="../../editor/interactiveduplicator.cpp" line="50"/>
         <source>I&amp;gnore all</source>
         <translation>Занемари с&amp;ве</translation>
     </message>
@@ -3506,17 +3508,17 @@ for a signal</source>
 <context>
     <name>InputParserDls</name>
     <message>
-        <location filename="../../core/input/dls/inputparserdls.cpp" line="60"/>
+        <location filename="../../core/input/dls/inputparserdls.cpp" line="43"/>
         <source>Cannot find file &quot;%1&quot;.</source>
         <translation>Не могу да пронађем датотеку „%1”.</translation>
     </message>
     <message>
-        <location filename="../../core/input/dls/inputparserdls.cpp" line="66"/>
+        <location filename="../../core/input/dls/inputparserdls.cpp" line="49"/>
         <source>Access denied for reading file &quot;%1&quot;.</source>
         <translation>Приступ одбијен за читање датотеке „%1”.</translation>
     </message>
     <message>
-        <location filename="../../core/input/dls/inputparserdls.cpp" line="123"/>
+        <location filename="../../core/input/dls/inputparserdls.cpp" line="61"/>
         <source>This is not a DLS file.</source>
         <translation>Ово није DLS датотека.</translation>
     </message>
@@ -3540,12 +3542,12 @@ for a signal</source>
 <context>
     <name>InputParserSf</name>
     <message>
-        <location filename="../../core/input/sf/inputparsersf.cpp" line="48"/>
+        <location filename="../../core/input/sf/inputparsersf.cpp" line="46"/>
         <source>Cannot find file &quot;%1&quot;.</source>
         <translation>Не могу да пронађем датотеку „%1”.</translation>
     </message>
     <message>
-        <location filename="../../core/input/sf/inputparsersf.cpp" line="55"/>
+        <location filename="../../core/input/sf/inputparsersf.cpp" line="53"/>
         <source>Access denied for reading file &quot;%1&quot;.</source>
         <translation>Приступ одбијен за читање датотеке „%1”.</translation>
     </message>
@@ -3553,22 +3555,22 @@ for a signal</source>
 <context>
     <name>InputParserSfz</name>
     <message>
-        <location filename="../../core/input/sfz/inputparsersfz.cpp" line="109"/>
+        <location filename="../../core/input/sfz/inputparsersfz.cpp" line="58"/>
         <source>File recursion</source>
         <translation>Рекурзија датотеке</translation>
     </message>
     <message>
-        <location filename="../../core/input/sfz/inputparsersfz.cpp" line="117"/>
+        <location filename="../../core/input/sfz/inputparsersfz.cpp" line="60"/>
         <source>Cannot open file &quot;%1&quot;</source>
         <translation>Не могу да отворим датотеку „%1”</translation>
     </message>
     <message>
-        <location filename="../../core/input/sfz/inputparsersfz.cpp" line="294"/>
+        <location filename="../../core/input/sfz/inputparsersfz.cpp" line="50"/>
         <source>Sfz import</source>
         <translation>Сфз — увоз</translation>
     </message>
     <message>
-        <location filename="../../core/input/sfz/inputparsersfz.cpp" line="453"/>
+        <location filename="../../core/input/sfz/inputparsersfz.cpp" line="49"/>
         <source>untitled</source>
         <translation>без назива</translation>
     </message>
@@ -3655,57 +3657,57 @@ for a signal</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="260"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="262"/>
         <source>&amp;Save</source>
         <translation>&amp;Сачувај</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="246"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="248"/>
         <source>Warning</source>
         <translation>Упозорење</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="67"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="69"/>
         <source>Polyphone SoundFont Editor</source>
         <translation>Полифон Уређивач звукотека</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="237"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="239"/>
         <source>Untitled</source>
         <translation>Без наслова</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="261"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="263"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Поништи</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="262"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="264"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>&amp;Изађи не сачувавши</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="350"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="352"/>
         <source>Opening files</source>
         <translation>Отварање датотека</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="360"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="362"/>
         <source>Opening a directory</source>
         <translation>Отварање директоријума</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="247"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="249"/>
         <source>Save before exiting?</source>
         <translation>Сачувати пре изласка?</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="250"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="252"/>
         <source>The following files have been modified:</source>
         <translation>Следеће датотеке су измењене:</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="257"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="259"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>Датотека „%1” је измењена.</translation>
     </message>
@@ -3722,7 +3724,7 @@ for a signal</source>
         <translation>  Документација</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="69"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="71"/>
         <source>Home screen</source>
         <translation>Почетни екран</translation>
     </message>
@@ -3807,14 +3809,14 @@ for a signal</source>
 <context>
     <name>MidiFileRenderer</name>
     <message>
-        <location filename="../../midi_player/midifilerenderer.cpp" line="115"/>
+        <location filename="../../midi_player/midifilerenderer.cpp" line="111"/>
         <location filename="../../midi_player/midifilerenderer.cpp" line="172"/>
         <location filename="../../midi_player/midifilerenderer.cpp" line="197"/>
         <source>Cannot write file &quot;%1&quot;.</source>
         <translation>Не могу да упишем датотеку „%1”.</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midifilerenderer.cpp" line="142"/>
+        <location filename="../../midi_player/midifilerenderer.cpp" line="138"/>
         <source>The audio file cannot exceed 4 GB.</source>
         <translation>Звучна датотека не може бити већа од 4 ГБ.</translation>
     </message>
@@ -4161,6 +4163,214 @@ default mod.</source>
     </message>
 </context>
 <context>
+    <name>Options</name>
+    <message>
+        <location filename="../../options.cpp" line="33"/>
+        <source>Invalid value &quot;%1&quot; for the option &quot;%2&quot;.</source>
+        <translation>Неважећа вредност „%1“ за опцију „%2“.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="48"/>
+        <source>Display this help.</source>
+        <translation>Прикажи ову помоћ.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="50"/>
+        <source>Display the version.</source>
+        <translation>Прикажи верзију.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="52"/>
+        <source>Convert the files into sf2, sf3, sfz, csv or dls. Without this option, the format is the extension of the output file if given.</source>
+        <translation>Претвори датотеке у sf2, sf3, sfz, csv или dls. Без ове опције, формат је екстензија излазне датотеке ако је наведена.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="54"/>
+        <source>Play a MIDI file with the soundfont and write the result in a wav file.</source>
+        <translation>Пусти МИДИ датотеку са звукотеком и упиши резултат у wav датотеку.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="56"/>
+        <source>Open Polyphone in synthesizer mode.</source>
+        <translation>Отвори Polyphone у режиму синтисајзера.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="58"/>
+        <source>Reset the configuration of Polyphone (settings, window geometry, history, etc.).</source>
+        <translation>Поништи конфигурацију програма Polyphone (подешавања, геометрија прозора, историјат итд.).</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="60"/>
+        <source>Output file, the extension being optional. A name alone is written in the output directory, a relative path starts from the current directory.</source>
+        <translation>Излазна датотека, екстензија није обавезна. Само име се уписује у излазни директоријум, релативна путања полази од тренутног директоријума.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="62"/>
+        <source>Output directory, by default the directory of the input file (or of the MIDI file).</source>
+        <translation>Излазни директоријум, подразумевано директоријум улазне датотеке (или МИДИ датотеке).</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="64"/>
+        <source>Replace an existing output file.</source>
+        <translation>Замени постојећу излазну датотеку.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="66"/>
+        <source>Conversion to sf3: compression quality, &quot;low&quot;, &quot;medium&quot; (default) or &quot;high&quot;.</source>
+        <translation>Претварање у sf3: квалитет компресије, „low“, „medium“ (подразумевано) или „high“.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="68"/>
+        <source>Conversion to sfz: prefix each preset with its number.</source>
+        <translation>Претварање у sfz: додај испред сваке поставке њен број.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="70"/>
+        <source>Conversion to sfz: create a directory per bank.</source>
+        <translation>Претварање у sfz: направи директоријум за сваку банку.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="72"/>
+        <source>Conversion to sfz: sort the presets according to the General MIDI classification.</source>
+        <translation>Претварање у sfz: сортирај поставке према General MIDI класификацији.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="74"/>
+        <source>Conversion to csv: export the raw values stored in the soundfont instead of values with units.</source>
+        <translation>Претварање у csv: извези сирове вредности сачуване у звукотеци уместо вредности са јединицама.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="76"/>
+        <source>Synthesizer mode: MIDI channel, from 1 to 16, &quot;all&quot; (default) for all channels processed as one, &quot;each&quot; for each channel separately.</source>
+        <translation>Режим синтисајзера: МИДИ канал, од 1 до 16, „all“ (подразумевано) за све канале обрађене као један, „each“ за сваки канал засебно.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="78"/>
+        <source>Synthesizer mode: several presets can be selected and played at the same time.</source>
+        <translation>Режим синтисајзера: више поставки може бити изабрано и свирано истовремено.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="80"/>
+        <source>Synthesizer mode: the keys corresponding to the preset numbers select the presets (&quot;on&quot;) or select and deselect them (&quot;toggle&quot;).</source>
+        <translation>Режим синтисајзера: дирке које одговарају бројевима поставки бирају поставке („on“) или их бирају и поништавају избор („toggle“).</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="82"/>
+        <source>Start the MCP server for this session even if it is disabled in the settings. A new instance of Polyphone is opened.</source>
+        <translation>Покрени MCP сервер за ову сесију чак и ако је онемогућен у подешавањима. Отвара се нова инстанца програма Polyphone.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="84"/>
+        <source>Port of the MCP server, implying --mcp. By default, the port of the settings.</source>
+        <translation>Порт MCP сервера, подразумева --mcp. Подразумевано, порт из подешавања.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="143"/>
+        <source>Unknown option &quot;%1&quot;.</source>
+        <translation>Непозната опција „%1“.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="234"/>
+        <source>Only one of the options --convert, --render, --synth and --reset-config can be used.</source>
+        <translation>Може се користити само једна од опција --convert, --render, --synth и --reset-config.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="246"/>
+        <source>The format of the output file &quot;%1&quot; is unknown, it can be specified with --convert.</source>
+        <translation>Формат излазне датотеке „%1“ је непознат, може се навести помоћу --convert.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="284"/>
+        <source>The option &quot;%1&quot; is not used when files are opened in the editor.</source>
+        <translation>Опција „%1“ се не користи када се датотеке отварају у уређивачу.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="287"/>
+        <source>The option &quot;%1&quot; cannot be used with &quot;%2&quot;.</source>
+        <translation>Опција „%1“ се не може користити са „%2“.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="294"/>
+        <source>No file is expected with &quot;%1&quot;.</source>
+        <translation>Уз „%1“ се не очекује ниједна датотека.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="296"/>
+        <source>One soundfont is expected with &quot;%1&quot;.</source>
+        <translation>Уз „%1“ се очекује једна звукотека.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="300"/>
+        <source>No file to convert.</source>
+        <translation>Нема датотека за претварање.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="302"/>
+        <source>The option &quot;%1&quot; cannot be used with several input files.</source>
+        <translation>Опција „%1“ се не може користити са више улазних датотека.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="312"/>
+        <source>The format of the file &quot;%1&quot; is not supported.</source>
+        <translation>Формат датотеке „%1“ није подржан.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="327"/>
+        <source>The option &quot;%1&quot; can only be used once.</source>
+        <translation>Опција „%1“ се може користити само једном.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="360"/>
+        <source>The options &quot;%1&quot; and &quot;%2&quot; cannot be used together.</source>
+        <translation>Опције „%1“ и „%2“ се не могу користити заједно.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="367"/>
+        <source>The MIDI file to play is missing.</source>
+        <translation>Недостаје МИДИ датотека за пуштање.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="608"/>
+        <source>Usage:</source>
+        <translation>Употреба:</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="610"/>
+        <source>Polyphone, a soundfont editor: the files and directories are opened in the editor, unless one of the options --convert, --render, --synth or --reset-config is used.</source>
+        <translation>Polyphone, уређивач звукотека: датотеке и директоријуми се отварају у уређивачу, осим ако се користи једна од опција --convert, --render, --synth или --reset-config.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="612"/>
+        <source>Files:</source>
+        <translation>Датотеке:</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="613"/>
+        <source>Soundfonts (sf2, sf3, sfz, dls, sfArk, organ) or directories.</source>
+        <translation>Звукотеке (sf2, sf3, sfz, dls, sfArk, organ) или директоријуми.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="614"/>
+        <source>Options:</source>
+        <translation>Опције:</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="634"/>
+        <source>Examples:</source>
+        <translation>Примери:</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="641"/>
+        <source>The options -1 to -6, -i and -c of the previous versions are still accepted.</source>
+        <translation>Опције од -1 до -6, -i и -c из претходних верзија се и даље прихватају.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="642"/>
+        <source>Documentation: %1</source>
+        <translation>Документација: %1</translation>
+    </message>
+</context>
+<context>
     <name>OutputCsv</name>
     <message>
         <location filename="../../core/output/csv/outputcsv.cpp" line="52"/>
@@ -4185,11 +4395,13 @@ default mod.</source>
     </message>
     <message>
         <location filename="../../core/output/sf/outputsf.cpp" line="91"/>
+        <location filename="../../main.cpp" line="234"/>
         <source>cannot delete file &quot;%1&quot;</source>
         <translation>не могу да обришем датотеку „%1”</translation>
     </message>
     <message>
         <location filename="../../core/output/sf/outputsf.cpp" line="101"/>
+        <location filename="../../main.cpp" line="239"/>
         <source>cannot rename file &quot;%1&quot;</source>
         <translation>не могу да преименујем датотеку „%1”</translation>
     </message>
@@ -5026,68 +5238,68 @@ Warning: quality will be reduced and the loop may be altered</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../core/output/outputfactory.cpp" line="130"/>
+        <location filename="../../mainwindow/soundfontsaver.cpp" line="81"/>
         <source>Save a soundfont</source>
         <translation>Сачувај звукотеку</translation>
     </message>
     <message>
-        <location filename="../../core/output/outputfactory.cpp" line="132"/>
+        <location filename="../../mainwindow/soundfontsaver.cpp" line="83"/>
         <source>Sf2 files</source>
         <translation>Sf2 датотеке</translation>
     </message>
     <message>
-        <location filename="../../core/output/outputfactory.cpp" line="132"/>
+        <location filename="../../mainwindow/soundfontsaver.cpp" line="83"/>
         <source>Sf3 files</source>
         <translation>Sf3 датотеке</translation>
     </message>
     <message>
-        <location filename="../../core/output/outputfactory.cpp" line="158"/>
-        <location filename="../../core/sample/sampleloader.cpp" line="60"/>
+        <location filename="../../editor/interactivesampleloader.cpp" line="45"/>
+        <location filename="../../mainwindow/soundfontsaver.cpp" line="109"/>
         <source>Warning</source>
         <translation>Упозорење</translation>
     </message>
     <message>
-        <location filename="../../core/sample/sampleloader.cpp" line="84"/>
+        <location filename="../../core/sample/sampleloader.cpp" line="89"/>
         <source>Sample &quot;%1L&quot; already exists.&lt;br /&gt;Replace?</source>
         <translation>Узорак „%1Л” већ постоји.&lt;br /&gt;Заменити?</translation>
     </message>
     <message>
-        <location filename="../../core/sample/sampleloader.cpp" line="89"/>
+        <location filename="../../core/sample/sampleloader.cpp" line="94"/>
         <source>Sample &quot;%1R&quot; already exists.&lt;br /&gt;Replace?</source>
         <translation>Узорак „%1Д” већ постоји.&lt;br /&gt;Заменити?</translation>
     </message>
     <message>
-        <location filename="../../core/sample/sampleloader.cpp" line="97"/>
+        <location filename="../../core/sample/sampleloader.cpp" line="102"/>
         <source>Sample &quot;%1&quot; already exists.&lt;br /&gt;Replace?</source>
         <translation>Узорак „%1” већ постоји.&lt;br /&gt;Заменити?</translation>
     </message>
     <message>
-        <location filename="../../core/sample/sampleloader.cpp" line="110"/>
+        <location filename="../../editor/interactivesampleloader.cpp" line="56"/>
         <source>&amp;Replace</source>
         <translation>За&amp;мени</translation>
     </message>
     <message>
-        <location filename="../../core/sample/sampleloader.cpp" line="111"/>
+        <location filename="../../editor/interactivesampleloader.cpp" line="57"/>
         <source>R&amp;eplace all</source>
         <translation>Замени св&amp;е</translation>
     </message>
     <message>
-        <location filename="../../core/sample/sampleloader.cpp" line="112"/>
+        <location filename="../../editor/interactivesampleloader.cpp" line="58"/>
         <source>&amp;Duplicate</source>
         <translation>У&amp;двостручи</translation>
     </message>
     <message>
-        <location filename="../../core/sample/sampleloader.cpp" line="113"/>
+        <location filename="../../editor/interactivesampleloader.cpp" line="59"/>
         <source>D&amp;uplicate all</source>
         <translation>&amp;Удвостручи све</translation>
     </message>
     <message>
-        <location filename="../../core/sample/sampleloader.cpp" line="114"/>
+        <location filename="../../editor/interactivesampleloader.cpp" line="60"/>
         <source>&amp;Ignore</source>
         <translation>Занемар&amp;и</translation>
     </message>
     <message>
-        <location filename="../../core/sample/sampleloader.cpp" line="115"/>
+        <location filename="../../editor/interactivesampleloader.cpp" line="61"/>
         <source>I&amp;gnore all</source>
         <translation>Занемари с&amp;ве</translation>
     </message>
@@ -5135,7 +5347,7 @@ Warning: quality will be reduced and the loop may be altered</source>
         <location filename="../../core/input/grandorgue/grandorguerank.cpp" line="142"/>
         <location filename="../../core/input/grandorgue/grandorguestop.cpp" line="141"/>
         <location filename="../../core/input/grandorgue/grandorgueswitch.cpp" line="73"/>
-        <location filename="../../core/output/outputfactory.cpp" line="114"/>
+        <location filename="../../mainwindow/soundfontsaver.cpp" line="65"/>
         <source>untitled</source>
         <translation>без назива</translation>
     </message>
@@ -5308,31 +5520,31 @@ Warning: quality will be reduced and the loop may be altered</source>
         <translation>Ла♯</translation>
     </message>
     <message>
-        <location filename="../../core/utils.cpp" line="340"/>
+        <location filename="../../core/utils.cpp" line="307"/>
         <source>bytes</source>
         <translation>бајтова</translation>
     </message>
     <message>
-        <location filename="../../core/utils.cpp" line="342"/>
+        <location filename="../../core/utils.cpp" line="309"/>
         <source>kB</source>
         <comment>kilobytes</comment>
         <translation>кБ</translation>
     </message>
     <message>
-        <location filename="../../core/utils.cpp" line="344"/>
+        <location filename="../../core/utils.cpp" line="311"/>
         <location filename="../../repository/browser/soundfontbrowser.cpp" line="80"/>
         <source>MB</source>
         <comment>megabytes</comment>
         <translation>МБ</translation>
     </message>
     <message>
-        <location filename="../../core/utils.cpp" line="346"/>
+        <location filename="../../core/utils.cpp" line="313"/>
         <source>GB</source>
         <comment>gigabytes</comment>
         <translation>ГБ</translation>
     </message>
     <message>
-        <location filename="../../core/utils.cpp" line="347"/>
+        <location filename="../../core/utils.cpp" line="314"/>
         <source>TB</source>
         <comment>terabytes</comment>
         <translation>ТБ</translation>
@@ -5390,98 +5602,95 @@ Both divisions must share the same note and velocity ranges.</source>
         <translation>не могу да направим датотеку „%1”</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="111"/>
-        <location filename="../../main.cpp" line="257"/>
+        <location filename="../../main.cpp" line="150"/>
+        <location filename="../../main.cpp" line="334"/>
         <source>The file &quot;%1&quot; does not exist.</source>
         <translation>Датотека „%1“ не постоји.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="119"/>
-        <location filename="../../main.cpp" line="262"/>
+        <location filename="../../main.cpp" line="159"/>
+        <location filename="../../main.cpp" line="341"/>
         <source>The directory &quot;%1&quot; does not exist.</source>
         <translation>Директоријум „%1“ не постоји.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="124"/>
+        <location filename="../../main.cpp" line="166"/>
+        <location filename="../../main.cpp" line="346"/>
         <source>The file &quot;%1&quot; already exists.</source>
         <translation>Датотека „%1“ већ постоји.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="129"/>
-        <location filename="../../main.cpp" line="203"/>
-        <location filename="../../main.cpp" line="288"/>
+        <location filename="../../main.cpp" line="167"/>
+        <location filename="../../main.cpp" line="347"/>
+        <source>Use &quot;%1&quot; to replace it.</source>
+        <translation>Користите „%1“ да бисте је заменили.</translation>
+    </message>
+    <message>
+        <location filename="../../main.cpp" line="172"/>
+        <location filename="../../main.cpp" line="282"/>
+        <location filename="../../main.cpp" line="373"/>
         <source>Loading file &quot;%1&quot;...</source>
         <translation>Учитавање датотеке „%1“...</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="134"/>
-        <location filename="../../main.cpp" line="208"/>
-        <location filename="../../main.cpp" line="293"/>
+        <location filename="../../main.cpp" line="177"/>
+        <location filename="../../main.cpp" line="287"/>
+        <location filename="../../main.cpp" line="378"/>
         <source>Couldn&apos;t load file &quot;%1&quot;: %2.</source>
         <translation>Није било могуће учитати датотеку „%1“: %2.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="140"/>
-        <location filename="../../main.cpp" line="214"/>
-        <location filename="../../main.cpp" line="299"/>
+        <location filename="../../main.cpp" line="183"/>
+        <location filename="../../main.cpp" line="293"/>
+        <location filename="../../main.cpp" line="384"/>
         <source>File successfully loaded!</source>
         <translation>Датотека успешно учитана!</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="148"/>
-        <location filename="../../main.cpp" line="153"/>
-        <location filename="../../main.cpp" line="166"/>
-        <location filename="../../main.cpp" line="236"/>
-        <location filename="../../main.cpp" line="303"/>
+        <location filename="../../main.cpp" line="193"/>
+        <location filename="../../main.cpp" line="198"/>
+        <location filename="../../main.cpp" line="211"/>
+        <location filename="../../main.cpp" line="314"/>
+        <location filename="../../main.cpp" line="387"/>
         <source>Writing file &quot;%1&quot;...</source>
         <translation>Писање датотеке „%1“...</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="159"/>
-        <location filename="../../main.cpp" line="163"/>
+        <location filename="../../main.cpp" line="204"/>
+        <location filename="../../main.cpp" line="208"/>
         <source>Writing files in directory &quot;%1&quot;...</source>
         <translation>Писање датотека у директоријум „%1“...</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="169"/>
-        <source>Unknown mode &quot;%1&quot;.</source>
-        <translation>Непознати режим „%1“.</translation>
-    </message>
-    <message>
-        <location filename="../../main.cpp" line="177"/>
-        <location filename="../../main.cpp" line="283"/>
-        <location filename="../../main.cpp" line="311"/>
+        <location filename="../../main.cpp" line="246"/>
+        <location filename="../../main.cpp" line="368"/>
+        <location filename="../../main.cpp" line="397"/>
         <source>An error occurred: %1.</source>
         <translation>Дошло је до грешке: %1.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="182"/>
+        <location filename="../../main.cpp" line="249"/>
         <source>File successfully converted!</source>
         <translation>Датотека успешно конвертована!</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="223"/>
+        <location filename="../../main.cpp" line="302"/>
         <source>Channel %1: no preset %2 in the soundfont, its notes are not played.</source>
         <translation>Канал %1: звукотека нема поставку %2, његове ноте се не пуштају.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="242"/>
-        <location filename="../../main.cpp" line="314"/>
+        <location filename="../../main.cpp" line="320"/>
+        <location filename="../../main.cpp" line="400"/>
         <source>File successfully rendered!</source>
         <translation>Датотека успешно рендерована!</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="327"/>
+        <location filename="../../main.cpp" line="411"/>
         <source>Previous configuration is now cleared.</source>
         <translation>Претходна конфигурација је сада обрисана.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="336"/>
-        <source>See &quot;%1&quot; for more information.</source>
-        <translation>Погледајте „%1“ за више информација.</translation>
-    </message>
-    <message>
-        <location filename="../../main.cpp" line="338"/>
+        <location filename="../../main.cpp" line="537"/>
         <source>Write &quot;%1&quot; to show usage.</source>
         <translation>Напишите „%1“ да бисте приказали употребу.</translation>
     </message>
@@ -6187,58 +6396,58 @@ download content</source>
 <context>
     <name>TabManager</name>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="112"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="127"/>
         <source>Settings</source>
         <translation>Подешавања</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="141"/>
-        <location filename="../../mainwindow/tabmanager.cpp" line="350"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="156"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="365"/>
         <source>Warning</source>
         <translation>Упозорење</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="142"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="157"/>
         <source>Cannot open file &quot;%1&quot;</source>
         <translation>Не могу да отворим датотеку „%1”</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="299"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="314"/>
         <source>Online repository</source>
         <translation>Онлајн ризница</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="345"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="360"/>
         <source>Save before exiting?</source>
         <translation>Сачувати пре изласка?</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="348"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="363"/>
         <source>untitled</source>
         <translation>без назива</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="349"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="364"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>Датотека „%1” је измењена.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="352"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="367"/>
         <source>&amp;Save</source>
         <translation>&amp;Сачувај</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="353"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="368"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Поништи</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="354"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="369"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>&amp;Не чувај</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="582"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="597"/>
         <source>User area</source>
         <translation>Корисничка област</translation>
     </message>
@@ -8192,7 +8401,7 @@ Other soundfont editors might display other units.</source>
         <translation>Вртња / репродукција</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/trim_end/tooltrimend.h" line="64"/>
+        <location filename="../../editor/tools/trim_end/tooltrimend.h" line="61"/>
         <source>Trim to end of loop</source>
         <translation>Скрати до краја вртње</translation>
     </message>
@@ -8205,7 +8414,7 @@ Other soundfont editors might display other units.</source>
         <translation>Вртња / репродукција</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/trim_start/tooltrimstart.h" line="67"/>
+        <location filename="../../editor/tools/trim_start/tooltrimstart.h" line="64"/>
         <source>Remove blank at start</source>
         <translation>Уклони празнину на почетку</translation>
     </message>

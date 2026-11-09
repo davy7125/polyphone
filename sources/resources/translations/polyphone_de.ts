@@ -453,364 +453,364 @@
 <context>
     <name>ConfManager</name>
     <message>
-        <location filename="../../context/confmanager.cpp" line="215"/>
+        <location filename="../../context/confmanager.cpp" line="214"/>
         <source>Z</source>
         <comment>first key mapping for bottom left C</comment>
         <translatorcomment>Erstes key mapping für tiefes C links</translatorcomment>
         <translation>Y</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="216"/>
+        <location filename="../../context/confmanager.cpp" line="215"/>
         <source>S</source>
         <comment>first key mapping for bottom C#</comment>
         <translatorcomment>Erstes key mapping für tiefes C#</translatorcomment>
         <translation>S</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="217"/>
+        <location filename="../../context/confmanager.cpp" line="216"/>
         <source>X</source>
         <comment>first key mapping for bottom D</comment>
         <translatorcomment>Erstes key mapping für tiefes D</translatorcomment>
         <translation>X</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="218"/>
+        <location filename="../../context/confmanager.cpp" line="217"/>
         <source>D</source>
         <comment>first key mapping for bottom D#</comment>
         <translatorcomment>Erstes key mapping für tiefes D#</translatorcomment>
         <translation>D</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="219"/>
+        <location filename="../../context/confmanager.cpp" line="218"/>
         <source>C</source>
         <comment>first key mapping for bottom E</comment>
         <translatorcomment>Erstes key mapping für tiefes E</translatorcomment>
         <translation>C</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="220"/>
+        <location filename="../../context/confmanager.cpp" line="219"/>
         <source>V</source>
         <comment>first key mapping for bottom F</comment>
         <translatorcomment>Erstes key mapping für tiefes F</translatorcomment>
         <translation>V</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="221"/>
+        <location filename="../../context/confmanager.cpp" line="220"/>
         <source>G</source>
         <comment>first key mapping for bottom F#</comment>
         <translatorcomment>Erstes key mapping für tiefes F#</translatorcomment>
         <translation>G</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="222"/>
+        <location filename="../../context/confmanager.cpp" line="221"/>
         <source>B</source>
         <comment>first key mapping for bottom G</comment>
         <translatorcomment>Erstes key mapping für tiefes G</translatorcomment>
         <translation>B</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="223"/>
+        <location filename="../../context/confmanager.cpp" line="222"/>
         <source>H</source>
         <comment>first key mapping for bottom G#</comment>
         <translatorcomment>Erstes key mapping für tiefes G#</translatorcomment>
         <translation>H</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="224"/>
+        <location filename="../../context/confmanager.cpp" line="223"/>
         <source>N</source>
         <comment>first key mapping for bottom A</comment>
         <translatorcomment>Erstes key mapping für tiefes A</translatorcomment>
         <translation>N</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="225"/>
+        <location filename="../../context/confmanager.cpp" line="224"/>
         <source>J</source>
         <comment>first key mapping for bottom A#</comment>
         <translatorcomment>Erstes key mapping für tiefes A#</translatorcomment>
         <translation>J</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="226"/>
+        <location filename="../../context/confmanager.cpp" line="225"/>
         <source>M</source>
         <comment>first key mapping for bottom B</comment>
         <translatorcomment>Erstes key mapping für tiefes H</translatorcomment>
         <translation>M</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="227"/>
+        <location filename="../../context/confmanager.cpp" line="226"/>
         <source>,</source>
         <comment>first key mapping for bottom right C</comment>
         <translatorcomment>Erstes key mapping für tiefes C rechts</translatorcomment>
         <translation>,</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="233"/>
+        <location filename="../../context/confmanager.cpp" line="232"/>
         <source>Q</source>
         <comment>first key mapping for upper left C</comment>
         <translatorcomment>Erstes key mapping für hohes C links</translatorcomment>
         <translation>Q</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="234"/>
+        <location filename="../../context/confmanager.cpp" line="233"/>
         <source>2</source>
         <comment>first key mapping for upper C#</comment>
         <translatorcomment>Erstes key mapping für hohes C#</translatorcomment>
         <translation>2</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="235"/>
+        <location filename="../../context/confmanager.cpp" line="234"/>
         <source>W</source>
         <comment>first key mapping for upper D</comment>
         <translatorcomment>Erstes key mapping für hohes D</translatorcomment>
         <translation>W</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="236"/>
+        <location filename="../../context/confmanager.cpp" line="235"/>
         <source>3</source>
         <comment>first key mapping for upper D#</comment>
         <translatorcomment>Erstes key mapping für hohes D#</translatorcomment>
         <translation>3</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="237"/>
+        <location filename="../../context/confmanager.cpp" line="236"/>
         <source>E</source>
         <comment>first key mapping for upper E</comment>
         <translatorcomment>Erstes key mapping für hohes E</translatorcomment>
         <translation>E</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="238"/>
+        <location filename="../../context/confmanager.cpp" line="237"/>
         <source>R</source>
         <comment>first key mapping for upper F</comment>
         <translatorcomment>Erstes key mapping für hohes F</translatorcomment>
         <translation>R</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="239"/>
+        <location filename="../../context/confmanager.cpp" line="238"/>
         <source>5</source>
         <comment>first key mapping for upper F#</comment>
         <translatorcomment>Erstes key mapping für hohes F#</translatorcomment>
         <translation>5</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="240"/>
+        <location filename="../../context/confmanager.cpp" line="239"/>
         <source>T</source>
         <comment>first key mapping for upper G</comment>
         <translatorcomment>Erstes key mapping für hohes G</translatorcomment>
         <translation>T</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="241"/>
+        <location filename="../../context/confmanager.cpp" line="240"/>
         <source>6</source>
         <comment>first key mapping for upper G#</comment>
         <translatorcomment>Erstes key mapping für hohes G#</translatorcomment>
         <translation>6</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="242"/>
+        <location filename="../../context/confmanager.cpp" line="241"/>
         <source>Y</source>
         <comment>first key mapping for upper A</comment>
         <translatorcomment>Erstes key mapping für hohes A</translatorcomment>
         <translation>Z</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="243"/>
+        <location filename="../../context/confmanager.cpp" line="242"/>
         <source>7</source>
         <comment>first key mapping for upper A#</comment>
         <translatorcomment>Erstes key mapping für hohes A#</translatorcomment>
         <translation>7</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="244"/>
+        <location filename="../../context/confmanager.cpp" line="243"/>
         <source>U</source>
         <comment>first key mapping for upper B</comment>
         <translatorcomment>Erstes key mapping für hohes H</translatorcomment>
         <translation>U</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="245"/>
+        <location filename="../../context/confmanager.cpp" line="244"/>
         <source>I</source>
         <comment>first key mapping for upper right C</comment>
         <translatorcomment>Erstes key mapping für hohes C rechts</translatorcomment>
         <translation>I</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="251"/>
+        <location filename="../../context/confmanager.cpp" line="250"/>
         <source>Shift+Z</source>
         <comment>second key mapping for bottom left C</comment>
         <translatorcomment>Zweites key mapping für tiefes C links</translatorcomment>
         <translation>Shift+Y</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="252"/>
+        <location filename="../../context/confmanager.cpp" line="251"/>
         <source>Shift+S</source>
         <comment>second key mapping for bottom C#</comment>
         <translatorcomment>Zweites key mapping für tiefes C#</translatorcomment>
         <translation>Shift+S</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="253"/>
+        <location filename="../../context/confmanager.cpp" line="252"/>
         <source>Shift+X</source>
         <comment>second key mapping for bottom D</comment>
         <translatorcomment>Zweites key mapping für tiefes D</translatorcomment>
         <translation>Shift+X</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="254"/>
+        <location filename="../../context/confmanager.cpp" line="253"/>
         <source>Shift+D</source>
         <comment>second key mapping for bottom D#</comment>
         <translatorcomment>Zweites key mapping für tiefes D#</translatorcomment>
         <translation>Shift+D</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="255"/>
+        <location filename="../../context/confmanager.cpp" line="254"/>
         <source>Shift+C</source>
         <comment>second key mapping for bottom E</comment>
         <translatorcomment>Zweites key mapping für tiefes E</translatorcomment>
         <translation>Shift+C</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="256"/>
+        <location filename="../../context/confmanager.cpp" line="255"/>
         <source>Shift+V</source>
         <comment>second key mapping for bottom F</comment>
         <translatorcomment>Zweites key mapping für tiefes F</translatorcomment>
         <translation>Shift+V</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="257"/>
+        <location filename="../../context/confmanager.cpp" line="256"/>
         <source>Shift+G</source>
         <comment>second key mapping for bottom F#</comment>
         <translatorcomment>Zweites key mapping für tiefes F#</translatorcomment>
         <translation>Shift+G</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="258"/>
+        <location filename="../../context/confmanager.cpp" line="257"/>
         <source>Shift+B</source>
         <comment>second key mapping for bottom G</comment>
         <translatorcomment>Zweites key mapping für tiefes G</translatorcomment>
         <translation>Shift+B</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="259"/>
+        <location filename="../../context/confmanager.cpp" line="258"/>
         <source>Shift+H</source>
         <comment>second key mapping for bottom G#</comment>
         <translatorcomment>Zweites key mapping für tiefes G#</translatorcomment>
         <translation>Shift+H</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="260"/>
+        <location filename="../../context/confmanager.cpp" line="259"/>
         <source>Shift+N</source>
         <comment>second key mapping for bottom A</comment>
         <translatorcomment>Zweites key mapping für tiefes A</translatorcomment>
         <translation>Shift+N</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="261"/>
+        <location filename="../../context/confmanager.cpp" line="260"/>
         <source>Shift+J</source>
         <comment>second key mapping for bottom A#</comment>
         <translatorcomment>Zweites key mapping für tiefes A#</translatorcomment>
         <translation>Shift+J</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="262"/>
+        <location filename="../../context/confmanager.cpp" line="261"/>
         <source>Shift+M</source>
         <comment>second key mapping for bottom B</comment>
         <translatorcomment>Zweites key mapping für tiefes H</translatorcomment>
         <translation>Shift+M</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="263"/>
+        <location filename="../../context/confmanager.cpp" line="262"/>
         <source>Shift+&lt;</source>
         <comment>second key mapping for bottom right C</comment>
         <translatorcomment>Zweites key mapping für tiefes C rechts</translatorcomment>
         <translation>Shift+;</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="269"/>
+        <location filename="../../context/confmanager.cpp" line="268"/>
         <source>Shift+Q</source>
         <comment>second key mapping for upper left C</comment>
         <translatorcomment>Zweites key mapping für hohes C links</translatorcomment>
         <translation>Shift+Q</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="270"/>
+        <location filename="../../context/confmanager.cpp" line="269"/>
         <source>Shift+@</source>
         <comment>second key mapping for upper C#</comment>
         <translatorcomment>Zweites key mapping für hohes C#</translatorcomment>
         <translation>Shift+&quot;</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="271"/>
+        <location filename="../../context/confmanager.cpp" line="270"/>
         <source>Shift+W</source>
         <comment>second key mapping for upper D</comment>
         <translatorcomment>Zweites key mapping für hohes D</translatorcomment>
         <translation>Shift+W</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="272"/>
+        <location filename="../../context/confmanager.cpp" line="271"/>
         <source>Shift+#</source>
         <comment>second key mapping for upper D#</comment>
         <translatorcomment>Zweites key mapping für hohes D#</translatorcomment>
         <translation>Shift+§</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="273"/>
+        <location filename="../../context/confmanager.cpp" line="272"/>
         <source>Shift+E</source>
         <comment>second key mapping for upper E</comment>
         <translatorcomment>Zweites key mapping für hohes E</translatorcomment>
         <translation>Shift+E</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="274"/>
+        <location filename="../../context/confmanager.cpp" line="273"/>
         <source>Shift+R</source>
         <comment>second key mapping for upper F</comment>
         <translatorcomment>Zweites key mapping für hohes F</translatorcomment>
         <translation>Shift+R</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="275"/>
+        <location filename="../../context/confmanager.cpp" line="274"/>
         <source>Shift+%</source>
         <comment>second key mapping for upper F#</comment>
         <translatorcomment>Zweites key mapping für hohes F#</translatorcomment>
         <translation>Shift+%</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="276"/>
+        <location filename="../../context/confmanager.cpp" line="275"/>
         <source>Shift+T</source>
         <comment>second key mapping for upper G</comment>
         <translatorcomment>Zweites key mapping für hohes G</translatorcomment>
         <translation>Shift+T</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="277"/>
+        <location filename="../../context/confmanager.cpp" line="276"/>
         <source>Shift+^</source>
         <comment>second key mapping for upper G#</comment>
         <translatorcomment>Zweites key mapping für hohes G#</translatorcomment>
         <translation>Shift+&amp;</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="278"/>
+        <location filename="../../context/confmanager.cpp" line="277"/>
         <source>Shift+Y</source>
         <comment>second key mapping for upper A</comment>
         <translatorcomment>Zweites key mapping für hohes A</translatorcomment>
         <translation>Shift+Z</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="279"/>
+        <location filename="../../context/confmanager.cpp" line="278"/>
         <source>Shift+&amp;</source>
         <comment>second key mapping for upper A#</comment>
         <translatorcomment>Zweites key mapping für hohes A#</translatorcomment>
         <translation>Shift+/</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="280"/>
+        <location filename="../../context/confmanager.cpp" line="279"/>
         <source>Shift+U</source>
         <comment>second key mapping for upper B</comment>
         <translatorcomment>Zweites key mapping für hohes H</translatorcomment>
         <translation>Shift+U</translation>
     </message>
     <message>
-        <location filename="../../context/confmanager.cpp" line="281"/>
+        <location filename="../../context/confmanager.cpp" line="280"/>
         <source>Shift+I</source>
         <comment>second key mapping for upper right C</comment>
         <translatorcomment>Zweites key mapping für hohes C rechts</translatorcomment>
@@ -1291,37 +1291,39 @@
         <translation>Beschreibung</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionmcp.cpp" line="90"/>
+        <location filename="../../context/interface/configsectionmcp.cpp" line="92"/>
+        <location filename="../../main.cpp" line="120"/>
         <source>Server started, address: %1</source>
         <translation>Server gestartet, Adresse: %1</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionmcp.cpp" line="92"/>
+        <location filename="../../context/interface/configsectionmcp.cpp" line="94"/>
+        <location filename="../../main.cpp" line="122"/>
         <source>The server cannot start: %1</source>
         <translation>Der Server kann nicht gestartet werden: %1</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionmcp.cpp" line="94"/>
+        <location filename="../../context/interface/configsectionmcp.cpp" line="96"/>
         <source>Server stopped</source>
         <translation>Server gestoppt</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionmcp.cpp" line="101"/>
+        <location filename="../../context/interface/configsectionmcp.cpp" line="103"/>
         <source>Browsing</source>
         <translation>Durchsuchen</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionmcp.cpp" line="102"/>
+        <location filename="../../context/interface/configsectionmcp.cpp" line="104"/>
         <source>Editing</source>
         <translation>Bearbeitung</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionmcp.cpp" line="103"/>
+        <location filename="../../context/interface/configsectionmcp.cpp" line="105"/>
         <source>Tools</source>
         <translation>Werkzeuge</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionmcp.cpp" line="104"/>
+        <location filename="../../context/interface/configsectionmcp.cpp" line="106"/>
         <source>Sound analysis</source>
         <translation>Klanganalyse</translation>
     </message>
@@ -1577,103 +1579,103 @@ Fundgrube</translation>
 <context>
     <name>ConversionSfz</name>
     <message>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="56"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="55"/>
         <source>cannot create directory &quot;%1&quot;</source>
         <translation>der Ordner &quot;%1&quot; kann nicht erzeugt werden</translation>
     </message>
     <message>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="241"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="240"/>
         <source>untitled</source>
         <translation>unbenannt</translation>
     </message>
     <message>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="673"/>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="715"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="672"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="714"/>
         <source>other</source>
         <translation>sonstiges</translation>
     </message>
     <message>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="676"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="675"/>
         <source>Piano</source>
         <translation>Klavier</translation>
     </message>
     <message>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="678"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="677"/>
         <source>Chromatic percussion</source>
         <translation>Chromatische Percussion</translation>
     </message>
     <message>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="680"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="679"/>
         <source>Organ</source>
         <translation>Orgel</translation>
     </message>
     <message>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="682"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="681"/>
         <source>Guitar</source>
         <translation>Gitarre</translation>
     </message>
     <message>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="684"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="683"/>
         <source>Bass</source>
         <translation>Bass</translation>
     </message>
     <message>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="686"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="685"/>
         <source>Strings</source>
         <translation>Streicher</translation>
     </message>
     <message>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="688"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="687"/>
         <source>Ensemble</source>
         <translation>Ensemble</translation>
     </message>
     <message>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="690"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="689"/>
         <source>Brass</source>
         <translation>Blechbläser</translation>
     </message>
     <message>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="692"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="691"/>
         <source>Reed</source>
         <translation>Holzbläser</translation>
     </message>
     <message>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="694"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="693"/>
         <source>Pipe</source>
         <translation>Pfeife</translation>
     </message>
     <message>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="696"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="695"/>
         <source>Synth lead</source>
         <translation>Synth lead</translation>
     </message>
     <message>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="698"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="697"/>
         <source>Synth pad</source>
         <translation>Synth pad</translation>
     </message>
     <message>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="700"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="699"/>
         <source>Synth effects</source>
         <translation>Synth-Effekte</translation>
     </message>
     <message>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="702"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="701"/>
         <source>Ethnic</source>
         <translation>Ethnisch</translation>
     </message>
     <message>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="704"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="703"/>
         <source>Percussive</source>
         <translation>Percussion</translation>
     </message>
     <message>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="706"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="705"/>
         <source>Sound effects</source>
         <translation>Soundeffekte</translation>
     </message>
     <message>
-        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="708"/>
+        <location filename="../../core/output/sfz/conversion_sfz.cpp" line="707"/>
         <source>Percussion kit</source>
         <translation>Percussion-Kit</translation>
     </message>
@@ -3056,77 +3058,77 @@ ein Signal</translation>
 <context>
     <name>Duplicator</name>
     <message>
-        <location filename="../../core/duplicator.cpp" line="277"/>
+        <location filename="../../editor/interactiveduplicator.cpp" line="72"/>
         <source>Global parameters are already filled.</source>
         <translation>Globale Parameter sind bereits angegeben.</translation>
     </message>
     <message>
-        <location filename="../../core/duplicator.cpp" line="278"/>
+        <location filename="../../editor/interactiveduplicator.cpp" line="73"/>
         <source>The global division will not be copied.</source>
         <translation>Die globale Aufteilung wird nicht kopiert.</translation>
     </message>
     <message>
-        <location filename="../../core/duplicator.cpp" line="280"/>
+        <location filename="../../editor/interactiveduplicator.cpp" line="75"/>
         <source>&amp;Ok</source>
         <translation>&amp;Ok</translation>
     </message>
     <message>
-        <location filename="../../core/duplicator.cpp" line="281"/>
+        <location filename="../../editor/interactiveduplicator.cpp" line="76"/>
         <source>Ok, &amp;disable this message</source>
         <translation>Ok, diese &amp;Meldung deaktivieren</translation>
     </message>
     <message>
-        <location filename="../../core/duplicator.cpp" line="313"/>
+        <location filename="../../core/duplicator.cpp" line="296"/>
         <source>The sample &quot;%1&quot; already exists.&lt;br /&gt;Replace?</source>
         <translation>Das Sample &quot;%1&quot; existiert bereits.&lt;br /&gt;Ersetzen?</translation>
     </message>
     <message>
-        <location filename="../../core/duplicator.cpp" line="461"/>
+        <location filename="../../core/duplicator.cpp" line="444"/>
         <source>The instrument &quot;%1&quot; already exists.&lt;br /&gt;Replace?</source>
         <translation>Das Instrument &quot;%1&quot; existiert bereits.&lt;br /&gt;Ersetzen?</translation>
     </message>
     <message>
-        <location filename="../../core/duplicator.cpp" line="556"/>
+        <location filename="../../core/duplicator.cpp" line="539"/>
         <source>The preset &quot;%1&quot; already exists.&lt;br/&gt;Replace?</source>
         <translation>Das Preset &quot;%1&quot; existiert bereits.&lt;br/&gt;Ersetzen?</translation>
     </message>
     <message>
-        <location filename="../../core/duplicator.cpp" line="578"/>
+        <location filename="../../editor/interactiveduplicator.cpp" line="84"/>
         <source>Warning</source>
         <translation>Warnung</translation>
     </message>
     <message>
-        <location filename="../../core/duplicator.cpp" line="579"/>
+        <location filename="../../editor/interactiveduplicator.cpp" line="84"/>
         <source>No preset available.</source>
         <translation>Kein Preset verfügbar.</translation>
     </message>
     <message>
-        <location filename="../../core/duplicator.cpp" line="777"/>
+        <location filename="../../editor/interactiveduplicator.cpp" line="45"/>
         <source>&amp;Replace</source>
         <translation>&amp;Ersetzen</translation>
     </message>
     <message>
-        <location filename="../../core/duplicator.cpp" line="778"/>
+        <location filename="../../editor/interactiveduplicator.cpp" line="46"/>
         <source>R&amp;eplace all</source>
         <translation>&amp;Alle ersetzen</translation>
     </message>
     <message>
-        <location filename="../../core/duplicator.cpp" line="779"/>
+        <location filename="../../editor/interactiveduplicator.cpp" line="47"/>
         <source>&amp;Duplicate</source>
         <translation>&amp;Duplizieren</translation>
     </message>
     <message>
-        <location filename="../../core/duplicator.cpp" line="780"/>
+        <location filename="../../editor/interactiveduplicator.cpp" line="48"/>
         <source>D&amp;uplicate all</source>
         <translation>Alle d&amp;uplizieren</translation>
     </message>
     <message>
-        <location filename="../../core/duplicator.cpp" line="781"/>
+        <location filename="../../editor/interactiveduplicator.cpp" line="49"/>
         <source>&amp;Ignore</source>
         <translation>&amp;Ignorieren</translation>
     </message>
     <message>
-        <location filename="../../core/duplicator.cpp" line="782"/>
+        <location filename="../../editor/interactiveduplicator.cpp" line="50"/>
         <source>I&amp;gnore all</source>
         <translation>Alle i&amp;gnorieren</translation>
     </message>
@@ -3568,17 +3570,17 @@ ein Signal</translation>
 <context>
     <name>InputParserDls</name>
     <message>
-        <location filename="../../core/input/dls/inputparserdls.cpp" line="60"/>
+        <location filename="../../core/input/dls/inputparserdls.cpp" line="43"/>
         <source>Cannot find file &quot;%1&quot;.</source>
         <translation>Die Datei &quot;%1&quot; wurde nicht gefunden.</translation>
     </message>
     <message>
-        <location filename="../../core/input/dls/inputparserdls.cpp" line="66"/>
+        <location filename="../../core/input/dls/inputparserdls.cpp" line="49"/>
         <source>Access denied for reading file &quot;%1&quot;.</source>
         <translation>Lesezugriff verweigert für Datei &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../core/input/dls/inputparserdls.cpp" line="123"/>
+        <location filename="../../core/input/dls/inputparserdls.cpp" line="61"/>
         <source>This is not a DLS file.</source>
         <translation>Dies ist keine DLS-Datei.</translation>
     </message>
@@ -3602,12 +3604,12 @@ ein Signal</translation>
 <context>
     <name>InputParserSf</name>
     <message>
-        <location filename="../../core/input/sf/inputparsersf.cpp" line="48"/>
+        <location filename="../../core/input/sf/inputparsersf.cpp" line="46"/>
         <source>Cannot find file &quot;%1&quot;.</source>
         <translation>Die Datei &quot;%1&quot; wurde nicht gefunden.</translation>
     </message>
     <message>
-        <location filename="../../core/input/sf/inputparsersf.cpp" line="55"/>
+        <location filename="../../core/input/sf/inputparsersf.cpp" line="53"/>
         <source>Access denied for reading file &quot;%1&quot;.</source>
         <translation>Lesezugriff verweigert für Datei &quot;%1&quot;.</translation>
     </message>
@@ -3615,22 +3617,22 @@ ein Signal</translation>
 <context>
     <name>InputParserSfz</name>
     <message>
-        <location filename="../../core/input/sfz/inputparsersfz.cpp" line="109"/>
+        <location filename="../../core/input/sfz/inputparsersfz.cpp" line="58"/>
         <source>File recursion</source>
         <translation>Dateirekursion</translation>
     </message>
     <message>
-        <location filename="../../core/input/sfz/inputparsersfz.cpp" line="117"/>
+        <location filename="../../core/input/sfz/inputparsersfz.cpp" line="60"/>
         <source>Cannot open file &quot;%1&quot;</source>
         <translation>Die Datei &quot;%1&quot; kann nicht geöffnet werden</translation>
     </message>
     <message>
-        <location filename="../../core/input/sfz/inputparsersfz.cpp" line="294"/>
+        <location filename="../../core/input/sfz/inputparsersfz.cpp" line="50"/>
         <source>Sfz import</source>
         <translation>Sfz-Import</translation>
     </message>
     <message>
-        <location filename="../../core/input/sfz/inputparsersfz.cpp" line="453"/>
+        <location filename="../../core/input/sfz/inputparsersfz.cpp" line="49"/>
         <source>untitled</source>
         <translation>unbenannt</translation>
     </message>
@@ -3717,57 +3719,57 @@ ein Signal</translation>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="260"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="262"/>
         <source>&amp;Save</source>
         <translation>&amp;Speichern</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="246"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="248"/>
         <source>Warning</source>
         <translation>Warnung</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="67"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="69"/>
         <source>Polyphone SoundFont Editor</source>
         <translation>Polyphone SoundFont Editor</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="237"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="239"/>
         <source>Untitled</source>
         <translation>Unbenannt</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="261"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="263"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="262"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="264"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>&amp;Nicht speichern</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="350"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="352"/>
         <source>Opening files</source>
         <translation>Dateien öffnen</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="360"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="362"/>
         <source>Opening a directory</source>
         <translation>Verzeichnis öffnen</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="247"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="249"/>
         <source>Save before exiting?</source>
         <translation>Vor dem Beenden speichern?</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="250"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="252"/>
         <source>The following files have been modified:</source>
         <translation>Folgende Dateien wurden geändert:</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="257"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="259"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>Die Datei &quot;%1&quot; wurde geändert.</translation>
     </message>
@@ -3784,7 +3786,7 @@ ein Signal</translation>
         <translation>  Dokumentation</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="69"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="71"/>
         <source>Home screen</source>
         <translation>Startbildschirm</translation>
     </message>
@@ -3869,14 +3871,14 @@ ein Signal</translation>
 <context>
     <name>MidiFileRenderer</name>
     <message>
-        <location filename="../../midi_player/midifilerenderer.cpp" line="115"/>
+        <location filename="../../midi_player/midifilerenderer.cpp" line="111"/>
         <location filename="../../midi_player/midifilerenderer.cpp" line="172"/>
         <location filename="../../midi_player/midifilerenderer.cpp" line="197"/>
         <source>Cannot write file &quot;%1&quot;.</source>
         <translation>Die Datei &quot;%1&quot; kann nicht geschrieben werden.</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midifilerenderer.cpp" line="142"/>
+        <location filename="../../midi_player/midifilerenderer.cpp" line="138"/>
         <source>The audio file cannot exceed 4 GB.</source>
         <translation>Die Audiodatei darf 4 GB nicht überschreiten.</translation>
     </message>
@@ -4225,6 +4227,214 @@ StandardMod.</translation>
     </message>
 </context>
 <context>
+    <name>Options</name>
+    <message>
+        <location filename="../../options.cpp" line="33"/>
+        <source>Invalid value &quot;%1&quot; for the option &quot;%2&quot;.</source>
+        <translation>Ungültiger Wert &quot;%1&quot; für die Option &quot;%2&quot;.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="48"/>
+        <source>Display this help.</source>
+        <translation>Diese Hilfe anzeigen.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="50"/>
+        <source>Display the version.</source>
+        <translation>Die Version anzeigen.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="52"/>
+        <source>Convert the files into sf2, sf3, sfz, csv or dls. Without this option, the format is the extension of the output file if given.</source>
+        <translation>Die Dateien in sf2, sf3, sfz, csv oder dls konvertieren. Ohne diese Option ist das Format die Erweiterung der Ausgabedatei, falls angegeben.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="54"/>
+        <source>Play a MIDI file with the soundfont and write the result in a wav file.</source>
+        <translation>Eine MIDI-Datei mit der Soundfont abspielen und das Ergebnis in eine wav-Datei schreiben.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="56"/>
+        <source>Open Polyphone in synthesizer mode.</source>
+        <translation>Polyphone im Synthesizer-Modus öffnen.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="58"/>
+        <source>Reset the configuration of Polyphone (settings, window geometry, history, etc.).</source>
+        <translation>Die Konfiguration von Polyphone zurücksetzen (Einstellungen, Fenstergeometrie, Verlauf usw.).</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="60"/>
+        <source>Output file, the extension being optional. A name alone is written in the output directory, a relative path starts from the current directory.</source>
+        <translation>Ausgabedatei, die Erweiterung ist optional. Ein Name allein wird in das Ausgabeverzeichnis geschrieben, ein relativer Pfad beginnt im aktuellen Verzeichnis.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="62"/>
+        <source>Output directory, by default the directory of the input file (or of the MIDI file).</source>
+        <translation>Ausgabeverzeichnis, standardmäßig das Verzeichnis der Eingabedatei (oder der MIDI-Datei).</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="64"/>
+        <source>Replace an existing output file.</source>
+        <translation>Eine vorhandene Ausgabedatei ersetzen.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="66"/>
+        <source>Conversion to sf3: compression quality, &quot;low&quot;, &quot;medium&quot; (default) or &quot;high&quot;.</source>
+        <translation>Konvertierung in sf3: Kompressionsqualität, &quot;low&quot;, &quot;medium&quot; (Standard) oder &quot;high&quot;.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="68"/>
+        <source>Conversion to sfz: prefix each preset with its number.</source>
+        <translation>Konvertierung in sfz: jedem Preset seine Nummer voranstellen.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="70"/>
+        <source>Conversion to sfz: create a directory per bank.</source>
+        <translation>Konvertierung in sfz: ein Verzeichnis pro Bank erstellen.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="72"/>
+        <source>Conversion to sfz: sort the presets according to the General MIDI classification.</source>
+        <translation>Konvertierung in sfz: die Presets nach der General-MIDI-Klassifikation sortieren.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="74"/>
+        <source>Conversion to csv: export the raw values stored in the soundfont instead of values with units.</source>
+        <translation>Konvertierung in csv: die in der Soundfont gespeicherten Rohwerte statt Werten mit Einheiten exportieren.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="76"/>
+        <source>Synthesizer mode: MIDI channel, from 1 to 16, &quot;all&quot; (default) for all channels processed as one, &quot;each&quot; for each channel separately.</source>
+        <translation>Synthesizer-Modus: MIDI-Kanal, von 1 bis 16, &quot;all&quot; (Standard) für alle Kanäle als einer verarbeitet, &quot;each&quot; für jeden Kanal einzeln.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="78"/>
+        <source>Synthesizer mode: several presets can be selected and played at the same time.</source>
+        <translation>Synthesizer-Modus: mehrere Presets können gleichzeitig ausgewählt und gespielt werden.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="80"/>
+        <source>Synthesizer mode: the keys corresponding to the preset numbers select the presets (&quot;on&quot;) or select and deselect them (&quot;toggle&quot;).</source>
+        <translation>Synthesizer-Modus: die den Preset-Nummern entsprechenden Tasten wählen die Presets aus (&quot;on&quot;) oder wählen sie aus und ab (&quot;toggle&quot;).</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="82"/>
+        <source>Start the MCP server for this session even if it is disabled in the settings. A new instance of Polyphone is opened.</source>
+        <translation>Den MCP-Server für diese Sitzung starten, auch wenn er in den Einstellungen deaktiviert ist. Eine neue Instanz von Polyphone wird geöffnet.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="84"/>
+        <source>Port of the MCP server, implying --mcp. By default, the port of the settings.</source>
+        <translation>Port des MCP-Servers, impliziert --mcp. Standardmäßig der Port der Einstellungen.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="143"/>
+        <source>Unknown option &quot;%1&quot;.</source>
+        <translation>Unbekannte Option &quot;%1&quot;.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="234"/>
+        <source>Only one of the options --convert, --render, --synth and --reset-config can be used.</source>
+        <translation>Nur eine der Optionen --convert, --render, --synth und --reset-config kann verwendet werden.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="246"/>
+        <source>The format of the output file &quot;%1&quot; is unknown, it can be specified with --convert.</source>
+        <translation>Das Format der Ausgabedatei &quot;%1&quot; ist unbekannt, es kann mit --convert angegeben werden.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="284"/>
+        <source>The option &quot;%1&quot; is not used when files are opened in the editor.</source>
+        <translation>Die Option &quot;%1&quot; wird nicht verwendet, wenn Dateien im Editor geöffnet werden.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="287"/>
+        <source>The option &quot;%1&quot; cannot be used with &quot;%2&quot;.</source>
+        <translation>Die Option &quot;%1&quot; kann nicht mit &quot;%2&quot; verwendet werden.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="294"/>
+        <source>No file is expected with &quot;%1&quot;.</source>
+        <translation>Mit &quot;%1&quot; wird keine Datei erwartet.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="296"/>
+        <source>One soundfont is expected with &quot;%1&quot;.</source>
+        <translation>Mit &quot;%1&quot; wird eine Soundfont erwartet.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="300"/>
+        <source>No file to convert.</source>
+        <translation>Keine Datei zu konvertieren.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="302"/>
+        <source>The option &quot;%1&quot; cannot be used with several input files.</source>
+        <translation>Die Option &quot;%1&quot; kann nicht mit mehreren Eingabedateien verwendet werden.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="312"/>
+        <source>The format of the file &quot;%1&quot; is not supported.</source>
+        <translation>Das Format der Datei &quot;%1&quot; wird nicht unterstützt.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="327"/>
+        <source>The option &quot;%1&quot; can only be used once.</source>
+        <translation>Die Option &quot;%1&quot; kann nur einmal verwendet werden.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="360"/>
+        <source>The options &quot;%1&quot; and &quot;%2&quot; cannot be used together.</source>
+        <translation>Die Optionen &quot;%1&quot; und &quot;%2&quot; können nicht zusammen verwendet werden.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="367"/>
+        <source>The MIDI file to play is missing.</source>
+        <translation>Die abzuspielende MIDI-Datei fehlt.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="608"/>
+        <source>Usage:</source>
+        <translation>Verwendung:</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="610"/>
+        <source>Polyphone, a soundfont editor: the files and directories are opened in the editor, unless one of the options --convert, --render, --synth or --reset-config is used.</source>
+        <translation>Polyphone, ein Soundfont-Editor: die Dateien und Verzeichnisse werden im Editor geöffnet, es sei denn, eine der Optionen --convert, --render, --synth oder --reset-config wird verwendet.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="612"/>
+        <source>Files:</source>
+        <translation>Dateien:</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="613"/>
+        <source>Soundfonts (sf2, sf3, sfz, dls, sfArk, organ) or directories.</source>
+        <translation>Soundfonts (sf2, sf3, sfz, dls, sfArk, organ) oder Verzeichnisse.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="614"/>
+        <source>Options:</source>
+        <translation>Optionen:</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="634"/>
+        <source>Examples:</source>
+        <translation>Beispiele:</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="641"/>
+        <source>The options -1 to -6, -i and -c of the previous versions are still accepted.</source>
+        <translation>Die Optionen -1 bis -6, -i und -c der früheren Versionen werden weiterhin akzeptiert.</translation>
+    </message>
+    <message>
+        <location filename="../../options.cpp" line="642"/>
+        <source>Documentation: %1</source>
+        <translation>Dokumentation: %1</translation>
+    </message>
+</context>
+<context>
     <name>OutputCsv</name>
     <message>
         <location filename="../../core/output/csv/outputcsv.cpp" line="52"/>
@@ -4249,11 +4459,13 @@ StandardMod.</translation>
     </message>
     <message>
         <location filename="../../core/output/sf/outputsf.cpp" line="91"/>
+        <location filename="../../main.cpp" line="234"/>
         <source>cannot delete file &quot;%1&quot;</source>
         <translation>die Datei &quot;%1&quot; kann nicht gelöscht werden</translation>
     </message>
     <message>
         <location filename="../../core/output/sf/outputsf.cpp" line="101"/>
+        <location filename="../../main.cpp" line="239"/>
         <source>cannot rename file &quot;%1&quot;</source>
         <translation>die Datei &quot;%1&quot; konnte nicht umbenannt werden</translation>
     </message>
@@ -5113,68 +5325,68 @@ Warnung: Die Qualität wird reduziert und der Loop kann verändert werden</trans
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../core/output/outputfactory.cpp" line="130"/>
+        <location filename="../../mainwindow/soundfontsaver.cpp" line="81"/>
         <source>Save a soundfont</source>
         <translation>Soundfont speichern</translation>
     </message>
     <message>
-        <location filename="../../core/output/outputfactory.cpp" line="132"/>
+        <location filename="../../mainwindow/soundfontsaver.cpp" line="83"/>
         <source>Sf2 files</source>
         <translation>Sf2-Dateien</translation>
     </message>
     <message>
-        <location filename="../../core/output/outputfactory.cpp" line="132"/>
+        <location filename="../../mainwindow/soundfontsaver.cpp" line="83"/>
         <source>Sf3 files</source>
         <translation>Sf3-Dateien</translation>
     </message>
     <message>
-        <location filename="../../core/output/outputfactory.cpp" line="158"/>
-        <location filename="../../core/sample/sampleloader.cpp" line="60"/>
+        <location filename="../../editor/interactivesampleloader.cpp" line="45"/>
+        <location filename="../../mainwindow/soundfontsaver.cpp" line="109"/>
         <source>Warning</source>
         <translation>Warnung</translation>
     </message>
     <message>
-        <location filename="../../core/sample/sampleloader.cpp" line="84"/>
+        <location filename="../../core/sample/sampleloader.cpp" line="89"/>
         <source>Sample &quot;%1L&quot; already exists.&lt;br /&gt;Replace?</source>
         <translation>Das Sample &quot;%1L&quot; existiert bereits.&lt;br /&gt;Ersetzen?</translation>
     </message>
     <message>
-        <location filename="../../core/sample/sampleloader.cpp" line="89"/>
+        <location filename="../../core/sample/sampleloader.cpp" line="94"/>
         <source>Sample &quot;%1R&quot; already exists.&lt;br /&gt;Replace?</source>
         <translation>Das Sample &quot;%1R&quot; existiert bereits.&lt;br /&gt;Ersetzen?</translation>
     </message>
     <message>
-        <location filename="../../core/sample/sampleloader.cpp" line="97"/>
+        <location filename="../../core/sample/sampleloader.cpp" line="102"/>
         <source>Sample &quot;%1&quot; already exists.&lt;br /&gt;Replace?</source>
         <translation>Das Sample &quot;%1&quot; existiert bereits.&lt;br /&gt;Ersetzen?</translation>
     </message>
     <message>
-        <location filename="../../core/sample/sampleloader.cpp" line="110"/>
+        <location filename="../../editor/interactivesampleloader.cpp" line="56"/>
         <source>&amp;Replace</source>
         <translation>&amp;Ersetzen</translation>
     </message>
     <message>
-        <location filename="../../core/sample/sampleloader.cpp" line="111"/>
+        <location filename="../../editor/interactivesampleloader.cpp" line="57"/>
         <source>R&amp;eplace all</source>
         <translation>Alle e&amp;rsetzen</translation>
     </message>
     <message>
-        <location filename="../../core/sample/sampleloader.cpp" line="112"/>
+        <location filename="../../editor/interactivesampleloader.cpp" line="58"/>
         <source>&amp;Duplicate</source>
         <translation>&amp;Duplizieren</translation>
     </message>
     <message>
-        <location filename="../../core/sample/sampleloader.cpp" line="113"/>
+        <location filename="../../editor/interactivesampleloader.cpp" line="59"/>
         <source>D&amp;uplicate all</source>
         <translation>Alle d&amp;uplizieren</translation>
     </message>
     <message>
-        <location filename="../../core/sample/sampleloader.cpp" line="114"/>
+        <location filename="../../editor/interactivesampleloader.cpp" line="60"/>
         <source>&amp;Ignore</source>
         <translation>&amp;Ignorieren</translation>
     </message>
     <message>
-        <location filename="../../core/sample/sampleloader.cpp" line="115"/>
+        <location filename="../../editor/interactivesampleloader.cpp" line="61"/>
         <source>I&amp;gnore all</source>
         <translation>Alle i&amp;gnorieren</translation>
     </message>
@@ -5224,7 +5436,7 @@ Warnung: Die Qualität wird reduziert und der Loop kann verändert werden</trans
         <location filename="../../core/input/grandorgue/grandorguerank.cpp" line="142"/>
         <location filename="../../core/input/grandorgue/grandorguestop.cpp" line="141"/>
         <location filename="../../core/input/grandorgue/grandorgueswitch.cpp" line="73"/>
-        <location filename="../../core/output/outputfactory.cpp" line="114"/>
+        <location filename="../../mainwindow/soundfontsaver.cpp" line="65"/>
         <source>untitled</source>
         <translation>unbenannt</translation>
     </message>
@@ -5397,31 +5609,31 @@ Warnung: Die Qualität wird reduziert und der Loop kann verändert werden</trans
         <translation>A♯</translation>
     </message>
     <message>
-        <location filename="../../core/utils.cpp" line="340"/>
+        <location filename="../../core/utils.cpp" line="307"/>
         <source>bytes</source>
         <translation>Bytes</translation>
     </message>
     <message>
-        <location filename="../../core/utils.cpp" line="342"/>
+        <location filename="../../core/utils.cpp" line="309"/>
         <source>kB</source>
         <comment>kilobytes</comment>
         <translation>kB</translation>
     </message>
     <message>
-        <location filename="../../core/utils.cpp" line="344"/>
+        <location filename="../../core/utils.cpp" line="311"/>
         <location filename="../../repository/browser/soundfontbrowser.cpp" line="80"/>
         <source>MB</source>
         <comment>megabytes</comment>
         <translation>MB</translation>
     </message>
     <message>
-        <location filename="../../core/utils.cpp" line="346"/>
+        <location filename="../../core/utils.cpp" line="313"/>
         <source>GB</source>
         <comment>gigabytes</comment>
         <translation>GB</translation>
     </message>
     <message>
-        <location filename="../../core/utils.cpp" line="347"/>
+        <location filename="../../core/utils.cpp" line="314"/>
         <source>TB</source>
         <comment>terabytes</comment>
         <translation>TB</translation>
@@ -5479,98 +5691,95 @@ Beide Aufteilungen müssen denselben Tasten- und Anschlagsbereich haben.</transl
         <translation>die Datei &quot;%1&quot; kann nicht erstellt werden</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="111"/>
-        <location filename="../../main.cpp" line="257"/>
+        <location filename="../../main.cpp" line="150"/>
+        <location filename="../../main.cpp" line="334"/>
         <source>The file &quot;%1&quot; does not exist.</source>
         <translation>Die Datei &quot;%1&quot; existiert nicht.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="119"/>
-        <location filename="../../main.cpp" line="262"/>
+        <location filename="../../main.cpp" line="159"/>
+        <location filename="../../main.cpp" line="341"/>
         <source>The directory &quot;%1&quot; does not exist.</source>
         <translation>Das Verzeichnis &quot;%1&quot; existiert nicht.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="124"/>
+        <location filename="../../main.cpp" line="166"/>
+        <location filename="../../main.cpp" line="346"/>
         <source>The file &quot;%1&quot; already exists.</source>
         <translation>Die Datei &quot;%1&quot; existiert bereits.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="129"/>
-        <location filename="../../main.cpp" line="203"/>
-        <location filename="../../main.cpp" line="288"/>
+        <location filename="../../main.cpp" line="167"/>
+        <location filename="../../main.cpp" line="347"/>
+        <source>Use &quot;%1&quot; to replace it.</source>
+        <translation>Verwenden Sie &quot;%1&quot;, um sie zu ersetzen.</translation>
+    </message>
+    <message>
+        <location filename="../../main.cpp" line="172"/>
+        <location filename="../../main.cpp" line="282"/>
+        <location filename="../../main.cpp" line="373"/>
         <source>Loading file &quot;%1&quot;...</source>
         <translation>Lade Datei &quot;%1&quot;...</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="134"/>
-        <location filename="../../main.cpp" line="208"/>
-        <location filename="../../main.cpp" line="293"/>
+        <location filename="../../main.cpp" line="177"/>
+        <location filename="../../main.cpp" line="287"/>
+        <location filename="../../main.cpp" line="378"/>
         <source>Couldn&apos;t load file &quot;%1&quot;: %2.</source>
         <translation>Konnte Datei &quot;%1&quot; nicht laden: %2.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="140"/>
-        <location filename="../../main.cpp" line="214"/>
-        <location filename="../../main.cpp" line="299"/>
+        <location filename="../../main.cpp" line="183"/>
+        <location filename="../../main.cpp" line="293"/>
+        <location filename="../../main.cpp" line="384"/>
         <source>File successfully loaded!</source>
         <translation>Datei erfolgreich geladen!</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="148"/>
-        <location filename="../../main.cpp" line="153"/>
-        <location filename="../../main.cpp" line="166"/>
-        <location filename="../../main.cpp" line="236"/>
-        <location filename="../../main.cpp" line="303"/>
+        <location filename="../../main.cpp" line="193"/>
+        <location filename="../../main.cpp" line="198"/>
+        <location filename="../../main.cpp" line="211"/>
+        <location filename="../../main.cpp" line="314"/>
+        <location filename="../../main.cpp" line="387"/>
         <source>Writing file &quot;%1&quot;...</source>
         <translation>Schreibe Datei &quot;%1&quot;...</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="159"/>
-        <location filename="../../main.cpp" line="163"/>
+        <location filename="../../main.cpp" line="204"/>
+        <location filename="../../main.cpp" line="208"/>
         <source>Writing files in directory &quot;%1&quot;...</source>
         <translation>Schreibe Dateien in Verzeichnis „%1“...</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="169"/>
-        <source>Unknown mode &quot;%1&quot;.</source>
-        <translation>Unbekannter Modus &quot;%1&quot;.</translation>
-    </message>
-    <message>
-        <location filename="../../main.cpp" line="177"/>
-        <location filename="../../main.cpp" line="283"/>
-        <location filename="../../main.cpp" line="311"/>
+        <location filename="../../main.cpp" line="246"/>
+        <location filename="../../main.cpp" line="368"/>
+        <location filename="../../main.cpp" line="397"/>
         <source>An error occurred: %1.</source>
         <translation>Ein Fehler ist aufgetreten: %1.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="182"/>
+        <location filename="../../main.cpp" line="249"/>
         <source>File successfully converted!</source>
         <translation>Datei erfolgreich konvertiert!</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="223"/>
+        <location filename="../../main.cpp" line="302"/>
         <source>Channel %1: no preset %2 in the soundfont, its notes are not played.</source>
         <translation>Kanal %1: kein Preset %2 in der Soundfont, seine Noten werden nicht gespielt.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="242"/>
-        <location filename="../../main.cpp" line="314"/>
+        <location filename="../../main.cpp" line="320"/>
+        <location filename="../../main.cpp" line="400"/>
         <source>File successfully rendered!</source>
         <translation>Datei erfolgreich gerendert!</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="327"/>
+        <location filename="../../main.cpp" line="411"/>
         <source>Previous configuration is now cleared.</source>
         <translation>Vorherige Konfiguration wurde gelöscht.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="336"/>
-        <source>See &quot;%1&quot; for more information.</source>
-        <translation>Siehe &quot;%1&quot; für weitere Informationen.</translation>
-    </message>
-    <message>
-        <location filename="../../main.cpp" line="338"/>
+        <location filename="../../main.cpp" line="537"/>
         <source>Write &quot;%1&quot; to show usage.</source>
         <translation>Geben Sie &quot;%1&quot; ein, um die Verwendung anzuzeigen.</translation>
     </message>
@@ -6276,58 +6485,58 @@ nicht heruntergeladen werden</translation>
 <context>
     <name>TabManager</name>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="112"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="127"/>
         <source>Settings</source>
         <translation>Einstellungen</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="141"/>
-        <location filename="../../mainwindow/tabmanager.cpp" line="350"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="156"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="365"/>
         <source>Warning</source>
         <translation>Warnung</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="142"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="157"/>
         <source>Cannot open file &quot;%1&quot;</source>
         <translation>Die Datei &quot;%1&quot; kann nicht geöffnet werden</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="299"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="314"/>
         <source>Online repository</source>
         <translation>Online-Fundgrube</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="345"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="360"/>
         <source>Save before exiting?</source>
         <translation>Vor dem Beenden speichern?</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="348"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="363"/>
         <source>untitled</source>
         <translation>unbenannt</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="349"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="364"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>Die Datei &quot;%1&quot; wurde geändert.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="352"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="367"/>
         <source>&amp;Save</source>
         <translation>&amp;Speichern</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="353"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="368"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="354"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="369"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>&amp;Nicht speichern</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="582"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="597"/>
         <source>User area</source>
         <translation>Benutzerbereich</translation>
     </message>
@@ -8293,7 +8502,7 @@ Andere Soundfont-Editoren könnten andere Einheiten anzeigen.</translation>
         <translation>Loop / Wiedergabe</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/trim_end/tooltrimend.h" line="64"/>
+        <location filename="../../editor/tools/trim_end/tooltrimend.h" line="61"/>
         <source>Trim to end of loop</source>
         <translation>Bis zum Loop-Ende kürzen</translation>
     </message>
@@ -8306,7 +8515,7 @@ Andere Soundfont-Editoren könnten andere Einheiten anzeigen.</translation>
         <translation>Loop / Wiedergabe</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/trim_start/tooltrimstart.h" line="67"/>
+        <location filename="../../editor/tools/trim_start/tooltrimstart.h" line="64"/>
         <source>Remove blank at start</source>
         <translation>Leere am Anfang entfernen</translation>
     </message>

@@ -55,6 +55,9 @@ install -p -m 755 ../polyphone %{buildroot}%{_bindir}
 install -p -m 644 ../polyphone.png %{buildroot}%{_datadir}/icons
 install -p -m 644 ../../polyphone.xml %{buildroot}%{_datadir}/mime/packages/polyphone.xml
 install -p -m 644 ../../../sources/changelog %{buildroot}%{_docdir}/%{name}
+# Manual pages: English in man1, translations in <language>/man1
+mkdir -p %{buildroot}%{_mandir}
+cp -r ../../man/. %{buildroot}%{_mandir}/
 desktop-file-install --vendor="" --dir=%{buildroot}%{_datadir}/applications/ ../../io.polyphone.polyphone.desktop
 
 %post
@@ -80,8 +83,8 @@ update-desktop-database &> /dev/null || :
 
 %files
 %license ../../../sources/LICENSE.txt
-%doc ../../man/man1/polyphone.1
-%doc ../../man/fr/man1/polyphone.1
+%{_mandir}/man1/polyphone.1*
+%{_mandir}/*/man1/polyphone.1*
 %{_bindir}/%{name}
 %{_docdir}/%{name}
 %{_datadir}/applications/io.polyphone.polyphone.desktop

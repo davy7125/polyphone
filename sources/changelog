@@ -26,6 +26,7 @@ polyphone (2.7) UNRELEASED; urgency=low
   * (improvement) various ergonomic improvements
   * (improvement) more reliable pitch estimation of the samples (YIN algorithm refined with the harmonics)
   * (improvement) more accurate frequencies of the peaks shown in the Fourier graph
+  * (improvement) command line: readable options (--convert, --render, --synth...), conversion of several files, --force, --mcp to start the MCP server, a complete help and precise error messages (the previous options are still accepted)
   * (fix) audio files in floating point format, such as the records of the recorder, were silent when imported as samples
   * (fix) the calendar of the date field could appear when a soundfont was opened in the background
   * (fix) a soundfont opened again while it was still loading was opened in a second tab

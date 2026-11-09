@@ -1,0 +1,162 @@
+.TH POLYPHONE 1 "2026年11月" "polyphone 2.7" "Polyphone マニュアルページ"
+.SH 名前
+polyphone \- SoundFontエディター
+.SH 書式
+.B polyphone
+[\fIファイル\fR]...
+.br
+.B polyphone
+\fB\-\-convert\fR \fI形式\fR [\fIオプション\fR]... \fIファイル\fR...
+.br
+.B polyphone
+\fIファイル\fR \fB\-o\fR \fI出力ファイル\fR [\fIオプション\fR]...
+.br
+.B polyphone
+\fB\-\-render\fR \fIMIDIファイル\fR [\fIオプション\fR]... \fISoundFont\fR
+.br
+.B polyphone
+\fB\-\-synth\fR [\fIオプション\fR]... [\fIファイル\fR]...
+.br
+.B polyphone
+\fB\-\-mcp\fR [\fB\-\-mcp\-port\fR \fIポート\fR] [\fIファイル\fR]...
+.br
+.B polyphone
+\fB\-\-reset\-config\fR | \fB\-\-help\fR | \fB\-\-version\fR
+.SH 説明
+.B polyphone
+は、SoundFontを作成・編集するためのシンプルで効率的なインターフェースを提供します。さまざまなパラメーターの編集を容易にし、自動化するツールを備えており、大量のデータを扱うことができます。
+.PP
+sf2（バージョン2.01または2.04）、sf3、sfz、dls（レベル1または2）、sfArk（バージョン1または2）、GrandOrgue（organ）の各形式を開くことができ、ファイルをsf2、sf3、sfz、csv、dlsに変換できます。コマンドラインでは、ファイルの変換、MIDIファイルのwavファイルへのレンダリング、シンセサイザーモードやMCPサーバーを起動した状態でのPolyphoneの起動、問題が発生した場合の構成のリセットができます。
+.PP
+\fB\-\-convert\fR、\fB\-\-render\fR、\fB\-\-synth\fR、\fB\-\-reset\-config\fR のいずれも指定しない場合、指定したファイルとディレクトリはエディターで開かれます（ディレクトリはSoundFontエクスプローラーで開かれます）。Polyphoneがすでに開いている場合は、実行中のインスタンスで開かれます。
+.PP
+引数の順序は問いません。メッセージとヘルプは、設定で選択した言語で表示されます。
+.SH オプション
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+すべてのオプションの一覧を表示します。
+.TP
+\fB\-v\fR, \fB\-\-version\fR
+Polyphoneのバージョンを表示します。
+.TP
+\fB\-r\fR, \fB\-\-reset\-config\fR
+Polyphoneの構成（設定、ウィンドウの配置、履歴など）をリセットします。
+.SS 変換
+.TP
+\fB\-\-convert\fR \fI形式\fR
+各\fIファイル\fRを\fI形式\fR（sf2、sf3、sfz、csv、dls）に変換します。\fB\-\-output\fR で形式の拡張子を持つファイルを指定した場合、このオプションは省略できます。1つのコマンドで複数のファイルを変換でき、各出力ファイルは対応する入力ファイルと同じ名前になります。失敗した場合でも、ほかのファイルは変換されます。
+.TP
+\fB\-o\fR, \fB\-\-output\fR \fIパス\fR
+出力ファイルです（入力ファイルが1つの場合のみ）。拡張子は省略できます。名前だけの場合は出力ディレクトリに書き込まれ、相対パスは現在のディレクトリ（\fB\-d\fR を使用した場合は出力ディレクトリ）が起点になります。既定では、出力ファイルは入力ファイルと同じ名前になります。
+.TP
+\fB\-d\fR, \fB\-\-output\-dir\fR \fIディレクトリ\fR
+出力ディレクトリです。このディレクトリは存在している必要があります。既定では、各入力ファイルのディレクトリになります。
+.TP
+\fB\-f\fR, \fB\-\-force\fR
+既存の出力ファイルを置き換えます。このオプションがない場合、出力ファイルが存在すると変換は失敗します。入力ファイルをその変換結果で置き換えることもできます。sfzとcsvへの変換ではディレクトリが作成され、何も置き換えられません。ディレクトリがすでに存在する場合は、名前に番号が付け加えられます。
+.TP
+\fB\-\-quality\fR \fI品質\fR
+sf3への変換：圧縮品質。\fBlow\fR（低）、\fBmedium\fR（中、既定）、\fBhigh\fR（高）のいずれか。
+.TP
+\fB\-\-preset\-prefix\fR
+sfzへの変換：各プリセットの前にそのプリセット番号を付けます。
+.TP
+\fB\-\-bank\-dir\fR
+sfzへの変換：バンクごとにディレクトリを作成します。
+.TP
+\fB\-\-gm\-sort\fR
+sfzへの変換：General MIDI分類を使ってプリセットを並べ替えます。
+.TP
+\fB\-\-raw\fR
+csvへの変換：物理単位を持つ値ではなく、生の値（SoundFontファイルに保存されているとおりの値）を書き出します。たとえば、書き出されるリリース時間は0.491（秒）ではなく\-1229になります。
+.SS MIDIファイルのレンダリング
+.TP
+\fB\-\-render\fR \fIMIDIファイル\fR
+入力ファイルとして指定したSoundFontで\fIMIDIファイル\fR（mid、midi、kar、rmi）を再生し、結果をwavファイルに書き込みます。すべてのチャンネルがSoundFontを演奏し、プリセットはファイルのプログラムチェンジによって選ばれます（チャンネル10ではバンク128）。シンセサイザーの設定（リバーブ、コーラス、全体の音量、同時発音数、チューニング）が使われます。結果は48000 Hzのステレオ32ビット浮動小数点のwavファイルです。SoundFontにないプリセットのノートは演奏されず、警告が表示されます。
+.IP
+オプション \fB\-o\fR、\fB\-d\fR、\fB\-f\fR は変換の場合と同様に使用します。既定では、出力ファイルはMIDIファイルと同じ名前、同じディレクトリになります。
+.SS シンセサイザーモード
+.TP
+\fB\-s\fR, \fB\-\-synth\fR
+Polyphoneをシンセサイザーモードで開きます。以下の設定は、後からインターフェースで変更できます。
+.TP
+\fB\-\-channel\fR \fIチャンネル\fR
+演奏用に受信するMIDIチャンネル：1～16の番号、すべてのチャンネルを1つのチャンネルとして処理する \fBall\fR（既定）、または各チャンネルを個別に受信する \fBeach\fR。\fBeach\fR は、たとえばシーケンサーのMIDI出力を演奏するための前提条件です。
+.TP
+\fB\-\-multiple\-selection\fR
+複数のプリセットを同時に選択して演奏できます。
+.TP
+\fB\-\-key\-selection\fR \fIモード\fR
+\fBon\fR の場合、プリセット番号に対応するキーでプリセットが選択されます（たとえば、キー0でプリセット0が選択されます）。\fBtoggle\fR の場合、キーでそのプリセットの選択を解除することもできます。
+.SS MCPサーバー
+.TP
+\fB\-\-mcp\fR
+AIアシスタントが開いているSoundFontを参照、編集、分析できるようにするMCPサーバーを、設定で無効になっていても、このセッションで起動します。サーバーのアドレスは標準出力に表示されます。Polyphoneがすでに開いている場合でも、Polyphoneの新しいインスタンスが開きます。インターフェースでMCPサーバーの設定を変更すると、このオプションは置き換えられます。
+.TP
+\fB\-\-mcp\-port\fR \fIポート\fR
+MCPサーバーのポートです（\fB\-\-mcp\fR を含みます）。既定では、設定のポート（8642）になります。
+.SH 以前のバージョンのオプション
+これらのオプションも引き続き使用できます。
+.TP
+\fB\-1\fR, \fB\-2\fR, \fB\-3\fR, \fB\-4\fR, \fB\-6\fR
+sf2、sf3、sfz、csv、dlsへの変換で、\fB\-\-convert\fR と同じです。
+.TP
+\fB\-5\fR
+MIDIファイルのレンダリングで、MIDIファイルのパスは \fB\-c\fR で指定します。
+.TP
+\fB\-i\fR \fIファイル\fR
+入力ファイルです。このオプションなしで書くこともできます。
+.TP
+\fB\-c\fR \fI設定\fR
+「|」で区切られた値からなる設定：sf3の圧縮品質（「0」低、「1」中、「2」高）、sfzの3つの値「1」または「0」（\fB\-\-preset\-prefix\fR、\fB\-\-bank\-dir\fR、\fB\-\-gm\-sort\fR、たとえば「0|1|1」）、csvの「raw」、\fB\-5\fR のMIDIファイルのパス、シンセサイザーモードのチャンネル（「all」、「each」、または1～16。0は「all」、\-1は「each」と同じ）、複数選択（「on」または「off」）、キーによる選択（「on」、「off」、「toggle」）（たとえば「all|on|toggle」）。
+.SH 終了ステータス
+読み込みと書き込みの状況は標準出力に、エラーは標準エラー出力に出力されます。
+.TP
+.B 0
+成功。
+.TP
+.B 1
+入力ファイルまたは出力ディレクトリが存在しない、または出力ファイルがすでに存在する（\fB\-f\fR なしの場合）。
+.TP
+.B 2
+引数が無効：不明なオプション、誤った値、選択したモードで使用されないオプション、サポートされていない入力ファイル形式など。
+.TP
+.B 3
+入力ファイル（SoundFont、MIDIファイル）を読み込めない。
+.TP
+.B 4
+出力を書き込めない。
+.PP
+複数のファイルを変換した場合、終了ステータスは最初に失敗したときの値になります。
+.SH 例
+sfArkからsf2への変換：
+.IP
+polyphone \-\-convert sf2 /path/to/file.sfArk
+.PP
+sf2からsf3への変換（高品質）。形式は出力ファイルで指定します：
+.IP
+polyphone /path/to/file.sf2 \-o /path/to/file.sf3 \-\-quality high
+.PP
+現在のディレクトリのすべてのsf2ファイルを、別のディレクトリにsf3として変換：
+.IP
+polyphone \-\-convert sf3 *.sf2 \-d /path/to/directory
+.PP
+sf3からsfzへの変換（バンクごとのサブディレクトリとGeneral MIDI分類）：
+.IP
+polyphone \-\-convert sfz /path/to/file.sf3 \-\-bank\-dir \-\-gm\-sort
+.PP
+SoundFontでのMIDIファイルのレンダリング（song.wavはsong.midと同じ場所に書き込まれます）：
+.IP
+polyphone \-\-render /path/to/song.mid /path/to/file.sf2
+.PP
+MIDIキーボードの最も低いキーで、演奏するプリセットを選択・選択解除するシンセサイザーモード：
+.IP
+polyphone \-\-synth /path/to/file.sf2 \-\-multiple\-selection \-\-key\-selection toggle
+.PP
+ポート8700で待ち受けるMCPサーバーを起動してSoundFontを開く：
+.IP
+polyphone \-\-mcp\-port 8700 /path/to/file.sf2
+.SH 関連項目
+https://www.polyphone.io/documentation/manual/annexes/command-line
+.SH 著者
+Davy Triponney (contact@polyphone.io)

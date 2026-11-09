@@ -26,10 +26,16 @@
 #define OPTIONS_H
 
 #include <QStringList>
+#include <QCoreApplication>
 class PlayerOptions;
+class QCommandLineParser;
 
+/// Options of the command line
+/// The options of the previous versions (-0 to -6, -i, -c) are still accepted, hidden in the help
 class Options
 {
+    Q_DECLARE_TR_FUNCTIONS(Options)
+
 public:
     enum Mode
     {
@@ -44,26 +50,27 @@ public:
         MODE_CONVERSION_TO_DLS = 105
     };
 
-    Options(int argc, char *argv[]);
+    /// Parse the arguments of QCoreApplication::arguments(), the first one being the executable
+    Options(QStringList arguments);
     ~Options();
 
-    /// Get all files that will be open (or the file to be converted)
+    /// Get all files that will be open (or the files to be converted, or the soundfont to render)
     QStringList getInputFiles() { return _inputFiles; }
 
-    /// Get all files to open with possible options for the player
+    /// Get all files to open, as absolute paths, with possible options for the player
     QString getInputFilesAsString();
 
-    /// Return the output file name (in case of a conversion)
-    QString getOutputFile() { return _outputFile; }
-
-    /// Return the full path of the output file
-    QString getOutputFileFullPath();
-
-    /// Return the output file (in case of a conversion)
-    QString getOutputDirectory() { return _outputDirectory; }
+    /// Full path of the file written from an input file, extension included (conversion or rendering)
+    QString getOutputFilePath(QString inputFile);
 
     /// Return the mode describing how the executable will be used
     Mode mode() { return _mode; }
+
+    /// True if the mode is a conversion
+    bool isConversion();
+
+    /// True if an existing output file can be replaced
+    bool force() { return _force; }
 
     /// Sfz option: preset number as prefix
     bool sfzPresetPrefix() { return _sfzPresetPrefix; }
@@ -92,32 +99,42 @@ public:
     /// Player options
     PlayerOptions * playerOptions() { return _playerOptions; }
 
-    /// Return true in case of bad arguments
-    bool error() { return _error; }
+    /// MCP server started for this session, on a port (0: port of the settings)
+    bool mcp() { return _mcp; }
+    quint16 mcpPort() { return _mcpPort; }
 
-    /// If true, display help
+    /// Return true in case of bad arguments
+    bool error() { return _errorSource != nullptr || !_errorText.isEmpty(); }
+
+    /// Description of the error, translated (the translations must be loaded first)
+    QString getErrorMessage();
+
+    /// If true, display help or the version
     bool help() { return _help; }
+    bool version() { return _version; }
+
+    /// Help text, translated (the translations must be loaded first)
+    static QString getHelpText();
 
 private:
-    enum ProcessingState
-    {
-        STATE_INPUT_FILE,
-        STATE_OUTPUT_FILE,
-        STATE_OUTPUT_DIRECTORY,
-        STATE_CONFIG,
-        STATE_NONE
-    };
+    static void addOptions(QCommandLineParser &parser);
+    void parse(QCommandLineParser &parser);
+    bool readMode(QCommandLineParser &parser);
+    void readLegacyConfiguration(QString configuration, QString optionName);
+    bool checkOptions(QCommandLineParser &parser);
+    void readModeOptions(QCommandLineParser &parser);
+    QString getModeOption();
+    QString getExtension();
+    static QString getOptionName(QString name);
+    void setError(const char * source, QStringList arguments = QStringList());
 
-    void processType1(QString arg);
-    void processType2(QString arg);
-    void checkErrors();
-    void postTreatment();
-
-    ProcessingState _currentState;
     QStringList _inputFiles;
     QString _outputFile, _outputDirectory;
     Mode _mode;
-    bool _error, _help;
+    bool _help, _version, _force;
+    const char * _errorSource;
+    QStringList _errorArguments;
+    QString _errorText;
 
     // Sf3 option
     int _sf3Quality;
@@ -137,7 +154,9 @@ private:
     // Player options
     PlayerOptions * _playerOptions;
 
-    QString _appPath;
+    // MCP server
+    bool _mcp;
+    quint16 _mcpPort;
 };
 
 #endif // OPTIONS_H

@@ -62,6 +62,7 @@ void ConfigSectionMcp::initialize()
 void ConfigSectionMcp::on_checkEnabled_toggled(bool checked)
 {
     ContextManager::configuration()->setValue(ConfManager::SECTION_MCP, "enabled", checked);
+    McpServer::getInstance()->setSessionPort(0); // The settings replace the option of the command line
     McpServer::getInstance()->applyConfiguration();
 }
 
@@ -70,6 +71,7 @@ void ConfigSectionMcp::on_spinPort_editingFinished()
     if (ui->spinPort->value() == ContextManager::configuration()->getValue(ConfManager::SECTION_MCP, "port", McpServer::DEFAULT_PORT).toInt())
         return;
     ContextManager::configuration()->setValue(ConfManager::SECTION_MCP, "port", ui->spinPort->value());
+    McpServer::getInstance()->setSessionPort(0);
     McpServer::getInstance()->applyConfiguration();
 }
 
