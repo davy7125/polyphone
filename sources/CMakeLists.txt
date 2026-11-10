@@ -1,13 +1,12 @@
 # Polyphone built with CMake: the editor, and possibly the plugin and the tests of the synth core. The official builds
-# use it (GitHub workflows, Debian and Fedora packages). polyphone.pro still builds the same editor with qmake until a
-# release has been made with CMake (same lists of files, checked by tests/ci/check_build_files.py).
+# use it (GitHub workflows, Debian and Fedora packages).
 #
 #   cmake -S sources -B build/polyphone            (Qt 6 if found, otherwise Qt 5: -DPOLYPHONE_QT_VERSION=5 or 6)
 #   cmake --build build/polyphone --parallel 4     (executable: build/polyphone/bin/polyphone)
 #
 # Qt Creator: open this file, choose the kits (Qt 5 or Qt 6), the options are in Projects > Build > CMake.
-# Translations: "cmake --build <build> --target update_translations" updates the .ts files with lupdate, as lupdate
-# on polyphone.pro (texts of the editor and of the plugin).
+# Translations: "cmake --build <build> --target update_translations" updates the .ts files with lupdate (texts of the
+# editor and of the plugin).
 
 cmake_minimum_required(VERSION 3.16)
 
@@ -36,8 +35,8 @@ set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS ${CMAKE_CURRENT_S
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-# -std=c++17 as polyphone.pro, not gnu++17: with GNU extensions, GCC may fuse multiplications and additions (FMA, ARM)
-# and the renderings would differ
+# -std=c++17, not gnu++17: with GNU extensions, GCC may fuse multiplications and additions (FMA, ARM) and the
+# renderings would differ
 set(CMAKE_CXX_EXTENSIONS OFF)
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
     set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
@@ -58,7 +57,7 @@ if(WIN32 OR APPLE)
     set(POLYPHONE_LOCAL_RTMIDI ON)
 endif()
 
-# MinGW: option needed by sfArk, given to all sources as polyphone.pro does
+# MinGW: option needed by sfArk, given to all sources
 if(MINGW)
     add_compile_options(-ffloat-store)
 endif()
@@ -230,7 +229,7 @@ if(POLYPHONE_BUILD_EDITOR)
             MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/../packaging/mac/polyphone.plist)
     endif()
 
-    # Translations compiled by lrelease and embedded (prefix ":/i18n"), as with "embed_translations" in polyphone.pro
+    # Translations compiled by lrelease and embedded (prefix ":/i18n")
     file(GLOB POLYPHONE_TS_FILES ${CMAKE_CURRENT_SOURCE_DIR}/resources/translations/polyphone_*.ts)
     if(TARGET Qt${QT_VERSION_MAJOR}::lrelease)
         set(POLYPHONE_LRELEASE $<TARGET_FILE:Qt${QT_VERSION_MAJOR}::lrelease>)
@@ -260,8 +259,8 @@ if(POLYPHONE_BUILD_EDITOR)
     set_source_files_properties(${POLYPHONE_TRANSLATION_RESOURCES} PROPERTIES SKIP_AUTOGEN ON)
     target_sources(polyphone PRIVATE ${POLYPHONE_QM_FILES} ${POLYPHONE_TRANSLATION_RESOURCES})
 
-    # Target "update_translations": the .ts files updated by lupdate with the files built (the same result as lupdate
-    # on polyphone.pro: relative locations, strings of the files ignored by git not included)
+    # Target "update_translations": the .ts files updated by lupdate with the files built (relative locations, strings
+    # of the files ignored by git not included)
     if(TARGET Qt${QT_VERSION_MAJOR}::lupdate)
         set(POLYPHONE_LUPDATE $<TARGET_FILE:Qt${QT_VERSION_MAJOR}::lupdate>)
     else()
@@ -289,7 +288,7 @@ if(POLYPHONE_BUILD_EDITOR)
             VERBATIM)
     endif()
 
-    # Installation (Linux), as "make install" with polyphone.pro
+    # Installation (Linux)
     if(UNIX AND NOT APPLE)
         include(GNUInstallDirs)
         install(TARGETS polyphone RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})

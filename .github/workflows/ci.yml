@@ -1,9 +1,8 @@
 name: CI
 
 # Builds and tests of each change (Linux), also run before a release (release-on-tag.yml):
-# - dependencies between the parts of the sources, same files built by qmake and CMake (tests/ci/check_*.py);
-# - editor built with Qt 6 by CMake, and by qmake while polyphone.pro exists (same renderings), with Qt 5 by CMake
-#   (compilation only);
+# - dependencies between the parts of the sources (tests/ci/check_dependencies.py);
+# - editor built with Qt 6, and with Qt 5 (compilation only);
 # - synth core alone, with ThreadSanitizer and AddressSanitizer (tests/synth_core);
 # - plugin built, checked by pluginval, clap-validator and the test host (tests/plugin);
 # - renderings of tests/render: modes of the editor and formats of the plugin compared with the synth core of the
@@ -30,7 +29,7 @@ env:
 
 jobs:
   sources:
-    name: Sources (dependencies, files of the builds)
+    name: Sources (dependencies)
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
@@ -39,11 +38,8 @@ jobs:
       - name: Dependencies between the parts of the sources
         run: python3 tests/ci/check_dependencies.py
 
-      - name: Same files built by polyphone.pro and CMake
-        run: python3 tests/ci/check_build_files.py
-
   editor:
-    name: Editor (Qt 6, CMake)
+    name: Editor (Qt 6)
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
@@ -70,36 +66,8 @@ jobs:
           retention-days: 3
           if-no-files-found: error
 
-  editor-qmake:
-    name: Editor (Qt 6, qmake)
-    runs-on: ubuntu-24.04
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v7
-
-      - name: Install dependencies
-        run: tests/ci/install_dependencies.sh editor
-
-      - name: Restore the compilation cache
-        uses: actions/cache@v6
-        with:
-          path: .ccache
-          key: ccache-editor-qmake-${{ github.sha }}
-          restore-keys: ccache-editor-qmake-
-
-      - name: Build
-        run: BUILD_SYSTEM=qmake tests/ci/build_editor.sh . build/editor-qmake && ccache -s
-
-      - name: Upload the executable
-        uses: actions/upload-artifact@v7
-        with:
-          name: ci-editor-qmake
-          path: build/editor-qmake/bin/polyphone
-          retention-days: 3
-          if-no-files-found: error
-
   editor-qt5:
-    name: Editor (Qt 5, CMake, compilation only)
+    name: Editor (Qt 5, compilation only)
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
@@ -223,7 +191,7 @@ jobs:
 
   renderings:
     name: Renderings (editor and plugin)
-    needs: [editor, editor-qmake, plugin]
+    needs: [editor, plugin]
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
@@ -238,12 +206,6 @@ jobs:
           name: ci-editor
           path: build/editor/bin
 
-      - name: Download the editor built by qmake
-        uses: actions/download-artifact@v8
-        with:
-          name: ci-editor-qmake
-          path: build/editor-qmake/bin
-
       - name: Download the plugin and the test host
         uses: actions/download-artifact@v8
         with:
@@ -252,8 +214,7 @@ jobs:
 
       - name: Soundfonts
         run: |
-          chmod +x build/editor/bin/polyphone build/editor-qmake/bin/polyphone \
-            build/plugin_tests/plugin_host_artefacts/Release/plugin_host
+          chmod +x build/editor/bin/polyphone build/plugin_tests/plugin_host_artefacts/Release/plugin_host
           tests/ci/get_soundfonts.sh soundfonts
 
       - name: Modes of the editor
@@ -268,12 +229,6 @@ jobs:
             python3 tests/render/compare.py renders/reference renders/$mode || status=1
           done
           exit $status
-
-      - name: Editor built by qmake
-        # Same renderings as the editor built by CMake
-        run: |
-          tests/render/render.sh build/editor-qmake/bin/polyphone soundfonts renders/qmake
-          python3 tests/render/compare.py renders/reference renders/qmake
 
       - name: DLS import and export
         run: tests/dls/run_tests.sh build/editor/bin/polyphone renders/dls
@@ -349,15 +304,9 @@ jobs:
 
       - name: Build the previous version
         if: steps.previous.outputs.sha != ''
-        # Built by qmake if CMake fails (029d4804: its CMakeLists.txt is refused by CMake < 4.1). Same renderings, as the
-        # step "Editor built by qmake" of the job renderings checks it.
         run: |
           git worktree add ../previous ${{ steps.previous.outputs.sha }}
-          if ! tests/ci/build_editor.sh ../previous build/previous; then
-            echo "::warning::Previous version not built by CMake: built by qmake"
-            rm -rf build/previous
-            BUILD_SYSTEM=qmake tests/ci/build_editor.sh ../previous build/previous
-          fi
+          tests/ci/build_editor.sh ../previous build/previous
 
       - name: Download the editor
         if: steps.previous.outputs.sha != ''

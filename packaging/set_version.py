@@ -3,7 +3,7 @@
 
 Usage: set_version.py <tag>
 The tag is "<version>[-<identifier>]", for instance "2.7.0", "2.7.0-beta" or "2.1-beta". It is written:
-  * in sources/version.txt, read by polyphone.pro and by the CMake projects (editor and plugin);
+  * in sources/version.txt, read by the CMake projects (editor and plugin);
   * in packaging/mac/polyphone.plist (CFBundleShortVersionString, 3 numbers);
   * in packaging/io.polyphone.polyphone.metainfo.xml (first release of the list, added if it is another version).
 """

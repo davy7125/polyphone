@@ -1,5 +1,5 @@
 # Synth core of Polyphone: plays soundfonts without Qt, for a plugin or a web player.
-# The editor compiles the same sources through polyphone.pro. Alone:
+# Also built by the editor (sources/CMakeLists.txt). Alone:
 #   cmake -S sources/synth_core -B build/synth_core && cmake --build build/synth_core
 # (with a multi-configuration generator such as Visual Studio or Xcode: cmake --build ... --config Release)
 
@@ -58,8 +58,8 @@ target_include_directories(polyphone_synth_core PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
-# Possibly linked in a shared library (plugin). -std=c++17 as polyphone.pro, not gnu++17: with GNU extensions, GCC
-# may fuse multiplications and additions (FMA on ARM) and the plugin would not sound exactly as the editor
+# Possibly linked in a shared library (plugin). -std=c++17, not gnu++17: with GNU extensions, GCC may fuse
+# multiplications and additions (FMA on ARM) and the plugin would not sound exactly as the editor
 set_target_properties(polyphone_synth_core PROPERTIES POSITION_INDEPENDENT_CODE ON CXX_EXTENSIONS OFF)
 
 # libvorbisfile decompresses the samples of the sf3 files (SynthSoundfontFile): the target Vorbis::vorbisfile if the

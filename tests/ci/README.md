@@ -6,8 +6,7 @@ hand on Linux.
 | Script | Purpose |
 |---|---|
 | `check_dependencies.py` | The parts of the sources only include what they may use: `synth_core` nothing (no Qt), `core` itself, `synth_core` and `lib` (no widgets of Qt), `plugin` itself and `synth_core`, `mcp` no interface except the tools. Run it before a commit: a forbidden include is printed with its line. |
-| `check_build_files.py` | `sources/polyphone.pro` and the CMake files (`sources/CMakeLists.txt`, `sources/cmake/files.cmake`, `sources/synth_core/CMakeLists.txt`) build the same files: a file added to one must be added to the other. |
-| `build_editor.sh` | Builds the editor as the official builds (release, local RtAudio), with ccache if found: `build_editor.sh <repository> <build directory> [CMake options]`. CMake by default; qmake with `BUILD_SYSTEM=qmake` (while `polyphone.pro` exists) or for a previous version without `CMakeLists.txt`. `JOBS`, `LOCAL_RTMIDI=1` and `QMAKE` in the environment. |
+| `build_editor.sh` | Builds the editor with CMake as the official builds (release, local RtAudio), with ccache if found: `build_editor.sh <repository> <build directory> [CMake options]`. `JOBS` and `LOCAL_RTMIDI=1` in the environment. |
 | `install_dependencies.sh` | Ubuntu packages by group: `editor`, `qt5`, `synth_core`, `plugin`, `tests`. |
 | `get_soundfonts.sh` | Soundfonts of `tests/render` in a directory: FluidR3_GM and TimGM6mb from the packages, VintageDreamsWaves from the sources of FluidSynth (checked by SHA-256). |
 

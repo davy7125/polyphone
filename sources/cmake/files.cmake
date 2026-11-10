@@ -1,6 +1,5 @@
-# Source files of Polyphone built with CMake (CMakeLists.txt), the same as in polyphone.pro: both lists are
-# kept identical while both builds exist (checked by tests/ci/check_build_files.py). The files depending on the
-# platform or on the options (RtAudio, RtMidi, ASIO) are in CMakeLists.txt, the synth core in synth_core/.
+# Source files of Polyphone built with CMake (CMakeLists.txt). The files depending on the platform or on the options
+# (RtAudio, RtMidi, ASIO) are in CMakeLists.txt, the synth core in synth_core/.
 
 # Soundfonts, samples, import and export: library polyphone_core (without the widgets of Qt)
 set(POLYPHONE_CORE_FILES

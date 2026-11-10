@@ -51,17 +51,7 @@ rm -f polyphone-dbg*
 
 # Clean the source directory
 rm -rf sources/debian
-rm -rf sources/generated_files
-rm -rf sources/bin
 rm -rf sources/obj-*
-rm -rf sources/.qm
-rm -f sources/*.o
-rm -f sources/ui_*
-rm -f sources/moc_*
-rm -f sources/qrc_*
-rm -f sources/qmake_qmake_qm_files.qrc
-rm -f sources/Makefile
-rm -f sources/.qmake.stash
 
 # Clean the packaging directory
 rm -f packaging/debian/changelog

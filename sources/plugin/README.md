@@ -121,7 +121,7 @@ into its own (`SampleFileReader` reading the samples with libsndfile).
 The texts of the plugin are in the translation files of the editor
 (`sources/resources/translations/polyphone_XX.ts`), in the contexts `PluginEditor`, `PluginProcessor`
 and `PluginJuce`: they are updated with the ones of the editor (`update_translations` target of
-`sources/CMakeLists.txt`, or lupdate on `polyphone.pro`) and translated with Qt Linguist. In the
+`sources/CMakeLists.txt`) and translated with Qt Linguist. In the
 sources, a class declares `Q_DECLARE_TR_FUNCTIONS(Class)` and calls `tr("text")`, as with Qt (the
 macros are defined in `plugintranslator.h`).
 
