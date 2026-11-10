@@ -87,8 +87,7 @@ void ToolAutoDistribution::process(SoundfontManager * sm, EltID id, AbstractTool
                 val.rValue.byHi = 127;
             else
             {
-                val.rValue.byHi = qMin(note + (127 - note) / 20,
-                                       (int)floor((double)(2 * note + noteSuivante) / 3));
+                val.rValue.byHi = static_cast<quint8>(getMaxKey(note, noteSuivante));
                 if (val.rValue.byLo > val.rValue.byHi)
                     val.rValue.byHi = val.rValue.byLo;
             }
@@ -100,4 +99,9 @@ void ToolAutoDistribution::process(SoundfontManager * sm, EltID id, AbstractTool
                 sm->get(listID.at(i), champ_keyRange).rValue.byHi != val.rValue.byHi)
             sm->set(listID.at(i), champ_keyRange, val);
     }
+}
+
+int ToolAutoDistribution::getMaxKey(int key, int nextKey)
+{
+    return qMin(key + (127 - key) / 20, static_cast<int>(floor(static_cast<double>(2 * key + nextKey) / 3)));
 }

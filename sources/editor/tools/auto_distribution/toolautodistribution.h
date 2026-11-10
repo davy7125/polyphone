@@ -54,6 +54,10 @@ public:
     /// Process an element
     void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
 
+    /// Highest key of the range of a sample whose root key is "key", the next root key being "nextKey" (> key): a third
+    /// of the interval above the root key, at most (127 - key) / 20 keys, the rest going to the next sample
+    static int getMaxKey(int key, int nextKey);
+
 protected:
     QString getLabelInternal() const override
     {

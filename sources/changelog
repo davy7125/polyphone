@@ -9,6 +9,7 @@ polyphone (2.7) UNRELEASED; urgency=low
   * (new) option for reopening at startup the soundfonts and directories that were open when Polyphone was closed
   * (new) messages published on polyphone.io shown in a banner of the home screen, which can be disabled in the settings
   * (new) duplicate samples detected (general page and sample summary) and removed by a tool that updates the instruments
+  * (new) tool creating the missing samples of instruments, at chosen keys or wherever two samples are too far apart
   * (new) MCP server, enabled in the settings: an AI assistant can browse, edit (all editing functions and tools) and measure the open soundfonts
   * (improvement) faster sound engine
   * (improvement) the startup view can open the first instrument or preset on its ranges or envelopes page

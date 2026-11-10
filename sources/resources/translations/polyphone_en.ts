@@ -3321,32 +3321,32 @@ for a signal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/equalizer.ui" line="638"/>
+        <location filename="../../editor/widgets/equalizer.ui" line="654"/>
         <source>Reset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/equalizer.ui" line="664"/>
+        <location filename="../../editor/widgets/equalizer.ui" line="680"/>
         <source>Apply</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/equalizer.cpp" line="131"/>
+        <location filename="../../editor/widgets/equalizer.cpp" line="132"/>
         <source>Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/equalizer.cpp" line="132"/>
+        <location filename="../../editor/widgets/equalizer.cpp" line="133"/>
         <source>Equalization successfully applied on 1 sample.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/equalizer.cpp" line="133"/>
+        <location filename="../../editor/widgets/equalizer.cpp" line="134"/>
         <source>Equalization successfully applied on %1 samples.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/equalizer.cpp" line="209"/>
+        <location filename="../../editor/widgets/equalizer.cpp" line="210"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
         <translation type="unfinished"></translation>
@@ -7304,7 +7304,7 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ToolAutoDistribution</name>
     <message>
-        <location filename="../../editor/tools/auto_distribution/toolautodistribution.h" line="60"/>
+        <location filename="../../editor/tools/auto_distribution/toolautodistribution.h" line="64"/>
         <source>Sample auto-positioning</source>
         <oldsource>Automatically link the samples</oldsource>
         <translation type="unfinished"></translation>
@@ -8397,6 +8397,101 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="../../editor/tools/merge_samples/toolmergesamples_gui.cpp" line="35"/>
         <source>&amp;Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ToolMissingSamples</name>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="101"/>
+        <source>This tool cannot be used on instruments having several velocity ranges:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="158"/>
+        <source>No keys to create.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="160"/>
+        <source>No sample to create: the root keys are at most %n semitone(s) apart.</source>
+        <translation>
+            <numerusform>No sample to create: the root keys are at most %n semitone apart.</numerusform>
+            <numerusform>No sample to create: the root keys are at most %n semitones apart.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="273"/>
+        <source>Keys already having a sample, ignored:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="275"/>
+        <source>No harmonics found around the following keys, only the level was interpolated:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="278"/>
+        <source>The following samples couldn&apos;t be looped:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.h" line="49"/>
+        <source>Transformation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.h" line="75"/>
+        <source>Create missing samples</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ToolMissingSamples_gui</name>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.ui" line="20"/>
+        <source>Keys to create</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.ui" line="30"/>
+        <source>Maximum spacing between two samples (semitones)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.ui" line="50"/>
+        <source>Each new sample is the closest sample transposed, the levels of its harmonics being interpolated between the two closest samples (or extrapolated beyond the last sample). It is looped if these samples are looped, and the key ranges are adjusted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.cpp" line="37"/>
+        <source>&amp;Ok</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.cpp" line="38"/>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.cpp" line="58"/>
+        <source>Example:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.cpp" line="156"/>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.cpp" line="161"/>
+        <source>Warning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.cpp" line="156"/>
+        <source>Key &quot;%1&quot; is not valid.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.cpp" line="161"/>
+        <source>Please specify the keys to create.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

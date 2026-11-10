@@ -3315,32 +3315,32 @@ un senyal</translation>
         <translation>previsualització</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/equalizer.ui" line="638"/>
+        <location filename="../../editor/widgets/equalizer.ui" line="654"/>
         <source>Reset</source>
         <translation>Restableix</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/equalizer.ui" line="664"/>
+        <location filename="../../editor/widgets/equalizer.ui" line="680"/>
         <source>Apply</source>
         <translation>Aplica</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/equalizer.cpp" line="131"/>
+        <location filename="../../editor/widgets/equalizer.cpp" line="132"/>
         <source>Information</source>
         <translation>Informació</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/equalizer.cpp" line="132"/>
+        <location filename="../../editor/widgets/equalizer.cpp" line="133"/>
         <source>Equalization successfully applied on 1 sample.</source>
         <translation>Equalització aplicada correctament en 1 mostra.</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/equalizer.cpp" line="133"/>
+        <location filename="../../editor/widgets/equalizer.cpp" line="134"/>
         <source>Equalization successfully applied on %1 samples.</source>
         <translation>Equalització aplicada correctament en %1 mostres.</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/equalizer.cpp" line="209"/>
+        <location filename="../../editor/widgets/equalizer.cpp" line="210"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
         <translation>Hz</translation>
@@ -7310,7 +7310,7 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
         <translation>Edició ràpida</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/auto_distribution/toolautodistribution.h" line="60"/>
+        <location filename="../../editor/tools/auto_distribution/toolautodistribution.h" line="64"/>
         <source>Sample auto-positioning</source>
         <translation>Posiciona automàticament la mostra</translation>
     </message>
@@ -8386,6 +8386,101 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
         <location filename="../../editor/tools/merge_samples/toolmergesamples_gui.cpp" line="35"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Cancel·la</translation>
+    </message>
+</context>
+<context>
+    <name>ToolMissingSamples</name>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="101"/>
+        <source>This tool cannot be used on instruments having several velocity ranges:</source>
+        <translation>Aquesta eina no es pot utilitzar en instruments amb diversos rangs de velocitat:</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="158"/>
+        <source>No keys to create.</source>
+        <translation>No hi ha cap nota per crear.</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="160"/>
+        <source>No sample to create: the root keys are at most %n semitone(s) apart.</source>
+        <translation>
+            <numerusform>No hi ha cap mostra per crear: les notes base estan separades com a màxim %n semitó.</numerusform>
+            <numerusform>No hi ha cap mostra per crear: les notes base estan separades com a màxim %n semitons.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="273"/>
+        <source>Keys already having a sample, ignored:</source>
+        <translation>Notes que ja tenen una mostra, ignorades:</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="275"/>
+        <source>No harmonics found around the following keys, only the level was interpolated:</source>
+        <translation>No s&apos;han trobat harmònics al voltant de les notes següents, només s&apos;ha interpolat el nivell:</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="278"/>
+        <source>The following samples couldn&apos;t be looped:</source>
+        <translation>No s&apos;ha pogut crear el bucle en les mostres següents:</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.h" line="49"/>
+        <source>Transformation</source>
+        <translation>Transformació</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.h" line="75"/>
+        <source>Create missing samples</source>
+        <translation>Crea les mostres que falten</translation>
+    </message>
+</context>
+<context>
+    <name>ToolMissingSamples_gui</name>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.ui" line="20"/>
+        <source>Keys to create</source>
+        <translation>Notes per crear</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.ui" line="30"/>
+        <source>Maximum spacing between two samples (semitones)</source>
+        <translation>Separació màxima entre dues mostres (semitons)</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.ui" line="50"/>
+        <source>Each new sample is the closest sample transposed, the levels of its harmonics being interpolated between the two closest samples (or extrapolated beyond the last sample). It is looped if these samples are looped, and the key ranges are adjusted.</source>
+        <translation>Cada mostra nova és la mostra més propera transposada, amb els nivells dels seus harmònics interpolats entre les dues mostres més properes (o extrapolats més enllà de l&apos;última mostra). Se li aplica un bucle si aquestes mostres tenen bucle, i s&apos;ajusten els rangs de notes.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.cpp" line="37"/>
+        <source>&amp;Ok</source>
+        <translation>&amp;Ok</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.cpp" line="38"/>
+        <source>&amp;Cancel</source>
+        <translation>&amp;Cancel·la</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.cpp" line="58"/>
+        <source>Example:</source>
+        <translation>Exemple:</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.cpp" line="156"/>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.cpp" line="161"/>
+        <source>Warning</source>
+        <translation>Atenció</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.cpp" line="156"/>
+        <source>Key &quot;%1&quot; is not valid.</source>
+        <translation>La nota &quot;%1&quot; no és vàlida.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.cpp" line="161"/>
+        <source>Please specify the keys to create.</source>
+        <translation>Indiqueu les notes per crear.</translation>
     </message>
 </context>
 <context>

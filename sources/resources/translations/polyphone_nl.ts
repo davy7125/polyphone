@@ -3328,32 +3328,32 @@ een signaal</translation>
         <translation>voorbeeld</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/equalizer.ui" line="638"/>
+        <location filename="../../editor/widgets/equalizer.ui" line="654"/>
         <source>Reset</source>
         <translation>Reset</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/equalizer.ui" line="664"/>
+        <location filename="../../editor/widgets/equalizer.ui" line="680"/>
         <source>Apply</source>
         <translation>Toepassen</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/equalizer.cpp" line="131"/>
+        <location filename="../../editor/widgets/equalizer.cpp" line="132"/>
         <source>Information</source>
         <translation>Informatie</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/equalizer.cpp" line="132"/>
+        <location filename="../../editor/widgets/equalizer.cpp" line="133"/>
         <source>Equalization successfully applied on 1 sample.</source>
         <translation>Equalisatie succesvol toegepast op 1 sample.</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/equalizer.cpp" line="133"/>
+        <location filename="../../editor/widgets/equalizer.cpp" line="134"/>
         <source>Equalization successfully applied on %1 samples.</source>
         <translation>Equalisatie succesvol toegepast op %1 samples.</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/equalizer.cpp" line="209"/>
+        <location filename="../../editor/widgets/equalizer.cpp" line="210"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
         <translation>Hz</translation>
@@ -7325,7 +7325,7 @@ Andere soundfont-editors kunnen andere eenheden weergeven.</translation>
 <context>
     <name>ToolAutoDistribution</name>
     <message>
-        <location filename="../../editor/tools/auto_distribution/toolautodistribution.h" line="60"/>
+        <location filename="../../editor/tools/auto_distribution/toolautodistribution.h" line="64"/>
         <source>Sample auto-positioning</source>
         <oldsource>Automatically link the samples</oldsource>
         <translation>Sample automatische positionering</translation>
@@ -8419,6 +8419,101 @@ Andere soundfont-editors kunnen andere eenheden weergeven.</translation>
         <location filename="../../editor/tools/merge_samples/toolmergesamples_gui.cpp" line="35"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Annuleren</translation>
+    </message>
+</context>
+<context>
+    <name>ToolMissingSamples</name>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="101"/>
+        <source>This tool cannot be used on instruments having several velocity ranges:</source>
+        <translation>Deze tool kan niet worden gebruikt op instrumenten met meerdere bereiken van snelheden:</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="158"/>
+        <source>No keys to create.</source>
+        <translation>Geen toetsen om te maken.</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="160"/>
+        <source>No sample to create: the root keys are at most %n semitone(s) apart.</source>
+        <translation>
+            <numerusform>Geen sample om te maken: de basistoonhoogtes liggen hoogstens %n halve toon uit elkaar.</numerusform>
+            <numerusform>Geen sample om te maken: de basistoonhoogtes liggen hoogstens %n halve tonen uit elkaar.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="273"/>
+        <source>Keys already having a sample, ignored:</source>
+        <translation>Toetsen die al een sample hebben, genegeerd:</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="275"/>
+        <source>No harmonics found around the following keys, only the level was interpolated:</source>
+        <translation>Geen harmonischen gevonden rond de volgende toetsen, alleen het niveau is geïnterpoleerd:</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="278"/>
+        <source>The following samples couldn&apos;t be looped:</source>
+        <translation>De volgende samples konden niet worden geloopt:</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.h" line="49"/>
+        <source>Transformation</source>
+        <translation>Transformatie</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.h" line="75"/>
+        <source>Create missing samples</source>
+        <translation>Ontbrekende samples maken</translation>
+    </message>
+</context>
+<context>
+    <name>ToolMissingSamples_gui</name>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.ui" line="20"/>
+        <source>Keys to create</source>
+        <translation>Te maken toetsen</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.ui" line="30"/>
+        <source>Maximum spacing between two samples (semitones)</source>
+        <translation>Maximale afstand tussen twee samples (halve tonen)</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.ui" line="50"/>
+        <source>Each new sample is the closest sample transposed, the levels of its harmonics being interpolated between the two closest samples (or extrapolated beyond the last sample). It is looped if these samples are looped, and the key ranges are adjusted.</source>
+        <translation>Elk nieuw sample is het dichtstbijzijnde sample, getransponeerd, waarbij de niveaus van zijn harmonischen worden geïnterpoleerd tussen de twee dichtstbijzijnde samples (of geëxtrapoleerd voorbij het laatste sample). Het wordt geloopt als deze samples geloopt zijn, en de toonbereiken worden aangepast.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.cpp" line="37"/>
+        <source>&amp;Ok</source>
+        <translation>&amp;Ok</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.cpp" line="38"/>
+        <source>&amp;Cancel</source>
+        <translation>&amp;Annuleren</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.cpp" line="58"/>
+        <source>Example:</source>
+        <translation>Voorbeeld:</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.cpp" line="156"/>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.cpp" line="161"/>
+        <source>Warning</source>
+        <translation>Waarschuwing</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.cpp" line="156"/>
+        <source>Key &quot;%1&quot; is not valid.</source>
+        <translation>Toets &quot;%1&quot; is niet geldig.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.cpp" line="161"/>
+        <source>Please specify the keys to create.</source>
+        <translation>Geef de te maken toetsen op.</translation>
     </message>
 </context>
 <context>

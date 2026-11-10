@@ -3321,32 +3321,32 @@ for a signal</source>
         <translation>プレビュー</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/equalizer.ui" line="638"/>
+        <location filename="../../editor/widgets/equalizer.ui" line="654"/>
         <source>Reset</source>
         <translation>リセット</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/equalizer.ui" line="664"/>
+        <location filename="../../editor/widgets/equalizer.ui" line="680"/>
         <source>Apply</source>
         <translation>適用</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/equalizer.cpp" line="131"/>
+        <location filename="../../editor/widgets/equalizer.cpp" line="132"/>
         <source>Information</source>
         <translation>情報</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/equalizer.cpp" line="132"/>
+        <location filename="../../editor/widgets/equalizer.cpp" line="133"/>
         <source>Equalization successfully applied on 1 sample.</source>
         <translation>1つのサンプルにイコライゼーションが正常に適用されました。</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/equalizer.cpp" line="133"/>
+        <location filename="../../editor/widgets/equalizer.cpp" line="134"/>
         <source>Equalization successfully applied on %1 samples.</source>
         <translation>%1個のサンプルにイコライゼーションが正常に適用されました。</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/equalizer.cpp" line="209"/>
+        <location filename="../../editor/widgets/equalizer.cpp" line="210"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
         <translation>Hz</translation>
@@ -7321,7 +7321,7 @@ Other soundfont editors might display other units.</source>
         <translation>高速編集</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/auto_distribution/toolautodistribution.h" line="60"/>
+        <location filename="../../editor/tools/auto_distribution/toolautodistribution.h" line="64"/>
         <source>Sample auto-positioning</source>
         <oldsource>Automatically link the samples</oldsource>
         <translation>サンプル自動配置</translation>
@@ -8405,6 +8405,100 @@ Other soundfont editors might display other units.</source>
         <location filename="../../editor/tools/merge_samples/toolmergesamples_gui.cpp" line="35"/>
         <source>&amp;Cancel</source>
         <translation>キャンセル(&amp;C)</translation>
+    </message>
+</context>
+<context>
+    <name>ToolMissingSamples</name>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="101"/>
+        <source>This tool cannot be used on instruments having several velocity ranges:</source>
+        <translation>このツールは、複数のベロシティ範囲を持つインストゥルメントには使用できません:</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="158"/>
+        <source>No keys to create.</source>
+        <translation>作成するキーがありません。</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="160"/>
+        <source>No sample to create: the root keys are at most %n semitone(s) apart.</source>
+        <translation>
+            <numerusform>作成するサンプルはありません: ルートキーの間隔は最大 %n 半音です。</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="273"/>
+        <source>Keys already having a sample, ignored:</source>
+        <translation>すでにサンプルがあるキー (無視):</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="275"/>
+        <source>No harmonics found around the following keys, only the level was interpolated:</source>
+        <translation>以下のキーの周辺で倍音が見つからなかったため、レベルのみを補間しました:</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="278"/>
+        <source>The following samples couldn&apos;t be looped:</source>
+        <translation>以下のサンプルはループできませんでした:</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.h" line="49"/>
+        <source>Transformation</source>
+        <translation>変換</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.h" line="75"/>
+        <source>Create missing samples</source>
+        <translation>不足しているサンプルを作成</translation>
+    </message>
+</context>
+<context>
+    <name>ToolMissingSamples_gui</name>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.ui" line="20"/>
+        <source>Keys to create</source>
+        <translation>作成するキー</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.ui" line="30"/>
+        <source>Maximum spacing between two samples (semitones)</source>
+        <translation>2つのサンプル間の最大間隔 (半音)</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.ui" line="50"/>
+        <source>Each new sample is the closest sample transposed, the levels of its harmonics being interpolated between the two closest samples (or extrapolated beyond the last sample). It is looped if these samples are looped, and the key ranges are adjusted.</source>
+        <translation>新しい各サンプルは最も近いサンプルをトランスポーズしたもので、その倍音のレベルは最も近い2つのサンプルの間で補間されます(最後のサンプルより外側では外挿されます)。これらのサンプルがループしている場合はループが設定され、キー範囲が調整されます。</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.cpp" line="37"/>
+        <source>&amp;Ok</source>
+        <translation>OK(&amp;O)</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.cpp" line="38"/>
+        <source>&amp;Cancel</source>
+        <translation>キャンセル(&amp;C)</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.cpp" line="58"/>
+        <source>Example:</source>
+        <translation>例:</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.cpp" line="156"/>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.cpp" line="161"/>
+        <source>Warning</source>
+        <translation>警告</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.cpp" line="156"/>
+        <source>Key &quot;%1&quot; is not valid.</source>
+        <translation>キー「%1」は無効です。</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.cpp" line="161"/>
+        <source>Please specify the keys to create.</source>
+        <translation>作成するキーを指定してください。</translation>
     </message>
 </context>
 <context>

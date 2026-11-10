@@ -60,6 +60,8 @@
 #include "mixture_creation/toolmixturecreation_parameters.h"
 #include "chords/toolchords.h"
 #include "chords/toolchords_parameters.h"
+#include "missing_samples/toolmissingsamples.h"
+#include "missing_samples/toolmissingsamples_parameters.h"
 #include "sound_spatialization/toolsoundspatialization.h"
 #include "sound_spatialization/toolsoundspatialization_parameters.h"
 #include "transpose/tooltranspose.h"
@@ -101,8 +103,10 @@ static AbstractTool * getTool(QString name, std::function<AbstractTool *()> crea
 static QString cleanMessage(QString message)
 {
     static QRegularExpression lineBreak("<br\\s*/?>", QRegularExpression::CaseInsensitiveOption);
+    static QRegularExpression listItem("<li>", QRegularExpression::CaseInsensitiveOption);
     static QRegularExpression tag("<[^>]*>");
     message.replace(lineBreak, "\n");
+    message.replace(listItem, "\n- ");
     message.remove(tag);
     return message.trimmed();
 }
@@ -612,6 +616,64 @@ static void addInstrumentTools(QList<McpFunction *> &functions)
             ci.chordType5Inversion = inversions-- > 0;
             ci.chordType3Inversion = inversions-- > 0;
             params->setChordConfiguration(ci);
+        });
+
+    functions << toolFunction(
+        "create_missing_samples",
+        "Tool \"Create missing samples\": add samples at keys having no sample in instruments. A new sample is the "
+        "sample of the closest root key transposed (the higher one at equal distance), the levels of its harmonics "
+        "being corrected in dB by (key - closest) / (second - closest) times the difference of level with a second "
+        "root key: the closest one on the other side of the key (interpolation), otherwise the next one on the same "
+        "side (extrapolation). Only the harmonics found in both root keys are corrected; if none is found, the level "
+        "is corrected with the steady loudness. The new sample is looped automatically if both root keys are looped. "
+        "Its division copies the division of the transposed sample (attenuation reduced if the sample had to be "
+        "attenuated below the full scale) and the key ranges around are adjusted as by the tool \"auto distribution\" "
+        "(existing ranges can only shrink). Instruments with several velocity ranges are refused.",
+        "Instruments having at least two root keys", instruments,
+        R"JSON("keys":{"type":"array","items":{"type":["integer","string"]},"description":"Keys to create (number or name such as \"C#4\"); keys already having a sample are ignored"},
+           "max_spacing":{"type":"integer","minimum":1,"maximum":24,"description":"Instead of keys: create the keys needed so that two consecutive root keys are at most this number of semitones apart, evenly spread"})JSON",
+        {}, []() { return new ToolMissingSamples(); },
+        [](const McpArguments &args, AbstractTool *, AbstractToolParameters * parameters) {
+            ToolMissingSamples_parameters * params = dynamic_cast<ToolMissingSamples_parameters *>(parameters);
+            if (args.contains("keys") == args.contains("max_spacing"))
+                throw McpException("one of the arguments \"keys\" and \"max_spacing\" is required");
+            if (args.contains("keys"))
+            {
+                QList<int> keys;
+                for (const QJsonValue value : args.getArray("keys"))
+                {
+                    int key = McpUtils::readKey(value, "keys");
+                    if (!keys.contains(key))
+                        keys << key;
+                }
+                if (keys.isEmpty())
+                    throw McpException("argument \"keys\" is empty");
+                std::sort(keys.begin(), keys.end());
+                params->setMode(ToolMissingSamples_parameters::MODE_KEYS);
+                params->setKeys(keys);
+            }
+            else
+            {
+                params->setMode(ToolMissingSamples_parameters::MODE_MAX_SPACING);
+                params->setMaxSpacing(args.getInt("max_spacing", 1, 24));
+            }
+        },
+        [](AbstractTool * tool, QJsonObject &result) {
+            QJsonArray created;
+            for (const ToolMissingSamples::Creation &creation : dynamic_cast<ToolMissingSamples *>(tool)->getCreations())
+            {
+                QJsonObject item;
+                item["instrument"] = McpUtils::brief(creation.idInst);
+                item["key"] = creation.key;
+                item["transposed_root_key"] = creation.closestKey;
+                item["second_root_key"] = creation.secondKey;
+                QJsonArray samples;
+                for (const EltID &id : creation.samples)
+                    samples << McpUtils::brief(id);
+                item["samples"] = samples;
+                created << item;
+            }
+            result["created"] = created;
         });
 
     functions << toolFunction(

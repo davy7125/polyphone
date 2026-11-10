@@ -102,6 +102,19 @@ public:
     // frequency; the part analyzed is returned in seconds
     QList<Partial> getPartials(int maxCount, double &startSeconds, double &endSeconds);
 
+    // Harmonic of the steady part
+    struct Harmonic
+    {
+        int rank; // 1 = fundamental
+        double frequency; // Hz
+        double amplitude; // Linear, relative to full scale (0 if there is no peak at this rank)
+        bool found; // The peak stands out from its neighborhood
+    };
+
+    // Harmonics of the steady part (mean power of the channels if there are two), from the rank 1 to the last one
+    // below 16 kHz (60 at most), empty if no pitch is found
+    QList<Harmonic> getHarmonicList();
+
     // Pitch over the whole signal (first channel), searched as for getPitch: a frequency in Hz every hop, 0 where no
     // pitch is found; firstTime is the time of the first value (center of its window)
     QVector<double> getPitchTrack(double hopSeconds, double &firstTime);
@@ -158,14 +171,6 @@ public:
     static QVector<double> getThirdOctaveFrequencies();
 
 private:
-    struct Harmonic
-    {
-        int rank;
-        double frequency;
-        double amplitude; // Linear, relative to full scale
-        bool found;
-    };
-
     // Regions and envelopes
     void computeRegions();
     double rms(int start, int end) const { return SampleUtils::rms(_cumSquares, start, end); }

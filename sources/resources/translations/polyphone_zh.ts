@@ -3299,32 +3299,32 @@ for a signal</source>
         <translation>预览</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/equalizer.ui" line="638"/>
+        <location filename="../../editor/widgets/equalizer.ui" line="654"/>
         <source>Reset</source>
         <translation>重置</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/equalizer.ui" line="664"/>
+        <location filename="../../editor/widgets/equalizer.ui" line="680"/>
         <source>Apply</source>
         <translation>应用</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/equalizer.cpp" line="131"/>
+        <location filename="../../editor/widgets/equalizer.cpp" line="132"/>
         <source>Information</source>
         <translation>信息</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/equalizer.cpp" line="132"/>
+        <location filename="../../editor/widgets/equalizer.cpp" line="133"/>
         <source>Equalization successfully applied on 1 sample.</source>
         <translation>均衡已成功应用于 1 个采样。</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/equalizer.cpp" line="133"/>
+        <location filename="../../editor/widgets/equalizer.cpp" line="134"/>
         <source>Equalization successfully applied on %1 samples.</source>
         <translation>均衡已成功应用于 %1 个采样。</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/equalizer.cpp" line="209"/>
+        <location filename="../../editor/widgets/equalizer.cpp" line="210"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
         <translation>赫兹</translation>
@@ -7279,7 +7279,7 @@ Other soundfont editors might display other units.</source>
         <translation>快速编辑</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/auto_distribution/toolautodistribution.h" line="60"/>
+        <location filename="../../editor/tools/auto_distribution/toolautodistribution.h" line="64"/>
         <source>Sample auto-positioning</source>
         <translation>采样自动定位</translation>
     </message>
@@ -8351,6 +8351,100 @@ Other soundfont editors might display other units.</source>
         <location filename="../../editor/tools/merge_samples/toolmergesamples_gui.cpp" line="35"/>
         <source>&amp;Cancel</source>
         <translation>取消(&amp;C)</translation>
+    </message>
+</context>
+<context>
+    <name>ToolMissingSamples</name>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="101"/>
+        <source>This tool cannot be used on instruments having several velocity ranges:</source>
+        <translation>此工具不能用于具有多个力度范围的乐器：</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="158"/>
+        <source>No keys to create.</source>
+        <translation>没有要创建的音符。</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="160"/>
+        <source>No sample to create: the root keys are at most %n semitone(s) apart.</source>
+        <translation>
+            <numerusform>没有要创建的采样：根音符之间的间隔最多为 %n 个半音。</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="273"/>
+        <source>Keys already having a sample, ignored:</source>
+        <translation>已有采样的音符（已忽略）：</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="275"/>
+        <source>No harmonics found around the following keys, only the level was interpolated:</source>
+        <translation>在以下音符附近未找到谐波，仅对电平进行了插值：</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="278"/>
+        <source>The following samples couldn&apos;t be looped:</source>
+        <translation>以下采样无法循环：</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.h" line="49"/>
+        <source>Transformation</source>
+        <translation>变换</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.h" line="75"/>
+        <source>Create missing samples</source>
+        <translation>创建缺失的采样</translation>
+    </message>
+</context>
+<context>
+    <name>ToolMissingSamples_gui</name>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.ui" line="20"/>
+        <source>Keys to create</source>
+        <translation>要创建的音符</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.ui" line="30"/>
+        <source>Maximum spacing between two samples (semitones)</source>
+        <translation>两个采样之间的最大间隔（半音）</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.ui" line="50"/>
+        <source>Each new sample is the closest sample transposed, the levels of its harmonics being interpolated between the two closest samples (or extrapolated beyond the last sample). It is looped if these samples are looped, and the key ranges are adjusted.</source>
+        <translation>每个新采样都是移调后的最近采样，其谐波电平在两个最近的采样之间插值（超出最后一个采样时外推）。如果这些采样是循环的，则对其进行循环，并调整音符范围。</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.cpp" line="37"/>
+        <source>&amp;Ok</source>
+        <translation>确定(&amp;O)</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.cpp" line="38"/>
+        <source>&amp;Cancel</source>
+        <translation>取消(&amp;C)</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.cpp" line="58"/>
+        <source>Example:</source>
+        <translation>示例：</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.cpp" line="156"/>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.cpp" line="161"/>
+        <source>Warning</source>
+        <translation>警告</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.cpp" line="156"/>
+        <source>Key &quot;%1&quot; is not valid.</source>
+        <translation>音符“%1”无效。</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples_gui.cpp" line="161"/>
+        <source>Please specify the keys to create.</source>
+        <translation>请指定要创建的音符。</translation>
     </message>
 </context>
 <context>

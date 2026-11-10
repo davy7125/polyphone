@@ -52,6 +52,7 @@
 #include "transpose/tooltranspose.h"
 #include "release/toolrelease.h"
 #include "chords/toolchords.h"
+#include "missing_samples/toolmissingsamples.h"
 #include "sample_export/toolsampleexport.h"
 #include "default_mod/tooldefaultmod.h"
 #include "fast_edit_smpl/toolfasteditsmpl.h"
@@ -104,6 +105,7 @@ void ToolFactory::initialize()
            << new ToolAutoDistribution()
            << new ToolMixtureCreation()
            << new ToolChords()
+           << new ToolMissingSamples()
            << new ToolSoundSpatialization()
            << new ToolTranspose()
            << new ToolRelease()

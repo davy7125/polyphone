@@ -547,6 +547,15 @@ set(POLYPHONE_APP_FILES
     editor/tools/merge_samples/toolmergesamples_gui.ui
     editor/tools/merge_samples/toolmergesamples_parameters.cpp
     editor/tools/merge_samples/toolmergesamples_parameters.h
+    editor/tools/missing_samples/missingsamplecreator.cpp
+    editor/tools/missing_samples/missingsamplecreator.h
+    editor/tools/missing_samples/toolmissingsamples.cpp
+    editor/tools/missing_samples/toolmissingsamples.h
+    editor/tools/missing_samples/toolmissingsamples_gui.cpp
+    editor/tools/missing_samples/toolmissingsamples_gui.h
+    editor/tools/missing_samples/toolmissingsamples_gui.ui
+    editor/tools/missing_samples/toolmissingsamples_parameters.cpp
+    editor/tools/missing_samples/toolmissingsamples_parameters.h
     editor/tools/mixture_creation/runnablesamplecreator.cpp
     editor/tools/mixture_creation/runnablesamplecreator.h
     editor/tools/mixture_creation/toolmixturecreation.cpp

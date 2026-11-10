@@ -2370,6 +2370,12 @@ QJsonObject SoundAnalyzer::compare(SoundAnalyzer &reference, SoundAnalyzer &othe
     return result;
 }
 
+QList<SoundAnalyzer::Harmonic> SoundAnalyzer::getHarmonicList()
+{
+    computeHarmonics();
+    return _harmonics;
+}
+
 int SoundAnalyzer::harmonicCount()
 {
     computeHarmonics();
