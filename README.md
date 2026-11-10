@@ -6,7 +6,8 @@
 
 <p align="center">
   <strong>Turn any sound into a musical instrument.</strong><br>
-  A free and open-source soundfont editor for Windows, macOS and Linux.
+  A free and open-source soundfont editor for Windows, macOS and Linux,<br>
+  with a plugin to play your soundfonts in any DAW.
 </p>
 
 <p align="center">
@@ -18,6 +19,7 @@
 <p align="center">
   <a href="https://www.polyphone.io">Website</a> ·
   <a href="https://www.polyphone.io/software">Download</a> ·
+  <a href="https://www.polyphone.io/software/plugin">Plugin</a> ·
   <a href="https://www.polyphone.io/documentation">Documentation</a> ·
   <a href="https://www.polyphone.io/forum">Forum</a> ·
   <a href="https://www.polyphone.io/soundfonts">Soundfonts</a>
@@ -29,6 +31,7 @@
 
 A soundfont is a single file holding everything a synthesizer needs to play an instrument: the recorded samples, how they are spread across the keyboard and the velocities, and how they are shaped by envelopes, filters and modulators.
 Polyphone lets you create soundfonts from your own recordings, refine existing ones, convert them to other formats and play them right away with its built-in synthesizer.
+The [Polyphone plugin](#polyphone-plugin) then plays them in your DAW with the same synthesizer, so they sound the same in your projects as in the editor.
 
 ## Features
 
@@ -105,6 +108,26 @@ More than 30 tools automate the repetitive work, for example:
   </tr>
 </table>
 
+## Polyphone plugin
+
+<p align="center">
+  <img src="screenshots/Plugin.png" alt="Polyphone plugin: the presets of a soundfont, the parameters of the synthesizer, the reverb, the chorus and a keyboard" width="600">
+</p>
+
+The Polyphone plugin plays soundfonts in DAWs and in any other host of VST3, CLAP, LV2 or AU (macOS) plugins.
+It uses the synthesizer of Polyphone, so a soundfont sounds the same in your projects as in the editor.
+The plugin only plays soundfonts: they are created and edited with Polyphone, then opened in the plugin.
+
+- Opens sf2, sf3, sfz and dls files with a button, from the recent files or by dropping them on the window.
+- Three playing modes: one preset on the 16 MIDI channels; one preset per channel, chosen in the plugin or by program changes like a General MIDI synthesizer (handy for MIDI files); or one preset played by an MPE controller.
+- Separate outputs for each MIDI channel and for the effects, to mix them on different tracks.
+- Gain, reverb, chorus, transposition, tuning and temperament, all automatable by the host.
+- The soundfont can be stored in the project, which then opens on another computer without the file.
+- A soundfont used by several tracks is loaded in memory only once, and nothing is read from the disk while playing.
+- Notes start exactly at the position of their MIDI message whatever the buffer size, and offline rendering is never limited by the processor.
+
+The plugin is currently in beta. Download it from its [page on the website](https://www.polyphone.io/software/plugin), and see its [manual](https://www.polyphone.io/documentation/manual/plugin) for the installation and the settings.
+
 ## Install
 
 Download the latest version from the [website](https://www.polyphone.io/software) or from the [GitHub releases](https://github.com/davy7125/polyphone/releases/latest):
@@ -117,6 +140,8 @@ Download the latest version from the [website](https://www.polyphone.io/software
 
 Polyphone is also packaged for several Linux distributions, FreeBSD, Homebrew and Nix: see [Repology](https://repology.org/project/polyphone/versions) for the available versions, which may be older than the latest release.
 
+The [plugin](https://www.polyphone.io/software/plugin) is downloaded separately, from its page or from the [GitHub releases](https://github.com/davy7125/polyphone/releases): one archive per system (Windows 64-bit, macOS 12 or later for Apple silicon or Intel, Linux x86-64 or ARM64) containing the VST3, CLAP and LV2 versions, plus AU on macOS. Its page explains where to copy each of them so that your host finds it.
+
 Free code signing of the Windows version is provided by [SignPath.io](https://signpath.io/), certificate by [SignPath Foundation](https://signpath.org/).
 
 Polyphone only connects to [polyphone.io](https://www.polyphone.io), for the version check, the messages of the home screen, the online repository and the user account. No personal data is collected, tracked or shared.
@@ -125,11 +150,14 @@ Polyphone only connects to [polyphone.io](https://www.polyphone.io), for the ver
 
 - New to soundfonts? The tutorial [Create a soundfont from scratch](https://www.polyphone.io/documentation/tutorials/create-a-soundfont-from-scratch) goes through all the steps.
 - The [user manual](https://www.polyphone.io/documentation/manual/index) describes every window and tool, in 9 languages.
+- The [plugin manual](https://www.polyphone.io/documentation/manual/plugin) explains how to install and use the plugin.
 - Questions are welcome in the [forum](https://www.polyphone.io/forum).
 
 ## Building from source
 
 Polyphone is written in C++ with Qt. Building instructions are available for [Windows](https://www.polyphone.io/en/documentation/development/building-polyphone-for-windows), [macOS](https://www.polyphone.io/en/documentation/development/building-polyphone-for-mac-os-x), [Fedora](https://www.polyphone.io/en/documentation/development/building-polyphone-for-fedora) and [Ubuntu](https://www.polyphone.io/en/documentation/development/building-polyphone-for-ubuntu), and for [building with Qt Creator](https://www.polyphone.io/en/documentation/development/using-qt-creator-to-build-polyphone).
+
+The plugin is made with [JUCE](https://juce.com) and built with CMake on its own: see [sources/plugin/README.md](sources/plugin/README.md).
 
 ## Contributing
 
@@ -142,3 +170,4 @@ Polyphone is free and its website shows no advertising. If you find it useful, a
 ## License
 
 Polyphone has been developed by Davy Triponney since 2013 and is released under the [GNU General Public License v3.0](LICENSE.txt).
+The plugin uses JUCE under the AGPL v3 and [clap-juce-extensions](https://github.com/free-audio/clap-juce-extensions) under the MIT license.
