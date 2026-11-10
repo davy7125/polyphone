@@ -26,6 +26,10 @@ Instructions to build Polyphone with Ubuntu.
 
 Instructions to build Polyphone with Qt Creator.
 
+### [Building the Polyphone plugin](development/building-the-polyphone-plugin.md)
+
+Instructions to build the plugin of Polyphone (VST3, CLAP, LV2 and AU).
+
 ### [Translate Polyphone](development/translate-polyphone.md)
 
 For all people willing to see Polyphone in their own language.

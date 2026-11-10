@@ -13,7 +13,8 @@ Laden Sie das Übersetzungspaket für die Sprache, die Sie übersetzen möchten,
 Ist die Sprache noch nicht in der Liste, fragen Sie über das [Kontaktformular](contact) danach (Sie müssen nur die gewünschte neue Sprache angeben).
 Sie erhalten dann schnell ein neues Übersetzungspaket.
 
-Die Übersetzungsdateien sind auch im <a href="https://github.com/davy7125/polyphone" target="_blank">GitHub</a>-Repository im Verzeichnis :file:`sources` verfügbar (eine Datei :file:`polyphone_XX.ts` pro Sprache).
+Die Übersetzungsdateien sind auch im <a href="https://github.com/davy7125/polyphone" target="_blank">GitHub</a>-Repository im Verzeichnis :file:`sources/resources/translations` verfügbar (eine Datei :file:`polyphone_XX.ts` pro Sprache).
+Sie enthalten auch die Texte des [Plugins](manual/plugin.md) in den Kontexten :guilabel:`PluginEditor`, :guilabel:`PluginProcessor` und :guilabel:`PluginJuce`.
 
 
 ### Qt Linguist

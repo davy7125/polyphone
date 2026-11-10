@@ -26,6 +26,10 @@ UbuntuでPolyphoneをビルドする手順です。
 
 Qt CreatorでPolyphoneをビルドする手順です。
 
+### [Polyphoneプラグインをビルドする](development/building-the-polyphone-plugin.md)
+
+Polyphoneのプラグイン（VST3、CLAP、LV2、AU）をビルドする手順です。
+
 ### [Polyphoneを翻訳する](development/translate-polyphone.md)
 
 Polyphoneを自分の言語で使いたいすべての方へ。

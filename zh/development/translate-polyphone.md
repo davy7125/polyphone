@@ -13,7 +13,8 @@ Polyphone 在设计上支持翻译，以便让更多人能够使用。
 如果列表中还没有该语言，请使用[联系](contact)表单提出申请（只需说明你想要的新语言）。
 你很快就会收到一个新的翻译包。
 
-翻译文件也可以在 <a href="https://github.com/davy7125/polyphone" target="_blank">GitHub</a> 仓库的 :file:`sources` 目录中找到（每种语言一个 :file:`polyphone_XX.ts` 文件）。
+翻译文件也可以在 <a href="https://github.com/davy7125/polyphone" target="_blank">GitHub</a> 仓库的 :file:`sources/resources/translations` 目录中找到（每种语言一个 :file:`polyphone_XX.ts` 文件）。
+这些文件还包含[插件](manual/plugin.md)的文本，位于 :guilabel:`PluginEditor`、:guilabel:`PluginProcessor` 和 :guilabel:`PluginJuce` 上下文中。
 
 
 ### Qt Linguist

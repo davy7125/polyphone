@@ -25,6 +25,10 @@
 重複は、事前に[サンプルの構成サマリー](manual/soundfont-editor/configuration-summaries.md#doc_sample)で確認できます。
 
 
+![サンプルの構成サマリーに表示された重複](images/tool_clean_duplicates.png "サンプルの構成サマリーに表示された重複")
+
+
+
 ## モジュレーター {#doc_cat_mod}
 
 

@@ -202,6 +202,10 @@ Mesclar as divisões esquerda e direita nos instrumentos
 No final, uma mensagem lista as amostras que saturaram ou que permaneceram inalteradas, bem como os instrumentos nos quais algumas divisões não puderam ser mescladas.
 
 
+![Ferramenta de conversão para mono](images/tool_convert_mono.png "Ferramenta de conversão para mono")
+
+
+
 ### Encontrar um vínculo {#doc_link}
 
 Entre as amostras selecionadas, as amostras cujos nomes diferem apenas pela última letra (L&nbsp;/&nbsp;R) são vinculadas automaticamente (espaços e os caracteres ``-``, ``_``, ``(``, ``)``, ``[``, ``]``, ``{``, ``}`` e ``|`` são ignorados nos nomes).

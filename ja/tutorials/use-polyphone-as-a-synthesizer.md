@@ -106,3 +106,5 @@ polyphone -s
 Polyphoneをシンセサイザーにする方法がわかったら、[Raspberry Piを使って楽器を作って](tutorials/create-a-synthesizer-with-raspberry-pi.md)みてはいかがでしょうか。
 
 Polyphoneのシンセモードは、[MIDIファイルの再生](tutorials/read-midi-file-with-soundfont.md)にも使えます。
+
+さらに、デジタルオーディオワークステーション（DAW）でSoundFontを同じ音のまま演奏するには、[Polyphoneプラグイン](manual/plugin.md)を使います。

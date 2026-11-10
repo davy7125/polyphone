@@ -25,6 +25,10 @@ Un messaggio indica quanti campioni sono stati eliminati.
 I duplicati sono visibili in anticipo nel [riepilogo della configurazione dei campioni](manual/soundfont-editor/configuration-summaries.md#doc_sample).
 
 
+![Duplicati nel riepilogo della configurazione dei campioni](images/tool_clean_duplicates.png "Duplicati nel riepilogo della configurazione dei campioni")
+
+
+
 ## Modulatori {#doc_cat_mod}
 
 

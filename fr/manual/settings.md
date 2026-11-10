@@ -98,6 +98,7 @@ Couleurs
 
 Bordures de fenêtre
 : Affiche ou masque les bordures de fenêtre pour gagner de la place sur l'écran (non disponible sous macOS).
+  Sans bordures, les fenêtres du clavier virtuel, du magnétophone et du lecteur MIDI se déplacent en faisant glisser leur bandeau, qui affiche leur titre et un bouton de fermeture, et se redimensionnent en faisant glisser leurs bords.
 
 Décorations
 : Les décorations en arrière-plan de certaines listes peuvent être désactivées pour augmenter la lisibilité.
@@ -114,7 +115,7 @@ Une modification de la langue, du nom des notes, du style, des couleurs, des bor
 La section :guilabel:`Son` permet de configurer la réverbération (niveau, profondeur, atténuation et densité) et le chorus (niveau, amplitude et fréquence) du synthétiseur, ainsi que son volume général.
 Le volume général peut aussi être modifié avec le contrôleur MIDI du volume si un clavier externe est connecté.
 Une led à gauche de :guilabel:`Réverbération` et de :guilabel:`Chorus` active ou désactive chaque effet sans perdre ses réglages.
-Ces réglages peuvent aussi être modifiés sous le [clavier virtuel](manual/soundfont-editor/toolbar.md#doc_keyboard_effects) tout en jouant&nbsp;: une modification est progressive et n'interrompt pas les notes en cours.
+Ces réglages peuvent aussi être modifiés dans la fenêtre du [clavier virtuel](manual/soundfont-editor/toolbar.md#doc_keyboard_effects) tout en jouant&nbsp;: une modification est progressive et n'interrompt pas les notes en cours.
 
 Le modulateur par défaut modifiant la fréquence de coupure du filtre ayant été modifié entre les versions 2.01 et 2.04 des spécifications sf2, il est possible de définir ici quelle version utiliser&nbsp;:
 

@@ -17,6 +17,7 @@ index.md=用户手册
 |online-repository.md=在线仓库
 |settings.md=设置
 |menu.md=菜单
+|plugin.md=Polyphone 插件
 |annexes/index.md=附录
 ||annexes/common-issues.md=音色库中的常见缺陷
 ||annexes/the-different-soundfont-formats.md=不同的音色库格式

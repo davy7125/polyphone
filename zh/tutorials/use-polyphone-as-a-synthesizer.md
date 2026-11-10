@@ -106,3 +106,5 @@ polyphone -s
 既然你已经知道如何把 Polyphone 变成合成器，何不[用树莓派制作一件乐器](tutorials/create-a-synthesizer-with-raspberry-pi.md)？
 
 Polyphone 的合成器模式还可以用来[播放 MIDI 文件](tutorials/read-midi-file-with-soundfont.md)。
+
+此外，要在数字音频工作站（DAW）中以相同的声音演奏音色库，请使用 [Polyphone 插件](manual/plugin.md)。

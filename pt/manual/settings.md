@@ -98,6 +98,7 @@ Cores
 
 Bordas da janela
 : Exibe ou oculta as bordas da janela, para economizar espaço na tela (não disponível no macOS).
+  Sem bordas, as janelas do teclado virtual, do gravador e do reprodutor MIDI são movidas arrastando o banner, que exibe o título e um botão para fechar, e são redimensionadas arrastando as bordas.
 
 Decorações
 : As decorações de fundo de algumas listas podem ser desativadas para melhorar a legibilidade.
@@ -114,7 +115,7 @@ Uma modificação do idioma, dos nomes de notas, do estilo, das cores, das borda
 A seção :guilabel:`Som` permite modificar a reverberação (nível, tamanho da sala, amortecimento e largura) e o chorus (nível, profundidade e frequência) do sintetizador, assim como seu volume geral.
 O volume geral pode ser alterado com o controlador MIDI de volume se um teclado externo estiver conectado.
 Um LED à esquerda de :guilabel:`Reverberação` e de :guilabel:`Chorus` liga ou desliga cada efeito sem perder suas configurações.
-Essas configurações também podem ser alteradas abaixo do [teclado virtual](manual/soundfont-editor/toolbar.md#doc_keyboard_effects) enquanto se toca: uma alteração é progressiva e não interrompe as notas que estão sendo tocadas.
+Essas configurações também podem ser alteradas na janela do [teclado virtual](manual/soundfont-editor/toolbar.md#doc_keyboard_effects) enquanto se toca: uma alteração é progressiva e não interrompe as notas que estão sendo tocadas.
 
 Como o modulador padrão que modifica a frequência de corte do filtro mudou entre as versões 2.01 e 2.04 das especificações sf2, é possível definir aqui qual versão usar:
 

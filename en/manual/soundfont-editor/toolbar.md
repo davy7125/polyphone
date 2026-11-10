@@ -142,11 +142,11 @@ This window triggers MIDI signals:
 * **note on** / **note off** / **aftertouch** with the piano keyboard,
 * other MIDI signals if the **MIDI controller part** is expanded.
 
-The key, the velocity and the aftertouch of the note being played are displayed at the bottom of the window, along with a drop-down list for choosing the size of the keyboard (5 octaves, 6 octaves, 88 keys or 128 keys).
-Two buttons at the bottom right show or hide the MIDI controllers above the keyboard and the audio effects below it.
+The banner at the top of the window contains a list for choosing the type of keyboard (5 octaves, 6 octaves, 88 keys or 128 keys), and displays the key, the velocity and the aftertouch of the note being played.
+The menu on the right of the banner shows or hides the [MIDI controllers](#doc_keyboard_controllers) and the [audio effects](#doc_keyboard_effects), displayed above the keyboard.
 
-The window keeps the proportions of the keyboard: changing its width changes its height, and conversely.
-Showing or hiding an area only changes the height of the window.
+The window keeps the proportions of the keyboard: changing its width changes its height.
+Showing or hiding an area only changes the height of the window, which grows or shrinks from its top so that the keyboard stays at the same place on the screen (this is not possible with Wayland on Linux).
 
 The virtual keyboard can also be displayed from the [soundfont explorer](manual/soundfont-explorer.md#doc_play), for playing the elements of the files of a directory without opening them.
 
@@ -212,11 +212,10 @@ using an external MIDI keyboard
 The arrows play notes only if the piano keyboard has the focus: otherwise they act on the element having the focus, a knob for instance.
 
 
-### MIDI controllers
+### MIDI controllers {#doc_keyboard_controllers}
 
 
-When clicking on the MIDI button at the bottom right, the MIDI controller area is displayed above the keyboard or hidden.
-The window then moves so that the keyboard stays at the same place on the screen (this is not possible with Wayland on Linux).
+When the option :guilabel:`MIDI controllers` is checked in the menu on the right of the banner, the MIDI controller area is displayed above the keyboard.
 If you are playing with modulators, it is advised to use these features to test your soundfont.
 
 
@@ -251,7 +250,7 @@ All these elements can be synchronized with a MIDI keyboard connected to the com
 ### Audio effects {#doc_keyboard_effects}
 
 
-When clicking on the speaker button at the bottom right, an area is displayed below the keyboard for adjusting the main settings of the synthesizer while playing:
+When the option :guilabel:`Effects` is checked in the menu on the right of the banner, an area is displayed at the top of the window for adjusting the main settings of the synthesizer while playing:
 
 Reverb
 : A led switches the reverb on or off, then 4 knobs change its level, room size, width and damping.

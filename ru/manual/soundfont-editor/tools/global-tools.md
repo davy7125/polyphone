@@ -25,6 +25,10 @@
 Дубликаты можно заранее увидеть в [сводке конфигурации семплов](manual/soundfont-editor/configuration-summaries.md#doc_sample).
 
 
+![Дубликаты в сводке конфигурации семплов](images/tool_clean_duplicates.png "Дубликаты в сводке конфигурации семплов")
+
+
+
 ## Модуляторы {#doc_cat_mod}
 
 

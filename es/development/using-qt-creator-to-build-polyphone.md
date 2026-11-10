@@ -7,8 +7,9 @@ Se supone que ya tienes instalado en tu ordenador Qt Creator con el framework Qt
 
 Se necesitan los siguientes elementos:
 
-* un compilador de C++ (VC++, Clang, GCC, …),
-* Qt Creator con su framework (Qt 6),
+* un compilador de C++ (GCC, Clang, MinGW…),
+* Qt Creator con su framework (Qt 6, o Qt 5),
+* :program:`CMake` (versión 3.16 o posterior), que se puede instalar con Qt Creator,
 * las dependencias de Polyphone.
 
 Las instrucciones para instalarlos dependen del sistema operativo que uses; consulta las páginas de documentación correspondientes.
@@ -26,52 +27,36 @@ Obtén el código fuente de Polyphone <a href="software" target="_blank">aquí</
 ### Abrir y configurar el proyecto
 
 
-Primero, abre el archivo :file:`polyphone.pro` y edítalo para usar, si es necesario, las versiones distribuidas de :program:`rtaudio` y de :program:`rtmidi` si tu sistema operativo no las proporciona.
-Quita el comentario de las siguientes líneas eliminando el ‘#’ inicial:
-
-```
-DEFINES += USE_LOCAL_RTAUDIO
-DEFINES += USE_LOCAL_RTMIDI
-```
-
-Puedes saltarte estas modificaciones si quieres usar las bibliotecas ya instaladas en tu ordenador (¡asegúrate de tenerlas!).
-Este paso no es necesario en Windows ni en macOS, ya que siempre se usan las versiones distribuidas.
-
-Inicia Qt Creator y abre el archivo :file:`polyphone.pro`.
+Inicia Qt Creator y abre el archivo :file:`CMakeLists.txt` situado en el directorio :file:`sources`.
 
 
 ![Abrir Qt Creator](images/open-Qt-Creator.png "Abrir Qt Creator")
 
 
-Después, configura el proyecto.
+Después, configura el proyecto eligiendo un kit, es decir, una versión de Qt y un compilador.
 
 ![Configurar el proyecto](images/configure-project.png "Configurar el proyecto")
 
 
-### Ejecutar qmake y compilar el proyecto
+Qt Creator ejecuta entonces :program:`CMake`, que comprueba que se encuentran las dependencias.
+Los mensajes se muestran en el panel :guilabel:`General Messages`: si falta una biblioteca, instálala y vuelve a ejecutar :program:`CMake` con la opción :guilabel:`Run CMake` del menú :guilabel:`Build`.
+
+Las opciones del proyecto están en la sección :guilabel:`Projects` de la columna izquierda, en :guilabel:`Build` → :guilabel:`CMake`.
+En Linux, se pueden usar las copias de :program:`RtAudio` y :program:`RtMidi` incluidas en el código fuente en lugar de las bibliotecas del sistema: activa las opciones ``POLYPHONE_LOCAL_RTAUDIO`` y ``POLYPHONE_LOCAL_RTMIDI`` y luego haz clic en :guilabel:`Run CMake`.
+Esto no es necesario en Windows ni en macOS, ya que siempre se usan las versiones distribuidas.
+En la misma sección, selecciona la configuración de compilación (es preferible :guilabel:`Release`).
 
 
-Ve al menú :guilabel:`Build` y elige la opción :guilabel:`Run qmake`.
+### Compilar el proyecto
 
 
-![Ejecutar qmake](images/run-qmake.png "Ejecutar qmake")
+Por último, haz clic en la acción :guilabel:`Build Project "Polyphone"` del menú :guilabel:`Build`. Durante la compilación del proyecto pueden aparecer advertencias, pero no debería haber errores.
 
+Ahora deberías tener el ejecutable en el subdirectorio :file:`bin` del directorio de compilación creado por Qt Creator (:file:`build/Desktop_Qt_6_…-Release` en el directorio :file:`sources`, por ejemplo):
 
-La ejecución de :command:`qmake` termina cuando la barra de progreso de la esquina inferior derecha llega al 100 % en verde.
-
-
-![qmake terminado](images/qmake-finished.png "qmake terminado")
-
-
-En la sección :guilabel:`Project` de la columna izquierda y luego en la sección :guilabel:`Build&Run`, selecciona la configuración de compilación (es preferible :guilabel:`Release`).
-
-Por último, haz clic en la acción :guilabel:`Build project Polyphone` del menú :guilabel:`Build`. Durante la compilación del proyecto pueden aparecer advertencias, pero no debería haber errores.
-
-Ahora deberías tener el ejecutable en el directorio de compilación creado por Qt Creator (:file:`build-XXX` junto al código fuente, por ejemplo), según lo que hayas elegido en la configuración de compilación de Qt Creator:
-
-* en Linux, el archivo :file:`polyphone` está en el subdirectorio :file:`bin`,
-* en Windows, el archivo :file:`polyphone.exe` está en el subdirectorio :file:`release` o :file:`debug`,
-* en macOS, el paquete :file:`Polyphone.app` está en el directorio :file:`macos`, situado junto al directorio :file:`sources`.
+* en Linux, el archivo :file:`polyphone`,
+* en Windows, el archivo :file:`polyphone.exe`,
+* en macOS, el paquete :file:`Polyphone.app`.
 
 
 ## Solución de problemas

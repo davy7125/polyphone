@@ -13,13 +13,13 @@
 
 Qt Creatorでプロジェクトを正しく開くには、まずQt Creatorにコンピューター上のすべてのファイルを読み取る権限を与える必要があります（「プライバシーとセキュリティ」=>「フルディスクアクセス」=> インストールディレクトリにある「Qt Creator.app」を追加）。
 
-Polyphoneが使うライブラリは、<a href="https://brew.sh/" target="_blank">Homebrew</a>で簡単にインストールできます。このツールをインストールした後、次のコマンドを実行します。
+ビルドツール :program:`CMake` と、Polyphoneが使うライブラリは、<a href="https://brew.sh/" target="_blank">Homebrew</a>で簡単にインストールできます。このツールをインストールした後、次のコマンドを実行します。
 
 ```
-brew install libsndfile libogg libvorbis flac lame mpg123 opus openssl
+brew install cmake pkgconf libsndfile libogg libvorbis flac lame mpg123 opus openssl
 ```
 
-プロジェクトファイル :file:`polyphone.pro` は、ヘッダーとライブラリを :file:`/opt/homebrew`（Apple Silicon）、:file:`/usr/local`（Intel）、そしてディレクトリ :file:`sources` の隣にあるディレクトリ :file:`macos` の中で探します。
+ディレクトリ :file:`sources` のファイル :file:`CMakeLists.txt` は、ヘッダーとライブラリを :file:`/opt/homebrew`（Apple Silicon）、:file:`/usr/local`（Intel）、そしてディレクトリ :file:`sources` の隣にあるディレクトリ :file:`macos` の中で探します。
 [こちら](files/macos.zip)で入手できる静的ライブラリのアーカイブを展開して、ディレクトリ :file:`macos` を用意することもできますが、内容が古くなっている可能性があります。
 
 SSLなど、一部のライブラリが最新でなかったり、お使いのMacのバージョンと互換性がなかったりする場合は、インターネットでそのソースを探し、静的リンクを有効にして再コンパイルする必要があります。
@@ -36,21 +36,22 @@ make install
 ## ビルド
 
 
-:program:`Qt Creator` でファイル :file:`polyphone.pro` を開き（「[Qt CreatorでPolyphoneをビルドする](development/using-qt-creator-to-build-polyphone.md)」を参照）、プロジェクトをビルドします。
-ディレクトリ :file:`sources` の隣にあるディレクトリ :file:`macos` に、バンドル :file:`Polyphone.app` ができるはずです。
+:program:`Qt Creator` でディレクトリ :file:`sources` のファイル :file:`CMakeLists.txt` を開き（「[Qt CreatorでPolyphoneをビルドする](development/using-qt-creator-to-build-polyphone.md)」を参照）、プロジェクトをビルドします。
+ビルドディレクトリのサブディレクトリ :file:`bin` に、バンドル :file:`Polyphone.app` ができるはずです。
 
-コマンドラインでビルドすることもできます。
-
-```
-cd sources
-qmake polyphone.pro CONFIG+=release
-make -j4
-```
-
-指定したmacOSのターゲットでは一部の機能が使えないとコンパイラーが警告する場合は、ファイル :file:`polyphone.pro` の次の変数の値を上げることができます（デフォルト値は12.0です）。
+コマンドラインでビルドすることもできます。プロジェクトのルート（:file:`sources` を含むディレクトリ）で、Qtのパスを指定して次のコマンドを実行します（先にパスを調整してください！）。
 
 ```
-QMAKE_MACOSX_DEPLOYMENT_TARGET = 12.0
+cmake -S sources -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=/Path/To/Qt/6.7.3/macos
+cmake --build build --parallel 4
+```
+
+これで、ディレクトリ :file:`build/bin` にバンドル :file:`Polyphone.app` ができます。
+
+指定したmacOSのターゲットでは一部の機能が使えないとコンパイラーが警告する場合は、最初のコマンドに次のオプションを追加して、macOSの最小バージョンを上げることができます（デフォルト値は12.0です）。
+
+```
+-DCMAKE_OSX_DEPLOYMENT_TARGET=13.0
 ```
 
 この値は、ファイル :file:`packaging/mac/polyphone.plist` の「LSMinimumSystemVersion」の下にも書き込む必要があります。
@@ -62,14 +63,14 @@ QMAKE_MACOSX_DEPLOYMENT_TARGET = 12.0
 次のコマンドを実行して、ライブラリとフレームワークをバンドルに含めます（先にパスを調整してください！）。
 
 ```
-/Path/To/Qt/6.7.3/macos/bin/macdeployqt /Path/To/macos/Polyphone.app
+/Path/To/Qt/6.7.3/macos/bin/macdeployqt /Path/To/build/bin/Polyphone.app
 ```
 
 Apple Siliconプロセッサーを搭載したMacでは、実行できるようにするために、バンドルに署名する必要もあります（アドホック署名でもかまいません）。
 
 ```
-xattr -cr /Path/To/macos/Polyphone.app
-codesign --force --deep --sign - /Path/To/macos/Polyphone.app
+xattr -cr /Path/To/build/bin/Polyphone.app
+codesign --force --deep --sign - /Path/To/build/bin/Polyphone.app
 ```
 
 これで、プログラムを実行したり、.zipファイルや.dmgファイルに圧縮して共有したりできます。

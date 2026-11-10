@@ -6,11 +6,11 @@ Verwenden Sie diese Anleitung, wenn Sie Polyphone auf Ihrer Fedora-Distribution 
 
 ### Installation von Qt
 
-Installieren Sie nach einer Grundinstallation von Fedora die folgenden Pakete (einschließlich eines Compilers) als Voraussetzung für die Entwicklung mit Qt:
+Installieren Sie nach einer Grundinstallation von Fedora die folgenden Pakete (einschließlich eines Compilers und :program:`CMake`) als Voraussetzung für die Entwicklung mit Qt:
 
 ```
 sudo dnf update
-sudo dnf install @development-tools
+sudo dnf install @development-tools cmake pkgconf
 ```
 
 Installieren Sie dann das Qt-6-Framework mit folgendem Befehl:
@@ -45,14 +45,19 @@ Wenn Sie mit Qt Creator weiterkompilieren möchten, folgen Sie nun diesem Tutori
 ### Die ausführbare Datei erzeugen
 
 
-Wechseln Sie in das Quellverzeichnis (in dem sich die Datei :file:`polyphone.pro` befindet), öffnen Sie ein Terminal und kompilieren Sie Polyphone mit diesem Befehl:
+Polyphone wird mit :program:`CMake` kompiliert, wobei das Projekt durch die Datei :file:`CMakeLists.txt` im Verzeichnis :file:`sources` beschrieben wird.
+Öffnen Sie im Stammverzeichnis des Projekts (dem Verzeichnis, das :file:`sources` enthält) ein Terminal und kompilieren Sie Polyphone mit diesen Befehlen:
 
 ```
-qmake6 && make
+cmake -S sources -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build --parallel 4
 ```
 
-Läuft alles gut, befindet sich die kompilierte Datei :file:`polyphone` im Unterverzeichnis :file:`bin`.
-Wird mit Qt Creator kompiliert, befindet sich diese Datei dagegen im Verzeichnis :file:`build-XXX`, das neben :file:`sources` erstellt wird.
+Läuft alles gut, befindet sich die kompilierte Datei :file:`polyphone` im Verzeichnis :file:`build/bin`.
+Wird mit Qt Creator kompiliert, befindet sich diese Datei dagegen im Unterverzeichnis :file:`bin` des in Qt Creator gewählten Build-Verzeichnisses.
+
+Sind :program:`RtAudio` oder :program:`RtMidi` nicht in einer kompatiblen Version verfügbar, können die in den Quellen von Polyphone enthaltenen Kopien verwendet werden, indem dem ersten Befehl die Optionen ``-DPOLYPHONE_LOCAL_RTAUDIO=ON -DPOLYPHONE_LOCAL_RTMIDI=ON`` hinzugefügt werden.
+Die weiteren Optionen sind auf der Seite [Polyphone für Ubuntu kompilieren](development/building-polyphone-for-ubuntu.md) beschrieben.
 
 
 ## Fehlerbehebung

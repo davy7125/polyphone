@@ -13,13 +13,13 @@ You also need the sources of Polyphone, available <a href="software" target="_bl
 
 For correctly opening a project with Qt Creator, it must first be given the permission to read all files from your computer (in "Privacy & Security" => "Full Disk Access" => add "Qt Creator.app" which is in its installation directory).
 
-The libraries used by Polyphone are easily installed with <a href="https://brew.sh/" target="_blank">Homebrew</a>. After installing this tool, run this command:
+The build tool :program:`CMake` and the libraries used by Polyphone are easily installed with <a href="https://brew.sh/" target="_blank">Homebrew</a>. After installing this tool, run this command:
 
 ```
-brew install libsndfile libogg libvorbis flac lame mpg123 opus openssl
+brew install cmake pkgconf libsndfile libogg libvorbis flac lame mpg123 opus openssl
 ```
 
-The project file :file:`polyphone.pro` looks for the headers and the libraries in :file:`/opt/homebrew` (Apple Silicon), in :file:`/usr/local` (Intel) and in the directory :file:`macos` located next to the directory :file:`sources`.
+The file :file:`CMakeLists.txt` of the directory :file:`sources` looks for the headers and the libraries in :file:`/opt/homebrew` (Apple Silicon), in :file:`/usr/local` (Intel) and in the directory :file:`macos` located next to the directory :file:`sources`.
 The archive of static libraries available [here](files/macos.zip) can also be unzipped for obtaining the directory :file:`macos`, but its content may be out of date.
 
 If some libraries are not up to date or not compatible with the version of your Mac, like SSL for example, it will be necessary to look for their sources on the internet and to recompile them by enabling a static linking:
@@ -36,21 +36,22 @@ Then copy all .h (headers) in :file:`macos/include` and all .a (static libraries
 ## Build
 
 
-Open the file :file:`polyphone.pro` with :program:`Qt Creator` (see [Using Qt Creator to build Polyphone](development/using-qt-creator-to-build-polyphone.md)) and build the project.
-A bundle :file:`Polyphone.app` should appear in the directory :file:`macos`, located next to the directory :file:`sources`.
+Open the file :file:`CMakeLists.txt` of the directory :file:`sources` with :program:`Qt Creator` (see [Using Qt Creator to build Polyphone](development/using-qt-creator-to-build-polyphone.md)) and build the project.
+A bundle :file:`Polyphone.app` should appear in the subdirectory :file:`bin` of the build directory.
 
-The build can also be done with the command line:
-
-```
-cd sources
-qmake polyphone.pro CONFIG+=release
-make -j4
-```
-
-If the compiler is complaining that some features are not available with the specified macOS target, you can increase this variable in the file :file:`polyphone.pro` (the default value is 12.0):
+The build can also be done with the command line, at the root of the project (the directory containing :file:`sources`), by giving the path of Qt (adjust it first!):
 
 ```
-QMAKE_MACOSX_DEPLOYMENT_TARGET = 12.0
+cmake -S sources -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=/Path/To/Qt/6.7.3/macos
+cmake --build build --parallel 4
+```
+
+The bundle :file:`Polyphone.app` is then in the directory :file:`build/bin`.
+
+If the compiler is complaining that some features are not available with the specified macOS target, you can increase the minimum version of macOS by adding this option to the first command (the default value is 12.0):
+
+```
+-DCMAKE_OSX_DEPLOYMENT_TARGET=13.0
 ```
 
 This value is also to be written in file :file:`packaging/mac/polyphone.plist` below "LSMinimumSystemVersion".
@@ -62,14 +63,14 @@ This value is also to be written in file :file:`packaging/mac/polyphone.plist` b
 Run the following command to include libraries and frameworks inside the bundle (adjust the path first!):
 
 ```
-/Path/To/Qt/6.7.3/macos/bin/macdeployqt /Path/To/macos/Polyphone.app
+/Path/To/Qt/6.7.3/macos/bin/macdeployqt /Path/To/build/bin/Polyphone.app
 ```
 
 On a Mac with an Apple Silicon processor, the bundle must also be signed (even with an ad-hoc signature) to be able to run:
 
 ```
-xattr -cr /Path/To/macos/Polyphone.app
-codesign --force --deep --sign - /Path/To/macos/Polyphone.app
+xattr -cr /Path/To/build/bin/Polyphone.app
+codesign --force --deep --sign - /Path/To/build/bin/Polyphone.app
 ```
 
 You can then execute the program or compress it as a .zip or .dmg file to share it.

@@ -4,4 +4,5 @@ index.md=Техническая документация
 |building-polyphone-for-fedora.md=Сборка Polyphone для Fedora
 |building-polyphone-for-ubuntu.md=Сборка Polyphone для Ubuntu
 |using-qt-creator-to-build-polyphone.md=Сборка Polyphone в Qt Creator
+|building-the-polyphone-plugin.md=Сборка плагина Polyphone
 |translate-polyphone.md=Перевод Polyphone

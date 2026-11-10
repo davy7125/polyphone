@@ -17,6 +17,7 @@ index.md=User manual
 |online-repository.md=Online repository
 |settings.md=Settings
 |menu.md=Menu
+|plugin.md=Polyphone plugin
 |annexes/index.md=Annexes
 ||annexes/common-issues.md=Typical flaws found in soundfonts
 ||annexes/the-different-soundfont-formats.md=The different soundfont formats

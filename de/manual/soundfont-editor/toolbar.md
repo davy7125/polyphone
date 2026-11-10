@@ -142,11 +142,11 @@ Dieses Fenster sendet MIDI-Signale:
 * **Note On** / **Note Off** / **Aftertouch** mit der Klaviatur,
 * weitere MIDI-Signale, wenn der **Bereich der MIDI-Controller** ausgeklappt ist.
 
-Taste, Anschlag und Aftertouch der gespielten Note werden am unteren Rand des Fensters angezeigt, zusammen mit einer Dropdown-Liste zur Auswahl der Tastaturgröße (5 Oktaven, 6 Oktaven, 88 Tasten oder 128 Tasten).
-Zwei Schaltflächen unten rechts blenden die MIDI-Controller oberhalb der Klaviatur und die Audioeffekte darunter ein oder aus.
+Das Banner oben im Fenster enthält eine Liste zur Auswahl des Tastaturtyps (5 Oktaven, 6 Oktaven, 88 Tasten oder 128 Tasten) und zeigt Taste, Anschlag und Aftertouch der gespielten Note an.
+Das Menü rechts im Banner blendet die [MIDI-Controller](#doc_keyboard_controllers) und die [Audioeffekte](#doc_keyboard_effects) ein oder aus, die oberhalb der Klaviatur angezeigt werden.
 
-Das Fenster behält die Proportionen der Klaviatur bei: Wird seine Breite geändert, ändert sich seine Höhe, und umgekehrt.
-Das Ein- oder Ausblenden eines Bereichs ändert nur die Höhe des Fensters.
+Das Fenster behält die Proportionen der Klaviatur bei: Wird seine Breite geändert, ändert sich seine Höhe.
+Das Ein- oder Ausblenden eines Bereichs ändert nur die Höhe des Fensters, das an seinem oberen Rand wächst oder schrumpft, damit die Klaviatur an derselben Stelle des Bildschirms bleibt (unter Linux mit Wayland nicht möglich).
 
 Die virtuelle Tastatur kann auch im [Soundfont-Explorer](manual/soundfont-explorer.md#doc_play) angezeigt werden, um die Elemente der Dateien eines Verzeichnisses zu spielen, ohne sie zu öffnen.
 
@@ -212,11 +212,10 @@ mit einer externen MIDI-Tastatur
 Die Pfeiltasten spielen nur dann Noten, wenn die Klaviatur den Fokus hat: Andernfalls wirken sie auf das Element mit dem Fokus, zum Beispiel auf einen Drehregler.
 
 
-### MIDI-Controller
+### MIDI-Controller {#doc_keyboard_controllers}
 
 
-Mit einem Klick auf die MIDI-Schaltfläche unten rechts wird der Bereich der MIDI-Controller oberhalb der Klaviatur ein- oder ausgeblendet.
-Das Fenster wird dabei so verschoben, dass die Klaviatur an derselben Stelle des Bildschirms bleibt (unter Linux mit Wayland nicht möglich).
+Ist die Option :guilabel:`MIDI-Controller` im Menü rechts im Banner angehakt, wird der Bereich der MIDI-Controller oberhalb der Klaviatur angezeigt.
 Wenn Sie mit Modulatoren arbeiten, empfiehlt es sich, diese Funktionen zum Testen Ihres Soundfonts zu verwenden.
 
 
@@ -251,7 +250,7 @@ Alle diese Elemente können mit einer an den Computer angeschlossenen MIDI-Tasta
 ### Audioeffekte {#doc_keyboard_effects}
 
 
-Mit einem Klick auf die Lautsprecher-Schaltfläche unten rechts wird unterhalb der Klaviatur ein Bereich angezeigt, in dem sich die wichtigsten Einstellungen des Synthesizers während des Spielens anpassen lassen:
+Ist die Option :guilabel:`Effekte` im Menü rechts im Banner angehakt, wird oben im Fenster ein Bereich angezeigt, in dem sich die wichtigsten Einstellungen des Synthesizers während des Spielens anpassen lassen:
 
 Halleffekt
 : Eine LED schaltet den Hall ein oder aus, dann ändern 4 Drehregler seine Intensität, Raumgröße, Weite und Dämpfung.

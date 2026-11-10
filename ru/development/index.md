@@ -26,6 +26,10 @@
 
 Инструкции по сборке Polyphone в Qt Creator.
 
+### [Сборка плагина Polyphone](development/building-the-polyphone-plugin.md)
+
+Инструкции по сборке плагина Polyphone (VST3, CLAP, LV2 и AU).
+
 ### [Перевод Polyphone](development/translate-polyphone.md)
 
 Для всех, кто хочет видеть Polyphone на своём языке.

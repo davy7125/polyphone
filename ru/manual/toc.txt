@@ -17,6 +17,7 @@ index.md=Руководство пользователя
 |online-repository.md=Онлайн-хранилище
 |settings.md=Настройки
 |menu.md=Меню
+|plugin.md=Плагин Polyphone
 |annexes/index.md=Приложения
 ||annexes/common-issues.md=Типичные недостатки SoundFont
 ||annexes/the-different-soundfont-formats.md=Различные форматы SoundFont

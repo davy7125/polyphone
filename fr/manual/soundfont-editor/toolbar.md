@@ -142,11 +142,11 @@ Cette fenêtre déclenche des signaux MIDI&nbsp;:
 * **note on** / **note off** / **aftertouch** à l'aide du clavier de piano,
 * d'autres signaux MIDI si la partie **contrôleurs MIDI** est visible.
 
-La note, la vélocité et l'aftertouch de la note jouée sont affichés en bas de la fenêtre, avec une liste déroulante permettant de choisir la taille du clavier (5 octaves, 6 octaves, 88 notes ou 128 notes).
-Deux boutons en bas à droite affichent ou masquent les contrôleurs MIDI au-dessus du clavier et les effets audio en dessous.
+Le bandeau en haut de la fenêtre contient une liste permettant de choisir le type de clavier (5 octaves, 6 octaves, 88 notes ou 128 notes), et affiche la note, la vélocité et l'aftertouch de la note jouée.
+Le menu à droite du bandeau affiche ou masque, au-dessus du clavier, les [contrôleurs MIDI](#doc_keyboard_controllers) et les [effets audio](#doc_keyboard_effects).
 
-La fenêtre conserve les proportions du clavier&nbsp;: modifier sa largeur modifie sa hauteur, et inversement.
-Afficher ou masquer une zone ne modifie que la hauteur de la fenêtre.
+La fenêtre conserve les proportions du clavier&nbsp;: modifier sa largeur modifie sa hauteur.
+Afficher ou masquer une zone ne modifie que la hauteur de la fenêtre, qui s'agrandit ou se réduit par le haut afin que le clavier reste à la même place à l'écran (ce n'est pas possible avec Wayland sous Linux).
 
 Le clavier virtuel peut également être affiché depuis l'[explorateur de banques de sons](manual/soundfont-explorer.md#doc_play), pour jouer les éléments des fichiers d'un répertoire sans les ouvrir.
 
@@ -212,11 +212,10 @@ en utilisant un clavier MIDI externe
 Les flèches ne jouent des notes que si le clavier de piano a le focus&nbsp;: sinon elles agissent sur l'élément qui a le focus, un potentiomètre par exemple.
 
 
-### Contrôleurs MIDI
+### Contrôleurs MIDI {#doc_keyboard_controllers}
 
 
-En cliquant sur le bouton MIDI en bas à droite, la zone des contrôleurs MIDI est affichée au-dessus du clavier ou masquée.
-La fenêtre se déplace alors pour que le clavier reste à la même place à l'écran (ce n'est pas possible avec Wayland sous Linux).
+Lorsque l'option :guilabel:`Contrôleurs MIDI` est cochée dans le menu à droite du bandeau, la zone des contrôleurs MIDI est affichée au-dessus du clavier.
 Si vous jouez avec les modulateurs, il est conseillé d'utiliser ces fonctionnalités pour tester votre banque de sons.
 
 
@@ -251,7 +250,7 @@ Tous ces éléments peuvent être synchronisés avec un clavier MIDI raccordé �
 ### Effets audio {#doc_keyboard_effects}
 
 
-En cliquant sur le bouton haut-parleur en bas à droite, une zone s'affiche sous le clavier pour régler les principaux paramètres du synthétiseur tout en jouant&nbsp;:
+Lorsque l'option :guilabel:`Effets` est cochée dans le menu à droite du bandeau, une zone s'affiche en haut de la fenêtre pour régler les principaux paramètres du synthétiseur tout en jouant&nbsp;:
 
 Réverbération
 : Une led active ou désactive la réverbération, puis 4 potentiomètres modifient son niveau, sa profondeur, sa densité et son atténuation.

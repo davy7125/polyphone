@@ -13,13 +13,13 @@
 
 要用 Qt Creator 正确打开项目，必须先授予它读取电脑上所有文件的权限（在“隐私与安全性” => “完全磁盘访问权限”中添加位于其安装目录中的“Qt Creator.app”）。
 
-Polyphone 所用的库可以用 <a href="https://brew.sh/" target="_blank">Homebrew</a> 轻松安装。安装此工具后，运行以下命令：
+编译工具 :program:`CMake` 以及 Polyphone 所用的库可以用 <a href="https://brew.sh/" target="_blank">Homebrew</a> 轻松安装。安装此工具后，运行以下命令：
 
 ```
-brew install libsndfile libogg libvorbis flac lame mpg123 opus openssl
+brew install cmake pkgconf libsndfile libogg libvorbis flac lame mpg123 opus openssl
 ```
 
-项目文件 :file:`polyphone.pro` 会在 :file:`/opt/homebrew`（Apple Silicon）、:file:`/usr/local`（Intel）以及位于 :file:`sources` 目录旁边的 :file:`macos` 目录中查找头文件和库。
+:file:`sources` 目录中的 :file:`CMakeLists.txt` 文件会在 :file:`/opt/homebrew`（Apple Silicon）、:file:`/usr/local`（Intel）以及位于 :file:`sources` 目录旁边的 :file:`macos` 目录中查找头文件和库。
 也可以解压[这里](files/macos.zip)提供的静态库压缩包来获得 :file:`macos` 目录，但其内容可能已经过时。
 
 如果某些库不是最新的，或者与你的 Mac 版本不兼容（例如 SSL），就需要在网上找到它们的源代码，并启用静态链接重新编译：
@@ -36,21 +36,22 @@ make install
 ## 编译
 
 
-用 :program:`Qt Creator` 打开 :file:`polyphone.pro` 文件（参见[使用 Qt Creator 编译 Polyphone](development/using-qt-creator-to-build-polyphone.md)）并编译项目。
-位于 :file:`sources` 目录旁边的 :file:`macos` 目录中应该会出现一个 :file:`Polyphone.app` 应用程序包。
+用 :program:`Qt Creator` 打开 :file:`sources` 目录中的 :file:`CMakeLists.txt` 文件（参见[使用 Qt Creator 编译 Polyphone](development/using-qt-creator-to-build-polyphone.md)）并编译项目。
+构建目录的 :file:`bin` 子目录中应该会出现一个 :file:`Polyphone.app` 应用程序包。
 
-也可以通过命令行进行编译：
-
-```
-cd sources
-qmake polyphone.pro CONFIG+=release
-make -j4
-```
-
-如果编译器提示某些功能在指定的 macOS 目标版本中不可用，可以在 :file:`polyphone.pro` 文件中提高以下变量的值（默认值为 12.0）：
+也可以在项目的根目录（包含 :file:`sources` 的目录）中通过命令行进行编译，此时需要指定 Qt 的路径（请先修改路径！）：
 
 ```
-QMAKE_MACOSX_DEPLOYMENT_TARGET = 12.0
+cmake -S sources -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=/Path/To/Qt/6.7.3/macos
+cmake --build build --parallel 4
+```
+
+之后 :file:`Polyphone.app` 应用程序包位于 :file:`build/bin` 目录中。
+
+如果编译器提示某些功能在指定的 macOS 目标版本中不可用，可以在第一条命令中添加以下选项，提高 macOS 的最低版本（默认值为 12.0）：
+
+```
+-DCMAKE_OSX_DEPLOYMENT_TARGET=13.0
 ```
 
 该值还需要写入 :file:`packaging/mac/polyphone.plist` 文件中“LSMinimumSystemVersion”的下方。
@@ -62,14 +63,14 @@ QMAKE_MACOSX_DEPLOYMENT_TARGET = 12.0
 运行以下命令，将库和框架打包进应用程序包中（请先修改路径！）：
 
 ```
-/Path/To/Qt/6.7.3/macos/bin/macdeployqt /Path/To/macos/Polyphone.app
+/Path/To/Qt/6.7.3/macos/bin/macdeployqt /Path/To/build/bin/Polyphone.app
 ```
 
 在搭载 Apple Silicon 处理器的 Mac 上，应用程序包还必须经过签名（即使是临时签名）才能运行：
 
 ```
-xattr -cr /Path/To/macos/Polyphone.app
-codesign --force --deep --sign - /Path/To/macos/Polyphone.app
+xattr -cr /Path/To/build/bin/Polyphone.app
+codesign --force --deep --sign - /Path/To/build/bin/Polyphone.app
 ```
 
 然后就可以运行该程序，或者将其压缩为 .zip 或 .dmg 文件以便分享。

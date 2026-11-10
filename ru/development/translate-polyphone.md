@@ -13,7 +13,8 @@ Polyphone изначально разработан с поддержкой пе
 Если языка ещё нет в списке, запросите его через [форму обратной связи](contact) (достаточно указать нужный новый язык).
 Вскоре вы получите новый пакет перевода.
 
-Файлы перевода также доступны в репозитории <a href="https://github.com/davy7125/polyphone" target="_blank">GitHub</a> в каталоге :file:`sources` (по одному файлу :file:`polyphone_XX.ts` на язык).
+Файлы перевода также доступны в репозитории <a href="https://github.com/davy7125/polyphone" target="_blank">GitHub</a> в каталоге :file:`sources/resources/translations` (по одному файлу :file:`polyphone_XX.ts` на язык).
+В них есть и тексты [плагина](manual/plugin.md) — в контекстах :guilabel:`PluginEditor`, :guilabel:`PluginProcessor` и :guilabel:`PluginJuce`.
 
 
 ### Qt Linguist

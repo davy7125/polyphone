@@ -7,8 +7,9 @@ Es wird vorausgesetzt, dass auf Ihrem Computer bereits Qt Creator mit dem Qt-Fra
 
 Folgende Elemente werden benötigt:
 
-* ein C++-Compiler (VC++, Clang, GCC, …),
-* Qt Creator mit seinem Framework (Qt 6),
+* ein C++-Compiler (GCC, Clang, MinGW…),
+* Qt Creator mit seinem Framework (Qt 6 oder Qt 5),
+* :program:`CMake` (Version 3.16 oder höher), das mit Qt Creator installiert werden kann,
 * die Abhängigkeiten von Polyphone.
 
 Die Installationsanleitung hängt vom verwendeten Betriebssystem ab; siehe dazu die entsprechenden Seiten der Dokumentation.
@@ -26,52 +27,36 @@ Besorgen Sie sich die Quellen von Polyphone <a href="software" target="_blank">h
 ### Das Projekt öffnen und konfigurieren
 
 
-Öffnen Sie zunächst die Datei :file:`polyphone.pro` und bearbeiten Sie sie, um gegebenenfalls die mitgelieferten Versionen von :program:`rtaudio` und :program:`rtmidi` zu verwenden, falls Ihr Betriebssystem sie nicht bereitstellt.
-Entfernen Sie dazu das vorangestellte „#“ in den folgenden Zeilen:
-
-```
-DEFINES += USE_LOCAL_RTAUDIO
-DEFINES += USE_LOCAL_RTMIDI
-```
-
-Diese Änderungen können Sie überspringen, wenn Sie bereits auf Ihrem Computer installierte Bibliotheken verwenden möchten (stellen Sie sicher, dass sie vorhanden sind!).
-Unter Windows und macOS ist dieser Schritt nicht nötig, da dort immer die mitgelieferten Versionen verwendet werden.
-
-Starten Sie Qt Creator und öffnen Sie die Datei :file:`polyphone.pro`.
+Starten Sie Qt Creator und öffnen Sie die Datei :file:`CMakeLists.txt` im Verzeichnis :file:`sources`.
 
 
 ![Qt Creator öffnen](images/open-Qt-Creator.png "Qt Creator öffnen")
 
 
-Konfigurieren Sie dann das Projekt.
+Konfigurieren Sie dann das Projekt, indem Sie ein Kit wählen, also eine Qt-Version und einen Compiler.
 
 ![Projekt konfigurieren](images/configure-project.png "Projekt konfigurieren")
 
 
-### qmake ausführen und das Projekt kompilieren
+Qt Creator führt dann :program:`CMake` aus, das prüft, ob die Abhängigkeiten gefunden werden.
+Die Meldungen werden im Bereich :guilabel:`General Messages` angezeigt: Fehlt eine Bibliothek, installieren Sie sie und führen Sie :program:`CMake` mit dem Eintrag :guilabel:`Run CMake` des Menüs :guilabel:`Build` erneut aus.
+
+Die Optionen des Projekts befinden sich im Bereich :guilabel:`Projects` der linken Spalte unter :guilabel:`Build` → :guilabel:`CMake`.
+Unter Linux können statt der Bibliotheken des Systems die in den Quellen enthaltenen Kopien von :program:`RtAudio` und :program:`RtMidi` verwendet werden: Aktivieren Sie die Optionen ``POLYPHONE_LOCAL_RTAUDIO`` und ``POLYPHONE_LOCAL_RTMIDI`` und klicken Sie dann auf :guilabel:`Run CMake`.
+Unter Windows und macOS ist dies nicht nötig, da dort immer die mitgelieferten Versionen verwendet werden.
+Wählen Sie im selben Bereich die Build-Konfiguration aus (:guilabel:`Release` wird empfohlen).
 
 
-Öffnen Sie das Menü :guilabel:`Build` und wählen Sie den Eintrag :guilabel:`Run qmake`.
+### Das Projekt kompilieren
 
 
-![qmake ausführen](images/run-qmake.png "qmake ausführen")
+Klicken Sie schließlich im Menü :guilabel:`Build` auf die Aktion :guilabel:`Build Project "Polyphone"`. Während des Kompilierens können Warnungen erscheinen, es sollten aber keine Fehler auftreten.
 
+Nun sollte sich die ausführbare Datei im Unterverzeichnis :file:`bin` des von Qt Creator erstellten Build-Verzeichnisses befinden (zum Beispiel :file:`build/Desktop_Qt_6_…-Release` im Verzeichnis :file:`sources`):
 
-Die Ausführung von :command:`qmake` ist abgeschlossen, wenn der Fortschrittsbalken unten rechts grün 100 % erreicht hat.
-
-
-![qmake abgeschlossen](images/qmake-finished.png "qmake abgeschlossen")
-
-
-Wählen Sie im Bereich :guilabel:`Project` in der linken Spalte und dann im Bereich :guilabel:`Build&Run` die Build-Konfiguration aus (:guilabel:`Release` wird empfohlen).
-
-Klicken Sie schließlich im Menü :guilabel:`Build` auf die Aktion :guilabel:`Build project Polyphone`. Während des Kompilierens können Warnungen erscheinen, es sollten aber keine Fehler auftreten.
-
-Nun sollte sich die ausführbare Datei in dem von Qt Creator erstellten Build-Verzeichnis befinden (zum Beispiel :file:`build-XXX` neben den Quellen), je nach Ihrer Wahl in der Build-Konfiguration von Qt Creator:
-
-* unter Linux befindet sich die Datei :file:`polyphone` im Unterverzeichnis :file:`bin`,
-* unter Windows befindet sich die Datei :file:`polyphone.exe` im Unterverzeichnis :file:`release` oder :file:`debug`,
-* unter macOS befindet sich das Bundle :file:`Polyphone.app` im Verzeichnis :file:`macos` neben dem Verzeichnis :file:`sources`.
+* unter Linux die Datei :file:`polyphone`,
+* unter Windows die Datei :file:`polyphone.exe`,
+* unter macOS das Bundle :file:`Polyphone.app`.
 
 
 ## Fehlerbehebung

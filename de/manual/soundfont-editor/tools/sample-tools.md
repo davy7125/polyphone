@@ -202,6 +202,10 @@ Linke und rechte Aufteilungen in den Instrumenten zusammenführen
 Am Ende listet eine Meldung die Samples auf, bei denen Clipping aufgetreten ist oder die unverändert geblieben sind, sowie die Instrumente, in denen Aufteilungen nicht zusammengeführt werden konnten.
 
 
+![Werkzeug „In Mono umwandeln“](images/tool_convert_mono.png "Werkzeug „In Mono umwandeln“")
+
+
+
 ### Verknüpfung finden {#doc_link}
 
 Unter den ausgewählten Samples werden diejenigen automatisch verknüpft, deren Namen sich nur im letzten Buchstaben (L&nbsp;/&nbsp;R) unterscheiden (Leerzeichen und die Zeichen ``-``, ``_``, ``(``, ``)``, ``[``, ``]``, ``{``, ``}`` und ``|`` werden in den Namen ignoriert).

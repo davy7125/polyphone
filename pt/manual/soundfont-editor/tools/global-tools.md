@@ -25,6 +25,10 @@ Uma mensagem indica quantas amostras foram excluídas.
 As duplicatas podem ser vistas antes no [resumo de configuração das amostras](manual/soundfont-editor/configuration-summaries.md#doc_sample).
 
 
+![Duplicatas no resumo de configuração das amostras](images/tool_clean_duplicates.png "Duplicatas no resumo de configuração das amostras")
+
+
+
 ## Moduladores {#doc_cat_mod}
 
 

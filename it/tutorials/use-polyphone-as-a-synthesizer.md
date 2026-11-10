@@ -106,3 +106,5 @@ Le varie opzioni sono descritte in questa [pagina](manual/annexes/command-line.m
 Ora che sai come trasformare Polyphone in un sintetizzatore, perché non [usare un Raspberry Pi per creare uno strumento musicale](tutorials/create-a-synthesizer-with-raspberry-pi.md)?
 
 La modalità sintetizzatore di Polyphone può essere usata anche per [riprodurre file MIDI](tutorials/read-midi-file-with-soundfont.md).
+
+E per suonare i soundfont in una workstation audio digitale (DAW), con lo stesso suono, usa il [plugin di Polyphone](manual/plugin.md).

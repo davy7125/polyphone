@@ -142,11 +142,11 @@ Questa finestra genera segnali MIDI:
 * **note on** / **note off** / **aftertouch** con la tastiera del pianoforte,
 * altri segnali MIDI se la **sezione dei controller MIDI** è espansa.
 
-La nota, la velocità e l'aftertouch della nota suonata vengono mostrati nella parte inferiore della finestra, insieme a un elenco a discesa per scegliere la dimensione della tastiera (5 ottave, 6 ottave, 88 tasti o 128 tasti).
-Due pulsanti in basso a destra mostrano o nascondono i controller MIDI sopra la tastiera e gli effetti audio sotto di essa.
+Il banner nella parte superiore della finestra contiene un elenco per scegliere il tipo di tastiera (5 ottave, 6 ottave, 88 tasti o 128 tasti) e mostra la nota, la velocità e l'aftertouch della nota suonata.
+Il menu a destra del banner mostra o nasconde i [controller MIDI](#doc_keyboard_controllers) e gli [effetti audio](#doc_keyboard_effects), visualizzati sopra la tastiera.
 
-La finestra mantiene le proporzioni della tastiera: modificandone la larghezza cambia l'altezza, e viceversa.
-Mostrare o nascondere un'area cambia solo l'altezza della finestra.
+La finestra mantiene le proporzioni della tastiera: modificandone la larghezza cambia l'altezza.
+Mostrare o nascondere un'area cambia solo l'altezza della finestra, che si allunga o si accorcia dal lato superiore in modo che la tastiera resti nello stesso punto dello schermo (non è possibile con Wayland su Linux).
 
 La tastiera virtuale può essere mostrata anche dall'[esploratore di soundfont](manual/soundfont-explorer.md#doc_play), per suonare gli elementi dei file di una cartella senza aprirli.
 
@@ -212,11 +212,10 @@ con una tastiera MIDI esterna
 Le frecce suonano le note solo se la tastiera del pianoforte ha il focus: altrimenti agiscono sull'elemento che ha il focus, ad esempio una manopola.
 
 
-### Controller MIDI
+### Controller MIDI {#doc_keyboard_controllers}
 
 
-Facendo clic sul pulsante MIDI in basso a destra, l'area dei controller MIDI viene mostrata sopra la tastiera o nascosta.
-La finestra si sposta allora in modo che la tastiera resti nello stesso punto dello schermo (non è possibile con Wayland su Linux).
+Quando l'opzione :guilabel:`Controller MIDI` è spuntata nel menu a destra del banner, l'area dei controller MIDI viene mostrata sopra la tastiera.
 Se lavori con i modulatori, è consigliabile usare queste funzionalità per provare il tuo soundfont.
 
 
@@ -251,7 +250,7 @@ Tutti questi elementi possono essere sincronizzati con una tastiera MIDI collega
 ### Effetti audio {#doc_keyboard_effects}
 
 
-Facendo clic sul pulsante con l'altoparlante in basso a destra, sotto la tastiera compare un'area per regolare le principali impostazioni del sintetizzatore mentre si suona:
+Quando l'opzione :guilabel:`Effetti` è spuntata nel menu a destra del banner, nella parte superiore della finestra compare un'area per regolare le principali impostazioni del sintetizzatore mentre si suona:
 
 Riverbero
 : Un LED attiva o disattiva il riverbero, poi 4 manopole ne modificano il livello, la dimensione della stanza, l'ampiezza e lo smorzamento.

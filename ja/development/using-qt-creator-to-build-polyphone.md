@@ -7,8 +7,9 @@
 
 次のものが必要です。
 
-* C++コンパイラー（VC++、Clang、GCCなど）
-* Qt Creatorとそのフレームワーク（Qt 6）
+* C++コンパイラー（GCC、Clang、MinGWなど）
+* Qt Creatorとそのフレームワーク（Qt 6またはQt 5）
+* :program:`CMake`（バージョン3.16以上。Qt Creatorと一緒にインストールできます）
 * Polyphoneの依存関係
 
 インストール方法は使っているOSによって異なります。関連するドキュメントのページを参照してください。
@@ -26,52 +27,36 @@ Polyphoneのソースを<a href="software" target="_blank">こちら</a>また�
 ### プロジェクトを開いて設定する
 
 
-まず、ファイル :file:`polyphone.pro` を開き、お使いのOSが :program:`rtaudio` と :program:`rtmidi` を提供していない場合は、同梱版を使うように編集します。
-次の行の先頭にある「#」を削除して、コメントを解除します。
-
-```
-DEFINES += USE_LOCAL_RTAUDIO
-DEFINES += USE_LOCAL_RTMIDI
-```
-
-コンピューターにすでにインストールされているライブラリを使う場合は、この変更は省略できます（ライブラリがあることを確認してください！）。
-WindowsとmacOSでは常に同梱版が使われるため、この手順は不要です。
-
-Qt Creatorを起動し、ファイル :file:`polyphone.pro` を開きます。
+Qt Creatorを起動し、ディレクトリ :file:`sources` にあるファイル :file:`CMakeLists.txt` を開きます。
 
 
 ![Qt Creatorを開く](images/open-Qt-Creator.png "Qt Creatorを開く")
 
 
-次に、プロジェクトを設定します。
+次に、キット、つまりQtのバージョンとコンパイラーを選んで、プロジェクトを設定します。
 
 ![プロジェクトの設定](images/configure-project.png "プロジェクトの設定")
 
 
-### qmakeを実行してプロジェクトをビルドする
+続いてQt Creatorが :program:`CMake` を実行し、依存関係が見つかるかどうかを確認します。
+メッセージはパネル :guilabel:`General Messages` に表示されます。ライブラリが見つからない場合は、それをインストールしてから、:guilabel:`Build` メニューの :guilabel:`Run CMake` で :program:`CMake` をもう一度実行します。
+
+プロジェクトのオプションは、左の列の :guilabel:`Projects` セクションの :guilabel:`Build` → :guilabel:`CMake` にあります。
+Linuxでは、システムのライブラリの代わりに、ソースに含まれている :program:`RtAudio` と :program:`RtMidi` のコピーを使えます。その場合は、オプション ``POLYPHONE_LOCAL_RTAUDIO`` と ``POLYPHONE_LOCAL_RTMIDI`` を有効にしてから、:guilabel:`Run CMake` をクリックします。
+WindowsとmacOSでは常に同梱版が使われるため、この手順は不要です。
+同じセクションで、ビルド構成を選択します（:guilabel:`Release` がおすすめです）。
 
 
-:guilabel:`Build` メニューから :guilabel:`Run qmake` を選びます。
+### プロジェクトをビルドする
 
 
-![qmakeの実行](images/run-qmake.png "qmakeの実行")
+最後に、:guilabel:`Build` メニューの :guilabel:`Build Project "Polyphone"` をクリックします。プロジェクトのビルド中に警告が表示されることがありますが、エラーは出ないはずです。
 
+これで、Qt Creatorが作成したビルドディレクトリ（たとえば、ディレクトリ :file:`sources` の中の :file:`build/Desktop_Qt_6_…-Release`）のサブディレクトリ :file:`bin` に、実行ファイルができているはずです。
 
-右下隅の進行状況バーが緑色で100%に達すると、:command:`qmake` の実行は完了です。
-
-
-![qmakeの完了](images/qmake-finished.png "qmakeの完了")
-
-
-左の列の :guilabel:`Project` セクションで、さらに :guilabel:`Build&Run` セクションに進み、ビルド構成を選択します（:guilabel:`Release` がおすすめです）。
-
-最後に、:guilabel:`Build` メニューの :guilabel:`Build project Polyphone` をクリックします。プロジェクトのビルド中に警告が表示されることがありますが、エラーは出ないはずです。
-
-これで、Qt Creatorのビルド構成での選択に応じて、Qt Creatorが作成したビルドディレクトリ（たとえば、ソースの隣にある :file:`build-XXX`）に実行ファイルができているはずです。
-
-* Linuxでは、ファイル :file:`polyphone` はサブディレクトリ :file:`bin` にあります。
-* Windowsでは、ファイル :file:`polyphone.exe` はサブディレクトリ :file:`release` または :file:`debug` にあります。
-* macOSでは、バンドル :file:`Polyphone.app` はディレクトリ :file:`sources` の隣にあるディレクトリ :file:`macos` にあります。
+* Linuxでは、ファイル :file:`polyphone`
+* Windowsでは、ファイル :file:`polyphone.exe`
+* macOSでは、バンドル :file:`Polyphone.app`
 
 
 ## トラブルシューティング

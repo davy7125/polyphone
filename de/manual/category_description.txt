@@ -3,4 +3,5 @@ Dieser Bereich enthält die Beschreibung der Software Polyphone:
 * der Soundfont-Editor,
 * der Soundfont-Explorer,
 * die Online-Fundgrube für Soundfonts,
-* die Konfiguration.
+* die Konfiguration,
+* das Plugin für Audio-Workstations.

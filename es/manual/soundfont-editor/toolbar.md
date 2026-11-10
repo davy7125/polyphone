@@ -142,11 +142,11 @@ Esta ventana emite señales MIDI:
 * **note on** / **note off** / **aftertouch** con el teclado de piano,
 * otras señales MIDI si la **parte de controladores MIDI** está desplegada.
 
-La nota, la velocidad y la postpulsación (aftertouch) de la nota que se toca se muestran en la parte inferior de la ventana, junto con una lista desplegable para elegir el tamaño del teclado (5 octavas, 6 octavas, 88 teclas o 128 teclas).
-Dos botones en la esquina inferior derecha muestran u ocultan los controladores MIDI encima del teclado y los efectos de audio debajo de él.
+El banner de la parte superior de la ventana contiene una lista para elegir el tipo de teclado (5 octavas, 6 octavas, 88 teclas o 128 teclas) y muestra la nota, la velocidad y la postpulsación (aftertouch) de la nota que se toca.
+El menú a la derecha del banner muestra u oculta, encima del teclado, los [controladores MIDI](#doc_keyboard_controllers) y los [efectos de audio](#doc_keyboard_effects).
 
-La ventana conserva las proporciones del teclado: al cambiar su anchura cambia su altura, y viceversa.
-Mostrar u ocultar una zona solo cambia la altura de la ventana.
+La ventana conserva las proporciones del teclado: al cambiar su anchura cambia su altura.
+Mostrar u ocultar una zona solo cambia la altura de la ventana, que crece o se reduce por arriba para que el teclado se quede en el mismo lugar de la pantalla (no es posible con Wayland en Linux).
 
 El teclado virtual también se puede mostrar desde el [explorador de soundfonts](manual/soundfont-explorer.md#doc_play), para tocar los elementos de los archivos de un directorio sin abrirlos.
 
@@ -212,11 +212,10 @@ con un teclado MIDI externo
 Las flechas solo tocan notas si el teclado de piano tiene el foco: si no, actúan sobre el elemento que tiene el foco, por ejemplo un potenciómetro.
 
 
-### Controladores MIDI
+### Controladores MIDI {#doc_keyboard_controllers}
 
 
-Al hacer clic en el botón MIDI de la esquina inferior derecha, la zona de controladores MIDI se muestra encima del teclado o se oculta.
-La ventana se desplaza entonces para que el teclado se quede en el mismo lugar de la pantalla (no es posible con Wayland en Linux).
+Cuando la opción :guilabel:`Controladores MIDI` está marcada en el menú a la derecha del banner, la zona de controladores MIDI se muestra encima del teclado.
 Si trabajas con moduladores, es recomendable usar estas funciones para probar tu soundfont.
 
 
@@ -251,7 +250,7 @@ Todos estos elementos se pueden sincronizar con un teclado MIDI conectado al ord
 ### Efectos de audio {#doc_keyboard_effects}
 
 
-Al hacer clic en el botón del altavoz de la esquina inferior derecha, se muestra debajo del teclado una zona para ajustar los principales parámetros del sintetizador mientras se toca:
+Cuando la opción :guilabel:`Efectos` está marcada en el menú a la derecha del banner, se muestra en la parte superior de la ventana una zona para ajustar los principales parámetros del sintetizador mientras se toca:
 
 Reverberación
 : Un LED activa o desactiva la reverberación y luego 4 potenciómetros cambian su nivel, el tamaño de la sala, la anchura y la amortiguación.

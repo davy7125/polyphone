@@ -3,4 +3,5 @@ Esta seção contém a descrição do software Polyphone:
 * o editor de soundfonts,
 * o explorador de soundfonts,
 * o repositório online de soundfonts,
-* a configuração.
+* a configuração,
+* o plugin para as estações de trabalho de áudio.

@@ -4,4 +4,5 @@ index.md=Technische Dokumentation
 |building-polyphone-for-fedora.md=Polyphone für Fedora kompilieren
 |building-polyphone-for-ubuntu.md=Polyphone für Ubuntu kompilieren
 |using-qt-creator-to-build-polyphone.md=Polyphone mit Qt Creator kompilieren
+|building-the-polyphone-plugin.md=Das Polyphone-Plugin kompilieren
 |translate-polyphone.md=Polyphone übersetzen

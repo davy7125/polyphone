@@ -25,6 +25,10 @@
 可以事先在[采样配置概览](manual/soundfont-editor/configuration-summaries.md#doc_sample)中查看重复项。
 
 
+![采样配置概览中的重复项](images/tool_clean_duplicates.png "采样配置概览中的重复项")
+
+
+
 ## 调制器 {#doc_cat_mod}
 
 

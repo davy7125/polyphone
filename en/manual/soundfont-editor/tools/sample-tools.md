@@ -202,6 +202,10 @@ Merge the left and right divisions in the instruments
 At the end, a message lists the samples that clipped or that have been left unchanged, and the instruments in which some divisions could not be merged.
 
 
+![Convert to mono tool](images/tool_convert_mono.png "Convert to mono tool")
+
+
+
 ### Find a link {#doc_link}
 
 Among the selected samples, samples whose names only differ by the last letter (L&nbsp;/&nbsp;R) are automatically linked (spaces and the characters ``-``, ``_``, ``(``, ``)``, ``[``, ``]``, ``{``, ``}`` and ``|`` are ignored in the names).

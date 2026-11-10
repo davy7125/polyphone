@@ -13,20 +13,21 @@ PolyphoneはC++とQt開発環境（バージョン6）で書かれています�
 ![選択するコンポーネント](images/select-qt-components.png "選択するコンポーネント")
 
 選択肢がこれとまったく同じでない場合は、利用できる最新のバージョンを選んでください。
+Qtのバージョンのコンポーネント「MinGW 64-bit」で、MinGW向けにビルドされたQtのライブラリが入ります。
 
 
 ### コンパイラーと依存関係のインストール
 
-QtでPolyphoneのソースをコンパイルするには、コンパイラーが必要です。次の理由から、MinGWを使う必要があります。
+Polyphoneは、次の理由からMinGWでビルドします。
 
 * 何よりも実用上の理由で、以下の依存ライブラリがMinGWに対応しているためです。
 * また、sfArk形式のファイルを正しくインポート/エクスポートできるようにするためでもあります（コンパイルオプション ``-ffloat-store`` が必要です）。
 
-Polyphoneが使うコンパイラーとライブラリは、<a href="https://www.msys2.org/" target="_blank">MSYS2</a>でインストールします。
-MSYS2をデフォルトのディレクトリ :file:`C:/msys64` にインストールし（プロジェクトファイル :file:`polyphone.pro` は :file:`C:/msys64/mingw64` でライブラリを探します）、ターミナル :program:`MSYS2 MINGW64` を開いて次のコマンドを実行します。
+コンパイラー、ビルドツールの :program:`CMake` と :program:`Ninja`、そしてPolyphoneが使うライブラリは、<a href="https://www.msys2.org/" target="_blank">MSYS2</a>でインストールします。
+MSYS2をデフォルトのディレクトリ :file:`C:/msys64` にインストールし、ターミナル :program:`MSYS2 MINGW64` を開いて次のコマンドを実行します。
 
 ```
-pacman -S mingw-w64-x86_64-toolchain mingw-w64-x86_64-zlib mingw-w64-x86_64-libogg mingw-w64-x86_64-libvorbis mingw-w64-x86_64-openssl mingw-w64-x86_64-flac mingw-w64-x86_64-libsndfile
+pacman -S mingw-w64-x86_64-toolchain mingw-w64-x86_64-cmake mingw-w64-x86_64-ninja mingw-w64-x86_64-zlib mingw-w64-x86_64-libogg mingw-w64-x86_64-libvorbis mingw-w64-x86_64-openssl mingw-w64-x86_64-flac mingw-w64-x86_64-libsndfile
 ```
 
 次に、Windowsのシステム設定で、フォルダー :file:`C:/msys64/mingw64/bin` をPathに追加します。
@@ -37,7 +38,7 @@ pacman -S mingw-w64-x86_64-toolchain mingw-w64-x86_64-zlib mingw-w64-x86_64-libo
 * システム環境変数の「Path」をダブルクリックします。
 * 変数「Path」に登録されているディレクトリに :file:`C:/msys64/mingw64/bin` を追加します。
 
-こうすることで、QtがMinGWの実行ファイルとライブラリを見つけられるようになります。
+こうすることで、Qt CreatorとPolyphoneが、MSYS2のコンパイラー、ツール、ライブラリを見つけられるようになります。
 
 
 ## ビルド
@@ -49,21 +50,21 @@ pacman -S mingw-w64-x86_64-toolchain mingw-w64-x86_64-zlib mingw-w64-x86_64-libo
 
 ### Qt Creatorでビルドする
 
-続いて、Qt CreatorでPolyphoneをビルドするためのチュートリアル「[Qt CreatorでPolyphoneをビルドする](development/using-qt-creator-to-build-polyphone.md)」に進みます。ファイル :file:`polyphone.pro` を変更する必要はありません。
+続いて、Qt CreatorでPolyphoneをビルドするためのチュートリアル「[Qt CreatorでPolyphoneをビルドする](development/using-qt-creator-to-build-polyphone.md)」に進みます。
+使用するキットには、MSYS2でインストールしたライブラリを見つけられるMSYS2のコンパイラー（:file:`C:\msys64\mingw64\bin\g++.exe`）と、MinGW 64-bit向けのQtのバージョンを設定する必要があります。
 
 ### コマンドラインでビルドする
 
-ターミナル :program:`MSYS2 MINGW64` を開き、QtをPathに追加して、新しいディレクトリでプロジェクトをビルドします（パスは事前に環境に合わせて変更してください）。
+この方法は、Windows版のPolyphoneをビルドするときに実際に使っているものです。
+ターミナル :program:`MSYS2 MINGW64` を開き、プロジェクトのルート（:file:`sources` を含むディレクトリ）に移動して、次のコマンドを実行します（Qtのパスは事前に環境に合わせて変更してください）。
 
 ```
-export PATH="/c/Qt/6.6.2/mingw_64/bin:$PATH"
-mkdir build
-cd build
-qmake ../sources/polyphone.pro CONFIG+=release
-mingw32-make -j4
+export PATH="/mingw64/bin:/c/Qt/6.6.2/mingw_64/bin:$PATH"
+cmake -S sources -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=C:/Qt/6.6.2/mingw_64
+cmake --build build --parallel 4
 ```
 
-コンパイルがうまくいけば、ディレクトリ :file:`build/release` に実行ファイル :file:`polyphone.exe` ができているはずです。
+コンパイルがうまくいけば、ディレクトリ :file:`build/bin` に実行ファイル :file:`polyphone.exe` ができているはずです。
 
 
 ### Polyphoneの起動
@@ -72,7 +73,7 @@ mingw32-make -j4
 ターミナルで次のコマンドを実行します（パスは事前に環境に合わせて変更してください）。
 
 ```
-C:\Qt\6.6.2\mingw_64\bin\windeployqt.exe "C:\Users\User\Desktop\build\release\polyphone.exe"
+C:\Qt\6.6.2\mingw_64\bin\windeployqt.exe --release "C:\Users\User\Desktop\polyphone\build\bin\polyphone.exe"
 ```
 
 Qtのライブラリ（たとえば :file:`Qt6Core`）が追加され、ファイル :file:`polyphone.exe` をダブルクリックするとソフトウェアが起動します。

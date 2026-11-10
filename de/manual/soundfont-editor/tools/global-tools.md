@@ -25,6 +25,10 @@ Eine Meldung gibt an, wie viele Samples gelöscht wurden.
 Die Duplikate sind vorab in der [Konfigurationsübersicht der Samples](manual/soundfont-editor/configuration-summaries.md#doc_sample) zu sehen.
 
 
+![Duplikate in der Konfigurationsübersicht der Samples](images/tool_clean_duplicates.png "Duplikate in der Konfigurationsübersicht der Samples")
+
+
+
 ## Modulatoren {#doc_cat_mod}
 
 

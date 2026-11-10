@@ -202,6 +202,10 @@ Unisci le divisioni sinistra e destra negli strumenti
 Alla fine, un messaggio elenca i campioni in cui si è verificato un clipping o che sono rimasti invariati, nonché gli strumenti in cui alcune divisioni non hanno potuto essere unite.
 
 
+![Funzione Converti in mono](images/tool_convert_mono.png "Funzione Converti in mono")
+
+
+
 ### Trova un collegamento {#doc_link}
 
 Tra i campioni selezionati, quelli i cui nomi differiscono solo per l'ultima lettera (L&nbsp;/&nbsp;R) vengono collegati automaticamente (gli spazi e i caratteri ``-``, ``_``, ``(``, ``)``, ``[``, ``]``, ``{``, ``}`` e ``|`` vengono ignorati nei nomi).

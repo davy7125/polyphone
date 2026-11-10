@@ -109,6 +109,10 @@ Il sera ensuite possible de modifier la balance de manière plus précise dans u
 Cet outil ne peut pas être utilisé avec des échantillons mono.
 
 
+![Outil de conversion en mono](images/tool_convert_mono.png "Outil de conversion en mono")
+
+
+
 ### Trouver un lien {#doc_link}
 
 Parmi les échantillons sélectionnés, les échantillons dont les noms ne diffèrent que par la dernière lettre (L&nbsp;/&nbsp;R) sont automatiquement liés (les espaces et les caractères ``-``, ``_``, ``(``, ``)``, ``[``, ``]``, ``{``, ``}`` et ``|`` sont ignorés dans les noms).

@@ -98,6 +98,7 @@ Colori
 
 Bordi delle finestre
 : Mostra o nasconde i bordi delle finestre, per risparmiare spazio sullo schermo (non disponibile su macOS).
+  Senza bordi, le finestre della tastiera virtuale, del registratore e del lettore MIDI si spostano trascinando il loro banner, che ne mostra il titolo e un pulsante di chiusura, e si ridimensionano trascinandone i bordi.
 
 Decorazioni
 : Le decorazioni di sfondo in alcuni elenchi possono essere disattivate per migliorare la leggibilità.
@@ -114,7 +115,7 @@ Una modifica della lingua, dei nomi delle note, dello stile, dei colori, dei bor
 La sezione :guilabel:`Suono` permette di modificare il riverbero (livello, dimensione della stanza, smorzamento e ampiezza) e il chorus (livello, profondità e frequenza) del sintetizzatore, oltre al volume generale.
 Se è collegata una tastiera esterna, il volume generale può essere modificato con il controller MIDI del volume.
 Un LED a sinistra di :guilabel:`Riverbero` e di :guilabel:`Chorus` attiva o disattiva ciascun effetto senza perderne le impostazioni.
-Queste impostazioni si possono modificare anche sotto la [tastiera virtuale](manual/soundfont-editor/toolbar.md#doc_keyboard_effects) mentre si suona: una modifica è progressiva e non interrompe le note in corso.
+Queste impostazioni si possono modificare anche nella finestra della [tastiera virtuale](manual/soundfont-editor/toolbar.md#doc_keyboard_effects) mentre si suona: una modifica è progressiva e non interrompe le note in corso.
 
 Poiché il modulatore predefinito che modifica la frequenza di taglio del filtro è cambiato tra le versioni 2.01 e 2.04 della specifica sf2, qui si può stabilire quale versione usare:
 

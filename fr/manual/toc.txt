@@ -17,6 +17,7 @@ index.md=Manuel utilisateur
 |online-repository.md=Dépôt en ligne
 |settings.md=Préférences du logiciel
 |menu.md=Menu principal
+|plugin.md=Plugin Polyphone
 |annexes/index.md=Annexes
 ||annexes/common-issues.md=Défauts typiques des banques de sons
 ||annexes/the-different-soundfont-formats.md=Les différents formats de banques de sons

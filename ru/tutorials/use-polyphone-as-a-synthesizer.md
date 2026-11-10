@@ -106,3 +106,5 @@ polyphone -s
 Теперь, когда вы знаете, как превратить Polyphone в синтезатор, почему бы не [создать музыкальный инструмент на Raspberry Pi](tutorials/create-a-synthesizer-with-raspberry-pi.md)?
 
 Режим синтезатора Polyphone можно также использовать для [воспроизведения MIDI-файлов](tutorials/read-midi-file-with-soundfont.md).
+
+А чтобы воспроизводить SoundFont в цифровой звуковой рабочей станции (DAW) с тем же звучанием, используйте [плагин Polyphone](manual/plugin.md).

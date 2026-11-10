@@ -25,6 +25,10 @@ A message indicates how many samples have been deleted.
 Duplicates are shown beforehand in the [sample configuration summary](manual/soundfont-editor/configuration-summaries.md#doc_sample).
 
 
+![Duplicates in the sample configuration summary](images/tool_clean_duplicates.png "Duplicates in the sample configuration summary")
+
+
+
 ## Modulators {#doc_cat_mod}
 
 

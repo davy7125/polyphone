@@ -25,6 +25,10 @@ Un message indique combien d'échantillons ont été supprimés.
 Les doublons sont visibles au préalable dans le [résumé de configuration des échantillons](manual/soundfont-editor/configuration-summaries.md#doc_sample).
 
 
+![Doublons dans le résumé de configuration des échantillons](images/tool_clean_duplicates.png "Doublons dans le résumé de configuration des échantillons")
+
+
+
 ## Modulateurs {#doc_cat_mod}
 
 

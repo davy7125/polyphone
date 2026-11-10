@@ -7,8 +7,9 @@
 
 需要以下组件：
 
-* C++ 编译器（VC++、Clang、GCC……），
-* Qt Creator 及其框架（Qt 6），
+* C++ 编译器（GCC、Clang、MinGW……），
+* Qt Creator 及其框架（Qt 6 或 Qt 5），
+* :program:`CMake`（3.16 或更高版本），可以随 Qt Creator 一起安装，
 * Polyphone 的依赖项。
 
 它们的安装方法取决于你所使用的操作系统，请参阅相应的文档页面。
@@ -26,52 +27,36 @@
 ### 打开并配置项目
 
 
-首先打开 :file:`polyphone.pro` 文件并进行编辑：如果你的操作系统没有提供 :program:`rtaudio` 和 :program:`rtmidi`，可以改用随附的版本。
-去掉以下各行开头的‘#’以取消注释：
-
-```
-DEFINES += USE_LOCAL_RTAUDIO
-DEFINES += USE_LOCAL_RTMIDI
-```
-
-如果想使用电脑上已经安装的库，可以跳过这些修改（请确保这些库已经安装！）。
-在 Windows 和 macOS 上无需执行这一步，因为始终使用随附的版本。
-
-启动 Qt Creator 并打开 :file:`polyphone.pro` 文件。
+启动 Qt Creator 并打开位于 :file:`sources` 目录中的 :file:`CMakeLists.txt` 文件。
 
 
 ![打开 Qt Creator](images/open-Qt-Creator.png "打开 Qt Creator")
 
 
-然后配置项目。
+然后选择一个构建套件（即一个 Qt 版本和一个编译器）来配置项目。
 
 ![配置项目](images/configure-project.png "配置项目")
 
 
-### 运行 qmake 并编译项目
+随后 Qt Creator 会运行 :program:`CMake`，检查能否找到各个依赖项。
+消息显示在 :guilabel:`General Messages` 面板中：如果缺少某个库，请安装它，然后通过 :guilabel:`Build` 菜单中的 :guilabel:`Run CMake` 菜单项再次运行 :program:`CMake`。
+
+项目的选项位于左侧栏的 :guilabel:`Projects` 部分，在 :guilabel:`Build` → :guilabel:`CMake` 下。
+在 Linux 上，可以使用源代码中附带的 :program:`RtAudio` 和 :program:`RtMidi` 副本来代替系统中的库：启用 ``POLYPHONE_LOCAL_RTAUDIO`` 和 ``POLYPHONE_LOCAL_RTMIDI`` 选项，然后单击 :guilabel:`Run CMake`。
+在 Windows 和 macOS 上无需这样做，因为始终使用随附的版本。
+在同一部分中选择构建配置（建议选择 :guilabel:`Release`）。
 
 
-进入 :guilabel:`Build` 菜单，选择 :guilabel:`Run qmake` 菜单项。
+### 编译项目
 
 
-![运行 qmake](images/run-qmake.png "运行 qmake")
+最后，单击 :guilabel:`Build` 菜单中的 :guilabel:`Build Project "Polyphone"` 操作。编译项目时可能会出现一些警告，但不应出现错误。
 
+现在，可执行文件应该位于 Qt Creator 创建的构建目录的 :file:`bin` 子目录中（例如 :file:`sources` 目录中的 :file:`build/Desktop_Qt_6_…-Release`）：
 
-当右下角的进度条变为绿色并达到 100% 时，:command:`qmake` 运行完毕。
-
-
-![qmake 运行完毕](images/qmake-finished.png "qmake 运行完毕")
-
-
-在左侧栏的 :guilabel:`Project` 部分，再进入 :guilabel:`Build&Run` 部分，选择构建配置（建议选择 :guilabel:`Release`）。
-
-最后，单击 :guilabel:`Build` 菜单中的 :guilabel:`Build project Polyphone` 操作。编译项目时可能会出现一些警告，但不应出现错误。
-
-现在，根据你在 Qt Creator 构建配置中的选择，可执行文件应该位于 Qt Creator 创建的构建目录中（例如源代码旁边的 :file:`build-XXX`）：
-
-* 在 Linux 上，:file:`polyphone` 文件位于 :file:`bin` 子目录中，
-* 在 Windows 上，:file:`polyphone.exe` 文件位于 :file:`release` 或 :file:`debug` 子目录中，
-* 在 macOS 上，:file:`Polyphone.app` 应用程序包位于 :file:`sources` 目录旁边的 :file:`macos` 目录中。
+* 在 Linux 上为 :file:`polyphone` 文件，
+* 在 Windows 上为 :file:`polyphone.exe` 文件，
+* 在 macOS 上为 :file:`Polyphone.app` 应用程序包。
 
 
 ## 故障排除

@@ -25,6 +25,10 @@ Un mensaje indica cuántas muestras se han eliminado.
 Los duplicados pueden verse antes en el [resumen de configuración de las muestras](manual/soundfont-editor/configuration-summaries.md#doc_sample).
 
 
+![Duplicados en el resumen de configuración de las muestras](images/tool_clean_duplicates.png "Duplicados en el resumen de configuración de las muestras")
+
+
+
 ## Moduladores {#doc_cat_mod}
 
 

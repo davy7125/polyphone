@@ -6,11 +6,11 @@
 
 ### Qtのインストール
 
-Fedoraの基本インストールの後、Qt開発の前提条件として、次のパッケージ（コンパイラーを含む）をインストールします。
+Fedoraの基本インストールの後、Qt開発の前提条件として、次のパッケージ（コンパイラーと :program:`CMake` を含む）をインストールします。
 
 ```
 sudo dnf update
-sudo dnf install @development-tools
+sudo dnf install @development-tools cmake pkgconf
 ```
 
 次に、以下のコマンドでQt 6フレームワークをインストールします。
@@ -45,14 +45,19 @@ Qt Creatorでビルドを続ける場合は、ここでチュートリアル「[
 ### 実行ファイルの作成
 
 
-ソースディレクトリ（ファイル :file:`polyphone.pro` がある場所）に移動してターミナルを開き、次のコマンドでPolyphoneをビルドします。
+Polyphoneは :program:`CMake` でビルドします。プロジェクトはディレクトリ :file:`sources` のファイル :file:`CMakeLists.txt` に記述されています。
+プロジェクトのルート（:file:`sources` を含むディレクトリ）でターミナルを開き、次のコマンドでPolyphoneをビルドします。
 
 ```
-qmake6 && make
+cmake -S sources -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build --parallel 4
 ```
 
-すべてうまくいけば、サブディレクトリ :file:`bin` にコンパイル済みのファイル :file:`polyphone` ができます。
-Qt Creatorでビルドした場合、このファイルは :file:`sources` の隣に作成されるディレクトリ :file:`build-XXX` にあります。
+すべてうまくいけば、ディレクトリ :file:`build/bin` にコンパイル済みのファイル :file:`polyphone` ができます。
+Qt Creatorでビルドした場合、このファイルはQt Creatorで選んだビルドディレクトリのサブディレクトリ :file:`bin` にあります。
+
+:program:`RtAudio` や :program:`RtMidi` の互換性のあるバージョンが利用できない場合は、最初のコマンドにオプション ``-DPOLYPHONE_LOCAL_RTAUDIO=ON -DPOLYPHONE_LOCAL_RTMIDI=ON`` を追加すると、Polyphoneのソースに含まれているコピーを使えます。
+その他のオプションについては、ページ「[Ubuntu向けにPolyphoneをビルドする](development/building-polyphone-for-ubuntu.md)」で説明しています。
 
 
 ## トラブルシューティング

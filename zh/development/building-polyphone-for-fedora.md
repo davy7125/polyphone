@@ -6,11 +6,11 @@
 
 ### 安装 Qt
 
-在 Fedora 基础安装完成后，安装以下软件包（包括编译器），作为 Qt 开发的前提条件：
+在 Fedora 基础安装完成后，安装以下软件包（包括编译器和 :program:`CMake`），作为 Qt 开发的前提条件：
 
 ```
 sudo dnf update
-sudo dnf install @development-tools
+sudo dnf install @development-tools cmake pkgconf
 ```
 
 然后用以下命令安装 Qt 6 框架：
@@ -45,14 +45,19 @@ sudo dnf install alsa-lib-devel jack-audio-connection-kit-devel rtaudio-devel zl
 ### 生成可执行文件
 
 
-进入源代码目录（:file:`polyphone.pro` 文件所在的目录），打开终端，用以下命令编译 Polyphone：
+Polyphone 使用 :program:`CMake` 编译，项目由 :file:`sources` 目录中的 :file:`CMakeLists.txt` 文件描述。
+在项目的根目录（包含 :file:`sources` 的目录）中打开终端，用以下命令编译 Polyphone：
 
 ```
-qmake6 && make
+cmake -S sources -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build --parallel 4
 ```
 
-如果一切顺利，:file:`bin` 子目录中会生成编译好的 :file:`polyphone` 文件。
-如果是用 Qt Creator 编译的，该文件则位于 :file:`sources` 旁边新建的 :file:`build-XXX` 目录中。
+如果一切顺利，:file:`build/bin` 目录中会生成编译好的 :file:`polyphone` 文件。
+如果是用 Qt Creator 编译的，该文件则位于在 Qt Creator 中选择的构建目录的 :file:`bin` 子目录中。
+
+如果没有兼容版本的 :program:`RtAudio` 或 :program:`RtMidi`，可以在第一条命令中添加选项 ``-DPOLYPHONE_LOCAL_RTAUDIO=ON -DPOLYPHONE_LOCAL_RTMIDI=ON``，以使用 Polyphone 源代码中附带的副本。
+其他选项在[在 Ubuntu 上编译 Polyphone](development/building-polyphone-for-ubuntu.md)页面中介绍。
 
 
 ## 故障排除

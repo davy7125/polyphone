@@ -26,6 +26,10 @@ Instrucciones para compilar Polyphone con Ubuntu.
 
 Instrucciones para compilar Polyphone con Qt Creator.
 
+### [Compilar el plugin de Polyphone](development/building-the-polyphone-plugin.md)
+
+Instrucciones para compilar el plugin de Polyphone (VST3, CLAP, LV2 y AU).
+
 ### [Traducir Polyphone](development/translate-polyphone.md)
 
 Para todas las personas que quieran ver Polyphone en su propio idioma.

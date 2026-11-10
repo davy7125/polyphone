@@ -13,13 +13,13 @@
 
 Чтобы Qt Creator правильно открыл проект, ему сначала нужно дать разрешение на чтение всех файлов компьютера («Конфиденциальность и безопасность» => «Доступ к диску» => добавить «Qt Creator.app» из его каталога установки).
 
-Библиотеки, используемые Polyphone, легко устанавливаются с помощью <a href="https://brew.sh/" target="_blank">Homebrew</a>. После установки этого инструмента выполните команду:
+Инструмент сборки :program:`CMake` и библиотеки, используемые Polyphone, легко устанавливаются с помощью <a href="https://brew.sh/" target="_blank">Homebrew</a>. После установки этого инструмента выполните команду:
 
 ```
-brew install libsndfile libogg libvorbis flac lame mpg123 opus openssl
+brew install cmake pkgconf libsndfile libogg libvorbis flac lame mpg123 opus openssl
 ```
 
-Файл проекта :file:`polyphone.pro` ищет заголовочные файлы и библиотеки в :file:`/opt/homebrew` (Apple Silicon), в :file:`/usr/local` (Intel) и в каталоге :file:`macos`, расположенном рядом с каталогом :file:`sources`.
+Файл :file:`CMakeLists.txt` каталога :file:`sources` ищет заголовочные файлы и библиотеки в :file:`/opt/homebrew` (Apple Silicon), в :file:`/usr/local` (Intel) и в каталоге :file:`macos`, расположенном рядом с каталогом :file:`sources`.
 Каталог :file:`macos` можно также получить, распаковав архив статических библиотек, доступный [здесь](files/macos.zip), но его содержимое может быть устаревшим.
 
 Если какие-то библиотеки устарели или несовместимы с версией вашего Mac (например, SSL), придётся найти их исходный код в интернете и перекомпилировать их со статической компоновкой:
@@ -36,21 +36,22 @@ make install
 ## Сборка
 
 
-Откройте файл :file:`polyphone.pro` в :program:`Qt Creator` (см. [Сборка Polyphone в Qt Creator](development/using-qt-creator-to-build-polyphone.md)) и соберите проект.
-В каталоге :file:`macos` рядом с каталогом :file:`sources` должен появиться пакет :file:`Polyphone.app`.
+Откройте файл :file:`CMakeLists.txt` из каталога :file:`sources` в :program:`Qt Creator` (см. [Сборка Polyphone в Qt Creator](development/using-qt-creator-to-build-polyphone.md)) и соберите проект.
+В подкаталоге :file:`bin` каталога сборки должен появиться пакет :file:`Polyphone.app`.
 
-Собрать проект можно и из командной строки:
-
-```
-cd sources
-qmake polyphone.pro CONFIG+=release
-make -j4
-```
-
-Если компилятор сообщает, что некоторые функции недоступны для указанной целевой версии macOS, можно увеличить значение этой переменной в файле :file:`polyphone.pro` (значение по умолчанию — 12.0):
+Собрать проект можно и из командной строки в корне проекта (в каталоге, содержащем :file:`sources`), указав путь к Qt (сначала поправьте его!):
 
 ```
-QMAKE_MACOSX_DEPLOYMENT_TARGET = 12.0
+cmake -S sources -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=/Path/To/Qt/6.7.3/macos
+cmake --build build --parallel 4
+```
+
+Пакет :file:`Polyphone.app` появится в каталоге :file:`build/bin`.
+
+Если компилятор сообщает, что некоторые функции недоступны для указанной целевой версии macOS, можно повысить минимальную версию macOS, добавив к первой команде этот параметр (значение по умолчанию — 12.0):
+
+```
+-DCMAKE_OSX_DEPLOYMENT_TARGET=13.0
 ```
 
 Это значение также нужно указать в файле :file:`packaging/mac/polyphone.plist` под «LSMinimumSystemVersion».
@@ -62,14 +63,14 @@ QMAKE_MACOSX_DEPLOYMENT_TARGET = 12.0
 Выполните следующую команду, чтобы включить библиотеки и фреймворки в пакет (сначала поправьте путь!):
 
 ```
-/Path/To/Qt/6.7.3/macos/bin/macdeployqt /Path/To/macos/Polyphone.app
+/Path/To/Qt/6.7.3/macos/bin/macdeployqt /Path/To/build/bin/Polyphone.app
 ```
 
 На Mac с процессором Apple Silicon пакет также нужно подписать (хотя бы ad-hoc подписью), иначе он не запустится:
 
 ```
-xattr -cr /Path/To/macos/Polyphone.app
-codesign --force --deep --sign - /Path/To/macos/Polyphone.app
+xattr -cr /Path/To/build/bin/Polyphone.app
+codesign --force --deep --sign - /Path/To/build/bin/Polyphone.app
 ```
 
 После этого программу можно запустить или упаковать в файл .zip или .dmg, чтобы поделиться ею.

@@ -98,6 +98,7 @@ Farben
 
 Fensterrahmen
 : Blendet die Fensterrahmen ein oder aus, um Platz auf dem Bildschirm zu sparen (unter macOS nicht verfügbar).
+  Ohne Rahmen werden die Fenster der virtuellen Tastatur, des Rekorders und des MIDI-Players durch Ziehen ihres Banners verschoben, das ihren Titel und eine Schaltfläche zum Schließen anzeigt, und durch Ziehen ihrer Ränder in der Größe verändert.
 
 Dekorationen
 : Hintergrunddekorationen in einigen Listen können zur besseren Lesbarkeit deaktiviert werden.
@@ -114,7 +115,7 @@ Eine Änderung der Sprache, der Notennamen, des Stils, der Farben, der Fensterra
 Im Bereich :guilabel:`Sound` lassen sich der Hall (Intensität, Raumgröße, Dämpfung und Weite) und der Chorus (Intensität, Tiefe und Frequenz) des Synthesizers sowie seine Gesamtlautstärke ändern.
 Ist eine externe Tastatur angeschlossen, kann die Gesamtlautstärke mit dem MIDI-Lautstärkeregler geändert werden.
 Eine LED links neben :guilabel:`Halleffekt` und :guilabel:`Chorus` schaltet den jeweiligen Effekt ein oder aus, ohne seine Einstellungen zu verlieren.
-Diese Einstellungen lassen sich während des Spielens auch unterhalb der [virtuellen Tastatur](manual/soundfont-editor/toolbar.md#doc_keyboard_effects) ändern: Eine Änderung erfolgt schrittweise und unterbricht die gespielten Noten nicht.
+Diese Einstellungen lassen sich während des Spielens auch im Fenster der [virtuellen Tastatur](manual/soundfont-editor/toolbar.md#doc_keyboard_effects) ändern: Eine Änderung erfolgt schrittweise und unterbricht die gespielten Noten nicht.
 
 Da der Standardmodulator, der die Grenzfrequenz des Filters ändert, zwischen den Versionen 2.01 und 2.04 der sf2-Spezifikation geändert wurde, kann hier festgelegt werden, welche Version verwendet werden soll:
 

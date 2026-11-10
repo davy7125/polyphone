@@ -26,6 +26,10 @@
 
 使用 Qt Creator 编译 Polyphone 的说明。
 
+### [编译 Polyphone 插件](development/building-the-polyphone-plugin.md)
+
+编译 Polyphone 插件（VST3、CLAP、LV2 和 AU）的说明。
+
 ### [翻译 Polyphone](development/translate-polyphone.md)
 
 献给所有希望看到 Polyphone 使用自己母语的人。

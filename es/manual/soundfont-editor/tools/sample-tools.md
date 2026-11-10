@@ -202,6 +202,10 @@ Fusionar las divisiones izquierda y derecha en los instrumentos
 Al final, un mensaje enumera las muestras que se han saturado o que no se han modificado, así como los instrumentos en los que algunas divisiones no se han podido fusionar.
 
 
+![Herramienta de conversión a mono](images/tool_convert_mono.png "Herramienta de conversión a mono")
+
+
+
 ### Encontrar un enlace {#doc_link}
 
 Entre las muestras seleccionadas, las muestras cuyos nombres solo difieren en la última letra (L&nbsp;/&nbsp;R) se enlazan automáticamente (los espacios y los caracteres ``-``, ``_``, ``(``, ``)``, ``[``, ``]``, ``{``, ``}`` y ``|`` se ignoran en los nombres).

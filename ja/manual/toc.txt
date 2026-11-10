@@ -17,6 +17,7 @@ index.md=ユーザーマニュアル
 |online-repository.md=オンラインリポジトリ
 |settings.md=設定
 |menu.md=メニュー
+|plugin.md=Polyphoneプラグイン
 |annexes/index.md=付録
 ||annexes/common-issues.md=SoundFontによくある欠陥
 ||annexes/the-different-soundfont-formats.md=さまざまなSoundFont形式

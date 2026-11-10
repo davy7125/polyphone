@@ -13,20 +13,21 @@ Poi avvia il programma di installazione e seleziona i seguenti componenti:
 ![Componenti da selezionare](images/select-qt-components.png "Componenti da selezionare")
 
 Scegli l'ultima versione disponibile se le opzioni non sono esattamente le stesse.
+Il componente «MinGW 64-bit» della versione di Qt fornisce le librerie Qt compilate per MinGW.
 
 
 ### Installazione del compilatore e delle dipendenze
 
-Qt ha bisogno di un compilatore per compilare i sorgenti di Polyphone. È necessario usare MinGW per i seguenti motivi:
+Polyphone si compila con MinGW per i seguenti motivi:
 
 * innanzitutto per un motivo pratico, perché le dipendenze indicate sotto sono compatibili con MinGW,
 * ma anche per consentire una corretta importazione / esportazione dei file in formato sfArk (è necessaria l'opzione di compilazione ``-ffloat-store``).
 
-Il compilatore e le librerie usate da Polyphone si installano con <a href="https://www.msys2.org/" target="_blank">MSYS2</a>.
-Installalo nella cartella predefinita :file:`C:/msys64` (il file di progetto :file:`polyphone.pro` cerca le librerie in :file:`C:/msys64/mingw64`), apri il terminale :program:`MSYS2 MINGW64` ed esegui questo comando:
+Il compilatore, gli strumenti di compilazione :program:`CMake` e :program:`Ninja` e le librerie usate da Polyphone si installano con <a href="https://www.msys2.org/" target="_blank">MSYS2</a>.
+Installalo nella cartella predefinita :file:`C:/msys64`, apri il terminale :program:`MSYS2 MINGW64` ed esegui questo comando:
 
 ```
-pacman -S mingw-w64-x86_64-toolchain mingw-w64-x86_64-zlib mingw-w64-x86_64-libogg mingw-w64-x86_64-libvorbis mingw-w64-x86_64-openssl mingw-w64-x86_64-flac mingw-w64-x86_64-libsndfile
+pacman -S mingw-w64-x86_64-toolchain mingw-w64-x86_64-cmake mingw-w64-x86_64-ninja mingw-w64-x86_64-zlib mingw-w64-x86_64-libogg mingw-w64-x86_64-libvorbis mingw-w64-x86_64-openssl mingw-w64-x86_64-flac mingw-w64-x86_64-libsndfile
 ```
 
 Poi vai nelle impostazioni di sistema di Windows per aggiungere la cartella :file:`C:/msys64/mingw64/bin` al Path:
@@ -37,7 +38,7 @@ Poi vai nelle impostazioni di sistema di Windows per aggiungere la cartella :fil
 * fai doppio clic su «Path» nelle variabili di sistema,
 * e aggiungi :file:`C:/msys64/mingw64/bin` alle cartelle elencate nella variabile «Path».
 
-In questo modo Qt può trovare gli eseguibili e le librerie di MinGW.
+In questo modo il compilatore, gli strumenti e le librerie di MSYS2 possono essere trovati da Qt Creator e da Polyphone.
 
 
 ## Compilazione
@@ -49,21 +50,21 @@ Inizia scaricando i sorgenti di Polyphone <a href="software" target="_blank">qui
 
 ### Compilare con Qt Creator
 
-Prosegui ora con questo tutorial per compilare Polyphone con Qt Creator: [Compilare Polyphone con Qt Creator](development/using-qt-creator-to-build-polyphone.md). Non sarà necessario modificare il file :file:`polyphone.pro`.
+Prosegui ora con questo tutorial per compilare Polyphone con Qt Creator: [Compilare Polyphone con Qt Creator](development/using-qt-creator-to-build-polyphone.md).
+Il kit usato deve avere il compilatore di MSYS2 (:file:`C:\msys64\mingw64\bin\g++.exe`), che trova le librerie installate con MSYS2, e la versione di Qt per MinGW 64-bit.
 
 ### Compilare da riga di comando
 
-Apri il terminale :program:`MSYS2 MINGW64`, aggiungi Qt al Path e compila il progetto in una nuova cartella (adatta prima i percorsi):
+Questo è il metodo usato per compilare le versioni Windows di Polyphone.
+Apri il terminale :program:`MSYS2 MINGW64`, vai nella radice del progetto (la cartella che contiene :file:`sources`) ed esegui i comandi seguenti (adatta prima il percorso di Qt):
 
 ```
-export PATH="/c/Qt/6.6.2/mingw_64/bin:$PATH"
-mkdir build
-cd build
-qmake ../sources/polyphone.pro CONFIG+=release
-mingw32-make -j4
+export PATH="/mingw64/bin:/c/Qt/6.6.2/mingw_64/bin:$PATH"
+cmake -S sources -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=C:/Qt/6.6.2/mingw_64
+cmake --build build --parallel 4
 ```
 
-Se la compilazione è andata a buon fine, dovresti trovare il file eseguibile :file:`polyphone.exe` nella cartella :file:`build/release`.
+Se la compilazione è andata a buon fine, dovresti trovare il file eseguibile :file:`polyphone.exe` nella cartella :file:`build/bin`.
 
 
 ### Avviare Polyphone
@@ -72,7 +73,7 @@ Perché l'eseguibile possa funzionare in modo autonomo, la sua cartella deve ess
 Esegui il comando seguente in un terminale (adatta prima i percorsi):
 
 ```
-C:\Qt\6.6.2\mingw_64\bin\windeployqt.exe "C:\Users\User\Desktop\build\release\polyphone.exe"
+C:\Qt\6.6.2\mingw_64\bin\windeployqt.exe --release "C:\Users\User\Desktop\polyphone\build\bin\polyphone.exe"
 ```
 
 Compariranno le librerie di Qt (ad esempio :file:`Qt6Core`) e un doppio clic sul file :file:`polyphone.exe` avvierà il software.

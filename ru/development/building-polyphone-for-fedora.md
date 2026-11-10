@@ -6,11 +6,11 @@
 
 ### Установка Qt
 
-После базовой установки Fedora установите следующие пакеты (включая компилятор), необходимые для разработки на Qt:
+После базовой установки Fedora установите следующие пакеты (включая компилятор и :program:`CMake`), необходимые для разработки на Qt:
 
 ```
 sudo dnf update
-sudo dnf install @development-tools
+sudo dnf install @development-tools cmake pkgconf
 ```
 
 Затем установите фреймворк Qt 6 командой:
@@ -45,14 +45,19 @@ sudo dnf install alsa-lib-devel jack-audio-connection-kit-devel rtaudio-devel zl
 ### Получение исполняемого файла
 
 
-Перейдите в каталог с исходным кодом (где находится файл :file:`polyphone.pro`), откройте терминал и соберите Polyphone командой:
+Polyphone собирается с помощью :program:`CMake`; проект описан файлом :file:`CMakeLists.txt` в каталоге :file:`sources`.
+В корне проекта (в каталоге, содержащем :file:`sources`) откройте терминал и соберите Polyphone командами:
 
 ```
-qmake6 && make
+cmake -S sources -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build --parallel 4
 ```
 
-Если всё пройдёт успешно, скомпилированный файл :file:`polyphone` появится в подкаталоге :file:`bin`.
-При сборке в Qt Creator этот файл находится в каталоге :file:`build-XXX`, создаваемом рядом с :file:`sources`.
+Если всё пройдёт успешно, скомпилированный файл :file:`polyphone` появится в каталоге :file:`build/bin`.
+При сборке в Qt Creator этот файл находится в подкаталоге :file:`bin` каталога сборки, выбранного в Qt Creator.
+
+Если :program:`RtAudio` или :program:`RtMidi` недоступны в совместимой версии, можно использовать их копии, включённые в исходный код Polyphone, добавив к первой команде параметры ``-DPOLYPHONE_LOCAL_RTAUDIO=ON -DPOLYPHONE_LOCAL_RTMIDI=ON``.
+Остальные параметры описаны на странице [Сборка Polyphone для Ubuntu](development/building-polyphone-for-ubuntu.md).
 
 
 ## Устранение неполадок

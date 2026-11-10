@@ -6,11 +6,11 @@ Usa queste istruzioni se non riesci a installare Polyphone sulla tua distribuzio
 
 ### Installazione di Qt
 
-Dopo un'installazione di base di Fedora, installa i seguenti pacchetti (compreso un compilatore) come prerequisiti per lo sviluppo con Qt:
+Dopo un'installazione di base di Fedora, installa i seguenti pacchetti (compresi un compilatore e :program:`CMake`) come prerequisiti per lo sviluppo con Qt:
 
 ```
 sudo dnf update
-sudo dnf install @development-tools
+sudo dnf install @development-tools cmake pkgconf
 ```
 
 Poi installa il framework Qt 6 con il comando seguente:
@@ -45,14 +45,19 @@ Se vuoi proseguire la compilazione con Qt Creator, segui ora questo tutorial: [c
 ### Ottenere l'eseguibile
 
 
-Vai nella cartella dei sorgenti (dove si trova il file :file:`polyphone.pro`), apri un terminale e compila Polyphone con questo comando:
+Polyphone si compila con :program:`CMake`, e il progetto è descritto dal file :file:`CMakeLists.txt` della cartella :file:`sources`.
+Nella radice del progetto (la cartella che contiene :file:`sources`), apri un terminale e compila Polyphone con questi comandi:
 
 ```
-qmake6 && make
+cmake -S sources -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build --parallel 4
 ```
 
-Se tutto va bene, troverai il file compilato :file:`polyphone` nella sottocartella :file:`bin`.
-Se la compilazione è stata eseguita con Qt Creator, questo file si trova invece nella cartella :file:`build-XXX` creata accanto a :file:`sources`.
+Se tutto va bene, troverai il file compilato :file:`polyphone` nella cartella :file:`build/bin`.
+Se la compilazione è stata eseguita con Qt Creator, questo file si trova invece nella sottocartella :file:`bin` della cartella di compilazione scelta in Qt Creator.
+
+Se :program:`RtAudio` o :program:`RtMidi` non sono disponibili in una versione compatibile, si possono usare le copie incluse nei sorgenti di Polyphone aggiungendo le opzioni ``-DPOLYPHONE_LOCAL_RTAUDIO=ON -DPOLYPHONE_LOCAL_RTMIDI=ON`` al primo comando.
+Le altre opzioni sono descritte nella pagina [Compilare Polyphone per Ubuntu](development/building-polyphone-for-ubuntu.md).
 
 
 ## Risoluzione dei problemi

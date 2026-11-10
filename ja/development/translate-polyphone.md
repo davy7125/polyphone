@@ -13,7 +13,8 @@ Polyphoneは、より多くの人が使えるように、翻訳に対応する�
 その言語がまだ一覧にない場合は、[お問い合わせ](contact)フォームで依頼してください（追加したい新しい言語を伝えるだけで大丈夫です）。
 すぐに新しい翻訳パッケージが用意されます。
 
-翻訳ファイルは<a href="https://github.com/davy7125/polyphone" target="_blank">GitHub</a>リポジトリのディレクトリ :file:`sources` でも入手できます（言語ごとに1つのファイル :file:`polyphone_XX.ts`）。
+翻訳ファイルは<a href="https://github.com/davy7125/polyphone" target="_blank">GitHub</a>リポジトリのディレクトリ :file:`sources/resources/translations` でも入手できます（言語ごとに1つのファイル :file:`polyphone_XX.ts`）。
+これらのファイルには、[プラグイン](manual/plugin.md)のテキストも、コンテキスト :guilabel:`PluginEditor`、:guilabel:`PluginProcessor`、:guilabel:`PluginJuce` に含まれています。
 
 
 ### Qt Linguist
