@@ -44,6 +44,9 @@ public:
     // Start or restart the animation
     void startAnimation();
 
+    // Stop the animation (useless while the spinner is hidden)
+    void stopAnimation();
+
 protected:
     void paintEvent(QPaintEvent * event);
 

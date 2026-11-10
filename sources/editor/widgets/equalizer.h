@@ -76,7 +76,9 @@ private:
     GainCurve getCurve();
     QList<EltID> getProcessedIds(); // Selected samples, with their linked samples if the stereo editing is enabled
     void updateBands();
+    void schedulePreview();
     void clearPreview();
+    void setPreviewPending(bool isPending);
     void applyPreview(int generation, const QList<PreviewData> &previewData);
     void saveEQ();
     void loadEQ();

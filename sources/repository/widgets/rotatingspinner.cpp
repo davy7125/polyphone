@@ -53,6 +53,11 @@ void RotatingSpinner::startAnimation()
     _animation->start();
 }
 
+void RotatingSpinner::stopAnimation()
+{
+    _animation->stop();
+}
+
 void RotatingSpinner::paintEvent(QPaintEvent * event)
 {
     Q_UNUSED(event);

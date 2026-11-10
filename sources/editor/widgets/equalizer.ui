@@ -608,6 +608,22 @@
        </widget>
       </item>
       <item>
+       <widget class="RotatingSpinner" name="spinnerPreview" native="true">
+        <property name="minimumSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
        <spacer name="horizontalSpacer_2">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -682,6 +698,12 @@
    <class>ResettableSlider</class>
    <extends>QSlider</extends>
    <header>resettableslider.h</header>
+  </customwidget>
+  <customwidget>
+   <class>RotatingSpinner</class>
+   <extends>QWidget</extends>
+   <header>rotatingspinner.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <tabstops>

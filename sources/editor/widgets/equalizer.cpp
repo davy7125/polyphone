@@ -63,6 +63,7 @@ Equalizer::Equalizer(QWidget *parent) :
     _previewTimer.setInterval(100);
     connect(&_previewTimer, SIGNAL(timeout()), this, SLOT(computePreview()));
     _previewThreadPool.setMaxThreadCount(1);
+    ui->spinnerPreview->hide();
 
     // Initialize EQ
     loadEQ();
@@ -86,7 +87,7 @@ void Equalizer::updateSamples()
 {
     updateBands();
     if (ui->checkEqualizerPreview->isChecked())
-        _previewTimer.start();
+        schedulePreview();
 }
 
 void Equalizer::on_pushEgalRestore_clicked()
@@ -274,7 +275,33 @@ void Equalizer::on_verticalSliderMoved(int position)
 
     saveEQ();
     if (ui->checkEqualizerPreview->isChecked())
-        _previewTimer.start();
+        schedulePreview();
+}
+
+void Equalizer::schedulePreview()
+{
+    // The spinner is displayed while the sound heard doesn't match the settings: a sample is going to play processed
+    // data, or its own data again
+    if (!_previewIds.isEmpty() || (_currentIds.getSelectedIds(elementSmpl).count() == 1 && !getCurve().isNeutral()))
+        setPreviewPending(true);
+    _previewTimer.start();
+}
+
+void Equalizer::setPreviewPending(bool isPending)
+{
+    if (isPending == !ui->spinnerPreview->isHidden())
+        return;
+
+    if (isPending)
+    {
+        ui->spinnerPreview->show();
+        ui->spinnerPreview->startAnimation();
+    }
+    else
+    {
+        ui->spinnerPreview->hide();
+        ui->spinnerPreview->stopAnimation();
+    }
 }
 
 void Equalizer::computePreview()
@@ -295,6 +322,7 @@ void Equalizer::computePreview()
         if (!ids.contains(id))
             _synth->setSampleData(id, nullptr, nullptr, 0);
     _previewIds = ids;
+    setPreviewPending(!ids.isEmpty());
     if (ids.isEmpty())
         return;
 
@@ -357,6 +385,10 @@ void Equalizer::applyPreview(int generation, const QList<PreviewData> &previewDa
         delete [] data16;
         delete [] data24;
     }
+
+    // Unless the settings changed again in the meantime, the sound heard is now up to date
+    if (!_previewTimer.isActive())
+        setPreviewPending(false);
 }
 
 void Equalizer::clearPreview()
@@ -366,4 +398,5 @@ void Equalizer::clearPreview()
     foreach (EltID id, _previewIds)
         _synth->setSampleData(id, nullptr, nullptr, 0);
     _previewIds.clear();
+    setPreviewPending(false);
 }
