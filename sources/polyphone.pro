@@ -20,9 +20,9 @@
 # Only for the official builds (GitHub workflows, packaging scripts), given to qmake: "DEFINES+=OFFICIAL_BUILD"
 # The notifications of a new version are then shown. Not for the package of a distribution, which updates the software itself
 
-# Polyphone version, read in the file VERSION shared with the plugin: "<version>[-<identifier>]", for instance
+# Polyphone version, read in the file version.txt shared with the plugin: "<version>[-<identifier>]", for instance
 # "2.7.0-BETA" (set from a tag by packaging/set_version.py). The year is the one of the build.
-POLYPHONE_VERSION = $$cat($$PWD/VERSION)
+POLYPHONE_VERSION = $$cat($$PWD/version.txt)
 POLYPHONE_VERSION = $$first(POLYPHONE_VERSION)
 POLYPHONE_SOFT_VERSION = $$section(POLYPHONE_VERSION, -, 0, 0)
 POLYPHONE_IDENTIFIER = $$section(POLYPHONE_VERSION, -, 1, -1)

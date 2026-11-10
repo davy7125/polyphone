@@ -11,8 +11,10 @@
 
 cmake_minimum_required(VERSION 3.16)
 
-# Version read in VERSION: "2.7.0-BETA" gives the version 2.7.0 and the identifier BETA
-file(STRINGS ${CMAKE_CURRENT_SOURCE_DIR}/VERSION POLYPHONE_VERSION_FULL LIMIT_COUNT 1)
+# Version read in version.txt: "2.7.0-BETA" gives the version 2.7.0 and the identifier BETA. Not "VERSION": this
+# folder is in the include path and, on the case-insensitive file systems (macOS, Windows), <version> of the C++
+# library would be this file
+file(STRINGS ${CMAKE_CURRENT_SOURCE_DIR}/version.txt POLYPHONE_VERSION_FULL LIMIT_COUNT 1)
 string(STRIP "${POLYPHONE_VERSION_FULL}" POLYPHONE_VERSION_FULL)
 string(REGEX MATCH "^[0-9]+(\\.[0-9]+)*" POLYPHONE_VERSION "${POLYPHONE_VERSION_FULL}")
 # Not REGEX REPLACE "^[^-]*-?": before CMake 4.1 (CMP0186), "^" matches again after each replacement ("BETA" removed
@@ -22,7 +24,7 @@ if(POLYPHONE_VERSION_FULL MATCHES "-(.+)$")
     set(POLYPHONE_IDENTIFIER "${CMAKE_MATCH_1}")
 endif()
 if(NOT POLYPHONE_VERSION)
-    message(FATAL_ERROR "No version found in VERSION")
+    message(FATAL_ERROR "No version found in version.txt")
 endif()
 
 if(APPLE AND NOT CMAKE_OSX_DEPLOYMENT_TARGET)
@@ -30,7 +32,7 @@ if(APPLE AND NOT CMAKE_OSX_DEPLOYMENT_TARGET)
 endif()
 
 project(Polyphone VERSION ${POLYPHONE_VERSION} LANGUAGES C CXX)
-set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/VERSION)
+set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/version.txt)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)

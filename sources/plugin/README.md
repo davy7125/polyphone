@@ -93,7 +93,7 @@ JUCE and clap-juce-extensions are downloaded at the configuration (versions fixe
 `CMakeLists.txt`), unless local copies are given with `-DPOLYPHONE_JUCE_DIR=<path>` and
 `-DPOLYPHONE_CLAP_JUCE_EXTENSIONS_DIR=<path>`.
 
-The version is the one of the editor, read in `sources/VERSION` (its numbers only: `2.7.0` for
+The version is the one of the editor, read in `sources/version.txt` (its numbers only: `2.7.0` for
 `2.7.0-BETA`).
 
 ## Sources

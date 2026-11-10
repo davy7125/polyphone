@@ -172,8 +172,8 @@ jobs:
             Windows)
               (cd dist && 7z a -tzip "../$name.zip" "$name")
               # Product version written by JUCE in the version information of the libraries (numbers of
-              # sources/VERSION, as read by sources/plugin/CMakeLists.txt), checked by SignPath
-              echo "product-version=$(grep -oE '^[0-9]+(\.[0-9]+)*' sources/VERSION)" >> "$GITHUB_OUTPUT"
+              # sources/version.txt, as read by sources/plugin/CMakeLists.txt), checked by SignPath
+              echo "product-version=$(grep -oE '^[0-9]+(\.[0-9]+)*' sources/version.txt)" >> "$GITHUB_OUTPUT"
               ;;
           esac
           ls -l Polyphone-plugin_*

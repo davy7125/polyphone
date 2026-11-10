@@ -92,7 +92,8 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang" AND NOT MSVC)
     target_compile_options(polyphone_synth_core PRIVATE -Wall -Wextra ${SYNTH_CORE_OPTIMIZATION})
 endif()
 
-# MSVC and clang-cl (Windows, plugin): M_PI_2 and the other constants of <cmath>
-if(MSVC)
+# Windows: M_PI_2 and the other constants of <cmath>, hidden by MSVC and clang-cl (plugin) and by MinGW in strict mode
+# (-std=c++17). The editor sources have them through the precompiled header (qmath.h)
+if(WIN32)
     target_compile_definitions(polyphone_synth_core PRIVATE _USE_MATH_DEFINES)
 endif()

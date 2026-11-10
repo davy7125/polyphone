@@ -6,14 +6,14 @@
 
 cmake_minimum_required(VERSION 3.22)
 
-# Same version as the editor, read in sources/VERSION ("2.7.0-BETA": the numbers only)
-file(STRINGS ${CMAKE_CURRENT_SOURCE_DIR}/../VERSION POLYPHONE_VERSION_FULL LIMIT_COUNT 1)
+# Same version as the editor, read in sources/version.txt ("2.7.0-BETA": the numbers only)
+file(STRINGS ${CMAKE_CURRENT_SOURCE_DIR}/../version.txt POLYPHONE_VERSION_FULL LIMIT_COUNT 1)
 string(REGEX MATCH "^[0-9]+(\\.[0-9]+)*" POLYPHONE_VERSION "${POLYPHONE_VERSION_FULL}")
 if(NOT POLYPHONE_VERSION)
-    message(FATAL_ERROR "No version found in sources/VERSION")
+    message(FATAL_ERROR "No version found in sources/version.txt")
 endif()
 project(PolyphonePlugin VERSION ${POLYPHONE_VERSION} LANGUAGES C CXX)
-set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/../VERSION)
+set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/../version.txt)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
