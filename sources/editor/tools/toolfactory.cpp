@@ -26,10 +26,9 @@
 #include "abstracttool.h"
 #include <QApplication>
 
-#include "trim_end/tooltrimend.h"
+#include "trim/tooltrim.h"
 #include "auto_loop/toolautoloop.h"
 #include "external_command/toolexternalcommand.h"
-#include "trim_start/tooltrimstart.h"
 #include "frequency_filter/toolfrequencyfilter.h"
 #include "change_volume/toolchangevolume.h"
 #include "balance_adjustment/toolbalanceadjustment.h"
@@ -86,10 +85,9 @@ void ToolFactory::initialize()
     AbstractTool::initialize(QApplication::activeWindow());
 
     // Register all possible tools
-    _tools << new ToolTrimEnd() // Samples
+    _tools << new ToolTrim() // Samples
            << new ToolAutoLoop()
            << new ToolExternalCommand()
-           << new ToolTrimStart()
            << new ToolFrequencyFilter()
            << new ToolChangeVolume()
            << new ToolBalanceAdjustment()

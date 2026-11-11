@@ -30,9 +30,9 @@
 InteractiveSampleLoader::InteractiveSampleLoader(QWidget * parent) : SampleLoader(),
     _parent(parent)
 {
-    // Automatically trim to loop, remove the leading blank
-    setProcessing(ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "wav_auto_loop", false).toBool(),
-                  ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "wav_remove_blank", false).toBool());
+    // Automatically remove the blank at the start and at the end
+    setProcessing(ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "wav_remove_blank", false).toBool(),
+                  ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "wav_remove_blank_end", false).toBool());
 }
 
 void InteractiveSampleLoader::loading(QString path)

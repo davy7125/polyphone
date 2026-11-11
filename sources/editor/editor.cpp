@@ -167,6 +167,9 @@ void Editor::tabInitialized(int indexSf2)
         case 8: // First instrument, envelopes
             _pageSelector->setLastPage(elementInst, _pageSelector->getPages(elementInst)[2]);
             break;
+        case 10: // First instrument, timbre
+            _pageSelector->setLastPage(elementInst, _pageSelector->getPages(elementInst)[3]);
+            break;
         case 9: // First preset, ranges
             _pageSelector->setLastPage(elementPrst, _pageSelector->getPages(elementPrst)[1]);
             break;

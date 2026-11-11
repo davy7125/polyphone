@@ -69,8 +69,8 @@ ConfigSectionInterface::ConfigSectionInterface(QWidget *parent) :
     ui->comboColorTheme->blockSignals(false);
 
     // Values stored for the startup views (0 to 6 keep their meaning from the previous versions)
-    int startupViews[] = {0, 1, 2, 3, 4, 7, 8, 5, 6, 9};
-    for (int i = 0; i < 10; i++)
+    int startupViews[] = {0, 1, 2, 3, 4, 7, 8, 10, 5, 6, 9};
+    for (int i = 0; i < 11; i++)
         ui->comboStartupView->setItemData(i, startupViews[i]);
 }
 

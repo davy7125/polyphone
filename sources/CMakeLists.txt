@@ -201,7 +201,7 @@ if(POLYPHONE_BUILD_EDITOR)
         RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
     target_include_directories(polyphone PRIVATE
         . clavier context context/interface dialogs directory editor editor/footers editor/graphics editor/modulator
-        editor/overview editor/tools editor/tree editor/widgets extensions lib lib/qtsingleapplication mainwindow mcp
+        editor/overview editor/timbre editor/tools editor/tree editor/widgets extensions lib lib/qtsingleapplication mainwindow mcp
         midi_player player repository repository/browser repository/daily repository/soundfont
         repository/soundfont/viewer repository/soundfont/editor repository/user repository/widgets resources sound_engine
         sound_engine/elements)

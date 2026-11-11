@@ -65,9 +65,10 @@ public:
     void setLoopEnabled(bool isEnabled);
     void setSinus(bool isOn, int rootKey);
 
-    // Preview of a processing of a sample (equalizer): data played instead of the sample data when the sample is played
-    // alone (same length, 16 bits plus the 8 least significant bits possibly null), null to read the sample data again
-    void setSampleData(EltID id, const qint16 * data16, const quint8 * data24, quint32 length);
+    // Preview of a processing of a sample (equalizer, timbre view): data played instead of the sample data when the
+    // sample is played alone, or by all voices if allVoices is true (same length, 16 bits plus the 8 least significant
+    // bits possibly null), null to read the sample data again
+    void setSampleData(EltID id, const qint16 * data16, const quint8 * data24, quint32 length, bool allVoices = false);
 
     // Editing parameters of the playing samples
     void setStartLoop(quint32 startLoop, bool withLinkedSample);

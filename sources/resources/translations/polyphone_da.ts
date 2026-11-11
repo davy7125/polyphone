@@ -1036,16 +1036,21 @@
     </message>
     <message>
         <location filename="../../context/interface/configsectioninterface.ui" line="700"/>
+        <source>Instruments - first instrument - Timbre</source>
+        <translation>Instrumenter - første instrument - Klangfarve</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/configsectioninterface.ui" line="705"/>
         <source>Presets</source>
         <translation>Forvalg</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="705"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="710"/>
         <source>Presets - first preset - Table</source>
         <translation>Forvalg - første forvalg - Tabel</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectioninterface.ui" line="710"/>
+        <location filename="../../context/interface/configsectioninterface.ui" line="715"/>
         <source>Presets - first preset - Ranges</source>
         <translation>Forvalg - første forvalg - Områder</translation>
     </message>
@@ -2676,6 +2681,237 @@ på et signal</translation>
     </message>
 </context>
 <context>
+    <name>DialogTimbreCorrection</name>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="57"/>
+        <source>Correct the timbre</source>
+        <translation>Korrigér klangfarven</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="75"/>
+        <source>Interpolation between the neighbors</source>
+        <translation>Interpolation mellem naboerne</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="76"/>
+        <source>Local regression</source>
+        <translation>Lokal regression</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="77"/>
+        <source>Aligned on a root key</source>
+        <translation>Justeret efter en grundtangent</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="79"/>
+        <source>Reference</source>
+        <translation>Reference</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="83"/>
+        <source>neighbors on each side</source>
+        <translation>naboer på hver side</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="92"/>
+        <source>Correct the timbre (sample data)</source>
+        <translation>Korrigér klangfarven (sampledata)</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="95"/>
+        <source>Correct the level (attenuation)</source>
+        <translation>Korrigér niveauet (dæmpning)</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="107"/>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="242"/>
+        <source>dB</source>
+        <comment>unit for decibels</comment>
+        <translation>dB</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="109"/>
+        <source>A smaller deviation of a row is not corrected, only the part beyond is</source>
+        <translation>En mindre afvigelse i en række korrigeres ikke, kun den overskydende del</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="110"/>
+        <source>Tolerance</source>
+        <translation>Tolerance</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="112"/>
+        <source>Strength</source>
+        <translation>Styrke</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="114"/>
+        <source>Maximum correction</source>
+        <translation>Maksimal korrektion</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="116"/>
+        <source>Ranks and bands</source>
+        <translation>Harmoniske og bånd</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="117"/>
+        <source>Ranks from 1 to</source>
+        <translation>Harmoniske fra 1 til</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="119"/>
+        <source>Ranks corrected</source>
+        <translation>Korrigerede harmoniske</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="124"/>
+        <source>dB / octave</source>
+        <translation>dB / oktav</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="125"/>
+        <source>Slope added to the target: positive for a brighter sound</source>
+        <translation>Hældning lagt til målet: positiv for en lysere klang</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="126"/>
+        <source>Brightness</source>
+        <translation>Lyshed</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="128"/>
+        <source>Level added to the odd ranks (3, 5, 7...) of the target</source>
+        <translation>Niveau lagt til målets ulige harmoniske (3, 5, 7...)</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="129"/>
+        <source>Odd ranks</source>
+        <translation>Ulige harmoniske</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="132"/>
+        <source>Listening</source>
+        <translation>Lytning</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="136"/>
+        <source>Root key %1</source>
+        <translation>Grundtangent %1</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="139"/>
+        <source>A: original</source>
+        <translation>A: original</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="141"/>
+        <source>B: corrected</source>
+        <translation>B: korrigeret</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="146"/>
+        <source>Play</source>
+        <translation>Afspil</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="231"/>
+        <source>Heard</source>
+        <translation>Hørt</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="234"/>
+        <source>Target</source>
+        <translation>Mål</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="237"/>
+        <source>Result</source>
+        <translation>Resultat</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="246"/>
+        <source>Before: level %1, timbre %2</source>
+        <translation>Før: niveau %1, klangfarve %2</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="248"/>
+        <source>Expected: level %1, timbre %2</source>
+        <translation>Forventet: niveau %1, klangfarve %2</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="251"/>
+        <source>Level change through the attenuation: %1</source>
+        <translation>Niveauændring via dæmpningen: %1</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="253"/>
+        <source>Nothing to correct with these parameters.</source>
+        <translation>Intet at korrigere med disse parametre.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="256"/>
+        <source>No reference: nothing can be computed.</source>
+        <translation>Ingen reference: intet kan beregnes.</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="258"/>
+        <source>The parameters will be applied to %n root keys, from the worst to the least bad.</source>
+        <translation>
+            <numerusform>Parametrene anvendes på %n grundtangent, begyndende med den dårligste.</numerusform>
+            <numerusform>Parametrene anvendes på %n grundtangenter, begyndende med den dårligste.</numerusform>
+        </translation>
+    </message>
+</context>
+<context>
+    <name>DialogTimbreCreation</name>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="39"/>
+        <source>Create a computed note</source>
+        <translation>Opret en beregnet tone</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="43"/>
+        <source>Note at the key %1: the closest root key is transposed and the levels of its harmonics are interpolated (or extrapolated) from a second root key.</source>
+        <translation>Tone på tangenten %1: den nærmeste grundtangent transponeres, og niveauerne af dens harmoniske interpoleres (eller ekstrapoleres) ud fra en anden grundtangent.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="51"/>
+        <source>Automatic: %1 transposed, %2 for the harmonics</source>
+        <translation>Automatisk: %1 transponeret, %2 for de harmoniske</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="56"/>
+        <source>Chosen root keys:</source>
+        <translation>Valgte grundtangenter:</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="69"/>
+        <source>Root key transposed</source>
+        <translation>Transponeret grundtangent</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="70"/>
+        <source>Root key for the harmonics</source>
+        <translation>Grundtangent for de harmoniske</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="144"/>
+        <source>The two root keys must be different.</source>
+        <translation>De to grundtangenter skal være forskellige.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="149"/>
+        <source>The key is far from the root keys used: the extrapolation of the harmonics may be inaccurate.</source>
+        <translation>Tangenten ligger langt fra de anvendte grundtangenter: ekstrapolationen af de harmoniske kan være upræcis.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="151"/>
+        <source>The closest root key is transposed by more than an octave.</source>
+        <translation>Den nærmeste grundtangent transponeres mere end en oktav.</translation>
+    </message>
+</context>
+<context>
     <name>DirectoryBrowser</name>
     <message>
         <location filename="../../directory/directorybrowser.ui" line="296"/>
@@ -3134,7 +3370,7 @@ på et signal</translation>
         <translation>Kan ikke åbne filen</translation>
     </message>
     <message>
-        <location filename="../../editor/editor.cpp" line="526"/>
+        <location filename="../../editor/editor.cpp" line="529"/>
         <source>Warning</source>
         <translation>Advarsel</translation>
     </message>
@@ -5209,6 +5445,589 @@ Advarsel: kvaliteten vil blive reduceret, og loopet kan blive ændret</translati
         <location filename="../../editor/pagetable.h" line="41"/>
         <source>Table</source>
         <translation>Tabel</translation>
+    </message>
+</context>
+<context>
+    <name>PageTimbre</name>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="178"/>
+        <source>Velocity</source>
+        <translation>Anslagsstyrke</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="189"/>
+        <source>Display</source>
+        <translation>Visning</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="197"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="823"/>
+        <source>Reference</source>
+        <translation>Reference</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="199"/>
+        <source>Neighbors</source>
+        <translation>Naboer</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="200"/>
+        <source>Local regression</source>
+        <translation>Lokal regression</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="201"/>
+        <source>Reference of a root key: interpolation between its two neighbors, or robust regression on several neighbors on each side</source>
+        <translation>Reference for en grundtangent: interpolation mellem dens to naboer eller robust regression over flere naboer på hver side</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="208"/>
+        <source>Neighbors on each side</source>
+        <translation>Naboer på hver side</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="215"/>
+        <source>Partials</source>
+        <translation>Deltoner</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="223"/>
+        <source>Ranks displayed one by one</source>
+        <translation>Harmoniske vist enkeltvis</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="225"/>
+        <source>Bands of a third of an octave</source>
+        <translation>Tertsbånd</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="226"/>
+        <source>Bands of an octave</source>
+        <translation>Oktavbånd</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="228"/>
+        <source>Next ranks</source>
+        <translation>Følgende harmoniske</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="232"/>
+        <source>kHz</source>
+        <comment>unit for kilohertz</comment>
+        <translation>kHz</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="233"/>
+        <source>Half of the sample rate</source>
+        <translation>Halvdelen af sample rate</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="235"/>
+        <source>Upper limit</source>
+        <translation>Øvre grænse</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="239"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="261"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="428"/>
+        <source>dB</source>
+        <comment>unit for decibels</comment>
+        <translation>dB</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="241"/>
+        <source>Ranks further below the strongest one of the key are ignored</source>
+        <translation>Harmoniske, der ligger mere end denne værdi under tangentens stærkeste harmoniske, ignoreres</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="242"/>
+        <source>Dynamic range</source>
+        <translation>Dynamikområde</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="251"/>
+        <source>Thresholds</source>
+        <translation>Tærskler</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="266"/>
+        <source>Tolerance</source>
+        <translation>Tolerance</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="266"/>
+        <source>Timbre deviation up to which a root key is consistent</source>
+        <translation>Klangfarveafvigelse, op til hvilken en grundtangent er konsistent</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="267"/>
+        <source>Maximum</source>
+        <translation>Maksimum</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="267"/>
+        <source>Timbre deviation up to which a root key can be corrected, beyond it is too different</source>
+        <translation>Klangfarveafvigelse, op til hvilken en grundtangent kan korrigeres; derover er den for forskellig</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="269"/>
+        <source>Redundancy</source>
+        <translation>Redundans</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="269"/>
+        <source>Largest timbre deviation over the keys of a consistent root key if it were removed, for being redundant</source>
+        <translation>Største klangfarveafvigelse over en konsistent grundtangents tangenter, hvis den blev fjernet, for at den regnes som redundant</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="271"/>
+        <source>Break</source>
+        <translation>Brud</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="271"/>
+        <source>Timbre jump at a junction from which a computed note is proposed</source>
+        <translation>Klangfarvespring ved en overgang, fra hvilket en beregnet tone foreslås</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="272"/>
+        <source>Level</source>
+        <translation>Niveau</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="272"/>
+        <source>Level deviation from which a correction of the attenuation is proposed</source>
+        <translation>Niveauafvigelse, fra hvilken en korrektion af dæmpningen foreslås</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="273"/>
+        <source>Default values</source>
+        <translation>Standardværdier</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="291"/>
+        <source>Options</source>
+        <translation>Muligheder</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="294"/>
+        <source>Summaries</source>
+        <translation>Oversigter</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="311"/>
+        <source>Root keys only</source>
+        <translation>Kun grundtangenter</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="312"/>
+        <source>Whole keyboard</source>
+        <translation>Hele keyboardet</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="313"/>
+        <source>Colors by steps of the thresholds</source>
+        <translation>Farver i trin efter tærsklerne</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="314"/>
+        <source>Automatic range of the colors</source>
+        <translation>Automatisk farveområde</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="316"/>
+        <source>Play the clicked keys</source>
+        <translation>Spil de klikkede tangenter</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="322"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1156"/>
+        <source>Propose</source>
+        <translation>Foreslå</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="326"/>
+        <source>Correct the root keys marked &quot;to correct&quot;...</source>
+        <translation>Korrigér grundtangenterne markeret &quot;skal korrigeres&quot;...</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="329"/>
+        <source>Replace the root keys marked &quot;too different&quot; with computed notes...</source>
+        <translation>Erstat grundtangenterne markeret &quot;for forskellig&quot; med beregnede toner...</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="332"/>
+        <source>Remove the redundant root keys...</source>
+        <translation>Fjern de redundante grundtangenter...</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="335"/>
+        <source>Create computed notes at the breaks...</source>
+        <translation>Opret beregnede toner ved bruddene...</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="338"/>
+        <source>Correct the deviating levels...</source>
+        <translation>Korrigér de afvigende niveauer...</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="375"/>
+        <source>Create a note here...</source>
+        <translation>Opret en tone her...</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="376"/>
+        <source>Remove...</source>
+        <translation>Fjern...</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="377"/>
+        <source>Replace with a computed note...</source>
+        <translation>Erstat med en beregnet tone...</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="378"/>
+        <source>Correct the timbre...</source>
+        <translation>Korrigér klangfarven...</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="379"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1017"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1191"/>
+        <source>Correct the level</source>
+        <translation>Korrigér niveauet</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="380"/>
+        <source>Check by rendering</source>
+        <translation>Tjek ved rendering</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="381"/>
+        <source>Play the key with the sound engine and measure the harmonics of the result</source>
+        <translation>Spil tangenten med lydmotoren, og mål resultatets harmoniske</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="449"/>
+        <source>Select a single instrument
+to display its timbre</source>
+        <translation>Vælg et enkelt instrument
+for at vise dets klangfarve</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="520"/>
+        <source>Analysis of the samples: %n remaining</source>
+        <translation>
+            <numerusform>Analyse af samples: %n tilbage</numerusform>
+            <numerusform>Analyse af samples: %n tilbage</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="747"/>
+        <source>No division of this instrument plays at the velocity %1.</source>
+        <translation>Ingen division i dette instrument spiller ved anslagsstyrken %1.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="753"/>
+        <source>Click on a key to see what it plays.</source>
+        <translation>Klik på en tangent for at se, hvad den spiller.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="761"/>
+        <source>Key %1</source>
+        <translation>Tangent %1</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="770"/>
+        <source>%1: transposition %2 semitones, attenuation %3, filter %4 Hz</source>
+        <translation>%1: transponering %2 halvtoner, dæmpning %3, filter %4 Hz</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="774"/>
+        <source>Duration factor: %1 (attack, tremolo and beats)</source>
+        <translation>Varighedsfaktor: %1 (attack, tremolo og svævninger)</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="776"/>
+        <source>Pitch: %1 cents from the closest note of the equal temperament</source>
+        <translation>Tonehøjde: %1 cents fra den nærmeste tone i ligesvævende temperament</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="780"/>
+        <source>No sample</source>
+        <translation>Ingen sample</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="787"/>
+        <source>Played by the root key %1</source>
+        <translation>Spillet af grundtangenten %1</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="793"/>
+        <source>consistent</source>
+        <translation>konsistent</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="794"/>
+        <source>redundant: can be removed</source>
+        <translation>redundant: kan fjernes</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="795"/>
+        <source>to correct</source>
+        <translation>skal korrigeres</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="796"/>
+        <source>too different: remove it or replace it with a computed note</source>
+        <translation>for forskellig: fjern den, eller erstat den med en beregnet tone</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="799"/>
+        <source>Root key %1: %2</source>
+        <translation>Grundtangent %1: %2</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="800"/>
+        <source>Deviation from the reference: level %1, timbre %2 (confidence %3%)</source>
+        <translation>Afvigelse fra referencen: niveau %1, klangfarve %2 (konfidens %3 %)</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="804"/>
+        <source>Reference extrapolated from the neighbors on one side: less reliable</source>
+        <translation>Reference ekstrapoleret fra naboerne på kun én side: mindre pålidelig</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="807"/>
+        <source>If removed: largest timbre deviation %1, level %2</source>
+        <translation>Hvis den fjernes: største klangfarveafvigelse %1, niveau %2</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="810"/>
+        <source>new junction %1</source>
+        <translation>ny overgang %1</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="815"/>
+        <source>Analysis in progress...</source>
+        <translation>Analyse i gang...</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="820"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="828"/>
+        <source>Heard</source>
+        <translation>Hørt</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="834"/>
+        <source>Computed note</source>
+        <translation>Beregnet tone</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="836"/>
+        <source>A computed note can be created here (dashed column).</source>
+        <translation>En beregnet tone kan oprettes her (stiplet kolonne).</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="841"/>
+        <source>Junction with the previous key: level %1, timbre %2</source>
+        <translation>Overgang til den forrige tangent: niveau %1, klangfarve %2</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="843"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="848"/>
+        <source>break</source>
+        <translation>brud</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="845"/>
+        <source>Junction with the next key: level %1, timbre %2</source>
+        <translation>Overgang til den næste tangent: niveau %1, klangfarve %2</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="853"/>
+        <source>Rendered</source>
+        <translation>Renderet</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="862"/>
+        <source>Rendering against the model: level %1, timbre %2, largest deviation of a row %3</source>
+        <translation>Rendering sammenlignet med modellen: niveau %1, klangfarve %2, største afvigelse i en række %3</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="868"/>
+        <source>%n root keys selected: the actions apply to all of them.</source>
+        <translation>
+            <numerusform>%n grundtangent valgt: handlingerne gælder for dem alle.</numerusform>
+            <numerusform>%n grundtangenter valgt: handlingerne gælder for dem alle.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="891"/>
+        <source>Mute these divisions</source>
+        <translation>Mute disse divisioner</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="927"/>
+        <source>Computing the note %1...</source>
+        <translation>Beregner tonen %1...</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="946"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1116"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1330"/>
+        <source>Warning</source>
+        <translation>Advarsel</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="975"/>
+        <source>Remove the root key %1 (%n division(s))? The neighbors will play its keys.</source>
+        <translation>
+            <numerusform>Fjern grundtangenten %1 (%n division)? Naboerne vil spille dens tangenter.</numerusform>
+            <numerusform>Fjern grundtangenten %1 (%n divisioner)? Naboerne vil spille dens tangenter.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="978"/>
+        <source>Largest timbre deviation over its keys: %1, level: %2.</source>
+        <translation>Største klangfarveafvigelse over dens tangenter: %1, niveau: %2.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="981"/>
+        <source>Timbre jump at the new junction: %1.</source>
+        <translation>Klangfarvespring ved den nye overgang: %1.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="984"/>
+        <source>Remove the following root keys? The neighbors will play their keys.</source>
+        <translation>Fjern følgende grundtangenter? Naboerne vil spille deres tangenter.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="986"/>
+        <source>Remove</source>
+        <translation>Fjern</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="987"/>
+        <source>Also remove the samples that are not used anymore</source>
+        <translation>Fjern også de samples, der ikke længere bruges</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1002"/>
+        <source>Replace the root key %1 with a note computed from its neighbors?</source>
+        <translation>Erstat grundtangenten %1 med en tone beregnet ud fra dens naboer?</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1003"/>
+        <source>Replace the following root keys with notes computed from their neighbors?</source>
+        <translation>Erstat følgende grundtangenter med toner beregnet ud fra deres naboer?</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1005"/>
+        <source>Replace</source>
+        <translation>Erstat</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1018"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1192"/>
+        <source>Correct the level of the following root keys?</source>
+        <translation>Korrigér niveauet for følgende grundtangenter?</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1051"/>
+        <source>Shared samples</source>
+        <translation>Delte samples</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1052"/>
+        <source>The following samples are also used by other divisions or instruments:</source>
+        <translation>Følgende samples bruges også af andre divisioner eller instrumenter:</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1054"/>
+        <source>Duplicate them for the corrected root keys, or modify them everywhere?</source>
+        <translation>Kopiér dem til de korrigerede grundtangenter, eller ændr dem overalt?</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1055"/>
+        <source>Duplicate</source>
+        <translation>Kopiér</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1056"/>
+        <source>Modify everywhere</source>
+        <translation>Ændr overalt</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1059"/>
+        <source>Don&apos;t ask again (until Polyphone is closed)</source>
+        <translation>Spørg ikke igen (indtil Polyphone lukkes)</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1113"/>
+        <source>Rendering of the key %1...</source>
+        <translation>Renderer tangenten %1...</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1116"/>
+        <source>The rendering couldn&apos;t be analyzed.</source>
+        <translation>Renderingen kunne ikke analyseres.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1156"/>
+        <source>Nothing to propose with the current thresholds.</source>
+        <translation>Intet at foreslå med de nuværende tærskler.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1185"/>
+        <source>Create computed notes</source>
+        <translation>Opret beregnede toner</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1186"/>
+        <source>Create computed notes at the following keys?</source>
+        <translation>Opret beregnede toner på følgende tangenter?</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1208"/>
+        <source>Processing...</source>
+        <translation>Behandler...</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1208"/>
+        <source>Cancel</source>
+        <translation>Afbryd</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1267"/>
+        <source>Processing the key %1...</source>
+        <translation>Behandler tangenten %1...</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1289"/>
+        <source>%1: the attenuation reached its limit (%2 missing).</source>
+        <translation>%1: dæmpningen har nået sin grænse (%2 mangler).</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1303"/>
+        <source>Correction of the key %1...</source>
+        <translation>Korrigerer tangenten %1...</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1307"/>
+        <source>: </source>
+        <comment>separator</comment>
+        <translation>: </translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1328"/>
+        <source>Not processed (the label changed or nothing to do):</source>
+        <translation>Ikke behandlet (mærkningen er ændret, eller intet at gøre):</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.h" line="59"/>
+        <source>Timbre</source>
+        <translation>Klangfarve</translation>
     </message>
 </context>
 <context>
@@ -7358,6 +8177,187 @@ Andre soundfont-editorer kan vise andre enheder.</translation>
     </message>
 </context>
 <context>
+    <name>TimbreActions</name>
+    <message>
+        <location filename="../../editor/timbre/timbreactions.cpp" line="62"/>
+        <source>The key %1 already has a sample.</source>
+        <translation>Tangenten %1 har allerede en sample.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/timbreactions.cpp" line="67"/>
+        <source>At least two root keys are needed for computing a note.</source>
+        <translation>Der kræves mindst to grundtangenter for at beregne en tone.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/timbreactions.cpp" line="108"/>
+        <source>The note couldn&apos;t be computed.</source>
+        <translation>Tonen kunne ikke beregnes.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/timbreactions.cpp" line="118"/>
+        <source>No harmonics found, only the level was interpolated.</source>
+        <translation>Ingen harmoniske fundet, kun niveauet blev interpoleret.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/timbreactions.cpp" line="120"/>
+        <source>The following samples couldn&apos;t be looped:</source>
+        <translation>Følgende samples kunne ikke loopes:</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/timbreactions.cpp" line="503"/>
+        <source>The attenuation reached its limit: the level differs by %1 dB from the expected one.</source>
+        <translation>Dæmpningen har nået sin grænse: niveauet afviger med %1 dB fra det forventede.</translation>
+    </message>
+</context>
+<context>
+    <name>TimbreBarsWidget</name>
+    <message>
+        <location filename="../../editor/timbre/timbrebarswidget.cpp" line="194"/>
+        <source>: </source>
+        <comment>separator</comment>
+        <translation>: </translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/timbrebarswidget.cpp" line="195"/>
+        <source>dB</source>
+        <comment>unit for decibels</comment>
+        <translation>dB</translation>
+    </message>
+</context>
+<context>
+    <name>TimbreMapWidget</name>
+    <message>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="74"/>
+        <source>Level</source>
+        <translation>Niveau</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="75"/>
+        <source>Timbre</source>
+        <translation>Klangfarve</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="76"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="94"/>
+        <source>Transposition</source>
+        <translation>Transponering</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="77"/>
+        <source>Brightness</source>
+        <translation>Lyshed</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="78"/>
+        <source>Odd / even</source>
+        <translation>Ulige / lige</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="79"/>
+        <source>Noise</source>
+        <translation>Støj</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="80"/>
+        <source>Tuning</source>
+        <translation>Intonation</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="81"/>
+        <source>Loop</source>
+        <translation>Loop</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="90"/>
+        <source>Absolute levels</source>
+        <translation>Absolutte niveauer</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="91"/>
+        <source>Relative levels</source>
+        <translation>Relative niveauer</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="92"/>
+        <source>Deviation from the reference</source>
+        <translation>Afvigelse fra referencen</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="93"/>
+        <source>Jumps</source>
+        <translation>Spring</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="95"/>
+        <source>Confidence</source>
+        <translation>Konfidens</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="210"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="569"/>
+        <source>Decisions</source>
+        <translation>Beslutninger</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="762"/>
+        <source>No sample</source>
+        <translation>Ingen sample</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="775"/>
+        <source>Row: %1</source>
+        <translation>Række: %1</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="775"/>
+        <source>level: %1 dB</source>
+        <translation>niveau: %1 dB</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="780"/>
+        <source>Deviation from the reference: %1 dB</source>
+        <translation>Afvigelse fra referencen: %1 dB</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="783"/>
+        <source>Jump from the previous key: %1 dB</source>
+        <translation>Spring fra den forrige tangent: %1 dB</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="796"/>
+        <source>Samples: %1</source>
+        <translation>Samples: %1</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="798"/>
+        <source>Root key: %1</source>
+        <translation>Grundtangent: %1</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="799"/>
+        <source>Transposition: %1 semitones</source>
+        <translation>Transponering: %1 halvtoner</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="800"/>
+        <source>Duration factor: %1</source>
+        <translation>Varighedsfaktor: %1</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="801"/>
+        <source>Level: %1 dB</source>
+        <translation>Niveau: %1 dB</translation>
+    </message>
+</context>
+<context>
+    <name>TimbreVelocityStrip</name>
+    <message>
+        <location filename="../../editor/timbre/timbrebarswidget.cpp" line="208"/>
+        <source>Velocity layers of the instrument: a click selects the middle of a layer</source>
+        <translation>Instrumentets anslagsstyrkelag: et klik vælger midten af et lag</translation>
+    </message>
+</context>
+<context>
     <name>ToolAutoDistribution</name>
     <message>
         <location filename="../../editor/tools/auto_distribution/toolautodistribution.h" line="45"/>
@@ -8459,17 +9459,17 @@ Andre soundfont-editorer kan vise andre enheder.</translation>
 <context>
     <name>ToolMissingSamples</name>
     <message>
-        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="101"/>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="104"/>
         <source>This tool cannot be used on instruments having several velocity ranges:</source>
         <translation>Dette værktøj kan ikke bruges på instrumenter med flere anslagsstyrke områder:</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="158"/>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="161"/>
         <source>No keys to create.</source>
         <translation>Ingen tangenter at oprette.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="160"/>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="163"/>
         <source>No sample to create: the root keys are at most %n semitone(s) apart.</source>
         <translation>
             <numerusform>Ingen sample at oprette: grundtangenterne ligger højst %n halvtone fra hinanden.</numerusform>
@@ -8477,17 +9477,17 @@ Andre soundfont-editorer kan vise andre enheder.</translation>
         </translation>
     </message>
     <message>
-        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="273"/>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="277"/>
         <source>Keys already having a sample, ignored:</source>
         <translation>Tangenter, der allerede har en sample, ignoreret:</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="275"/>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="279"/>
         <source>No harmonics found around the following keys, only the level was interpolated:</source>
         <translation>Ingen harmoniske fundet omkring følgende tangenter, kun niveauet blev interpoleret:</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="278"/>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.cpp" line="282"/>
         <source>The following samples couldn&apos;t be looped:</source>
         <translation>Følgende samples kunne ikke loopes:</translation>
     </message>
@@ -8497,7 +9497,7 @@ Andre soundfont-editorer kan vise andre enheder.</translation>
         <translation>Transformation</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/missing_samples/toolmissingsamples.h" line="75"/>
+        <location filename="../../editor/tools/missing_samples/toolmissingsamples.h" line="79"/>
         <source>Create missing samples</source>
         <translation>Opret manglende samples</translation>
     </message>

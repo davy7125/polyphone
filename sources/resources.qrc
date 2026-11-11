@@ -35,6 +35,7 @@
         <file alias="warning.svg">resources/warning.svg</file>
         <file alias="adsr.svg">resources/adsr.svg</file>
         <file alias="range.svg">resources/range.svg</file>
+        <file alias="timbre.svg">resources/timbre.svg</file>
         <file alias="table.svg">resources/table.svg</file>
         <file alias="courbe01.svg">resources/courbe01.svg</file>
         <file alias="courbe02.svg">resources/courbe02.svg</file>
@@ -108,10 +109,9 @@
         <file alias="temperaments.csv">resources/misc/temperaments.csv</file>
     </qresource>
     <qresource prefix="/tool">
-        <file alias="trim_loop.svg">editor/tools/trim_end/trim_loop.svg</file>
+        <file alias="trim.svg">editor/tools/trim/trim.svg</file>
         <file alias="loop.svg">editor/tools/auto_loop/loop.svg</file>
         <file alias="command_line.svg">editor/tools/external_command/command_line.svg</file>
-        <file alias="remove_blank.svg">editor/tools/trim_start/remove_blank.svg</file>
         <file alias="filter_frequencies.svg">editor/tools/frequency_filter/filter_frequencies.svg</file>
         <file alias="change_volume.svg">editor/tools/change_volume/change_volume.svg</file>
         <file alias="balance.svg">editor/tools/balance_adjustment/balance.svg</file>

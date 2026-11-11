@@ -249,11 +249,11 @@ void Synth::setSinus(bool isOn, int rootKey)
         _sinus.off();
 }
 
-void Synth::setSampleData(EltID id, const qint16 * data16, const quint8 * data24, quint32 length)
+void Synth::setSampleData(EltID id, const qint16 * data16, const quint8 * data24, quint32 length, bool allVoices)
 {
     // The soundfonts must not change while the voices are updated
     QMutexLocker mutexLocker(_mutexSoundfonts); // Will do nothing if _mutexSoundfonts is null
-    _core.setSampleData(id.indexSf2, id.indexElt, data16, data24, length);
+    _core.setSampleData(id.indexSf2, id.indexElt, data16, data24, length, allVoices);
 }
 
 void Synth::setStartLoop(quint32 startLoop, bool withLinkedSample)

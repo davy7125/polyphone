@@ -88,10 +88,11 @@ public:
     void setEndLoop(uint32_t endLoop, bool withLinkedSample);
     void setPitchCorrection(int16_t correction, bool withLinkedSample);
 
-    // Preview of a processing of a sample (editor): the voices playing the sample alone read this data instead of the
-    // sample data (same length, 16 bits plus the 8 least significant bits possibly null), the voices already playing
-    // from their next chunk. A null data16 restores the sample data.
-    void setSampleData(int sf2Id, int sampleIndex, const int16_t * data16, const uint8_t * data24, uint32_t length);
+    // Preview of a processing of a sample (editor): the voices playing the sample alone (or all the voices playing it
+    // if allVoices is true) read this data instead of the sample data (same length, 16 bits plus the 8 least significant
+    // bits possibly null), the voices already playing from their next chunk. A null data16 restores the sample data.
+    void setSampleData(int sf2Id, int sampleIndex, const int16_t * data16, const uint8_t * data24, uint32_t length,
+                       bool allVoices = false);
 
     // MIDI controllers (the values read by the modulators are given by IMidiValues)
     void processPolyPressureChanged(int channel, int key, int pressure);
@@ -169,7 +170,7 @@ private:
     bool _smplIsLoopEnabled;
     VoiceContext _context; // Read by the voices
 
-    // Data replacing the data of samples played alone (setSampleData), protected by _voicesMutex
+    // Data replacing the data of samples played alone or by all voices (setSampleData), protected by _voicesMutex
     struct ReplacedSample
     {
         int sf2Id;
@@ -177,6 +178,7 @@ private:
         std::vector<int16_t> data16;
         std::vector<uint8_t> data24;
         float peak;
+        bool allVoices;
     };
     std::vector<ReplacedSample> _replacedSamples;
 

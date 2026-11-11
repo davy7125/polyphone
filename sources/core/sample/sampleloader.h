@@ -38,8 +38,8 @@ public:
     SampleLoader();
     virtual ~SampleLoader() {}
 
-    /// Processing of the samples loaded: data removed after the end of the loop, blank removed at the start
-    void setProcessing(bool trimToLoop, bool trimStart);
+    /// Processing of the samples loaded: blank removed at the start and / or at the end (automatic threshold)
+    void setProcessing(bool trimStart, bool trimEnd);
 
     /// Add a sample to a soundfont
     /// "replace" is what to do with a sample having the same name as an existing one, possibly changed by the user:
@@ -61,8 +61,8 @@ private:
     QString getName(QString name, int maxCharacters, int suffixNumber);
 
     SoundfontManager * _sm;
-    bool _trimToLoop;
     bool _trimStart;
+    bool _trimEnd;
 };
 
 #endif // SAMPLELOADER_H

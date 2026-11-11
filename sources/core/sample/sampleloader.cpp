@@ -30,16 +30,16 @@
 
 SampleLoader::SampleLoader() :
     _sm(SoundfontManager::getInstance()),
-    _trimToLoop(false),
-    _trimStart(false)
+    _trimStart(false),
+    _trimEnd(false)
 {
 
 }
 
-void SampleLoader::setProcessing(bool trimToLoop, bool trimStart)
+void SampleLoader::setProcessing(bool trimStart, bool trimEnd)
 {
-    _trimToLoop = trimToLoop;
     _trimStart = trimStart;
+    _trimEnd = trimEnd;
 }
 
 // Replace status
@@ -218,14 +218,13 @@ IdList SampleLoader::load(QString path, int numSf2, int *replace)
             sm->set(id, champ_byOriginalPitch, val);
             val.cValue = static_cast<char>(sound.getInt32(champ_chPitchCorrection));
             sm->set(id, champ_chPitchCorrection, val);
-
-            // Automatically trim to loop?
-            if (_trimToLoop)
-                SampleTrimming::trimToLoop(_sm, id);
         }
     }
 
-    // Automatically remove leading blank?
+    // Automatically remove the blank at the end and at the start? (the noise before the sound is a reference for the
+    // end)
+    if (_trimEnd)
+        SampleTrimming::trimEnd(_sm, loadedSmpl);
     if (_trimStart)
         SampleTrimming::trimStart(_sm, loadedSmpl);
 

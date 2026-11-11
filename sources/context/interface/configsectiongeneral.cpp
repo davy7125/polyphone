@@ -60,13 +60,13 @@ void ConfigSectionGeneral::initialize()
     this->initializeMidi();
 
     // Various options
-    ui->checkBoucle->blockSignals(true);
-    ui->checkBoucle->setChecked(ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "wav_auto_loop", false).toBool());
-    ui->checkBoucle->blockSignals(false);
-
     ui->checkBlanc->blockSignals(true);
     ui->checkBlanc->setChecked(ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "wav_remove_blank", false).toBool());
     ui->checkBlanc->blockSignals(false);
+
+    ui->checkBlancFin->blockSignals(true);
+    ui->checkBlancFin->setChecked(ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "wav_remove_blank_end", false).toBool());
+    ui->checkBlancFin->blockSignals(false);
 
     // Other configuration that needs to be updated more often
     showEvent(nullptr);
@@ -262,14 +262,14 @@ void ConfigSectionGeneral::on_comboMidiInput_currentIndexChanged(int index)
     ContextManager::midi()->openMidiPort(indexInput);
 }
 
-void ConfigSectionGeneral::on_checkBoucle_toggled(bool checked)
-{
-    ContextManager::configuration()->setValue(ConfManager::SECTION_NONE, "wav_auto_loop", checked);
-}
-
 void ConfigSectionGeneral::on_checkBlanc_toggled(bool checked)
 {
     ContextManager::configuration()->setValue(ConfManager::SECTION_NONE, "wav_remove_blank", checked);
+}
+
+void ConfigSectionGeneral::on_checkBlancFin_toggled(bool checked)
+{
+    ContextManager::configuration()->setValue(ConfManager::SECTION_NONE, "wav_remove_blank_end", checked);
 }
 
 void ConfigSectionGeneral::on_checkRepercussionStereo_toggled(bool checked)

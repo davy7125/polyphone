@@ -22,50 +22,21 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include "tooltrimstart.h"
-#include "soundfontmanager.h"
-#include "sampletrimming.h"
+#include "tooltrim_parameters.h"
 
-void ToolTrimStart::beforeProcess(IdList ids)
+void ToolTrim_parameters::loadConfiguration()
 {
-    Q_UNUSED(ids)
-    _processedSamples.clear();
+    _start = getToolValue("start", true).toBool();
+    int endMode = getToolValue("end", END_BLANK).toInt();
+    _endMode = (endMode >= END_UNCHANGED && endMode <= END_BLANK) ? static_cast<EndMode>(endMode) : END_BLANK;
+    _automaticThreshold = getToolValue("automatic_threshold", true).toBool();
+    _threshold = getToolValue("threshold", -70).toDouble();
 }
 
-void ToolTrimStart::process(SoundfontManager * sm, EltID id, AbstractToolParameters *parameters)
+void ToolTrim_parameters::saveConfiguration()
 {
-    Q_UNUSED(parameters);
-    bool withLink = false;
-    EltID id2 = id;
-
-    // Sample already processed?
-    _mutex.lock();
-    if (_processedSamples.contains(id))
-    {
-        _mutex.unlock();
-        return;
-    }
-    else
-    {
-        _processedSamples << id;
-
-        // The sample may be linked
-        SFSampleLink typeLien = sm->get(id, champ_sfSampleType).sfLinkValue;
-        if (typeLien != monoSample && typeLien != RomMonoSample)
-        {
-            id2.indexElt = sm->get(id, champ_wSampleLink).wValue;
-            if (this->isProcessed(id2))
-            {
-                withLink = true;
-                _processedSamples << id2;
-            }
-        }
-    }
-    _mutex.unlock();
-
-    // Elements to process
-    IdList ids(id);
-    if (withLink)
-        ids << id2;
-    SampleTrimming::trimStart(sm, ids);
+    setToolValue("start", _start);
+    setToolValue("end", static_cast<int>(_endMode));
+    setToolValue("automatic_threshold", _automaticThreshold);
+    setToolValue("threshold", _threshold);
 }

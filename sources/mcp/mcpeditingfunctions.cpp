@@ -298,8 +298,8 @@ void McpFunctions::addEditingFunctions(QList<McpFunction *> &functions)
             // As in the editor: processing of the configuration, recent files
             SampleLoader loader;
             loader.setProcessing(
-                ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "wav_auto_loop", false).toBool(),
-                ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "wav_remove_blank", false).toBool());
+                ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "wav_remove_blank", false).toBool(),
+                ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "wav_remove_blank_end", false).toBool());
             int replace = -1; // Duplicate if a name already exists, no questions
             IdList ids;
             foreach (QString path, paths)

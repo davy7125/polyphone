@@ -697,6 +697,11 @@
      </item>
      <item>
       <property name="text">
+       <string>Instruments - first instrument - Timbre</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
        <string>Presets</string>
       </property>
      </item>

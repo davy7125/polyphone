@@ -32,6 +32,7 @@
 #include "pageprst.h"
 #include "pagerange.h"
 #include "pageenvelope.h"
+#include "pagetimbre.h"
 #include "extensionmanager.h"
 
 PageSelector::PageSelector()
@@ -45,7 +46,8 @@ PageSelector::PageSelector()
            << new PageInst()
            << new PagePrst()
            << new PageRange()
-           << new PageEnvelope();
+           << new PageEnvelope()
+           << new PageTimbre();
 
     // Pages from possible extensions
     for (int i = 0; i < ExtensionManager::view()->count(); i++)

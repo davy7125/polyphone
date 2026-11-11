@@ -91,6 +91,24 @@ public:
     // that the remaining data does not start with a jump
     static quint32 findTrimStart(const QVector<float> &vData, quint32 dwSmplRate, bool looped);
 
+    // Same with a threshold in dBFS, NaN for the automatic detection above: the onset is then the first value whose
+    // absolute value reaches the threshold (0 if none)
+    static quint32 findTrimStart(const QVector<float> &vData, quint32 dwSmplRate, bool looped, double thresholdDb);
+
+    // Level in dBFS below which the end of a sound is blank: 6 dB above the peaks of the background noise measured at the
+    // end of the sound (or before the sound if the end is still sounding), -90 dB at least or if no noise can be measured
+    static double findBlankThresholdAtEnd(const QVector<float> &vData, quint32 dwSmplRate);
+
+    // Blank at the end of a sound, after lastPosition, the last value whose absolute value reaches the threshold (dBFS).
+    // fadeLength: length of the fade-out prolonging the decay of the sound after this position (40 dB at the speed of
+    // the last 20 dB before the threshold, between 20 ms and 1 s). Return false if no value reaches the threshold
+    static bool findTrimEnd(const QVector<float> &vData, quint32 dwSmplRate, double thresholdDb, quint32 &lastPosition,
+                            quint32 &fadeLength);
+
+    // Fade-out on the values [start, start + length[ (those that exist), the gain decreasing like a natural decay down
+    // to 0 at the last position
+    static void fadeOut(QVector<float> &vData, quint32 start, quint32 length);
+
     // Steady part of a sound (found by a segmentation of its envelope in straight lines), return false if there is
     // none (decaying or percussive sound): the positions are then the most stable part after the attack
     static bool findSteadyPart(const QVector<float> &fData, quint32 dwSmplRate, quint32 &posStart, quint32 &posEnd);

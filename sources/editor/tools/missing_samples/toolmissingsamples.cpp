@@ -64,6 +64,7 @@ private:
 ToolMissingSamples::ToolMissingSamples() : AbstractTool(new ToolMissingSamples_parameters(), new ToolMissingSamples_gui()),
     _runId(0),
     _processedCount(0),
+    _velocity(-1),
     _waitingDialog(nullptr)
 {
     connect(this, SIGNAL(jobProcessed(int)), this, SLOT(onJobProcessed(int)), Qt::QueuedConnection);
@@ -91,6 +92,8 @@ bool ToolMissingSamples::isCompatible(IdList ids)
 
 QString ToolMissingSamples::getBlockingError(IdList ids)
 {
+    if (_velocity >= 0)
+        return ""; // A single velocity layer is processed
     SoundfontManager * sm = SoundfontManager::getInstance();
     QStringList names;
     foreach (EltID idInst, ids.getSelectedIds(elementInst))
@@ -117,7 +120,7 @@ void ToolMissingSamples::prepare(SoundfontManager * sm, IdList ids, ToolMissingS
         idInst.typeElement = elementInst;
         if (!sm->isValid(idInst))
             continue;
-        QMap<int, MissingSamplePosition> positions = MissingSampleCreator::getPositions(sm, idInst);
+        QMap<int, MissingSamplePosition> positions = MissingSampleCreator::getPositions(sm, idInst, _velocity);
         if (positions.count() < 2)
             continue;
 
@@ -261,6 +264,7 @@ void ToolMissingSamples::finish(SoundfontManager * sm)
                               ContextManager::keyName()->getKeyName(static_cast<unsigned int>(job.key));
         }
         MissingSampleCreator::adjustKeyRanges(sm, instrument.divisions, newDivisions);
+        MissingSampleCreator::removeCoveredDivisions(sm, instrument.divisions, newDivisions);
     }
 }
 

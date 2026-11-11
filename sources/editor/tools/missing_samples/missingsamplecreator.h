@@ -43,6 +43,7 @@ struct MissingSampleSource
     EltID idSample;
     double attenuation; // dB (value of the division or of the instrument)
     bool looped; // Loop playback with loop points defined in the sample
+    int keyMin, keyMax; // Key range of the division
 };
 
 // Divisions of an instrument sharing a root key
@@ -52,6 +53,10 @@ struct MissingSamplePosition
     QList<MissingSampleSource> sources;
 
     bool isLooped() const; // True if all divisions are looped
+
+    // One division per distinct sample, the closest to the root key (several divisions may play the same sample on
+    // different keys): their sound is the one of the root key, and the new divisions copy them
+    QList<MissingSampleSource> getMainSources() const;
 };
 
 // Sample to create at a key of an instrument: the closest root key ("closest") is transposed and the levels of its
@@ -115,8 +120,15 @@ class MissingSampleCreator
 {
 public:
     // Divisions of an instrument by root key (overriding root key of the division or of the instrument, otherwise
-    // original pitch of the sample), root keys above 127 being ignored
-    static QMap<int, MissingSamplePosition> getPositions(SoundfontManager * sm, EltID idInst);
+    // original pitch of the sample), root keys above 127 being ignored. With a velocity (0 to 127), only the divisions
+    // of the subset playing at this velocity (see isInSubset).
+    static QMap<int, MissingSamplePosition> getPositions(SoundfontManager * sm, EltID idInst, int velocity = -1,
+                                                         bool includeMuted = false);
+
+    // True if a division is in the subset of an instrument playing at a velocity: playable (not hidden, not muted
+    // unless includeMuted), its velocity range containing the velocity, not played only at the release (sample mode 2),
+    // with a sample
+    static bool isInSubset(SoundfontManager * sm, EltID idDivision, int velocity, bool includeMuted);
 
     // True if all divisions of an instrument have the same velocity range
     static bool hasSingleVelocityRange(SoundfontManager * sm, EltID idInst);
@@ -149,6 +161,11 @@ public:
     // keys of the instrument being kept
     static void adjustKeyRanges(SoundfontManager * sm, const QMap<int, QList<EltID> > &existingDivisions,
                                 const QMap<int, QList<EltID> > &newDivisions);
+
+    // Remove the existing divisions whose key range is entirely within the range of a new division (one division per
+    // key for instance: they could not shrink and would be played with the new note)
+    static void removeCoveredDivisions(SoundfontManager * sm, const QMap<int, QList<EltID> > &existingDivisions,
+                                       const QMap<int, QList<EltID> > &newDivisions);
 
     // Name of a new sample: the key written in the name of the source (number, possibly with 3 digits, or note name) is
     // replaced, otherwise the key is added at the end

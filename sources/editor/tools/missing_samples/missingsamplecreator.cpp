@@ -90,6 +90,31 @@ bool MissingSamplePosition::isLooped() const
     return true;
 }
 
+QList<MissingSampleSource> MissingSamplePosition::getMainSources() const
+{
+    QList<MissingSampleSource> result;
+    QList<int> distances;
+    foreach (MissingSampleSource source, sources)
+    {
+        int distance = key < source.keyMin ? source.keyMin - key : (key > source.keyMax ? key - source.keyMax : 0);
+        int found = -1;
+        for (int i = 0; i < result.count(); i++)
+            if (result[i].idSample == source.idSample)
+                found = i;
+        if (found == -1)
+        {
+            result << source;
+            distances << distance;
+        }
+        else if (distance < distances[found])
+        {
+            result[found] = source;
+            distances[found] = distance;
+        }
+    }
+    return result;
+}
+
 QSharedPointer<MissingSampleAnalysis> MissingSampleAnalysisCache::get(EltID idInst, const MissingSamplePosition &position)
 {
     QString key = QString("%1:%2:%3").arg(idInst.indexSf2).arg(idInst.indexElt).arg(position.key);
@@ -110,13 +135,32 @@ QSharedPointer<MissingSampleAnalysis> MissingSampleAnalysisCache::get(EltID idIn
     return result;
 }
 
-QMap<int, MissingSamplePosition> MissingSampleCreator::getPositions(SoundfontManager * sm, EltID idInst)
+bool MissingSampleCreator::isInSubset(SoundfontManager * sm, EltID idDivision, int velocity, bool includeMuted)
+{
+    if (!sm->isValid(idDivision)) // Hidden divisions excluded
+        return false;
+    if (!includeMuted && sm->get(idDivision, champ_mute).bValue > 0)
+        return false;
+    RangesType range = getRange(sm, idDivision, champ_velRange);
+    if (velocity < range.byLo || velocity > range.byHi)
+        return false;
+    AttributeValue value;
+    if (getValue(sm, idDivision, champ_sampleModes, value) && value.wValue == 2)
+        return false; // Played at the release only
+    EltID idSmpl(elementSmpl, idDivision.indexSf2, sm->get(idDivision, champ_sampleID).wValue);
+    return sm->isValid(idSmpl);
+}
+
+QMap<int, MissingSamplePosition> MissingSampleCreator::getPositions(SoundfontManager * sm, EltID idInst, int velocity,
+                                                                    bool includeMuted)
 {
     QMap<int, MissingSamplePosition> positions;
     EltID idDivision(elementInstSmpl, idInst.indexSf2, idInst.indexElt);
     foreach (int index, sm->getSiblings(idDivision))
     {
         idDivision.indexElt2 = index;
+        if (velocity >= 0 && !isInSubset(sm, idDivision, velocity, includeMuted))
+            continue;
         EltID idSample(elementSmpl, idInst.indexSf2, sm->get(idDivision, champ_sampleID).wValue);
         if (!sm->isValid(idSample))
             continue;
@@ -137,6 +181,9 @@ QMap<int, MissingSamplePosition> MissingSampleCreator::getPositions(SoundfontMan
         source.looped = isLoopPlayback(sm, idDivision) &&
                 SampleUtils::isLooped(sm->get(idSample, champ_dwStartLoop).dwValue, sm->get(idSample, champ_dwEndLoop).dwValue,
                                       sm->get(idSample, champ_dwLength).dwValue);
+        RangesType keyRange = getRange(sm, idDivision, champ_keyRange);
+        source.keyMin = keyRange.byLo;
+        source.keyMax = keyRange.byHi;
         positions[key].key = key;
         positions[key].sources << source;
     }
@@ -233,7 +280,7 @@ MissingSampleAnalysis MissingSampleCreator::analyze(const MissingSamplePosition 
     QVector<int> counts;
     double loudnessPower = 0;
     int loudnessCount = 0;
-    foreach (MissingSampleSource source, position.sources)
+    foreach (MissingSampleSource source, position.getMainSources())
     {
         QVector<float> data = sm->getDataFloat(source.idSample);
         quint32 sampleRate = sm->get(source.idSample, champ_dwSampleRate).dwValue;
@@ -245,8 +292,11 @@ MissingSampleAnalysis MissingSampleCreator::analyze(const MissingSamplePosition 
         if (data.isEmpty() || sampleRate == 0)
             continue;
 
-        // Harmonics, the expected frequency avoiding octave errors
-        SoundAnalyzer analyzer(data, sampleRate, loopStart, loopEnd, GainCurve::getFundamental(position.key, correction));
+        // Harmonics, the expected frequency avoiding octave errors (the sound may be higher than the root key, as for
+        // the organ stops of 4' or the mutations)
+        double expected = SoundAnalyzer::adjustExpectedFrequency(data, sampleRate, loopStart, loopEnd,
+                                                                 GainCurve::getFundamental(position.key, correction));
+        SoundAnalyzer analyzer(data, sampleRate, loopStart, loopEnd, expected);
         double attenuation = std::pow(10.0, -source.attenuation / 10);
         foreach (SoundAnalyzer::Harmonic harmonic, analyzer.getHarmonicList())
         {
@@ -318,7 +368,7 @@ void MissingSampleCreator::compute(MissingSampleJob &job, MissingSampleAnalysisC
     // Transposition then correction of each distinct sample of the closest root key
     double transposition = std::pow(2.0, (job.key - job.closest.key) / 12.0);
     QList<double> peaks, scales; // Peak of the result without limitation, scale applied
-    foreach (MissingSampleSource source, job.closest.sources)
+    foreach (MissingSampleSource source, job.closest.getMainSources())
     {
         bool alreadyProcessed = false;
         foreach (MissingSampleJob::NewSample sample, job.samples)
@@ -497,7 +547,7 @@ QList<EltID> MissingSampleCreator::apply(SoundfontManager * sm, const MissingSam
     EltID idInst = job.idInst;
     idInst.typeElement = elementInst;
     bool rootKeyOverridden = sm->isSet(idInst, champ_overridingRootKey);
-    foreach (MissingSampleSource source, job.closest.sources)
+    foreach (MissingSampleSource source, job.closest.getMainSources())
     {
         if (!sampleBySource.contains(source.idSample.indexElt))
             continue;
@@ -650,6 +700,32 @@ void MissingSampleCreator::adjustKeyRanges(SoundfontManager * sm, const QMap<int
         value.rValue.byHi = static_cast<quint8>(qBound(0, qMax(highKey, key), 127));
         foreach (EltID idDivision, newDivisions[key])
             sm->set(idDivision, champ_keyRange, value);
+    }
+}
+
+void MissingSampleCreator::removeCoveredDivisions(SoundfontManager * sm, const QMap<int, QList<EltID> > &existingDivisions,
+                                                  const QMap<int, QList<EltID> > &newDivisions)
+{
+    QList<RangesType> newRanges;
+    foreach (QList<EltID> divisions, newDivisions.values())
+        if (!divisions.isEmpty())
+            newRanges << getRange(sm, divisions.first(), champ_keyRange);
+    foreach (QList<EltID> divisions, existingDivisions.values())
+    {
+        foreach (EltID idDivision, divisions)
+        {
+            if (!sm->isValid(idDivision))
+                continue;
+            RangesType range = getRange(sm, idDivision, champ_keyRange);
+            foreach (RangesType newRange, newRanges)
+            {
+                if (range.byLo >= newRange.byLo && range.byHi <= newRange.byHi)
+                {
+                    sm->remove(idDivision);
+                    break;
+                }
+            }
+        }
     }
 }
 

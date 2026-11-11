@@ -40,6 +40,7 @@ private:
     static void addEditingFunctions(QList<McpFunction *> &functions);   // mcpeditingfunctions.cpp
     static void addToolFunctions(QList<McpFunction *> &functions);      // mcptoolfunctions.cpp
     static void addAnalysisFunctions(QList<McpFunction *> &functions);  // mcpanalysisfunctions.cpp
+    static void addTimbreFunctions(QList<McpFunction *> &functions);    // mcptimbrefunctions.cpp
 };
 
 #endif // MCPFUNCTIONS_H

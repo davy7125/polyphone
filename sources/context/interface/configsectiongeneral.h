@@ -53,8 +53,8 @@ private slots:
     void on_comboCpuBudget_currentIndexChanged(int index);
     void on_comboMidiInput_currentIndexChanged(int index);
 
-    void on_checkBoucle_toggled(bool checked);
     void on_checkBlanc_toggled(bool checked);
+    void on_checkBlancFin_toggled(bool checked);
     void on_checkRepercussionStereo_toggled(bool checked);
 
     void onAudioDevicesChanged();

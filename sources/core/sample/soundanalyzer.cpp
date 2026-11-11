@@ -137,6 +137,8 @@ SoundAnalyzer::SoundAnalyzer(const QVector<float> &data, quint32 sampleRate, qui
     _expectedFrequency(expectedFrequency),
     _maxPitchFrames(300),
     _maxSpectrumFrames(48),
+    _maxHarmonicCount(60),
+    _maxHarmonicFrequency(16000),
     _regionsComputed(false),
     _pitchComputed(false),
     _harmonicsComputed(false),
@@ -1489,8 +1491,8 @@ void SoundAnalyzer::computeHarmonics()
         f0 = _f0; // Fit not reliable
     _refinedF0 = f0;
 
-    // Second pass on all harmonics up to 16 kHz
-    int count = qMin(60, static_cast<int>(qMin(16000.0, 0.95 * _sampleRate / 2) / f0));
+    // Second pass on all harmonics up to 16 kHz (by default)
+    int count = qMin(_maxHarmonicCount, static_cast<int>(qMin(_maxHarmonicFrequency, 0.95 * _sampleRate / 2) / f0));
     for (int h = 1; h <= count; h++)
     {
         double predicted = h * f0 * std::sqrt(1 + _inharmonicity * h * h);
@@ -1567,6 +1569,12 @@ double SoundAnalyzer::getHnr()
 {
     computeHarmonics();
     return _hnr;
+}
+
+double SoundAnalyzer::getInharmonicity()
+{
+    computeHarmonics();
+    return _inharmonicity;
 }
 
 QJsonObject SoundAnalyzer::getHarmonics(int maxListed)
@@ -2374,6 +2382,48 @@ QList<SoundAnalyzer::Harmonic> SoundAnalyzer::getHarmonicList()
 {
     computeHarmonics();
     return _harmonics;
+}
+
+double SoundAnalyzer::adjustExpectedFrequency(const QVector<float> &data, quint32 sampleRate, quint32 loopStart,
+                                              quint32 loopEnd, double expected)
+{
+    if (expected <= 0 || data.isEmpty())
+        return expected;
+    SoundAnalyzer analyzer(data, sampleRate, loopStart, loopEnd, expected);
+    QList<Harmonic> harmonics = analyzer.getHarmonicList();
+    if (harmonics.isEmpty())
+    {
+        // Nothing around: pitch without prior
+        SoundAnalyzer other(data, sampleRate, loopStart, loopEnd, 0);
+        double fundamental = other.getFundamental();
+        return fundamental > 0 ? fundamental : expected;
+    }
+
+    // Largest n such that the ranks that are not multiples of n carry less than 1% of the power
+    double total = 0;
+    foreach (Harmonic harmonic, harmonics)
+        if (harmonic.found)
+            total += harmonic.amplitude * harmonic.amplitude;
+    if (total <= 0)
+        return expected;
+    int best = 1;
+    for (int n = 2; n <= 8; n++)
+    {
+        double others = 0;
+        int multiplesFound = 0;
+        foreach (Harmonic harmonic, harmonics)
+        {
+            if (!harmonic.found)
+                continue;
+            if (harmonic.rank % n == 0)
+                multiplesFound++;
+            else
+                others += harmonic.amplitude * harmonic.amplitude;
+        }
+        if (multiplesFound >= 2 && others < 0.01 * total)
+            best = n;
+    }
+    return best == 1 ? expected : best * analyzer.getFundamental();
 }
 
 int SoundAnalyzer::harmonicCount()

@@ -1,7 +1,7 @@
 /***************************************************************************
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
-**  Copyright (C) 2013-2024 Davy Triponney                                **
+**  Copyright (C) 2013-2026 Davy Triponney                                **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -22,51 +22,22 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef TOOLTRIMSTART_H
-#define TOOLTRIMSTART_H
 
-#include "abstracttooliterating.h"
-#include <QObject>
+#ifndef TIMBRERENDERING_H
+#define TIMBRERENDERING_H
 
-class ToolTrimStart: public AbstractToolIterating
+#include "basetypes.h"
+#include "timbremodel.h"
+
+// Check of the model by the sound engine: a key of an instrument is rendered offline at a velocity, then the harmonics
+// of the sustained part are measured (power of the two channels added)
+class TimbreRendering
 {
-    Q_OBJECT
-
 public:
-    ToolTrimStart() : AbstractToolIterating(elementSmpl) {}
+    static const double SAMPLE_RATE;
 
-    /// Icon, label and category displayed to the user to describe the tool
-    QString getIconName() const override
-    {
-        return ":/tool/remove_blank.svg";
-    }
-
-    QString getCategory() const override
-    {
-        return tr("Loop / playback");
-    }
-
-    /// Internal identification
-    QString getToolName() const override
-    {
-        return "trimStart";
-    }
-
-    /// Method executed before the iterating process
-    void beforeProcess(IdList ids) override;
-
-    /// Process an element
-    void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
-
-protected:
-    QString getLabelInternal() const override
-    {
-        return tr("Remove blank at start");
-    }
-
-private:
-    QMutex _mutex;
-    IdList _processedSamples;
+    // Spectrum heard, empty in case of error (can be called by another thread if the soundfont doesn't change)
+    static TimbreSpectrum render(EltID idInst, int key, int velocity, double expectedFrequency, QString &error);
 };
 
-#endif // TOOLTRIMSTART_H
+#endif // TIMBRERENDERING_H

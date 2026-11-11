@@ -196,8 +196,8 @@
      </property>
     </widget>
    </item>
-   <item row="9" column="2">
-    <widget class="QCheckBox" name="checkBoucle">
+   <item row="10" column="2">
+    <widget class="QCheckBox" name="checkBlancFin">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
        <horstretch>0</horstretch>
@@ -211,15 +211,15 @@
       </font>
      </property>
      <property name="toolTip">
-      <string>When importing a sample, data located after the end of loop are automatically removed.
-(same effect as the tool "Trim to end of loop")</string>
+      <string>When importing a sample, any blank area located at the end of the sound is automatically removed.
+(same effect as the tool "Trim" with an automatic detection of the background noise)</string>
      </property>
      <property name="text">
-      <string>trim to loop</string>
+      <string>remove blank at end</string>
      </property>
     </widget>
    </item>
-   <item row="10" column="2">
+   <item row="9" column="2">
     <widget class="QCheckBox" name="checkBlanc">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -235,7 +235,7 @@
      </property>
      <property name="toolTip">
       <string>When importing a sample, any blank area located before the beginning of the attack is automatically removed.
-(same effect as the tool "Remove blank at start")</string>
+(same effect as the tool "Trim" with an automatic detection of the background noise)</string>
      </property>
      <property name="text">
       <string>remove blank at start</string>
@@ -357,8 +357,8 @@
   <tabstop>comboCpuBudget</tabstop>
   <tabstop>comboMidiInput</tabstop>
   <tabstop>checkRepercussionStereo</tabstop>
-  <tabstop>checkBoucle</tabstop>
   <tabstop>checkBlanc</tabstop>
+  <tabstop>checkBlancFin</tabstop>
  </tabstops>
  <resources/>
  <connections/>

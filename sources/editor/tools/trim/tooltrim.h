@@ -22,23 +22,25 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef TOOLTRIMEND_H
-#define TOOLTRIMEND_H
+#ifndef TOOLTRIM_H
+#define TOOLTRIM_H
 
 #include "abstracttooliterating.h"
 #include <QObject>
+#include <QMutex>
+#include <QSet>
 
-class ToolTrimEnd: public AbstractToolIterating
+class ToolTrim: public AbstractToolIterating
 {
     Q_OBJECT
 
 public:
-    ToolTrimEnd() : AbstractToolIterating(elementSmpl) {}
+    ToolTrim();
 
     /// Icon, label and category displayed to the user to describe the tool
     QString getIconName() const override
     {
-        return ":/tool/trim_loop.svg";
+        return ":/tool/trim.svg";
     }
 
     QString getCategory() const override
@@ -49,8 +51,11 @@ public:
     /// Internal identification
     QString getToolName() const override
     {
-        return "trimEnd";
+        return "trim";
     }
+
+    /// Method executed before the iterating process
+    void beforeProcess(IdList ids) override;
 
     /// Process an element
     void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
@@ -58,8 +63,18 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return tr("Trim to end of loop");
+        return tr("Trim");
     }
+
+    /// Get the warning to display after the tool is run
+    QString getWarning() override;
+
+private:
+    QMutex _mutex;
+    IdList _processedSamples;
+    QMap<int, QList<EltID> > _divisions; // Divisions using each sample
+    QSet<int> _notContinuouslyLooped; // Samples used by at least one division without a continuous loop
+    QStringList _keptAfterLoop;
 };
 
-#endif // TOOLTRIMEND_H
+#endif // TOOLTRIM_H

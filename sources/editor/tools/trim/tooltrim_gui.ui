@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ToolTrim_gui</class>
+ <widget class="QWidget" name="ToolTrim_gui">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>320</width>
+    <height>240</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string notr="true">Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QCheckBox" name="checkStart">
+     <property name="toolTip">
+      <string>The silence or the background noise before the attack is removed.</string>
+     </property>
+     <property name="text">
+      <string>Remove blank at start</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="labelEnd">
+     <property name="text">
+      <string>End of the sample:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QRadioButton" name="radioEndUnchanged">
+     <property name="text">
+      <string>Unchanged</string>
+     </property>
+     <attribute name="buttonGroup">
+      <string notr="true">groupEnd</string>
+     </attribute>
+    </widget>
+   </item>
+   <item>
+    <widget class="QRadioButton" name="radioEndLoop">
+     <property name="toolTip">
+      <string>The data after the end of the loop is removed, unless an instrument doesn't play the loop continuously.</string>
+     </property>
+     <property name="text">
+      <string>Trim after the end of loop</string>
+     </property>
+     <attribute name="buttonGroup">
+      <string notr="true">groupEnd</string>
+     </attribute>
+    </widget>
+   </item>
+   <item>
+    <widget class="QRadioButton" name="radioEndBlank">
+     <property name="toolTip">
+      <string>The blank at the end is replaced by a short fade-out prolonging the decay of the sound, so that the remaining noise doesn't stop abruptly.</string>
+     </property>
+     <property name="text">
+      <string>Remove blank at end</string>
+     </property>
+     <attribute name="buttonGroup">
+      <string notr="true">groupEnd</string>
+     </attribute>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="labelThreshold">
+     <property name="text">
+      <string>Blank:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QRadioButton" name="radioAutomatic">
+     <property name="toolTip">
+      <string>The blank is what is quieter than the background noise measured before or after the sound.</string>
+     </property>
+     <property name="text">
+      <string>Detect the background noise</string>
+     </property>
+     <attribute name="buttonGroup">
+      <string notr="true">groupThreshold</string>
+     </attribute>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QRadioButton" name="radioLevel">
+       <property name="toolTip">
+        <string>The blank is what has a peak level below this value.</string>
+       </property>
+       <property name="text">
+        <string>Level below</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">groupThreshold</string>
+       </attribute>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSpinBox" name="spinThreshold">
+       <property name="suffix">
+        <string notr="true"> dB</string>
+       </property>
+       <property name="minimum">
+        <number>-120</number>
+       </property>
+       <property name="maximum">
+        <number>-10</number>
+       </property>
+       <property name="value">
+        <number>-70</number>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>0</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>0</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <widget class="DialogButtonBox" name="buttonBox"/>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>DialogButtonBox</class>
+   <extends>QDialogButtonBox</extends>
+   <header>dialogbuttonbox.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>checkStart</tabstop>
+  <tabstop>radioEndUnchanged</tabstop>
+  <tabstop>radioEndLoop</tabstop>
+  <tabstop>radioEndBlank</tabstop>
+  <tabstop>radioAutomatic</tabstop>
+  <tabstop>radioLevel</tabstop>
+  <tabstop>spinThreshold</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+ <buttongroups>
+  <buttongroup name="groupEnd"/>
+  <buttongroup name="groupThreshold"/>
+ </buttongroups>
+</ui>

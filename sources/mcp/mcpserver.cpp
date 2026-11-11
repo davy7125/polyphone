@@ -54,7 +54,9 @@ static const char * INSTRUCTIONS =
     "at once: registrations, chords), including what changes over time (pitch, level), whatever the parameters "
     "producing it; start with them. The analysis functions (analyze_sample, analyze_instrument, compare_samples, "
     "get_spectrum, get_loop_analysis) measure the samples alone, describe_key and get_parameter_map give the exact "
-    "parameters that explain what is heard. The measures describe the sound without judging it: what is right depends on the intended result (a "
+    "parameters that explain what is heard. get_timbre_map gives the harmonics heard along the keyboard of an "
+    "instrument (resampling included) with the deviations of each root key from its neighbors, for harmonizing it "
+    "(create_missing_samples, remove_root_key, correct_root_key). The measures describe the sound without judging it: what is right depends on the intended result (a "
     "slight detuning, an irregularity or a noise can be wanted), so ask the user what is intended before correcting "
     "something.";
 

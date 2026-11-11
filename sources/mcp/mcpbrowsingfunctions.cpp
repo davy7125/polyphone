@@ -39,6 +39,7 @@
 #include "midiprocessor.h"
 #include "offlinerenderer.h"
 #include "synthcoreconfig.h"
+#include "enginevoiceparameters.h"
 #include <QRegularExpression>
 
 static QJsonObject describeSample(EltID id, bool detailed)
@@ -267,27 +268,14 @@ static bool inRanges(ISynthZone * zone, ISynthZone * globalZone, int key, int ve
 
 // Voice started by the synth for a division of an instrument (possibly reached from a preset division): parameters
 // computed by the same code as the sound engine (VoiceParam), modulators included
-static QJsonObject describeVoice(int indexSf2, Soundfont * soundfont, InstPrst * prst, int prstDivIndex,
+static QJsonObject describeVoice(EngineVoiceParameters &engine, int indexSf2, InstPrst * prst, int prstDivIndex,
                                  InstPrst * inst, int instDivIndex, int key, int velocity)
 {
-    Division * prstDiv = prst != nullptr ? prst->getDivision(prstDivIndex) : nullptr;
-    Division * instDiv = inst->getDivision(instDivIndex);
-    int sampleIndex = instDiv->getAttributeSet()[champ_sampleID] ? instDiv->getAttributeValues()[champ_sampleID].wValue : -1;
-    Smpl * smpl = sampleIndex >= 0 ? soundfont->getSample(sampleIndex) : nullptr;
-    if (smpl == nullptr)
+    VoiceParam * voiceParam = engine.compute(prst, prstDivIndex, inst, instDivIndex, key, velocity);
+    if (voiceParam == nullptr)
         return QJsonObject();
-
-    // Default settings of the sound engine (as the offline rendering): A4 = 440 Hz, equal temperament, default values
-    // of the controllers as in the editor (volume and expression at 127, pan at 64, the controllers read by the
-    // modulators of the soundfont at 64 if bipolar, 127 if decreasing)
-    MidiProcessor midiValues;
-    OfflineRenderer::applyDefaultControllerValues(soundfont, midiValues);
-    VoiceContext context;
-    context.setMidiValues(&midiValues);
-    context.setModulatorVelToFilterType(SynthCoreConfig().modulatorVelToFilterType);
-    VoiceParam param(&context);
-    param.initialize(indexSf2, prst, prstDiv, inst, instDiv, smpl, static_cast<int8_t>(prst != nullptr ? 0 : -1),
-                     static_cast<int8_t>(key), static_cast<int8_t>(velocity), 0);
+    VoiceParam &param = *voiceParam;
+    int sampleIndex = inst->getDivision(instDivIndex)->getAttributeValues()[champ_sampleID].wValue;
 
     SoundfontManager * sm = SoundfontManager::getInstance();
     QJsonObject voice;
@@ -305,14 +293,11 @@ static QJsonObject describeVoice(int indexSf2, Soundfont * soundfont, InstPrst *
 
     int playedKey = param.getCurrentInteger(champ_keynum);
     int rootKey = param.getCurrentInteger(champ_overridingRootKey);
-    int scaleTuning = param.getCurrentInteger(champ_scaleTuning);
-    int fineTuneWithCorrection = param.getCurrentInteger(champ_fineTune);
-    int coarseTune = param.getCurrentInteger(champ_coarseTune);
     voice["sample_mode"] = param.getCurrentInteger(champ_sampleModes);
     voice["key_used"] = playedKey;
     voice["velocity_used"] = param.getCurrentInteger(champ_velocity);
     voice["root_key_used"] = rootKey;
-    voice["static_pitch_shift_cents"] = (playedKey - rootKey) * scaleTuning + fineTuneWithCorrection + 100 * coarseTune;
+    voice["static_pitch_shift_cents"] = EngineVoiceParameters::getStaticPitchShift(voiceParam);
 
     QJsonObject parameters;
     foreach (QString name, McpAttributes::getNames())
@@ -355,6 +340,7 @@ static QJsonObject describeKey(EltID id, int key, int velocity)
         throw McpException("the soundfont is not loaded");
 
     QJsonArray voices;
+    EngineVoiceParameters engine(id.indexSf2, soundfont);
     auto addInstrumentVoices = [&](InstPrst * prst, int prstDivIndex, InstPrst * inst) {
         EltID idDiv(elementInstSmpl, id.indexSf2, inst->getIndex());
         foreach (int i, sm->getSiblings(idDiv))
@@ -362,7 +348,7 @@ static QJsonObject describeKey(EltID id, int key, int velocity)
             Division * division = inst->getDivision(i);
             if (division != nullptr && division->isPlayable() && inRanges(division, inst->getGlobalDivision(), key, velocity))
             {
-                QJsonObject voice = describeVoice(id.indexSf2, soundfont, prst, prstDivIndex, inst, i, key, velocity);
+                QJsonObject voice = describeVoice(engine, id.indexSf2, prst, prstDivIndex, inst, i, key, velocity);
                 if (!voice.isEmpty())
                     voices.append(voice);
             }

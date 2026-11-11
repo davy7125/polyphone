@@ -280,13 +280,10 @@ int SynthCore::playSmpl(int sf2Id, ISynthSample * smpl, int channel, int key, in
                       _sampleRate, currentToken, _noteId);
     configureVoice(voice);
 
-    // Possibly another data for a sample played alone
-    if (inst == nullptr)
-    {
-        for (const ReplacedSample &replacement : _replacedSamples)
-            if (replacement.sf2Id == sf2Id && replacement.smpl == smpl)
-                replaceVoiceData(voice, smpl, &replacement);
-    }
+    // Possibly another data for a sample played alone (or for all voices)
+    for (const ReplacedSample &replacement : _replacedSamples)
+        if (replacement.sf2Id == sf2Id && replacement.smpl == smpl && (inst == nullptr || replacement.allVoices))
+            replaceVoiceData(voice, smpl, &replacement);
 
     return currentToken;
 }
@@ -546,7 +543,8 @@ void SynthCore::setPitchCorrection(int16_t correction, bool withLinkedSample)
     }
 }
 
-void SynthCore::setSampleData(int sf2Id, int sampleIndex, const int16_t * data16, const uint8_t * data24, uint32_t length)
+void SynthCore::setSampleData(int sf2Id, int sampleIndex, const int16_t * data16, const uint8_t * data24, uint32_t length,
+                              bool allVoices)
 {
     std::lock_guard<std::recursive_mutex> lock(_voicesMutex);
     ISynthSoundfont * soundfont = _soundfonts->getSynthSoundfont(sf2Id);
@@ -554,11 +552,13 @@ void SynthCore::setSampleData(int sf2Id, int sampleIndex, const int16_t * data16
     if (smpl == nullptr)
         return;
 
-    // New replacement, or none
+    // New replacement, or none (the voices of the previous replacement are restored)
+    bool previousAllVoices = false;
     for (size_t i = 0; i < _replacedSamples.size(); i++)
     {
         if (_replacedSamples[i].sf2Id == sf2Id && _replacedSamples[i].smpl == smpl)
         {
+            previousAllVoices = _replacedSamples[i].allVoices;
             _replacedSamples.erase(_replacedSamples.begin() + static_cast<std::ptrdiff_t>(i));
             break;
         }
@@ -581,19 +581,22 @@ void SynthCore::setSampleData(int sf2Id, int sampleIndex, const int16_t * data16
             max = SynthMath::max(max, value < 0 ? -value : value);
         }
         sample.peak = static_cast<float>(max) / 8388608.0f;
+        sample.allVoices = allVoices;
 
         _replacedSamples.push_back(sample);
         replacement = &_replacedSamples.back();
     }
 
-    // Voices already playing the sample alone
+    // Voices already playing the sample alone (or all of them)
+    bool allTypes = allVoices || previousAllVoices;
     Voice ** voices1, ** voices2;
     int count1, count2;
     _voices.getVoices(voices1, count1, voices2, count2);
     for (int i = 0; i < count1 + count2; ++i)
     {
         Voice * voice = i < count1 ? voices1[i] : voices2[i - count1];
-        if (voice->getParam()->getType() != 0 && voice->getParam()->getSf2Id() == sf2Id && voice->getSample() == smpl)
+        if ((allTypes || voice->getParam()->getType() != 0) && voice->getParam()->getSf2Id() == sf2Id &&
+            voice->getSample() == smpl)
             replaceVoiceData(voice, smpl, replacement);
     }
 }

@@ -26,19 +26,47 @@
 #define SAMPLETRIMMING_H
 
 #include "basetypes.h"
+#include <QMap>
+#include <limits>
 class SoundfontManager;
 
-// Samples of a soundfont cropped (tools "Trim to end of loop" and "Remove blank at start", samples loaded)
+// Samples of a soundfont cropped (tool "Trim", samples loaded)
+// The channels of a stereo sample are given together so that they keep the same length
 class SampleTrimming
 {
 public:
-    /// Remove the data after the end of the loop of a sample, except the 8 values used for the interpolation at the
-    /// loop point
-    static void trimToLoop(SoundfontManager * sm, EltID idSmpl);
+    /// Threshold for an automatic detection of the background noise
+    static constexpr double AUTOMATIC_THRESHOLD = std::numeric_limits<double>::quiet_NaN();
 
-    /// Remove the blank at the start of samples (the channels of a stereo sample being given together): the position
-    /// where the sound starts is the earliest of all samples, so that the sound of no channel is cut
-    static void trimStart(SoundfontManager * sm, IdList idsSmpl);
+    /// Remove the blank at the start of samples: the position where the sound starts is the earliest of all channels,
+    /// so that the sound of no channel is cut. Threshold in dBFS or AUTOMATIC_THRESHOLD. Return the number of values
+    /// removed
+    static quint32 trimStart(SoundfontManager * sm, IdList idsSmpl, double thresholdDb = AUTOMATIC_THRESHOLD);
+
+    /// Remove the blank at the end of samples, replaced by a fade-out prolonging the decay of the sound (never before the
+    /// end of a loop and the 8 values after it). Threshold in dBFS or AUTOMATIC_THRESHOLD. Return the number of values
+    /// removed in each sample
+    static QList<quint32> trimEnd(SoundfontManager * sm, IdList idsSmpl, double thresholdDb = AUTOMATIC_THRESHOLD);
+
+    /// True if data can be removed after the end of the loop of a sample
+    static bool hasDataAfterLoop(SoundfontManager * sm, EltID idSmpl);
+
+    /// Remove the data after the end of the loop of a sample, except the 8 values used for the interpolation at the
+    /// loop point. Return the number of values removed
+    static quint32 trimToLoop(SoundfontManager * sm, EltID idSmpl);
+
+    /// Divisions of the instruments using each sample of a soundfont (key: index of the sample)
+    static QMap<int, QList<EltID> > getDivisionsBySample(SoundfontManager * sm, int indexSf2);
+
+    /// Update the offsets of divisions after values have been removed at the start or at the end of their sample, so
+    /// that they still target the same sound
+    static void updateStartOffsets(SoundfontManager * sm, const QList<EltID> &divisions, quint32 removed);
+    static void updateEndOffsets(SoundfontManager * sm, const QList<EltID> &divisions, quint32 removed);
+
+private:
+    static void updateOffset(SoundfontManager * sm, EltID idDiv, AttributeType champFine, AttributeType champCoarse,
+                             qint64 removed, bool start);
+    static AttributeValue getInheritedValue(SoundfontManager * sm, EltID idDiv, AttributeType champ);
 };
 
 #endif // SAMPLETRIMMING_H

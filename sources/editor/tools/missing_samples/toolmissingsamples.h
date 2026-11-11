@@ -66,6 +66,10 @@ public:
     };
     QList<Creation> getCreations() const { return _creations; }
 
+    /// Divisions processed: all (-1), or only the subset playing at a velocity (instruments with several velocity
+    /// ranges being then accepted), for the next run
+    void setVelocity(int velocity) { _velocity = velocity; }
+
 signals:
     void jobProcessed(int runId);
 
@@ -108,6 +112,7 @@ private:
     QSharedPointer<MissingSampleRun> _run;
     int _runId;
     int _processedCount;
+    int _velocity;
     WaitingToolDialog * _waitingDialog;
 
     QList<Creation> _creations;

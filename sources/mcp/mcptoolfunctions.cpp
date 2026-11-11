@@ -30,9 +30,9 @@
 #include "soundanalyzer.h"
 #include "sampleutils.h"
 #include "utils.h"
-#include "trim_end/tooltrimend.h"
+#include "trim/tooltrim.h"
+#include "trim/tooltrim_parameters.h"
 #include "auto_loop/toolautoloop.h"
-#include "trim_start/tooltrimstart.h"
 #include "frequency_filter/toolfrequencyfilter.h"
 #include "frequency_filter/toolfrequencyfilter_parameters.h"
 #include "change_volume/toolchangevolume.h"
@@ -112,18 +112,24 @@ static QString cleanMessage(QString message)
 }
 
 // Function running a tool on elements given in the argument "elements"
+// Called before running the tool, for settings that change the blocking errors
+typedef std::function<void(const McpArguments &args, AbstractTool * tool)> BeforeRun;
+
 static McpFunction * toolFunction(QString name, QString description, QString elementsDescription, QList<ElementType> types,
                                   QString properties, QStringList required, std::function<AbstractTool *()> create,
-                                  ParameterSetter setter = ParameterSetter(), ResultFiller filler = ResultFiller())
+                                  ParameterSetter setter = ParameterSetter(), ResultFiller filler = ResultFiller(),
+                                  BeforeRun beforeRun = BeforeRun())
 {
     QString schema = "{\"properties\":{\"elements\":{\"type\":[\"string\",\"array\"],\"items\":{\"type\":\"string\"},"
                      "\"description\":\"" + elementsDescription + "\"}" + (properties.isEmpty() ? "" : "," + properties) +
                      "},\"required\":[\"elements\"" + (required.isEmpty() ? "" : ",\"" + required.join("\",\"") + "\"") + "]}";
 
     return new McpFunction(name, McpFunction::CATEGORY_TOOLS, false, description, schema.toUtf8().constData(),
-        [name, types, create, setter, filler](const McpArguments &args) -> McpResult {
+        [name, types, create, setter, filler, beforeRun](const McpArguments &args) -> McpResult {
             IdList ids = args.getIds("elements", types);
             AbstractTool * tool = getTool(name, create);
+            if (beforeRun)
+                beforeRun(args, tool);
             QString message;
             QString error = tool->runWithoutDialog(ids, [&](AbstractToolParameters * parameters) -> QString {
                 if (setter)
@@ -293,15 +299,30 @@ static void addSampleTools(QList<McpFunction *> &functions)
         samplesText, samples, "", {}, []() { return new ToolAutoLoop(); });
 
     functions << toolFunction(
-        "trim_to_loop",
-        "Tool \"Trim to end of loop\": remove the data after the loop end of each sample.",
-        samplesText, samples, "", {}, []() { return new ToolTrimEnd(); });
-
-    functions << toolFunction(
-        "trim_start",
-        "Tool \"Remove blank at start\": remove the silence or the background noise before the sound of each sample, "
-        "up to the onset given by analyze_sample (stereo pairs are trimmed together, the loop points are shifted).",
-        samplesText, samples, "", {}, []() { return new ToolTrimStart(); });
+        "trim_samples",
+        "Tool \"Trim\": remove the blank at the start and / or at the end of each sample (stereo pairs are trimmed "
+        "together). Start: the silence or the background noise before the sound is removed, up to a zero crossing (with "
+        "the automatic threshold, up to the onset given by analyze_sample); the loop points are shifted. End \"loop\": "
+        "the data after the loop end is removed (8 values kept), except in samples that at least one instrument doesn't "
+        "play with a continuous loop (they are reported). End \"blank\": the blank at the end is removed and replaced by "
+        "a fade-out prolonging the decay of the sound (20 ms to 1 s), never before the loop end. The start and end offsets "
+        "of the instrument divisions using the samples are updated so that they target the same sound.",
+        samplesText, samples,
+        R"JSON("start":{"type":"boolean","description":"Remove the blank at the start (default true)"},
+           "end":{"type":"string","enum":["unchanged","loop","blank"],"description":"Processing of the end (default blank)"},
+           "threshold_db":{"type":"number","minimum":-120,"maximum":-10,"description":"Peak level in dBFS below which the signal is blank; if omitted, the background noise is detected automatically"})JSON",
+        {}, []() { return new ToolTrim(); },
+        [](const McpArguments &args, AbstractTool *, AbstractToolParameters * parameters) {
+            ToolTrim_parameters * params = dynamic_cast<ToolTrim_parameters *>(parameters);
+            params->setStart(args.getBool("start", true));
+            params->setEndMode(static_cast<ToolTrim_parameters::EndMode>(
+                readChoice(args, "end", { "unchanged", "loop", "blank" }, ToolTrim_parameters::END_BLANK)));
+            params->setAutomaticThreshold(!args.contains("threshold_db"));
+            if (args.contains("threshold_db"))
+                params->setThreshold(args.getDouble("threshold_db", -120, -10));
+            if (!params->getStart() && params->getEndMode() == ToolTrim_parameters::END_UNCHANGED)
+                throw McpException("nothing to do: \"start\" is false and \"end\" is \"unchanged\"");
+        });
 
     functions << toolFunction(
         "filter_frequencies",
@@ -628,10 +649,14 @@ static void addInstrumentTools(QList<McpFunction *> &functions)
         "is corrected with the steady loudness. The new sample is looped automatically if both root keys are looped. "
         "Its division copies the division of the transposed sample (attenuation reduced if the sample had to be "
         "attenuated below the full scale) and the key ranges around are adjusted as by the tool \"auto distribution\" "
-        "(existing ranges can only shrink). Instruments with several velocity ranges are refused.",
+        "(existing ranges can only shrink, the divisions entirely within the range of a new note being removed). "
+        "Instruments with several velocity ranges are refused, unless a velocity is given: only the subset playing "
+        "at this velocity is then used and adjusted (divisions not muted, velocity range containing it, not played at "
+        "the release only), as by the timbre view.",
         "Instruments having at least two root keys", instruments,
         R"JSON("keys":{"type":"array","items":{"type":["integer","string"]},"description":"Keys to create (number or name such as \"C#4\"); keys already having a sample are ignored"},
-           "max_spacing":{"type":"integer","minimum":1,"maximum":24,"description":"Instead of keys: create the keys needed so that two consecutive root keys are at most this number of semitones apart, evenly spread"})JSON",
+           "max_spacing":{"type":"integer","minimum":1,"maximum":24,"description":"Instead of keys: create the keys needed so that two consecutive root keys are at most this number of semitones apart, evenly spread"},
+           "velocity":{"type":"integer","minimum":1,"maximum":127,"description":"Only the divisions playing at this velocity (subset), for instruments having several velocity layers"})JSON",
         {}, []() { return new ToolMissingSamples(); },
         [](const McpArguments &args, AbstractTool *, AbstractToolParameters * parameters) {
             ToolMissingSamples_parameters * params = dynamic_cast<ToolMissingSamples_parameters *>(parameters);
@@ -674,6 +699,9 @@ static void addInstrumentTools(QList<McpFunction *> &functions)
                 created << item;
             }
             result["created"] = created;
+        },
+        [](const McpArguments &args, AbstractTool * tool) {
+            dynamic_cast<ToolMissingSamples *>(tool)->setVelocity(args.contains("velocity") ? args.getInt("velocity", 1, 127) : -1);
         });
 
     functions << toolFunction(

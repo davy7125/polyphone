@@ -435,12 +435,9 @@ quint32 SampleUtils::findOnset(const QVector<float> &vData, quint32 dwSmplRate, 
     return static_cast<quint32>(onset);
 }
 
-quint32 SampleUtils::findTrimStart(const QVector<float> &vData, quint32 dwSmplRate, bool looped)
+// Zero crossing before an onset (a value of 0 or a change of sign), 10 ms before at most
+static quint32 zeroCrossingBefore(const QVector<float> &vData, quint32 dwSmplRate, quint32 onset)
 {
-    double noiseFloorDb;
-    quint32 onset = findOnset(vData, dwSmplRate, looped, noiseFloorDb);
-
-    // Zero crossing before the onset (a value of 0 or a change of sign)
     const float * data = vData.constData();
     quint32 limit = onset > dwSmplRate / 100 ? onset - dwSmplRate / 100 : 0;
     for (quint32 pos = onset; pos > limit; pos--)
@@ -451,6 +448,124 @@ quint32 SampleUtils::findTrimStart(const QVector<float> &vData, quint32 dwSmplRa
             return qAbs(data[pos - 1]) < qAbs(data[pos]) ? pos - 1 : pos;
     }
     return onset;
+}
+
+quint32 SampleUtils::findTrimStart(const QVector<float> &vData, quint32 dwSmplRate, bool looped)
+{
+    double noiseFloorDb;
+    return zeroCrossingBefore(vData, dwSmplRate, findOnset(vData, dwSmplRate, looped, noiseFloorDb));
+}
+
+quint32 SampleUtils::findTrimStart(const QVector<float> &vData, quint32 dwSmplRate, bool looped, double thresholdDb)
+{
+    if (std::isnan(thresholdDb))
+        return findTrimStart(vData, dwSmplRate, looped);
+
+    // First value reaching the threshold
+    const float * data = vData.constData();
+    quint32 length = static_cast<quint32>(vData.size());
+    float threshold = static_cast<float>(std::pow(10.0, thresholdDb / 20));
+    quint32 onset = 0;
+    while (onset < length && std::fabs(data[onset]) < threshold)
+        onset++;
+    return onset < length ? zeroCrossingBefore(vData, dwSmplRate, onset) : 0;
+}
+
+double SampleUtils::findBlankThresholdAtEnd(const QVector<float> &vData, quint32 dwSmplRate)
+{
+    const double defaultThreshold = -90;
+    const double margin = 6;
+    const double maxSlope = 3; // dB/s, above which a part is still decaying or rising
+    int length = vData.size();
+    int hop = qMax(1, static_cast<int>(0.01 * dwSmplRate));
+    int window = 2 * hop;
+    QVector<double> cumSquares = cumulativeSquares(vData);
+    QVector<double> envelope = rmsEnvelope(cumSquares, window, hop);
+    if (envelope.size() < 20)
+        return defaultThreshold;
+    for (int i = 0; i < envelope.size(); i++)
+        envelope[i] = toDb(envelope[i]);
+    double maxDb = *std::max_element(envelope.begin(), envelope.end());
+
+    // Level of a part of the envelope if it is steady (background noise), NaN otherwise
+    auto steadyLevel = [&](int firstFrame, int frameCount) -> double {
+        if (frameCount < 5)
+            return std::numeric_limits<double>::quiet_NaN();
+        QVector<double> x, y, w;
+        for (int i = firstFrame; i < firstFrame + frameCount; i++)
+        {
+            x << static_cast<double>(i) * hop / dwSmplRate;
+            y << envelope[i];
+        }
+        double slope, intercept;
+        if (!linearRegression(x, y, w, slope, intercept) || qAbs(slope) > maxSlope)
+            return std::numeric_limits<double>::quiet_NaN();
+        return median(y);
+    };
+
+    // Noise before the sound: up to the first frame 20 dB below the loudest one
+    int onsetFrame = 0;
+    while (onsetFrame < envelope.size() && envelope[onsetFrame] < maxDb - 20)
+        onsetFrame++;
+    int beforeFrames = onsetFrame - 2;
+    double noiseBeforeDb = steadyLevel(0, beforeFrames);
+
+    // Tail of the sound (500 ms, a quarter of a short sound): background noise if it is steady and either far below
+    // the sound or at the level of the noise before the sound. The threshold is not below -90 dB (inaudible)
+    int tailLength = qMin(static_cast<int>(0.5 * dwSmplRate), length / 4);
+    int tailFrames = (tailLength - window) / hop + 1;
+    double tailDb = steadyLevel(envelope.size() - tailFrames, tailFrames);
+    const float * data = vData.constData();
+    if (!std::isnan(tailDb) && (tailDb < maxDb - 40 || (!std::isnan(noiseBeforeDb) && qAbs(tailDb - noiseBeforeDb) < 6)))
+        return qMax(defaultThreshold, toDb(peak(data + length - tailLength, static_cast<quint32>(tailLength))) + margin);
+
+    // Otherwise the noise before the sound (the end is still sounding)
+    if (!std::isnan(noiseBeforeDb) && noiseBeforeDb < maxDb - 20)
+        return qMax(defaultThreshold, toDb(peak(data, static_cast<quint32>((beforeFrames - 1) * hop + window))) + margin);
+
+    return defaultThreshold;
+}
+
+bool SampleUtils::findTrimEnd(const QVector<float> &vData, quint32 dwSmplRate, double thresholdDb, quint32 &lastPosition,
+                              quint32 &fadeLength)
+{
+    const double decayDb = 20; // Measured part of the decay
+    const double fadeDb = 40; // Attenuation of the fade-out at the same speed
+    const double minFade = 0.02;
+    const double maxFade = 1.0;
+
+    // Last value reaching the threshold
+    const float * data = vData.constData();
+    float threshold = static_cast<float>(std::pow(10.0, thresholdDb / 20));
+    int last = vData.size() - 1;
+    while (last >= 0 && std::fabs(data[last]) < threshold)
+        last--;
+    if (last < 0)
+        return false;
+    lastPosition = static_cast<quint32>(last);
+
+    // Time taken by the sound to lose its last 20 dB before the threshold
+    float louder = static_cast<float>(std::pow(10.0, (thresholdDb + decayDb) / 20));
+    int previous = last;
+    while (previous >= 0 && std::fabs(data[previous]) < louder)
+        previous--;
+    double fade = maxFade;
+    if (previous >= 0)
+        fade = qBound(minFade, fadeDb / decayDb * (last - previous) / dwSmplRate, maxFade);
+    fadeLength = static_cast<quint32>(fade * dwSmplRate + 0.5);
+    return true;
+}
+
+void SampleUtils::fadeOut(QVector<float> &vData, quint32 start, quint32 length)
+{
+    // Exponential decay of 40 dB, shifted so that it ends at 0
+    float * data = vData.data();
+    quint32 size = static_cast<quint32>(vData.size());
+    for (quint32 i = 0; i < length && start + i < size; i++)
+    {
+        double x = static_cast<double>(i + 1) / length;
+        data[start + i] *= static_cast<float>((std::pow(10.0, -2.0 * x) - 0.01) / 0.99);
+    }
 }
 
 QVector<float> SampleUtils::trimStart(QVector<float> vData, quint32 pos)

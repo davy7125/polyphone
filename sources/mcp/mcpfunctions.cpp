@@ -33,6 +33,7 @@ const QList<McpFunction *> &McpFunctions::getAll()
         addEditingFunctions(functions);
         addToolFunctions(functions);
         addAnalysisFunctions(functions);
+        addTimbreFunctions(functions);
     }
     return functions;
 }

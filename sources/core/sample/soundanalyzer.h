@@ -112,12 +112,27 @@ public:
     };
 
     // Harmonics of the steady part (mean power of the channels if there are two), from the rank 1 to the last one
-    // below 16 kHz (60 at most), empty if no pitch is found
+    // below 16 kHz (60 at most, see setHarmonicLimits), empty if no pitch is found
     QList<Harmonic> getHarmonicList();
+
+    // Limits of the harmonics measured, to give before any measure: maximum number of ranks (60 by default) and highest
+    // frequency (16 kHz by default), the harmonics staying below 95% of the half of the sample rate
+    void setHarmonicLimits(int maxCount, double maxFrequency)
+    {
+        _maxHarmonicCount = qMax(1, maxCount);
+        _maxHarmonicFrequency = maxFrequency;
+    }
 
     // Pitch over the whole signal (first channel), searched as for getPitch: a frequency in Hz every hop, 0 where no
     // pitch is found; firstTime is the time of the first value (center of its window)
     QVector<double> getPitchTrack(double hopSeconds, double &firstTime);
+
+    // Expected frequency to give to the analyzer of a sample whose root key gives the frequency "expected": this one,
+    // unless the harmonics found show that the sound is n times higher (only the ranks multiple of n stand out, as for
+    // the organ stops of 4', 2' or the mutations whose root key is the key played), or the pitch searched without prior
+    // if none is found around it
+    static double adjustExpectedFrequency(const QVector<float> &data, quint32 sampleRate, quint32 loopStart,
+                                          quint32 loopEnd, double expected);
 
     // Fast estimation of the pitch (Hz, 0 if not found) without prior, on a region analyzed as a loop, with the
     // confidence of the estimation between 0 and 1
@@ -162,6 +177,7 @@ public:
     double getHarmonicCentroid(); // In harmonic ranks
     double getHarmonicTilt(); // dB per octave
     double getHnr(); // dB
+    double getInharmonicity(); // Coefficient B of the stretched partials (f_n = n f0 sqrt(1 + B n^2)), 0 if harmonic
     double getAttackTime(); // s
     double getLoopCorrelation(); // 1 = perfect seam, NaN if not looped
     int harmonicCount();
@@ -213,6 +229,8 @@ private:
     double _expectedFrequency;
     int _maxPitchFrames;
     int _maxSpectrumFrames;
+    int _maxHarmonicCount;
+    double _maxHarmonicFrequency;
     mutable std::map<int, FourierTransform> _fourierTransforms;
 
     // Regions (frames)
