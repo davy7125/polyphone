@@ -10,8 +10,8 @@ their path. A part may only include the headers of the parts it is allowed to us
     and QtGui only): the user interface derives its classes to ask questions (InteractiveSampleLoader,
     InteractiveDuplicator) and gives it the preferences it reads (CoreSettings);
   * plugin: itself and synth_core;
-  * mcp (server for the AI assistants): no interface except the tools (the main window gives it the editor through
-    McpEditor).
+  * mcp (server for the AI assistants): no interface except the tools and the model of the timbre view (the main
+    window gives it the editor through McpEditor).
 Allowed parts are directories of sources/ ("editor/tools" allows this directory of editor only).
 """
 
@@ -24,7 +24,7 @@ ALLOWED = {
     "synth_core": {"synth_core"},
     "core": {"core", "synth_core", "lib"},
     "plugin": {"plugin", "synth_core"},
-    "mcp": {"mcp", "core", "synth_core", "lib", "context", "sound_engine", "editor/tools"},
+    "mcp": {"mcp", "core", "synth_core", "lib", "context", "sound_engine", "editor/tools", "editor/timbre/model"},
 }
 
 # Headers of the modules QtWidgets and QtPrintSupport, forbidden in core

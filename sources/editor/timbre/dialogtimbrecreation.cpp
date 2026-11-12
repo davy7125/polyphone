@@ -84,9 +84,14 @@ DialogTimbreCreation::DialogTimbreCreation(const TimbreModel &model, int key, QW
     connect(_radioAutomatic, SIGNAL(toggled(bool)), this, SLOT(updateWarning()));
     connect(_comboClosest, SIGNAL(currentIndexChanged(int)), this, SLOT(updateWarning()));
     connect(_comboSecond, SIGNAL(currentIndexChanged(int)), this, SLOT(updateWarning()));
-    connect(_comboClosest, &QComboBox::activated, this, [this]() { _radioManual->setChecked(true); });
-    connect(_comboSecond, &QComboBox::activated, this, [this]() { _radioManual->setChecked(true); });
+    connect(_comboClosest, SIGNAL(activated(int)), this, SLOT(selectManual()));
+    connect(_comboSecond, SIGNAL(activated(int)), this, SLOT(selectManual()));
     updateWarning();
+}
+
+void DialogTimbreCreation::selectManual()
+{
+    _radioManual->setChecked(true);
 }
 
 void DialogTimbreCreation::getAutomaticKeys(const QList<int> &rootKeys, int key, int &closest, int &second)

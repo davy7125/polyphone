@@ -8141,32 +8141,32 @@ Inne edytory SoundFontów mogą wyświetlać inne jednostki.</translation>
 <context>
     <name>TimbreActions</name>
     <message>
-        <location filename="../../editor/timbre/timbreactions.cpp" line="62"/>
+        <location filename="../../editor/timbre/model/timbreactions.cpp" line="62"/>
         <source>The key %1 already has a sample.</source>
         <translation>Klawisz %1 ma już próbkę.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbreactions.cpp" line="67"/>
+        <location filename="../../editor/timbre/model/timbreactions.cpp" line="67"/>
         <source>At least two root keys are needed for computing a note.</source>
         <translation>Do obliczenia nuty potrzebne są co najmniej dwa pierwotne klawisze.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbreactions.cpp" line="108"/>
+        <location filename="../../editor/timbre/model/timbreactions.cpp" line="108"/>
         <source>The note couldn&apos;t be computed.</source>
         <translation>Nie udało się obliczyć nuty.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbreactions.cpp" line="118"/>
+        <location filename="../../editor/timbre/model/timbreactions.cpp" line="118"/>
         <source>No harmonics found, only the level was interpolated.</source>
         <translation>Nie znaleziono harmonicznych, interpolowano tylko poziom.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbreactions.cpp" line="120"/>
+        <location filename="../../editor/timbre/model/timbreactions.cpp" line="120"/>
         <source>The following samples couldn&apos;t be looped:</source>
         <translation>Następujących próbek nie udało się zapętlić:</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbreactions.cpp" line="503"/>
+        <location filename="../../editor/timbre/model/timbreactions.cpp" line="503"/>
         <source>The attenuation reached its limit: the level differs by %1 dB from the expected one.</source>
         <translation>Tłumienie osiągnęło limit: poziom różni się o %1 dB od oczekiwanego.</translation>
     </message>

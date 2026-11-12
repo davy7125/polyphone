@@ -8145,32 +8145,32 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>TimbreActions</name>
     <message>
-        <location filename="../../editor/timbre/timbreactions.cpp" line="62"/>
+        <location filename="../../editor/timbre/model/timbreactions.cpp" line="62"/>
         <source>The key %1 already has a sample.</source>
         <translation>Нота %1 већ има узорак.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbreactions.cpp" line="67"/>
+        <location filename="../../editor/timbre/model/timbreactions.cpp" line="67"/>
         <source>At least two root keys are needed for computing a note.</source>
         <translation>За израчунавање ноте потребне су најмање две основне ноте.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbreactions.cpp" line="108"/>
+        <location filename="../../editor/timbre/model/timbreactions.cpp" line="108"/>
         <source>The note couldn&apos;t be computed.</source>
         <translation>Није могуће израчунати ноту.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbreactions.cpp" line="118"/>
+        <location filename="../../editor/timbre/model/timbreactions.cpp" line="118"/>
         <source>No harmonics found, only the level was interpolated.</source>
         <translation>Нису пронађени хармоници, интерполиран је само ниво.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbreactions.cpp" line="120"/>
+        <location filename="../../editor/timbre/model/timbreactions.cpp" line="120"/>
         <source>The following samples couldn&apos;t be looped:</source>
         <translation>Ови узорци не могу да се понављају (врте):</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbreactions.cpp" line="503"/>
+        <location filename="../../editor/timbre/model/timbreactions.cpp" line="503"/>
         <source>The attenuation reached its limit: the level differs by %1 dB from the expected one.</source>
         <translation>Пригушење је достигло границу: ниво се разликује од очекиваног за %1 dB.</translation>
     </message>

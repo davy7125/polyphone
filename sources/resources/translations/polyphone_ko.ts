@@ -8126,32 +8126,32 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>TimbreActions</name>
     <message>
-        <location filename="../../editor/timbre/timbreactions.cpp" line="62"/>
+        <location filename="../../editor/timbre/model/timbreactions.cpp" line="62"/>
         <source>The key %1 already has a sample.</source>
         <translation>키 %1에 이미 샘플이 있습니다.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbreactions.cpp" line="67"/>
+        <location filename="../../editor/timbre/model/timbreactions.cpp" line="67"/>
         <source>At least two root keys are needed for computing a note.</source>
         <translation>노트를 계산하려면 루트 키가 두 개 이상 필요합니다.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbreactions.cpp" line="108"/>
+        <location filename="../../editor/timbre/model/timbreactions.cpp" line="108"/>
         <source>The note couldn&apos;t be computed.</source>
         <translation>노트를 계산할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbreactions.cpp" line="118"/>
+        <location filename="../../editor/timbre/model/timbreactions.cpp" line="118"/>
         <source>No harmonics found, only the level was interpolated.</source>
         <translation>배음을 찾지 못해 레벨만 보간했습니다.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbreactions.cpp" line="120"/>
+        <location filename="../../editor/timbre/model/timbreactions.cpp" line="120"/>
         <source>The following samples couldn&apos;t be looped:</source>
         <translation>다음 샘플은 반복되지 않습니다:</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbreactions.cpp" line="503"/>
+        <location filename="../../editor/timbre/model/timbreactions.cpp" line="503"/>
         <source>The attenuation reached its limit: the level differs by %1 dB from the expected one.</source>
         <translation>감쇠가 한계에 도달했습니다: 레벨이 예상값과 %1 dB 차이 납니다.</translation>
     </message>

@@ -421,22 +421,22 @@ set(POLYPHONE_APP_FILES
     editor/timbre/dialogtimbrecorrection.h
     editor/timbre/dialogtimbrecreation.cpp
     editor/timbre/dialogtimbrecreation.h
+    editor/timbre/model/timbreactions.cpp
+    editor/timbre/model/timbreactions.h
+    editor/timbre/model/timbreanalysis.cpp
+    editor/timbre/model/timbreanalysis.h
+    editor/timbre/model/timbremodel.cpp
+    editor/timbre/model/timbremodel.h
+    editor/timbre/model/timbrerendering.cpp
+    editor/timbre/model/timbrerendering.h
     editor/timbre/pagetimbre.cpp
     editor/timbre/pagetimbre.h
-    editor/timbre/timbreactions.cpp
-    editor/timbre/timbreactions.h
-    editor/timbre/timbreanalysis.cpp
-    editor/timbre/timbreanalysis.h
     editor/timbre/timbrebarswidget.cpp
     editor/timbre/timbrebarswidget.h
     editor/timbre/timbremapwidget.cpp
     editor/timbre/timbremapwidget.h
-    editor/timbre/timbremodel.cpp
-    editor/timbre/timbremodel.h
     editor/timbre/timbrepalette.cpp
     editor/timbre/timbrepalette.h
-    editor/timbre/timbrerendering.cpp
-    editor/timbre/timbrerendering.h
     editor/tools/abstractrunnablemixer.cpp
     editor/tools/abstractrunnablemixer.h
     editor/tools/abstracttool.cpp

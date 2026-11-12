@@ -8173,32 +8173,32 @@ Jiné editory soundfontů mohou zobrazovat jiné jednotky.</translation>
 <context>
     <name>TimbreActions</name>
     <message>
-        <location filename="../../editor/timbre/timbreactions.cpp" line="62"/>
+        <location filename="../../editor/timbre/model/timbreactions.cpp" line="62"/>
         <source>The key %1 already has a sample.</source>
         <translation>Nota %1 již má vzorek.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbreactions.cpp" line="67"/>
+        <location filename="../../editor/timbre/model/timbreactions.cpp" line="67"/>
         <source>At least two root keys are needed for computing a note.</source>
         <translation>K výpočtu noty jsou potřeba alespoň dvě základní noty.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbreactions.cpp" line="108"/>
+        <location filename="../../editor/timbre/model/timbreactions.cpp" line="108"/>
         <source>The note couldn&apos;t be computed.</source>
         <translation>Notu se nepodařilo vypočítat.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbreactions.cpp" line="118"/>
+        <location filename="../../editor/timbre/model/timbreactions.cpp" line="118"/>
         <source>No harmonics found, only the level was interpolated.</source>
         <translation>Nebyly nalezeny žádné harmonické, interpolována byla pouze úroveň.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbreactions.cpp" line="120"/>
+        <location filename="../../editor/timbre/model/timbreactions.cpp" line="120"/>
         <source>The following samples couldn&apos;t be looped:</source>
         <translation>Následující vzorky se nepodařilo smyčkovat:</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbreactions.cpp" line="503"/>
+        <location filename="../../editor/timbre/model/timbreactions.cpp" line="503"/>
         <source>The attenuation reached its limit: the level differs by %1 dB from the expected one.</source>
         <translation>Zeslabení dosáhlo své meze: úroveň se od očekávané liší o %1 dB.</translation>
     </message>

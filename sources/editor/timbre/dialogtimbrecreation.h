@@ -50,6 +50,7 @@ public:
 
 private slots:
     void updateWarning();
+    void selectManual();
 
 private:
     int _key;

@@ -8174,32 +8174,32 @@ Outros editores de soundfont podem exibir outras unidades.</translation>
 <context>
     <name>TimbreActions</name>
     <message>
-        <location filename="../../editor/timbre/timbreactions.cpp" line="62"/>
+        <location filename="../../editor/timbre/model/timbreactions.cpp" line="62"/>
         <source>The key %1 already has a sample.</source>
         <translation>A nota %1 já tem uma amostra.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbreactions.cpp" line="67"/>
+        <location filename="../../editor/timbre/model/timbreactions.cpp" line="67"/>
         <source>At least two root keys are needed for computing a note.</source>
         <translation>São necessárias pelo menos duas notas base para calcular uma nota.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbreactions.cpp" line="108"/>
+        <location filename="../../editor/timbre/model/timbreactions.cpp" line="108"/>
         <source>The note couldn&apos;t be computed.</source>
         <translation>Não foi possível calcular a nota.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbreactions.cpp" line="118"/>
+        <location filename="../../editor/timbre/model/timbreactions.cpp" line="118"/>
         <source>No harmonics found, only the level was interpolated.</source>
         <translation>Nenhum harmônico encontrado, apenas o nível foi interpolado.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbreactions.cpp" line="120"/>
+        <location filename="../../editor/timbre/model/timbreactions.cpp" line="120"/>
         <source>The following samples couldn&apos;t be looped:</source>
         <translation>Não foi possível criar o loop das seguintes amostras:</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbreactions.cpp" line="503"/>
+        <location filename="../../editor/timbre/model/timbreactions.cpp" line="503"/>
         <source>The attenuation reached its limit: the level differs by %1 dB from the expected one.</source>
         <translation>A atenuação atingiu o limite: o nível difere em %1 dB do esperado.</translation>
     </message>
