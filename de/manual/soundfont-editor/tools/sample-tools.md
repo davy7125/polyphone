@@ -144,23 +144,47 @@ Ein Tipp ist, sich auf Positionen zu konzentrieren, an denen die Welle die x-Ach
 ![Werkzeug „Crossfade-Loop“](images/tool_crossfade_loop.png "Werkzeug „Crossfade-Loop“")
 
 
-### Leere am Anfang entfernen {#doc_removeblank}
+### Kürzen {#doc_trim}
 
-Jeder leere Bereich vor dem Beginn des Samples wird entfernt, wodurch sich die Zeit verkürzt, bis der Klang zu hören ist.
-Bei einem Stereo-Sample wird auf beiden Seiten dieselbe Länge entfernt.
+Dieses Werkzeug entfernt, was am Anfang und am Ende der ausgewählten Samples unnötig ist: Der Klang ist früher zu hören und der Soundfont wird kleiner.
+Bei einem Stereo-Sample werden beide Seiten auf dieselbe Weise gekürzt.
+
+![Werkzeug Kürzen](images/tool_trim.png "Werkzeug Kürzen")
+
+Leere am Anfang entfernen
+: Die Stille oder das Grundrauschen vor dem Attack wird entfernt; das Sample beginnt dann an einer Stelle, an der die Welle durch null geht.
+  Es wird keine Einblendung hinzugefügt: Der Attack der Lautstärke-Hüllkurve lässt den Klang bereits weich beginnen.
 
 ![Leere am Anfang entfernen](images/remove_blank.png "Leere am Anfang entfernen")
 
-**Hinweis:** Dieses Werkzeug kann bei jedem Import eines Samples automatisch angewendet werden; die Option befindet sich in den [Einstellungen](manual/settings.md#doc_general) der Software.
+Das Ende des Samples kann unverändert bleiben oder auf zwei Arten gekürzt werden.
 
+Nach dem Loop-Ende kürzen
+: Ist ein Loop festgelegt, werden die Daten nach dem Ende des Loops entfernt, bis auf einen kleinen Rand, der am Loop-Punkt verwendet wird.
+  Diese Daten sind zu hören, wenn ein Instrument den Loop nicht durchgehend abspielt (Loop aus, Release oder Loop ein + Release): Die so verwendeten Samples bleiben unverändert und werden in einer Meldung aufgelistet.
 
-### Bis zum Loop-Ende kürzen {#doc_trimloop}
+![Nach dem Loop-Ende kürzen](images/trim_to_loop.png "Nach dem Loop-Ende kürzen")
 
-Ist für das ausgewählte Sample ein Loop festgelegt, schneidet die Software den Klang nach dem Ende des Loops ab (mit einem kleinen Rand am Ende).
+Leere am Ende entfernen
+: Die Stille oder das Grundrauschen nach dem Klang wird entfernt und durch eine kurze Ausblendung ersetzt, die das Abklingen des Klangs fortsetzt, damit das verbleibende Rauschen nicht abrupt endet, wenn das Sample bis zu seinem Ende abgespielt wird (zum Beispiel ein Klavier mit Haltepedal oder mit langem Release).
+  Die Dauer der Ausblendung wird automatisch bestimmt: doppelt so lang wie die Zeit, die der Klang braucht, um seine letzten 20 dB zu verlieren, zwischen 20 ms und 1 s.
+  Der Loop und alles davor werden nie verändert.
 
-![Bis zum Loop-Ende kürzen](images/trim_to_loop.png "Bis zum Loop-Ende kürzen")
+![Leere am Ende entfernen](images/remove_blank_end.png "Leere am Ende entfernen")
 
-**Hinweis:** Je nach den [Einstellungen](manual/settings.md#doc_general) der Software kann dieses Werkzeug bei jedem Import eines Samples automatisch angewendet werden.
+Die letzte Option legt fest, was als Leere gilt, am Anfang wie am Ende:
+
+Grundrauschen erkennen
+: Das Grundrauschen wird in jedem Sample vor oder nach dem Klang gemessen, und als Leere gilt, was es nicht überschreitet.
+  Lässt sich kein Rauschen messen, gilt am Ende als Leere, was unter −90 dB liegt, und am Anfang, was 50 dB unter der Spitze des Samples liegt.
+
+Pegel unter
+: Als Leere gilt, was einen Spitzenpegel unter dem gewählten Wert hat, von −120 bis −10 dB (0 dB ist der maximale Pegel eines Samples).
+  Ein hoher Wert entfernt ein lauteres Rauschen, kann aber auch das Ende des Klangs abschneiden.
+
+Die Start- und End-[Offsets](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table) der Instrument-Aufteilungen, die die gekürzten Samples verwenden, werden angepasst, damit sie weiterhin denselben Teil des Klangs abspielen.
+
+**Hinweis:** Die Leere kann bei jedem importierten Sample automatisch am Anfang und am Ende entfernt werden; die Optionen befinden sich in den [Einstellungen](manual/settings.md#doc_general) der Software.
 
 
 ## Stereo-Samples {#doc_cat_stereo}

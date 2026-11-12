@@ -36,8 +36,8 @@ Le problème vient probablement d'une boucle mal positionnée, sujet décrit dan
 
 Les échantillons ne sont souvent utilisés que partiellement et enlever le superflu permet de réduire la taille d'un fichier&nbsp;:
 
-* la zone utile dans les échantillons est parfois située avant le point de bouclage final&nbsp;: il est donc possible de supprimer la partie de l'échantillon située après la fin de boucle et cet [outil](manual/soundfont-editor/tools/sample-tools.md#doc_trimloop) permet de le faire en quelques clics&nbsp;;
-* les échantillons peuvent débuter par un blanc qu'il est important de supprimer pour diminuer la latence lors du déclenchement d'une note (il existe aussi un [outil](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank) pour le faire rapidement)&nbsp;;
+* la zone utile dans les échantillons est parfois située avant le point de bouclage final&nbsp;: il est donc possible de supprimer la partie de l'échantillon située après la fin de boucle et cet [outil](manual/soundfont-editor/tools/sample-tools.md#doc_trim) permet de le faire en quelques clics&nbsp;;
+* les échantillons peuvent débuter par un blanc qu'il est important de supprimer pour diminuer la latence lors du déclenchement d'une note (il existe aussi un [outil](manual/soundfont-editor/tools/sample-tools.md#doc_trim) pour le faire rapidement)&nbsp;;
 * un même échantillon peut être présent plusieurs fois&nbsp;: ce [résumé de configuration](manual/soundfont-editor/configuration-summaries.md#doc_sample) montre les doublons et cet [outil](manual/soundfont-editor/tools/global-tools.md#doc_duplicates) les enlève en mettant à jour les instruments&nbsp;;
 * enfin, des échantillons peuvent tout simplement ne pas être utilisés&nbsp;: ce [résumé de configuration](manual/soundfont-editor/configuration-summaries.md#doc_sample) les liste et cet [outil](manual/soundfont-editor/tools/global-tools.md#doc_unused) les enlève automatiquement.
 
@@ -91,7 +91,7 @@ Pour adoucir le démarrage d'une note, précisez ou augmentez la **durée d'atta
 Trois solutions possibles et pouvant être complémentaires&nbsp;:
 
 * supprimez la **durée du délai** si elle est précisée au niveau des [instruments](manual/soundfont-editor/editing-pages/instrument-editor.md) ou des [ensembles](manual/soundfont-editor/editing-pages/preset-editor.md),
-* supprimez le silence au début de l'échantillon audio (voir la découpe de l'échantillon sur cette [page](manual/soundfont-editor/editing-pages/sample-editor.md#doc_graph) ou l'outil de suppression du silence au démarrage [ici](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank)),
+* supprimez le silence au début de l'échantillon audio (voir la découpe de l'échantillon sur cette [page](manual/soundfont-editor/editing-pages/sample-editor.md#doc_graph) ou l'outil de suppression du silence au démarrage [ici](manual/soundfont-editor/tools/sample-tools.md#doc_trim)),
 * enfin, la latence entendue peut être causée par le serveur audio que vous utilisez sur votre ordinateur (il ne s'agit donc pas d'un défaut interne à une banque de sons et il est possible de changer la sortie audio dans les [préférences](manual/settings.md#doc_general)).
 
 ### Le son s'arrête subitement

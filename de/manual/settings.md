@@ -50,11 +50,11 @@ Stereobearbeitung: Verknüpftes Sample ändern
 : Wird eine Seite eines Stereo-Samples bearbeitet, wird die andere Seite automatisch genauso bearbeitet.
   Dasselbe gilt für die Bearbeitung einer Stereo-Aufteilung eines Instruments: Die Aufteilung des anderen Kanals (mit denselben Tasten- und Anschlagsbereichen) wird genauso bearbeitet.
 
-Sample importieren: bis zum Loop-Ende kürzen
-: Beim Import eines Samples werden die Daten nach dem Ende des Loops automatisch entfernt (gleiche Wirkung wie das Werkzeug „[Bis zum Loop-Ende kürzen](manual/soundfont-editor/tools/sample-tools.md#doc_trimloop)“).
-
 Sample importieren: Leere am Anfang entfernen
-: Beim Import eines Samples wird jeder leere Bereich vor dem Beginn des Attacks automatisch entfernt (gleiche Wirkung wie das Werkzeug „[Leere am Anfang entfernen](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank)“).
+: Beim Import eines Samples wird jeder leere Bereich vor dem Beginn des Attacks automatisch entfernt (gleiche Wirkung wie das Werkzeug „[Kürzen](manual/soundfont-editor/tools/sample-tools.md#doc_trim)“ mit automatischer Erkennung des Grundrauschens).
+
+Sample importieren: Leere am Ende entfernen
+: Beim Import eines Samples wird jeder leere Bereich am Ende des Klangs automatisch entfernt und durch eine kurze Ausblendung ersetzt (gleiche Wirkung wie das Werkzeug „[Kürzen](manual/soundfont-editor/tools/sample-tools.md#doc_trim)“ mit automatischer Erkennung des Grundrauschens).
 
 
 ![Einstellungen, Allgemein](images/settings_general.png "Einstellungen, Allgemein")
@@ -82,7 +82,7 @@ Benachrichtigungen
 : Zeigt auf dem [Startbildschirm](manual/index.md#doc_home) die auf der Website veröffentlichten [Benachrichtigungen](manual/index.md#doc_notifications) an (Warnung, neue Version, Ankündigung, Aufruf zur Unterstützung). Ist die Option deaktiviert, wird nichts heruntergeladen.
 
 Startansicht
-: Wählt die Ansicht, die beim Öffnen eines Soundfonts angezeigt wird, unter folgenden aus: :guilabel:`Allgemein` (Standard), :guilabel:`Samples`, :guilabel:`Samples - erstes Sample`, :guilabel:`Instrumente`, :guilabel:`Instrumente - erstes Instrument - Tabelle`, :guilabel:`Instrumente - erstes Instrument - Bereiche`, :guilabel:`Instrumente - erstes Instrument - Hüllkurven`, :guilabel:`Presets`, :guilabel:`Presets - erstes Preset - Tabelle`, :guilabel:`Presets - erstes Preset - Bereiche`. Beim ersten Instrument oder Preset legt der letzte Teil die angezeigte Seite fest: [Tabelle](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), [Bereichseditor](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range) oder [Hüllkurveneditor](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope).
+: Wählt die Ansicht, die beim Öffnen eines Soundfonts angezeigt wird, unter folgenden aus: :guilabel:`Allgemein` (Standard), :guilabel:`Samples`, :guilabel:`Samples - erstes Sample`, :guilabel:`Instrumente`, :guilabel:`Instrumente - erstes Instrument - Tabelle`, :guilabel:`Instrumente - erstes Instrument - Bereiche`, :guilabel:`Instrumente - erstes Instrument - Hüllkurven`, :guilabel:`Instrumente - erstes Instrument - Klangfarbe`, :guilabel:`Presets`, :guilabel:`Presets - erstes Preset - Tabelle`, :guilabel:`Presets - erstes Preset - Bereiche`. Beim ersten Instrument oder Preset legt der letzte Teil die angezeigte Seite fest: [Tabelle](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), [Bereichseditor](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range), [Hüllkurveneditor](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope) oder [Klangfarbenansicht](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_timbre).
 
 Aufteilungen sortieren
 : Hier kann die Reihenfolge der Aufteilungen innerhalb eines Instruments oder eines Presets geändert werden: :guilabel:`Nach Tastenbereich`, :guilabel:`Nach Anschlagsbereich`, :guilabel:`Alphabetische Reihenfolge` oder :guilabel:`Keine` (die Reihenfolge der Erstellung).

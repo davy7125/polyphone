@@ -47,7 +47,7 @@
 
 В правой части панели инструментов в зависимости от отображаемого [редактора](manual/soundfont-editor/editing-pages/index.md) могут появляться значки:
 
-* при редактировании инструмента можно переключаться между ![таблица](images/toolbar_table.png "таблица"){.inline} [табличным видом](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), ![диапазоны](images/toolbar_range.png "диапазоны"){.inline} [редактором диапазонов](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range) и ![огибающие](images/toolbar_adsr.png "огибающие"){.inline} [редактором огибающих](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope),
+* при редактировании инструмента можно переключаться между ![таблица](images/toolbar_table.png "таблица"){.inline} [табличным видом](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), ![диапазоны](images/toolbar_range.png "диапазоны"){.inline} [редактором диапазонов](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range), ![огибающие](images/toolbar_adsr.png "огибающие"){.inline} [редактором огибающих](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope) и ![тембр](images/toolbar_timbre.png "тембр"){.inline} [видом тембра](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_timbre),
 * при редактировании пресета можно переключаться между ![таблица](images/toolbar_table.png "таблица"){.inline} табличным видом и ![диапазоны](images/toolbar_range.png "диапазоны"){.inline} редактором диапазонов,
 * в остальных случаях ничего не отображается.
 

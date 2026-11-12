@@ -36,8 +36,8 @@ O problema provavelmente vem de um ponto de loop mal posicionado, assunto tratad
 
 Muitas vezes as amostras são usadas apenas parcialmente, e remover o excesso pode reduzir o tamanho do arquivo:
 
-* a parte útil de uma amostra às vezes fica antes do ponto final do loop: é então possível excluir a parte da amostra após o fim do loop, e esta [ferramenta](manual/soundfont-editor/tools/sample-tools.md#doc_trimloop) permite fazer isso em poucos cliques;
-* as amostras podem começar com um silêncio, que deve ser removido para reduzir a latência ao disparar uma nota (também existe uma [ferramenta](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank) para fazer isso rapidamente);
+* a parte útil de uma amostra às vezes fica antes do ponto final do loop: é então possível excluir a parte da amostra após o fim do loop, e esta [ferramenta](manual/soundfont-editor/tools/sample-tools.md#doc_trim) permite fazer isso em poucos cliques;
+* as amostras podem começar com um silêncio, que deve ser removido para reduzir a latência ao disparar uma nota (também existe uma [ferramenta](manual/soundfont-editor/tools/sample-tools.md#doc_trim) para fazer isso rapidamente);
 * uma mesma amostra pode estar presente várias vezes: este [resumo de configuração](manual/soundfont-editor/configuration-summaries.md#doc_sample) mostra as duplicatas, e esta [ferramenta](manual/soundfont-editor/tools/global-tools.md#doc_duplicates) as remove atualizando os instrumentos;
 * por fim, algumas amostras podem simplesmente não ser usadas: este [resumo de configuração](manual/soundfont-editor/configuration-summaries.md#doc_sample) as lista, e esta [ferramenta](manual/soundfont-editor/tools/global-tools.md#doc_unused) as remove automaticamente.
 
@@ -91,7 +91,7 @@ Ao contrário do caso anterior, diminua ou remova a **duração do attack** da n
 Três soluções possíveis e complementares:
 
 * remover a **duração do delay** se ela estiver especificada no nível do [instrumento](manual/soundfont-editor/editing-pages/instrument-editor.md) ou da [predefinição](manual/soundfont-editor/editing-pages/preset-editor.md),
-* remover o silêncio no início da amostra de áudio (veja o corte de amostras nesta [página](manual/soundfont-editor/editing-pages/sample-editor.md#doc_graph) ou a ferramenta de remoção de silêncio [aqui](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank)),
+* remover o silêncio no início da amostra de áudio (veja o corte de amostras nesta [página](manual/soundfont-editor/editing-pages/sample-editor.md#doc_graph) ou a ferramenta de remoção de silêncio [aqui](manual/soundfont-editor/tools/sample-tools.md#doc_trim)),
 * por fim, a latência percebida pode ser causada pelo servidor de áudio usado no seu computador (nesse caso, não é um defeito da soundfont em si, e você pode alterar a saída de áudio nas [configurações](manual/settings.md#doc_general)).
 
 ### O som para de repente

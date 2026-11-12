@@ -50,11 +50,11 @@ Modifica stereo: modifica il campione collegato
 : Quando si modifica un lato di un campione stereo, l'altro lato viene modificato automaticamente allo stesso modo.
   Lo stesso vale per la modifica di una divisione stereo di uno strumento: la divisione corrispondente all'altro canale (con gli stessi intervalli di note e di velocità) viene modificata allo stesso modo.
 
-Importazione campioni: taglia alla fine del loop
-: Quando si importa un campione, i dati situati dopo la fine del loop vengono rimossi automaticamente (stesso effetto della funzione «[Taglia alla fine del loop](manual/soundfont-editor/tools/sample-tools.md#doc_trimloop)»).
-
 Importazione campioni: rimuovi il silenzio all'inizio
-: Quando si importa un campione, qualsiasi zona vuota situata prima dell'inizio dell'attacco viene rimossa automaticamente (stesso effetto della funzione «[Rimuovi silenzio all'inizio](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank)»).
+: Quando si importa un campione, qualsiasi zona vuota situata prima dell'inizio dell'attacco viene rimossa automaticamente (stesso effetto della funzione «[Taglia](manual/soundfont-editor/tools/sample-tools.md#doc_trim)» con un rilevamento automatico del rumore di fondo).
+
+Importazione campioni: rimuovi il silenzio alla fine
+: Quando si importa un campione, qualsiasi zona vuota situata alla fine del suono viene rimossa automaticamente e sostituita da una breve dissolvenza in uscita (stesso effetto della funzione «[Taglia](manual/soundfont-editor/tools/sample-tools.md#doc_trim)» con un rilevamento automatico del rumore di fondo).
 
 
 ![Impostazioni, generale](images/settings_general.png "Impostazioni, generale")
@@ -82,7 +82,7 @@ Notifiche
 : Mostra nella [schermata iniziale](manual/index.md#doc_home) le [notifiche](manual/index.md#doc_notifications) pubblicate sul sito (avviso, nuova versione, annuncio, appello al sostegno). Quando l'opzione è disattivata, non viene scaricato nulla.
 
 Vista all'avvio
-: Seleziona la vista da mostrare all'apertura di un soundfont tra le seguenti: :guilabel:`Generale` (predefinita), :guilabel:`Campioni`, :guilabel:`Campioni - primo campione`, :guilabel:`Strumenti`, :guilabel:`Strumenti - primo strumento - Tabella`, :guilabel:`Strumenti - primo strumento - Intervalli`, :guilabel:`Strumenti - primo strumento - Inviluppi`, :guilabel:`Preset`, :guilabel:`Preset - primo preset - Tabella`, :guilabel:`Preset - primo preset - Intervalli`. Per il primo strumento o preset, l'ultima parte indica la pagina mostrata: [tabella](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), [editor degli intervalli](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range) o [editor degli inviluppi](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope).
+: Seleziona la vista da mostrare all'apertura di un soundfont tra le seguenti: :guilabel:`Generale` (predefinita), :guilabel:`Campioni`, :guilabel:`Campioni - primo campione`, :guilabel:`Strumenti`, :guilabel:`Strumenti - primo strumento - Tabella`, :guilabel:`Strumenti - primo strumento - Intervalli`, :guilabel:`Strumenti - primo strumento - Inviluppi`, :guilabel:`Strumenti - primo strumento - Timbro`, :guilabel:`Preset`, :guilabel:`Preset - primo preset - Tabella`, :guilabel:`Preset - primo preset - Intervalli`. Per il primo strumento o preset, l'ultima parte indica la pagina mostrata: [tabella](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), [editor degli intervalli](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range), [editor degli inviluppi](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope) o [vista del timbro](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_timbre).
 
 Ordina le divisioni
 : Qui si può cambiare l'ordine delle divisioni all'interno di uno strumento o di un preset: :guilabel:`per intervallo di nota`, :guilabel:`per intervallo di velocità`, :guilabel:`in ordine alfabetico` o :guilabel:`nessuna` (l'ordine di creazione).

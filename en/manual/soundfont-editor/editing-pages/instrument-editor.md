@@ -5,6 +5,7 @@ This page comprises several parts:
 * the [table](#doc_table),
 * the [range editor](#doc_range) when the button :guilabel:`Edit ranges` from the [toolbar](manual/soundfont-editor/toolbar.md#doc_view) is clicked,
 * the [envelope editor](#doc_envelope) when the button :guilabel:`Edit envelope` from the [toolbar](manual/soundfont-editor/toolbar.md#doc_view) is clicked,
+* the [timbre view](#doc_timbre) when the button :guilabel:`Timbre` from the [toolbar](manual/soundfont-editor/toolbar.md#doc_view) is clicked,
 * the [modulator section](#doc_modulator).
 
 
@@ -260,6 +261,204 @@ If several divisions or instruments are selected, all their envelopes are change
 Maintaining the right click allows you to change the zoom around the selected point.
 
 Maintaining the left click allows you to move the graphic if the click does not start on a point of the curve.
+
+
+## Timbre view {#doc_timbre}
+
+
+The timbre view shows, all along the keyboard, the timbre of an instrument **as it is heard**: the level of each harmonic, once each sample is transposed to the keys it plays and once the attenuation, the filter and the modulators of its division are applied.
+Irregularities become visible, in particular the breaks at the junctions between samples.
+From this view, computed notes can be created, redundant samples removed, and the timbre or the level of a sample corrected.
+The view measures and proposes, nothing is applied automatically.
+
+
+![Timbre view](images/edit_timbre.png "Timbre view")
+
+
+### Divisions taken into account
+
+
+The view shows what is played at the velocity chosen at the top left (100 by default, then the last one used).
+The bar next to it shows the velocity layers of the instrument: a click on a layer selects the velocity in its middle.
+
+The divisions taken into account are those playing at this velocity, that are not [muted](#doc_solo) and that are not played only when the key is released (sample mode “release”).
+Muting a division is thus the way to exclude it from the view, for instance a noise or a release sound.
+When the [solo on selection](manual/soundfont-editor/tree.md#doc_menu) is enabled, the mutes follow the selection and are not taken into account.
+The divisions playing the same key (stereo pair, layers) are combined: their powers are added.
+
+A **root key** gathers all the divisions having this root key, possibly with several key ranges.
+The samples are analyzed in the background (the number of samples remaining is shown at the top right): the harmonics are measured on the loop, or on the steady part of the sound if there is no loop.
+These analyses are kept until the data, the loop, the root key or the pitch correction of a sample changes.
+
+
+### Map
+
+
+Each column is a key, aligned on the keyboard displayed below, and each row a harmonic rank (H1: fundamental, H2: second harmonic...), the rank 1 being at the bottom as in a spectrogram.
+The first ranks are displayed one by one, the next ones being grouped in bands (see [Partials](#doc_timbre_partials)).
+
+Above the map, summary rows show for each key:
+
+* :guilabel:`Level`: total level,
+* :guilabel:`Timbre`: timbre deviation of the root key from its reference (hatched when the reference is less reliable, at the ends of the keyboard),
+* :guilabel:`Transposition`: blue when the sample is transposed down, red when it is transposed up,
+* and, chosen in the menu :guilabel:`Options` > :guilabel:`Summaries`: :guilabel:`Brightness` (center of gravity of the ranks), :guilabel:`Odd / even` (odd ranks compared to even ranks), :guilabel:`Noise` (harmonics to noise ratio), :guilabel:`Tuning` (cents from the closest note of the equal temperament) and :guilabel:`Loop` (quality of the loop).
+
+On the map, vertical lines mark the junctions between divisions (thicker when the sample changes), a dot marks each root key, hatching shows the ranks that are absent (outside the band of the sample or of the output, above the upper limit) or not reliably measured, and the keys that play nothing are grayed.
+A tooltip gives the values of the cell under the mouse cursor: key, rank, level, deviation, samples, transposition and duration factor (the attack, the tremolo and the beats are faster when a sample is transposed up).
+
+The list :guilabel:`Display` selects what the colors represent:
+
+Absolute levels
+: Level of each rank in dB.
+
+Relative levels
+: Level of each rank relative to the strongest one of the key: the timbre regardless of the level.
+
+Deviation from the reference
+: Difference between the root key and its reference for each rank, over all the keys played by the root key: too strong (red) or too weak (blue).
+
+Jumps
+: Difference with the previous key: the breaks at the junctions.
+
+Transposition
+: Semitones between the key and the root key of its sample.
+
+Confidence
+: Part of the power that is reliably measured.
+
+The menu :guilabel:`Options` also allows displaying the whole keyboard or only one column per root key, coloring by steps of the thresholds (the deviations within the tolerance being neutral), and playing the clicked keys.
+The keyboard below the map plays the instrument at the velocity of the view.
+
+
+### Reference and decisions
+
+
+The **reference** of a root key is what its neighbors predict: the neighboring root keys are played at its key (with the parameters of their divisions) and their levels are interpolated rank by rank, in dB.
+At both ends of the keyboard, the reference is extrapolated from the two neighbors on the same side, which is less reliable.
+With :guilabel:`Local regression`, a robust regression on several neighbors on each side is used instead, so that a defective neighbor weighs less.
+
+The deviation of a root key from its reference is summed up by two numbers:
+
+* the **level** deviation, difference of the total levels, which can be corrected by the attenuation,
+* the **timbre** deviation, mean of the differences of the rows once the level deviation is removed, each row weighing according to its loudness (a weak harmonic counts, without dominating).
+
+The strip :guilabel:`Decisions` gives a label to each root key and to each junction, with a shape and a color:
+
+Consistent ✓ (green)
+: The timbre deviation is within the tolerance.
+
+Redundant − (blue)
+: The root key is consistent, and removing it would change its keys by less than the threshold :guilabel:`Redundancy`, without a break at the new junction: it can be removed.
+
+To correct ~ (orange)
+: The timbre deviation is between the tolerance and the maximum: the timbre can be corrected.
+
+Too different × (red)
+: The timbre deviation is beyond the maximum: the root key can be removed or replaced with a computed note.
+
+Break + (purple)
+: At a change of sample, the timbre jump is beyond the threshold :guilabel:`Break` and a key without sample exists between both root keys: a computed note can be created there.
+
+Level ▲ ▼ (yellow)
+: The level deviation is beyond the threshold :guilabel:`Level` (▲ too loud, ▼ too soft): the attenuation can be corrected.
+
+The thresholds are set in the menu :guilabel:`Thresholds`.
+Their default values (:guilabel:`Tolerance` 4.5 dB, :guilabel:`Maximum` 8 dB, :guilabel:`Redundancy` 2.5 dB, :guilabel:`Break` 6 dB, :guilabel:`Level` 2.5 dB) come from organ sample sets, where 70% of the root keys deviate by less than 4.5 dB from their neighbors: they can be adapted to the instrument.
+A junction or a deviation can be wanted (an instrument becoming another one, a mixture breaking back): the labels are only proposals.
+
+
+### Partials {#doc_timbre_partials}
+
+
+The menu :guilabel:`Partials` sets the rows of the map, shared by the display, the deviations and the corrections:
+
+Ranks displayed one by one
+: Number of ranks displayed and compared one by one (10 by default). The ear distinguishes the first harmonics individually, the next ones being perceived together as brightness.
+
+Next ranks
+: The next ranks are grouped in bands of a third of an octave (11-12, 13-16, 17-20...) or of an octave, so that many weak high ranks don't weigh more than the first ones.
+
+Upper limit
+: The partials above this frequency are ignored (16 kHz by default, or the half of the sample rate).
+
+Dynamic range
+: The ranks further below the strongest one of the key are not compared (60 dB by default).
+
+
+### Details and actions
+
+
+A click on a key shows below the map what it plays: the samples with their transposition, attenuation and filter, the duration factor, the pitch, the deviations of the root key and what its removal would change.
+The bar chart compares the levels heard with the reference, or with the computed note that a key without sample could receive (a dashed column on the map).
+
+A click on a root key selects its divisions in the [tree](manual/soundfont-editor/tree.md), and selecting divisions in the tree selects their root keys.
+Several root keys can be selected with :kbd:`Ctrl` or :kbd:`Shift`, or by dragging the mouse over keys.
+
+The buttons on the right and the contextual menu of the map apply to the selected root keys:
+
+Create a note here...
+: On a key without sample: the closest root key is transposed and the levels of its harmonics are interpolated (or extrapolated) from a second root key. The root keys used can be chosen, and a warning is shown when the key is far from them. The key ranges around are adjusted; the divisions entirely within the range of the new note are removed.
+
+Remove...
+: The divisions of the root key are removed and its neighbors take its keys. The samples that are not used anymore can be removed too.
+
+Replace with a computed note...
+: The root key is removed, then created again from its neighbors.
+
+Correct the timbre...
+: Opens the [correction](#doc_timbre_correction) window.
+
+Correct the level
+: The attenuation of the divisions is changed so that the level deviation becomes zero (an attenuation cannot be negative).
+
+Check by rendering
+: The key is played by the sound engine and the harmonics of the result are measured: they are shown on the bar chart for checking the computation of the view.
+
+Mute these divisions
+: In the contextual menu: excludes the divisions from the view.
+
+The menu :guilabel:`Propose` selects all root keys (or junctions) having a label and applies the corresponding action to them, after a confirmation: correct the root keys to correct, replace those too different, remove the redundant ones, create computed notes at the breaks, correct the deviating levels.
+They are processed from the worst to the least bad, the references being computed again after each action: a defective root key also distorts the reference of its neighbors, which look half defective until it is corrected.
+
+Each action, or series of actions, can be undone in one step (:kbd:`Ctrl`+:kbd:`Z`).
+
+
+### Correction of the timbre {#doc_timbre_correction}
+
+
+![Correction of the timbre](images/timbre_correction.png "Correction of the timbre")
+
+
+The window shows the levels heard, the target and the expected result for each row, and offers the following parameters:
+
+Reference
+: Target of the correction: :guilabel:`Interpolation between the neighbors`, :guilabel:`Local regression` on several neighbors on each side, or :guilabel:`Aligned on a root key` (another root key played at the key).
+
+Correct the timbre (sample data)
+: The gain of each row is applied to the data of the samples with a minimum phase curve following the pitch: the correction stays valid on all the keys of the division, whatever the transposition, and the loop is kept. The same correction is applied to both samples of a stereo pair.
+
+Correct the level (attenuation)
+: The level deviation is corrected through the attenuation of the divisions, which doesn't change the data. If the attenuation would become negative, the rest goes in the data, within the full scale.
+
+Tolerance
+: A smaller deviation of a row is not corrected, only the part beyond is.
+
+Strength
+: Part of the deviation corrected.
+
+Maximum correction
+: Largest gain of a row, on each side.
+
+Ranks corrected
+: All rows, or only the ranks from 1 to a given rank.
+
+Brightness, Odd ranks
+: Slope added to the target (positive for a brighter sound), and level added to the odd ranks 3, 5, 7... of the target.
+
+The section :guilabel:`Listening` compares the original sound (A) and the corrected one (B) with the button :guilabel:`Play`.
+If the correction would exceed the full scale, the sample is lowered and the attenuation compensates.
+When a sample is also used by other divisions or instruments, Polyphone asks whether to duplicate it for the corrected root keys or to modify it everywhere (the answer can be remembered until Polyphone is closed).
 
 
 ## Modulators {#doc_modulator}

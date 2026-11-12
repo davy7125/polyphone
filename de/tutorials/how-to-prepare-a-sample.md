@@ -126,7 +126,7 @@ Hier einige Beispiele mit dem Klang einer Flöte und einem Kalibrier-Sinus:
 Im Menü :guilabel:`Werkzeuge` der [Werkzeugleiste](manual/soundfont-editor/toolbar.md#doc_edit) stehen mehrere Werkzeuge zur Verfügung.
 Sie können Samples bearbeiten durch:
 
-* [Entfernen der Leere](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank) am Anfang,
+* [Entfernen der Leere](manual/soundfont-editor/tools/sample-tools.md#doc_trim) am Anfang,
 * [Entzerren](manual/soundfont-editor/editing-pages/sample-editor.md#doc_eq) des Klangs,
 * [Transponieren](manual/soundfont-editor/tools/sample-tools.md#doc_transpose),
 * [Normalisieren](manual/soundfont-editor/tools/sample-tools.md#doc_volume) der Lautstärke,

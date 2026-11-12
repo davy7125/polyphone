@@ -67,7 +67,7 @@ SoundFontは3階層の構造でできているため、新しいSoundFontの作�
 
 サンプルを編集するためのツールがいくつか用意されています。たとえば次のようなものです。
 
-* 先頭の[空白を削除](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank)する
+* 先頭の[空白を削除](manual/soundfont-editor/tools/sample-tools.md#doc_trim)する
 * 音を[イコライズ](manual/soundfont-editor/editing-pages/sample-editor.md#doc_eq)する
 * [トランスポーズ](manual/soundfont-editor/tools/sample-tools.md#doc_transpose)する
 * 音量を[ノーマライズ](manual/soundfont-editor/tools/sample-tools.md#doc_volume)する

@@ -67,7 +67,7 @@ L'[analyse fréquentielle](manual/soundfont-editor/editing-pages/sample-editor.m
 
 Différents outils sont disponibles pour l'édition des échantillons comme&nbsp;:
 
-* [supprimer le blanc](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank) au démarrage,
+* [supprimer le blanc](manual/soundfont-editor/tools/sample-tools.md#doc_trim) au démarrage,
 * [égaliser](manual/soundfont-editor/editing-pages/sample-editor.md#doc_eq) le son,
 * [transposer](manual/soundfont-editor/tools/sample-tools.md#doc_transpose),
 * [normaliser](manual/soundfont-editor/tools/sample-tools.md#doc_volume) le volume,

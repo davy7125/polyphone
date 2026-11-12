@@ -126,7 +126,7 @@
 В меню :guilabel:`Инструментарий` на [панели инструментов](manual/soundfont-editor/toolbar.md#doc_edit) есть несколько функций.
 С их помощью семплы можно редактировать:
 
-* [удалять тишину](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank) в начале,
+* [удалять тишину](manual/soundfont-editor/tools/sample-tools.md#doc_trim) в начале,
 * [эквализировать](manual/soundfont-editor/editing-pages/sample-editor.md#doc_eq) звук,
 * [транспонировать](manual/soundfont-editor/tools/sample-tools.md#doc_transpose),
 * [нормализовать](manual/soundfont-editor/tools/sample-tools.md#doc_volume) громкость,

@@ -50,11 +50,11 @@ Stereo editing: change linked sample
 : When editing one side of a stereo sample, the other side is automatically edited the same.
   The same applies when editing a stereo instrument division: the division corresponding to the other channel (with the same note and velocity ranges) is edited the same.
 
-Sample import: trim to loop
-: When importing a sample, data located after the end of loop are automatically removed (same effect as the tool “[Trim to end of loop](manual/soundfont-editor/tools/sample-tools.md#doc_trimloop)”).
-
 Sample import: remove blank at start
-: When importing a sample, any blank area located before the beginning of the attack is automatically removed (same effect as the tool “[Remove blank at start](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank)”).
+: When importing a sample, any blank area located before the beginning of the attack is automatically removed (same effect as the tool “[Trim](manual/soundfont-editor/tools/sample-tools.md#doc_trim)” with an automatic detection of the background noise).
+
+Sample import: remove blank at end
+: When importing a sample, any blank area located at the end of the sound is automatically removed and replaced by a short fade-out (same effect as the tool “[Trim](manual/soundfont-editor/tools/sample-tools.md#doc_trim)” with an automatic detection of the background noise).
 
 
 ![Settings, general](images/settings_general.png "Settings, general")
@@ -82,7 +82,7 @@ Notifications
 : Display on the [home screen](manual/index.md#doc_home) the [notifications](manual/index.md#doc_notifications) published on the website (alert, new version, announcement, appeal for support). When this option is disabled, nothing is downloaded.
 
 Startup view
-: Select the view to display when a soundfont is opened among the following: :guilabel:`General` (default), :guilabel:`Samples`, :guilabel:`Samples - first sample`, :guilabel:`Instruments`, :guilabel:`Instruments - first instrument - Table`, :guilabel:`Instruments - first instrument - Ranges`, :guilabel:`Instruments - first instrument - Envelopes`, :guilabel:`Presets`, :guilabel:`Presets - first preset - Table`, :guilabel:`Presets - first preset - Ranges`. For the first instrument or preset, the last part sets the page displayed: [table](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), [range editor](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range) or [envelope editor](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope).
+: Select the view to display when a soundfont is opened among the following: :guilabel:`General` (default), :guilabel:`Samples`, :guilabel:`Samples - first sample`, :guilabel:`Instruments`, :guilabel:`Instruments - first instrument - Table`, :guilabel:`Instruments - first instrument - Ranges`, :guilabel:`Instruments - first instrument - Envelopes`, :guilabel:`Instruments - first instrument - Timbre`, :guilabel:`Presets`, :guilabel:`Presets - first preset - Table`, :guilabel:`Presets - first preset - Ranges`. For the first instrument or preset, the last part sets the page displayed: [table](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), [range editor](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range), [envelope editor](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope) or [timbre view](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_timbre).
 
 Sort divisions
 : The order of the divisions within an instrument or a preset can be changed here: :guilabel:`by key range`, :guilabel:`by velocity range`, :guilabel:`in alphabetical order` or :guilabel:`none` (the order of creation).

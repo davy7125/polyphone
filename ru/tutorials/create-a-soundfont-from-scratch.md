@@ -67,7 +67,7 @@ SoundFont имеет 3-уровневую структуру, поэтому с�
 
 Для редактирования семплов есть несколько функций, например:
 
-* [удаление тишины](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank) в начале,
+* [удаление тишины](manual/soundfont-editor/tools/sample-tools.md#doc_trim) в начале,
 * [эквализация](manual/soundfont-editor/editing-pages/sample-editor.md#doc_eq) звука,
 * [транспонирование](manual/soundfont-editor/tools/sample-tools.md#doc_transpose),
 * [нормализация](manual/soundfont-editor/tools/sample-tools.md#doc_volume) громкости,

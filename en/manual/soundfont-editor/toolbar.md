@@ -47,7 +47,7 @@ The elements in the left part of the toolbar are for common editing functions:
 
 In the right part of the toolbar, some icons may appear depending on which [editor](manual/soundfont-editor/editing-pages/index.md) is displayed:
 
-* switching between the ![table](images/toolbar_table.png "table"){.inline} [table view](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), the ![range](images/toolbar_range.png "range"){.inline} [range editor](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range) and the ![envelope](images/toolbar_adsr.png "envelope"){.inline} [envelope editor](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope) is possible when editing an instrument,
+* switching between the ![table](images/toolbar_table.png "table"){.inline} [table view](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), the ![range](images/toolbar_range.png "range"){.inline} [range editor](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range), the ![envelope](images/toolbar_adsr.png "envelope"){.inline} [envelope editor](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope) and the ![timbre](images/toolbar_timbre.png "timbre"){.inline} [timbre view](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_timbre) is possible when editing an instrument,
 * switching between the ![table](images/toolbar_table.png "table"){.inline} table view and the ![range](images/toolbar_range.png "range"){.inline} range editor is possible when editing a preset,
 * nothing displayed otherwise.
 

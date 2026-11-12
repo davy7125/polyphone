@@ -36,8 +36,8 @@
 
 采样往往只有一部分被用到，删除多余部分可以减小文件大小：
 
-* 采样中有用的部分有时位于最终循环点之前：此时可以删除循环终点之后的部分，用这个[工具](manual/soundfont-editor/tools/sample-tools.md#doc_trimloop)只需点几下即可完成；
-* 采样开头可能有一段静音，应将其删除，以减少触发音符时的延迟（也有一个[工具](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank)可以快速完成）；
+* 采样中有用的部分有时位于最终循环点之前：此时可以删除循环终点之后的部分，用这个[工具](manual/soundfont-editor/tools/sample-tools.md#doc_trim)只需点几下即可完成；
+* 采样开头可能有一段静音，应将其删除，以减少触发音符时的延迟（也有一个[工具](manual/soundfont-editor/tools/sample-tools.md#doc_trim)可以快速完成）；
 * 同一个采样可能出现多次：这个[配置概览](manual/soundfont-editor/configuration-summaries.md#doc_sample)会显示重复项，而这个[工具](manual/soundfont-editor/tools/global-tools.md#doc_duplicates)会在更新乐器的同时移除它们；
 * 最后，有些采样可能根本没有被使用：这个[配置概览](manual/soundfont-editor/configuration-summaries.md#doc_sample)会列出它们，而这个[工具](manual/soundfont-editor/tools/global-tools.md#doc_unused)会自动移除它们。
 
@@ -91,7 +91,7 @@ ADSR 包络表示演奏一个音符时音量如何变化，也表示松开该音
 有三种可能且可以互补的解决办法：
 
 * 如果在[乐器](manual/soundfont-editor/editing-pages/instrument-editor.md)或[预设](manual/soundfont-editor/editing-pages/preset-editor.md)层级设置了**延迟时长**，将其去掉，
-* 去掉音频采样开头的静音（参见这个[页面](manual/soundfont-editor/editing-pages/sample-editor.md#doc_graph)中的采样裁剪，或[这里](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank)的静音移除工具），
+* 去掉音频采样开头的静音（参见这个[页面](manual/soundfont-editor/editing-pages/sample-editor.md#doc_graph)中的采样裁剪，或[这里](manual/soundfont-editor/tools/sample-tools.md#doc_trim)的静音移除工具），
 * 最后，感觉到的延迟可能是由你电脑上使用的音频服务器造成的（这种情况下并不是音色库本身的缺陷，可以在[设置](manual/settings.md#doc_general)中更改音频输出）。
 
 ### 声音突然中断

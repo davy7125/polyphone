@@ -12,13 +12,6 @@ L'utilisation d'outils pour plusieurs échantillons simultanément est possible 
 ## Boucle / lecture {#doc_cat_loop_playback}
 
 
-### Ajuster à la fin de boucle {#doc_trimloop}
-
-Si une boucle est définie pour l'échantillon sélectionné, le logiciel coupera le son après la fin de la boucle (laissant une petite marge à la fin).
-
-![Ajuster à la fin de boucle](images/trim_to_loop.png "Ajuster à la fin de boucle")
-
-**Note&nbsp;:** cet outil peut être appliqué automatiquement à chaque fois qu'un échantillon est importé, l'option étant dans les [préférences](manual/settings.md#doc_general) du logiciel.
 
 
 ### Bouclage automatique {#doc_autoloop}
@@ -39,14 +32,6 @@ Pour les entendre, vous devez sélectionner ![boucle activée](images/loop_on.pn
 ![boucle activée + fin](images/loop_on_end.png "boucle activée + fin"){.inline} active la boucle et l'échantillon sera lu jusqu'à la fin une fois la note relâchée.
 
 
-### Enlever le silence initial {#doc_removeblank}
-
-Tout silence au début de l'échantillon est éliminé, réduisant le temps avant que le son soit entendu.
-Avec un échantillon stéréo, la même durée est retirée des deux côtés.
-
-![Suppression du silence initial](images/remove_blank.png "Suppression du silence initial")
-
-**Note&nbsp;:** cet outil peut être appliqué automatiquement à chaque fois qu'un échantillon est importé, l'option étant dans les [préférences](manual/settings.md#doc_general) du logiciel.
 
 
 ### Fondu enchaîné {#doc_crossfadeloop}
@@ -60,6 +45,49 @@ L'outil de fondu enchaîné peut être vu comme la version manuelle de l'[outil 
 Un conseil est de se concentrer sur les positions où l'onde croise l'axe des x (valeur 0).
 
 ![Fondu enchaîné](images/tool_crossfade_loop.png "Fondu enchaîné")
+
+
+### Rogner {#doc_trim}
+
+Cet outil enlève ce qui est inutile au début et à la fin des échantillons sélectionnés&nbsp;: le son est entendu plus tôt et la banque de sons est plus légère.
+Avec un échantillon stéréo, les deux côtés sont rognés de la même manière.
+
+![Outil Rogner](images/tool_trim.png "Outil Rogner")
+
+Enlever le silence initial
+: Le silence ou le bruit de fond situé avant l'attaque est supprimé, l'échantillon commençant alors à un endroit où l'onde passe par zéro.
+  Aucun fondu d'entrée n'est ajouté&nbsp;: l'attaque de l'enveloppe de volume fait déjà démarrer le son en douceur.
+
+![Enlever le silence initial](images/remove_blank.png "Enlever le silence initial")
+
+La fin de l'échantillon peut rester inchangée ou être rognée de deux manières.
+
+Couper après la fin de boucle
+: Si une boucle est définie, les données situées après la fin de la boucle sont supprimées, à l'exception d'une petite marge utilisée au point de bouclage.
+  Ces données sont entendues lorsqu'un instrument ne joue pas la boucle en continu (boucle désactivée, relâche, ou boucle activée + relâche)&nbsp;: les échantillons utilisés ainsi ne sont pas modifiés et sont listés dans un message.
+
+![Couper après la fin de boucle](images/trim_to_loop.png "Couper après la fin de boucle")
+
+Enlever le silence final
+: Le silence ou le bruit de fond situé après le son est supprimé et remplacé par un court fondu prolongeant la décroissance du son, pour que le bruit restant ne s'arrête pas brusquement lorsque l'échantillon est lu jusqu'à sa fin (un piano avec la pédale de sustain ou une longue relâche par exemple).
+  La durée du fondu est automatique&nbsp;: deux fois le temps mis par le son pour perdre ses 20 derniers dB, entre 20&nbsp;ms et 1&nbsp;s.
+  La boucle et ce qui la précède ne sont jamais modifiés.
+
+![Enlever le silence final](images/remove_blank_end.png "Enlever le silence final")
+
+La dernière option définit le silence, au début comme à la fin&nbsp;:
+
+Détecter le bruit de fond
+: Le bruit de fond est mesuré dans chaque échantillon, avant ou après le son, et le silence est ce qui ne le dépasse pas.
+  Si aucun bruit ne peut être mesuré, le silence est ce qui se trouve sous −90&nbsp;dB à la fin, ou 50&nbsp;dB sous la crête de l'échantillon au début.
+
+Niveau inférieur à
+: Le silence est ce dont le niveau crête est inférieur à la valeur choisie, de −120 à −10&nbsp;dB (0&nbsp;dB étant le niveau maximal d'un échantillon).
+  Une valeur élevée enlève un bruit plus fort mais peut aussi couper la fin du son.
+
+Les [offsets](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table) de début et de fin des divisions d'instruments utilisant les échantillons rognés sont mis à jour pour qu'ils jouent toujours la même partie du son.
+
+**Note&nbsp;:** le silence peut être enlevé automatiquement au début et à la fin de chaque échantillon importé, les options étant dans les [préférences](manual/settings.md#doc_general) du logiciel.
 
 
 ## Échantillons stéréo {#doc_cat_stereo}

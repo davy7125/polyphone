@@ -144,23 +144,47 @@ Uma dica é se concentrar nas posições em que a onda cruza o eixo x (valor 0).
 ![Ferramenta de loop com crossfade](images/tool_crossfade_loop.png "Ferramenta de loop com crossfade")
 
 
-### Remover silêncio inicial {#doc_removeblank}
+### Cortar {#doc_trim}
 
-Qualquer área vazia antes do início da amostra é eliminada, reduzindo o tempo até o som ser ouvido.
-Com uma amostra estéreo, o mesmo comprimento é removido dos dois lados.
+Esta ferramenta remove o que é inútil no início e no fim das amostras selecionadas: o som é ouvido mais cedo e a soundfont fica mais leve.
+Com uma amostra estéreo, os dois lados são cortados da mesma forma.
+
+![Ferramenta Cortar](images/tool_trim.png "Ferramenta Cortar")
+
+Remover silêncio inicial
+: O silêncio ou o ruído de fundo antes do ataque é removido, e a amostra passa a começar em um ponto onde a onda cruza o zero.
+  Nenhum fade-in é adicionado: o ataque do envelope de volume já faz o som começar suavemente.
 
 ![Remover silêncio inicial](images/remove_blank.png "Remover silêncio inicial")
 
-**Observação:** esta ferramenta pode ser aplicada automaticamente sempre que uma amostra é importada; a opção fica nas [configurações](manual/settings.md#doc_general) do software.
+O fim da amostra pode ficar inalterado ou ser cortado de duas formas.
 
+Cortar após o fim do loop
+: Se um loop estiver definido, os dados após o fim do loop são removidos, exceto uma pequena margem usada no ponto de loop.
+  Esses dados são ouvidos quando um instrumento não toca o loop continuamente (loop desligado, release ou loop ligado + release): as amostras usadas assim não são modificadas e aparecem em uma mensagem.
 
-### Cortar no fim do loop {#doc_trimloop}
+![Cortar após o fim do loop](images/trim_to_loop.png "Cortar após o fim do loop")
 
-Se um loop estiver definido para a amostra selecionada, o software corta o som após o fim do loop (deixando uma pequena margem no fim).
+Remover silêncio final
+: O silêncio ou o ruído de fundo após o som é removido e substituído por um breve fade-out que prolonga o decaimento do som, para que o ruído restante não pare bruscamente quando a amostra é tocada até o fim (por exemplo, um piano com o pedal de sustentação ou com um release longo).
+  A duração do fade-out é automática: o dobro do tempo que o som leva para perder seus últimos 20 dB, entre 20 ms e 1 s.
+  O loop e o que vem antes dele nunca são modificados.
 
-![Cortar no fim do loop](images/trim_to_loop.png "Cortar no fim do loop")
+![Remover silêncio final](images/remove_blank_end.png "Remover silêncio final")
 
-**Observação:** esta ferramenta pode ser aplicada automaticamente sempre que uma amostra é importada, de acordo com as [configurações](manual/settings.md#doc_general) do software.
+A última opção define o silêncio, tanto no início quanto no fim:
+
+Detectar o ruído de fundo
+: O ruído de fundo é medido em cada amostra, antes ou depois do som, e o silêncio é o que não o ultrapassa.
+  Se nenhum ruído puder ser medido, o silêncio é o que fica abaixo de −90 dB no fim, ou 50 dB abaixo do pico da amostra no início.
+
+Nível abaixo de
+: O silêncio é o que tem um nível de pico abaixo do valor escolhido, de −120 a −10 dB (0 dB é o nível máximo de uma amostra).
+  Um valor alto remove um ruído mais forte, mas também pode cortar o fim do som.
+
+Os [offsets](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table) de início e de fim das divisões de instrumentos que usam as amostras cortadas são atualizados para que continuem tocando a mesma parte do som.
+
+**Observação:** o silêncio pode ser removido automaticamente no início e no fim de cada amostra importada; as opções ficam nas [configurações](manual/settings.md#doc_general) do software.
 
 
 ## Amostras estéreo {#doc_cat_stereo}

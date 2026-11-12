@@ -36,8 +36,8 @@ El problema viene probablemente de un punto de bucle mal colocado, tema que se t
 
 A menudo las muestras solo se usan en parte, y eliminar lo sobrante puede reducir el tamaño del archivo:
 
-* la parte útil de una muestra a veces se encuentra antes del punto final del bucle: entonces se puede eliminar la parte de la muestra posterior al final del bucle, y esta [herramienta](manual/soundfont-editor/tools/sample-tools.md#doc_trimloop) permite hacerlo en unos pocos clics;
-* las muestras pueden empezar con un silencio, que conviene eliminar para reducir la latencia al disparar una nota (también hay una [herramienta](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank) para hacerlo rápidamente);
+* la parte útil de una muestra a veces se encuentra antes del punto final del bucle: entonces se puede eliminar la parte de la muestra posterior al final del bucle, y esta [herramienta](manual/soundfont-editor/tools/sample-tools.md#doc_trim) permite hacerlo en unos pocos clics;
+* las muestras pueden empezar con un silencio, que conviene eliminar para reducir la latencia al disparar una nota (también hay una [herramienta](manual/soundfont-editor/tools/sample-tools.md#doc_trim) para hacerlo rápidamente);
 * una misma muestra puede estar presente varias veces: este [resumen de configuración](manual/soundfont-editor/configuration-summaries.md#doc_sample) muestra los duplicados y esta [herramienta](manual/soundfont-editor/tools/global-tools.md#doc_duplicates) los elimina actualizando los instrumentos;
 * por último, puede que algunas muestras simplemente no se usen: este [resumen de configuración](manual/soundfont-editor/configuration-summaries.md#doc_sample) las enumera y esta [herramienta](manual/soundfont-editor/tools/global-tools.md#doc_unused) las elimina automáticamente.
 
@@ -91,7 +91,7 @@ Al contrario que en el caso anterior, reduce o elimina la **duración del ataque
 Tres soluciones posibles y complementarias:
 
 * eliminar la **duración del retraso** si está indicada a nivel de [instrumento](manual/soundfont-editor/editing-pages/instrument-editor.md) o de [conjunto](manual/soundfont-editor/editing-pages/preset-editor.md),
-* eliminar el silencio al principio de la muestra de audio (ver el recorte de muestras en esta [página](manual/soundfont-editor/editing-pages/sample-editor.md#doc_graph) o la herramienta de eliminación de silencio [aquí](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank)),
+* eliminar el silencio al principio de la muestra de audio (ver el recorte de muestras en esta [página](manual/soundfont-editor/editing-pages/sample-editor.md#doc_graph) o la herramienta de eliminación de silencio [aquí](manual/soundfont-editor/tools/sample-tools.md#doc_trim)),
 * por último, la latencia percibida puede deberse al servidor de audio que usa tu ordenador (en ese caso no es un defecto del propio soundfont, y puedes cambiar la salida de audio en las [preferencias](manual/settings.md#doc_general)).
 
 ### El sonido se corta de repente

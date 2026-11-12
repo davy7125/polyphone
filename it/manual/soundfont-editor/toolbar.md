@@ -47,7 +47,7 @@ Gli elementi nella parte sinistra della barra degli strumenti servono per le fun
 
 Nella parte destra della barra degli strumenti possono comparire alcune icone, a seconda dell'[editor](manual/soundfont-editor/editing-pages/index.md) mostrato:
 
-* durante la modifica di uno strumento è possibile passare dalla ![tabella](images/toolbar_table.png "tabella"){.inline} [vista a tabella](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table) all'![intervalli](images/toolbar_range.png "intervalli"){.inline} [editor degli intervalli](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range) e all'![inviluppi](images/toolbar_adsr.png "inviluppi"){.inline} [editor degli inviluppi](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope) e viceversa,
+* durante la modifica di uno strumento è possibile passare dalla ![tabella](images/toolbar_table.png "tabella"){.inline} [vista a tabella](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table) all'![intervalli](images/toolbar_range.png "intervalli"){.inline} [editor degli intervalli](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range), all'![inviluppi](images/toolbar_adsr.png "inviluppi"){.inline} [editor degli inviluppi](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope) e alla ![timbro](images/toolbar_timbre.png "timbro"){.inline} [vista del timbro](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_timbre) e viceversa,
 * durante la modifica di un preset è possibile passare dalla ![tabella](images/toolbar_table.png "tabella"){.inline} vista a tabella all'![intervalli](images/toolbar_range.png "intervalli"){.inline} editor degli intervalli e viceversa,
 * negli altri casi non viene mostrato nulla.
 

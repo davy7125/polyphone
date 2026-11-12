@@ -36,8 +36,8 @@ Il problema deriva probabilmente da un punto di loop posizionato male, argomento
 
 Spesso i campioni vengono usati solo in parte, e rimuovere l'eccesso può ridurre la dimensione del file:
 
-* la parte utile di un campione si trova talvolta prima del punto finale del loop: è quindi possibile eliminare la parte del campione successiva alla fine del loop, e questa [funzione](manual/soundfont-editor/tools/sample-tools.md#doc_trimloop) permette di farlo in pochi clic;
-* i campioni possono iniziare con del silenzio, che andrebbe rimosso per ridurre la latenza quando si suona una nota (esiste anche una [funzione](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank) per farlo rapidamente);
+* la parte utile di un campione si trova talvolta prima del punto finale del loop: è quindi possibile eliminare la parte del campione successiva alla fine del loop, e questa [funzione](manual/soundfont-editor/tools/sample-tools.md#doc_trim) permette di farlo in pochi clic;
+* i campioni possono iniziare con del silenzio, che andrebbe rimosso per ridurre la latenza quando si suona una nota (esiste anche una [funzione](manual/soundfont-editor/tools/sample-tools.md#doc_trim) per farlo rapidamente);
 * lo stesso campione può essere presente più volte: questo [riepilogo della configurazione](manual/soundfont-editor/configuration-summaries.md#doc_sample) mostra i duplicati e questa [funzione](manual/soundfont-editor/tools/global-tools.md#doc_duplicates) li rimuove aggiornando gli strumenti;
 * infine, alcuni campioni potrebbero semplicemente non essere usati: questo [riepilogo della configurazione](manual/soundfont-editor/configuration-summaries.md#doc_sample) li elenca e questa [funzione](manual/soundfont-editor/tools/global-tools.md#doc_unused) li rimuove automaticamente.
 
@@ -91,7 +91,7 @@ Al contrario del caso precedente, riduci o elimina la **durata dell'attack** del
 Tre soluzioni possibili e complementari:
 
 * eliminare la **durata del delay** se è specificata a livello di [strumento](manual/soundfont-editor/editing-pages/instrument-editor.md) o di [preset](manual/soundfont-editor/editing-pages/preset-editor.md),
-* rimuovere il silenzio all'inizio del campione audio (vedi il taglio dei campioni in questa [pagina](manual/soundfont-editor/editing-pages/sample-editor.md#doc_graph) o la funzione di rimozione del silenzio [qui](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank)),
+* rimuovere il silenzio all'inizio del campione audio (vedi il taglio dei campioni in questa [pagina](manual/soundfont-editor/editing-pages/sample-editor.md#doc_graph) o la funzione di rimozione del silenzio [qui](manual/soundfont-editor/tools/sample-tools.md#doc_trim)),
 * infine, la latenza percepita può essere causata dal server audio usato sul computer (in questo caso non si tratta di un difetto del soundfont, e puoi cambiare l'uscita audio nelle [impostazioni](manual/settings.md#doc_general)).
 
 ### Il suono si interrompe all'improvviso

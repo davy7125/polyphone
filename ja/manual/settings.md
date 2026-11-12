@@ -50,11 +50,11 @@ MIDI入力
 : ステレオサンプルの片側を編集すると、もう片側にも自動的に同じ編集が行われます。
   ステレオのインストゥルメントのディビジョンを編集する場合も同様で、もう一方のチャンネルに対応するディビジョン（キー範囲とベロシティ範囲が同じもの）にも同じ編集が行われます。
 
-サンプルインポート：ループの終点までトリム
-: サンプルをインポートするときに、ループの終了位置より後ろにあるデータが自動的に削除されます（「[ループの終点までトリム](manual/soundfont-editor/tools/sample-tools.md#doc_trimloop)」ツールと同じ効果です）。
-
 サンプルインポート：先頭の空白を削除
-: サンプルをインポートするときに、アタックの開始より前にある空白部分が自動的に削除されます（「[先頭の空白を削除](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank)」ツールと同じ効果です）。
+: サンプルをインポートするときに、アタックの開始より前にある空白部分が自動的に削除されます（バックグラウンドノイズを自動検出する「[トリム](manual/soundfont-editor/tools/sample-tools.md#doc_trim)」ツールと同じ効果です）。
+
+サンプルインポート：末尾の空白を削除
+: サンプルをインポートするときに、音の末尾にある空白部分が自動的に削除され、短いフェードアウトに置き換えられます（バックグラウンドノイズを自動検出する「[トリム](manual/soundfont-editor/tools/sample-tools.md#doc_trim)」ツールと同じ効果です）。
 
 
 ![設定：一般](images/settings_general.png "設定：一般")
@@ -82,7 +82,7 @@ MIDI入力
 : Webサイトで公開された[通知](manual/index.md#doc_notifications)（警告、新しいバージョン、お知らせ、支援のお願い）を[ホーム画面](manual/index.md#doc_home)に表示します。このオプションを無効にすると、何もダウンロードされません。
 
 起動時の表示
-: SoundFontを開いたときに表示する画面を、:guilabel:`一般`（初期設定）、:guilabel:`サンプル`、:guilabel:`サンプル - 最初のサンプル`、:guilabel:`インストゥルメント`、:guilabel:`インストゥルメント - 最初のインストゥルメント - テーブル`、:guilabel:`インストゥルメント - 最初のインストゥルメント - 範囲`、:guilabel:`インストゥルメント - 最初のインストゥルメント - エンベロープ`、:guilabel:`プリセット`、:guilabel:`プリセット - 最初のプリセット - テーブル`、:guilabel:`プリセット - 最初のプリセット - 範囲` の中から選びます。最初のインストゥルメントまたはプリセットでは、最後の部分で表示するページ（[テーブル](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table)、[範囲エディター](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range)、[エンベロープエディター](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope)）を指定します。
+: SoundFontを開いたときに表示する画面を、:guilabel:`一般`（初期設定）、:guilabel:`サンプル`、:guilabel:`サンプル - 最初のサンプル`、:guilabel:`インストゥルメント`、:guilabel:`インストゥルメント - 最初のインストゥルメント - テーブル`、:guilabel:`インストゥルメント - 最初のインストゥルメント - 範囲`、:guilabel:`インストゥルメント - 最初のインストゥルメント - エンベロープ`、:guilabel:`インストゥルメント - 最初のインストゥルメント - 音色`、:guilabel:`プリセット`、:guilabel:`プリセット - 最初のプリセット - テーブル`、:guilabel:`プリセット - 最初のプリセット - 範囲` の中から選びます。最初のインストゥルメントまたはプリセットでは、最後の部分で表示するページ（[テーブル](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table)、[範囲エディター](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range)、[エンベロープエディター](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope)、[音色ビュー](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_timbre)）を指定します。
 
 ディビジョンを並べ替え
 : インストゥルメントやプリセット内のディビジョンの並び順を、:guilabel:`キー範囲で`、:guilabel:`ベロシティ範囲で`、:guilabel:`アルファベット順で`、:guilabel:`なし`（作成順）のいずれかに変更できます。

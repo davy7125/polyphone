@@ -47,7 +47,7 @@ Os elementos da parte esquerda da barra de ferramentas servem para as funções 
 
 Na parte direita da barra de ferramentas, alguns ícones podem aparecer, dependendo do [editor](manual/soundfont-editor/editing-pages/index.md) exibido:
 
-* é possível alternar entre a ![tabela](images/toolbar_table.png "tabela"){.inline} [visualização em tabela](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), o ![alcances](images/toolbar_range.png "alcances"){.inline} [editor de alcances](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range) e o ![envelope](images/toolbar_adsr.png "envelope"){.inline} [editor de envelopes](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope) ao editar um instrumento,
+* é possível alternar entre a ![tabela](images/toolbar_table.png "tabela"){.inline} [visualização em tabela](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), o ![alcances](images/toolbar_range.png "alcances"){.inline} [editor de alcances](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range), o ![envelope](images/toolbar_adsr.png "envelope"){.inline} [editor de envelopes](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope) e a ![timbre](images/toolbar_timbre.png "timbre"){.inline} [visualização do timbre](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_timbre) ao editar um instrumento,
 * é possível alternar entre a ![tabela](images/toolbar_table.png "tabela"){.inline} visualização em tabela e o ![alcances](images/toolbar_range.png "alcances"){.inline} editor de alcances ao editar uma predefinição,
 * nada é exibido nos demais casos.
 

@@ -47,7 +47,7 @@
 
 ツールバーの右側には、表示されている[エディター](manual/soundfont-editor/editing-pages/index.md)に応じていくつかのアイコンが表示されます。
 
-* インストゥルメントの編集中は、![テーブル](images/toolbar_table.png "テーブル"){.inline} [テーブル表示](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table)、![範囲](images/toolbar_range.png "範囲"){.inline} [範囲エディター](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range)、![エンベロープ](images/toolbar_adsr.png "エンベロープ"){.inline} [エンベロープエディター](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope)を切り替えられます。
+* インストゥルメントの編集中は、![テーブル](images/toolbar_table.png "テーブル"){.inline} [テーブル表示](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table)、![範囲](images/toolbar_range.png "範囲"){.inline} [範囲エディター](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range)、![エンベロープ](images/toolbar_adsr.png "エンベロープ"){.inline} [エンベロープエディター](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope)、![音色](images/toolbar_timbre.png "音色"){.inline} [音色ビュー](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_timbre)を切り替えられます。
 * プリセットの編集中は、![テーブル](images/toolbar_table.png "テーブル"){.inline} テーブル表示と ![範囲](images/toolbar_range.png "範囲"){.inline} 範囲エディターを切り替えられます。
 * それ以外の場合は何も表示されません。
 

@@ -5,6 +5,7 @@ Diese Seite umfasst mehrere Teile:
 * die [Tabelle](#doc_table),
 * den [Bereichseditor](#doc_range), wenn in der [Werkzeugleiste](manual/soundfont-editor/toolbar.md#doc_view) auf den Button :guilabel:`Bereiche` geklickt wird,
 * den [Hüllkurveneditor](#doc_envelope), wenn in der [Werkzeugleiste](manual/soundfont-editor/toolbar.md#doc_view) auf den Button :guilabel:`Hüllkurven` geklickt wird,
+* die [Klangfarbenansicht](#doc_timbre), wenn in der [Werkzeugleiste](manual/soundfont-editor/toolbar.md#doc_view) auf den Button :guilabel:`Klangfarbe` geklickt wird,
 * den [Modulatorbereich](#doc_modulator).
 
 
@@ -260,6 +261,204 @@ Sind mehrere Aufteilungen oder Instrumente ausgewählt, werden alle ihre Hüllku
 Durch Gedrückthalten der rechten Maustaste lässt sich der Zoom um den gewählten Punkt herum ändern.
 
 Durch Gedrückthalten der linken Maustaste lässt sich die Grafik verschieben, wenn der Klick nicht auf einem Punkt der Kurve beginnt.
+
+
+## Klangfarbenansicht {#doc_timbre}
+
+
+Die Klangfarbenansicht zeigt über die gesamte Tastatur hinweg die Klangfarbe eines Instruments **so, wie sie zu hören ist**: den Pegel jeder Harmonischen, nachdem jedes Sample auf die Tasten transponiert wurde, die es spielt, und nachdem die Dämpfung, der Filter und die Modulatoren seiner Aufteilung angewendet wurden.
+Unregelmäßigkeiten werden sichtbar, insbesondere die Brüche an den Übergängen zwischen Samples.
+Von dieser Ansicht aus können berechnete Noten erstellt, redundante Samples entfernt und die Klangfarbe oder der Pegel eines Samples korrigiert werden.
+Die Ansicht misst und schlägt vor; nichts wird automatisch angewendet.
+
+
+![Klangfarbenansicht](images/edit_timbre.png "Klangfarbenansicht")
+
+
+### Berücksichtigte Aufteilungen
+
+
+Die Ansicht zeigt, was bei dem oben links gewählten Anschlag gespielt wird (standardmäßig 100, danach der zuletzt verwendete).
+Die Leiste daneben zeigt die Anschlagsebenen des Instruments: Ein Klick auf eine Ebene wählt den Anschlag in ihrer Mitte.
+
+Berücksichtigt werden die Aufteilungen, die bei diesem Anschlag spielen, nicht [stummgeschaltet](#doc_solo) sind und nicht nur beim Loslassen der Taste gespielt werden (Wiedergabemodus „Release“).
+Das Stummschalten einer Aufteilung ist somit der Weg, sie aus der Ansicht auszuschließen, zum Beispiel ein Geräusch oder einen Release-Klang.
+Ist [Solo auf Auswahl](manual/soundfont-editor/tree.md#doc_menu) aktiviert, folgen die Stummschaltungen der Auswahl und werden nicht berücksichtigt.
+Die Aufteilungen, die dieselbe Taste spielen (Stereopaar, Ebenen), werden zusammengefasst: Ihre Leistungen werden addiert.
+
+Eine **Basisnote** fasst alle Aufteilungen mit dieser Basisnote zusammen, gegebenenfalls mit mehreren Tastenbereichen.
+Die Samples werden im Hintergrund analysiert (die Anzahl der verbleibenden Samples wird oben rechts angezeigt): Die Harmonischen werden auf dem Loop gemessen oder, wenn es keinen Loop gibt, auf dem stationären Teil des Klangs.
+Diese Analysen bleiben erhalten, bis sich die Daten, der Loop, die Basisnote oder die Korrektur der Tonhöhe eines Samples ändern.
+
+
+### Karte
+
+
+Jede Spalte ist eine Taste, ausgerichtet an der darunter angezeigten Tastatur, und jede Zeile eine Harmonische (H1: Grundton, H2: zweite Harmonische...), wobei H1 wie in einem Spektrogramm unten liegt.
+Die ersten Harmonischen werden einzeln angezeigt, die weiteren in Bändern zusammengefasst (siehe [Teiltöne](#doc_timbre_partials)).
+
+Über der Karte zeigen Übersichtszeilen für jede Taste:
+
+* :guilabel:`Pegel`: Gesamtpegel,
+* :guilabel:`Klangfarbe`: Klangfarbenabweichung der Basisnote von ihrer Referenz (schraffiert, wenn die Referenz weniger zuverlässig ist, an den Enden der Tastatur),
+* :guilabel:`Transposition`: blau, wenn das Sample nach unten transponiert wird, rot, wenn es nach oben transponiert wird,
+* und, im Menü :guilabel:`Optionen` > :guilabel:`Übersichten` wählbar: :guilabel:`Helligkeit` (Schwerpunkt der Harmonischen), :guilabel:`Ungerade / gerade` (ungerade Harmonische im Vergleich zu den geraden), :guilabel:`Rauschen` (Verhältnis der Harmonischen zum Rauschen), :guilabel:`Intonation` (Abweichung in Cent von der nächstgelegenen Note der gleichstufigen Stimmung) und :guilabel:`Loop` (Qualität des Loops).
+
+Auf der Karte markieren senkrechte Linien die Übergänge zwischen Aufteilungen (dicker, wenn das Sample wechselt), ein Punkt markiert jede Basisnote, Schraffuren zeigen die fehlenden Harmonischen (außerhalb des Frequenzbands des Samples oder der Ausgabe, oberhalb der Obergrenze) oder die nicht zuverlässig gemessenen, und die Tasten, die nichts spielen, sind ausgegraut.
+Ein Tooltip zeigt die Werte der Zelle unter dem Mauszeiger: Taste, Harmonische, Pegel, Abweichung, Samples, Transposition und Dauerfaktor (Attack, Tremolo und Schwebungen sind schneller, wenn ein Sample nach oben transponiert wird).
+
+Die Liste :guilabel:`Anzeige` legt fest, was die Farben darstellen:
+
+Absolute Pegel
+: Pegel jeder Harmonischen in dB.
+
+Relative Pegel
+: Pegel jeder Harmonischen im Verhältnis zur stärksten der Taste: die Klangfarbe unabhängig vom Pegel.
+
+Abweichung von der Referenz
+: Unterschied zwischen der Basisnote und ihrer Referenz für jede Harmonische, über alle von der Basisnote gespielten Tasten: zu stark (rot) oder zu schwach (blau).
+
+Sprünge
+: Unterschied zur vorherigen Taste: die Brüche an den Übergängen.
+
+Transposition
+: Halbtöne zwischen der Taste und der Basisnote ihres Samples.
+
+Konfidenz
+: Anteil der Leistung, der zuverlässig gemessen wird.
+
+Das Menü :guilabel:`Optionen` ermöglicht außerdem, die gesamte Tastatur oder nur eine Spalte pro Basisnote anzuzeigen, in Stufen der Schwellenwerte zu färben (Abweichungen innerhalb der Toleranz bleiben neutral) und die angeklickten Tasten zu spielen.
+Die Tastatur unter der Karte spielt das Instrument mit dem Anschlag der Ansicht.
+
+
+### Referenz und Entscheidungen
+
+
+Die **Referenz** einer Basisnote ist das, was ihre Nachbarn vorhersagen: Die benachbarten Basisnoten werden auf ihrer Taste gespielt (mit den Parametern ihrer Aufteilungen), und ihre Pegel werden Harmonische für Harmonische in dB interpoliert.
+An beiden Enden der Tastatur wird die Referenz aus den beiden Nachbarn auf derselben Seite extrapoliert, was weniger zuverlässig ist.
+Mit :guilabel:`Lokale Regression` wird stattdessen eine robuste Regression über mehrere Nachbarn auf jeder Seite verwendet, sodass ein fehlerhafter Nachbar weniger ins Gewicht fällt.
+
+Die Abweichung einer Basisnote von ihrer Referenz wird durch zwei Zahlen zusammengefasst:
+
+* die Abweichung des **Pegels**, Differenz der Gesamtpegel, die sich über die Dämpfung korrigieren lässt,
+* die Abweichung der **Klangfarbe**, Mittelwert der Abweichungen der Zeilen nach Abzug der Pegelabweichung, wobei jede Zeile entsprechend ihrer Lautheit gewichtet wird (eine schwache Harmonische zählt, ohne zu dominieren).
+
+Die Leiste :guilabel:`Entscheidungen` ordnet jeder Basisnote und jedem Übergang eine Einstufung mit einer Form und einer Farbe zu:
+
+Konsistent ✓ (grün)
+: Die Klangfarbenabweichung liegt innerhalb der Toleranz.
+
+Redundant − (blau)
+: Die Basisnote ist konsistent, und ihr Entfernen würde ihre Tasten um weniger als den Schwellenwert :guilabel:`Redundanz` verändern, ohne Bruch am neuen Übergang: Sie kann entfernt werden.
+
+Zu korrigieren ~ (orange)
+: Die Klangfarbenabweichung liegt zwischen der Toleranz und dem Maximum: Die Klangfarbe kann korrigiert werden.
+
+Zu verschieden × (rot)
+: Die Klangfarbenabweichung liegt über dem Maximum: Die Basisnote kann entfernt oder durch eine berechnete Note ersetzt werden.
+
+Bruch + (violett)
+: Bei einem Samplewechsel liegt der Klangfarbensprung über dem Schwellenwert :guilabel:`Bruch`, und zwischen den beiden Basisnoten gibt es eine Taste ohne Sample: Dort kann eine berechnete Note erstellt werden.
+
+Pegel ▲ ▼ (gelb)
+: Die Pegelabweichung liegt über dem Schwellenwert :guilabel:`Pegel` (▲ zu laut, ▼ zu leise): Die Dämpfung kann korrigiert werden.
+
+Die Schwellenwerte werden im Menü :guilabel:`Schwellenwerte` eingestellt.
+Ihre Standardwerte (:guilabel:`Toleranz` 4,5 dB, :guilabel:`Maximum` 8 dB, :guilabel:`Redundanz` 2,5 dB, :guilabel:`Bruch` 6 dB, :guilabel:`Pegel` 2,5 dB) stammen von Orgel-Samplesets, bei denen 70 % der Basisnoten um weniger als 4,5 dB von ihren Nachbarn abweichen: Sie können an das Instrument angepasst werden.
+Ein Übergang oder eine Abweichung kann gewollt sein (ein Instrument, das zu einem anderen wird, eine repetierende Mixtur): Die Einstufungen sind nur Vorschläge.
+
+
+### Teiltöne {#doc_timbre_partials}
+
+
+Das Menü :guilabel:`Teiltöne` legt die Zeilen der Karte fest, die von der Anzeige, den Abweichungen und den Korrekturen gemeinsam genutzt werden:
+
+Einzeln angezeigte Harmonische
+: Anzahl der einzeln angezeigten und verglichenen Harmonischen (standardmäßig 10). Das Ohr unterscheidet die ersten Harmonischen einzeln, die weiteren werden gemeinsam als Helligkeit wahrgenommen.
+
+Weitere Harmonische
+: Die weiteren Harmonischen werden in Terzbändern (11-12, 13-16, 17-20...) oder Oktavbändern zusammengefasst, damit viele schwache hohe Harmonische nicht mehr Gewicht haben als die ersten.
+
+Obergrenze
+: Teiltöne oberhalb dieser Frequenz werden ignoriert (standardmäßig 16 kHz oder die Hälfte der Samplefrequenz).
+
+Dynamikumfang
+: Harmonische, die mehr als diesen Wert unter der stärksten Harmonischen der Taste liegen, werden nicht verglichen (standardmäßig 60 dB).
+
+
+### Details und Aktionen
+
+
+Ein Klick auf eine Taste zeigt unter der Karte, was sie spielt: die Samples mit ihrer Transposition, ihrer Dämpfung und ihrem Filter, den Dauerfaktor, die Tonhöhe, die Abweichungen der Basisnote und was ihr Entfernen ändern würde.
+Das Balkendiagramm vergleicht die gehörten Pegel mit der Referenz oder mit der berechneten Note, die eine Taste ohne Sample erhalten könnte (eine gestrichelte Spalte auf der Karte).
+
+Ein Klick auf eine Basisnote wählt ihre Aufteilungen in der [Baumansicht](manual/soundfont-editor/tree.md) aus, und die Auswahl von Aufteilungen in der Baumansicht wählt ihre Basisnoten aus.
+Mehrere Basisnoten können mit :kbd:`Ctrl` oder :kbd:`Shift` ausgewählt werden oder indem die Maus über Tasten gezogen wird.
+
+Die Buttons rechts und das Kontextmenü der Karte wirken auf die ausgewählten Basisnoten:
+
+Hier eine Note erstellen...
+: Auf einer Taste ohne Sample: Die nächstgelegene Basisnote wird transponiert, und die Pegel ihrer Harmonischen werden anhand einer zweiten Basisnote interpoliert (oder extrapoliert). Die verwendeten Basisnoten können gewählt werden, und eine Warnung erscheint, wenn die Taste weit von ihnen entfernt ist. Die angrenzenden Tastenbereiche werden angepasst; die Aufteilungen, die vollständig im Bereich der neuen Note liegen, werden entfernt.
+
+Entfernen...
+: Die Aufteilungen der Basisnote werden entfernt, und ihre Nachbarn übernehmen ihre Tasten. Die nicht mehr verwendeten Samples können ebenfalls entfernt werden.
+
+Durch eine berechnete Note ersetzen...
+: Die Basisnote wird entfernt und dann aus ihren Nachbarn neu erstellt.
+
+Klangfarbe korrigieren...
+: Öffnet das Fenster zur [Korrektur](#doc_timbre_correction).
+
+Pegel korrigieren
+: Die Dämpfung der Aufteilungen wird so geändert, dass die Pegelabweichung null wird (eine Dämpfung kann nicht negativ sein).
+
+Durch Rendern prüfen
+: Die Taste wird von der Sound-Engine gespielt, und die Harmonischen des Ergebnisses werden gemessen: Sie werden im Balkendiagramm angezeigt, um die Berechnung der Ansicht zu überprüfen.
+
+Diese Aufteilungen stummschalten
+: Im Kontextmenü: schließt die Aufteilungen aus der Ansicht aus.
+
+Das Menü :guilabel:`Vorschlagen` wählt alle Basisnoten (oder Übergänge) mit einer Einstufung aus und wendet nach einer Bestätigung die entsprechende Aktion auf sie an: die zu korrigierenden Basisnoten korrigieren, die zu verschiedenen ersetzen, die redundanten entfernen, an den Brüchen berechnete Noten erstellen, die abweichenden Pegel korrigieren.
+Sie werden von der schlechtesten bis zur am wenigsten schlechten bearbeitet, wobei die Referenzen nach jeder Aktion neu berechnet werden: Eine fehlerhafte Basisnote verfälscht auch die Referenz ihrer Nachbarn, die halb fehlerhaft erscheinen, solange sie nicht korrigiert ist.
+
+Jede Aktion oder Reihe von Aktionen lässt sich in einem Schritt rückgängig machen (:kbd:`Ctrl`+:kbd:`Z`).
+
+
+### Korrektur der Klangfarbe {#doc_timbre_correction}
+
+
+![Korrektur der Klangfarbe](images/timbre_correction.png "Korrektur der Klangfarbe")
+
+
+Das Fenster zeigt für jede Zeile die gehörten Pegel, das Ziel und das erwartete Ergebnis und bietet folgende Parameter:
+
+Referenz
+: Ziel der Korrektur: :guilabel:`Interpolation zwischen den Nachbarn`, :guilabel:`Lokale Regression` über mehrere Nachbarn auf jeder Seite oder :guilabel:`An einer Basisnote ausgerichtet` (eine andere Basisnote, auf der Taste gespielt).
+
+Klangfarbe korrigieren (Sampledaten)
+: Die Verstärkung jeder Zeile wird mit einer minimalphasigen Kurve, die der Tonhöhe folgt, auf die Daten der Samples angewendet: Die Korrektur bleibt auf allen Tasten der Aufteilung gültig, unabhängig von der Transposition, und der Loop bleibt erhalten. Dieselbe Korrektur wird auf beide Samples eines Stereopaars angewendet.
+
+Pegel korrigieren (Dämpfung)
+: Die Pegelabweichung wird über die Dämpfung der Aufteilungen korrigiert, was die Daten nicht verändert. Würde die Dämpfung negativ, geht der Rest in die Daten, im Rahmen der Vollaussteuerung.
+
+Toleranz
+: Eine kleinere Abweichung einer Zeile wird nicht korrigiert, nur der darüber hinausgehende Teil.
+
+Stärke
+: Korrigierter Anteil der Abweichung.
+
+Maximale Korrektur
+: Größte Verstärkung einer Zeile, in beide Richtungen.
+
+Korrigierte Harmonische
+: Alle Zeilen oder nur die Harmonischen von 1 bis zu einer gegebenen Nummer.
+
+Helligkeit, Ungerade Harmonische
+: Zum Ziel addierte Neigung (positiv für einen helleren Klang) und den ungeraden Harmonischen 3, 5, 7... des Ziels hinzugefügter Pegel.
+
+Der Bereich :guilabel:`Anhören` vergleicht den Originalklang (A) und den korrigierten Klang (B) mit dem Button :guilabel:`Wiedergabe`.
+Würde die Korrektur die Vollaussteuerung überschreiten, wird das Sample abgesenkt und die Dämpfung gleicht dies aus.
+Wird ein Sample auch von anderen Aufteilungen oder Instrumenten verwendet, fragt Polyphone, ob es für die korrigierten Basisnoten dupliziert oder überall geändert werden soll (die Antwort kann bis zum Schließen von Polyphone gespeichert werden).
 
 
 ## Modulatoren {#doc_modulator}

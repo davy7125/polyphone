@@ -67,7 +67,7 @@ Die [Frequenzanalyse](manual/soundfont-editor/editing-pages/sample-editor.md#doc
 
 Zum Bearbeiten von Samples stehen mehrere Werkzeuge zur Verfügung, zum Beispiel:
 
-* [Entfernen der Leere](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank) am Anfang,
+* [Entfernen der Leere](manual/soundfont-editor/tools/sample-tools.md#doc_trim) am Anfang,
 * [Entzerren](manual/soundfont-editor/editing-pages/sample-editor.md#doc_eq) des Klangs,
 * [Transponieren](manual/soundfont-editor/tools/sample-tools.md#doc_transpose),
 * [Normalisieren](manual/soundfont-editor/tools/sample-tools.md#doc_volume) der Lautstärke,

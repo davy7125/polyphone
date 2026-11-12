@@ -47,7 +47,7 @@
 
 根据当前显示的[编辑器](manual/soundfont-editor/editing-pages/index.md)，工具栏右侧可能会出现一些图标：
 
-* 编辑乐器时，可以在 ![表格](images/toolbar_table.png "表格"){.inline} [表格视图](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table)、![范围](images/toolbar_range.png "范围"){.inline} [范围编辑器](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range)和 ![包络](images/toolbar_adsr.png "包络"){.inline} [包络编辑器](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope)之间切换，
+* 编辑乐器时，可以在 ![表格](images/toolbar_table.png "表格"){.inline} [表格视图](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table)、![范围](images/toolbar_range.png "范围"){.inline} [范围编辑器](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range)、![包络](images/toolbar_adsr.png "包络"){.inline} [包络编辑器](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope)和 ![音色](images/toolbar_timbre.png "音色"){.inline} [音色视图](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_timbre)之间切换，
 * 编辑预设时，可以在 ![表格](images/toolbar_table.png "表格"){.inline} 表格视图和 ![范围](images/toolbar_range.png "范围"){.inline} 范围编辑器之间切换，
 * 其他情况下不显示任何图标。
 

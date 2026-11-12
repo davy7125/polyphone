@@ -50,11 +50,11 @@ Edición estéreo: cambiar muestra enlazada
 : Al editar un lado de una muestra estéreo, el otro lado se edita automáticamente de la misma manera.
   Lo mismo ocurre al editar una división estéreo de un instrumento: la división correspondiente al otro canal (con los mismos rangos de notas y de velocidad) se edita de la misma manera.
 
-Importar muestras: recortar hasta el final del bucle
-: Al importar una muestra, los datos situados después del final del bucle se eliminan automáticamente (mismo efecto que la herramienta «[Recortar hasta el final del bucle](manual/soundfont-editor/tools/sample-tools.md#doc_trimloop)»).
-
 Importar muestras: eliminar silencio al inicio
-: Al importar una muestra, cualquier zona vacía situada antes del comienzo del ataque se elimina automáticamente (mismo efecto que la herramienta «[Eliminar silencio al inicio](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank)»).
+: Al importar una muestra, cualquier zona vacía situada antes del comienzo del ataque se elimina automáticamente (mismo efecto que la herramienta «[Recortar](manual/soundfont-editor/tools/sample-tools.md#doc_trim)» con una detección automática del ruido de fondo).
+
+Importar muestras: eliminar silencio al final
+: Al importar una muestra, cualquier zona vacía situada al final del sonido se elimina automáticamente y se sustituye por un breve fundido de salida (mismo efecto que la herramienta «[Recortar](manual/soundfont-editor/tools/sample-tools.md#doc_trim)» con una detección automática del ruido de fondo).
 
 
 ![Preferencias, general](images/settings_general.png "Preferencias, general")
@@ -82,7 +82,7 @@ Notificaciones
 : Muestra en la [pantalla de inicio](manual/index.md#doc_home) las [notificaciones](manual/index.md#doc_notifications) publicadas en el sitio web (alerta, nueva versión, anuncio, llamamiento de apoyo). Cuando la opción está desactivada, no se descarga nada.
 
 Vista de inicio
-: Permite elegir la vista que se muestra al abrir un soundfont entre las siguientes: :guilabel:`General` (por defecto), :guilabel:`Muestras`, :guilabel:`Muestras - primera muestra`, :guilabel:`Instrumentos`, :guilabel:`Instrumentos - primer instrumento - Tabla`, :guilabel:`Instrumentos - primer instrumento - Rangos`, :guilabel:`Instrumentos - primer instrumento - Envolventes`, :guilabel:`Conjuntos`, :guilabel:`Conjuntos - primer conjunto - Tabla`, :guilabel:`Conjuntos - primer conjunto - Rangos`. Para el primer instrumento o conjunto, la última parte indica la página mostrada: [tabla](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), [editor de rangos](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range) o [editor de envolventes](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope).
+: Permite elegir la vista que se muestra al abrir un soundfont entre las siguientes: :guilabel:`General` (por defecto), :guilabel:`Muestras`, :guilabel:`Muestras - primera muestra`, :guilabel:`Instrumentos`, :guilabel:`Instrumentos - primer instrumento - Tabla`, :guilabel:`Instrumentos - primer instrumento - Rangos`, :guilabel:`Instrumentos - primer instrumento - Envolventes`, :guilabel:`Instrumentos - primer instrumento - Timbre`, :guilabel:`Conjuntos`, :guilabel:`Conjuntos - primer conjunto - Tabla`, :guilabel:`Conjuntos - primer conjunto - Rangos`. Para el primer instrumento o conjunto, la última parte indica la página mostrada: [tabla](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), [editor de rangos](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range), [editor de envolventes](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope) o [vista de timbre](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_timbre).
 
 Ordenar divisiones
 : Aquí se puede cambiar el orden de las divisiones dentro de un instrumento o de un conjunto: :guilabel:`por rango de notas`, :guilabel:`por rango de velocidad`, :guilabel:`en orden alfabético` o :guilabel:`ninguna` (el orden de creación).

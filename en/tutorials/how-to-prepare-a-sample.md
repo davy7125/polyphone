@@ -126,7 +126,7 @@ Here are examples containing the sound of a flute and a calibration sine:
 Several tools are available in the menu :guilabel:`Toolbox` of the [toolbar](manual/soundfont-editor/toolbar.md#doc_edit).
 You can edit samples by:
 
-* [removing blank](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank) at start,
+* [removing blank](manual/soundfont-editor/tools/sample-tools.md#doc_trim) at start,
 * [equalizing](manual/soundfont-editor/editing-pages/sample-editor.md#doc_eq) the sound,
 * [transposing](manual/soundfont-editor/tools/sample-tools.md#doc_transpose),
 * [normalizing](manual/soundfont-editor/tools/sample-tools.md#doc_volume) the volume,

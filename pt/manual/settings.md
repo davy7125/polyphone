@@ -50,11 +50,11 @@ Edição estéreo: alterar amostra vinculada
 : Ao editar um lado de uma amostra estéreo, o outro lado é automaticamente editado da mesma forma.
   O mesmo vale ao editar uma divisão estéreo de um instrumento: a divisão correspondente ao outro canal (com os mesmos alcances de notas e de velocidade) é editada da mesma forma.
 
-Importação de amostra: cortar no fim do loop
-: Ao importar uma amostra, os dados localizados após o fim do loop são removidos automaticamente (mesmo efeito da ferramenta “[Cortar no fim do loop](manual/soundfont-editor/tools/sample-tools.md#doc_trimloop)”).
-
 Importação de amostra: remover silêncio inicial
-: Ao importar uma amostra, qualquer área vazia localizada antes do início do ataque é removida automaticamente (mesmo efeito da ferramenta “[Remover silêncio inicial](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank)”).
+: Ao importar uma amostra, qualquer área vazia localizada antes do início do ataque é removida automaticamente (mesmo efeito da ferramenta “[Cortar](manual/soundfont-editor/tools/sample-tools.md#doc_trim)” com uma detecção automática do ruído de fundo).
+
+Importação de amostra: remover silêncio final
+: Ao importar uma amostra, qualquer área vazia localizada no fim do som é removida automaticamente e substituída por um breve fade-out (mesmo efeito da ferramenta “[Cortar](manual/soundfont-editor/tools/sample-tools.md#doc_trim)” com uma detecção automática do ruído de fundo).
 
 
 ![Configurações, geral](images/settings_general.png "Configurações, geral")
@@ -82,7 +82,7 @@ Notificações
 : Exibe na [tela inicial](manual/index.md#doc_home) as [notificações](manual/index.md#doc_notifications) publicadas no site (alerta, nova versão, anúncio, pedido de apoio). Quando a opção está desativada, nada é baixado.
 
 Visualização inicial
-: Seleciona a visualização a exibir quando uma soundfont é aberta, entre as seguintes: :guilabel:`Geral` (padrão), :guilabel:`Amostras`, :guilabel:`Amostras - primeira amostra`, :guilabel:`Instrumentos`, :guilabel:`Instrumentos - primeiro instrumento - Tabela`, :guilabel:`Instrumentos - primeiro instrumento - Alcances`, :guilabel:`Instrumentos - primeiro instrumento - Envelopes`, :guilabel:`Predefinições`, :guilabel:`Predefinições - primeira predefinição - Tabela`, :guilabel:`Predefinições - primeira predefinição - Alcances`. Para o primeiro instrumento ou predefinição, a última parte indica a página exibida: [tabela](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), [editor de alcances](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range) ou [editor de envelopes](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope).
+: Seleciona a visualização a exibir quando uma soundfont é aberta, entre as seguintes: :guilabel:`Geral` (padrão), :guilabel:`Amostras`, :guilabel:`Amostras - primeira amostra`, :guilabel:`Instrumentos`, :guilabel:`Instrumentos - primeiro instrumento - Tabela`, :guilabel:`Instrumentos - primeiro instrumento - Alcances`, :guilabel:`Instrumentos - primeiro instrumento - Envelopes`, :guilabel:`Instrumentos - primeiro instrumento - Timbre`, :guilabel:`Predefinições`, :guilabel:`Predefinições - primeira predefinição - Tabela`, :guilabel:`Predefinições - primeira predefinição - Alcances`. Para o primeiro instrumento ou predefinição, a última parte indica a página exibida: [tabela](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), [editor de alcances](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range), [editor de envelopes](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope) ou [visualização do timbre](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_timbre).
 
 Ordenar divisões
 : A ordem das divisões em um instrumento ou em uma predefinição pode ser alterada aqui: :guilabel:`por alcance de notas`, :guilabel:`por alcance de velocidade`, :guilabel:`em ordem alfabética` ou :guilabel:`nenhum` (a ordem de criação).

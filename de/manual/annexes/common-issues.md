@@ -36,8 +36,8 @@ Das Problem rührt wahrscheinlich von einem schlecht gesetzten Loop-Punkt her, w
 
 Samples werden oft nur teilweise genutzt, und das Entfernen des Überschusses kann die Dateigröße verringern:
 
-* der nützliche Teil eines Samples liegt manchmal vor dem letzten Loop-Punkt: Der Teil des Samples nach dem Loop-Ende kann daher gelöscht werden, und mit diesem [Werkzeug](manual/soundfont-editor/tools/sample-tools.md#doc_trimloop) geht das mit wenigen Klicks;
-* Samples können mit Stille beginnen, die entfernt werden sollte, um die Latenz beim Auslösen einer Note zu verringern (auch dafür gibt es ein [Werkzeug](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank));
+* der nützliche Teil eines Samples liegt manchmal vor dem letzten Loop-Punkt: Der Teil des Samples nach dem Loop-Ende kann daher gelöscht werden, und mit diesem [Werkzeug](manual/soundfont-editor/tools/sample-tools.md#doc_trim) geht das mit wenigen Klicks;
+* Samples können mit Stille beginnen, die entfernt werden sollte, um die Latenz beim Auslösen einer Note zu verringern (auch dafür gibt es ein [Werkzeug](manual/soundfont-editor/tools/sample-tools.md#doc_trim));
 * dasselbe Sample kann mehrfach vorhanden sein: Diese [Konfigurationsübersicht](manual/soundfont-editor/configuration-summaries.md#doc_sample) zeigt die Duplikate an, und dieses [Werkzeug](manual/soundfont-editor/tools/global-tools.md#doc_duplicates) entfernt sie und passt dabei die Instrumente an;
 * schließlich werden manche Samples möglicherweise gar nicht verwendet: Diese [Konfigurationsübersicht](manual/soundfont-editor/configuration-summaries.md#doc_sample) listet sie auf, und dieses [Werkzeug](manual/soundfont-editor/tools/global-tools.md#doc_unused) entfernt sie automatisch.
 
@@ -91,7 +91,7 @@ Im Gegensatz zum vorherigen Fall verkürzen oder entfernen Sie die **Attack-Daue
 Drei mögliche, einander ergänzende Lösungen:
 
 * die **Delay-Dauer** entfernen, wenn sie auf [Instrument](manual/soundfont-editor/editing-pages/instrument-editor.md)- oder [Preset](manual/soundfont-editor/editing-pages/preset-editor.md)-Ebene festgelegt ist,
-* die Stille am Anfang des Audiosamples entfernen (siehe das Kürzen von Samples auf dieser [Seite](manual/soundfont-editor/editing-pages/sample-editor.md#doc_graph) oder das Werkzeug zum Entfernen von Stille [hier](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank)),
+* die Stille am Anfang des Audiosamples entfernen (siehe das Kürzen von Samples auf dieser [Seite](manual/soundfont-editor/editing-pages/sample-editor.md#doc_graph) oder das Werkzeug zum Entfernen von Stille [hier](manual/soundfont-editor/tools/sample-tools.md#doc_trim)),
 * schließlich kann die wahrgenommene Latenz durch den auf Ihrem Computer verwendeten Audioserver verursacht werden (in diesem Fall handelt es sich nicht um einen Mangel des Soundfonts selbst, und Sie können den Audioausgang in den [Einstellungen](manual/settings.md#doc_general) ändern).
 
 ### Der Klang bricht plötzlich ab

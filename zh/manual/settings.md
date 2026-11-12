@@ -50,11 +50,11 @@ MIDI 输入
 : 编辑立体声采样的一侧时，另一侧会自动进行相同的编辑。
   编辑立体声乐器分区时也是如此：对应另一声道的分区（具有相同的音符范围和力度范围）会进行相同的编辑。
 
-采样导入：裁剪至循环终点
-: 导入采样时，位于循环终点之后的数据会被自动移除（效果与“[裁剪至循环终点](manual/soundfont-editor/tools/sample-tools.md#doc_trimloop)”工具相同）。
-
 采样导入：移除开头空白
-: 导入采样时，位于起音开始之前的所有空白区域都会被自动移除（效果与“[移除开头空白](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank)”工具相同）。
+: 导入采样时，位于起音开始之前的所有空白区域都会被自动移除（效果与自动检测背景噪声的“[裁剪](manual/soundfont-editor/tools/sample-tools.md#doc_trim)”工具相同）。
+
+采样导入：移除末尾空白
+: 导入采样时，位于声音末尾的空白区域会被自动移除，并替换为短淡出（效果与自动检测背景噪声的“[裁剪](manual/soundfont-editor/tools/sample-tools.md#doc_trim)”工具相同）。
 
 
 ![设置：通用](images/settings_general.png "设置：通用")
@@ -82,7 +82,7 @@ MIDI 输入
 : 在[主屏幕](manual/index.md#doc_home)上显示网站发布的[通知](manual/index.md#doc_notifications)（警报、新版本、公告、支持呼吁）。禁用此选项后，不会下载任何内容。
 
 启动视图
-: 选择打开音色库时显示的视图，可选项如下：:guilabel:`通用`（默认）、:guilabel:`采样`、:guilabel:`采样 - 第一个采样`、:guilabel:`乐器`、:guilabel:`乐器 - 第一个乐器 - 表格`、:guilabel:`乐器 - 第一个乐器 - 范围`、:guilabel:`乐器 - 第一个乐器 - 包络`、:guilabel:`预设`、:guilabel:`预设 - 第一个预设 - 表格`、:guilabel:`预设 - 第一个预设 - 范围`。对于第一个乐器或预设，最后一部分指定显示的页面：[表格](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table)、[范围编辑器](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range)或[包络编辑器](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope)。
+: 选择打开音色库时显示的视图，可选项如下：:guilabel:`通用`（默认）、:guilabel:`采样`、:guilabel:`采样 - 第一个采样`、:guilabel:`乐器`、:guilabel:`乐器 - 第一个乐器 - 表格`、:guilabel:`乐器 - 第一个乐器 - 范围`、:guilabel:`乐器 - 第一个乐器 - 包络`、:guilabel:`乐器 - 第一个乐器 - 音色`、:guilabel:`预设`、:guilabel:`预设 - 第一个预设 - 表格`、:guilabel:`预设 - 第一个预设 - 范围`。对于第一个乐器或预设，最后一部分指定显示的页面：[表格](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table)、[范围编辑器](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range)、[包络编辑器](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope)或[音色视图](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_timbre)。
 
 分区排序
 : 可以在这里更改乐器或预设中分区的排列顺序：:guilabel:`按音符范围`、:guilabel:`按力度范围`、:guilabel:`按字母顺序` 或 :guilabel:`无`（按创建顺序）。

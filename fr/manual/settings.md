@@ -50,11 +50,11 @@ Par ailleurs, il est possible de cocher les options suivantes&nbsp;:
 : Lors de l'édition d'un côté d'un échantillon stéréo, l'autre côté est automatiquement édité de la même manière.
   L'option s'applique également lors de l'édition de divisions stéréo d'un instrument&nbsp;: la division correspondant à l'autre canal (et ayant les mêmes étendues de notes et de vélocités) est éditée de la même manière.
 
-Import d'échantillons&nbsp;: ajuster à la boucle
-: Lors de l'importation d'un échantillon, les données situées après la fin de la boucle sont automatiquement enlevées (même effet que l'outil «&nbsp;[Ajuster à la fin de boucle](manual/soundfont-editor/tools/sample-tools.md#doc_trimloop)&nbsp;»).
-
 Import d'échantillons&nbsp;: enlever le blanc au départ
-: Lors de l'importation d'un échantillon, la partie silencieuse située avant l'attaque est automatiquement enlevée (même effet que l'outil «&nbsp;[Enlever le silence initial](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank)&nbsp;»).
+: Lors de l'importation d'un échantillon, la partie silencieuse située avant l'attaque est automatiquement enlevée (même effet que l'outil «&nbsp;[Rogner](manual/soundfont-editor/tools/sample-tools.md#doc_trim)&nbsp;» avec une détection automatique du bruit de fond).
+
+Import d'échantillons&nbsp;: enlever le blanc final
+: Lors de l'importation d'un échantillon, la partie silencieuse située à la fin du son est automatiquement enlevée et remplacée par un court fondu (même effet que l'outil «&nbsp;[Rogner](manual/soundfont-editor/tools/sample-tools.md#doc_trim)&nbsp;» avec une détection automatique du bruit de fond).
 
 
 ![Préférences, général](images/settings_general.png "Préférences, général")
@@ -82,7 +82,7 @@ Notifications
 : Affiche sur l'[écran d'accueil](manual/index.md#doc_home) les [notifications](manual/index.md#doc_notifications) publiées sur le site web (alerte, nouvelle version, annonce, appel au soutien). Lorsque l'option est désactivée, rien n'est téléchargé.
 
 Vue de démarrage
-: Sélectionne la vue à afficher à l'ouverture d'une banque de sons parmi&nbsp;: :guilabel:`Général` (par défaut), :guilabel:`Échantillons`, :guilabel:`Échantillons - premier échantillon`, :guilabel:`Instruments`, :guilabel:`Instruments - premier instrument - Table`, :guilabel:`Instruments - premier instrument - Étendues`, :guilabel:`Instruments - premier instrument - Enveloppes`, :guilabel:`Ensembles`, :guilabel:`Ensembles - premier ensemble - Table`, :guilabel:`Ensembles - premier ensemble - Étendues`. Pour le premier instrument ou ensemble, la dernière partie désigne la page affichée&nbsp;: [table](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), [éditeur d'étendues](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range) ou [éditeur d'enveloppes](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope).
+: Sélectionne la vue à afficher à l'ouverture d'une banque de sons parmi&nbsp;: :guilabel:`Général` (par défaut), :guilabel:`Échantillons`, :guilabel:`Échantillons - premier échantillon`, :guilabel:`Instruments`, :guilabel:`Instruments - premier instrument - Table`, :guilabel:`Instruments - premier instrument - Étendues`, :guilabel:`Instruments - premier instrument - Enveloppes`, :guilabel:`Instruments - premier instrument - Timbre`, :guilabel:`Ensembles`, :guilabel:`Ensembles - premier ensemble - Table`, :guilabel:`Ensembles - premier ensemble - Étendues`. Pour le premier instrument ou ensemble, la dernière partie désigne la page affichée&nbsp;: [table](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), [éditeur d'étendues](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range), [éditeur d'enveloppes](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope) ou [vue du timbre](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_timbre).
 
 Ordonner les divisions
 : L'ordre des divisions au sein d'un instrument ou d'un ensemble peut être changé ici&nbsp;: :guilabel:`par étendue de notes`, :guilabel:`par étendues de vélocités`, :guilabel:`alphabétiquement` ou :guilabel:`non` (ordre de création).

@@ -47,7 +47,7 @@ Die Elemente im linken Teil der Werkzeugleiste dienen häufig verwendeten Bearbe
 
 Im rechten Teil der Werkzeugleiste können je nach angezeigtem [Editor](manual/soundfont-editor/editing-pages/index.md) einige Symbole erscheinen:
 
-* beim Bearbeiten eines Instruments kann zwischen der ![Tabelle](images/toolbar_table.png "Tabelle"){.inline} [Tabellenansicht](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), dem ![Bereiche](images/toolbar_range.png "Bereiche"){.inline} [Bereichseditor](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range) und dem ![Hüllkurven](images/toolbar_adsr.png "Hüllkurven"){.inline} [Hüllkurveneditor](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope) gewechselt werden,
+* beim Bearbeiten eines Instruments kann zwischen der ![Tabelle](images/toolbar_table.png "Tabelle"){.inline} [Tabellenansicht](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), dem ![Bereiche](images/toolbar_range.png "Bereiche"){.inline} [Bereichseditor](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range), dem ![Hüllkurven](images/toolbar_adsr.png "Hüllkurven"){.inline} [Hüllkurveneditor](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope) und der ![Klangfarbe](images/toolbar_timbre.png "Klangfarbe"){.inline} [Klangfarbenansicht](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_timbre) gewechselt werden,
 * beim Bearbeiten eines Presets kann zwischen der ![Tabelle](images/toolbar_table.png "Tabelle"){.inline} Tabellenansicht und dem ![Bereiche](images/toolbar_range.png "Bereiche"){.inline} Bereichseditor gewechselt werden,
 * andernfalls wird nichts angezeigt.
 

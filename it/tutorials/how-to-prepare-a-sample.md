@@ -126,7 +126,7 @@ Ecco alcuni esempi con il suono di un flauto e una sinusoide di calibrazione:
 Nel menu :guilabel:`Toolbox` della [barra degli strumenti](manual/soundfont-editor/toolbar.md#doc_edit) sono disponibili diverse funzioni.
 Puoi modificare i campioni per:
 
-* [rimuovere il silenzio](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank) all'inizio,
+* [rimuovere il silenzio](manual/soundfont-editor/tools/sample-tools.md#doc_trim) all'inizio,
 * [equalizzare](manual/soundfont-editor/editing-pages/sample-editor.md#doc_eq) il suono,
 * [trasporre](manual/soundfont-editor/tools/sample-tools.md#doc_transpose),
 * [normalizzare](manual/soundfont-editor/tools/sample-tools.md#doc_volume) il volume,

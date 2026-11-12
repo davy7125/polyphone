@@ -144,23 +144,47 @@ Un truco es centrarse en las posiciones en las que la onda cruza el eje x (valor
 ![Herramienta de bucle de fundido cruzado](images/tool_crossfade_loop.png "Herramienta de bucle de fundido cruzado")
 
 
-### Eliminar silencio al inicio {#doc_removeblank}
+### Recortar {#doc_trim}
 
-Se elimina cualquier zona vacía antes del comienzo de la muestra, lo que reduce el tiempo hasta que se oye el sonido.
-Con una muestra estéreo, se elimina la misma longitud en los dos lados.
+Esta herramienta elimina lo que sobra al principio y al final de las muestras seleccionadas: el sonido se oye antes y el soundfont ocupa menos.
+Con una muestra estéreo, los dos lados se recortan de la misma manera.
+
+![Herramienta Recortar](images/tool_trim.png "Herramienta Recortar")
+
+Eliminar silencio al inicio
+: Se elimina el silencio o el ruido de fondo antes del ataque, y la muestra empieza entonces en un punto donde la onda pasa por cero.
+  No se añade ningún fundido de entrada: el ataque de la envolvente de volumen ya hace que el sonido empiece suavemente.
 
 ![Eliminar silencio al inicio](images/remove_blank.png "Eliminar silencio al inicio")
 
-**Nota:** esta herramienta se puede aplicar automáticamente cada vez que se importa una muestra; la opción está en las [preferencias](manual/settings.md#doc_general) del programa.
+El final de la muestra puede quedar sin cambios o recortarse de dos maneras.
 
+Recortar después del final del bucle
+: Si hay un bucle definido, se eliminan los datos situados después del final del bucle, salvo un pequeño margen que se usa en el punto de bucle.
+  Estos datos se oyen cuando un instrumento no reproduce el bucle de forma continua (bucle desactivado, release o bucle activado + release): las muestras usadas así no se modifican y se enumeran en un mensaje.
 
-### Recortar hasta el final del bucle {#doc_trimloop}
+![Recortar después del final del bucle](images/trim_to_loop.png "Recortar después del final del bucle")
 
-Si hay un bucle definido para la muestra seleccionada, el programa corta el sonido después del final del bucle (dejando un pequeño margen al final).
+Eliminar silencio al final
+: Se elimina el silencio o el ruido de fondo después del sonido y se sustituye por un breve fundido de salida que prolonga el decaimiento del sonido, para que el ruido restante no se detenga bruscamente cuando la muestra se reproduce hasta el final (por ejemplo, un piano con el pedal de resonancia o con un release largo).
+  La duración del fundido es automática: el doble del tiempo que tarda el sonido en perder sus últimos 20 dB, entre 20 ms y 1 s.
+  El bucle y lo que lo precede nunca se modifican.
 
-![Recortar hasta el final del bucle](images/trim_to_loop.png "Recortar hasta el final del bucle")
+![Eliminar silencio al final](images/remove_blank_end.png "Eliminar silencio al final")
 
-**Nota:** esta herramienta se puede aplicar automáticamente cada vez que se importa una muestra, según las [preferencias](manual/settings.md#doc_general) del programa.
+La última opción define el silencio, tanto al principio como al final:
+
+Detectar el ruido de fondo
+: El ruido de fondo se mide en cada muestra, antes o después del sonido, y el silencio es lo que no lo supera.
+  Si no se puede medir ningún ruido, el silencio es lo que está por debajo de −90 dB al final, o 50 dB por debajo del pico de la muestra al principio.
+
+Nivel inferior a
+: El silencio es lo que tiene un nivel de pico inferior al valor elegido, de −120 a −10 dB (0 dB es el nivel máximo de una muestra).
+  Un valor alto elimina un ruido más fuerte, pero también puede cortar el final del sonido.
+
+Los [desfases](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table) de inicio y de fin de las divisiones de instrumentos que usan las muestras recortadas se actualizan para que sigan reproduciendo la misma parte del sonido.
+
+**Nota:** el silencio puede eliminarse automáticamente al principio y al final de cada muestra importada; las opciones están en las [preferencias](manual/settings.md#doc_general) del programa.
 
 
 ## Muestras estéreo {#doc_cat_stereo}

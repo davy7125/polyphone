@@ -67,7 +67,7 @@
 
 有多种工具可以用来编辑采样，例如：
 
-* [移除开头空白](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank)，
+* [移除开头空白](manual/soundfont-editor/tools/sample-tools.md#doc_trim)，
 * 对声音进行[均衡](manual/soundfont-editor/editing-pages/sample-editor.md#doc_eq)，
 * [移调](manual/soundfont-editor/tools/sample-tools.md#doc_transpose)，
 * 对音量进行[归一化](manual/soundfont-editor/tools/sample-tools.md#doc_volume)，

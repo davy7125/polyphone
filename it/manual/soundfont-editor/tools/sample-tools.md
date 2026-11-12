@@ -144,23 +144,47 @@ Un consiglio è concentrarsi sulle posizioni in cui l'onda attraversa l'asse x (
 ![Funzione Loop con dissolvenza incrociata](images/tool_crossfade_loop.png "Funzione Loop con dissolvenza incrociata")
 
 
-### Rimuovi silenzio all'inizio {#doc_removeblank}
+### Taglia {#doc_trim}
 
-Qualsiasi zona vuota prima dell'inizio del campione viene eliminata, riducendo il tempo prima che il suono si senta.
-Con un campione stereo, viene rimossa la stessa lunghezza da entrambi i lati.
+Questa funzione rimuove ciò che è inutile all'inizio e alla fine dei campioni selezionati: il suono si sente prima e il soundfont è più leggero.
+Con un campione stereo, entrambi i lati vengono tagliati allo stesso modo.
+
+![Funzione Taglia](images/tool_trim.png "Funzione Taglia")
+
+Rimuovi silenzio all'inizio
+: Il silenzio o il rumore di fondo prima dell'attacco viene rimosso e il campione inizia quindi in un punto in cui l'onda passa per lo zero.
+  Non viene aggiunta alcuna dissolvenza in entrata: l'attacco dell'inviluppo del volume fa già iniziare il suono in modo morbido.
 
 ![Rimuovi silenzio all'inizio](images/remove_blank.png "Rimuovi silenzio all'inizio")
 
-**Nota:** questa funzione può essere applicata automaticamente a ogni importazione di un campione; l'opzione si trova nelle [impostazioni](manual/settings.md#doc_general) del software.
+La fine del campione può restare invariata o essere tagliata in due modi.
 
+Taglia dopo la fine del loop
+: Se è definito un loop, i dati dopo la fine del loop vengono rimossi, tranne un piccolo margine usato nel punto di loop.
+  Questi dati si sentono quando uno strumento non riproduce il loop in modo continuo (loop spento, release o loop acceso + release): i campioni usati in questo modo non vengono modificati e sono elencati in un messaggio.
 
-### Taglia alla fine del loop {#doc_trimloop}
+![Taglia dopo la fine del loop](images/trim_to_loop.png "Taglia dopo la fine del loop")
 
-Se per il campione selezionato è definito un loop, il software taglierà il suono dopo la fine del loop (lasciando un piccolo margine alla fine).
+Rimuovi silenzio alla fine
+: Il silenzio o il rumore di fondo dopo il suono viene rimosso e sostituito da una breve dissolvenza in uscita che prolunga il decadimento del suono, affinché il rumore residuo non si interrompa bruscamente quando il campione viene riprodotto fino alla fine (per esempio un pianoforte con il pedale di risonanza o con un release lungo).
+  La durata della dissolvenza è automatica: il doppio del tempo impiegato dal suono per perdere i suoi ultimi 20 dB, tra 20 ms e 1 s.
+  Il loop e ciò che lo precede non vengono mai modificati.
 
-![Taglia alla fine del loop](images/trim_to_loop.png "Taglia alla fine del loop")
+![Rimuovi silenzio alla fine](images/remove_blank_end.png "Rimuovi silenzio alla fine")
 
-**Nota:** in base alle [impostazioni](manual/settings.md#doc_general) del software, questa funzione può essere applicata automaticamente a ogni importazione di un campione.
+L'ultima opzione definisce il silenzio, sia all'inizio sia alla fine:
+
+Rileva il rumore di fondo
+: Il rumore di fondo viene misurato in ogni campione, prima o dopo il suono, e il silenzio è ciò che non lo supera.
+  Se non è possibile misurare alcun rumore, il silenzio è ciò che sta sotto −90 dB alla fine, o 50 dB sotto il picco del campione all'inizio.
+
+Livello inferiore a
+: Il silenzio è ciò che ha un livello di picco inferiore al valore scelto, da −120 a −10 dB (0 dB è il livello massimo di un campione).
+  Un valore alto rimuove un rumore più forte, ma può anche tagliare la fine del suono.
+
+Gli [offset](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table) di inizio e di fine delle divisioni degli strumenti che usano i campioni tagliati vengono aggiornati affinché riproducano sempre la stessa parte del suono.
+
+**Nota:** il silenzio può essere rimosso automaticamente all'inizio e alla fine di ogni campione importato; le opzioni si trovano nelle [impostazioni](manual/settings.md#doc_general) del software.
 
 
 ## Campioni stereo {#doc_cat_stereo}

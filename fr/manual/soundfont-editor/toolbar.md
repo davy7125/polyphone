@@ -47,7 +47,7 @@ Les éléments dans la partie gauche de la barre d'outils présentent des foncti
 
 Dans la partie droite de la barre d'outils, certaines icônes peuvent apparaître selon l'[éditeur](manual/soundfont-editor/editing-pages/index.md) affiché&nbsp;:
 
-* il est possible de basculer entre la [table](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table) ![table](images/toolbar_table.png "table"){.inline}, l'[éditeur d'étendues](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range) ![étendues](images/toolbar_range.png "étendues"){.inline} et l'[éditeur d'enveloppes](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope) ![enveloppe](images/toolbar_adsr.png "enveloppe"){.inline} lors de l'édition d'un instrument,
+* il est possible de basculer entre la [table](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table) ![table](images/toolbar_table.png "table"){.inline}, l'[éditeur d'étendues](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range) ![étendues](images/toolbar_range.png "étendues"){.inline}, l'[éditeur d'enveloppes](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope) ![enveloppe](images/toolbar_adsr.png "enveloppe"){.inline} et la [vue du timbre](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_timbre) ![timbre](images/toolbar_timbre.png "timbre"){.inline} lors de l'édition d'un instrument,
 * il est possible de basculer entre la table ![table](images/toolbar_table.png "table"){.inline} et l'éditeur d'étendues ![étendues](images/toolbar_range.png "étendues"){.inline} lors de l'édition d'un ensemble,
 * rien n'est affiché dans les autres cas.
 

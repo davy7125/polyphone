@@ -67,7 +67,7 @@ The [frequency](manual/soundfont-editor/editing-pages/sample-editor.md#doc_freq)
 
 Several tools are available to edit samples like:
 
-* [removing blank](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank) at start,
+* [removing blank](manual/soundfont-editor/tools/sample-tools.md#doc_trim) at start,
 * [equalizing](manual/soundfont-editor/editing-pages/sample-editor.md#doc_eq) the sound,
 * [transposing](manual/soundfont-editor/tools/sample-tools.md#doc_transpose),
 * [normalizing](manual/soundfont-editor/tools/sample-tools.md#doc_volume) the volume,

@@ -5,6 +5,7 @@ Esta página consta de varias partes:
 * la [tabla](#doc_table),
 * el [editor de rangos](#doc_range), cuando se pulsa el botón :guilabel:`Rangos` de la [barra de herramientas](manual/soundfont-editor/toolbar.md#doc_view),
 * el [editor de envolventes](#doc_envelope), cuando se pulsa el botón :guilabel:`Envolventes` de la [barra de herramientas](manual/soundfont-editor/toolbar.md#doc_view),
+* la [vista de timbre](#doc_timbre), cuando se pulsa el botón :guilabel:`Timbre` de la [barra de herramientas](manual/soundfont-editor/toolbar.md#doc_view),
 * la [sección de moduladores](#doc_modulator).
 
 
@@ -260,6 +261,204 @@ Si hay varias divisiones o instrumentos seleccionados, todas sus envolventes se 
 Mantener pulsado el clic derecho permite cambiar el zoom alrededor del punto seleccionado.
 
 Mantener pulsado el clic izquierdo permite desplazar el gráfico si el clic no empieza sobre un punto de la curva.
+
+
+## Vista de timbre {#doc_timbre}
+
+
+La vista de timbre muestra, a lo largo de todo el teclado, el timbre de un instrumento **tal como se oye**: el nivel de cada armónico, una vez transpuesta cada muestra a las notas que reproduce y una vez aplicados la atenuación, el filtro y los moduladores de su división.
+Las irregularidades se hacen visibles, en particular las rupturas en las uniones entre muestras.
+Desde esta vista se pueden crear notas calculadas, eliminar muestras redundantes y corregir el timbre o el nivel de una muestra.
+La vista mide y propone; no se aplica nada automáticamente.
+
+
+![Vista de timbre](images/edit_timbre.png "Vista de timbre")
+
+
+### Divisiones tenidas en cuenta
+
+
+La vista muestra lo que suena a la velocidad elegida arriba a la izquierda (100 por defecto, y luego la última utilizada).
+La barra contigua muestra las capas de velocidad del instrumento: un clic en una capa selecciona la velocidad situada en su centro.
+
+Las divisiones tenidas en cuenta son las que suenan a esta velocidad, que no están [silenciadas](#doc_solo) y que no se reproducen solo al soltar la tecla (modo de reproducción «release»).
+Silenciar una división es, por tanto, la forma de excluirla de la vista, por ejemplo un ruido o un sonido de release.
+Cuando el [solo en la selección](manual/soundfont-editor/tree.md#doc_menu) está activado, el silenciado sigue a la selección y no se tiene en cuenta.
+Las divisiones que reproducen una misma nota (par estéreo, capas) se combinan: sus potencias se suman.
+
+Una **nota raíz** agrupa todas las divisiones que tienen esa nota raíz, posiblemente con varios rangos de notas.
+Las muestras se analizan en segundo plano (el número de muestras restantes se muestra arriba a la derecha): los armónicos se miden en el bucle, o en la parte estable del sonido si no hay bucle.
+Estos análisis se conservan mientras no cambien los datos, el bucle, la nota raíz o la corrección de afinación de una muestra.
+
+
+### Mapa
+
+
+Cada columna es una nota, alineada con el teclado mostrado debajo, y cada fila un armónico (H1: fundamental, H2: segundo armónico...), con el armónico 1 abajo, como en un espectrograma.
+Los primeros armónicos se muestran uno a uno, y los siguientes se agrupan en bandas (ver [Parciales](#doc_timbre_partials)).
+
+Encima del mapa, unas filas de resumen muestran para cada nota:
+
+* :guilabel:`Nivel`: nivel total,
+* :guilabel:`Timbre`: desviación de timbre de la nota raíz respecto a su referencia (rayada cuando la referencia es menos fiable, en los extremos del teclado),
+* :guilabel:`Transposición`: azul cuando la muestra se transpone hacia abajo, rojo cuando se transpone hacia arriba,
+* y, a elegir en el menú :guilabel:`Opciones` > :guilabel:`Resúmenes`: :guilabel:`Brillo` (centro de gravedad de los armónicos), :guilabel:`Impares / pares` (armónicos impares comparados con los pares), :guilabel:`Ruido` (relación armónicos / ruido), :guilabel:`Afinación` (centésimas respecto a la nota más cercana del temperamento igual) y :guilabel:`Bucle` (calidad del bucle).
+
+En el mapa, unas líneas verticales marcan las uniones entre divisiones (más gruesas cuando cambia la muestra), un punto marca cada nota raíz, un rayado muestra los armónicos ausentes (fuera de la banda de la muestra o de la salida, por encima del límite superior) o medidos de forma poco fiable, y las notas que no reproducen nada aparecen en gris.
+Una información emergente da los valores de la celda bajo el cursor del ratón: nota, armónico, nivel, desviación, muestras, transposición y factor de duración (el ataque, el trémolo y los batimientos son más rápidos cuando una muestra se transpone hacia arriba).
+
+La lista :guilabel:`Visualización` elige lo que representan los colores:
+
+Niveles absolutos
+: Nivel de cada armónico en dB.
+
+Niveles relativos
+: Nivel de cada armónico respecto al más fuerte de la nota: el timbre independientemente del nivel.
+
+Desviación respecto a la referencia
+: Diferencia entre la nota raíz y su referencia para cada armónico, en todas las notas que reproduce la nota raíz: demasiado fuerte (rojo) o demasiado débil (azul).
+
+Saltos
+: Diferencia con la nota anterior: las rupturas en las uniones.
+
+Transposición
+: Semitonos entre la nota y la nota raíz de su muestra.
+
+Confianza
+: Parte de la potencia que se mide de forma fiable.
+
+El menú :guilabel:`Opciones` también permite mostrar todo el teclado o una sola columna por nota raíz, colorear por escalones según los umbrales (las desviaciones dentro de la tolerancia quedan neutras) y reproducir las notas en las que se hace clic.
+El teclado bajo el mapa reproduce el instrumento a la velocidad de la vista.
+
+
+### Referencia y decisiones
+
+
+La **referencia** de una nota raíz es lo que predicen sus vecinas: las notas raíz vecinas se reproducen en su nota (con los parámetros de sus divisiones) y sus niveles se interpolan armónico por armónico, en dB.
+En los dos extremos del teclado, la referencia se extrapola a partir de las dos vecinas del mismo lado, lo que es menos fiable.
+Con :guilabel:`Regresión local`, se usa en su lugar una regresión robusta sobre varias vecinas a cada lado, para que una vecina defectuosa pese menos.
+
+La desviación de una nota raíz respecto a su referencia se resume con dos números:
+
+* la desviación de **nivel**, diferencia de los niveles totales, que se puede corregir con la atenuación,
+* la desviación de **timbre**, media de las diferencias de las filas una vez eliminada la desviación de nivel, donde cada fila pesa según su sonoridad (un armónico débil cuenta, sin dominar).
+
+La franja :guilabel:`Decisiones` da una etiqueta a cada nota raíz y a cada unión, con una forma y un color:
+
+Coherente ✓ (verde)
+: La desviación de timbre está dentro de la tolerancia.
+
+Redundante − (azul)
+: La nota raíz es coherente, y eliminarla cambiaría sus notas menos que el umbral :guilabel:`Redundancia`, sin ruptura en la nueva unión: se puede eliminar.
+
+Por corregir ~ (naranja)
+: La desviación de timbre está entre la tolerancia y el máximo: se puede corregir el timbre.
+
+Demasiado diferente × (rojo)
+: La desviación de timbre supera el máximo: la nota raíz se puede eliminar o reemplazar por una nota calculada.
+
+Ruptura + (morado)
+: En un cambio de muestra, el salto de timbre supera el umbral :guilabel:`Ruptura` y existe una nota sin muestra entre las dos notas raíz: se puede crear allí una nota calculada.
+
+Nivel ▲ ▼ (amarillo)
+: La desviación de nivel supera el umbral :guilabel:`Nivel` (▲ demasiado fuerte, ▼ demasiado débil): se puede corregir la atenuación.
+
+Los umbrales se ajustan en el menú :guilabel:`Umbrales`.
+Sus valores por defecto (:guilabel:`Tolerancia` 4,5 dB, :guilabel:`Máximo` 8 dB, :guilabel:`Redundancia` 2,5 dB, :guilabel:`Ruptura` 6 dB, :guilabel:`Nivel` 2,5 dB) proceden de bancos de muestras de órgano, en los que el 70 % de las notas raíz se desvían menos de 4,5 dB de sus vecinas: se pueden adaptar al instrumento.
+Una unión o una desviación puede ser intencionada (un instrumento que se convierte en otro, la repetición de una mixtura): las etiquetas solo son propuestas.
+
+
+### Parciales {#doc_timbre_partials}
+
+
+El menú :guilabel:`Parciales` define las filas del mapa, compartidas por la visualización, las desviaciones y las correcciones:
+
+Armónicos mostrados uno a uno
+: Número de armónicos mostrados y comparados uno a uno (10 por defecto). El oído distingue individualmente los primeros armónicos, mientras que los siguientes se perciben en conjunto como brillo.
+
+Armónicos siguientes
+: Los armónicos siguientes se agrupan en bandas de un tercio de octava (11-12, 13-16, 17-20...) o de una octava, para que muchos armónicos agudos y débiles no pesen más que los primeros.
+
+Límite superior
+: Los parciales por encima de esta frecuencia se ignoran (16 kHz por defecto, o la mitad de la frecuencia de muestreo).
+
+Rango dinámico
+: Los armónicos situados más de este valor por debajo del más fuerte de la nota no se comparan (60 dB por defecto).
+
+
+### Detalles y acciones
+
+
+Un clic en una nota muestra bajo el mapa lo que reproduce: las muestras con su transposición, atenuación y filtro, el factor de duración, el tono, las desviaciones de la nota raíz y lo que cambiaría su eliminación.
+El gráfico de barras compara los niveles oídos con la referencia, o con la nota calculada que podría recibir una nota sin muestra (una columna con trazo discontinuo en el mapa).
+
+Un clic en una nota raíz selecciona sus divisiones en el [árbol](manual/soundfont-editor/tree.md), y seleccionar divisiones en el árbol selecciona sus notas raíz.
+Se pueden seleccionar varias notas raíz con :kbd:`Ctrl` o :kbd:`Shift`, o arrastrando el ratón sobre las notas.
+
+Los botones de la derecha y el menú contextual del mapa se aplican a las notas raíz seleccionadas:
+
+Crear una nota aquí...
+: En una nota sin muestra: se transpone la nota raíz más cercana y los niveles de sus armónicos se interpolan (o se extrapolan) a partir de una segunda nota raíz. Se pueden elegir las notas raíz utilizadas, y se muestra una advertencia cuando la nota está lejos de ellas. Los rangos de notas de alrededor se ajustan; las divisiones contenidas por completo en el rango de la nueva nota se eliminan.
+
+Eliminar...
+: Las divisiones de la nota raíz se eliminan y sus vecinas pasan a reproducir sus notas. Las muestras que ya no se usan también se pueden eliminar.
+
+Reemplazar por una nota calculada...
+: La nota raíz se elimina y luego se vuelve a crear a partir de sus vecinas.
+
+Corregir el timbre...
+: Abre la ventana de [corrección](#doc_timbre_correction).
+
+Corregir el nivel
+: La atenuación de las divisiones se modifica para que la desviación de nivel sea nula (una atenuación no puede ser negativa).
+
+Verificar mediante renderizado
+: El motor de sonido reproduce la nota y se miden los armónicos del resultado: se muestran en el gráfico de barras para verificar el cálculo de la vista.
+
+Silenciar estas divisiones
+: En el menú contextual: excluye las divisiones de la vista.
+
+El menú :guilabel:`Proponer` selecciona todas las notas raíz (o uniones) que tienen una etiqueta y les aplica la acción correspondiente, tras una confirmación: corregir las notas raíz por corregir, reemplazar las demasiado diferentes, eliminar las redundantes, crear notas calculadas en las rupturas, corregir los niveles que se desvían.
+Se procesan de la peor a la menos mala, y las referencias se vuelven a calcular tras cada acción: una nota raíz defectuosa también falsea la referencia de sus vecinas, que parecen medio defectuosas hasta que se corrige.
+
+Cada acción, o serie de acciones, se puede deshacer en un solo paso (:kbd:`Ctrl`+:kbd:`Z`).
+
+
+### Corrección del timbre {#doc_timbre_correction}
+
+
+![Corrección del timbre](images/timbre_correction.png "Corrección del timbre")
+
+
+La ventana muestra para cada fila los niveles oídos, el objetivo y el resultado esperado, y ofrece los siguientes parámetros:
+
+Referencia
+: Objetivo de la corrección: :guilabel:`Interpolación entre las vecinas`, :guilabel:`Regresión local` sobre varias vecinas a cada lado, o :guilabel:`Alineación con una nota raíz` (otra nota raíz reproducida en la nota).
+
+Corregir el timbre (datos de la muestra)
+: La ganancia de cada fila se aplica a los datos de las muestras con una curva de fase mínima que sigue el tono: la corrección sigue siendo válida en todas las notas de la división, sea cual sea la transposición, y el bucle se conserva. La misma corrección se aplica a las dos muestras de un par estéreo.
+
+Corregir el nivel (atenuación)
+: La desviación de nivel se corrige mediante la atenuación de las divisiones, lo que no modifica los datos. Si la atenuación pasara a ser negativa, el resto se aplica a los datos, dentro del límite de la escala completa.
+
+Tolerancia
+: Una desviación menor en una fila no se corrige; solo se corrige el exceso.
+
+Intensidad
+: Proporción de la desviación que se corrige.
+
+Corrección máxima
+: Mayor ganancia de una fila, en ambos sentidos.
+
+Armónicos corregidos
+: Todas las filas, o solo los armónicos del 1 a un armónico dado.
+
+Brillo, Armónicos impares
+: Pendiente añadida al objetivo (positiva para un sonido más brillante) y nivel añadido a los armónicos impares 3, 5, 7... del objetivo.
+
+La sección :guilabel:`Escucha` compara el sonido original (A) y el corregido (B) con el botón :guilabel:`Reproducir`.
+Si la corrección superara la escala completa, la muestra se baja y la atenuación lo compensa.
+Cuando una muestra también se usa en otras divisiones o instrumentos, Polyphone pregunta si hay que duplicarla para las notas raíz corregidas o modificarla en todas partes (la respuesta se puede recordar hasta cerrar Polyphone).
 
 
 ## Moduladores {#doc_modulator}

@@ -5,6 +5,7 @@ Esta página contém várias partes:
 * a [tabela](#doc_table),
 * o [editor de alcances](#doc_range), quando o botão :guilabel:`Alcances` da [barra de ferramentas](manual/soundfont-editor/toolbar.md#doc_view) é clicado,
 * o [editor de envelopes](#doc_envelope), quando o botão :guilabel:`Envelopes` da [barra de ferramentas](manual/soundfont-editor/toolbar.md#doc_view) é clicado,
+* a [visualização do timbre](#doc_timbre), quando o botão :guilabel:`Timbre` da [barra de ferramentas](manual/soundfont-editor/toolbar.md#doc_view) é clicado,
 * a [seção dos moduladores](#doc_modulator).
 
 
@@ -260,6 +261,204 @@ Se várias divisões ou instrumentos estiverem selecionados, todos os seus envel
 Manter o clique direito pressionado permite alterar o zoom em torno do ponto selecionado.
 
 Manter o clique esquerdo pressionado permite deslocar o gráfico se o clique não começar sobre um ponto da curva.
+
+
+## Visualização do timbre {#doc_timbre}
+
+
+A visualização do timbre mostra, ao longo de todo o teclado, o timbre de um instrumento **tal como é ouvido**: o nível de cada harmônico, depois que cada amostra é transposta para as notas que toca e depois de aplicados a atenuação, o filtro e os moduladores de sua divisão.
+As irregularidades se tornam visíveis, em particular as rupturas nas junções entre amostras.
+A partir desta visualização, é possível criar notas calculadas, remover amostras redundantes e corrigir o timbre ou o nível de uma amostra.
+A visualização mede e propõe; nada é aplicado automaticamente.
+
+
+![Visualização do timbre](images/edit_timbre.png "Visualização do timbre")
+
+
+### Divisões consideradas
+
+
+A visualização mostra o que é tocado na velocidade escolhida no canto superior esquerdo (100 por padrão, depois a última usada).
+A barra ao lado mostra as camadas de velocidade do instrumento: um clique em uma camada seleciona a velocidade no seu meio.
+
+As divisões consideradas são aquelas que tocam nessa velocidade, que não estão [silenciadas](#doc_solo) e que não são tocadas apenas quando a tecla é solta (modo de reprodução “release”).
+Silenciar uma divisão é, portanto, a maneira de excluí-la da visualização, por exemplo um ruído ou um som de release.
+Quando o [solo na seleção](manual/soundfont-editor/tree.md#doc_menu) está ativado, os silenciamentos seguem a seleção e não são levados em conta.
+As divisões que tocam a mesma nota (par estéreo, camadas) são combinadas: suas potências se somam.
+
+Uma **nota base** reúne todas as divisões que têm essa nota base, eventualmente com vários alcances de notas.
+As amostras são analisadas em segundo plano (o número de amostras restantes é exibido no canto superior direito): os harmônicos são medidos no loop ou, se não houver loop, na parte estável do som.
+Essas análises são mantidas até que os dados, o loop, a nota base ou a correção de afinação de uma amostra mudem.
+
+
+### Mapa
+
+
+Cada coluna é uma nota, alinhada com o teclado exibido abaixo, e cada linha um harmônico (H1: fundamental, H2: segundo harmônico...), o harmônico 1 ficando embaixo, como em um espectrograma.
+Os primeiros harmônicos são exibidos um a um, e os seguintes são agrupados em bandas (veja [Parciais](#doc_timbre_partials)).
+
+Acima do mapa, linhas de resumo mostram para cada nota:
+
+* :guilabel:`Nível`: nível total,
+* :guilabel:`Timbre`: desvio de timbre da nota base em relação à sua referência (hachurado quando a referência é menos confiável, nas extremidades do teclado),
+* :guilabel:`Transposição`: azul quando a amostra é transposta para baixo, vermelho quando é transposta para cima,
+* e, à escolha no menu :guilabel:`Opções` > :guilabel:`Resumos`: :guilabel:`Brilho` (centro de gravidade dos harmônicos), :guilabel:`Ímpares / pares` (harmônicos ímpares comparados aos harmônicos pares), :guilabel:`Ruído` (relação entre harmônicos e ruído), :guilabel:`Afinação` (cents em relação à nota mais próxima do temperamento igual) e :guilabel:`Loop` (qualidade do loop).
+
+No mapa, linhas verticais marcam as junções entre divisões (mais grossas quando a amostra muda), um ponto marca cada nota base, hachuras mostram os harmônicos ausentes (fora da banda da amostra ou da saída, acima do limite superior) ou medidos de forma pouco confiável, e as notas que não tocam nada ficam acinzentadas.
+Uma dica dá os valores da célula sob o cursor do mouse: nota, harmônico, nível, desvio, amostras, transposição e fator de duração (o ataque, o trêmolo e os batimentos são mais rápidos quando uma amostra é transposta para cima).
+
+A lista :guilabel:`Visualização` escolhe o que as cores representam:
+
+Níveis absolutos
+: Nível de cada harmônico em dB.
+
+Níveis relativos
+: Nível de cada harmônico em relação ao mais forte da nota: o timbre independentemente do nível.
+
+Desvio em relação à referência
+: Diferença entre a nota base e sua referência para cada harmônico, em todas as notas tocadas pela nota base: forte demais (vermelho) ou fraco demais (azul).
+
+Saltos
+: Diferença em relação à nota anterior: as rupturas nas junções.
+
+Transposição
+: Semitons entre a nota e a nota base de sua amostra.
+
+Confiança
+: Parte da potência medida de forma confiável.
+
+O menu :guilabel:`Opções` também permite exibir o teclado inteiro ou apenas uma coluna por nota base, colorir em patamares conforme os limiares (os desvios dentro da tolerância ficando neutros) e tocar as notas clicadas.
+O teclado abaixo do mapa toca o instrumento na velocidade da visualização.
+
+
+### Referência e decisões
+
+
+A **referência** de uma nota base é o que suas vizinhas preveem: as notas base vizinhas são tocadas na sua nota (com os parâmetros de suas divisões) e seus níveis são interpolados harmônico por harmônico, em dB.
+Nas duas extremidades do teclado, a referência é extrapolada a partir das duas vizinhas do mesmo lado, o que é menos confiável.
+Com :guilabel:`Regressão local`, é usada em vez disso uma regressão robusta sobre várias vizinhas de cada lado, para que uma vizinha defeituosa pese menos.
+
+O desvio de uma nota base em relação à sua referência é resumido por dois números:
+
+* o desvio de **nível**, diferença dos níveis totais, que pode ser corrigido pela atenuação,
+* o desvio de **timbre**, média dos desvios das linhas depois de removido o desvio de nível, cada linha pesando de acordo com sua intensidade sonora (um harmônico fraco conta, sem dominar).
+
+A faixa :guilabel:`Decisões` dá um rótulo a cada nota base e a cada junção, com uma forma e uma cor:
+
+Coerente ✓ (verde)
+: O desvio de timbre está dentro da tolerância.
+
+Redundante − (azul)
+: A nota base é coerente, e removê-la mudaria suas notas menos do que o limiar :guilabel:`Redundância`, sem ruptura na nova junção: ela pode ser removida.
+
+A corrigir ~ (laranja)
+: O desvio de timbre está entre a tolerância e o máximo: o timbre pode ser corrigido.
+
+Diferente demais × (vermelho)
+: O desvio de timbre ultrapassa o máximo: a nota base pode ser removida ou substituída por uma nota calculada.
+
+Ruptura + (roxo)
+: Em uma mudança de amostra, o salto de timbre ultrapassa o limiar :guilabel:`Ruptura` e existe uma nota sem amostra entre as duas notas base: uma nota calculada pode ser criada ali.
+
+Nível ▲ ▼ (amarelo)
+: O desvio de nível ultrapassa o limiar :guilabel:`Nível` (▲ alto demais, ▼ baixo demais): a atenuação pode ser corrigida.
+
+Os limiares são ajustados no menu :guilabel:`Limiares`.
+Seus valores padrão (:guilabel:`Tolerância` 4,5 dB, :guilabel:`Máximo` 8 dB, :guilabel:`Redundância` 2,5 dB, :guilabel:`Ruptura` 6 dB, :guilabel:`Nível` 2,5 dB) vêm de conjuntos de amostras de órgão, em que 70% das notas base se desviam menos de 4,5 dB de suas vizinhas: eles podem ser adaptados ao instrumento.
+Uma junção ou um desvio pode ser intencional (um instrumento que se torna outro, a repetição de uma mixtura): os rótulos são apenas propostas.
+
+
+### Parciais {#doc_timbre_partials}
+
+
+O menu :guilabel:`Parciais` define as linhas do mapa, compartilhadas pela exibição, pelos desvios e pelas correções:
+
+Harmônicos exibidos um a um
+: Número de harmônicos exibidos e comparados um a um (10 por padrão). O ouvido distingue individualmente os primeiros harmônicos, enquanto os seguintes são percebidos em conjunto como brilho.
+
+Harmônicos seguintes
+: Os harmônicos seguintes são agrupados em bandas de um terço de oitava (11-12, 13-16, 17-20...) ou de uma oitava, para que muitos harmônicos agudos e fracos não pesem mais do que os primeiros.
+
+Limite superior
+: Os parciais acima dessa frequência são ignorados (16 kHz por padrão, ou a metade da taxa de amostragem).
+
+Faixa dinâmica
+: Os harmônicos que ficam mais do que este valor abaixo do mais forte da nota não são comparados (60 dB por padrão).
+
+
+### Detalhes e ações
+
+
+Um clique em uma nota mostra abaixo do mapa o que ela toca: as amostras com sua transposição, atenuação e filtro, o fator de duração, a altura, os desvios da nota base e o que sua remoção mudaria.
+O gráfico de barras compara os níveis ouvidos com a referência, ou com a nota calculada que uma nota sem amostra poderia receber (uma coluna tracejada no mapa).
+
+Um clique em uma nota base seleciona suas divisões na [árvore](manual/soundfont-editor/tree.md), e selecionar divisões na árvore seleciona suas notas base.
+Várias notas base podem ser selecionadas com :kbd:`Ctrl` ou :kbd:`Shift`, ou arrastando o mouse sobre as notas.
+
+Os botões à direita e o menu de contexto do mapa se aplicam às notas base selecionadas:
+
+Criar uma nota aqui...
+: Em uma nota sem amostra: a nota base mais próxima é transposta e os níveis de seus harmônicos são interpolados (ou extrapolados) a partir de uma segunda nota base. As notas base usadas podem ser escolhidas, e um aviso é exibido quando a nota está longe delas. Os alcances de notas ao redor são ajustados; as divisões inteiramente contidas no alcance da nova nota são removidas.
+
+Remover...
+: As divisões da nota base são removidas e suas vizinhas assumem suas notas. As amostras que não são mais usadas também podem ser removidas.
+
+Substituir por uma nota calculada...
+: A nota base é removida e depois recriada a partir de suas vizinhas.
+
+Corrigir o timbre...
+: Abre a janela de [correção](#doc_timbre_correction).
+
+Corrigir o nível
+: A atenuação das divisões é alterada para que o desvio de nível se torne zero (uma atenuação não pode ser negativa).
+
+Verificar por renderização
+: A nota é tocada pelo motor de som e os harmônicos do resultado são medidos: eles são exibidos no gráfico de barras para verificar o cálculo da visualização.
+
+Silenciar estas divisões
+: No menu de contexto: exclui as divisões da visualização.
+
+O menu :guilabel:`Propor` seleciona todas as notas base (ou junções) que têm um rótulo e aplica a elas a ação correspondente, após uma confirmação: corrigir as notas base a corrigir, substituir as diferentes demais, remover as redundantes, criar notas calculadas nas rupturas, corrigir os níveis que se desviam.
+Elas são processadas da pior para a menos ruim, com as referências recalculadas após cada ação: uma nota base defeituosa também distorce a referência de suas vizinhas, que parecem meio defeituosas enquanto ela não for corrigida.
+
+Cada ação, ou série de ações, pode ser desfeita em uma única etapa (:kbd:`Ctrl`+:kbd:`Z`).
+
+
+### Correção do timbre {#doc_timbre_correction}
+
+
+![Correção do timbre](images/timbre_correction.png "Correção do timbre")
+
+
+A janela mostra, para cada linha, os níveis ouvidos, o alvo e o resultado esperado, e oferece os seguintes parâmetros:
+
+Referência
+: Alvo da correção: :guilabel:`Interpolação entre as vizinhas`, :guilabel:`Regressão local` sobre várias vizinhas de cada lado, ou :guilabel:`Alinhamento com uma nota base` (outra nota base tocada na nota).
+
+Corrigir o timbre (dados da amostra)
+: O ganho de cada linha é aplicado aos dados das amostras com uma curva de fase mínima que acompanha a altura: a correção continua válida em todas as notas da divisão, qualquer que seja a transposição, e o loop é mantido. A mesma correção é aplicada às duas amostras de um par estéreo.
+
+Corrigir o nível (atenuação)
+: O desvio de nível é corrigido pela atenuação das divisões, o que não altera os dados. Se a atenuação tiver que ficar negativa, o restante vai para os dados, dentro do limite do fundo de escala.
+
+Tolerância
+: Um desvio menor de uma linha não é corrigido; apenas a parte que o excede é corrigida.
+
+Intensidade
+: Parte do desvio que é corrigida.
+
+Correção máxima
+: Maior ganho de uma linha, nos dois sentidos.
+
+Harmônicos corrigidos
+: Todas as linhas, ou apenas os harmônicos de 1 até um harmônico dado.
+
+Brilho, Harmônicos ímpares
+: Inclinação adicionada ao alvo (positiva para um som mais brilhante) e nível adicionado aos harmônicos ímpares 3, 5, 7... do alvo.
+
+A seção :guilabel:`Audição` compara o som original (A) e o som corrigido (B) com o botão :guilabel:`Reproduzir`.
+Se a correção ultrapassar o fundo de escala, a amostra é abaixada e a atenuação compensa.
+Quando uma amostra também é usada por outras divisões ou instrumentos, o Polyphone pergunta se ela deve ser duplicada para as notas base corrigidas ou modificada em toda parte (a resposta pode ser memorizada até o Polyphone ser fechado).
 
 
 ## Moduladores {#doc_modulator}

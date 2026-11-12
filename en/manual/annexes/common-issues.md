@@ -36,8 +36,8 @@ The problem likely comes from a poorly placed loop point, which is discussed in 
 
 Samples are often only partially used, and removing the excess can reduce the file size:
 
-* the useful part of a sample is sometimes located before the final loop point: it is therefore possible to delete the portion of the sample after the loop end, and this [tool](manual/soundfont-editor/tools/sample-tools.md#doc_trimloop) lets you do that in a few clicks;
-* samples may begin with silence, which should be removed to reduce latency when triggering a note (there is also a [tool](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank) to do this quickly);
+* the useful part of a sample is sometimes located before the final loop point: it is therefore possible to delete the portion of the sample after the loop end, and this [tool](manual/soundfont-editor/tools/sample-tools.md#doc_trim) lets you do that in a few clicks;
+* samples may begin with silence, which should be removed to reduce latency when triggering a note (there is also a [tool](manual/soundfont-editor/tools/sample-tools.md#doc_trim) to do this quickly);
 * the same sample may be present several times: this [configuration summary](manual/soundfont-editor/configuration-summaries.md#doc_sample) shows the duplicates, and this [tool](manual/soundfont-editor/tools/global-tools.md#doc_duplicates) removes them while updating the instruments;
 * finally, some samples may simply not be used: this [configuration summary](manual/soundfont-editor/configuration-summaries.md#doc_sample) lists them, and this [tool](manual/soundfont-editor/tools/global-tools.md#doc_unused) removes them automatically.
 
@@ -91,7 +91,7 @@ Conversely to the previous case, decrease or remove the **attack duration** of t
 Three possible and complementary solutions:
 
 * remove the **delay duration** if it's specified at the [instrument](manual/soundfont-editor/editing-pages/instrument-editor.md) or [preset](manual/soundfont-editor/editing-pages/preset-editor.md) level,
-* remove the silence at the beginning of the audio sample (see sample trimming on this [page](manual/soundfont-editor/editing-pages/sample-editor.md#doc_graph) or the silence removal tool [here](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank)),
+* remove the silence at the beginning of the audio sample (see sample trimming on this [page](manual/soundfont-editor/editing-pages/sample-editor.md#doc_graph) or the silence removal tool [here](manual/soundfont-editor/tools/sample-tools.md#doc_trim)),
 * finally, the perceived latency may be caused by the audio server used on your computer (in this case it's not a flaw in the soundfont itself, and you can change the audio output in the [settings](manual/settings.md#doc_general)).
 
 ### The sound stops suddenly

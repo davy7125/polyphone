@@ -5,6 +5,7 @@ Cette interface comprend plusieurs parties&nbsp;:
 * la [table](#doc_table),
 * l'[éditeur d'étendues](#doc_range) quand le bouton :guilabel:`Éditer les étendues` de la [barre d'outils](manual/soundfont-editor/toolbar.md#doc_view) est cliqué,
 * l'[éditeur d'enveloppes](#doc_envelope) quand le bouton :guilabel:`Éditer les enveloppes` de la [barre d'outils](manual/soundfont-editor/toolbar.md#doc_view) est cliqué,
+* la [vue du timbre](#doc_timbre) quand le bouton :guilabel:`Timbre` de la [barre d'outils](manual/soundfont-editor/toolbar.md#doc_view) est cliqué,
 * la [section modulateurs](#doc_modulator).
 
 
@@ -260,6 +261,204 @@ Si plusieurs divisions ou instruments sont sélectionnés, toutes leurs envelopp
 Maintenir le clic droit permet de modifier le zoom autour du point de départ.
 
 Maintenir le clic gauche permet de déplacer le graphique si le clic ne commence pas sur un point de la courbe.
+
+
+## Vue du timbre {#doc_timbre}
+
+
+La vue du timbre montre, tout au long du clavier, le timbre d'un instrument **tel qu'il est entendu**&nbsp;: le niveau de chaque harmonique, une fois chaque échantillon transposé vers les notes qu'il joue et une fois appliqués l'atténuation, le filtre et les modulateurs de sa division.
+Les irrégularités deviennent visibles, en particulier les cassures aux jonctions entre échantillons.
+À partir de cette vue, des notes calculées peuvent être créées, des échantillons redondants supprimés, et le timbre ou le niveau d'un échantillon corrigé.
+La vue mesure et propose, rien n'est appliqué automatiquement.
+
+
+![Vue du timbre](images/edit_timbre.png "Vue du timbre")
+
+
+### Divisions prises en compte
+
+
+La vue montre ce qui est joué à la vélocité choisie en haut à gauche (100 par défaut, puis la dernière utilisée).
+La barre voisine montre les couches de vélocité de l'instrument&nbsp;: un clic sur une couche choisit la vélocité en son milieu.
+
+Les divisions prises en compte sont celles qui jouent à cette vélocité, qui ne sont pas [muettes](#doc_solo) et qui ne sont pas jouées seulement au relâchement de la touche (mode de lecture «&nbsp;relâchement&nbsp;»).
+Rendre une division muette est donc le moyen de l'exclure de la vue, par exemple un bruit ou un son de relâchement.
+Quand le [solo sur sélection](manual/soundfont-editor/tree.md#doc_menu) est activé, les divisions muettes suivent la sélection et ne sont pas prises en compte.
+Les divisions jouant une même note (paire stéréo, couches) sont combinées&nbsp;: leurs puissances s'additionnent.
+
+Une **note de base** regroupe toutes les divisions ayant cette note de base, éventuellement avec plusieurs étendues de notes.
+Les échantillons sont analysés en arrière-plan (le nombre d'échantillons restants est affiché en haut à droite)&nbsp;: les harmoniques sont mesurées sur la boucle, ou sur la partie stable du son s'il n'y a pas de boucle.
+Ces analyses sont conservées tant que les données, la boucle, la note de base ou la correction de hauteur d'un échantillon ne changent pas.
+
+
+### Carte
+
+
+Chaque colonne est une note, alignée sur le clavier affiché en dessous, et chaque ligne un rang d'harmonique (H1&nbsp;: fondamentale, H2&nbsp;: deuxième harmonique...), le rang 1 étant en bas comme sur un spectrogramme.
+Les premiers rangs sont affichés un par un, les suivants étant regroupés en bandes (voir [Partiels](#doc_timbre_partials)).
+
+Au-dessus de la carte, des lignes de résumé montrent pour chaque note&nbsp;:
+
+* :guilabel:`Niveau`&nbsp;: niveau total,
+* :guilabel:`Timbre`&nbsp;: écart de timbre de la note de base à sa référence (hachuré quand la référence est moins sûre, aux extrémités du clavier),
+* :guilabel:`Transposition`&nbsp;: bleu quand l'échantillon est transposé vers le bas, rouge quand il est transposé vers le haut,
+* et, au choix dans le menu :guilabel:`Options` > :guilabel:`Résumés`&nbsp;: :guilabel:`Brillance` (centre de gravité des rangs), :guilabel:`Impairs / pairs` (rangs impairs comparés aux rangs pairs), :guilabel:`Bruit` (rapport harmoniques / bruit), :guilabel:`Justesse` (cents par rapport à la note la plus proche du tempérament égal) et :guilabel:`Boucle` (qualité de la boucle).
+
+Sur la carte, des lignes verticales marquent les jonctions entre divisions (plus épaisses quand l'échantillon change), un point marque chaque note de base, des hachures montrent les rangs absents (hors de la bande de l'échantillon ou de la sortie, au-dessus de la limite haute) ou mesurés de façon peu sûre, et les notes qui ne jouent rien sont grisées.
+Une infobulle donne les valeurs de la case sous le curseur de la souris&nbsp;: note, rang, niveau, écart, échantillons, transposition et facteur de durée (l'attaque, le trémolo et les battements sont plus rapides quand un échantillon est transposé vers le haut).
+
+La liste :guilabel:`Affichage` choisit ce que représentent les couleurs&nbsp;:
+
+Niveaux absolus
+: Niveau de chaque rang en dB.
+
+Niveaux relatifs
+: Niveau de chaque rang par rapport au plus fort de la note&nbsp;: le timbre indépendamment du niveau.
+
+Écart à la référence
+: Différence entre la note de base et sa référence pour chaque rang, sur toutes les notes jouées par la note de base&nbsp;: trop fort (rouge) ou trop faible (bleu).
+
+Sauts
+: Différence avec la note précédente&nbsp;: les cassures aux jonctions.
+
+Transposition
+: Demi-tons entre la note et la note de base de son échantillon.
+
+Confiance
+: Part de la puissance mesurée de façon sûre.
+
+Le menu :guilabel:`Options` permet aussi d'afficher le clavier entier ou une seule colonne par note de base, de colorer par paliers des seuils (les écarts dans la tolérance étant neutres), et de jouer les notes cliquées.
+Le clavier sous la carte joue l'instrument à la vélocité de la vue.
+
+
+### Référence et décisions
+
+
+La **référence** d'une note de base est ce que prédisent ses voisines&nbsp;: les notes de base voisines sont jouées à sa note (avec les paramètres de leurs divisions) et leurs niveaux sont interpolés rang par rang, en dB.
+Aux deux extrémités du clavier, la référence est extrapolée à partir des deux voisines du même côté, ce qui est moins sûr.
+Avec :guilabel:`Régression locale`, une régression robuste sur plusieurs voisines de chaque côté est utilisée à la place, pour qu'une voisine défectueuse pèse moins.
+
+L'écart d'une note de base à sa référence est résumé par deux nombres&nbsp;:
+
+* l'écart de **niveau**, différence des niveaux totaux, qui se corrige par l'atténuation,
+* l'écart de **timbre**, moyenne des écarts des lignes une fois l'écart de niveau retiré, chaque ligne pesant selon son intensité (une harmonique faible compte, sans dominer).
+
+La bande :guilabel:`Décisions` donne une étiquette à chaque note de base et à chaque jonction, avec une forme et une couleur&nbsp;:
+
+Conforme ✓ (vert)
+: L'écart de timbre est dans la tolérance.
+
+Redondante − (bleu)
+: La note de base est conforme, et la supprimer changerait ses notes de moins que le seuil :guilabel:`Redondance`, sans cassure à la nouvelle jonction&nbsp;: elle peut être supprimée.
+
+À corriger ~ (orange)
+: L'écart de timbre est entre la tolérance et le maximum&nbsp;: le timbre peut être corrigé.
+
+Trop différente × (rouge)
+: L'écart de timbre dépasse le maximum&nbsp;: la note de base peut être supprimée ou remplacée par une note calculée.
+
+Cassure + (violet)
+: À un changement d'échantillon, le saut de timbre dépasse le seuil :guilabel:`Cassure` et une note sans échantillon existe entre les deux notes de base&nbsp;: une note calculée peut y être créée.
+
+Niveau ▲ ▼ (jaune)
+: L'écart de niveau dépasse le seuil :guilabel:`Niveau` (▲ trop fort, ▼ trop faible)&nbsp;: l'atténuation peut être corrigée.
+
+Les seuils se règlent dans le menu :guilabel:`Seuils`.
+Leurs valeurs par défaut (:guilabel:`Tolérance` 4,5&nbsp;dB, :guilabel:`Maximum` 8&nbsp;dB, :guilabel:`Redondance` 2,5&nbsp;dB, :guilabel:`Cassure` 6&nbsp;dB, :guilabel:`Niveau` 2,5&nbsp;dB) viennent de jeux d'orgue échantillonnés, où 70&nbsp;% des notes de base s'écartent de moins de 4,5&nbsp;dB de leurs voisines&nbsp;: elles peuvent être adaptées à l'instrument.
+Une jonction ou un écart peut être voulu (un instrument qui en devient un autre, une reprise de mixture)&nbsp;: les étiquettes ne sont que des propositions.
+
+
+### Partiels {#doc_timbre_partials}
+
+
+Le menu :guilabel:`Partiels` règle les lignes de la carte, partagées par l'affichage, les écarts et les corrections&nbsp;:
+
+Rangs affichés un par un
+: Nombre de rangs affichés et comparés un par un (10 par défaut). L'oreille distingue individuellement les premières harmoniques, les suivantes étant perçues ensemble comme une brillance.
+
+Rangs suivants
+: Les rangs suivants sont regroupés en bandes d'un tiers d'octave (11-12, 13-16, 17-20...) ou d'une octave, pour que de nombreux rangs aigus et faibles ne pèsent pas plus que les premiers.
+
+Limite haute
+: Les partiels au-dessus de cette fréquence sont ignorés (16&nbsp;kHz par défaut, ou la moitié de la fréquence d'échantillonnage).
+
+Dynamique
+: Les rangs plus faibles que cette valeur sous le plus fort de la note ne sont pas comparés (60&nbsp;dB par défaut).
+
+
+### Détail et actions
+
+
+Un clic sur une note montre sous la carte ce qu'elle joue&nbsp;: les échantillons avec leur transposition, leur atténuation et leur filtre, le facteur de durée, la hauteur, les écarts de la note de base et ce que changerait sa suppression.
+Le graphique compare les niveaux entendus à la référence, ou à la note calculée que pourrait recevoir une note sans échantillon (colonne en pointillés sur la carte).
+
+Un clic sur une note de base sélectionne ses divisions dans l'[arborescence](manual/soundfont-editor/tree.md), et la sélection de divisions dans l'arborescence sélectionne leurs notes de base.
+Plusieurs notes de base peuvent être sélectionnées avec :kbd:`Ctrl` ou :kbd:`Maj`, ou en faisant glisser la souris sur des notes.
+
+Les boutons à droite et le menu contextuel de la carte s'appliquent aux notes de base sélectionnées&nbsp;:
+
+Créer une note ici...
+: Sur une note sans échantillon&nbsp;: la note de base la plus proche est transposée et les niveaux de ses harmoniques sont interpolés (ou extrapolés) à partir d'une deuxième note de base. Les notes de base utilisées peuvent être choisies, et un avertissement apparaît quand la note en est éloignée. Les étendues de notes autour sont ajustées&nbsp;; les divisions entièrement comprises dans l'étendue de la nouvelle note sont supprimées.
+
+Supprimer...
+: Les divisions de la note de base sont supprimées et ses voisines prennent ses notes. Les échantillons qui ne sont plus utilisés peuvent être supprimés aussi.
+
+Remplacer par une note calculée...
+: La note de base est supprimée, puis recréée à partir de ses voisines.
+
+Corriger le timbre...
+: Ouvre la fenêtre de [correction](#doc_timbre_correction).
+
+Corriger le niveau
+: L'atténuation des divisions est modifiée pour que l'écart de niveau devienne nul (une atténuation ne peut pas être négative).
+
+Vérifier par un rendu
+: La note est jouée par le moteur de son et les harmoniques du résultat sont mesurées&nbsp;: elles s'affichent sur le graphique pour vérifier le calcul de la vue.
+
+Rendre muettes ces divisions
+: Dans le menu contextuel&nbsp;: exclut les divisions de la vue.
+
+Le menu :guilabel:`Proposer` sélectionne toutes les notes de base (ou jonctions) ayant une étiquette et leur applique l'action correspondante, après confirmation&nbsp;: corriger les notes de base à corriger, remplacer les trop différentes, supprimer les redondantes, créer des notes calculées aux cassures, corriger les niveaux qui s'écartent.
+Elles sont traitées de la pire à la moins mauvaise, les références étant recalculées après chaque action&nbsp;: une note de base défectueuse fausse aussi la référence de ses voisines, qui paraissent à moitié défectueuses tant qu'elle n'est pas corrigée.
+
+Chaque action, ou série d'actions, s'annule en une étape (:kbd:`Ctrl`+:kbd:`Z`).
+
+
+### Correction du timbre {#doc_timbre_correction}
+
+
+![Correction du timbre](images/timbre_correction.png "Correction du timbre")
+
+
+La fenêtre montre pour chaque ligne les niveaux entendus, la cible et le résultat attendu, et propose les paramètres suivants&nbsp;:
+
+Référence
+: Cible de la correction&nbsp;: :guilabel:`Interpolation entre les voisines`, :guilabel:`Régression locale` sur plusieurs voisines de chaque côté, ou :guilabel:`Alignement sur une note de base` (une autre note de base jouée à la note).
+
+Corriger le timbre (données de l'échantillon)
+: Le gain de chaque ligne est appliqué aux données des échantillons avec une courbe à phase minimale qui suit la hauteur&nbsp;: la correction reste valable sur toutes les notes de la division, quelle que soit la transposition, et la boucle est conservée. La même correction s'applique aux deux échantillons d'une paire stéréo.
+
+Corriger le niveau (atténuation)
+: L'écart de niveau est corrigé par l'atténuation des divisions, ce qui ne modifie pas les données. Si l'atténuation devenait négative, le reste passe dans les données, dans la limite de la pleine échelle.
+
+Tolérance
+: Un écart plus petit d'une ligne n'est pas corrigé, seule la partie au-delà l'est.
+
+Force
+: Part de l'écart corrigée.
+
+Correction maximale
+: Plus grand gain d'une ligne, de part et d'autre.
+
+Rangs corrigés
+: Toutes les lignes, ou seulement les rangs de 1 à un rang donné.
+
+Brillance, Rangs impairs
+: Pente ajoutée à la cible (positive pour un son plus brillant), et niveau ajouté aux rangs impairs 3, 5, 7... de la cible.
+
+La section :guilabel:`Écoute` compare le son original (A) et le son corrigé (B) avec le bouton :guilabel:`Lecture`.
+Si la correction dépassait la pleine échelle, l'échantillon est baissé et l'atténuation compense.
+Quand un échantillon est aussi utilisé par d'autres divisions ou instruments, Polyphone demande s'il faut le dupliquer pour les notes de base corrigées ou le modifier partout (la réponse peut être mémorisée jusqu'à la fermeture de Polyphone).
 
 
 ## Modulateurs {#doc_modulator}

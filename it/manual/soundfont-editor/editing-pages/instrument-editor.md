@@ -5,6 +5,7 @@ Questa pagina comprende diverse parti:
 * la [tabella](#doc_table),
 * l'[editor degli intervalli](#doc_range), quando si fa clic sul pulsante :guilabel:`Intervalli` della [barra degli strumenti](manual/soundfont-editor/toolbar.md#doc_view),
 * l'[editor degli inviluppi](#doc_envelope), quando si fa clic sul pulsante :guilabel:`Inviluppi` della [barra degli strumenti](manual/soundfont-editor/toolbar.md#doc_view),
+* la [vista del timbro](#doc_timbre), quando si fa clic sul pulsante :guilabel:`Timbro` della [barra degli strumenti](manual/soundfont-editor/toolbar.md#doc_view),
 * la [sezione dei modulatori](#doc_modulator).
 
 
@@ -260,6 +261,204 @@ Se sono selezionati più divisioni o strumenti, tutti i loro inviluppi vengono m
 Tenendo premuto il tasto destro si può cambiare lo zoom attorno al punto selezionato.
 
 Tenendo premuto il tasto sinistro si può spostare il grafico, se il clic non inizia su un punto della curva.
+
+
+## Vista del timbro {#doc_timbre}
+
+
+La vista del timbro mostra, lungo tutta la tastiera, il timbro di uno strumento **così come si sente**: il livello di ciascuna armonica, una volta trasposto ogni campione sulle note che suona e una volta applicati l'attenuazione, il filtro e i modulatori della sua divisione.
+Le irregolarità diventano visibili, in particolare le discontinuità alle giunzioni tra campioni.
+A partire da questa vista è possibile creare note calcolate, rimuovere campioni ridondanti e correggere il timbro o il livello di un campione.
+La vista misura e propone, nulla viene applicato automaticamente.
+
+
+![Vista del timbro](images/edit_timbre.png "Vista del timbro")
+
+
+### Divisioni prese in considerazione
+
+
+La vista mostra ciò che viene suonato alla velocità scelta in alto a sinistra (100 per impostazione predefinita, poi l'ultima usata).
+La barra accanto mostra i livelli di velocità dello strumento: un clic su uno di essi seleziona la velocità al suo centro.
+
+Le divisioni prese in considerazione sono quelle che suonano a questa velocità, che non sono [silenziate](#doc_solo) e che non vengono suonate solo al rilascio del tasto (modalità di riproduzione «release»).
+Silenziare una divisione è quindi il modo per escluderla dalla vista, ad esempio un rumore o un suono di release.
+Quando il [solo su selezione](manual/soundfont-editor/tree.md#doc_menu) è attivo, il silenziamento segue la selezione e non viene preso in considerazione.
+Le divisioni che suonano la stessa nota (coppia stereo, strati) vengono combinate: le loro potenze si sommano.
+
+Una **nota di base** raggruppa tutte le divisioni che hanno questa nota di base, eventualmente con più intervalli di note.
+I campioni vengono analizzati in background (il numero di campioni rimanenti è mostrato in alto a destra): le armoniche vengono misurate sul loop, o sulla parte stabile del suono se non c'è un loop.
+Queste analisi vengono conservate finché non cambiano i dati, il loop, la nota di base o la correzione di accordatura di un campione.
+
+
+### Mappa
+
+
+Ogni colonna è una nota, allineata con la tastiera mostrata sotto, e ogni riga un'armonica (H1: fondamentale, H2: seconda armonica...), con l'armonica 1 in basso come in uno spettrogramma.
+Le prime armoniche sono mostrate singolarmente, mentre le successive sono raggruppate in bande (vedi [Parziali](#doc_timbre_partials)).
+
+Sopra la mappa, alcune righe di riepilogo mostrano per ogni nota:
+
+* :guilabel:`Livello`: livello totale,
+* :guilabel:`Timbro`: scarto di timbro della nota di base dal suo riferimento (tratteggiato in diagonale quando il riferimento è meno affidabile, alle estremità della tastiera),
+* :guilabel:`Trasposizione`: blu quando il campione è trasposto verso il basso, rosso quando è trasposto verso l'alto,
+* e, a scelta nel menu :guilabel:`Opzioni` > :guilabel:`Riepiloghi`: :guilabel:`Brillantezza` (baricentro delle armoniche), :guilabel:`Dispari / pari` (armoniche dispari confrontate con quelle pari), :guilabel:`Rumore` (rapporto armoniche / rumore), :guilabel:`Intonazione` (centesimi dalla nota più vicina del temperamento equabile) e :guilabel:`Loop` (qualità del loop).
+
+Sulla mappa, linee verticali segnano le giunzioni tra divisioni (più spesse quando il campione cambia), un punto segna ogni nota di base, un tratteggio diagonale indica le armoniche assenti (fuori dalla banda del campione o dell'uscita, sopra il limite superiore) o misurate in modo poco affidabile, e le note che non suonano nulla sono in grigio.
+Un suggerimento mostra i valori della cella sotto il cursore del mouse: nota, armonica, livello, scarto, campioni, trasposizione e fattore di durata (l'attacco, il tremolo e i battimenti sono più rapidi quando un campione è trasposto verso l'alto).
+
+L'elenco :guilabel:`Visualizzazione` sceglie cosa rappresentano i colori:
+
+Livelli assoluti
+: Livello di ciascuna armonica in dB.
+
+Livelli relativi
+: Livello di ciascuna armonica rispetto alla più forte della nota: il timbro indipendentemente dal livello.
+
+Scarto dal riferimento
+: Differenza tra la nota di base e il suo riferimento per ciascuna armonica, su tutte le note suonate dalla nota di base: troppo forte (rosso) o troppo debole (blu).
+
+Salti
+: Differenza con la nota precedente: le discontinuità alle giunzioni.
+
+Trasposizione
+: Semitoni tra la nota e la nota di base del suo campione.
+
+Affidabilità
+: Parte della potenza misurata in modo affidabile.
+
+Il menu :guilabel:`Opzioni` permette anche di mostrare la tastiera intera o una sola colonna per nota di base, di colorare a fasce secondo le soglie (gli scarti entro la tolleranza restano neutri) e di suonare le note cliccate.
+La tastiera sotto la mappa suona lo strumento alla velocità della vista.
+
+
+### Riferimento e decisioni
+
+
+Il **riferimento** di una nota di base è ciò che prevedono le sue note vicine: le note di base vicine vengono suonate sulla sua nota (con i parametri delle loro divisioni) e i loro livelli vengono interpolati armonica per armonica, in dB.
+Alle due estremità della tastiera, il riferimento viene estrapolato dalle due note vicine dello stesso lato, il che è meno affidabile.
+Con :guilabel:`Regressione locale` viene invece usata una regressione robusta su più note vicine da ciascun lato, così che una nota vicina difettosa pesi meno.
+
+Lo scarto di una nota di base dal suo riferimento è riassunto da due numeri:
+
+* lo scarto di **livello**, differenza dei livelli totali, che si corregge con l'attenuazione,
+* lo scarto di **timbro**, media degli scarti delle righe una volta tolto lo scarto di livello, dove ogni riga pesa in base alla sua intensità sonora (un'armonica debole conta, senza dominare).
+
+La fascia :guilabel:`Decisioni` assegna un'etichetta a ogni nota di base e a ogni giunzione, con una forma e un colore:
+
+Coerente ✓ (verde)
+: Lo scarto di timbro è entro la tolleranza.
+
+Ridondante − (blu)
+: La nota di base è coerente, e rimuoverla cambierebbe le sue note meno della soglia :guilabel:`Ridondanza`, senza discontinuità alla nuova giunzione: può essere rimossa.
+
+Da correggere ~ (arancione)
+: Lo scarto di timbro è compreso tra la tolleranza e il massimo: il timbro può essere corretto.
+
+Troppo diversa × (rosso)
+: Lo scarto di timbro supera il massimo: la nota di base può essere rimossa o sostituita con una nota calcolata.
+
+Discontinuità + (viola)
+: A un cambio di campione, il salto di timbro supera la soglia :guilabel:`Discontinuità` ed esiste una nota senza campione tra le due note di base: lì può essere creata una nota calcolata.
+
+Livello ▲ ▼ (giallo)
+: Lo scarto di livello supera la soglia :guilabel:`Livello` (▲ troppo forte, ▼ troppo debole): l'attenuazione può essere corretta.
+
+Le soglie si impostano nel menu :guilabel:`Soglie`.
+I loro valori predefiniti (:guilabel:`Tolleranza` 4,5 dB, :guilabel:`Massimo` 8 dB, :guilabel:`Ridondanza` 2,5 dB, :guilabel:`Discontinuità` 6 dB, :guilabel:`Livello` 2,5 dB) derivano da sample set di organi, in cui il 70% delle note di base si discosta di meno di 4,5 dB dalle note vicine: possono essere adattati allo strumento.
+Una giunzione o uno scarto possono essere voluti (uno strumento che ne diventa un altro, il ritornello di un ripieno): le etichette sono solo proposte.
+
+
+### Parziali {#doc_timbre_partials}
+
+
+Il menu :guilabel:`Parziali` imposta le righe della mappa, condivise dalla visualizzazione, dagli scarti e dalle correzioni:
+
+Armoniche visualizzate singolarmente
+: Numero di armoniche visualizzate e confrontate singolarmente (10 per impostazione predefinita). L'orecchio distingue individualmente le prime armoniche, mentre le successive vengono percepite insieme come brillantezza.
+
+Armoniche successive
+: Le armoniche successive vengono raggruppate in bande di un terzo d'ottava (11-12, 13-16, 17-20...) o di un'ottava, così che molte armoniche acute e deboli non pesino più delle prime.
+
+Limite superiore
+: I parziali sopra questa frequenza vengono ignorati (16 kHz per impostazione predefinita, o la metà della frequenza di campionamento).
+
+Gamma dinamica
+: Le armoniche che scendono oltre questo valore sotto la più forte della nota non vengono confrontate (60 dB per impostazione predefinita).
+
+
+### Dettagli e azioni
+
+
+Un clic su una nota mostra sotto la mappa cosa suona: i campioni con la loro trasposizione, attenuazione e filtro, il fattore di durata, l'intonazione, gli scarti della nota di base e cosa cambierebbe rimuovendola.
+Il grafico a barre confronta i livelli percepiti con il riferimento, o con la nota calcolata che potrebbe ricevere una nota senza campione (una colonna tratteggiata sulla mappa).
+
+Un clic su una nota di base seleziona le sue divisioni nell'[albero](manual/soundfont-editor/tree.md), e selezionare divisioni nell'albero seleziona le loro note di base.
+È possibile selezionare più note di base con :kbd:`Ctrl` o :kbd:`Shift`, oppure trascinando il mouse sulle note.
+
+I pulsanti a destra e il menu contestuale della mappa si applicano alle note di base selezionate:
+
+Crea una nota qui...
+: Su una nota senza campione: la nota di base più vicina viene trasposta e i livelli delle sue armoniche vengono interpolati (o estrapolati) a partire da una seconda nota di base. Le note di base usate possono essere scelte, e compare un avviso quando la nota è lontana da esse. Gli intervalli di note circostanti vengono adattati; le divisioni interamente comprese nell'intervallo della nuova nota vengono rimosse.
+
+Rimuovi...
+: Le divisioni della nota di base vengono rimosse e le note vicine suonano al suo posto. Anche i campioni non più utilizzati possono essere rimossi.
+
+Sostituisci con una nota calcolata...
+: La nota di base viene rimossa, poi ricreata a partire dalle note vicine.
+
+Correggi il timbro...
+: Apre la finestra di [correzione](#doc_timbre_correction).
+
+Correggi il livello
+: L'attenuazione delle divisioni viene modificata in modo che lo scarto di livello diventi nullo (un'attenuazione non può essere negativa).
+
+Verifica tramite rendering
+: La nota viene suonata dal motore sonoro e le armoniche del risultato vengono misurate: sono mostrate sul grafico a barre per verificare il calcolo della vista.
+
+Silenzia queste divisioni
+: Nel menu contestuale: esclude le divisioni dalla vista.
+
+Il menu :guilabel:`Proponi` seleziona tutte le note di base (o le giunzioni) che hanno un'etichetta e applica loro l'azione corrispondente, dopo una conferma: correggere le note di base da correggere, sostituire quelle troppo diverse, rimuovere quelle ridondanti, creare note calcolate nelle discontinuità, correggere i livelli che si discostano.
+Vengono elaborate dalla peggiore alla meno problematica, e i riferimenti vengono ricalcolati dopo ogni azione: una nota di base difettosa altera anche il riferimento delle sue note vicine, che sembrano difettose a metà finché non viene corretta.
+
+Ogni azione, o serie di azioni, può essere annullata in un solo passaggio (:kbd:`Ctrl`+:kbd:`Z`).
+
+
+### Correzione del timbro {#doc_timbre_correction}
+
+
+![Correzione del timbro](images/timbre_correction.png "Correzione del timbro")
+
+
+La finestra mostra per ogni riga i livelli percepiti, l'obiettivo e il risultato atteso, e offre i seguenti parametri:
+
+Riferimento
+: Obiettivo della correzione: :guilabel:`Interpolazione tra le note vicine`, :guilabel:`Regressione locale` su più note vicine da ciascun lato, oppure :guilabel:`Allineamento a una nota di base` (un'altra nota di base suonata sulla nota).
+
+Correggi il timbro (dati del campione)
+: Il guadagno di ogni riga viene applicato ai dati dei campioni con una curva a fase minima che segue l'altezza del suono: la correzione resta valida su tutte le note della divisione, qualunque sia la trasposizione, e il loop viene conservato. La stessa correzione viene applicata a entrambi i campioni di una coppia stereo.
+
+Correggi il livello (attenuazione)
+: Lo scarto di livello viene corretto tramite l'attenuazione delle divisioni, il che non modifica i dati. Se l'attenuazione diventasse negativa, la parte restante passa nei dati, entro il limite del fondo scala.
+
+Tolleranza
+: Lo scarto di una riga inferiore a questo valore non viene corretto, viene corretta solo la parte eccedente.
+
+Intensità
+: Quota dello scarto che viene corretta.
+
+Correzione massima
+: Guadagno massimo di una riga, in entrambi i sensi.
+
+Armoniche corrette
+: Tutte le righe, oppure solo le armoniche da 1 a un'armonica data.
+
+Brillantezza, Armoniche dispari
+: Pendenza aggiunta all'obiettivo (positiva per un suono più brillante) e livello aggiunto alle armoniche dispari 3, 5, 7... dell'obiettivo.
+
+La sezione :guilabel:`Ascolto` confronta il suono originale (A) e quello corretto (B) con il pulsante :guilabel:`Riproduci`.
+Se la correzione superasse il fondo scala, il campione viene abbassato e l'attenuazione compensa.
+Quando un campione è usato anche da altre divisioni o strumenti, Polyphone chiede se duplicarlo per le note di base corrette o modificarlo ovunque (la risposta può essere memorizzata fino alla chiusura di Polyphone).
 
 
 ## Modulatori {#doc_modulator}

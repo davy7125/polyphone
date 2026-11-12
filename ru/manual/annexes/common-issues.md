@@ -36,8 +36,8 @@
 
 Семплы часто используются лишь частично, и удаление лишнего может уменьшить размер файла:
 
-* полезная часть семпла иногда находится до конечной точки петли — тогда часть семпла после конца петли можно удалить, и эта [функция](manual/soundfont-editor/tools/sample-tools.md#doc_trimloop) позволяет сделать это за несколько щелчков;
-* семплы могут начинаться с тишины, которую стоит удалить, чтобы уменьшить задержку при нажатии ноты (для этого тоже есть [функция](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank));
+* полезная часть семпла иногда находится до конечной точки петли — тогда часть семпла после конца петли можно удалить, и эта [функция](manual/soundfont-editor/tools/sample-tools.md#doc_trim) позволяет сделать это за несколько щелчков;
+* семплы могут начинаться с тишины, которую стоит удалить, чтобы уменьшить задержку при нажатии ноты (для этого тоже есть [функция](manual/soundfont-editor/tools/sample-tools.md#doc_trim));
 * один и тот же семпл может присутствовать несколько раз: эта [сводка конфигурации](manual/soundfont-editor/configuration-summaries.md#doc_sample) показывает дубликаты, а эта [функция](manual/soundfont-editor/tools/global-tools.md#doc_duplicates) удаляет их, обновляя инструменты;
 * наконец, некоторые семплы могут вовсе не использоваться: эта [сводка конфигурации](manual/soundfont-editor/configuration-summaries.md#doc_sample) перечисляет их, а эта [функция](manual/soundfont-editor/tools/global-tools.md#doc_unused) автоматически их удаляет.
 
@@ -91,7 +91,7 @@
 Три возможных решения, которые можно сочетать:
 
 * убрать **длительность задержки**, если она задана на уровне [инструмента](manual/soundfont-editor/editing-pages/instrument-editor.md) или [пресета](manual/soundfont-editor/editing-pages/preset-editor.md),
-* удалить тишину в начале аудиосемпла (см. обрезку семплов на этой [странице](manual/soundfont-editor/editing-pages/sample-editor.md#doc_graph) или функцию удаления тишины [здесь](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank)),
+* удалить тишину в начале аудиосемпла (см. обрезку семплов на этой [странице](manual/soundfont-editor/editing-pages/sample-editor.md#doc_graph) или функцию удаления тишины [здесь](manual/soundfont-editor/tools/sample-tools.md#doc_trim)),
 * наконец, ощущаемая задержка может быть вызвана звуковым сервером, используемым на компьютере (в этом случае это не недостаток самого SoundFont, а вывод звука можно изменить в [настройках](manual/settings.md#doc_general)).
 
 ### Звук внезапно обрывается

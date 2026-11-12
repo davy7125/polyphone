@@ -36,8 +36,8 @@ SoundFontに説得力のあるインストゥルメントが1つもないこと�
 
 サンプルは一部しか使われていないことが多く、余分な部分を取り除けばファイルサイズを小さくできます。
 
-* サンプルの有効な部分が最後のループポイントより前にある場合があります。その場合はループの終了位置より後ろの部分を削除でき、この[ツール](manual/soundfont-editor/tools/sample-tools.md#doc_trimloop)を使えば数回のクリックで済みます。
-* サンプルの先頭に無音があることがあります。ノートを鳴らしたときのレイテンシーを減らすために取り除くべきです（すばやく行うための[ツール](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank)もあります）。
+* サンプルの有効な部分が最後のループポイントより前にある場合があります。その場合はループの終了位置より後ろの部分を削除でき、この[ツール](manual/soundfont-editor/tools/sample-tools.md#doc_trim)を使えば数回のクリックで済みます。
+* サンプルの先頭に無音があることがあります。ノートを鳴らしたときのレイテンシーを減らすために取り除くべきです（すばやく行うための[ツール](manual/soundfont-editor/tools/sample-tools.md#doc_trim)もあります）。
 * 同じサンプルが複数回含まれていることがあります。この[構成サマリー](manual/soundfont-editor/configuration-summaries.md#doc_sample)には重複が表示され、この[ツール](manual/soundfont-editor/tools/global-tools.md#doc_duplicates)を使うとインストゥルメントを更新しながら重複を削除できます。
 * 最後に、まったく使われていないサンプルもあるかもしれません。この[構成サマリー](manual/soundfont-editor/configuration-summaries.md#doc_sample)にはそれらが一覧表示され、この[ツール](manual/soundfont-editor/tools/global-tools.md#doc_unused)を使うと自動的に削除できます。
 
@@ -91,7 +91,7 @@ ADSRエンベロープは、ノートを鳴らしたとき、そしてそのノ�
 考えられる解決策は3つあり、組み合わせて使えます。
 
 * [インストゥルメント](manual/soundfont-editor/editing-pages/instrument-editor.md)または[プリセット](manual/soundfont-editor/editing-pages/preset-editor.md)のレベルで**ディレイ時間**が指定されている場合は、それを削除する
-* オーディオサンプルの先頭にある無音を取り除く（この[ページ](manual/soundfont-editor/editing-pages/sample-editor.md#doc_graph)にあるサンプルのトリミング、または[こちら](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank)の無音削除ツールを参照）
+* オーディオサンプルの先頭にある無音を取り除く（この[ページ](manual/soundfont-editor/editing-pages/sample-editor.md#doc_graph)にあるサンプルのトリミング、または[こちら](manual/soundfont-editor/tools/sample-tools.md#doc_trim)の無音削除ツールを参照）
 * 最後に、感じられるレイテンシーは、コンピューターで使っているオーディオサーバーが原因の場合もあります（この場合はSoundFont自体の欠陥ではなく、[設定](manual/settings.md#doc_general)でオーディオ出力を変更できます）
 
 ### 音が突然止まる

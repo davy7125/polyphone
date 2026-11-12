@@ -47,7 +47,7 @@ Los elementos de la parte izquierda de la barra de herramientas sirven para las 
 
 En la parte derecha de la barra de herramientas pueden aparecer algunos iconos según el [editor](manual/soundfont-editor/editing-pages/index.md) que se muestre:
 
-* al editar un instrumento, se puede cambiar entre la ![tabla](images/toolbar_table.png "tabla"){.inline} [vista de tabla](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), el ![rangos](images/toolbar_range.png "rangos"){.inline} [editor de rangos](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range) y el ![envolvente](images/toolbar_adsr.png "envolvente"){.inline} [editor de envolventes](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope),
+* al editar un instrumento, se puede cambiar entre la ![tabla](images/toolbar_table.png "tabla"){.inline} [vista de tabla](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), el ![rangos](images/toolbar_range.png "rangos"){.inline} [editor de rangos](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range), el ![envolvente](images/toolbar_adsr.png "envolvente"){.inline} [editor de envolventes](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope) y la ![timbre](images/toolbar_timbre.png "timbre"){.inline} [vista de timbre](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_timbre),
 * al editar un conjunto, se puede cambiar entre la ![tabla](images/toolbar_table.png "tabla"){.inline} vista de tabla y el ![rangos](images/toolbar_range.png "rangos"){.inline} editor de rangos,
 * en los demás casos no se muestra nada.
 

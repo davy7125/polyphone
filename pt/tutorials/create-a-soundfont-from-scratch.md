@@ -67,7 +67,7 @@ A análise de [frequências](manual/soundfont-editor/editing-pages/sample-editor
 
 Várias ferramentas estão disponíveis para editar as amostras, como:
 
-* [remover o silêncio](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank) inicial,
+* [remover o silêncio](manual/soundfont-editor/tools/sample-tools.md#doc_trim) inicial,
 * [equalizar](manual/soundfont-editor/editing-pages/sample-editor.md#doc_eq) o som,
 * [transpor](manual/soundfont-editor/tools/sample-tools.md#doc_transpose),
 * [normalizar](manual/soundfont-editor/tools/sample-tools.md#doc_volume) o volume,

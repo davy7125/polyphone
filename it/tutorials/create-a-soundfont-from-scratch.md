@@ -67,7 +67,7 @@ L'analisi delle [frequenze](manual/soundfont-editor/editing-pages/sample-editor.
 
 Per modificare i campioni sono disponibili diverse funzioni, ad esempio per:
 
-* [rimuovere il silenzio](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank) all'inizio,
+* [rimuovere il silenzio](manual/soundfont-editor/tools/sample-tools.md#doc_trim) all'inizio,
 * [equalizzare](manual/soundfont-editor/editing-pages/sample-editor.md#doc_eq) il suono,
 * [trasporre](manual/soundfont-editor/tools/sample-tools.md#doc_transpose),
 * [normalizzare](manual/soundfont-editor/tools/sample-tools.md#doc_volume) il volume,

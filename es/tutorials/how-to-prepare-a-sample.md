@@ -126,7 +126,7 @@ Estos son ejemplos con el sonido de una flauta y un seno de calibración:
 Hay varias herramientas disponibles en el menú :guilabel:`Caja de herramientas` de la [barra de herramientas](manual/soundfont-editor/toolbar.md#doc_edit).
 Puedes editar las muestras:
 
-* [eliminando el silencio](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank) al inicio,
+* [eliminando el silencio](manual/soundfont-editor/tools/sample-tools.md#doc_trim) al inicio,
 * [ecualizando](manual/soundfont-editor/editing-pages/sample-editor.md#doc_eq) el sonido,
 * [transportando](manual/soundfont-editor/tools/sample-tools.md#doc_transpose),
 * [normalizando](manual/soundfont-editor/tools/sample-tools.md#doc_volume) el volumen,

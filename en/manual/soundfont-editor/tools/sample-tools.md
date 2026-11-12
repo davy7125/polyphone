@@ -144,23 +144,47 @@ A tip is to focus on positions where the wave crosses the x-axis (value 0).
 ![Cross-fade loop tool](images/tool_crossfade_loop.png "Cross-fade loop tool")
 
 
-### Remove blank at start {#doc_removeblank}
+### Trim {#doc_trim}
 
-Any blank area before the sample begins is eliminated, reducing the time before the sound is heard.
-With a stereo sample, the same length is removed from both sides.
+This tool removes what is useless at the start and at the end of the selected samples: the sound is heard sooner and the soundfont is lighter.
+With a stereo sample, both sides are trimmed the same way.
+
+![Trim tool](images/tool_trim.png "Trim tool")
+
+Remove blank at start
+: The silence or the background noise before the attack is removed, the sample then starting at a point where the wave crosses zero.
+  No fade-in is added: the attack of the volume envelope already makes the sound start smoothly.
 
 ![Remove blank at start](images/remove_blank.png "Remove blank at start")
 
-**Note:** this tool may be applied automatically each time a sample is imported, the option being in the software [settings](manual/settings.md#doc_general).
+The end of the sample can be left unchanged or trimmed in two ways.
 
+Trim after the end of loop
+: If a loop is defined, the data after the end of the loop is removed, except a small margin used at the loop point.
+  This data is heard when an instrument doesn't play the loop continuously (loop off, release, or loop on + release): the samples used this way are left unchanged and listed in a message.
 
-### Trim to end of loop {#doc_trimloop}
+![Trim after the end of loop](images/trim_to_loop.png "Trim after the end of loop")
 
-If a loop is defined for the selected sample, the software will cut the sound after the end of the loop (leaving a small margin at the end).
+Remove blank at end
+: The silence or the background noise after the sound is removed and replaced by a short fade-out prolonging the decay of the sound, so that the remaining noise doesn't stop abruptly when the sample is played to its end (a piano with the sustain pedal or with a long release for instance).
+  The duration of the fade-out is automatic: twice the time taken by the sound to lose its last 20 dB, between 20 ms and 1 s.
+  The loop and what precedes it are never modified.
 
-![Trim to loop](images/trim_to_loop.png "Trim to loop")
+![Remove blank at end](images/remove_blank_end.png "Remove blank at end")
 
-**Note:** this tool may be applied automatically each time a sample is imported, according to the software [settings](manual/settings.md#doc_general).
+The last option defines the blank, at the start as well as at the end:
+
+Detect the background noise
+: The background noise is measured in each sample, before or after the sound, and the blank is what doesn't exceed it.
+  If no noise can be measured, the blank is what is below −90 dB at the end, or 50 dB below the peak of the sample at the start.
+
+Level below
+: The blank is what has a peak level below the chosen value, from −120 to −10 dB (0 dB being the maximum level of a sample).
+  A high value removes a louder noise but may also cut the end of the sound.
+
+The start and end [offsets](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table) of the instrument divisions using the trimmed samples are updated so that they still play the same part of the sound.
+
+**Note:** the blank may be removed automatically at the start and at the end of each imported sample, the options being in the software [settings](manual/settings.md#doc_general).
 
 
 ## Stereo samples {#doc_cat_stereo}
