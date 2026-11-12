@@ -808,6 +808,25 @@
         <translation>入力 / 出力</translation>
     </message>
     <message>
+        <location filename="../../context/interface/configsectiongeneral.ui" line="214"/>
+        <source>When importing a sample, any blank area located at the end of the sound is automatically removed.
+(same effect as the tool &quot;Trim&quot; with an automatic detection of the background noise)</source>
+        <translation>サンプルをインポートする際、音の末尾にある空白領域は自動的に削除されます。
+(バックグラウンドノイズを自動検出する「トリム」ツールと同じ効果です)</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/configsectiongeneral.ui" line="218"/>
+        <source>remove blank at end</source>
+        <translation>末尾の空白を削除</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/configsectiongeneral.ui" line="237"/>
+        <source>When importing a sample, any blank area located before the beginning of the attack is automatically removed.
+(same effect as the tool &quot;Trim&quot; with an automatic detection of the background noise)</source>
+        <translation>サンプルをインポートする際、アタック開始前にある空白領域は自動的に削除されます。
+(バックグラウンドノイズを自動検出する「トリム」ツールと同じ効果です)</translation>
+    </message>
+    <message>
         <location filename="../../context/interface/configsectiongeneral.ui" line="281"/>
         <source>Audio backend</source>
         <translation>オーディオバックエンド</translation>
@@ -816,15 +835,6 @@
         <location filename="../../context/interface/configsectiongeneral.ui" line="288"/>
         <source>Buffer size</source>
         <translation>バッファサイズ</translation>
-    </message>
-    <message>
-        <location filename="../../context/interface/configsectiongeneral.ui" line="237"/>
-        <source>When importing a sample, any blank area located before the beginning of the attack is automatically removed.
-(same effect as the tool &quot;Remove blank at start&quot;)</source>
-        <oldsource>When importing a sample, any blank area located before the beginning of the attack is automatically removed.
-(same effect as the tool “Remove blank at start”)</oldsource>
-        <translation>サンプルをインポートする際、アタック開始前にある空白領域は自動的に削除されます。
-(「先頭の空白を削除」ツールと同じ効果です)</translation>
     </message>
     <message>
         <location filename="../../context/interface/configsectiongeneral.ui" line="44"/>
@@ -841,15 +851,6 @@
         <location filename="../../context/interface/configsectiongeneral.ui" line="133"/>
         <source>Processor load</source>
         <translation>プロセッサー負荷</translation>
-    </message>
-    <message>
-        <location filename="../../context/interface/configsectiongeneral.ui" line="214"/>
-        <source>When importing a sample, data located after the end of loop are automatically removed.
-(same effect as the tool &quot;Trim to end of loop&quot;)</source>
-        <oldsource>When importing a sample, data located after the end of loop are automatically removed.
-(same effect as the tool “Trim to end of loop”)</oldsource>
-        <translation>サンプルをインポートする際、ループ終了後に位置するデータは自動的に削除されます。
-(「ループの終点までトリム」ツールと同じ効果です)</translation>
     </message>
     <message>
         <location filename="../../context/interface/configsectiongeneral.ui" line="268"/>
@@ -877,11 +878,6 @@
         <location filename="../../context/interface/configsectiongeneral.ui" line="346"/>
         <source>change linked sample</source>
         <translation>リンクされたサンプルを変更</translation>
-    </message>
-    <message>
-        <location filename="../../context/interface/configsectiongeneral.ui" line="218"/>
-        <source>trim to loop</source>
-        <translation>ループの終点までトリム</translation>
     </message>
     <message>
         <location filename="../../context/interface/configsectiongeneral.ui" line="327"/>
@@ -5414,564 +5410,564 @@ Warning: quality will be reduced and the loop may be altered</source>
         <translation>表示</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="197"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="823"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="206"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="825"/>
         <source>Reference</source>
         <translation>基準</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="199"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="208"/>
         <source>Neighbors</source>
         <translation>隣接ルートキー</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="200"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="209"/>
         <source>Local regression</source>
         <translation>局所回帰</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="201"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="210"/>
         <source>Reference of a root key: interpolation between its two neighbors, or robust regression on several neighbors on each side</source>
         <translation>ルートキーの基準: 両隣の2つのルートキー間の補間、または各側の複数の隣接ルートキーに対するロバスト回帰</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="208"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="217"/>
         <source>Neighbors on each side</source>
         <translation>各側の隣接ルートキー数</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="215"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="224"/>
         <source>Partials</source>
         <translation>部分音</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="223"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="232"/>
         <source>Ranks displayed one by one</source>
         <translation>個別に表示する次数</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="225"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="234"/>
         <source>Bands of a third of an octave</source>
         <translation>1/3オクターブ帯域</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="226"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="235"/>
         <source>Bands of an octave</source>
         <translation>1オクターブ帯域</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="228"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="237"/>
         <source>Next ranks</source>
         <translation>以降の次数</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="232"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="241"/>
         <source>kHz</source>
         <comment>unit for kilohertz</comment>
         <translation>kHz</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="233"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="242"/>
         <source>Half of the sample rate</source>
         <translation>サンプルレートの半分</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="235"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="244"/>
         <source>Upper limit</source>
         <translation>上限</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="239"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="261"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="428"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="248"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="270"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="430"/>
         <source>dB</source>
         <comment>unit for decibels</comment>
         <translation>dB</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="241"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="250"/>
         <source>Ranks further below the strongest one of the key are ignored</source>
         <translation>キー内で最も強い次数よりこの値以上低い次数は無視されます</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="242"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="251"/>
         <source>Dynamic range</source>
         <translation>ダイナミックレンジ</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="251"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="260"/>
         <source>Thresholds</source>
         <translation>しきい値</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="266"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="275"/>
         <source>Tolerance</source>
         <translation>許容差</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="266"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="275"/>
         <source>Timbre deviation up to which a root key is consistent</source>
         <translation>ルートキーが整合しているとみなされる音色の偏差の上限</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="267"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="276"/>
         <source>Maximum</source>
         <translation>最大</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="267"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="276"/>
         <source>Timbre deviation up to which a root key can be corrected, beyond it is too different</source>
         <translation>ルートキーを補正できる音色の偏差の上限。これを超えると差が大きすぎるとみなされます</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="269"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="278"/>
         <source>Redundancy</source>
         <translation>冗長</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="269"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="278"/>
         <source>Largest timbre deviation over the keys of a consistent root key if it were removed, for being redundant</source>
         <translation>整合したルートキーを削除した場合に、担当していたキーでの音色の最大偏差がこの値以下なら冗長とみなされます</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="271"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="280"/>
         <source>Break</source>
         <translation>不連続</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="271"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="280"/>
         <source>Timbre jump at a junction from which a computed note is proposed</source>
         <translation>つなぎ目での音色の段差がこの値以上になると、計算ノートが提案されます</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="272"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="281"/>
         <source>Level</source>
         <translation>レベル</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="272"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="281"/>
         <source>Level deviation from which a correction of the attenuation is proposed</source>
         <translation>レベルの偏差がこの値以上になると、アッテネーションの補正が提案されます</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="273"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="282"/>
         <source>Default values</source>
         <translation>デフォルト値</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="291"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="300"/>
         <source>Options</source>
         <translation>オプション</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="294"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="303"/>
         <source>Summaries</source>
         <translation>概要行</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="311"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="320"/>
         <source>Root keys only</source>
         <translation>ルートキーのみ</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="312"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="321"/>
         <source>Whole keyboard</source>
         <translation>キーボード全体</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="313"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="322"/>
         <source>Colors by steps of the thresholds</source>
         <translation>しきい値で段階的に色分け</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="314"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="323"/>
         <source>Automatic range of the colors</source>
         <translation>色の範囲を自動調整</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="316"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="325"/>
         <source>Play the clicked keys</source>
         <translation>クリックしたキーを再生</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="322"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1156"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="331"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1158"/>
         <source>Propose</source>
         <translation>提案</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="326"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="335"/>
         <source>Correct the root keys marked &quot;to correct&quot;...</source>
         <translation>「要補正」とされたルートキーを補正...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="329"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="338"/>
         <source>Replace the root keys marked &quot;too different&quot; with computed notes...</source>
         <translation>「差が大きすぎる」とされたルートキーを計算ノートで置き換え...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="332"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="341"/>
         <source>Remove the redundant root keys...</source>
         <translation>冗長なルートキーを削除...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="335"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="344"/>
         <source>Create computed notes at the breaks...</source>
         <translation>不連続箇所に計算ノートを作成...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="338"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="347"/>
         <source>Correct the deviating levels...</source>
         <translation>ずれたレベルを補正...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="375"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="377"/>
         <source>Create a note here...</source>
         <translation>ここにノートを作成...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="376"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="378"/>
         <source>Remove...</source>
         <translation>削除...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="377"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="379"/>
         <source>Replace with a computed note...</source>
         <translation>計算ノートで置き換え...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="378"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="380"/>
         <source>Correct the timbre...</source>
         <translation>音色を補正...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="379"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1017"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1191"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="381"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1019"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1193"/>
         <source>Correct the level</source>
         <translation>レベルを補正</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="380"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="382"/>
         <source>Check by rendering</source>
         <translation>レンダリングで確認</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="381"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="383"/>
         <source>Play the key with the sound engine and measure the harmonics of the result</source>
         <translation>サウンドエンジンでキーを再生し、結果の倍音を測定します</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="449"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="451"/>
         <source>Select a single instrument
 to display its timbre</source>
         <translation>音色を表示するには、
 単一のインストゥルメントを選択してください</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="520"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="522"/>
         <source>Analysis of the samples: %n remaining</source>
         <translation>
             <numerusform>サンプルの分析中: 残り %n</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="747"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="749"/>
         <source>No division of this instrument plays at the velocity %1.</source>
         <translation>このインストゥルメントには、ベロシティ %1 で鳴るディビジョンがありません。</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="753"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="755"/>
         <source>Click on a key to see what it plays.</source>
         <translation>キーをクリックすると、そのキーで再生される内容が表示されます。</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="761"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="763"/>
         <source>Key %1</source>
         <translation>キー %1</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="770"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="772"/>
         <source>%1: transposition %2 semitones, attenuation %3, filter %4 Hz</source>
         <translation>%1: トランスポーズ %2 半音、アッテネーション %3、フィルター %4 Hz</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="774"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="776"/>
         <source>Duration factor: %1 (attack, tremolo and beats)</source>
         <translation>持続時間の倍率: %1 (アタック、トレモロ、うなり)</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="776"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="778"/>
         <source>Pitch: %1 cents from the closest note of the equal temperament</source>
         <translation>ピッチ: 平均律の最も近い音から %1 セント</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="780"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="782"/>
         <source>No sample</source>
         <translation>サンプルなし</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="787"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="789"/>
         <source>Played by the root key %1</source>
         <translation>ルートキー %1 で再生</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="793"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="795"/>
         <source>consistent</source>
         <translation>整合</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="794"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="796"/>
         <source>redundant: can be removed</source>
         <translation>冗長: 削除可能</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="795"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="797"/>
         <source>to correct</source>
         <translation>要補正</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="796"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="798"/>
         <source>too different: remove it or replace it with a computed note</source>
         <translation>差が大きすぎる: 削除するか、計算ノートで置き換えてください</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="799"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="801"/>
         <source>Root key %1: %2</source>
         <translation>ルートキー %1: %2</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="800"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="802"/>
         <source>Deviation from the reference: level %1, timbre %2 (confidence %3%)</source>
         <translation>基準からの偏差: レベル %1、音色 %2 (信頼度 %3%)</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="804"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="806"/>
         <source>Reference extrapolated from the neighbors on one side: less reliable</source>
         <translation>片側の隣接ルートキーから外挿した基準: 信頼性が低い</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="807"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="809"/>
         <source>If removed: largest timbre deviation %1, level %2</source>
         <translation>削除した場合: 音色の最大偏差 %1、レベル %2</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="810"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="812"/>
         <source>new junction %1</source>
         <translation>新しいつなぎ目 %1</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="815"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="817"/>
         <source>Analysis in progress...</source>
         <translation>分析中...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="820"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="828"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="822"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="830"/>
         <source>Heard</source>
         <translation>聞こえる音</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="834"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="836"/>
         <source>Computed note</source>
         <translation>計算ノート</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="836"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="838"/>
         <source>A computed note can be created here (dashed column).</source>
         <translation>ここに計算ノートを作成できます (破線の列)。</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="841"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="843"/>
         <source>Junction with the previous key: level %1, timbre %2</source>
         <translation>前のキーとのつなぎ目: レベル %1、音色 %2</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="843"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="848"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="845"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="850"/>
         <source>break</source>
         <translation>不連続</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="845"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="847"/>
         <source>Junction with the next key: level %1, timbre %2</source>
         <translation>次のキーとのつなぎ目: レベル %1、音色 %2</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="853"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="855"/>
         <source>Rendered</source>
         <translation>レンダリング結果</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="862"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="864"/>
         <source>Rendering against the model: level %1, timbre %2, largest deviation of a row %3</source>
         <translation>レンダリングとモデルの比較: レベル %1、音色 %2、行の最大偏差 %3</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="868"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="870"/>
         <source>%n root keys selected: the actions apply to all of them.</source>
         <translation>
             <numerusform>%n個のルートキーを選択中: 操作はそのすべてに適用されます。</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="891"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="893"/>
         <source>Mute these divisions</source>
         <translation>これらのディビジョンをミュート</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="927"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="929"/>
         <source>Computing the note %1...</source>
         <translation>ノート %1 を計算中...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="946"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1116"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1330"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="948"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1118"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1332"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="975"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="977"/>
         <source>Remove the root key %1 (%n division(s))? The neighbors will play its keys.</source>
         <translation>
             <numerusform>ルートキー %1 (%n個のディビジョン) を削除しますか？そのキーは隣接するルートキーで再生されます。</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="978"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="980"/>
         <source>Largest timbre deviation over its keys: %1, level: %2.</source>
         <translation>担当していたキーでの音色の最大偏差: %1、レベル: %2。</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="981"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="983"/>
         <source>Timbre jump at the new junction: %1.</source>
         <translation>新しいつなぎ目での音色の段差: %1。</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="984"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="986"/>
         <source>Remove the following root keys? The neighbors will play their keys.</source>
         <translation>以下のルートキーを削除しますか？それらのキーは隣接するルートキーで再生されます。</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="986"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="988"/>
         <source>Remove</source>
         <translation>削除</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="987"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="989"/>
         <source>Also remove the samples that are not used anymore</source>
         <translation>使用されなくなったサンプルも削除</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1002"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1004"/>
         <source>Replace the root key %1 with a note computed from its neighbors?</source>
         <translation>ルートキー %1 を、隣接するルートキーから計算したノートで置き換えますか？</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1003"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1005"/>
         <source>Replace the following root keys with notes computed from their neighbors?</source>
         <translation>以下のルートキーを、隣接するルートキーから計算したノートで置き換えますか？</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1005"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1007"/>
         <source>Replace</source>
         <translation>置き換え</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1018"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1192"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1020"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1194"/>
         <source>Correct the level of the following root keys?</source>
         <translation>以下のルートキーのレベルを補正しますか？</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1051"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1053"/>
         <source>Shared samples</source>
         <translation>共有サンプル</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1052"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1054"/>
         <source>The following samples are also used by other divisions or instruments:</source>
         <translation>以下のサンプルは、他のディビジョンまたはインストゥルメントでも使用されています:</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1054"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1056"/>
         <source>Duplicate them for the corrected root keys, or modify them everywhere?</source>
         <translation>補正するルートキー用に複製しますか？それともすべての箇所で変更しますか？</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1055"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1057"/>
         <source>Duplicate</source>
         <translation>複製</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1056"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1058"/>
         <source>Modify everywhere</source>
         <translation>すべての箇所で変更</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1059"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1061"/>
         <source>Don&apos;t ask again (until Polyphone is closed)</source>
         <translation>今後確認しない (Polyphoneを閉じるまで)</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1113"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1115"/>
         <source>Rendering of the key %1...</source>
         <translation>キー %1 をレンダリング中...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1116"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1118"/>
         <source>The rendering couldn&apos;t be analyzed.</source>
         <translation>レンダリング結果を分析できませんでした。</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1156"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1158"/>
         <source>Nothing to propose with the current thresholds.</source>
         <translation>現在のしきい値では、提案できるものはありません。</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1185"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1187"/>
         <source>Create computed notes</source>
         <translation>計算ノートを作成</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1186"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1188"/>
         <source>Create computed notes at the following keys?</source>
         <translation>以下のキーに計算ノートを作成しますか？</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1208"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1210"/>
         <source>Processing...</source>
         <translation>処理中...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1208"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1210"/>
         <source>Cancel</source>
         <translation>キャンセル</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1267"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1269"/>
         <source>Processing the key %1...</source>
         <translation>キー %1 を処理中...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1289"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1291"/>
         <source>%1: the attenuation reached its limit (%2 missing).</source>
         <translation>%1: アッテネーションが限界に達しました (%2 不足)。</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1303"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1305"/>
         <source>Correction of the key %1...</source>
         <translation>キー %1 を補正中...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1307"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1309"/>
         <source>: </source>
         <comment>separator</comment>
         <translation>: </translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1328"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1330"/>
         <source>Not processed (the label changed or nothing to do):</source>
         <translation>未処理 (ラベルが変更されたか、処理する内容がありません):</translation>
     </message>
@@ -8164,13 +8160,13 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>TimbreBarsWidget</name>
     <message>
-        <location filename="../../editor/timbre/timbrebarswidget.cpp" line="194"/>
+        <location filename="../../editor/timbre/timbrebarswidget.cpp" line="196"/>
         <source>: </source>
         <comment>separator</comment>
         <translation>: </translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbrebarswidget.cpp" line="195"/>
+        <location filename="../../editor/timbre/timbrebarswidget.cpp" line="197"/>
         <source>dB</source>
         <comment>unit for decibels</comment>
         <translation>dB</translation>
@@ -8304,7 +8300,7 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>TimbreVelocityStrip</name>
     <message>
-        <location filename="../../editor/timbre/timbrebarswidget.cpp" line="208"/>
+        <location filename="../../editor/timbre/timbrebarswidget.cpp" line="210"/>
         <source>Velocity layers of the instrument: a click selects the middle of a layer</source>
         <translation>インストゥルメントのベロシティレイヤー: クリックするとレイヤーの中央を選択します</translation>
     </message>
@@ -10259,29 +10255,99 @@ Other soundfont editors might display other units.</source>
     </message>
 </context>
 <context>
-    <name>ToolTrimEnd</name>
+    <name>ToolTrim</name>
     <message>
-        <location filename="../../editor/tools/trim_end/tooltrimend.h" line="46"/>
+        <location filename="../../editor/tools/trim/tooltrim.cpp" line="148"/>
+        <source>The data after the end of the loop has been kept in the following samples, because at least one instrument doesn&apos;t play their loop continuously:</source>
+        <translation>次のサンプルでは、ループを連続再生しないインストゥルメントが少なくとも1つあるため、ループの終点より後ろのデータを残しました:</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/trim/tooltrim.h" line="48"/>
         <source>Loop / playback</source>
         <translation>ループ / 再生</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/trim_end/tooltrimend.h" line="61"/>
-        <source>Trim to end of loop</source>
-        <translation>ループの終点までトリム</translation>
+        <location filename="../../editor/tools/trim/tooltrim.h" line="66"/>
+        <source>Trim</source>
+        <translation>トリム</translation>
     </message>
 </context>
 <context>
-    <name>ToolTrimStart</name>
+    <name>ToolTrim_gui</name>
     <message>
-        <location filename="../../editor/tools/trim_start/tooltrimstart.h" line="46"/>
-        <source>Loop / playback</source>
-        <translation>ループ / 再生</translation>
+        <location filename="../../editor/tools/trim/tooltrim_gui.ui" line="20"/>
+        <source>The silence or the background noise before the attack is removed.</source>
+        <translation>アタックより前の無音やバックグラウンドノイズを削除します。</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/trim_start/tooltrimstart.h" line="64"/>
+        <location filename="../../editor/tools/trim/tooltrim_gui.ui" line="23"/>
         <source>Remove blank at start</source>
         <translation>先頭の空白を削除</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/trim/tooltrim_gui.ui" line="30"/>
+        <source>End of the sample:</source>
+        <translation>サンプルの末尾:</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/trim/tooltrim_gui.ui" line="37"/>
+        <source>Unchanged</source>
+        <translation>変更しない</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/trim/tooltrim_gui.ui" line="47"/>
+        <source>The data after the end of the loop is removed, unless an instrument doesn&apos;t play the loop continuously.</source>
+        <translation>ループの終点より後ろのデータを削除します（ループを連続再生しないインストゥルメントがある場合を除く）。</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/trim/tooltrim_gui.ui" line="50"/>
+        <source>Trim after the end of loop</source>
+        <translation>ループの終点以降をトリム</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/trim/tooltrim_gui.ui" line="60"/>
+        <source>The blank at the end is replaced by a short fade-out prolonging the decay of the sound, so that the remaining noise doesn&apos;t stop abruptly.</source>
+        <translation>末尾の空白を、音の減衰を延長する短いフェードアウトに置き換え、残りのノイズが急に途切れないようにします。</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/trim/tooltrim_gui.ui" line="63"/>
+        <source>Remove blank at end</source>
+        <translation>末尾の空白を削除</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/trim/tooltrim_gui.ui" line="73"/>
+        <source>Blank:</source>
+        <translation>空白:</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/trim/tooltrim_gui.ui" line="80"/>
+        <source>The blank is what is quieter than the background noise measured before or after the sound.</source>
+        <translation>音の前後で測定したバックグラウンドノイズより小さい部分を空白とみなします。</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/trim/tooltrim_gui.ui" line="83"/>
+        <source>Detect the background noise</source>
+        <translation>バックグラウンドノイズを検出</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/trim/tooltrim_gui.ui" line="95"/>
+        <source>The blank is what has a peak level below this value.</source>
+        <translation>ピークレベルがこの値未満の部分を空白とみなします。</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/trim/tooltrim_gui.ui" line="98"/>
+        <source>Level below</source>
+        <translation>しきい値</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/trim/tooltrim_gui.cpp" line="35"/>
+        <source>&amp;Ok</source>
+        <translation>OK(&amp;O)</translation>
+    </message>
+    <message>
+        <location filename="../../editor/tools/trim/tooltrim_gui.cpp" line="36"/>
+        <source>&amp;Cancel</source>
+        <translation>キャンセル(&amp;C)</translation>
     </message>
 </context>
 <context>
