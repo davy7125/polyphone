@@ -26,6 +26,7 @@
 #include "ui_configpanel.h"
 #include "contextmanager.h"
 #include <QScrollBar>
+#include <QWheelEvent>
 
 ConfigPanel::ConfigPanel(QWidget *parent) : Tab(parent),
     ui(new Ui::ConfigPanel)
@@ -86,6 +87,12 @@ bool ConfigPanel::eventFilter(QObject * watched, QEvent * event)
         updateTitle();
     }
     return Tab::eventFilter(watched, event);
+}
+
+void ConfigPanel::wheelEvent(QWheelEvent * event)
+{
+    // Wheel events outside the scroll area (table of contents, space around it) also scroll the sections
+    QCoreApplication::sendEvent(ui->scrollArea->viewport(), event);
 }
 
 void ConfigPanel::onSectionClicked(int sectionNumber)

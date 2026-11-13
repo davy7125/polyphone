@@ -47,6 +47,7 @@ public:
 
 protected:
     bool eventFilter(QObject * watched, QEvent * event) override;
+    void wheelEvent(QWheelEvent * event) override;
 
 private slots:
     void onSectionClicked(int sectionNumber);
