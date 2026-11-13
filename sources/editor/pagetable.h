@@ -79,8 +79,9 @@ private slots:
 
 private:
     void reselect();
-    void addGlobal(IdList listIds);
-    void addDivisions(EltID id);
+    IdList getSortedGlobalIds(IdList listIds);
+    IdList getSortedDivisionIds(EltID id);
+    void fillColumn(int numCol, EltID id);
     void formatTable(bool multiGlobal);
     int limit(int iVal, AttributeType champ, EltID id);
     void resetChamp(int colonne, AttributeType champ1, AttributeType champ2);

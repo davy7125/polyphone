@@ -40,7 +40,7 @@ public:
     TableWidget(QWidget *parent = nullptr);
     ~TableWidget() { delete this->itemDelegate(); }
     void clear();
-    void addColumn(int column, QString title, EltID id);
+    void setColumns(QStringList titles, QList<EltID> ids);
     EltID getID(int column);
     void setEnlighted(int colonne, bool isEnlighted);
     void removeColumn(int column);

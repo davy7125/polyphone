@@ -104,15 +104,34 @@ void PageTable::afficheTable(bool justSelection)
 
         if (!_currentParentIds.isEmpty())
         {
-            // Global division(s)
-            addGlobal(_currentParentIds);
+            // Columns in the display order: global division(s), then the child divisions
+            bool multiGlobal = _currentParentIds.count() > 1;
+            IdList columnIds = getSortedGlobalIds(_currentParentIds);
+            if (!multiGlobal)
+                columnIds << getSortedDivisionIds(_currentParentIds.first());
 
-            // Child divisions
-            if (_currentParentIds.count() == 1)
-                addDivisions(_currentParentIds.first());
+            // Create all columns at once
+            QStringList titles;
+            foreach (EltID id, columnIds)
+            {
+                if (id.typeElement == this->contenant)
+                    titles << (multiGlobal ? _sf2->getQstr(id, champ_name) : tr("Global"));
+                else
+                {
+                    EltID idLinked = id;
+                    idLinked.typeElement = this->contenu;
+                    idLinked.indexElt = _sf2->get(id, this->contenant == elementInst ? champ_sampleID : champ_instrument).wValue;
+                    titles << _sf2->getQstr(idLinked, champ_name);
+                }
+            }
+            _table->setColumns(titles, columnIds);
+
+            // Fill the columns
+            for (int i = 0; i < columnIds.count(); i++)
+                fillColumn(i, columnIds[i]);
 
             // Table style
-            formatTable(_currentParentIds.count() > 1);
+            formatTable(multiGlobal);
         }
     }
     else
@@ -128,258 +147,158 @@ void PageTable::afficheTable(bool justSelection)
     _table->verticalScrollBar()->setValue(posV);
 }
 
-void PageTable::addGlobal(IdList listIds)
+IdList PageTable::getSortedGlobalIds(IdList listIds)
 {
-    bool multiGlobal = listIds.count() > 1;
-    int nbGlobal = 0;
-
+    // Global divisions sorted by name
+    IdList sortedIds;
     foreach (EltID id, listIds)
     {
-        AttributeValue genValTmp;
-        int offsetStart = 0;
-        bool offsetStartDefined = false;
-        int offsetEnd = 0;
-        bool offsetEndDefined = false;
-        int offsetStartLoop = 0;
-        bool offsetStartLoopDefined = false;
-        int offsetEndLoop = 0;
-        bool offsetEndLoopDefined = false;
-        int row;
-
-        // Column number
-        int numCol = 0;
-        for (int i = 0; i < nbGlobal; i++)
-        {
-            if (Utils::naturalOrder(_sf2->getQstr(id, champ_nameSort), _sf2->getQstr(_table->getID(i), champ_nameSort)) > 0)
-                numCol++;
-            else
-                break;
-        }
-
-        _table->addColumn(numCol, multiGlobal ? _sf2->getQstr(id, champ_name) : tr("Global"), id);
-        nbGlobal++;
-        EltID idGen = id;
-        idGen.typeElement = this->contenantGen;
-        idGen.indexElt2 = 0;
-        foreach (int i, _sf2->getSiblings(idGen))
-        {
-            genValTmp = _sf2->get(id, static_cast<AttributeType>(i));
-            switch (i)
-            {
-            case champ_startAddrsOffset:
-                offsetStartDefined = true;
-                offsetStart += genValTmp.shValue;
-                break;
-            case champ_startAddrsCoarseOffset:
-                offsetStartDefined = true;
-                offsetStart += 32768 * genValTmp.shValue;
-                break;
-            case champ_endAddrsOffset:
-                offsetEndDefined = true;
-                offsetEnd += genValTmp.shValue;
-                break;
-            case champ_endAddrsCoarseOffset:
-                offsetEndDefined = true;
-                offsetEnd += 32768 * genValTmp.shValue;
-                break;
-            case champ_startloopAddrsOffset:
-                offsetStartLoopDefined = true;
-                offsetStartLoop += genValTmp.shValue;
-                break;
-            case champ_startloopAddrsCoarseOffset:
-                offsetStartLoopDefined = true;
-                offsetStartLoop += 32768 * genValTmp.shValue;
-                break;
-            case champ_endloopAddrsOffset:
-                offsetEndLoopDefined = true;
-                offsetEndLoop += genValTmp.shValue;
-                break;
-            case champ_endloopAddrsCoarseOffset:
-                offsetEndLoopDefined = true;
-                offsetEndLoop += 32768 * genValTmp.shValue;
-                break;
-            default:
-                row = _table->getRow(static_cast<AttributeType>(i));
-                if (row > -1)
-                {
-                    if (i == champ_sampleModes)
-                        _table->setLoopModeImage(row, numCol, genValTmp.wValue);
-                    else
-                        _table->item(row, numCol)->setText(
-                            attributeToString(static_cast<AttributeType>(i),
-                                              _isPrst, genValTmp));
-                }
-            }
-        }
-        if (offsetStartDefined && _table->getRow(champ_startAddrsOffset) > -1)
-        {
-            row = _table->getRow(champ_startAddrsOffset);
-            _table->item(row, numCol)->setText(QString::number(offsetStart));
-        }
-        if (offsetEndDefined && _table->getRow(champ_endAddrsOffset) > -1)
-        {
-            row = _table->getRow(champ_endAddrsOffset);
-            _table->item(row, numCol)->setText(QString::number(offsetEnd));
-        }
-        if (offsetStartLoopDefined && _table->getRow(champ_startloopAddrsOffset) > -1)
-        {
-            row = _table->getRow(champ_startloopAddrsOffset);
-            _table->item(row, numCol)->setText(QString::number(offsetStartLoop));
-        }
-        if (offsetEndLoopDefined && _table->getRow(champ_endloopAddrsOffset) > -1)
-        {
-            row = _table->getRow(champ_endloopAddrsOffset);
-            _table->item(row, numCol)->setText(QString::number(offsetEndLoop));
-        }
+        int pos = 0;
+        while (pos < sortedIds.count() &&
+               Utils::naturalOrder(_sf2->getQstr(id, champ_nameSort), _sf2->getQstr(sortedIds[pos], champ_nameSort)) > 0)
+            pos++;
+        sortedIds.insert(pos, id);
     }
+    return sortedIds;
 }
 
-void PageTable::addDivisions(EltID id)
+IdList PageTable::getSortedDivisionIds(EltID id)
 {
-    AttributeValue genValTmp;
-    int row;
-    EltID id2 = id;
-    EltID id3 = id;
-    int nbSmplInst = 0;
+    // Divisions sorted according to the configuration
+    IdList sortedIds;
     id.typeElement = this->lien;
-    id2.typeElement = this->lienGen;
-    id3.typeElement = this->contenu;
-
     foreach (int i, _sf2->getSiblings(id))
     {
         id.indexElt2 = i;
-        id2.indexElt2 = i;
+        int pos = 0;
+        while (pos < sortedIds.count() && _sf2->sortDivisions(id, sortedIds[pos], _sortType) > 0)
+            pos++;
+        sortedIds.insert(pos, id);
+    }
+    return sortedIds;
+}
 
-        // Ajout d'un élément lié
-        int numCol = 1;
+void PageTable::fillColumn(int numCol, EltID id)
+{
+    bool isGlobal = (id.typeElement == this->contenant);
+    EltID idGen = id;
+    if (isGlobal)
+    {
+        idGen.typeElement = this->contenantGen;
+        idGen.indexElt2 = 0;
+    }
+    else
+        idGen.typeElement = this->lienGen;
 
-        // Détermination de la colonne
-        AttributeType cElementLie;
-        if (this->contenant == elementInst)
-            cElementLie = champ_sampleID;
-        else
-            cElementLie = champ_instrument;
-
-        id3.indexElt = _sf2->get(id, cElementLie).wValue;
-
-        QString strOrder = QString("%1-%2-%3")
-                               .arg(_sf2->get(id, champ_keyRange).rValue.byLo, 3, 10, QChar('0'))
-                               .arg(_sf2->get(id, champ_velRange).rValue.byLo, 3, 10, QChar('0'))
-                               .arg(_sf2->getQstr(id3, champ_name));
-        for (int j = 1; j < nbSmplInst + 1; j++)
+    AttributeValue genValTmp;
+    int row;
+    int offsetStart = 0;
+    bool offsetStartDefined = false;
+    int offsetEnd = 0;
+    bool offsetEndDefined = false;
+    int offsetStartLoop = 0;
+    bool offsetStartLoopDefined = false;
+    int offsetEndLoop = 0;
+    bool offsetEndLoopDefined = false;
+    foreach (int champTmp, _sf2->getSiblings(idGen))
+    {
+        genValTmp = _sf2->get(id, static_cast<AttributeType>(champTmp));
+        switch (champTmp)
         {
-            if (_sf2->sortDivisions(id, _table->getID(j), _sortType) > 0)
-                numCol++;
-            else
-                break;
-        }
-
-        nbSmplInst++;
-        int offsetStart = 0;
-        bool offsetStartDefined = false;
-        int offsetEnd = 0;
-        bool offsetEndDefined = false;
-        int offsetStartLoop = 0;
-        bool offsetStartLoopDefined = false;
-        int offsetEndLoop = 0;
-        bool offsetEndLoopDefined = false;
-        _table->addColumn(numCol, _sf2->getQstr(id3, champ_name), id);
-        foreach (int champTmp, _sf2->getSiblings(id2))
-        {
-            genValTmp = _sf2->get(id, static_cast<AttributeType>(champTmp));
-            switch (champTmp)
-            {
-            case champ_startAddrsOffset:
-                offsetStartDefined = true;
-                offsetStart += genValTmp.shValue;
-                break;
-            case champ_startAddrsCoarseOffset:
-                offsetStartDefined = true;
-                offsetStart += 32768 * genValTmp.shValue;
-                break;
-            case champ_endAddrsOffset:
-                offsetEndDefined = true;
-                offsetEnd += genValTmp.shValue;
-                break;
-            case champ_endAddrsCoarseOffset:
-                offsetEndDefined = true;
-                offsetEnd += 32768 * genValTmp.shValue;
-                break;
-            case champ_startloopAddrsOffset:
-                offsetStartLoopDefined = true;
-                offsetStartLoop += genValTmp.shValue;
-                break;
-            case champ_startloopAddrsCoarseOffset:
-                offsetStartLoopDefined = true;
-                offsetStartLoop += 32768 * genValTmp.shValue;
-                break;
-            case champ_endloopAddrsOffset:
-                offsetEndLoopDefined = true;
-                offsetEndLoop += genValTmp.shValue;
-                break;
-            case champ_endloopAddrsCoarseOffset:
-                offsetEndLoopDefined = true;
-                offsetEndLoop += 32768 * genValTmp.shValue;
-                break;
-            default:
-                row = _table->getRow(static_cast<AttributeType>(champTmp));
-                if (row > -1)
-                {
-                    if (champTmp == champ_sampleModes)
-                        _table->setLoopModeImage(row, numCol, genValTmp.wValue);
-                    else
-                        _table->item(row, numCol)->setText(
-                            attributeToString(static_cast<AttributeType>(champTmp),
-                                              _isPrst, genValTmp));
-                }
-            }
-        }
-
-        if (offsetStartDefined && _table->getRow(champ_startAddrsOffset) > -1)
-        {
-            row = _table->getRow(champ_startAddrsOffset);
-            _table->item(row, numCol)->setText(QString::number(offsetStart));
-        }
-        if (offsetEndDefined && _table->getRow(champ_endAddrsOffset) > -1)
-        {
-            row = _table->getRow(champ_endAddrsOffset);
-            _table->item(row, numCol)->setText(QString::number(offsetEnd));
-        }
-        if (offsetStartLoopDefined && _table->getRow(champ_startloopAddrsOffset) > -1)
-        {
-            row = _table->getRow(champ_startloopAddrsOffset);
-            _table->item(row, numCol)->setText(QString::number(offsetStartLoop));
-        }
-        if (offsetEndLoopDefined && _table->getRow(champ_endloopAddrsOffset) > -1)
-        {
-            row = _table->getRow(champ_endloopAddrsOffset);
-            _table->item(row, numCol)->setText(QString::number(offsetEndLoop));
-        }
-
-        if (this->contenant == elementInst)
-        {
-            // Data about linked samples
-            int row = _table->getRow(champ_byOriginalPitch);
+        case champ_startAddrsOffset:
+            offsetStartDefined = true;
+            offsetStart += genValTmp.shValue;
+            break;
+        case champ_startAddrsCoarseOffset:
+            offsetStartDefined = true;
+            offsetStart += 32768 * genValTmp.shValue;
+            break;
+        case champ_endAddrsOffset:
+            offsetEndDefined = true;
+            offsetEnd += genValTmp.shValue;
+            break;
+        case champ_endAddrsCoarseOffset:
+            offsetEndDefined = true;
+            offsetEnd += 32768 * genValTmp.shValue;
+            break;
+        case champ_startloopAddrsOffset:
+            offsetStartLoopDefined = true;
+            offsetStartLoop += genValTmp.shValue;
+            break;
+        case champ_startloopAddrsCoarseOffset:
+            offsetStartLoopDefined = true;
+            offsetStartLoop += 32768 * genValTmp.shValue;
+            break;
+        case champ_endloopAddrsOffset:
+            offsetEndLoopDefined = true;
+            offsetEndLoop += genValTmp.shValue;
+            break;
+        case champ_endloopAddrsCoarseOffset:
+            offsetEndLoopDefined = true;
+            offsetEndLoop += 32768 * genValTmp.shValue;
+            break;
+        default:
+            row = _table->getRow(static_cast<AttributeType>(champTmp));
             if (row > -1)
             {
-                quint8 pitch = _sf2->get(id3, champ_byOriginalPitch).bValue;
-                _table->item(row, numCol)->setText(QString::number(pitch));
+                if (champTmp == champ_sampleModes)
+                    _table->setLoopModeImage(row, numCol, genValTmp.wValue);
+                else
+                    _table->item(row, numCol)->setText(
+                        attributeToString(static_cast<AttributeType>(champTmp),
+                                          _isPrst, genValTmp));
             }
+        }
+    }
 
-            row = _table->getRow(champ_dwLength);
-            if (row > -1)
-            {
-                unsigned int length = _sf2->get(id3, champ_dwLength).dwValue;
-                _table->item(row, numCol)->setText(QString::number(length));
-            }
+    if (offsetStartDefined && _table->getRow(champ_startAddrsOffset) > -1)
+    {
+        row = _table->getRow(champ_startAddrsOffset);
+        _table->item(row, numCol)->setText(QString::number(offsetStart));
+    }
+    if (offsetEndDefined && _table->getRow(champ_endAddrsOffset) > -1)
+    {
+        row = _table->getRow(champ_endAddrsOffset);
+        _table->item(row, numCol)->setText(QString::number(offsetEnd));
+    }
+    if (offsetStartLoopDefined && _table->getRow(champ_startloopAddrsOffset) > -1)
+    {
+        row = _table->getRow(champ_startloopAddrsOffset);
+        _table->item(row, numCol)->setText(QString::number(offsetStartLoop));
+    }
+    if (offsetEndLoopDefined && _table->getRow(champ_endloopAddrsOffset) > -1)
+    {
+        row = _table->getRow(champ_endloopAddrsOffset);
+        _table->item(row, numCol)->setText(QString::number(offsetEndLoop));
+    }
 
-            row = _table->getRow(champ_dwStartLoop);
-            if (row > -1)
-            {
-                unsigned int start = _sf2->get(id3, champ_dwStartLoop).dwValue;
-                unsigned int end = _sf2->get(id3, champ_dwEndLoop).dwValue;
-                _table->item(row, numCol)->setText(QString::number(start) + "-" + QString::number(end));
-            }
+    if (!isGlobal && this->contenant == elementInst)
+    {
+        // Data about linked samples
+        EltID idSmpl = id;
+        idSmpl.typeElement = elementSmpl;
+        idSmpl.indexElt = _sf2->get(id, champ_sampleID).wValue;
+
+        row = _table->getRow(champ_byOriginalPitch);
+        if (row > -1)
+        {
+            quint8 pitch = _sf2->get(idSmpl, champ_byOriginalPitch).bValue;
+            _table->item(row, numCol)->setText(QString::number(pitch));
+        }
+
+        row = _table->getRow(champ_dwLength);
+        if (row > -1)
+        {
+            unsigned int length = _sf2->get(idSmpl, champ_dwLength).dwValue;
+            _table->item(row, numCol)->setText(QString::number(length));
+        }
+
+        row = _table->getRow(champ_dwStartLoop);
+        if (row > -1)
+        {
+            unsigned int start = _sf2->get(idSmpl, champ_dwStartLoop).dwValue;
+            unsigned int end = _sf2->get(idSmpl, champ_dwEndLoop).dwValue;
+            _table->item(row, numCol)->setText(QString::number(start) + "-" + QString::number(end));
         }
     }
 }

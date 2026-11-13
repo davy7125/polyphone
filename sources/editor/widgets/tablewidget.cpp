@@ -54,38 +54,43 @@ TableWidget::TableWidget(QWidget *parent) : QTableWidget(parent)
 
 void TableWidget::clear()
 {
-    for (int i = 0; i < this->columnCount(); i++)
-        for (int j = 0; j < this->rowCount(); j++)
-            delete this->item(j, i);
+    // The model deletes the items of the removed columns
+    // (much faster than deleting them one by one, each deletion searching the item in the model)
     this->setColumnCount(0);
     _columnIds.clear();
     _listColors.clear();
 }
 
-void TableWidget::addColumn(int column, QString title, EltID id)
+void TableWidget::setColumns(QStringList titles, QList<EltID> ids)
 {
-    _columnIds.insert(column, EltID());
-    this->insertColumn(column);
-    for (int i = 0; i < this->rowCount(); i++)
-        this->setItem(i, column, new QTableWidgetItem());
-    this->setHorizontalHeaderItem(column, new QTableWidgetItem(title));
-
-    // Add a colored element
+    // All columns are created at once: a column inserted one by one makes the headers
+    // compute again their size from the text of all sections
+    this->setColumnCount(ids.count());
     QColor color = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
-    _listColors.insert(column, color);
-    this->horizontalHeaderItem(column)->setForeground(color);
+    _columnIds.clear();
+    _listColors.clear();
+    for (int column = 0; column < ids.count(); column++)
+    {
+        for (int i = 0; i < this->rowCount(); i++)
+            this->setItem(i, column, new QTableWidgetItem());
+        QTableWidgetItem * headerItem = new QTableWidgetItem(titles[column]);
+        headerItem->setForeground(color);
+        this->setHorizontalHeaderItem(column, headerItem);
+        _listColors << color;
 
-    // Keep the id somewhere
-    if (id.typeElement == elementInstGen)
-        id.typeElement = elementInst;
-    if (id.typeElement == elementInstSmplGen)
-        id.typeElement = elementInstSmpl;
-    if (id.typeElement == elementPrstGen)
-        id.typeElement = elementPrst;
-    if (id.typeElement == elementPrstInstGen)
-        id.typeElement = elementPrstInst;
-    _columnIds[column] = id;
-    this->model()->setHeaderData(column, Qt::Horizontal, QVariant::fromValue(id), Qt::UserRole);
+        // Keep the id somewhere
+        EltID id = ids[column];
+        if (id.typeElement == elementInstGen)
+            id.typeElement = elementInst;
+        if (id.typeElement == elementInstSmplGen)
+            id.typeElement = elementInstSmpl;
+        if (id.typeElement == elementPrstGen)
+            id.typeElement = elementPrst;
+        if (id.typeElement == elementPrstInstGen)
+            id.typeElement = elementPrstInst;
+        _columnIds << id;
+        this->model()->setHeaderData(column, Qt::Horizontal, QVariant::fromValue(id), Qt::UserRole);
+    }
 }
 
 EltID TableWidget::getID(int column)
