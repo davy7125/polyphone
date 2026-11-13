@@ -30,6 +30,9 @@
 #include <cmath>
 #include <QFile>
 #include <QRegularExpression>
+#include <QMimeData>
+#include <QUrl>
+#include <QDir>
 #include <QLocale>
 #include <QVarLengthArray>
 #include <QHash>
@@ -537,6 +540,16 @@ QString Utils::fixFilePath(QString filePath)
         filePath = filePath.remove(0, 1);
 #endif
     return filePath;
+}
+
+QStringList Utils::getDroppedPaths(const QMimeData * mimeData)
+{
+    // Without a trailing slash (macOS Finder), UNC paths being kept
+    QStringList paths;
+    foreach (QUrl url, mimeData->urls())
+        if (url.isLocalFile())
+            paths << QDir::cleanPath(url.toLocalFile());
+    return paths;
 }
 
 QString Utils::removeForbiddenFilePathCharacters(QString str)

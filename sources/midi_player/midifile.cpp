@@ -97,6 +97,12 @@ MidiFile::MidiFile() :
     _isSmpte(false)
 {}
 
+bool MidiFile::isSuffixSupported(QString suffix)
+{
+    suffix = suffix.toLower();
+    return suffix == "mid" || suffix == "midi" || suffix == "kar" || suffix == "rmi";
+}
+
 bool MidiFile::read(QString filePath)
 {
     QFile file(filePath);

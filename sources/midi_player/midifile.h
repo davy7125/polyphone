@@ -58,6 +58,9 @@ public:
 
     MidiFile();
 
+    // Extensions of the files played (mid, midi, kar, rmi), case insensitive
+    static bool isSuffixSupported(QString suffix);
+
     // Read a file, false in case of error (see getError)
     bool read(QString filePath);
     bool read(const QByteArray &data);

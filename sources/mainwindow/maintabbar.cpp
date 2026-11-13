@@ -28,11 +28,11 @@
 #include <QStylePainter>
 #include <QStyleOptionTab>
 #include <QToolTip>
-#include <QMimeData>
-#include <QDir>
+#include <QFileInfo>
 #include "maintabbarelement.h"
 #include "contextmanager.h"
 #include "inputfactory.h"
+#include "utils.h"
 #include "tab.h"
 
 const int MainTabBar::TAB_MIN_WIDTH = 50;
@@ -315,15 +315,13 @@ void MainTabBar::dropEvent(QDropEvent *event)
 
 QStringList MainTabBar::getDroppedPaths(const QMimeData * mimeData)
 {
-    // Local directories and soundfonts, written like the paths given by the file dialogs
+    // Local directories and soundfonts
     QStringList paths;
-    foreach (QUrl url, mimeData->urls())
+    foreach (QString path, Utils::getDroppedPaths(mimeData))
     {
-        if (!url.isLocalFile())
-            continue;
-        QFileInfo fileInfo(QDir::cleanPath(url.toLocalFile()));
+        QFileInfo fileInfo(path);
         if (fileInfo.isDir() || (fileInfo.isFile() && InputFactory::isSuffixSupported(fileInfo.suffix())))
-            paths << fileInfo.filePath();
+            paths << path;
     }
     return paths;
 }

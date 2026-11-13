@@ -29,6 +29,9 @@
 #include <QFileDialog>
 #include <QKeyEvent>
 #include <QWheelEvent>
+#include <QMimeData>
+#include <QDragEnterEvent>
+#include <QDropEvent>
 #include <QHeaderView>
 #include <QGridLayout>
 #include <QCheckBox>
@@ -51,6 +54,7 @@
 #include "player.h"
 #include "resettableslider.h"
 #include "waitingtooldialog.h"
+#include "utils.h"
 
 DialogMidiPlayer::DialogMidiPlayer(QWidget *parent) :
     QDialog(parent, Qt::Tool | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint),
@@ -137,8 +141,12 @@ DialogMidiPlayer::DialogMidiPlayer(QWidget *parent) :
     ui->pushStop->setEnabled(false);
     ui->sliderPosition->setEnabled(false);
     ui->sliderPosition->installEventFilter(this); // Mouse wheel
+    ui->frameTop->installEventFilter(this); // Mouse wheel over the file name and the times, ignored by these labels
     _actionExport->setEnabled(false);
     updateSize();
+
+    // A MIDI file dropped anywhere on the window is opened
+    this->setAcceptDrops(true);
 
     // Periodic update of the position, the activity, the programs and the MIDI values
     _timer = new QTimer(this);
@@ -195,6 +203,51 @@ void DialogMidiPlayer::on_pushOpen_clicked()
 void DialogMidiPlayer::openFile(QString filePath)
 {
     loadFile(filePath);
+}
+
+void DialogMidiPlayer::dragEnterEvent(QDragEnterEvent * event)
+{
+    if (!getDroppedMidiFile(event).isEmpty())
+    {
+        // The file is only read, never moved
+        event->setDropAction(Qt::CopyAction);
+        event->accept();
+    }
+    else
+        event->ignore();
+}
+
+void DialogMidiPlayer::dragMoveEvent(QDragMoveEvent * event)
+{
+    event->setDropAction(Qt::CopyAction);
+    event->accept();
+}
+
+void DialogMidiPlayer::dropEvent(QDropEvent * event)
+{
+    QString filePath = getDroppedMidiFile(event);
+    if (filePath.isEmpty())
+        return;
+    event->setDropAction(Qt::CopyAction);
+    event->accept();
+
+    // Loaded once the drop is finished (the file manager waits for it)
+    QTimer::singleShot(0, this, [this, filePath]() { loadFile(filePath); });
+}
+
+QString DialogMidiPlayer::getDroppedMidiFile(const QDropEvent * event)
+{
+    // First MIDI file dragged from another application, the player having one file
+    if (event->source() == nullptr)
+    {
+        foreach (QString path, Utils::getDroppedPaths(event->mimeData()))
+        {
+            QFileInfo fileInfo(path);
+            if (fileInfo.isFile() && MidiFile::isSuffixSupported(fileInfo.suffix()))
+                return path;
+        }
+    }
+    return "";
 }
 
 void DialogMidiPlayer::loadFile(QString filePath)
@@ -747,13 +800,19 @@ void DialogMidiPlayer::keyPressEvent(QKeyEvent * event)
 
 bool DialogMidiPlayer::eventFilter(QObject * watched, QEvent * event)
 {
-    if (watched != ui->sliderPosition || event->type() != QEvent::Wheel)
+    if (event->type() != QEvent::Wheel)
+        return QDialog::eventFilter(watched, event);
+
+    // Mouse wheel over the slider, or over the file name, the times and the space between them (part of the banner
+    // around the slider, the other widgets of the banner keeping their behavior)
+    QWheelEvent * wheelEvent = static_cast<QWheelEvent *>(event);
+    if (watched != ui->sliderPosition &&
+        (watched != ui->frameTop || !ui->layoutPosition->geometry().contains(wheelEvent->position().toPoint())))
         return QDialog::eventFilter(watched, event);
 
     // A notch of the mouse wheel over the position moves it by 5 seconds of the displayed time, forward when the wheel
     // goes up or right (directions of the sliders), the small deltas of a touchpad being accumulated. Replaces the
     // default behavior of the slider: a few milliseconds by notch, each of them restarting the notes.
-    QWheelEvent * wheelEvent = static_cast<QWheelEvent *>(event);
     QPoint angleDelta = wheelEvent->angleDelta();
     int delta = qAbs(angleDelta.x()) > qAbs(angleDelta.y()) ? -angleDelta.x() : angleDelta.y();
     if (wheelEvent->inverted())

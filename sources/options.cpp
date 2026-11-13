@@ -28,6 +28,7 @@
 #include <QCommandLineParser>
 #include "inputfactory.h"
 #include "playeroptions.h"
+#include "midifile.h"
 #include "utils.h"
 
 static const char * INVALID_VALUE = QT_TRANSLATE_NOOP("Options", "Invalid value \"%1\" for the option \"%2\".");
@@ -469,8 +470,7 @@ bool Options::isConversion()
 bool Options::renderMidiFile()
 {
     // Extensions of the MIDI player
-    QString suffix = QFileInfo(_renderEventFile).suffix().toLower();
-    return suffix == "mid" || suffix == "midi" || suffix == "kar" || suffix == "rmi";
+    return MidiFile::isSuffixSupported(QFileInfo(_renderEventFile).suffix());
 }
 
 QString Options::getModeOption()

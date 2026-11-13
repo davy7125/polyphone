@@ -53,6 +53,7 @@ class DialogMidiPlayer;
 // By default the channels play the soundfont selected in the main window: soundfont of the current tab, or file selected
 // in a soundfont explorer.
 // The menu also exports the file in a wav file, as it is heard (without the loop).
+// A MIDI file can also be dropped on the window from a file manager.
 class DialogMidiPlayer : public QDialog
 {
     Q_OBJECT
@@ -74,6 +75,9 @@ protected:
     void hideEvent(QHideEvent * event) override;
     void keyPressEvent(QKeyEvent * event) override;
     bool eventFilter(QObject * watched, QEvent * event) override;
+    void dragEnterEvent(QDragEnterEvent * event) override;
+    void dragMoveEvent(QDragMoveEvent * event) override;
+    void dropEvent(QDropEvent * event) override;
 
 private slots:
     void on_pushOpen_clicked();
@@ -108,6 +112,7 @@ private:
     void initializeSettingsMenu();
     void updateTempoToolTip();
     static QString getTimeText(qint64 microseconds);
+    static QString getDroppedMidiFile(const QDropEvent * event);
 
     Ui::DialogMidiPlayer * ui;
     MidiFilePlayer * _player;
