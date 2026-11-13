@@ -240,7 +240,11 @@ void MainTabBar::mouseReleaseEvent(QMouseEvent *event)
         }
         if (!itemPlaced)
             reorederedTabs.append(_tabs[_clickedItemIndex]);
-        _tabs = reorederedTabs;
+        if (reorederedTabs != _tabs)
+        {
+            _tabs = reorederedTabs;
+            emit tabsReordered();
+        }
     }
 
     // Reset state

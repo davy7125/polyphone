@@ -52,6 +52,7 @@ public:
     void selectElement(EltID id);
     IdList getSelection() { return _currentIds; }
     void onActionRequired(TabAction action) override;
+    KeyboardDisplayContent getKeyboardDisplayContent() override;
 
 signals:
     void processKeyMainThread(int channel, int key, int vel);
@@ -88,6 +89,17 @@ private:
     static QVector<bool> getEnabledKeysForInstrument(EltID idInst);
     void updateSearchStyle(QColor focusBackgroundColor);
 
+    // Sample, instrument or preset played by the keyboard (unique in the selection), or elementUnknown
+    EltID getPlayedElement();
+
+    // Element to play before (direction < 0) or after (direction > 0) the element played, or the first element of the
+    // category selected if nothing is played (elementUnknown if none)
+    EltID getNavigationTarget(int direction);
+
+    // Display of the virtual keyboard, updated once when several changes occur
+    void scheduleKeyboardDisplayUpdate();
+    void updateKeyboardDisplay();
+
     Ui::Editor *ui;
     PageSelector * _pageSelector;
     ElementType _currentElementType;
@@ -95,6 +107,7 @@ private:
     EltID _initialSelection;
     bool _firstShow;
     QVariantAnimation * _searchAnimation;
+    bool _keyboardDisplayUpdateScheduled;
 };
 
 #endif // EDITOR_H

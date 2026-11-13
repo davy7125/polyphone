@@ -31,6 +31,8 @@ class QFileSystemWatcher;
 class QPushButton;
 class DialogKeyboard;
 class DirectoryPreview;
+class DirectoryElementListView;
+class DirectoryFileData;
 
 namespace Ui {
 class DirectoryBrowser;
@@ -51,6 +53,7 @@ public:
     DirectoryPreview * getPreview() { return _preview; }
 
     void onActionRequired(TabAction action) override;
+    KeyboardDisplayContent getKeyboardDisplayContent() override;
 
 signals:
     void itemDoubleClicked(QString filePath, EltID id);
@@ -89,12 +92,28 @@ private:
     void setPreviewElement(EltID id);
     void focusFileList();
 
+    // List of samples, instruments or presets having a selection, or the first one that is displayed and not empty
+    // (presets, then instruments, then samples) or nullptr
+    DirectoryElementListView * getSelectedList();
+    DirectoryElementListView * getFirstList();
+
+    // After a jump to another file with the virtual keyboard, select the first element of the type that was selected
+    // (possibly once the file is scanned)
+    void selectFirstElementIfRequired(const DirectoryFileData * d);
+
+    // Display of the virtual keyboard, updated once when several changes occur
+    void scheduleKeyboardDisplayUpdate();
+    void updateKeyboardDisplay();
+
     Ui::DirectoryBrowser *ui;
     QString _dirPath;
     QFileSystemWatcher * _watcher;
     QMap<QString, QDateTime> _currentFiles;
-    bool _hasKeyboard;
+    DialogKeyboard * _dialogKeyboard;
     DirectoryPreview * _preview;
+    bool _keyboardDisplayUpdateScheduled;
+    ElementType _elementTypeToSelect;
+    QString _elementTypeToSelectPath;
 };
 
 #endif // DIRECTORYBROWSER_H

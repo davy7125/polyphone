@@ -40,6 +40,11 @@ public:
     void setSf2Index(int sf2Index) { _sf2Index = sf2Index; }
     void expandAndScrollToSelection();
 
+    // Sample, instrument or preset displayed before (direction < 0) or after (direction > 0) another one, or the first
+    // element displayed of a type, elementUnknown if there is none
+    EltID getNeighbor(EltID id, int direction);
+    EltID getFirstElement(ElementType type);
+
 public slots:
     void onSelectionChanged(const IdList &selectedIds);
     void saveExpandedState();

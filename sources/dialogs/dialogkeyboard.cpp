@@ -28,6 +28,7 @@
 #include "editortoolbar.h"
 #include "bannermenu.h"
 #include "dialogdecoration.h"
+#include "keyboarddisplay.h"
 #include <QApplication>
 #include <QCheckBox>
 
@@ -89,6 +90,12 @@ DialogKeyboard::DialogKeyboard(QWidget *parent) :
     checkEffects->setChecked(configuration->getValue(ConfManager::SECTION_DISPLAY, "effect_area_expanded", false).toBool());
     connect(checkEffects, SIGNAL(toggled(bool)), this, SLOT(onEffectsToggled(bool)));
     updateAreaVisibility();
+
+    // Navigation among the elements and files
+    connect(ui->display, &KeyboardDisplay::previousElementRequested, this, [this]() { emit navigationRequested(Tab::PREVIOUS_ELEMENT); });
+    connect(ui->display, &KeyboardDisplay::nextElementRequested, this, [this]() { emit navigationRequested(Tab::NEXT_ELEMENT); });
+    connect(ui->display, &KeyboardDisplay::previousFileRequested, this, [this]() { emit navigationRequested(Tab::PREVIOUS_FILE); });
+    connect(ui->display, &KeyboardDisplay::nextFileRequested, this, [this]() { emit navigationRequested(Tab::NEXT_FILE); });
 
     // The keys played with the computer keyboard are captured whatever the widget having the focus in this window
     qApp->installEventFilter(this);
@@ -286,10 +293,24 @@ void DialogKeyboard::keyPressEvent(QKeyEvent * event)
 
 bool DialogKeyboard::eventFilter(QObject * watched, QEvent * event)
 {
-    // Keys sent to another widget of this window (effect area, combobox, ...) but played by the keyboard
     if (event->type() == QEvent::KeyPress || event->type() == QEvent::KeyRelease)
     {
         QWidget * widget = qobject_cast<QWidget *>(watched);
+
+        // Page Up / Page Down for the previous / next element, with Shift for the files, whatever the widget having the
+        // focus in this window
+        QKeyEvent * keyEvent = static_cast<QKeyEvent *>(event);
+        if (widget != nullptr && widget->window() == this &&
+            (keyEvent->key() == Qt::Key_PageUp || keyEvent->key() == Qt::Key_PageDown) &&
+            (keyEvent->modifiers() & ~(Qt::ShiftModifier | Qt::KeypadModifier)) == 0)
+        {
+            if (event->type() == QEvent::KeyPress)
+                ui->display->triggerButton(keyEvent->key() == Qt::Key_PageDown,
+                                           (keyEvent->modifiers() & Qt::ShiftModifier) != 0);
+            return true;
+        }
+
+        // Keys sent to another widget of this window (effect area, combobox, ...) but played by the keyboard
         if (widget != nullptr && widget->window() == this && widget != ui->keyboard && !ui->keyboard->isAncestorOf(widget) &&
             ui->keyboard->capturesKey(static_cast<QKeyEvent *>(event)))
         {
@@ -357,4 +378,9 @@ bool DialogKeyboard::processPolyPressureChanged(int channel, int key, int pressu
 PianoKeybdCustom * DialogKeyboard::getKeyboard()
 {
     return ui->keyboard;
+}
+
+void DialogKeyboard::setDisplayContent(const KeyboardDisplayContent &content)
+{
+    ui->display->setContent(content);
 }

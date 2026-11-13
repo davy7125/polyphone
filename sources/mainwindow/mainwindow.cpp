@@ -145,6 +145,16 @@ MainWindow::MainWindow(bool playerMode, QWidget *parent) : QWidget(parent),
     connect(_recorder, SIGNAL(midiFileOpened(QString)), this, SLOT(onMidiFileOpened(QString)));
     connect(ui->tabBar, SIGNAL(openFile(QString)), this, SLOT(openFiles(QString)), Qt::QueuedConnection);
 
+    // Previous / next element or file asked with the virtual keyboard, in the current tab
+    if (_keyboard != nullptr)
+    {
+        connect(_keyboard, &DialogKeyboard::navigationRequested, this, [this](Tab::TabAction action) {
+            Tab * currentTab = dynamic_cast<Tab *>(ui->stackedWidget->currentWidget());
+            if (currentTab != nullptr)
+                currentTab->onActionRequired(action);
+        });
+    }
+
     // Possibly start the server giving access to the soundfonts to AI assistants
     if (!playerMode)
         McpServer::getInstance()->applyConfiguration();

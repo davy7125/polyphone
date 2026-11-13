@@ -27,6 +27,8 @@
 
 #include <QDialog>
 #include "imidilistener.h"
+#include "tab.h"
+#include "keyboarddisplaycontent.h"
 class PianoKeybdCustom;
 class ControllerArea;
 
@@ -49,12 +51,18 @@ public:
     // Keyboard
     PianoKeybdCustom * getKeyboard();
 
+    // Element played and navigation possibilities, displayed below the banner
+    void setDisplayContent(const KeyboardDisplayContent &content);
+
     // Reaction to MIDI signals
     bool processKey(int channel, int key, int vel) override;
     bool processPolyPressureChanged(int channel, int key, int pressure) override;
 
 signals:
     void processKeyMainThread(int channel, int key, int vel);
+
+    // Previous / next element or file asked with the buttons of the display or Page Up / Page Down (Shift for the files)
+    void navigationRequested(Tab::TabAction action);
 
 protected:
     void showEvent(QShowEvent * event) override;

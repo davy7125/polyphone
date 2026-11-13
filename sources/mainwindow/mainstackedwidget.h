@@ -48,6 +48,7 @@ public:
 
 signals:
     void tabCloseRequested(QWidget * widget);
+    void tabsChanged(); // Tab added, removed or moved
 
 private slots:
     void onHomeCliked(bool clicked);

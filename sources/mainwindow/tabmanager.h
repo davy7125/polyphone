@@ -37,6 +37,7 @@ class SoundfontViewer;
 class PlayerOptions;
 class DialogKeyboard;
 class DirectoryBrowser;
+class Editor;
 
 class TabManager : public QObject
 {
@@ -98,6 +99,10 @@ public slots:
     /// Display the editor of a soundfont and select an element in it, return false if there is no editor
     bool showElement(EltID id);
 
+    /// Editor before (direction < 0) or after (direction > 0) an editor in the order of the tabs, other kinds of tabs
+    /// being skipped (nullptr if none)
+    Editor * getNeighborEditor(Editor * editor, int direction);
+
     /// Close the current tab
     void closeCurrentTab();
 
@@ -128,6 +133,10 @@ private slots:
     void openSoundfont(QString filePath, EltID id);
     void onPreviewChanged();
 
+    /// Display of the virtual keyboard for the current tab (updated once if several tabs change)
+    void scheduleKeyboardDisplayUpdate();
+    void updateKeyboardDisplay();
+
 private:
     explicit TabManager(DialogKeyboard * dialogKeyboard, MainStackedWidget * stackedWidget);
     ~TabManager();
@@ -143,6 +152,7 @@ private:
     QList<SoundfontTab *> _soundfontTabs;
     QList<SoundfontViewer *> _viewerTabs;
     QList<DirectoryBrowser *> _dirBrowserTabs;
+    bool _keyboardDisplayUpdateScheduled;
 
     static TabManager * s_instance;
 };

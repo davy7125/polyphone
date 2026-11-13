@@ -30,6 +30,7 @@
 #include "soundfontmanager.h"
 #include "directorypreview.h"
 #include "editortoolbar.h"
+#include "dialogkeyboard.h"
 #include <QInputDialog>
 #include <QMessageBox>
 #include <QKeyEvent>
@@ -37,8 +38,10 @@
 DirectoryBrowser::DirectoryBrowser(DialogKeyboard * dialogKeyboard, QWidget *parent) : Tab(parent),
     ui(new Ui::DirectoryBrowser),
     _watcher(nullptr),
-    _hasKeyboard(dialogKeyboard != nullptr),
-    _preview(new DirectoryPreview(dialogKeyboard, this))
+    _dialogKeyboard(dialogKeyboard),
+    _preview(new DirectoryPreview(dialogKeyboard, this)),
+    _keyboardDisplayUpdateScheduled(false),
+    _elementTypeToSelect(elementUnknown)
 {
     ui->setupUi(this);
 
@@ -84,7 +87,7 @@ DirectoryBrowser::DirectoryBrowser(DialogKeyboard * dialogKeyboard, QWidget *par
     ui->pushShowKeyboard->initialize(tr("Virtual keyboard"), ":/icons/piano.svg");
     ui->pushShowRecorder->initialize(tr("Recorder"), ":/icons/recorder.svg");
     EditorToolBar::addMidiPlayerButton(ui->pushShowMidiPlayer);
-    if (_hasKeyboard)
+    if (_dialogKeyboard != nullptr)
     {
         EditorToolBar::addKeyboardButton(ui->pushShowKeyboard);
         EditorToolBar::addRecorderButton(ui->pushShowRecorder);
@@ -112,6 +115,19 @@ DirectoryBrowser::DirectoryBrowser(DialogKeyboard * dialogKeyboard, QWidget *par
     connect(ui->listSamples, SIGNAL(itemDoubleClicked(QString,EltID)), this, SIGNAL(itemDoubleClicked(QString,EltID)));
     connect(ui->listInstruments, SIGNAL(itemDoubleClicked(QString,EltID)), this, SIGNAL(itemDoubleClicked(QString,EltID)));
     connect(ui->listPresets, SIGNAL(itemDoubleClicked(QString,EltID)), this, SIGNAL(itemDoubleClicked(QString,EltID)));
+
+    // Display of the virtual keyboard: selection, elements displayed (filter, sort, scan)
+    connect(ui->lineSearch, &QLineEdit::textEdited, this, &DirectoryBrowser::scheduleKeyboardDisplayUpdate);
+    QList<QAbstractItemView *> views;
+    views << ui->listView << ui->listSamples << ui->listInstruments << ui->listPresets;
+    foreach (QAbstractItemView * view, views)
+    {
+        connect(view->model(), &QAbstractItemModel::rowsInserted, this, &DirectoryBrowser::scheduleKeyboardDisplayUpdate);
+        connect(view->model(), &QAbstractItemModel::rowsRemoved, this, &DirectoryBrowser::scheduleKeyboardDisplayUpdate);
+        connect(view->model(), &QAbstractItemModel::layoutChanged, this, &DirectoryBrowser::scheduleKeyboardDisplayUpdate);
+        connect(view->model(), &QAbstractItemModel::modelReset, this, &DirectoryBrowser::scheduleKeyboardDisplayUpdate);
+    }
+
     ui->lineSearch->installEventFilter(this);
     ui->listView->installEventFilter(this);
     ui->pushShowSamples->installEventFilter(this);
@@ -140,7 +156,7 @@ DirectoryBrowser::DirectoryBrowser(DialogKeyboard * dialogKeyboard, QWidget *par
 DirectoryBrowser::~DirectoryBrowser()
 {
     EditorToolBar::removeMidiPlayerButton(ui->pushShowMidiPlayer);
-    if (_hasKeyboard)
+    if (_dialogKeyboard != nullptr)
     {
         EditorToolBar::removeKeyboardButton(ui->pushShowKeyboard);
         EditorToolBar::removeRecorderButton(ui->pushShowRecorder);
@@ -282,6 +298,8 @@ void DirectoryBrowser::onSelectionChanged(QItemSelection selected, QItemSelectio
         _preview->setFile(d->getPath(), d->getStatus() == DirectoryFileData::NOT_INITIALIZED,
                           d->getStatus() == DirectoryFileData::OK);
     setPreviewElement(EltID(elementUnknown));
+    selectFirstElementIfRequired(d);
+    scheduleKeyboardDisplayUpdate();
 }
 
 void DirectoryBrowser::onFileDataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight)
@@ -369,6 +387,7 @@ void DirectoryBrowser::onSmplSelectionChanged(QItemSelection selected, QItemSele
     ui->listPresets->viewport()->update();
 
     setPreviewElement(ui->listSamples->getSelectedElement());
+    scheduleKeyboardDisplayUpdate();
 }
 
 void DirectoryBrowser::onInstSelectionChanged(QItemSelection selected, QItemSelection deselected)
@@ -387,6 +406,7 @@ void DirectoryBrowser::onInstSelectionChanged(QItemSelection selected, QItemSele
     ui->listPresets->viewport()->update();
 
     setPreviewElement(ui->listInstruments->getSelectedElement());
+    scheduleKeyboardDisplayUpdate();
 }
 
 void DirectoryBrowser::onPrstSelectionChanged(QItemSelection selected, QItemSelection deselected)
@@ -405,6 +425,7 @@ void DirectoryBrowser::onPrstSelectionChanged(QItemSelection selected, QItemSele
     ui->listInstruments->viewport()->update();
 
     setPreviewElement(ui->listPresets->getSelectedElement());
+    scheduleKeyboardDisplayUpdate();
 }
 
 void DirectoryBrowser::onActionRequired(TabAction action)
@@ -415,6 +436,36 @@ void DirectoryBrowser::onActionRequired(TabAction action)
         ui->lineSearch->selectAll();
         ui->lineSearch->setFocus();
         break;
+    case Tab::PREVIOUS_ELEMENT: case Tab::NEXT_ELEMENT: {
+        // The selection changes, the focus staying where it is (virtual keyboard)
+        int direction = (action == Tab::NEXT_ELEMENT ? 1 : -1);
+        DirectoryElementListView * list = getSelectedList();
+        if (list != nullptr)
+        {
+            int row = list->getSelectedRow() + direction;
+            if (row >= 0 && row < list->getRowCount())
+                list->selectRow(row);
+        }
+        else if (direction > 0 && (list = getFirstList()) != nullptr)
+            list->selectRow(0); // Nothing selected: first element
+    } break;
+    case Tab::PREVIOUS_FILE: case Tab::NEXT_FILE: {
+        QModelIndex index = ui->listView->currentIndex();
+        int row = index.isValid() ? index.row() + (action == Tab::NEXT_FILE ? 1 : -1) :
+                      (action == Tab::NEXT_FILE ? 0 : -1); // Nothing selected: first file
+        if (row >= 0 && row < ui->listView->model()->rowCount())
+        {
+            // The first element of the type selected will be selected in the new file
+            index = ui->listView->model()->index(row, 0);
+            DirectoryElementListView * list = getSelectedList();
+            const DirectoryFileData * d = index.data(Qt::UserRole).value<const DirectoryFileData *>();
+            _elementTypeToSelect = (list != nullptr && d != nullptr) ? list->getType() : elementUnknown;
+            _elementTypeToSelectPath = (d != nullptr ? d->getPath() : "");
+
+            ui->listView->setCurrentIndex(index);
+            ui->listView->scrollTo(index);
+        }
+    } break;
     default:
         break;
     }
@@ -431,6 +482,7 @@ void DirectoryBrowser::onDisplayOptionsChanged(int options)
 void DirectoryBrowser::on_pushShowSamples_toggled(bool checked)
 {
     updateShowIcon(ui->pushShowSamples);
+    scheduleKeyboardDisplayUpdate();
     ui->listSamples->setVisible(checked);
     updateVerticalSpacer();
     ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "directory_browser_show_samples", checked);
@@ -439,6 +491,7 @@ void DirectoryBrowser::on_pushShowSamples_toggled(bool checked)
 void DirectoryBrowser::on_pushShowInstruments_toggled(bool checked)
 {
     updateShowIcon(ui->pushShowInstruments);
+    scheduleKeyboardDisplayUpdate();
     ui->listInstruments->setVisible(checked);
     updateVerticalSpacer();
     ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "directory_browser_show_instruments", checked);
@@ -447,6 +500,7 @@ void DirectoryBrowser::on_pushShowInstruments_toggled(bool checked)
 void DirectoryBrowser::on_pushShowPresets_toggled(bool checked)
 {
     updateShowIcon(ui->pushShowPresets);
+    scheduleKeyboardDisplayUpdate();
     ui->listPresets->setVisible(checked);
     updateVerticalSpacer();
     ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "directory_browser_show_presets", checked);
@@ -493,6 +547,105 @@ void DirectoryBrowser::showEvent(QShowEvent * event)
 {
     Tab::showEvent(event);
     _preview->onShown();
+    scheduleKeyboardDisplayUpdate();
+}
+
+DirectoryElementListView * DirectoryBrowser::getSelectedList()
+{
+    QList<DirectoryElementListView *> lists;
+    lists << ui->listPresets << ui->listInstruments << ui->listSamples;
+    foreach (DirectoryElementListView * list, lists)
+        if (list->getSelectedRow() >= 0)
+            return list;
+    return nullptr;
+}
+
+DirectoryElementListView * DirectoryBrowser::getFirstList()
+{
+    QList<QPair<DirectoryElementListView *, QPushButton *>> lists;
+    lists << QPair<DirectoryElementListView *, QPushButton *>(ui->listPresets, ui->pushShowPresets)
+          << QPair<DirectoryElementListView *, QPushButton *>(ui->listInstruments, ui->pushShowInstruments)
+          << QPair<DirectoryElementListView *, QPushButton *>(ui->listSamples, ui->pushShowSamples);
+    for (int i = 0; i < lists.count(); i++)
+        if (lists[i].second->isChecked() && lists[i].first->getRowCount() > 0)
+            return lists[i].first;
+    return nullptr;
+}
+
+void DirectoryBrowser::selectFirstElementIfRequired(const DirectoryFileData * d)
+{
+    if (_elementTypeToSelect == elementUnknown)
+        return;
+
+    // Another file selected meanwhile
+    if (d == nullptr || d->getPath() != _elementTypeToSelectPath)
+    {
+        _elementTypeToSelect = elementUnknown;
+        return;
+    }
+
+    DirectoryElementListView * list = (_elementTypeToSelect == elementSmpl ? ui->listSamples :
+                                           (_elementTypeToSelect == elementInst ? ui->listInstruments : ui->listPresets));
+    if (list->getRowCount() > 0)
+    {
+        _elementTypeToSelect = elementUnknown;
+        list->selectRow(0);
+    }
+    else if (d->getStatus() != DirectoryFileData::NOT_INITIALIZED)
+        _elementTypeToSelect = elementUnknown; // No element of this type
+    // Otherwise the file is being scanned: this function is called again once the scan is over
+}
+
+KeyboardDisplayContent DirectoryBrowser::getKeyboardDisplayContent()
+{
+    KeyboardDisplayContent content;
+
+    // File selected
+    QModelIndex index = ui->listView->currentIndex();
+    int fileCount = ui->listView->model()->rowCount();
+    if (index.isValid())
+    {
+        const DirectoryFileData * d = index.data(Qt::UserRole).value<const DirectoryFileData *>();
+        if (d != nullptr)
+            content.fileName = d->getFileName();
+        content.hasPreviousFile = index.row() > 0;
+        content.hasNextFile = index.row() < fileCount - 1;
+    }
+    else
+        content.hasNextFile = fileCount > 0;
+
+    // Element selected
+    DirectoryElementListView * list = getSelectedList();
+    if (list != nullptr)
+    {
+        int row = list->getSelectedRow();
+        content.elementType = list->getType();
+        list->getSelectedTexts(content.elementNumber, content.elementName);
+        content.hasPreviousElement = row > 0;
+        content.hasNextElement = row < list->getRowCount() - 1;
+    }
+    else
+        content.hasNextElement = (getFirstList() != nullptr);
+
+    return content;
+}
+
+void DirectoryBrowser::scheduleKeyboardDisplayUpdate()
+{
+    if (_dialogKeyboard == nullptr || _keyboardDisplayUpdateScheduled)
+        return;
+    _keyboardDisplayUpdateScheduled = true;
+    QMetaObject::invokeMethod(this, [this]() {
+        _keyboardDisplayUpdateScheduled = false;
+        updateKeyboardDisplay();
+    }, Qt::QueuedConnection);
+}
+
+void DirectoryBrowser::updateKeyboardDisplay()
+{
+    // This explorer may not be the one that is displayed
+    if (_dialogKeyboard != nullptr && this->isVisible())
+        _dialogKeyboard->setDisplayContent(getKeyboardDisplayContent());
 }
 
 void DirectoryBrowser::hideEvent(QHideEvent * event)

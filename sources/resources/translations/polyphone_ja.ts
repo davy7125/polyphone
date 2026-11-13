@@ -1995,12 +1995,12 @@ repository</source>
         <translation>表示オプション</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="85"/>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="86"/>
         <source>MIDI controllers</source>
         <translation>MIDIコントローラー</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="88"/>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="89"/>
         <source>Effects</source>
         <translation>エフェクト</translation>
     </message>
@@ -2047,7 +2047,7 @@ repository</source>
     </message>
     <message>
         <location filename="../../dialogs/dialogmidiplayer.ui" line="84"/>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="186"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="197"/>
         <source>Open a MIDI file</source>
         <translation>MIDIファイルを開く</translation>
     </message>
@@ -2062,105 +2062,105 @@ repository</source>
         <translation>再生設定</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="369"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="425"/>
         <source>Tempo</source>
         <translation>テンポ</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="384"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="440"/>
         <source>The percussions (bank 128) are not transposed</source>
         <translation>パーカッション（バンク128）はトランスポーズされません</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="112"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="118"/>
         <source>Channel</source>
         <translation>チャンネル</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="112"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="118"/>
         <source>Soundfont</source>
         <translation>SoundFont</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="112"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="118"/>
         <source>Preset</source>
         <translation>プリセット</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="112"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="118"/>
         <source>Volume</source>
         <translation>ボリューム</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="132"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="138"/>
         <source>Open a MIDI file to play it with the soundfonts that are open.</source>
         <translation>MIDIファイルを開くと、開いているSoundFontで再生できます。</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="187"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="198"/>
         <source>MIDI files</source>
         <translation>MIDIファイル</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="365"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="421"/>
         <source>Loop playback</source>
         <translation>ループ再生</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="375"/>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="436"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="431"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="492"/>
         <source>%1%</source>
         <comment>percentage</comment>
         <translation>%1%</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="376"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="432"/>
         <source>Pitch</source>
         <translation>ピッチ</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="402"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="458"/>
         <source>Export audio...</source>
         <translation>オーディオをエクスポート...</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="419"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="475"/>
         <source>Tempo of the file: %1 bpm, variable</source>
         <translation>ファイルのテンポ：%1 bpm（可変）</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="419"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="475"/>
         <source>Tempo of the file: %1 bpm</source>
         <translation>ファイルのテンポ：%1 bpm</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="421"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="477"/>
         <source>File without tempo (SMPTE time code)</source>
         <translation>テンポのないファイル（SMPTEタイムコード）</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="481"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="537"/>
         <source>Pause</source>
         <translation>一時停止</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="481"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="537"/>
         <source>Play</source>
         <translation>再生</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="598"/>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="643"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="654"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="699"/>
         <source>Export audio</source>
         <translation>オーディオをエクスポート</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="601"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="657"/>
         <source>Wav file</source>
         <translation>Wavファイル</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogmidiplayer.cpp" line="685"/>
+        <location filename="../../dialogs/dialogmidiplayer.cpp" line="741"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
@@ -2900,94 +2900,94 @@ for a signal</source>
         <translation>ファイル、サンプル、インストゥルメント、またはプリセットを検索...</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="82"/>
+        <location filename="../../directory/directorybrowser.cpp" line="86"/>
         <source>MIDI player</source>
         <translation>MIDIプレーヤー</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="83"/>
+        <location filename="../../directory/directorybrowser.cpp" line="87"/>
         <source>Virtual keyboard</source>
         <translation>仮想キーボード</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="84"/>
+        <location filename="../../directory/directorybrowser.cpp" line="88"/>
         <source>Recorder</source>
         <translation>レコーダー</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="160"/>
+        <location filename="../../directory/directorybrowser.cpp" line="177"/>
         <source>The directory &quot;%1&quot; does not exist.</source>
         <oldsource>The directory &quot;%1&quot; doesn&apos;t exist.</oldsource>
         <translation>ディレクトリ「%1」は存在しません。</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="167"/>
+        <location filename="../../directory/directorybrowser.cpp" line="184"/>
         <source>The directory &quot;%1&quot; is not readable.</source>
         <translation>ディレクトリ「%1」を読み取れません。</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="314"/>
+        <location filename="../../directory/directorybrowser.cpp" line="333"/>
         <source>Rename</source>
         <translation>名前の変更</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="315"/>
+        <location filename="../../directory/directorybrowser.cpp" line="334"/>
         <source>New name:</source>
         <translation>新しい名前:</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="317"/>
+        <location filename="../../directory/directorybrowser.cpp" line="336"/>
         <source>&amp;Cancel</source>
         <oldsource>Cancel</oldsource>
         <translation>キャンセル(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="318"/>
+        <location filename="../../directory/directorybrowser.cpp" line="337"/>
         <source>&amp;Ok</source>
         <oldsource>Ok</oldsource>
         <translation>OK(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="329"/>
+        <location filename="../../directory/directorybrowser.cpp" line="348"/>
         <source>A file with this name already exists.</source>
         <translation>この名前のファイルは既に存在します。</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="329"/>
-        <location filename="../../directory/directorybrowser.cpp" line="334"/>
-        <location filename="../../directory/directorybrowser.cpp" line="352"/>
+        <location filename="../../directory/directorybrowser.cpp" line="348"/>
+        <location filename="../../directory/directorybrowser.cpp" line="353"/>
+        <location filename="../../directory/directorybrowser.cpp" line="371"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="334"/>
+        <location filename="../../directory/directorybrowser.cpp" line="353"/>
         <source>Cannot rename file &quot;%1&quot;.</source>
         <translation>ファイル「%1」の名前を変更できませんでした。</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="342"/>
+        <location filename="../../directory/directorybrowser.cpp" line="361"/>
         <source>Confirm deletion</source>
         <translation>削除の確認</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="343"/>
+        <location filename="../../directory/directorybrowser.cpp" line="362"/>
         <source>Are you sure you want to delete file &quot;%1&quot;?</source>
         <translation>本当にファイル「%1」を削除しますか？</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="345"/>
+        <location filename="../../directory/directorybrowser.cpp" line="364"/>
         <source>&amp;Yes</source>
         <oldsource>Yes</oldsource>
         <translation>はい(&amp;Y)</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="346"/>
+        <location filename="../../directory/directorybrowser.cpp" line="365"/>
         <source>&amp;No</source>
         <oldsource>No</oldsource>
         <translation>いいえ(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../../directory/directorybrowser.cpp" line="352"/>
+        <location filename="../../directory/directorybrowser.cpp" line="371"/>
         <source>Cannot delete file &quot;%1&quot;.</source>
         <translation>ファイル「%1」を削除できませんでした。</translation>
     </message>
@@ -3048,78 +3048,78 @@ for a signal</source>
 <context>
     <name>DirectoryFileData</name>
     <message>
-        <location filename="../../directory/directoryfiledata.cpp" line="298"/>
+        <location filename="../../directory/directoryfiledata.cpp" line="307"/>
         <source>Invalid link</source>
         <translation>無効なリンク</translation>
     </message>
     <message>
-        <location filename="../../directory/directoryfiledata.cpp" line="301"/>
+        <location filename="../../directory/directoryfiledata.cpp" line="310"/>
         <source>Mono</source>
         <comment>opposite to stereo</comment>
         <translation>モノラル</translation>
     </message>
     <message>
-        <location filename="../../directory/directoryfiledata.cpp" line="304"/>
+        <location filename="../../directory/directoryfiledata.cpp" line="313"/>
         <source>Stereo right</source>
         <translation>ステレオ右</translation>
     </message>
     <message>
-        <location filename="../../directory/directoryfiledata.cpp" line="307"/>
+        <location filename="../../directory/directoryfiledata.cpp" line="316"/>
         <source>Stereo left</source>
         <translation>ステレオ左</translation>
     </message>
     <message>
-        <location filename="../../directory/directoryfiledata.cpp" line="310"/>
+        <location filename="../../directory/directoryfiledata.cpp" line="319"/>
         <source>Stereo non defined</source>
         <translation>ステレオ未定義</translation>
     </message>
     <message>
-        <location filename="../../directory/directoryfiledata.cpp" line="314"/>
+        <location filename="../../directory/directoryfiledata.cpp" line="323"/>
         <source>s</source>
         <comment>unit for seconds</comment>
         <translation>秒</translation>
     </message>
     <message>
-        <location filename="../../directory/directoryfiledata.cpp" line="317"/>
+        <location filename="../../directory/directoryfiledata.cpp" line="326"/>
         <source>Loop</source>
         <translation>ループ</translation>
     </message>
     <message>
-        <location filename="../../directory/directoryfiledata.cpp" line="318"/>
+        <location filename="../../directory/directoryfiledata.cpp" line="327"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
         <translation>Hz</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../directory/directoryfiledata.cpp" line="328"/>
+        <location filename="../../directory/directoryfiledata.cpp" line="337"/>
         <source>%n division(s)</source>
         <translation>
             <numerusform>%n個のディビジョン</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../directory/directoryfiledata.cpp" line="329"/>
+        <location filename="../../directory/directoryfiledata.cpp" line="338"/>
         <source>%n parameter(s)</source>
         <translation>
             <numerusform>%n個のパラメータ</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../directory/directoryfiledata.cpp" line="330"/>
+        <location filename="../../directory/directoryfiledata.cpp" line="339"/>
         <source>%n modulator(s)</source>
         <translation>
             <numerusform>%n個のモジュレーター</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../directory/directoryfiledata.cpp" line="331"/>
+        <location filename="../../directory/directoryfiledata.cpp" line="340"/>
         <source>%n distinct key range(s)</source>
         <translation>
             <numerusform>%n個の異なるキー範囲</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../directory/directoryfiledata.cpp" line="332"/>
+        <location filename="../../directory/directoryfiledata.cpp" line="341"/>
         <source>%n distinct velocity range(s)</source>
         <translation>
             <numerusform>%n個の異なるベロシティ範囲</numerusform>
@@ -3339,7 +3339,7 @@ for a signal</source>
         <translation>ファイルを開けません</translation>
     </message>
     <message>
-        <location filename="../../editor/editor.cpp" line="529"/>
+        <location filename="../../editor/editor.cpp" line="541"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
@@ -3853,6 +3853,34 @@ for a signal</source>
     </message>
 </context>
 <context>
+    <name>KeyboardDisplay</name>
+    <message>
+        <location filename="../../dialogs/keyboarddisplay.cpp" line="293"/>
+        <source>Previous file</source>
+        <translation>前のファイル</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/keyboarddisplay.cpp" line="295"/>
+        <source>Previous element</source>
+        <translation>前の要素</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/keyboarddisplay.cpp" line="297"/>
+        <source>Next element</source>
+        <translation>次の要素</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/keyboarddisplay.cpp" line="299"/>
+        <source>Next file</source>
+        <translation>次のファイル</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/keyboarddisplay.cpp" line="375"/>
+        <source>No playable element selected</source>
+        <translation>演奏できる要素が選択されていません</translation>
+    </message>
+</context>
+<context>
     <name>LevelMeter</name>
     <message>
         <location filename="../../editor/widgets/levelmeter.cpp" line="64"/>
@@ -3934,12 +3962,12 @@ for a signal</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="262"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="272"/>
         <source>&amp;Save</source>
         <translation>保存(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="248"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="258"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
@@ -3949,42 +3977,42 @@ for a signal</source>
         <translation>Polyphone SoundFont エディター</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="239"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="249"/>
         <source>Untitled</source>
         <translation>無題</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="249"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="259"/>
         <source>Save before exiting?</source>
         <translation>閉じる前に保存しますか？</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="252"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="262"/>
         <source>The following files have been modified:</source>
         <translation>以下のファイルが変更されています:</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="259"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="269"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>ファイル「%1」は変更されています。</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="263"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="273"/>
         <source>&amp;Cancel</source>
         <translation>キャンセル(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="264"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="274"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>保存しない(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="352"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="362"/>
         <source>Opening files</source>
         <translation>ファイルを開いています</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/mainwindow.cpp" line="362"/>
+        <location filename="../../mainwindow/mainwindow.cpp" line="372"/>
         <source>Opening a directory</source>
         <translation>ディレクトリを開いています</translation>
     </message>
@@ -4062,23 +4090,23 @@ for a signal</source>
 <context>
     <name>MidiFile</name>
     <message>
-        <location filename="../../midi_player/midifile.cpp" line="105"/>
+        <location filename="../../midi_player/midifile.cpp" line="111"/>
         <source>Cannot read file &quot;%1&quot;.</source>
         <translation>ファイル「%1」を読み込めません。</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midifile.cpp" line="110"/>
-        <location filename="../../midi_player/midifile.cpp" line="212"/>
+        <location filename="../../midi_player/midifile.cpp" line="116"/>
+        <location filename="../../midi_player/midifile.cpp" line="218"/>
         <source>This is not a MIDI file.</source>
         <translation>これはMIDIファイルではありません。</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midifile.cpp" line="172"/>
+        <location filename="../../midi_player/midifile.cpp" line="178"/>
         <source>This MIDI file contains no notes.</source>
         <translation>このMIDIファイルにはノートが含まれていません。</translation>
     </message>
     <message>
-        <location filename="../../midi_player/midifile.cpp" line="231"/>
+        <location filename="../../midi_player/midifile.cpp" line="237"/>
         <source>The time division of this MIDI file is not valid.</source>
         <translation>このMIDIファイルの時間分解能が無効です。</translation>
     </message>
@@ -4443,167 +4471,167 @@ default mod.</source>
 <context>
     <name>Options</name>
     <message>
-        <location filename="../../options.cpp" line="33"/>
+        <location filename="../../options.cpp" line="34"/>
         <source>Invalid value &quot;%1&quot; for the option &quot;%2&quot;.</source>
         <translation>オプション「%2」の値「%1」は無効です。</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="48"/>
+        <location filename="../../options.cpp" line="49"/>
         <source>Display this help.</source>
         <translation>このヘルプを表示します。</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="50"/>
+        <location filename="../../options.cpp" line="51"/>
         <source>Display the version.</source>
         <translation>バージョンを表示します。</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="52"/>
+        <location filename="../../options.cpp" line="53"/>
         <source>Convert the files into sf2, sf3, sfz, csv or dls. Without this option, the format is the extension of the output file if given.</source>
         <translation>ファイルを sf2、sf3、sfz、csv、dls に変換します。このオプションがない場合、出力ファイルが指定されていればその拡張子が形式になります。</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="54"/>
+        <location filename="../../options.cpp" line="55"/>
         <source>Play a MIDI file with the soundfont and write the result in a wav file.</source>
         <translation>MIDIファイルをSoundFontで再生し、結果をwavファイルに書き込みます。</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="56"/>
+        <location filename="../../options.cpp" line="57"/>
         <source>Open Polyphone in synthesizer mode.</source>
         <translation>Polyphoneをシンセサイザーモードで開きます。</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="58"/>
+        <location filename="../../options.cpp" line="59"/>
         <source>Reset the configuration of Polyphone (settings, window geometry, history, etc.).</source>
         <translation>Polyphoneの構成（設定、ウィンドウの配置、履歴など）をリセットします。</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="60"/>
+        <location filename="../../options.cpp" line="61"/>
         <source>Output file, the extension being optional. A name alone is written in the output directory, a relative path starts from the current directory.</source>
         <translation>出力ファイル（拡張子は省略可）。名前のみの場合は出力ディレクトリに書き込まれ、相対パスは現在のディレクトリが起点になります。</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="62"/>
+        <location filename="../../options.cpp" line="63"/>
         <source>Output directory, by default the directory of the input file (or of the MIDI file).</source>
         <translation>出力ディレクトリ。既定では入力ファイル（またはMIDIファイル）のディレクトリです。</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="64"/>
+        <location filename="../../options.cpp" line="65"/>
         <source>Replace an existing output file.</source>
         <translation>既存の出力ファイルを置き換えます。</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="66"/>
+        <location filename="../../options.cpp" line="67"/>
         <source>Conversion to sf3: compression quality, &quot;low&quot;, &quot;medium&quot; (default) or &quot;high&quot;.</source>
         <translation>sf3への変換：圧縮品質、「low」、「medium」（既定）または「high」。</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="68"/>
+        <location filename="../../options.cpp" line="69"/>
         <source>Conversion to sfz: prefix each preset with its number.</source>
         <translation>sfzへの変換：各プリセットの前にその番号を付けます。</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="70"/>
+        <location filename="../../options.cpp" line="71"/>
         <source>Conversion to sfz: create a directory per bank.</source>
         <translation>sfzへの変換：バンクごとにディレクトリを作成します。</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="72"/>
+        <location filename="../../options.cpp" line="73"/>
         <source>Conversion to sfz: sort the presets according to the General MIDI classification.</source>
         <translation>sfzへの変換：General MIDI分類に従ってプリセットを並べ替えます。</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="74"/>
+        <location filename="../../options.cpp" line="75"/>
         <source>Conversion to csv: export the raw values stored in the soundfont instead of values with units.</source>
         <translation>csvへの変換：単位付きの値ではなく、SoundFontに格納されている生の値をエクスポートします。</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="76"/>
+        <location filename="../../options.cpp" line="77"/>
         <source>Synthesizer mode: MIDI channel, from 1 to 16, &quot;all&quot; (default) for all channels processed as one, &quot;each&quot; for each channel separately.</source>
         <translation>シンセサイザーモード：MIDIチャンネル。1～16、「all」（既定）はすべてのチャンネルを1つとして処理、「each」は各チャンネルを個別に処理します。</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="78"/>
+        <location filename="../../options.cpp" line="79"/>
         <source>Synthesizer mode: several presets can be selected and played at the same time.</source>
         <translation>シンセサイザーモード：複数のプリセットを同時に選択して演奏できます。</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="80"/>
+        <location filename="../../options.cpp" line="81"/>
         <source>Synthesizer mode: the keys corresponding to the preset numbers select the presets (&quot;on&quot;) or select and deselect them (&quot;toggle&quot;).</source>
         <translation>シンセサイザーモード：プリセット番号に対応するキーでプリセットを選択（「on」）、または選択と選択解除（「toggle」）します。</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="82"/>
+        <location filename="../../options.cpp" line="83"/>
         <source>Start the MCP server for this session even if it is disabled in the settings. A new instance of Polyphone is opened.</source>
         <translation>設定で無効になっていても、このセッションでMCPサーバーを起動します。Polyphoneの新しいインスタンスが開きます。</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="84"/>
+        <location filename="../../options.cpp" line="85"/>
         <source>Port of the MCP server, implying --mcp. By default, the port of the settings.</source>
         <translation>MCPサーバーのポート（--mcp を含む）。既定では設定のポートです。</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="143"/>
+        <location filename="../../options.cpp" line="144"/>
         <source>Unknown option &quot;%1&quot;.</source>
         <translation>不明なオプション「%1」。</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="234"/>
+        <location filename="../../options.cpp" line="235"/>
         <source>Only one of the options --convert, --render, --synth and --reset-config can be used.</source>
         <translation>--convert、--render、--synth、--reset-config のうち、使用できるオプションは1つだけです。</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="246"/>
+        <location filename="../../options.cpp" line="247"/>
         <source>The format of the output file &quot;%1&quot; is unknown, it can be specified with --convert.</source>
         <translation>出力ファイル「%1」の形式が不明です。--convert で指定できます。</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="284"/>
+        <location filename="../../options.cpp" line="285"/>
         <source>The option &quot;%1&quot; is not used when files are opened in the editor.</source>
         <translation>オプション「%1」は、ファイルをエディターで開く場合には使用されません。</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="287"/>
+        <location filename="../../options.cpp" line="288"/>
         <source>The option &quot;%1&quot; cannot be used with &quot;%2&quot;.</source>
         <translation>オプション「%1」は「%2」と一緒に使用できません。</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="294"/>
+        <location filename="../../options.cpp" line="295"/>
         <source>No file is expected with &quot;%1&quot;.</source>
         <translation>「%1」ではファイルを指定できません。</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="296"/>
+        <location filename="../../options.cpp" line="297"/>
         <source>One soundfont is expected with &quot;%1&quot;.</source>
         <translation>「%1」ではSoundFontを1つ指定する必要があります。</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="300"/>
+        <location filename="../../options.cpp" line="301"/>
         <source>No file to convert.</source>
         <translation>変換するファイルがありません。</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="302"/>
+        <location filename="../../options.cpp" line="303"/>
         <source>The option &quot;%1&quot; cannot be used with several input files.</source>
         <translation>オプション「%1」は複数の入力ファイルと一緒に使用できません。</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="312"/>
+        <location filename="../../options.cpp" line="313"/>
         <source>The format of the file &quot;%1&quot; is not supported.</source>
         <translation>ファイル「%1」の形式はサポートされていません。</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="327"/>
+        <location filename="../../options.cpp" line="328"/>
         <source>The option &quot;%1&quot; can only be used once.</source>
         <translation>オプション「%1」は1回しか使用できません。</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="360"/>
+        <location filename="../../options.cpp" line="361"/>
         <source>The options &quot;%1&quot; and &quot;%2&quot; cannot be used together.</source>
         <translation>オプション「%1」と「%2」は一緒に使用できません。</translation>
     </message>
     <message>
-        <location filename="../../options.cpp" line="367"/>
+        <location filename="../../options.cpp" line="368"/>
         <source>The MIDI file to play is missing.</source>
         <translation>再生するMIDIファイルがありません。</translation>
     </message>
@@ -7090,31 +7118,31 @@ to display its timbre</source>
         <translation>ラ♯</translation>
     </message>
     <message>
-        <location filename="../../core/utils.cpp" line="307"/>
+        <location filename="../../core/utils.cpp" line="570"/>
         <source>bytes</source>
         <translation>バイト</translation>
     </message>
     <message>
-        <location filename="../../core/utils.cpp" line="309"/>
+        <location filename="../../core/utils.cpp" line="572"/>
         <source>kB</source>
         <comment>kilobytes</comment>
         <translation>kB</translation>
     </message>
     <message>
-        <location filename="../../core/utils.cpp" line="311"/>
+        <location filename="../../core/utils.cpp" line="574"/>
         <location filename="../../repository/browser/soundfontbrowser.cpp" line="80"/>
         <source>MB</source>
         <comment>megabytes</comment>
         <translation>MB</translation>
     </message>
     <message>
-        <location filename="../../core/utils.cpp" line="313"/>
+        <location filename="../../core/utils.cpp" line="576"/>
         <source>GB</source>
         <comment>gigabytes</comment>
         <translation>GB</translation>
     </message>
     <message>
-        <location filename="../../core/utils.cpp" line="314"/>
+        <location filename="../../core/utils.cpp" line="577"/>
         <source>TB</source>
         <comment>terabytes</comment>
         <translation>TB</translation>
@@ -7870,6 +7898,7 @@ download the list</source>
 <context>
     <name>SoundfontTab</name>
     <message>
+        <location filename="../../editor/editor.cpp" line="846"/>
         <location filename="../../mainwindow/soundfonttab.cpp" line="103"/>
         <source>Untitled</source>
         <translation>無題</translation>
@@ -7967,58 +7996,58 @@ download content</source>
 <context>
     <name>TabManager</name>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="127"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="132"/>
         <source>Settings</source>
         <translation>設定</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="156"/>
-        <location filename="../../mainwindow/tabmanager.cpp" line="365"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="161"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="370"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="157"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="162"/>
         <source>Cannot open file &quot;%1&quot;</source>
         <translation>ファイル「%1」を開けません</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="314"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="319"/>
         <source>Online repository</source>
         <translation>オンラインリポジトリ</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="360"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="365"/>
         <source>Save before exiting?</source>
         <translation>閉じる前に保存しますか？</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="363"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="368"/>
         <source>untitled</source>
         <translation>無題</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="364"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="369"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>ファイル「%1」は変更されています。</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="367"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="372"/>
         <source>&amp;Save</source>
         <translation>保存(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="368"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="373"/>
         <source>&amp;Cancel</source>
         <translation>キャンセル(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="369"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="374"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>保存しない(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="597"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="641"/>
         <source>User area</source>
         <translation>ユーザーエリア</translation>
     </message>
@@ -10432,22 +10461,22 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>TreeView</name>
     <message>
-        <location filename="../../editor/tree/treeview.cpp" line="961"/>
+        <location filename="../../editor/tree/treeview.cpp" line="999"/>
         <source>instrument</source>
         <translation>インストゥルメント</translation>
     </message>
     <message>
-        <location filename="../../editor/tree/treeview.cpp" line="961"/>
+        <location filename="../../editor/tree/treeview.cpp" line="999"/>
         <source>preset</source>
         <translation>プリセット</translation>
     </message>
     <message>
-        <location filename="../../editor/tree/treeview.cpp" line="982"/>
+        <location filename="../../editor/tree/treeview.cpp" line="1020"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../../editor/tree/treeview.cpp" line="982"/>
+        <location filename="../../editor/tree/treeview.cpp" line="1020"/>
         <source>Cannot create more presets.</source>
         <translation>これ以上プリセットを作成できません。</translation>
     </message>

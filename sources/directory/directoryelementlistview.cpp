@@ -72,6 +72,10 @@ void DirectoryElementListView::setData(DirectoryFileData::DetailsData data, QStr
         // Text for the filter, whatever the number of spaces
         item->setData(Utils::simplifySpaces(data.names[i]), Qt::UserRole + 4);
 
+        // Number and name, for the display of the virtual keyboard
+        item->setData(data.numbers.value(i), Qt::UserRole + 5);
+        item->setData(data.elementNames.value(i), Qt::UserRole + 6);
+
         _model->appendRow(item);
     }
 }
@@ -82,6 +86,40 @@ EltID DirectoryElementListView::getSelectedElement()
     if (indexes.isEmpty() || _type == elementUnknown)
         return EltID(elementUnknown);
     return EltID(_type, -1, indexes[0].data(Qt::UserRole + 3).toInt());
+}
+
+int DirectoryElementListView::getSelectedRow()
+{
+    QModelIndexList indexes = this->selectionModel()->selectedIndexes();
+    if (indexes.isEmpty() || _type == elementUnknown)
+        return -1;
+    return indexes[0].row();
+}
+
+int DirectoryElementListView::getRowCount()
+{
+    return _proxy->rowCount();
+}
+
+void DirectoryElementListView::getSelectedTexts(QString &number, QString &name)
+{
+    QModelIndexList indexes = this->selectionModel()->selectedIndexes();
+    if (indexes.isEmpty())
+    {
+        number = name = "";
+        return;
+    }
+    number = indexes[0].data(Qt::UserRole + 5).toString();
+    name = indexes[0].data(Qt::UserRole + 6).toString();
+}
+
+void DirectoryElementListView::selectRow(int row)
+{
+    QModelIndex index = _proxy->index(row, 0);
+    if (!index.isValid())
+        return;
+    this->setCurrentIndex(index);
+    this->scrollTo(index);
 }
 
 void DirectoryElementListView::setDetailsDisplayed(bool displayed)

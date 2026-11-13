@@ -43,6 +43,18 @@ public:
     // Element selected (indexSf2 not set), or elementUnknown
     EltID getSelectedElement();
 
+    // Type of the elements, position of the element selected among the elements displayed (-1 if none), number of
+    // elements displayed
+    ElementType getType() { return _type; }
+    int getSelectedRow();
+    int getRowCount();
+
+    // Number ("bank:preset" for a preset, empty otherwise) and name of the element selected
+    void getSelectedTexts(QString &number, QString &name);
+
+    // Select the element displayed at a position, scrolled into view
+    void selectRow(int row);
+
     // Lines below the name of each element
     void setDetailsDisplayed(bool displayed);
 

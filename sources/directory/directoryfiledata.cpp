@@ -159,11 +159,12 @@ void DirectoryFileData::scanInstPrst(QVectorIterator<InstPrst*> &i, QList<Direct
         // Initialize data
         DirectoryInstrumentPresetData data;
         data.id = elt->getId().indexElt;
-        data.name = isPrst ? QString("%1:%2 %3")
-                                 .arg(QString::number(elt->getExtraField(champ_wBank)), 3, QChar('0'))
-                                 .arg(QString::number(elt->getExtraField(champ_wPreset)), 3, QChar('0'))
-                                 .arg(elt->getName())
-                           : elt->getName();
+        data.number = isPrst ? QString("%1:%2")
+                                   .arg(QString::number(elt->getExtraField(champ_wBank)), 3, QChar('0'))
+                                   .arg(QString::number(elt->getExtraField(champ_wPreset)), 3, QChar('0'))
+                             : "";
+        data.elementName = elt->getName();
+        data.name = isPrst ? data.number + " " + data.elementName : data.elementName;
         data.nameSort = Utils::removeAccents(data.name).toLower();
         data.numDivisions = 0;
         data.numParameters = 0;
@@ -262,6 +263,8 @@ DirectoryFileData::DetailsData DirectoryFileData::getSampleDetails() const
         result.names << sample.name;
         result.details << sample.getDetail();
         result.values << sample.id;
+        result.numbers << "";
+        result.elementNames << sample.name;
     }
     return result;
 }
@@ -274,6 +277,8 @@ DirectoryFileData::DetailsData DirectoryFileData::getInstrumentDetails() const
         result.names << instrument.name;
         result.details << instrument.getDetail();
         result.values << instrument.id;
+        result.numbers << instrument.number;
+        result.elementNames << instrument.elementName;
     }
     return result;
 }
@@ -286,6 +291,8 @@ DirectoryFileData::DetailsData DirectoryFileData::getPresetDetails() const
         result.names << preset.name;
         result.details << preset.getDetail();
         result.values << preset.id;
+        result.numbers << preset.number;
+        result.elementNames << preset.elementName;
     }
     return result;
 }

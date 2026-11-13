@@ -49,6 +49,7 @@
 #include "editortoolbar.h"
 #include "directorybrowser.h"
 #include "directorypreview.h"
+#include "dialogkeyboard.h"
 
 TabManager * TabManager::s_instance = nullptr;
 
@@ -89,12 +90,16 @@ TabManager::TabManager(DialogKeyboard * dialogKeyboard, MainStackedWidget * stac
     _stackedWidget(stackedWidget),
     _configTab(new ConfigPanel()),
     _browserTab(new SoundfontBrowser()),
-    _userTab(new UserArea())
+    _userTab(new UserArea()),
+    _keyboardDisplayUpdateScheduled(false)
 {
     SoundfontManager * sf2 = SoundfontManager::getInstance();
     connect(sf2, SIGNAL(editingDone(QString,QList<int>)), this, SLOT(editingDone(QString,QList<int>)));
     connect(_stackedWidget, SIGNAL(tabCloseRequested(QWidget*)), this, SLOT(onTabCloseRequested(QWidget*)));
     connect(_stackedWidget, SIGNAL(currentChanged(int)), this, SLOT(onTabIndexChanged(int)));
+
+    // The editors before and after the current one may change
+    connect(_stackedWidget, SIGNAL(tabsChanged()), this, SLOT(scheduleKeyboardDisplayUpdate()));
 }
 
 TabManager::~TabManager()
@@ -587,6 +592,45 @@ void TabManager::onTabIndexChanged(int tabIndex)
     QWidget * widget = _stackedWidget->widget(tabIndex);
     emit tabOpen(_soundfontTabs.contains(dynamic_cast<SoundfontTab*>(widget)), !_soundfontTabs.empty(), _stackedWidget->currentIndex() > 0);
     emit soundfontSelectionChanged();
+
+    // Element played by the virtual keyboard in the new tab (nothing on the home screen and in the other tabs)
+    updateKeyboardDisplay();
+}
+
+void TabManager::scheduleKeyboardDisplayUpdate()
+{
+    if (_dialogKeyboard == nullptr || _keyboardDisplayUpdateScheduled)
+        return;
+    _keyboardDisplayUpdateScheduled = true;
+    QMetaObject::invokeMethod(this, [this]() {
+        _keyboardDisplayUpdateScheduled = false;
+        updateKeyboardDisplay();
+    }, Qt::QueuedConnection);
+}
+
+void TabManager::updateKeyboardDisplay()
+{
+    if (_dialogKeyboard == nullptr)
+        return;
+    Tab * tab = dynamic_cast<Tab *>(_stackedWidget->currentWidget());
+    _dialogKeyboard->setDisplayContent(tab != nullptr ? tab->getKeyboardDisplayContent() : KeyboardDisplayContent());
+}
+
+Editor * TabManager::getNeighborEditor(Editor * editor, int direction)
+{
+    QList<Tab *> tabs = _stackedWidget->getTabs();
+    int index = tabs.indexOf(editor);
+    if (index == -1)
+        return nullptr;
+
+    int step = (direction < 0 ? -1 : 1);
+    for (int i = index + step; i >= 0 && i < tabs.count(); i += step)
+    {
+        Editor * neighbor = dynamic_cast<Editor *>(tabs[i]);
+        if (neighbor != nullptr)
+            return neighbor;
+    }
+    return nullptr;
 }
 
 void TabManager::openUser()

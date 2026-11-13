@@ -57,6 +57,7 @@ signals:
     void widgetClicked(QWidget * widget);
     void closeClicked(QWidget * widget);
     void openFile(QString file);
+    void tabsReordered();
 
 protected:
     bool event(QEvent *event) override;

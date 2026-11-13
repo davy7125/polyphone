@@ -23,6 +23,8 @@
         <file alias="arrow_left.svg">resources/arrow_left.svg</file>
         <file alias="arrow_right.svg">resources/arrow_right.svg</file>
         <file alias="arrow_up.svg">resources/arrow_up.svg</file>
+        <file alias="file_previous.svg">resources/file_previous.svg</file>
+        <file alias="file_next.svg">resources/file_next.svg</file>
         <file alias="instrument.svg">resources/instrument.svg</file>
         <file alias="preset.svg">resources/preset.svg</file>
         <file alias="sample.svg">resources/sample.svg</file>

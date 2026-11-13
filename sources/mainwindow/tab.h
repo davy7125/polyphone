@@ -26,6 +26,7 @@
 #define TAB_H
 
 #include <QWidget>
+#include "keyboarddisplaycontent.h"
 
 class Tab: public QWidget
 {
@@ -34,13 +35,20 @@ public:
     {
         SEARCH,
         UNDO,
-        REDO
+        REDO,
+        PREVIOUS_ELEMENT, // Element played by the virtual keyboard
+        NEXT_ELEMENT,
+        PREVIOUS_FILE, // File of a soundfont explorer
+        NEXT_FILE
     };
 
     Tab(QWidget *parent = nullptr);
 
 public:
     virtual void onActionRequired(TabAction action) { Q_UNUSED(action) }
+
+    // Element played by the virtual keyboard in this tab, with the navigation possibilities
+    virtual KeyboardDisplayContent getKeyboardDisplayContent() { return KeyboardDisplayContent(); }
 };
 
 #endif // TAB_H

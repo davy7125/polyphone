@@ -289,6 +289,9 @@ set(POLYPHONE_APP_FILES
     dialogs/dialogselection.cpp
     dialogs/dialogselection.h
     dialogs/dialogselection.ui
+    dialogs/keyboarddisplay.cpp
+    dialogs/keyboarddisplay.h
+    dialogs/keyboarddisplaycontent.h
     dialogs/latinvalidator.h
     dialogs/modalprogressdialog.h
     dialogs/recorderhistory.cpp

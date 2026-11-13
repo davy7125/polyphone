@@ -39,9 +39,11 @@ class DirectoryFileData : public QObject
 public:
     struct DetailsData
     {
-        QStringList names;
+        QStringList names; // Displayed in the list ("bank:preset name" for a preset)
         QStringList details;
         QList<int> values;
+        QStringList numbers; // "bank:preset" for a preset, empty otherwise
+        QStringList elementNames; // Names without the number
     };
 
     enum Status {
@@ -107,6 +109,8 @@ private:
         int id;
         QString name;
         QString nameSort;
+        QString number;
+        QString elementName;
         int numDivisions = 0;
         int numDistinctKeyRanges = 0;
         int numDistinctVelocityRanges = 0;

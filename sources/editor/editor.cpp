@@ -37,6 +37,7 @@
 #include "pageselector.h"
 #include "dialogkeyboard.h"
 #include "pianokeybdcustom.h"
+#include "tabmanager.h"
 
 Editor::Editor(DialogKeyboard * dialogKeyboard, EltID initialSelection) : SoundfontTab(nullptr),
     _dialogKeyboard(dialogKeyboard),
@@ -44,7 +45,8 @@ Editor::Editor(DialogKeyboard * dialogKeyboard, EltID initialSelection) : Soundf
     _pageSelector(new PageSelector()),
     _currentElementType(elementUnknown),
     _initialSelection(initialSelection),
-    _firstShow(true)
+    _firstShow(true),
+    _keyboardDisplayUpdateScheduled(false)
 {
     ui->setupUi(this);
 
@@ -132,6 +134,11 @@ Editor::Editor(DialogKeyboard * dialogKeyboard, EltID initialSelection) : Soundf
     connect(SoundfontManager::getInstance(), SIGNAL(errorEncountered(QString)), this, SLOT(onErrorEncountered(QString)));
     connect(this, SIGNAL(processKeyMainThread(int,int,int)), this, SLOT(onProcessKeyMainThread(int,int,int)));
     ui->editFilter->installEventFilter(this);
+
+    // Display of the virtual keyboard: file name, elements displayed in the tree
+    connect(this, &SoundfontTab::tabTitleChanged, this, &Editor::scheduleKeyboardDisplayUpdate);
+    connect(this, &SoundfontTab::filePathChanged, this, &Editor::scheduleKeyboardDisplayUpdate);
+    connect(ui->editFilter, &QLineEdit::textChanged, this, &Editor::scheduleKeyboardDisplayUpdate);
 }
 
 Editor::~Editor()
@@ -284,6 +291,7 @@ void Editor::onSelectionChanged(IdList ids)
 
     // Update the keyboard
     this->customizeKeyboard();
+    scheduleKeyboardDisplayUpdate();
 }
 
 void Editor::displayOptionChanged(int displayOption)
@@ -311,6 +319,7 @@ void Editor::showEvent(QShowEvent* event)
 {
     QWidget::showEvent(event);
     customizeKeyboard();
+    scheduleKeyboardDisplayUpdate();
 
     if (_firstShow)
     {
@@ -321,9 +330,12 @@ void Editor::showEvent(QShowEvent* event)
 
 void Editor::onEditingDone(QString editingSource, QList<int> sf2Indexes)
 {
-    Q_UNUSED(sf2Indexes)
     if (editingSource == "command:undo" || editingSource == "command:redo")
         customizeKeyboard();
+
+    // Names, numbers or order of the elements possibly changed
+    if (sf2Indexes.contains(this->getSf2Index()))
+        scheduleKeyboardDisplayUpdate();
 }
 
 void Editor::customizeKeyboard()
@@ -751,7 +763,127 @@ void Editor::onActionRequired(TabAction action)
     case Tab::REDO:
         SoundfontManager::getInstance()->redo(this->getSf2Index());
         break;
+    case Tab::PREVIOUS_ELEMENT: case Tab::NEXT_ELEMENT: {
+        // The selection of the tree changes, the focus staying where it is (virtual keyboard)
+        EltID id = getNavigationTarget(action == Tab::NEXT_ELEMENT ? 1 : -1);
+        if (id.typeElement != elementUnknown)
+            ui->treeView->onSelectionChanged(IdList(id));
+    } break;
+    case Tab::PREVIOUS_FILE: case Tab::NEXT_FILE: {
+        // Editor before or after this one in the order of the tabs, with its own selection
+        TabManager * tabManager = TabManager::getInstance();
+        Editor * editor = tabManager != nullptr ? tabManager->getNeighborEditor(this, action == Tab::NEXT_FILE ? 1 : -1) : nullptr;
+        if (editor != nullptr)
+            tabManager->setCurrentWidget(editor);
+    } break;
+    default:
+        break;
     }
+}
+
+EltID Editor::getPlayedElement()
+{
+    // Same rule as processKey()
+    QList<ElementType> types;
+    types << elementSmpl << elementInst << elementPrst;
+    foreach (ElementType type, types)
+    {
+        IdList ids = _currentIds.getSelectedIds(type);
+        if (ids.count() == 1)
+            return ids[0];
+    }
+    return EltID(elementUnknown);
+}
+
+EltID Editor::getNavigationTarget(int direction)
+{
+    if (this->getSf2Index() == -1 || _currentIds.isEmpty())
+        return EltID(elementUnknown);
+
+    // Element before or after the element played, in the order of the tree
+    EltID id = getPlayedElement();
+    if (id.typeElement != elementUnknown)
+        return ui->treeView->getNeighbor(id, direction);
+
+    // Otherwise the next element is the first one of the category selected
+    if (direction < 0)
+        return EltID(elementUnknown);
+    switch (_currentIds[0].typeElement)
+    {
+    case elementRootSmpl:
+        return ui->treeView->getFirstElement(elementSmpl);
+    case elementRootInst:
+        return ui->treeView->getFirstElement(elementInst);
+    case elementRootPrst:
+        return ui->treeView->getFirstElement(elementPrst);
+    case elementSf2:
+        id = ui->treeView->getFirstElement(elementPrst);
+        if (id.typeElement == elementUnknown)
+            id = ui->treeView->getFirstElement(elementInst);
+        if (id.typeElement == elementUnknown)
+            id = ui->treeView->getFirstElement(elementSmpl);
+        return id;
+    default:
+        // Several elements selected
+        return EltID(elementUnknown);
+    }
+}
+
+KeyboardDisplayContent Editor::getKeyboardDisplayContent()
+{
+    KeyboardDisplayContent content;
+    SoundfontManager * sm = SoundfontManager::getInstance();
+    int sf2Index = this->getSf2Index();
+
+    // File, or name of the soundfont if it has never been saved
+    QString filePath = this->getFilePath();
+    if (!filePath.isEmpty())
+        content.fileName = QFileInfo(filePath).fileName();
+    else if (sf2Index != -1)
+    {
+        content.fileName = sm->getQstr(EltID(elementSf2, sf2Index), champ_name);
+        if (content.fileName.isEmpty())
+            content.fileName = QCoreApplication::translate("SoundfontTab", "Untitled");
+    }
+
+    // Element played
+    EltID id = getPlayedElement();
+    if (id.typeElement != elementUnknown)
+    {
+        content.elementType = id.typeElement;
+        content.elementName = sm->getQstr(id, champ_name);
+        if (id.typeElement == elementPrst)
+            content.elementNumber = QString("%1:%2")
+                                        .arg(sm->get(id, champ_wBank).wValue, 3, 10, QChar('0'))
+                                        .arg(sm->get(id, champ_wPreset).wValue, 3, 10, QChar('0'));
+    }
+
+    // Navigation among the elements, and among the editors in the order of the tabs
+    content.hasPreviousElement = getNavigationTarget(-1).typeElement != elementUnknown;
+    content.hasNextElement = getNavigationTarget(1).typeElement != elementUnknown;
+    TabManager * tabManager = TabManager::getInstance();
+    content.hasPreviousFile = tabManager != nullptr && tabManager->getNeighborEditor(this, -1) != nullptr;
+    content.hasNextFile = tabManager != nullptr && tabManager->getNeighborEditor(this, 1) != nullptr;
+
+    return content;
+}
+
+void Editor::scheduleKeyboardDisplayUpdate()
+{
+    if (_keyboardDisplayUpdateScheduled)
+        return;
+    _keyboardDisplayUpdateScheduled = true;
+    QMetaObject::invokeMethod(this, [this]() {
+        _keyboardDisplayUpdateScheduled = false;
+        updateKeyboardDisplay();
+    }, Qt::QueuedConnection);
+}
+
+void Editor::updateKeyboardDisplay()
+{
+    // This editor may not be the one that is displayed
+    if (_dialogKeyboard != nullptr && this->isVisible())
+        _dialogKeyboard->setDisplayContent(getKeyboardDisplayContent());
 }
 
 bool Editor::eventFilter(QObject *obj, QEvent *event)

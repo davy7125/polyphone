@@ -592,6 +592,44 @@ void TreeView::expandAndScrollToSelection()
     }
 }
 
+EltID TreeView::getNeighbor(EltID id, int direction)
+{
+    if (this->model() == nullptr || (id.typeElement != elementSmpl && id.typeElement != elementInst && id.typeElement != elementPrst))
+        return EltID(elementUnknown);
+
+    // Elements sorted and filtered as displayed
+    QModelIndex index = getIndex(id);
+    if (!index.isValid())
+        return EltID(elementUnknown);
+    QModelIndex neighbor = index.sibling(index.row() + (direction < 0 ? -1 : 1), 0);
+    return neighbor.isValid() ? neighbor.data(Qt::UserRole).value<EltID>() : EltID(elementUnknown);
+}
+
+EltID TreeView::getFirstElement(ElementType type)
+{
+    if (this->model() == nullptr)
+        return EltID(elementUnknown);
+
+    int rootRow;
+    switch (type)
+    {
+    case elementSmpl:
+        rootRow = 1;
+        break;
+    case elementInst:
+        rootRow = 2;
+        break;
+    case elementPrst:
+        rootRow = 3;
+        break;
+    default:
+        return EltID(elementUnknown);
+    }
+
+    QModelIndex index = this->model()->index(0, 0, this->model()->index(rootRow, 0));
+    return index.isValid() ? index.data(Qt::UserRole).value<EltID>() : EltID(elementUnknown);
+}
+
 QModelIndex TreeView::getIndex(EltID id)
 {
     switch (id.typeElement)

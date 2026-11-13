@@ -40,6 +40,7 @@ void MainStackedWidget::setControls(QPushButton * pushHome, MainTabBar * tabBar)
     _tabBar = tabBar;
     connect(_tabBar, SIGNAL(widgetClicked(QWidget*)), SLOT(onWidgetClicked(QWidget*)));
     connect(_tabBar, SIGNAL(closeClicked(QWidget*)), this, SIGNAL(tabCloseRequested(QWidget*)));
+    connect(_tabBar, SIGNAL(tabsReordered()), this, SIGNAL(tabsChanged()));
     _pushHome = pushHome;
     connect(_pushHome, SIGNAL(clicked(bool)), SLOT(onHomeCliked(bool)));
 
@@ -56,6 +57,7 @@ int MainStackedWidget::addWidgetWithTab(Tab * tab, QString iconName, const QStri
 {
     int index = this->addWidget(tab);
     _tabBar->addTab(tab, iconName, label);
+    emit tabsChanged();
     return index;
 }
 
@@ -63,6 +65,7 @@ void MainStackedWidget::removeWidgetWithTab(Tab * tab)
 {
     _tabBar->removeTab(tab);
     this->removeWidget(tab);
+    emit tabsChanged();
 }
 
 void MainStackedWidget::onHomeCliked(bool clicked)
