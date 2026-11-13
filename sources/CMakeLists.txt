@@ -254,7 +254,11 @@ if(POLYPHONE_BUILD_EDITOR)
         string(APPEND qrc "    <file alias=\"${name}.qm\">${qm}</file>\n")
     endforeach()
     string(APPEND qrc "  </qresource>\n</RCC>\n")
-    file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/i18n/translations.qrc "${qrc}")
+    # Written if it changed only: otherwise each CMake run (Qt Creator runs it when opening the project) builds the
+    # translation resource and links the application again. The .tmp file is kept (configure_file input).
+    file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/i18n/translations.qrc.tmp "${qrc}")
+    configure_file(${CMAKE_CURRENT_BINARY_DIR}/i18n/translations.qrc.tmp
+                   ${CMAKE_CURRENT_BINARY_DIR}/i18n/translations.qrc COPYONLY)
     qt_add_resources(POLYPHONE_TRANSLATION_RESOURCES ${CMAKE_CURRENT_BINARY_DIR}/i18n/translations.qrc)
     set_source_files_properties(${POLYPHONE_TRANSLATION_RESOURCES} PROPERTIES SKIP_AUTOGEN ON)
     target_sources(polyphone PRIVATE ${POLYPHONE_QM_FILES} ${POLYPHONE_TRANSLATION_RESOURCES})
