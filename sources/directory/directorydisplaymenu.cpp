@@ -23,7 +23,6 @@
 ***************************************************************************/
 
 #include "directorydisplaymenu.h"
-#include "ui_directorydisplaymenu.h"
 #include "contextmanager.h"
 #include <QMenu>
 #include <QMouseEvent>
@@ -36,18 +35,9 @@ const int DirectoryDisplayMenu::DETAILS_OPTIONS = SAMPLE_DETAILS | INSTRUMENT_DE
 static_assert(DirectoryDisplayMenu::SAMPLE_DETAILS == (0x01 << DirectoryListView::COLUMN_NUMBER),
               "the details follow the columns");
 
-DirectoryDisplayMenu::DirectoryDisplayMenu(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::DirectoryDisplayMenu)
+DirectoryDisplayMenu::DirectoryDisplayMenu(QWidget *parent) : StyledAction(parent)
 {
-    ui->setupUi(this);
-
-    // Style
-    _textColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name();
-    _backgroundColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name();
-    _hoveredBackgroundColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT, ThemeManager::HOVERED).name();
-    ui->labelDisplay->setPixmap(ContextManager::theme()->getColoredSvg(":/icons/eye.svg", QSize(16, 16), ThemeManager::HIGHLIGHTED_BACKGROUND));
-    this->setStyle(false);
+    this->initialize(tr("Display"), ":/icons/eye.svg");
 
     // Icons
     QPixmap emptyPixmap(24, 24);
@@ -60,7 +50,6 @@ DirectoryDisplayMenu::DirectoryDisplayMenu(QWidget *parent) :
     // Add a menu to the button
     QMenu * menu = new QMenu(this);
     menu->installEventFilter(this);
-    connect(menu, SIGNAL(aboutToHide()), this, SLOT(onMenuClosed()));
     menu->setStyleSheet(ContextManager::theme()->getMenuTheme());
 
     // Bit 0 for the preset summary, bit i for the column i, then the details of the elements
@@ -81,12 +70,7 @@ DirectoryDisplayMenu::DirectoryDisplayMenu(QWidget *parent) :
     addOption(menu, tr("Instrument details"), INSTRUMENT_DETAILS);
     addOption(menu, tr("Preset details"), PRESET_DETAILS);
 
-    ui->pushButton->setMenu(menu);
-}
-
-DirectoryDisplayMenu::~DirectoryDisplayMenu()
-{
-    delete ui;
+    this->setDropDownMenu(menu);
 }
 
 void DirectoryDisplayMenu::addOption(QMenu * menu, QString text, int flag)
@@ -106,48 +90,11 @@ void DirectoryDisplayMenu::toggleOption(QAction * action)
     emit displayOptionsChanged(_displayOptions);
 }
 
-#if QT_VERSION >= 0x060000
-void DirectoryDisplayMenu::enterEvent(QEnterEvent *event)
-#else
-void DirectoryDisplayMenu::enterEvent(QEvent *event)
-#endif
-{
-    setStyle(true);
-    QWidget::enterEvent(event);
-}
-
-void DirectoryDisplayMenu::leaveEvent(QEvent *event)
-{
-    setStyle(false);
-    QWidget::leaveEvent(event);
-}
-
-void DirectoryDisplayMenu::mousePressEvent(QMouseEvent *event)
-{
-    if (event->button() == Qt::LeftButton)
-        ui->pushButton->showMenu();
-    QWidget::mousePressEvent(event);
-}
-
-void DirectoryDisplayMenu::onMenuClosed()
-{
-    setStyle(false);
-}
-
-void DirectoryDisplayMenu::setStyle(bool hovered)
-{
-    ui->pushButton->setStyleSheet("QPushButton{border: 0; padding:0 5px 0 5px;color:" + _textColor + ";background-color:" +
-                                  (hovered ? _hoveredBackgroundColor : _backgroundColor) + ";border-top-right-radius:2px;border-bottom-right-radius:2px}" +
-                                  "QPushButton::menu-indicator{width:0px;image:url(:/misc/transparent.png)}");
-    ui->labelDisplay->setStyleSheet("QLabel{border-top-left-radius:2px;border-bottom-left-radius:2px;padding: 0 5px;background-color:" +
-                                 (hovered ? _hoveredBackgroundColor : _backgroundColor) + "}");
-}
-
 bool DirectoryDisplayMenu::eventFilter(QObject *obj, QEvent *event)
 {
     QMenu * menu = qobject_cast<QMenu *>(obj);
     if (!menu)
-        return QWidget::eventFilter(obj, event);
+        return StyledAction::eventFilter(obj, event);
 
     // Toggle an option without closing the menu, with the mouse or the keyboard
     if (event->type() == QEvent::MouseButtonRelease)
@@ -171,5 +118,5 @@ bool DirectoryDisplayMenu::eventFilter(QObject *obj, QEvent *event)
         }
     }
 
-    return QWidget::eventFilter(obj, event);
+    return StyledAction::eventFilter(obj, event);
 }

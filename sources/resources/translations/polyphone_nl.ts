@@ -2998,52 +2998,52 @@ een signaal</translation>
 <context>
     <name>DirectoryDisplayMenu</name>
     <message>
-        <location filename="../../directory/directorydisplaymenu.ui" line="63"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="40"/>
         <source>Display</source>
         <translation>Weergave</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="72"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="61"/>
         <source>Preset summary</source>
         <translation>Overzicht van de presets</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="74"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="63"/>
         <source>Size</source>
         <translation>Grootte</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="75"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="64"/>
         <source>Date</source>
         <translation>Datum</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="76"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="65"/>
         <source>Samples</source>
         <translation>Samples</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="77"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="66"/>
         <source>Instruments</source>
         <translation>Instrumenten</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="78"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="67"/>
         <source>Presets</source>
         <translation>Presets</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="80"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="69"/>
         <source>Sample details</source>
         <translation>Details van de samples</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="81"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="70"/>
         <source>Instrument details</source>
         <translation>Details van de instrumenten</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="82"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="71"/>
         <source>Preset details</source>
         <translation>Details van de presets</translation>
     </message>
@@ -3452,37 +3452,37 @@ een signaal</translation>
         <translation>Opslaan</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="85"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="83"/>
         <source>Recorder</source>
         <translation>Recorder</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="88"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="86"/>
         <source>Virtual keyboard</source>
         <translation>Virtueel toetsenbord</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="91"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="89"/>
         <source>MIDI player</source>
         <translation>MIDI-speler</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="344"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="342"/>
         <source>Import an audio file</source>
         <translation>Een audiobestand importeren</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="346"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="344"/>
         <source>Audio files</source>
         <translation>Audiobestanden</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="502"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="500"/>
         <source>Cannot create more presets.</source>
         <translation>Kan geen presets meer aanmaken.</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="502"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="500"/>
         <source>Warning</source>
         <translation>Waarschuwing</translation>
     </message>

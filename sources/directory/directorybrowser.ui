@@ -710,10 +710,32 @@
               </property>
              </widget>
             </item>
-            <item>
-             <widget class="DirectoryDisplayMenu" name="widgetDisplayMenu" native="true"/>
-            </item>
            </layout>
+          </item>
+          <item>
+           <widget class="DirectoryDisplayMenu" name="pushDisplay"/>
+          </item>
+          <item>
+           <widget class="QFrame" name="separator">
+            <property name="minimumSize">
+             <size>
+              <width>8</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>8</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Shape::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Shadow::Plain</enum>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="StyledAction" name="pushShowMidiPlayer">
@@ -753,15 +775,14 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>DirectoryDisplayMenu</class>
-   <extends>QWidget</extends>
-   <header>directorydisplaymenu.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>StyledAction</class>
    <extends>QPushButton</extends>
    <header>styledaction.h</header>
+  </customwidget>
+  <customwidget>
+   <class>DirectoryDisplayMenu</class>
+   <extends>StyledAction</extends>
+   <header>directorydisplaymenu.h</header>
   </customwidget>
   <customwidget>
    <class>DirectoryListHeader</class>

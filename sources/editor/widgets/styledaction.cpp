@@ -63,6 +63,14 @@ void StyledAction::initialize(QString label, QString iconName)
     this->setIcon(_icon);
 }
 
+void StyledAction::setDropDownMenu(QMenu * menu)
+{
+    // Menu shown when clicking, indicated by a down arrow on the right of the icon
+    this->setMenu(menu);
+    this->setMinimumWidth(46);
+    this->setStyleSheet("StyledAction{padding-right: 6px;border:0} StyledAction::menu-indicator {image: url(:/icons/arrow_down.svg); height: 12px; width: 12px;}");
+}
+
 #if QT_VERSION >= 0x060000
 void StyledAction::enterEvent(QEnterEvent *event)
 #else

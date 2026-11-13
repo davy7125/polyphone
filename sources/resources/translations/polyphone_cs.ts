@@ -3001,52 +3001,52 @@ na signál</translation>
 <context>
     <name>DirectoryDisplayMenu</name>
     <message>
-        <location filename="../../directory/directorydisplaymenu.ui" line="63"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="40"/>
         <source>Display</source>
         <translation>Zobrazení</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="72"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="61"/>
         <source>Preset summary</source>
         <translation>Souhrn přednastavení</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="74"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="63"/>
         <source>Size</source>
         <translation>Velikost</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="75"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="64"/>
         <source>Date</source>
         <translation>Datum</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="76"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="65"/>
         <source>Samples</source>
         <translation>Vzorky</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="77"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="66"/>
         <source>Instruments</source>
         <translation>Nástroje</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="78"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="67"/>
         <source>Presets</source>
         <translation>Přednastavení</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="80"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="69"/>
         <source>Sample details</source>
         <translation>Podrobnosti vzorků</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="81"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="70"/>
         <source>Instrument details</source>
         <translation>Podrobnosti nástrojů</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="82"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="71"/>
         <source>Preset details</source>
         <translation>Podrobnosti přednastavení</translation>
     </message>
@@ -3461,37 +3461,37 @@ na signál</translation>
         <translation>Uložit</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="85"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="83"/>
         <source>Recorder</source>
         <translation>Nahrávací zařízení</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="88"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="86"/>
         <source>Virtual keyboard</source>
         <translation>Virtuální klávesnice</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="91"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="89"/>
         <source>MIDI player</source>
         <translation>Přehrávač MIDI</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="344"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="342"/>
         <source>Import an audio file</source>
         <translation>Zavést zvukový soubor</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="346"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="344"/>
         <source>Audio files</source>
         <translation>Audio soubory</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="502"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="500"/>
         <source>Cannot create more presets.</source>
         <translation>Nelze vytvořit více přednastavení.</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="502"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="500"/>
         <source>Warning</source>
         <translation>Pozor</translation>
     </message>

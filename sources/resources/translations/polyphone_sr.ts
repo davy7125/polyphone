@@ -2986,52 +2986,52 @@ for a signal</source>
 <context>
     <name>DirectoryDisplayMenu</name>
     <message>
-        <location filename="../../directory/directorydisplaymenu.ui" line="63"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="40"/>
         <source>Display</source>
         <translation>Приказ</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="72"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="61"/>
         <source>Preset summary</source>
         <translation>Преглед поставки</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="74"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="63"/>
         <source>Size</source>
         <translation>Величина</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="75"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="64"/>
         <source>Date</source>
         <translation>Датум</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="76"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="65"/>
         <source>Samples</source>
         <translation>Узорци</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="77"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="66"/>
         <source>Instruments</source>
         <translation>Инструменти</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="78"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="67"/>
         <source>Presets</source>
         <translation>Поставке</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="80"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="69"/>
         <source>Sample details</source>
         <translation>Детаљи узорака</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="81"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="70"/>
         <source>Instrument details</source>
         <translation>Детаљи инструмената</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="82"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="71"/>
         <source>Preset details</source>
         <translation>Детаљи поставки</translation>
     </message>
@@ -3445,37 +3445,37 @@ for a signal</source>
         <translation>Сачувај</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="85"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="83"/>
         <source>Recorder</source>
         <translation>Магнетофон (снимач)</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="88"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="86"/>
         <source>Virtual keyboard</source>
         <translation>Виртуелна клавијатура</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="91"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="89"/>
         <source>MIDI player</source>
         <translation>МИДИ плејер</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="344"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="342"/>
         <source>Import an audio file</source>
         <translation>Увези звучну датотеку</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="346"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="344"/>
         <source>Audio files</source>
         <translation>Звучне датотеке</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="502"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="500"/>
         <source>Cannot create more presets.</source>
         <translation>Не могу да направим више поставки.</translation>
     </message>
     <message>
-        <location filename="../../editor/widgets/editortoolbar.cpp" line="502"/>
+        <location filename="../../editor/widgets/editortoolbar.cpp" line="500"/>
         <source>Warning</source>
         <translation>Упозорење</translation>
     </message>

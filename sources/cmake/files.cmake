@@ -298,7 +298,6 @@ set(POLYPHONE_APP_FILES
     directory/directorybrowser.ui
     directory/directorydisplaymenu.cpp
     directory/directorydisplaymenu.h
-    directory/directorydisplaymenu.ui
     directory/directoryelementlistdelegate.cpp
     directory/directoryelementlistdelegate.h
     directory/directoryelementlistview.cpp

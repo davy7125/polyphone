@@ -25,18 +25,13 @@
 #ifndef DIRECTORYDISPLAYMENU_H
 #define DIRECTORYDISPLAYMENU_H
 
-#include <QWidget>
+#include "styledaction.h"
 #include <QIcon>
-class QMenu;
 
-namespace Ui {
-class DirectoryDisplayMenu;
-}
-
-// This widget displays a button and a menu is shown when clicking on it
+// This button (eye icon) shows a menu when it is clicked
 // The elements are only checkboxes: preset summary, columns of the directory browser and details of the elements
 // The menu is not closed after checking / unchecking one element
-class DirectoryDisplayMenu : public QWidget
+class DirectoryDisplayMenu : public StyledAction
 {
     Q_OBJECT
 
@@ -52,7 +47,6 @@ public:
     };
 
     explicit DirectoryDisplayMenu(QWidget *parent = nullptr);
-    ~DirectoryDisplayMenu();
 
     int displayOptions() { return _displayOptions; }
 
@@ -61,29 +55,16 @@ signals:
 
 protected:
     bool eventFilter(QObject *obj, QEvent *event) override;
-#if QT_VERSION >= 0x060000
-    void enterEvent(QEnterEvent * event) override;
-#else
-    void enterEvent(QEvent * event) override;
-#endif
-    void leaveEvent(QEvent *event) override;
-    void mousePressEvent(QMouseEvent *event) override;
-
-private slots:
-    void onMenuClosed();
 
 private:
-    void setStyle(bool hovered);
     void addOption(QMenu * menu, QString text, int flag);
     void toggleOption(QAction * action);
 
-    Ui::DirectoryDisplayMenu *ui;
     int _displayOptions;
     static const int LIST_OPTIONS;
     static const int DETAILS_OPTIONS;
     static const int DETAILS_SHIFT;
     QIcon _emptyIcon, _checkIcon;
-    QString _textColor, _backgroundColor, _hoveredBackgroundColor;
 };
 
 #endif // DIRECTORYDISPLAYMENU_H

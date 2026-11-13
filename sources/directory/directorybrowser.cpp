@@ -53,6 +53,7 @@ DirectoryBrowser::DirectoryBrowser(DialogKeyboard * dialogKeyboard, QWidget *par
     QString titleStyleSheet = "QLabel#labelFilters, QFrame#frameTop{background-color:" + highlightedBackground + ";color:" + highlightedText+ "}";
     ui->frameTop->setStyleSheet(titleStyleSheet);
     ui->lineSearch->setStyleSheet("QLineEdit{background-color:" + highlightedText + ";color:" + highlightedBackground + ";border:0;border-radius:2px;}");
+    ui->separator->setStyleSheet("QFrame{border: 1px solid " + highlightedText + ";margin: 7px 3px;}");
 
     // Style: center part
     ui->pushRetry->setStyleSheet("QPushButton{background-color:" + highlightedBackground + ";border-radius:5px;padding:5px}");
@@ -95,7 +96,7 @@ DirectoryBrowser::DirectoryBrowser(DialogKeyboard * dialogKeyboard, QWidget *par
     }
 
     // Connections
-    connect(ui->widgetDisplayMenu, SIGNAL(displayOptionsChanged(int)), this, SLOT(onDisplayOptionsChanged(int)));
+    connect(ui->pushDisplay, SIGNAL(displayOptionsChanged(int)), this, SLOT(onDisplayOptionsChanged(int)));
     connect(ui->lineSearch, SIGNAL(textEdited(QString)), ui->listView, SLOT(setFilter(QString)));
     connect(ui->lineSearch, SIGNAL(textEdited(QString)), ui->listSamples, SLOT(setFilter(QString)));
     connect(ui->lineSearch, SIGNAL(textEdited(QString)), ui->listInstruments, SLOT(setFilter(QString)));
@@ -128,7 +129,7 @@ DirectoryBrowser::DirectoryBrowser(DialogKeyboard * dialogKeyboard, QWidget *par
 
     // Column header and initial display options
     ui->widgetHeader->setListView(ui->listView);
-    onDisplayOptionsChanged(ui->widgetDisplayMenu->displayOptions());
+    onDisplayOptionsChanged(ui->pushDisplay->displayOptions());
 
     // Sections expanded or collapsed on the right
     ui->pushShowSamples->setChecked(ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "directory_browser_show_samples", true).toBool());

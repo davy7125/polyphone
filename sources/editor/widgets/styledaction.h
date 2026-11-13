@@ -26,6 +26,7 @@
 #define STYLEDACTION_H
 
 #include <QPushButton>
+class QMenu;
 
 class StyledAction : public QPushButton
 {
@@ -34,6 +35,7 @@ class StyledAction : public QPushButton
 public:
     explicit StyledAction(QWidget *parent = nullptr);
     void initialize(QString label, QString iconName);
+    void setDropDownMenu(QMenu * menu);
     void disable(bool isDisabled);
     void setData(int data);
     int getData();
