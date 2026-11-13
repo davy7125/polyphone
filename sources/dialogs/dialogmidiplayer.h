@@ -73,6 +73,7 @@ protected:
     void showEvent(QShowEvent * event) override;
     void hideEvent(QHideEvent * event) override;
     void keyPressEvent(QKeyEvent * event) override;
+    bool eventFilter(QObject * watched, QEvent * event) override;
 
 private slots:
     void on_pushOpen_clicked();
@@ -120,6 +121,7 @@ private:
     bool _stateUpdate;
     bool _isPlaying; // As displayed
     bool _updatingSlider;
+    int _wheelDelta; // Mouse wheel over the position, accumulated up to a notch (120)
     double _speed; // The times are displayed for this speed
     ResettableSlider * _sliderTempo;
     ResettableSlider * _sliderPitch;

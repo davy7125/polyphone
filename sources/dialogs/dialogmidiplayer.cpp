@@ -28,6 +28,7 @@
 #include <QFileInfo>
 #include <QFileDialog>
 #include <QKeyEvent>
+#include <QWheelEvent>
 #include <QHeaderView>
 #include <QGridLayout>
 #include <QCheckBox>
@@ -60,6 +61,7 @@ DialogMidiPlayer::DialogMidiPlayer(QWidget *parent) :
     _stateUpdate(true),
     _isPlaying(false),
     _updatingSlider(false),
+    _wheelDelta(0),
     _speed(1.0),
     _sliderTempo(nullptr),
     _sliderPitch(nullptr),
@@ -134,6 +136,7 @@ DialogMidiPlayer::DialogMidiPlayer(QWidget *parent) :
     ui->pushPlayPause->setEnabled(false);
     ui->pushStop->setEnabled(false);
     ui->sliderPosition->setEnabled(false);
+    ui->sliderPosition->installEventFilter(this); // Mouse wheel
     _actionExport->setEnabled(false);
     updateSize();
 
@@ -740,4 +743,34 @@ void DialogMidiPlayer::keyPressEvent(QKeyEvent * event)
         on_pushPlayPause_clicked();
     else if (event->key() != Qt::Key_Escape)
         QDialog::keyPressEvent(event);
+}
+
+bool DialogMidiPlayer::eventFilter(QObject * watched, QEvent * event)
+{
+    if (watched != ui->sliderPosition || event->type() != QEvent::Wheel)
+        return QDialog::eventFilter(watched, event);
+
+    // A notch of the mouse wheel over the position moves it by 5 seconds of the displayed time, forward when the wheel
+    // goes up or right (directions of the sliders), the small deltas of a touchpad being accumulated. Replaces the
+    // default behavior of the slider: a few milliseconds by notch, each of them restarting the notes.
+    QWheelEvent * wheelEvent = static_cast<QWheelEvent *>(event);
+    QPoint angleDelta = wheelEvent->angleDelta();
+    int delta = qAbs(angleDelta.x()) > qAbs(angleDelta.y()) ? -angleDelta.x() : angleDelta.y();
+    if (wheelEvent->inverted())
+        delta = -delta;
+    if (_file == nullptr || ui->sliderPosition->isSliderDown() || delta == 0)
+        return true;
+    if ((delta > 0) != (_wheelDelta > 0)) // Change of direction
+        _wheelDelta = 0;
+    _wheelDelta += delta;
+    int steps = _wheelDelta / 120;
+    if (steps == 0)
+        return true;
+    _wheelDelta -= 120 * steps;
+
+    qint64 position = _player->getPosition() + static_cast<qint64>(5000000.0 * steps * _speed);
+    position = qBound(static_cast<qint64>(0), position, _file->getDuration());
+    _player->setPosition(position);
+    updatePosition(position);
+    return true;
 }
