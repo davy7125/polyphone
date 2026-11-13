@@ -28,6 +28,7 @@
 #include "editkey.h"
 #include <QTextStream>
 #include <QFile>
+#include <QScrollBar>
 #include "tuningprogrammanager.h"
 
 ConfigSectionKeyboard::ConfigSectionKeyboard(QWidget *parent) :
@@ -91,6 +92,7 @@ void ConfigSectionKeyboard::initialize()
         }
     }
     ui->tableKeyboardMap->horizontalHeader()->setDefaultSectionSize(maxWidth);
+    adjustTableHeight();
 
     // Octave configuration
     initializeFirstC();
@@ -102,6 +104,21 @@ void ConfigSectionKeyboard::initialize()
 
     // Load the temperaments
     updateTemperaments();
+}
+
+void ConfigSectionKeyboard::adjustTableHeight()
+{
+    // Height showing all rows: frame, header, rows and horizontal scrollbar
+    // (the default section size is used since the last row may be stretched)
+    QTableWidget * table = ui->tableKeyboardMap;
+    QHeaderView * header = table->horizontalHeader();
+    int height = 2 * table->frameWidth() +
+                 qMax(header->minimumHeight(), header->sizeHint().height()) +
+                 table->rowCount() * table->verticalHeader()->defaultSectionSize() +
+                 table->horizontalScrollBar()->sizeHint().height();
+    if (table->style()->styleHint(QStyle::SH_ScrollView_FrameOnlyAroundContents, nullptr, table))
+        height += table->style()->pixelMetric(QStyle::PM_ScrollView_ScrollBarSpacing, nullptr, table);
+    table->setFixedHeight(height);
 }
 
 void ConfigSectionKeyboard::initializeFirstC()

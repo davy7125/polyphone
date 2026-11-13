@@ -54,6 +54,7 @@ private slots:
 
 private:
     void renameComboFirstC();
+    void adjustTableHeight();
     void updateTemperaments();
 
     Ui::ConfigSectionKeyboard *ui;
