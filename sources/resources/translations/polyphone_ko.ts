@@ -769,7 +769,7 @@
     <name>ConfigPanel</name>
     <message>
         <location filename="../../context/interface/configpanel.ui" line="63"/>
-        <location filename="../../context/interface/configpanel.cpp" line="109"/>
+        <location filename="../../context/interface/configpanel.cpp" line="116"/>
         <source>General</source>
         <translation>일반</translation>
     </message>
@@ -1146,27 +1146,27 @@
         <translation>매핑</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="209"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="206"/>
         <source>Octave #1</source>
         <translation>옥타브 #1</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="214"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="211"/>
         <source>Octave #2</source>
         <translation>옥타브 #2</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="219"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="216"/>
         <source>Octave #3</source>
         <translation>옥타브 #3</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="224"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="221"/>
         <source>Octave #4</source>
         <translation>옥타브 #4</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="297"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="294"/>
         <source>Temperament</source>
         <translation>음률</translation>
     </message>
@@ -1192,7 +1192,7 @@
         <translation>튜닝</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.cpp" line="53"/>
+        <location filename="../../context/interface/configsectionkeyboard.cpp" line="54"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
         <translation>Hz</translation>
@@ -2857,17 +2857,17 @@ for a signal</source>
         <translation>배음용 루트 키</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="144"/>
+        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="149"/>
         <source>The two root keys must be different.</source>
         <translation>두 루트 키는 서로 달라야 합니다.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="149"/>
+        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="154"/>
         <source>The key is far from the root keys used: the extrapolation of the harmonics may be inaccurate.</source>
         <translation>키가 사용된 루트 키에서 멀리 떨어져 있습니다: 배음의 외삽이 부정확할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="151"/>
+        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="156"/>
         <source>The closest root key is transposed by more than an octave.</source>
         <translation>가장 가까운 루트 키가 한 옥타브 이상 조옮김됩니다.</translation>
     </message>
@@ -3000,34 +3000,49 @@ for a signal</source>
         <translation>표시</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="61"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="72"/>
         <source>Preset summary</source>
         <translation>프리셋 요약</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="63"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="74"/>
         <source>Size</source>
         <translation>크기</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="64"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="75"/>
         <source>Date</source>
         <translation>날짜</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="65"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="76"/>
         <source>Samples</source>
         <translation>샘플들</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="66"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="77"/>
         <source>Instruments</source>
         <translation>악기들</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="67"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="78"/>
         <source>Presets</source>
         <translation>프리셋들</translation>
+    </message>
+    <message>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="80"/>
+        <source>Sample details</source>
+        <translation>샘플 세부사항</translation>
+    </message>
+    <message>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="81"/>
+        <source>Instrument details</source>
+        <translation>악기 세부사항</translation>
+    </message>
+    <message>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="82"/>
+        <source>Preset details</source>
+        <translation>프리셋 세부사항</translation>
     </message>
 </context>
 <context>
@@ -5381,12 +5396,12 @@ Warning: quality will be reduced and the loop may be altered</source>
 <context>
     <name>PageTable</name>
     <message>
-        <location filename="../../editor/pagetable.cpp" line="159"/>
+        <location filename="../../editor/pagetable.cpp" line="118"/>
         <source>Global</source>
         <translation>전역</translation>
     </message>
     <message>
-        <location filename="../../editor/pagetable.cpp" line="1224"/>
+        <location filename="../../editor/pagetable.cpp" line="1143"/>
         <source>absolute value</source>
         <translation>절댓값</translation>
     </message>

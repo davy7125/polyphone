@@ -95,7 +95,7 @@ DirectoryBrowser::DirectoryBrowser(DialogKeyboard * dialogKeyboard, QWidget *par
     }
 
     // Connections
-    connect(ui->widgetDisplayMenu, SIGNAL(displayOptionsChanged(int)), ui->listView, SLOT(setDisplayOptions(int)));
+    connect(ui->widgetDisplayMenu, SIGNAL(displayOptionsChanged(int)), this, SLOT(onDisplayOptionsChanged(int)));
     connect(ui->lineSearch, SIGNAL(textEdited(QString)), ui->listView, SLOT(setFilter(QString)));
     connect(ui->lineSearch, SIGNAL(textEdited(QString)), ui->listSamples, SLOT(setFilter(QString)));
     connect(ui->lineSearch, SIGNAL(textEdited(QString)), ui->listInstruments, SLOT(setFilter(QString)));
@@ -128,7 +128,7 @@ DirectoryBrowser::DirectoryBrowser(DialogKeyboard * dialogKeyboard, QWidget *par
 
     // Column header and initial display options
     ui->widgetHeader->setListView(ui->listView);
-    ui->listView->setDisplayOptions(ui->widgetDisplayMenu->displayOptions());
+    onDisplayOptionsChanged(ui->widgetDisplayMenu->displayOptions());
 
     // Sections expanded or collapsed on the right
     ui->pushShowSamples->setChecked(ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "directory_browser_show_samples", true).toBool());
@@ -417,6 +417,14 @@ void DirectoryBrowser::onActionRequired(TabAction action)
     default:
         break;
     }
+}
+
+void DirectoryBrowser::onDisplayOptionsChanged(int options)
+{
+    ui->listView->setDisplayOptions(options);
+    ui->listSamples->setDetailsDisplayed(options & DirectoryDisplayMenu::SAMPLE_DETAILS);
+    ui->listInstruments->setDetailsDisplayed(options & DirectoryDisplayMenu::INSTRUMENT_DETAILS);
+    ui->listPresets->setDetailsDisplayed(options & DirectoryDisplayMenu::PRESET_DETAILS);
 }
 
 void DirectoryBrowser::on_pushShowSamples_toggled(bool checked)

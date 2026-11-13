@@ -29,6 +29,13 @@
 #include <QMouseEvent>
 #include "directorylistview.h"
 
+// Preset summary and columns of the list, details of the elements
+const int DirectoryDisplayMenu::LIST_OPTIONS = (0x01 << DirectoryListView::COLUMN_NUMBER) - 1;
+const int DirectoryDisplayMenu::DETAILS_SHIFT = DirectoryListView::COLUMN_NUMBER;
+const int DirectoryDisplayMenu::DETAILS_OPTIONS = SAMPLE_DETAILS | INSTRUMENT_DETAILS | PRESET_DETAILS;
+static_assert(DirectoryDisplayMenu::SAMPLE_DETAILS == (0x01 << DirectoryListView::COLUMN_NUMBER),
+              "the details follow the columns");
+
 DirectoryDisplayMenu::DirectoryDisplayMenu(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::DirectoryDisplayMenu)
@@ -56,15 +63,23 @@ DirectoryDisplayMenu::DirectoryDisplayMenu(QWidget *parent) :
     connect(menu, SIGNAL(aboutToHide()), this, SLOT(onMenuClosed()));
     menu->setStyleSheet(ContextManager::theme()->getMenuTheme());
 
-    // Bit 0 for the preset summary, bit i for the column i
-    _displayOptions = ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "directory_browser_display", 0x3F).toInt();
-    addOption(menu, tr("Preset summary"), 0x01);
+    // Bit 0 for the preset summary, bit i for the column i, then the details of the elements
+    // (saved under another key so that they are displayed by default with an existing configuration)
+    _displayOptions =
+        (ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "directory_browser_display", LIST_OPTIONS).toInt() & LIST_OPTIONS) |
+        ((ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "directory_browser_details", DETAILS_OPTIONS >> DETAILS_SHIFT).toInt()
+          << DETAILS_SHIFT) & DETAILS_OPTIONS);
+    addOption(menu, tr("Preset summary"), PRESET_SUMMARY);
     menu->addSeparator();
     addOption(menu, tr("Size"), 0x01 << DirectoryListView::COLUMN_SIZE);
     addOption(menu, tr("Date"), 0x01 << DirectoryListView::COLUMN_DATE);
     addOption(menu, tr("Samples"), 0x01 << DirectoryListView::COLUMN_SAMPLES);
     addOption(menu, tr("Instruments"), 0x01 << DirectoryListView::COLUMN_INSTRUMENTS);
     addOption(menu, tr("Presets"), 0x01 << DirectoryListView::COLUMN_PRESETS);
+    menu->addSeparator();
+    addOption(menu, tr("Sample details"), SAMPLE_DETAILS);
+    addOption(menu, tr("Instrument details"), INSTRUMENT_DETAILS);
+    addOption(menu, tr("Preset details"), PRESET_DETAILS);
 
     ui->pushButton->setMenu(menu);
 }
@@ -86,7 +101,8 @@ void DirectoryDisplayMenu::toggleOption(QAction * action)
     int flag = action->data().toInt();
     _displayOptions ^= flag;
     action->setIcon((_displayOptions & flag) ? _checkIcon : _emptyIcon);
-    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "directory_browser_display", _displayOptions);
+    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "directory_browser_display", _displayOptions & LIST_OPTIONS);
+    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "directory_browser_details", (_displayOptions & DETAILS_OPTIONS) >> DETAILS_SHIFT);
     emit displayOptionsChanged(_displayOptions);
 }
 

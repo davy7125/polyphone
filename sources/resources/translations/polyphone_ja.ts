@@ -769,7 +769,7 @@
     <name>ConfigPanel</name>
     <message>
         <location filename="../../context/interface/configpanel.ui" line="63"/>
-        <location filename="../../context/interface/configpanel.cpp" line="109"/>
+        <location filename="../../context/interface/configpanel.cpp" line="116"/>
         <source>General</source>
         <translation>一般</translation>
     </message>
@@ -1146,27 +1146,27 @@
         <translation>マッピング</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="209"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="206"/>
         <source>Octave #1</source>
         <translation>オクターブ #1</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="214"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="211"/>
         <source>Octave #2</source>
         <translation>オクターブ #2</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="219"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="216"/>
         <source>Octave #3</source>
         <translation>オクターブ #3</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="224"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="221"/>
         <source>Octave #4</source>
         <translation>オクターブ #4</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="297"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="294"/>
         <source>Temperament</source>
         <translation>音律</translation>
     </message>
@@ -1192,7 +1192,7 @@
         <translation>チューニング</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.cpp" line="53"/>
+        <location filename="../../context/interface/configsectionkeyboard.cpp" line="54"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
         <translation>Hz</translation>
@@ -2857,17 +2857,17 @@ for a signal</source>
         <translation>倍音用のルートキー</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="144"/>
+        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="149"/>
         <source>The two root keys must be different.</source>
         <translation>2つのルートキーは異なっている必要があります。</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="149"/>
+        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="154"/>
         <source>The key is far from the root keys used: the extrapolation of the harmonics may be inaccurate.</source>
         <translation>キーが使用するルートキーから離れています: 倍音の外挿が不正確になる可能性があります。</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="151"/>
+        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="156"/>
         <source>The closest root key is transposed by more than an octave.</source>
         <translation>最も近いルートキーが1オクターブ以上トランスポーズされます。</translation>
     </message>
@@ -3000,34 +3000,49 @@ for a signal</source>
         <translation>表示</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="61"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="72"/>
         <source>Preset summary</source>
         <translation>プリセットの概要</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="63"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="74"/>
         <source>Size</source>
         <translation>サイズ</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="64"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="75"/>
         <source>Date</source>
         <translation>日付</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="65"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="76"/>
         <source>Samples</source>
         <translation>サンプル</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="66"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="77"/>
         <source>Instruments</source>
         <translation>インストゥルメント</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="67"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="78"/>
         <source>Presets</source>
         <translation>プリセット</translation>
+    </message>
+    <message>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="80"/>
+        <source>Sample details</source>
+        <translation>サンプルの詳細</translation>
+    </message>
+    <message>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="81"/>
+        <source>Instrument details</source>
+        <translation>インストゥルメントの詳細</translation>
+    </message>
+    <message>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="82"/>
+        <source>Preset details</source>
+        <translation>プリセットの詳細</translation>
     </message>
 </context>
 <context>
@@ -5382,12 +5397,12 @@ Warning: quality will be reduced and the loop may be altered</source>
 <context>
     <name>PageTable</name>
     <message>
-        <location filename="../../editor/pagetable.cpp" line="159"/>
+        <location filename="../../editor/pagetable.cpp" line="118"/>
         <source>Global</source>
         <translation>グローバル</translation>
     </message>
     <message>
-        <location filename="../../editor/pagetable.cpp" line="1224"/>
+        <location filename="../../editor/pagetable.cpp" line="1143"/>
         <source>absolute value</source>
         <translation>絶対値</translation>
     </message>

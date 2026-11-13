@@ -55,7 +55,7 @@ public:
     void removeFile(QString filePath);
     void updateFile(DirectoryFileData * fileData);
 
-    // Display options: bit 0 for the preset summary, bit i for the column i (the name is always displayed)
+    // Display options: bit 0 for the preset summary, bit i for the column i (the name is always displayed), other bits ignored
     bool isPresetSummaryDisplayed() const;
     bool isColumnDisplayed(int column) const;
 

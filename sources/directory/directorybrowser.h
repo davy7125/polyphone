@@ -75,6 +75,7 @@ private slots:
     void on_listView_activated(const QModelIndex &index);
     void onRenameRequested(QString path);
     void onDeleteRequested(QString path);
+    void onDisplayOptionsChanged(int options);
     void on_pushShowSamples_toggled(bool checked);
     void on_pushShowInstruments_toggled(bool checked);
     void on_pushShowPresets_toggled(bool checked);

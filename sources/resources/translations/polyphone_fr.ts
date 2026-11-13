@@ -769,7 +769,7 @@
     <name>ConfigPanel</name>
     <message>
         <location filename="../../context/interface/configpanel.ui" line="63"/>
-        <location filename="../../context/interface/configpanel.cpp" line="109"/>
+        <location filename="../../context/interface/configpanel.cpp" line="116"/>
         <source>General</source>
         <translation>Général</translation>
     </message>
@@ -1142,27 +1142,27 @@
         <translation>Mappage</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="209"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="206"/>
         <source>Octave #1</source>
         <translation>Octave 1</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="214"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="211"/>
         <source>Octave #2</source>
         <translation>Octave 2</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="219"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="216"/>
         <source>Octave #3</source>
         <translation>Octave 3</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="224"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="221"/>
         <source>Octave #4</source>
         <translation>Octave 4</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="297"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="294"/>
         <source>Temperament</source>
         <translation>Tempérament</translation>
     </message>
@@ -1188,7 +1188,7 @@
         <translation>Accordage</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.cpp" line="53"/>
+        <location filename="../../context/interface/configsectionkeyboard.cpp" line="54"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
         <translation>Hz</translation>
@@ -2850,17 +2850,17 @@ d&apos;un signal</translation>
         <translation>Note de base pour les harmoniques</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="144"/>
+        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="149"/>
         <source>The two root keys must be different.</source>
         <translation>Les deux notes de base doivent être différentes.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="149"/>
+        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="154"/>
         <source>The key is far from the root keys used: the extrapolation of the harmonics may be inaccurate.</source>
         <translation>La note est loin des notes de base utilisées : l&apos;extrapolation des harmoniques peut être imprécise.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="151"/>
+        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="156"/>
         <source>The closest root key is transposed by more than an octave.</source>
         <translation>La note de base la plus proche est transposée de plus d&apos;une octave.</translation>
     </message>
@@ -2993,34 +2993,49 @@ d&apos;un signal</translation>
         <translation>Affichage</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="61"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="72"/>
         <source>Preset summary</source>
         <translation>Résumé des ensembles</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="63"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="74"/>
         <source>Size</source>
         <translation>Taille</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="64"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="75"/>
         <source>Date</source>
         <translation>Date</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="65"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="76"/>
         <source>Samples</source>
         <translation>Échantillons</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="66"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="77"/>
         <source>Instruments</source>
         <translation>Instruments</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="67"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="78"/>
         <source>Presets</source>
         <translation>Ensembles</translation>
+    </message>
+    <message>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="80"/>
+        <source>Sample details</source>
+        <translation>Détails des échantillons</translation>
+    </message>
+    <message>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="81"/>
+        <source>Instrument details</source>
+        <translation>Détails des instruments</translation>
+    </message>
+    <message>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="82"/>
+        <source>Preset details</source>
+        <translation>Détails des ensembles</translation>
     </message>
 </context>
 <context>
@@ -5391,12 +5406,12 @@ Attention : la qualité sera réduite et les boucles peuvent être altérés</tr
 <context>
     <name>PageTable</name>
     <message>
-        <location filename="../../editor/pagetable.cpp" line="159"/>
+        <location filename="../../editor/pagetable.cpp" line="118"/>
         <source>Global</source>
         <translation>Global</translation>
     </message>
     <message>
-        <location filename="../../editor/pagetable.cpp" line="1224"/>
+        <location filename="../../editor/pagetable.cpp" line="1143"/>
         <source>absolute value</source>
         <translation>valeur absolue</translation>
     </message>

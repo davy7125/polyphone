@@ -769,7 +769,7 @@
     <name>ConfigPanel</name>
     <message>
         <location filename="../../context/interface/configpanel.ui" line="63"/>
-        <location filename="../../context/interface/configpanel.cpp" line="109"/>
+        <location filename="../../context/interface/configpanel.cpp" line="116"/>
         <source>General</source>
         <translation>通用</translation>
     </message>
@@ -1142,27 +1142,27 @@
         <translation>映射</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="209"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="206"/>
         <source>Octave #1</source>
         <translation>八度 #1</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="214"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="211"/>
         <source>Octave #2</source>
         <translation>八度 #2</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="219"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="216"/>
         <source>Octave #3</source>
         <translation>八度 #3</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="224"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="221"/>
         <source>Octave #4</source>
         <translation>八度 #4</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="297"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="294"/>
         <source>Temperament</source>
         <translation>律制</translation>
     </message>
@@ -1188,7 +1188,7 @@
         <translation>调音</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.cpp" line="53"/>
+        <location filename="../../context/interface/configsectionkeyboard.cpp" line="54"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
         <translation>赫兹</translation>
@@ -2844,17 +2844,17 @@ for a signal</source>
         <translation>用于谐波的根音符</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="144"/>
+        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="149"/>
         <source>The two root keys must be different.</source>
         <translation>两个根音符必须不同。</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="149"/>
+        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="154"/>
         <source>The key is far from the root keys used: the extrapolation of the harmonics may be inaccurate.</source>
         <translation>该音符距离所用的根音符较远：谐波的外推可能不准确。</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="151"/>
+        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="156"/>
         <source>The closest root key is transposed by more than an octave.</source>
         <translation>最近的根音符移调超过一个八度。</translation>
     </message>
@@ -2982,34 +2982,49 @@ for a signal</source>
         <translation>显示</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="61"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="72"/>
         <source>Preset summary</source>
         <translation>预设摘要</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="63"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="74"/>
         <source>Size</source>
         <translation>大小</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="64"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="75"/>
         <source>Date</source>
         <translation>日期</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="65"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="76"/>
         <source>Samples</source>
         <translation>采样</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="66"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="77"/>
         <source>Instruments</source>
         <translation>乐器</translation>
     </message>
     <message>
-        <location filename="../../directory/directorydisplaymenu.cpp" line="67"/>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="78"/>
         <source>Presets</source>
         <translation>预设</translation>
+    </message>
+    <message>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="80"/>
+        <source>Sample details</source>
+        <translation>采样详细信息</translation>
+    </message>
+    <message>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="81"/>
+        <source>Instrument details</source>
+        <translation>乐器详细信息</translation>
+    </message>
+    <message>
+        <location filename="../../directory/directorydisplaymenu.cpp" line="82"/>
+        <source>Preset details</source>
+        <translation>预设详细信息</translation>
     </message>
 </context>
 <context>
@@ -5347,12 +5362,12 @@ Warning: quality will be reduced and the loop may be altered</source>
 <context>
     <name>PageTable</name>
     <message>
-        <location filename="../../editor/pagetable.cpp" line="159"/>
+        <location filename="../../editor/pagetable.cpp" line="118"/>
         <source>Global</source>
         <translation>全局</translation>
     </message>
     <message>
-        <location filename="../../editor/pagetable.cpp" line="1224"/>
+        <location filename="../../editor/pagetable.cpp" line="1143"/>
         <source>absolute value</source>
         <translation>绝对值</translation>
     </message>

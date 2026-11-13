@@ -29,6 +29,8 @@
 #include "utils.h"
 
 DirectoryElementListView::DirectoryElementListView(QWidget *parent) : QListView(parent),
+    _delegate(new DirectoryElementListDelegate(this)),
+    _detailsDisplayed(true),
     _path(""),
     _type(elementUnknown)
 {
@@ -39,7 +41,7 @@ DirectoryElementListView::DirectoryElementListView(QWidget *parent) : QListView(
     _proxy->setFilterRole(Qt::UserRole + 4);
     this->setModel(_proxy);
 
-    this->setItemDelegate(new DirectoryElementListDelegate(this));
+    this->setItemDelegate(_delegate);
     connect(this, &QListView::activated, this, &DirectoryElementListView::onActivated);
 }
 
@@ -80,6 +82,18 @@ EltID DirectoryElementListView::getSelectedElement()
     if (indexes.isEmpty() || _type == elementUnknown)
         return EltID(elementUnknown);
     return EltID(_type, -1, indexes[0].data(Qt::UserRole + 3).toInt());
+}
+
+void DirectoryElementListView::setDetailsDisplayed(bool displayed)
+{
+    if (displayed == _detailsDisplayed)
+        return;
+
+    // The row height depends on the details
+    _detailsDisplayed = displayed;
+    _delegate->setDetailsDisplayed(displayed);
+    this->scheduleDelayedItemsLayout();
+    this->viewport()->update();
 }
 
 void DirectoryElementListView::onActivated(const QModelIndex &index)

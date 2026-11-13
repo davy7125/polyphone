@@ -29,7 +29,8 @@
 
 const int DirectoryElementListDelegate::MARGIN = 6;
 
-DirectoryElementListDelegate::DirectoryElementListDelegate(QObject *parent) : QStyledItemDelegate(parent)
+DirectoryElementListDelegate::DirectoryElementListDelegate(QObject *parent) : QStyledItemDelegate(parent),
+    _detailsDisplayed(true)
 {
     _colorEnabled = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT, ThemeManager::NORMAL);
     _colorHighlighted = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT, ThemeManager::NORMAL);
@@ -68,6 +69,11 @@ void DirectoryElementListDelegate::paint(QPainter *painter, const QStyleOptionVi
     painter->drawText(rect.left(), rect.top() + fm.ascent(), name);
 
     // Other lines
+    if (!_detailsDisplayed)
+    {
+        painter->restore();
+        return;
+    }
     QStringList details = index.data(Qt::UserRole + 1).toString().split("\n");
     QFont fontSmall = option.font;
     fontSmall.setPointSizeF(0.9 * fontSmall.pointSizeF());
@@ -84,8 +90,7 @@ void DirectoryElementListDelegate::paint(QPainter *painter, const QStyleOptionVi
 
 QSize DirectoryElementListDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-    Q_UNUSED(index)
     QFontMetrics fm(option.font);
-    int lineCount = index.data(Qt::UserRole + 2).toInt();
+    int lineCount = _detailsDisplayed ? index.data(Qt::UserRole + 2).toInt() : 0;
     return QSize(0, (0.9 * lineCount + 1.0) * fm.height() + (0.5 * lineCount + 2.0) * MARGIN);
 }

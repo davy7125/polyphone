@@ -125,6 +125,8 @@ bool DirectoryListView::isColumnDisplayed(int column) const
 
 void DirectoryListView::setDisplayOptions(int displayOptions)
 {
+    // Other bits are not related to the list
+    displayOptions &= (0x01 << COLUMN_NUMBER) - 1;
     if (displayOptions == _displayOptions)
         return;
 

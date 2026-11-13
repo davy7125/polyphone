@@ -29,6 +29,7 @@
 #include "directoryfiledata.h"
 class QStandardItemModel;
 class QSortFilterProxyModel;
+class DirectoryElementListDelegate;
 
 class DirectoryElementListView : public QListView
 {
@@ -42,6 +43,9 @@ public:
     // Element selected (indexSf2 not set), or elementUnknown
     EltID getSelectedElement();
 
+    // Lines below the name of each element
+    void setDetailsDisplayed(bool displayed);
+
 public slots:
     void setFilter(QString filter);
 
@@ -54,6 +58,8 @@ private slots:
 private:
     QStandardItemModel * _model;
     QSortFilterProxyModel * _proxy;
+    DirectoryElementListDelegate * _delegate;
+    bool _detailsDisplayed;
     QString _path;
     ElementType _type;
 };

@@ -36,8 +36,12 @@ public:
     void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
     QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const override;
 
+    // Lines below the name of each element
+    void setDetailsDisplayed(bool displayed) { _detailsDisplayed = displayed; }
+
 private:
     QColor _colorEnabled, _colorHighlighted, _colorAlternate;
+    bool _detailsDisplayed;
     static const int MARGIN;
 };
 

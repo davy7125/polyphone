@@ -34,17 +34,26 @@ class DirectoryDisplayMenu;
 }
 
 // This widget displays a button and a menu is shown when clicking on it
-// The elements are only checkboxes: preset summary and columns of the directory browser
+// The elements are only checkboxes: preset summary, columns of the directory browser and details of the elements
 // The menu is not closed after checking / unchecking one element
 class DirectoryDisplayMenu : public QWidget
 {
     Q_OBJECT
 
 public:
+    // Bit 0 for the preset summary, bit i for the column i of DirectoryListView,
+    // then the details below the samples, instruments and presets
+    enum DisplayOption
+    {
+        PRESET_SUMMARY = 0x001,
+        SAMPLE_DETAILS = 0x040,
+        INSTRUMENT_DETAILS = 0x080,
+        PRESET_DETAILS = 0x100
+    };
+
     explicit DirectoryDisplayMenu(QWidget *parent = nullptr);
     ~DirectoryDisplayMenu();
 
-    // Bit 0 for the preset summary, bit i for the column i of DirectoryListView
     int displayOptions() { return _displayOptions; }
 
 signals:
@@ -70,6 +79,9 @@ private:
 
     Ui::DirectoryDisplayMenu *ui;
     int _displayOptions;
+    static const int LIST_OPTIONS;
+    static const int DETAILS_OPTIONS;
+    static const int DETAILS_SHIFT;
     QIcon _emptyIcon, _checkIcon;
     QString _textColor, _backgroundColor, _hoveredBackgroundColor;
 };
