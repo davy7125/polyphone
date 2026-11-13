@@ -34,6 +34,8 @@
 
 DirectoryFileData::DirectoryFileData(const QFileInfo &fileInfo, int sf2Id) : QObject(nullptr),
     _path(fileInfo.absoluteFilePath()),
+    _baseName(fileInfo.completeBaseName()),
+    _suffix(fileInfo.suffix()),
     _fileSize(fileInfo.size()),
     _lastModified(fileInfo.lastModified()),
     _existingSf2Id(sf2Id),

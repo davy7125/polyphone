@@ -76,7 +76,10 @@ bool DirectorySortProxyModel::lessThan(const QModelIndex &left, const QModelInde
     }
 
     // Sort by name, or names A→Z for equal values whatever the order
-    int nameOrder = Utils::naturalOrder(fdL->getFileName(), dfR->getFileName());
+    // Extensions are compared last so that "Piano.sf2" is before "Piano (1).sf2"
+    int nameOrder = Utils::naturalOrder(fdL->getBaseName(), dfR->getBaseName());
+    if (nameOrder == 0)
+        nameOrder = Utils::naturalOrder(fdL->getSuffix(), dfR->getSuffix());
     return (_column == DirectoryListView::COLUMN_NAME || ascending) ? nameOrder < 0 : nameOrder > 0;
 }
 

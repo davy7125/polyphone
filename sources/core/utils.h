@@ -32,10 +32,15 @@ class Utils
 public:
     static void prepareStaticVariables();
 
-    /// Return the natural comparison between two strings
-    /// -1 if a should be before b, 0 if equals, 1 is a should be after b
-    /// This is case insensitive
-    static int naturalOrder(QString a, QString b);
+    /// Natural comparison of two strings: -1 if a is before b, 0 if they are identical, 1 if a is after b
+    /// Unicode Collation Algorithm with the root order of CLDR and its "numeric" option (as ICU):
+    ///  1. whitespaces < punctuation < symbols < currency signs < numbers < letters, sequences of digits being compared
+    ///     by their value ("2" < "10") and letters without their accent and case ("Piano" = "piano" = "píano"),
+    ///  2. then accents ("piano" < "píano"),
+    ///  3. then case, uppercase first ("Piano" < "piano"),
+    ///  4. then leading zeros, more zeros first ("01" < "1"),
+    ///  5. then code points, so that only identical strings are equal.
+    static int naturalOrder(const QString &a, const QString &b);
 
     /// Remove all accents
     /// Can be useful for sorting strings
@@ -66,7 +71,6 @@ public:
     static QString getFormattedSize(qint64 bytes);
 
 private:
-    static int getNumberPart(const QString &str, int &length);
     static QString removeSuffix(QString txt);
 
     static QString s_diacriticLetters;

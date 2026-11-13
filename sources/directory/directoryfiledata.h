@@ -58,6 +58,8 @@ public:
 
     QString getPath() const { return _path; }
     QString getFileName() const { return QFileInfo(_path).fileName(); }
+    const QString &getBaseName() const { return _baseName; } // Name without extension
+    const QString &getSuffix() const { return _suffix; }
     quint64 getFileSize() const { return _fileSize; }
     QDateTime getLastModified() const { return _lastModified; }
     Status getStatus() const { return _status; }
@@ -124,6 +126,8 @@ private:
     static void scanInstPrst(QVectorIterator<InstPrst*> &i, QList<DirectoryInstrumentPresetData> &list, bool isPrst);
 
     QString _path;
+    QString _baseName;
+    QString _suffix;
     quint64 _fileSize;
     QDateTime _lastModified;
     int _existingSf2Id;
