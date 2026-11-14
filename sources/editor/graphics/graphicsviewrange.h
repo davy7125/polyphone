@@ -50,6 +50,7 @@ public:
 
 signals:
     void selectionChanged(IdList selectedIds);
+    void viewChanged(); // Zoom, scroll or size
 
 protected:
     void showEvent(QShowEvent * event) override;

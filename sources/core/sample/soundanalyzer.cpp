@@ -585,11 +585,15 @@ double SoundAnalyzer::yin(int start, int length, double fMin, double fMax, doubl
     // giving a much deeper dip is the period
     for (int k = 2; k <= 6 && best * k + k < tauMax; k++)
     {
-        int multiple = best * k;
-        for (int tau = multiple - k; tau <= multiple + k; tau++)
+        // Fixed window around k × best (the bound must not follow the minimum found, which could leave the array), a
+        // minimum on an edge being a slope towards another dip, not a dip at the multiple
+        int center = best * k;
+        int multiple = center;
+        for (int tau = center - k; tau <= center + k; tau++)
             if (cmndf[tau] < cmndf[multiple])
                 multiple = tau;
-        if (cmndf[multiple] < 0.5 * cmndf[best] && cmndf[multiple] < cmndf[best] - 0.05)
+        if (multiple > center - k && multiple < center + k &&
+            cmndf[multiple] < 0.5 * cmndf[best] && cmndf[multiple] < cmndf[best] - 0.05)
         {
             best = multiple;
             break;
@@ -1921,7 +1925,8 @@ void SoundAnalyzer::computeLoop()
 
     // Seam correlation: what precedes the loop start compared to what precedes the loop end
     int n = f0 > 0 ? static_cast<int>(2 * sr / f0) : 0;
-    n = qBound(static_cast<int>(0.005 * sr), n, qMax(8, qMin(static_cast<int>(0.05 * sr), length / 2)));
+    int nMax = qMax(8, qMin(static_cast<int>(0.05 * sr), length / 2)); // Half of a short loop at most
+    n = qBound(qMin(static_cast<int>(0.005 * sr), nMax), n, nMax);
     double correlation = std::nan(""), errorDb = std::nan("");
     auto compareWindows = [&](int a, int b, int count) {
         double sab = 0, saa = 0, sbb = 0, sdd = 0;

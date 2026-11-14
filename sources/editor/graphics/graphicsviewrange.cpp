@@ -343,6 +343,7 @@ void GraphicsViewRange::resizeEvent(QResizeEvent * event)
     QGraphicsView::resizeEvent(event);
     fitInView(_displayedRect);
     _dontRememberScroll = false;
+    emit viewChanged();
 }
 
 void GraphicsViewRange::mousePressEvent(QMouseEvent *event)
@@ -819,6 +820,7 @@ void GraphicsViewRange::mouseDoubleClickEvent(QMouseEvent * event)
 void GraphicsViewRange::scrollContentsBy(int dx, int dy)
 {
     QGraphicsView::scrollContentsBy(dx, dy);
+    emit viewChanged();
     if (_dontRememberScroll)
         return;
 
@@ -933,6 +935,7 @@ void GraphicsViewRange::zoomDrag()
     this->fitInView(_displayedRect);
     _dontRememberScroll = false;
     updateLabelPosition();
+    emit viewChanged();
 }
 
 void GraphicsViewRange::setZoomLine(double x1Norm, double y1Norm, double x2Norm, double y2Norm)

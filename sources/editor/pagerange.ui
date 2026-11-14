@@ -42,12 +42,18 @@
        <property name="bottomMargin">
         <number>0</number>
        </property>
+       <property name="spacing">
+        <number>0</number>
+       </property>
        <item row="0" column="0">
         <widget class="GraphicsViewRange" name="rangeEditor">
          <property name="frameShape">
           <enum>QFrame::NoFrame</enum>
          </property>
         </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="KeyboardStrip" name="keyboard" native="true"/>
        </item>
       </layout>
      </widget>
@@ -134,6 +140,11 @@ to display its division ranges</string>
    <extends>QGraphicsView</extends>
    <header>graphicsviewrange.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>KeyboardStrip</class>
+   <extends>QWidget</extends>
+   <header>keyboardstrip.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

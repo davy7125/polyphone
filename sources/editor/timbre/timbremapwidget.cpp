@@ -26,17 +26,12 @@
 #include "timbremapwidget.h"
 #include "contextmanager.h"
 #include "soundfontmanager.h"
+#include "keyboardstrip.h"
 #include <QPainter>
 #include <QMouseEvent>
 #include <QContextMenuEvent>
 #include <QToolTip>
 #include <cmath>
-
-static bool isBlackKey(int key)
-{
-    int note = key % 12;
-    return note == 1 || note == 3 || note == 6 || note == 8 || note == 10;
-}
 
 TimbreMapWidget::TimbreMapWidget(QWidget * parent) : QWidget(parent),
     _model(nullptr),
@@ -619,24 +614,18 @@ void TimbreMapWidget::paintDecisions(QPainter &painter)
 
 void TimbreMapWidget::paintKeyboard(QPainter &painter)
 {
-    QColor white = _palette.isDark() ? QColor(210, 210, 210) : QColor(250, 250, 250);
-    QColor black = _palette.isDark() ? QColor(30, 30, 30) : QColor(40, 40, 40);
-    QColor border = _palette.grid();
+    QList<KeyboardStrip::Key> keys;
     for (int c = 0; c < _columns.count(); c++)
     {
         int key = _columns[c];
-        QRectF rect = columnRect(c, _keyboardTop, _keyboardHeight);
-        QColor color = isBlackKey(key) ? black : white;
+        QColor color = KeyboardStrip::keyColor(key, _palette.isDark());
         if (_playedKeys.contains(key))
             color = _palette.highlight();
         else if (_model->getKey(key).sources.isEmpty())
             color = ThemeManager::mix(color, _palette.background(), 0.6);
-        painter.fillRect(rect, color);
-        painter.setPen(border);
-        painter.drawLine(rect.topRight(), rect.bottomRight());
+        keys << KeyboardStrip::Key { key, _left + c * _columnWidth, _left + (c + 1) * _columnWidth, color };
     }
-    painter.setBrush(Qt::NoBrush);
-    painter.drawRect(QRectF(_left, _keyboardTop, _columns.count() * _columnWidth, _keyboardHeight));
+    KeyboardStrip::paintKeys(painter, keys, _keyboardTop, _keyboardHeight, _palette.grid());
 
     // Names of the C keys
     QFontMetrics metrics(this->font());

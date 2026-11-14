@@ -360,6 +360,8 @@ set(POLYPHONE_APP_FILES
     editor/graphics/graphicswavepainter.h
     editor/graphics/graphicszoomline.cpp
     editor/graphics/graphicszoomline.h
+    editor/graphics/keyboardstrip.cpp
+    editor/graphics/keyboardstrip.h
     editor/interactiveduplicator.cpp
     editor/interactiveduplicator.h
     editor/interactivesampleloader.cpp
