@@ -22,7 +22,7 @@ Polyphoneでは、[ホーム画面](manual/index.md#doc_left)の :guilabel:`デ�
   * サンプル、インストゥルメント、プリセットの数
   * 最初のいくつかのプリセットの名前
 
-これらの詳細は、見出しの下に列として揃えて表示されます。テキストフィールドの右にある :guilabel:`表示` ボタンをクリックするとメニューが開き、表示する列（名前以外はすべて非表示にできます）と、:guilabel:`プリセットの概要`（2行目に表示される最初のいくつかのプリセットの名前）を表示するかどうかを選べます。概要を表示しない場合、各ファイルは表のように1行に収まります。
+これらの詳細は、見出しの下に列として揃えて表示されます。テキストフィールドの右にある ![表示](images/toolbar_display.png "表示"){.inline} ボタンをクリックするとメニューが開き、表示する列（名前以外はすべて非表示にできます）と、:guilabel:`プリセットの概要`（2行目に表示される最初のいくつかのプリセットの名前）を表示するかどうかを選べます。概要を表示しない場合、各ファイルは表のように1行に収まります。
 
 ### 各サンプルの情報
 
@@ -67,9 +67,11 @@ Polyphoneでは、[ホーム画面](manual/index.md#doc_left)の :guilabel:`デ�
 ## 要素を演奏する {#doc_play}
 
 
-:guilabel:`表示` ボタンの右にある ![MIDI](images/toolbar_midi.png "MIDI"){.inline} ボタンで[MIDIプレーヤー](manual/soundfont-editor/toolbar.md#doc_midi_player)の表示 / 非表示を、その隣の ![piano](images/toolbar_piano.png "piano"){.inline} ボタンで[仮想キーボード](manual/soundfont-editor/toolbar.md#doc_keyboard)の表示 / 非表示を、さらに ![レコーダー](images/toolbar_recorder.png "レコーダー"){.inline} ボタンで[レコーダー](manual/soundfont-editor/toolbar.md#doc_recorder)の表示 / 非表示を、エディターのツールバーのボタンと同じように切り替えられます。
+![表示](images/toolbar_display.png "表示"){.inline} ボタンの右にある ![MIDI](images/toolbar_midi.png "MIDI"){.inline} ボタンで[MIDIプレーヤー](manual/soundfont-editor/toolbar.md#doc_midi_player)の表示 / 非表示を、その隣の ![piano](images/toolbar_piano.png "piano"){.inline} ボタンで[仮想キーボード](manual/soundfont-editor/toolbar.md#doc_keyboard)の表示 / 非表示を、さらに ![レコーダー](images/toolbar_recorder.png "レコーダー"){.inline} ボタンで[レコーダー](manual/soundfont-editor/toolbar.md#doc_recorder)の表示 / 非表示を、エディターのツールバーのボタンと同じように切り替えられます。
 
 右側のリストで選択したサンプル、インストゥルメント、プリセットは、仮想キーボードで演奏できるほか、仮想キーボードが非表示のときでも外部MIDIキーボードで演奏できます。エディターと同じく、仮想キーボードには要素の音域、またはサンプルのルートキーが表示されます。サンプルは、ループがあればループ再生され、サンプルの[プレーヤー](manual/soundfont-editor/editing-pages/sample-editor.md#doc_player)の :guilabel:`ステレオ` オプションがオンならステレオで再生されます。
+
+仮想キーボードの[表示部](manual/soundfont-editor/toolbar.md#doc_keyboard_element)には、演奏中の要素とそのファイル名が表示されます。その矢印で前または次の要素を、外側の2つのボタンで前または次のファイルを選択できます（:kbd:`PageUp` / :kbd:`PageDown` と :kbd:`Shift`+:kbd:`PageUp` / :kbd:`Shift`+:kbd:`PageDown` でも操作可能）。これにより、仮想キーボードから離れずにディレクトリ内のファイルを順に演奏できます。
 
 ファイルの要素を初めて選択すると、タブを開かずにバックグラウンドでSoundFontが読み込まれます。その後、同じファイルの要素を選択している間はSoundFontが保持され、メインリストで別のファイルを選択すると解放されます。
 

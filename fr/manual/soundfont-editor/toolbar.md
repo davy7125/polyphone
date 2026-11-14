@@ -154,6 +154,16 @@ Le clavier virtuel peut également être affiché depuis l'[explorateur de banqu
 ![Clavier virtuel](images/virtual_keyboard.png "Clavier virtuel")
 
 
+### Élément joué {#doc_keyboard_element}
+
+
+L'afficheur situé sous le bandeau montre l'élément joué par le clavier : le nom de l'échantillon, de l'instrument ou de l'ensemble, précédé de son icône et, pour un ensemble, de ses numéros de banque et d'ensemble. Le nom de son fichier est écrit au-dessus en petits caractères (ou le nom de la banque de sons si elle n'a jamais été enregistrée). :guilabel:`Aucun élément jouable sélectionné` s'affiche lorsque rien ne peut être joué : aucun échantillon, instrument ou ensemble n'est sélectionné, plusieurs éléments sont sélectionnés, ou l'onglet courant n'est ni un éditeur ni un explorateur de banques de sons.
+
+Les flèches de part et d'autre de l'afficheur sélectionnent l'élément précédent ou suivant du même type, dans l'ordre de l'[arborescence](manual/soundfont-editor/tree.md) ou des listes de l'[explorateur de banques de sons](manual/soundfont-explorer.md#doc_play). Le clavier virtuel garde le focus, ce qui permet de jouer aussitôt le nouvel élément avec le clavier de l'ordinateur. Lorsque seul un fichier est sélectionné dans l'explorateur, ou seulement un entête dans l'arborescence, la flèche de droite sélectionne le premier élément sous cet entête, ou le premier ensemble (à défaut instrument, à défaut échantillon) du fichier ou de la banque de sons. Les flèches sont également accessibles avec :kbd:`Page↑` et :kbd:`Page↓`.
+
+Deux boutons supplémentaires aux extrémités de l'afficheur sélectionnent le fichier précédent ou suivant, également avec :kbd:`Maj`+:kbd:`Page↑` et :kbd:`Maj`+:kbd:`Page↓`. Avec un explorateur de banques de sons, il s'agit du fichier précédent ou suivant de la liste principale : si un échantillon, un instrument ou un ensemble est sélectionné, le premier élément du même type est alors sélectionné dans le nouveau fichier. Avec un éditeur, il s'agit de l'éditeur précédent ou suivant dans l'ordre des onglets (les autres types d'onglets étant ignorés), qui conserve sa propre sélection. Dans les autres onglets, ces boutons sont désactivés.
+
+
 ### Clavier de piano
 
 
@@ -200,6 +210,10 @@ en utilisant un clavier MIDI externe
   Après l'utilisation de :kbd:`Ctrl`+:kbd:`1`, les octaves les plus graves peuvent être jouées.
   Les octaves les plus hautes sont atteintes en utilisant :kbd:`Ctrl`+:kbd:`8`.
   Ils fonctionnent eux aussi dès que la fenêtre du clavier virtuel est active.
+
+:kbd:`Page↑` / :kbd:`Page↓`
+: Ces touches sélectionnent l'[élément joué](#doc_keyboard_element) précédent ou suivant, et le fichier précédent ou suivant d'un explorateur de banques de sons, ou l'éditeur précédent ou suivant, lorsqu'elles sont combinées avec la touche :kbd:`Maj`.
+  Elles fonctionnent également dès que la fenêtre du clavier virtuel est active.
 
 :kbd:`→` / :kbd:`←`
 : Les flèches droite et gauche jouent la note située juste au-dessus ou juste en dessous de la dernière note jouée, avec la même vélocité.
@@ -285,6 +299,7 @@ Le bandeau en haut de la fenêtre contient, de gauche à droite&nbsp;:
 * un bouton pour arrêter la lecture et revenir au début,
 * un bouton ouvrant les [paramètres de lecture](#doc_midi_player_settings).
 
+Un fichier MIDI peut aussi être ouvert par glisser-déposer sur la fenêtre.
 Si le fichier ne peut pas être lu, la raison est affichée à la place des canaux.
 La lecture s'arrête lorsque la fenêtre est fermée.
 

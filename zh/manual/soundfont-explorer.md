@@ -22,7 +22,7 @@
   * 采样、乐器和预设的数量，
   * 前几个预设的名称。
 
-这些信息在表头下按列对齐。文本框右侧的 :guilabel:`显示` 按钮会打开一个菜单，用于选择显示哪些列（除名称外均可隐藏），以及是否显示 :guilabel:`预设摘要`，即第二行中前几个预设的名称。不显示摘要时，每个文件只占一行，如同表格。
+这些信息在表头下按列对齐。文本框右侧的 ![显示](images/toolbar_display.png "显示"){.inline} 按钮会打开一个菜单，用于选择显示哪些列（除名称外均可隐藏），以及是否显示 :guilabel:`预设摘要`，即第二行中前几个预设的名称。不显示摘要时，每个文件只占一行，如同表格。
 
 ### 每个采样的信息
 
@@ -67,9 +67,11 @@
 ## 演奏元素 {#doc_play}
 
 
-:guilabel:`显示` 按钮右侧的 ![MIDI](images/toolbar_midi.png "MIDI"){.inline} 按钮用于显示或隐藏[MIDI 播放器](manual/soundfont-editor/toolbar.md#doc_midi_player)，旁边的 ![piano](images/toolbar_piano.png "piano"){.inline} 按钮用于显示或隐藏[虚拟键盘](manual/soundfont-editor/toolbar.md#doc_keyboard)，![录音机](images/toolbar_recorder.png "录音机"){.inline} 按钮用于显示或隐藏[录音机](manual/soundfont-editor/toolbar.md#doc_recorder)，与编辑器工具栏中的按钮作用相同。
+![显示](images/toolbar_display.png "显示"){.inline} 按钮右侧的 ![MIDI](images/toolbar_midi.png "MIDI"){.inline} 按钮用于显示或隐藏[MIDI 播放器](manual/soundfont-editor/toolbar.md#doc_midi_player)，旁边的 ![piano](images/toolbar_piano.png "piano"){.inline} 按钮用于显示或隐藏[虚拟键盘](manual/soundfont-editor/toolbar.md#doc_keyboard)，![录音机](images/toolbar_recorder.png "录音机"){.inline} 按钮用于显示或隐藏[录音机](manual/soundfont-editor/toolbar.md#doc_recorder)，与编辑器工具栏中的按钮作用相同。
 
 在右侧列表中选中的采样、乐器或预设可以用虚拟键盘演奏，即使虚拟键盘处于隐藏状态，也可以用外部 MIDI 键盘演奏。与编辑器中一样，虚拟键盘会显示该元素的音域，或采样的根音符。如果采样带有循环，则循环播放；如果勾选了采样[播放器](manual/soundfont-editor/editing-pages/sample-editor.md#doc_player)的 :guilabel:`立体声` 选项，则以立体声播放。
+
+虚拟键盘的[显示屏](manual/soundfont-editor/toolbar.md#doc_keyboard_element)会显示正在演奏的元素及其文件名。其箭头用于选择上一个或下一个元素，外侧的两个按钮用于选择上一个或下一个文件，也可以用 :kbd:`PageUp` / :kbd:`PageDown` 和 :kbd:`Shift`+:kbd:`PageUp` / :kbd:`Shift`+:kbd:`PageDown` 操作：这样无需离开虚拟键盘，就能逐个浏览并演奏目录中的文件。
 
 首次选中某个文件中的元素时，音色库会在后台加载，不会打开标签页。之后，只要选中的元素属于同一个文件，音色库就会一直保留；在主列表中选中另一个文件时，它会被释放。
 

@@ -176,6 +176,8 @@ Maintaining the left click allows you to move the graphic if the initial point i
 
 A click on the middle button plays a note: the key is given by the horizontal position of the mouse and the velocity by its vertical position.
 
+A keyboard under the horizontal scroll bar shows the white and black keys and follows the zoom and the scroll of the graph. A click on a key plays the corresponding note, the velocity being defined by the vertical position of the click as on the [virtual keyboard](manual/soundfont-editor/toolbar.md#doc_keyboard). The mouse wheel over this keyboard scrolls the graph horizontally.
+
 
 ## Envelope editor {#doc_envelope}
 

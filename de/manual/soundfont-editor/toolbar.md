@@ -154,6 +154,16 @@ Die virtuelle Tastatur kann auch im [Soundfont-Explorer](manual/soundfont-explor
 ![Virtuelle Tastatur](images/virtual_keyboard.png "Virtuelle Tastatur")
 
 
+### Gespieltes Element {#doc_keyboard_element}
+
+
+Die Anzeige unter dem Banner zeigt das Element, das mit der Tastatur gespielt wird: den Namen des Samples, Instruments oder Presets, mit seinem Symbol davor und bei einem Preset mit seiner Bank- und Presetnummer. Darüber steht in kleiner Schrift der Name seiner Datei (oder der Name des Soundfonts, wenn er noch nie gespeichert wurde). :guilabel:`Kein spielbares Element ausgewählt` wird angezeigt, wenn nichts gespielt werden kann: kein Sample, Instrument oder Preset ist ausgewählt, mehrere Elemente sind ausgewählt, oder der aktuelle Tab ist weder ein Editor noch ein Soundfont-Explorer.
+
+Die Pfeile links und rechts der Anzeige wählen das vorherige oder nächste Element desselben Typs aus, in der Reihenfolge der [Baumansicht](manual/soundfont-editor/tree.md) oder der Listen des [Soundfont-Explorers](manual/soundfont-explorer.md#doc_play). Die virtuelle Tastatur behält den Fokus, sodass das neue Element sofort mit der Computertastatur gespielt werden kann. Ist im Soundfont-Explorer nur eine Datei ausgewählt oder in der Baumansicht nur eine Überschrift, wählt der rechte Pfeil das erste Element unter dieser Überschrift aus, bzw. das erste Preset (sonst Instrument, sonst Sample) der Datei oder des Soundfonts. Die Pfeile lassen sich auch mit :kbd:`PageUp` und :kbd:`PageDown` bedienen.
+
+Zwei weitere Schaltflächen an beiden Enden der Anzeige wählen die vorherige oder nächste Datei aus, auch mit :kbd:`Shift`+:kbd:`PageUp` und :kbd:`Shift`+:kbd:`PageDown`. In einem Soundfont-Explorer ist dies die vorherige oder nächste Datei der Hauptliste: Ist ein Sample, Instrument oder Preset ausgewählt, wird anschließend das erste Element desselben Typs in der neuen Datei ausgewählt. In einem Editor ist dies der vorherige oder nächste Editor in der Reihenfolge der Tabs (andere Arten von Tabs werden übersprungen), der seine eigene Auswahl behält. In den übrigen Tabs sind diese Schaltflächen deaktiviert.
+
+
 ### Klaviatur
 
 
@@ -199,6 +209,10 @@ mit einer externen MIDI-Tastatur
 : Diese Tastenkombinationen ändern die Oktaven, die mit der Computertastatur gespielt werden.
   Nach :kbd:`Ctrl`+:kbd:`1` können die tiefsten Oktaven gespielt werden.
   Die höchsten Oktaven erreicht man mit :kbd:`Ctrl`+:kbd:`8`.
+  Sie funktionieren ebenfalls, sobald das Fenster der virtuellen Tastatur aktiv ist.
+
+:kbd:`PageUp` / :kbd:`PageDown`
+: Diese Tasten wählen das vorherige oder nächste [gespielte Element](#doc_keyboard_element) aus, und zusammen mit der Taste :kbd:`Shift` die vorherige oder nächste Datei eines Soundfont-Explorers bzw. den vorherigen oder nächsten Editor.
   Sie funktionieren ebenfalls, sobald das Fenster der virtuellen Tastatur aktiv ist.
 
 :kbd:`→` / :kbd:`←`
@@ -285,6 +299,7 @@ Das Banner oben im Fenster enthält von links nach rechts:
 * eine Schaltfläche zum Stoppen der Wiedergabe und Zurückkehren zum Anfang,
 * eine Schaltfläche, die die [Wiedergabeeinstellungen](#doc_midi_player_settings) öffnet.
 
+Eine MIDI-Datei kann auch per Drag & Drop auf das Fenster geöffnet werden.
 Kann die Datei nicht gelesen werden, wird der Grund anstelle der Kanäle angezeigt.
 Die Wiedergabe stoppt, wenn das Fenster geschlossen wird.
 

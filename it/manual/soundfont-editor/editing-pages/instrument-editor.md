@@ -176,6 +176,8 @@ Tenendo premuto il tasto sinistro si può spostare il grafico, se il punto inizi
 
 Un clic con il tasto centrale suona una nota: la nota è data dalla posizione orizzontale del mouse e la velocità dalla sua posizione verticale.
 
+Una tastiera sotto la barra di scorrimento orizzontale mostra i tasti bianchi e neri e segue lo zoom e lo scorrimento del grafico. Un clic su un tasto suona la nota corrispondente; la velocità dipende dalla posizione verticale del clic, come sulla [tastiera virtuale](manual/soundfont-editor/toolbar.md#doc_keyboard). La rotellina del mouse sopra questa tastiera fa scorrere il grafico in orizzontale.
+
 
 ## Editor degli inviluppi {#doc_envelope}
 

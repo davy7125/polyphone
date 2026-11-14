@@ -154,6 +154,16 @@ O teclado virtual também pode ser exibido a partir do [explorador de soundfonts
 ![Teclado virtual](images/virtual_keyboard.png "Teclado virtual")
 
 
+### Elemento tocado {#doc_keyboard_element}
+
+
+O visor abaixo do banner mostra o elemento tocado pelo teclado: o nome da amostra, do instrumento ou da predefinição, precedido do seu ícone e, para uma predefinição, dos seus números de banco e de predefinição. Acima, em caracteres pequenos, aparece o nome do seu arquivo (ou o nome da soundfont se ela nunca foi salva). :guilabel:`Nenhum elemento reproduzível selecionado` é exibido quando nada pode ser tocado: nenhuma amostra, instrumento ou predefinição está selecionado, vários elementos estão selecionados, ou a aba atual não é nem um editor nem um explorador de soundfonts.
+
+As setas dos dois lados do visor selecionam o elemento anterior ou seguinte do mesmo tipo, na ordem da [árvore](manual/soundfont-editor/tree.md) ou das listas do [explorador de soundfonts](manual/soundfont-explorer.md#doc_play). O teclado virtual mantém o foco, de modo que o novo elemento pode ser tocado imediatamente com o teclado do computador. Quando apenas um arquivo está selecionado no explorador de soundfonts, ou apenas um cabeçalho na árvore, a seta direita seleciona o primeiro elemento desse cabeçalho, ou a primeira predefinição (senão instrumento, senão amostra) do arquivo ou da soundfont. As setas também podem ser usadas com :kbd:`PageUp` e :kbd:`PageDown`.
+
+Dois botões adicionais nas extremidades do visor selecionam o arquivo anterior ou seguinte, também com :kbd:`Shift`+:kbd:`PageUp` e :kbd:`Shift`+:kbd:`PageDown`. Com um explorador de soundfonts, trata-se do arquivo anterior ou seguinte da lista principal: se uma amostra, um instrumento ou uma predefinição estiver selecionado, o primeiro elemento do mesmo tipo é então selecionado no novo arquivo. Com um editor, trata-se do editor anterior ou seguinte na ordem das abas (os outros tipos de abas são ignorados), que mantém a sua própria seleção. Nas outras abas, estes botões ficam desativados.
+
+
 ### Teclado de piano
 
 
@@ -200,6 +210,10 @@ com um teclado MIDI externo
   Depois de usar :kbd:`Ctrl`+:kbd:`1`, as oitavas mais graves podem ser tocadas.
   As oitavas mais agudas são alcançadas com :kbd:`Ctrl`+:kbd:`8`.
   Eles também funcionam assim que a janela do teclado virtual está ativa.
+
+:kbd:`PageUp` / :kbd:`PageDown`
+: Estas teclas selecionam o [elemento tocado](#doc_keyboard_element) anterior ou seguinte e, combinadas com a tecla :kbd:`Shift`, o arquivo anterior ou seguinte de um explorador de soundfonts ou o editor anterior ou seguinte.
+  Elas também funcionam assim que a janela do teclado virtual está ativa.
 
 :kbd:`→` / :kbd:`←`
 : A seta para a direita ou para a esquerda toca a altura imediatamente acima ou abaixo da última tecla tocada, com a mesma velocidade.
@@ -285,6 +299,7 @@ A faixa no topo da janela contém, da esquerda para a direita:
 * um botão para parar a reprodução e voltar ao início,
 * um botão que abre as [configurações de reprodução](#doc_midi_player_settings).
 
+Um arquivo MIDI também pode ser aberto arrastando-o e soltando-o na janela.
 Se o arquivo não puder ser lido, o motivo é exibido no lugar dos canais.
 A reprodução para quando a janela é fechada.
 

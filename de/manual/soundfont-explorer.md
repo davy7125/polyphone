@@ -22,7 +22,7 @@ Ein Klick auf eine durchsuchbare Datei zeigt in den Listen auf der rechten Seite
   * Anzahl der Samples, Instrumente und Presets,
   * Namen der ersten Presets.
 
-Diese Angaben sind in Spalten unter einer Kopfzeile ausgerichtet. Die Schaltfläche :guilabel:`Anzeige` rechts neben dem Textfeld öffnet ein Menü, in dem die angezeigten Spalten gewählt werden (alle außer dem Namen können ausgeblendet werden) und festgelegt wird, ob die :guilabel:`Preset-Übersicht` angezeigt wird, also die Namen der ersten Presets in einer zweiten Zeile. Ohne diese Übersicht belegt jede Datei nur eine Zeile, wie in einer Tabelle.
+Diese Angaben sind in Spalten unter einer Kopfzeile ausgerichtet. Die Schaltfläche ![Anzeige](images/toolbar_display.png "Anzeige"){.inline} rechts neben dem Textfeld öffnet ein Menü, in dem die angezeigten Spalten gewählt werden (alle außer dem Namen können ausgeblendet werden) und festgelegt wird, ob die :guilabel:`Preset-Übersicht` angezeigt wird, also die Namen der ersten Presets in einer zweiten Zeile. Ohne diese Übersicht belegt jede Datei nur eine Zeile, wie in einer Tabelle.
 
 ### Informationen zu jedem Sample
 
@@ -67,9 +67,11 @@ Mit diesen Operationen lässt sich eine lokale Soundfont-Sammlung schnell verwal
 ## Elemente abspielen {#doc_play}
 
 
-Der Button ![MIDI](images/toolbar_midi.png "MIDI"){.inline} rechts neben dem Button :guilabel:`Anzeige` blendet den [MIDI-Player](manual/soundfont-editor/toolbar.md#doc_midi_player) ein oder aus, der Button ![piano](images/toolbar_piano.png "piano"){.inline} daneben die [virtuelle Tastatur](manual/soundfont-editor/toolbar.md#doc_keyboard) und der Button ![Rekorder](images/toolbar_recorder.png "Rekorder"){.inline} den [Rekorder](manual/soundfont-editor/toolbar.md#doc_recorder), wie die entsprechenden Buttons der Werkzeugleiste des Editors.
+Der Button ![MIDI](images/toolbar_midi.png "MIDI"){.inline} rechts neben dem Button ![Anzeige](images/toolbar_display.png "Anzeige"){.inline} blendet den [MIDI-Player](manual/soundfont-editor/toolbar.md#doc_midi_player) ein oder aus, der Button ![piano](images/toolbar_piano.png "piano"){.inline} daneben die [virtuelle Tastatur](manual/soundfont-editor/toolbar.md#doc_keyboard) und der Button ![Rekorder](images/toolbar_recorder.png "Rekorder"){.inline} den [Rekorder](manual/soundfont-editor/toolbar.md#doc_recorder), wie die entsprechenden Buttons der Werkzeugleiste des Editors.
 
 Das in den Listen auf der rechten Seite ausgewählte Sample, Instrument oder Preset kann mit der virtuellen Tastatur gespielt werden, oder mit einer externen MIDI-Tastatur, auch wenn die virtuelle Tastatur ausgeblendet ist. Wie im Editor zeigt die virtuelle Tastatur den Tonumfang des Elements bzw. die Basisnote eines Samples. Ein Sample wird im Loop abgespielt, wenn es einen Loop besitzt, und in Stereo, wenn die Option :guilabel:`Stereo` des [Players](manual/soundfont-editor/editing-pages/sample-editor.md#doc_player) für Samples aktiviert ist.
+
+Die [Anzeige](manual/soundfont-editor/toolbar.md#doc_keyboard_element) der virtuellen Tastatur zeigt das gespielte Element und den Namen seiner Datei. Ihre Pfeile wählen das vorherige oder nächste Element aus und ihre beiden äußeren Schaltflächen die vorherige oder nächste Datei, auch mit :kbd:`PageUp` / :kbd:`PageDown` und :kbd:`Shift`+:kbd:`PageUp` / :kbd:`Shift`+:kbd:`PageDown`: So lassen sich die Dateien eines Verzeichnisses durchgehen und spielen, ohne die virtuelle Tastatur zu verlassen.
 
 Wenn zum ersten Mal ein Element einer Datei ausgewählt wird, wird der Soundfont im Hintergrund geladen, ohne einen Tab zu öffnen. Der Soundfont bleibt dann geladen, solange Elemente derselben Datei ausgewählt werden, und wird freigegeben, sobald in der Hauptliste eine andere Datei ausgewählt wird.
 

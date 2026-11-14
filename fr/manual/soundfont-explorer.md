@@ -22,7 +22,7 @@ Un clic sur un fichier pouvant être scanné affiche, dans les listes de la part
   * nombre d'échantillons, d'instruments et d'ensembles,
   * noms des premiers ensembles.
 
-Ces détails sont alignés en colonnes sous un en-tête. Le bouton :guilabel:`Affichage`, à droite du champ de texte, ouvre un menu permettant de choisir les colonnes affichées (toutes peuvent être masquées sauf le nom) et d'afficher ou non le :guilabel:`Résumé des ensembles`, c'est-à-dire les noms des premiers ensembles sur une seconde ligne. Sans ce résumé, chaque fichier tient sur une seule ligne, comme dans un tableau.
+Ces détails sont alignés en colonnes sous un en-tête. Le bouton ![Affichage](images/toolbar_display.png "Affichage"){.inline}, à droite du champ de texte, ouvre un menu permettant de choisir les colonnes affichées (toutes peuvent être masquées sauf le nom) et d'afficher ou non le :guilabel:`Résumé des ensembles`, c'est-à-dire les noms des premiers ensembles sur une seconde ligne. Sans ce résumé, chaque fichier tient sur une seule ligne, comme dans un tableau.
 
 ### Informations pour chaque échantillon
 
@@ -67,9 +67,11 @@ Ces opérations permettent de gérer et de nettoyer rapidement une collection lo
 ## Jouer les éléments {#doc_play}
 
 
-Le bouton ![MIDI](images/toolbar_midi.png "MIDI"){.inline}, à droite du bouton :guilabel:`Affichage`, affiche ou masque le [lecteur MIDI](manual/soundfont-editor/toolbar.md#doc_midi_player), le bouton ![piano](images/toolbar_piano.png "piano"){.inline} situé à côté affiche ou masque le [clavier virtuel](manual/soundfont-editor/toolbar.md#doc_keyboard), et le bouton ![magnétophone](images/toolbar_recorder.png "magnétophone"){.inline} affiche ou masque le [magnétophone](manual/soundfont-editor/toolbar.md#doc_recorder), comme les boutons de la barre d'outils de l'éditeur.
+Le bouton ![MIDI](images/toolbar_midi.png "MIDI"){.inline}, à droite du bouton ![Affichage](images/toolbar_display.png "Affichage"){.inline}, affiche ou masque le [lecteur MIDI](manual/soundfont-editor/toolbar.md#doc_midi_player), le bouton ![piano](images/toolbar_piano.png "piano"){.inline} situé à côté affiche ou masque le [clavier virtuel](manual/soundfont-editor/toolbar.md#doc_keyboard), et le bouton ![magnétophone](images/toolbar_recorder.png "magnétophone"){.inline} affiche ou masque le [magnétophone](manual/soundfont-editor/toolbar.md#doc_recorder), comme les boutons de la barre d'outils de l'éditeur.
 
 L'échantillon, l'instrument ou l'ensemble sélectionné dans les listes de droite peut être joué avec le clavier virtuel, ou avec un clavier MIDI externe même si le clavier virtuel est masqué. Comme dans l'éditeur, le clavier virtuel montre l'étendue de l'élément, ou la note de référence d'un échantillon. Un échantillon est joué en boucle s'il en possède une, et en stéréo si l'option :guilabel:`stéréo` du [lecteur](manual/soundfont-editor/editing-pages/sample-editor.md#doc_player) d'échantillon est cochée.
+
+L'[afficheur](manual/soundfont-editor/toolbar.md#doc_keyboard_element) du clavier virtuel montre l'élément joué et le nom de son fichier. Ses flèches sélectionnent l'élément précédent ou suivant et ses deux boutons extérieurs le fichier précédent ou suivant, également avec :kbd:`Page↑` / :kbd:`Page↓` et :kbd:`Maj`+:kbd:`Page↑` / :kbd:`Maj`+:kbd:`Page↓` : les fichiers d'un répertoire peuvent ainsi être parcourus et joués sans quitter le clavier virtuel.
 
 La première fois qu'un élément d'un fichier est sélectionné, la banque de sons est chargée en arrière-plan sans ouvrir d'onglet. La banque de sons est ensuite conservée tant que les éléments sélectionnés appartiennent au même fichier, et libérée lorsqu'un autre fichier est sélectionné dans la liste principale.
 

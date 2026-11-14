@@ -176,6 +176,8 @@ Manter o clique esquerdo pressionado permite deslocar o gráfico se o ponto inic
 
 Um clique com o botão do meio toca uma nota: a nota é dada pela posição horizontal do mouse e a velocidade pela sua posição vertical.
 
+Um teclado sob a barra de rolagem horizontal mostra as teclas brancas e pretas e acompanha o zoom e o deslocamento do gráfico. Um clique em uma tecla toca a nota correspondente; a velocidade é definida de acordo com a posição vertical do clique, como no [teclado virtual](manual/soundfont-editor/toolbar.md#doc_keyboard). A roda do mouse sobre este teclado rola o gráfico horizontalmente.
+
 
 ## Editor de envelopes {#doc_envelope}
 

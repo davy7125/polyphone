@@ -154,6 +154,16 @@ La tastiera virtuale può essere mostrata anche dall'[esploratore di soundfont](
 ![Tastiera virtuale](images/virtual_keyboard.png "Tastiera virtuale")
 
 
+### Elemento suonato {#doc_keyboard_element}
+
+
+Il display sotto il banner mostra l'elemento suonato dalla tastiera: il nome del campione, dello strumento o del preset, preceduto dalla sua icona e, per un preset, dal suo numero di banco e di preset. Sopra, in caratteri piccoli, è scritto il nome del suo file (o il nome del soundfont se non è mai stato salvato). :guilabel:`Nessun elemento riproducibile selezionato` viene mostrato quando non si può suonare nulla: nessun campione, strumento o preset è selezionato, sono selezionati più elementi, oppure la scheda corrente non è né un editor né un esploratore di soundfont.
+
+Le frecce ai due lati del display selezionano l'elemento precedente o successivo dello stesso tipo, nell'ordine dell'[albero](manual/soundfont-editor/tree.md) o degli elenchi dell'[esploratore di soundfont](manual/soundfont-explorer.md#doc_play). La tastiera virtuale mantiene il focus, così il nuovo elemento può essere suonato subito con la tastiera del computer. Quando nell'esploratore è selezionato solo un file, o nell'albero solo un'intestazione, la freccia destra seleziona il primo elemento sotto questa intestazione, oppure il primo preset (altrimenti strumento, altrimenti campione) del file o del soundfont. Le frecce si possono usare anche con :kbd:`PageUp` e :kbd:`PageDown`.
+
+Due pulsanti aggiuntivi alle estremità del display selezionano il file precedente o successivo, anche con :kbd:`Shift`+:kbd:`PageUp` e :kbd:`Shift`+:kbd:`PageDown`. Con un esploratore di soundfont, si tratta del file precedente o successivo dell'elenco principale: se è selezionato un campione, uno strumento o un preset, viene quindi selezionato il primo elemento dello stesso tipo nel nuovo file. Con un editor, si tratta dell'editor precedente o successivo nell'ordine delle schede (gli altri tipi di schede vengono saltati), che mantiene la propria selezione. Nelle altre schede questi pulsanti sono disattivati.
+
+
 ### Tastiera del pianoforte
 
 
@@ -200,6 +210,10 @@ con una tastiera MIDI esterna
   Dopo :kbd:`Ctrl`+:kbd:`1` si possono suonare le ottave più gravi.
   Le ottave più acute si raggiungono con :kbd:`Ctrl`+:kbd:`8`.
   Funzionano anch'esse non appena la finestra della tastiera virtuale è attiva.
+
+:kbd:`PageUp` / :kbd:`PageDown`
+: Questi tasti selezionano l'[elemento suonato](#doc_keyboard_element) precedente o successivo e, combinati con il tasto :kbd:`Shift`, il file precedente o successivo di un esploratore di soundfont o l'editor precedente o successivo.
+  Funzionano anch'essi non appena la finestra della tastiera virtuale è attiva.
 
 :kbd:`→` / :kbd:`←`
 : La freccia destra o sinistra suona la nota immediatamente sopra o sotto l'ultimo tasto suonato, con la stessa velocità.
@@ -285,6 +299,7 @@ La fascia in alto nella finestra contiene, da sinistra a destra:
 * un pulsante per fermare la riproduzione e tornare all'inizio,
 * un pulsante che apre le [impostazioni di riproduzione](#doc_midi_player_settings).
 
+Un file MIDI può anche essere aperto trascinandolo nella finestra.
 Se il file non può essere letto, il motivo viene mostrato al posto dei canali.
 La riproduzione si ferma quando la finestra viene chiusa.
 

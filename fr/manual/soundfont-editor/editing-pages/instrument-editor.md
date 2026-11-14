@@ -176,6 +176,8 @@ Maintenir le clic gauche permet de déplacer le graphique si le point initial n'
 
 Un clic sur le bouton du milieu joue une note&nbsp;: la note est donnée par la position horizontale de la souris et la vélocité par sa position verticale.
 
+Un clavier sous la barre de défilement horizontale montre les touches blanches et noires et suit le zoom et le défilement du graphique. Un clic sur une touche joue la note correspondante, la vélocité étant déterminée par la position verticale du clic comme sur le [clavier virtuel](manual/soundfont-editor/toolbar.md#doc_keyboard). La molette de la souris au-dessus de ce clavier fait défiler le graphique horizontalement.
+
 
 ## Éditeur d'enveloppes {#doc_envelope}
 

@@ -22,7 +22,7 @@ Clicking on a scannable file displays, in the lists on the right side of the int
   * number of samples, instruments and presets,
   * names of the first presets.
 
-These details are aligned in columns under a header. The :guilabel:`Display` button, to the right of the text field, opens a menu for choosing the columns shown (all of them can be hidden except the name) and whether the :guilabel:`Preset summary` is displayed, that is the names of the first presets on a second line. Without this summary, each file takes up a single line, as in a table.
+These details are aligned in columns under a header. The ![Display](images/toolbar_display.png "Display"){.inline} button, to the right of the text field, opens a menu for choosing the columns shown (all of them can be hidden except the name) and whether the :guilabel:`Preset summary` is displayed, that is the names of the first presets on a second line. Without this summary, each file takes up a single line, as in a table.
 
 ### Information for each sample
 
@@ -67,9 +67,11 @@ These operations allow you to quickly manage and clean up a local soundfont coll
 ## Playing the elements {#doc_play}
 
 
-The ![MIDI](images/toolbar_midi.png "MIDI"){.inline} button, on the right of the :guilabel:`Display` button, shows or hides the [MIDI player](manual/soundfont-editor/toolbar.md#doc_midi_player), the ![piano](images/toolbar_piano.png "piano"){.inline} button next to it shows or hides the [virtual keyboard](manual/soundfont-editor/toolbar.md#doc_keyboard), and the ![recorder](images/toolbar_recorder.png "recorder"){.inline} button shows or hides the [recorder](manual/soundfont-editor/toolbar.md#doc_recorder), like the buttons of the editor toolbar.
+The ![MIDI](images/toolbar_midi.png "MIDI"){.inline} button, on the right of the ![Display](images/toolbar_display.png "Display"){.inline} button, shows or hides the [MIDI player](manual/soundfont-editor/toolbar.md#doc_midi_player), the ![piano](images/toolbar_piano.png "piano"){.inline} button next to it shows or hides the [virtual keyboard](manual/soundfont-editor/toolbar.md#doc_keyboard), and the ![recorder](images/toolbar_recorder.png "recorder"){.inline} button shows or hides the [recorder](manual/soundfont-editor/toolbar.md#doc_recorder), like the buttons of the editor toolbar.
 
 The sample, instrument or preset selected in the lists on the right can be played with the virtual keyboard, or with an external MIDI keyboard even if the virtual keyboard is hidden. As in the editor, the virtual keyboard shows the range of the element, or the root key of a sample. A sample is played in a loop if it has one, and in stereo if the :guilabel:`stereo` option of the sample [player](manual/soundfont-editor/editing-pages/sample-editor.md#doc_player) is ticked.
+
+The [display](manual/soundfont-editor/toolbar.md#doc_keyboard_element) of the virtual keyboard shows the element played and the name of its file. Its arrows select the previous or next element and its two outer buttons the previous or next file, also with :kbd:`PageUp` / :kbd:`PageDown` and :kbd:`Shift`+:kbd:`PageUp` / :kbd:`Shift`+:kbd:`PageDown`: the files of a directory can be browsed and played without leaving the virtual keyboard.
 
 The first time an element of a file is selected, the soundfont is loaded in the background without opening a tab. The soundfont is then kept as long as elements of the same file are selected, and released when another file is selected in the main list.
 

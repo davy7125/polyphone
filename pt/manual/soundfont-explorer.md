@@ -22,7 +22,7 @@ Clicar em um arquivo analisável exibe, nas listas do lado direito da interface,
   * número de amostras, instrumentos e predefinições,
   * nomes das primeiras predefinições.
 
-Esses detalhes ficam alinhados em colunas sob um cabeçalho. O botão :guilabel:`Visualização`, à direita do campo de texto, abre um menu que permite escolher as colunas exibidas (todas podem ser ocultadas, exceto o nome) e exibir ou não o :guilabel:`Resumo das predefinições`, ou seja, os nomes das primeiras predefinições em uma segunda linha. Sem esse resumo, cada arquivo ocupa uma única linha, como em uma tabela.
+Esses detalhes ficam alinhados em colunas sob um cabeçalho. O botão ![Visualização](images/toolbar_display.png "Visualização"){.inline}, à direita do campo de texto, abre um menu que permite escolher as colunas exibidas (todas podem ser ocultadas, exceto o nome) e exibir ou não o :guilabel:`Resumo das predefinições`, ou seja, os nomes das primeiras predefinições em uma segunda linha. Sem esse resumo, cada arquivo ocupa uma única linha, como em uma tabela.
 
 ### Informações de cada amostra
 
@@ -67,9 +67,11 @@ Essas operações permitem gerenciar e organizar rapidamente uma coleção local
 ## Tocar os elementos {#doc_play}
 
 
-O botão ![MIDI](images/toolbar_midi.png "MIDI"){.inline}, à direita do botão :guilabel:`Visualização`, exibe ou oculta o [reprodutor MIDI](manual/soundfont-editor/toolbar.md#doc_midi_player), o botão ![piano](images/toolbar_piano.png "piano"){.inline} ao lado exibe ou oculta o [teclado virtual](manual/soundfont-editor/toolbar.md#doc_keyboard), e o botão ![gravador](images/toolbar_recorder.png "gravador"){.inline} exibe ou oculta o [gravador](manual/soundfont-editor/toolbar.md#doc_recorder), como os botões da barra de ferramentas do editor.
+O botão ![MIDI](images/toolbar_midi.png "MIDI"){.inline}, à direita do botão ![Visualização](images/toolbar_display.png "Visualização"){.inline}, exibe ou oculta o [reprodutor MIDI](manual/soundfont-editor/toolbar.md#doc_midi_player), o botão ![piano](images/toolbar_piano.png "piano"){.inline} ao lado exibe ou oculta o [teclado virtual](manual/soundfont-editor/toolbar.md#doc_keyboard), e o botão ![gravador](images/toolbar_recorder.png "gravador"){.inline} exibe ou oculta o [gravador](manual/soundfont-editor/toolbar.md#doc_recorder), como os botões da barra de ferramentas do editor.
 
 A amostra, o instrumento ou a predefinição selecionada nas listas da direita pode ser tocada com o teclado virtual, ou com um teclado MIDI externo mesmo que o teclado virtual esteja oculto. Como no editor, o teclado virtual mostra a extensão do elemento, ou a nota base de uma amostra. Uma amostra é tocada em loop se tiver um, e em estéreo se a opção :guilabel:`estéreo` do [reprodutor](manual/soundfont-editor/editing-pages/sample-editor.md#doc_player) de amostras estiver marcada.
+
+O [visor](manual/soundfont-editor/toolbar.md#doc_keyboard_element) do teclado virtual mostra o elemento tocado e o nome do seu arquivo. Suas setas selecionam o elemento anterior ou seguinte e seus dois botões externos o arquivo anterior ou seguinte, também com :kbd:`PageUp` / :kbd:`PageDown` e :kbd:`Shift`+:kbd:`PageUp` / :kbd:`Shift`+:kbd:`PageDown`: os arquivos de um diretório podem assim ser percorridos e tocados sem sair do teclado virtual.
 
 Na primeira vez que um elemento de um arquivo é selecionado, a soundfont é carregada em segundo plano sem abrir uma aba. A soundfont é então mantida enquanto elementos do mesmo arquivo forem selecionados, e liberada quando outro arquivo é selecionado na lista principal.
 

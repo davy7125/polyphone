@@ -154,6 +154,16 @@ The virtual keyboard can also be displayed from the [soundfont explorer](manual/
 ![Virtual keyboard](images/virtual_keyboard.png "Virtual keyboard")
 
 
+### Element played {#doc_keyboard_element}
+
+
+The display below the banner shows the element played by the keyboard: the name of the sample, instrument or preset, preceded by its icon and, for a preset, by its bank and preset numbers. The name of its file is written above in small characters (or the name of the soundfont if it has never been saved). :guilabel:`No playable element selected` is displayed when nothing can be played: no sample, instrument or preset is selected, several elements are selected, or the current tab is neither an editor nor a soundfont explorer.
+
+The arrows on both sides of the display select the previous or next element of the same type, in the order of the [tree](manual/soundfont-editor/tree.md) or of the lists of the [soundfont explorer](manual/soundfont-explorer.md#doc_play). The virtual keyboard keeps the focus, so that the new element can be played at once with the computer keyboard. When only a file is selected in the soundfont explorer, or only a header in the tree, the right arrow selects the first element under this header, or the first preset (otherwise instrument, otherwise sample) of the file or of the soundfont. The arrows can also be used with :kbd:`PageUp` and :kbd:`PageDown`.
+
+Two more buttons at both ends of the display select the previous or next file, also with :kbd:`Shift`+:kbd:`PageUp` and :kbd:`Shift`+:kbd:`PageDown`. With a soundfont explorer, this is the previous or next file of the main list: if a sample, instrument or preset is selected, the first element of the same type is then selected in the new file. With an editor, this is the previous or next editor in the order of the tabs (the other kinds of tabs being skipped), which keeps its own selection. They are disabled in the other tabs.
+
+
 ### Piano keyboard
 
 
@@ -199,6 +209,10 @@ using an external MIDI keyboard
 : These shortcuts change the octaves played with the computer keyboard.
   After the use of :kbd:`Ctrl`+:kbd:`1`, the lowest octaves can be played.
   The highest octaves are reached using :kbd:`Ctrl`+:kbd:`8`.
+  They also work as soon as the window of the virtual keyboard is active.
+
+:kbd:`PageUp` / :kbd:`PageDown`
+: These keys select the previous or next [element played](#doc_keyboard_element), and the previous or next file of a soundfont explorer or the previous or next editor when combined with the key :kbd:`Shift`.
   They also work as soon as the window of the virtual keyboard is active.
 
 :kbd:`→` / :kbd:`←`
@@ -285,6 +299,7 @@ The banner at the top of the window contains, from left to right:
 * a button for stopping the playback and going back to the beginning,
 * a button opening the [playback settings](#doc_midi_player_settings).
 
+A MIDI file can also be opened by dragging and dropping it on the window.
 If the file cannot be read, the reason is displayed instead of the channels.
 The playback stops when the window is closed.
 

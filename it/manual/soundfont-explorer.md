@@ -22,7 +22,7 @@ Un clic su un file analizzabile mostra, negli elenchi nella parte destra dell'in
   * numero di campioni, strumenti e preset,
   * nomi dei primi preset.
 
-Questi dettagli sono allineati in colonne sotto un'intestazione. Il pulsante :guilabel:`Visualizzazione`, a destra del campo di testo, apre un menu che permette di scegliere le colonne mostrate (tutte possono essere nascoste tranne il nome) e di mostrare o meno il :guilabel:`Riepilogo dei preset`, cioè i nomi dei primi preset su una seconda riga. Senza questo riepilogo, ogni file occupa una sola riga, come in una tabella.
+Questi dettagli sono allineati in colonne sotto un'intestazione. Il pulsante ![Visualizzazione](images/toolbar_display.png "Visualizzazione"){.inline}, a destra del campo di testo, apre un menu che permette di scegliere le colonne mostrate (tutte possono essere nascoste tranne il nome) e di mostrare o meno il :guilabel:`Riepilogo dei preset`, cioè i nomi dei primi preset su una seconda riga. Senza questo riepilogo, ogni file occupa una sola riga, come in una tabella.
 
 ### Informazioni per ogni campione
 
@@ -67,9 +67,11 @@ Queste operazioni permettono di gestire e riordinare rapidamente una raccolta lo
 ## Suonare gli elementi {#doc_play}
 
 
-Il pulsante ![MIDI](images/toolbar_midi.png "MIDI"){.inline}, a destra del pulsante :guilabel:`Visualizzazione`, mostra o nasconde il [lettore MIDI](manual/soundfont-editor/toolbar.md#doc_midi_player), il pulsante ![piano](images/toolbar_piano.png "piano"){.inline} accanto mostra o nasconde la [tastiera virtuale](manual/soundfont-editor/toolbar.md#doc_keyboard), e il pulsante ![registratore](images/toolbar_recorder.png "registratore"){.inline} mostra o nasconde il [registratore](manual/soundfont-editor/toolbar.md#doc_recorder), come i pulsanti della barra degli strumenti dell'editor.
+Il pulsante ![MIDI](images/toolbar_midi.png "MIDI"){.inline}, a destra del pulsante ![Visualizzazione](images/toolbar_display.png "Visualizzazione"){.inline}, mostra o nasconde il [lettore MIDI](manual/soundfont-editor/toolbar.md#doc_midi_player), il pulsante ![piano](images/toolbar_piano.png "piano"){.inline} accanto mostra o nasconde la [tastiera virtuale](manual/soundfont-editor/toolbar.md#doc_keyboard), e il pulsante ![registratore](images/toolbar_recorder.png "registratore"){.inline} mostra o nasconde il [registratore](manual/soundfont-editor/toolbar.md#doc_recorder), come i pulsanti della barra degli strumenti dell'editor.
 
 Il campione, lo strumento o il preset selezionato negli elenchi di destra può essere suonato con la tastiera virtuale, oppure con una tastiera MIDI esterna anche se la tastiera virtuale è nascosta. Come nell'editor, la tastiera virtuale mostra l'estensione dell'elemento, o la nota di base di un campione. Un campione viene riprodotto in loop se ne ha uno, e in stereo se l'opzione :guilabel:`stereo` del [lettore](manual/soundfont-editor/editing-pages/sample-editor.md#doc_player) del campione è selezionata.
+
+Il [display](manual/soundfont-editor/toolbar.md#doc_keyboard_element) della tastiera virtuale mostra l'elemento suonato e il nome del suo file. Le sue frecce selezionano l'elemento precedente o successivo e i suoi due pulsanti esterni il file precedente o successivo, anche con :kbd:`PageUp` / :kbd:`PageDown` e :kbd:`Shift`+:kbd:`PageUp` / :kbd:`Shift`+:kbd:`PageDown`: i file di una cartella possono così essere sfogliati e suonati senza lasciare la tastiera virtuale.
 
 La prima volta che viene selezionato un elemento di un file, il soundfont viene caricato in background senza aprire una scheda. Il soundfont viene poi conservato finché vengono selezionati elementi dello stesso file, e rilasciato quando nell'elenco principale viene selezionato un altro file.
 

@@ -176,6 +176,8 @@ Mantener pulsado el clic izquierdo permite desplazar el gráfico si el punto ini
 
 Un clic con el botón central toca una nota: la nota la da la posición horizontal del ratón y la velocidad, su posición vertical.
 
+Un teclado bajo la barra de desplazamiento horizontal muestra las teclas blancas y negras y sigue el zoom y el desplazamiento del gráfico. Un clic en una tecla toca la nota correspondiente; la velocidad se define según la posición vertical del clic, como en el [teclado virtual](manual/soundfont-editor/toolbar.md#doc_keyboard). La rueda del ratón sobre este teclado desplaza el gráfico horizontalmente.
+
 
 ## Editor de envolventes {#doc_envelope}
 

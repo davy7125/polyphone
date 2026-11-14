@@ -176,6 +176,8 @@ Durch Gedrückthalten der linken Maustaste lässt sich die Grafik verschieben, w
 
 Ein Klick mit der mittleren Maustaste spielt eine Note: Die Taste ergibt sich aus der horizontalen Position der Maus, der Anschlag aus ihrer vertikalen Position.
 
+Eine Tastatur unter der horizontalen Bildlaufleiste zeigt die weißen und schwarzen Tasten und folgt dem Zoom und dem Verschieben der Grafik. Ein Klick auf eine Taste spielt die entsprechende Note; die Anschlagsstärke richtet sich wie bei der [virtuellen Tastatur](manual/soundfont-editor/toolbar.md#doc_keyboard) nach der vertikalen Position des Klicks. Das Mausrad über dieser Tastatur verschiebt die Grafik horizontal.
+
 
 ## Hüllkurveneditor {#doc_envelope}
 
