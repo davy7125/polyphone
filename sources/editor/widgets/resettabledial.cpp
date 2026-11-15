@@ -27,6 +27,12 @@
 #include <QMouseEvent>
 #include <QPainter>
 #include <QtMath>
+#include <QLabel>
+#include <QTimer>
+#include <QToolTip>
+#include <QScreen>
+#include <QStylePainter>
+#include <QStyleOptionFrame>
 
 // Number of pixels for covering the whole range, multiplied by 10 with Shift for a fine adjustment
 static const double s_dragLength = 200.0;
@@ -35,10 +41,97 @@ static const double s_dragLength = 200.0;
 static const double s_angleMin = 240.0;
 static const double s_angleRange = 300.0;
 
+// Time during which the value remains displayed after the last wheel step, key or mouse release (ms)
+static const int s_bubbleDuration = 1000;
+
+// Space between the dial and its bubble (px)
+static const int s_bubbleSpacing = 2;
+
+// Label looking like a tooltip (same settings as QTipLabel in Qt), but not closed by the clicks and the wheel
+// It is transparent for the window system: otherwise, when the mouse goes over it while dragging the dial, the
+// compositor gives it the pointer (Wayland), the dial then losing the drag and the focus
+class ValueBubble : public QLabel
+{
+public:
+    ValueBubble(QWidget * parent) : QLabel(parent, Qt::ToolTip | Qt::BypassGraphicsProxyWidget |
+                                                   Qt::WindowTransparentForInput | Qt::WindowDoesNotAcceptFocus)
+    {
+        this->setForegroundRole(QPalette::ToolTipText);
+        this->setBackgroundRole(QPalette::ToolTipBase);
+        this->setPalette(QToolTip::palette());
+        this->setFont(QToolTip::font());
+        this->ensurePolished();
+        this->setMargin(1 + this->style()->pixelMetric(QStyle::PM_ToolTipLabelFrameWidth, nullptr, this));
+        this->setFrameStyle(QFrame::NoFrame);
+        this->setAlignment(Qt::AlignCenter);
+        this->setTextFormat(Qt::PlainText);
+        this->setWindowOpacity(this->style()->styleHint(QStyle::SH_ToolTipLabel_Opacity, nullptr, this) / 255.0);
+        this->setAttribute(Qt::WA_ShowWithoutActivating);
+    }
+
+protected:
+    void paintEvent(QPaintEvent * event) override
+    {
+        QStylePainter p(this);
+        QStyleOptionFrame opt;
+        opt.initFrom(this);
+        p.drawPrimitive(QStyle::PE_PanelTipLabel, opt);
+        p.end();
+
+        QLabel::paintEvent(event);
+    }
+
+    void resizeEvent(QResizeEvent * event) override
+    {
+        QStyleHintReturnMask frameMask;
+        QStyleOption option;
+        option.initFrom(this);
+        if (this->style()->styleHint(QStyle::SH_ToolTip_Mask, &option, this, &frameMask))
+            this->setMask(frameMask.region);
+
+        QLabel::resizeEvent(event);
+    }
+};
+
+ResettableDial * ResettableDial::s_dialWithBubble = nullptr;
+
 ResettableDial::ResettableDial(QWidget * parent) : QDial(parent),
     _defaultValue(0),
-    _dragValue(0)
-{}
+    _dragValue(0),
+    _valueBubble(nullptr),
+    _bubbleTimer(new QTimer(this)),
+    _valueBubbleEnabled(false),
+    _bubbleFromDrag(false)
+{
+    _bubbleTimer->setSingleShot(true);
+    _bubbleTimer->setInterval(s_bubbleDuration);
+    connect(_bubbleTimer, &QTimer::timeout, this, &ResettableDial::hideValueBubble);
+}
+
+ResettableDial::~ResettableDial()
+{
+    if (s_dialWithBubble == this)
+        s_dialWithBubble = nullptr;
+}
+
+void ResettableDial::setValueBubbleEnabled(bool enabled)
+{
+    _valueBubbleEnabled = enabled;
+    if (!enabled)
+        hideValueBubble();
+}
+
+bool ResettableDial::event(QEvent * event)
+{
+    // No tooltip over the bubble, which already contains the name
+    if (event->type() == QEvent::ToolTip && _valueBubble != nullptr && _valueBubble->isVisible())
+    {
+        event->accept();
+        return true;
+    }
+
+    return QDial::event(event);
+}
 
 void ResettableDial::mousePressEvent(QMouseEvent * event)
 {
@@ -57,6 +150,7 @@ void ResettableDial::mousePressEvent(QMouseEvent * event)
     _lastPosition = event->position();
 #endif
     this->setSliderDown(true);
+    showValueBubble(true);
 }
 
 void ResettableDial::mouseMoveEvent(QMouseEvent * event)
@@ -80,6 +174,7 @@ void ResettableDial::mouseMoveEvent(QMouseEvent * event)
     _dragValue += (delta.x() - delta.y()) * (this->maximum() - this->minimum()) / length;
     _dragValue = qBound(static_cast<double>(this->minimum()), _dragValue, static_cast<double>(this->maximum()));
     this->setSliderPosition(qRound(_dragValue));
+    showValueBubble(true);
 }
 
 void ResettableDial::mouseReleaseEvent(QMouseEvent * event)
@@ -92,6 +187,10 @@ void ResettableDial::mouseReleaseEvent(QMouseEvent * event)
 
     // QDial would take the value under the mouse
     this->setSliderDown(false);
+
+    // The final value remains readable a moment
+    if (_valueBubble != nullptr && _valueBubble->isVisible())
+        _bubbleTimer->start();
 }
 
 void ResettableDial::mouseDoubleClickEvent(QMouseEvent * event)
@@ -105,6 +204,87 @@ void ResettableDial::mouseDoubleClickEvent(QMouseEvent * event)
     // The base implementation is not called since it would process the second click as a press
     event->accept();
     this->setValue(_defaultValue);
+    showValueBubble(false);
+}
+
+void ResettableDial::wheelEvent(QWheelEvent * event)
+{
+    QDial::wheelEvent(event);
+    showValueBubble(false);
+}
+
+void ResettableDial::keyPressEvent(QKeyEvent * event)
+{
+    QDial::keyPressEvent(event);
+    if (event->isAccepted())
+        showValueBubble(false);
+}
+
+void ResettableDial::leaveEvent(QEvent * event)
+{
+    // Not after a drag: the mouse can be released out of the dial
+    if (!_bubbleFromDrag)
+        hideValueBubble();
+    QDial::leaveEvent(event);
+}
+
+void ResettableDial::hideEvent(QHideEvent * event)
+{
+    hideValueBubble();
+    QDial::hideEvent(event);
+}
+
+void ResettableDial::showValueBubble(bool dragging)
+{
+    if (!_valueBubbleEnabled)
+        return;
+
+    if (s_dialWithBubble != nullptr && s_dialWithBubble != this)
+        s_dialWithBubble->hideValueBubble();
+    s_dialWithBubble = this;
+    _bubbleFromDrag = dragging;
+
+    if (_valueBubble == nullptr)
+        _valueBubble = new ValueBubble(this);
+
+    // Raw value, below the name of the parameter if it is not already written next to the dial
+    QString text = QString::number(this->sliderPosition());
+    if (!this->toolTip().isEmpty())
+        text = this->toolTip() + "\n" + text;
+    _valueBubble->setText(text);
+    _valueBubble->adjustSize();
+
+    // Centered above the dial, or below if the screen is too small above
+    QRect dialRect(this->mapToGlobal(QPoint(0, 0)), this->size());
+    QPoint position(dialRect.center().x() - _valueBubble->width() / 2,
+                    dialRect.top() - s_bubbleSpacing - _valueBubble->height());
+    if (this->screen() != nullptr)
+    {
+        QRect screenRect = this->screen()->geometry();
+        if (position.y() < screenRect.top())
+            position.setY(dialRect.bottom() + 1 + s_bubbleSpacing);
+        position.setX(qMax(screenRect.left(), qMin(position.x(), screenRect.right() + 1 - _valueBubble->width())));
+    }
+    _valueBubble->move(position);
+    _valueBubble->show();
+
+    // Possible tooltip replaced by the bubble
+    QToolTip::hideText();
+
+    // Hidden after a delay, the mouse button being released if dragging
+    if (dragging)
+        _bubbleTimer->stop();
+    else
+        _bubbleTimer->start();
+}
+
+void ResettableDial::hideValueBubble()
+{
+    _bubbleTimer->stop();
+    if (_valueBubble != nullptr)
+        _valueBubble->hide();
+    if (s_dialWithBubble == this)
+        s_dialWithBubble = nullptr;
 }
 
 void ResettableDial::paintEvent(QPaintEvent * event)

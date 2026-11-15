@@ -37,6 +37,11 @@ ConfigSectionSound::ConfigSectionSound(QWidget *parent) :
     ui->labelSubTitle2->setStyleSheet("QLabel{margin: 20px 0;}");
     ui->labelSubTitle3->setStyleSheet("QLabel{margin: 20px 0;}");
 
+    // Values displayed while adjusting the effects
+    for (ResettableDial * dial : {ui->dialRevNiveau, ui->dialRevProfondeur, ui->dialRevDensite, ui->dialRevAttenuation,
+                                  ui->dialChoNiveau, ui->dialChoAmplitude, ui->dialChoFrequence})
+        dial->setValueBubbleEnabled(true);
+
     // The effects and the volume can also be changed in the virtual keyboard
     connect(ContextManager::configuration(), SIGNAL(soundEngineConfigurationChanged()), this, SLOT(initialize()));
 }

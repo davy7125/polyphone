@@ -33,6 +33,11 @@ EffectArea::EffectArea(QWidget *parent) :
     ui->setupUi(this);
     updateValues();
 
+    // Values displayed while adjusting the effects
+    for (ResettableDial * dial : {ui->dialRevLevel, ui->dialRevSize, ui->dialRevWidth, ui->dialRevDamping,
+                                  ui->dialChoLevel, ui->dialChoDepth, ui->dialChoFrequency})
+        dial->setValueBubbleEnabled(true);
+
     // The same values can be changed in the sound settings
     connect(ContextManager::configuration(), SIGNAL(soundEngineConfigurationChanged()), this, SLOT(updateValues()));
 }
