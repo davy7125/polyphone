@@ -39,12 +39,30 @@ static QColor interpolate(const QList<QColor> &colors, double t)
                             static_cast<float>(a.blueF() + f * (b.blueF() - a.blueF())));
 }
 
-TimbrePalette::TimbrePalette()
+static double relativeLuminance(const QColor &color)
+{
+    auto linear = [](double value) {
+        return value <= 0.04045 ? value / 12.92 : std::pow((value + 0.055) / 1.055, 2.4);
+    };
+    return 0.2126 * linear(color.redF()) + 0.7152 * linear(color.greenF()) + 0.0722 * linear(color.blueF());
+}
+
+static double contrastRatio(const QColor &color1, const QColor &color2)
+{
+    double l1 = relativeLuminance(color1);
+    double l2 = relativeLuminance(color2);
+    return (qMax(l1, l2) + 0.05) / (qMin(l1, l2) + 0.05);
+}
+
+TimbrePalette::TimbrePalette(Surface surface)
 {
     ThemeManager * theme = ContextManager::theme();
-    _background = theme->getColor(ThemeManager::LIST_BACKGROUND);
-    _text = theme->getColor(ThemeManager::LIST_TEXT);
-    _dark = theme->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT);
+    ThemeManager::ColorType backgroundType = surface == SURFACE_WINDOW ?
+                ThemeManager::WINDOW_BACKGROUND : ThemeManager::LIST_BACKGROUND;
+    ThemeManager::ColorType textType = surface == SURFACE_WINDOW ? ThemeManager::WINDOW_TEXT : ThemeManager::LIST_TEXT;
+    _background = theme->getColor(backgroundType);
+    _text = theme->getColor(textType);
+    _dark = theme->isDark(backgroundType, textType);
     _neutral = ThemeManager::mix(_background, _text, 0.1);
     _grid = ThemeManager::mix(_background, _text, 0.25);
     _uncovered = ThemeManager::mix(_background, _text, 0.04);
@@ -84,6 +102,15 @@ QColor TimbrePalette::diverging(double t) const
     }
     t = qBound(-1.0, t, 1.0);
     return t < 0 ? interpolate(negative, -t) : interpolate(positive, t);
+}
+
+QColor TimbrePalette::readable(QColor color, double minimumContrast) const
+{
+    QColor limit = _dark ? QColor(Qt::white) : QColor(Qt::black);
+    QColor result = color;
+    for (int step = 1; step <= 20 && contrastRatio(result, _background) < minimumContrast; step++)
+        result = ThemeManager::mix(color, limit, 0.05 * step);
+    return result;
 }
 
 void TimbrePalette::drawShape(QPainter &painter, Shape shape, QRectF rect, QColor color)

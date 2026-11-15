@@ -33,7 +33,14 @@
 class TimbrePalette
 {
 public:
-    TimbrePalette();
+    // Background on which the colors are drawn: a list (map) or the window itself (graphs)
+    enum Surface
+    {
+        SURFACE_LIST,
+        SURFACE_WINDOW
+    };
+
+    explicit TimbrePalette(Surface surface = SURFACE_LIST);
 
     // Sequential palette (viridis) for t in [0, 1]
     QColor sequential(double t) const;
@@ -71,6 +78,10 @@ public:
         SHAPE_DOWN
     };
     static void drawShape(QPainter &painter, Shape shape, QRectF rect, QColor color);
+
+    // Same color, darker on a light background or lighter on a dark one, until its contrast with the background
+    // reaches the minimum (WCAG ratio, from 1 to 21)
+    QColor readable(QColor color, double minimumContrast) const;
 
 private:
     QColor _background, _text, _neutral, _grid, _highlight, _uncovered, _hatch;

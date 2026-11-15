@@ -144,8 +144,10 @@ private:
     RotatingSpinner * _spinner;
     QLabel * _labelPending;
     TimbreMapWidget * _map;
+    QStackedWidget * _stackDetail; // Graph and text, or a message if no key is selected
     TimbreBarsWidget * _bars;
     QLabel * _labelDetail;
+    QLabel * _labelNoSelection;
     QPushButton * _buttonCreate, * _buttonRemove, * _buttonReplace, * _buttonCorrect, * _buttonLevel, * _buttonRender;
 };
 

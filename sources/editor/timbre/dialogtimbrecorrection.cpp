@@ -225,7 +225,7 @@ void DialogTimbreCorrection::updatePreview()
     // Plan of the root key previewed
     int key = _targets.count() > 1 ? _comboPreviewed->currentData().toInt() : _targets.first();
     _plan = TimbreActions::planCorrection(*_model, key, getParameters());
-    TimbrePalette palette;
+    TimbrePalette palette(TimbrePalette::SURFACE_WINDOW);
     QList<TimbreBarsWidget::Series> series;
     if (_model->getPositions().contains(key))
         series << TimbreBarsWidget::Series { tr("Heard"), _model->getRowLevels(_model->getPositions()[key].spectrum),

@@ -38,7 +38,6 @@
 #include <QComboBox>
 #include <QToolButton>
 #include <QStackedWidget>
-#include <QSplitter>
 #include <QScrollArea>
 #include <QMenu>
 #include <QWidgetAction>
@@ -163,8 +162,13 @@ void PageTimbre::buildInterface()
     layout->addWidget(_stack);
 
     QWidget * main = new QWidget(_stack);
-    QVBoxLayout * mainLayout = new QVBoxLayout(main);
-    mainLayout->setContentsMargins(6, 6, 6, 6);
+    QVBoxLayout * pageLayout = new QVBoxLayout(main);
+    pageLayout->setContentsMargins(0, 0, 0, 0);
+    pageLayout->setSpacing(0);
+    QWidget * upper = new QWidget(main); // Bars with margins, map on the whole width
+    QVBoxLayout * mainLayout = new QVBoxLayout(upper);
+    mainLayout->setContentsMargins(0, 6, 0, 0);
+    pageLayout->addWidget(upper, 1);
     _stack->addWidget(main);
     _labelMessage = new QLabel(_stack);
     _labelMessage->setAlignment(Qt::AlignCenter);
@@ -175,6 +179,7 @@ void PageTimbre::buildInterface()
 
     // Top bar
     QHBoxLayout * top = new QHBoxLayout();
+    top->setContentsMargins(6, 0, 6, 0);
     top->addWidget(new QLabel(tr("Velocity"), main));
     _spinVelocity = new QSpinBox(main);
     _spinVelocity->setRange(1, 127);
@@ -203,6 +208,7 @@ void PageTimbre::buildInterface()
 
     // Second row
     top = new QHBoxLayout();
+    top->setContentsMargins(6, 0, 6, 0);
     top->addWidget(new QLabel(tr("Reference"), main));
     _comboReference = new QComboBox(main);
     _comboReference->addItem(tr("Neighbors"));
@@ -351,29 +357,48 @@ void PageTimbre::buildInterface()
     top->addStretch();
     mainLayout->addLayout(top);
 
-    // Map and detail
-    QSplitter * splitter = new QSplitter(Qt::Vertical, main);
-    _map = new TimbreMapWidget(splitter);
+    // Map
+    _map = new TimbreMapWidget(main);
     _map->setDisplay(_pendingDisplay);
     _map->setModel(&_model);
     _map->setVelocity(_settings.velocity);
-    splitter->addWidget(_map);
-    QWidget * detail = new QWidget(splitter);
+    mainLayout->addWidget(_map, 1);
+
+    // Detail, with a fixed height: the one of the buttons (graph and text without margins, only the buttons have some)
+    QWidget * detail = new QWidget(main);
+    detail->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
     QHBoxLayout * detailLayout = new QHBoxLayout(detail);
-    detailLayout->setContentsMargins(0, 4, 0, 0);
-    _bars = new TimbreBarsWidget(detail);
-    detailLayout->addWidget(_bars, 3);
-    QScrollArea * scrollDetail = new QScrollArea(detail);
+    detailLayout->setContentsMargins(0, 0, 0, 0);
+    _stackDetail = new QStackedWidget(detail);
+    _stackDetail->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Ignored);
+    detailLayout->addWidget(_stackDetail, 1);
+    QWidget * detailContent = new QWidget(_stackDetail);
+    QHBoxLayout * contentLayout = new QHBoxLayout(detailContent);
+    contentLayout->setContentsMargins(0, 0, 0, 0);
+    _bars = new TimbreBarsWidget(detailContent);
+    _bars->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Ignored);
+    contentLayout->addWidget(_bars, 3);
+    QScrollArea * scrollDetail = new QScrollArea(detailContent);
     scrollDetail->setWidgetResizable(true);
     scrollDetail->setFrameShape(QFrame::NoFrame);
+    scrollDetail->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Ignored);
     _labelDetail = new QLabel(scrollDetail);
     _labelDetail->setWordWrap(true);
     _labelDetail->setAlignment(Qt::AlignLeft | Qt::AlignTop);
     _labelDetail->setTextInteractionFlags(Qt::TextSelectableByMouse);
     scrollDetail->setWidget(_labelDetail);
     scrollDetail->setMinimumWidth(280);
-    detailLayout->addWidget(scrollDetail, 2);
+    contentLayout->addWidget(scrollDetail, 2);
+    _stackDetail->addWidget(detailContent);
+    _labelNoSelection = new QLabel(tr("Click on a key to see what it plays."), _stackDetail);
+    _labelNoSelection->setAlignment(Qt::AlignCenter);
+    _labelNoSelection->setWordWrap(true);
+    _labelNoSelection->setStyleSheet("QLabel{color:" + ContextManager::theme()->getColor(
+                                         ThemeManager::WINDOW_TEXT, ThemeManager::DISABLED).name() + "}");
+    _labelNoSelection->setFont(font); // Bold
+    _stackDetail->addWidget(_labelNoSelection);
     QVBoxLayout * buttons = new QVBoxLayout();
+    buttons->setContentsMargins(0, 6, 6, 6);
     _buttonCreate = new QPushButton(tr("Create a note here..."), detail);
     _buttonRemove = new QPushButton(tr("Remove..."), detail);
     _buttonReplace = new QPushButton(tr("Replace with a computed note..."), detail);
@@ -387,12 +412,8 @@ void PageTimbre::buildInterface()
     buttons->addWidget(_buttonCorrect);
     buttons->addWidget(_buttonLevel);
     buttons->addWidget(_buttonRender);
-    buttons->addStretch();
     detailLayout->addLayout(buttons);
-    splitter->addWidget(detail);
-    splitter->setStretchFactor(0, 3);
-    splitter->setStretchFactor(1, 1);
-    mainLayout->addWidget(splitter, 1);
+    pageLayout->addWidget(detail);
 
     // Connections
     connect(_spinVelocity, SIGNAL(valueChanged(int)), this, SLOT(onVelocityChanged(int)));
@@ -729,7 +750,7 @@ QList<int> PageTimbre::getTargets()
 
 void PageTimbre::updateDetail()
 {
-    TimbrePalette palette;
+    TimbrePalette palette(TimbrePalette::SURFACE_WINDOW); // Colors of the graph
     int key = _selectedKey;
     bool hasPosition = _model.getPositions().contains(key);
     bool covered = key >= 0 && !_model.getKey(key).sources.isEmpty();
@@ -745,16 +766,19 @@ void PageTimbre::updateDetail()
 
     if (_model.getDivisions().isEmpty())
     {
+        _stackDetail->setCurrentIndex(0);
         _bars->clear();
         _labelDetail->setText(tr("No division of this instrument plays at the velocity %1.").arg(_settings.velocity));
         return;
     }
     if (key < 0)
     {
+        _stackDetail->setCurrentIndex(1);
         _bars->clear();
-        _labelDetail->setText(tr("Click on a key to see what it plays."));
+        _labelDetail->clear();
         return;
     }
+    _stackDetail->setCurrentIndex(0);
 
     QStringList lines;
     QLocale locale;

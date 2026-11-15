@@ -32,6 +32,7 @@
 
 TimbreBarsWidget::TimbreBarsWidget(QWidget * parent) : QWidget(parent),
     _dynamicRange(60),
+    _palette(TimbrePalette::SURFACE_WINDOW),
     _left(0),
     _top(0),
     _plotWidth(0),
@@ -45,6 +46,10 @@ void TimbreBarsWidget::setData(const QList<TimbreRow> &rows, const QList<Series>
 {
     _rows = rows;
     _series = series;
+
+    // The background is the one of the window: lines need more contrast than filled bars
+    for (int i = 0; i < _series.count(); i++)
+        _series[i].color = _palette.readable(_series[i].color, _series[i].style == STYLE_BARS ? 1.5 : 3.0);
     _dynamicRange = dynamicRange;
     update();
 }
@@ -59,8 +64,7 @@ void TimbreBarsWidget::clear()
 void TimbreBarsWidget::paintEvent(QPaintEvent * event)
 {
     Q_UNUSED(event)
-    QPainter painter(this);
-    painter.fillRect(this->rect(), _palette.background());
+    QPainter painter(this); // No background: the one of the window
     if (_rows.isEmpty() || _series.isEmpty())
         return;
 
