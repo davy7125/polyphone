@@ -31,10 +31,6 @@ PageRange::PageRange(QWidget *parent) :
 {
     ui->setupUi(this);
     connect(ui->rangeEditor, SIGNAL(selectionChanged(IdList)), this, SIGNAL(selectedIdsChanged(IdList)));
-
-    // Keyboard under the horizontal scroll bar
-    ui->keyboard->setView(ui->rangeEditor);
-    connect(ui->rangeEditor, SIGNAL(viewChanged()), ui->keyboard, SLOT(update()));
 }
 
 PageRange::~PageRange()
@@ -80,5 +76,4 @@ void PageRange::updateInterface(QString editingSource)
 void PageRange::keyPlayedInternal(int key, int velocity)
 {
     ui->rangeEditor->playKey(key, velocity);
-    ui->keyboard->setPlayedKey(key, velocity > 0);
 }

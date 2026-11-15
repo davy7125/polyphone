@@ -45,6 +45,11 @@ KeyboardStrip::KeyboardStrip(QWidget * parent) : QWidget(parent),
     _border = ThemeManager::mix(background, text, 0.25);
     _highlight = theme->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
     this->setFixedHeight(TOP_MARGIN + 20);
+
+    // Same background as the graph above, own cursor (the view changes its cursor when hovering the rectangles)
+    this->setBackgroundRole(QPalette::Base);
+    this->setAutoFillBackground(true);
+    this->setCursor(Qt::ArrowCursor);
 }
 
 bool KeyboardStrip::isBlackKey(int key)
@@ -226,9 +231,11 @@ void KeyboardStrip::stopKey()
 
 void KeyboardStrip::wheelEvent(QWheelEvent * event)
 {
-    // Horizontal scroll, as over the scroll bar just above
+    // Horizontal scroll, as over the scroll bar just below (accepted even at the end of the scroll, otherwise the
+    // view would scroll vertically)
     if (_view != nullptr)
         QApplication::sendEvent(_view->horizontalScrollBar(), event);
+    event->accept();
 }
 
 bool KeyboardStrip::event(QEvent * event)

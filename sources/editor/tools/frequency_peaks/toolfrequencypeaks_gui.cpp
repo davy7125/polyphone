@@ -28,6 +28,7 @@
 #include "soundanalyzer.h"
 #include "soundfontmanager.h"
 #include "utils.h"
+#include "scrollbarcornerfiller.h"
 #include <QFileDialog>
 
 class RunnableTask: public QRunnable
@@ -75,6 +76,7 @@ ToolFrequencyPeaks_gui::ToolFrequencyPeaks_gui(QWidget *parent) :
     ui->buttonBox->addButton(tr("&Close"), QDialogButtonBox::RejectRole);
 
     // Table header
+    ScrollBarCornerFiller::install(ui->table);
     ui->table->setColumnCount(6);
     ui->table->setHorizontalHeaderItem(0, new QTableWidgetItem(tr("Sample")));
     ui->table->setHorizontalHeaderItem(1, new QTableWidgetItem(tr("Peak")));

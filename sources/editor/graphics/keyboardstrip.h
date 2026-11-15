@@ -29,8 +29,9 @@
 class QGraphicsView;
 
 // Row of white and black squares, one per key, following the horizontal zoom and scroll of a view in which the key k
-// lies between the abscissas k - 0.5 and k + 0.5 (range editor). Clicking plays the keys, with a velocity increasing
-// downwards as on the virtual keyboard. The painting of the keys is shared with the timbre view.
+// lies between the abscissas k - 0.5 and k + 0.5 (range editor, which places it between its viewport and its
+// horizontal scroll bar). Clicking plays the keys, with a velocity increasing downwards as on the virtual keyboard.
+// The painting of the keys is shared with the timbre view.
 class KeyboardStrip : public QWidget
 {
     Q_OBJECT

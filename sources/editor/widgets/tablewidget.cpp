@@ -34,6 +34,7 @@
 #include <QScrollBar>
 #include "tableheaderview.h"
 #include "tableheaderviewv.h"
+#include "scrollbarcornerfiller.h"
 
 TableWidget::TableWidget(QWidget *parent) : QTableWidget(parent)
 {
@@ -46,6 +47,7 @@ TableWidget::TableWidget(QWidget *parent) : QTableWidget(parent)
     connect(_timer, SIGNAL(timeout()), this, SLOT(updateColors()));
     connect(this->horizontalHeader(), SIGNAL(sectionDoubleClicked(int)), this, SLOT(onSectionDoubleClicked(int)));
     connect(this, SIGNAL(itemSelectionChanged()), this, SLOT(onItemSelectionChanged()));
+    ScrollBarCornerFiller::install(this);
 
     // Style
     this->setStyleSheet(ContextManager::theme()->getTableTheme() +

@@ -28,6 +28,7 @@
 #include "contextmanager.h"
 #include "soundfontmanager.h"
 #include "utils.h"
+#include "scrollbarcornerfiller.h"
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QRegularExpression>
@@ -56,6 +57,7 @@ ToolSoundfontExport_gui::ToolSoundfontExport_gui(QWidget *parent) :
     ui->listPresets->installEventFilter(this);
     ui->listPresets->viewport()->installEventFilter(this);
     connect(ui->listPresets, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(updateCheckedCount()));
+    ScrollBarCornerFiller::install(ui->listPresets);
 }
 
 ToolSoundfontExport_gui::~ToolSoundfontExport_gui()
@@ -87,15 +89,17 @@ void ToolSoundfontExport_gui::updateInterface(AbstractToolParameters * parameter
         QTreeWidgetItem * rootItem = new QTreeWidgetItem(QStringList(title));
         rootItem->setFlags(rootItem->flags() & ~Qt::ItemIsSelectable);
         ui->listPresets->addTopLevelItem(rootItem);
+        rootItem->setFirstColumnSpanned(true); // Title over both columns (ignored when sizing them)
 
         id.typeElement = elementPrst;
         foreach (int i, sm->getSiblings(id))
         {
             id.indexElt = i;
+            // Bank:preset, then the name in a second column so that the names are aligned
             QTreeWidgetItem * item = new QTreeWidgetItem(
-                        QStringList() << QString("%1:%2   %3").arg(QString::number(sm->get(id, champ_wBank).wValue), 3, QChar('0'))
+                        QStringList() << QString("%1:%2").arg(QString::number(sm->get(id, champ_wBank).wValue), 3, QChar('0'))
                         .arg(QString::number(sm->get(id, champ_wPreset).wValue), 3, QChar('0'))
-                        .arg(sm->getQstr(id, champ_name)));
+                        << sm->getQstr(id, champ_name));
             item->setCheckState(0, Qt::Checked);
             item->setData(0, Qt::UserRole, QPoint(id.indexSf2, id.indexElt));
             item->setData(0, Qt::UserRole + 1, Utils::simplifySpaces(sm->getQstr(id, champ_nameSort)));
@@ -107,6 +111,8 @@ void ToolSoundfontExport_gui::updateInterface(AbstractToolParameters * parameter
         rootItem->sortChildren(0, Qt::AscendingOrder);
     }
     ui->listPresets->resizeColumnToContents(0);
+    ui->listPresets->setColumnWidth(0, ui->listPresets->columnWidth(0) + ui->listPresets->fontMetrics().horizontalAdvance("  "));
+    ui->listPresets->resizeColumnToContents(1);
 
     // Empty filter
     ui->lineSearch->clear();

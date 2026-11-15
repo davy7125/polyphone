@@ -714,6 +714,8 @@ set(POLYPHONE_APP_FILES
     editor/widgets/resettabledial.h
     editor/widgets/resettableslider.cpp
     editor/widgets/resettableslider.h
+    editor/widgets/scrollbarcornerfiller.cpp
+    editor/widgets/scrollbarcornerfiller.h
     editor/widgets/spinboxcents.cpp
     editor/widgets/spinboxcents.h
     editor/widgets/spinboxkey.cpp

@@ -31,6 +31,8 @@
 #include "graphicslegenditem2.h"
 #include "graphicszoomline.h"
 #include "graphicskey.h"
+#include "keyboardstrip.h"
+#include "scrollbarcornerfiller.h"
 #include <QScrollBar>
 #include <QMouseEvent>
 #include <QApplication>
@@ -54,6 +56,7 @@ GraphicsViewRange::GraphicsViewRange(QWidget *parent) : QGraphicsView(parent),
     _legendItem(nullptr),
     _legendItem2(nullptr),
     _zoomLine(nullptr),
+    _keyboard(new KeyboardStrip(this)),
     _dontRememberScroll(false),
     _keyTriggered(-1),
     _removeIndexOnRelease(false),
@@ -77,8 +80,13 @@ GraphicsViewRange::GraphicsViewRange(QWidget *parent) : QGraphicsView(parent),
     // Configuration
     this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     this->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+    ScrollBarCornerFiller::install(this);
     this->setRenderHint(QPainter::Antialiasing, true);
     this->setMouseTracking(true);
+
+    // Keyboard in a margin below the viewport, the vertical scroll bar extending along it
+    _keyboard->setView(this);
+    this->setViewportMargins(0, 0, 0, _keyboard->height());
 
     // Preparation of the graphics
     this->setScene(_scene);
@@ -335,6 +343,14 @@ void GraphicsViewRange::showEvent(QShowEvent * event)
 {
     QGraphicsView::showEvent(event);
     updateLabelPosition();
+    updateKeyboardGeometry();
+}
+
+void GraphicsViewRange::updateKeyboardGeometry()
+{
+    QRect viewportGeometry = viewport()->geometry();
+    _keyboard->setGeometry(viewportGeometry.left(), viewportGeometry.bottom() + 1, viewportGeometry.width(), _keyboard->height());
+    _keyboard->update();
 }
 
 void GraphicsViewRange::resizeEvent(QResizeEvent * event)
@@ -343,7 +359,7 @@ void GraphicsViewRange::resizeEvent(QResizeEvent * event)
     QGraphicsView::resizeEvent(event);
     fitInView(_displayedRect);
     _dontRememberScroll = false;
-    emit viewChanged();
+    updateKeyboardGeometry();
 }
 
 void GraphicsViewRange::mousePressEvent(QMouseEvent *event)
@@ -820,7 +836,7 @@ void GraphicsViewRange::mouseDoubleClickEvent(QMouseEvent * event)
 void GraphicsViewRange::scrollContentsBy(int dx, int dy)
 {
     QGraphicsView::scrollContentsBy(dx, dy);
-    emit viewChanged();
+    _keyboard->update();
     if (_dontRememberScroll)
         return;
 
@@ -935,7 +951,7 @@ void GraphicsViewRange::zoomDrag()
     this->fitInView(_displayedRect);
     _dontRememberScroll = false;
     updateLabelPosition();
-    emit viewChanged();
+    _keyboard->update();
 }
 
 void GraphicsViewRange::setZoomLine(double x1Norm, double y1Norm, double x2Norm, double y2Norm)
@@ -1006,6 +1022,7 @@ QRectF GraphicsViewRange::getCurrentRect()
 
 void GraphicsViewRange::playKey(int key, int velocity)
 {
+    _keyboard->setPlayedKey(key, velocity > 0);
     if (velocity == 0 && _mapGraphicsKeys[key] != nullptr)
     {
         // A key is removed

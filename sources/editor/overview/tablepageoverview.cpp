@@ -24,6 +24,7 @@
 
 #include "tablepageoverview.h"
 #include "contextmanager.h"
+#include "scrollbarcornerfiller.h"
 #include <QHeaderView>
 #include <QPainter>
 
@@ -38,6 +39,8 @@ TablePageOverview::TablePageOverview(QWidget *parent) : QTableWidget(parent)
                         "QTableWidget{border:0;}" +
                         "QHeaderView::down-arrow {image: url(:/icons/empty);}" +
                         "QHeaderView::up-arrow {image: url(:/icons/empty);}");
+
+    ScrollBarCornerFiller::install(this);
 }
 
 OverviewTableHeaderView::OverviewTableHeaderView(QWidget *parent) : QHeaderView(Qt::Horizontal, parent)

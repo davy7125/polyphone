@@ -35,6 +35,7 @@ class GraphicsLegendItem;
 class GraphicsLegendItem2;
 class GraphicsZoomLine;
 class GraphicsKey;
+class KeyboardStrip;
 
 class GraphicsViewRange : public QGraphicsView
 {
@@ -50,7 +51,6 @@ public:
 
 signals:
     void selectionChanged(IdList selectedIds);
-    void viewChanged(); // Zoom, scroll or size
 
 protected:
     void showEvent(QShowEvent * event) override;
@@ -66,6 +66,7 @@ protected:
 
 private:
     void initItems();
+    void updateKeyboardGeometry();
     void updateLabelPosition();
     void updateHover(QPoint mousePos);
     QList<QList<GraphicsRectangleItem*> > getRectanglesUnderMouse(QPoint mousePos);
@@ -84,6 +85,7 @@ private:
     GraphicsZoomLine * _zoomLine;
     QList<QGraphicsRectItem *> _lines;
     QMap<int, GraphicsKey*> _mapGraphicsKeys;
+    KeyboardStrip * _keyboard; // Between the viewport and the horizontal scroll bar
 
     // Various
     bool _dontRememberScroll;
