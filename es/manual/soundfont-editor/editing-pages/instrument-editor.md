@@ -176,7 +176,7 @@ Mantener pulsado el clic izquierdo permite desplazar el gráfico si el punto ini
 
 Un clic con el botón central toca una nota: la nota la da la posición horizontal del ratón y la velocidad, su posición vertical.
 
-Un teclado bajo la barra de desplazamiento horizontal muestra las teclas blancas y negras y sigue el zoom y el desplazamiento del gráfico. Un clic en una tecla toca la nota correspondiente; la velocidad se define según la posición vertical del clic, como en el [teclado virtual](manual/soundfont-editor/toolbar.md#doc_keyboard). La rueda del ratón sobre este teclado desplaza el gráfico horizontalmente.
+Un teclado justo encima de la barra de desplazamiento horizontal muestra las teclas blancas y negras y sigue el zoom y el desplazamiento del gráfico. Un clic en una tecla toca la nota correspondiente; la velocidad se define según la posición vertical del clic, como en el [teclado virtual](manual/soundfont-editor/toolbar.md#doc_keyboard). La rueda del ratón sobre este teclado desplaza el gráfico horizontalmente.
 
 
 ## Editor de envolventes {#doc_envelope}
@@ -295,26 +295,24 @@ Estos análisis se conservan mientras no cambien los datos, el bucle, la nota ra
 
 
 Cada columna es una nota, alineada con el teclado mostrado debajo, y cada fila un armónico (H1: fundamental, H2: segundo armónico...), con el armónico 1 abajo, como en un espectrograma.
-Los primeros armónicos se muestran uno a uno, y los siguientes se agrupan en bandas (ver [Parciales](#doc_timbre_partials)).
+Los 10 primeros armónicos se muestran uno a uno, ya que el oído los distingue individualmente; los siguientes, percibidos en conjunto como brillo, se agrupan en bandas de un tercio de octava (11-12, 13-16, 17-20...) para que muchos armónicos agudos y débiles no pesen más que los primeros.
+Los parciales por encima de 16 kHz se ignoran, y los armónicos situados más de 60 dB por debajo del más fuerte de la nota no se comparan.
 
 Encima del mapa, unas filas de resumen muestran para cada nota:
 
 * :guilabel:`Nivel`: nivel total,
 * :guilabel:`Timbre`: desviación de timbre de la nota raíz respecto a su referencia (rayada cuando la referencia es menos fiable, en los extremos del teclado),
 * :guilabel:`Transposición`: azul cuando la muestra se transpone hacia abajo, rojo cuando se transpone hacia arriba,
-* y, a elegir en el menú :guilabel:`Opciones` > :guilabel:`Resúmenes`: :guilabel:`Brillo` (centro de gravedad de los armónicos), :guilabel:`Impares / pares` (armónicos impares comparados con los pares), :guilabel:`Ruido` (relación armónicos / ruido), :guilabel:`Afinación` (centésimas respecto a la nota más cercana del temperamento igual) y :guilabel:`Bucle` (calidad del bucle).
+* y, a elegir en el menú :guilabel:`Opciones` > :guilabel:`Resúmenes`: :guilabel:`Brillo` (centro de gravedad de los armónicos), :guilabel:`Impares / pares` (armónicos impares comparados con los pares), :guilabel:`Ruido` (relación armónicos / ruido) y :guilabel:`Afinación` (centésimas respecto a la nota más cercana del temperamento igual).
 
-En el mapa, unas líneas verticales marcan las uniones entre divisiones (más gruesas cuando cambia la muestra), un punto marca cada nota raíz, un rayado muestra los armónicos ausentes (fuera de la banda de la muestra o de la salida, por encima del límite superior) o medidos de forma poco fiable, y las notas que no reproducen nada quedan vacías (atenuadas en el teclado).
+En el mapa, unas líneas verticales marcan las uniones entre divisiones (más gruesas cuando cambia la muestra), un punto marca cada nota raíz, los armónicos ausentes (fuera de la banda de la muestra o de la salida, por encima de 16 kHz) y las notas que no reproducen nada quedan vacíos (estas últimas atenuadas en el teclado), y un rayado muestra los valores medidos de forma poco fiable o en análisis.
 Cuando la nota raíz de una división está fuera de su rango de notas (extensión de un registro de órgano, por ejemplo), se muestra en la nota más cercana reproducida por la división, con un triángulo que apunta hacia la nota raíz real en lugar del punto; su desviación se sigue midiendo tocando la división en la nota raíz (:guilabel:`Tocado en la nota raíz` en el gráfico de barras).
 Una información emergente da los valores de la celda bajo el cursor del ratón: nota, armónico, nivel, desviación, muestras, transposición y factor de duración (el ataque, el trémolo y los batimientos son más rápidos cuando una muestra se transpone hacia arriba).
 
 La lista :guilabel:`Visualización` elige lo que representan los colores:
 
-Niveles absolutos
-: Nivel de cada armónico en dB.
-
-Niveles relativos
-: Nivel de cada armónico respecto al más fuerte de la nota: el timbre independientemente del nivel.
+Niveles
+: Nivel de cada armónico respecto al más fuerte de la nota: el timbre independientemente del nivel, que muestra la fila de resumen :guilabel:`Nivel`.
 
 Desviación respecto a la referencia
 : Diferencia entre la nota raíz y su referencia para cada armónico, en todas las notas que reproduce la nota raíz: demasiado fuerte (rojo) o demasiado débil (azul).
@@ -325,10 +323,9 @@ Saltos
 Transposición
 : Semitonos entre la nota y la nota raíz de su muestra.
 
-Confianza
-: Parte de la potencia que se mide de forma fiable.
-
-El menú :guilabel:`Opciones` también permite mostrar una sola columna por nota raíz, colorear por escalones según los umbrales (las desviaciones dentro de la tolerancia quedan neutras) y reproducir las notas en las que se hace clic.
+Los tonos de gris muestran una magnitud (cuanto más contrastada, más fuerte), el rojo y el azul una desviación (rojo: demasiado fuerte o transpuesto hacia arriba, azul: demasiado débil o transpuesto hacia abajo).
+La escala se muestra junto a la lista, y su información emergente explica los colores; es fija: 60 dB para los niveles, el doble del máximo (16 dB por defecto) para las desviaciones y los saltos, una octava para la transposición.
+El menú :guilabel:`Opciones` también permite reproducir las notas en las que se hace clic.
 El teclado en la parte inferior del mapa reproduce el instrumento a la velocidad de la vista.
 Mantener pulsado el clic derecho dilata el eje horizontal alrededor del punto seleccionado, y mantener pulsado el clic izquierdo lo desplaza.
 
@@ -347,45 +344,30 @@ La desviación de una nota raíz respecto a su referencia se resume con dos núm
 
 La franja :guilabel:`Decisiones` da una etiqueta a cada nota raíz y a cada unión, con una forma y un color:
 
-Coherente ✓ (verde)
+Coherente ✓ (gris)
 : La desviación de timbre está dentro de la tolerancia.
 
-Redundante − (azul)
-: La nota raíz es coherente, y eliminarla cambiaría sus notas menos que el umbral :guilabel:`Redundancia`, sin ruptura en la nueva unión: se puede eliminar.
+Redundante − (gris)
+: La nota raíz es coherente, y eliminarla cambiaría sus notas menos que el umbral de redundancia, sin ruptura en la nueva unión: se puede eliminar.
 
-Por corregir ~ (naranja)
+Por corregir ~ (rojo claro)
 : La desviación de timbre está entre la tolerancia y el máximo: se puede corregir el timbre.
 
 Demasiado diferente × (rojo)
 : La desviación de timbre supera el máximo: la nota raíz se puede eliminar o reemplazar por una nota calculada.
 
-Ruptura + (morado)
-: En un cambio de muestra, el salto de timbre supera el umbral :guilabel:`Ruptura` y existe una nota sin muestra entre las dos notas raíz: se puede crear allí una nota calculada.
+Ruptura + (rojo)
+: En un cambio de muestra, el salto de timbre supera el umbral de ruptura y existe una nota sin muestra entre las dos notas raíz: se puede crear allí una nota calculada.
 
-Nivel ▲ ▼ (amarillo)
-: La desviación de nivel supera el umbral :guilabel:`Nivel` (▲ demasiado fuerte, ▼ demasiado débil): se puede corregir la atenuación.
+Nivel ▲ ▼ (rojo / azul)
+: La desviación de nivel supera 2,5 dB (▲ demasiado fuerte, ▼ demasiado débil): se puede corregir la atenuación.
 
-Los umbrales se ajustan en el menú :guilabel:`Umbrales`.
-Sus valores por defecto (:guilabel:`Tolerancia` 4,5 dB, :guilabel:`Máximo` 8 dB, :guilabel:`Redundancia` 2,5 dB, :guilabel:`Ruptura` 6 dB, :guilabel:`Nivel` 2,5 dB) proceden de bancos de muestras de órgano, en los que el 70 % de las notas raíz se desvían menos de 4,5 dB de sus vecinas: se pueden adaptar al instrumento.
+Los umbrales de timbre se ajustan con el campo :guilabel:`Tolerancia` (4,5 dB por defecto).
+El máximo, la redundancia y la ruptura siguen a la tolerancia: 8 dB, 2,5 dB y 6 dB para una tolerancia de 4,5 dB, en proporción para otros valores (la información emergente del campo los indica).
+La tolerancia por defecto procede de bancos de muestras de órgano, en los que el 70 % de las notas raíz se desvían menos de 4,5 dB de sus vecinas.
+Las desviaciones naturales de pianos, guitarras, maderas y bancos General MIDI son unas 1,4 veces mayores: les conviene una tolerancia de unos 6 dB, mientras que un instrumento muestreado en cada nota puede verificarse con más rigor.
+El umbral de nivel está fijado en 2,5 dB: a diferencia del timbre, las desviaciones de nivel apenas dependen del instrumento.
 Una unión o una desviación puede ser intencionada (un instrumento que se convierte en otro, la repetición de una mixtura): las etiquetas solo son propuestas.
-
-
-### Parciales {#doc_timbre_partials}
-
-
-El menú :guilabel:`Parciales` define las filas del mapa, compartidas por la visualización, las desviaciones y las correcciones:
-
-Armónicos mostrados uno a uno
-: Número de armónicos mostrados y comparados uno a uno (10 por defecto). El oído distingue individualmente los primeros armónicos, mientras que los siguientes se perciben en conjunto como brillo.
-
-Armónicos siguientes
-: Los armónicos siguientes se agrupan en bandas de un tercio de octava (11-12, 13-16, 17-20...) o de una octava, para que muchos armónicos agudos y débiles no pesen más que los primeros.
-
-Límite superior
-: Los parciales por encima de esta frecuencia se ignoran (16 kHz por defecto, o la mitad de la frecuencia de muestreo).
-
-Rango dinámico
-: Los armónicos situados más de este valor por debajo del más fuerte de la nota no se comparan (60 dB por defecto).
 
 
 ### Detalles y acciones
@@ -399,7 +381,7 @@ El título indica la nota, la nota raíz que la reproduce y la etiqueta de esta 
 * :guilabel:`Renderizado frente al modelo`: tras la acción :guilabel:`Verificar mediante renderizado`,
 * :guilabel:`Si se eliminara`: mayor desviación en las notas de la nota raíz y salto en la nueva unión entre sus vecinas,
 * :guilabel:`Muestras`: transposición, atenuación y filtro de cada muestra,
-* :guilabel:`Medidas`: nivel, brillo, pendiente espectral, armónicos impares / pares, ruido, afinación, bucle y factor de duración de lo que se oye.
+* :guilabel:`Medidas`: nivel, brillo, pendiente espectral, armónicos impares / pares, ruido, afinación y factor de duración de lo que se oye.
 
 El gráfico de barras compara los niveles oídos con la referencia en una nota raíz o, en otra nota, con la nota calculada que esta podría recibir (una columna con trazo discontinuo en el mapa).
 

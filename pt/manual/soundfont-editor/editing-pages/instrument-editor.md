@@ -176,7 +176,7 @@ Manter o clique esquerdo pressionado permite deslocar o gráfico se o ponto inic
 
 Um clique com o botão do meio toca uma nota: a nota é dada pela posição horizontal do mouse e a velocidade pela sua posição vertical.
 
-Um teclado sob a barra de rolagem horizontal mostra as teclas brancas e pretas e acompanha o zoom e o deslocamento do gráfico. Um clique em uma tecla toca a nota correspondente; a velocidade é definida de acordo com a posição vertical do clique, como no [teclado virtual](manual/soundfont-editor/toolbar.md#doc_keyboard). A roda do mouse sobre este teclado rola o gráfico horizontalmente.
+Um teclado logo acima da barra de rolagem horizontal mostra as teclas brancas e pretas e acompanha o zoom e o deslocamento do gráfico. Um clique em uma tecla toca a nota correspondente; a velocidade é definida de acordo com a posição vertical do clique, como no [teclado virtual](manual/soundfont-editor/toolbar.md#doc_keyboard). A roda do mouse sobre este teclado rola o gráfico horizontalmente.
 
 
 ## Editor de envelopes {#doc_envelope}
@@ -295,26 +295,24 @@ Essas análises são mantidas até que os dados, o loop, a nota base ou a corre�
 
 
 Cada coluna é uma nota, alinhada com o teclado exibido abaixo, e cada linha um harmônico (H1: fundamental, H2: segundo harmônico...), o harmônico 1 ficando embaixo, como em um espectrograma.
-Os primeiros harmônicos são exibidos um a um, e os seguintes são agrupados em bandas (veja [Parciais](#doc_timbre_partials)).
+Os 10 primeiros harmônicos são exibidos um a um, pois o ouvido os distingue individualmente; os seguintes, percebidos em conjunto como brilho, são agrupados em bandas de um terço de oitava (11-12, 13-16, 17-20...) para que muitos harmônicos agudos e fracos não pesem mais do que os primeiros.
+Os parciais acima de 16 kHz são ignorados, e os harmônicos que ficam mais de 60 dB abaixo do mais forte da nota não são comparados.
 
 Acima do mapa, linhas de resumo mostram para cada nota:
 
 * :guilabel:`Nível`: nível total,
 * :guilabel:`Timbre`: desvio de timbre da nota base em relação à sua referência (hachurado quando a referência é menos confiável, nas extremidades do teclado),
 * :guilabel:`Transposição`: azul quando a amostra é transposta para baixo, vermelho quando é transposta para cima,
-* e, à escolha no menu :guilabel:`Opções` > :guilabel:`Resumos`: :guilabel:`Brilho` (centro de gravidade dos harmônicos), :guilabel:`Ímpares / pares` (harmônicos ímpares comparados aos harmônicos pares), :guilabel:`Ruído` (relação entre harmônicos e ruído), :guilabel:`Afinação` (cents em relação à nota mais próxima do temperamento igual) e :guilabel:`Loop` (qualidade do loop).
+* e, à escolha no menu :guilabel:`Opções` > :guilabel:`Resumos`: :guilabel:`Brilho` (centro de gravidade dos harmônicos), :guilabel:`Ímpares / pares` (harmônicos ímpares comparados aos harmônicos pares), :guilabel:`Ruído` (relação entre harmônicos e ruído) e :guilabel:`Afinação` (cents em relação à nota mais próxima do temperamento igual).
 
-No mapa, linhas verticais marcam as junções entre divisões (mais grossas quando a amostra muda), um ponto marca cada nota base, hachuras mostram os harmônicos ausentes (fora da banda da amostra ou da saída, acima do limite superior) ou medidos de forma pouco confiável, e as notas que não tocam nada ficam vazias (esmaecidas no teclado).
+No mapa, linhas verticais marcam as junções entre divisões (mais grossas quando a amostra muda), um ponto marca cada nota base, os harmônicos ausentes (fora da banda da amostra ou da saída, acima de 16 kHz) e as notas que não tocam nada ficam vazios (estas esmaecidas no teclado), e hachuras mostram os valores medidos de forma pouco confiável ou em análise.
 Quando a nota base de uma divisão está fora do seu alcance de notas (extensão de um registro de órgão, por exemplo), ela é mostrada na nota mais próxima tocada pela divisão, com um triângulo apontando para a nota base real no lugar do ponto; seu desvio continua sendo medido tocando a divisão na nota base (:guilabel:`Tocado na nota base` no gráfico de barras).
 Uma dica dá os valores da célula sob o cursor do mouse: nota, harmônico, nível, desvio, amostras, transposição e fator de duração (o ataque, o trêmolo e os batimentos são mais rápidos quando uma amostra é transposta para cima).
 
 A lista :guilabel:`Visualização` escolhe o que as cores representam:
 
-Níveis absolutos
-: Nível de cada harmônico em dB.
-
-Níveis relativos
-: Nível de cada harmônico em relação ao mais forte da nota: o timbre independentemente do nível.
+Níveis
+: Nível de cada harmônico em relação ao mais forte da nota: o timbre independentemente do nível, que é mostrado pela linha de resumo :guilabel:`Nível`.
 
 Desvio em relação à referência
 : Diferença entre a nota base e sua referência para cada harmônico, em todas as notas tocadas pela nota base: forte demais (vermelho) ou fraco demais (azul).
@@ -325,10 +323,9 @@ Saltos
 Transposição
 : Semitons entre a nota e a nota base de sua amostra.
 
-Confiança
-: Parte da potência medida de forma confiável.
-
-O menu :guilabel:`Opções` também permite exibir apenas uma coluna por nota base, colorir em patamares conforme os limiares (os desvios dentro da tolerância ficando neutros) e tocar as notas clicadas.
+Os tons de cinza mostram uma grandeza (quanto mais contrastada, mais forte), o vermelho e o azul um desvio (vermelho: forte demais ou transposto para cima, azul: fraco demais ou transposto para baixo).
+A escala é exibida ao lado da lista, e sua dica explica as cores; ela é fixa: 60 dB para os níveis, o dobro do máximo (16 dB por padrão) para os desvios e os saltos, uma oitava para a transposição.
+O menu :guilabel:`Opções` também permite tocar as notas clicadas.
 O teclado na parte inferior do mapa toca o instrumento na velocidade da visualização.
 Manter o clique direito pressionado dilata o eixo horizontal em torno do ponto selecionado, e manter o clique esquerdo pressionado o desloca.
 
@@ -347,45 +344,30 @@ O desvio de uma nota base em relação à sua referência é resumido por dois n
 
 A faixa :guilabel:`Decisões` dá um rótulo a cada nota base e a cada junção, com uma forma e uma cor:
 
-Coerente ✓ (verde)
+Coerente ✓ (cinza)
 : O desvio de timbre está dentro da tolerância.
 
-Redundante − (azul)
-: A nota base é coerente, e removê-la mudaria suas notas menos do que o limiar :guilabel:`Redundância`, sem ruptura na nova junção: ela pode ser removida.
+Redundante − (cinza)
+: A nota base é coerente, e removê-la mudaria suas notas menos do que o limiar de redundância, sem ruptura na nova junção: ela pode ser removida.
 
-A corrigir ~ (laranja)
+A corrigir ~ (vermelho-claro)
 : O desvio de timbre está entre a tolerância e o máximo: o timbre pode ser corrigido.
 
 Diferente demais × (vermelho)
 : O desvio de timbre ultrapassa o máximo: a nota base pode ser removida ou substituída por uma nota calculada.
 
-Ruptura + (roxo)
-: Em uma mudança de amostra, o salto de timbre ultrapassa o limiar :guilabel:`Ruptura` e existe uma nota sem amostra entre as duas notas base: uma nota calculada pode ser criada ali.
+Ruptura + (vermelho)
+: Em uma mudança de amostra, o salto de timbre ultrapassa o limiar de ruptura e existe uma nota sem amostra entre as duas notas base: uma nota calculada pode ser criada ali.
 
-Nível ▲ ▼ (amarelo)
-: O desvio de nível ultrapassa o limiar :guilabel:`Nível` (▲ alto demais, ▼ baixo demais): a atenuação pode ser corrigida.
+Nível ▲ ▼ (vermelho / azul)
+: O desvio de nível ultrapassa 2,5 dB (▲ alto demais, ▼ baixo demais): a atenuação pode ser corrigida.
 
-Os limiares são ajustados no menu :guilabel:`Limiares`.
-Seus valores padrão (:guilabel:`Tolerância` 4,5 dB, :guilabel:`Máximo` 8 dB, :guilabel:`Redundância` 2,5 dB, :guilabel:`Ruptura` 6 dB, :guilabel:`Nível` 2,5 dB) vêm de conjuntos de amostras de órgão, em que 70% das notas base se desviam menos de 4,5 dB de suas vizinhas: eles podem ser adaptados ao instrumento.
+Os limiares de timbre são ajustados com o campo :guilabel:`Tolerância` (4,5 dB por padrão).
+O máximo, a redundância e a ruptura acompanham a tolerância: 8 dB, 2,5 dB e 6 dB para uma tolerância de 4,5 dB, na mesma proporção para outros valores (a dica do campo os indica).
+A tolerância padrão vem de conjuntos de amostras de órgão, em que 70% das notas base se desviam menos de 4,5 dB de suas vizinhas.
+Os desvios naturais de pianos, violões, guitarras, madeiras e bancos General MIDI são cerca de 1,4 vez maiores: uma tolerância de cerca de 6 dB é adequada para eles, enquanto um instrumento amostrado em cada nota pode ser verificado com mais rigor.
+O limiar de nível é fixo em 2,5 dB: ao contrário do timbre, os desvios de nível dependem pouco do instrumento.
 Uma junção ou um desvio pode ser intencional (um instrumento que se torna outro, a repetição de uma mixtura): os rótulos são apenas propostas.
-
-
-### Parciais {#doc_timbre_partials}
-
-
-O menu :guilabel:`Parciais` define as linhas do mapa, compartilhadas pela exibição, pelos desvios e pelas correções:
-
-Harmônicos exibidos um a um
-: Número de harmônicos exibidos e comparados um a um (10 por padrão). O ouvido distingue individualmente os primeiros harmônicos, enquanto os seguintes são percebidos em conjunto como brilho.
-
-Harmônicos seguintes
-: Os harmônicos seguintes são agrupados em bandas de um terço de oitava (11-12, 13-16, 17-20...) ou de uma oitava, para que muitos harmônicos agudos e fracos não pesem mais do que os primeiros.
-
-Limite superior
-: Os parciais acima dessa frequência são ignorados (16 kHz por padrão, ou a metade da taxa de amostragem).
-
-Faixa dinâmica
-: Os harmônicos que ficam mais do que este valor abaixo do mais forte da nota não são comparados (60 dB por padrão).
 
 
 ### Detalhes e ações
@@ -399,7 +381,7 @@ O título indica a nota, a nota base que a toca e o rótulo dessa nota base; as 
 * :guilabel:`Renderização comparada ao modelo`: após a ação :guilabel:`Verificar por renderização`,
 * :guilabel:`Se removida`: maior desvio nas notas da nota base e salto na nova junção entre suas vizinhas,
 * :guilabel:`Amostras`: transposição, atenuação e filtro de cada amostra,
-* :guilabel:`Medidas`: nível, brilho, inclinação espectral, harmônicos ímpares / pares, ruído, afinação, loop e fator de duração do que é ouvido.
+* :guilabel:`Medidas`: nível, brilho, inclinação espectral, harmônicos ímpares / pares, ruído, afinação e fator de duração do que é ouvido.
 
 O gráfico de barras compara os níveis ouvidos com a referência em uma nota base ou, em outra nota, com a nota calculada que ela poderia receber (uma coluna tracejada no mapa).
 

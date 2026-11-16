@@ -176,7 +176,7 @@ Tenendo premuto il tasto sinistro si può spostare il grafico, se il punto inizi
 
 Un clic con il tasto centrale suona una nota: la nota è data dalla posizione orizzontale del mouse e la velocità dalla sua posizione verticale.
 
-Una tastiera sotto la barra di scorrimento orizzontale mostra i tasti bianchi e neri e segue lo zoom e lo scorrimento del grafico. Un clic su un tasto suona la nota corrispondente; la velocità dipende dalla posizione verticale del clic, come sulla [tastiera virtuale](manual/soundfont-editor/toolbar.md#doc_keyboard). La rotellina del mouse sopra questa tastiera fa scorrere il grafico in orizzontale.
+Una tastiera subito sopra la barra di scorrimento orizzontale mostra i tasti bianchi e neri e segue lo zoom e lo scorrimento del grafico. Un clic su un tasto suona la nota corrispondente; la velocità dipende dalla posizione verticale del clic, come sulla [tastiera virtuale](manual/soundfont-editor/toolbar.md#doc_keyboard). La rotellina del mouse sopra questa tastiera fa scorrere il grafico in orizzontale.
 
 
 ## Editor degli inviluppi {#doc_envelope}
@@ -295,26 +295,24 @@ Queste analisi vengono conservate finché non cambiano i dati, il loop, la nota 
 
 
 Ogni colonna è una nota, allineata con la tastiera mostrata sotto, e ogni riga un'armonica (H1: fondamentale, H2: seconda armonica...), con l'armonica 1 in basso come in uno spettrogramma.
-Le prime armoniche sono mostrate singolarmente, mentre le successive sono raggruppate in bande (vedi [Parziali](#doc_timbre_partials)).
+Le prime 10 armoniche sono mostrate singolarmente, poiché l'orecchio le distingue individualmente; le successive, percepite insieme come brillantezza, sono raggruppate in bande di un terzo d'ottava (11-12, 13-16, 17-20...) così che molte armoniche acute e deboli non pesino più delle prime.
+I parziali sopra 16 kHz vengono ignorati, e le armoniche che scendono oltre 60 dB sotto la più forte della nota non vengono confrontate.
 
 Sopra la mappa, alcune righe di riepilogo mostrano per ogni nota:
 
 * :guilabel:`Livello`: livello totale,
 * :guilabel:`Timbro`: scarto di timbro della nota di base dal suo riferimento (tratteggiato in diagonale quando il riferimento è meno affidabile, alle estremità della tastiera),
 * :guilabel:`Trasposizione`: blu quando il campione è trasposto verso il basso, rosso quando è trasposto verso l'alto,
-* e, a scelta nel menu :guilabel:`Opzioni` > :guilabel:`Riepiloghi`: :guilabel:`Brillantezza` (baricentro delle armoniche), :guilabel:`Dispari / pari` (armoniche dispari confrontate con quelle pari), :guilabel:`Rumore` (rapporto armoniche / rumore), :guilabel:`Intonazione` (centesimi dalla nota più vicina del temperamento equabile) e :guilabel:`Loop` (qualità del loop).
+* e, a scelta nel menu :guilabel:`Opzioni` > :guilabel:`Riepiloghi`: :guilabel:`Brillantezza` (baricentro delle armoniche), :guilabel:`Dispari / pari` (armoniche dispari confrontate con quelle pari), :guilabel:`Rumore` (rapporto armoniche / rumore) e :guilabel:`Intonazione` (centesimi dalla nota più vicina del temperamento equabile).
 
-Sulla mappa, linee verticali segnano le giunzioni tra divisioni (più spesse quando il campione cambia), un punto segna ogni nota di base, un tratteggio diagonale indica le armoniche assenti (fuori dalla banda del campione o dell'uscita, sopra il limite superiore) o misurate in modo poco affidabile, e le note che non suonano nulla restano vuote (attenuate sulla tastiera).
+Sulla mappa, linee verticali segnano le giunzioni tra divisioni (più spesse quando il campione cambia), un punto segna ogni nota di base, le armoniche assenti (fuori dalla banda del campione o dell'uscita, sopra 16 kHz) e le note che non suonano nulla restano vuote (queste ultime attenuate sulla tastiera), e un tratteggio diagonale indica i valori misurati in modo poco affidabile o in analisi.
 Quando la nota di base di una divisione è fuori dal suo intervallo di note (estensione di un registro d'organo, per esempio), viene mostrata sulla nota più vicina suonata dalla divisione, con un triangolo che punta verso la vera nota di base al posto del punto; il suo scarto è sempre misurato suonando la divisione alla nota di base (:guilabel:`Suonato alla nota di base` nel grafico a barre).
 Un suggerimento mostra i valori della cella sotto il cursore del mouse: nota, armonica, livello, scarto, campioni, trasposizione e fattore di durata (l'attacco, il tremolo e i battimenti sono più rapidi quando un campione è trasposto verso l'alto).
 
 L'elenco :guilabel:`Visualizzazione` sceglie cosa rappresentano i colori:
 
-Livelli assoluti
-: Livello di ciascuna armonica in dB.
-
-Livelli relativi
-: Livello di ciascuna armonica rispetto alla più forte della nota: il timbro indipendentemente dal livello.
+Livelli
+: Livello di ciascuna armonica rispetto alla più forte della nota: il timbro indipendentemente dal livello, mostrato dalla riga di riepilogo :guilabel:`Livello`.
 
 Scarto dal riferimento
 : Differenza tra la nota di base e il suo riferimento per ciascuna armonica, su tutte le note suonate dalla nota di base: troppo forte (rosso) o troppo debole (blu).
@@ -325,10 +323,9 @@ Salti
 Trasposizione
 : Semitoni tra la nota e la nota di base del suo campione.
 
-Affidabilità
-: Parte della potenza misurata in modo affidabile.
-
-Il menu :guilabel:`Opzioni` permette anche di mostrare una sola colonna per nota di base, di colorare a fasce secondo le soglie (gli scarti entro la tolleranza restano neutri) e di suonare le note cliccate.
+Le sfumature di grigio mostrano una grandezza (più è contrastata, più è forte), il rosso e il blu uno scarto (rosso: troppo forte o trasposto verso l'alto, blu: troppo debole o trasposto verso il basso).
+La scala è mostrata accanto all'elenco e il suo suggerimento spiega i colori; è fissa: 60 dB per i livelli, il doppio del massimo (16 dB per impostazione predefinita) per gli scarti e i salti, un'ottava per la trasposizione.
+Il menu :guilabel:`Opzioni` permette anche di suonare le note cliccate.
 La tastiera in fondo alla mappa suona lo strumento alla velocità della vista.
 Tenendo premuto il tasto destro si dilata l'asse orizzontale attorno al punto selezionato, tenendo premuto il tasto sinistro lo si sposta.
 
@@ -347,45 +344,30 @@ Lo scarto di una nota di base dal suo riferimento è riassunto da due numeri:
 
 La fascia :guilabel:`Decisioni` assegna un'etichetta a ogni nota di base e a ogni giunzione, con una forma e un colore:
 
-Coerente ✓ (verde)
+Coerente ✓ (grigio)
 : Lo scarto di timbro è entro la tolleranza.
 
-Ridondante − (blu)
-: La nota di base è coerente, e rimuoverla cambierebbe le sue note meno della soglia :guilabel:`Ridondanza`, senza discontinuità alla nuova giunzione: può essere rimossa.
+Ridondante − (grigio)
+: La nota di base è coerente, e rimuoverla cambierebbe le sue note meno della soglia di ridondanza, senza discontinuità alla nuova giunzione: può essere rimossa.
 
-Da correggere ~ (arancione)
+Da correggere ~ (rosso chiaro)
 : Lo scarto di timbro è compreso tra la tolleranza e il massimo: il timbro può essere corretto.
 
 Troppo diversa × (rosso)
 : Lo scarto di timbro supera il massimo: la nota di base può essere rimossa o sostituita con una nota calcolata.
 
-Discontinuità + (viola)
-: A un cambio di campione, il salto di timbro supera la soglia :guilabel:`Discontinuità` ed esiste una nota senza campione tra le due note di base: lì può essere creata una nota calcolata.
+Discontinuità + (rosso)
+: A un cambio di campione, il salto di timbro supera la soglia di discontinuità ed esiste una nota senza campione tra le due note di base: lì può essere creata una nota calcolata.
 
-Livello ▲ ▼ (giallo)
-: Lo scarto di livello supera la soglia :guilabel:`Livello` (▲ troppo forte, ▼ troppo debole): l'attenuazione può essere corretta.
+Livello ▲ ▼ (rosso / blu)
+: Lo scarto di livello supera 2,5 dB (▲ troppo forte, ▼ troppo debole): l'attenuazione può essere corretta.
 
-Le soglie si impostano nel menu :guilabel:`Soglie`.
-I loro valori predefiniti (:guilabel:`Tolleranza` 4,5 dB, :guilabel:`Massimo` 8 dB, :guilabel:`Ridondanza` 2,5 dB, :guilabel:`Discontinuità` 6 dB, :guilabel:`Livello` 2,5 dB) derivano da sample set di organi, in cui il 70% delle note di base si discosta di meno di 4,5 dB dalle note vicine: possono essere adattati allo strumento.
+Le soglie di timbro si impostano con il campo :guilabel:`Tolleranza` (4,5 dB per impostazione predefinita).
+Il massimo, la ridondanza e la discontinuità seguono la tolleranza: 8 dB, 2,5 dB e 6 dB per una tolleranza di 4,5 dB, in proporzione per gli altri valori (il suggerimento del campo li indica).
+La tolleranza predefinita deriva da sample set di organi, in cui il 70% delle note di base si discosta di meno di 4,5 dB dalle note vicine.
+Gli scarti naturali di pianoforti, chitarre, legni e banchi General MIDI sono circa 1,4 volte più grandi: per loro è adatta una tolleranza di circa 6 dB, mentre uno strumento campionato su ogni nota può essere verificato in modo più rigoroso.
+La soglia di livello è fissata a 2,5 dB: a differenza del timbro, gli scarti di livello dipendono poco dallo strumento.
 Una giunzione o uno scarto possono essere voluti (uno strumento che ne diventa un altro, il ritornello di un ripieno): le etichette sono solo proposte.
-
-
-### Parziali {#doc_timbre_partials}
-
-
-Il menu :guilabel:`Parziali` imposta le righe della mappa, condivise dalla visualizzazione, dagli scarti e dalle correzioni:
-
-Armoniche visualizzate singolarmente
-: Numero di armoniche visualizzate e confrontate singolarmente (10 per impostazione predefinita). L'orecchio distingue individualmente le prime armoniche, mentre le successive vengono percepite insieme come brillantezza.
-
-Armoniche successive
-: Le armoniche successive vengono raggruppate in bande di un terzo d'ottava (11-12, 13-16, 17-20...) o di un'ottava, così che molte armoniche acute e deboli non pesino più delle prime.
-
-Limite superiore
-: I parziali sopra questa frequenza vengono ignorati (16 kHz per impostazione predefinita, o la metà della frequenza di campionamento).
-
-Gamma dinamica
-: Le armoniche che scendono oltre questo valore sotto la più forte della nota non vengono confrontate (60 dB per impostazione predefinita).
 
 
 ### Dettagli e azioni
@@ -399,7 +381,7 @@ Il titolo indica la nota, la nota di base che la suona e l'etichetta di questa n
 * :guilabel:`Rendering rispetto al modello`: dopo l'azione :guilabel:`Verifica tramite rendering`,
 * :guilabel:`Se rimossa`: scarto massimo sulle note della nota di base e salto alla nuova giunzione tra le sue vicine,
 * :guilabel:`Campioni`: trasposizione, attenuazione e filtro di ogni campione,
-* :guilabel:`Misure`: livello, brillantezza, pendenza spettrale, armoniche dispari / pari, rumore, intonazione, loop e fattore di durata di ciò che si sente.
+* :guilabel:`Misure`: livello, brillantezza, pendenza spettrale, armoniche dispari / pari, rumore, intonazione e fattore di durata di ciò che si sente.
 
 Il grafico a barre confronta i livelli percepiti con il riferimento su una nota di base o, su un'altra nota, con la nota calcolata che questa potrebbe ricevere (una colonna tratteggiata sulla mappa).
 

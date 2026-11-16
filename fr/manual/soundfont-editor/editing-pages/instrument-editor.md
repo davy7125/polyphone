@@ -176,7 +176,7 @@ Maintenir le clic gauche permet de déplacer le graphique si le point initial n'
 
 Un clic sur le bouton du milieu joue une note&nbsp;: la note est donnée par la position horizontale de la souris et la vélocité par sa position verticale.
 
-Un clavier sous la barre de défilement horizontale montre les touches blanches et noires et suit le zoom et le défilement du graphique. Un clic sur une touche joue la note correspondante, la vélocité étant déterminée par la position verticale du clic comme sur le [clavier virtuel](manual/soundfont-editor/toolbar.md#doc_keyboard). La molette de la souris au-dessus de ce clavier fait défiler le graphique horizontalement.
+Un clavier juste au-dessus de la barre de défilement horizontale montre les touches blanches et noires et suit le zoom et le défilement du graphique. Un clic sur une touche joue la note correspondante, la vélocité étant déterminée par la position verticale du clic comme sur le [clavier virtuel](manual/soundfont-editor/toolbar.md#doc_keyboard). La molette de la souris au-dessus de ce clavier fait défiler le graphique horizontalement.
 
 
 ## Éditeur d'enveloppes {#doc_envelope}
@@ -295,26 +295,24 @@ Ces analyses sont conservées tant que les données, la boucle, la note de base 
 
 
 Chaque colonne est une note, alignée sur le clavier affiché en dessous, et chaque ligne un rang d'harmonique (H1&nbsp;: fondamentale, H2&nbsp;: deuxième harmonique...), le rang 1 étant en bas comme sur un spectrogramme.
-Les premiers rangs sont affichés un par un, les suivants étant regroupés en bandes (voir [Partiels](#doc_timbre_partials)).
+Les 10 premiers rangs sont affichés un par un, l'oreille distinguant individuellement les premières harmoniques&nbsp;; les suivants, perçus ensemble comme une brillance, sont regroupés en bandes d'un tiers d'octave (11-12, 13-16, 17-20...) pour que de nombreux rangs aigus et faibles ne pèsent pas plus que les premiers.
+Les partiels au-dessus de 16&nbsp;kHz sont ignorés, et les rangs plus faibles de plus de 60&nbsp;dB que le plus fort de la note ne sont pas comparés.
 
 Au-dessus de la carte, des lignes de résumé montrent pour chaque note&nbsp;:
 
 * :guilabel:`Niveau`&nbsp;: niveau total,
 * :guilabel:`Timbre`&nbsp;: écart de timbre de la note de base à sa référence (hachuré quand la référence est moins sûre, aux extrémités du clavier),
 * :guilabel:`Transposition`&nbsp;: bleu quand l'échantillon est transposé vers le bas, rouge quand il est transposé vers le haut,
-* et, au choix dans le menu :guilabel:`Options` > :guilabel:`Résumés`&nbsp;: :guilabel:`Brillance` (centre de gravité des rangs), :guilabel:`Impairs / pairs` (rangs impairs comparés aux rangs pairs), :guilabel:`Bruit` (rapport harmoniques / bruit), :guilabel:`Justesse` (cents par rapport à la note la plus proche du tempérament égal) et :guilabel:`Boucle` (qualité de la boucle).
+* et, au choix dans le menu :guilabel:`Options` > :guilabel:`Résumés`&nbsp;: :guilabel:`Brillance` (centre de gravité des rangs), :guilabel:`Impairs / pairs` (rangs impairs comparés aux rangs pairs), :guilabel:`Bruit` (rapport harmoniques / bruit) et :guilabel:`Justesse` (cents par rapport à la note la plus proche du tempérament égal).
 
-Sur la carte, des lignes verticales marquent les jonctions entre divisions (plus épaisses quand l'échantillon change), un point marque chaque note de base, des hachures montrent les rangs absents (hors de la bande de l'échantillon ou de la sortie, au-dessus de la limite haute) ou mesurés de façon peu sûre, et les notes qui ne jouent rien restent vides (estompées sur le clavier).
+Sur la carte, des lignes verticales marquent les jonctions entre divisions (plus épaisses quand l'échantillon change), un point marque chaque note de base, les rangs absents (hors de la bande de l'échantillon ou de la sortie, au-dessus de 16&nbsp;kHz) et les notes qui ne jouent rien restent vides (ces dernières estompées sur le clavier), et des hachures montrent les valeurs mesurées de façon peu sûre ou en cours d'analyse.
 Quand la note de base d'une division est hors de son étendue de notes (extension d'un jeu d'orgue par exemple), elle est montrée sur la note la plus proche jouée par la division, avec un triangle pointant vers la vraie note de base à la place du point&nbsp;; son écart reste mesuré en jouant la division à la note de base (:guilabel:`Joué à la note de base` dans le graphique).
 Une infobulle donne les valeurs de la case sous le curseur de la souris&nbsp;: note, rang, niveau, écart, échantillons, transposition et facteur de durée (l'attaque, le trémolo et les battements sont plus rapides quand un échantillon est transposé vers le haut).
 
 La liste :guilabel:`Affichage` choisit ce que représentent les couleurs&nbsp;:
 
-Niveaux absolus
-: Niveau de chaque rang en dB.
-
-Niveaux relatifs
-: Niveau de chaque rang par rapport au plus fort de la note&nbsp;: le timbre indépendamment du niveau.
+Niveaux
+: Niveau de chaque rang par rapport au plus fort de la note&nbsp;: le timbre indépendamment du niveau, que montre la ligne de résumé :guilabel:`Niveau`.
 
 Écart à la référence
 : Différence entre la note de base et sa référence pour chaque rang, sur toutes les notes jouées par la note de base&nbsp;: trop fort (rouge) ou trop faible (bleu).
@@ -325,10 +323,9 @@ Sauts
 Transposition
 : Demi-tons entre la note et la note de base de son échantillon.
 
-Confiance
-: Part de la puissance mesurée de façon sûre.
-
-Le menu :guilabel:`Options` permet aussi d'afficher une seule colonne par note de base, de colorer par paliers des seuils (les écarts dans la tolérance étant neutres), et de jouer les notes cliquées.
+Les nuances de gris montrent une grandeur (plus elle est contrastée, plus elle est forte), le rouge et le bleu un écart (rouge&nbsp;: trop fort ou transposé vers le haut, bleu&nbsp;: trop faible ou transposé vers le bas).
+L'échelle est affichée à côté de la liste, son info-bulle expliquant les couleurs&nbsp;; elle est fixe&nbsp;: 60&nbsp;dB pour les niveaux, deux fois le maximum (16&nbsp;dB par défaut) pour les écarts et les sauts, une octave pour la transposition.
+Le menu :guilabel:`Options` permet aussi de jouer les notes cliquées.
 Le clavier en bas de la carte joue l'instrument à la vélocité de la vue.
 Maintenir le clic droit dilate l'axe horizontal autour du point de départ, maintenir le clic gauche le déplace.
 
@@ -347,45 +344,30 @@ L'écart d'une note de base à sa référence est résumé par deux nombres&nbsp
 
 La bande :guilabel:`Décisions` donne une étiquette à chaque note de base et à chaque jonction, avec une forme et une couleur&nbsp;:
 
-Conforme ✓ (vert)
+Conforme ✓ (gris)
 : L'écart de timbre est dans la tolérance.
 
-Redondante − (bleu)
-: La note de base est conforme, et la supprimer changerait ses notes de moins que le seuil :guilabel:`Redondance`, sans cassure à la nouvelle jonction&nbsp;: elle peut être supprimée.
+Redondante − (gris)
+: La note de base est conforme, et la supprimer changerait ses notes de moins que le seuil de redondance, sans cassure à la nouvelle jonction&nbsp;: elle peut être supprimée.
 
-À corriger ~ (orange)
+À corriger ~ (rouge clair)
 : L'écart de timbre est entre la tolérance et le maximum&nbsp;: le timbre peut être corrigé.
 
 Trop différente × (rouge)
 : L'écart de timbre dépasse le maximum&nbsp;: la note de base peut être supprimée ou remplacée par une note calculée.
 
-Cassure + (violet)
-: À un changement d'échantillon, le saut de timbre dépasse le seuil :guilabel:`Cassure` et une note sans échantillon existe entre les deux notes de base&nbsp;: une note calculée peut y être créée.
+Cassure + (rouge)
+: À un changement d'échantillon, le saut de timbre dépasse le seuil de cassure et une note sans échantillon existe entre les deux notes de base&nbsp;: une note calculée peut y être créée.
 
-Niveau ▲ ▼ (jaune)
-: L'écart de niveau dépasse le seuil :guilabel:`Niveau` (▲ trop fort, ▼ trop faible)&nbsp;: l'atténuation peut être corrigée.
+Niveau ▲ ▼ (rouge / bleu)
+: L'écart de niveau dépasse 2,5&nbsp;dB (▲ trop fort, ▼ trop faible)&nbsp;: l'atténuation peut être corrigée.
 
-Les seuils se règlent dans le menu :guilabel:`Seuils`.
-Leurs valeurs par défaut (:guilabel:`Tolérance` 4,5&nbsp;dB, :guilabel:`Maximum` 8&nbsp;dB, :guilabel:`Redondance` 2,5&nbsp;dB, :guilabel:`Cassure` 6&nbsp;dB, :guilabel:`Niveau` 2,5&nbsp;dB) viennent de jeux d'orgue échantillonnés, où 70&nbsp;% des notes de base s'écartent de moins de 4,5&nbsp;dB de leurs voisines&nbsp;: elles peuvent être adaptées à l'instrument.
+Les seuils de timbre se règlent avec le champ :guilabel:`Tolérance` (4,5&nbsp;dB par défaut).
+Le maximum, la redondance et la cassure suivent la tolérance&nbsp;: 8&nbsp;dB, 2,5&nbsp;dB et 6&nbsp;dB pour une tolérance de 4,5&nbsp;dB, en proportion pour les autres valeurs (l'info-bulle du champ les indique).
+La tolérance par défaut vient de jeux d'orgue échantillonnés, où 70&nbsp;% des notes de base s'écartent de moins de 4,5&nbsp;dB de leurs voisines.
+Les écarts naturels des pianos, guitares, bois et banques General MIDI sont environ 1,4 fois plus grands&nbsp;: une tolérance d'environ 6&nbsp;dB leur convient, alors qu'un instrument échantillonné sur chaque note peut être vérifié plus strictement.
+Le seuil de niveau est fixé à 2,5&nbsp;dB&nbsp;: contrairement au timbre, les écarts de niveau dépendent peu de l'instrument.
 Une jonction ou un écart peut être voulu (un instrument qui en devient un autre, une reprise de mixture)&nbsp;: les étiquettes ne sont que des propositions.
-
-
-### Partiels {#doc_timbre_partials}
-
-
-Le menu :guilabel:`Partiels` règle les lignes de la carte, partagées par l'affichage, les écarts et les corrections&nbsp;:
-
-Rangs affichés un par un
-: Nombre de rangs affichés et comparés un par un (10 par défaut). L'oreille distingue individuellement les premières harmoniques, les suivantes étant perçues ensemble comme une brillance.
-
-Rangs suivants
-: Les rangs suivants sont regroupés en bandes d'un tiers d'octave (11-12, 13-16, 17-20...) ou d'une octave, pour que de nombreux rangs aigus et faibles ne pèsent pas plus que les premiers.
-
-Limite haute
-: Les partiels au-dessus de cette fréquence sont ignorés (16&nbsp;kHz par défaut, ou la moitié de la fréquence d'échantillonnage).
-
-Dynamique
-: Les rangs plus faibles que cette valeur sous le plus fort de la note ne sont pas comparés (60&nbsp;dB par défaut).
 
 
 ### Détail et actions
@@ -399,7 +381,7 @@ Le titre donne la note, la note de base qui la joue et l'étiquette de cette not
 * :guilabel:`Rendu comparé au modèle`&nbsp;: après l'action :guilabel:`Vérifier par un rendu`,
 * :guilabel:`Si elle est supprimée`&nbsp;: plus grand écart sur les notes de la note de base et saut à la nouvelle jonction entre ses voisines,
 * :guilabel:`Échantillons`&nbsp;: transposition, atténuation et filtre de chaque échantillon,
-* :guilabel:`Mesures`&nbsp;: niveau, brillance, pente spectrale, rangs impairs / pairs, bruit, justesse, boucle et facteur de durée de ce qui est entendu.
+* :guilabel:`Mesures`&nbsp;: niveau, brillance, pente spectrale, rangs impairs / pairs, bruit, justesse et facteur de durée de ce qui est entendu.
 
 Le graphique compare les niveaux entendus à la référence sur une note de base ou, sur une autre note, à la note calculée qu'elle pourrait recevoir (colonne en pointillés sur la carte).
 

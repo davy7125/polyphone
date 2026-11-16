@@ -176,7 +176,7 @@ Durch Gedrückthalten der linken Maustaste lässt sich die Grafik verschieben, w
 
 Ein Klick mit der mittleren Maustaste spielt eine Note: Die Taste ergibt sich aus der horizontalen Position der Maus, der Anschlag aus ihrer vertikalen Position.
 
-Eine Tastatur unter der horizontalen Bildlaufleiste zeigt die weißen und schwarzen Tasten und folgt dem Zoom und dem Verschieben der Grafik. Ein Klick auf eine Taste spielt die entsprechende Note; die Anschlagsstärke richtet sich wie bei der [virtuellen Tastatur](manual/soundfont-editor/toolbar.md#doc_keyboard) nach der vertikalen Position des Klicks. Das Mausrad über dieser Tastatur verschiebt die Grafik horizontal.
+Eine Tastatur direkt über der horizontalen Bildlaufleiste zeigt die weißen und schwarzen Tasten und folgt dem Zoom und dem Verschieben der Grafik. Ein Klick auf eine Taste spielt die entsprechende Note; die Anschlagsstärke richtet sich wie bei der [virtuellen Tastatur](manual/soundfont-editor/toolbar.md#doc_keyboard) nach der vertikalen Position des Klicks. Das Mausrad über dieser Tastatur verschiebt die Grafik horizontal.
 
 
 ## Hüllkurveneditor {#doc_envelope}
@@ -295,26 +295,24 @@ Diese Analysen bleiben erhalten, bis sich die Daten, der Loop, die Basisnote ode
 
 
 Jede Spalte ist eine Taste, ausgerichtet an der darunter angezeigten Tastatur, und jede Zeile eine Harmonische (H1: Grundton, H2: zweite Harmonische...), wobei H1 wie in einem Spektrogramm unten liegt.
-Die ersten Harmonischen werden einzeln angezeigt, die weiteren in Bändern zusammengefasst (siehe [Teiltöne](#doc_timbre_partials)).
+Die ersten 10 Harmonischen werden einzeln angezeigt, da das Ohr die ersten Harmonischen einzeln unterscheidet; die weiteren, die gemeinsam als Helligkeit wahrgenommen werden, werden in Terzbändern (11-12, 13-16, 17-20...) zusammengefasst, damit viele schwache hohe Harmonische nicht mehr Gewicht haben als die ersten.
+Teiltöne oberhalb von 16 kHz werden ignoriert, und Harmonische, die mehr als 60 dB unter der stärksten Harmonischen der Taste liegen, werden nicht verglichen.
 
 Über der Karte zeigen Übersichtszeilen für jede Taste:
 
 * :guilabel:`Pegel`: Gesamtpegel,
 * :guilabel:`Klangfarbe`: Klangfarbenabweichung der Basisnote von ihrer Referenz (schraffiert, wenn die Referenz weniger zuverlässig ist, an den Enden der Tastatur),
 * :guilabel:`Transposition`: blau, wenn das Sample nach unten transponiert wird, rot, wenn es nach oben transponiert wird,
-* und, im Menü :guilabel:`Optionen` > :guilabel:`Übersichten` wählbar: :guilabel:`Helligkeit` (Schwerpunkt der Harmonischen), :guilabel:`Ungerade / gerade` (ungerade Harmonische im Vergleich zu den geraden), :guilabel:`Rauschen` (Verhältnis der Harmonischen zum Rauschen), :guilabel:`Intonation` (Abweichung in Cent von der nächstgelegenen Note der gleichstufigen Stimmung) und :guilabel:`Loop` (Qualität des Loops).
+* und, im Menü :guilabel:`Optionen` > :guilabel:`Übersichten` wählbar: :guilabel:`Helligkeit` (Schwerpunkt der Harmonischen), :guilabel:`Ungerade / gerade` (ungerade Harmonische im Vergleich zu den geraden), :guilabel:`Rauschen` (Verhältnis der Harmonischen zum Rauschen) und :guilabel:`Intonation` (Abweichung in Cent von der nächstgelegenen Note der gleichstufigen Stimmung).
 
-Auf der Karte markieren senkrechte Linien die Übergänge zwischen Aufteilungen (dicker, wenn das Sample wechselt), ein Punkt markiert jede Basisnote, Schraffuren zeigen die fehlenden Harmonischen (außerhalb des Frequenzbands des Samples oder der Ausgabe, oberhalb der Obergrenze) oder die nicht zuverlässig gemessenen, und die Tasten, die nichts spielen, bleiben leer (auf der Tastatur abgeblendet).
+Auf der Karte markieren senkrechte Linien die Übergänge zwischen Aufteilungen (dicker, wenn das Sample wechselt), ein Punkt markiert jede Basisnote, die fehlenden Harmonischen (außerhalb des Frequenzbands des Samples oder der Ausgabe, oberhalb von 16 kHz) und die Tasten, die nichts spielen, bleiben leer (letztere auf der Tastatur abgeblendet), und Schraffuren zeigen die nicht zuverlässig gemessenen oder noch analysierten Werte.
 Liegt die Basisnote einer Aufteilung außerhalb ihres Tastenbereichs (Erweiterung eines Orgelregisters zum Beispiel), wird sie auf der nächstgelegenen von der Aufteilung gespielten Taste angezeigt, mit einem Dreieck statt des Punktes, das zur tatsächlichen Basisnote zeigt; ihre Abweichung wird weiterhin gemessen, indem die Aufteilung auf der Basisnote gespielt wird (:guilabel:`Auf der Basisnote gespielt` im Balkendiagramm).
 Ein Tooltip zeigt die Werte der Zelle unter dem Mauszeiger: Taste, Harmonische, Pegel, Abweichung, Samples, Transposition und Dauerfaktor (Attack, Tremolo und Schwebungen sind schneller, wenn ein Sample nach oben transponiert wird).
 
 Die Liste :guilabel:`Anzeige` legt fest, was die Farben darstellen:
 
-Absolute Pegel
-: Pegel jeder Harmonischen in dB.
-
-Relative Pegel
-: Pegel jeder Harmonischen im Verhältnis zur stärksten der Taste: die Klangfarbe unabhängig vom Pegel.
+Pegel
+: Pegel jeder Harmonischen im Verhältnis zur stärksten der Taste: die Klangfarbe unabhängig vom Pegel, den die Übersichtszeile :guilabel:`Pegel` zeigt.
 
 Abweichung von der Referenz
 : Unterschied zwischen der Basisnote und ihrer Referenz für jede Harmonische, über alle von der Basisnote gespielten Tasten: zu stark (rot) oder zu schwach (blau).
@@ -325,10 +323,9 @@ Sprünge
 Transposition
 : Halbtöne zwischen der Taste und der Basisnote ihres Samples.
 
-Konfidenz
-: Anteil der Leistung, der zuverlässig gemessen wird.
-
-Das Menü :guilabel:`Optionen` ermöglicht außerdem, nur eine Spalte pro Basisnote anzuzeigen, in Stufen der Schwellenwerte zu färben (Abweichungen innerhalb der Toleranz bleiben neutral) und die angeklickten Tasten zu spielen.
+Grautöne zeigen eine Größe (je kontrastreicher, desto stärker), Rot und Blau eine Abweichung (Rot: zu stark oder nach oben transponiert, Blau: zu schwach oder nach unten transponiert).
+Die Skala wird neben der Liste angezeigt, ihr Tooltip erklärt die Farben; sie ist fest: 60 dB für die Pegel, das Doppelte des Maximums (standardmäßig 16 dB) für die Abweichungen und die Sprünge, eine Oktave für die Transposition.
+Das Menü :guilabel:`Optionen` ermöglicht außerdem, die angeklickten Tasten zu spielen.
 Die Tastatur unten an der Karte spielt das Instrument mit dem Anschlag der Ansicht.
 Durch Gedrückthalten der rechten Maustaste wird die horizontale Achse um den gewählten Punkt herum gedehnt, durch Gedrückthalten der linken Maustaste wird sie verschoben.
 
@@ -347,45 +344,30 @@ Die Abweichung einer Basisnote von ihrer Referenz wird durch zwei Zahlen zusamme
 
 Die Leiste :guilabel:`Entscheidungen` ordnet jeder Basisnote und jedem Übergang eine Einstufung mit einer Form und einer Farbe zu:
 
-Konsistent ✓ (grün)
+Konsistent ✓ (grau)
 : Die Klangfarbenabweichung liegt innerhalb der Toleranz.
 
-Redundant − (blau)
-: Die Basisnote ist konsistent, und ihr Entfernen würde ihre Tasten um weniger als den Schwellenwert :guilabel:`Redundanz` verändern, ohne Bruch am neuen Übergang: Sie kann entfernt werden.
+Redundant − (grau)
+: Die Basisnote ist konsistent, und ihr Entfernen würde ihre Tasten um weniger als den Redundanz-Schwellenwert verändern, ohne Bruch am neuen Übergang: Sie kann entfernt werden.
 
-Zu korrigieren ~ (orange)
+Zu korrigieren ~ (hellrot)
 : Die Klangfarbenabweichung liegt zwischen der Toleranz und dem Maximum: Die Klangfarbe kann korrigiert werden.
 
 Zu verschieden × (rot)
 : Die Klangfarbenabweichung liegt über dem Maximum: Die Basisnote kann entfernt oder durch eine berechnete Note ersetzt werden.
 
-Bruch + (violett)
-: Bei einem Samplewechsel liegt der Klangfarbensprung über dem Schwellenwert :guilabel:`Bruch`, und zwischen den beiden Basisnoten gibt es eine Taste ohne Sample: Dort kann eine berechnete Note erstellt werden.
+Bruch + (rot)
+: Bei einem Samplewechsel liegt der Klangfarbensprung über dem Bruch-Schwellenwert, und zwischen den beiden Basisnoten gibt es eine Taste ohne Sample: Dort kann eine berechnete Note erstellt werden.
 
-Pegel ▲ ▼ (gelb)
-: Die Pegelabweichung liegt über dem Schwellenwert :guilabel:`Pegel` (▲ zu laut, ▼ zu leise): Die Dämpfung kann korrigiert werden.
+Pegel ▲ ▼ (rot / blau)
+: Die Pegelabweichung liegt über 2,5 dB (▲ zu laut, ▼ zu leise): Die Dämpfung kann korrigiert werden.
 
-Die Schwellenwerte werden im Menü :guilabel:`Schwellenwerte` eingestellt.
-Ihre Standardwerte (:guilabel:`Toleranz` 4,5 dB, :guilabel:`Maximum` 8 dB, :guilabel:`Redundanz` 2,5 dB, :guilabel:`Bruch` 6 dB, :guilabel:`Pegel` 2,5 dB) stammen von Orgel-Samplesets, bei denen 70 % der Basisnoten um weniger als 4,5 dB von ihren Nachbarn abweichen: Sie können an das Instrument angepasst werden.
+Die Schwellenwerte der Klangfarbe werden mit dem Feld :guilabel:`Toleranz` (standardmäßig 4,5 dB) eingestellt.
+Maximum, Redundanz und Bruch folgen der Toleranz: 8 dB, 2,5 dB und 6 dB bei einer Toleranz von 4,5 dB, bei anderen Werten im selben Verhältnis (der Tooltip des Feldes zeigt sie an).
+Die Standardtoleranz stammt von Orgel-Samplesets, bei denen 70 % der Basisnoten um weniger als 4,5 dB von ihren Nachbarn abweichen.
+Die natürlichen Abweichungen von Klavieren, Gitarren, Holzbläsern und General-MIDI-Bänken sind etwa 1,4-mal so groß: Eine Toleranz von etwa 6 dB passt zu ihnen, während ein Instrument mit einem Sample pro Taste strenger geprüft werden kann.
+Der Pegel-Schwellenwert ist fest auf 2,5 dB eingestellt: Anders als die Klangfarbe hängen die Pegelabweichungen kaum vom Instrument ab.
 Ein Übergang oder eine Abweichung kann gewollt sein (ein Instrument, das zu einem anderen wird, eine repetierende Mixtur): Die Einstufungen sind nur Vorschläge.
-
-
-### Teiltöne {#doc_timbre_partials}
-
-
-Das Menü :guilabel:`Teiltöne` legt die Zeilen der Karte fest, die von der Anzeige, den Abweichungen und den Korrekturen gemeinsam genutzt werden:
-
-Einzeln angezeigte Harmonische
-: Anzahl der einzeln angezeigten und verglichenen Harmonischen (standardmäßig 10). Das Ohr unterscheidet die ersten Harmonischen einzeln, die weiteren werden gemeinsam als Helligkeit wahrgenommen.
-
-Weitere Harmonische
-: Die weiteren Harmonischen werden in Terzbändern (11-12, 13-16, 17-20...) oder Oktavbändern zusammengefasst, damit viele schwache hohe Harmonische nicht mehr Gewicht haben als die ersten.
-
-Obergrenze
-: Teiltöne oberhalb dieser Frequenz werden ignoriert (standardmäßig 16 kHz oder die Hälfte der Samplefrequenz).
-
-Dynamikumfang
-: Harmonische, die mehr als diesen Wert unter der stärksten Harmonischen der Taste liegen, werden nicht verglichen (standardmäßig 60 dB).
 
 
 ### Details und Aktionen
@@ -399,7 +381,7 @@ Der Titel nennt die Taste, die Basisnote, die sie spielt, und die Einstufung die
 * :guilabel:`Rendering im Vergleich zum Modell`: nach der Aktion :guilabel:`Durch Rendern prüfen`,
 * :guilabel:`Falls entfernt`: größte Abweichung über die Tasten der Basisnote und Sprung am neuen Übergang zwischen ihren Nachbarn,
 * :guilabel:`Samples`: Transposition, Dämpfung und Filter jedes Samples,
-* :guilabel:`Messwerte`: Pegel, Helligkeit, spektrale Steigung, ungerade / gerade Harmonische, Rauschen, Intonation, Loop und Dauerfaktor des Gehörten.
+* :guilabel:`Messwerte`: Pegel, Helligkeit, spektrale Steigung, ungerade / gerade Harmonische, Rauschen, Intonation und Dauerfaktor des Gehörten.
 
 Das Balkendiagramm vergleicht die gehörten Pegel auf einer Basisnote mit der Referenz und auf einer anderen Taste mit der berechneten Note, die diese Taste erhalten könnte (eine gestrichelte Spalte auf der Karte).
 

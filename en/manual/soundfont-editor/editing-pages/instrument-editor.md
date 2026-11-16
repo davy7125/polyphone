@@ -176,7 +176,7 @@ Maintaining the left click allows you to move the graphic if the initial point i
 
 A click on the middle button plays a note: the key is given by the horizontal position of the mouse and the velocity by its vertical position.
 
-A keyboard under the horizontal scroll bar shows the white and black keys and follows the zoom and the scroll of the graph. A click on a key plays the corresponding note, the velocity being defined by the vertical position of the click as on the [virtual keyboard](manual/soundfont-editor/toolbar.md#doc_keyboard). The mouse wheel over this keyboard scrolls the graph horizontally.
+A keyboard just above the horizontal scroll bar shows the white and black keys and follows the zoom and the scroll of the graph. A click on a key plays the corresponding note, the velocity being defined by the vertical position of the click as on the [virtual keyboard](manual/soundfont-editor/toolbar.md#doc_keyboard). The mouse wheel over this keyboard scrolls the graph horizontally.
 
 
 ## Envelope editor {#doc_envelope}
@@ -295,26 +295,24 @@ These analyses are kept until the data, the loop, the root key or the pitch corr
 
 
 Each column is a key, aligned on the keyboard displayed below, and each row a harmonic rank (H1: fundamental, H2: second harmonic...), the rank 1 being at the bottom as in a spectrogram.
-The first ranks are displayed one by one, the next ones being grouped in bands (see [Partials](#doc_timbre_partials)).
+The first 10 ranks are displayed one by one, the ear distinguishing the first harmonics individually; the next ones, perceived together as brightness, are grouped in bands of a third of an octave (11-12, 13-16, 17-20...) so that many weak high ranks don't weigh more than the first ones.
+The partials above 16 kHz are ignored, and the ranks more than 60 dB below the strongest one of the key are not compared.
 
 Above the map, summary rows show for each key:
 
 * :guilabel:`Level`: total level,
 * :guilabel:`Timbre`: timbre deviation of the root key from its reference (hatched when the reference is less reliable, at the ends of the keyboard),
 * :guilabel:`Transposition`: blue when the sample is transposed down, red when it is transposed up,
-* and, chosen in the menu :guilabel:`Options` > :guilabel:`Summaries`: :guilabel:`Brightness` (center of gravity of the ranks), :guilabel:`Odd / even` (odd ranks compared to even ranks), :guilabel:`Noise` (harmonics to noise ratio), :guilabel:`Tuning` (cents from the closest note of the equal temperament) and :guilabel:`Loop` (quality of the loop).
+* and, chosen in the menu :guilabel:`Options` > :guilabel:`Summaries`: :guilabel:`Brightness` (center of gravity of the ranks), :guilabel:`Odd / even` (odd ranks compared to even ranks), :guilabel:`Noise` (harmonics to noise ratio) and :guilabel:`Tuning` (cents from the closest note of the equal temperament).
 
-On the map, vertical lines mark the junctions between divisions (thicker when the sample changes), a dot marks each root key, hatching shows the ranks that are absent (outside the band of the sample or of the output, above the upper limit) or not reliably measured, and the keys that play nothing are left empty (dimmed on the keyboard).
+On the map, vertical lines mark the junctions between divisions (thicker when the sample changes), a dot marks each root key, the ranks that are absent (outside the band of the sample or of the output, above 16 kHz) and the keys that play nothing are left empty (the latter dimmed on the keyboard), and hatching shows the values not reliably measured or being analyzed.
 When the root key of a division is outside its key range (extension of an organ stop for instance), it is shown on the closest key played by the division, with a triangle pointing towards the real root key instead of the dot; its deviation is still measured by playing the division at the root key (:guilabel:`Played at the root key` in the bar chart).
 A tooltip gives the values of the cell under the mouse cursor: key, rank, level, deviation, samples, transposition and duration factor (the attack, the tremolo and the beats are faster when a sample is transposed up).
 
 The list :guilabel:`Display` selects what the colors represent:
 
-Absolute levels
-: Level of each rank in dB.
-
-Relative levels
-: Level of each rank relative to the strongest one of the key: the timbre regardless of the level.
+Levels
+: Level of each rank relative to the strongest one of the key: the timbre regardless of the level, which is shown by the summary row :guilabel:`Level`.
 
 Deviation from the reference
 : Difference between the root key and its reference for each rank, over all the keys played by the root key: too strong (red) or too weak (blue).
@@ -325,10 +323,9 @@ Jumps
 Transposition
 : Semitones between the key and the root key of its sample.
 
-Confidence
-: Part of the power that is reliably measured.
-
-The menu :guilabel:`Options` also allows displaying only one column per root key, coloring by steps of the thresholds (the deviations within the tolerance being neutral), and playing the clicked keys.
+Shades of grey show a quantity (the more contrasted, the stronger), red and blue a deviation (red: too strong or transposed up, blue: too weak or transposed down).
+The scale is shown next to the list, its tooltip explaining the colors; it is fixed: 60 dB for the levels, twice the maximum (16 dB by default) for the deviations and the jumps, an octave for the transposition.
+The menu :guilabel:`Options` also allows playing the clicked keys.
 The keyboard at the bottom of the map plays the instrument at the velocity of the view.
 Maintaining the right click dilates the horizontal axis around the selected point, and maintaining the left click moves it.
 
@@ -347,45 +344,30 @@ The deviation of a root key from its reference is summed up by two numbers:
 
 The strip :guilabel:`Decisions` gives a label to each root key and to each junction, with a shape and a color:
 
-Consistent ✓ (green)
+Consistent ✓ (grey)
 : The timbre deviation is within the tolerance.
 
-Redundant − (blue)
-: The root key is consistent, and removing it would change its keys by less than the threshold :guilabel:`Redundancy`, without a break at the new junction: it can be removed.
+Redundant − (grey)
+: The root key is consistent, and removing it would change its keys by less than the redundancy threshold, without a break at the new junction: it can be removed.
 
-To correct ~ (orange)
+To correct ~ (light red)
 : The timbre deviation is between the tolerance and the maximum: the timbre can be corrected.
 
 Too different × (red)
 : The timbre deviation is beyond the maximum: the root key can be removed or replaced with a computed note.
 
-Break + (purple)
-: At a change of sample, the timbre jump is beyond the threshold :guilabel:`Break` and a key without sample exists between both root keys: a computed note can be created there.
+Break + (red)
+: At a change of sample, the timbre jump is beyond the break threshold and a key without sample exists between both root keys: a computed note can be created there.
 
-Level ▲ ▼ (yellow)
-: The level deviation is beyond the threshold :guilabel:`Level` (▲ too loud, ▼ too soft): the attenuation can be corrected.
+Level ▲ ▼ (red / blue)
+: The level deviation is beyond 2.5 dB (▲ too loud, ▼ too soft): the attenuation can be corrected.
 
-The thresholds are set in the menu :guilabel:`Thresholds`.
-Their default values (:guilabel:`Tolerance` 4.5 dB, :guilabel:`Maximum` 8 dB, :guilabel:`Redundancy` 2.5 dB, :guilabel:`Break` 6 dB, :guilabel:`Level` 2.5 dB) come from organ sample sets, where 70% of the root keys deviate by less than 4.5 dB from their neighbors: they can be adapted to the instrument.
+The timbre thresholds are set with the field :guilabel:`Tolerance` (4.5 dB by default).
+The maximum, the redundancy and the break follow the tolerance: 8 dB, 2.5 dB and 6 dB for a tolerance of 4.5 dB, in proportion for other values (the tooltip of the field gives them).
+The default tolerance comes from organ sample sets, where 70% of the root keys deviate by less than 4.5 dB from their neighbors.
+The natural deviations of pianos, guitars, woodwinds and general MIDI banks are about 1.4 times larger: a tolerance of about 6 dB suits them, whereas an instrument sampled on every key can be checked more strictly.
+The level threshold is fixed at 2.5 dB: unlike the timbre, the level deviations hardly depend on the instrument.
 A junction or a deviation can be wanted (an instrument becoming another one, a mixture breaking back): the labels are only proposals.
-
-
-### Partials {#doc_timbre_partials}
-
-
-The menu :guilabel:`Partials` sets the rows of the map, shared by the display, the deviations and the corrections:
-
-Ranks displayed one by one
-: Number of ranks displayed and compared one by one (10 by default). The ear distinguishes the first harmonics individually, the next ones being perceived together as brightness.
-
-Next ranks
-: The next ranks are grouped in bands of a third of an octave (11-12, 13-16, 17-20...) or of an octave, so that many weak high ranks don't weigh more than the first ones.
-
-Upper limit
-: The partials above this frequency are ignored (16 kHz by default, or the half of the sample rate).
-
-Dynamic range
-: The ranks further below the strongest one of the key are not compared (60 dB by default).
 
 
 ### Details and actions
@@ -399,7 +381,7 @@ The title gives the key, the root key playing it and the label of this root key;
 * :guilabel:`Rendering against the model`: after the action :guilabel:`Check by rendering`,
 * :guilabel:`If removed`: largest deviation over the keys of the root key and jump at the new junction between its neighbors,
 * :guilabel:`Samples`: transposition, attenuation and filter of each sample,
-* :guilabel:`Measures`: level, brightness, spectral slope, odd / even ranks, noise, tuning, loop and duration factor of what is heard.
+* :guilabel:`Measures`: level, brightness, spectral slope, odd / even ranks, noise, tuning and duration factor of what is heard.
 
 The bar chart compares the levels heard with the reference on a root key or, on another key, with the computed note that this key could receive (a dashed column on the map).
 
