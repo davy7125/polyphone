@@ -29,17 +29,27 @@
 #include "keyboardstrip.h"
 #include <QPainter>
 #include <QMouseEvent>
-#include <QContextMenuEvent>
 #include <QToolTip>
+#include <QApplication>
 #include <cmath>
+
+const double TimbreMapWidget::LABEL_PADDING = 4;
+const double TimbreMapWidget::MAX_ZOOM = 8;
 
 TimbreMapWidget::TimbreMapWidget(QWidget * parent) : QWidget(parent),
     _model(nullptr),
     _selectedKey(-1),
     _ghostKey(-1),
     _velocity(100),
+    _graphLeft(2),
+    _graphWidth(100),
+    _labelWidth(50),
+    _marginWidth(58),
+    _zoom(1),
+    _scroll(0),
     _left(60),
     _columnWidth(1),
+    _namesTop(0),
     _summaryTop(0),
     _summaryHeight(14),
     _mapTop(0),
@@ -48,13 +58,16 @@ TimbreMapWidget::TimbreMapWidget(QWidget * parent) : QWidget(parent),
     _decisionTop(0),
     _decisionHeight(20),
     _keyboardTop(0),
-    _keyboardHeight(34),
+    _keyboardHeight(KeyboardStrip::KEYS_HEIGHT),
     _maxLevel(0),
     _maxTransposition(1),
+    _pressedButton(Qt::NoButton),
+    _pressScroll(0),
+    _pressZoom(1),
+    _pressColumn(0),
+    _moved(false),
     _pressedKey(-1),
-    _dragKey(-1),
     _playingKey(-1),
-    _dragging(false),
     _rangeCache(12)
 {
     this->setMouseTracking(true);
@@ -130,9 +143,7 @@ void TimbreMapWidget::updateColumns()
         _columns = _model->getPositions().keys();
     else
     {
-        int first = _display.fullKeyboard ? 0 : qMax(0, _model->getMinKey() - 1);
-        int last = _display.fullKeyboard ? 127 : qMin(127, _model->getMaxKey() + 1);
-        for (int key = first; key <= last; key++)
+        for (int key = _model->getMinKey(); key <= _model->getMaxKey(); key++)
             _columns << key;
     }
 
@@ -202,20 +213,52 @@ double TimbreMapWidget::getAutoRange()
 void TimbreMapWidget::computeGeometry()
 {
     QFontMetrics metrics(this->font());
-    _left = 10 + qMax(metrics.horizontalAdvance(tr("Decisions")), metrics.horizontalAdvance("129-161"));
+
+    // Labels written inside the graph, in a margin keeping the first key away from them
+    _labelWidth = qMax(metrics.horizontalAdvance(tr("Decisions")), metrics.horizontalAdvance("129-161"));
     foreach (int summary, _display.summaries)
-        _left = qMax(_left, 10.0 + metrics.horizontalAdvance(getSummaryName(summary)));
+        _labelWidth = qMax(_labelWidth, static_cast<double>(metrics.horizontalAdvance(getSummaryName(summary))));
+    if (_model != nullptr)
+    {
+        foreach (TimbreRow row, _model->getRows())
+            _labelWidth = qMax(_labelWidth, static_cast<double>(metrics.horizontalAdvance(row.label)));
+    }
+    _marginWidth = _labelWidth + 2 * LABEL_PADDING;
+
+    // Horizontal axis: zoom and scroll
+    _graphLeft = 2;
+    _graphWidth = qMax(1.0, this->width() - _graphLeft - 4);
+    _columnWidth = getColumnWidth(_zoom);
+    _scroll = qBound(0.0, _scroll, _zoom * _graphWidth - _graphWidth);
+    _left = _graphLeft + _marginWidth - _scroll;
+
+    // Vertical axis: summaries, map, decisions, names of the keys and keyboard at the bottom (as in the range editor)
     _summaryHeight = qMax(12, metrics.height());
     _summaryTop = 4;
     _mapTop = _summaryTop + _display.summaries.count() * _summaryHeight + 6;
-    _keyboardHeight = 34;
-    _keyboardTop = this->height() - _keyboardHeight - metrics.height() - 2;
+    _keyboardHeight = KeyboardStrip::KEYS_HEIGHT;
+    _keyboardTop = this->height() - 1 - _keyboardHeight;
+    _namesTop = _keyboardTop - metrics.height();
     _decisionHeight = qMax(18, metrics.height() + 4);
-    _decisionTop = _keyboardTop - _decisionHeight - 3;
+    _decisionTop = _namesTop - 1 - _decisionHeight;
     _mapHeight = qMax(10.0, _decisionTop - 4 - _mapTop);
     int rowCount = _model != nullptr ? static_cast<int>(_model->getRows().count()) : 0;
     _rowHeight = rowCount > 0 ? _mapHeight / rowCount : _mapHeight;
-    _columnWidth = _columns.isEmpty() ? 1 : (this->width() - _left - 4) / _columns.count();
+}
+
+double TimbreMapWidget::getColumnWidth(double zoom) const
+{
+    // The whole content, margin included, is "zoom" times as wide as the graph
+    if (_columns.isEmpty())
+        return 1;
+    return qMax(1.0, (zoom * _graphWidth - _marginWidth) / _columns.count());
+}
+
+void TimbreMapWidget::setScroll(double scroll)
+{
+    _scroll = qBound(0.0, scroll, _zoom * _graphWidth - _graphWidth);
+    _left = _graphLeft + _marginWidth - _scroll;
+    update();
 }
 
 QRectF TimbreMapWidget::columnRect(int column, double top, double height) const
@@ -223,9 +266,31 @@ QRectF TimbreMapWidget::columnRect(int column, double top, double height) const
     return QRectF(_left + column * _columnWidth, top, _columnWidth, height);
 }
 
+QRectF TimbreMapWidget::marginRect(double top, double height) const
+{
+    return QRectF(_left - _marginWidth, top, _marginWidth, height);
+}
+
+void TimbreMapWidget::drawLabel(QPainter &painter, double top, double height, const QString &text)
+{
+    // The labels stay on the left of the graph: once the margin is scrolled, they are written over the columns
+    QRectF rect(_graphLeft + LABEL_PADDING, top, _labelWidth, height);
+    if (_scroll > 0)
+    {
+        QFontMetrics metrics(this->font());
+        QColor background = _palette.uncovered();
+        background.setAlpha(220);
+        double textHeight = qMin(height, static_cast<double>(metrics.height()));
+        painter.fillRect(QRectF(rect.left() - 2, rect.center().y() - textHeight / 2,
+                                metrics.horizontalAdvance(text) + 4, textHeight), background);
+    }
+    painter.setPen(_palette.text());
+    painter.drawText(rect, Qt::AlignLeft | Qt::AlignVCenter | Qt::TextDontClip, text);
+}
+
 int TimbreMapWidget::columnAt(int x) const
 {
-    if (_columns.isEmpty() || x < _left)
+    if (_columns.isEmpty() || x < _left || x < _graphLeft || x >= _graphLeft + _graphWidth)
         return -1;
     int column = static_cast<int>((x - _left) / _columnWidth);
     return column < _columns.count() ? column : -1;
@@ -400,14 +465,13 @@ void TimbreMapWidget::paintEvent(QPaintEvent * event)
     QBrush hatchBrush(_palette.hatch(), Qt::BDiagPattern);
     QBrush pendingBrush(_palette.hatch(), Qt::Dense6Pattern);
     const QList<TimbreRow> &rows = _model->getRows();
+    painter.setClipRect(QRectF(_graphLeft, 0, _graphWidth, this->height()));
 
-    // Summaries
+    // Summaries, their names in the margin
     for (int s = 0; s < _display.summaries.count(); s++)
     {
         double top = _summaryTop + s * _summaryHeight;
-        painter.setPen(_palette.text());
-        painter.drawText(QRectF(2, top, _left - 6, _summaryHeight), Qt::AlignRight | Qt::AlignVCenter,
-                         getSummaryName(_display.summaries[s]));
+        painter.fillRect(marginRect(top + 1, _summaryHeight - 2), _palette.uncovered());
         for (int c = 0; c < _columns.count(); c++)
         {
             bool hatched;
@@ -419,6 +483,7 @@ void TimbreMapWidget::paintEvent(QPaintEvent * event)
     }
 
     // Map, rank 1 at the bottom
+    painter.fillRect(marginRect(_mapTop, _mapHeight), _palette.uncovered());
     for (int c = 0; c < _columns.count(); c++)
     {
         int key = _columns[c];
@@ -433,15 +498,6 @@ void TimbreMapWidget::paintEvent(QPaintEvent * event)
         }
     }
 
-    // Row labels (every n rows if they don't fit)
-    int step = qMax(1, static_cast<int>(std::ceil(metrics.height() / qMax(1.0, _rowHeight))));
-    painter.setPen(_palette.text());
-    for (int row = 0; row < rows.count(); row += step)
-    {
-        QRectF rect(2, _mapTop + _mapHeight - (row + 1) * _rowHeight, _left - 6, _rowHeight);
-        painter.drawText(rect, Qt::AlignRight | Qt::AlignVCenter | Qt::TextDontClip, rows[row].label);
-    }
-
     // Separation between the detailed ranks and the bands
     int detailed = 0;
     while (detailed < rows.count() && rows[detailed].firstRank == rows[detailed].lastRank)
@@ -450,8 +506,9 @@ void TimbreMapWidget::paintEvent(QPaintEvent * event)
     {
         double y = _mapTop + _mapHeight - detailed * _rowHeight;
         painter.setPen(QPen(_palette.background(), 2));
-        painter.drawLine(QPointF(_left, y), QPointF(_left + _columns.count() * _columnWidth, y));
+        painter.drawLine(QPointF(_left - _marginWidth, y), QPointF(_left + _columns.count() * _columnWidth, y));
     }
+
 
     // Ghost column: sound predicted at a free key
     int ghostColumn = _columns.indexOf(_ghostKey);
@@ -507,7 +564,7 @@ void TimbreMapWidget::paintEvent(QPaintEvent * event)
     paintDecisions(painter);
     paintKeyboard(painter);
 
-    // Selected positions and key, drag
+    // Selected positions and key
     painter.setBrush(Qt::NoBrush);
     QColor highlight = _palette.highlight();
     foreach (int key, _selectedPositions)
@@ -545,24 +602,26 @@ void TimbreMapWidget::paintEvent(QPaintEvent * event)
         painter.setPen(QPen(highlight, 2, Qt::DashLine));
         painter.drawRect(columnRect(ghostColumn, _mapTop, _mapHeight).adjusted(1, 1, -1, -1));
     }
-    if (_dragging && _pressedKey >= 0 && _dragKey >= 0)
+
+    // Names of the rows, above everything as in the range editor (every n rows if they don't fit)
+    for (int s = 0; s < _display.summaries.count(); s++)
+        drawLabel(painter, _summaryTop + s * _summaryHeight, _summaryHeight, getSummaryName(_display.summaries[s]));
+    int step = qMax(1, static_cast<int>(std::ceil(metrics.height() / qMax(1.0, _rowHeight))));
+    for (int row = 0; row < rows.count(); row += step)
+        drawLabel(painter, _mapTop + _mapHeight - (row + 1) * _rowHeight, _rowHeight, rows[row].label);
+    drawLabel(painter, _decisionTop, _decisionHeight, tr("Decisions"));
+
+    // Dilation in progress: line from the point where the right button has been pressed, as in the range editor
+    if (_pressedButton == Qt::RightButton && _moved)
     {
-        int c1 = _columns.indexOf(qMin(_pressedKey, _dragKey)), c2 = _columns.indexOf(qMax(_pressedKey, _dragKey));
-        if (c1 >= 0 && c2 >= 0)
-        {
-            QColor fill = highlight;
-            fill.setAlpha(50);
-            QRectF rect(_left + c1 * _columnWidth, _mapTop, (c2 - c1 + 1) * _columnWidth, _decisionTop + _decisionHeight - _mapTop);
-            painter.fillRect(rect, fill);
-        }
+        painter.setPen(QPen(ContextManager::theme()->getFixedColor(ThemeManager::RED, true), 2, Qt::DotLine));
+        painter.drawLine(_pressPosition, QPoint(_currentPosition.x(), _pressPosition.y()));
     }
 }
 
 void TimbreMapWidget::paintDecisions(QPainter &painter)
 {
-    painter.setPen(_palette.text());
-    painter.drawText(QRectF(2, _decisionTop, _left - 6, _decisionHeight), Qt::AlignRight | Qt::AlignVCenter, tr("Decisions"));
-    QRectF strip(_left, _decisionTop, _columns.count() * _columnWidth, _decisionHeight);
+    QRectF strip(_left - _marginWidth, _decisionTop, _marginWidth + _columns.count() * _columnWidth, _decisionHeight);
     painter.fillRect(strip, _palette.uncovered());
     double size = qMin(_decisionHeight * 0.6, qMax(_columnWidth, 8.0) * 1.2);
 
@@ -614,7 +673,10 @@ void TimbreMapWidget::paintDecisions(QPainter &painter)
 
 void TimbreMapWidget::paintKeyboard(QPainter &painter)
 {
+    // Gray area below the labels, that cannot be played
     QList<KeyboardStrip::Key> keys;
+    keys << KeyboardStrip::Key { -1, _left - _marginWidth, _left,
+                                 KeyboardStrip::marginColor(_palette.background(), _palette.text()) };
     for (int c = 0; c < _columns.count(); c++)
     {
         int key = _columns[c];
@@ -627,7 +689,7 @@ void TimbreMapWidget::paintKeyboard(QPainter &painter)
     }
     KeyboardStrip::paintKeys(painter, keys, _keyboardTop, _keyboardHeight, _palette.grid());
 
-    // Names of the C keys
+    // Names of the C keys, above the keyboard
     QFontMetrics metrics(this->font());
     painter.setPen(_palette.text());
     for (int c = 0; c < _columns.count(); c++)
@@ -637,76 +699,97 @@ void TimbreMapWidget::paintKeyboard(QPainter &painter)
             continue;
         QString name = ContextManager::keyName()->getKeyName(static_cast<unsigned int>(key));
         double width = metrics.horizontalAdvance(name) + 4;
-        QRectF rect(_left + (c + 0.5) * _columnWidth - width / 2, _keyboardTop + _keyboardHeight, width, metrics.height());
+        QRectF rect(_left + (c + 0.5) * _columnWidth - width / 2, _namesTop, width, metrics.height());
         painter.drawText(rect, Qt::AlignCenter, name);
     }
 }
 
 void TimbreMapWidget::mousePressEvent(QMouseEvent * event)
 {
-    int key = keyAt(event->pos().x());
-    if (key < 0 || _model == nullptr)
+    if (_model == nullptr || _columns.isEmpty() || _pressedButton != Qt::NoButton || _playingKey >= 0)
         return;
+    int key = keyAt(event->pos().x());
     if (event->button() == Qt::LeftButton && event->pos().y() >= _keyboardTop && event->pos().y() <= _keyboardTop + _keyboardHeight)
     {
         // Keyboard
-        _playingKey = key;
-        ContextManager::midi()->processKeyOn(-1, key, _velocity);
+        if (key >= 0)
+        {
+            _playingKey = key;
+            ContextManager::midi()->processKeyOn(-1, key, _velocity);
+        }
         return;
     }
-    if (event->button() == Qt::LeftButton)
-    {
-        _pressedKey = key;
-        _dragKey = key;
-        _dragging = false;
-    }
+    if (event->button() != Qt::LeftButton && event->button() != Qt::RightButton)
+        return;
+
+    // Selection on release if the mouse hasn't moved, otherwise translation (left) or dilation (right)
+    _pressedButton = event->button();
+    _pressPosition = _currentPosition = event->pos();
+    _pressScroll = _scroll;
+    _pressZoom = _zoom;
+    _pressColumn = (event->pos().x() - _left) / _columnWidth;
+    _moved = false;
+    _pressedKey = key;
 }
 
 void TimbreMapWidget::mouseMoveEvent(QMouseEvent * event)
 {
-    int key = keyAt(event->pos().x());
-    if (_playingKey >= 0 && key >= 0 && key != _playingKey)
+    if (_playingKey >= 0)
     {
         // Glissando
-        ContextManager::midi()->processKeyOff(-1, _playingKey);
-        _playingKey = key;
-        ContextManager::midi()->processKeyOn(-1, key, _velocity);
+        int key = keyAt(event->pos().x());
+        if (key >= 0 && key != _playingKey)
+        {
+            ContextManager::midi()->processKeyOff(-1, _playingKey);
+            _playingKey = key;
+            ContextManager::midi()->processKeyOn(-1, key, _velocity);
+        }
+        return;
     }
-    else if (_pressedKey >= 0 && (event->buttons() & Qt::LeftButton) && key >= 0 && key != _dragKey)
+    if (_pressedButton == Qt::NoButton)
+        return;
+    _currentPosition = event->pos();
+    int dx = event->pos().x() - _pressPosition.x();
+    if (!_moved && (event->pos() - _pressPosition).manhattanLength() < QApplication::startDragDistance())
+        return;
+    _moved = true;
+
+    if (_pressedButton == Qt::LeftButton)
     {
-        _dragKey = key;
-        _dragging = (key != _pressedKey);
-        update();
+        // Translation
+        this->setCursor(Qt::ClosedHandCursor);
+        setScroll(_pressScroll - dx);
+    }
+    else
+    {
+        // Dilation around the point where the button has been pressed (the same formula as in the range editor)
+        this->setCursor(Qt::ClosedHandCursor);
+        _zoom = qBound(1.0, _pressZoom * std::pow(2.0, 10.0 * dx / this->width()), MAX_ZOOM);
+        _columnWidth = getColumnWidth(_zoom);
+        setScroll(_graphLeft + _marginWidth + _pressColumn * _columnWidth - _pressPosition.x());
     }
 }
 
 void TimbreMapWidget::mouseReleaseEvent(QMouseEvent * event)
 {
-    if (event->button() != Qt::LeftButton)
-        return;
     if (_playingKey >= 0)
     {
-        ContextManager::midi()->processKeyOff(-1, _playingKey);
-        _playingKey = -1;
+        if (event->button() == Qt::LeftButton)
+        {
+            ContextManager::midi()->processKeyOff(-1, _playingKey);
+            _playingKey = -1;
+        }
         return;
     }
-    if (_pressedKey >= 0)
-    {
-        if (_dragging)
-            emit rangeSelected(qMin(_pressedKey, _dragKey), qMax(_pressedKey, _dragKey), event->modifiers());
-        else
-            emit keySelected(_pressedKey, event->modifiers());
-    }
-    _pressedKey = _dragKey = -1;
-    _dragging = false;
+    if (event->button() != _pressedButton)
+        return;
+    if (_pressedButton == Qt::LeftButton && !_moved && _pressedKey >= 0)
+        emit keySelected(_pressedKey, event->modifiers());
+    _pressedButton = Qt::NoButton;
+    _pressedKey = -1;
+    _moved = false;
+    this->setCursor(Qt::ArrowCursor);
     update();
-}
-
-void TimbreMapWidget::contextMenuEvent(QContextMenuEvent * event)
-{
-    int key = keyAt(event->pos().x());
-    if (key >= 0 && event->pos().y() < _keyboardTop)
-        emit contextMenuRequested(key, event->globalPos());
 }
 
 void TimbreMapWidget::leaveEvent(QEvent * event)

@@ -62,7 +62,6 @@ static TimbreSettings readSettings(const McpArguments &args)
         throw McpException("argument \"reference\" must be \"neighbors\" or \"regression\"");
     settings.reference = reference == "regression" ? TimbreSettings::REFERENCE_REGRESSION : TimbreSettings::REFERENCE_INTERPOLATION;
     settings.regressionCount = args.getInt("regression_count", 2, 8, 3);
-    settings.includeMuted = args.getBool("include_muted", false);
     settings.outputSampleRate = 48000;
     return settings;
 }
@@ -74,8 +73,7 @@ static const char * SETTINGS_SCHEMA =
         "upper_limit_hz":{"type":"number","description":"Partials above this frequency are ignored (default 16000, 0 for the half of the sample rate)"},
         "dynamic_range_db":{"type":"number","description":"Ranks further below the strongest one of a key are not compared (default 60)"},
         "reference":{"type":"string","enum":["neighbors","regression"],"description":"Reference of a root key: interpolation between its two neighbors played at its key (default), or robust local regression on several neighbors on each side"},
-        "regression_count":{"type":"integer","minimum":2,"maximum":8,"description":"Neighbors on each side for the regression (default 3)"},
-        "include_muted":{"type":"boolean","description":"Include the muted divisions (default false: muting excludes noises or other sounds)"})JSON";
+        "regression_count":{"type":"integer","minimum":2,"maximum":8,"description":"Neighbors on each side for the regression (default 3)"})JSON";
 
 static EltID readInstrument(const McpArguments &args)
 {

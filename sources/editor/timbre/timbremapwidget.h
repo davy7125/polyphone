@@ -47,7 +47,6 @@ struct TimbreDisplay
     double fixedRange = 12; // dB of the diverging palettes (deviation, jump), the levels using the dynamic range
     bool steps = false; // Colors by steps aligned on the thresholds, the tolerance in the neutral color
     bool positionsOnly = false; // One column per root key
-    bool fullKeyboard = false; // All keys instead of the range of the instrument
 
     // Optional summary rows
     enum Summary
@@ -65,7 +64,9 @@ struct TimbreDisplay
 };
 
 // Map of the timbre: one column per key, one row per rank or band (rank 1 at the bottom, as a spectrogram), summaries
-// above, labels and a playable keyboard below
+// above, the names of the keys and a playable keyboard below. The names of the rows are written inside the graph, in
+// a margin on the left of the first key. The horizontal axis is dilated by holding the right button (as the zoom of the
+// range editor) and moved by holding the left button, a click selecting a key.
 class TimbreMapWidget : public QWidget
 {
     Q_OBJECT
@@ -86,24 +87,25 @@ public:
 
 signals:
     void keySelected(int key, Qt::KeyboardModifiers modifiers);
-    void rangeSelected(int firstKey, int lastKey, Qt::KeyboardModifiers modifiers);
-    void contextMenuRequested(int key, QPoint globalPosition);
 
 protected:
     void paintEvent(QPaintEvent * event) override;
     void mousePressEvent(QMouseEvent * event) override;
     void mouseMoveEvent(QMouseEvent * event) override;
     void mouseReleaseEvent(QMouseEvent * event) override;
-    void contextMenuEvent(QContextMenuEvent * event) override;
     void leaveEvent(QEvent * event) override;
     bool event(QEvent * event) override;
 
 private:
     void updateColumns();
     void computeGeometry();
+    double getColumnWidth(double zoom) const;
+    void setScroll(double scroll);
     int columnAt(int x) const;
     int keyAt(int x) const;
     QRectF columnRect(int column, double top, double height) const;
+    QRectF marginRect(double top, double height) const;
+    void drawLabel(QPainter &painter, double top, double height, const QString &text);
     QColor cellColor(int key, int row, bool &hatched, bool &absent);
     QColor summaryColor(int summary, int key, bool &hatched);
     QColor divergingColor(double value, double range, bool withThresholds);
@@ -122,8 +124,12 @@ private:
     QList<int> _playedKeys;
     int _velocity;
 
-    // Geometry
-    double _left, _columnWidth;
+    // Geometry: the graph is visible between _graphLeft and _graphLeft + _graphWidth, its content (margin of the labels
+    // then the columns) being _zoom times as wide and scrolled by _scroll pixels
+    double _graphLeft, _graphWidth, _labelWidth, _marginWidth;
+    double _zoom, _scroll;
+    double _left, _columnWidth; // Abscissa of the first column (after the margin), possibly outside the graph
+    double _namesTop;
     double _summaryTop, _summaryHeight; // Per summary row
     double _mapTop, _mapHeight, _rowHeight;
     double _decisionTop, _decisionHeight;
@@ -136,10 +142,16 @@ private:
     QMap<int, QPair<double, double> > _summaryBounds; // Summary => minimum, maximum
     double _maxTransposition;
 
-    // Mouse
-    int _pressedKey, _dragKey, _playingKey;
-    bool _dragging;
+    // Mouse: click (selection), translation (left button held), dilation (right button held), keyboard
+    Qt::MouseButton _pressedButton;
+    QPoint _pressPosition, _currentPosition;
+    double _pressScroll, _pressZoom, _pressColumn; // Column under the mouse, in column widths from the first one
+    bool _moved;
+    int _pressedKey, _playingKey;
     double _rangeCache;
+
+    static const double LABEL_PADDING;
+    static const double MAX_ZOOM;
 };
 
 #endif // TIMBREMAPWIDGET_H

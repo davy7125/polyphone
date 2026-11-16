@@ -25,12 +25,12 @@
 
 #include "pagetimbre.h"
 #include "timbrebarswidget.h"
+#include "timbredetailwidget.h"
 #include "dialogtimbrecorrection.h"
 #include "dialogtimbrecreation.h"
 #include "timbrerendering.h"
 #include "contextmanager.h"
 #include "soundfontmanager.h"
-#include "solomanager.h"
 #include "rotatingspinner.h"
 #include <QLabel>
 #include <QSpinBox>
@@ -38,7 +38,6 @@
 #include <QComboBox>
 #include <QToolButton>
 #include <QStackedWidget>
-#include <QScrollArea>
 #include <QMenu>
 #include <QWidgetAction>
 #include <QFormLayout>
@@ -52,6 +51,7 @@
 
 PageTimbre::PageTimbre(QWidget * parent) : Page(parent, "page:timbre"),
     _selectedKey(-1),
+    _anchorKey(-1),
     _playClickedNotes(false),
     _clickedNote(-1),
     _renderedKey(-1),
@@ -93,7 +93,6 @@ void PageTimbre::loadSettings()
     display.mode = static_cast<TimbreDisplay::Mode>(qBound(0, mode, 5));
     display.steps = conf->getValue(ConfManager::SECTION_DISPLAY, "timbre_steps", false).toBool();
     display.positionsOnly = conf->getValue(ConfManager::SECTION_DISPLAY, "timbre_positions_only", false).toBool();
-    display.fullKeyboard = conf->getValue(ConfManager::SECTION_DISPLAY, "timbre_full_keyboard", false).toBool();
     display.autoRange = conf->getValue(ConfManager::SECTION_DISPLAY, "timbre_auto_range", true).toBool();
     display.fixedRange = conf->getValue(ConfManager::SECTION_DISPLAY, "timbre_fixed_range", 12).toDouble();
     QList<int> summaries;
@@ -132,7 +131,6 @@ void PageTimbre::saveSettings()
         conf->setValue(ConfManager::SECTION_DISPLAY, "timbre_mode", static_cast<int>(display.mode));
         conf->setValue(ConfManager::SECTION_DISPLAY, "timbre_steps", display.steps);
         conf->setValue(ConfManager::SECTION_DISPLAY, "timbre_positions_only", display.positionsOnly);
-        conf->setValue(ConfManager::SECTION_DISPLAY, "timbre_full_keyboard", display.fullKeyboard);
         conf->setValue(ConfManager::SECTION_DISPLAY, "timbre_auto_range", display.autoRange);
         conf->setValue(ConfManager::SECTION_DISPLAY, "timbre_fixed_range", display.fixedRange);
         QStringList extra;
@@ -324,7 +322,6 @@ void PageTimbre::buildInterface()
         return action;
     };
     addOption(tr("Root keys only"), _pendingDisplay.positionsOnly, "positionsOnly");
-    addOption(tr("Whole keyboard"), _pendingDisplay.fullKeyboard, "fullKeyboard");
     addOption(tr("Colors by steps of the thresholds"), _pendingDisplay.steps, "steps");
     addOption(tr("Automatic range of the colors"), _pendingDisplay.autoRange, "autoRange");
     menuOptions->addSeparator();
@@ -364,7 +361,7 @@ void PageTimbre::buildInterface()
     _map->setVelocity(_settings.velocity);
     mainLayout->addWidget(_map, 1);
 
-    // Detail, with a fixed height: the one of the buttons (graph and text without margins, only the buttons have some)
+    // Detail, with a fixed height: the one of the buttons (graph and details without margins, only the buttons have some)
     QWidget * detail = new QWidget(main);
     detail->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
     QHBoxLayout * detailLayout = new QHBoxLayout(detail);
@@ -377,18 +374,13 @@ void PageTimbre::buildInterface()
     contentLayout->setContentsMargins(0, 0, 0, 0);
     _bars = new TimbreBarsWidget(detailContent);
     _bars->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Ignored);
-    contentLayout->addWidget(_bars, 3);
-    QScrollArea * scrollDetail = new QScrollArea(detailContent);
-    scrollDetail->setWidgetResizable(true);
-    scrollDetail->setFrameShape(QFrame::NoFrame);
-    scrollDetail->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Ignored);
-    _labelDetail = new QLabel(scrollDetail);
-    _labelDetail->setWordWrap(true);
-    _labelDetail->setAlignment(Qt::AlignLeft | Qt::AlignTop);
-    _labelDetail->setTextInteractionFlags(Qt::TextSelectableByMouse);
-    scrollDetail->setWidget(_labelDetail);
-    scrollDetail->setMinimumWidth(280);
-    contentLayout->addWidget(scrollDetail, 2);
+    contentLayout->addWidget(_bars, 1);
+    // The details take the width of their content first (scroll bar if the window is too narrow), the rest goes to the
+    // graph: its preferred width is its minimum one
+    _detail = new TimbreDetailWidget(detailContent);
+    _detail->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Ignored);
+    _detail->setMinimumWidth(280);
+    contentLayout->addWidget(_detail);
     _stackDetail->addWidget(detailContent);
     _labelNoSelection = new QLabel(tr("Click on a key to see what it plays."), _stackDetail);
     _labelNoSelection->setAlignment(Qt::AlignCenter);
@@ -429,8 +421,6 @@ void PageTimbre::buildInterface()
              << _spinJump << _spinLevel)
         connect(spin, SIGNAL(valueChanged(double)), this, SLOT(onThresholdsChanged()));
     connect(_map, SIGNAL(keySelected(int,Qt::KeyboardModifiers)), this, SLOT(onKeySelected(int,Qt::KeyboardModifiers)));
-    connect(_map, SIGNAL(rangeSelected(int,int,Qt::KeyboardModifiers)), this, SLOT(onRangeSelected(int,int,Qt::KeyboardModifiers)));
-    connect(_map, SIGNAL(contextMenuRequested(int,QPoint)), this, SLOT(onContextMenu(int,QPoint)));
     connect(_buttonCreate, SIGNAL(clicked()), this, SLOT(onCreate()));
     connect(_buttonRemove, SIGNAL(clicked()), this, SLOT(onRemove()));
     connect(_buttonReplace, SIGNAL(clicked()), this, SLOT(onReplace()));
@@ -444,11 +434,23 @@ QString PageTimbre::keyName(int key)
     return ContextManager::keyName()->getKeyName(static_cast<unsigned int>(qBound(0, key, 127)));
 }
 
-QString PageTimbre::formatDb(double value, int decimals)
+// Number with an optional unit, "-" if not measured
+static QString formatValue(double value, int decimals, QString unit = QString(), bool sign = false)
 {
     if (!std::isfinite(value))
         return "-";
-    return QLocale().toString(value, 'f', decimals) + " " + tr("dB", "unit for decibels");
+    if (std::round(value * std::pow(10.0, decimals)) == 0)
+        value = 0; // Neither "-0.0" nor "+0.0"
+    QLocale locale;
+    QString text = locale.toString(value, 'f', decimals);
+    if (sign && value > 0)
+        text.prepend(locale.positiveSign());
+    return unit.isEmpty() ? text : text + " " + unit;
+}
+
+QString PageTimbre::formatDb(double value, int decimals, bool sign)
+{
+    return formatValue(value, decimals, tr("dB", "unit for decibels"), sign);
 }
 
 void PageTimbre::updateInterface(QString editingSource)
@@ -479,8 +481,10 @@ void PageTimbre::updateInterface(QString editingSource)
     if (!sameInstrument)
     {
         _selectedKey = -1;
+        _anchorKey = -1;
         _selectedPositions.clear();
         _renderedKey = -1;
+        _detail->resetWidth();
     }
     if (!sameInstrument || editingSource != "command:selection")
     {
@@ -515,9 +519,6 @@ void PageTimbre::recompute()
     if (_idInst.typeElement != elementInst || !sm->isValid(_idInst))
         return;
     _settings.outputSampleRate = _synth != nullptr && _synth->getSampleRate() > 0 ? _synth->getSampleRate() : 48000;
-
-    // With the solo on selection, the mute follows the selection: it doesn't exclude divisions anymore
-    _settings.includeMuted = sm->solo()->isSoloOnSelectionEnabled(_idInst.indexSf2);
     _model.compute(_idInst, _settings, false);
     _map->setVelocity(_settings.velocity);
     _map->modelUpdated();
@@ -625,8 +626,6 @@ void PageTimbre::onDisplayChanged()
         }
         else if (action->objectName() == "positionsOnly")
             display.positionsOnly = action->isChecked();
-        else if (action->objectName() == "fullKeyboard")
-            display.fullKeyboard = action->isChecked();
         else if (action->objectName() == "steps")
             display.steps = action->isChecked();
         else if (action->objectName() == "autoRange")
@@ -651,8 +650,41 @@ void PageTimbre::readTreeSelection()
                 positions << division.rootKey;
     }
     _selectedPositions = positions;
-    if (!positions.isEmpty() && !positions.contains(_selectedKey))
-        _selectedKey = positions.first();
+    if (!positions.isEmpty() && !positions.contains(getPosition(_selectedKey)))
+        _selectedKey = positions.first(); // Otherwise the selected key stays, being a selected root key or played by one
+    if (!positions.contains(_anchorKey))
+        _anchorKey = positions.isEmpty() ? -1 : getPosition(_selectedKey);
+    _map->setSelection(_selectedKey, _selectedPositions);
+    updateDetail();
+}
+
+int PageTimbre::getPosition(int key)
+{
+    // The key if it is a root key, otherwise the root key of the main division playing it
+    if (key < 0 || key > 127)
+        return -1;
+    if (_model.getPositions().contains(key))
+        return key;
+    int position = _model.getKey(key).position;
+    return _model.getPositions().contains(position) ? position : -1;
+}
+
+void PageTimbre::restoreSelection(int key, const QList<int> &positions, int anchorKey)
+{
+    // Root keys that still exist (a replaced root key is at the same key), otherwise the one now playing the key
+    QList<int> kept;
+    foreach (int position, positions)
+        if (_model.getPositions().contains(position))
+            kept << position;
+    int playing = getPosition(key);
+    if (kept.isEmpty() && playing >= 0)
+        kept << playing;
+
+    // The tree selects their divisions again and notifies the page, which can change the selected key meanwhile
+    _selectedKey = key;
+    selectPositions(kept, true);
+    _selectedKey = key;
+    _anchorKey = kept.contains(anchorKey) ? anchorKey : (kept.isEmpty() ? -1 : kept.first());
     _map->setSelection(_selectedKey, _selectedPositions);
     updateDetail();
 }
@@ -680,25 +712,42 @@ void PageTimbre::selectPositions(const QList<int> &keys, bool notifyTree)
 
 void PageTimbre::onKeySelected(int key, Qt::KeyboardModifiers modifiers)
 {
+    // A key that is not a root key acts on the root key playing it (its divisions are selected in the tree), the
+    // details still being those of the key clicked. Several root keys as in the range editor: Ctrl adds or removes
+    // one, Shift selects all of them from the root key clicked previously.
     _selectedKey = key;
-    bool isPosition = _model.getPositions().contains(key);
-    if (modifiers & (Qt::ShiftModifier | Qt::ControlModifier))
+    int position = getPosition(key);
+    if ((modifiers & Qt::ShiftModifier) && _anchorKey >= 0 && position >= 0)
     {
-        // Several root keys
+        QList<int> positions;
+        foreach (int other, _model.getPositions().keys())
+            if (other >= qMin(_anchorKey, position) && other <= qMax(_anchorKey, position))
+                positions << other;
+        selectPositions(positions, true);
+    }
+    else if (modifiers & (Qt::ShiftModifier | Qt::ControlModifier))
+    {
         QList<int> positions = _selectedPositions;
-        if (isPosition)
+        if (position >= 0)
         {
-            if (positions.contains(key))
-                positions.removeAll(key);
+            if (positions.contains(position))
+                positions.removeAll(position);
             else
-                positions << key;
+            {
+                positions << position;
+                _anchorKey = position;
+            }
         }
         selectPositions(positions, true);
     }
-    else if (isPosition)
-        selectPositions(QList<int>() << key, true);
+    else if (position >= 0)
+    {
+        _anchorKey = position;
+        selectPositions(QList<int>() << position, true);
+    }
     else
     {
+        // Key without sample: nothing to select in the tree
         _map->setSelection(_selectedKey, _selectedPositions);
         updateDetail();
     }
@@ -718,19 +767,6 @@ void PageTimbre::onKeySelected(int key, Qt::KeyboardModifiers modifiers)
             }
         });
     }
-}
-
-void PageTimbre::onRangeSelected(int firstKey, int lastKey, Qt::KeyboardModifiers modifiers)
-{
-    QList<int> positions;
-    if (modifiers & (Qt::ShiftModifier | Qt::ControlModifier))
-        positions = _selectedPositions;
-    foreach (int key, _model.getPositions().keys())
-        if (key >= firstKey && key <= lastKey && !positions.contains(key))
-            positions << key;
-    if (!positions.isEmpty())
-        _selectedKey = positions.first();
-    selectPositions(positions, true);
 }
 
 QList<int> PageTimbre::getTargets()
@@ -768,87 +804,120 @@ void PageTimbre::updateDetail()
     {
         _stackDetail->setCurrentIndex(0);
         _bars->clear();
-        _labelDetail->setText(tr("No division of this instrument plays at the velocity %1.").arg(_settings.velocity));
+        _detail->beginUpdate();
+        _detail->addNotice(tr("No division of this instrument plays at the velocity %1.").arg(_settings.velocity));
+        _detail->endUpdate();
         return;
     }
     if (key < 0)
     {
         _stackDetail->setCurrentIndex(1);
         _bars->clear();
-        _labelDetail->clear();
         return;
     }
     _stackDetail->setCurrentIndex(0);
 
-    QStringList lines;
     QLocale locale;
     SoundfontManager * sm = SoundfontManager::getInstance();
     const TimbreKey &tk = _model.getKey(key);
-    lines << "<b>" + tr("Key %1").arg(keyName(key)) + "</b>";
+    const QMap<int, TimbrePosition> &positions = _model.getPositions();
+    QMap<int, TimbrePosition>::const_iterator positionIt = positions.constFind(hasPosition ? key : (covered ? tk.position : -1));
+    const TimbrePosition * position = (positionIt != positions.constEnd()) ? &positionIt.value() : nullptr;
+    const QString levelName = TimbreMapWidget::getSummaryName(TimbreDisplay::SUMMARY_LEVEL);
+    const QString timbreName = TimbreMapWidget::getSummaryName(TimbreDisplay::SUMMARY_TIMBRE);
+    auto withThreshold = [this](QDoubleSpinBox * spin, double threshold) -> QString {
+        return spin->toolTip() + " (" + formatDb(threshold) + ")";
+    };
     QList<TimbreBarsWidget::Series> series;
+    _detail->beginUpdate();
 
-    if (covered)
+    // Title: the key, then the label of the root key playing it (same shapes and colors as in the map)
+    TimbreDetailWidget::Badge label;
+    if (position != nullptr && position->deviation.valid)
     {
-        // Sources
-        foreach (TimbreVoice voice, tk.voices)
+        switch (position->label)
         {
-            QString name = sm->getQstr(EltID(elementSmpl, _idInst.indexSf2, voice.sampleIndex), champ_name);
-            lines << tr("%1: transposition %2 semitones, attenuation %3, filter %4 Hz")
-                     .arg(name.toHtmlEscaped(), locale.toString(voice.transposition / 100, 'f', 2), formatDb(voice.attenuation),
-                          locale.toString(qRound(voice.filterFrequency)));
+        case TimbrePosition::LABEL_CONFORM:
+            label = TimbreDetailWidget::makeBadge(TimbrePalette::SHAPE_CHECK, palette.conform(), tr("Consistent"),
+                                                  withThreshold(_spinTolerance, _settings.tolerance));
+            break;
+        case TimbrePosition::LABEL_REDUNDANT:
+            label = TimbreDetailWidget::makeBadge(TimbrePalette::SHAPE_MINUS, palette.redundant(), tr("Redundant"),
+                                                  withThreshold(_spinRedundancy, _settings.redundancy));
+            break;
+        case TimbrePosition::LABEL_TO_CORRECT:
+            label = TimbreDetailWidget::makeBadge(TimbrePalette::SHAPE_TILDE, palette.toCorrect(), tr("To correct"),
+                                                  withThreshold(_spinMaximum, _settings.maximum));
+            break;
+        case TimbrePosition::LABEL_TOO_DIFFERENT:
+            label = TimbreDetailWidget::makeBadge(TimbrePalette::SHAPE_CROSS, palette.tooDifferent(), tr("Too different"),
+                                                  withThreshold(_spinMaximum, _settings.maximum));
+            break;
+        default:
+            break;
         }
-        lines << tr("Duration factor: %1 (attack, tremolo and beats)").arg(locale.toString(tk.durationFactor, 'f', 3));
-        if (std::isfinite(tk.tuning))
-            lines << tr("Pitch: %1 cents from the closest note of the equal temperament").arg(
-                         locale.toString(tk.tuning - 100 * std::round(tk.tuning / 100), 'f', 1));
     }
+    if (hasPosition)
+        _detail->setTitle(tr("Root key %1").arg(keyName(key)), label);
     else
-        lines << tr("No sample");
-
-    int positionKey = hasPosition ? key : (covered ? tk.position : -1);
-    if (_model.getPositions().contains(positionKey))
     {
-        const TimbrePosition &position = _model.getPositions()[positionKey];
-        if (!hasPosition)
-            lines << tr("Played by the root key %1").arg(keyName(positionKey));
-        if (position.deviation.valid)
-        {
-            QString label;
-            switch (position.label)
-            {
-            case TimbrePosition::LABEL_CONFORM: label = tr("consistent"); break;
-            case TimbrePosition::LABEL_REDUNDANT: label = tr("redundant: can be removed"); break;
-            case TimbrePosition::LABEL_TO_CORRECT: label = tr("to correct"); break;
-            case TimbrePosition::LABEL_TOO_DIFFERENT: label = tr("too different: remove it or replace it with a computed note"); break;
-            default: break;
-            }
-            lines << tr("Root key %1: %2").arg(keyName(positionKey), label);
-            lines << tr("Deviation from the reference: level %1, timbre %2 (confidence %3%)")
-                     .arg(formatDb(position.deviation.levelDifference), formatDb(position.deviation.timbreDifference))
-                     .arg(qRound(100 * position.deviation.confidence));
-            if (position.referenceAtEdge)
-                lines << "<i>" + tr("Reference extrapolated from the neighbors on one side: less reliable") + "</i>";
-            if (position.redundancyComputed)
-            {
-                QString redundancy = tr("If removed: largest timbre deviation %1, level %2").arg(
-                            formatDb(position.redundancy), formatDb(position.redundancyLevel));
-                if (position.newJunction.valid)
-                    redundancy += ", " + tr("new junction %1").arg(formatDb(position.newJunction.timbreDifference));
-                lines << redundancy;
-            }
-        }
-        else if (!position.analyzed)
-            lines << tr("Analysis in progress...");
+        _detail->setTitle(tr("Key %1").arg(keyName(key)));
+        if (!covered)
+            _detail->setSubtitle(tr("No sample"));
+        else if (position != nullptr)
+            _detail->setSubtitle(tr("Played by the root key %1").arg(keyName(position->key)), label);
+    }
 
-        // Bars of the root key
-        if (hasPosition)
+    // Notices
+    if (targets.count() > 1)
+        _detail->addNotice(tr("%n root keys selected: the actions apply to all of them.", "", static_cast<int>(targets.count())));
+    if (position != nullptr && !position->deviation.valid && !position->analyzed)
+        _detail->addNotice(tr("Analysis in progress..."));
+
+    // Deviation of the root key from its reference
+    if (position != nullptr && position->deviation.valid)
+    {
+        const TimbreComparison &deviation = position->deviation;
+        TimbreDetailWidget::Badge levelBadge;
+        if (position->levelLabel)
+            levelBadge = TimbreDetailWidget::makeBadge(
+                        deviation.levelDifference > 0 ? TimbrePalette::SHAPE_UP : TimbrePalette::SHAPE_DOWN, palette.levelColor(),
+                        deviation.levelDifference > 0 ? tr("Too loud") : tr("Too soft"), withThreshold(_spinLevel, _settings.level));
+        // Measured at the root key: its name is given when another key is selected
+        _detail->beginSection(TimbreDetailWidget::SECTION_DEVIATION,
+                              hasPosition ? TimbreMapWidget::getModeName(TimbreDisplay::MODE_DEVIATION) :
+                                            tr("Deviation of the root key %1").arg(keyName(position->key)),
+                              timbreName + " " + formatDb(deviation.timbreDifference), levelBadge);
+        _detail->addRow(levelName, QStringList(formatDb(deviation.levelDifference, 1, true)), QString(),
+                        TimbreDetailWidget::shapeOnly(levelBadge));
+        _detail->addRow(timbreName, QStringList(formatDb(deviation.timbreDifference)));
+        _detail->addRow(TimbreMapWidget::getModeName(TimbreDisplay::MODE_CONFIDENCE),
+                        QStringList(tr("%1%", "percentage").arg(qRound(100 * deviation.confidence))));
+        if (position->referenceAtEdge)
+            _detail->addNote(tr("Reference extrapolated from the neighbors on one side: less reliable"));
+
+        // Consequences of a removal
+        if (position->redundancyComputed)
         {
-            series << TimbreBarsWidget::Series { tr("Heard"), _model.getRowLevels(position.spectrum), palette.highlight(),
-                                                 TimbreBarsWidget::STYLE_BARS };
-            if (!position.reference.isEmpty())
-                series << TimbreBarsWidget::Series { tr("Reference"), _model.getRowLevels(position.reference), palette.text(),
-                                                     TimbreBarsWidget::STYLE_MARKERS };
+            _detail->beginSection(TimbreDetailWidget::SECTION_REMOVAL, tr("If removed"),
+                                  timbreName + " " + formatDb(position->redundancy));
+            _detail->addColumnHeaders(QStringList() << levelName << timbreName);
+            _detail->addRow(tr("Largest deviation"), QStringList() << formatDb(position->redundancyLevel)
+                            << formatDb(position->redundancy));
+            if (position->newJunction.valid)
+                _detail->addRow(tr("New junction"), QStringList() << formatDb(position->newJunction.levelDifference, 1, true)
+                                << formatDb(position->newJunction.timbreDifference));
         }
+    }
+
+    // Bars of the root key, of the key or of a computed note
+    if (position != nullptr && hasPosition)
+    {
+        series << TimbreBarsWidget::Series { tr("Heard"), _model.getRowLevels(position->spectrum), palette.highlight(),
+                                             TimbreBarsWidget::STYLE_BARS };
+        if (!position->reference.isEmpty())
+            series << TimbreBarsWidget::Series { tr("Reference"), _model.getRowLevels(position->reference), palette.text(),
+                                                 TimbreBarsWidget::STYLE_MARKERS };
     }
     if (!hasPosition && covered)
         series << TimbreBarsWidget::Series { tr("Heard"), _model.getRowLevels(tk.spectrum), palette.highlight(),
@@ -859,19 +928,30 @@ void PageTimbre::updateDetail()
         TimbreSpectrum predicted = _model.predict(key, -1, &atEdge);
         series << TimbreBarsWidget::Series { tr("Computed note"), _model.getRowLevels(predicted), palette.breakColor(),
                                              TimbreBarsWidget::STYLE_OUTLINE };
-        lines << tr("A computed note can be created here (dashed column).");
     }
 
     // Jumps at the junctions around the key
-    if (covered && tk.junction && tk.jump.valid)
-        lines << tr("Junction with the previous key: level %1, timbre %2").arg(
-                     formatDb(tk.jump.levelDifference), formatDb(tk.jump.timbreDifference)) +
-                 (tk.breakLabel ? " — " + tr("break") : "");
-    if (covered && key < 127 && _model.getKey(key + 1).junction && _model.getKey(key + 1).jump.valid)
-        lines << tr("Junction with the next key: level %1, timbre %2").arg(
-                     formatDb(_model.getKey(key + 1).jump.levelDifference),
-                     formatDb(_model.getKey(key + 1).jump.timbreDifference)) +
-                 (_model.getKey(key + 1).breakLabel ? " — " + tr("break") : "");
+    const TimbreKey * nextKey = key < 127 ? &_model.getKey(key + 1) : nullptr;
+    bool previousJunction = covered && key > 0 && tk.junction && tk.jump.valid;
+    bool nextJunction = covered && nextKey != nullptr && nextKey->junction && nextKey->jump.valid;
+    if (previousJunction || nextJunction)
+    {
+        TimbreDetailWidget::Badge breakBadge = TimbreDetailWidget::makeBadge(
+                    TimbrePalette::SHAPE_PLUS, palette.breakColor(), tr("Break"), withThreshold(_spinJump, _settings.jump));
+        bool hasBreak = (previousJunction && tk.breakLabel) || (nextJunction && nextKey->breakLabel);
+        double largest = qMax(previousJunction ? tk.jump.timbreDifference : 0.0, nextJunction ? nextKey->jump.timbreDifference : 0.0);
+        _detail->beginSection(TimbreDetailWidget::SECTION_JUNCTIONS, tr("Junctions"), timbreName + " " + formatDb(largest),
+                              hasBreak ? breakBadge : TimbreDetailWidget::Badge());
+        _detail->addColumnHeaders(QStringList() << levelName << timbreName);
+        if (previousJunction)
+            _detail->addRow(keyName(key - 1) + " – " + keyName(key), QStringList() << formatDb(tk.jump.levelDifference, 1, true)
+                            << formatDb(tk.jump.timbreDifference), QString(),
+                            tk.breakLabel ? TimbreDetailWidget::shapeOnly(breakBadge) : TimbreDetailWidget::Badge());
+        if (nextJunction)
+            _detail->addRow(keyName(key) + " – " + keyName(key + 1), QStringList() << formatDb(nextKey->jump.levelDifference, 1, true)
+                            << formatDb(nextKey->jump.timbreDifference), QString(),
+                            nextKey->breakLabel ? TimbreDetailWidget::shapeOnly(breakBadge) : TimbreDetailWidget::Badge());
+    }
 
     // Rendering
     if (_renderedKey == key && _renderedVelocity == _settings.velocity && !_renderedSpectrum.isEmpty())
@@ -885,44 +965,49 @@ void PageTimbre::updateDetail()
             for (int row = 0; row < comparison.rowDifferences.size(); row++)
                 if (!std::isnan(comparison.rowDifferences[row]))
                     largest = qMax(largest, std::fabs(comparison.rowDifferences[row] - comparison.levelDifference));
-            lines << tr("Rendering against the model: level %1, timbre %2, largest deviation of a row %3").arg(
-                         formatDb(comparison.levelDifference), formatDb(comparison.timbreDifference), formatDb(largest));
+            _detail->beginSection(TimbreDetailWidget::SECTION_RENDERING, tr("Rendering against the model"),
+                                  timbreName + " " + formatDb(comparison.timbreDifference));
+            _detail->addRow(levelName, QStringList(formatDb(comparison.levelDifference, 1, true)));
+            _detail->addRow(timbreName, QStringList(formatDb(comparison.timbreDifference)));
+            _detail->addRow(tr("Largest deviation of a row"), QStringList(formatDb(largest)));
         }
     }
 
-    if (targets.count() > 1)
-        lines << "<i>" + tr("%n root keys selected: the actions apply to all of them.", "", static_cast<int>(targets.count())) + "</i>";
-    _labelDetail->setText(lines.join("<br/>"));
-    _bars->setData(_model.getRows(), series, _settings.dynamicRange);
-}
+    if (covered)
+    {
+        // Samples played and their parameters
+        _detail->beginSection(TimbreDetailWidget::SECTION_SAMPLES, tr("Samples"));
+        foreach (TimbreVoice voice, tk.voices)
+        {
+            _detail->addSubtitle(sm->getQstr(EltID(elementSmpl, _idInst.indexSf2, voice.sampleIndex), champ_name));
+            _detail->addRow(TimbreMapWidget::getSummaryName(TimbreDisplay::SUMMARY_TRANSPOSITION),
+                            QStringList(formatValue(voice.transposition / 100, 2, tr("semitones"), true)));
+            _detail->addRow(tr("Attenuation"), QStringList(formatDb(voice.attenuation)));
+            _detail->addRow(tr("Filter"), QStringList(locale.toString(qRound(voice.filterFrequency)) + " " +
+                                                      tr("Hz", "unit for Herz")));
+        }
 
-void PageTimbre::onContextMenu(int key, QPoint position)
-{
-    if (_selectedKey != key)
-        onKeySelected(key, Qt::NoModifier);
-    QMenu menu(this);
-    if (_buttonCreate->isEnabled())
-        menu.addAction(_buttonCreate->text(), this, SLOT(onCreate()));
-    if (_buttonRemove->isEnabled())
-        menu.addAction(_buttonRemove->text(), this, SLOT(onRemove()));
-    if (_buttonReplace->isEnabled())
-        menu.addAction(_buttonReplace->text(), this, SLOT(onReplace()));
-    if (_buttonCorrect->isEnabled())
-        menu.addAction(_buttonCorrect->text(), this, SLOT(onCorrect()));
-    if (_buttonLevel->isEnabled())
-        menu.addAction(_buttonLevel->text(), this, SLOT(onCorrectLevel()));
-    if (!getTargets().isEmpty())
-    {
-        menu.addSeparator();
-        menu.addAction(tr("Mute these divisions"), this, SLOT(onMute()));
+        // Descriptors of what is heard
+        _detail->beginSection(TimbreDetailWidget::SECTION_MEASURES, tr("Measures"));
+        _detail->addRow(levelName, QStringList(formatDb(tk.totalLevel)));
+        _detail->addRow(TimbreMapWidget::getSummaryName(TimbreDisplay::SUMMARY_BRIGHTNESS), QStringList(formatValue(tk.centroid, 2)),
+                        tr("Center of gravity of the partials, as a rank"));
+        _detail->addRow(tr("Spectral slope"), QStringList(formatValue(tk.slope, 1, tr("dB/octave", "unit for decibels per octave"), true)));
+        _detail->addRow(TimbreMapWidget::getSummaryName(TimbreDisplay::SUMMARY_ODD_EVEN), QStringList(formatDb(tk.oddEven, 1, true)),
+                        tr("Odd ranks (3, 5...) against even ranks (2, 4...)"));
+        _detail->addRow(TimbreMapWidget::getSummaryName(TimbreDisplay::SUMMARY_NOISE), QStringList(formatDb(tk.hnr)),
+                        tr("Harmonics-to-noise ratio"));
+        _detail->addRow(TimbreMapWidget::getSummaryName(TimbreDisplay::SUMMARY_TUNING),
+                        QStringList(formatValue(tk.tuning - 100 * std::round(tk.tuning / 100), 1, tr("cents"), true)),
+                        tr("Deviation from the closest note of the equal temperament"));
+        _detail->addRow(TimbreMapWidget::getSummaryName(TimbreDisplay::SUMMARY_LOOP), QStringList(formatValue(tk.loopCorrelation, 3)),
+                        tr("Correlation at the loop point: 1 for a perfect loop"));
+        _detail->addRow(tr("Duration factor"), QStringList(formatValue(tk.durationFactor, 3)),
+                        tr("Durations of the attack, the tremolo and the beats compared to the sample"));
     }
-    if (_buttonRender->isEnabled())
-    {
-        menu.addSeparator();
-        menu.addAction(_buttonRender->text(), this, SLOT(onRender()));
-    }
-    if (!menu.isEmpty())
-        menu.exec(position);
+
+    _detail->endUpdate();
+    _bars->setData(_model.getRows(), series, _settings.dynamicRange);
 }
 
 void PageTimbre::runInThread(std::function<void()> function, QString text)
@@ -965,16 +1050,19 @@ void PageTimbre::onCreate()
     if (dialog.exec() != QDialog::Accepted)
         return;
     QStringList warnings;
+    int anchorKey = _anchorKey;
+    QList<int> selectedPositions = _selectedPositions;
     bool created = createNote(key, dialog.getClosestKey(), dialog.getSecondKey(), -1, warnings);
     SoundfontManager::getInstance()->endEditing(_editingSource);
     recompute(); // The page is not updated by its own editions
+
+    // The new root key is selected, otherwise the selection is restored (divisions covered by the new one are removed)
+    if (created)
+        restoreSelection(key, QList<int>() << key, key);
+    else
+        restoreSelection(key, selectedPositions, anchorKey);
     if (!warnings.isEmpty())
         QMessageBox::warning(this, tr("Warning"), warnings.join("<br/>"));
-    if (created)
-    {
-        _selectedKey = key;
-        selectPositions(QList<int>() << key, true);
-    }
 }
 
 static QString keyList(const QList<int> &keys, std::function<QString(int)> name)
@@ -1107,21 +1195,6 @@ void PageTimbre::onCorrect()
     runSeries(SERIES_CORRECT, targets, dialog.getParameters(), false, duplicate);
 }
 
-void PageTimbre::onMute()
-{
-    QList<int> targets = getTargets();
-    SoundfontManager * sm = SoundfontManager::getInstance();
-    foreach (int key, targets)
-    {
-        if (!_model.getPositions().contains(key))
-            continue;
-        foreach (int index, _model.getPositions()[key].divisions)
-            sm->solo()->setMute(EltID(elementInstSmpl, _idInst.indexSf2, _idInst.indexElt, _model.getDivisions()[index].index), true);
-    }
-    emit sm->editingDone("command:mute", QList<int>() << _idInst.indexSf2);
-    recompute();
-}
-
 void PageTimbre::onRender()
 {
     int key = _selectedKey;
@@ -1231,6 +1304,11 @@ void PageTimbre::runSeries(SeriesType type, QList<int> targets, const TimbreCorr
 {
     SoundfontManager * sm = SoundfontManager::getInstance();
     QStringList warnings, skipped;
+
+    // Selection restored afterwards: the tree selects other elements when divisions are removed
+    int selectedKey = _selectedKey, anchorKey = _anchorKey;
+    QList<int> selectedPositions = _selectedPositions;
+
     QProgressDialog progress(tr("Processing..."), tr("Cancel"), 0, static_cast<int>(targets.count()), this);
     progress.setWindowModality(Qt::WindowModal);
     progress.setMinimumDuration(targets.count() > 1 ? 0 : 400);
@@ -1347,6 +1425,7 @@ void PageTimbre::runSeries(SeriesType type, QList<int> targets, const TimbreCorr
     else
         sm->endEditing(_editingSource);
     recompute(); // The page is not updated by its own editions
+    restoreSelection(selectedKey, selectedPositions, anchorKey);
     if (!canceled && (!warnings.isEmpty() || !skipped.isEmpty()))
     {
         QStringList parts;

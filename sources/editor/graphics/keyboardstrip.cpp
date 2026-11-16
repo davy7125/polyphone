@@ -33,6 +33,7 @@
 #include <cmath>
 
 const int KeyboardStrip::TOP_MARGIN = 2;
+const int KeyboardStrip::KEYS_HEIGHT = 19;
 
 KeyboardStrip::KeyboardStrip(QWidget * parent) : QWidget(parent),
     _view(nullptr),
@@ -44,7 +45,8 @@ KeyboardStrip::KeyboardStrip(QWidget * parent) : QWidget(parent),
     _isDark = theme->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT);
     _border = ThemeManager::mix(background, text, 0.25);
     _highlight = theme->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
-    this->setFixedHeight(TOP_MARGIN + 20);
+    _margin = marginColor(background, text);
+    this->setFixedHeight(TOP_MARGIN + KEYS_HEIGHT + 1);
 
     // Same background as the graph above, own cursor (the view changes its cursor when hovering the rectangles)
     this->setBackgroundRole(QPalette::Base);
@@ -63,6 +65,11 @@ QColor KeyboardStrip::keyColor(int key, bool isDark)
     if (isBlackKey(key))
         return isDark ? QColor(30, 30, 30) : QColor(40, 40, 40);
     return isDark ? QColor(210, 210, 210) : QColor(250, 250, 250);
+}
+
+QColor KeyboardStrip::marginColor(const QColor &background, const QColor &text)
+{
+    return ThemeManager::mix(background, text, 0.2);
 }
 
 void KeyboardStrip::paintKeys(QPainter &painter, const QList<Key> &keys, double top, double height, const QColor &border)
@@ -112,7 +119,7 @@ void KeyboardStrip::setPlayedKey(int key, bool isOn)
     update();
 }
 
-bool KeyboardStrip::getScale(double &left, double &keyWidth, int &visibleLeft, int &visibleRight) const
+bool KeyboardStrip::getScale(double &left, double &keyWidth, int &visibleLeft, int &visibleRight, double * sceneLeft) const
 {
     if (_view == nullptr || !_view->isVisible())
         return false;
@@ -129,6 +136,8 @@ bool KeyboardStrip::getScale(double &left, double &keyWidth, int &visibleLeft, i
     int offset = this->mapFromGlobal(viewport->mapToGlobal(QPoint(0, 0))).x();
     left = offset + x0;
     keyWidth = (x1 - x0) / 128;
+    if (sceneLeft != nullptr)
+        *sceneLeft = offset + transform.map(QPointF(_view->sceneRect().left(), 0)).x();
     visibleLeft = qMax(0, offset);
     visibleRight = qMin(this->width(), offset + viewport->width());
     return visibleRight > visibleLeft;
@@ -156,22 +165,24 @@ int KeyboardStrip::velocityAt(QPoint position) const
 void KeyboardStrip::paintEvent(QPaintEvent * event)
 {
     Q_UNUSED(event)
-    double left, keyWidth;
+    double left, keyWidth, sceneLeft;
     int visibleLeft, visibleRight;
-    if (!getScale(left, keyWidth, visibleLeft, visibleRight))
+    if (!getScale(left, keyWidth, visibleLeft, visibleRight, &sceneLeft))
         return;
 
-    // Keys in the visible part of the view
+    // Margin of the view on the left of the first key (labels), then the keys in the visible part of the view
+    QList<Key> keys;
+    if (left - sceneLeft >= 1 && left > visibleLeft)
+        keys << Key { -1, sceneLeft, left, _margin };
     int firstKey = qMax(0, static_cast<int>(std::floor((visibleLeft - left) / keyWidth)));
     int lastKey = qMin(127, static_cast<int>(std::floor((visibleRight - left) / keyWidth)));
-    QList<Key> keys;
     for (int key = firstKey; key <= lastKey; key++)
         keys << Key { key, left + key * keyWidth, left + (key + 1) * keyWidth,
                      _playedKeys.contains(key) ? _highlight : keyColor(key, _isDark) };
 
     QPainter painter(this);
     painter.setClipRect(QRect(visibleLeft, 0, visibleRight - visibleLeft, this->height()));
-    paintKeys(painter, keys, TOP_MARGIN, this->height() - TOP_MARGIN - 1, _border);
+    paintKeys(painter, keys, TOP_MARGIN, KEYS_HEIGHT, _border);
 }
 
 void KeyboardStrip::mousePressEvent(QMouseEvent * event)

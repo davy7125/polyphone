@@ -40,6 +40,7 @@
 const double GraphicsViewRange::WIDTH = 128.0;
 const double GraphicsViewRange::MARGIN = 0.5;
 const double GraphicsViewRange::OFFSET = -0.5;
+const double GraphicsViewRange::LABEL_PADDING = 4;
 
 // Z values (all GraphicsItem being at the top level)
 //   0: grid
@@ -57,6 +58,8 @@ GraphicsViewRange::GraphicsViewRange(QWidget *parent) : QGraphicsView(parent),
     _legendItem2(nullptr),
     _zoomLine(nullptr),
     _keyboard(new KeyboardStrip(this)),
+    _lowestKey(-1),
+    _labelMargin(0),
     _dontRememberScroll(false),
     _keyTriggered(-1),
     _removeIndexOnRelease(false),
@@ -152,7 +155,14 @@ void GraphicsViewRange::initItems()
         text->setPos(OFFSET, 127 - vel);
         _leftLabels << text;
         _lines << line;
+        _velocityLines << line;
     }
+
+    // Width of the velocity labels, written inside the graph
+    double labelWidth = 0;
+    foreach (GraphicsSimpleTextItem * label, _leftLabels)
+        labelWidth = qMax(labelWidth, label->boundingRect().width());
+    _labelMargin = labelWidth + 2 * LABEL_PADDING;
 
     // Legends
     _legendItem = new GraphicsLegendItem(this->font().family());
@@ -170,19 +180,21 @@ void GraphicsViewRange::initItems()
 
 void GraphicsViewRange::updateLabelPosition()
 {
-    // Current rect
+    // Current rect, scene units per pixel horizontally
     QRectF rect = getCurrentRect();
+    double left = qMax(this->sceneRect().left(), rect.x());
+    double pixel = 1.0 / this->transform().m11();
 
     // Update the position of the axis labels (they stay to the left and bottom)
     foreach (GraphicsSimpleTextItem * label, _leftLabels)
-        label->setX(qMax(OFFSET, rect.x()));
+        label->setX(left + LABEL_PADDING * pixel);
     foreach (GraphicsSimpleTextItem * label, _bottomLabels)
         label->setY(qMin(WIDTH + OFFSET, rect.y() + rect.height()));
 
-    // Update the position of the legend (it stays on a corner)
+    // Update the position of the legend (it stays on a corner, after the velocity labels)
     if (_legendItem->isLeft())
     {
-        double posX = 35. * rect.width() / this->width() + qMax(OFFSET, rect.x());
+        double posX = left + (_labelMargin + 5) * pixel;
         _legendItem->setX(posX);
         _legendItem2->setX(posX);
     }
@@ -320,7 +332,7 @@ void GraphicsViewRange::display(IdList ids, bool justSelection)
             _rectangles << item;
         }
 
-        updateLabelPosition();
+        updateMargin();
     }
 
     // Selection
@@ -357,8 +369,11 @@ void GraphicsViewRange::resizeEvent(QResizeEvent * event)
 {
     _dontRememberScroll = true;
     QGraphicsView::resizeEvent(event);
-    fitInView(_displayedRect);
     _dontRememberScroll = false;
+
+    // Same zoom and position, the margin of the velocity labels depending on the width
+    updatePosition();
+    applyZoom();
     updateKeyboardGeometry();
 }
 
@@ -393,7 +408,7 @@ void GraphicsViewRange::mousePressEvent(QMouseEvent *event)
         QPointF p = this->mapToScene(event->pos());
         int key = qRound(p.x());
         int velocity = 127 - qRound(p.y());
-        if (velocity > 0)
+        if (velocity > 0 && key >= 0 && key <= 127) // Not in the margin of the velocity labels
         {
             ContextManager::midi()->processKeyOn(-1, key, velocity);
             _keyTriggered = key;
@@ -402,16 +417,7 @@ void GraphicsViewRange::mousePressEvent(QMouseEvent *event)
     else if (event->button() == Qt::LeftButton || event->button() == Qt::RightButton)
     {
         // Update current position
-        double deltaX = WIDTH - _displayedRect.width();
-        if (deltaX < 0.5)
-            _posX = 0.5;
-        else
-            _posX = (_displayedRect.left() - OFFSET) / deltaX;
-        double deltaY = WIDTH - _displayedRect.height();
-        if (deltaY < 0.5)
-            _posY = 0.5;
-        else
-            _posY = (_displayedRect.top() - OFFSET) / deltaY;
+        updatePosition();
 
         // Remember situation
         _xInit = normalizeX(event->pos().x());
@@ -637,7 +643,12 @@ void GraphicsViewRange::mouseReleaseEvent(QMouseEvent *event)
                     withChanges |= item->saveChanges();
 
             if (withChanges)
+            {
                 _sf2->endEditing("rangeEditor");
+
+                // This page is not prepared again after its own changes
+                updateMargin();
+            }
         }
         else
         {
@@ -844,14 +855,7 @@ void GraphicsViewRange::scrollContentsBy(int dx, int dy)
     _displayedRect = getCurrentRect();
 
     // Limits
-    if (_displayedRect.left() < OFFSET)
-        _displayedRect.setLeft(OFFSET);
-    if (_displayedRect.right() > WIDTH + OFFSET)
-        _displayedRect.setRight(WIDTH + OFFSET);
-    if (_displayedRect.top() < OFFSET)
-        _displayedRect.setTop(OFFSET);
-    if (_displayedRect.bottom() > WIDTH + OFFSET)
-        _displayedRect.setBottom(WIDTH + OFFSET);
+    _displayedRect = _displayedRect.intersected(this->sceneRect());
 
     updateLabelPosition();
 }
@@ -939,19 +943,76 @@ void GraphicsViewRange::zoomDrag()
     else if (_posY > 1)
         _posY = 1;
 
+    applyZoom();
+}
+
+void GraphicsViewRange::applyZoom()
+{
+    // Horizontal extent of the scene: the keys, preceded by a margin for the velocity labels if the lowest key would
+    // be drawn below them at this zoom (the whole content being _zoomX times as wide as the viewport, in which
+    // fitInView keeps 2 pixels on each side)
+    double contentWidth = _zoomX * (viewport()->width() - 4);
+    double sceneLeft = OFFSET;
+    double sceneWidth = WIDTH;
+    if (_lowestKey >= 0 && contentWidth > 2 * _labelMargin && _lowestKey * contentWidth / WIDTH < _labelMargin)
+    {
+        sceneWidth = WIDTH * contentWidth / (contentWidth - _labelMargin);
+        sceneLeft = OFFSET + WIDTH - sceneWidth;
+    }
+
+    _dontRememberScroll = true;
+    this->setSceneRect(sceneLeft, OFFSET, sceneWidth, WIDTH);
+    foreach (QGraphicsRectItem * line, _velocityLines)
+    {
+        QRectF rect = line->rect();
+        line->setRect(sceneLeft - MARGIN, rect.y(), sceneWidth + 2 * MARGIN, rect.height());
+    }
+
     // Application du drag et zoom
-    double etendueX = WIDTH / _zoomX;
-    double offsetX = (WIDTH - etendueX) * _posX + OFFSET;
+    double etendueX = sceneWidth / _zoomX;
+    double offsetX = (sceneWidth - etendueX) * _posX + sceneLeft;
     double etendueY = WIDTH / _zoomY;
     double offsetY = (WIDTH - etendueY) * _posY + OFFSET;
     _displayedRect.setRect(offsetX, offsetY, etendueX, etendueY);
 
     // Mise à jour
-    _dontRememberScroll = true;
     this->fitInView(_displayedRect);
     _dontRememberScroll = false;
     updateLabelPosition();
     _keyboard->update();
+}
+
+void GraphicsViewRange::updateMargin()
+{
+    // The lowest key may require a margin for the velocity labels, or not anymore
+    int lowestKey = -1;
+    foreach (GraphicsRectangleItem * item, _rectangles)
+        if (lowestKey == -1 || item->currentMinKey() < lowestKey)
+            lowestKey = item->currentMinKey();
+    if (lowestKey != _lowestKey)
+    {
+        _lowestKey = lowestKey;
+        updatePosition();
+        applyZoom();
+    }
+    else
+        updateLabelPosition();
+}
+
+void GraphicsViewRange::updatePosition()
+{
+    // Position of the displayed rect in the scene, from 0 (left or top) to 1 (right or bottom)
+    QRectF scene = this->sceneRect();
+    double deltaX = scene.width() - _displayedRect.width();
+    if (deltaX < 0.5)
+        _posX = 0.5;
+    else
+        _posX = qBound(0.0, (_displayedRect.left() - scene.left()) / deltaX, 1.0);
+    double deltaY = scene.height() - _displayedRect.height();
+    if (deltaY < 0.5)
+        _posY = 0.5;
+    else
+        _posY = qBound(0.0, (_displayedRect.top() - scene.top()) / deltaY, 1.0);
 }
 
 void GraphicsViewRange::setZoomLine(double x1Norm, double y1Norm, double x2Norm, double y2Norm)
@@ -1014,10 +1075,9 @@ double GraphicsViewRange::normalizeY(int yPixel)
 
 QRectF GraphicsViewRange::getCurrentRect()
 {
-    QPointF tl(horizontalScrollBar()->value(), verticalScrollBar()->value());
-    QPointF br = tl + viewport()->rect().bottomRight();
-    QTransform mat = transform().inverted();
-    return mat.mapRect(QRectF(tl, br));
+    // Visible part of the scene (the values of the scroll bars ignore the offset centering a scene narrower than the
+    // viewport)
+    return this->mapToScene(viewport()->rect()).boundingRect();
 }
 
 void GraphicsViewRange::playKey(int key, int velocity)

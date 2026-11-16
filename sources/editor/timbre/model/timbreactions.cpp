@@ -54,8 +54,7 @@ bool TimbreActions::prepareCreation(SoundfontManager * sm, EltID idInst, const T
                                     QString &error)
 {
     idInst.typeElement = elementInst;
-    QMap<int, MissingSamplePosition> positions = MissingSampleCreator::getPositions(sm, idInst, settings.velocity,
-                                                                                    settings.includeMuted);
+    QMap<int, MissingSamplePosition> positions = MissingSampleCreator::getPositions(sm, idInst, settings.velocity, true);
     positions.remove(excludedPosition);
     if (positions.contains(key))
     {

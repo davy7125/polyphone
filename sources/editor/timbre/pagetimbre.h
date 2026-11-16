@@ -34,6 +34,7 @@
 #include <functional>
 class TimbreBarsWidget;
 class TimbreVelocityStrip;
+class TimbreDetailWidget;
 class QLabel;
 class QSpinBox;
 class QDoubleSpinBox;
@@ -72,15 +73,12 @@ private slots:
     void onThresholdsChanged();
     void onDisplayChanged();
     void onKeySelected(int key, Qt::KeyboardModifiers modifiers);
-    void onRangeSelected(int firstKey, int lastKey, Qt::KeyboardModifiers modifiers);
-    void onContextMenu(int key, QPoint position);
     void onCreate();
     void onRemove();
     void onReplace();
     void onCorrect();
     void onCorrectLevel();
     void onRender();
-    void onMute();
     void onPropose(int label);
 
 private:
@@ -101,9 +99,11 @@ private:
     void updatePending();
     void selectPositions(const QList<int> &keys, bool notifyTree);
     void readTreeSelection();
+    void restoreSelection(int key, const QList<int> &positions, int anchorKey);
     QList<int> getTargets();
+    int getPosition(int key);
     QString keyName(int key);
-    QString formatDb(double value, int decimals = 1);
+    QString formatDb(double value, int decimals = 1, bool sign = false);
     void runInThread(std::function<void()> function, QString text);
     bool askSharedSamples(const QList<int> &targets, bool &duplicate);
     void runSeries(SeriesType type, QList<int> targets, const TimbreCorrectionParameters &parameters,
@@ -117,6 +117,7 @@ private:
     EltID _idInst;
     int _selectedKey;
     QList<int> _selectedPositions;
+    int _anchorKey; // Root key from which Shift + click selects
     QTimer _recomputeTimer;
     bool _playClickedNotes;
     int _clickedNote;
@@ -144,9 +145,9 @@ private:
     RotatingSpinner * _spinner;
     QLabel * _labelPending;
     TimbreMapWidget * _map;
-    QStackedWidget * _stackDetail; // Graph and text, or a message if no key is selected
+    QStackedWidget * _stackDetail; // Graph and details, or a message if no key is selected
     TimbreBarsWidget * _bars;
-    QLabel * _labelDetail;
+    TimbreDetailWidget * _detail;
     QLabel * _labelNoSelection;
     QPushButton * _buttonCreate, * _buttonRemove, * _buttonReplace, * _buttonCorrect, * _buttonLevel, * _buttonRender;
 };

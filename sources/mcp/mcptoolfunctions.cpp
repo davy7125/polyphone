@@ -652,7 +652,7 @@ static void addInstrumentTools(QList<McpFunction *> &functions)
         "(existing ranges can only shrink, the divisions entirely within the range of a new note being removed). "
         "Instruments with several velocity ranges are refused, unless a velocity is given: only the subset playing "
         "at this velocity is then used and adjusted (divisions not muted, velocity range containing it, not played at "
-        "the release only), as by the timbre view.",
+        "the release only).",
         "Instruments having at least two root keys", instruments,
         R"JSON("keys":{"type":"array","items":{"type":["integer","string"]},"description":"Keys to create (number or name such as \"C#4\"); keys already having a sample are ignored"},
            "max_spacing":{"type":"integer","minimum":1,"maximum":24,"description":"Instead of keys: create the keys needed so that two consecutive root keys are at most this number of semitones apart, evenly spread"},

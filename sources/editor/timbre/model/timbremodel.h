@@ -66,8 +66,6 @@ struct TimbreSettings
     double jump = 6;
     double level = 2.5;
 
-    // Muted divisions are included (the mute follows the selection with the solo on selection)
-    bool includeMuted = false;
 
     // Sample rate of the output
     double outputSampleRate = 48000;
@@ -198,9 +196,9 @@ public:
     static const double WEIGHT_EXPONENT;
     static const double WEIGHT_FLOOR;
 
-    // True if a division of an instrument is in the active subset: playable (not hidden, not muted unless
-    // includeMuted), its velocity range containing the velocity, not played at the release only, with a sample
-    static bool isInSubset(SoundfontManager * sm, EltID idDivision, int velocity, bool includeMuted);
+    // True if a division of an instrument is in the active subset: not hidden (muted or not), its velocity range
+    // containing the velocity, not played at the release only, with a sample
+    static bool isInSubset(SoundfontManager * sm, EltID idDivision, int velocity);
 
     // Compute everything (the analyses not available are started in the background if analyzeNow is false, otherwise
     // computed before)
@@ -227,7 +225,8 @@ public:
     // Comparison of a sound with a reference, by rows
     TimbreComparison compare(const TimbreSpectrum &test, const TimbreSpectrum &reference) const;
 
-    // Sound predicted at a key by the positions around it (for a computed note), excluding a position (-1: none)
+    // Sound predicted at a key by the two closest positions around it, as for a computed note (interpolation mode
+    // whatever the settings), excluding a position (-1: none)
     TimbreSpectrum predict(int key, int excludedPosition = -1, bool * atEdge = nullptr);
 
     // Reference of a position (or sound predicted at a free key) with another mode than the one of the settings

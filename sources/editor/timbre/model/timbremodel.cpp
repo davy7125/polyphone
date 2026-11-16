@@ -175,9 +175,9 @@ void TimbreModel::clear()
     _engine = nullptr;
 }
 
-bool TimbreModel::isInSubset(SoundfontManager * sm, EltID idDivision, int velocity, bool includeMuted)
+bool TimbreModel::isInSubset(SoundfontManager * sm, EltID idDivision, int velocity)
 {
-    return MissingSampleCreator::isInSubset(sm, idDivision, velocity, includeMuted);
+    return MissingSampleCreator::isInSubset(sm, idDivision, velocity, true);
 }
 
 void TimbreModel::readSubset(SoundfontManager * sm)
@@ -186,7 +186,7 @@ void TimbreModel::readSubset(SoundfontManager * sm)
     foreach (int index, sm->getSiblings(idDivision))
     {
         idDivision.indexElt2 = index;
-        if (!isInSubset(sm, idDivision, _settings.velocity, _settings.includeMuted))
+        if (!isInSubset(sm, idDivision, _settings.velocity))
             continue;
         EltID idSmpl(elementSmpl, idDivision.indexSf2, sm->get(idDivision, champ_sampleID).wValue);
 
@@ -587,8 +587,10 @@ TimbreSpectrum TimbreModel::computeReference(int positionKey, bool &atEdge, int 
 
 TimbreSpectrum TimbreModel::predict(int key, int excludedPosition, bool * atEdge)
 {
+    // Always from the two closest root keys, as the creation does (MissingSampleCreator::createJob), whatever the
+    // reference chosen in the settings
     bool edge = false;
-    TimbreSpectrum result = computeReference(key, edge, excludedPosition);
+    TimbreSpectrum result = computeReferenceWith(key, TimbreSettings::REFERENCE_INTERPOLATION, 0, edge, excludedPosition);
     if (atEdge != nullptr)
         *atEdge = edge;
     return result;

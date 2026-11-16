@@ -66,6 +66,9 @@ protected:
 
 private:
     void initItems();
+    void applyZoom();
+    void updatePosition();
+    void updateMargin();
     void updateKeyboardGeometry();
     void updateLabelPosition();
     void updateHover(QPoint mousePos);
@@ -83,9 +86,13 @@ private:
     GraphicsLegendItem * _legendItem;
     GraphicsLegendItem2 * _legendItem2;
     GraphicsZoomLine * _zoomLine;
-    QList<QGraphicsRectItem *> _lines;
+    QList<QGraphicsRectItem *> _lines, _velocityLines;
     QMap<int, GraphicsKey*> _mapGraphicsKeys;
     KeyboardStrip * _keyboard; // Between the viewport and the horizontal scroll bar
+
+    // Margin on the left of the keys for the velocity labels, only when the lowest key would be drawn below them
+    int _lowestKey; // -1 if no divisions
+    double _labelMargin; // Pixels
 
     // Various
     bool _dontRememberScroll;
@@ -112,6 +119,7 @@ private:
     static const double WIDTH;
     static const double MARGIN;
     static const double OFFSET;
+    static const double LABEL_PADDING;
     QColor _lineColor;
     QColor _textColor;
 };

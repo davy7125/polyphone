@@ -437,6 +437,8 @@ set(POLYPHONE_APP_FILES
     editor/timbre/pagetimbre.h
     editor/timbre/timbrebarswidget.cpp
     editor/timbre/timbrebarswidget.h
+    editor/timbre/timbredetailwidget.cpp
+    editor/timbre/timbredetailwidget.h
     editor/timbre/timbremapwidget.cpp
     editor/timbre/timbremapwidget.h
     editor/timbre/timbrepalette.cpp

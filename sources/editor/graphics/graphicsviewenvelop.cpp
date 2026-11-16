@@ -469,16 +469,12 @@ void GraphicsViewEnvelop::paintEvent(QPaintEvent *event)
         painter.drawImage(width - qMin(width, width - posReleaseLine) / 2 - _imageNoteOff.width() / 2,
                           15, _imageNoteOff);
 
-    // Zoom line
-    if (_zoomFlag)
+    // Zoom line, horizontal since only the horizontal axis is zoomed
+    if (_zoomFlag && _x != _xInit)
     {
-        // Zoom line
-        if (_x != _xInit || _y != _yInit)
-        {
-            painter.setPen(QPen(_redColor, 1.0, Qt::DashLine));
-            painter.drawLine(QPointF(static_cast<double>(_xInit * this->width()), static_cast<double>(_yInit * this->height())),
-                             QPointF(static_cast<double>(_x * this->width()), static_cast<double>(_y * this->height())));
-        }
+        painter.setPen(_zoomLinePen);
+        painter.drawLine(QPointF(_xInit * this->width(), _yInit * this->height()),
+                         QPointF(_x * this->width(), _yInit * this->height()));
     }
 
     // Values of the hovered point
@@ -606,7 +602,7 @@ void GraphicsViewEnvelop::mouseMoveEvent(QMouseEvent *event)
     }
     else if (_zoomFlag)
     {
-        this->setCursor(Qt::SizeAllCursor);
+        this->setCursor(Qt::ClosedHandCursor);
         this->zoom(event->pos());
     }
     else if (_dragFlag)
