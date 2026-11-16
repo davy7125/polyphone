@@ -37,6 +37,8 @@ Diese Angaben sind in Spalten unter einer Kopfzeile ausgerichtet. Die Schaltflä
 * Anzahl der unterschiedlichen Tastenbereiche,
 * Anzahl der unterschiedlichen Anschlagsbereiche.
 
+Diese Angaben werden unter dem Namen jedes Elements angezeigt. Sie können für jede Liste einzeln mit den Optionen :guilabel:`Sample-Details`, :guilabel:`Instrument-Details` und :guilabel:`Preset-Details` des Menüs :guilabel:`Anzeige` ausgeblendet werden: Jedes Element belegt dann nur eine Zeile.
+
 
 ## Sortier- und Suchfunktionen {#doc_filter}
 

@@ -37,6 +37,8 @@ Questi dettagli sono allineati in colonne sotto un'intestazione. Il pulsante ![V
 * numero di intervalli di note distinti,
 * numero di intervalli di velocità distinti.
 
+Queste informazioni sono mostrate sotto il nome di ogni elemento. Possono essere nascoste elenco per elenco con le opzioni :guilabel:`Dettagli dei campioni`, :guilabel:`Dettagli degli strumenti` e :guilabel:`Dettagli dei preset` del menu :guilabel:`Visualizzazione`: ogni elemento occupa allora una sola riga.
+
 
 ## Funzioni di ordinamento e ricerca {#doc_filter}
 

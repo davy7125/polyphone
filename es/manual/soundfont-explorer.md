@@ -37,6 +37,8 @@ Estos detalles se alinean en columnas bajo un encabezado. El botón ![Visualizac
 * número de rangos de notas distintos,
 * número de rangos de velocidad distintos.
 
+Esta información se muestra debajo del nombre de cada elemento. Puede ocultarse lista por lista con las opciones :guilabel:`Detalles de las muestras`, :guilabel:`Detalles de los instrumentos` y :guilabel:`Detalles de los conjuntos` del menú :guilabel:`Visualización`: cada elemento ocupa entonces una sola línea.
+
 
 ## Funciones de ordenación y búsqueda {#doc_filter}
 

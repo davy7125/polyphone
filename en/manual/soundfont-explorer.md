@@ -37,6 +37,8 @@ These details are aligned in columns under a header. The ![Display](images/toolb
 * number of distinct key ranges,
 * number of distinct velocity ranges.
 
+This information is displayed below the name of each element. It can be hidden list by list with the :guilabel:`Sample details`, :guilabel:`Instrument details` and :guilabel:`Preset details` options of the :guilabel:`Display` menu: each element then takes up a single line.
+
 
 ## Sort and search functions {#doc_filter}
 

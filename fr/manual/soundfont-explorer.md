@@ -37,6 +37,8 @@ Ces détails sont alignés en colonnes sous un en-tête. Le bouton ![Affichage](
 * nombre d'étendues de notes distinctes,
 * nombre d'étendues de vélocités distinctes.
 
+Ces informations sont affichées sous le nom de chaque élément. Elles peuvent être masquées liste par liste avec les options :guilabel:`Détails des échantillons`, :guilabel:`Détails des instruments` et :guilabel:`Détails des ensembles` du menu :guilabel:`Affichage` : chaque élément tient alors sur une seule ligne.
+
 
 ## Fonctions de tri et de recherche {#doc_filter}
 

@@ -37,6 +37,8 @@ Esses detalhes ficam alinhados em colunas sob um cabeçalho. O botão ![Visualiz
 * número de alcances de notas distintos,
 * número de alcances de velocidade distintos.
 
+Essas informações são exibidas abaixo do nome de cada elemento. Elas podem ser ocultadas lista por lista com as opções :guilabel:`Detalhes das amostras`, :guilabel:`Detalhes dos instrumentos` e :guilabel:`Detalhes das predefinições` do menu :guilabel:`Visualização`: cada elemento ocupa então uma única linha.
+
 
 ## Funções de ordenação e de pesquisa {#doc_filter}
 
