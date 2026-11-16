@@ -283,9 +283,7 @@ Die Ansicht misst und schlägt vor; nichts wird automatisch angewendet.
 Die Ansicht zeigt, was bei dem oben links gewählten Anschlag gespielt wird (standardmäßig 100, danach der zuletzt verwendete).
 Die Leiste daneben zeigt die Anschlagsebenen des Instruments: Ein Klick auf eine Ebene wählt den Anschlag in ihrer Mitte.
 
-Berücksichtigt werden die Aufteilungen, die bei diesem Anschlag spielen, nicht [stummgeschaltet](#doc_solo) sind und nicht nur beim Loslassen der Taste gespielt werden (Wiedergabemodus „Release“).
-Das Stummschalten einer Aufteilung ist somit der Weg, sie aus der Ansicht auszuschließen, zum Beispiel ein Geräusch oder einen Release-Klang.
-Ist [Solo auf Auswahl](manual/soundfont-editor/tree.md#doc_menu) aktiviert, folgen die Stummschaltungen der Auswahl und werden nicht berücksichtigt.
+Berücksichtigt werden die Aufteilungen, die bei diesem Anschlag spielen und nicht nur beim Loslassen der Taste gespielt werden (Wiedergabemodus „Release“), ob sie [stummgeschaltet](#doc_solo) sind oder nicht.
 Die Aufteilungen, die dieselbe Taste spielen (Stereopaar, Ebenen), werden zusammengefasst: Ihre Leistungen werden addiert.
 
 Eine **Basisnote** fasst alle Aufteilungen mit dieser Basisnote zusammen, gegebenenfalls mit mehreren Tastenbereichen.
@@ -329,8 +327,9 @@ Transposition
 Konfidenz
 : Anteil der Leistung, der zuverlässig gemessen wird.
 
-Das Menü :guilabel:`Optionen` ermöglicht außerdem, die gesamte Tastatur oder nur eine Spalte pro Basisnote anzuzeigen, in Stufen der Schwellenwerte zu färben (Abweichungen innerhalb der Toleranz bleiben neutral) und die angeklickten Tasten zu spielen.
-Die Tastatur unter der Karte spielt das Instrument mit dem Anschlag der Ansicht.
+Das Menü :guilabel:`Optionen` ermöglicht außerdem, nur eine Spalte pro Basisnote anzuzeigen, in Stufen der Schwellenwerte zu färben (Abweichungen innerhalb der Toleranz bleiben neutral) und die angeklickten Tasten zu spielen.
+Die Tastatur unten an der Karte spielt das Instrument mit dem Anschlag der Ansicht.
+Durch Gedrückthalten der rechten Maustaste wird die horizontale Achse um den gewählten Punkt herum gedehnt, durch Gedrückthalten der linken Maustaste wird sie verschoben.
 
 
 ### Referenz und Entscheidungen
@@ -391,13 +390,22 @@ Dynamikumfang
 ### Details und Aktionen
 
 
-Ein Klick auf eine Taste zeigt unter der Karte, was sie spielt: die Samples mit ihrer Transposition, ihrer Dämpfung und ihrem Filter, den Dauerfaktor, die Tonhöhe, die Abweichungen der Basisnote und was ihr Entfernen ändern würde.
-Das Balkendiagramm vergleicht die gehörten Pegel mit der Referenz oder mit der berechneten Note, die eine Taste ohne Sample erhalten könnte (eine gestrichelte Spalte auf der Karte).
+Ein Klick auf eine Taste zeigt unter der Karte, was sie spielt.
+Der Titel nennt die Taste, die Basisnote, die sie spielt, und die Einstufung dieser Basisnote; die folgenden Abschnitte werden mit einem Klick auf ihren Titel ein- oder ausgeklappt, ein eingeklappter Abschnitt zeigt seinen Hauptwert:
+
+* :guilabel:`Abweichung von der Referenz`: Pegel, Klangfarbe und Konfidenz der Basisnote (▲ ▼, wenn der Pegel abweicht),
+* :guilabel:`Übergänge`: Pegel- und Klangfarbensprünge zur vorherigen und zur nächsten Taste (+ bei einem Bruch),
+* :guilabel:`Rendering im Vergleich zum Modell`: nach der Aktion :guilabel:`Durch Rendern prüfen`,
+* :guilabel:`Falls entfernt`: größte Abweichung über die Tasten der Basisnote und Sprung am neuen Übergang zwischen ihren Nachbarn,
+* :guilabel:`Samples`: Transposition, Dämpfung und Filter jedes Samples,
+* :guilabel:`Messwerte`: Pegel, Helligkeit, spektrale Steigung, ungerade / gerade Harmonische, Rauschen, Intonation, Loop und Dauerfaktor des Gehörten.
+
+Das Balkendiagramm vergleicht die gehörten Pegel auf einer Basisnote mit der Referenz und auf einer anderen Taste mit der berechneten Note, die diese Taste erhalten könnte (eine gestrichelte Spalte auf der Karte).
 
 Ein Klick auf eine Basisnote wählt ihre Aufteilungen in der [Baumansicht](manual/soundfont-editor/tree.md) aus, und die Auswahl von Aufteilungen in der Baumansicht wählt ihre Basisnoten aus.
-Mehrere Basisnoten können mit :kbd:`Ctrl` oder :kbd:`Shift` ausgewählt werden oder indem die Maus über Tasten gezogen wird.
+Mehrere Basisnoten können ausgewählt werden, indem Sie die Taste :kbd:`Ctrl` gedrückt halten und nacheinander auf sie klicken, oder mit der Taste :kbd:`Shift`: Alle Basisnoten zwischen der zuerst angeklickten und der nächsten werden ausgewählt.
 
-Die Buttons rechts und das Kontextmenü der Karte wirken auf die ausgewählten Basisnoten:
+Die Buttons rechts wirken auf die ausgewählten Basisnoten:
 
 Hier eine Note erstellen...
 : Auf einer Taste ohne Sample: Die nächstgelegene Basisnote wird transponiert, und die Pegel ihrer Harmonischen werden anhand einer zweiten Basisnote interpoliert (oder extrapoliert). Die verwendeten Basisnoten können gewählt werden, und eine Warnung erscheint, wenn die Taste weit von ihnen entfernt ist. Die angrenzenden Tastenbereiche werden angepasst; die Aufteilungen, die vollständig im Bereich der neuen Note liegen, werden entfernt.
@@ -415,10 +423,7 @@ Pegel korrigieren
 : Die Dämpfung der Aufteilungen wird so geändert, dass die Pegelabweichung null wird (eine Dämpfung kann nicht negativ sein).
 
 Durch Rendern prüfen
-: Die Taste wird von der Sound-Engine gespielt, und die Harmonischen des Ergebnisses werden gemessen: Sie werden im Balkendiagramm angezeigt, um die Berechnung der Ansicht zu überprüfen.
-
-Diese Aufteilungen stummschalten
-: Im Kontextmenü: schließt die Aufteilungen aus der Ansicht aus.
+: Die Taste wird von der Sound-Engine gespielt, und die Harmonischen des Ergebnisses werden gemessen: Sie werden im Balkendiagramm angezeigt und im Abschnitt :guilabel:`Rendering im Vergleich zum Modell` mit dem Modell verglichen, um die Berechnung der Ansicht zu überprüfen.
 
 Das Menü :guilabel:`Vorschlagen` wählt alle Basisnoten (oder Übergänge) mit einer Einstufung aus und wendet nach einer Bestätigung die entsprechende Aktion auf sie an: die zu korrigierenden Basisnoten korrigieren, die zu verschiedenen ersetzen, die redundanten entfernen, an den Brüchen berechnete Noten erstellen, die abweichenden Pegel korrigieren.
 Sie werden von der schlechtesten bis zur am wenigsten schlechten bearbeitet, wobei die Referenzen nach jeder Aktion neu berechnet werden: Eine fehlerhafte Basisnote verfälscht auch die Referenz ihrer Nachbarn, die halb fehlerhaft erscheinen, solange sie nicht korrigiert ist.

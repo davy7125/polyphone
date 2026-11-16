@@ -283,9 +283,7 @@ La vista misura e propone, nulla viene applicato automaticamente.
 La vista mostra ciò che viene suonato alla velocità scelta in alto a sinistra (100 per impostazione predefinita, poi l'ultima usata).
 La barra accanto mostra i livelli di velocità dello strumento: un clic su uno di essi seleziona la velocità al suo centro.
 
-Le divisioni prese in considerazione sono quelle che suonano a questa velocità, che non sono [silenziate](#doc_solo) e che non vengono suonate solo al rilascio del tasto (modalità di riproduzione «release»).
-Silenziare una divisione è quindi il modo per escluderla dalla vista, ad esempio un rumore o un suono di release.
-Quando il [solo su selezione](manual/soundfont-editor/tree.md#doc_menu) è attivo, il silenziamento segue la selezione e non viene preso in considerazione.
+Le divisioni prese in considerazione sono quelle che suonano a questa velocità e che non vengono suonate solo al rilascio del tasto (modalità di riproduzione «release»), che siano [silenziate](#doc_solo) o no.
 Le divisioni che suonano la stessa nota (coppia stereo, strati) vengono combinate: le loro potenze si sommano.
 
 Una **nota di base** raggruppa tutte le divisioni che hanno questa nota di base, eventualmente con più intervalli di note.
@@ -329,8 +327,9 @@ Trasposizione
 Affidabilità
 : Parte della potenza misurata in modo affidabile.
 
-Il menu :guilabel:`Opzioni` permette anche di mostrare la tastiera intera o una sola colonna per nota di base, di colorare a fasce secondo le soglie (gli scarti entro la tolleranza restano neutri) e di suonare le note cliccate.
-La tastiera sotto la mappa suona lo strumento alla velocità della vista.
+Il menu :guilabel:`Opzioni` permette anche di mostrare una sola colonna per nota di base, di colorare a fasce secondo le soglie (gli scarti entro la tolleranza restano neutri) e di suonare le note cliccate.
+La tastiera in fondo alla mappa suona lo strumento alla velocità della vista.
+Tenendo premuto il tasto destro si dilata l'asse orizzontale attorno al punto selezionato, tenendo premuto il tasto sinistro lo si sposta.
 
 
 ### Riferimento e decisioni
@@ -391,13 +390,22 @@ Gamma dinamica
 ### Dettagli e azioni
 
 
-Un clic su una nota mostra sotto la mappa cosa suona: i campioni con la loro trasposizione, attenuazione e filtro, il fattore di durata, l'intonazione, gli scarti della nota di base e cosa cambierebbe rimuovendola.
-Il grafico a barre confronta i livelli percepiti con il riferimento, o con la nota calcolata che potrebbe ricevere una nota senza campione (una colonna tratteggiata sulla mappa).
+Un clic su una nota mostra sotto la mappa cosa suona.
+Il titolo indica la nota, la nota di base che la suona e l'etichetta di questa nota di base; le sezioni seguenti si chiudono o si aprono con un clic sul loro titolo, e una sezione chiusa mostra il suo valore principale:
+
+* :guilabel:`Scarto dal riferimento`: livello, timbro e affidabilità della nota di base (▲ ▼ se il livello si scosta),
+* :guilabel:`Giunzioni`: salti di livello e di timbro con la nota precedente e con quella successiva (+ su una discontinuità),
+* :guilabel:`Rendering rispetto al modello`: dopo l'azione :guilabel:`Verifica tramite rendering`,
+* :guilabel:`Se rimossa`: scarto massimo sulle note della nota di base e salto alla nuova giunzione tra le sue vicine,
+* :guilabel:`Campioni`: trasposizione, attenuazione e filtro di ogni campione,
+* :guilabel:`Misure`: livello, brillantezza, pendenza spettrale, armoniche dispari / pari, rumore, intonazione, loop e fattore di durata di ciò che si sente.
+
+Il grafico a barre confronta i livelli percepiti con il riferimento su una nota di base o, su un'altra nota, con la nota calcolata che questa potrebbe ricevere (una colonna tratteggiata sulla mappa).
 
 Un clic su una nota di base seleziona le sue divisioni nell'[albero](manual/soundfont-editor/tree.md), e selezionare divisioni nell'albero seleziona le loro note di base.
-È possibile selezionare più note di base con :kbd:`Ctrl` o :kbd:`Shift`, oppure trascinando il mouse sulle note.
+È possibile selezionare più note di base tenendo premuto il tasto :kbd:`Ctrl` e facendo clic su di esse una a una, oppure con il tasto :kbd:`Shift`: vengono selezionate tutte le note di base comprese tra la prima cliccata e la successiva.
 
-I pulsanti a destra e il menu contestuale della mappa si applicano alle note di base selezionate:
+I pulsanti a destra si applicano alle note di base selezionate:
 
 Crea una nota qui...
 : Su una nota senza campione: la nota di base più vicina viene trasposta e i livelli delle sue armoniche vengono interpolati (o estrapolati) a partire da una seconda nota di base. Le note di base usate possono essere scelte, e compare un avviso quando la nota è lontana da esse. Gli intervalli di note circostanti vengono adattati; le divisioni interamente comprese nell'intervallo della nuova nota vengono rimosse.
@@ -415,10 +423,7 @@ Correggi il livello
 : L'attenuazione delle divisioni viene modificata in modo che lo scarto di livello diventi nullo (un'attenuazione non può essere negativa).
 
 Verifica tramite rendering
-: La nota viene suonata dal motore sonoro e le armoniche del risultato vengono misurate: sono mostrate sul grafico a barre per verificare il calcolo della vista.
-
-Silenzia queste divisioni
-: Nel menu contestuale: esclude le divisioni dalla vista.
+: La nota viene suonata dal motore sonoro e le armoniche del risultato vengono misurate: sono mostrate sul grafico a barre e confrontate con il modello nella sezione :guilabel:`Rendering rispetto al modello`, per verificare il calcolo della vista.
 
 Il menu :guilabel:`Proponi` seleziona tutte le note di base (o le giunzioni) che hanno un'etichetta e applica loro l'azione corrispondente, dopo una conferma: correggere le note di base da correggere, sostituire quelle troppo diverse, rimuovere quelle ridondanti, creare note calcolate nelle discontinuità, correggere i livelli che si discostano.
 Vengono elaborate dalla peggiore alla meno problematica, e i riferimenti vengono ricalcolati dopo ogni azione: una nota di base difettosa altera anche il riferimento delle sue note vicine, che sembrano difettose a metà finché non viene corretta.

@@ -283,9 +283,7 @@ A visualização mede e propõe; nada é aplicado automaticamente.
 A visualização mostra o que é tocado na velocidade escolhida no canto superior esquerdo (100 por padrão, depois a última usada).
 A barra ao lado mostra as camadas de velocidade do instrumento: um clique em uma camada seleciona a velocidade no seu meio.
 
-As divisões consideradas são aquelas que tocam nessa velocidade, que não estão [silenciadas](#doc_solo) e que não são tocadas apenas quando a tecla é solta (modo de reprodução “release”).
-Silenciar uma divisão é, portanto, a maneira de excluí-la da visualização, por exemplo um ruído ou um som de release.
-Quando o [solo na seleção](manual/soundfont-editor/tree.md#doc_menu) está ativado, os silenciamentos seguem a seleção e não são levados em conta.
+As divisões consideradas são aquelas que tocam nessa velocidade e que não são tocadas apenas quando a tecla é solta (modo de reprodução “release”), estejam [silenciadas](#doc_solo) ou não.
 As divisões que tocam a mesma nota (par estéreo, camadas) são combinadas: suas potências se somam.
 
 Uma **nota base** reúne todas as divisões que têm essa nota base, eventualmente com vários alcances de notas.
@@ -329,8 +327,9 @@ Transposição
 Confiança
 : Parte da potência medida de forma confiável.
 
-O menu :guilabel:`Opções` também permite exibir o teclado inteiro ou apenas uma coluna por nota base, colorir em patamares conforme os limiares (os desvios dentro da tolerância ficando neutros) e tocar as notas clicadas.
-O teclado abaixo do mapa toca o instrumento na velocidade da visualização.
+O menu :guilabel:`Opções` também permite exibir apenas uma coluna por nota base, colorir em patamares conforme os limiares (os desvios dentro da tolerância ficando neutros) e tocar as notas clicadas.
+O teclado na parte inferior do mapa toca o instrumento na velocidade da visualização.
+Manter o clique direito pressionado dilata o eixo horizontal em torno do ponto selecionado, e manter o clique esquerdo pressionado o desloca.
 
 
 ### Referência e decisões
@@ -391,13 +390,22 @@ Faixa dinâmica
 ### Detalhes e ações
 
 
-Um clique em uma nota mostra abaixo do mapa o que ela toca: as amostras com sua transposição, atenuação e filtro, o fator de duração, a altura, os desvios da nota base e o que sua remoção mudaria.
-O gráfico de barras compara os níveis ouvidos com a referência, ou com a nota calculada que uma nota sem amostra poderia receber (uma coluna tracejada no mapa).
+Um clique em uma nota mostra abaixo do mapa o que ela toca.
+O título indica a nota, a nota base que a toca e o rótulo dessa nota base; as seções seguintes são recolhidas ou expandidas com um clique em seu título, e uma seção recolhida mostra seu valor principal:
+
+* :guilabel:`Desvio em relação à referência`: nível, timbre e confiança da nota base (▲ ▼ se o nível se desvia),
+* :guilabel:`Junções`: saltos de nível e de timbre com as notas anterior e seguinte (+ em uma ruptura),
+* :guilabel:`Renderização comparada ao modelo`: após a ação :guilabel:`Verificar por renderização`,
+* :guilabel:`Se removida`: maior desvio nas notas da nota base e salto na nova junção entre suas vizinhas,
+* :guilabel:`Amostras`: transposição, atenuação e filtro de cada amostra,
+* :guilabel:`Medidas`: nível, brilho, inclinação espectral, harmônicos ímpares / pares, ruído, afinação, loop e fator de duração do que é ouvido.
+
+O gráfico de barras compara os níveis ouvidos com a referência em uma nota base ou, em outra nota, com a nota calculada que ela poderia receber (uma coluna tracejada no mapa).
 
 Um clique em uma nota base seleciona suas divisões na [árvore](manual/soundfont-editor/tree.md), e selecionar divisões na árvore seleciona suas notas base.
-Várias notas base podem ser selecionadas com :kbd:`Ctrl` ou :kbd:`Shift`, ou arrastando o mouse sobre as notas.
+Várias notas base podem ser selecionadas mantendo a tecla :kbd:`Ctrl` pressionada e clicando nelas uma a uma, ou com a tecla :kbd:`Shift`: todas as notas base entre a primeira clicada e a seguinte são selecionadas.
 
-Os botões à direita e o menu de contexto do mapa se aplicam às notas base selecionadas:
+Os botões à direita se aplicam às notas base selecionadas:
 
 Criar uma nota aqui...
 : Em uma nota sem amostra: a nota base mais próxima é transposta e os níveis de seus harmônicos são interpolados (ou extrapolados) a partir de uma segunda nota base. As notas base usadas podem ser escolhidas, e um aviso é exibido quando a nota está longe delas. Os alcances de notas ao redor são ajustados; as divisões inteiramente contidas no alcance da nova nota são removidas.
@@ -415,10 +423,7 @@ Corrigir o nível
 : A atenuação das divisões é alterada para que o desvio de nível se torne zero (uma atenuação não pode ser negativa).
 
 Verificar por renderização
-: A nota é tocada pelo motor de som e os harmônicos do resultado são medidos: eles são exibidos no gráfico de barras para verificar o cálculo da visualização.
-
-Silenciar estas divisões
-: No menu de contexto: exclui as divisões da visualização.
+: A nota é tocada pelo motor de som e os harmônicos do resultado são medidos: eles são exibidos no gráfico de barras e comparados ao modelo na seção :guilabel:`Renderização comparada ao modelo`, para verificar o cálculo da visualização.
 
 O menu :guilabel:`Propor` seleciona todas as notas base (ou junções) que têm um rótulo e aplica a elas a ação correspondente, após uma confirmação: corrigir as notas base a corrigir, substituir as diferentes demais, remover as redundantes, criar notas calculadas nas rupturas, corrigir os níveis que se desviam.
 Elas são processadas da pior para a menos ruim, com as referências recalculadas após cada ação: uma nota base defeituosa também distorce a referência de suas vizinhas, que parecem meio defeituosas enquanto ela não for corrigida.

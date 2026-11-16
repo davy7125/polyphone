@@ -283,9 +283,7 @@ The view measures and proposes, nothing is applied automatically.
 The view shows what is played at the velocity chosen at the top left (100 by default, then the last one used).
 The bar next to it shows the velocity layers of the instrument: a click on a layer selects the velocity in its middle.
 
-The divisions taken into account are those playing at this velocity, that are not [muted](#doc_solo) and that are not played only when the key is released (sample mode “release”).
-Muting a division is thus the way to exclude it from the view, for instance a noise or a release sound.
-When the [solo on selection](manual/soundfont-editor/tree.md#doc_menu) is enabled, the mutes follow the selection and are not taken into account.
+The divisions taken into account are those playing at this velocity and that are not played only when the key is released (sample mode “release”), whether they are [muted](#doc_solo) or not.
 The divisions playing the same key (stereo pair, layers) are combined: their powers are added.
 
 A **root key** gathers all the divisions having this root key, possibly with several key ranges.
@@ -329,8 +327,9 @@ Transposition
 Confidence
 : Part of the power that is reliably measured.
 
-The menu :guilabel:`Options` also allows displaying the whole keyboard or only one column per root key, coloring by steps of the thresholds (the deviations within the tolerance being neutral), and playing the clicked keys.
-The keyboard below the map plays the instrument at the velocity of the view.
+The menu :guilabel:`Options` also allows displaying only one column per root key, coloring by steps of the thresholds (the deviations within the tolerance being neutral), and playing the clicked keys.
+The keyboard at the bottom of the map plays the instrument at the velocity of the view.
+Maintaining the right click dilates the horizontal axis around the selected point, and maintaining the left click moves it.
 
 
 ### Reference and decisions
@@ -391,13 +390,22 @@ Dynamic range
 ### Details and actions
 
 
-A click on a key shows below the map what it plays: the samples with their transposition, attenuation and filter, the duration factor, the pitch, the deviations of the root key and what its removal would change.
-The bar chart compares the levels heard with the reference, or with the computed note that a key without sample could receive (a dashed column on the map).
+A click on a key shows below the map what it plays.
+The title gives the key, the root key playing it and the label of this root key; the sections below are folded or unfolded with a click on their title, a folded section giving its main value:
+
+* :guilabel:`Deviation from the reference`: level, timbre and confidence of the root key (▲ ▼ if the level deviates),
+* :guilabel:`Junctions`: level and timbre jumps with the previous and the next keys (+ on a break),
+* :guilabel:`Rendering against the model`: after the action :guilabel:`Check by rendering`,
+* :guilabel:`If removed`: largest deviation over the keys of the root key and jump at the new junction between its neighbors,
+* :guilabel:`Samples`: transposition, attenuation and filter of each sample,
+* :guilabel:`Measures`: level, brightness, spectral slope, odd / even ranks, noise, tuning, loop and duration factor of what is heard.
+
+The bar chart compares the levels heard with the reference on a root key or, on another key, with the computed note that this key could receive (a dashed column on the map).
 
 A click on a root key selects its divisions in the [tree](manual/soundfont-editor/tree.md), and selecting divisions in the tree selects their root keys.
-Several root keys can be selected with :kbd:`Ctrl` or :kbd:`Shift`, or by dragging the mouse over keys.
+Several root keys can be selected by maintaining the key :kbd:`Ctrl` and clicking on them one by one, or with the key :kbd:`Shift`: all root keys between the first one being clicked and the next one are selected.
 
-The buttons on the right and the contextual menu of the map apply to the selected root keys:
+The buttons on the right apply to the selected root keys:
 
 Create a note here...
 : On a key without sample: the closest root key is transposed and the levels of its harmonics are interpolated (or extrapolated) from a second root key. The root keys used can be chosen, and a warning is shown when the key is far from them. The key ranges around are adjusted; the divisions entirely within the range of the new note are removed.
@@ -415,10 +423,7 @@ Correct the level
 : The attenuation of the divisions is changed so that the level deviation becomes zero (an attenuation cannot be negative).
 
 Check by rendering
-: The key is played by the sound engine and the harmonics of the result are measured: they are shown on the bar chart for checking the computation of the view.
-
-Mute these divisions
-: In the contextual menu: excludes the divisions from the view.
+: The key is played by the sound engine and the harmonics of the result are measured: they are shown on the bar chart and compared to the model in the section :guilabel:`Rendering against the model`, for checking the computation of the view.
 
 The menu :guilabel:`Propose` selects all root keys (or junctions) having a label and applies the corresponding action to them, after a confirmation: correct the root keys to correct, replace those too different, remove the redundant ones, create computed notes at the breaks, correct the deviating levels.
 They are processed from the worst to the least bad, the references being computed again after each action: a defective root key also distorts the reference of its neighbors, which look half defective until it is corrected.

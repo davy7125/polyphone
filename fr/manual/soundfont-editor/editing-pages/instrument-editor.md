@@ -283,9 +283,7 @@ La vue mesure et propose, rien n'est appliqué automatiquement.
 La vue montre ce qui est joué à la vélocité choisie en haut à gauche (100 par défaut, puis la dernière utilisée).
 La barre voisine montre les couches de vélocité de l'instrument&nbsp;: un clic sur une couche choisit la vélocité en son milieu.
 
-Les divisions prises en compte sont celles qui jouent à cette vélocité, qui ne sont pas [muettes](#doc_solo) et qui ne sont pas jouées seulement au relâchement de la touche (mode de lecture «&nbsp;relâchement&nbsp;»).
-Rendre une division muette est donc le moyen de l'exclure de la vue, par exemple un bruit ou un son de relâchement.
-Quand le [solo sur sélection](manual/soundfont-editor/tree.md#doc_menu) est activé, les divisions muettes suivent la sélection et ne sont pas prises en compte.
+Les divisions prises en compte sont celles qui jouent à cette vélocité et qui ne sont pas jouées seulement au relâchement de la touche (mode de lecture «&nbsp;relâchement&nbsp;»), qu'elles soient [muettes](#doc_solo) ou non.
 Les divisions jouant une même note (paire stéréo, couches) sont combinées&nbsp;: leurs puissances s'additionnent.
 
 Une **note de base** regroupe toutes les divisions ayant cette note de base, éventuellement avec plusieurs étendues de notes.
@@ -329,8 +327,9 @@ Transposition
 Confiance
 : Part de la puissance mesurée de façon sûre.
 
-Le menu :guilabel:`Options` permet aussi d'afficher le clavier entier ou une seule colonne par note de base, de colorer par paliers des seuils (les écarts dans la tolérance étant neutres), et de jouer les notes cliquées.
-Le clavier sous la carte joue l'instrument à la vélocité de la vue.
+Le menu :guilabel:`Options` permet aussi d'afficher une seule colonne par note de base, de colorer par paliers des seuils (les écarts dans la tolérance étant neutres), et de jouer les notes cliquées.
+Le clavier en bas de la carte joue l'instrument à la vélocité de la vue.
+Maintenir le clic droit dilate l'axe horizontal autour du point de départ, maintenir le clic gauche le déplace.
 
 
 ### Référence et décisions
@@ -391,13 +390,22 @@ Dynamique
 ### Détail et actions
 
 
-Un clic sur une note montre sous la carte ce qu'elle joue&nbsp;: les échantillons avec leur transposition, leur atténuation et leur filtre, le facteur de durée, la hauteur, les écarts de la note de base et ce que changerait sa suppression.
-Le graphique compare les niveaux entendus à la référence, ou à la note calculée que pourrait recevoir une note sans échantillon (colonne en pointillés sur la carte).
+Un clic sur une note montre sous la carte ce qu'elle joue.
+Le titre donne la note, la note de base qui la joue et l'étiquette de cette note de base&nbsp;; les sections suivantes se replient ou se déplient d'un clic sur leur titre, une section repliée indiquant sa valeur principale&nbsp;:
+
+* :guilabel:`Écart à la référence`&nbsp;: niveau, timbre et confiance de la note de base (▲ ▼ si le niveau s'écarte),
+* :guilabel:`Jonctions`&nbsp;: sauts de niveau et de timbre avec les notes précédente et suivante (+ sur une cassure),
+* :guilabel:`Rendu comparé au modèle`&nbsp;: après l'action :guilabel:`Vérifier par un rendu`,
+* :guilabel:`Si elle est supprimée`&nbsp;: plus grand écart sur les notes de la note de base et saut à la nouvelle jonction entre ses voisines,
+* :guilabel:`Échantillons`&nbsp;: transposition, atténuation et filtre de chaque échantillon,
+* :guilabel:`Mesures`&nbsp;: niveau, brillance, pente spectrale, rangs impairs / pairs, bruit, justesse, boucle et facteur de durée de ce qui est entendu.
+
+Le graphique compare les niveaux entendus à la référence sur une note de base ou, sur une autre note, à la note calculée qu'elle pourrait recevoir (colonne en pointillés sur la carte).
 
 Un clic sur une note de base sélectionne ses divisions dans l'[arborescence](manual/soundfont-editor/tree.md), et la sélection de divisions dans l'arborescence sélectionne leurs notes de base.
-Plusieurs notes de base peuvent être sélectionnées avec :kbd:`Ctrl` ou :kbd:`Maj`, ou en faisant glisser la souris sur des notes.
+Plusieurs notes de base peuvent être sélectionnées en maintenant la touche :kbd:`Ctrl` enfoncée puis en cliquant dessus une par une, ou avec la touche :kbd:`Maj`&nbsp;: toutes les notes de base entre la première cliquée et la suivante sont sélectionnées.
 
-Les boutons à droite et le menu contextuel de la carte s'appliquent aux notes de base sélectionnées&nbsp;:
+Les boutons à droite s'appliquent aux notes de base sélectionnées&nbsp;:
 
 Créer une note ici...
 : Sur une note sans échantillon&nbsp;: la note de base la plus proche est transposée et les niveaux de ses harmoniques sont interpolés (ou extrapolés) à partir d'une deuxième note de base. Les notes de base utilisées peuvent être choisies, et un avertissement apparaît quand la note en est éloignée. Les étendues de notes autour sont ajustées&nbsp;; les divisions entièrement comprises dans l'étendue de la nouvelle note sont supprimées.
@@ -415,10 +423,7 @@ Corriger le niveau
 : L'atténuation des divisions est modifiée pour que l'écart de niveau devienne nul (une atténuation ne peut pas être négative).
 
 Vérifier par un rendu
-: La note est jouée par le moteur de son et les harmoniques du résultat sont mesurées&nbsp;: elles s'affichent sur le graphique pour vérifier le calcul de la vue.
-
-Rendre muettes ces divisions
-: Dans le menu contextuel&nbsp;: exclut les divisions de la vue.
+: La note est jouée par le moteur de son et les harmoniques du résultat sont mesurées&nbsp;: elles s'affichent sur le graphique et sont comparées au modèle dans la section :guilabel:`Rendu comparé au modèle`, pour vérifier le calcul de la vue.
 
 Le menu :guilabel:`Proposer` sélectionne toutes les notes de base (ou jonctions) ayant une étiquette et leur applique l'action correspondante, après confirmation&nbsp;: corriger les notes de base à corriger, remplacer les trop différentes, supprimer les redondantes, créer des notes calculées aux cassures, corriger les niveaux qui s'écartent.
 Elles sont traitées de la pire à la moins mauvaise, les références étant recalculées après chaque action&nbsp;: une note de base défectueuse fausse aussi la référence de ses voisines, qui paraissent à moitié défectueuses tant qu'elle n'est pas corrigée.

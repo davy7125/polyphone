@@ -283,9 +283,7 @@ La vista mide y propone; no se aplica nada automáticamente.
 La vista muestra lo que suena a la velocidad elegida arriba a la izquierda (100 por defecto, y luego la última utilizada).
 La barra contigua muestra las capas de velocidad del instrumento: un clic en una capa selecciona la velocidad situada en su centro.
 
-Las divisiones tenidas en cuenta son las que suenan a esta velocidad, que no están [silenciadas](#doc_solo) y que no se reproducen solo al soltar la tecla (modo de reproducción «release»).
-Silenciar una división es, por tanto, la forma de excluirla de la vista, por ejemplo un ruido o un sonido de release.
-Cuando el [solo en la selección](manual/soundfont-editor/tree.md#doc_menu) está activado, el silenciado sigue a la selección y no se tiene en cuenta.
+Las divisiones tenidas en cuenta son las que suenan a esta velocidad y que no se reproducen solo al soltar la tecla (modo de reproducción «release»), estén [silenciadas](#doc_solo) o no.
 Las divisiones que reproducen una misma nota (par estéreo, capas) se combinan: sus potencias se suman.
 
 Una **nota raíz** agrupa todas las divisiones que tienen esa nota raíz, posiblemente con varios rangos de notas.
@@ -329,8 +327,9 @@ Transposición
 Confianza
 : Parte de la potencia que se mide de forma fiable.
 
-El menú :guilabel:`Opciones` también permite mostrar todo el teclado o una sola columna por nota raíz, colorear por escalones según los umbrales (las desviaciones dentro de la tolerancia quedan neutras) y reproducir las notas en las que se hace clic.
-El teclado bajo el mapa reproduce el instrumento a la velocidad de la vista.
+El menú :guilabel:`Opciones` también permite mostrar una sola columna por nota raíz, colorear por escalones según los umbrales (las desviaciones dentro de la tolerancia quedan neutras) y reproducir las notas en las que se hace clic.
+El teclado en la parte inferior del mapa reproduce el instrumento a la velocidad de la vista.
+Mantener pulsado el clic derecho dilata el eje horizontal alrededor del punto seleccionado, y mantener pulsado el clic izquierdo lo desplaza.
 
 
 ### Referencia y decisiones
@@ -391,13 +390,22 @@ Rango dinámico
 ### Detalles y acciones
 
 
-Un clic en una nota muestra bajo el mapa lo que reproduce: las muestras con su transposición, atenuación y filtro, el factor de duración, el tono, las desviaciones de la nota raíz y lo que cambiaría su eliminación.
-El gráfico de barras compara los niveles oídos con la referencia, o con la nota calculada que podría recibir una nota sin muestra (una columna con trazo discontinuo en el mapa).
+Un clic en una nota muestra bajo el mapa lo que reproduce.
+El título indica la nota, la nota raíz que la reproduce y la etiqueta de esta nota raíz; las secciones siguientes se pliegan o despliegan con un clic en su título, y una sección plegada muestra su valor principal:
+
+* :guilabel:`Desviación respecto a la referencia`: nivel, timbre y confianza de la nota raíz (▲ ▼ si el nivel se desvía),
+* :guilabel:`Uniones`: saltos de nivel y de timbre con las notas anterior y siguiente (+ en una ruptura),
+* :guilabel:`Renderizado frente al modelo`: tras la acción :guilabel:`Verificar mediante renderizado`,
+* :guilabel:`Si se eliminara`: mayor desviación en las notas de la nota raíz y salto en la nueva unión entre sus vecinas,
+* :guilabel:`Muestras`: transposición, atenuación y filtro de cada muestra,
+* :guilabel:`Medidas`: nivel, brillo, pendiente espectral, armónicos impares / pares, ruido, afinación, bucle y factor de duración de lo que se oye.
+
+El gráfico de barras compara los niveles oídos con la referencia en una nota raíz o, en otra nota, con la nota calculada que esta podría recibir (una columna con trazo discontinuo en el mapa).
 
 Un clic en una nota raíz selecciona sus divisiones en el [árbol](manual/soundfont-editor/tree.md), y seleccionar divisiones en el árbol selecciona sus notas raíz.
-Se pueden seleccionar varias notas raíz con :kbd:`Ctrl` o :kbd:`Shift`, o arrastrando el ratón sobre las notas.
+Se pueden seleccionar varias notas raíz manteniendo pulsada la tecla :kbd:`Ctrl` y haciendo clic en ellas una a una, o con la tecla :kbd:`Shift`: se seleccionan todas las notas raíz entre la primera pulsada y la siguiente.
 
-Los botones de la derecha y el menú contextual del mapa se aplican a las notas raíz seleccionadas:
+Los botones de la derecha se aplican a las notas raíz seleccionadas:
 
 Crear una nota aquí...
 : En una nota sin muestra: se transpone la nota raíz más cercana y los niveles de sus armónicos se interpolan (o se extrapolan) a partir de una segunda nota raíz. Se pueden elegir las notas raíz utilizadas, y se muestra una advertencia cuando la nota está lejos de ellas. Los rangos de notas de alrededor se ajustan; las divisiones contenidas por completo en el rango de la nueva nota se eliminan.
@@ -415,10 +423,7 @@ Corregir el nivel
 : La atenuación de las divisiones se modifica para que la desviación de nivel sea nula (una atenuación no puede ser negativa).
 
 Verificar mediante renderizado
-: El motor de sonido reproduce la nota y se miden los armónicos del resultado: se muestran en el gráfico de barras para verificar el cálculo de la vista.
-
-Silenciar estas divisiones
-: En el menú contextual: excluye las divisiones de la vista.
+: El motor de sonido reproduce la nota y se miden los armónicos del resultado: se muestran en el gráfico de barras y se comparan con el modelo en la sección :guilabel:`Renderizado frente al modelo`, para verificar el cálculo de la vista.
 
 El menú :guilabel:`Proponer` selecciona todas las notas raíz (o uniones) que tienen una etiqueta y les aplica la acción correspondiente, tras una confirmación: corregir las notas raíz por corregir, reemplazar las demasiado diferentes, eliminar las redundantes, crear notas calculadas en las rupturas, corregir los niveles que se desvían.
 Se procesan de la peor a la menos mala, y las referencias se vuelven a calcular tras cada acción: una nota raíz defectuosa también falsea la referencia de sus vecinas, que parecen medio defectuosas hasta que se corrige.
