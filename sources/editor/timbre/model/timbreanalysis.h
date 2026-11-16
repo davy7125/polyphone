@@ -46,7 +46,6 @@ struct TimbreSampleAnalysis
     QVector<bool> found; // The peak stands out from its neighborhood
     double hnr = 0; // Harmonics to noise ratio (dB), NaN if not measured
     double inharmonicity = 0;
-    double loopCorrelation = 0; // 1 = perfect seam, NaN if not looped
 };
 
 // Analyses of the samples, computed once in the background by several threads and kept until the data, the loop, the

@@ -278,7 +278,7 @@ void TimbreModel::compute(EltID idInst, const TimbreSettings &settings, bool ana
             _maxKey = k;
         }
         // Highest rank within the dynamic range
-        double threshold = key.spectrum.strongest() * std::pow(10.0, -_settings.dynamicRange / 10);
+        double threshold = key.spectrum.strongest() * std::pow(10.0, -TimbreSettings::DYNAMIC_RANGE / 10);
         for (int r = key.spectrum.count() - 1; r >= 0; r--)
         {
             if (key.spectrum.state[r] != TimbreSpectrum::ABSENT && key.spectrum.power[r] >= threshold)
@@ -288,7 +288,7 @@ void TimbreModel::compute(EltID idInst, const TimbreSettings &settings, bool ana
             }
         }
     }
-    _rows = computeRows(_settings.detailedRanks, _settings.octaveBands, _maxRank);
+    _rows = computeRows(_maxRank);
 
     // Descriptors of the keys and jumps
     for (int k = 0; k < 128; k++)
@@ -425,7 +425,7 @@ TimbreSpectrum TimbreModel::getSpectrum(const TimbreVoice &voice)
 
     double ratio = std::pow(2.0, voice.transposition / 1200);
     double nyquist = 0.5 * _settings.outputSampleRate;
-    double upperLimit = _settings.upperLimit > 0 ? qMin(_settings.upperLimit, nyquist) : nyquist;
+    double upperLimit = qMin(TimbreSettings::UPPER_LIMIT, nyquist);
     int count = static_cast<int>(analysis->levels.size());
     spectrum.power.fill(0, count);
     spectrum.state.fill(TimbreSpectrum::ABSENT, count);
@@ -703,7 +703,7 @@ TimbreComparison TimbreModel::compare(const TimbreSpectrum &test, const TimbreSp
     if (test.isEmpty() || reference.isEmpty())
         return result;
 
-    double dynamic = std::pow(10.0, -_settings.dynamicRange / 10);
+    double dynamic = std::pow(10.0, -TimbreSettings::DYNAMIC_RANGE / 10);
     double thresholdTest = test.strongest() * dynamic;
     double thresholdReference = reference.strongest() * dynamic;
     QVector<double> testPower(rowCount, 0), referencePower(rowCount, 0);
@@ -771,30 +771,6 @@ QVector<double> TimbreModel::getRowLevels(const TimbreSpectrum &spectrum) const
     return result;
 }
 
-QVector<int> TimbreModel::getRowStates(const TimbreSpectrum &spectrum) const
-{
-    // 0: absent, 1: doubtful, 2: measured, 3: partly absent
-    QVector<int> result(_rows.size(), 0);
-    for (int row = 0; row < _rows.size(); row++)
-    {
-        bool anyAbsent = false, anyPresent = false, anyDoubtful = false;
-        for (int r = _rows[row].firstRank; r <= qMin(_rows[row].lastRank, _maxRank); r++)
-        {
-            int state = r <= spectrum.count() ? static_cast<int>(spectrum.state[r - 1]) : static_cast<int>(TimbreSpectrum::ABSENT);
-            if (state == TimbreSpectrum::ABSENT)
-                anyAbsent = true;
-            else
-            {
-                anyPresent = true;
-                if (state == TimbreSpectrum::DOUBTFUL)
-                    anyDoubtful = true;
-            }
-        }
-        result[row] = !anyPresent ? 0 : (anyAbsent ? 3 : (anyDoubtful ? 1 : 2));
-    }
-    return result;
-}
-
 QVector<double> TimbreModel::getRowConfidence(const TimbreSpectrum &spectrum) const
 {
     QVector<double> result(_rows.size(), std::nan(""));
@@ -819,7 +795,7 @@ void TimbreModel::computeKeyDescriptors(TimbreKey &key, int keyNumber)
 {
     const TimbreSpectrum &spectrum = key.spectrum;
     key.totalLevel = spectrum.totalDb();
-    double threshold = spectrum.strongest() * std::pow(10.0, -_settings.dynamicRange / 10);
+    double threshold = spectrum.strongest() * std::pow(10.0, -TimbreSettings::DYNAMIC_RANGE / 10);
     double sum = 0, weightedSum = 0, odd = 0, even = 0;
     QVector<double> x, y;
     for (int i = 0; i < spectrum.count(); i++)
@@ -831,7 +807,7 @@ void TimbreModel::computeKeyDescriptors(TimbreKey &key, int keyNumber)
         weightedSum += rank * spectrum.power[i];
         x << std::log2(rank);
         y << toDb(spectrum.power[i]);
-        if (rank >= 2 && rank <= qMax(2, _settings.detailedRanks))
+        if (rank >= 2 && rank <= qMax(2, TimbreSettings::DETAILED_RANKS))
             (rank % 2 == 1 ? odd : even) += spectrum.power[i];
     }
     key.centroid = sum > 0 ? weightedSum / sum : std::nan("");
@@ -841,7 +817,7 @@ void TimbreModel::computeKeyDescriptors(TimbreKey &key, int keyNumber)
 
     // Transposition (mean weighted by the levels), tuning and quality of the main source
     double transpositionSum = 0, transpositionWeights = 0, mainPower = -1;
-    key.tuning = key.hnr = key.loopCorrelation = std::nan("");
+    key.tuning = key.hnr = std::nan("");
     for (int i = 0; i < key.voices.count(); i++)
     {
         const TimbreVoice &voice = key.voices[i];
@@ -855,10 +831,7 @@ void TimbreModel::computeKeyDescriptors(TimbreKey &key, int keyNumber)
             mainPower = weight;
             QSharedPointer<const TimbreSampleAnalysis> analysis = _analyses.value(voice.sampleIndex);
             if (!analysis.isNull())
-            {
                 key.hnr = analysis->hnr;
-                key.loopCorrelation = analysis->loopCorrelation;
-            }
             if (voice.fundamental > 0)
                 key.tuning = 1200 * std::log2(voice.fundamental / SampleUtils::keyToFrequency(keyNumber));
         }
@@ -959,10 +932,6 @@ void TimbreModel::computeRedundancy(TimbrePosition &position)
 void TimbreModel::applyThresholds(const TimbreSettings &settings)
 {
     _settings.tolerance = settings.tolerance;
-    _settings.maximum = settings.maximum;
-    _settings.redundancy = settings.redundancy;
-    _settings.jump = settings.jump;
-    _settings.level = settings.level;
 
     for (QMap<int, TimbrePosition>::iterator it = _positions.begin(); it != _positions.end(); ++it)
     {
@@ -974,15 +943,15 @@ void TimbreModel::applyThresholds(const TimbreSettings &settings)
         double timbre = position.deviation.timbreDifference;
         if (timbre <= _settings.tolerance)
         {
-            bool redundant = position.redundancyComputed && position.redundancy <= _settings.redundancy &&
-                    (!position.newJunction.valid || position.newJunction.timbreDifference <= _settings.jump);
+            bool redundant = position.redundancyComputed && position.redundancy <= _settings.redundancy() &&
+                    (!position.newJunction.valid || position.newJunction.timbreDifference <= _settings.jump());
             position.label = redundant ? TimbrePosition::LABEL_REDUNDANT : TimbrePosition::LABEL_CONFORM;
         }
-        else if (timbre <= _settings.maximum)
+        else if (timbre <= _settings.maximum())
             position.label = TimbrePosition::LABEL_TO_CORRECT;
         else
             position.label = TimbrePosition::LABEL_TOO_DIFFERENT;
-        position.levelLabel = std::fabs(position.deviation.levelDifference) > _settings.level;
+        position.levelLabel = std::fabs(position.deviation.levelDifference) > TimbreSettings::LEVEL;
     }
 
     for (int k = 1; k < 128; k++)
@@ -990,7 +959,7 @@ void TimbreModel::applyThresholds(const TimbreSettings &settings)
         TimbreKey &key = _keys[k];
         key.breakLabel = false;
         if (!key.sampleChange || !key.jump.valid || !key.analyzed || !_keys[k - 1].analyzed ||
-            key.jump.timbreDifference <= _settings.jump)
+            key.jump.timbreDifference <= _settings.jump())
             continue;
 
         // A free key (neither a root key nor displaying one) between the keys where the positions on both sides are heard
@@ -1009,18 +978,17 @@ void TimbreModel::applyThresholds(const TimbreSettings &settings)
     }
 }
 
-QList<TimbreRow> TimbreModel::computeRows(int detailedRanks, bool octaveBands, int maxRank)
+QList<TimbreRow> TimbreModel::computeRows(int maxRank)
 {
     QList<TimbreRow> rows;
-    int detailed = qMin(detailedRanks, maxRank);
+    int detailed = qMin(TimbreSettings::DETAILED_RANKS, maxRank);
     for (int r = 1; r <= detailed; r++)
         rows << TimbreRow { r, r, "H" + QString::number(r) };
     int previous = detailed;
     for (int i = 1; previous < maxRank && i < 200; i++)
     {
-        int bound = octaveBands ? (1 << qMin(i, 30)) / 1 : static_cast<int>(std::floor(std::pow(2.0, i / 3.0) + 1e-9));
-        if (octaveBands && i > 30)
-            break;
+        // Upper bounds of the bands of a third of an octave
+        int bound = static_cast<int>(std::floor(std::pow(2.0, i / 3.0) + 1e-9));
         if (bound <= previous)
             continue;
         TimbreRow row;

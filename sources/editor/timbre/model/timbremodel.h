@@ -41,12 +41,13 @@ struct TimbreSettings
 {
     int velocity = 100;
 
-    // Partials: ranks displayed one by one, then bands grouping the next ranks (third of octave or octave in rank)
-    // up to an upper frequency (0: half of the sample rate), the ranks too far below the strongest one being ignored
-    int detailedRanks = 10;
-    bool octaveBands = false;
-    double upperLimit = 16000;
-    double dynamicRange = 60;
+    // Partials: ranks displayed one by one (the ear distinguishes them individually), then bands of a third of an
+    // octave grouping the next ranks (11-12, 13-16, 17-20...), up to an upper frequency (Hz), the ranks too far below
+    // the strongest one (dB) being ignored. Not editable: they are part of the timbre deviations, and therefore of the
+    // calibration of the thresholds below
+    static constexpr int DETAILED_RANKS = 10;
+    static constexpr double UPPER_LIMIT = 16000;
+    static constexpr double DYNAMIC_RANGE = 60;
 
     // Reference of a position: interpolation between the neighbors, or robust local regression on n neighbors on each side
     enum Reference
@@ -59,12 +60,17 @@ struct TimbreSettings
 
     // Thresholds (dB) of the labels, calibrated on organ sample sets (natural deviation of the root keys from their
     // reference: median 3.7 dB, 70% below 4.5 dB, 95% below 8 dB; redundancy below 2.5 dB for 15% of them; timbre
-    // jumps at the changes of samples below 6 dB for 80% of them; level deviations below 2.5 dB for 78% of them)
-    double tolerance = 4.5;
-    double maximum = 8;
-    double redundancy = 2.5;
-    double jump = 6;
-    double level = 2.5;
+    // jumps at the changes of samples below 6 dB for 80% of them; level deviations below 2.5 dB for 78% of them).
+    // Only the tolerance is editable: the maximum, the redundancy and the break follow it, since the natural timbre
+    // deviations of other instruments grow by the same factor for all of them (GM banks, pianos, guitars, woodwinds:
+    // 70% below 5.7 to 7.1 dB, 95% below 10 to 19 dB, jumps x1.4). The level threshold is fixed: the level deviations
+    // hardly depend on the instrument (70% below 2.2 dB for the organs, 2.6 to 3.2 dB for the GM banks)
+    static constexpr double DEFAULT_TOLERANCE = 4.5;
+    static constexpr double LEVEL = 2.5;
+    double tolerance = DEFAULT_TOLERANCE;
+    double maximum() const { return tolerance * 8 / DEFAULT_TOLERANCE; }
+    double redundancy() const { return tolerance * 2.5 / DEFAULT_TOLERANCE; }
+    double jump() const { return tolerance * 6 / DEFAULT_TOLERANCE; }
 
 
     // Sample rate of the output
@@ -181,7 +187,6 @@ struct TimbreKey
     double durationFactor = 1;
     double tuning = 0; // Cents from the equal temperament
     double hnr = 0; // dB
-    double loopCorrelation = 0;
     TimbreComparison jump; // With the previous key, if both are covered
     bool junction = false; // The sources differ from the previous key
     bool sampleChange = false; // The samples differ from the previous key
@@ -219,9 +224,8 @@ public:
     int getMaxKey() const { return _maxKey; }
     bool isComplete() const { return _missingAnalyses == 0; }
 
-    // Values per row of a spectrum: level (dB, NaN if absent) and state (worst state of the ranks of the row)
+    // Values per row of a spectrum: level (dB, NaN if absent) and part of the power reliably measured
     QVector<double> getRowLevels(const TimbreSpectrum &spectrum) const;
-    QVector<int> getRowStates(const TimbreSpectrum &spectrum) const;
     QVector<double> getRowConfidence(const TimbreSpectrum &spectrum) const; // Part of the power well measured, NaN if absent
 
     // Comparison of a sound with a reference, by rows
@@ -251,7 +255,7 @@ public:
     int getPositionOf(int key) const;
 
     // Name of a row: "H1" for the rank 1, "11-12" for a band
-    static QList<TimbreRow> computeRows(int detailedRanks, bool octaveBands, int maxRank);
+    static QList<TimbreRow> computeRows(int maxRank);
 
 private:
     void clear();

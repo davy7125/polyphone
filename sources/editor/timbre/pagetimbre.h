@@ -96,6 +96,8 @@ private:
     void saveSettings();
     void updateVelocityLayers();
     void updateDetail();
+    void updateToleranceToolTip();
+    void updateLegend();
     void updatePending();
     void selectPositions(const QList<int> &keys, bool notifyTree);
     void readTreeSelection();
@@ -133,14 +135,12 @@ private:
     QLabel * _labelMessage;
     QSpinBox * _spinVelocity;
     TimbreVelocityStrip * _velocityStrip;
+    TimbreLegendWidget * _legend;
     QComboBox * _comboMode;
     QComboBox * _comboReference;
     QSpinBox * _spinRegression;
-    QSpinBox * _spinDetailed;
-    QComboBox * _comboBands;
-    QDoubleSpinBox * _spinUpperLimit;
-    QDoubleSpinBox * _spinDynamic;
-    QDoubleSpinBox * _spinTolerance, * _spinMaximum, * _spinRedundancy, * _spinJump, * _spinLevel;
+    QLabel * _labelTolerance;
+    QDoubleSpinBox * _spinTolerance;
     QToolButton * _buttonOptions;
     RotatingSpinner * _spinner;
     QLabel * _labelPending;

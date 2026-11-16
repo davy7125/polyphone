@@ -119,7 +119,7 @@ DialogTimbreCorrection::DialogTimbreCorrection(TimbreModel * model, const QList<
     form->addRow(tr("Ranks corrected"), _comboRanks);
     _spinRanks = new QSpinBox(this);
     _spinRanks->setRange(1, 64);
-    _spinRanks->setValue(parameters.maxRank > 0 ? parameters.maxRank : settings.detailedRanks);
+    _spinRanks->setValue(parameters.maxRank > 0 ? parameters.maxRank : TimbreSettings::DETAILED_RANKS);
     form->addRow("", _spinRanks);
     _spinBrightness = spin(-6, 6, parameters.brightness, 1, " " + tr("dB / octave"));
     _spinBrightness->setToolTip(tr("Slope added to the target: positive for a brighter sound"));
@@ -236,7 +236,7 @@ void DialogTimbreCorrection::updatePreview()
     if (!_plan.after.isEmpty())
         series << TimbreBarsWidget::Series { tr("Result"), _model->getRowLevels(_plan.after), palette.highlight(),
                                              TimbreBarsWidget::STYLE_OUTLINE };
-    _bars->setData(_model->getRows(), series, _settings.dynamicRange);
+    _bars->setData(_model->getRows(), series, TimbreSettings::DYNAMIC_RANGE);
 
     QLocale locale;
     auto db = [&](double value) { return locale.toString(value, 'f', 1) + " " + tr("dB", "unit for decibels"); };

@@ -39,8 +39,6 @@
 #include <QToolButton>
 #include <QStackedWidget>
 #include <QMenu>
-#include <QWidgetAction>
-#include <QFormLayout>
 #include <QMessageBox>
 #include <QCheckBox>
 #include <QProgressDialog>
@@ -75,33 +73,24 @@ void PageTimbre::loadSettings()
 {
     ConfManager * conf = ContextManager::configuration();
     _settings.velocity = conf->getValue(ConfManager::SECTION_DISPLAY, "timbre_velocity", 100).toInt();
-    _settings.detailedRanks = conf->getValue(ConfManager::SECTION_DISPLAY, "timbre_detailed_ranks", 10).toInt();
-    _settings.octaveBands = conf->getValue(ConfManager::SECTION_DISPLAY, "timbre_octave_bands", false).toBool();
-    _settings.upperLimit = conf->getValue(ConfManager::SECTION_DISPLAY, "timbre_upper_limit", 16000).toDouble();
-    _settings.dynamicRange = conf->getValue(ConfManager::SECTION_DISPLAY, "timbre_dynamic_range", 60).toDouble();
     _settings.reference = static_cast<TimbreSettings::Reference>(
         conf->getValue(ConfManager::SECTION_DISPLAY, "timbre_reference", 0).toInt() == 1 ? 1 : 0);
     _settings.regressionCount = conf->getValue(ConfManager::SECTION_DISPLAY, "timbre_regression_count", 3).toInt();
-    _settings.tolerance = conf->getValue(ConfManager::SECTION_DISPLAY, "timbre_tolerance", _settings.tolerance).toDouble();
-    _settings.maximum = conf->getValue(ConfManager::SECTION_DISPLAY, "timbre_maximum", _settings.maximum).toDouble();
-    _settings.redundancy = conf->getValue(ConfManager::SECTION_DISPLAY, "timbre_redundancy", _settings.redundancy).toDouble();
-    _settings.jump = conf->getValue(ConfManager::SECTION_DISPLAY, "timbre_jump", _settings.jump).toDouble();
-    _settings.level = conf->getValue(ConfManager::SECTION_DISPLAY, "timbre_level", _settings.level).toDouble();
+    _settings.tolerance = qBound(0.5, conf->getValue(ConfManager::SECTION_DISPLAY, "timbre_tolerance", _settings.tolerance).toDouble(), 20.);
 
     TimbreDisplay display;
     int mode = conf->getValue(ConfManager::SECTION_DISPLAY, "timbre_mode", TimbreDisplay::MODE_DEVIATION).toInt();
-    display.mode = static_cast<TimbreDisplay::Mode>(qBound(0, mode, 5));
-    display.steps = conf->getValue(ConfManager::SECTION_DISPLAY, "timbre_steps", false).toBool();
-    display.positionsOnly = conf->getValue(ConfManager::SECTION_DISPLAY, "timbre_positions_only", false).toBool();
-    display.autoRange = conf->getValue(ConfManager::SECTION_DISPLAY, "timbre_auto_range", true).toBool();
-    display.fixedRange = conf->getValue(ConfManager::SECTION_DISPLAY, "timbre_fixed_range", 12).toDouble();
+    if (mode == 0) // Former "Absolute levels"
+        mode = TimbreDisplay::MODE_LEVELS;
+    display.mode = static_cast<TimbreDisplay::Mode>(
+        mode >= TimbreDisplay::MODE_LEVELS && mode <= TimbreDisplay::MODE_TRANSPOSITION ? mode : TimbreDisplay::MODE_DEVIATION);
     QList<int> summaries;
     summaries << TimbreDisplay::SUMMARY_LEVEL << TimbreDisplay::SUMMARY_TIMBRE << TimbreDisplay::SUMMARY_TRANSPOSITION;
     QStringList extra = conf->getValue(ConfManager::SECTION_DISPLAY, "timbre_summaries", "").toString().split(",", Qt::SkipEmptyParts);
     foreach (QString value, extra)
     {
         int summary = value.toInt();
-        if (summary >= TimbreDisplay::SUMMARY_BRIGHTNESS && summary <= TimbreDisplay::SUMMARY_LOOP && !summaries.contains(summary))
+        if (summary >= TimbreDisplay::SUMMARY_BRIGHTNESS && summary <= TimbreDisplay::SUMMARY_TUNING && !summaries.contains(summary))
             summaries << summary;
     }
     display.summaries = summaries;
@@ -114,25 +103,13 @@ void PageTimbre::saveSettings()
 {
     ConfManager * conf = ContextManager::configuration();
     conf->setValue(ConfManager::SECTION_DISPLAY, "timbre_velocity", _settings.velocity);
-    conf->setValue(ConfManager::SECTION_DISPLAY, "timbre_detailed_ranks", _settings.detailedRanks);
-    conf->setValue(ConfManager::SECTION_DISPLAY, "timbre_octave_bands", _settings.octaveBands);
-    conf->setValue(ConfManager::SECTION_DISPLAY, "timbre_upper_limit", _settings.upperLimit);
-    conf->setValue(ConfManager::SECTION_DISPLAY, "timbre_dynamic_range", _settings.dynamicRange);
     conf->setValue(ConfManager::SECTION_DISPLAY, "timbre_reference", static_cast<int>(_settings.reference));
     conf->setValue(ConfManager::SECTION_DISPLAY, "timbre_regression_count", _settings.regressionCount);
     conf->setValue(ConfManager::SECTION_DISPLAY, "timbre_tolerance", _settings.tolerance);
-    conf->setValue(ConfManager::SECTION_DISPLAY, "timbre_maximum", _settings.maximum);
-    conf->setValue(ConfManager::SECTION_DISPLAY, "timbre_redundancy", _settings.redundancy);
-    conf->setValue(ConfManager::SECTION_DISPLAY, "timbre_jump", _settings.jump);
-    conf->setValue(ConfManager::SECTION_DISPLAY, "timbre_level", _settings.level);
     if (_map != nullptr)
     {
         const TimbreDisplay &display = _map->getDisplay();
         conf->setValue(ConfManager::SECTION_DISPLAY, "timbre_mode", static_cast<int>(display.mode));
-        conf->setValue(ConfManager::SECTION_DISPLAY, "timbre_steps", display.steps);
-        conf->setValue(ConfManager::SECTION_DISPLAY, "timbre_positions_only", display.positionsOnly);
-        conf->setValue(ConfManager::SECTION_DISPLAY, "timbre_auto_range", display.autoRange);
-        conf->setValue(ConfManager::SECTION_DISPLAY, "timbre_fixed_range", display.fixedRange);
         QStringList extra;
         foreach (int summary, display.summaries)
             if (summary >= TimbreDisplay::SUMMARY_BRIGHTNESS)
@@ -191,10 +168,13 @@ void PageTimbre::buildInterface()
 
     top->addWidget(new QLabel(tr("Display"), main));
     _comboMode = new QComboBox(main);
-    for (int mode = 0; mode <= TimbreDisplay::MODE_CONFIDENCE; mode++)
-        _comboMode->addItem(TimbreMapWidget::getModeName(mode));
-    _comboMode->setCurrentIndex(_pendingDisplay.mode);
+    for (int mode = TimbreDisplay::MODE_LEVELS; mode <= TimbreDisplay::MODE_TRANSPOSITION; mode++)
+        _comboMode->addItem(TimbreMapWidget::getModeName(mode), mode);
+    _comboMode->setCurrentIndex(_comboMode->findData(static_cast<int>(_pendingDisplay.mode)));
     top->addWidget(_comboMode);
+    top->addSpacing(6);
+    _legend = new TimbreLegendWidget(main);
+    top->addWidget(_legend);
     top->addStretch();
     _spinner = new RotatingSpinner(main);
     _spinner->setFixedSize(16, 16);
@@ -223,81 +203,18 @@ void PageTimbre::buildInterface()
     top->addWidget(_spinRegression);
     top->addSpacing(12);
 
-    // Partials
-    QToolButton * buttonPartials = new QToolButton(main);
-    buttonPartials->setText(tr("Partials"));
-    buttonPartials->setPopupMode(QToolButton::InstantPopup);
-    QMenu * menuPartials = new QMenu(buttonPartials);
-    QWidget * partials = new QWidget(menuPartials);
-    QFormLayout * formPartials = new QFormLayout(partials);
-    _spinDetailed = new QSpinBox(partials);
-    _spinDetailed->setRange(4, 32);
-    _spinDetailed->setValue(_settings.detailedRanks);
-    formPartials->addRow(tr("Ranks displayed one by one"), _spinDetailed);
-    _comboBands = new QComboBox(partials);
-    _comboBands->addItem(tr("Bands of a third of an octave"));
-    _comboBands->addItem(tr("Bands of an octave"));
-    _comboBands->setCurrentIndex(_settings.octaveBands ? 1 : 0);
-    formPartials->addRow(tr("Next ranks"), _comboBands);
-    _spinUpperLimit = new QDoubleSpinBox(partials);
-    _spinUpperLimit->setRange(0, 24);
-    _spinUpperLimit->setDecimals(1);
-    _spinUpperLimit->setSuffix(" " + tr("kHz", "unit for kilohertz"));
-    _spinUpperLimit->setSpecialValueText(tr("Half of the sample rate"));
-    _spinUpperLimit->setValue(_settings.upperLimit / 1000);
-    formPartials->addRow(tr("Upper limit"), _spinUpperLimit);
-    _spinDynamic = new QDoubleSpinBox(partials);
-    _spinDynamic->setRange(20, 120);
-    _spinDynamic->setDecimals(0);
-    _spinDynamic->setSuffix(" " + tr("dB", "unit for decibels"));
-    _spinDynamic->setValue(_settings.dynamicRange);
-    _spinDynamic->setToolTip(tr("Ranks further below the strongest one of the key are ignored"));
-    formPartials->addRow(tr("Dynamic range"), _spinDynamic);
-    QWidgetAction * actionPartials = new QWidgetAction(menuPartials);
-    actionPartials->setDefaultWidget(partials);
-    menuPartials->addAction(actionPartials);
-    buttonPartials->setMenu(menuPartials);
-    top->addWidget(buttonPartials);
-
-    // Thresholds
-    QToolButton * buttonThresholds = new QToolButton(main);
-    buttonThresholds->setText(tr("Thresholds"));
-    buttonThresholds->setPopupMode(QToolButton::InstantPopup);
-    QMenu * menuThresholds = new QMenu(buttonThresholds);
-    QWidget * thresholds = new QWidget(menuThresholds);
-    QFormLayout * formThresholds = new QFormLayout(thresholds);
-    auto addThreshold = [&](QDoubleSpinBox *& spin, QString label, QString tooltip, double value) {
-        spin = new QDoubleSpinBox(thresholds);
-        spin->setRange(0, 40);
-        spin->setDecimals(1);
-        spin->setSingleStep(0.5);
-        spin->setSuffix(" " + tr("dB", "unit for decibels"));
-        spin->setValue(value);
-        spin->setToolTip(tooltip);
-        formThresholds->addRow(label, spin);
-    };
-    addThreshold(_spinTolerance, tr("Tolerance"), tr("Timbre deviation up to which a root key is consistent"), _settings.tolerance);
-    addThreshold(_spinMaximum, tr("Maximum"), tr("Timbre deviation up to which a root key can be corrected, beyond it is too different"),
-                 _settings.maximum);
-    addThreshold(_spinRedundancy, tr("Redundancy"), tr("Largest timbre deviation over the keys of a consistent root key if it were "
-                                                       "removed, for being redundant"), _settings.redundancy);
-    addThreshold(_spinJump, tr("Break"), tr("Timbre jump at a junction from which a computed note is proposed"), _settings.jump);
-    addThreshold(_spinLevel, tr("Level"), tr("Level deviation from which a correction of the attenuation is proposed"), _settings.level);
-    QPushButton * buttonDefault = new QPushButton(tr("Default values"), thresholds);
-    formThresholds->addRow(buttonDefault);
-    connect(buttonDefault, &QPushButton::clicked, this, [this]() {
-        TimbreSettings defaults;
-        _spinTolerance->setValue(defaults.tolerance);
-        _spinMaximum->setValue(defaults.maximum);
-        _spinRedundancy->setValue(defaults.redundancy);
-        _spinJump->setValue(defaults.jump);
-        _spinLevel->setValue(defaults.level);
-    });
-    QWidgetAction * actionThresholds = new QWidgetAction(menuThresholds);
-    actionThresholds->setDefaultWidget(thresholds);
-    menuThresholds->addAction(actionThresholds);
-    buttonThresholds->setMenu(menuThresholds);
-    top->addWidget(buttonThresholds);
+    // Tolerance (the other timbre thresholds following it)
+    _labelTolerance = new QLabel(tr("Tolerance"), main);
+    top->addWidget(_labelTolerance);
+    _spinTolerance = new QDoubleSpinBox(main);
+    _spinTolerance->setRange(0.5, 20);
+    _spinTolerance->setDecimals(1);
+    _spinTolerance->setSingleStep(0.5);
+    _spinTolerance->setSuffix(" " + tr("dB", "unit for decibels"));
+    _spinTolerance->setValue(_settings.tolerance);
+    top->addWidget(_spinTolerance);
+    updateToleranceToolTip();
+    top->addSpacing(12);
 
     // Options
     _buttonOptions = new QToolButton(main);
@@ -305,7 +222,7 @@ void PageTimbre::buildInterface()
     _buttonOptions->setPopupMode(QToolButton::InstantPopup);
     QMenu * menuOptions = new QMenu(_buttonOptions);
     QMenu * menuRows = menuOptions->addMenu(tr("Summaries"));
-    for (int summary = TimbreDisplay::SUMMARY_BRIGHTNESS; summary <= TimbreDisplay::SUMMARY_LOOP; summary++)
+    for (int summary = TimbreDisplay::SUMMARY_BRIGHTNESS; summary <= TimbreDisplay::SUMMARY_TUNING; summary++)
     {
         QAction * action = menuRows->addAction(TimbreMapWidget::getSummaryName(summary));
         action->setCheckable(true);
@@ -321,9 +238,6 @@ void PageTimbre::buildInterface()
         connect(action, SIGNAL(toggled(bool)), this, SLOT(onDisplayChanged()));
         return action;
     };
-    addOption(tr("Root keys only"), _pendingDisplay.positionsOnly, "positionsOnly");
-    addOption(tr("Colors by steps of the thresholds"), _pendingDisplay.steps, "steps");
-    addOption(tr("Automatic range of the colors"), _pendingDisplay.autoRange, "autoRange");
     menuOptions->addSeparator();
     addOption(tr("Play the clicked keys"), _playClickedNotes, "playClicked");
     _buttonOptions->setMenu(menuOptions);
@@ -346,7 +260,7 @@ void PageTimbre::buildInterface()
     action = menuPropose->addAction(shapeIcon(TimbrePalette::SHAPE_PLUS, palette.breakColor()),
                                     tr("Create computed notes at the breaks..."));
     connect(action, &QAction::triggered, this, [this]() { onPropose(100); });
-    action = menuPropose->addAction(shapeIcon(TimbrePalette::SHAPE_UP, palette.levelColor()),
+    action = menuPropose->addAction(shapeIcon(TimbrePalette::SHAPE_UP, palette.levelColor(true)),
                                     tr("Correct the deviating levels..."));
     connect(action, &QAction::triggered, this, [this]() { onPropose(101); });
     buttonPropose->setMenu(menuPropose);
@@ -360,6 +274,7 @@ void PageTimbre::buildInterface()
     _map->setModel(&_model);
     _map->setVelocity(_settings.velocity);
     mainLayout->addWidget(_map, 1);
+    updateLegend();
 
     // Detail, with a fixed height: the one of the buttons (graph and details without margins, only the buttons have some)
     QWidget * detail = new QWidget(main);
@@ -413,13 +328,7 @@ void PageTimbre::buildInterface()
     connect(_comboMode, SIGNAL(currentIndexChanged(int)), this, SLOT(onDisplayChanged()));
     connect(_comboReference, SIGNAL(currentIndexChanged(int)), this, SLOT(onSettingsChanged()));
     connect(_spinRegression, SIGNAL(valueChanged(int)), this, SLOT(onSettingsChanged()));
-    connect(_spinDetailed, SIGNAL(valueChanged(int)), this, SLOT(onSettingsChanged()));
-    connect(_comboBands, SIGNAL(currentIndexChanged(int)), this, SLOT(onSettingsChanged()));
-    connect(_spinUpperLimit, SIGNAL(valueChanged(double)), this, SLOT(onSettingsChanged()));
-    connect(_spinDynamic, SIGNAL(valueChanged(double)), this, SLOT(onSettingsChanged()));
-    foreach (QDoubleSpinBox * spin, QList<QDoubleSpinBox *>() << _spinTolerance << _spinMaximum << _spinRedundancy
-             << _spinJump << _spinLevel)
-        connect(spin, SIGNAL(valueChanged(double)), this, SLOT(onThresholdsChanged()));
+    connect(_spinTolerance, SIGNAL(valueChanged(double)), this, SLOT(onThresholdsChanged()));
     connect(_map, SIGNAL(keySelected(int,Qt::KeyboardModifiers)), this, SLOT(onKeySelected(int,Qt::KeyboardModifiers)));
     connect(_buttonCreate, SIGNAL(clicked()), this, SLOT(onCreate()));
     connect(_buttonRemove, SIGNAL(clicked()), this, SLOT(onRemove()));
@@ -522,6 +431,7 @@ void PageTimbre::recompute()
     _model.compute(_idInst, _settings, false);
     _map->setVelocity(_settings.velocity);
     _map->modelUpdated();
+    updateLegend();
 
     _stack->setCurrentIndex(0); // Even without divisions: the velocity can be changed
 
@@ -591,29 +501,34 @@ void PageTimbre::onSettingsChanged()
                                                                  TimbreSettings::REFERENCE_INTERPOLATION;
     _spinRegression->setVisible(_settings.reference == TimbreSettings::REFERENCE_REGRESSION);
     _settings.regressionCount = _spinRegression->value();
-    _settings.detailedRanks = _spinDetailed->value();
-    _settings.octaveBands = (_comboBands->currentIndex() == 1);
-    _settings.upperLimit = 1000 * _spinUpperLimit->value();
-    _settings.dynamicRange = _spinDynamic->value();
     recompute();
 }
 
 void PageTimbre::onThresholdsChanged()
 {
     _settings.tolerance = _spinTolerance->value();
-    _settings.maximum = qMax(_spinMaximum->value(), _settings.tolerance);
-    _settings.redundancy = _spinRedundancy->value();
-    _settings.jump = _spinJump->value();
-    _settings.level = _spinLevel->value();
+    updateToleranceToolTip();
     _model.applyThresholds(_settings);
     _map->modelUpdated();
+    updateLegend();
     updateDetail();
+}
+
+void PageTimbre::updateToleranceToolTip()
+{
+    QString text = tr("Timbre deviation up to which a root key is consistent") + "\n" +
+            tr("The other timbre thresholds follow it: too different beyond %1, redundant up to %2, break beyond %3.")
+            .arg(formatDb(_settings.maximum()), formatDb(_settings.redundancy()), formatDb(_settings.jump())) + "\n" +
+            tr("%1 for organs, about %2 for pianos, guitars, woodwinds and general MIDI banks.")
+            .arg(formatDb(TimbreSettings::DEFAULT_TOLERANCE), formatDb(6, 0));
+    _spinTolerance->setToolTip(text);
+    _labelTolerance->setToolTip(text);
 }
 
 void PageTimbre::onDisplayChanged()
 {
     TimbreDisplay display = _map->getDisplay();
-    display.mode = static_cast<TimbreDisplay::Mode>(_comboMode->currentIndex());
+    display.mode = static_cast<TimbreDisplay::Mode>(_comboMode->currentData().toInt());
     QList<int> summaries;
     summaries << TimbreDisplay::SUMMARY_LEVEL << TimbreDisplay::SUMMARY_TIMBRE << TimbreDisplay::SUMMARY_TRANSPOSITION;
     foreach (QAction * action, _buttonOptions->menu()->actions())
@@ -624,17 +539,39 @@ void PageTimbre::onDisplayChanged()
                 if (subAction->isChecked())
                     summaries << subAction->data().toInt();
         }
-        else if (action->objectName() == "positionsOnly")
-            display.positionsOnly = action->isChecked();
-        else if (action->objectName() == "steps")
-            display.steps = action->isChecked();
-        else if (action->objectName() == "autoRange")
-            display.autoRange = action->isChecked();
         else if (action->objectName() == "playClicked")
             _playClickedNotes = action->isChecked();
     }
     display.summaries = summaries;
     _map->setDisplay(display);
+    updateLegend();
+}
+
+void PageTimbre::updateLegend()
+{
+    // Unit on the right only, red and blue explained in the tooltip
+    double range = _map->getRange();
+    QString hatching = tr("Hatched: not reliably measured or being analyzed. Empty: nothing to measure.");
+    QString meaning;
+    switch (_map->getDisplay().mode)
+    {
+    case TimbreDisplay::MODE_LEVELS:
+        _legend->setScale(false, formatValue(-range, 0), formatDb(0, 0));
+        break;
+    case TimbreDisplay::MODE_DEVIATION:
+        _legend->setScale(true, formatValue(-range, 0, QString(), true), formatDb(range, 0, true));
+        meaning = tr("Red: stronger than the reference, blue: weaker.");
+        break;
+    case TimbreDisplay::MODE_JUMP:
+        _legend->setScale(true, formatValue(-range, 0, QString(), true), formatDb(range, 0, true));
+        meaning = tr("Red: stronger than the previous key, blue: weaker.");
+        break;
+    case TimbreDisplay::MODE_TRANSPOSITION:
+        _legend->setScale(true, formatValue(-range, 0, QString(), true), formatValue(range, 0, tr("semitones"), true));
+        meaning = tr("Red: sample transposed up, blue: transposed down.");
+        break;
+    }
+    _legend->setToolTip(meaning.isEmpty() ? hatching : meaning + "\n" + hatching);
 }
 
 void PageTimbre::readTreeSelection()
@@ -825,8 +762,8 @@ void PageTimbre::updateDetail()
     const TimbrePosition * position = (positionIt != positions.constEnd()) ? &positionIt.value() : nullptr;
     const QString levelName = TimbreMapWidget::getSummaryName(TimbreDisplay::SUMMARY_LEVEL);
     const QString timbreName = TimbreMapWidget::getSummaryName(TimbreDisplay::SUMMARY_TIMBRE);
-    auto withThreshold = [this](QDoubleSpinBox * spin, double threshold) -> QString {
-        return spin->toolTip() + " (" + formatDb(threshold) + ")";
+    auto withThreshold = [this](QString explanation, double threshold) -> QString {
+        return explanation + " (" + formatDb(threshold) + ")";
     };
     QList<TimbreBarsWidget::Series> series;
     _detail->beginUpdate();
@@ -839,19 +776,22 @@ void PageTimbre::updateDetail()
         {
         case TimbrePosition::LABEL_CONFORM:
             label = TimbreDetailWidget::makeBadge(TimbrePalette::SHAPE_CHECK, palette.conform(), tr("Consistent"),
-                                                  withThreshold(_spinTolerance, _settings.tolerance));
+                                                  withThreshold(tr("Timbre deviation up to which a root key is consistent"), _settings.tolerance));
             break;
         case TimbrePosition::LABEL_REDUNDANT:
             label = TimbreDetailWidget::makeBadge(TimbrePalette::SHAPE_MINUS, palette.redundant(), tr("Redundant"),
-                                                  withThreshold(_spinRedundancy, _settings.redundancy));
+                                                  withThreshold(tr("Largest timbre deviation over the keys of a consistent root key if it were "
+                                                                    "removed, for being redundant"), _settings.redundancy()));
             break;
         case TimbrePosition::LABEL_TO_CORRECT:
             label = TimbreDetailWidget::makeBadge(TimbrePalette::SHAPE_TILDE, palette.toCorrect(), tr("To correct"),
-                                                  withThreshold(_spinMaximum, _settings.maximum));
+                                                  withThreshold(tr("Timbre deviation up to which a root key can be corrected, beyond it is "
+                                                                    "too different"), _settings.maximum()));
             break;
         case TimbrePosition::LABEL_TOO_DIFFERENT:
             label = TimbreDetailWidget::makeBadge(TimbrePalette::SHAPE_CROSS, palette.tooDifferent(), tr("Too different"),
-                                                  withThreshold(_spinMaximum, _settings.maximum));
+                                                  withThreshold(tr("Timbre deviation up to which a root key can be corrected, beyond it is "
+                                                                    "too different"), _settings.maximum()));
             break;
         default:
             break;
@@ -881,8 +821,10 @@ void PageTimbre::updateDetail()
         TimbreDetailWidget::Badge levelBadge;
         if (position->levelLabel)
             levelBadge = TimbreDetailWidget::makeBadge(
-                        deviation.levelDifference > 0 ? TimbrePalette::SHAPE_UP : TimbrePalette::SHAPE_DOWN, palette.levelColor(),
-                        deviation.levelDifference > 0 ? tr("Too loud") : tr("Too soft"), withThreshold(_spinLevel, _settings.level));
+                        deviation.levelDifference > 0 ? TimbrePalette::SHAPE_UP : TimbrePalette::SHAPE_DOWN,
+                        palette.levelColor(deviation.levelDifference > 0),
+                        deviation.levelDifference > 0 ? tr("Too loud") : tr("Too soft"),
+                        withThreshold(tr("Level deviation from which a correction of the attenuation is proposed"), TimbreSettings::LEVEL));
         // Measured at the root key: its name is given when another key is selected
         _detail->beginSection(TimbreDetailWidget::SECTION_DEVIATION,
                               hasPosition ? TimbreMapWidget::getModeName(TimbreDisplay::MODE_DEVIATION) :
@@ -891,7 +833,7 @@ void PageTimbre::updateDetail()
         _detail->addRow(levelName, QStringList(formatDb(deviation.levelDifference, 1, true)), QString(),
                         TimbreDetailWidget::shapeOnly(levelBadge));
         _detail->addRow(timbreName, QStringList(formatDb(deviation.timbreDifference)));
-        _detail->addRow(TimbreMapWidget::getModeName(TimbreDisplay::MODE_CONFIDENCE),
+        _detail->addRow(tr("Confidence"),
                         QStringList(tr("%1%", "percentage").arg(qRound(100 * deviation.confidence))));
         if (position->referenceAtEdge)
             _detail->addNote(tr("Reference extrapolated from the neighbors on one side: less reliable"));
@@ -941,7 +883,8 @@ void PageTimbre::updateDetail()
     if (previousJunction || nextJunction)
     {
         TimbreDetailWidget::Badge breakBadge = TimbreDetailWidget::makeBadge(
-                    TimbrePalette::SHAPE_PLUS, palette.breakColor(), tr("Break"), withThreshold(_spinJump, _settings.jump));
+                    TimbrePalette::SHAPE_PLUS, palette.breakColor(), tr("Break"), withThreshold(tr("Timbre jump at a junction from which a computed note is proposed"),
+                                                                                         _settings.jump()));
         bool hasBreak = (previousJunction && tk.breakLabel) || (nextJunction && nextKey->breakLabel);
         double largest = qMax(previousJunction ? tk.jump.timbreDifference : 0.0, nextJunction ? nextKey->jump.timbreDifference : 0.0);
         _detail->beginSection(TimbreDetailWidget::SECTION_JUNCTIONS, tr("Junctions"), timbreName + " " + formatDb(largest),
@@ -1004,14 +947,12 @@ void PageTimbre::updateDetail()
         _detail->addRow(TimbreMapWidget::getSummaryName(TimbreDisplay::SUMMARY_TUNING),
                         QStringList(formatValue(tk.tuning - 100 * std::round(tk.tuning / 100), 1, tr("cents"), true)),
                         tr("Deviation from the closest note of the equal temperament"));
-        _detail->addRow(TimbreMapWidget::getSummaryName(TimbreDisplay::SUMMARY_LOOP), QStringList(formatValue(tk.loopCorrelation, 3)),
-                        tr("Correlation at the loop point: 1 for a perfect loop"));
         _detail->addRow(tr("Duration factor"), QStringList(formatValue(tk.durationFactor, 3)),
                         tr("Durations of the attack, the tremolo and the beats compared to the sample"));
     }
 
     _detail->endUpdate();
-    _bars->setData(_model.getRows(), series, _settings.dynamicRange);
+    _bars->setData(_model.getRows(), series, TimbreSettings::DYNAMIC_RANGE);
 }
 
 void PageTimbre::runInThread(std::function<void()> function, QString text)

@@ -30,9 +30,9 @@ class QGraphicsView;
 
 // Row of white and black squares, one per key, following the horizontal zoom and scroll of a view in which the key k
 // lies between the abscissas k - 0.5 and k + 0.5 (range editor, which places it between its viewport and its
-// horizontal scroll bar). The part of the scene of the view on the left of the first key (margin of the labels) is a
-// gray area that cannot be played. Clicking plays the keys, with a velocity increasing downwards as on the virtual
-// keyboard. The painting of the keys is shared with the timbre view.
+// horizontal scroll bar). The part of the scene of the view on the left of the first key (margin of the labels) is left
+// empty, with the background of the graph. Clicking plays the keys, with a velocity increasing downwards as on the
+// virtual keyboard. The painting of the keys is shared with the timbre view.
 class KeyboardStrip : public QWidget
 {
     Q_OBJECT
@@ -52,7 +52,6 @@ public:
     static const int KEYS_HEIGHT; // Height of the painted keys (+ 1 for the bottom border)
     static bool isBlackKey(int key);
     static QColor keyColor(int key, bool isDark);
-    static QColor marginColor(const QColor &background, const QColor &text); // Area below the labels, no keys
 
     // Keys side by side, the separators being drawn after all the fills (otherwise, depending on the rounding of the
     // abscissas, the next key covers the separator and two white keys merge)
@@ -69,7 +68,7 @@ protected:
     bool event(QEvent * event) override;
 
 private:
-    bool getScale(double &left, double &keyWidth, int &visibleLeft, int &visibleRight, double * sceneLeft = nullptr) const;
+    bool getScale(double &left, double &keyWidth, int &visibleLeft, int &visibleRight) const;
     int keyAt(QPoint position) const;
     int velocityAt(QPoint position) const;
     void stopKey();
@@ -80,7 +79,7 @@ private:
     QList<int> _playedKeys;
     int _playingKey;
     bool _isDark;
-    QColor _border, _highlight, _margin;
+    QColor _border, _highlight;
 };
 
 #endif // KEYBOARDSTRIP_H

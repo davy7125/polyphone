@@ -2830,47 +2830,47 @@ una señal</translation>
 <context>
     <name>DialogTimbreCreation</name>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="39"/>
+        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="43"/>
         <source>Create a computed note</source>
         <translation>Crear una nota calculada</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="43"/>
+        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="47"/>
         <source>Note at the key %1: the closest root key is transposed and the levels of its harmonics are interpolated (or extrapolated) from a second root key.</source>
         <translation>Nota %1: se transpone la nota raíz más cercana y los niveles de sus armónicos se interpolan (o se extrapolan) a partir de una segunda nota raíz.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="51"/>
+        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="55"/>
         <source>Automatic: %1 transposed, %2 for the harmonics</source>
         <translation>Automático: %1 transpuesta, %2 para los armónicos</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="56"/>
+        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="60"/>
         <source>Chosen root keys:</source>
         <translation>Notas raíz elegidas:</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="69"/>
+        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="73"/>
         <source>Root key transposed</source>
         <translation>Nota raíz transpuesta</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="70"/>
+        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="74"/>
         <source>Root key for the harmonics</source>
         <translation>Nota raíz para los armónicos</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="149"/>
+        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="137"/>
         <source>The two root keys must be different.</source>
         <translation>Las dos notas raíz deben ser diferentes.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="154"/>
+        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="145"/>
         <source>The key is far from the root keys used: the extrapolation of the harmonics may be inaccurate.</source>
         <translation>La nota está lejos de las notas raíz utilizadas: la extrapolación de los armónicos puede ser imprecisa.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="156"/>
+        <location filename="../../editor/timbre/dialogtimbrecreation.cpp" line="147"/>
         <source>The closest root key is transposed by more than an octave.</source>
         <translation>La nota raíz más cercana se transpone más de una octava.</translation>
     </message>
@@ -5486,268 +5486,177 @@ Advertencia: la calidad se reducirá y el bucle podría alterarse</translation>
 <context>
     <name>PageTimbre</name>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="181"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="158"/>
         <source>Velocity</source>
         <translation>Velocidad</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="192"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="169"/>
         <source>Display</source>
         <translation>Visualización</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="210"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="923"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="190"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="865"/>
         <source>Reference</source>
         <translation>Referencia</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="212"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="192"/>
         <source>Neighbors</source>
         <translation>Vecinas</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="213"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="193"/>
         <source>Local regression</source>
         <translation>Regresión local</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="214"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="194"/>
         <source>Reference of a root key: interpolation between its two neighbors, or robust regression on several neighbors on each side</source>
         <translation>Referencia de una nota raíz: interpolación entre sus dos vecinas, o regresión robusta sobre varias vecinas a cada lado</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="221"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="201"/>
         <source>Neighbors on each side</source>
         <translation>Vecinas a cada lado</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="228"/>
-        <source>Partials</source>
-        <translation>Parciales</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="236"/>
-        <source>Ranks displayed one by one</source>
-        <translation>Armónicos mostrados uno a uno</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="238"/>
-        <source>Bands of a third of an octave</source>
-        <translation>Bandas de un tercio de octava</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="239"/>
-        <source>Bands of an octave</source>
-        <translation>Bandas de una octava</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="241"/>
-        <source>Next ranks</source>
-        <translation>Armónicos siguientes</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="245"/>
-        <source>kHz</source>
-        <comment>unit for kilohertz</comment>
-        <translation>kHz</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="246"/>
-        <source>Half of the sample rate</source>
-        <translation>Mitad de la frecuencia de muestreo</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="248"/>
-        <source>Upper limit</source>
-        <translation>Límite superior</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="252"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="274"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="453"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="213"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="362"/>
         <source>dB</source>
         <comment>unit for decibels</comment>
         <translation>dB</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="254"/>
-        <source>Ranks further below the strongest one of the key are ignored</source>
-        <translation>Se ignoran los armónicos situados más de este valor por debajo del más fuerte de la nota</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="255"/>
-        <source>Dynamic range</source>
-        <translation>Rango dinámico</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="264"/>
-        <source>Thresholds</source>
-        <translation>Umbrales</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="279"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="207"/>
         <source>Tolerance</source>
         <translation>Tolerancia</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="279"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="519"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="779"/>
         <source>Timbre deviation up to which a root key is consistent</source>
         <translation>Desviación de timbre hasta la cual una nota raíz es coherente</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="280"/>
-        <source>Maximum</source>
-        <translation>Máximo</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="280"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="788"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="793"/>
         <source>Timbre deviation up to which a root key can be corrected, beyond it is too different</source>
         <translation>Desviación de timbre hasta la cual una nota raíz se puede corregir; más allá, es demasiado diferente</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="282"/>
-        <source>Redundancy</source>
-        <translation>Redundancia</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="282"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="783"/>
         <source>Largest timbre deviation over the keys of a consistent root key if it were removed, for being redundant</source>
         <translation>Mayor desviación de timbre en las notas de una nota raíz coherente si se eliminara, para considerarla redundante</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="284"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="944"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="886"/>
         <source>Break</source>
         <translation>Ruptura</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="284"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="886"/>
         <source>Timbre jump at a junction from which a computed note is proposed</source>
         <translation>Salto de timbre en una unión a partir del cual se propone una nota calculada</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="285"/>
-        <source>Level</source>
-        <translation>Nivel</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="285"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="827"/>
         <source>Level deviation from which a correction of the attenuation is proposed</source>
         <translation>Desviación de nivel a partir de la cual se propone una corrección de la atenuación</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="286"/>
-        <source>Default values</source>
-        <translation>Valores por defecto</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="304"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="221"/>
         <source>Options</source>
         <translation>Opciones</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="307"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="224"/>
         <source>Summaries</source>
         <translation>Resúmenes</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="324"/>
-        <source>Root keys only</source>
-        <translation>Solo las notas raíz</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="325"/>
-        <source>Colors by steps of the thresholds</source>
-        <translation>Colores escalonados según los umbrales</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="326"/>
-        <source>Automatic range of the colors</source>
-        <translation>Rango automático de los colores</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="328"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="242"/>
         <source>Play the clicked keys</source>
         <translation>Reproducir las notas al hacer clic</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="334"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1260"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="248"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1206"/>
         <source>Propose</source>
         <translation>Proponer</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="338"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="252"/>
         <source>Correct the root keys marked &quot;to correct&quot;...</source>
         <translation>Corregir las notas raíz marcadas como &quot;por corregir&quot;...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="341"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="255"/>
         <source>Replace the root keys marked &quot;too different&quot; with computed notes...</source>
         <translation>Reemplazar las notas raíz marcadas como &quot;demasiado diferente&quot; por notas calculadas...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="344"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="258"/>
         <source>Remove the redundant root keys...</source>
         <translation>Eliminar las notas raíz redundantes...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="347"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="261"/>
         <source>Create computed notes at the breaks...</source>
         <translation>Crear notas calculadas en las rupturas...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="350"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="264"/>
         <source>Correct the deviating levels...</source>
         <translation>Corregir los niveles que se desvían...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="394"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="309"/>
         <source>Create a note here...</source>
         <translation>Crear una nota aquí...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="395"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="310"/>
         <source>Remove...</source>
         <translation>Eliminar...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="396"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="311"/>
         <source>Replace with a computed note...</source>
         <translation>Reemplazar por una nota calculada...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="397"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="312"/>
         <source>Correct the timbre...</source>
         <translation>Corregir el timbre...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="398"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1136"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1295"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="313"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1077"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1241"/>
         <source>Correct the level</source>
         <translation>Corregir el nivel</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="399"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="314"/>
         <source>Check by rendering</source>
         <translation>Verificar mediante renderizado</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="400"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="315"/>
         <source>Play the key with the sound engine and measure the harmonics of the result</source>
         <translation>Reproduce la nota con el motor de sonido y mide los armónicos del resultado</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="474"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="383"/>
         <source>Select a single instrument
 to display its timbre</source>
         <translation>Selecciona un solo instrumento
 para mostrar su timbre</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="544"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="454"/>
         <source>Analysis of the samples: %n remaining</source>
         <translation>
             <numerusform>Análisis de las muestras: %n restante</numerusform>
@@ -5755,83 +5664,83 @@ para mostrar su timbre</translation>
         </translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="808"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="745"/>
         <source>No division of this instrument plays at the velocity %1.</source>
         <translation>Ninguna división de este instrumento suena a la velocidad %1.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="385"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="300"/>
         <source>Click on a key to see what it plays.</source>
         <translation>Haz clic en una nota para ver lo que reproduce.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="841"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="778"/>
         <source>Consistent</source>
         <translation>Coherente</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="845"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="782"/>
         <source>Redundant</source>
         <translation>Redundante</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="849"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="787"/>
         <source>To correct</source>
         <translation>Por corregir</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="853"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="792"/>
         <source>Too different</source>
         <translation>Demasiado diferente</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="861"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="801"/>
         <source>Root key %1</source>
         <translation>Nota raíz %1</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="864"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="804"/>
         <source>Key %1</source>
         <translation>Nota %1</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="866"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="806"/>
         <source>No sample</source>
         <translation>Sin muestra</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="868"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="808"/>
         <source>Played by the root key %1</source>
         <translation>Reproducida por la nota raíz %1</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="897"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="839"/>
         <source>Reference extrapolated from the neighbors on one side: less reliable</source>
         <translation>Referencia extrapolada a partir de las vecinas de un solo lado: menos fiable</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="875"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="815"/>
         <source>Analysis in progress...</source>
         <translation>Análisis en curso...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="919"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="927"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="861"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="869"/>
         <source>Heard</source>
         <translation>Escuchado</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="933"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="875"/>
         <source>Computed note</source>
         <translation>Nota calculada</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="963"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="906"/>
         <source>Rendered</source>
         <translation>Renderizado</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="873"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="813"/>
         <source>%n root keys selected: the actions apply to all of them.</source>
         <translation>
             <numerusform>%n nota raíz seleccionada: las acciones se aplican a todas.</numerusform>
@@ -5839,162 +5748,193 @@ para mostrar su timbre</translation>
         </translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="885"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="520"/>
+        <source>The other timbre thresholds follow it: too different beyond %1, redundant up to %2, break beyond %3.</source>
+        <translation>Los demás umbrales de timbre la siguen: demasiado diferente por encima de %1, redundante hasta %2, ruptura por encima de %3.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="522"/>
+        <source>%1 for organs, about %2 for pianos, guitars, woodwinds and general MIDI banks.</source>
+        <translation>%1 para los órganos, unos %2 para pianos, guitarras, maderas y bancos General MIDI.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="826"/>
         <source>Too loud</source>
         <translation>Demasiado fuerte</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="885"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="826"/>
         <source>Too soft</source>
         <translation>Demasiado débil</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="889"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="831"/>
         <source>Deviation of the root key %1</source>
         <translation>Desviación de la nota raíz %1</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="895"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="837"/>
         <source>%1%</source>
         <comment>percentage</comment>
         <translation>%1 %</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="899"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="841"/>
         <source>Root key outside the key range of its divisions: measured by playing them at the root key</source>
         <translation>Nota raíz fuera del rango de notas de sus divisiones: medida tocándolas en la nota raíz</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="904"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="846"/>
         <source>If removed</source>
         <translation>Si se eliminara</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="907"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="849"/>
         <source>Largest deviation</source>
         <translation>Mayor desviación</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="910"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="852"/>
         <source>New junction</source>
         <translation>Nueva unión</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="919"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="861"/>
         <source>Played at the root key</source>
         <translation>Tocado en la nota raíz</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="947"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="890"/>
         <source>Junctions</source>
         <translation>Uniones</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="972"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="915"/>
         <source>Rendering against the model</source>
         <translation>Renderizado frente al modelo</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="976"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="919"/>
         <source>Largest deviation of a row</source>
         <translation>Mayor desviación de una fila</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="983"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="926"/>
         <source>Samples</source>
         <translation>Muestras</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="988"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="570"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="931"/>
         <source>semitones</source>
         <translation>semitonos</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="989"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="554"/>
+        <source>Hatched: not reliably measured or being analyzed. Empty: nothing to measure.</source>
+        <translation>Rayado: medición poco fiable o en análisis. Vacío: nada que medir.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="563"/>
+        <source>Red: stronger than the reference, blue: weaker.</source>
+        <translation>Rojo: más fuerte que la referencia, azul: más débil.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="567"/>
+        <source>Red: stronger than the previous key, blue: weaker.</source>
+        <translation>Rojo: más fuerte que la nota anterior, azul: más débil.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="571"/>
+        <source>Red: sample transposed up, blue: transposed down.</source>
+        <translation>Rojo: muestra transpuesta hacia arriba, azul: hacia abajo.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="836"/>
+        <source>Confidence</source>
+        <translation>Confianza</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="932"/>
         <source>Attenuation</source>
         <translation>Atenuación</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="990"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="933"/>
         <source>Filter</source>
         <translation>Filtro</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="991"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="934"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
         <translation>Hz</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="995"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="938"/>
         <source>Measures</source>
         <translation>Medidas</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="998"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="941"/>
         <source>Center of gravity of the partials, as a rank</source>
         <translation>Centro de gravedad de los parciales, como número de armónico</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="999"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="942"/>
         <source>Spectral slope</source>
         <translation>Pendiente espectral</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="999"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="942"/>
         <source>dB/octave</source>
         <comment>unit for decibels per octave</comment>
         <translation>dB/octava</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1001"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="944"/>
         <source>Odd ranks (3, 5...) against even ranks (2, 4...)</source>
         <translation>Armónicos impares (3, 5...) frente a pares (2, 4...)</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1003"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="946"/>
         <source>Harmonics-to-noise ratio</source>
         <translation>Relación armónicos-ruido</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1005"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="948"/>
         <source>cents</source>
         <translation>centésimas</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1006"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="949"/>
         <source>Deviation from the closest note of the equal temperament</source>
         <translation>Desviación respecto a la nota más cercana del temperamento igual</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1008"/>
-        <source>Correlation at the loop point: 1 for a perfect loop</source>
-        <translation>Correlación en el punto de bucle: 1 para un bucle perfecto</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1009"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="950"/>
         <source>Duration factor</source>
         <translation>Factor de duración</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1010"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="951"/>
         <source>Durations of the attack, the tremolo and the beats compared to the sample</source>
         <translation>Duraciones del ataque, el trémolo y los batimientos respecto a la muestra</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1042"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="983"/>
         <source>Computing the note %1...</source>
         <translation>Calculando la nota %1...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1070"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1220"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1440"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1011"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1161"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1386"/>
         <source>Warning</source>
         <translation>Advertencia</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1094"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1035"/>
         <source>Remove the root key %1 (%n division(s))? The neighbors will play its keys.</source>
         <translation>
             <numerusform>¿Eliminar la nota raíz %1 (%n división)? Las vecinas reproducirán sus notas.</numerusform>
@@ -6002,139 +5942,139 @@ para mostrar su timbre</translation>
         </translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1097"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1038"/>
         <source>Largest timbre deviation over its keys: %1, level: %2.</source>
         <translation>Mayor desviación de timbre en sus notas: %1, de nivel: %2.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1100"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1041"/>
         <source>Timbre jump at the new junction: %1.</source>
         <translation>Salto de timbre en la nueva unión: %1.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1103"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1044"/>
         <source>Remove the following root keys? The neighbors will play their keys.</source>
         <translation>¿Eliminar las siguientes notas raíz? Las vecinas reproducirán sus notas.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1105"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1046"/>
         <source>Remove</source>
         <translation>Eliminar</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1106"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1047"/>
         <source>Also remove the samples that are not used anymore</source>
         <translation>Eliminar también las muestras que ya no se usan</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1121"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1062"/>
         <source>Replace the root key %1 with a note computed from its neighbors?</source>
         <translation>¿Reemplazar la nota raíz %1 por una nota calculada a partir de sus vecinas?</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1122"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1063"/>
         <source>Replace the following root keys with notes computed from their neighbors?</source>
         <translation>¿Reemplazar las siguientes notas raíz por notas calculadas a partir de sus vecinas?</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1124"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1065"/>
         <source>Replace</source>
         <translation>Reemplazar</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1137"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1296"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1078"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1242"/>
         <source>Correct the level of the following root keys?</source>
         <translation>¿Corregir el nivel de las siguientes notas raíz?</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1170"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1111"/>
         <source>Shared samples</source>
         <translation>Muestras compartidas</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1171"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1112"/>
         <source>The following samples are also used by other divisions or instruments:</source>
         <translation>Las siguientes muestras también se usan en otras divisiones o instrumentos:</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1173"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1114"/>
         <source>Duplicate them for the corrected root keys, or modify them everywhere?</source>
         <translation>¿Duplicarlas para las notas raíz corregidas o modificarlas en todas partes?</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1174"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1115"/>
         <source>Duplicate</source>
         <translation>Duplicar</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1175"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1116"/>
         <source>Modify everywhere</source>
         <translation>Modificar en todas partes</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1178"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1119"/>
         <source>Don&apos;t ask again (until Polyphone is closed)</source>
         <translation>No volver a preguntar (hasta cerrar Polyphone)</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1217"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1158"/>
         <source>Rendering of the key %1...</source>
         <translation>Renderizado de la nota %1...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1220"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1161"/>
         <source>The rendering couldn&apos;t be analyzed.</source>
         <translation>No se pudo analizar el renderizado.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1260"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1206"/>
         <source>Nothing to propose with the current thresholds.</source>
         <translation>Nada que proponer con los umbrales actuales.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1289"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1235"/>
         <source>Create computed notes</source>
         <translation>Crear notas calculadas</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1290"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1236"/>
         <source>Create computed notes at the following keys?</source>
         <translation>¿Crear notas calculadas en las siguientes notas?</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1317"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1263"/>
         <source>Processing...</source>
         <translation>Procesando...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1317"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1263"/>
         <source>Cancel</source>
         <translation>Cancelar</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1376"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1322"/>
         <source>Processing the key %1...</source>
         <translation>Procesando la nota %1...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1398"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1344"/>
         <source>%1: the attenuation reached its limit (%2 missing).</source>
         <translation>%1: la atenuación alcanzó su límite (faltan %2).</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1412"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1358"/>
         <source>Correction of the key %1...</source>
         <translation>Corrección de la nota %1...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1416"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1362"/>
         <source>: </source>
         <comment>separator</comment>
         <translation>: </translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1438"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1384"/>
         <source>Not processed (the label changed or nothing to do):</source>
         <translation>No procesadas (la etiqueta cambió o no había nada que hacer):</translation>
     </message>
@@ -8298,32 +8238,32 @@ Otros editores de soundfonts pueden mostrar otras unidades.</translation>
 <context>
     <name>TimbreActions</name>
     <message>
-        <location filename="../../editor/timbre/model/timbreactions.cpp" line="61"/>
+        <location filename="../../editor/timbre/model/timbreactions.cpp" line="84"/>
         <source>The key %1 already has a sample.</source>
         <translation>La nota %1 ya tiene una muestra.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/model/timbreactions.cpp" line="66"/>
+        <location filename="../../editor/timbre/model/timbreactions.cpp" line="89"/>
         <source>At least two root keys are needed for computing a note.</source>
         <translation>Se necesitan al menos dos notas raíz para calcular una nota.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/model/timbreactions.cpp" line="107"/>
+        <location filename="../../editor/timbre/model/timbreactions.cpp" line="136"/>
         <source>The note couldn&apos;t be computed.</source>
         <translation>No se pudo calcular la nota.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/model/timbreactions.cpp" line="117"/>
+        <location filename="../../editor/timbre/model/timbreactions.cpp" line="171"/>
         <source>No harmonics found, only the level was interpolated.</source>
         <translation>No se encontraron armónicos, solo se interpoló el nivel.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/model/timbreactions.cpp" line="119"/>
+        <location filename="../../editor/timbre/model/timbreactions.cpp" line="173"/>
         <source>The following samples couldn&apos;t be looped:</source>
         <translation>No se ha podido hacer un bucle en las siguientes muestras:</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/model/timbreactions.cpp" line="502"/>
+        <location filename="../../editor/timbre/model/timbreactions.cpp" line="559"/>
         <source>The attenuation reached its limit: the level differs by %1 dB from the expected one.</source>
         <translation>La atenuación alcanzó su límite: el nivel difiere en %1 dB del esperado.</translation>
     </message>
@@ -8346,129 +8286,114 @@ Otros editores de soundfonts pueden mostrar otras unidades.</translation>
 <context>
     <name>TimbreMapWidget</name>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="82"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="91"/>
         <source>Level</source>
         <translation>Nivel</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="83"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="92"/>
         <source>Timbre</source>
         <translation>Timbre</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="84"/>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="102"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="93"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="109"/>
         <source>Transposition</source>
         <translation>Transposición</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="85"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="94"/>
         <source>Brightness</source>
         <translation>Brillo</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="86"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="95"/>
         <source>Odd / even</source>
         <translation>Impares / pares</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="87"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="96"/>
         <source>Noise</source>
         <translation>Ruido</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="88"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="97"/>
         <source>Tuning</source>
         <translation>Afinación</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="89"/>
-        <source>Loop</source>
-        <translation>Bucle</translation>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="106"/>
+        <source>Levels</source>
+        <translation>Niveles</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="98"/>
-        <source>Absolute levels</source>
-        <translation>Niveles absolutos</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="99"/>
-        <source>Relative levels</source>
-        <translation>Niveles relativos</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="100"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="107"/>
         <source>Deviation from the reference</source>
         <translation>Desviación respecto a la referencia</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="101"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="108"/>
         <source>Jumps</source>
         <translation>Saltos</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="103"/>
-        <source>Confidence</source>
-        <translation>Confianza</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="224"/>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="623"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="194"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="571"/>
         <source>Decisions</source>
         <translation>Decisiones</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="843"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="789"/>
         <source>No sample</source>
         <translation>Sin muestra</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="856"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="802"/>
         <source>Row: %1</source>
         <translation>Fila: %1</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="856"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="802"/>
         <source>level: %1 dB</source>
         <translation>nivel: %1 dB</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="861"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="807"/>
         <source>Deviation from the reference: %1 dB</source>
         <translation>Desviación respecto a la referencia: %1 dB</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="864"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="810"/>
         <source>Jump from the previous key: %1 dB</source>
         <translation>Salto desde la nota anterior: %1 dB</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="877"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="823"/>
         <source>Samples: %1</source>
         <translation>Muestras: %1</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="882"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="828"/>
         <source>Root key: %1</source>
         <translation>Nota raíz: %1</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="884"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="830"/>
         <source>Root key: %1, outside the key range of its divisions</source>
         <translation>Nota raíz: %1, fuera del rango de notas de sus divisiones</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="886"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="832"/>
         <source>Transposition: %1 semitones</source>
         <translation>Transposición: %1 semitonos</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="887"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="833"/>
         <source>Duration factor: %1</source>
         <translation>Factor de duración: %1</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="888"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="834"/>
         <source>Level: %1 dB</source>
         <translation>Nivel: %1 dB</translation>
     </message>

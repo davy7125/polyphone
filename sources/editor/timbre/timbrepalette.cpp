@@ -69,39 +69,36 @@ TimbrePalette::TimbrePalette(Surface surface)
     _hatch = ThemeManager::mix(_background, _text, 0.45);
     _highlight = theme->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
 
-    // Okabe-Ito colors, readable by color blind people, a bit lighter on a dark background
-    _conform = _dark ? QColor(80, 200, 150) : QColor(0, 140, 100);
-    _redundant = _dark ? QColor(110, 180, 240) : QColor(0, 114, 178);
-    _toCorrect = _dark ? QColor(240, 170, 60) : QColor(220, 130, 0);
-    _tooDifferent = _dark ? QColor(240, 110, 70) : QColor(213, 94, 0);
-    _break = _dark ? QColor(220, 140, 200) : QColor(170, 70, 150);
-    _level = _dark ? QColor(240, 228, 66) : QColor(160, 140, 0);
+    // Deviations (RdBu): from the neutral color to colors more and more contrasted with the background, darker on a
+    // light background and lighter on a dark one (as the shades of grey)
+    if (_dark)
+    {
+        _negativeStops = { _neutral, QColor(40, 70, 120), QColor(60, 130, 210), QColor(150, 200, 255) };
+        _positiveStops = { _neutral, QColor(120, 45, 40), QColor(220, 70, 60), QColor(255, 165, 145) };
+    }
+    else
+    {
+        _negativeStops = { _neutral, QColor(103, 169, 207), QColor(33, 102, 172), QColor(5, 48, 97) };
+        _positiveStops = { _neutral, QColor(239, 138, 98), QColor(178, 24, 43), QColor(103, 0, 31) };
+    }
+
+    // Labels, drawn as thin shapes: a light red less visible than the red on both backgrounds
+    _grey = ThemeManager::mix(_background, _text, 0.5);
+    _lightRed = _dark ? QColor(200, 110, 95) : QColor(239, 138, 98);
+    _red = _dark ? QColor(255, 105, 85) : QColor(178, 24, 43);
+    _blue = _dark ? QColor(110, 170, 240) : QColor(33, 102, 172);
 }
 
-QColor TimbrePalette::sequential(double t) const
+QColor TimbrePalette::magnitude(double t) const
 {
-    static const QList<QColor> viridis = {
-        QColor(0x44, 0x01, 0x54), QColor(0x48, 0x28, 0x78), QColor(0x3e, 0x49, 0x89), QColor(0x31, 0x68, 0x8e),
-        QColor(0x26, 0x82, 0x8e), QColor(0x1f, 0x9e, 0x89), QColor(0x35, 0xb7, 0x79), QColor(0x6e, 0xce, 0x58),
-        QColor(0xb5, 0xde, 0x2b), QColor(0xfd, 0xe7, 0x25) };
-    return interpolate(viridis, t);
+    return ThemeManager::mix(_background, _text, 0.1 + 0.75 * qBound(0.0, t, 1.0));
 }
 
 QColor TimbrePalette::diverging(double t) const
 {
-    // Blue - neutral - red (RdBu), the neutral color being the background of the theme
-    QList<QColor> negative = { _neutral, _dark ? QColor(80, 150, 210) : QColor(103, 169, 207), QColor(33, 102, 172), QColor(5, 48, 97) };
-    QList<QColor> positive = { _neutral, _dark ? QColor(230, 120, 100) : QColor(239, 138, 98), QColor(178, 24, 43), QColor(103, 0, 31) };
-    if (_dark)
-    {
-        // The darkest colors would vanish in the background
-        negative[3] = QColor(140, 200, 255);
-        positive[3] = QColor(255, 170, 150);
-        negative[2] = QColor(60, 130, 210);
-        positive[2] = QColor(220, 70, 60);
-    }
+    // Blue - neutral - red (RdBu), the neutral color being close to the background of the theme
     t = qBound(-1.0, t, 1.0);
-    return t < 0 ? interpolate(negative, -t) : interpolate(positive, t);
+    return t < 0 ? interpolate(_negativeStops, -t) : interpolate(_positiveStops, t);
 }
 
 QColor TimbrePalette::readable(QColor color, double minimumContrast) const

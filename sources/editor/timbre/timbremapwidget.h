@@ -33,20 +33,15 @@
 // Options of the display of the map
 struct TimbreDisplay
 {
+    // Stable codes stored in the configuration (0 was "Absolute levels", 5 "Confidence")
     enum Mode
     {
-        MODE_ABSOLUTE = 0, // Levels in dB
-        MODE_RELATIVE = 1, // Levels relative to the strongest row of the key
+        MODE_LEVELS = 1, // Levels relative to the strongest row of the key
         MODE_DEVIATION = 2, // Deviation from the reference, over the keys of each position
         MODE_JUMP = 3, // Difference with the previous key
-        MODE_TRANSPOSITION = 4, // Semitones from the root key
-        MODE_CONFIDENCE = 5 // Part of the power well measured
+        MODE_TRANSPOSITION = 4 // Semitones from the root key
     };
     Mode mode = MODE_DEVIATION;
-    bool autoRange = true;
-    double fixedRange = 12; // dB of the diverging palettes (deviation, jump), the levels using the dynamic range
-    bool steps = false; // Colors by steps aligned on the thresholds, the tolerance in the neutral color
-    bool positionsOnly = false; // One column per root key
 
     // Optional summary rows
     enum Summary
@@ -57,8 +52,7 @@ struct TimbreDisplay
         SUMMARY_BRIGHTNESS = 3,
         SUMMARY_ODD_EVEN = 4,
         SUMMARY_NOISE = 5,
-        SUMMARY_TUNING = 6,
-        SUMMARY_LOOP = 7
+        SUMMARY_TUNING = 6
     };
     QList<int> summaries = { SUMMARY_LEVEL, SUMMARY_TIMBRE, SUMMARY_TRANSPOSITION };
 };
@@ -82,6 +76,11 @@ public:
     void setVelocity(int velocity) { _velocity = velocity; }
     void modelUpdated() { updateColumns(); update(); }
 
+    // Fixed scale of the colors of the map: dynamic range for the levels, twice the maximum threshold for the
+    // deviations and the jumps, an octave for the transposition
+    double getRange() const;
+    static const double TRANSPOSITION_RANGE;
+
     static QString getSummaryName(int summary);
     static QString getModeName(int mode);
 
@@ -104,12 +103,12 @@ private:
     int columnAt(int x) const;
     int keyAt(int x) const;
     QRectF columnRect(int column, double top, double height) const;
+    QRectF cellRect(int column, int row) const;
+    static QRectF snapped(double left, double top, double right, double bottom);
     void drawLabel(QPainter &painter, double top, double height, const QString &text);
     QColor cellColor(int key, int row, bool &hatched, bool &absent);
     QColor summaryColor(int summary, int key, bool &hatched);
-    QColor divergingColor(double value, double range, bool withThresholds);
     QString getTooltip(QPoint position);
-    double getAutoRange();
     void paintKeyboard(QPainter &painter);
     void paintDecisions(QPainter &painter);
 
@@ -136,10 +135,7 @@ private:
 
     // Values per key computed once for each model
     QVector<double> _levels[128], _confidence[128];
-    QVector<int> _states[128];
-    double _maxLevel;
     QMap<int, QPair<double, double> > _summaryBounds; // Summary => minimum, maximum
-    double _maxTransposition;
 
     // Mouse: click (selection), translation (left button held), dilation (right button held), keyboard
     Qt::MouseButton _pressedButton;
@@ -147,10 +143,28 @@ private:
     double _pressScroll, _pressZoom, _pressColumn; // Column under the mouse, in column widths from the first one
     bool _moved;
     int _pressedKey, _playingKey;
-    double _rangeCache;
 
     static const double LABEL_PADDING;
     static const double MAX_ZOOM;
+};
+
+// Color scale of the map, next to the list of the display modes: a gradient between two values
+class TimbreLegendWidget : public QWidget
+{
+public:
+    explicit TimbreLegendWidget(QWidget * parent = nullptr);
+    void setScale(bool diverging, QString minimum, QString maximum);
+
+protected:
+    void paintEvent(QPaintEvent * event) override;
+    QSize sizeHint() const override;
+
+private:
+    bool _diverging;
+    QString _minimum, _maximum;
+    TimbrePalette _palette;
+
+    static const int BAR_WIDTH;
 };
 
 #endif // TIMBREMAPWIDGET_H

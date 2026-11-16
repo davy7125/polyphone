@@ -50,13 +50,6 @@ static TimbreSettings readSettings(const McpArguments &args)
 {
     TimbreSettings settings;
     settings.velocity = args.getInt("velocity", 1, 127, 100);
-    settings.detailedRanks = args.getInt("detailed_ranks", 4, 32, 10);
-    QString bands = args.getString("bands", "third_octave");
-    if (bands != "third_octave" && bands != "octave")
-        throw McpException("argument \"bands\" must be \"third_octave\" or \"octave\"");
-    settings.octaveBands = (bands == "octave");
-    settings.upperLimit = args.getDouble("upper_limit_hz", 0, 24000, 16000);
-    settings.dynamicRange = args.getDouble("dynamic_range_db", 20, 120, 60);
     QString reference = args.getString("reference", "neighbors");
     if (reference != "neighbors" && reference != "regression")
         throw McpException("argument \"reference\" must be \"neighbors\" or \"regression\"");
@@ -68,10 +61,6 @@ static TimbreSettings readSettings(const McpArguments &args)
 
 static const char * SETTINGS_SCHEMA =
     R"JSON("velocity":{"type":"integer","minimum":1,"maximum":127,"description":"Velocity played (default 100): the subset is the divisions playing at it"},
-        "detailed_ranks":{"type":"integer","minimum":4,"maximum":32,"description":"Ranks given one by one (default 10), the next ones being grouped in bands"},
-        "bands":{"type":"string","enum":["third_octave","octave"],"description":"Bands of ranks beyond the detailed ones (default third_octave: 11-12, 13-16, 17-20...)"},
-        "upper_limit_hz":{"type":"number","description":"Partials above this frequency are ignored (default 16000, 0 for the half of the sample rate)"},
-        "dynamic_range_db":{"type":"number","description":"Ranks further below the strongest one of a key are not compared (default 60)"},
         "reference":{"type":"string","enum":["neighbors","regression"],"description":"Reference of a root key: interpolation between its two neighbors played at its key (default), or robust local regression on several neighbors on each side"},
         "regression_count":{"type":"integer","minimum":2,"maximum":8,"description":"Neighbors on each side for the regression (default 3)"})JSON";
 
@@ -120,10 +109,12 @@ void McpFunctions::addTimbreFunctions(QList<McpFunction *> &functions)
     functions << new McpFunction(
         "get_timbre_map", McpFunction::CATEGORY_ANALYSIS, true,
         "Timbre of an instrument along the keyboard as heard at a velocity, without rendering (as the timbre view of "
-        "the editor): for each key, the level of each harmonic rank (or band of ranks) of the steady part, once the "
-        "samples are transposed and the attenuation, the filter and the modulators of the divisions applied (sound "
-        "engine at 48 kHz, envelopes at their sustain level, LFOs at their mean value). A rank is absent (null) beyond "
-        "the half of the sample rate of the sample or of the output, or beyond the upper limit. The divisions "
+        "the editor): for each key, the level of each harmonic rank of the steady part (ranks 1 to 10 one by one, "
+        "then bands of a third of an octave: 11-12, 13-16, 17-20...), once the samples are transposed and the "
+        "attenuation, the filter and the modulators of the divisions applied (sound engine at 48 kHz, envelopes at "
+        "their sustain level, LFOs at their mean value). A rank is absent (null) beyond the half of the sample rate "
+        "of the sample or of the output, or beyond 16 kHz; ranks more than 60 dB below the strongest one of a key "
+        "are not compared. The divisions "
         "playing a key are combined by adding their powers. For each root key (\"position\", all divisions of the "
         "subset having this root key): its levels played at its key, the reference predicted by its neighbors played "
         "at the same key, the deviation from it (level, timbre: weighted quadratic mean of the differences by row "
@@ -197,7 +188,6 @@ void McpFunctions::addTimbreFunctions(QList<McpFunction *> &functions)
                 item["odd_even_db"] = number(key.oddEven, 2);
                 item["tuning_cents"] = number(key.tuning, 1);
                 item["hnr_db"] = number(key.hnr, 1);
-                item["loop_correlation"] = number(key.loopCorrelation, 4);
                 if (key.junction)
                 {
                     QJsonObject junction = comparisonToJson(key.jump);

@@ -35,6 +35,18 @@
 
 const double TimbreMapWidget::LABEL_PADDING = 4;
 const double TimbreMapWidget::MAX_ZOOM = 8;
+const double TimbreMapWidget::TRANSPOSITION_RANGE = 12;
+const int TimbreLegendWidget::BAR_WIDTH = 100;
+
+// Strongest row of a key, top of the scale of the levels
+static double strongestLevel(const QVector<double> &levels)
+{
+    double result = -1000;
+    foreach (double level, levels)
+        if (!std::isnan(level))
+            result = qMax(result, level);
+    return result;
+}
 
 TimbreMapWidget::TimbreMapWidget(QWidget * parent) : QWidget(parent),
     _model(nullptr),
@@ -59,16 +71,13 @@ TimbreMapWidget::TimbreMapWidget(QWidget * parent) : QWidget(parent),
     _decisionHeight(20),
     _keyboardTop(0),
     _keyboardHeight(KeyboardStrip::KEYS_HEIGHT),
-    _maxLevel(0),
-    _maxTransposition(1),
     _pressedButton(Qt::NoButton),
     _pressScroll(0),
     _pressZoom(1),
     _pressColumn(0),
     _moved(false),
     _pressedKey(-1),
-    _playingKey(-1),
-    _rangeCache(12)
+    _playingKey(-1)
 {
     this->setMouseTracking(true);
     this->setMinimumHeight(250);
@@ -86,7 +95,6 @@ QString TimbreMapWidget::getSummaryName(int summary)
     case TimbreDisplay::SUMMARY_ODD_EVEN: return tr("Odd / even");
     case TimbreDisplay::SUMMARY_NOISE: return tr("Noise");
     case TimbreDisplay::SUMMARY_TUNING: return tr("Tuning");
-    case TimbreDisplay::SUMMARY_LOOP: return tr("Loop");
     default: return "";
     }
 }
@@ -95,12 +103,10 @@ QString TimbreMapWidget::getModeName(int mode)
 {
     switch (mode)
     {
-    case TimbreDisplay::MODE_ABSOLUTE: return tr("Absolute levels");
-    case TimbreDisplay::MODE_RELATIVE: return tr("Relative levels");
+    case TimbreDisplay::MODE_LEVELS: return tr("Levels");
     case TimbreDisplay::MODE_DEVIATION: return tr("Deviation from the reference");
     case TimbreDisplay::MODE_JUMP: return tr("Jumps");
     case TimbreDisplay::MODE_TRANSPOSITION: return tr("Transposition");
-    case TimbreDisplay::MODE_CONFIDENCE: return tr("Confidence");
     default: return "";
     }
 }
@@ -139,36 +145,18 @@ void TimbreMapWidget::updateColumns()
     _columns.clear();
     if (_model == nullptr || _model->getMinKey() < 0)
         return;
-    if (_display.positionsOnly)
-    {
-        // Keys where the root keys are displayed
-        foreach (TimbrePosition position, _model->getPositions().values())
-            if (!_columns.contains(position.anchor))
-                _columns << position.anchor;
-        std::sort(_columns.begin(), _columns.end());
-    }
-    else
-    {
-        for (int key = _model->getMinKey(); key <= _model->getMaxKey(); key++)
-            _columns << key;
-    }
+    for (int key = _model->getMinKey(); key <= _model->getMaxKey(); key++)
+        _columns << key;
 
     // Values of the rows and bounds of the summaries
-    _maxLevel = -1000;
-    _maxTransposition = 1;
     _summaryBounds.clear();
     for (int key = 0; key < 128; key++)
     {
         const TimbreKey &tk = _model->getKey(key);
         _levels[key] = _model->getRowLevels(tk.spectrum);
-        _states[key] = _model->getRowStates(tk.spectrum);
         _confidence[key] = _model->getRowConfidence(tk.spectrum);
         if (tk.sources.isEmpty() || !_columns.contains(key))
             continue;
-        foreach (double level, _levels[key])
-            if (!std::isnan(level))
-                _maxLevel = qMax(_maxLevel, level);
-        _maxTransposition = qMax(_maxTransposition, std::fabs(tk.transposition));
         QList<QPair<int, double> > values;
         values << qMakePair(static_cast<int>(TimbreDisplay::SUMMARY_LEVEL), tk.totalLevel)
                << qMakePair(static_cast<int>(TimbreDisplay::SUMMARY_BRIGHTNESS), tk.centroid);
@@ -183,36 +171,18 @@ void TimbreMapWidget::updateColumns()
             bounds.second = qMax(bounds.second, values[i].second);
         }
     }
-    _maxTransposition = std::ceil(_maxTransposition);
-    _rangeCache = getAutoRange();
 }
 
-double TimbreMapWidget::getAutoRange()
+double TimbreMapWidget::getRange() const
 {
-    if (_model == nullptr)
-        return 12;
-    if (!_display.autoRange)
-        return _display.fixedRange;
-    const TimbreSettings &settings = _model->getSettings();
     switch (_display.mode)
     {
-    case TimbreDisplay::MODE_ABSOLUTE: case TimbreDisplay::MODE_RELATIVE: case TimbreDisplay::MODE_CONFIDENCE:
-        return settings.dynamicRange;
+    case TimbreDisplay::MODE_LEVELS:
+        return TimbreSettings::DYNAMIC_RANGE;
     case TimbreDisplay::MODE_TRANSPOSITION:
-        return _maxTransposition;
-    default: {
-        // Deviations: twice the maximum threshold, more if needed (95% of the values within the range)
-        QVector<double> values;
-        foreach (TimbrePosition position, _model->getPositions().values())
-            foreach (double value, position.deviation.rowDifferences)
-                if (!std::isnan(value))
-                    values << std::fabs(value);
-        std::sort(values.begin(), values.end());
-        double range = 2 * settings.maximum;
-        if (!values.isEmpty())
-            range = qMax(range, values[static_cast<int>(0.95 * (values.size() - 1))]);
-        return std::ceil(qMin(range, 40.0));
-    }
+        return TRANSPOSITION_RANGE;
+    default:
+        return _model != nullptr ? 2 * _model->getSettings().maximum() : 2 * TimbreSettings().maximum();
     }
 }
 
@@ -269,7 +239,23 @@ void TimbreMapWidget::setScroll(double scroll)
 
 QRectF TimbreMapWidget::columnRect(int column, double top, double height) const
 {
-    return QRectF(_left + column * _columnWidth, top, _columnWidth, height);
+    return snapped(_left + column * _columnWidth, top, _left + (column + 1) * _columnWidth, top + height);
+}
+
+QRectF TimbreMapWidget::cellRect(int column, int row) const
+{
+    // Edges shared with the neighboring cells computed by the same expressions
+    return snapped(_left + column * _columnWidth, _mapTop + _mapHeight - (row + 1) * _rowHeight,
+                   _left + (column + 1) * _columnWidth, _mapTop + _mapHeight - row * _rowHeight);
+}
+
+QRectF TimbreMapWidget::snapped(double left, double top, double right, double bottom)
+{
+    // Edges rounded to whole pixels: neighboring cells don't let a line of background appear between them when the
+    // screen has a fractional scale factor
+    left = std::round(left);
+    top = std::round(top);
+    return QRectF(left, top, std::round(right) - left, std::round(bottom) - top);
 }
 
 void TimbreMapWidget::drawLabel(QPainter &painter, double top, double height, const QString &text)
@@ -303,20 +289,6 @@ int TimbreMapWidget::keyAt(int x) const
     return column >= 0 ? _columns[column] : -1;
 }
 
-QColor TimbreMapWidget::divergingColor(double value, double range, bool withThresholds)
-{
-    if (std::isnan(value))
-        return _palette.neutral();
-    if (withThresholds && _model != nullptr)
-    {
-        const TimbreSettings &settings = _model->getSettings();
-        double absolute = std::fabs(value);
-        double t = absolute <= settings.tolerance ? 0 : (absolute <= settings.maximum ? 0.5 : 1);
-        return _palette.diverging(std::copysign(t, value));
-    }
-    return _palette.diverging(range > 0 ? value / range : 0);
-}
-
 QColor TimbreMapWidget::cellColor(int key, int row, bool &hatched, bool &absent)
 {
     hatched = false;
@@ -332,55 +304,50 @@ QColor TimbreMapWidget::cellColor(int key, int row, bool &hatched, bool &absent)
         hatched = true;
         return _palette.neutral();
     }
-    const QVector<int> &states = _states[key];
-    if (row >= states.size() || states[row] == 0)
+    // Empty: nothing to measure (ranks absent); hatched: less than half of the power of the row reliably measured, as
+    // for the timbre summary (a band with a few weak doubtful ranks or partly absent is reliable enough)
+    const QVector<double> &confidence = _confidence[key];
+    if (row >= confidence.size() || std::isnan(confidence[row]))
     {
         absent = true;
-        hatched = true;
         return _palette.background();
     }
-    hatched = (states[row] == 1 || states[row] == 3);
-    double range = _rangeCache;
+    hatched = confidence[row] < 0.5;
+    double range = getRange();
 
     switch (_display.mode)
     {
-    case TimbreDisplay::MODE_ABSOLUTE: case TimbreDisplay::MODE_RELATIVE: {
-        const QVector<double> &levels = _levels[key];
-        double top = _maxLevel; // Strongest level of the instrument
-        if (_display.mode == TimbreDisplay::MODE_RELATIVE)
+    case TimbreDisplay::MODE_LEVELS:
+        return _palette.magnitude(1 + (_levels[key][row] - strongestLevel(_levels[key])) / range);
+    case TimbreDisplay::MODE_DEVIATION: case TimbreDisplay::MODE_JUMP: {
+        // Empty without a value (no reference, first key), hatched for a row not compared
+        TimbreComparison comparison;
+        if (_display.mode == TimbreDisplay::MODE_JUMP)
+            comparison = tk.jump;
+        else
         {
-            top = -1000;
-            foreach (double level, levels)
-                if (!std::isnan(level))
-                    top = qMax(top, level);
+            QMap<int, TimbrePosition>::const_iterator it = _model->getPositions().constFind(tk.position);
+            if (it != _model->getPositions().constEnd())
+                comparison = it->deviation;
         }
-        return _palette.sequential(1 + (levels[row] - top) / range);
-    }
-    case TimbreDisplay::MODE_DEVIATION: {
-        if (!_model->getPositions().contains(tk.position))
-            return _palette.neutral();
-        const TimbrePosition &position = _model->getPositions()[tk.position];
-        if (!position.deviation.valid)
-            return _palette.neutral();
-        double value = row < position.deviation.rowDifferences.size() ? position.deviation.rowDifferences[row] : std::nan("");
+        if (!comparison.valid)
+        {
+            absent = true;
+            hatched = false;
+            return _palette.background();
+        }
+        double value = row < comparison.rowDifferences.size() ? comparison.rowDifferences[row] : std::nan("");
         if (std::isnan(value))
+        {
             hatched = true;
-        return divergingColor(value, range, _display.steps);
-    }
-    case TimbreDisplay::MODE_JUMP: {
-        if (!tk.jump.valid)
             return _palette.neutral();
-        double value = row < tk.jump.rowDifferences.size() ? tk.jump.rowDifferences[row] : std::nan("");
-        return divergingColor(value, range, _display.steps);
+        }
+        return _palette.diverging(value / range);
     }
     case TimbreDisplay::MODE_TRANSPOSITION:
-        return _palette.diverging(range > 0 ? tk.transposition / range : 0);
-    case TimbreDisplay::MODE_CONFIDENCE: {
-        const QVector<double> &confidence = _confidence[key];
-        return std::isnan(confidence[row]) ? _palette.neutral() : _palette.sequential(confidence[row]);
+        return _palette.diverging(tk.transposition / range);
     }
-    }
-    return _palette.neutral();
+    return _palette.background();
 }
 
 QColor TimbreMapWidget::summaryColor(int summary, int key, bool &hatched)
@@ -404,53 +371,44 @@ QColor TimbreMapWidget::summaryColor(int summary, int key, bool &hatched)
 
     switch (summary)
     {
+    // Empty without a value, shades of grey for a quantity, red or blue for a deviation
     case TimbreDisplay::SUMMARY_LEVEL:
         if (!std::isfinite(tk.totalLevel))
-            return _palette.neutral();
-        return _palette.sequential(normalized(tk.totalLevel, TimbreDisplay::SUMMARY_LEVEL));
+            return _palette.background();
+        return _palette.magnitude(normalized(tk.totalLevel, TimbreDisplay::SUMMARY_LEVEL));
     case TimbreDisplay::SUMMARY_TIMBRE: {
         if (!_model->getPositions().contains(tk.position))
-            return _palette.neutral();
+            return _palette.background();
         const TimbrePosition &position = _model->getPositions()[tk.position];
         if (!position.deviation.valid)
-            return _palette.neutral();
+            return _palette.background();
         hatched = position.deviation.confidence < 0.5 || position.referenceAtEdge;
-        double value = position.deviation.timbreDifference;
-        if (_display.steps)
-            return _palette.diverging(value <= settings.tolerance ? 0 : (value <= settings.maximum ? 0.5 : 1));
-        return _palette.diverging(qMin(1.0, value / (2 * settings.maximum)));
+        return _palette.diverging(position.deviation.timbreDifference / (2 * settings.maximum()));
     }
     case TimbreDisplay::SUMMARY_TRANSPOSITION:
-        return _palette.diverging(tk.transposition / _maxTransposition);
+        return _palette.diverging(tk.transposition / TRANSPOSITION_RANGE);
     case TimbreDisplay::SUMMARY_BRIGHTNESS:
         if (!std::isfinite(tk.centroid))
-            return _palette.neutral();
-        return _palette.sequential(normalized(tk.centroid, TimbreDisplay::SUMMARY_BRIGHTNESS));
+            return _palette.background();
+        return _palette.magnitude(normalized(tk.centroid, TimbreDisplay::SUMMARY_BRIGHTNESS));
     case TimbreDisplay::SUMMARY_ODD_EVEN:
         if (!std::isfinite(tk.oddEven))
-            return _palette.neutral();
+            return _palette.background();
         return _palette.diverging(tk.oddEven / 12);
     case TimbreDisplay::SUMMARY_NOISE:
         if (!std::isfinite(tk.hnr))
-            return _palette.neutral();
-        return _palette.sequential(tk.hnr / 60);
+            return _palette.background();
+        return _palette.magnitude(tk.hnr / 60);
     case TimbreDisplay::SUMMARY_TUNING: {
         if (!std::isfinite(tk.tuning))
-            return _palette.neutral();
+            return _palette.background();
         double cents = tk.tuning - 100 * std::round(tk.tuning / 100); // Octave or mutation stops
         return _palette.diverging(cents / 20);
     }
-    case TimbreDisplay::SUMMARY_LOOP:
-        if (!std::isfinite(tk.loopCorrelation))
-        {
-            hatched = true;
-            return _palette.neutral();
-        }
-        return _palette.sequential(qBound(0.0, (tk.loopCorrelation - 0.9) / 0.1, 1.0));
     default:
         break;
     }
-    return _palette.neutral();
+    return _palette.background();
 }
 
 void TimbreMapWidget::paintEvent(QPaintEvent * event)
@@ -463,8 +421,7 @@ void TimbreMapWidget::paintEvent(QPaintEvent * event)
     computeGeometry();
     QFontMetrics metrics(this->font());
     painter.setFont(this->font());
-    QBrush hatchBrush(_palette.hatch(), Qt::BDiagPattern);
-    QBrush pendingBrush(_palette.hatch(), Qt::Dense6Pattern);
+    QBrush hatchBrush(_palette.hatch(), Qt::BDiagPattern); // Not reliably measured, or analysis pending
     const QList<TimbreRow> &rows = _model->getRows();
     painter.setClipRect(QRectF(_graphLeft, 0, _graphWidth, this->height()));
 
@@ -478,7 +435,7 @@ void TimbreMapWidget::paintEvent(QPaintEvent * event)
             QRectF rect = columnRect(c, top + 1, _summaryHeight - 2);
             painter.fillRect(rect, summaryColor(_display.summaries[s], _columns[c], hatched));
             if (hatched)
-                painter.fillRect(rect, _model->getKey(_columns[c]).analyzed ? hatchBrush : pendingBrush);
+                painter.fillRect(rect, hatchBrush);
         }
     }
 
@@ -486,14 +443,13 @@ void TimbreMapWidget::paintEvent(QPaintEvent * event)
     for (int c = 0; c < _columns.count(); c++)
     {
         int key = _columns[c];
-        bool pending = !_model->getKey(key).sources.isEmpty() && !_model->getKey(key).analyzed;
         for (int row = 0; row < rows.count(); row++)
         {
             bool hatched, absent;
-            QRectF rect = columnRect(c, _mapTop + _mapHeight - (row + 1) * _rowHeight, _rowHeight);
+            QRectF rect = cellRect(c, row);
             painter.fillRect(rect, cellColor(key, row, hatched, absent));
             if (hatched)
-                painter.fillRect(rect, pending ? pendingBrush : hatchBrush);
+                painter.fillRect(rect, hatchBrush);
         }
     }
 
@@ -511,26 +467,18 @@ void TimbreMapWidget::paintEvent(QPaintEvent * event)
 
     // Ghost column: sound predicted at a free key
     int ghostColumn = _columns.indexOf(_ghostKey);
-    if (ghostColumn >= 0 && !_model->getPositions().contains(_ghostKey) &&
-        (_display.mode == TimbreDisplay::MODE_ABSOLUTE || _display.mode == TimbreDisplay::MODE_RELATIVE))
+    if (ghostColumn >= 0 && !_model->getPositions().contains(_ghostKey) && _display.mode == TimbreDisplay::MODE_LEVELS)
     {
         TimbreSpectrum predicted = _model->predict(_ghostKey);
         QVector<double> levels = _model->getRowLevels(predicted);
-        double top = _maxLevel;
-        if (_display.mode == TimbreDisplay::MODE_RELATIVE)
-        {
-            top = -1000;
-            foreach (double level, levels)
-                if (!std::isnan(level))
-                    top = qMax(top, level);
-        }
+        double top = strongestLevel(levels);
         for (int row = 0; row < rows.count() && row < levels.size(); row++)
         {
-            QRectF rect = columnRect(ghostColumn, _mapTop + _mapHeight - (row + 1) * _rowHeight, _rowHeight);
+            QRectF rect = cellRect(ghostColumn, row);
             if (std::isnan(levels[row]))
                 painter.fillRect(rect, hatchBrush);
             else
-                painter.fillRect(rect, _palette.sequential(1 + (levels[row] - top) / _rangeCache));
+                painter.fillRect(rect, _palette.magnitude(1 + (levels[row] - top) / getRange()));
         }
     }
 
@@ -663,9 +611,9 @@ void TimbreMapWidget::paintDecisions(QPainter &painter)
         {
             double triangle = _decisionHeight - size - 1;
             QRectF levelRect(x - triangle / 2, _decisionTop + size, triangle, triangle);
-            TimbrePalette::drawShape(painter, position.deviation.levelDifference > 0 ? TimbrePalette::SHAPE_UP :
-                                                                                       TimbrePalette::SHAPE_DOWN,
-                                     levelRect, _palette.levelColor());
+            bool tooLoud = position.deviation.levelDifference > 0;
+            TimbrePalette::drawShape(painter, tooLoud ? TimbrePalette::SHAPE_UP : TimbrePalette::SHAPE_DOWN,
+                                     levelRect, _palette.levelColor(tooLoud));
         }
     }
 
@@ -682,10 +630,8 @@ void TimbreMapWidget::paintDecisions(QPainter &painter)
 
 void TimbreMapWidget::paintKeyboard(QPainter &painter)
 {
-    // Gray area below the labels, that cannot be played
+    // Keys only, nothing below the labels on the left
     QList<KeyboardStrip::Key> keys;
-    keys << KeyboardStrip::Key { -1, _left - _marginWidth, _left,
-                                 KeyboardStrip::marginColor(_palette.background(), _palette.text()) };
     for (int c = 0; c < _columns.count(); c++)
     {
         int key = _columns[c];
@@ -704,7 +650,7 @@ void TimbreMapWidget::paintKeyboard(QPainter &painter)
     for (int c = 0; c < _columns.count(); c++)
     {
         int key = _columns[c];
-        if (key % 12 != 0 && !(_display.positionsOnly && _columnWidth > metrics.horizontalAdvance("C#00")))
+        if (key % 12 != 0)
             continue;
         QString name = ContextManager::keyName()->getKeyName(static_cast<unsigned int>(key));
         double width = metrics.horizontalAdvance(name) + 4;
@@ -887,4 +833,52 @@ QString TimbreMapWidget::getTooltip(QPoint position)
     lines << tr("Duration factor: %1").arg(number(tk.durationFactor, 3));
     lines << tr("Level: %1 dB").arg(number(tk.totalLevel, 1));
     return lines.join("<br/>");
+}
+
+TimbreLegendWidget::TimbreLegendWidget(QWidget * parent) : QWidget(parent),
+    _diverging(false)
+{}
+
+void TimbreLegendWidget::setScale(bool diverging, QString minimum, QString maximum)
+{
+    _diverging = diverging;
+    _minimum = minimum;
+    _maximum = maximum;
+    this->updateGeometry();
+    this->update();
+}
+
+QSize TimbreLegendWidget::sizeHint() const
+{
+    QFontMetrics metrics(this->font());
+    return QSize(metrics.horizontalAdvance(_minimum) + BAR_WIDTH + metrics.horizontalAdvance(_maximum) + 12,
+                 metrics.height());
+}
+
+void TimbreLegendWidget::paintEvent(QPaintEvent * event)
+{
+    Q_UNUSED(event)
+    QPainter painter(this);
+    QFontMetrics metrics(this->font());
+    QColor text = this->palette().color(QPalette::WindowText);
+    int minimumWidth = metrics.horizontalAdvance(_minimum);
+    int y = (this->height() - metrics.height()) / 2;
+    painter.setPen(text);
+    painter.drawText(QRect(0, y, minimumWidth, metrics.height()), Qt::AlignVCenter | Qt::AlignRight, _minimum);
+
+    // Gradient as drawn in the map, framed by the color of the grid
+    int barHeight = qMax(6, metrics.height() - 6);
+    QRect bar(minimumWidth + 6, (this->height() - barHeight) / 2, BAR_WIDTH, barHeight);
+    for (int x = 0; x < bar.width(); x++)
+    {
+        double t = static_cast<double>(x) / (bar.width() - 1);
+        painter.fillRect(QRect(bar.left() + x, bar.top(), 1, bar.height()),
+                         _diverging ? _palette.diverging(2 * t - 1) : _palette.magnitude(t));
+    }
+    painter.setPen(_palette.grid());
+    painter.drawRect(bar.adjusted(0, 0, -1, -1));
+
+    painter.setPen(text);
+    painter.drawText(QRect(bar.right() + 7, y, metrics.horizontalAdvance(_maximum) + 1, metrics.height()),
+                     Qt::AlignVCenter | Qt::AlignLeft, _maximum);
 }

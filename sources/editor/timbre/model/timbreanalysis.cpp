@@ -65,7 +65,6 @@ TimbreSampleAnalysis TimbreAnalysisCache::analyze(const QVector<float> &data, qu
     TimbreSampleAnalysis result;
     result.sampleRate = sampleRate;
     result.hnr = std::nan("");
-    result.loopCorrelation = std::nan("");
     if (data.isEmpty() || sampleRate == 0)
         return result;
     if (!SampleUtils::isLooped(loopStart, loopEnd, static_cast<quint32>(data.size())))
@@ -99,8 +98,6 @@ TimbreSampleAnalysis TimbreAnalysisCache::analyze(const QVector<float> &data, qu
     }
     result.hnr = analyzer.getHnr();
     result.inharmonicity = analyzer.getInharmonicity();
-    if (loopEnd > loopStart)
-        result.loopCorrelation = analyzer.getLoopCorrelation();
     return result;
 }
 
