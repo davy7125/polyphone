@@ -304,7 +304,8 @@ Encima del mapa, unas filas de resumen muestran para cada nota:
 * :guilabel:`Transposición`: azul cuando la muestra se transpone hacia abajo, rojo cuando se transpone hacia arriba,
 * y, a elegir en el menú :guilabel:`Opciones` > :guilabel:`Resúmenes`: :guilabel:`Brillo` (centro de gravedad de los armónicos), :guilabel:`Impares / pares` (armónicos impares comparados con los pares), :guilabel:`Ruido` (relación armónicos / ruido), :guilabel:`Afinación` (centésimas respecto a la nota más cercana del temperamento igual) y :guilabel:`Bucle` (calidad del bucle).
 
-En el mapa, unas líneas verticales marcan las uniones entre divisiones (más gruesas cuando cambia la muestra), un punto marca cada nota raíz, un rayado muestra los armónicos ausentes (fuera de la banda de la muestra o de la salida, por encima del límite superior) o medidos de forma poco fiable, y las notas que no reproducen nada aparecen en gris.
+En el mapa, unas líneas verticales marcan las uniones entre divisiones (más gruesas cuando cambia la muestra), un punto marca cada nota raíz, un rayado muestra los armónicos ausentes (fuera de la banda de la muestra o de la salida, por encima del límite superior) o medidos de forma poco fiable, y las notas que no reproducen nada quedan vacías (atenuadas en el teclado).
+Cuando la nota raíz de una división está fuera de su rango de notas (extensión de un registro de órgano, por ejemplo), se muestra en la nota más cercana reproducida por la división, con un triángulo que apunta hacia la nota raíz real en lugar del punto; su desviación se sigue midiendo tocando la división en la nota raíz (:guilabel:`Tocado en la nota raíz` en el gráfico de barras).
 Una información emergente da los valores de la celda bajo el cursor del ratón: nota, armónico, nivel, desviación, muestras, transposición y factor de duración (el ataque, el trémolo y los batimientos son más rápidos cuando una muestra se transpone hacia arriba).
 
 La lista :guilabel:`Visualización` elige lo que representan los colores:
@@ -408,13 +409,13 @@ Se pueden seleccionar varias notas raíz manteniendo pulsada la tecla :kbd:`Ctrl
 Los botones de la derecha se aplican a las notas raíz seleccionadas:
 
 Crear una nota aquí...
-: En una nota sin muestra: se transpone la nota raíz más cercana y los niveles de sus armónicos se interpolan (o se extrapolan) a partir de una segunda nota raíz. Se pueden elegir las notas raíz utilizadas, y se muestra una advertencia cuando la nota está lejos de ellas. Los rangos de notas de alrededor se ajustan; las divisiones contenidas por completo en el rango de la nueva nota se eliminan.
+: En una nota sin muestra: se transpone la nota raíz más cercana y los niveles de sus armónicos se interpolan (o se extrapolan) a partir de una segunda nota raíz. Se pueden elegir las notas raíz utilizadas, y se muestra una advertencia cuando la nota está lejos de ellas. Los rangos de notas de alrededor se ajustan; las divisiones contenidas por completo en el rango de la nueva nota se eliminan. Las notas raíz se comparan en las notas donde se oyen, lo que también admite las extensiones (notas raíz fuera del rango de notas de sus divisiones).
 
 Eliminar...
 : Las divisiones de la nota raíz se eliminan y sus vecinas pasan a reproducir sus notas. Las muestras que ya no se usan también se pueden eliminar.
 
 Reemplazar por una nota calculada...
-: La nota raíz se elimina y luego se vuelve a crear a partir de sus vecinas.
+: La nota raíz se reemplaza por una nota calculada a partir de sus vecinas, con la misma nota raíz y en las mismas notas: los rangos de notas de las vecinas no cambian.
 
 Corregir el timbre...
 : Abre la ventana de [corrección](#doc_timbre_correction).

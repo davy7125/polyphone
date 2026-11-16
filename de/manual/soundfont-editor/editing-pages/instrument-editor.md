@@ -304,7 +304,8 @@ Die ersten Harmonischen werden einzeln angezeigt, die weiteren in Bändern zusam
 * :guilabel:`Transposition`: blau, wenn das Sample nach unten transponiert wird, rot, wenn es nach oben transponiert wird,
 * und, im Menü :guilabel:`Optionen` > :guilabel:`Übersichten` wählbar: :guilabel:`Helligkeit` (Schwerpunkt der Harmonischen), :guilabel:`Ungerade / gerade` (ungerade Harmonische im Vergleich zu den geraden), :guilabel:`Rauschen` (Verhältnis der Harmonischen zum Rauschen), :guilabel:`Intonation` (Abweichung in Cent von der nächstgelegenen Note der gleichstufigen Stimmung) und :guilabel:`Loop` (Qualität des Loops).
 
-Auf der Karte markieren senkrechte Linien die Übergänge zwischen Aufteilungen (dicker, wenn das Sample wechselt), ein Punkt markiert jede Basisnote, Schraffuren zeigen die fehlenden Harmonischen (außerhalb des Frequenzbands des Samples oder der Ausgabe, oberhalb der Obergrenze) oder die nicht zuverlässig gemessenen, und die Tasten, die nichts spielen, sind ausgegraut.
+Auf der Karte markieren senkrechte Linien die Übergänge zwischen Aufteilungen (dicker, wenn das Sample wechselt), ein Punkt markiert jede Basisnote, Schraffuren zeigen die fehlenden Harmonischen (außerhalb des Frequenzbands des Samples oder der Ausgabe, oberhalb der Obergrenze) oder die nicht zuverlässig gemessenen, und die Tasten, die nichts spielen, bleiben leer (auf der Tastatur abgeblendet).
+Liegt die Basisnote einer Aufteilung außerhalb ihres Tastenbereichs (Erweiterung eines Orgelregisters zum Beispiel), wird sie auf der nächstgelegenen von der Aufteilung gespielten Taste angezeigt, mit einem Dreieck statt des Punktes, das zur tatsächlichen Basisnote zeigt; ihre Abweichung wird weiterhin gemessen, indem die Aufteilung auf der Basisnote gespielt wird (:guilabel:`Auf der Basisnote gespielt` im Balkendiagramm).
 Ein Tooltip zeigt die Werte der Zelle unter dem Mauszeiger: Taste, Harmonische, Pegel, Abweichung, Samples, Transposition und Dauerfaktor (Attack, Tremolo und Schwebungen sind schneller, wenn ein Sample nach oben transponiert wird).
 
 Die Liste :guilabel:`Anzeige` legt fest, was die Farben darstellen:
@@ -408,13 +409,13 @@ Mehrere Basisnoten können ausgewählt werden, indem Sie die Taste :kbd:`Ctrl` g
 Die Buttons rechts wirken auf die ausgewählten Basisnoten:
 
 Hier eine Note erstellen...
-: Auf einer Taste ohne Sample: Die nächstgelegene Basisnote wird transponiert, und die Pegel ihrer Harmonischen werden anhand einer zweiten Basisnote interpoliert (oder extrapoliert). Die verwendeten Basisnoten können gewählt werden, und eine Warnung erscheint, wenn die Taste weit von ihnen entfernt ist. Die angrenzenden Tastenbereiche werden angepasst; die Aufteilungen, die vollständig im Bereich der neuen Note liegen, werden entfernt.
+: Auf einer Taste ohne Sample: Die nächstgelegene Basisnote wird transponiert, und die Pegel ihrer Harmonischen werden anhand einer zweiten Basisnote interpoliert (oder extrapoliert). Die verwendeten Basisnoten können gewählt werden, und eine Warnung erscheint, wenn die Taste weit von ihnen entfernt ist. Die angrenzenden Tastenbereiche werden angepasst; die Aufteilungen, die vollständig im Bereich der neuen Note liegen, werden entfernt. Die Basisnoten werden auf den Tasten verglichen, auf denen sie zu hören sind, was auch Erweiterungen unterstützt (Basisnoten außerhalb des Tastenbereichs ihrer Aufteilungen).
 
 Entfernen...
 : Die Aufteilungen der Basisnote werden entfernt, und ihre Nachbarn übernehmen ihre Tasten. Die nicht mehr verwendeten Samples können ebenfalls entfernt werden.
 
 Durch eine berechnete Note ersetzen...
-: Die Basisnote wird entfernt und dann aus ihren Nachbarn neu erstellt.
+: Die Basisnote wird durch eine aus ihren Nachbarn berechnete Note ersetzt, mit derselben Basisnote und auf denselben Tasten: Die Tastenbereiche der Nachbarn ändern sich nicht.
 
 Klangfarbe korrigieren...
 : Öffnet das Fenster zur [Korrektur](#doc_timbre_correction).

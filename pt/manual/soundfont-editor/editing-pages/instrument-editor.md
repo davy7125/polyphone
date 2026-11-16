@@ -304,7 +304,8 @@ Acima do mapa, linhas de resumo mostram para cada nota:
 * :guilabel:`Transposição`: azul quando a amostra é transposta para baixo, vermelho quando é transposta para cima,
 * e, à escolha no menu :guilabel:`Opções` > :guilabel:`Resumos`: :guilabel:`Brilho` (centro de gravidade dos harmônicos), :guilabel:`Ímpares / pares` (harmônicos ímpares comparados aos harmônicos pares), :guilabel:`Ruído` (relação entre harmônicos e ruído), :guilabel:`Afinação` (cents em relação à nota mais próxima do temperamento igual) e :guilabel:`Loop` (qualidade do loop).
 
-No mapa, linhas verticais marcam as junções entre divisões (mais grossas quando a amostra muda), um ponto marca cada nota base, hachuras mostram os harmônicos ausentes (fora da banda da amostra ou da saída, acima do limite superior) ou medidos de forma pouco confiável, e as notas que não tocam nada ficam acinzentadas.
+No mapa, linhas verticais marcam as junções entre divisões (mais grossas quando a amostra muda), um ponto marca cada nota base, hachuras mostram os harmônicos ausentes (fora da banda da amostra ou da saída, acima do limite superior) ou medidos de forma pouco confiável, e as notas que não tocam nada ficam vazias (esmaecidas no teclado).
+Quando a nota base de uma divisão está fora do seu alcance de notas (extensão de um registro de órgão, por exemplo), ela é mostrada na nota mais próxima tocada pela divisão, com um triângulo apontando para a nota base real no lugar do ponto; seu desvio continua sendo medido tocando a divisão na nota base (:guilabel:`Tocado na nota base` no gráfico de barras).
 Uma dica dá os valores da célula sob o cursor do mouse: nota, harmônico, nível, desvio, amostras, transposição e fator de duração (o ataque, o trêmolo e os batimentos são mais rápidos quando uma amostra é transposta para cima).
 
 A lista :guilabel:`Visualização` escolhe o que as cores representam:
@@ -408,13 +409,13 @@ Várias notas base podem ser selecionadas mantendo a tecla :kbd:`Ctrl` pressiona
 Os botões à direita se aplicam às notas base selecionadas:
 
 Criar uma nota aqui...
-: Em uma nota sem amostra: a nota base mais próxima é transposta e os níveis de seus harmônicos são interpolados (ou extrapolados) a partir de uma segunda nota base. As notas base usadas podem ser escolhidas, e um aviso é exibido quando a nota está longe delas. Os alcances de notas ao redor são ajustados; as divisões inteiramente contidas no alcance da nova nota são removidas.
+: Em uma nota sem amostra: a nota base mais próxima é transposta e os níveis de seus harmônicos são interpolados (ou extrapolados) a partir de uma segunda nota base. As notas base usadas podem ser escolhidas, e um aviso é exibido quando a nota está longe delas. Os alcances de notas ao redor são ajustados; as divisões inteiramente contidas no alcance da nova nota são removidas. As notas base são comparadas nas notas onde são ouvidas, o que também permite as extensões (notas base fora do alcance de notas de suas divisões).
 
 Remover...
 : As divisões da nota base são removidas e suas vizinhas assumem suas notas. As amostras que não são mais usadas também podem ser removidas.
 
 Substituir por uma nota calculada...
-: A nota base é removida e depois recriada a partir de suas vizinhas.
+: A nota base é substituída por uma nota calculada a partir de suas vizinhas, com a mesma nota base e nas mesmas notas: os alcances de notas das vizinhas não mudam.
 
 Corrigir o timbre...
 : Abre a janela de [correção](#doc_timbre_correction).

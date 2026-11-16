@@ -304,7 +304,8 @@ Above the map, summary rows show for each key:
 * :guilabel:`Transposition`: blue when the sample is transposed down, red when it is transposed up,
 * and, chosen in the menu :guilabel:`Options` > :guilabel:`Summaries`: :guilabel:`Brightness` (center of gravity of the ranks), :guilabel:`Odd / even` (odd ranks compared to even ranks), :guilabel:`Noise` (harmonics to noise ratio), :guilabel:`Tuning` (cents from the closest note of the equal temperament) and :guilabel:`Loop` (quality of the loop).
 
-On the map, vertical lines mark the junctions between divisions (thicker when the sample changes), a dot marks each root key, hatching shows the ranks that are absent (outside the band of the sample or of the output, above the upper limit) or not reliably measured, and the keys that play nothing are grayed.
+On the map, vertical lines mark the junctions between divisions (thicker when the sample changes), a dot marks each root key, hatching shows the ranks that are absent (outside the band of the sample or of the output, above the upper limit) or not reliably measured, and the keys that play nothing are left empty (dimmed on the keyboard).
+When the root key of a division is outside its key range (extension of an organ stop for instance), it is shown on the closest key played by the division, with a triangle pointing towards the real root key instead of the dot; its deviation is still measured by playing the division at the root key (:guilabel:`Played at the root key` in the bar chart).
 A tooltip gives the values of the cell under the mouse cursor: key, rank, level, deviation, samples, transposition and duration factor (the attack, the tremolo and the beats are faster when a sample is transposed up).
 
 The list :guilabel:`Display` selects what the colors represent:
@@ -408,13 +409,13 @@ Several root keys can be selected by maintaining the key :kbd:`Ctrl` and clickin
 The buttons on the right apply to the selected root keys:
 
 Create a note here...
-: On a key without sample: the closest root key is transposed and the levels of its harmonics are interpolated (or extrapolated) from a second root key. The root keys used can be chosen, and a warning is shown when the key is far from them. The key ranges around are adjusted; the divisions entirely within the range of the new note are removed.
+: On a key without sample: the closest root key is transposed and the levels of its harmonics are interpolated (or extrapolated) from a second root key. The root keys used can be chosen, and a warning is shown when the key is far from them. The key ranges around are adjusted; the divisions entirely within the range of the new note are removed. The root keys are compared at the keys where they are heard, which also supports the extensions (root keys outside the key ranges of their divisions).
 
 Remove...
 : The divisions of the root key are removed and its neighbors take its keys. The samples that are not used anymore can be removed too.
 
 Replace with a computed note...
-: The root key is removed, then created again from its neighbors.
+: The root key is replaced with a note computed from its neighbors, with the same root key and on the same keys: the key ranges of the neighbors don't change.
 
 Correct the timbre...
 : Opens the [correction](#doc_timbre_correction) window.

@@ -304,7 +304,8 @@ Au-dessus de la carte, des lignes de résumé montrent pour chaque note&nbsp;:
 * :guilabel:`Transposition`&nbsp;: bleu quand l'échantillon est transposé vers le bas, rouge quand il est transposé vers le haut,
 * et, au choix dans le menu :guilabel:`Options` > :guilabel:`Résumés`&nbsp;: :guilabel:`Brillance` (centre de gravité des rangs), :guilabel:`Impairs / pairs` (rangs impairs comparés aux rangs pairs), :guilabel:`Bruit` (rapport harmoniques / bruit), :guilabel:`Justesse` (cents par rapport à la note la plus proche du tempérament égal) et :guilabel:`Boucle` (qualité de la boucle).
 
-Sur la carte, des lignes verticales marquent les jonctions entre divisions (plus épaisses quand l'échantillon change), un point marque chaque note de base, des hachures montrent les rangs absents (hors de la bande de l'échantillon ou de la sortie, au-dessus de la limite haute) ou mesurés de façon peu sûre, et les notes qui ne jouent rien sont grisées.
+Sur la carte, des lignes verticales marquent les jonctions entre divisions (plus épaisses quand l'échantillon change), un point marque chaque note de base, des hachures montrent les rangs absents (hors de la bande de l'échantillon ou de la sortie, au-dessus de la limite haute) ou mesurés de façon peu sûre, et les notes qui ne jouent rien restent vides (estompées sur le clavier).
+Quand la note de base d'une division est hors de son étendue de notes (extension d'un jeu d'orgue par exemple), elle est montrée sur la note la plus proche jouée par la division, avec un triangle pointant vers la vraie note de base à la place du point&nbsp;; son écart reste mesuré en jouant la division à la note de base (:guilabel:`Joué à la note de base` dans le graphique).
 Une infobulle donne les valeurs de la case sous le curseur de la souris&nbsp;: note, rang, niveau, écart, échantillons, transposition et facteur de durée (l'attaque, le trémolo et les battements sont plus rapides quand un échantillon est transposé vers le haut).
 
 La liste :guilabel:`Affichage` choisit ce que représentent les couleurs&nbsp;:
@@ -408,13 +409,13 @@ Plusieurs notes de base peuvent être sélectionnées en maintenant la touche :k
 Les boutons à droite s'appliquent aux notes de base sélectionnées&nbsp;:
 
 Créer une note ici...
-: Sur une note sans échantillon&nbsp;: la note de base la plus proche est transposée et les niveaux de ses harmoniques sont interpolés (ou extrapolés) à partir d'une deuxième note de base. Les notes de base utilisées peuvent être choisies, et un avertissement apparaît quand la note en est éloignée. Les étendues de notes autour sont ajustées&nbsp;; les divisions entièrement comprises dans l'étendue de la nouvelle note sont supprimées.
+: Sur une note sans échantillon&nbsp;: la note de base la plus proche est transposée et les niveaux de ses harmoniques sont interpolés (ou extrapolés) à partir d'une deuxième note de base. Les notes de base utilisées peuvent être choisies, et un avertissement apparaît quand la note en est éloignée. Les étendues de notes autour sont ajustées&nbsp;; les divisions entièrement comprises dans l'étendue de la nouvelle note sont supprimées. Les notes de base sont comparées sur les notes où on les entend, ce qui prend aussi en charge les extensions (notes de base hors de l'étendue de notes de leurs divisions).
 
 Supprimer...
 : Les divisions de la note de base sont supprimées et ses voisines prennent ses notes. Les échantillons qui ne sont plus utilisés peuvent être supprimés aussi.
 
 Remplacer par une note calculée...
-: La note de base est supprimée, puis recréée à partir de ses voisines.
+: La note de base est remplacée par une note calculée à partir de ses voisines, avec la même note de base et sur les mêmes notes&nbsp;: les étendues de notes des voisines ne changent pas.
 
 Corriger le timbre...
 : Ouvre la fenêtre de [correction](#doc_timbre_correction).

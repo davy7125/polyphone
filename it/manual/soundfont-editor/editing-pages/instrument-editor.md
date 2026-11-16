@@ -304,7 +304,8 @@ Sopra la mappa, alcune righe di riepilogo mostrano per ogni nota:
 * :guilabel:`Trasposizione`: blu quando il campione è trasposto verso il basso, rosso quando è trasposto verso l'alto,
 * e, a scelta nel menu :guilabel:`Opzioni` > :guilabel:`Riepiloghi`: :guilabel:`Brillantezza` (baricentro delle armoniche), :guilabel:`Dispari / pari` (armoniche dispari confrontate con quelle pari), :guilabel:`Rumore` (rapporto armoniche / rumore), :guilabel:`Intonazione` (centesimi dalla nota più vicina del temperamento equabile) e :guilabel:`Loop` (qualità del loop).
 
-Sulla mappa, linee verticali segnano le giunzioni tra divisioni (più spesse quando il campione cambia), un punto segna ogni nota di base, un tratteggio diagonale indica le armoniche assenti (fuori dalla banda del campione o dell'uscita, sopra il limite superiore) o misurate in modo poco affidabile, e le note che non suonano nulla sono in grigio.
+Sulla mappa, linee verticali segnano le giunzioni tra divisioni (più spesse quando il campione cambia), un punto segna ogni nota di base, un tratteggio diagonale indica le armoniche assenti (fuori dalla banda del campione o dell'uscita, sopra il limite superiore) o misurate in modo poco affidabile, e le note che non suonano nulla restano vuote (attenuate sulla tastiera).
+Quando la nota di base di una divisione è fuori dal suo intervallo di note (estensione di un registro d'organo, per esempio), viene mostrata sulla nota più vicina suonata dalla divisione, con un triangolo che punta verso la vera nota di base al posto del punto; il suo scarto è sempre misurato suonando la divisione alla nota di base (:guilabel:`Suonato alla nota di base` nel grafico a barre).
 Un suggerimento mostra i valori della cella sotto il cursore del mouse: nota, armonica, livello, scarto, campioni, trasposizione e fattore di durata (l'attacco, il tremolo e i battimenti sono più rapidi quando un campione è trasposto verso l'alto).
 
 L'elenco :guilabel:`Visualizzazione` sceglie cosa rappresentano i colori:
@@ -408,13 +409,13 @@ Un clic su una nota di base seleziona le sue divisioni nell'[albero](manual/soun
 I pulsanti a destra si applicano alle note di base selezionate:
 
 Crea una nota qui...
-: Su una nota senza campione: la nota di base più vicina viene trasposta e i livelli delle sue armoniche vengono interpolati (o estrapolati) a partire da una seconda nota di base. Le note di base usate possono essere scelte, e compare un avviso quando la nota è lontana da esse. Gli intervalli di note circostanti vengono adattati; le divisioni interamente comprese nell'intervallo della nuova nota vengono rimosse.
+: Su una nota senza campione: la nota di base più vicina viene trasposta e i livelli delle sue armoniche vengono interpolati (o estrapolati) a partire da una seconda nota di base. Le note di base usate possono essere scelte, e compare un avviso quando la nota è lontana da esse. Gli intervalli di note circostanti vengono adattati; le divisioni interamente comprese nell'intervallo della nuova nota vengono rimosse. Le note di base vengono confrontate sulle note in cui si sentono, il che supporta anche le estensioni (note di base fuori dall'intervallo di note delle loro divisioni).
 
 Rimuovi...
 : Le divisioni della nota di base vengono rimosse e le note vicine suonano al suo posto. Anche i campioni non più utilizzati possono essere rimossi.
 
 Sostituisci con una nota calcolata...
-: La nota di base viene rimossa, poi ricreata a partire dalle note vicine.
+: La nota di base viene sostituita da una nota calcolata a partire dalle note vicine, con la stessa nota di base e sulle stesse note: gli intervalli di note delle vicine non cambiano.
 
 Correggi il timbro...
 : Apre la finestra di [correzione](#doc_timbre_correction).
