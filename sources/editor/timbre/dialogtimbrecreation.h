@@ -44,9 +44,10 @@ public:
     int getClosestKey();
     int getSecondKey();
 
-    // Automatic choice: the closest root key (the higher one if two are at the same distance), the second one being on
-    // the other side of the key if possible, otherwise the next one on the same side (as the tool "create missing samples")
-    static void getAutomaticKeys(const QList<int> &rootKeys, int key, int &closest, int &second);
+    // Automatic choice, as MissingSampleCreator::createJob: the closest root key (the higher one if two are at the same
+    // distance), the second one being on the other side of the key if possible, otherwise the next one on the same
+    // side, the root keys being compared at the keys where they are heard (anchors: root key => key)
+    static void getAutomaticKeys(const QMap<int, int> &anchors, int key, int &closest, int &second);
 
 private slots:
     void updateWarning();
@@ -55,6 +56,7 @@ private slots:
 private:
     int _key;
     QList<int> _rootKeys;
+    QMap<int, int> _anchors; // Root key => key where it is heard
     QRadioButton * _radioAutomatic, * _radioManual;
     QComboBox * _comboClosest, * _comboSecond;
     QLabel * _labelWarning;

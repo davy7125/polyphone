@@ -50,8 +50,10 @@ struct MissingSampleSource
 struct MissingSamplePosition
 {
     int key = -1;
+    int anchor = -1; // Key where it is heard (see MissingSampleCreator::getAnchor), -1 for the root key
     QList<MissingSampleSource> sources;
 
+    int heardKey() const { return anchor >= 0 ? anchor : key; }
     bool isLooped() const; // True if all divisions are looped
 
     // One division per distinct sample, the closest to the root key (several divisions may play the same sample on
@@ -61,13 +63,19 @@ struct MissingSamplePosition
 
 // Sample to create at a key of an instrument: the closest root key ("closest") is transposed and the levels of its
 // harmonics are corrected according to a second root key ("second"), by interpolation if the key is between them,
-// otherwise by extrapolation
+// otherwise by extrapolation. The positions are compared at the keys where they are heard: with an extension (root
+// keys outside the key ranges), "key" is the root key of the new note and "anchor" the key where it is heard; the
+// sample is transposed by the difference of the root keys, the new divisions copying the parameters of the closest
+// root key, so that at any key the new note sounds as the closest root key would.
 struct MissingSampleJob
 {
     EltID idInst;
     int key = -1;
+    int anchor = -1; // -1 for the key
     MissingSamplePosition closest;
     MissingSamplePosition second;
+
+    int heardKey() const { return anchor >= 0 ? anchor : key; }
 
     // Result of the computation
     struct NewSample
@@ -136,10 +144,20 @@ public:
     // Keys to add so that two consecutive root keys are at most maxSpacing semitones apart, evenly spread
     static QList<int> getKeysToFill(const QList<int> &rootKeys, int maxSpacing);
 
+    // Key where a root key is heard: the root key itself if one of the key ranges of its divisions contains it,
+    // otherwise the closest key of these ranges (the lowest one if two keys are as close), as for the extension of an
+    // organ stop
+    static int getAnchor(int rootKey, const QList<QPair<int, int> > &keyRanges);
+
+    // Set the anchors of positions from the key ranges of their divisions
+    static void setAnchors(QMap<int, MissingSamplePosition> &positions);
+
     // Job for a key without sample (at least two positions): the closest root key is transposed (the higher one if
     // two root keys are at the same distance), the second one is on the other side of the key if there is one,
-    // otherwise the next one on the same side
-    static MissingSampleJob createJob(EltID idInst, int key, const QMap<int, MissingSamplePosition> &positions);
+    // otherwise the next one on the same side. Distances are measured between the keys where the positions are heard,
+    // the new note being heard at "anchor" (-1: at the key).
+    static MissingSampleJob createJob(EltID idInst, int key, const QMap<int, MissingSamplePosition> &positions,
+                                      int anchor = -1);
 
     // Harmonic levels of the divisions of a root key (the soundfont is only read)
     static MissingSampleAnalysis analyze(const MissingSamplePosition &position);
@@ -158,9 +176,14 @@ public:
 
     // Adjust the key ranges around the new root keys: the ranges of the existing divisions can only shrink (limits as
     // in the tool "auto distribution") and the new divisions take the keys up to the neighbors, the lowest and highest
-    // keys of the instrument being kept
+    // keys of the instrument being kept. The root keys are placed at the keys where they are heard (heardKeys: root
+    // key => key, the root key itself if not given).
     static void adjustKeyRanges(SoundfontManager * sm, const QMap<int, QList<EltID> > &existingDivisions,
-                                const QMap<int, QList<EltID> > &newDivisions);
+                                const QMap<int, QList<EltID> > &newDivisions,
+                                const QMap<int, int> &heardKeys = QMap<int, int>());
+
+    // Copy of a division (parameters and modulators) in the same instrument
+    static EltID copyDivision(SoundfontManager * sm, EltID idDivision);
 
     // Remove the existing divisions whose key range is entirely within the range of a new division (one division per
     // key for instance: they could not shrink and would be played with the new note)

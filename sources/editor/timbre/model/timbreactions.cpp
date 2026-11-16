@@ -55,8 +55,31 @@ bool TimbreActions::prepareCreation(SoundfontManager * sm, EltID idInst, const T
 {
     idInst.typeElement = elementInst;
     QMap<int, MissingSamplePosition> positions = MissingSampleCreator::getPositions(sm, idInst, settings.velocity, true);
+    MissingSampleCreator::setAnchors(positions);
+
+    // Replacement in place: the new note is heard where the position replaced was heard, on the same keys
+    creation.replacedRanges.clear();
+    int anchor = key;
+    if (excludedPosition >= 0 && excludedPosition == key && positions.contains(key))
+    {
+        anchor = positions[key].heardKey();
+        foreach (MissingSampleSource source, positions[key].sources)
+        {
+            QPair<int, int> range(source.keyMin, source.keyMax);
+            if (!creation.replacedRanges.contains(range))
+                creation.replacedRanges << range;
+        }
+    }
     positions.remove(excludedPosition);
-    if (positions.contains(key))
+
+    // Neither a root key nor, for a new note, a key where a root key is heard
+    bool used = positions.contains(key);
+    if (creation.replacedRanges.isEmpty())
+    {
+        foreach (MissingSamplePosition position, positions.values())
+            used |= (position.heardKey() == anchor);
+    }
+    if (used)
     {
         error = tr("The key %1 already has a sample.").arg(ContextManager::keyName()->getKeyName(static_cast<unsigned int>(key)));
         return false;
@@ -73,21 +96,27 @@ bool TimbreActions::prepareCreation(SoundfontManager * sm, EltID idInst, const T
         creation.job = MissingSampleJob();
         creation.job.idInst = idInst;
         creation.job.key = key;
+        creation.job.anchor = anchor;
         creation.job.closest = positions[closestKey];
         creation.job.second = positions[secondKey];
     }
     else
-        creation.job = MissingSampleCreator::createJob(idInst, key, positions);
+        creation.job = MissingSampleCreator::createJob(idInst, key, positions, anchor);
 
     creation.existingDivisions.clear();
+    creation.heardKeys.clear();
     foreach (MissingSamplePosition position, positions.values())
+    {
         foreach (MissingSampleSource source, position.sources)
             creation.existingDivisions[position.key] << source.idDivision;
+        creation.heardKeys[position.key] = position.heardKey();
+    }
+    creation.heardKeys[key] = anchor;
 
-    // Extrapolation far from the root keys used
-    int closest = creation.job.closest.key, second = creation.job.second.key;
-    bool between = (key > qMin(closest, second) && key < qMax(closest, second));
-    creation.extrapolationWarning = !between && std::abs(key - closest) > 2 * std::abs(second - closest);
+    // Extrapolation far from the root keys used (distances between the keys where they are heard)
+    int closest = creation.job.closest.heardKey(), second = creation.job.second.heardKey();
+    bool between = (anchor > qMin(closest, second) && anchor < qMax(closest, second));
+    creation.extrapolationWarning = !between && std::abs(anchor - closest) > 2 * std::abs(second - closest);
     return true;
 }
 
@@ -107,11 +136,36 @@ QList<EltID> TimbreActions::applyCreation(SoundfontManager * sm, const TimbreCre
         warnings << tr("The note couldn't be computed.");
         return newDivisions;
     }
-    QMap<int, QList<EltID> > created;
-    created[creation.job.key] = newDivisions;
-    MissingSampleCreator::adjustKeyRanges(sm, creation.existingDivisions, created);
-
-    MissingSampleCreator::removeCoveredDivisions(sm, creation.existingDivisions, created);
+    if (!creation.replacedRanges.isEmpty())
+    {
+        // Replacement in place: the keys of the position replaced, one set of divisions per key range
+        QList<EltID> copies = newDivisions;
+        AttributeValue value;
+        for (int i = 0; i < creation.replacedRanges.count(); i++)
+        {
+            QList<EltID> divisions;
+            if (i == 0)
+                divisions = copies;
+            else
+            {
+                foreach (EltID idDivision, copies)
+                    divisions << MissingSampleCreator::copyDivision(sm, idDivision);
+                newDivisions << divisions;
+            }
+            value.rValue.byLo = static_cast<quint8>(creation.replacedRanges[i].first);
+            value.rValue.byHi = static_cast<quint8>(creation.replacedRanges[i].second);
+            foreach (EltID idDivision, divisions)
+                sm->set(idDivision, champ_keyRange, value);
+        }
+    }
+    else
+    {
+        // New note: the key ranges around are shared again
+        QMap<int, QList<EltID> > created;
+        created[creation.job.key] = newDivisions;
+        MissingSampleCreator::adjustKeyRanges(sm, creation.existingDivisions, created, creation.heardKeys);
+        MissingSampleCreator::removeCoveredDivisions(sm, creation.existingDivisions, created);
+    }
 
     if (!creation.job.harmonicsFound)
         warnings << tr("No harmonics found, only the level was interpolated.");
@@ -120,7 +174,8 @@ QList<EltID> TimbreActions::applyCreation(SoundfontManager * sm, const TimbreCre
     return newDivisions;
 }
 
-void TimbreActions::removePosition(SoundfontManager * sm, const TimbreModel &model, int positionKey, bool removeUnusedSamples)
+void TimbreActions::removePosition(SoundfontManager * sm, const TimbreModel &model, int positionKey, bool removeUnusedSamples,
+                                   bool giveKeysToNeighbors)
 {
     if (!model.getPositions().contains(positionKey))
         return;
@@ -129,7 +184,9 @@ void TimbreActions::removePosition(SoundfontManager * sm, const TimbreModel &mod
     EltID idDivision(elementInstSmpl, idInst.indexSf2, idInst.indexElt);
 
     // Ranges of the neighbors extended
-    QMap<int, int> keysAfterRemoval = model.getKeysAfterRemoval(positionKey);
+    QMap<int, int> keysAfterRemoval;
+    if (giveKeysToNeighbors)
+        keysAfterRemoval = model.getKeysAfterRemoval(positionKey);
     int highestForPrevious = -1, lowestForNext = 128;
     foreach (int key, keysAfterRemoval.keys())
     {

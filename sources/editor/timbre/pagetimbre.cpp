@@ -650,8 +650,9 @@ void PageTimbre::readTreeSelection()
                 positions << division.rootKey;
     }
     _selectedPositions = positions;
+    // The selected key stays if it displays a selected root key or is played by one, otherwise the first one is displayed
     if (!positions.isEmpty() && !positions.contains(getPosition(_selectedKey)))
-        _selectedKey = positions.first(); // Otherwise the selected key stays, being a selected root key or played by one
+        _selectedKey = _model.getPositions()[positions.first()].anchor;
     if (!positions.contains(_anchorKey))
         _anchorKey = positions.isEmpty() ? -1 : getPosition(_selectedKey);
     _map->setSelection(_selectedKey, _selectedPositions);
@@ -660,13 +661,9 @@ void PageTimbre::readTreeSelection()
 
 int PageTimbre::getPosition(int key)
 {
-    // The key if it is a root key, otherwise the root key of the main division playing it
-    if (key < 0 || key > 127)
-        return -1;
-    if (_model.getPositions().contains(key))
-        return key;
-    int position = _model.getKey(key).position;
-    return _model.getPositions().contains(position) ? position : -1;
+    // The root key displayed at the key (the key itself, or a root key outside the keys covered by its divisions),
+    // otherwise the root key of the main division playing it
+    return _model.getPositionOf(key);
 }
 
 void PageTimbre::restoreSelection(int key, const QList<int> &positions, int anchorKey)
@@ -771,15 +768,14 @@ void PageTimbre::onKeySelected(int key, Qt::KeyboardModifiers modifiers)
 
 QList<int> PageTimbre::getTargets()
 {
-    // The selected root keys if the selected key is one of them or is played by one of them, otherwise the root key
-    // selected
+    // The selected root keys if the selected key displays one of them or is played by one of them, otherwise the root
+    // key displayed at the selected key
     QList<int> targets;
-    int playedBy = _selectedKey >= 0 ? _model.getKey(_selectedKey).position : -1;
-    if (_selectedPositions.contains(_selectedKey) ||
-        (!_model.getPositions().contains(_selectedKey) && _selectedPositions.contains(playedBy)))
+    int position = getPosition(_selectedKey);
+    if (_selectedPositions.contains(position))
         targets = _selectedPositions;
-    else if (_model.getPositions().contains(_selectedKey))
-        targets << _selectedKey;
+    else if (position >= 0 && _model.getPositions()[position].anchor == _selectedKey)
+        targets << position;
     std::sort(targets.begin(), targets.end());
     return targets;
 }
@@ -788,9 +784,13 @@ void PageTimbre::updateDetail()
 {
     TimbrePalette palette(TimbrePalette::SURFACE_WINDOW); // Colors of the graph
     int key = _selectedKey;
-    bool hasPosition = _model.getPositions().contains(key);
+
+    // Root key displayed at the key (the key itself, or a root key outside the keys covered by its divisions) or playing it
+    int positionKey = getPosition(key);
+    bool displayed = positionKey >= 0 && _model.getPositions()[positionKey].anchor == key;
+    bool hasPosition = displayed && positionKey == key;
     bool covered = key >= 0 && !_model.getKey(key).sources.isEmpty();
-    bool canCreate = key >= 0 && !hasPosition && _model.getPositions().count() >= 2;
+    bool canCreate = key >= 0 && !_model.getPositions().contains(key) && !displayed && _model.getPositions().count() >= 2;
     QList<int> targets = getTargets();
     _buttonCreate->setEnabled(canCreate);
     _buttonRemove->setEnabled(!targets.isEmpty());
@@ -821,7 +821,7 @@ void PageTimbre::updateDetail()
     SoundfontManager * sm = SoundfontManager::getInstance();
     const TimbreKey &tk = _model.getKey(key);
     const QMap<int, TimbrePosition> &positions = _model.getPositions();
-    QMap<int, TimbrePosition>::const_iterator positionIt = positions.constFind(hasPosition ? key : (covered ? tk.position : -1));
+    QMap<int, TimbrePosition>::const_iterator positionIt = positions.constFind(positionKey);
     const TimbrePosition * position = (positionIt != positions.constEnd()) ? &positionIt.value() : nullptr;
     const QString levelName = TimbreMapWidget::getSummaryName(TimbreDisplay::SUMMARY_LEVEL);
     const QString timbreName = TimbreMapWidget::getSummaryName(TimbreDisplay::SUMMARY_TIMBRE);
@@ -895,6 +895,8 @@ void PageTimbre::updateDetail()
                         QStringList(tr("%1%", "percentage").arg(qRound(100 * deviation.confidence))));
         if (position->referenceAtEdge)
             _detail->addNote(tr("Reference extrapolated from the neighbors on one side: less reliable"));
+        if (position->anchor != position->key)
+            _detail->addNote(tr("Root key outside the key range of its divisions: measured by playing them at the root key"));
 
         // Consequences of a removal
         if (position->redundancyComputed)
@@ -910,16 +912,18 @@ void PageTimbre::updateDetail()
         }
     }
 
-    // Bars of the root key, of the key or of a computed note
-    if (position != nullptr && hasPosition)
+    // Bars of the root key displayed (played at the root key, even outside the keys covered by its divisions, as for
+    // its deviation), of the key or of a computed note
+    if (position != nullptr && displayed)
     {
-        series << TimbreBarsWidget::Series { tr("Heard"), _model.getRowLevels(position->spectrum), palette.highlight(),
+        series << TimbreBarsWidget::Series { hasPosition ? tr("Heard") : tr("Played at the root key"),
+                                             _model.getRowLevels(position->spectrum), palette.highlight(),
                                              TimbreBarsWidget::STYLE_BARS };
         if (!position->reference.isEmpty())
             series << TimbreBarsWidget::Series { tr("Reference"), _model.getRowLevels(position->reference), palette.text(),
                                                  TimbreBarsWidget::STYLE_MARKERS };
     }
-    if (!hasPosition && covered)
+    if (!displayed && covered)
         series << TimbreBarsWidget::Series { tr("Heard"), _model.getRowLevels(tk.spectrum), palette.highlight(),
                                              TimbreBarsWidget::STYLE_BARS };
     if (canCreate)
@@ -1037,14 +1041,15 @@ bool PageTimbre::createNote(int key, int closestKey, int secondKey, int excluded
     runInThread([&creation]() { TimbreActions::computeCreation(creation); },
                 tr("Computing the note %1...").arg(keyName(key)));
     if (excludedPosition >= 0)
-        TimbreActions::removePosition(sm, _model, excludedPosition, true);
+        TimbreActions::removePosition(sm, _model, excludedPosition, true, creation.replacedRanges.isEmpty());
     return !TimbreActions::applyCreation(sm, creation, warnings).isEmpty();
 }
 
 void PageTimbre::onCreate()
 {
     int key = _selectedKey;
-    if (key < 0 || _model.getPositions().contains(key) || _model.getPositions().count() < 2)
+    if (key < 0 || _model.getPositions().contains(key) || _model.getPositionDisplayedAt(key) >= 0 ||
+        _model.getPositions().count() < 2)
         return;
     DialogTimbreCreation dialog(_model, key, this);
     if (dialog.exec() != QDialog::Accepted)
@@ -1223,12 +1228,17 @@ void PageTimbre::onRender()
 
 int PageTimbre::getBreakKey(int junctionKey)
 {
-    // Free key in the middle of the root keys on both sides of the junction
-    int low = qMin(_model.getKey(junctionKey - 1).position, _model.getKey(junctionKey).position);
-    int high = qMax(_model.getKey(junctionKey - 1).position, _model.getKey(junctionKey).position);
+    // Free key (neither a root key nor displaying one) in the middle of the keys where the root keys on both sides of
+    // the junction are heard
+    int previous = _model.getKey(junctionKey - 1).position;
+    int next = _model.getKey(junctionKey).position;
+    if (!_model.getPositions().contains(previous) || !_model.getPositions().contains(next))
+        return -1;
+    int low = qMin(_model.getPositions()[previous].anchor, _model.getPositions()[next].anchor);
+    int high = qMax(_model.getPositions()[previous].anchor, _model.getPositions()[next].anchor);
     int best = -1;
     for (int key = low + 1; key < high; key++)
-        if (!_model.getPositions().contains(key) &&
+        if (!_model.getPositions().contains(key) && _model.getPositionDisplayedAt(key) < 0 &&
             (best == -1 || std::abs(2 * key - low - high) < std::abs(2 * best - low - high)))
             best = key;
     return best;
@@ -1257,7 +1267,7 @@ void PageTimbre::onPropose(int label)
     }
     if (label != 100)
     {
-        _selectedKey = targets.first();
+        _selectedKey = _model.getPositions()[targets.first()].anchor;
         selectPositions(targets, true);
     }
 

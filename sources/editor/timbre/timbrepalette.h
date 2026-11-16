@@ -51,6 +51,7 @@ public:
     // Colors of the theme
     QColor background() const { return _background; }
     QColor text() const { return _text; }
+    QColor axisText() const { QColor color = _text; color.setAlpha(180); return color; } // As the axes of the range editor
     QColor neutral() const { return _neutral; }
     QColor grid() const { return _grid; }
     QColor highlight() const { return _highlight; }

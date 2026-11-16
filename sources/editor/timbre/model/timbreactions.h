@@ -38,6 +38,8 @@ struct TimbreCreation
 {
     MissingSampleJob job;
     QMap<int, QList<EltID> > existingDivisions; // Divisions of the subset by root key (without the position replaced)
+    QMap<int, int> heardKeys; // Root key => key where it is heard (anchor), the new one included
+    QList<QPair<int, int> > replacedRanges; // Replacement in place: key ranges of the position replaced
     bool extrapolationWarning = false; // The key is far from the root keys used
 };
 
@@ -100,15 +102,19 @@ public:
     static int s_sharedChoice;
 
     // Creation of a note at a key of the subset (closest and second root keys chosen automatically if -1), a position
-    // being possibly excluded (replacement); computeCreation reads the soundfont only and can be called by a thread
+    // being possibly excluded. If the key is the position excluded, the note replaces it in place: same root key, same
+    // key ranges, the neighbors keeping theirs. The root keys are compared at the keys where they are heard (anchors),
+    // so that the extensions of organ stops (root keys outside the key ranges) are supported. computeCreation reads
+    // the soundfont only and can be called by a thread.
     static bool prepareCreation(SoundfontManager * sm, EltID idInst, const TimbreSettings &settings, int key, int closestKey,
                                 int secondKey, int excludedPosition, TimbreCreation &creation, QString &error);
     static void computeCreation(TimbreCreation &creation);
     static QList<EltID> applyCreation(SoundfontManager * sm, const TimbreCreation &creation, QStringList &warnings);
 
-    // Removal of the divisions of a position, the neighbors taking its keys (getKeysAfterRemoval); the samples not used
-    // anymore are possibly removed too
-    static void removePosition(SoundfontManager * sm, const TimbreModel &model, int positionKey, bool removeUnusedSamples);
+    // Removal of the divisions of a position, the neighbors taking its keys (getKeysAfterRemoval) unless it is replaced
+    // in place; the samples not used anymore are possibly removed too
+    static void removePosition(SoundfontManager * sm, const TimbreModel &model, int positionKey, bool removeUnusedSamples,
+                               bool giveKeysToNeighbors = true);
 
     // Attenuation of divisions changed by a delta (dB, positive: quieter), within 0 and 144 dB; return the smallest
     // absolute change applied

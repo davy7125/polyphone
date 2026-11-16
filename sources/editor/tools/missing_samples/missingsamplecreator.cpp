@@ -33,6 +33,7 @@
 #include <QRegularExpression>
 #include <cmath>
 #include <utility>
+#include <algorithm>
 
 // Value of a division, otherwise of the instrument
 static bool getValue(SoundfontManager * sm, EltID idDivision, AttributeType champ, AttributeValue &value)
@@ -225,15 +226,58 @@ QList<int> MissingSampleCreator::getKeysToFill(const QList<int> &rootKeys, int m
     return keys;
 }
 
-MissingSampleJob MissingSampleCreator::createJob(EltID idInst, int key, const QMap<int, MissingSamplePosition> &positions)
+int MissingSampleCreator::getAnchor(int rootKey, const QList<QPair<int, int> > &keyRanges)
 {
-    QList<int> rootKeys = positions.keys();
-    int below = -1, above = -1;
-    for (int i = 0; i < rootKeys.count(); i++)
+    int anchor = -1;
+    for (int i = 0; i < keyRanges.count(); i++)
     {
-        if (rootKeys[i] < key)
+        int key = qBound(keyRanges[i].first, rootKey, keyRanges[i].second);
+        int distance = std::abs(key - rootKey);
+        int bestDistance = std::abs(anchor - rootKey);
+        if (anchor == -1 || distance < bestDistance || (distance == bestDistance && key < anchor))
+            anchor = key;
+    }
+    return anchor >= 0 ? anchor : rootKey;
+}
+
+void MissingSampleCreator::setAnchors(QMap<int, MissingSamplePosition> &positions)
+{
+    for (QMap<int, MissingSamplePosition>::iterator it = positions.begin(); it != positions.end(); ++it)
+    {
+        QList<QPair<int, int> > keyRanges;
+        foreach (MissingSampleSource source, it.value().sources)
+            keyRanges << qMakePair(source.keyMin, source.keyMax);
+        it.value().anchor = getAnchor(it.key(), keyRanges);
+    }
+}
+
+MissingSampleJob MissingSampleCreator::createJob(EltID idInst, int key, const QMap<int, MissingSamplePosition> &positions,
+                                                 int anchor)
+{
+    MissingSampleJob job;
+    job.idInst = idInst;
+    job.key = key;
+    job.anchor = anchor;
+
+    // Keys where the root keys are heard (the root keys themselves without extension), in ascending order
+    int target = job.heardKey();
+    QList<QPair<int, int> > order; // Heard key, root key
+    for (QMap<int, MissingSamplePosition>::const_iterator it = positions.constBegin(); it != positions.constEnd(); ++it)
+        order << qMakePair(it.value().heardKey(), it.key());
+    std::sort(order.begin(), order.end());
+    QList<int> rootKeys, heardKeys;
+    for (int i = 0; i < order.count(); i++)
+    {
+        heardKeys << order[i].first;
+        rootKeys << order[i].second;
+    }
+
+    int below = -1, above = -1;
+    for (int i = 0; i < heardKeys.count(); i++)
+    {
+        if (heardKeys[i] < target)
             below = i;
-        else if (rootKeys[i] > key && above == -1)
+        else if (heardKeys[i] > target && above == -1)
             above = i;
     }
 
@@ -241,7 +285,7 @@ MissingSampleJob MissingSampleCreator::createJob(EltID idInst, int key, const QM
     if (below >= 0 && above >= 0)
     {
         // Between two root keys
-        if (key - rootKeys[below] < rootKeys[above] - key)
+        if (target - heardKeys[below] < heardKeys[above] - target)
         {
             closest = below;
             second = above;
@@ -265,11 +309,11 @@ MissingSampleJob MissingSampleCreator::createJob(EltID idInst, int key, const QM
         second = above + 1;
     }
 
-    MissingSampleJob job;
-    job.idInst = idInst;
-    job.key = key;
+    // Nothing computed if a root key is missing (the closest one being empty)
+    if (closest < 0 || closest >= rootKeys.count())
+        return job;
     job.closest = positions[rootKeys[closest]];
-    job.second = positions[rootKeys[second]];
+    job.second = (second >= 0 && second < rootKeys.count()) ? positions[rootKeys[second]] : job.closest;
     return job;
 }
 
@@ -355,7 +399,11 @@ void MissingSampleCreator::compute(MissingSampleJob &job, MissingSampleAnalysisC
     // Correction of the harmonics, or of the level only if no harmonics are found
     QSharedPointer<MissingSampleAnalysis> closest = cache.get(job.idInst, job.closest);
     QSharedPointer<MissingSampleAnalysis> second = cache.get(job.idInst, job.second);
-    double ratio = static_cast<double>(job.key - job.closest.key) / (job.second.key - job.closest.key);
+    // Position of the new note between the keys where both root keys are heard
+    int heardDistance = job.second.heardKey() - job.closest.heardKey();
+    double ratio = heardDistance != 0 ?
+                static_cast<double>(job.heardKey() - job.closest.heardKey()) / heardDistance :
+                static_cast<double>(job.key - job.closest.key) / (job.second.key - job.closest.key);
     QList<QPointF> gains = getGains(*closest, *second, ratio);
     job.harmonicsFound = !gains.isEmpty();
     if (gains.isEmpty())
@@ -507,7 +555,11 @@ QList<EltID> MissingSampleCreator::apply(SoundfontManager * sm, const MissingSam
         sm->set(idSmpl, champ_dwLength, value);
         value.dwValue = sample.sampleRate;
         sm->set(idSmpl, champ_dwSampleRate, value);
-        value.bValue = static_cast<quint8>(job.key);
+        // Pitch of the source transposed (the root key of the new note without extension; otherwise the root keys
+        // of the divisions differ from the pitches of their samples, by an octave for instance)
+        int sourcePitch = sm->get(sample.idSource, champ_byOriginalPitch).bValue;
+        int pitch = qBound(0, sourcePitch + job.key - job.closest.key, 127);
+        value.bValue = static_cast<quint8>(pitch);
         sm->set(idSmpl, champ_byOriginalPitch, value);
         value.cValue = static_cast<qint8>(sample.correction);
         sm->set(idSmpl, champ_chPitchCorrection, value);
@@ -517,7 +569,7 @@ QList<EltID> MissingSampleCreator::apply(SoundfontManager * sm, const MissingSam
         sm->set(idSmpl, champ_dwEndLoop, value);
         value.sfLinkValue = monoSample;
         sm->set(idSmpl, champ_sfSampleType, value);
-        sm->set(idSmpl, champ_name, getSampleName(sm->getQstr(sample.idSource, champ_name), job.closest.key, job.key));
+        sm->set(idSmpl, champ_name, getSampleName(sm->getQstr(sample.idSource, champ_name), sourcePitch, pitch));
         sampleBySource[sample.idSource.indexElt] = idSmpl;
         newSamples << idSmpl;
         if (job.loopRequired && !SampleUtils::isLooped(sample.loopStart, sample.loopEnd, static_cast<quint32>(sample.data.size())))
@@ -552,30 +604,7 @@ QList<EltID> MissingSampleCreator::apply(SoundfontManager * sm, const MissingSam
         if (!sampleBySource.contains(source.idSample.indexElt))
             continue;
 
-        EltID idDivision(elementInstSmpl, job.idInst.indexSf2, job.idInst.indexElt);
-        idDivision.indexElt2 = sm->add(idDivision);
-
-        // Parameters
-        EltID idFrom = source.idDivision;
-        idFrom.typeElement = elementInstSmplGen;
-        foreach (int champ, sm->getSiblings(idFrom))
-            sm->set(idDivision, static_cast<AttributeType>(champ), sm->get(source.idDivision, static_cast<AttributeType>(champ)));
-
-        // Modulators
-        EltID idModFrom = source.idDivision;
-        idModFrom.typeElement = elementInstSmplMod;
-        EltID idModTo = idDivision;
-        idModTo.typeElement = elementInstSmplMod;
-        foreach (int index, sm->getSiblings(idModFrom))
-        {
-            idModFrom.indexMod = index;
-            idModTo.indexMod = sm->add(idModTo);
-            sm->set(idModTo, champ_modAmount, sm->get(idModFrom, champ_modAmount));
-            sm->set(idModTo, champ_sfModSrcOper, sm->get(idModFrom, champ_sfModSrcOper));
-            sm->set(idModTo, champ_sfModAmtSrcOper, sm->get(idModFrom, champ_sfModAmtSrcOper));
-            sm->set(idModTo, champ_sfModDestOper, sm->get(idModFrom, champ_sfModDestOper));
-            sm->set(idModTo, champ_sfModTransOper, sm->get(idModFrom, champ_sfModTransOper));
-        }
+        EltID idDivision = copyDivision(sm, source.idDivision);
 
         // Sample and root key
         value.wValue = static_cast<quint16>(sampleBySource[source.idSample.indexElt].indexElt);
@@ -609,8 +638,37 @@ QList<EltID> MissingSampleCreator::apply(SoundfontManager * sm, const MissingSam
     return newDivisions;
 }
 
+EltID MissingSampleCreator::copyDivision(SoundfontManager * sm, EltID idDivision)
+{
+    EltID idCopy(elementInstSmpl, idDivision.indexSf2, idDivision.indexElt);
+    idCopy.indexElt2 = sm->add(idCopy);
+
+    // Parameters
+    EltID idFrom = idDivision;
+    idFrom.typeElement = elementInstSmplGen;
+    foreach (int champ, sm->getSiblings(idFrom))
+        sm->set(idCopy, static_cast<AttributeType>(champ), sm->get(idDivision, static_cast<AttributeType>(champ)));
+
+    // Modulators
+    EltID idModFrom = idDivision;
+    idModFrom.typeElement = elementInstSmplMod;
+    EltID idModTo = idCopy;
+    idModTo.typeElement = elementInstSmplMod;
+    foreach (int index, sm->getSiblings(idModFrom))
+    {
+        idModFrom.indexMod = index;
+        idModTo.indexMod = sm->add(idModTo);
+        sm->set(idModTo, champ_modAmount, sm->get(idModFrom, champ_modAmount));
+        sm->set(idModTo, champ_sfModSrcOper, sm->get(idModFrom, champ_sfModSrcOper));
+        sm->set(idModTo, champ_sfModAmtSrcOper, sm->get(idModFrom, champ_sfModAmtSrcOper));
+        sm->set(idModTo, champ_sfModDestOper, sm->get(idModFrom, champ_sfModDestOper));
+        sm->set(idModTo, champ_sfModTransOper, sm->get(idModFrom, champ_sfModTransOper));
+    }
+    return idCopy;
+}
+
 void MissingSampleCreator::adjustKeyRanges(SoundfontManager * sm, const QMap<int, QList<EltID> > &existingDivisions,
-                                           const QMap<int, QList<EltID> > &newDivisions)
+                                           const QMap<int, QList<EltID> > &newDivisions, const QMap<int, int> &heardKeys)
 {
     if (newDivisions.isEmpty())
         return;
@@ -627,35 +685,41 @@ void MissingSampleCreator::adjustKeyRanges(SoundfontManager * sm, const QMap<int
         }
     }
 
-    // All root keys
+    // All root keys, in the order of the keys where they are heard (the root keys themselves without extension)
     QMap<int, QList<EltID> > allDivisions = existingDivisions;
     foreach (int key, newDivisions.keys())
         allDivisions[key] << newDivisions[key];
-    QList<int> keys = allDivisions.keys();
+    QList<QPair<int, int> > order; // Heard key, root key
+    foreach (int rootKey, allDivisions.keys())
+        order << qMakePair(heardKeys.value(rootKey, rootKey), rootKey);
+    std::sort(order.begin(), order.end());
 
     AttributeValue value;
-    for (int i = 0; i < keys.count(); i++)
+    for (int i = 0; i < order.count(); i++)
     {
-        int key = keys[i];
-        if (!newDivisions.contains(key))
+        int key = order[i].first;
+        int rootKey = order[i].second;
+        if (!newDivisions.contains(rootKey))
             continue;
 
-        // Lowest key, the previous existing divisions being possibly shortened
+        // Lowest key, the previous existing divisions being possibly shortened (those below the new note only, a
+        // root key possibly playing other keys elsewhere)
         int lowKey;
         if (i == 0)
             lowKey = qMin(minKey, key);
         else
         {
-            int previous = keys[i - 1];
-            int limit = ToolAutoDistribution::getMaxKey(previous, key);
-            if (newDivisions.contains(previous))
-                lowKey = limit + 1;
-            else
+            int previous = order[i - 1].second;
+            int limit = ToolAutoDistribution::getMaxKey(order[i - 1].first, key);
+            lowKey = limit + 1;
+            if (!newDivisions.contains(previous))
             {
                 int previousHigh = -1;
                 foreach (EltID idDivision, allDivisions[previous])
                 {
                     RangesType range = getRange(sm, idDivision, champ_keyRange);
+                    if (range.byLo > key)
+                        continue;
                     if (range.byHi > limit)
                     {
                         range.byHi = static_cast<quint8>(qMax(limit, static_cast<int>(range.byLo)));
@@ -664,26 +728,28 @@ void MissingSampleCreator::adjustKeyRanges(SoundfontManager * sm, const QMap<int
                     }
                     previousHigh = qMax(previousHigh, static_cast<int>(range.byHi));
                 }
-                lowKey = previousHigh + 1;
+                if (previousHigh >= 0)
+                    lowKey = previousHigh + 1;
             }
         }
 
-        // Highest key, the next existing divisions being possibly shortened
+        // Highest key, the next existing divisions being possibly shortened (those above the new note only)
         int highKey;
-        if (i == keys.count() - 1)
+        if (i == order.count() - 1)
             highKey = qMax(maxKey, key);
         else
         {
-            int next = keys[i + 1];
-            int limit = ToolAutoDistribution::getMaxKey(key, next);
-            if (newDivisions.contains(next))
-                highKey = limit;
-            else
+            int next = order[i + 1].second;
+            int limit = ToolAutoDistribution::getMaxKey(key, order[i + 1].first);
+            highKey = limit;
+            if (!newDivisions.contains(next))
             {
                 int nextLow = 128;
                 foreach (EltID idDivision, allDivisions[next])
                 {
                     RangesType range = getRange(sm, idDivision, champ_keyRange);
+                    if (range.byHi < key)
+                        continue;
                     if (range.byLo <= limit)
                     {
                         range.byLo = static_cast<quint8>(qMin(limit + 1, static_cast<int>(range.byHi)));
@@ -692,13 +758,14 @@ void MissingSampleCreator::adjustKeyRanges(SoundfontManager * sm, const QMap<int
                     }
                     nextLow = qMin(nextLow, static_cast<int>(range.byLo));
                 }
-                highKey = nextLow - 1;
+                if (nextLow < 128)
+                    highKey = nextLow - 1;
             }
         }
 
         value.rValue.byLo = static_cast<quint8>(qBound(0, qMin(lowKey, key), 127));
         value.rValue.byHi = static_cast<quint8>(qBound(0, qMax(highKey, key), 127));
-        foreach (EltID idDivision, newDivisions[key])
+        foreach (EltID idDivision, newDivisions[rootKey])
             sm->set(idDivision, champ_keyRange, value);
     }
 }

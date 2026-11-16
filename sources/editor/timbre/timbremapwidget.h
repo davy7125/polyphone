@@ -104,7 +104,6 @@ private:
     int columnAt(int x) const;
     int keyAt(int x) const;
     QRectF columnRect(int column, double top, double height) const;
-    QRectF marginRect(double top, double height) const;
     void drawLabel(QPainter &painter, double top, double height, const QString &text);
     QColor cellColor(int key, int row, bool &hatched, bool &absent);
     QColor summaryColor(int summary, int key, bool &hatched);

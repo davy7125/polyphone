@@ -26,6 +26,7 @@
 #include "dialogtimbrecreation.h"
 #include "dialogbuttonbox.h"
 #include "contextmanager.h"
+#include "missing_samples/missingsamplecreator.h"
 #include <QRadioButton>
 #include <QComboBox>
 #include <QLabel>
@@ -36,6 +37,9 @@ DialogTimbreCreation::DialogTimbreCreation(const TimbreModel &model, int key, QW
     _key(key),
     _rootKeys(model.getPositions().keys())
 {
+    foreach (int rootKey, _rootKeys)
+        _anchors[rootKey] = model.getPositions()[rootKey].anchor;
+
     this->setWindowTitle(tr("Create a computed note"));
     this->setWindowFlags((this->windowFlags() | Qt::Tool) & ~Qt::WindowContextHelpButtonHint);
     QVBoxLayout * layout = new QVBoxLayout(this);
@@ -47,7 +51,7 @@ DialogTimbreCreation::DialogTimbreCreation(const TimbreModel &model, int key, QW
     layout->addWidget(label);
 
     int closest, second;
-    getAutomaticKeys(_rootKeys, key, closest, second);
+    getAutomaticKeys(_anchors, key, closest, second);
     _radioAutomatic = new QRadioButton(tr("Automatic: %1 transposed, %2 for the harmonics").arg(
                                            keyNames->getKeyName(static_cast<unsigned int>(closest)),
                                            keyNames->getKeyName(static_cast<unsigned int>(second))), this);
@@ -94,33 +98,17 @@ void DialogTimbreCreation::selectManual()
     _radioManual->setChecked(true);
 }
 
-void DialogTimbreCreation::getAutomaticKeys(const QList<int> &rootKeys, int key, int &closest, int &second)
+void DialogTimbreCreation::getAutomaticKeys(const QMap<int, int> &anchors, int key, int &closest, int &second)
 {
-    closest = second = -1;
-    int below = -1, above = -1;
-    for (int i = 0; i < rootKeys.count(); i++)
+    QMap<int, MissingSamplePosition> positions;
+    for (QMap<int, int>::const_iterator it = anchors.constBegin(); it != anchors.constEnd(); ++it)
     {
-        if (rootKeys[i] < key)
-            below = i;
-        else if (rootKeys[i] > key && above == -1)
-            above = i;
+        positions[it.key()].key = it.key();
+        positions[it.key()].anchor = it.value();
     }
-    if (below >= 0 && above >= 0)
-    {
-        bool lowerCloser = key - rootKeys[below] < rootKeys[above] - key;
-        closest = rootKeys[lowerCloser ? below : above];
-        second = rootKeys[lowerCloser ? above : below];
-    }
-    else if (below >= 1)
-    {
-        closest = rootKeys[below];
-        second = rootKeys[below - 1];
-    }
-    else if (above >= 0 && above + 1 < rootKeys.count())
-    {
-        closest = rootKeys[above];
-        second = rootKeys[above + 1];
-    }
+    MissingSampleJob job = MissingSampleCreator::createJob(EltID(), key, positions);
+    closest = job.closest.key;
+    second = (closest >= 0 && job.second.key != closest) ? job.second.key : -1;
 }
 
 int DialogTimbreCreation::getClosestKey()
@@ -142,17 +130,20 @@ void DialogTimbreCreation::updateWarning()
         second = _comboSecond->currentData().toInt();
     }
     else
-        getAutomaticKeys(_rootKeys, _key, closest, second);
+        getAutomaticKeys(_anchors, _key, closest, second);
 
     QStringList warnings;
     if (closest == second)
         warnings << tr("The two root keys must be different.");
     else
     {
-        bool between = _key > qMin(closest, second) && _key < qMax(closest, second);
-        if (!between && std::abs(_key - closest) > 2 * std::abs(second - closest))
+        // Distances between the keys where the root keys are heard (the root keys themselves without extension)
+        int closestKey = _anchors.value(closest, closest);
+        int secondKey = _anchors.value(second, second);
+        bool between = _key > qMin(closestKey, secondKey) && _key < qMax(closestKey, secondKey);
+        if (!between && std::abs(_key - closestKey) > 2 * std::abs(secondKey - closestKey))
             warnings << tr("The key is far from the root keys used: the extrapolation of the harmonics may be inaccurate.");
-        if (std::abs(_key - closest) > 12)
+        if (std::abs(_key - closestKey) > 12)
             warnings << tr("The closest root key is transposed by more than an octave.");
     }
     _labelWarning->setText(warnings.join("<br/>"));

@@ -140,7 +140,13 @@ void TimbreMapWidget::updateColumns()
     if (_model == nullptr || _model->getMinKey() < 0)
         return;
     if (_display.positionsOnly)
-        _columns = _model->getPositions().keys();
+    {
+        // Keys where the root keys are displayed
+        foreach (TimbrePosition position, _model->getPositions().values())
+            if (!_columns.contains(position.anchor))
+                _columns << position.anchor;
+        std::sort(_columns.begin(), _columns.end());
+    }
     else
     {
         for (int key = _model->getMinKey(); key <= _model->getMaxKey(); key++)
@@ -266,11 +272,6 @@ QRectF TimbreMapWidget::columnRect(int column, double top, double height) const
     return QRectF(_left + column * _columnWidth, top, _columnWidth, height);
 }
 
-QRectF TimbreMapWidget::marginRect(double top, double height) const
-{
-    return QRectF(_left - _marginWidth, top, _marginWidth, height);
-}
-
 void TimbreMapWidget::drawLabel(QPainter &painter, double top, double height, const QString &text)
 {
     // The labels stay on the left of the graph: once the margin is scrolled, they are written over the columns
@@ -278,13 +279,13 @@ void TimbreMapWidget::drawLabel(QPainter &painter, double top, double height, co
     if (_scroll > 0)
     {
         QFontMetrics metrics(this->font());
-        QColor background = _palette.uncovered();
+        QColor background = _palette.background();
         background.setAlpha(220);
         double textHeight = qMin(height, static_cast<double>(metrics.height()));
         painter.fillRect(QRectF(rect.left() - 2, rect.center().y() - textHeight / 2,
                                 metrics.horizontalAdvance(text) + 4, textHeight), background);
     }
-    painter.setPen(_palette.text());
+    painter.setPen(_palette.axisText());
     painter.drawText(rect, Qt::AlignLeft | Qt::AlignVCenter | Qt::TextDontClip, text);
 }
 
@@ -324,7 +325,7 @@ QColor TimbreMapWidget::cellColor(int key, int row, bool &hatched, bool &absent)
     if (tk.sources.isEmpty())
     {
         absent = true;
-        return _palette.uncovered();
+        return _palette.background();
     }
     if (!tk.analyzed)
     {
@@ -336,7 +337,7 @@ QColor TimbreMapWidget::cellColor(int key, int row, bool &hatched, bool &absent)
     {
         absent = true;
         hatched = true;
-        return _palette.uncovered();
+        return _palette.background();
     }
     hatched = (states[row] == 1 || states[row] == 3);
     double range = _rangeCache;
@@ -387,7 +388,7 @@ QColor TimbreMapWidget::summaryColor(int summary, int key, bool &hatched)
     hatched = false;
     const TimbreKey &tk = _model->getKey(key);
     if (tk.sources.isEmpty())
-        return _palette.uncovered();
+        return _palette.background();
     if (!tk.analyzed)
     {
         hatched = true;
@@ -471,7 +472,6 @@ void TimbreMapWidget::paintEvent(QPaintEvent * event)
     for (int s = 0; s < _display.summaries.count(); s++)
     {
         double top = _summaryTop + s * _summaryHeight;
-        painter.fillRect(marginRect(top + 1, _summaryHeight - 2), _palette.uncovered());
         for (int c = 0; c < _columns.count(); c++)
         {
             bool hatched;
@@ -483,7 +483,6 @@ void TimbreMapWidget::paintEvent(QPaintEvent * event)
     }
 
     // Map, rank 1 at the bottom
-    painter.fillRect(marginRect(_mapTop, _mapHeight), _palette.uncovered());
     for (int c = 0; c < _columns.count(); c++)
     {
         int key = _columns[c];
@@ -548,16 +547,28 @@ void TimbreMapWidget::paintEvent(QPaintEvent * event)
         painter.drawLine(QPointF(x, _mapTop), QPointF(x, _mapTop + _mapHeight));
     }
 
-    // Root keys
+    // Root keys: a dot, or a triangle pointing to the root key when it is outside the keys covered by its divisions
+    // (displayed at the closest key they cover)
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setPen(QPen(_palette.background(), 1));
     painter.setBrush(_palette.text());
     double radius = qBound(2.0, _columnWidth / 4, 4.0);
-    foreach (int key, _model->getPositions().keys())
+    foreach (TimbrePosition position, _model->getPositions().values())
     {
-        int c = _columns.indexOf(key);
-        if (c >= 0)
-            painter.drawEllipse(QPointF(_left + (c + 0.5) * _columnWidth, _mapTop + _mapHeight - radius - 1), radius, radius);
+        int c = _columns.indexOf(position.anchor);
+        if (c < 0)
+            continue;
+        QPointF center(_left + (c + 0.5) * _columnWidth, _mapTop + _mapHeight - radius - 1);
+        if (position.anchor == position.key)
+            painter.drawEllipse(center, radius, radius);
+        else
+        {
+            double direction = position.key > position.anchor ? 1 : -1;
+            double half = radius * 1.25;
+            painter.drawPolygon(QPolygonF() << QPointF(center.x() - direction * half, center.y() - half)
+                                << QPointF(center.x() + direction * half, center.y())
+                                << QPointF(center.x() - direction * half, center.y() + half));
+        }
     }
     painter.setRenderHint(QPainter::Antialiasing, false);
 
@@ -621,14 +632,12 @@ void TimbreMapWidget::paintEvent(QPaintEvent * event)
 
 void TimbreMapWidget::paintDecisions(QPainter &painter)
 {
-    QRectF strip(_left - _marginWidth, _decisionTop, _marginWidth + _columns.count() * _columnWidth, _decisionHeight);
-    painter.fillRect(strip, _palette.uncovered());
     double size = qMin(_decisionHeight * 0.6, qMax(_columnWidth, 8.0) * 1.2);
 
     // Labels of the positions (upper part) and of the level (lower part)
     foreach (TimbrePosition position, _model->getPositions().values())
     {
-        int c = _columns.indexOf(position.key);
+        int c = _columns.indexOf(position.anchor);
         if (c < 0)
             continue;
         double x = _left + (c + 0.5) * _columnWidth;
@@ -691,7 +700,7 @@ void TimbreMapWidget::paintKeyboard(QPainter &painter)
 
     // Names of the C keys, above the keyboard
     QFontMetrics metrics(this->font());
-    painter.setPen(_palette.text());
+    painter.setPen(_palette.axisText());
     for (int c = 0; c < _columns.count(); c++)
     {
         int key = _columns[c];
@@ -867,7 +876,13 @@ QString TimbreMapWidget::getTooltip(QPoint position)
     }
     lines << tr("Samples: %1").arg(samples.join(", "));
     if (_model->getPositions().contains(tk.position))
-        lines << tr("Root key: %1").arg(ContextManager::keyName()->getKeyName(static_cast<unsigned int>(tk.position)));
+    {
+        QString name = ContextManager::keyName()->getKeyName(static_cast<unsigned int>(tk.position));
+        if (_model->getPositions()[tk.position].anchor == tk.position)
+            lines << tr("Root key: %1").arg(name);
+        else
+            lines << tr("Root key: %1, outside the key range of its divisions").arg(name);
+    }
     lines << tr("Transposition: %1 semitones").arg(number(tk.transposition, 2));
     lines << tr("Duration factor: %1").arg(number(tk.durationFactor, 3));
     lines << tr("Level: %1 dB").arg(number(tk.totalLevel, 1));

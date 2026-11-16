@@ -140,6 +140,8 @@ struct TimbrePosition
     int key;
     QList<int> divisions; // Indexes in TimbreModel::getDivisions()
     int keyMin, keyMax; // Keys covered by its divisions
+    int anchor = -1; // Key where it is displayed: the root key if its divisions cover it, otherwise the closest key they
+                     // cover (extension of an organ stop for instance)
     TimbreSpectrum spectrum; // Played at its root key
     TimbreSpectrum reference; // Predicted by the neighbors, played at the root key
     bool referenceAtEdge = false; // Extrapolation from the neighbors on one side
@@ -148,7 +150,7 @@ struct TimbrePosition
     double redundancy = 0; // D: largest ΔT over the keys of the position if it were removed
     double redundancyLevel = 0; // Largest |ΔL| over the same keys
     TimbreComparison newJunction; // Jump that would appear between the neighbors
-    int previous = -1, next = -1; // Keys of the neighbors
+    int previous = -1, next = -1; // Root keys of the neighbors, in the order of the anchors
     bool analyzed = false; // All analyses of its samples are available
 
     enum Label
@@ -226,7 +228,7 @@ public:
     TimbreComparison compare(const TimbreSpectrum &test, const TimbreSpectrum &reference) const;
 
     // Sound predicted at a key by the two closest positions around it, as for a computed note (interpolation mode
-    // whatever the settings), excluding a position (-1: none)
+    // whatever the settings, positions compared at the keys where they are heard), excluding a position (-1: none)
     TimbreSpectrum predict(int key, int excludedPosition = -1, bool * atEdge = nullptr);
 
     // Reference of a position (or sound predicted at a free key) with another mode than the one of the settings
@@ -242,6 +244,12 @@ public:
     // Divisions of a position closest to a key (all divisions covering the key, otherwise the closest ones)
     QList<int> getClosestDivisions(int positionKey, int key) const;
 
+    // Root key of the position displayed at a key (see TimbrePosition::anchor), -1 if none
+    int getPositionDisplayedAt(int key) const;
+
+    // Root key of the position displayed at a key, otherwise of the main division playing it, -1 if none
+    int getPositionOf(int key) const;
+
     // Name of a row: "H1" for the rank 1, "11-12" for a band
     static QList<TimbreRow> computeRows(int detailedRanks, bool octaveBands, int maxRank);
 
@@ -251,6 +259,8 @@ private:
     TimbreVoice getVoice(int divisionIndex, int key);
     TimbreSpectrum getSpectrum(const TimbreVoice &voice);
     TimbreSpectrum computeReference(int positionKey, bool &atEdge, int excludedPosition = -1);
+    // Neighbors played at a key and combined (interpolation or regression of the settings) according to their distances
+    TimbreSpectrum combine(const QList<int> &neighbors, const QList<int> &distances, int positionKey);
     void computeKeyDescriptors(TimbreKey &key, int keyNumber);
     void computeRedundancy(TimbrePosition &position);
     bool isValidRank(const TimbreSpectrum &spectrum, int index, double threshold) const;

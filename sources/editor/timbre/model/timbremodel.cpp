@@ -340,12 +340,26 @@ void TimbreModel::compute(EltID idInst, const TimbreSettings &settings, bool ana
         position.keyMin = qMin(position.keyMin, _divisions[i].keyMin);
         position.keyMax = qMax(position.keyMax, _divisions[i].keyMax);
     }
-    QList<int> positionKeys = _positions.keys();
-    for (int i = 0; i < positionKeys.count(); i++)
+    // Displayed at the root key if covered, otherwise at the closest key covered (same rule as the creation of notes)
+    QList<QPair<int, int> > order; // Anchor, root key
+    for (QMap<int, TimbrePosition>::iterator it = _positions.begin(); it != _positions.end(); ++it)
     {
-        TimbrePosition &position = _positions[positionKeys[i]];
-        position.previous = i > 0 ? positionKeys[i - 1] : -1;
-        position.next = i < positionKeys.count() - 1 ? positionKeys[i + 1] : -1;
+        QList<QPair<int, int> > keyRanges;
+        foreach (int index, it.value().divisions)
+            keyRanges << qMakePair(_divisions[index].keyMin, _divisions[index].keyMax);
+        it.value().anchor = MissingSampleCreator::getAnchor(it.key(), keyRanges);
+        order << qMakePair(it.value().anchor, it.key());
+    }
+    std::sort(order.begin(), order.end());
+
+    QList<int> positionKeys = _positions.keys();
+    for (int i = 0; i < order.count(); i++)
+    {
+        // Neighbors in the order of the keys where they are heard (the order of the root keys without extension)
+        TimbrePosition &position = _positions[order[i].second];
+        position.previous = i > 0 ? order[i - 1].second : -1;
+        position.next = i < order.count() - 1 ? order[i + 1].second : -1;
+
         position.spectrum = playPosition(position.key, position.key);
         position.analyzed = true;
         foreach (int index, position.divisions)
@@ -450,6 +464,30 @@ QList<int> TimbreModel::getClosestDivisions(int positionKey, int key) const
     return result;
 }
 
+int TimbreModel::getPositionDisplayedAt(int key) const
+{
+    if (key < 0 || key > 127)
+        return -1;
+
+    // The position playing the key first, if several positions are displayed there
+    int played = _keys[key].position;
+    if (_positions.contains(played) && _positions[played].anchor == key)
+        return played;
+    for (QMap<int, TimbrePosition>::const_iterator it = _positions.constBegin(); it != _positions.constEnd(); ++it)
+        if (it.value().anchor == key)
+            return it.key();
+    return -1;
+}
+
+int TimbreModel::getPositionOf(int key) const
+{
+    int displayed = getPositionDisplayedAt(key);
+    if (displayed >= 0)
+        return displayed;
+    int played = key >= 0 && key <= 127 ? _keys[key].position : -1;
+    return _positions.contains(played) ? played : -1;
+}
+
 TimbreSpectrum TimbreModel::playPosition(int positionKey, int key, QList<TimbreVoice> * voices)
 {
     TimbreSpectrum result;
@@ -492,6 +530,15 @@ TimbreSpectrum TimbreModel::computeReference(int positionKey, bool &atEdge, int 
         neighbors << below.first() << above.first();
     else
         neighbors << (below.isEmpty() ? above : below).mid(0, 2);
+    QList<int> distances;
+    foreach (int neighbor, neighbors)
+        distances << neighbor - positionKey;
+    return combine(neighbors, distances, positionKey);
+}
+
+TimbreSpectrum TimbreModel::combine(const QList<int> &neighbors, const QList<int> &distances, int positionKey)
+{
+    TimbreSpectrum result;
     QList<TimbreSpectrum> spectra;
     int count = 0;
     foreach (int key, neighbors)
@@ -511,7 +558,7 @@ TimbreSpectrum TimbreModel::computeReference(int positionKey, bool &atEdge, int 
         {
             if (r < spectra[i].count() && spectra[i].state[r] != TimbreSpectrum::ABSENT && spectra[i].power[r] > 0)
             {
-                x << neighbors[i] - positionKey;
+                x << distances[i];
                 y << toDb(spectra[i].power[r]);
                 allMeasured &= (spectra[i].state[r] == TimbreSpectrum::MEASURED);
             }
@@ -588,11 +635,43 @@ TimbreSpectrum TimbreModel::computeReference(int positionKey, bool &atEdge, int 
 TimbreSpectrum TimbreModel::predict(int key, int excludedPosition, bool * atEdge)
 {
     // Always from the two closest root keys, as the creation does (MissingSampleCreator::createJob), whatever the
-    // reference chosen in the settings
-    bool edge = false;
-    TimbreSpectrum result = computeReferenceWith(key, TimbreSettings::REFERENCE_INTERPOLATION, 0, edge, excludedPosition);
+    // reference chosen in the settings: the root keys are compared at the keys where they are heard (anchors), and
+    // played at the key
+    QList<QPair<int, int> > below, above; // Anchor, root key
+    for (QMap<int, TimbrePosition>::const_iterator it = _positions.constBegin(); it != _positions.constEnd(); ++it)
+    {
+        if (it.key() == excludedPosition)
+            continue;
+        if (it.value().anchor < key)
+            below << qMakePair(it.value().anchor, it.key());
+        else if (it.value().anchor > key)
+            above << qMakePair(it.value().anchor, it.key());
+    }
+    std::sort(below.begin(), below.end());
+    std::reverse(below.begin(), below.end()); // Closest first
+    std::sort(above.begin(), above.end());
+    bool edge = below.isEmpty() || above.isEmpty();
     if (atEdge != nullptr)
         *atEdge = edge;
+
+    QList<QPair<int, int> > selected;
+    if (!edge)
+        selected << below.first() << above.first();
+    else
+        selected << (below.isEmpty() ? above : below).mid(0, 2);
+    QList<int> neighbors, distances;
+    for (int i = 0; i < selected.count(); i++)
+    {
+        neighbors << selected[i].second;
+        distances << selected[i].first - key;
+    }
+    if (neighbors.isEmpty())
+        return TimbreSpectrum();
+
+    TimbreSettings::Reference previousMode = _settings.reference;
+    _settings.reference = TimbreSettings::REFERENCE_INTERPOLATION;
+    TimbreSpectrum result = combine(neighbors, distances, key);
+    _settings.reference = previousMode;
     return result;
 }
 
@@ -796,7 +875,10 @@ QMap<int, int> TimbreModel::getKeysAfterRemoval(int positionKey) const
         return result;
     const TimbrePosition &position = _positions[positionKey];
     int previous = position.previous, next = position.next;
-    int limit = (previous >= 0 && next >= 0) ? ToolAutoDistribution::getMaxKey(previous, next) : -1;
+
+    // Shared between the keys where the neighbors are heard
+    int limit = (previous >= 0 && next >= 0) ?
+                ToolAutoDistribution::getMaxKey(_positions[previous].anchor, _positions[next].anchor) : -1;
     for (int k = position.keyMin; k <= position.keyMax; k++)
     {
         // Keys only played by the position
@@ -867,7 +949,9 @@ void TimbreModel::computeRedundancy(TimbrePosition &position)
     // New junction between the neighbors
     if (position.previous >= 0 && position.next >= 0)
     {
-        int limit = lastPrevious >= 0 ? lastPrevious : ToolAutoDistribution::getMaxKey(position.previous, position.next);
+        int limit = lastPrevious >= 0 ? lastPrevious :
+                                        ToolAutoDistribution::getMaxKey(_positions[position.previous].anchor,
+                                                                        _positions[position.next].anchor);
         position.newJunction = compare(playPosition(position.next, limit + 1), playPosition(position.previous, limit));
     }
 }
@@ -909,12 +993,14 @@ void TimbreModel::applyThresholds(const TimbreSettings &settings)
             key.jump.timbreDifference <= _settings.jump)
             continue;
 
-        // A free key between the positions on both sides
-        int low = qMin(_keys[k - 1].position, key.position);
-        int high = qMax(_keys[k - 1].position, key.position);
+        // A free key (neither a root key nor displaying one) between the keys where the positions on both sides are heard
+        if (!_positions.contains(_keys[k - 1].position) || !_positions.contains(key.position))
+            continue;
+        int low = qMin(_positions[_keys[k - 1].position].anchor, _positions[key.position].anchor);
+        int high = qMax(_positions[_keys[k - 1].position].anchor, _positions[key.position].anchor);
         for (int j = low + 1; j < high; j++)
         {
-            if (!_positions.contains(j))
+            if (!_positions.contains(j) && getPositionDisplayedAt(j) < 0)
             {
                 key.breakLabel = true;
                 break;
