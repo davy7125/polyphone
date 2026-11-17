@@ -43,26 +43,21 @@ struct TimbreCreation
     bool extrapolationWarning = false; // The key is far from the root keys used
 };
 
-// Correction of the timbre and of the level of a position
+// Correction of the timbre of a position toward a target: its reference (interpolation or regression, as in the
+// settings), or another position played at its root key. The part of the deviation of each row beyond the dead zone is
+// corrected with the strength, bounded by MAX_CORRECTION against the amplification of weak partials. The level is
+// corrected the same way, or kept as heard.
 struct TimbreCorrectionParameters
 {
-    enum Reference
-    {
-        REFERENCE_INTERPOLATION = 0,
-        REFERENCE_REGRESSION = 1,
-        REFERENCE_POSITION = 2 // Aligned on another position played at the root key
-    };
-    Reference reference = REFERENCE_INTERPOLATION;
+    static constexpr double MAX_CORRECTION = 12; // dB on each side
+
+    TimbreSettings::Reference reference = TimbreSettings::REFERENCE_INTERPOLATION;
     int regressionCount = 3;
-    int alignedPosition = -1;
-    bool correctTimbre = true;
-    bool correctLevel = true;
-    double tolerance = 1.5; // dB: dead zone
+    int alignedPosition = -1; // If >= 0: target = this position played at the root key, instead of the reference
+    bool correctLevel = true; // Through the attenuation, otherwise the level heard is kept
+    double deadZone = TimbreSettings::DEFAULT_TOLERANCE / 3; // dB
     double strength = 1.0; // 0 to 1
-    double maxCorrection = 12; // dB on each side
-    int maxRank = 0; // 0: all rows (detailed ranks and bands), otherwise the ranks 1 to maxRank
-    double brightness = 0; // dB per octave (in rank) added to the target
-    double oddEven = 0; // dB added to the odd ranks (3, 5...) of the target
+    int maxRank = 0; // 0: all rows (detailed ranks and bands), otherwise the rows up to this rank
 };
 
 struct TimbreCorrectionPlan
@@ -76,7 +71,6 @@ struct TimbreCorrectionPlan
     QList<QPointF> gains; // Rank => dB, for GainCurve (note tracking), empty if the timbre is not changed
     double levelGain = 0; // dB, through the attenuation
     TimbreSpectrum target, after;
-    QVector<double> rowGains; // dB per row, level included
     TimbreComparison before, expected; // Heard and expected result against the target
 };
 

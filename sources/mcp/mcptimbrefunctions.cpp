@@ -269,29 +269,23 @@ void McpFunctions::addTimbreFunctions(QList<McpFunction *> &functions)
 
     functions << new McpFunction(
         "correct_root_key", McpFunction::CATEGORY_EDITING, false,
-        "Correct the timbre and the level of a root key (\"position\") of the subset of an instrument playing at a "
-        "velocity, toward a target: the interpolation of its neighbors, a local regression, or another root key "
-        "played at its key, possibly with a brightness slope and a level of the odd ranks added. The gain of each row "
-        "(rank or band) is the strength times the part of the deviation (target - heard, level removed) beyond the "
-        "tolerance, bounded by the maximum correction, for the rows well measured. The level part goes through the "
-        "attenuation of the divisions (beyond 0 dB, in the data within the full scale), the timbre part through a "
-        "minimum phase gain curve with note tracking applied to the data of the samples (loop kept, same curve for the "
-        "two channels of a stereo pair), the data being lowered and the attenuation compensating if the full scale "
-        "would be exceeded. Samples also used elsewhere are duplicated for the root key, or modified everywhere. The "
-        "result is measured again after the change.",
+        "Correct the timbre of a root key (\"position\") of the subset of an instrument playing at a velocity, toward a "
+        "target: its reference (settings \"reference\" and \"regression_count\") or another root key played at its key. "
+        "The gain of each row (rank or band) is the strength times the part of the deviation (target - heard, level "
+        "removed) beyond the dead zone, bounded to 12 dB, for the rows well measured. It is applied to the data of the "
+        "samples through a minimum phase gain curve with note tracking (loop kept, same curve for the two channels of a "
+        "stereo pair). The level is either corrected the same way through the attenuation of the divisions (beyond 0 "
+        "dB, in the data within the full scale), or kept as heard. The data are lowered and the attenuation compensates "
+        "if the full scale would be exceeded. Samples also used elsewhere are duplicated for the root key, or modified "
+        "everywhere. The result is measured again after the change.",
         (QString(R"JSON({"properties":{
             "instrument":{"type":"string","description":"Instrument identifier"},
             "root_key":{"type":["integer","string"],"description":"Root key to correct"},
-            "target":{"type":"string","enum":["neighbors","regression","root_key"],"description":"Target: interpolation of the neighbors (default), local regression (regression_count), or the root key aligned_root_key played at the key"},
-            "aligned_root_key":{"type":["integer","string"],"description":"Root key used as target with target \"root_key\""},
-            "correct_timbre":{"type":"boolean","description":"Change the timbre (sample data), default true"},
-            "correct_level":{"type":"boolean","description":"Change the level (attenuation), default true"},
-            "tolerance_db":{"type":"number","description":"Dead zone of each row (default 1.5)"},
-            "strength_percent":{"type":"number","description":"Part of the deviation corrected beyond the tolerance (default 100)"},
-            "max_correction_db":{"type":"number","description":"Largest gain of a row, on each side (default 12)"},
-            "max_rank":{"type":"integer","minimum":0,"maximum":64,"description":"0 (default): all rows, otherwise only the ranks 1 to max_rank"},
-            "brightness_db_per_octave":{"type":"number","description":"Slope added to the target (dB per octave of rank, default 0)"},
-            "odd_even_db":{"type":"number","description":"Level added to the odd ranks 3, 5, 7... of the target (default 0)"},
+            "aligned_root_key":{"type":["integer","string"],"description":"Another root key of the subset whose sound played at root_key is the target, instead of the reference of root_key"},
+            "correct_level":{"type":"boolean","description":"Correct the level too, through the attenuation (default true); false: the level heard is kept"},
+            "dead_zone_db":{"type":"number","description":"Deviation of a row that is not corrected, only the part beyond is (default 2, a third of the default tolerance of the Timbre view)"},
+            "strength_percent":{"type":"number","description":"Part of the deviation corrected beyond the dead zone (default 100)"},
+            "max_rank":{"type":"integer","minimum":0,"maximum":64,"description":"0 (default): all rows, otherwise only the rows whose ranks are up to max_rank"},
             "shared_samples":{"type":"string","enum":["duplicate","modify_all"],"description":"Samples also used by other divisions or instruments: duplicated for this root key (default) or modified everywhere"},)JSON") +
          SETTINGS_SCHEMA + R"JSON(},"required":["instrument","root_key"]})JSON").toUtf8().constData(),
         [](const McpArguments &args) -> McpResult {
@@ -303,27 +297,18 @@ void McpFunctions::addTimbreFunctions(QList<McpFunction *> &functions)
                 throw McpException("no division of the subset has the root key " + McpUtils::keyName(rootKey));
 
             TimbreCorrectionParameters parameters;
-            QString target = args.getString("target", "neighbors");
-            if (target == "regression")
-                parameters.reference = TimbreCorrectionParameters::REFERENCE_REGRESSION;
-            else if (target == "root_key")
+            parameters.reference = settings.reference;
+            parameters.regressionCount = settings.regressionCount;
+            if (args.contains("aligned_root_key"))
             {
-                parameters.reference = TimbreCorrectionParameters::REFERENCE_POSITION;
                 parameters.alignedPosition = args.getKey("aligned_root_key");
                 if (!model->getPositions().contains(parameters.alignedPosition) || parameters.alignedPosition == rootKey)
                     throw McpException("argument \"aligned_root_key\" must be another root key of the subset");
             }
-            else if (target != "neighbors")
-                throw McpException("argument \"target\" must be \"neighbors\", \"regression\" or \"root_key\"");
-            parameters.regressionCount = settings.regressionCount;
-            parameters.correctTimbre = args.getBool("correct_timbre", true);
             parameters.correctLevel = args.getBool("correct_level", true);
-            parameters.tolerance = args.getDouble("tolerance_db", 0, 20, 1.5);
+            parameters.deadZone = args.getDouble("dead_zone_db", 0, 20, TimbreSettings::DEFAULT_TOLERANCE / 3);
             parameters.strength = args.getDouble("strength_percent", 0, 100, 100) / 100;
-            parameters.maxCorrection = args.getDouble("max_correction_db", 0, 24, 12);
             parameters.maxRank = args.getInt("max_rank", 0, 64, 0);
-            parameters.brightness = args.getDouble("brightness_db_per_octave", -6, 6, 0);
-            parameters.oddEven = args.getDouble("odd_even_db", -12, 12, 0);
             QString shared = args.getString("shared_samples", "duplicate");
             if (shared != "duplicate" && shared != "modify_all")
                 throw McpException("argument \"shared_samples\" must be \"duplicate\" or \"modify_all\"");

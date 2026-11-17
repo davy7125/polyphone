@@ -2649,134 +2649,77 @@ na signál</translation>
 <context>
     <name>DialogTimbreCorrection</name>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="57"/>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="71"/>
         <source>Correct the timbre</source>
         <translation>Opravit barvu zvuku</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="75"/>
-        <source>Interpolation between the neighbors</source>
-        <translation>Interpolace mezi sousedními notami</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="76"/>
-        <source>Local regression</source>
-        <translation>Lokální regrese</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="77"/>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="102"/>
         <source>Aligned on a root key</source>
         <translation>Zarovnání na základní notu</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="79"/>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="107"/>
         <source>Reference</source>
         <translation>Reference</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="83"/>
-        <source>neighbors on each side</source>
-        <translation>na každé straně (sousední noty)</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="92"/>
-        <source>Correct the timbre (sample data)</source>
-        <translation>Opravit barvu zvuku (data vzorku)</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="95"/>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="130"/>
         <source>Correct the level (attenuation)</source>
         <translation>Opravit úroveň (zeslabení)</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="107"/>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="242"/>
-        <source>dB</source>
-        <comment>unit for decibels</comment>
-        <translation>dB</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="109"/>
-        <source>A smaller deviation of a row is not corrected, only the part beyond is</source>
-        <translation>Menší odchylka řádku se neopravuje, opravuje se jen část nad touto hodnotou</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="110"/>
-        <source>Tolerance</source>
-        <translation>Tolerance</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="112"/>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="118"/>
         <source>Strength</source>
         <translation>Síla</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="114"/>
-        <source>Maximum correction</source>
-        <translation>Maximální oprava</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="116"/>
-        <source>Ranks and bands</source>
-        <translation>Řády a pásma</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="117"/>
-        <source>Ranks from 1 to</source>
-        <translation>Řády od 1 do</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="119"/>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="128"/>
         <source>Ranks corrected</source>
         <translation>Opravované řády</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="124"/>
-        <source>dB / octave</source>
-        <translation>dB / oktáva</translation>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="116"/>
+        <source>Part of the deviation of each row corrected beyond %1 (a third of the tolerance)</source>
+        <translation>Část odchylky každého řádku opravovaná nad %1 (třetina tolerance)</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="122"/>
+        <source>All</source>
+        <translation>Všechny</translation>
     </message>
     <message>
         <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="125"/>
-        <source>Slope added to the target: positive for a brighter sound</source>
-        <translation>Sklon přidaný k cíli: kladný pro jasnější zvuk</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="126"/>
-        <source>Brightness</source>
-        <translation>Jas</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="128"/>
-        <source>Level added to the odd ranks (3, 5, 7...) of the target</source>
-        <translation>Úroveň přidaná k lichým řádům (3, 5, 7...) cíle</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="129"/>
-        <source>Odd ranks</source>
-        <translation>Liché řády</translation>
+        <source>Up to %1</source>
+        <translation>Až do %1</translation>
     </message>
     <message>
         <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="132"/>
+        <source>Otherwise the level heard is kept: the correction of the timbre doesn&apos;t change it</source>
+        <translation>Jinak se slyšená úroveň zachová: oprava barvy zvuku ji nezmění</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="136"/>
         <source>Listening</source>
         <translation>Poslech</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="136"/>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="140"/>
         <source>Root key %1</source>
         <translation>Základní nota %1</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="139"/>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="143"/>
         <source>A: original</source>
         <translation>A: původní</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="141"/>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="145"/>
         <source>B: corrected</source>
         <translation>B: opravený</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="146"/>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="150"/>
         <source>Play</source>
         <translation>Přehrát</translation>
     </message>
@@ -2796,7 +2739,7 @@ na signál</translation>
         <translation>Výsledek</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="246"/>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="245"/>
         <source>Before: level %1, timbre %2</source>
         <translation>Před: úroveň %1, barva zvuku %2</translation>
     </message>
@@ -5133,22 +5076,22 @@ pro zobrazení rozsahů jeho divizí</translation>
         <translation>Datum...</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="201"/>
+        <location filename="../../editor/pagesf2.ui" line="189"/>
         <source>Product</source>
         <translation>Výrobek</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="225"/>
+        <location filename="../../editor/pagesf2.ui" line="213"/>
         <source>Copyright</source>
         <translation>Autorské právo</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="208"/>
+        <location filename="../../editor/pagesf2.ui" line="196"/>
         <source>Comments</source>
         <translation>Poznámky</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../editor/pagesf2.cpp" line="219"/>
+        <location filename="../../editor/pagesf2.cpp" line="202"/>
         <source>unused: %n</source>
         <translation>
             <numerusform>nepoužíváno: %n</numerusform>
@@ -5157,7 +5100,7 @@ pro zobrazení rozsahů jeho divizí</translation>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../editor/pagesf2.cpp" line="221"/>
+        <location filename="../../editor/pagesf2.cpp" line="204"/>
         <source>duplicates: %n</source>
         <translation>
             <numerusform>duplikát: %n</numerusform>
@@ -5166,103 +5109,103 @@ pro zobrazení rozsahů jeho divizí</translation>
         </translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.cpp" line="474"/>
+        <location filename="../../editor/pagesf2.cpp" line="452"/>
         <source>SoundFont format</source>
         <translation>Formát SoundFont</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.cpp" line="479"/>
+        <location filename="../../editor/pagesf2.cpp" line="457"/>
         <source>ROM name</source>
         <translation>Název ROM</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.cpp" line="486"/>
+        <location filename="../../editor/pagesf2.cpp" line="464"/>
         <source>ROM version</source>
         <translation>Verze ROM</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.cpp" line="492"/>
+        <location filename="../../editor/pagesf2.cpp" line="470"/>
         <source>Sound engine</source>
         <translation>Zvukový stroj</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.cpp" line="497"/>
+        <location filename="../../editor/pagesf2.cpp" line="475"/>
         <source>Editing software</source>
         <translation>Program na úpravy</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="329"/>
+        <location filename="../../editor/pagesf2.ui" line="317"/>
         <source>Presets</source>
         <translation>Přednastavení</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="351"/>
-        <location filename="../../editor/pagesf2.ui" line="465"/>
-        <location filename="../../editor/pagesf2.ui" line="806"/>
+        <location filename="../../editor/pagesf2.ui" line="339"/>
+        <location filename="../../editor/pagesf2.ui" line="453"/>
+        <location filename="../../editor/pagesf2.ui" line="794"/>
         <source>Details</source>
         <translation>Podrobnosti</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="443"/>
+        <location filename="../../editor/pagesf2.ui" line="431"/>
         <source>Samples</source>
         <translation>Vzorky</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="518"/>
+        <location filename="../../editor/pagesf2.ui" line="506"/>
         <source>Compression</source>
         <translation>Komprese</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="525"/>
-        <location filename="../../editor/pagesf2.ui" line="614"/>
-        <location filename="../../editor/pagesf2.ui" line="677"/>
+        <location filename="../../editor/pagesf2.ui" line="513"/>
+        <location filename="../../editor/pagesf2.ui" line="602"/>
+        <location filename="../../editor/pagesf2.ui" line="665"/>
         <source>Count</source>
         <translation>Počet</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="539"/>
+        <location filename="../../editor/pagesf2.ui" line="527"/>
         <source>Bit depth</source>
         <translation>Bitová hloubka</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="553"/>
+        <location filename="../../editor/pagesf2.ui" line="541"/>
         <source>16 bits</source>
         <translation>16 bitů</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="558"/>
+        <location filename="../../editor/pagesf2.ui" line="546"/>
         <source>24 bits</source>
         <translation>24 bitů</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="573"/>
+        <location filename="../../editor/pagesf2.ui" line="561"/>
         <source>no</source>
         <translation>ne</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="578"/>
+        <location filename="../../editor/pagesf2.ui" line="566"/>
         <source>possible</source>
         <translation>možné</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="607"/>
-        <location filename="../../editor/pagesf2.ui" line="705"/>
+        <location filename="../../editor/pagesf2.ui" line="595"/>
+        <location filename="../../editor/pagesf2.ui" line="693"/>
         <source>Modulators</source>
         <translation>Modulátory</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="635"/>
-        <location filename="../../editor/pagesf2.ui" line="670"/>
+        <location filename="../../editor/pagesf2.ui" line="623"/>
+        <location filename="../../editor/pagesf2.ui" line="658"/>
         <source>Parameters</source>
         <translation>Parametry</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="784"/>
+        <location filename="../../editor/pagesf2.ui" line="772"/>
         <source>Instruments</source>
         <translation>Nástroje</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../editor/pagesf2.cpp" line="234"/>
+        <location filename="../../editor/pagesf2.cpp" line="217"/>
         <source>%1 (unused: %n)</source>
         <translation>
             <numerusform>%1 (nepoužíváno: %n)</numerusform>
@@ -5483,177 +5426,153 @@ Upozornění: kvalita bude snížena a smyčka může být změněna</translatio
 <context>
     <name>PageTimbre</name>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="158"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="182"/>
         <source>Velocity</source>
         <translation>Dynamika</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="169"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="170"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="269"/>
         <source>Display</source>
         <translation>Zobrazení</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="190"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="865"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="221"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="928"/>
         <source>Reference</source>
         <translation>Reference</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="192"/>
-        <source>Neighbors</source>
-        <translation>Sousední noty</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="193"/>
-        <source>Local regression</source>
-        <translation>Lokální regrese</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="194"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="398"/>
         <source>Reference of a root key: interpolation between its two neighbors, or robust regression on several neighbors on each side</source>
         <translation>Reference základní noty: interpolace mezi jejími dvěma sousedními notami, nebo robustní regrese na několika sousedních notách na každé straně</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="201"/>
-        <source>Neighbors on each side</source>
-        <translation>Počet sousedních not na každé straně</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="213"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="362"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="429"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="825"/>
         <source>dB</source>
         <comment>unit for decibels</comment>
         <translation>dB</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="207"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="199"/>
         <source>Tolerance</source>
         <translation>Tolerance</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="519"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="779"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="210"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="840"/>
         <source>Timbre deviation up to which a root key is consistent</source>
         <translation>Odchylka barvy zvuku, do které je základní nota konzistentní</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="788"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="793"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="849"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="854"/>
         <source>Timbre deviation up to which a root key can be corrected, beyond it is too different</source>
         <translation>Odchylka barvy zvuku, do které lze základní notu opravit; nad ní je příliš odlišná</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="783"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="844"/>
         <source>Largest timbre deviation over the keys of a consistent root key if it were removed, for being redundant</source>
         <translation>Největší odchylka barvy zvuku na notách konzistentní základní noty po jejím odstranění, do které je nadbytečná</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="886"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="592"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="949"/>
         <source>Break</source>
         <translation>Zlom</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="886"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="949"/>
         <source>Timbre jump at a junction from which a computed note is proposed</source>
         <translation>Skok barvy zvuku na přechodu, od kterého se navrhuje vypočtená nota</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="827"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="888"/>
         <source>Level deviation from which a correction of the attenuation is proposed</source>
         <translation>Odchylka úrovně, od které se navrhuje oprava zeslabení</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="221"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="235"/>
         <source>Options</source>
         <translation>Volby</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="224"/>
-        <source>Summaries</source>
-        <translation>Souhrny</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="242"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="277"/>
         <source>Play the clicked keys</source>
         <translation>Přehrávat noty po kliknutí</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="248"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1206"/>
-        <source>Propose</source>
-        <translation>Navrhnout</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="252"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="289"/>
         <source>Correct the root keys marked &quot;to correct&quot;...</source>
         <translation>Opravit základní noty označené &quot;k opravě&quot;...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="255"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="292"/>
         <source>Replace the root keys marked &quot;too different&quot; with computed notes...</source>
         <translation>Nahradit základní noty označené &quot;příliš odlišná&quot; vypočtenými notami...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="258"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="295"/>
         <source>Remove the redundant root keys...</source>
         <translation>Odstranit nadbytečné základní noty...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="261"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="298"/>
         <source>Create computed notes at the breaks...</source>
         <translation>Vytvořit vypočtené noty na zlomech...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="264"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="301"/>
         <source>Correct the deviating levels...</source>
         <translation>Opravit odchylující se úrovně...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="309"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="363"/>
         <source>Create a note here...</source>
         <translation>Vytvořit zde notu...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="310"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="364"/>
         <source>Remove...</source>
         <translation>Odstranit...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="311"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="365"/>
         <source>Replace with a computed note...</source>
         <translation>Nahradit vypočtenou notou...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="312"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="366"/>
         <source>Correct the timbre...</source>
         <translation>Opravit barvu zvuku...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="313"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1077"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1241"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="367"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1140"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1304"/>
         <source>Correct the level</source>
         <translation>Opravit úroveň</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="314"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="368"/>
         <source>Check by rendering</source>
         <translation>Ověřit vykreslením</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="315"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="369"/>
         <source>Play the key with the sound engine and measure the harmonics of the result</source>
         <translation>Zahrát notu zvukovým strojem a změřit harmonické výsledku</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="383"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="450"/>
         <source>Select a single instrument
 to display its timbre</source>
         <translation>Vyberte jeden nástroj
 pro zobrazení jeho barvy zvuku</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="454"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="532"/>
         <source>Analysis of the samples: %n remaining</source>
         <translation>
             <numerusform>Analýza vzorků: zbývá %n</numerusform>
@@ -5662,83 +5581,87 @@ pro zobrazení jeho barvy zvuku</translation>
         </translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="745"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="802"/>
         <source>No division of this instrument plays at the velocity %1.</source>
         <translation>Žádná divize tohoto nástroje nehraje při dynamice %1.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="300"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="354"/>
         <source>Click on a key to see what it plays.</source>
         <translation>Kliknutím na notu zobrazíte, co hraje.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="778"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="588"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="839"/>
         <source>Consistent</source>
         <translation>Konzistentní</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="782"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="591"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="843"/>
         <source>Redundant</source>
         <translation>Nadbytečná</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="787"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="589"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="848"/>
         <source>To correct</source>
         <translation>K opravě</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="792"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="590"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="853"/>
         <source>Too different</source>
         <translation>Příliš odlišná</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="801"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="862"/>
         <source>Root key %1</source>
         <translation>Základní nota %1</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="804"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="865"/>
         <source>Key %1</source>
         <translation>Nota %1</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="806"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="867"/>
         <source>No sample</source>
         <translation>Žádný vzorek</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="808"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="869"/>
         <source>Played by the root key %1</source>
         <translation>Hraje ji základní nota %1</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="839"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="900"/>
         <source>Reference extrapolated from the neighbors on one side: less reliable</source>
         <translation>Reference extrapolovaná ze sousedních not na jedné straně: méně spolehlivá</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="815"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="876"/>
         <source>Analysis in progress...</source>
         <translation>Probíhá analýza...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="861"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="869"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="924"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="932"/>
         <source>Heard</source>
         <translation>Slyšeno</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="875"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="938"/>
         <source>Computed note</source>
         <translation>Vypočtená nota</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="906"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="970"/>
         <source>Rendered</source>
         <translation>Vykresleno</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="813"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="874"/>
         <source>%n root keys selected: the actions apply to all of them.</source>
         <translation>
             <numerusform>Vybrána %n základní nota: akce se použijí na všechny.</numerusform>
@@ -5747,193 +5670,202 @@ pro zobrazení jeho barvy zvuku</translation>
         </translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="520"/>
-        <source>The other timbre thresholds follow it: too different beyond %1, redundant up to %2, break beyond %3.</source>
-        <translation>Ostatní prahové hodnoty barvy zvuku se jí řídí: příliš odlišná nad %1, nadbytečná do %2, zlom nad %3.</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="522"/>
-        <source>%1 for organs, about %2 for pianos, guitars, woodwinds and general MIDI banks.</source>
-        <translation>%1 pro varhany, přibližně %2 pro klavíry, kytary, dřevěné dechové nástroje a banky General MIDI.</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="826"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="887"/>
         <source>Too loud</source>
         <translation>Příliš hlasitá</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="826"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="887"/>
         <source>Too soft</source>
         <translation>Příliš tichá</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="831"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="894"/>
         <source>Deviation of the root key %1</source>
         <translation>Odchylka základní noty %1</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="837"/>
-        <source>%1%</source>
-        <comment>percentage</comment>
-        <translation>%1 %</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="841"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="902"/>
         <source>Root key outside the key range of its divisions: measured by playing them at the root key</source>
         <translation>Základní nota mimo rozsah not jejích divizí: měřeno jejich přehráním na základní notě</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="846"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="907"/>
         <source>If removed</source>
         <translation>Po odstranění</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="849"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="909"/>
         <source>Largest deviation</source>
         <translation>Největší odchylka</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="852"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="914"/>
         <source>New junction</source>
         <translation>Nový přechod</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="861"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="924"/>
         <source>Played at the root key</source>
         <translation>Hráno na základní notě</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="890"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="952"/>
         <source>Junctions</source>
         <translation>Přechody</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="915"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="979"/>
         <source>Rendering against the model</source>
         <translation>Vykreslení oproti modelu</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="919"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="983"/>
         <source>Largest deviation of a row</source>
         <translation>Největší odchylka řádku</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="926"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="990"/>
         <source>Samples</source>
         <translation>Vzorky</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="570"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="931"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="995"/>
         <source>semitones</source>
         <translation>půltónu</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="554"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="615"/>
         <source>Hatched: not reliably measured or being analyzed. Empty: nothing to measure.</source>
         <translation>Šrafované: nespolehlivé měření nebo probíhající analýza. Prázdné: není co měřit.</translation>
     </message>
+    <message numerus="yes">
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="395"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="397"/>
+        <source>%n neighboring notes</source>
+        <translation>
+            <numerusform>%n sousední nota</numerusform>
+            <numerusform>%n sousední noty</numerusform>
+            <numerusform>%n sousedních not</numerusform>
+        </translation>
+    </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="563"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="276"/>
+        <source>Miscellaneous</source>
+        <translation>Různé</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="283"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1269"/>
+        <source>Actions</source>
+        <translation>Akce</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="587"/>
+        <source>Thresholds</source>
+        <translation>Prahové hodnoty</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="624"/>
         <source>Red: stronger than the reference, blue: weaker.</source>
         <translation>Červená: silnější než reference, modrá: slabší.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="567"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="628"/>
         <source>Red: stronger than the previous key, blue: weaker.</source>
         <translation>Červená: silnější než předchozí nota, modrá: slabší.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="571"/>
-        <source>Red: sample transposed up, blue: transposed down.</source>
-        <translation>Červená: vzorek transponovaný nahoru, modrá: dolů.</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="836"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="898"/>
         <source>Confidence</source>
         <translation>Spolehlivost</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="932"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="996"/>
         <source>Attenuation</source>
         <translation>Zeslabení</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="933"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="997"/>
         <source>Filter</source>
         <translation>Filtr</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="934"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="997"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
         <translation>Hz</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="938"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1001"/>
         <source>Measures</source>
         <translation>Měření</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="941"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1004"/>
         <source>Center of gravity of the partials, as a rank</source>
         <translation>Těžiště částkových tónů, jako číslo řádu</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="942"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1005"/>
         <source>Spectral slope</source>
         <translation>Spektrální sklon</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="942"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1005"/>
         <source>dB/octave</source>
         <comment>unit for decibels per octave</comment>
         <translation>dB/oktávu</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="944"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1007"/>
         <source>Odd ranks (3, 5...) against even ranks (2, 4...)</source>
         <translation>Liché řády (3, 5...) oproti sudým (2, 4...)</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="946"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1009"/>
         <source>Harmonics-to-noise ratio</source>
         <translation>Poměr harmonických složek k šumu</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="948"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1010"/>
+        <source>Tuning</source>
+        <translation>Ladění</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1011"/>
         <source>cents</source>
         <translation>centu</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="949"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1012"/>
         <source>Deviation from the closest note of the equal temperament</source>
         <translation>Odchylka od nejbližší noty rovnoměrně temperovaného ladění</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="950"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1013"/>
         <source>Duration factor</source>
         <translation>Faktor délky</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="951"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1014"/>
         <source>Durations of the attack, the tremolo and the beats compared to the sample</source>
         <translation>Délky náběhu, tremola a záznějů oproti vzorku</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="983"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1046"/>
         <source>Computing the note %1...</source>
         <translation>Výpočet noty %1...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1011"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1161"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1386"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1074"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1224"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1449"/>
         <source>Warning</source>
         <translation>Pozor</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1035"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1098"/>
         <source>Remove the root key %1 (%n division(s))? The neighbors will play its keys.</source>
         <translation>
             <numerusform>Odstranit základní notu %1 (%n divize)? Její noty budou hrát sousední základní noty.</numerusform>
@@ -5942,144 +5874,145 @@ pro zobrazení jeho barvy zvuku</translation>
         </translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1038"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1101"/>
         <source>Largest timbre deviation over its keys: %1, level: %2.</source>
         <translation>Největší odchylka barvy zvuku na jejích notách: %1, úrovně: %2.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1041"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1104"/>
         <source>Timbre jump at the new junction: %1.</source>
         <translation>Skok barvy zvuku na novém přechodu: %1.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1044"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1107"/>
         <source>Remove the following root keys? The neighbors will play their keys.</source>
         <translation>Odstranit následující základní noty? Jejich noty budou hrát sousední základní noty.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1046"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1109"/>
         <source>Remove</source>
         <translation>Odstranit</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1047"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1110"/>
         <source>Also remove the samples that are not used anymore</source>
         <translation>Odstranit také vzorky, které se již nepoužívají</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1062"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1125"/>
         <source>Replace the root key %1 with a note computed from its neighbors?</source>
         <translation>Nahradit základní notu %1 notou vypočtenou z jejích sousedních not?</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1063"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1126"/>
         <source>Replace the following root keys with notes computed from their neighbors?</source>
         <translation>Nahradit následující základní noty notami vypočtenými z jejich sousedních not?</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1065"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1128"/>
         <source>Replace</source>
         <translation>Nahradit</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1078"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1242"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1141"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1305"/>
         <source>Correct the level of the following root keys?</source>
         <translation>Opravit úroveň následujících základních not?</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1111"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1174"/>
         <source>Shared samples</source>
         <translation>Sdílené vzorky</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1112"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1175"/>
         <source>The following samples are also used by other divisions or instruments:</source>
         <translation>Následující vzorky používají také jiné divize nebo nástroje:</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1114"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1177"/>
         <source>Duplicate them for the corrected root keys, or modify them everywhere?</source>
         <translation>Zdvojit je pro opravované základní noty, nebo je změnit všude?</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1115"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1178"/>
         <source>Duplicate</source>
         <translation>Zdvojit</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1116"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1179"/>
         <source>Modify everywhere</source>
         <translation>Změnit všude</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1119"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1182"/>
         <source>Don&apos;t ask again (until Polyphone is closed)</source>
         <translation>Už se neptat (do zavření Polyphone)</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1158"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1221"/>
         <source>Rendering of the key %1...</source>
         <translation>Vykreslování noty %1...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1161"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1224"/>
         <source>The rendering couldn&apos;t be analyzed.</source>
         <translation>Vykreslení se nepodařilo analyzovat.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1206"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1269"/>
         <source>Nothing to propose with the current thresholds.</source>
         <translation>S aktuálními prahovými hodnotami není co navrhnout.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1235"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1298"/>
         <source>Create computed notes</source>
         <translation>Vytvořit vypočtené noty</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1236"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1299"/>
         <source>Create computed notes at the following keys?</source>
         <translation>Vytvořit vypočtené noty u následujících not?</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1263"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1326"/>
         <source>Processing...</source>
         <translation>Zpracovává se...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1263"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1326"/>
         <source>Cancel</source>
         <translation>Zrušit</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1322"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1385"/>
         <source>Processing the key %1...</source>
         <translation>Zpracování noty %1...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1344"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1407"/>
         <source>%1: the attenuation reached its limit (%2 missing).</source>
         <translation>%1: zeslabení dosáhlo své meze (chybí %2).</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1358"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1421"/>
         <source>Correction of the key %1...</source>
         <translation>Oprava noty %1...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1362"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1425"/>
         <source>: </source>
         <comment>separator</comment>
         <translation>: </translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1384"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1447"/>
         <source>Not processed (the label changed or nothing to do):</source>
         <translation>Nezpracováno (označení se změnilo nebo není co dělat):</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.h" line="60"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="821"/>
+        <location filename="../../editor/timbre/pagetimbre.h" line="62"/>
         <source>Timbre</source>
         <translation>Barva zvuku</translation>
     </message>
@@ -8260,7 +8193,7 @@ Jiné editory soundfontů mohou zobrazovat jiné jednotky.</translation>
         <translation>Následující vzorky se nepodařilo smyčkovat:</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/model/timbreactions.cpp" line="559"/>
+        <location filename="../../editor/timbre/model/timbreactions.cpp" line="547"/>
         <source>The attenuation reached its limit: the level differs by %1 dB from the expected one.</source>
         <translation>Zeslabení dosáhlo své meze: úroveň se od očekávané liší o %1 dB.</translation>
     </message>
@@ -8268,13 +8201,13 @@ Jiné editory soundfontů mohou zobrazovat jiné jednotky.</translation>
 <context>
     <name>TimbreBarsWidget</name>
     <message>
-        <location filename="../../editor/timbre/timbrebarswidget.cpp" line="200"/>
+        <location filename="../../editor/timbre/timbrebarswidget.cpp" line="199"/>
         <source>: </source>
         <comment>separator</comment>
         <translation>: </translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbrebarswidget.cpp" line="201"/>
+        <location filename="../../editor/timbre/timbrebarswidget.cpp" line="200"/>
         <source>dB</source>
         <comment>unit for decibels</comment>
         <translation>dB</translation>
@@ -8283,124 +8216,110 @@ Jiné editory soundfontů mohou zobrazovat jiné jednotky.</translation>
 <context>
     <name>TimbreMapWidget</name>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="91"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="97"/>
         <source>Level</source>
         <translation>Úroveň</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="92"/>
-        <source>Timbre</source>
-        <translation>Barva zvuku</translation>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="98"/>
+        <source>Timbre deviation</source>
+        <translation>Odchylka barvy zvuku</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="93"/>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="109"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="99"/>
         <source>Transposition</source>
         <translation>Transpozice</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="94"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="100"/>
         <source>Brightness</source>
         <translation>Jas</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="95"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="101"/>
         <source>Odd / even</source>
         <translation>Liché / sudé</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="96"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="102"/>
         <source>Noise</source>
         <translation>Šum</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="97"/>
-        <source>Tuning</source>
-        <translation>Ladění</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="106"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="111"/>
         <source>Levels</source>
         <translation>Úrovně</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="107"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="112"/>
         <source>Deviation from the reference</source>
         <translation>Odchylka od reference</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="108"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="113"/>
         <source>Jumps</source>
         <translation>Skoky</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="194"/>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="571"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="196"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="590"/>
         <source>Decisions</source>
         <translation>Rozhodnutí</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="789"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="808"/>
         <source>No sample</source>
         <translation>Žádný vzorek</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="802"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="821"/>
         <source>Row: %1</source>
         <translation>Řádek: %1</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="802"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="821"/>
         <source>level: %1 dB</source>
         <translation>úroveň: %1 dB</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="807"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="826"/>
         <source>Deviation from the reference: %1 dB</source>
         <translation>Odchylka od reference: %1 dB</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="810"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="829"/>
         <source>Jump from the previous key: %1 dB</source>
         <translation>Skok od předchozí noty: %1 dB</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="823"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="842"/>
         <source>Samples: %1</source>
         <translation>Vzorky: %1</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="828"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="847"/>
         <source>Root key: %1</source>
         <translation>Základní nota: %1</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="830"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="849"/>
         <source>Root key: %1, outside the key range of its divisions</source>
         <translation>Základní nota: %1, mimo rozsah not jejích divizí</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="832"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="851"/>
         <source>Transposition: %1 semitones</source>
         <translation>Transpozice: %1 půltónu</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="833"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="852"/>
         <source>Duration factor: %1</source>
         <translation>Faktor délky: %1</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="834"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="853"/>
         <source>Level: %1 dB</source>
         <translation>Úroveň: %1 dB</translation>
-    </message>
-</context>
-<context>
-    <name>TimbreVelocityStrip</name>
-    <message>
-        <location filename="../../editor/timbre/timbrebarswidget.cpp" line="214"/>
-        <source>Velocity layers of the instrument: a click selects the middle of a layer</source>
-        <translation>Vrstvy dynamiky nástroje: kliknutím se vybere střed vrstvy</translation>
     </message>
 </context>
 <context>

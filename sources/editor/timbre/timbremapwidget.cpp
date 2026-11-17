@@ -31,6 +31,7 @@
 #include <QMouseEvent>
 #include <QToolTip>
 #include <QApplication>
+#include <QScrollBar>
 #include <cmath>
 
 const double TimbreMapWidget::LABEL_PADDING = 4;
@@ -71,6 +72,7 @@ TimbreMapWidget::TimbreMapWidget(QWidget * parent) : QWidget(parent),
     _decisionHeight(20),
     _keyboardTop(0),
     _keyboardHeight(KeyboardStrip::KEYS_HEIGHT),
+    _scrollBar(new QScrollBar(Qt::Horizontal, this)),
     _pressedButton(Qt::NoButton),
     _pressScroll(0),
     _pressZoom(1),
@@ -82,6 +84,10 @@ TimbreMapWidget::TimbreMapWidget(QWidget * parent) : QWidget(parent),
     this->setMouseTracking(true);
     this->setMinimumHeight(250);
     this->setAttribute(Qt::WA_OpaquePaintEvent, true);
+
+    // Scroll bar always shown (as in the range editor): the height of the map doesn't change with the zoom
+    _scrollBar->setRange(0, 0);
+    connect(_scrollBar, &QScrollBar::valueChanged, this, [this](int value) { setScroll(value); });
 }
 
 QString TimbreMapWidget::getSummaryName(int summary)
@@ -89,12 +95,11 @@ QString TimbreMapWidget::getSummaryName(int summary)
     switch (summary)
     {
     case TimbreDisplay::SUMMARY_LEVEL: return tr("Level");
-    case TimbreDisplay::SUMMARY_TIMBRE: return tr("Timbre");
+    case TimbreDisplay::SUMMARY_TIMBRE: return tr("Timbre deviation");
     case TimbreDisplay::SUMMARY_TRANSPOSITION: return tr("Transposition");
     case TimbreDisplay::SUMMARY_BRIGHTNESS: return tr("Brightness");
     case TimbreDisplay::SUMMARY_ODD_EVEN: return tr("Odd / even");
     case TimbreDisplay::SUMMARY_NOISE: return tr("Noise");
-    case TimbreDisplay::SUMMARY_TUNING: return tr("Tuning");
     default: return "";
     }
 }
@@ -106,7 +111,6 @@ QString TimbreMapWidget::getModeName(int mode)
     case TimbreDisplay::MODE_LEVELS: return tr("Levels");
     case TimbreDisplay::MODE_DEVIATION: return tr("Deviation from the reference");
     case TimbreDisplay::MODE_JUMP: return tr("Jumps");
-    case TimbreDisplay::MODE_TRANSPOSITION: return tr("Transposition");
     default: return "";
     }
 }
@@ -179,8 +183,6 @@ double TimbreMapWidget::getRange() const
     {
     case TimbreDisplay::MODE_LEVELS:
         return TimbreSettings::DYNAMIC_RANGE;
-    case TimbreDisplay::MODE_TRANSPOSITION:
-        return TRANSPOSITION_RANGE;
     default:
         return _model != nullptr ? 2 * _model->getSettings().maximum() : 2 * TimbreSettings().maximum();
     }
@@ -208,18 +210,20 @@ void TimbreMapWidget::computeGeometry()
     _scroll = qBound(0.0, _scroll, _zoom * _graphWidth - _graphWidth);
     _left = _graphLeft + _marginWidth - _scroll;
 
-    // Vertical axis: summaries, map, decisions, names of the keys and keyboard at the bottom (as in the range editor)
+    // Vertical axis: top border, summaries, decisions, map, names of the keys and keyboard at the bottom, just above the
+    // scroll bar (as in the range editor), itself above a bottom border
     _summaryHeight = qMax(12, metrics.height());
     _summaryTop = 4;
-    _mapTop = _summaryTop + _display.summaries.count() * _summaryHeight + 6;
-    _keyboardHeight = KeyboardStrip::KEYS_HEIGHT;
-    _keyboardTop = this->height() - 1 - _keyboardHeight;
-    _namesTop = _keyboardTop - metrics.height();
     _decisionHeight = qMax(18, metrics.height() + 4);
-    _decisionTop = _namesTop - 1 - _decisionHeight;
-    _mapHeight = qMax(10.0, _decisionTop - 4 - _mapTop);
+    _decisionTop = _summaryTop + _display.summaries.count() * _summaryHeight + 2;
+    _mapTop = _decisionTop + _decisionHeight + 4;
+    _keyboardHeight = KeyboardStrip::KEYS_HEIGHT;
+    _keyboardTop = this->height() - 1 - _scrollBar->sizeHint().height() - _keyboardHeight;
+    _namesTop = _keyboardTop - metrics.height();
+    _mapHeight = qMax(10.0, _namesTop - 2 - _mapTop);
     int rowCount = _model != nullptr ? static_cast<int>(_model->getRows().count()) : 0;
     _rowHeight = rowCount > 0 ? _mapHeight / rowCount : _mapHeight;
+    updateScrollBar();
 }
 
 double TimbreMapWidget::getColumnWidth(double zoom) const
@@ -234,7 +238,27 @@ void TimbreMapWidget::setScroll(double scroll)
 {
     _scroll = qBound(0.0, scroll, _zoom * _graphWidth - _graphWidth);
     _left = _graphLeft + _marginWidth - _scroll;
+    updateScrollBar();
     update();
+}
+
+void TimbreMapWidget::updateScrollBar()
+{
+    // Pixels of the content (margin of the labels then the columns), the graph showing a page; a step is a column.
+    // Signals blocked: only a move of the scroll bar by the user scrolls the graph.
+    const QSignalBlocker blocker(_scrollBar);
+    _scrollBar->setRange(0, qMax(0, static_cast<int>(std::round(_zoom * _graphWidth - _graphWidth))));
+    _scrollBar->setPageStep(qMax(1, static_cast<int>(std::round(_graphWidth))));
+    _scrollBar->setSingleStep(qMax(1, static_cast<int>(std::round(_columnWidth))));
+    _scrollBar->setValue(static_cast<int>(std::round(_scroll)));
+}
+
+void TimbreMapWidget::resizeEvent(QResizeEvent * event)
+{
+    // Scroll bar along the bottom edge, on the whole width, above a border of one pixel
+    int height = _scrollBar->sizeHint().height();
+    _scrollBar->setGeometry(0, this->height() - 1 - height, this->width(), height);
+    QWidget::resizeEvent(event);
 }
 
 QRectF TimbreMapWidget::columnRect(int column, double top, double height) const
@@ -344,8 +368,6 @@ QColor TimbreMapWidget::cellColor(int key, int row, bool &hatched, bool &absent)
         }
         return _palette.diverging(value / range);
     }
-    case TimbreDisplay::MODE_TRANSPOSITION:
-        return _palette.diverging(tk.transposition / range);
     }
     return _palette.background();
 }
@@ -356,6 +378,9 @@ QColor TimbreMapWidget::summaryColor(int summary, int key, bool &hatched)
     const TimbreKey &tk = _model->getKey(key);
     if (tk.sources.isEmpty())
         return _palette.background();
+    // The transposition comes from the parameters, known before the analysis
+    if (summary == TimbreDisplay::SUMMARY_TRANSPOSITION)
+        return _palette.diverging(tk.transposition / TRANSPOSITION_RANGE);
     if (!tk.analyzed)
     {
         hatched = true;
@@ -385,8 +410,6 @@ QColor TimbreMapWidget::summaryColor(int summary, int key, bool &hatched)
         hatched = position.deviation.confidence < 0.5 || position.referenceAtEdge;
         return _palette.diverging(position.deviation.timbreDifference / (2 * settings.maximum()));
     }
-    case TimbreDisplay::SUMMARY_TRANSPOSITION:
-        return _palette.diverging(tk.transposition / TRANSPOSITION_RANGE);
     case TimbreDisplay::SUMMARY_BRIGHTNESS:
         if (!std::isfinite(tk.centroid))
             return _palette.background();
@@ -399,12 +422,6 @@ QColor TimbreMapWidget::summaryColor(int summary, int key, bool &hatched)
         if (!std::isfinite(tk.hnr))
             return _palette.background();
         return _palette.magnitude(tk.hnr / 60);
-    case TimbreDisplay::SUMMARY_TUNING: {
-        if (!std::isfinite(tk.tuning))
-            return _palette.background();
-        double cents = tk.tuning - 100 * std::round(tk.tuning / 100); // Octave or mutation stops
-        return _palette.diverging(cents / 20);
-    }
     default:
         break;
     }
@@ -416,6 +433,8 @@ void TimbreMapWidget::paintEvent(QPaintEvent * event)
     Q_UNUSED(event)
     QPainter painter(this);
     painter.fillRect(this->rect(), _palette.background());
+    painter.fillRect(QRect(0, 0, this->width(), 1), _palette.grid()); // Top border
+    painter.fillRect(QRect(0, this->height() - 1, this->width(), 1), _palette.grid()); // Border below the scroll bar
     if (_model == nullptr || _columns.isEmpty() || _model->getRows().isEmpty())
         return;
     computeGeometry();
@@ -465,12 +484,15 @@ void TimbreMapWidget::paintEvent(QPaintEvent * event)
     }
 
 
-    // Ghost column: sound predicted at a free key
+    // Ghost column: sound predicted at a key without sample, hatched as the other cells. A key played by a sample keeps
+    // what is heard (the computed note is in the details): otherwise its colors and hatches would change when selected.
     int ghostColumn = _columns.indexOf(_ghostKey);
-    if (ghostColumn >= 0 && !_model->getPositions().contains(_ghostKey) && _display.mode == TimbreDisplay::MODE_LEVELS)
+    bool ghost = ghostColumn >= 0 && !_model->getPositions().contains(_ghostKey) && _model->getKey(_ghostKey).sources.isEmpty();
+    if (ghost && _display.mode == TimbreDisplay::MODE_LEVELS)
     {
         TimbreSpectrum predicted = _model->predict(_ghostKey);
         QVector<double> levels = _model->getRowLevels(predicted);
+        QVector<double> confidence = _model->getRowConfidence(predicted);
         double top = strongestLevel(levels);
         for (int row = 0; row < rows.count() && row < levels.size(); row++)
         {
@@ -478,7 +500,11 @@ void TimbreMapWidget::paintEvent(QPaintEvent * event)
             if (std::isnan(levels[row]))
                 painter.fillRect(rect, hatchBrush);
             else
+            {
                 painter.fillRect(rect, _palette.magnitude(1 + (levels[row] - top) / getRange()));
+                if (row < confidence.size() && !std::isnan(confidence[row]) && confidence[row] < 0.5)
+                    painter.fillRect(rect, hatchBrush);
+            }
         }
     }
 
@@ -554,9 +580,9 @@ void TimbreMapWidget::paintEvent(QPaintEvent * event)
     if (selectedColumn >= 0)
     {
         painter.setPen(QPen(highlight, 2));
-        painter.drawRect(columnRect(selectedColumn, _summaryTop, _decisionTop + _decisionHeight - _summaryTop).adjusted(1, 1, -1, -1));
+        painter.drawRect(columnRect(selectedColumn, _summaryTop, _mapTop + _mapHeight - _summaryTop).adjusted(1, 1, -1, -1));
     }
-    if (ghostColumn >= 0 && !_model->getPositions().contains(_ghostKey))
+    if (ghost)
     {
         painter.setPen(QPen(highlight, 2, Qt::DashLine));
         painter.drawRect(columnRect(ghostColumn, _mapTop, _mapHeight).adjusted(1, 1, -1, -1));
@@ -664,7 +690,7 @@ void TimbreMapWidget::mousePressEvent(QMouseEvent * event)
     if (_model == nullptr || _columns.isEmpty() || _pressedButton != Qt::NoButton || _playingKey >= 0)
         return;
     int key = keyAt(event->pos().x());
-    if (event->button() == Qt::LeftButton && event->pos().y() >= _keyboardTop && event->pos().y() <= _keyboardTop + _keyboardHeight)
+    if (event->button() == Qt::LeftButton && event->pos().y() >= _keyboardTop && event->pos().y() < _keyboardTop + _keyboardHeight)
     {
         // Keyboard
         if (key >= 0)
@@ -868,7 +894,8 @@ void TimbreLegendWidget::paintEvent(QPaintEvent * event)
 
     // Gradient as drawn in the map, framed by the color of the grid
     int barHeight = qMax(6, metrics.height() - 6);
-    QRect bar(minimumWidth + 6, (this->height() - barHeight) / 2, BAR_WIDTH, barHeight);
+    int barWidth = qMax(BAR_WIDTH, this->width() - minimumWidth - metrics.horizontalAdvance(_maximum) - 12);
+    QRect bar(minimumWidth + 6, (this->height() - barHeight) / 2, barWidth, barHeight);
     for (int x = 0; x < bar.width(); x++)
     {
         double t = static_cast<double>(x) / (bar.width() - 1);

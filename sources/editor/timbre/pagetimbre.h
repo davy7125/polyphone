@@ -31,17 +31,19 @@
 #include "timbreactions.h"
 #include "timbremapwidget.h"
 #include <QTimer>
+#include <QMap>
 #include <functional>
 class TimbreBarsWidget;
-class TimbreVelocityStrip;
 class TimbreDetailWidget;
 class QLabel;
-class QSpinBox;
-class QDoubleSpinBox;
+class QSlider;
 class QComboBox;
+class QFrame;
+class QCheckBox;
 class QToolButton;
 class QStackedWidget;
 class RotatingSpinner;
+class InfoButton;
 
 // Timbre of an instrument along the keyboard, as heard at a velocity, with the tools for harmonizing it (creation of
 // computed notes, removal, correction of the timbre and of the level)
@@ -60,10 +62,18 @@ public:
     QString getLabel() override { return tr("Timbre"); }
     QString getIconName() override { return ":/icons/timbre.svg"; }
 
+    // Items of the list of references, shared with the correction window: interpolation between the two neighbors (data
+    // 0), then robust regression on 2 to 8 neighbors on each side (data: count on each side)
+    static void addReferenceItems(QComboBox * combo);
+
+    static QString keyName(int key);
+    static QString formatDb(double value, int decimals = 1, bool sign = false);
+
 protected:
     void updateInterface(QString editingSource) override;
     void keyPlayedInternal(int key, int velocity) override;
     void hideEvent(QHideEvent * event) override;
+    bool eventFilter(QObject * watched, QEvent * event) override;
 
 private slots:
     void onAnalysisReady(int indexSf2);
@@ -94,18 +104,16 @@ private:
     void buildInterface();
     void loadSettings();
     void saveSettings();
-    void updateVelocityLayers();
     void updateDetail();
-    void updateToleranceToolTip();
+    void updateToleranceInfo();
     void updateLegend();
     void updatePending();
+    void placePendingFrame();
     void selectPositions(const QList<int> &keys, bool notifyTree);
     void readTreeSelection();
     void restoreSelection(int key, const QList<int> &positions, int anchorKey);
     QList<int> getTargets();
     int getPosition(int key);
-    QString keyName(int key);
-    QString formatDb(double value, int decimals = 1, bool sign = false);
     void runInThread(std::function<void()> function, QString text);
     bool askSharedSamples(const QList<int> &targets, bool &duplicate);
     void runSeries(SeriesType type, QList<int> targets, const TimbreCorrectionParameters &parameters,
@@ -133,15 +141,18 @@ private:
     // Interface
     QStackedWidget * _stack;
     QLabel * _labelMessage;
-    QSpinBox * _spinVelocity;
-    TimbreVelocityStrip * _velocityStrip;
+    QSlider * _sliderVelocity;
+    QLabel * _labelVelocity;
     TimbreLegendWidget * _legend;
     QComboBox * _comboMode;
     QComboBox * _comboReference;
-    QSpinBox * _spinRegression;
+    QSlider * _sliderTolerance; // Half dB
     QLabel * _labelTolerance;
-    QDoubleSpinBox * _spinTolerance;
-    QToolButton * _buttonOptions;
+    InfoButton * _buttonToleranceInfo; // Thresholds
+    QMap<QObject *, QCheckBox *> _optionCheckBoxes; // By label
+    QList<QCheckBox *> _summaryCheckBoxes;
+    QCheckBox * _checkPlayClicked;
+    QFrame * _framePending; // Analysis in progress, over the top right corner of the map
     RotatingSpinner * _spinner;
     QLabel * _labelPending;
     TimbreMapWidget * _map;

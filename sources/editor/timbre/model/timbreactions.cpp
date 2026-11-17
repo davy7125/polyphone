@@ -292,34 +292,22 @@ TimbreCorrectionPlan TimbreActions::planCorrection(TimbreModel &model, int posit
     }
 
     // Target
-    bool atEdge;
-    switch (parameters.reference)
+    if (parameters.alignedPosition >= 0)
     {
-    case TimbreCorrectionParameters::REFERENCE_POSITION:
         if (!model.getPositions().contains(parameters.alignedPosition) || parameters.alignedPosition == positionKey)
             return plan;
         plan.target = model.playPosition(parameters.alignedPosition, positionKey);
-        break;
-    case TimbreCorrectionParameters::REFERENCE_REGRESSION:
-        plan.target = model.computeReferenceWith(positionKey, TimbreSettings::REFERENCE_REGRESSION,
-                                                 parameters.regressionCount, atEdge);
-        break;
-    default:
-        plan.target = model.computeReferenceWith(positionKey, TimbreSettings::REFERENCE_INTERPOLATION, 0, atEdge);
-        break;
+    }
+    else
+    {
+        bool atEdge;
+        plan.target = model.computeReferenceWith(positionKey, parameters.reference, parameters.regressionCount, atEdge);
     }
     if (plan.target.isEmpty())
         return plan;
 
-    // Macros
-    for (int i = 0; i < plan.target.count(); i++)
-    {
-        int rank = i + 1;
-        double gain = parameters.brightness * std::log2(rank) + ((rank >= 3 && rank % 2 == 1) ? parameters.oddEven : 0);
-        plan.target.power[i] *= std::pow(10.0, gain / 10);
-    }
-
-    // Gains of the rows (timbre part, the level being removed): what exceeds the tolerance, with the strength, bounded
+    // Gains of the rows (timbre part, the level being removed): what exceeds the dead zone, with the strength, bounded
+    const double maximum = TimbreCorrectionParameters::MAX_CORRECTION;
     const TimbreSpectrum &heard = position.spectrum;
     plan.before = model.compare(heard, plan.target);
     if (!plan.before.valid)
@@ -327,22 +315,18 @@ TimbreCorrectionPlan TimbreActions::planCorrection(TimbreModel &model, int posit
     const QList<TimbreRow> &rows = model.getRows();
     QVector<double> timbreGains(rows.size(), 0);
     QVector<bool> corrected(rows.size(), false);
-    if (parameters.correctTimbre)
+    for (int row = 0; row < rows.size(); row++)
     {
-        for (int row = 0; row < rows.size(); row++)
-        {
-            if (parameters.maxRank > 0 && rows[row].lastRank > parameters.maxRank)
-                continue;
-            double difference = plan.before.rowDifferences[row];
-            if (std::isnan(difference))
-                continue;
-            corrected[row] = true;
-            difference -= plan.before.levelDifference;
-            double excess = std::fabs(difference) - parameters.tolerance;
-            if (excess > 0)
-                timbreGains[row] = qBound(-parameters.maxCorrection, -std::copysign(excess, difference) * parameters.strength,
-                                          parameters.maxCorrection);
-        }
+        if (parameters.maxRank > 0 && rows[row].lastRank > parameters.maxRank)
+            continue;
+        double difference = plan.before.rowDifferences[row];
+        if (std::isnan(difference))
+            continue;
+        corrected[row] = true;
+        difference -= plan.before.levelDifference;
+        double excess = std::fabs(difference) - parameters.deadZone;
+        if (excess > 0)
+            timbreGains[row] = qBound(-maximum, -std::copysign(excess, difference) * parameters.strength, maximum);
     }
 
     // Points of the gain curve (abscissa: rank), constant within the bands
@@ -370,14 +354,25 @@ TimbreCorrectionPlan TimbreActions::planCorrection(TimbreModel &model, int posit
     if (!plan.gains.isEmpty())
         for (int i = 0; i < plan.after.count(); i++)
             plan.after.power[i] *= std::pow(10.0, curve.getDb(i + 1) / 10);
-    if (parameters.correctLevel)
+    if (!parameters.correctLevel)
+    {
+        // The level heard is kept: the gain curve is shifted to compensate the level change of the timbre correction
+        TimbreComparison drift = model.compare(plan.after, heard);
+        if (!plan.gains.isEmpty() && drift.valid && std::fabs(drift.levelDifference) > 0.005)
+        {
+            for (int i = 0; i < plan.gains.count(); i++)
+                plan.gains[i].setY(plan.gains[i].y() - drift.levelDifference);
+            for (int i = 0; i < plan.after.count(); i++)
+                plan.after.power[i] *= std::pow(10.0, -drift.levelDifference / 10);
+        }
+    }
+    else
     {
         TimbreComparison comparison = model.compare(plan.after, plan.target);
-        double excess = std::fabs(comparison.levelDifference) - parameters.tolerance;
+        double excess = std::fabs(comparison.levelDifference) - parameters.deadZone;
         if (comparison.valid && excess > 0)
-            plan.levelGain = qBound(-parameters.maxCorrection,
-                                    -std::copysign(excess, comparison.levelDifference) * parameters.strength,
-                                    parameters.maxCorrection);
+            plan.levelGain = qBound(-maximum, -std::copysign(excess, comparison.levelDifference) * parameters.strength,
+                                    maximum);
         for (int i = 0; i < plan.after.count(); i++)
             plan.after.power[i] *= std::pow(10.0, plan.levelGain / 10);
 
@@ -409,13 +404,6 @@ TimbreCorrectionPlan TimbreActions::planCorrection(TimbreModel &model, int posit
         }
     }
     plan.expected = model.compare(plan.after, plan.target);
-
-    // Gains per row, for the display
-    QVector<double> levelsBefore = model.getRowLevels(heard), levelsAfter = model.getRowLevels(plan.after);
-    plan.rowGains.fill(0, rows.size());
-    for (int row = 0; row < rows.size(); row++)
-        if (!std::isnan(levelsBefore[row]) && !std::isnan(levelsAfter[row]))
-            plan.rowGains[row] = levelsAfter[row] - levelsBefore[row];
     plan.valid = !plan.gains.isEmpty() || plan.levelGain != 0;
     return plan;
 }

@@ -2645,134 +2645,77 @@ for a signal</source>
 <context>
     <name>DialogTimbreCorrection</name>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="57"/>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="71"/>
         <source>Correct the timbre</source>
         <translation>음색 보정</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="75"/>
-        <source>Interpolation between the neighbors</source>
-        <translation>이웃 루트 키 간 보간</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="76"/>
-        <source>Local regression</source>
-        <translation>국소 회귀</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="77"/>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="102"/>
         <source>Aligned on a root key</source>
         <translation>루트 키에 맞춤</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="79"/>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="107"/>
         <source>Reference</source>
         <translation>기준</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="83"/>
-        <source>neighbors on each side</source>
-        <translation>개씩 (양쪽 이웃)</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="92"/>
-        <source>Correct the timbre (sample data)</source>
-        <translation>음색 보정 (샘플 데이터)</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="95"/>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="130"/>
         <source>Correct the level (attenuation)</source>
         <translation>레벨 보정 (감쇠)</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="107"/>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="242"/>
-        <source>dB</source>
-        <comment>unit for decibels</comment>
-        <translation>dB</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="109"/>
-        <source>A smaller deviation of a row is not corrected, only the part beyond is</source>
-        <translation>행의 편차가 이 값보다 작으면 보정하지 않고, 초과분만 보정합니다</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="110"/>
-        <source>Tolerance</source>
-        <translation>허용 오차</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="112"/>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="118"/>
         <source>Strength</source>
         <translation>강도</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="114"/>
-        <source>Maximum correction</source>
-        <translation>최대 보정량</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="116"/>
-        <source>Ranks and bands</source>
-        <translation>차수와 대역</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="117"/>
-        <source>Ranks from 1 to</source>
-        <translation>1차부터 지정한 차수까지</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="119"/>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="128"/>
         <source>Ranks corrected</source>
         <translation>보정할 차수</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="124"/>
-        <source>dB / octave</source>
-        <translation>dB / 옥타브</translation>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="116"/>
+        <source>Part of the deviation of each row corrected beyond %1 (a third of the tolerance)</source>
+        <translation>각 행의 편차 중 %1 (허용 오차의 3분의 1)을 초과한 부분을 보정하는 비율</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="122"/>
+        <source>All</source>
+        <translation>전체</translation>
     </message>
     <message>
         <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="125"/>
-        <source>Slope added to the target: positive for a brighter sound</source>
-        <translation>목표에 더하는 기울기: 양수이면 소리가 더 밝아집니다</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="126"/>
-        <source>Brightness</source>
-        <translation>밝기</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="128"/>
-        <source>Level added to the odd ranks (3, 5, 7...) of the target</source>
-        <translation>목표의 홀수 차수 (3, 5, 7...)에 더하는 레벨</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="129"/>
-        <source>Odd ranks</source>
-        <translation>홀수 차수</translation>
+        <source>Up to %1</source>
+        <translation>%1까지</translation>
     </message>
     <message>
         <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="132"/>
+        <source>Otherwise the level heard is kept: the correction of the timbre doesn&apos;t change it</source>
+        <translation>끄면 들리는 레벨이 유지됩니다. 음색 보정으로 레벨이 바뀌지 않습니다</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="136"/>
         <source>Listening</source>
         <translation>미리 듣기</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="136"/>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="140"/>
         <source>Root key %1</source>
         <translation>루트 키 %1</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="139"/>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="143"/>
         <source>A: original</source>
         <translation>A: 원본</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="141"/>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="145"/>
         <source>B: corrected</source>
         <translation>B: 보정됨</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="146"/>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="150"/>
         <source>Play</source>
         <translation>재생</translation>
     </message>
@@ -2792,7 +2735,7 @@ for a signal</source>
         <translation>결과</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="246"/>
+        <location filename="../../editor/timbre/dialogtimbrecorrection.cpp" line="245"/>
         <source>Before: level %1, timbre %2</source>
         <translation>보정 전: 레벨 %1, 음색 %2</translation>
     </message>
@@ -5098,132 +5041,132 @@ to display its division ranges</source>
         <translation>날짜...</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="201"/>
+        <location filename="../../editor/pagesf2.ui" line="189"/>
         <source>Product</source>
         <translation>제품</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="225"/>
+        <location filename="../../editor/pagesf2.ui" line="213"/>
         <source>Copyright</source>
         <translation>저작권</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="208"/>
+        <location filename="../../editor/pagesf2.ui" line="196"/>
         <source>Comments</source>
         <translation>코멘트</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../editor/pagesf2.cpp" line="219"/>
+        <location filename="../../editor/pagesf2.cpp" line="202"/>
         <source>unused: %n</source>
         <translation>
             <numerusform>사용 안 함: %n개</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../editor/pagesf2.cpp" line="221"/>
+        <location filename="../../editor/pagesf2.cpp" line="204"/>
         <source>duplicates: %n</source>
         <translation>
             <numerusform>중복: %n개</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.cpp" line="474"/>
+        <location filename="../../editor/pagesf2.cpp" line="452"/>
         <source>SoundFont format</source>
         <translation>SoundFont 형식</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.cpp" line="479"/>
+        <location filename="../../editor/pagesf2.cpp" line="457"/>
         <source>ROM name</source>
         <translation>ROM 이름</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.cpp" line="486"/>
+        <location filename="../../editor/pagesf2.cpp" line="464"/>
         <source>ROM version</source>
         <translation>ROM 버전</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.cpp" line="492"/>
+        <location filename="../../editor/pagesf2.cpp" line="470"/>
         <source>Sound engine</source>
         <translation>사운드 엔진</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.cpp" line="497"/>
+        <location filename="../../editor/pagesf2.cpp" line="475"/>
         <source>Editing software</source>
         <translation>편집 소프트웨어</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="329"/>
+        <location filename="../../editor/pagesf2.ui" line="317"/>
         <source>Presets</source>
         <translation>프리셋들</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="351"/>
-        <location filename="../../editor/pagesf2.ui" line="465"/>
-        <location filename="../../editor/pagesf2.ui" line="806"/>
+        <location filename="../../editor/pagesf2.ui" line="339"/>
+        <location filename="../../editor/pagesf2.ui" line="453"/>
+        <location filename="../../editor/pagesf2.ui" line="794"/>
         <source>Details</source>
         <translation>세부사항</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="443"/>
+        <location filename="../../editor/pagesf2.ui" line="431"/>
         <source>Samples</source>
         <translation>샘플들</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="518"/>
+        <location filename="../../editor/pagesf2.ui" line="506"/>
         <source>Compression</source>
         <translation>압축</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="525"/>
-        <location filename="../../editor/pagesf2.ui" line="614"/>
-        <location filename="../../editor/pagesf2.ui" line="677"/>
+        <location filename="../../editor/pagesf2.ui" line="513"/>
+        <location filename="../../editor/pagesf2.ui" line="602"/>
+        <location filename="../../editor/pagesf2.ui" line="665"/>
         <source>Count</source>
         <translation>개수</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="539"/>
+        <location filename="../../editor/pagesf2.ui" line="527"/>
         <source>Bit depth</source>
         <translation>비트 깊이</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="553"/>
+        <location filename="../../editor/pagesf2.ui" line="541"/>
         <source>16 bits</source>
         <translation>16 비트</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="558"/>
+        <location filename="../../editor/pagesf2.ui" line="546"/>
         <source>24 bits</source>
         <translation>24 비트</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="573"/>
+        <location filename="../../editor/pagesf2.ui" line="561"/>
         <source>no</source>
         <translation>아니오</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="578"/>
+        <location filename="../../editor/pagesf2.ui" line="566"/>
         <source>possible</source>
         <translation>가능</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="607"/>
-        <location filename="../../editor/pagesf2.ui" line="705"/>
+        <location filename="../../editor/pagesf2.ui" line="595"/>
+        <location filename="../../editor/pagesf2.ui" line="693"/>
         <source>Modulators</source>
         <translation>모듈레이터들</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="635"/>
-        <location filename="../../editor/pagesf2.ui" line="670"/>
+        <location filename="../../editor/pagesf2.ui" line="623"/>
+        <location filename="../../editor/pagesf2.ui" line="658"/>
         <source>Parameters</source>
         <translation>매개변수들</translation>
     </message>
     <message>
-        <location filename="../../editor/pagesf2.ui" line="784"/>
+        <location filename="../../editor/pagesf2.ui" line="772"/>
         <source>Instruments</source>
         <translation>악기들</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../editor/pagesf2.cpp" line="234"/>
+        <location filename="../../editor/pagesf2.cpp" line="217"/>
         <source>%1 (unused: %n)</source>
         <translation>
             <numerusform>%1 (사용 안 함: %n개)</numerusform>
@@ -5442,597 +5385,585 @@ Warning: quality will be reduced and the loop may be altered</source>
 <context>
     <name>PageTimbre</name>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="158"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="182"/>
         <source>Velocity</source>
         <translation>벨로시티</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="169"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="170"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="269"/>
         <source>Display</source>
         <translation>표시</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="190"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="865"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="221"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="928"/>
         <source>Reference</source>
         <translation>기준</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="192"/>
-        <source>Neighbors</source>
-        <translation>이웃 루트 키</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="193"/>
-        <source>Local regression</source>
-        <translation>국소 회귀</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="194"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="398"/>
         <source>Reference of a root key: interpolation between its two neighbors, or robust regression on several neighbors on each side</source>
         <translation>루트 키의 기준: 양옆 두 이웃 간의 보간, 또는 양쪽 여러 이웃에 대한 강건 회귀</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="201"/>
-        <source>Neighbors on each side</source>
-        <translation>양쪽 각각의 이웃 수</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="213"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="362"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="429"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="825"/>
         <source>dB</source>
         <comment>unit for decibels</comment>
         <translation>dB</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="207"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="199"/>
         <source>Tolerance</source>
         <translation>허용 오차</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="519"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="779"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="210"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="840"/>
         <source>Timbre deviation up to which a root key is consistent</source>
         <translation>루트 키가 일관된 것으로 간주되는 음색 편차의 상한</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="788"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="793"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="849"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="854"/>
         <source>Timbre deviation up to which a root key can be corrected, beyond it is too different</source>
         <translation>루트 키를 보정할 수 있는 음색 편차의 상한. 이를 넘으면 차이가 너무 큰 것으로 간주됩니다</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="783"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="844"/>
         <source>Largest timbre deviation over the keys of a consistent root key if it were removed, for being redundant</source>
         <translation>일관된 루트 키를 제거했을 때 담당하던 키의 최대 음색 편차가 이 값 이하이면 중복으로 간주됩니다</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="886"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="592"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="949"/>
         <source>Break</source>
         <translation>단절</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="886"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="949"/>
         <source>Timbre jump at a junction from which a computed note is proposed</source>
         <translation>연결부의 음색 변화량이 이 값 이상이면 계산된 노트가 제안됩니다</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="827"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="888"/>
         <source>Level deviation from which a correction of the attenuation is proposed</source>
         <translation>레벨 편차가 이 값 이상이면 감쇠 보정이 제안됩니다</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="221"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="235"/>
         <source>Options</source>
         <translation>옵션</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="224"/>
-        <source>Summaries</source>
-        <translation>요약 행</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="242"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="277"/>
         <source>Play the clicked keys</source>
         <translation>클릭한 키 재생</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="248"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1206"/>
-        <source>Propose</source>
-        <translation>제안</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="252"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="289"/>
         <source>Correct the root keys marked &quot;to correct&quot;...</source>
         <translation>&quot;보정 필요&quot;로 표시된 루트 키 보정...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="255"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="292"/>
         <source>Replace the root keys marked &quot;too different&quot; with computed notes...</source>
         <translation>&quot;차이가 너무 큼&quot;으로 표시된 루트 키를 계산된 노트로 교체...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="258"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="295"/>
         <source>Remove the redundant root keys...</source>
         <translation>중복된 루트 키 제거...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="261"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="298"/>
         <source>Create computed notes at the breaks...</source>
         <translation>단절 지점에 계산된 노트 생성...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="264"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="301"/>
         <source>Correct the deviating levels...</source>
         <translation>벗어난 레벨 보정...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="309"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="363"/>
         <source>Create a note here...</source>
         <translation>여기에 노트 생성...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="310"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="364"/>
         <source>Remove...</source>
         <translation>제거...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="311"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="365"/>
         <source>Replace with a computed note...</source>
         <translation>계산된 노트로 교체...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="312"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="366"/>
         <source>Correct the timbre...</source>
         <translation>음색 보정...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="313"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1077"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1241"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="367"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1140"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1304"/>
         <source>Correct the level</source>
         <translation>레벨 보정</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="314"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="368"/>
         <source>Check by rendering</source>
         <translation>렌더링으로 확인</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="315"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="369"/>
         <source>Play the key with the sound engine and measure the harmonics of the result</source>
         <translation>사운드 엔진으로 키를 재생하고 결과의 배음을 측정합니다</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="383"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="450"/>
         <source>Select a single instrument
 to display its timbre</source>
         <translation>음색을 표시하려면 단일
 악기를 선택하십시오</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="454"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="532"/>
         <source>Analysis of the samples: %n remaining</source>
         <translation>
             <numerusform>샘플 분석 중: %n개 남음</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="745"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="802"/>
         <source>No division of this instrument plays at the velocity %1.</source>
         <translation>이 악기에는 벨로시티 %1에서 재생되는 분할이 없습니다.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="300"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="354"/>
         <source>Click on a key to see what it plays.</source>
         <translation>키를 클릭하면 재생되는 내용을 볼 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="778"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="588"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="839"/>
         <source>Consistent</source>
         <translation>일관됨</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="782"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="591"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="843"/>
         <source>Redundant</source>
         <translation>중복</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="787"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="589"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="848"/>
         <source>To correct</source>
         <translation>보정 필요</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="792"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="590"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="853"/>
         <source>Too different</source>
         <translation>차이가 너무 큼</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="801"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="862"/>
         <source>Root key %1</source>
         <translation>루트 키 %1</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="804"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="865"/>
         <source>Key %1</source>
         <translation>키 %1</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="806"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="867"/>
         <source>No sample</source>
         <translation>샘플 없음</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="808"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="869"/>
         <source>Played by the root key %1</source>
         <translation>루트 키 %1에 의해 재생됨</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="839"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="900"/>
         <source>Reference extrapolated from the neighbors on one side: less reliable</source>
         <translation>한쪽 이웃에서 외삽한 기준: 신뢰도 낮음</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="815"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="876"/>
         <source>Analysis in progress...</source>
         <translation>분석 진행 중...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="861"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="869"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="924"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="932"/>
         <source>Heard</source>
         <translation>들리는 음</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="875"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="938"/>
         <source>Computed note</source>
         <translation>계산된 노트</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="906"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="970"/>
         <source>Rendered</source>
         <translation>렌더링 결과</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="813"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="874"/>
         <source>%n root keys selected: the actions apply to all of them.</source>
         <translation>
             <numerusform>루트 키 %n개 선택됨: 작업이 모든 키에 적용됩니다.</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="520"/>
-        <source>The other timbre thresholds follow it: too different beyond %1, redundant up to %2, break beyond %3.</source>
-        <translation>다른 음색 임계값은 이 값을 따릅니다: 차이가 너무 큼 %1 초과, 중복 %2 이하, 단절 %3 초과.</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="522"/>
-        <source>%1 for organs, about %2 for pianos, guitars, woodwinds and general MIDI banks.</source>
-        <translation>오르간은 %1, 피아노, 기타, 목관 악기 및 General MIDI 뱅크는 약 %2입니다.</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="826"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="887"/>
         <source>Too loud</source>
         <translation>레벨이 너무 높음</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="826"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="887"/>
         <source>Too soft</source>
         <translation>레벨이 너무 낮음</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="831"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="894"/>
         <source>Deviation of the root key %1</source>
         <translation>루트 키 %1의 편차</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="837"/>
-        <source>%1%</source>
-        <comment>percentage</comment>
-        <translation>%1%</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="841"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="902"/>
         <source>Root key outside the key range of its divisions: measured by playing them at the root key</source>
         <translation>루트 키가 분할의 키 범위 밖에 있음: 루트 키에서 재생하여 측정</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="846"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="907"/>
         <source>If removed</source>
         <translation>제거 시</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="849"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="909"/>
         <source>Largest deviation</source>
         <translation>최대 편차</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="852"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="914"/>
         <source>New junction</source>
         <translation>새 연결부</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="861"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="924"/>
         <source>Played at the root key</source>
         <translation>루트 키에서 재생</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="890"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="952"/>
         <source>Junctions</source>
         <translation>연결부</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="915"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="979"/>
         <source>Rendering against the model</source>
         <translation>렌더링과 모델 비교</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="919"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="983"/>
         <source>Largest deviation of a row</source>
         <translation>행 최대 편차</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="926"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="990"/>
         <source>Samples</source>
         <translation>샘플</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="570"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="931"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="995"/>
         <source>semitones</source>
         <translation>반음</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="554"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="615"/>
         <source>Hatched: not reliably measured or being analyzed. Empty: nothing to measure.</source>
         <translation>빗금: 측정 신뢰도가 낮거나 분석 중. 빈칸: 측정할 것이 없음.</translation>
     </message>
+    <message numerus="yes">
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="395"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="397"/>
+        <source>%n neighboring notes</source>
+        <translation>
+            <numerusform>이웃 음 %n개</numerusform>
+        </translation>
+    </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="563"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="276"/>
+        <source>Miscellaneous</source>
+        <translation>기타</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="283"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1269"/>
+        <source>Actions</source>
+        <translation>작업</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="587"/>
+        <source>Thresholds</source>
+        <translation>임계값</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="624"/>
         <source>Red: stronger than the reference, blue: weaker.</source>
         <translation>빨강: 기준보다 강함, 파랑: 약함.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="567"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="628"/>
         <source>Red: stronger than the previous key, blue: weaker.</source>
         <translation>빨강: 이전 키보다 강함, 파랑: 약함.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="571"/>
-        <source>Red: sample transposed up, blue: transposed down.</source>
-        <translation>빨강: 샘플을 위로 이조, 파랑: 아래로 이조.</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="836"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="898"/>
         <source>Confidence</source>
         <translation>신뢰도</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="932"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="996"/>
         <source>Attenuation</source>
         <translation>감쇠</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="933"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="997"/>
         <source>Filter</source>
         <translation>필터</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="934"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="997"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
         <translation>Hz</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="938"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1001"/>
         <source>Measures</source>
         <translation>측정값</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="941"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1004"/>
         <source>Center of gravity of the partials, as a rank</source>
         <translation>부분음의 무게중심 (차수)</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="942"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1005"/>
         <source>Spectral slope</source>
         <translation>스펙트럼 기울기</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="942"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1005"/>
         <source>dB/octave</source>
         <comment>unit for decibels per octave</comment>
         <translation>dB/옥타브</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="944"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1007"/>
         <source>Odd ranks (3, 5...) against even ranks (2, 4...)</source>
         <translation>홀수 차수 (3, 5...) 대비 짝수 차수 (2, 4...)</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="946"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1009"/>
         <source>Harmonics-to-noise ratio</source>
         <translation>배음 대 잡음비</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="948"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1010"/>
+        <source>Tuning</source>
+        <translation>피치 정확도</translation>
+    </message>
+    <message>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1011"/>
         <source>cents</source>
         <translation>센트</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="949"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1012"/>
         <source>Deviation from the closest note of the equal temperament</source>
         <translation>평균율의 가장 가까운 음으로부터의 편차</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="950"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1013"/>
         <source>Duration factor</source>
         <translation>지속 시간 배율</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="951"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1014"/>
         <source>Durations of the attack, the tremolo and the beats compared to the sample</source>
         <translation>샘플 대비 어택, 트레몰로, 맥놀이의 지속 시간</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="983"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1046"/>
         <source>Computing the note %1...</source>
         <translation>노트 %1 계산 중...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1011"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1161"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1386"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1074"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1224"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1449"/>
         <source>Warning</source>
         <translation>경고</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1035"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1098"/>
         <source>Remove the root key %1 (%n division(s))? The neighbors will play its keys.</source>
         <translation>
             <numerusform>루트 키 %1 (분할 %n개)을(를) 제거하시겠습니까? 해당 키는 이웃 루트 키가 재생합니다.</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1038"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1101"/>
         <source>Largest timbre deviation over its keys: %1, level: %2.</source>
         <translation>담당하던 키의 최대 음색 편차: %1, 레벨: %2.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1041"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1104"/>
         <source>Timbre jump at the new junction: %1.</source>
         <translation>새 연결부의 음색 변화량: %1.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1044"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1107"/>
         <source>Remove the following root keys? The neighbors will play their keys.</source>
         <translation>다음 루트 키를 제거하시겠습니까? 해당 키는 이웃 루트 키가 재생합니다.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1046"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1109"/>
         <source>Remove</source>
         <translation>제거</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1047"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1110"/>
         <source>Also remove the samples that are not used anymore</source>
         <translation>더 이상 사용되지 않는 샘플도 제거</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1062"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1125"/>
         <source>Replace the root key %1 with a note computed from its neighbors?</source>
         <translation>루트 키 %1을(를) 이웃 루트 키로부터 계산한 노트로 교체하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1063"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1126"/>
         <source>Replace the following root keys with notes computed from their neighbors?</source>
         <translation>다음 루트 키를 이웃 루트 키로부터 계산한 노트로 교체하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1065"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1128"/>
         <source>Replace</source>
         <translation>교체</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1078"/>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1242"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1141"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1305"/>
         <source>Correct the level of the following root keys?</source>
         <translation>다음 루트 키의 레벨을 보정하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1111"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1174"/>
         <source>Shared samples</source>
         <translation>공유 샘플</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1112"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1175"/>
         <source>The following samples are also used by other divisions or instruments:</source>
         <translation>다음 샘플은 다른 분할이나 악기에서도 사용됩니다:</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1114"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1177"/>
         <source>Duplicate them for the corrected root keys, or modify them everywhere?</source>
         <translation>보정할 루트 키용으로 복제하시겠습니까, 아니면 모든 곳에서 수정하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1115"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1178"/>
         <source>Duplicate</source>
         <translation>복제</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1116"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1179"/>
         <source>Modify everywhere</source>
         <translation>모든 곳에서 수정</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1119"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1182"/>
         <source>Don&apos;t ask again (until Polyphone is closed)</source>
         <translation>다시 묻지 않음 (Polyphone을 닫을 때까지)</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1158"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1221"/>
         <source>Rendering of the key %1...</source>
         <translation>키 %1 렌더링 중...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1161"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1224"/>
         <source>The rendering couldn&apos;t be analyzed.</source>
         <translation>렌더링 결과를 분석할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1206"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1269"/>
         <source>Nothing to propose with the current thresholds.</source>
         <translation>현재 임계값으로는 제안할 항목이 없습니다.</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1235"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1298"/>
         <source>Create computed notes</source>
         <translation>계산된 노트 생성</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1236"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1299"/>
         <source>Create computed notes at the following keys?</source>
         <translation>다음 키에 계산된 노트를 생성하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1263"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1326"/>
         <source>Processing...</source>
         <translation>작업 중...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1263"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1326"/>
         <source>Cancel</source>
         <translation>취소</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1322"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1385"/>
         <source>Processing the key %1...</source>
         <translation>키 %1 처리 중...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1344"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1407"/>
         <source>%1: the attenuation reached its limit (%2 missing).</source>
         <translation>%1: 감쇠가 한계에 도달했습니다 (%2 부족).</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1358"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1421"/>
         <source>Correction of the key %1...</source>
         <translation>키 %1 보정 중...</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1362"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1425"/>
         <source>: </source>
         <comment>separator</comment>
         <translation>: </translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.cpp" line="1384"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="1447"/>
         <source>Not processed (the label changed or nothing to do):</source>
         <translation>처리되지 않음 (레이블이 바뀌었거나 할 작업 없음):</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/pagetimbre.h" line="60"/>
+        <location filename="../../editor/timbre/pagetimbre.cpp" line="821"/>
+        <location filename="../../editor/timbre/pagetimbre.h" line="62"/>
         <source>Timbre</source>
         <translation>음색</translation>
     </message>
@@ -8213,7 +8144,7 @@ Other soundfont editors might display other units.</source>
         <translation>다음 샘플은 반복되지 않습니다:</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/model/timbreactions.cpp" line="559"/>
+        <location filename="../../editor/timbre/model/timbreactions.cpp" line="547"/>
         <source>The attenuation reached its limit: the level differs by %1 dB from the expected one.</source>
         <translation>감쇠가 한계에 도달했습니다: 레벨이 예상값과 %1 dB 차이 납니다.</translation>
     </message>
@@ -8221,13 +8152,13 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>TimbreBarsWidget</name>
     <message>
-        <location filename="../../editor/timbre/timbrebarswidget.cpp" line="200"/>
+        <location filename="../../editor/timbre/timbrebarswidget.cpp" line="199"/>
         <source>: </source>
         <comment>separator</comment>
         <translation>: </translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbrebarswidget.cpp" line="201"/>
+        <location filename="../../editor/timbre/timbrebarswidget.cpp" line="200"/>
         <source>dB</source>
         <comment>unit for decibels</comment>
         <translation>dB</translation>
@@ -8236,124 +8167,110 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>TimbreMapWidget</name>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="91"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="97"/>
         <source>Level</source>
         <translation>레벨</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="92"/>
-        <source>Timbre</source>
-        <translation>음색</translation>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="98"/>
+        <source>Timbre deviation</source>
+        <translation>음색 편차</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="93"/>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="109"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="99"/>
         <source>Transposition</source>
         <translation>조옮김</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="94"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="100"/>
         <source>Brightness</source>
         <translation>밝기</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="95"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="101"/>
         <source>Odd / even</source>
         <translation>홀수 / 짝수</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="96"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="102"/>
         <source>Noise</source>
         <translation>잡음</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="97"/>
-        <source>Tuning</source>
-        <translation>피치 정확도</translation>
-    </message>
-    <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="106"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="111"/>
         <source>Levels</source>
         <translation>레벨</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="107"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="112"/>
         <source>Deviation from the reference</source>
         <translation>기준 대비 편차</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="108"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="113"/>
         <source>Jumps</source>
         <translation>변화량</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="194"/>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="571"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="196"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="590"/>
         <source>Decisions</source>
         <translation>판정</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="789"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="808"/>
         <source>No sample</source>
         <translation>샘플 없음</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="802"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="821"/>
         <source>Row: %1</source>
         <translation>행: %1</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="802"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="821"/>
         <source>level: %1 dB</source>
         <translation>레벨: %1 dB</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="807"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="826"/>
         <source>Deviation from the reference: %1 dB</source>
         <translation>기준 대비 편차: %1 dB</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="810"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="829"/>
         <source>Jump from the previous key: %1 dB</source>
         <translation>이전 키 대비 변화량: %1 dB</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="823"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="842"/>
         <source>Samples: %1</source>
         <translation>샘플: %1</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="828"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="847"/>
         <source>Root key: %1</source>
         <translation>루트 키: %1</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="830"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="849"/>
         <source>Root key: %1, outside the key range of its divisions</source>
         <translation>루트 키: %1, 분할의 키 범위 밖</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="832"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="851"/>
         <source>Transposition: %1 semitones</source>
         <translation>조옮김: %1 반음</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="833"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="852"/>
         <source>Duration factor: %1</source>
         <translation>지속 시간 배율: %1</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="834"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="853"/>
         <source>Level: %1 dB</source>
         <translation>레벨: %1 dB</translation>
-    </message>
-</context>
-<context>
-    <name>TimbreVelocityStrip</name>
-    <message>
-        <location filename="../../editor/timbre/timbrebarswidget.cpp" line="214"/>
-        <source>Velocity layers of the instrument: a click selects the middle of a layer</source>
-        <translation>악기의 벨로시티 레이어: 클릭하면 레이어의 중간을 선택합니다</translation>
     </message>
 </context>
 <context>

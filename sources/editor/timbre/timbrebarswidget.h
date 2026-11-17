@@ -66,30 +66,4 @@ private:
     double _left, _top, _plotWidth, _plotHeight;
 };
 
-// Velocity layers of an instrument: a click selects the middle of a layer
-class TimbreVelocityStrip : public QWidget
-{
-    Q_OBJECT
-
-public:
-    explicit TimbreVelocityStrip(QWidget * parent = nullptr);
-    void setLayers(const QList<QPair<int, int> > &layers); // Velocity ranges
-    void setVelocity(int velocity);
-
-signals:
-    void velocityClicked(int velocity);
-
-protected:
-    void paintEvent(QPaintEvent * event) override;
-    void mousePressEvent(QMouseEvent * event) override;
-    QSize sizeHint() const override { return QSize(160, 20); }
-
-private:
-    QList<QPair<int, int> > _layers;
-    QList<int> _rows; // Row of each layer (overlapping layers on several rows)
-    int _rowCount;
-    int _velocity;
-    TimbrePalette _palette;
-};
-
 #endif // TIMBREBARSWIDGET_H

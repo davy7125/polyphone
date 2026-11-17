@@ -25,6 +25,7 @@
 
 #include "dialogtimbrecorrection.h"
 #include "timbrebarswidget.h"
+#include "pagetimbre.h"
 #include "dialogbuttonbox.h"
 #include "contextmanager.h"
 #include "sampleutils.h"
@@ -32,7 +33,6 @@
 #include "soundfontmanager.h"
 #include <QComboBox>
 #include <QSpinBox>
-#include <QDoubleSpinBox>
 #include <QCheckBox>
 #include <QLabel>
 #include <QRadioButton>
@@ -40,10 +40,23 @@
 #include <QFormLayout>
 #include <QGroupBox>
 #include <QPointer>
+#include <QMutexLocker>
 #include <cmath>
 
 TimbreCorrectionParameters DialogTimbreCorrection::s_lastParameters;
 bool DialogTimbreCorrection::s_lastParametersSet = false;
+
+static void scaleData(QList<TimbreCorrectedSample> &samples, double factor)
+{
+    if (std::fabs(factor - 1) < 1e-6)
+        return;
+    for (int i = 0; i < samples.count(); i++)
+    {
+        float * data = samples[i].data.data();
+        for (int j = 0; j < samples[i].data.size(); j++)
+            data[j] = static_cast<float>(data[j] * factor);
+    }
+}
 
 DialogTimbreCorrection::DialogTimbreCorrection(TimbreModel * model, const QList<int> &targets,
                                                const TimbreSettings &settings, QWidget * parent) : QDialog(parent),
@@ -52,6 +65,7 @@ DialogTimbreCorrection::DialogTimbreCorrection(TimbreModel * model, const QList<
     _settings(settings),
     _synth(ContextManager::audio()->getSynth()),
     _generation(0),
+    _latestGeneration(new QAtomicInt(0)),
     _playedKey(-1)
 {
     this->setWindowTitle(tr("Correct the timbre"));
@@ -64,76 +78,66 @@ DialogTimbreCorrection::DialogTimbreCorrection(TimbreModel * model, const QList<
     TimbreCorrectionParameters parameters;
     if (s_lastParametersSet)
         parameters = s_lastParameters;
-    KeyNameManager * keyNames = ContextManager::keyName();
 
     QHBoxLayout * layout = new QHBoxLayout(this);
     QVBoxLayout * left = new QVBoxLayout();
     QFormLayout * form = new QFormLayout();
     left->addLayout(form);
 
+    // Target: the reference, with the choice of the view preselected, or another root key played at the key (the root
+    // keys to correct excepted, the closest one being proposed first)
     _comboReference = new QComboBox(this);
-    _comboReference->addItem(tr("Interpolation between the neighbors"));
-    _comboReference->addItem(tr("Local regression"));
-    _comboReference->addItem(tr("Aligned on a root key"));
-    _comboReference->setCurrentIndex(parameters.reference);
-    form->addRow(tr("Reference"), _comboReference);
-    _spinRegression = new QSpinBox(this);
-    _spinRegression->setRange(2, 8);
-    _spinRegression->setValue(parameters.regressionCount);
-    _spinRegression->setSuffix(" " + tr("neighbors on each side"));
-    form->addRow("", _spinRegression);
+    PageTimbre::addReferenceItems(_comboReference);
     _comboAligned = new QComboBox(this);
+    int closest = -1;
     foreach (int key, _model->getPositions().keys())
-        _comboAligned->addItem(keyNames->getKeyName(static_cast<unsigned int>(key)), key);
-    int aligned = _model->getPositions().keys().indexOf(parameters.alignedPosition);
-    _comboAligned->setCurrentIndex(aligned >= 0 ? aligned : 0);
+    {
+        if (_targets.contains(key))
+            continue;
+        _comboAligned->addItem(PageTimbre::keyName(key), key);
+        if (closest == -1 || std::abs(key - _targets.first()) < std::abs(closest - _targets.first()))
+            closest = key;
+    }
+    if (_comboAligned->count() > 0)
+        _comboReference->addItem(tr("Aligned on a root key"), -1);
+    int index = _comboAligned->findData(parameters.alignedPosition);
+    _comboAligned->setCurrentIndex(index >= 0 ? index : _comboAligned->findData(closest));
+    _comboReference->setCurrentIndex(_comboReference->findData(
+        _settings.reference == TimbreSettings::REFERENCE_REGRESSION ? qBound(2, _settings.regressionCount, 8) : 0));
+    form->addRow(tr("Reference"), _comboReference);
     form->addRow("", _comboAligned);
 
-    _checkTimbre = new QCheckBox(tr("Correct the timbre (sample data)"), this);
-    _checkTimbre->setChecked(parameters.correctTimbre);
-    form->addRow(_checkTimbre);
+    // Strength, the deviations within the dead zone being left
+    _spinStrength = new QSpinBox(this);
+    _spinStrength->setRange(10, 100);
+    _spinStrength->setSingleStep(10);
+    _spinStrength->setSuffix(" %");
+    _spinStrength->setValue(qBound(10, qRound(100 * parameters.strength), 100));
+    _spinStrength->setToolTip(tr("Part of the deviation of each row corrected beyond %1 (a third of the tolerance)")
+                              .arg(PageTimbre::formatDb(_settings.deadZone())));
+    form->addRow(tr("Strength"), _spinStrength);
+
+    // Rows corrected: all of them, or up to one of them
+    _comboRanks = new QComboBox(this);
+    _comboRanks->addItem(tr("All"), 0);
+    const QList<TimbreRow> &rows = _model->getRows();
+    for (int row = 0; row < rows.count() - 1; row++)
+        _comboRanks->addItem(tr("Up to %1").arg(rows[row].label), rows[row].lastRank);
+    index = _comboRanks->findData(parameters.maxRank);
+    _comboRanks->setCurrentIndex(index >= 0 ? index : 0);
+    form->addRow(tr("Ranks corrected"), _comboRanks);
+
     _checkLevel = new QCheckBox(tr("Correct the level (attenuation)"), this);
     _checkLevel->setChecked(parameters.correctLevel);
+    _checkLevel->setToolTip(tr("Otherwise the level heard is kept: the correction of the timbre doesn't change it"));
     form->addRow(_checkLevel);
-
-    auto spin = [&](double minimum, double maximum, double value, int decimals, QString suffix) -> QDoubleSpinBox * {
-        QDoubleSpinBox * box = new QDoubleSpinBox(this);
-        box->setRange(minimum, maximum);
-        box->setDecimals(decimals);
-        box->setValue(value);
-        box->setSuffix(suffix);
-        return box;
-    };
-    QString db = " " + tr("dB", "unit for decibels");
-    _spinTolerance = spin(0, 20, parameters.tolerance, 1, db);
-    _spinTolerance->setToolTip(tr("A smaller deviation of a row is not corrected, only the part beyond is"));
-    form->addRow(tr("Tolerance"), _spinTolerance);
-    _spinStrength = spin(0, 100, 100 * parameters.strength, 0, " %");
-    form->addRow(tr("Strength"), _spinStrength);
-    _spinMaximum = spin(0, 24, parameters.maxCorrection, 1, db);
-    form->addRow(tr("Maximum correction"), _spinMaximum);
-    _comboRanks = new QComboBox(this);
-    _comboRanks->addItem(tr("Ranks and bands"));
-    _comboRanks->addItem(tr("Ranks from 1 to"));
-    _comboRanks->setCurrentIndex(parameters.maxRank > 0 ? 1 : 0);
-    form->addRow(tr("Ranks corrected"), _comboRanks);
-    _spinRanks = new QSpinBox(this);
-    _spinRanks->setRange(1, 64);
-    _spinRanks->setValue(parameters.maxRank > 0 ? parameters.maxRank : TimbreSettings::DETAILED_RANKS);
-    form->addRow("", _spinRanks);
-    _spinBrightness = spin(-6, 6, parameters.brightness, 1, " " + tr("dB / octave"));
-    _spinBrightness->setToolTip(tr("Slope added to the target: positive for a brighter sound"));
-    form->addRow(tr("Brightness"), _spinBrightness);
-    _spinOddEven = spin(-12, 12, parameters.oddEven, 1, db);
-    _spinOddEven->setToolTip(tr("Level added to the odd ranks (3, 5, 7...) of the target"));
-    form->addRow(tr("Odd ranks"), _spinOddEven);
 
     // Comparison
     QGroupBox * groupComparison = new QGroupBox(tr("Listening"), this);
     QVBoxLayout * comparisonLayout = new QVBoxLayout(groupComparison);
     _comboPreviewed = new QComboBox(groupComparison);
     foreach (int key, _targets)
-        _comboPreviewed->addItem(tr("Root key %1").arg(keyNames->getKeyName(static_cast<unsigned int>(key))), key);
+        _comboPreviewed->addItem(tr("Root key %1").arg(PageTimbre::keyName(key)), key);
     _comboPreviewed->setVisible(_targets.count() > 1);
     comparisonLayout->addWidget(_comboPreviewed);
     _radioOriginal = new QRadioButton(tr("A: original"), groupComparison);
@@ -166,40 +170,34 @@ DialogTimbreCorrection::DialogTimbreCorrection(TimbreModel * model, const QList<
     layout->addLayout(right, 1);
 
     // Connections
-    foreach (QComboBox * combo, QList<QComboBox *>() << _comboReference << _comboAligned << _comboRanks << _comboPreviewed)
+    foreach (QComboBox * combo, QList<QComboBox *>() << _comboReference << _comboAligned << _comboRanks)
         connect(combo, SIGNAL(currentIndexChanged(int)), this, SLOT(updatePreview()));
-    foreach (QDoubleSpinBox * box, QList<QDoubleSpinBox *>() << _spinTolerance << _spinStrength << _spinMaximum
-             << _spinBrightness << _spinOddEven)
-        connect(box, SIGNAL(valueChanged(double)), this, SLOT(updatePreview()));
-    connect(_spinRegression, SIGNAL(valueChanged(int)), this, SLOT(updatePreview()));
-    connect(_spinRanks, SIGNAL(valueChanged(int)), this, SLOT(updatePreview()));
-    connect(_checkTimbre, SIGNAL(toggled(bool)), this, SLOT(updatePreview()));
+    connect(_comboPreviewed, SIGNAL(currentIndexChanged(int)), this, SLOT(onPreviewedChanged()));
+    connect(_spinStrength, SIGNAL(valueChanged(int)), this, SLOT(updatePreview()));
     connect(_checkLevel, SIGNAL(toggled(bool)), this, SLOT(updatePreview()));
-    connect(_radioCorrected, SIGNAL(toggled(bool)), this, SLOT(onComparisonChanged()));
+    connect(_radioCorrected, SIGNAL(toggled(bool)), this, SLOT(applyComparison()));
     connect(_buttonPlay, SIGNAL(toggled(bool)), this, SLOT(onPlayToggled(bool)));
     updatePreview();
 }
 
 DialogTimbreCorrection::~DialogTimbreCorrection()
 {
-    clearAudioPreview();
+    stopAudioPreview();
     _pool.waitForDone();
 }
 
 TimbreCorrectionParameters DialogTimbreCorrection::getParameters()
 {
+    // Reference: interpolation (0), regression on this number of neighbors on each side, or aligned on a root key (-1)
     TimbreCorrectionParameters parameters;
-    parameters.reference = static_cast<TimbreCorrectionParameters::Reference>(_comboReference->currentIndex());
-    parameters.regressionCount = _spinRegression->value();
-    parameters.alignedPosition = _comboAligned->currentData().toInt();
-    parameters.correctTimbre = _checkTimbre->isChecked();
+    int count = _comboReference->currentData().toInt();
+    parameters.reference = count > 0 ? TimbreSettings::REFERENCE_REGRESSION : TimbreSettings::REFERENCE_INTERPOLATION;
+    parameters.regressionCount = count > 0 ? count : _settings.regressionCount;
+    parameters.alignedPosition = count < 0 ? _comboAligned->currentData().toInt() : -1;
     parameters.correctLevel = _checkLevel->isChecked();
-    parameters.tolerance = _spinTolerance->value();
-    parameters.strength = _spinStrength->value() / 100;
-    parameters.maxCorrection = _spinMaximum->value();
-    parameters.maxRank = _comboRanks->currentIndex() == 1 ? _spinRanks->value() : 0;
-    parameters.brightness = _spinBrightness->value();
-    parameters.oddEven = _spinOddEven->value();
+    parameters.deadZone = _settings.deadZone();
+    parameters.strength = 0.01 * _spinStrength->value();
+    parameters.maxRank = _comboRanks->currentData().toInt();
     return parameters;
 }
 
@@ -210,45 +208,47 @@ void DialogTimbreCorrection::done(int result)
         s_lastParameters = getParameters();
         s_lastParametersSet = true;
     }
-    if (_buttonPlay->isChecked())
-        _buttonPlay->setChecked(false);
-    clearAudioPreview();
+    stopAudioPreview();
     QDialog::done(result);
+}
+
+int DialogTimbreCorrection::getPreviewedKey()
+{
+    return _targets.count() > 1 ? _comboPreviewed->currentData().toInt() : _targets.first();
 }
 
 void DialogTimbreCorrection::updatePreview()
 {
-    _spinRegression->setVisible(_comboReference->currentIndex() == TimbreCorrectionParameters::REFERENCE_REGRESSION);
-    _comboAligned->setVisible(_comboReference->currentIndex() == TimbreCorrectionParameters::REFERENCE_POSITION);
-    _spinRanks->setVisible(_comboRanks->currentIndex() == 1);
+    _comboAligned->setVisible(_comboReference->currentData().toInt() < 0);
 
-    // Plan of the root key previewed
-    int key = _targets.count() > 1 ? _comboPreviewed->currentData().toInt() : _targets.first();
+    // Plan of the root key previewed, same colors as in the view: heard in bars, target in markers, computed result in
+    // outline
+    int key = getPreviewedKey();
     _plan = TimbreActions::planCorrection(*_model, key, getParameters());
     TimbrePalette palette(TimbrePalette::SURFACE_WINDOW);
     QList<TimbreBarsWidget::Series> series;
     if (_model->getPositions().contains(key))
         series << TimbreBarsWidget::Series { tr("Heard"), _model->getRowLevels(_model->getPositions()[key].spectrum),
-                                             palette.grid(), TimbreBarsWidget::STYLE_BARS };
+                                             palette.highlight(), TimbreBarsWidget::STYLE_BARS };
     if (!_plan.target.isEmpty())
         series << TimbreBarsWidget::Series { tr("Target"), _model->getRowLevels(_plan.target), palette.text(),
                                              TimbreBarsWidget::STYLE_MARKERS };
     if (!_plan.after.isEmpty())
-        series << TimbreBarsWidget::Series { tr("Result"), _model->getRowLevels(_plan.after), palette.highlight(),
+        series << TimbreBarsWidget::Series { tr("Result"), _model->getRowLevels(_plan.after), palette.breakColor(),
                                              TimbreBarsWidget::STYLE_OUTLINE };
     _bars->setData(_model->getRows(), series, TimbreSettings::DYNAMIC_RANGE);
 
-    QLocale locale;
-    auto db = [&](double value) { return locale.toString(value, 'f', 1) + " " + tr("dB", "unit for decibels"); };
+    // Levels with their sign, as in the view
     QStringList lines;
     if (_plan.before.valid)
     {
-        lines << tr("Before: level %1, timbre %2").arg(db(_plan.before.levelDifference), db(_plan.before.timbreDifference));
+        lines << tr("Before: level %1, timbre %2").arg(PageTimbre::formatDb(_plan.before.levelDifference, 1, true),
+                                                      PageTimbre::formatDb(_plan.before.timbreDifference));
         if (_plan.expected.valid)
-            lines << tr("Expected: level %1, timbre %2").arg(db(_plan.expected.levelDifference),
-                                                             db(_plan.expected.timbreDifference));
+            lines << tr("Expected: level %1, timbre %2").arg(PageTimbre::formatDb(_plan.expected.levelDifference, 1, true),
+                                                             PageTimbre::formatDb(_plan.expected.timbreDifference));
         if (_plan.levelGain != 0)
-            lines << tr("Level change through the attenuation: %1").arg(db(_plan.levelGain));
+            lines << tr("Level change through the attenuation: %1").arg(PageTimbre::formatDb(_plan.levelGain, 1, true));
         if (!_plan.valid)
             lines << tr("Nothing to correct with these parameters.");
     }
@@ -259,87 +259,119 @@ void DialogTimbreCorrection::updatePreview()
                     static_cast<int>(_targets.count()));
     _labelSummary->setText(lines.join("<br/>"));
 
-    if (_radioCorrected->isChecked())
-        _previewTimer.start();
+    // Sounds A and B computed once the parameters stop changing
+    _previewTimer.start();
+}
+
+void DialogTimbreCorrection::onPreviewedChanged()
+{
+    // Data of the previous root key back, then the note played again at the new one
+    resetAudioPreview();
+    updatePreview();
+    if (_buttonPlay->isChecked())
+        onPlayToggled(true);
 }
 
 void DialogTimbreCorrection::onPlayToggled(bool isOn)
 {
-    int key = _targets.count() > 1 ? _comboPreviewed->currentData().toInt() : _targets.first();
-    if (isOn)
-    {
-        _playedKey = key;
-        ContextManager::midi()->processKeyOn(-1, key, _settings.velocity);
-    }
-    else if (_playedKey >= 0)
+    if (_playedKey >= 0)
     {
         ContextManager::midi()->processKeyOff(-1, _playedKey);
         _playedKey = -1;
     }
-}
-
-void DialogTimbreCorrection::onComparisonChanged()
-{
-    if (_radioCorrected->isChecked())
-        computeAudioPreview();
-    else
-        clearAudioPreview();
+    if (isOn)
+    {
+        // Played where the root key is heard: the closest key covered by its divisions for an extension
+        int key = getPreviewedKey();
+        if (_model->getPositions().contains(key) && _model->getPositions()[key].anchor >= 0)
+            key = _model->getPositions()[key].anchor;
+        _playedKey = key;
+        ContextManager::midi()->processKeyOn(-1, key, _settings.velocity);
+    }
 }
 
 void DialogTimbreCorrection::computeAudioPreview()
 {
     _previewTimer.stop();
     int generation = ++_generation;
+    _latestGeneration->storeRelaxed(generation);
+    _pool.clear();
     TimbreCorrectionPlan plan = _plan;
     if (!plan.valid)
     {
-        clearAudioPreview();
+        _previewOriginal.clear();
+        _previewCorrected.clear();
+        applyComparison();
         return;
     }
 
-    // Data computed in another thread, the level change being included in the data
+    // Data computed in another thread, the level change being included in the corrected data
     int indexSf2 = _model->getInstrument().indexSf2;
     QPointer<DialogTimbreCorrection> dialog(this);
-    _pool.start(QRunnable::create([dialog, generation, plan, indexSf2]() {
+    QSharedPointer<QAtomicInt> latest = _latestGeneration;
+    _pool.start(QRunnable::create([dialog, latest, generation, plan, indexSf2]() {
+        if (latest->loadRelaxed() != generation)
+            return;
         double compensation = 0;
-        QList<TimbreCorrectedSample> samples = TimbreActions::computeCorrection(indexSf2, plan, compensation);
-        if (samples.isEmpty())
+        QList<TimbreCorrectedSample> corrected = TimbreActions::computeCorrection(indexSf2, plan, compensation);
+        QList<TimbreCorrectedSample> original;
+        SoundfontManager * sm = SoundfontManager::getInstance();
+        foreach (int sampleIndex, plan.samples)
         {
-            // Level only: the original data with the gain
-            SoundfontManager * sm = SoundfontManager::getInstance();
-            foreach (int sampleIndex, plan.samples)
+            TimbreCorrectedSample sample;
+            sample.sampleIndex = sampleIndex;
             {
-                TimbreCorrectedSample sample;
-                sample.sampleIndex = sampleIndex;
+                QMutexLocker locker(sm->getMutex());
                 sample.data = sm->getDataFloat(EltID(elementSmpl, indexSf2, sampleIndex));
-                samples << sample;
             }
+            original << sample;
         }
+        if (corrected.isEmpty())
+            corrected = original; // Level only
+
+        // The data of the synth cannot exceed the full scale, unlike the attenuation applied afterwards: if the
+        // corrected sound would, both sounds are lowered by the same amount so that the comparison stays fair
         double gain = std::pow(10.0, (plan.levelGain + compensation) / 20);
-        QMetaObject::invokeMethod(qApp, [dialog, generation, samples, gain]() {
+        double peak = 0;
+        foreach (TimbreCorrectedSample sample, corrected)
+            peak = qMax(peak, gain * SampleUtils::peak(sample.data.constData(), static_cast<quint32>(sample.data.size())));
+        double headroom = qMax(1.0, peak);
+        scaleData(corrected, gain / headroom);
+        if (headroom > 1.0 + 1e-6)
+            scaleData(original, 1.0 / headroom);
+        else
+            original.clear(); // Not replaced
+        if (latest->loadRelaxed() != generation)
+            return;
+        QMetaObject::invokeMethod(qApp, [dialog, generation, original, corrected]() {
             if (!dialog.isNull())
-                dialog->applyAudioPreview(generation, samples, gain);
+                dialog->setAudioPreview(generation, original, corrected);
         }, Qt::QueuedConnection);
     }));
 }
 
-void DialogTimbreCorrection::applyAudioPreview(int generation, const QList<TimbreCorrectedSample> &samples, double gain)
+void DialogTimbreCorrection::setAudioPreview(int generation, const QList<TimbreCorrectedSample> &original,
+                                             const QList<TimbreCorrectedSample> &corrected)
 {
-    if (generation != _generation || !_radioCorrected->isChecked())
+    if (generation != _generation)
         return;
+    _previewOriginal = original;
+    _previewCorrected = corrected;
+    applyComparison();
+}
+
+void DialogTimbreCorrection::applyComparison()
+{
+    // B: the corrected data, A: the original data (replaced only if lowered with B)
     clearAudioPreview();
     int indexSf2 = _model->getInstrument().indexSf2;
-    foreach (TimbreCorrectedSample sample, samples)
+    foreach (TimbreCorrectedSample sample, _radioCorrected->isChecked() ? _previewCorrected : _previewOriginal)
     {
-        QVector<float> data = sample.data;
-        if (std::fabs(gain - 1) > 1e-6)
-            for (int i = 0; i < data.size(); i++)
-                data[i] = qBound(-1.0f, static_cast<float>(data[i] * gain), 1.0f);
         qint16 * data16;
         quint8 * data24;
-        SampleUtils::floatToInt24(data, data16, data24);
+        SampleUtils::floatToInt24(sample.data, data16, data24);
         EltID id(elementSmpl, indexSf2, sample.sampleIndex);
-        _synth->setSampleData(id, data16, data24, static_cast<quint32>(data.size()), true);
+        _synth->setSampleData(id, data16, data24, static_cast<quint32>(sample.data.size()), true);
         delete [] data16;
         delete [] data24;
         _previewIds << id;
@@ -351,4 +383,23 @@ void DialogTimbreCorrection::clearAudioPreview()
     foreach (EltID id, _previewIds)
         _synth->setSampleData(id, nullptr, nullptr, 0, true);
     _previewIds.clear();
+}
+
+void DialogTimbreCorrection::stopAudioPreview()
+{
+    // The note stops, then the sounds are reset
+    if (_buttonPlay->isChecked())
+        _buttonPlay->setChecked(false);
+    _previewTimer.stop();
+    resetAudioPreview();
+}
+
+void DialogTimbreCorrection::resetAudioPreview()
+{
+    // The computations in progress are ignored and the synth plays the original data again
+    _latestGeneration->storeRelaxed(++_generation);
+    _pool.clear();
+    _previewOriginal.clear();
+    _previewCorrected.clear();
+    clearAudioPreview();
 }

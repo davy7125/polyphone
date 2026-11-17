@@ -45,7 +45,7 @@ KeyboardStrip::KeyboardStrip(QWidget * parent) : QWidget(parent),
     _isDark = theme->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT);
     _border = ThemeManager::mix(background, text, 0.25);
     _highlight = theme->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
-    this->setFixedHeight(TOP_MARGIN + KEYS_HEIGHT + 1);
+    this->setFixedHeight(TOP_MARGIN + KEYS_HEIGHT);
 
     // Same background as the graph above, own cursor (the view changes its cursor when hovering the rectangles)
     this->setBackgroundRole(QPalette::Base);
@@ -84,13 +84,14 @@ void KeyboardStrip::paintKeys(QPainter &painter, const QList<Key> &keys, double 
         painter.fillRect(QRect(lefts[i], y, rights[i] - lefts[i], h), keys[i].color);
     }
 
-    // Then the separators between adjacent keys and the border
+    // Then the separators between adjacent keys and the border, open at the bottom (the scroll bar is just below)
     painter.setPen(border);
-    painter.setBrush(Qt::NoBrush);
     for (int i = 1; i < keys.count(); i++)
         if (lefts[i] == rights[i - 1])
-            painter.drawLine(lefts[i], y, lefts[i], y + h);
-    painter.drawRect(QRect(lefts.first(), y, rights.last() - lefts.first(), h));
+            painter.drawLine(lefts[i], y, lefts[i], y + h - 1);
+    painter.drawLine(lefts.first(), y, rights.last(), y);
+    painter.drawLine(lefts.first(), y, lefts.first(), y + h - 1);
+    painter.drawLine(rights.last(), y, rights.last(), y + h - 1);
 
     painter.restore();
 }

@@ -26,7 +26,6 @@
 #include "timbrebarswidget.h"
 #include <QPainter>
 #include <QHelpEvent>
-#include <QMouseEvent>
 #include <QToolTip>
 #include <cmath>
 
@@ -203,81 +202,4 @@ bool TimbreBarsWidget::event(QEvent * event)
         return true;
     }
     return QWidget::event(event);
-}
-
-TimbreVelocityStrip::TimbreVelocityStrip(QWidget * parent) : QWidget(parent),
-    _rowCount(1),
-    _velocity(100)
-{
-    this->setMinimumSize(80, 18);
-    this->setCursor(Qt::PointingHandCursor);
-    this->setToolTip(tr("Velocity layers of the instrument: a click selects the middle of a layer"));
-}
-
-void TimbreVelocityStrip::setLayers(const QList<QPair<int, int> > &layers)
-{
-    _layers = layers;
-
-    // Overlapping layers on different rows
-    _rows.clear();
-    QList<int> rowEnds;
-    foreach (auto layer, _layers)
-    {
-        int row = 0;
-        while (row < rowEnds.count() && rowEnds[row] >= layer.first)
-            row++;
-        if (row == rowEnds.count())
-            rowEnds << layer.second;
-        else
-            rowEnds[row] = layer.second;
-        _rows << row;
-    }
-    _rowCount = qMax(1, static_cast<int>(rowEnds.count()));
-    update();
-}
-
-void TimbreVelocityStrip::setVelocity(int velocity)
-{
-    _velocity = velocity;
-    update();
-}
-
-void TimbreVelocityStrip::paintEvent(QPaintEvent * event)
-{
-    Q_UNUSED(event)
-    QPainter painter(this);
-    QRectF area = QRectF(this->rect()).adjusted(1, 1, -1, -1);
-    painter.fillRect(area, _palette.uncovered());
-    double rowHeight = area.height() / _rowCount;
-    for (int i = 0; i < _layers.count(); i++)
-    {
-        double x1 = area.left() + area.width() * _layers[i].first / 128.0;
-        double x2 = area.left() + area.width() * (_layers[i].second + 1) / 128.0;
-        QRectF rect(x1, area.top() + _rows[i] * rowHeight, x2 - x1, rowHeight);
-        bool active = (_velocity >= _layers[i].first && _velocity <= _layers[i].second);
-        painter.fillRect(rect.adjusted(0.5, 0.5, -0.5, -0.5), active ? _palette.highlight() : _palette.grid());
-    }
-    double x = area.left() + area.width() * (_velocity + 0.5) / 128.0;
-    painter.setPen(QPen(_palette.text(), 2));
-    painter.drawLine(QPointF(x, area.top()), QPointF(x, area.bottom()));
-    painter.setPen(_palette.grid());
-    painter.setBrush(Qt::NoBrush);
-    painter.drawRect(area);
-}
-
-void TimbreVelocityStrip::mousePressEvent(QMouseEvent * event)
-{
-    QRectF area = QRectF(this->rect()).adjusted(1, 1, -1, -1);
-    int velocity = qBound(1, static_cast<int>(128.0 * (event->pos().x() - area.left()) / area.width()), 127);
-    double rowHeight = area.height() / _rowCount;
-    int row = static_cast<int>((event->pos().y() - area.top()) / rowHeight);
-    for (int i = 0; i < _layers.count(); i++)
-    {
-        if (_rows[i] == row && velocity >= _layers[i].first && velocity <= _layers[i].second)
-        {
-            velocity = qBound(1, (_layers[i].first + _layers[i].second + 1) / 2, 127);
-            break;
-        }
-    }
-    emit velocityClicked(velocity);
 }

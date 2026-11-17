@@ -170,21 +170,9 @@
       </spacer>
      </item>
      <item>
-      <widget class="QToolButton" name="toolButtonInfo">
-       <property name="cursor">
-        <cursorShape>PointingHandCursor</cursorShape>
-       </property>
+      <widget class="InfoButton" name="toolButtonInfo">
        <property name="text">
         <string notr="true"/>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>18</width>
-         <height>18</height>
-        </size>
-       </property>
-       <property name="popupMode">
-        <enum>QToolButton::ToolButtonPopupMode::InstantPopup</enum>
        </property>
       </widget>
      </item>
@@ -833,6 +821,11 @@
    <class>StyledLineEditWithCalendar</class>
    <extends>QLineEdit</extends>
    <header>styledlineeditwithcalendar.h</header>
+  </customwidget>
+  <customwidget>
+   <class>InfoButton</class>
+   <extends>QToolButton</extends>
+   <header>infobutton.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

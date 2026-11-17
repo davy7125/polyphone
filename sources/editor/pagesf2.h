@@ -98,7 +98,6 @@ protected:
 private:
     EltID _currentID;
     Ui::PageSf2 *ui;
-    QLabel * _labelInfo;
 
     void countElements();
     void countElements(int &unusedSmpl, int &unusedInst, int &usedSmpl, int &usedInst, int &usedPrst,

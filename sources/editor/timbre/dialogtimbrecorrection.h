@@ -29,19 +29,21 @@
 #include <QDialog>
 #include <QTimer>
 #include <QThreadPool>
+#include <QSharedPointer>
+#include <QAtomicInt>
 #include "timbreactions.h"
 class TimbreBarsWidget;
 class QComboBox;
 class QSpinBox;
-class QDoubleSpinBox;
 class QCheckBox;
 class QLabel;
 class QRadioButton;
 class QPushButton;
 class Synth;
 
-// Parameters of the correction of the timbre and of the level of root keys, with the levels before and after and a
-// comparison A / B of the original and of the corrected sound (the data of the samples being replaced in the synth)
+// Parameters of the correction of the timbre of root keys (the level being corrected too or kept), with the levels
+// before and after and a comparison A / B of the original and of the corrected sound (the data of the samples being
+// replaced in the synth)
 class DialogTimbreCorrection : public QDialog
 {
     Q_OBJECT
@@ -53,7 +55,7 @@ public:
 
     TimbreCorrectionParameters getParameters();
 
-    // Parameters used the last time, until Polyphone is closed
+    // Parameters used the last time (the reference excepted, which follows the view), until Polyphone is closed
     static TimbreCorrectionParameters s_lastParameters;
     static bool s_lastParametersSet;
 
@@ -62,13 +64,18 @@ protected:
 
 private slots:
     void updatePreview();
+    void onPreviewedChanged();
     void onPlayToggled(bool isOn);
-    void onComparisonChanged();
+    void applyComparison();
     void computeAudioPreview();
 
 private:
+    int getPreviewedKey();
+    void setAudioPreview(int generation, const QList<TimbreCorrectedSample> &original,
+                         const QList<TimbreCorrectedSample> &corrected);
     void clearAudioPreview();
-    void applyAudioPreview(int generation, const QList<TimbreCorrectedSample> &samples, double gain);
+    void resetAudioPreview();
+    void stopAudioPreview();
 
     TimbreModel * _model;
     QList<int> _targets;
@@ -78,18 +85,17 @@ private:
     QTimer _previewTimer;
     QThreadPool _pool;
     int _generation;
+    QSharedPointer<QAtomicInt> _latestGeneration; // Read by the computations, which stop if they are outdated
+    QList<TimbreCorrectedSample> _previewOriginal, _previewCorrected; // A (empty: data not replaced) and B
     QList<EltID> _previewIds;
     int _playedKey;
 
     QComboBox * _comboPreviewed;
     QComboBox * _comboReference;
-    QSpinBox * _spinRegression;
     QComboBox * _comboAligned;
-    QCheckBox * _checkTimbre, * _checkLevel;
-    QDoubleSpinBox * _spinTolerance, * _spinStrength, * _spinMaximum;
+    QSpinBox * _spinStrength;
     QComboBox * _comboRanks;
-    QSpinBox * _spinRanks;
-    QDoubleSpinBox * _spinBrightness, * _spinOddEven;
+    QCheckBox * _checkLevel;
     TimbreBarsWidget * _bars;
     QLabel * _labelSummary;
     QRadioButton * _radioOriginal, * _radioCorrected;

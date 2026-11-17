@@ -63,15 +63,20 @@ struct TimbreSettings
     // jumps at the changes of samples below 6 dB for 80% of them; level deviations below 2.5 dB for 78% of them).
     // Only the tolerance is editable: the maximum, the redundancy and the break follow it, since the natural timbre
     // deviations of other instruments grow by the same factor for all of them (GM banks, pianos, guitars, woodwinds:
-    // 70% below 5.7 to 7.1 dB, 95% below 10 to 19 dB, jumps x1.4). The level threshold is fixed: the level deviations
-    // hardly depend on the instrument (70% below 2.2 dB for the organs, 2.6 to 3.2 dB for the GM banks)
-    static constexpr double DEFAULT_TOLERANCE = 4.5;
+    // 70% below 5.7 to 7.1 dB, 95% below 10 to 19 dB, jumps x1.4). The default tolerance is the one of these usual
+    // instruments, the organs being a stricter case. The level threshold is fixed: the level deviations hardly depend
+    // on the instrument (70% below 2.2 dB for the organs, 2.6 to 3.2 dB for the GM banks)
+    static constexpr double CALIBRATION_TOLERANCE = 4.5; // Organs, reference of the ratios below
+    static constexpr double DEFAULT_TOLERANCE = 6;
     static constexpr double LEVEL = 2.5;
     double tolerance = DEFAULT_TOLERANCE;
-    double maximum() const { return tolerance * 8 / DEFAULT_TOLERANCE; }
-    double redundancy() const { return tolerance * 2.5 / DEFAULT_TOLERANCE; }
-    double jump() const { return tolerance * 6 / DEFAULT_TOLERANCE; }
+    double maximum() const { return tolerance * 8 / CALIBRATION_TOLERANCE; }
+    double redundancy() const { return tolerance * 2.5 / CALIBRATION_TOLERANCE; }
+    double jump() const { return tolerance * 6 / CALIBRATION_TOLERANCE; }
 
+    // Dead zone of the corrections of the timbre (a smaller deviation of a row is not corrected, only the part beyond
+    // is): a third of the tolerance, so that a corrected root key ends well within it
+    double deadZone() const { return tolerance / 3; }
 
     // Sample rate of the output
     double outputSampleRate = 48000;

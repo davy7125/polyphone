@@ -28,22 +28,24 @@
 
 #include <QWidget>
 #include "timbremodel.h"
+class QScrollBar;
 #include "timbrepalette.h"
 
 // Options of the display of the map
 struct TimbreDisplay
 {
-    // Stable codes stored in the configuration (0 was "Absolute levels", 5 "Confidence")
+    // Stable codes stored in the configuration (0 was "Absolute levels", 4 "Transposition", now a summary row only,
+    // 5 "Confidence")
     enum Mode
     {
         MODE_LEVELS = 1, // Levels relative to the strongest row of the key
         MODE_DEVIATION = 2, // Deviation from the reference, over the keys of each position
-        MODE_JUMP = 3, // Difference with the previous key
-        MODE_TRANSPOSITION = 4 // Semitones from the root key
+        MODE_JUMP = 3 // Difference with the previous key
     };
     Mode mode = MODE_DEVIATION;
 
-    // Optional summary rows
+    // Summary rows, level and timbre always shown, codes of the optional ones stored in the configuration (6 was
+    // "Tuning", unrelated to the timbre, now in the details only)
     enum Summary
     {
         SUMMARY_LEVEL = 0,
@@ -51,16 +53,22 @@ struct TimbreDisplay
         SUMMARY_TRANSPOSITION = 2,
         SUMMARY_BRIGHTNESS = 3,
         SUMMARY_ODD_EVEN = 4,
-        SUMMARY_NOISE = 5,
-        SUMMARY_TUNING = 6
+        SUMMARY_NOISE = 5
     };
-    QList<int> summaries = { SUMMARY_LEVEL, SUMMARY_TIMBRE, SUMMARY_TRANSPOSITION };
+    QList<int> summaries = { SUMMARY_LEVEL, SUMMARY_TIMBRE };
+
+    // Optional summary rows, in the order of the options and of the display (below the ones always shown)
+    static QList<int> optionalSummaries()
+    {
+        return { SUMMARY_BRIGHTNESS, SUMMARY_ODD_EVEN, SUMMARY_NOISE, SUMMARY_TRANSPOSITION };
+    }
 };
 
 // Map of the timbre: one column per key, one row per rank or band (rank 1 at the bottom, as a spectrogram), summaries
-// above, the names of the keys and a playable keyboard below. The names of the rows are written inside the graph, in
-// a margin on the left of the first key. The horizontal axis is dilated by holding the right button (as the zoom of the
-// range editor) and moved by holding the left button, a click selecting a key.
+// and decisions above, the names of the keys and a playable keyboard below. The names of the rows are written inside
+// the graph, in a margin on the left of the first key. The horizontal axis is dilated by holding the right button
+// (as the zoom of the range editor) and moved by holding the left button or with the scroll bar along the bottom edge,
+// a click selecting a key.
 class TimbreMapWidget : public QWidget
 {
     Q_OBJECT
@@ -77,9 +85,9 @@ public:
     void modelUpdated() { updateColumns(); update(); }
 
     // Fixed scale of the colors of the map: dynamic range for the levels, twice the maximum threshold for the
-    // deviations and the jumps, an octave for the transposition
+    // deviations and the jumps
     double getRange() const;
-    static const double TRANSPOSITION_RANGE;
+    static const double TRANSPOSITION_RANGE; // Scale of the transposition summary: an octave
 
     static QString getSummaryName(int summary);
     static QString getModeName(int mode);
@@ -93,6 +101,7 @@ protected:
     void mouseMoveEvent(QMouseEvent * event) override;
     void mouseReleaseEvent(QMouseEvent * event) override;
     void leaveEvent(QEvent * event) override;
+    void resizeEvent(QResizeEvent * event) override;
     bool event(QEvent * event) override;
 
 private:
@@ -100,6 +109,7 @@ private:
     void computeGeometry();
     double getColumnWidth(double zoom) const;
     void setScroll(double scroll);
+    void updateScrollBar();
     int columnAt(int x) const;
     int keyAt(int x) const;
     QRectF columnRect(int column, double top, double height) const;
@@ -132,6 +142,7 @@ private:
     double _mapTop, _mapHeight, _rowHeight;
     double _decisionTop, _decisionHeight;
     double _keyboardTop, _keyboardHeight;
+    QScrollBar * _scrollBar; // Below the keyboard, in pixels of the content
 
     // Values per key computed once for each model
     QVector<double> _levels[128], _confidence[128];
@@ -148,7 +159,7 @@ private:
     static const double MAX_ZOOM;
 };
 
-// Color scale of the map, next to the list of the display modes: a gradient between two values
+// Color scale of the map, below the list of the display modes: a gradient between two values, on the available width
 class TimbreLegendWidget : public QWidget
 {
 public:

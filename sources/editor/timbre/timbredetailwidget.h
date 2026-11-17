@@ -29,13 +29,16 @@
 #include <QWidget>
 #include "timbrepalette.h"
 class QLabel;
-class QScrollArea;
-class QGridLayout;
-class QVBoxLayout;
 class QHBoxLayout;
+class QVBoxLayout;
+class QTreeWidgetItem;
+class TimbreDetailTree;
 
-// Details of the key selected in the timbre view: a fixed title with the label of its root key, then notices and
-// sections that can be folded (state kept in the configuration), in a vertical scroll area
+// Details of the key selected in the timbre view: a fixed title with the label of its root key and the notices, then a
+// tree on the background of the lists whose columns align the names (and the names of the measures, as level and
+// timbre, of a line written on several rows), the values, the units and the icons of the labels, put on the rows they
+// come from and named by their tooltip. The sections can be folded (state kept in the configuration), a folded section
+// being summed up after its title and showing the icons of its rows.
 class TimbreDetailWidget : public QWidget
 {
     Q_OBJECT
@@ -65,7 +68,15 @@ public:
         QString tooltip;
     };
     static Badge makeBadge(TimbrePalette::Shape shape, QColor color, QString text, QString tooltip = QString());
-    static Badge shapeOnly(const Badge &badge); // Same badge without its text
+
+    // Number and its unit, in two aligned columns
+    struct Value
+    {
+        Value() {}
+        explicit Value(QString text, QString unit = QString()) : text(text), unit(unit) {}
+        QString text;
+        QString unit;
+    };
 
     explicit TimbreDetailWidget(QWidget * parent = nullptr);
 
@@ -79,51 +90,43 @@ public:
     void setTitle(QString text, const Badge &badge = Badge()); // No title: no header
     void setSubtitle(QString text, const Badge &badge = Badge());
     void addNotice(QString text);
-    // The summary is shown when the section is folded, the badge always
-    void beginSection(Section section, QString title, QString summary = QString(), const Badge &badge = Badge());
-    void addColumnHeaders(const QStringList &headers); // Above the values of the next rows
-    void addRow(QString label, const QStringList &values, QString tooltip = QString(), const Badge &badge = Badge());
+    // The summary is written after the title when the section is folded
+    void beginSection(Section section, QString title, QString summary = QString());
+    // Badge shown as an icon, its text and tooltip in the tooltip of the icon
+    void addRow(QString label, const Value &value, QString tooltip = QString(), const Badge &badge = Badge());
+    // Row of a measure (sublabel) of a line, the label being only given on its first row
+    void addRow(QString label, QString sublabel, const Value &value, QString tooltip = QString(), const Badge &badge = Badge());
     void addSubtitle(QString text); // Group of rows in a section
     void addNote(QString text);
     void endUpdate();
 
-private:
-    struct SectionWidgets
-    {
-        QWidget * container = nullptr;
-        QWidget * header = nullptr; // Clickable, for folding
-        QHBoxLayout * headerLayout = nullptr;
-        QLabel * title = nullptr;
-        QWidget * badge = nullptr;
-        QLabel * summary = nullptr;
-        QWidget * body = nullptr; // Recreated at each update
-        QGridLayout * grid = nullptr;
-        int row = 0;
-        bool used = false;
-    };
+private slots:
+    void onItemClicked(QTreeWidgetItem * item, int column);
+    void onExpansionChanged(QTreeWidgetItem * item);
 
-    void createSection(Section section);
-    void setExpanded(Section section, bool expanded);
-    void updateSection(Section section);
+private:
     QWidget * createBadge(const Badge &badge, QWidget * parent);
     void setBadge(QHBoxLayout * layout, QWidget *&current, const Badge &badge);
-    QLabel * createLabel(QString text, QString objectName, QWidget * parent);
+    QTreeWidgetItem * createItem(int kind);
+    void setBadge(QTreeWidgetItem * item, const Badge &badge);
+    void updateSectionBadges();
+    void updateColumns();
     void updateWidth();
 
-    TimbrePalette _palette;
+    TimbrePalette _windowPalette, _listPalette;
+    QColor _labelColor, _secondaryColor;
     QWidget * _header;
     QLabel * _title, * _subtitle;
     QWidget * _subtitleLine;
     QHBoxLayout * _titleLayout, * _subtitleLayout;
     QWidget * _titleBadge, * _subtitleBadge;
-    QScrollArea * _scroll;
-    QWidget * _content;
-    QVBoxLayout * _contentLayout;
+    QVBoxLayout * _noticeLayout;
     QList<QLabel *> _notices;
-    SectionWidgets _sections[SECTION_COUNT];
+    TimbreDetailTree * _tree;
+    QTreeWidgetItem * _currentSection; // Parent of the next rows
+    QTreeWidgetItem * _currentGroup; // Subtitle of the next rows, if any
     bool _expanded[SECTION_COUNT];
-    Section _currentSection;
-    int _indent;
+    bool _building;
     int _neededWidth;
 };
 

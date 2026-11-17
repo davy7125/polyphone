@@ -49,12 +49,12 @@ public:
         double left, right;
         QColor color;
     };
-    static const int KEYS_HEIGHT; // Height of the painted keys (+ 1 for the bottom border)
+    static const int KEYS_HEIGHT; // Height of the painted keys (no bottom border)
     static bool isBlackKey(int key);
     static QColor keyColor(int key, bool isDark);
 
     // Keys side by side, the separators being drawn after all the fills (otherwise, depending on the rounding of the
-    // abscissas, the next key covers the separator and two white keys merge)
+    // abscissas, the next key covers the separator and two white keys merge). Border on the top, left and right only.
     static void paintKeys(QPainter &painter, const QList<Key> &keys, double top, double height, const QColor &border);
 
 protected:

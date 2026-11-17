@@ -25,9 +25,8 @@
 #include "pagesf2.h"
 #include "ui_pagesf2.h"
 #include "contextmanager.h"
+#include "infobutton.h"
 #include <QDateTime>
-#include <QMenu>
-#include <QWidgetAction>
 #include "latinvalidator.h"
 
 PageSf2::PageSf2(QWidget * parent) :
@@ -62,22 +61,6 @@ PageSf2::PageSf2(QWidget * parent) :
     ui->labelSample->setPixmap(ContextManager::theme()->getColoredSvg(":/icons/sample.svg", QSize(16, 16), ThemeManager::HIGHLIGHTED_TEXT));
     ui->labelInstrument->setPixmap(ContextManager::theme()->getColoredSvg(":/icons/instrument.svg", QSize(16, 16), ThemeManager::HIGHLIGHTED_TEXT));
     ui->labelPreset->setPixmap(ContextManager::theme()->getColoredSvg(":/icons/preset.svg", QSize(16, 16), ThemeManager::HIGHLIGHTED_TEXT));
-
-    // Information button, opening a menu with the details of the soundfont
-    ui->toolButtonInfo->setIcon(ContextManager::theme()->getColoredSvg(":/icons/info.svg", QSize(18, 18), ThemeManager::HIGHLIGHTED_BACKGROUND));
-    QColor infoHover = ThemeManager::mix(ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND), highlighted, 0.2);
-    ui->toolButtonInfo->setStyleSheet("QToolButton::menu-indicator{width:0px;image:url(:/misc/transparent.png)}"
-                                      "QToolButton{border:0;border-radius:2px;padding:3px}"
-                                      "QToolButton:hover,QToolButton:pressed{background-color:" + infoHover.name() + "}");
-    QMenu * menuInfo = new QMenu(ui->toolButtonInfo);
-    menuInfo->setStyleSheet(ContextManager::theme()->getMenuTheme());
-    _labelInfo = new QLabel();
-    _labelInfo->setStyleSheet("QLabel{padding:10px 15px;color:" + ContextManager::theme()->getColor(ThemeManager::LIST_TEXT).name() + "}");
-    QWidgetAction * actionInfo = new QWidgetAction(menuInfo);
-    actionInfo->setDefaultWidget(_labelInfo);
-    menuInfo->addAction(actionInfo);
-    ui->toolButtonInfo->setMenu(menuInfo);
-    ui->toolButtonInfo->setLayoutDirection(Qt::RightToLeft); // The menu is then aligned on the right side of the button
 
     // Text validator
     ui->lineEdit_name->setValidator(new LatinValidator(ui->lineEdit_name));
@@ -462,40 +445,35 @@ void PageSf2::on_comboCompression_currentIndexChanged(int index)
 
 void PageSf2::updateInfo()
 {
-    QString labelStyle = "padding-right:15px;color:" + ThemeManager::mix(
-                             ContextManager::theme()->getColor(ThemeManager::LIST_TEXT),
-                             ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND), 0.4).name();
-    QString rowPattern = "<tr><td style=\"" + labelStyle + "\">%1</td><td>%2</td></tr>";
-
     // SoundFont version
     QString tmp = QString("%1.%2")
                       .arg(_sf2->get(_currentID, champ_IFIL).sfVerValue.wMajor)
                       .arg(_sf2->get(_currentID, champ_IFIL).sfVerValue.wMinor, 2, 10, QChar('0'));
-    QString info = "<table>" + rowPattern.arg(tr("SoundFont format"), tmp);
+    QString info = "<table>" + InfoButton::tableRow(tr("SoundFont format"), tmp);
 
     // ROM name / version
     tmp = _sf2->getQstr(_currentID, champ_IROM);
     if (!tmp.isEmpty())
-        info += rowPattern.arg(tr("ROM name"), tmp.toHtmlEscaped());
+        info += InfoButton::tableRow(tr("ROM name"), tmp.toHtmlEscaped());
     AttributeValue valTmp = _sf2->get(_currentID, champ_IVER);
     if (valTmp.sfVerValue.wMinor + valTmp.sfVerValue.wMajor > 0)
     {
         QString tmp = QString("%1.%2")
             .arg(valTmp.sfVerValue.wMajor)
             .arg(valTmp.sfVerValue.wMinor, 2, 10, QChar('0'));
-        info += rowPattern.arg(tr("ROM version"), tmp);
+        info += InfoButton::tableRow(tr("ROM version"), tmp);
     }
 
     // Sound engine
     tmp = _sf2->getQstr(_currentID, champ_ISNG);
     if (!tmp.isEmpty())
-        info += rowPattern.arg(tr("Sound engine"), tmp.toHtmlEscaped());
+        info += InfoButton::tableRow(tr("Sound engine"), tmp.toHtmlEscaped());
 
     // Editing software
     tmp = _sf2->getQstr(_currentID, champ_ISFT);
     if (!tmp.isEmpty())
-        info += rowPattern.arg(tr("Editing software"), tmp.toHtmlEscaped());
+        info += InfoButton::tableRow(tr("Editing software"), tmp.toHtmlEscaped());
 
     info += "</table>";
-    _labelInfo->setText(info);
+    ui->toolButtonInfo->setToolTip(info);
 }

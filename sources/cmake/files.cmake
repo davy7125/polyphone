@@ -700,6 +700,8 @@ set(POLYPHONE_APP_FILES
     editor/widgets/equalizer.cpp
     editor/widgets/equalizer.h
     editor/widgets/equalizer.ui
+    editor/widgets/infobutton.cpp
+    editor/widgets/infobutton.h
     editor/widgets/ledbutton.cpp
     editor/widgets/ledbutton.h
     editor/widgets/levelmeter.cpp
