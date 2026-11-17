@@ -280,14 +280,13 @@ A visualização mede e propõe; nada é aplicado automaticamente.
 ### Divisões consideradas
 
 
-A visualização mostra o que é tocado na velocidade escolhida no canto superior esquerdo (100 por padrão, depois a última usada).
-A barra ao lado mostra as camadas de velocidade do instrumento: um clique em uma camada seleciona a velocidade no seu meio.
+A visualização mostra o que é tocado na velocidade escolhida com o controle deslizante :guilabel:`Velocidade` no topo (100 por padrão, depois a última usada).
 
 As divisões consideradas são aquelas que tocam nessa velocidade e que não são tocadas apenas quando a tecla é solta (modo de reprodução “release”), estejam [silenciadas](#doc_solo) ou não.
 As divisões que tocam a mesma nota (par estéreo, camadas) são combinadas: suas potências se somam.
 
 Uma **nota base** reúne todas as divisões que têm essa nota base, eventualmente com vários alcances de notas.
-As amostras são analisadas em segundo plano (o número de amostras restantes é exibido no canto superior direito): os harmônicos são medidos no loop ou, se não houver loop, na parte estável do som.
+As amostras são analisadas em segundo plano (o número de amostras restantes é exibido em um quadro no canto superior direito do mapa): os harmônicos são medidos no loop ou, se não houver loop, na parte estável do som.
 Essas análises são mantidas até que os dados, o loop, a nota base ou a correção de afinação de uma amostra mudem.
 
 
@@ -301,9 +300,8 @@ Os parciais acima de 16 kHz são ignorados, e os harmônicos que ficam mais de 6
 Acima do mapa, linhas de resumo mostram para cada nota:
 
 * :guilabel:`Nível`: nível total,
-* :guilabel:`Timbre`: desvio de timbre da nota base em relação à sua referência (hachurado quando a referência é menos confiável, nas extremidades do teclado),
-* :guilabel:`Transposição`: azul quando a amostra é transposta para baixo, vermelho quando é transposta para cima,
-* e, à escolha no menu :guilabel:`Opções` > :guilabel:`Resumos`: :guilabel:`Brilho` (centro de gravidade dos harmônicos), :guilabel:`Ímpares / pares` (harmônicos ímpares comparados aos harmônicos pares), :guilabel:`Ruído` (relação entre harmônicos e ruído) e :guilabel:`Afinação` (cents em relação à nota mais próxima do temperamento igual).
+* :guilabel:`Desvio de timbre`: desvio da nota base em relação à sua referência (hachurado quando a referência é menos confiável, nas extremidades do teclado),
+* e, à escolha no menu :guilabel:`Opções` (seção :guilabel:`Visualização`): :guilabel:`Brilho` (centro de gravidade dos harmônicos), :guilabel:`Ímpares / pares` (harmônicos ímpares comparados aos harmônicos pares), :guilabel:`Ruído` (relação entre harmônicos e ruído) e :guilabel:`Transposição` (azul quando a amostra é transposta para baixo, vermelho quando é transposta para cima, em uma escala fixa de uma oitava).
 
 No mapa, linhas verticais marcam as junções entre divisões (mais grossas quando a amostra muda), um ponto marca cada nota base, os harmônicos ausentes (fora da banda da amostra ou da saída, acima de 16 kHz) e as notas que não tocam nada ficam vazios (estas esmaecidas no teclado), e hachuras mostram os valores medidos de forma pouco confiável ou em análise.
 Quando a nota base de uma divisão está fora do seu alcance de notas (extensão de um registro de órgão, por exemplo), ela é mostrada na nota mais próxima tocada pela divisão, com um triângulo apontando para a nota base real no lugar do ponto; seu desvio continua sendo medido tocando a divisão na nota base (:guilabel:`Tocado na nota base` no gráfico de barras).
@@ -320,14 +318,11 @@ Desvio em relação à referência
 Saltos
 : Diferença em relação à nota anterior: as rupturas nas junções.
 
-Transposição
-: Semitons entre a nota e a nota base de sua amostra.
-
 Os tons de cinza mostram uma grandeza (quanto mais contrastada, mais forte), o vermelho e o azul um desvio (vermelho: forte demais ou transposto para cima, azul: fraco demais ou transposto para baixo).
-A escala é exibida ao lado da lista, e sua dica explica as cores; ela é fixa: 60 dB para os níveis, o dobro do máximo (16 dB por padrão) para os desvios e os saltos, uma oitava para a transposição.
+A escala é exibida abaixo da lista, e sua dica explica as cores; ela é fixa: 60 dB para os níveis e o dobro do máximo (16 dB por padrão) para os desvios e os saltos.
 O menu :guilabel:`Opções` também permite tocar as notas clicadas.
 O teclado na parte inferior do mapa toca o instrumento na velocidade da visualização.
-Manter o clique direito pressionado dilata o eixo horizontal em torno do ponto selecionado, e manter o clique esquerdo pressionado o desloca.
+Manter o clique direito pressionado dilata o eixo horizontal em torno do ponto selecionado, e manter o clique esquerdo pressionado ou usar a barra de rolagem horizontal abaixo do teclado o desloca.
 
 
 ### Referência e decisões
@@ -335,7 +330,7 @@ Manter o clique direito pressionado dilata o eixo horizontal em torno do ponto s
 
 A **referência** de uma nota base é o que suas vizinhas preveem: as notas base vizinhas são tocadas na sua nota (com os parâmetros de suas divisões) e seus níveis são interpolados harmônico por harmônico, em dB.
 Nas duas extremidades do teclado, a referência é extrapolada a partir das duas vizinhas do mesmo lado, o que é menos confiável.
-Com :guilabel:`Regressão local`, é usada em vez disso uma regressão robusta sobre várias vizinhas de cada lado, para que uma vizinha defeituosa pese menos.
+A lista :guilabel:`Referência` define o número de notas vizinhas consideradas: com :guilabel:`2 notas vizinhas` (uma de cada lado), os níveis são interpolados como acima; a partir de :guilabel:`4 notas vizinhas`, é usada em vez disso uma regressão robusta sobre as vizinhas de cada lado, para que uma vizinha defeituosa pese menos.
 
 O desvio de uma nota base em relação à sua referência é resumido por dois números:
 
@@ -362,10 +357,9 @@ Ruptura + (vermelho)
 Nível ▲ ▼ (vermelho / azul)
 : O desvio de nível ultrapassa 2,5 dB (▲ alto demais, ▼ baixo demais): a atenuação pode ser corrigida.
 
-Os limiares de timbre são ajustados com o campo :guilabel:`Tolerância` (4,5 dB por padrão).
-O máximo, a redundância e a ruptura acompanham a tolerância: 8 dB, 2,5 dB e 6 dB para uma tolerância de 4,5 dB, na mesma proporção para outros valores (a dica do campo os indica).
-A tolerância padrão vem de conjuntos de amostras de órgão, em que 70% das notas base se desviam menos de 4,5 dB de suas vizinhas.
-Os desvios naturais de pianos, violões, guitarras, madeiras e bancos General MIDI são cerca de 1,4 vez maiores: uma tolerância de cerca de 6 dB é adequada para eles, enquanto um instrumento amostrado em cada nota pode ser verificado com mais rigor.
+Os limiares de timbre são ajustados com o controle deslizante :guilabel:`Tolerância` (6 dB por padrão, em passos de 0,5 dB).
+O máximo, a redundância e a ruptura acompanham a tolerância: 10,7 dB, 3,3 dB e 8 dB para uma tolerância de 6 dB, na mesma proporção para outros valores (o ícone de informação ao lado do rótulo :guilabel:`Tolerância` os exibe ao passar o mouse sobre ele ou ao clicar nele).
+A tolerância padrão é adequada aos desvios naturais da maioria dos instrumentos amostrados (pianos, violões, guitarras, madeiras, bancos General MIDI: 70% das notas base se desviam menos de 5,7 a 7,1 dB de suas vizinhas), enquanto um instrumento mais homogêneo, como um instrumento amostrado em cada nota, pode ser verificado com mais rigor.
 O limiar de nível é fixo em 2,5 dB: ao contrário do timbre, os desvios de nível dependem pouco do instrumento.
 Uma junção ou um desvio pode ser intencional (um instrumento que se torna outro, a repetição de uma mixtura): os rótulos são apenas propostas.
 
@@ -376,14 +370,16 @@ Uma junção ou um desvio pode ser intencional (um instrumento que se torna outr
 Um clique em uma nota mostra abaixo do mapa o que ela toca.
 O título indica a nota, a nota base que a toca e o rótulo dessa nota base; as seções seguintes são recolhidas ou expandidas com um clique em seu título, e uma seção recolhida mostra seu valor principal:
 
-* :guilabel:`Desvio em relação à referência`: nível, timbre e confiança da nota base (▲ ▼ se o nível se desvia),
-* :guilabel:`Junções`: saltos de nível e de timbre com as notas anterior e seguinte (+ em uma ruptura),
+* :guilabel:`Desvio em relação à referência`: nível, timbre e confiança da nota base,
+* :guilabel:`Junções`: saltos de nível e de timbre com as notas anterior e seguinte,
 * :guilabel:`Renderização comparada ao modelo`: após a ação :guilabel:`Verificar por renderização`,
 * :guilabel:`Se removida`: maior desvio nas notas da nota base e salto na nova junção entre suas vizinhas,
 * :guilabel:`Amostras`: transposição, atenuação e filtro de cada amostra,
 * :guilabel:`Medidas`: nível, brilho, inclinação espectral, harmônicos ímpares / pares, ruído, afinação e fator de duração do que é ouvido.
 
-O gráfico de barras compara os níveis ouvidos com a referência em uma nota base ou, em outra nota, com a nota calculada que ela poderia receber (uma coluna tracejada no mapa).
+Um ícone na última coluna marca a linha de onde vem um rótulo (mesmas formas da faixa :guilabel:`Decisões`, nome exibido ao passar o mouse); uma seção recolhida mostra os ícones de suas linhas.
+
+O gráfico de barras compara os níveis ouvidos com a referência em uma nota base ou, em outra nota, com a nota calculada que ela poderia receber (desenhada também no mapa com a visualização :guilabel:`Níveis` em uma nota sem amostra).
 
 Um clique em uma nota base seleciona suas divisões na [árvore](manual/soundfont-editor/tree.md), e selecionar divisões na árvore seleciona suas notas base.
 Várias notas base podem ser selecionadas mantendo a tecla :kbd:`Ctrl` pressionada e clicando nelas uma a uma, ou com a tecla :kbd:`Shift`: todas as notas base entre a primeira clicada e a seguinte são selecionadas.
@@ -408,7 +404,7 @@ Corrigir o nível
 Verificar por renderização
 : A nota é tocada pelo motor de som e os harmônicos do resultado são medidos: eles são exibidos no gráfico de barras e comparados ao modelo na seção :guilabel:`Renderização comparada ao modelo`, para verificar o cálculo da visualização.
 
-O menu :guilabel:`Propor` seleciona todas as notas base (ou junções) que têm um rótulo e aplica a elas a ação correspondente, após uma confirmação: corrigir as notas base a corrigir, substituir as diferentes demais, remover as redundantes, criar notas calculadas nas rupturas, corrigir os níveis que se desviam.
+O menu :guilabel:`Ações` seleciona todas as notas base (ou junções) que têm um rótulo e aplica a elas a ação correspondente, após uma confirmação: corrigir as notas base a corrigir, substituir as diferentes demais, remover as redundantes, criar notas calculadas nas rupturas, corrigir os níveis que se desviam.
 Elas são processadas da pior para a menos ruim, com as referências recalculadas após cada ação: uma nota base defeituosa também distorce a referência de suas vizinhas, que parecem meio defeituosas enquanto ela não for corrigida.
 
 Cada ação, ou série de ações, pode ser desfeita em uma única etapa (:kbd:`Ctrl`+:kbd:`Z`).
@@ -420,34 +416,24 @@ Cada ação, ou série de ações, pode ser desfeita em uma única etapa (:kbd:`
 ![Correção do timbre](images/timbre_correction.png "Correção do timbre")
 
 
-A janela mostra, para cada linha, os níveis ouvidos, o alvo e o resultado esperado, e oferece os seguintes parâmetros:
+A janela mostra, para cada linha, os níveis ouvidos, o alvo e o resultado esperado.
+O ganho de cada linha é aplicado aos dados das amostras com uma curva de fase mínima que acompanha a altura: a correção continua válida em todas as notas da divisão, qualquer que seja a transposição, e o loop é mantido. A mesma correção é aplicada às duas amostras de um par estéreo.
+São oferecidos os seguintes parâmetros:
 
 Referência
-: Alvo da correção: :guilabel:`Interpolação entre as vizinhas`, :guilabel:`Regressão local` sobre várias vizinhas de cada lado, ou :guilabel:`Alinhamento com uma nota base` (outra nota base tocada na nota).
-
-Corrigir o timbre (dados da amostra)
-: O ganho de cada linha é aplicado aos dados das amostras com uma curva de fase mínima que acompanha a altura: a correção continua válida em todas as notas da divisão, qualquer que seja a transposição, e o loop é mantido. A mesma correção é aplicada às duas amostras de um par estéreo.
-
-Corrigir o nível (atenuação)
-: O desvio de nível é corrigido pela atenuação das divisões, o que não altera os dados. Se a atenuação tiver que ficar negativa, o restante vai para os dados, dentro do limite do fundo de escala.
-
-Tolerância
-: Um desvio menor de uma linha não é corrigido; apenas a parte que o excede é corrigida.
+: Alvo da correção: a referência da nota base, com a escolha da lista :guilabel:`Referência` da vista pré-selecionada, ou :guilabel:`Alinhamento com uma nota base` (outra nota base tocada na nota, útil nas extremidades do teclado, onde a referência é extrapolada).
 
 Intensidade
-: Parte do desvio que é corrigida.
-
-Correção máxima
-: Maior ganho de uma linha, nos dois sentidos.
+: Parte do desvio de cada linha que é corrigida. Um desvio menor que um terço da tolerância (2 dB por padrão) não é corrigido, apenas a parte que o excede é corrigida, e uma linha é modificada em no máximo 12 dB.
 
 Harmônicos corrigidos
-: Todas as linhas, ou apenas os harmônicos de 1 até um harmônico dado.
+: Todas as linhas, ou apenas as linhas até uma linha dada.
 
-Brilho, Harmônicos ímpares
-: Inclinação adicionada ao alvo (positiva para um som mais brilhante) e nível adicionado aos harmônicos ímpares 3, 5, 7... do alvo.
+Corrigir o nível (atenuação)
+: O desvio de nível também é corrigido, pela atenuação das divisões, o que não altera os dados. Se a atenuação tiver que ficar negativa, o restante vai para os dados, dentro do limite do fundo de escala. Desmarcado, o nível ouvido é mantido: a correção do timbre não o altera.
 
-A seção :guilabel:`Audição` compara o som original (A) e o som corrigido (B) com o botão :guilabel:`Reproduzir`.
-Se a correção ultrapassar o fundo de escala, a amostra é abaixada e a atenuação compensa.
+A seção :guilabel:`Audição` compara o som original (A) e o som corrigido (B) com o botão :guilabel:`Reproduzir`, na nota em que a nota base é ouvida.
+Se o som corrigido ultrapassar o fundo de escala, os dois sons são abaixados na mesma medida para a comparação; depois de aplicada a correção, a amostra é abaixada e a atenuação compensa.
 Quando uma amostra também é usada por outras divisões ou instrumentos, o Polyphone pergunta se ela deve ser duplicada para as notas base corrigidas ou modificada em toda parte (a resposta pode ser memorizada até o Polyphone ser fechado).
 
 

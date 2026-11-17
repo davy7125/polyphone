@@ -280,14 +280,13 @@ Die Ansicht misst und schlägt vor; nichts wird automatisch angewendet.
 ### Berücksichtigte Aufteilungen
 
 
-Die Ansicht zeigt, was bei dem oben links gewählten Anschlag gespielt wird (standardmäßig 100, danach der zuletzt verwendete).
-Die Leiste daneben zeigt die Anschlagsebenen des Instruments: Ein Klick auf eine Ebene wählt den Anschlag in ihrer Mitte.
+Die Ansicht zeigt, was bei dem mit dem Schieberegler :guilabel:`Anschlag` oben gewählten Anschlag gespielt wird (standardmäßig 100, danach der zuletzt verwendete).
 
 Berücksichtigt werden die Aufteilungen, die bei diesem Anschlag spielen und nicht nur beim Loslassen der Taste gespielt werden (Wiedergabemodus „Release“), ob sie [stummgeschaltet](#doc_solo) sind oder nicht.
 Die Aufteilungen, die dieselbe Taste spielen (Stereopaar, Ebenen), werden zusammengefasst: Ihre Leistungen werden addiert.
 
 Eine **Basisnote** fasst alle Aufteilungen mit dieser Basisnote zusammen, gegebenenfalls mit mehreren Tastenbereichen.
-Die Samples werden im Hintergrund analysiert (die Anzahl der verbleibenden Samples wird oben rechts angezeigt): Die Harmonischen werden auf dem Loop gemessen oder, wenn es keinen Loop gibt, auf dem stationären Teil des Klangs.
+Die Samples werden im Hintergrund analysiert (die Anzahl der verbleibenden Samples wird in einem Rahmen oben rechts auf der Karte angezeigt): Die Harmonischen werden auf dem Loop gemessen oder, wenn es keinen Loop gibt, auf dem stationären Teil des Klangs.
 Diese Analysen bleiben erhalten, bis sich die Daten, der Loop, die Basisnote oder die Korrektur der Tonhöhe eines Samples ändern.
 
 
@@ -301,9 +300,8 @@ Teiltöne oberhalb von 16 kHz werden ignoriert, und Harmonische, die mehr als 60
 Über der Karte zeigen Übersichtszeilen für jede Taste:
 
 * :guilabel:`Pegel`: Gesamtpegel,
-* :guilabel:`Klangfarbe`: Klangfarbenabweichung der Basisnote von ihrer Referenz (schraffiert, wenn die Referenz weniger zuverlässig ist, an den Enden der Tastatur),
-* :guilabel:`Transposition`: blau, wenn das Sample nach unten transponiert wird, rot, wenn es nach oben transponiert wird,
-* und, im Menü :guilabel:`Optionen` > :guilabel:`Übersichten` wählbar: :guilabel:`Helligkeit` (Schwerpunkt der Harmonischen), :guilabel:`Ungerade / gerade` (ungerade Harmonische im Vergleich zu den geraden), :guilabel:`Rauschen` (Verhältnis der Harmonischen zum Rauschen) und :guilabel:`Intonation` (Abweichung in Cent von der nächstgelegenen Note der gleichstufigen Stimmung).
+* :guilabel:`Klangfarbenabweichung`: Abweichung der Basisnote von ihrer Referenz (schraffiert, wenn die Referenz weniger zuverlässig ist, an den Enden der Tastatur),
+* und, im Menü :guilabel:`Optionen` (Abschnitt :guilabel:`Anzeige`) wählbar: :guilabel:`Helligkeit` (Schwerpunkt der Harmonischen), :guilabel:`Ungerade / gerade` (ungerade Harmonische im Vergleich zu den geraden), :guilabel:`Rauschen` (Verhältnis der Harmonischen zum Rauschen) und :guilabel:`Transposition` (blau, wenn das Sample nach unten transponiert wird, rot, wenn es nach oben transponiert wird, auf einer festen Skala von einer Oktave).
 
 Auf der Karte markieren senkrechte Linien die Übergänge zwischen Aufteilungen (dicker, wenn das Sample wechselt), ein Punkt markiert jede Basisnote, die fehlenden Harmonischen (außerhalb des Frequenzbands des Samples oder der Ausgabe, oberhalb von 16 kHz) und die Tasten, die nichts spielen, bleiben leer (letztere auf der Tastatur abgeblendet), und Schraffuren zeigen die nicht zuverlässig gemessenen oder noch analysierten Werte.
 Liegt die Basisnote einer Aufteilung außerhalb ihres Tastenbereichs (Erweiterung eines Orgelregisters zum Beispiel), wird sie auf der nächstgelegenen von der Aufteilung gespielten Taste angezeigt, mit einem Dreieck statt des Punktes, das zur tatsächlichen Basisnote zeigt; ihre Abweichung wird weiterhin gemessen, indem die Aufteilung auf der Basisnote gespielt wird (:guilabel:`Auf der Basisnote gespielt` im Balkendiagramm).
@@ -320,14 +318,11 @@ Abweichung von der Referenz
 Sprünge
 : Unterschied zur vorherigen Taste: die Brüche an den Übergängen.
 
-Transposition
-: Halbtöne zwischen der Taste und der Basisnote ihres Samples.
-
 Grautöne zeigen eine Größe (je kontrastreicher, desto stärker), Rot und Blau eine Abweichung (Rot: zu stark oder nach oben transponiert, Blau: zu schwach oder nach unten transponiert).
-Die Skala wird neben der Liste angezeigt, ihr Tooltip erklärt die Farben; sie ist fest: 60 dB für die Pegel, das Doppelte des Maximums (standardmäßig 16 dB) für die Abweichungen und die Sprünge, eine Oktave für die Transposition.
+Die Skala wird unter der Liste angezeigt, ihr Tooltip erklärt die Farben; sie ist fest: 60 dB für die Pegel und das Doppelte des Maximums (standardmäßig 16 dB) für die Abweichungen und die Sprünge.
 Das Menü :guilabel:`Optionen` ermöglicht außerdem, die angeklickten Tasten zu spielen.
 Die Tastatur unten an der Karte spielt das Instrument mit dem Anschlag der Ansicht.
-Durch Gedrückthalten der rechten Maustaste wird die horizontale Achse um den gewählten Punkt herum gedehnt, durch Gedrückthalten der linken Maustaste wird sie verschoben.
+Durch Gedrückthalten der rechten Maustaste wird die horizontale Achse um den gewählten Punkt herum gedehnt, durch Gedrückthalten der linken Maustaste oder mit der horizontalen Bildlaufleiste unter der Tastatur wird sie verschoben.
 
 
 ### Referenz und Entscheidungen
@@ -335,7 +330,7 @@ Durch Gedrückthalten der rechten Maustaste wird die horizontale Achse um den ge
 
 Die **Referenz** einer Basisnote ist das, was ihre Nachbarn vorhersagen: Die benachbarten Basisnoten werden auf ihrer Taste gespielt (mit den Parametern ihrer Aufteilungen), und ihre Pegel werden Harmonische für Harmonische in dB interpoliert.
 An beiden Enden der Tastatur wird die Referenz aus den beiden Nachbarn auf derselben Seite extrapoliert, was weniger zuverlässig ist.
-Mit :guilabel:`Lokale Regression` wird stattdessen eine robuste Regression über mehrere Nachbarn auf jeder Seite verwendet, sodass ein fehlerhafter Nachbar weniger ins Gewicht fällt.
+Die Liste :guilabel:`Referenz` legt die Anzahl der berücksichtigten benachbarten Noten fest: Mit :guilabel:`2 benachbarte Noten` (eine auf jeder Seite) werden die Pegel wie oben interpoliert; ab :guilabel:`4 benachbarte Noten` wird stattdessen eine robuste Regression über die Nachbarn auf jeder Seite verwendet, sodass ein fehlerhafter Nachbar weniger ins Gewicht fällt.
 
 Die Abweichung einer Basisnote von ihrer Referenz wird durch zwei Zahlen zusammengefasst:
 
@@ -362,10 +357,9 @@ Bruch + (rot)
 Pegel ▲ ▼ (rot / blau)
 : Die Pegelabweichung liegt über 2,5 dB (▲ zu laut, ▼ zu leise): Die Dämpfung kann korrigiert werden.
 
-Die Schwellenwerte der Klangfarbe werden mit dem Feld :guilabel:`Toleranz` (standardmäßig 4,5 dB) eingestellt.
-Maximum, Redundanz und Bruch folgen der Toleranz: 8 dB, 2,5 dB und 6 dB bei einer Toleranz von 4,5 dB, bei anderen Werten im selben Verhältnis (der Tooltip des Feldes zeigt sie an).
-Die Standardtoleranz stammt von Orgel-Samplesets, bei denen 70 % der Basisnoten um weniger als 4,5 dB von ihren Nachbarn abweichen.
-Die natürlichen Abweichungen von Klavieren, Gitarren, Holzbläsern und General-MIDI-Bänken sind etwa 1,4-mal so groß: Eine Toleranz von etwa 6 dB passt zu ihnen, während ein Instrument mit einem Sample pro Taste strenger geprüft werden kann.
+Die Schwellenwerte der Klangfarbe werden mit dem Schieberegler :guilabel:`Toleranz` (standardmäßig 6 dB, in Schritten von 0,5 dB) eingestellt.
+Maximum, Redundanz und Bruch folgen der Toleranz: 10,7 dB, 3,3 dB und 8 dB bei einer Toleranz von 6 dB, bei anderen Werten im selben Verhältnis (das Informationssymbol neben der Beschriftung :guilabel:`Toleranz` zeigt sie an, wenn sich die Maus darüber befindet oder wenn es angeklickt wird).
+Die Standardtoleranz passt zu den natürlichen Abweichungen der meisten gesampelten Instrumente (Klaviere, Gitarren, Holzbläser, General-MIDI-Bänke: 70 % der Basisnoten weichen um weniger als 5,7 bis 7,1 dB von ihren Nachbarn ab), während ein homogeneres Instrument, etwa eines mit einem Sample pro Taste, strenger geprüft werden kann.
 Der Pegel-Schwellenwert ist fest auf 2,5 dB eingestellt: Anders als die Klangfarbe hängen die Pegelabweichungen kaum vom Instrument ab.
 Ein Übergang oder eine Abweichung kann gewollt sein (ein Instrument, das zu einem anderen wird, eine repetierende Mixtur): Die Einstufungen sind nur Vorschläge.
 
@@ -376,14 +370,16 @@ Ein Übergang oder eine Abweichung kann gewollt sein (ein Instrument, das zu ein
 Ein Klick auf eine Taste zeigt unter der Karte, was sie spielt.
 Der Titel nennt die Taste, die Basisnote, die sie spielt, und die Einstufung dieser Basisnote; die folgenden Abschnitte werden mit einem Klick auf ihren Titel ein- oder ausgeklappt, ein eingeklappter Abschnitt zeigt seinen Hauptwert:
 
-* :guilabel:`Abweichung von der Referenz`: Pegel, Klangfarbe und Konfidenz der Basisnote (▲ ▼, wenn der Pegel abweicht),
-* :guilabel:`Übergänge`: Pegel- und Klangfarbensprünge zur vorherigen und zur nächsten Taste (+ bei einem Bruch),
+* :guilabel:`Abweichung von der Referenz`: Pegel, Klangfarbe und Konfidenz der Basisnote,
+* :guilabel:`Übergänge`: Pegel- und Klangfarbensprünge zur vorherigen und zur nächsten Taste,
 * :guilabel:`Rendering im Vergleich zum Modell`: nach der Aktion :guilabel:`Durch Rendern prüfen`,
 * :guilabel:`Falls entfernt`: größte Abweichung über die Tasten der Basisnote und Sprung am neuen Übergang zwischen ihren Nachbarn,
 * :guilabel:`Samples`: Transposition, Dämpfung und Filter jedes Samples,
 * :guilabel:`Messwerte`: Pegel, Helligkeit, spektrale Steigung, ungerade / gerade Harmonische, Rauschen, Intonation und Dauerfaktor des Gehörten.
 
-Das Balkendiagramm vergleicht die gehörten Pegel auf einer Basisnote mit der Referenz und auf einer anderen Taste mit der berechneten Note, die diese Taste erhalten könnte (eine gestrichelte Spalte auf der Karte).
+Ein Symbol in der letzten Spalte markiert die Zeile, aus der eine Einstufung hervorgeht (dieselben Formen wie in der Leiste :guilabel:`Entscheidungen`, Name beim Darüberfahren mit der Maus); ein eingeklappter Abschnitt zeigt die Symbole seiner Zeilen.
+
+Das Balkendiagramm vergleicht die gehörten Pegel auf einer Basisnote mit der Referenz und auf einer anderen Taste mit der berechneten Note, die diese Taste erhalten könnte (auf einer Taste ohne Sample auch in der Anzeige :guilabel:`Pegel` der Karte dargestellt).
 
 Ein Klick auf eine Basisnote wählt ihre Aufteilungen in der [Baumansicht](manual/soundfont-editor/tree.md) aus, und die Auswahl von Aufteilungen in der Baumansicht wählt ihre Basisnoten aus.
 Mehrere Basisnoten können ausgewählt werden, indem Sie die Taste :kbd:`Ctrl` gedrückt halten und nacheinander auf sie klicken, oder mit der Taste :kbd:`Shift`: Alle Basisnoten zwischen der zuerst angeklickten und der nächsten werden ausgewählt.
@@ -408,7 +404,7 @@ Pegel korrigieren
 Durch Rendern prüfen
 : Die Taste wird von der Sound-Engine gespielt, und die Harmonischen des Ergebnisses werden gemessen: Sie werden im Balkendiagramm angezeigt und im Abschnitt :guilabel:`Rendering im Vergleich zum Modell` mit dem Modell verglichen, um die Berechnung der Ansicht zu überprüfen.
 
-Das Menü :guilabel:`Vorschlagen` wählt alle Basisnoten (oder Übergänge) mit einer Einstufung aus und wendet nach einer Bestätigung die entsprechende Aktion auf sie an: die zu korrigierenden Basisnoten korrigieren, die zu verschiedenen ersetzen, die redundanten entfernen, an den Brüchen berechnete Noten erstellen, die abweichenden Pegel korrigieren.
+Das Menü :guilabel:`Aktionen` wählt alle Basisnoten (oder Übergänge) mit einer Einstufung aus und wendet nach einer Bestätigung die entsprechende Aktion auf sie an: die zu korrigierenden Basisnoten korrigieren, die zu verschiedenen ersetzen, die redundanten entfernen, an den Brüchen berechnete Noten erstellen, die abweichenden Pegel korrigieren.
 Sie werden von der schlechtesten bis zur am wenigsten schlechten bearbeitet, wobei die Referenzen nach jeder Aktion neu berechnet werden: Eine fehlerhafte Basisnote verfälscht auch die Referenz ihrer Nachbarn, die halb fehlerhaft erscheinen, solange sie nicht korrigiert ist.
 
 Jede Aktion oder Reihe von Aktionen lässt sich in einem Schritt rückgängig machen (:kbd:`Ctrl`+:kbd:`Z`).
@@ -420,34 +416,24 @@ Jede Aktion oder Reihe von Aktionen lässt sich in einem Schritt rückgängig ma
 ![Korrektur der Klangfarbe](images/timbre_correction.png "Korrektur der Klangfarbe")
 
 
-Das Fenster zeigt für jede Zeile die gehörten Pegel, das Ziel und das erwartete Ergebnis und bietet folgende Parameter:
+Das Fenster zeigt für jede Zeile die gehörten Pegel, das Ziel und das erwartete Ergebnis.
+Die Verstärkung jeder Zeile wird mit einer minimalphasigen Kurve, die der Tonhöhe folgt, auf die Daten der Samples angewendet: Die Korrektur bleibt auf allen Tasten der Aufteilung gültig, unabhängig von der Transposition, und der Loop bleibt erhalten. Dieselbe Korrektur wird auf beide Samples eines Stereopaars angewendet.
+Folgende Parameter werden angeboten:
 
 Referenz
-: Ziel der Korrektur: :guilabel:`Interpolation zwischen den Nachbarn`, :guilabel:`Lokale Regression` über mehrere Nachbarn auf jeder Seite oder :guilabel:`An einer Basisnote ausgerichtet` (eine andere Basisnote, auf der Taste gespielt).
-
-Klangfarbe korrigieren (Sampledaten)
-: Die Verstärkung jeder Zeile wird mit einer minimalphasigen Kurve, die der Tonhöhe folgt, auf die Daten der Samples angewendet: Die Korrektur bleibt auf allen Tasten der Aufteilung gültig, unabhängig von der Transposition, und der Loop bleibt erhalten. Dieselbe Korrektur wird auf beide Samples eines Stereopaars angewendet.
-
-Pegel korrigieren (Dämpfung)
-: Die Pegelabweichung wird über die Dämpfung der Aufteilungen korrigiert, was die Daten nicht verändert. Würde die Dämpfung negativ, geht der Rest in die Daten, im Rahmen der Vollaussteuerung.
-
-Toleranz
-: Eine kleinere Abweichung einer Zeile wird nicht korrigiert, nur der darüber hinausgehende Teil.
+: Ziel der Korrektur: die Referenz der Basisnote, wobei die Auswahl der Liste :guilabel:`Referenz` der Ansicht vorausgewählt ist, oder :guilabel:`An einer Basisnote ausgerichtet` (eine andere Basisnote, auf der Taste gespielt, nützlich an den Enden der Tastatur, wo die Referenz extrapoliert wird).
 
 Stärke
-: Korrigierter Anteil der Abweichung.
-
-Maximale Korrektur
-: Größte Verstärkung einer Zeile, in beide Richtungen.
+: Korrigierter Anteil der Abweichung jeder Zeile. Eine Abweichung unter einem Drittel der Toleranz (standardmäßig 2 dB) wird nicht korrigiert, nur der darüber hinausgehende Teil, und eine Zeile wird um höchstens 12 dB verändert.
 
 Korrigierte Harmonische
-: Alle Zeilen oder nur die Harmonischen von 1 bis zu einer gegebenen Nummer.
+: Alle Zeilen oder nur die Zeilen bis zu einer gegebenen Zeile.
 
-Helligkeit, Ungerade Harmonische
-: Zum Ziel addierte Neigung (positiv für einen helleren Klang) und den ungeraden Harmonischen 3, 5, 7... des Ziels hinzugefügter Pegel.
+Pegel korrigieren (Dämpfung)
+: Die Pegelabweichung wird ebenfalls korrigiert, über die Dämpfung der Aufteilungen, was die Daten nicht verändert. Würde die Dämpfung negativ, geht der Rest in die Daten, im Rahmen der Vollaussteuerung. Ist die Option deaktiviert, bleibt der gehörte Pegel erhalten: Die Korrektur der Klangfarbe ändert ihn nicht.
 
-Der Bereich :guilabel:`Anhören` vergleicht den Originalklang (A) und den korrigierten Klang (B) mit dem Button :guilabel:`Wiedergabe`.
-Würde die Korrektur die Vollaussteuerung überschreiten, wird das Sample abgesenkt und die Dämpfung gleicht dies aus.
+Der Bereich :guilabel:`Anhören` vergleicht den Originalklang (A) und den korrigierten Klang (B) mit dem Button :guilabel:`Wiedergabe`, auf der Taste, auf der die Basisnote gehört wird.
+Würde der korrigierte Klang die Vollaussteuerung überschreiten, werden beide Klänge für den Vergleich um denselben Betrag abgesenkt; wird die Korrektur angewendet, wird das Sample abgesenkt und die Dämpfung gleicht dies aus.
 Wird ein Sample auch von anderen Aufteilungen oder Instrumenten verwendet, fragt Polyphone, ob es für die korrigierten Basisnoten dupliziert oder überall geändert werden soll (die Antwort kann bis zum Schließen von Polyphone gespeichert werden).
 
 
