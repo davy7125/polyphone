@@ -85,11 +85,25 @@ public:
     bool hasMultipleOutputs() const { return _hasMultipleOutputs.load(); }
     void setMultipleOutputs(bool hasMultipleOutputs);
 
+    // In real time, the MIDI messages of a block are moved together so that its first note starts at the beginning of
+    // the block (default): the latency is lower on average but varies. With a fixed latency, each message is processed
+    // at its frame, as offline.
+    bool hasFixedLatency() const { return _hasFixedLatency.load(); }
+    void setFixedLatency(bool hasFixedLatency);
+
+    // Outputs clipped to [-1; 1] (default) or not
+    bool isClipping() const { return _isClipping.load(); }
+    void setClipping(bool isClipping);
+
     PluginEngine &getEngine() { return _engine; }
     juce::AudioProcessorValueTreeState &getParameterState() { return _parameters; }
     juce::MidiKeyboardState &getKeyboardState() { return _keyboardState; }
     static const std::vector<Temperament> &getTemperaments();
     static juce::String getTemperamentName(size_t index); // Translated
+
+    // Default modulators of the velocity to the filter cutoff (SynthCoreConfig::modulatorVelToFilterType): 2.01, 2.04
+    // and none (translated)
+    static juce::StringArray getVelocityToFilterNames();
 
     // Settings shared by all instances (recent files, language)
     static juce::PropertiesFile::Options getSettingsOptions();
@@ -144,13 +158,16 @@ private:
     bool _isSoundfontStored;
 
     // Settings of the synth
+    static const int PARAMETER_COUNT = 14;
     int _polyphony;
     std::atomic<bool> _hasMultipleOutputs;
+    std::atomic<bool> _hasFixedLatency;
+    std::atomic<bool> _isClipping;
     bool _isPrepared;
     double _sampleRate;
     int _maxBlockSize;
-    std::atomic<float> * _parameterValues[12];
-    float _appliedValues[12];
+    std::atomic<float> * _parameterValues[PARAMETER_COUNT];
+    float _appliedValues[PARAMETER_COUNT];
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(PluginProcessor)
 };

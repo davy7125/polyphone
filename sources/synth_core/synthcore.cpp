@@ -67,6 +67,7 @@ SynthCore::SynthCore(ISynthSoundfonts * soundfonts, ISynthListener * listener) :
     _smplGain(0),
     _smplIsStereoEnabled(false),
     _smplIsLoopEnabled(true),
+    _isClipping(true),
     _sampleVoiceTokenCounter(0),
     _noteId(0),
     _outputL(nullptr),
@@ -790,12 +791,15 @@ void SynthCore::renderFrames(const Outputs &outputs, uint32_t position, uint32_t
         voiceChunkCount += _buses.addVoiceFrames(voice, len, leftInitialized, rightInitialized);
     std::chrono::steady_clock::time_point voicesComputed = std::chrono::steady_clock::now();
 
-    // Effects in their output or with the part without effect, clipping (the buffers of the synth being aligned)
+    // Effects in their output or with the part without effect, possibly clipped (the buffers of the synth being aligned)
     computeEffects(_outputL, _outputR, _buses, len);
     if (outputs.effectsLeft != nullptr && outputs.effectsRight != nullptr)
     {
-        FastMaths::clamp(_outputL, len);
-        FastMaths::clamp(_outputR, len);
+        if (_isClipping)
+        {
+            FastMaths::clamp(_outputL, len);
+            FastMaths::clamp(_outputR, len);
+        }
         memcpy(&outputs.effectsLeft[position], _outputL, len * sizeof(float));
         memcpy(&outputs.effectsRight[position], _outputR, len * sizeof(float));
         memcpy(_outputL, _buses.dataL, len * sizeof(float));
@@ -806,8 +810,11 @@ void SynthCore::renderFrames(const Outputs &outputs, uint32_t position, uint32_t
         FastMaths::addVectors(_outputL, _buses.dataL, len);
         FastMaths::addVectors(_outputR, _buses.dataR, len);
     }
-    FastMaths::clamp(_outputL, len);
-    FastMaths::clamp(_outputR, len);
+    if (_isClipping)
+    {
+        FastMaths::clamp(_outputL, len);
+        FastMaths::clamp(_outputR, len);
+    }
     memcpy(&outputs.left[position], _outputL, len * sizeof(float));
     memcpy(&outputs.right[position], _outputR, len * sizeof(float));
 
@@ -816,8 +823,11 @@ void SynthCore::renderFrames(const Outputs &outputs, uint32_t position, uint32_t
     {
         if (_buses.hasChannelBus(channel))
         {
-            FastMaths::clamp(_buses.channelL[channel], len);
-            FastMaths::clamp(_buses.channelR[channel], len);
+            if (_isClipping)
+            {
+                FastMaths::clamp(_buses.channelL[channel], len);
+                FastMaths::clamp(_buses.channelR[channel], len);
+            }
             memcpy(&outputs.channelLeft[channel][position], _buses.channelL[channel], len * sizeof(float));
             memcpy(&outputs.channelRight[channel][position], _buses.channelR[channel], len * sizeof(float));
         }
@@ -856,8 +866,11 @@ void SynthCore::renderChunks(uint32_t len)
 
     // Effects and clipping
     applyEffects(_outputL, _outputR, _buses, len);
-    FastMaths::clamp(_outputL, len);
-    FastMaths::clamp(_outputR, len);
+    if (_isClipping)
+    {
+        FastMaths::clamp(_outputL, len);
+        FastMaths::clamp(_outputR, len);
+    }
 
     // Measures for limiting the voices in real time
     uint32_t chunkCount = len >> COMPUTATION_CHUNK_SHIFT;

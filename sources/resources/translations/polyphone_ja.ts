@@ -6061,309 +6061,344 @@ to display its timbre</source>
 <context>
     <name>PluginEditor</name>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="55"/>
+        <location filename="../../plugin/plugineditor.cpp" line="57"/>
         <source>cannot open the file</source>
         <translation>ファイルを開けません</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="56"/>
+        <location filename="../../plugin/plugineditor.cpp" line="58"/>
         <source>file recursion (#include)</source>
         <translation>ファイルの再帰的なインクルード (#include)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="57"/>
+        <location filename="../../plugin/plugineditor.cpp" line="59"/>
         <source>not enough memory</source>
         <translation>メモリが不足しています</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="58"/>
+        <location filename="../../plugin/plugineditor.cpp" line="60"/>
         <source>this is not a DLS file</source>
         <translation>DLS ファイルではありません</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="59"/>
+        <location filename="../../plugin/plugineditor.cpp" line="61"/>
         <source>invalid header</source>
         <translation>無効なヘッダー</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="60"/>
+        <location filename="../../plugin/plugineditor.cpp" line="62"/>
         <source>corrupted file (sdta)</source>
         <translation>ファイルが破損しています (sdta)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="61"/>
+        <location filename="../../plugin/plugineditor.cpp" line="63"/>
         <source>corrupted file (pdta)</source>
         <translation>ファイルが破損しています (pdta)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="191"/>
+        <location filename="../../plugin/plugineditor.cpp" line="193"/>
         <source>Preset played by the channel, or the one chosen by the program changes it receives</source>
         <translation>チャンネルで演奏されるプリセット、または受信したプログラムチェンジで選ばれたプリセット</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="194"/>
+        <location filename="../../plugin/plugineditor.cpp" line="196"/>
         <source>Program change (drums)</source>
         <translation>プログラムチェンジ (ドラム)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="194"/>
+        <location filename="../../plugin/plugineditor.cpp" line="196"/>
         <source>Program change</source>
         <translation>プログラムチェンジ</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="379"/>
+        <location filename="../../plugin/plugineditor.cpp" line="499"/>
         <source>(no preset)</source>
         <translation>(プリセットなし)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="386"/>
+        <location filename="../../plugin/plugineditor.cpp" line="506"/>
         <source>Open...</source>
         <translation>開く...</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="387"/>
+        <location filename="../../plugin/plugineditor.cpp" line="507"/>
         <source>Open a soundfont (sf2, sf3, sfz or dls), which can also be dropped on the window</source>
         <translation>SoundFont (sf2、sf3、sfz、dls) を開きます。ウィンドウにドロップすることもできます</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="388"/>
+        <location filename="../../plugin/plugineditor.cpp" line="508"/>
         <source>Recent soundfonts</source>
         <translation>最近の SoundFont</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="389"/>
+        <location filename="../../plugin/plugineditor.cpp" line="509"/>
         <source>One preset</source>
         <translation>単一プリセット</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="390"/>
+        <location filename="../../plugin/plugineditor.cpp" line="510"/>
         <source>The same preset is played on all MIDI channels</source>
         <translation>すべての MIDI チャンネルで同じプリセットを演奏します</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="391"/>
+        <location filename="../../plugin/plugineditor.cpp" line="511"/>
         <source>16 channels</source>
         <translation>16 チャンネル</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="392"/>
+        <location filename="../../plugin/plugineditor.cpp" line="512"/>
         <source>Each MIDI channel plays its preset, or the one chosen by its program changes (General MIDI)</source>
         <translation>各 MIDI チャンネルがそれぞれのプリセット、またはプログラムチェンジで選ばれたプリセットを演奏します (General MIDI)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="394"/>
+        <location filename="../../plugin/plugineditor.cpp" line="514"/>
         <source>The same preset is played by an MPE controller: each note has its own pitch bend, pressure and timbre (lower zone of 15 channels, or the zones given by the controller)</source>
         <translation>同じプリセットを MPE コントローラーで演奏します。各ノートが独自のピッチベンド、プレッシャー、音色を持ちます (15 チャンネルの下位ゾーン、またはコントローラーが指定するゾーン)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="399"/>
+        <location filename="../../plugin/plugineditor.cpp" line="519"/>
         <source>Gain</source>
         <translation>ゲイン</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="399"/>
+        <location filename="../../plugin/plugineditor.cpp" line="519"/>
         <source>Transpose</source>
         <translation>トランスポーズ</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="399"/>
+        <location filename="../../plugin/plugineditor.cpp" line="519"/>
         <source>Tuning</source>
         <translation>チューニング</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="400"/>
+        <location filename="../../plugin/plugineditor.cpp" line="520"/>
         <source>Level</source>
         <comment>reverb</comment>
         <translation>レベル</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="400"/>
+        <location filename="../../plugin/plugineditor.cpp" line="520"/>
         <source>Size</source>
         <comment>reverb</comment>
         <translation>サイズ</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="400"/>
+        <location filename="../../plugin/plugineditor.cpp" line="520"/>
         <source>Width</source>
         <comment>reverb</comment>
         <translation>幅</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="400"/>
+        <location filename="../../plugin/plugineditor.cpp" line="520"/>
         <source>Damping</source>
         <comment>reverb</comment>
         <translation>ダンプ</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="401"/>
+        <location filename="../../plugin/plugineditor.cpp" line="521"/>
         <source>Level</source>
         <comment>chorus</comment>
         <translation>レベル</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="401"/>
+        <location filename="../../plugin/plugineditor.cpp" line="521"/>
         <source>Depth</source>
         <comment>chorus</comment>
         <translation>デプス</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="401"/>
+        <location filename="../../plugin/plugineditor.cpp" line="521"/>
         <source>Frequency</source>
         <comment>chorus</comment>
         <translation>周波数</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="405"/>
+        <location filename="../../plugin/plugineditor.cpp" line="525"/>
         <source>Temperament</source>
         <translation>音律</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="407"/>
+        <location filename="../../plugin/plugineditor.cpp" line="527"/>
         <source>Temperament, its fine tunes being relative to the key chosen on the right</source>
         <translation>音律。微調整は右で選んだ基準キーに対する値です</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="408"/>
+        <location filename="../../plugin/plugineditor.cpp" line="528"/>
         <source>Key of reference of the temperament</source>
         <translation>音律の基準キー</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="410"/>
+        <location filename="../../plugin/plugineditor.cpp" line="531"/>
+        <source>Filter</source>
+        <translation>フィルター</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="533"/>
+        <source>Default modulator lowering the filter cutoff according to the velocity (up to 2 octaves): version 2.04 of the SoundFont format, version 2.01 for old soundfonts made with its jump at the velocity 64, or none</source>
+        <translation>ベロシティに応じてフィルターのカットオフ周波数を下げる既定のモジュレーター（最大 2 オクターブ）：SoundFont 形式のバージョン 2.04、ベロシティ 64 での段差を前提に作られた古い SoundFont 用のバージョン 2.01、またはなし</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="539"/>
+        <source>Curve</source>
+        <translation>カーブ</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="540"/>
+        <source>Velocity curve: linear in the middle, concave to the left (softer velocity), convex to the right (velocity rising quickly)</source>
+        <translation>ベロシティカーブ：中央でリニア、左へ行くほど凹型（柔らかいベロシティ）、右へ行くほど凸型（ベロシティが素早く上がる）</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="546"/>
         <source>Panic</source>
         <translation>パニック</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="411"/>
+        <location filename="../../plugin/plugineditor.cpp" line="547"/>
         <source>Stop all sounds and reset the controllers</source>
         <translation>すべての音を停止し、コントローラーをリセットします</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="412"/>
+        <location filename="../../plugin/plugineditor.cpp" line="548"/>
         <source>Settings</source>
         <translation>設定</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="459"/>
+        <location filename="../../plugin/plugineditor.cpp" line="595"/>
         <source>cannot open the file %1</source>
         <translation>ファイル %1 を開けません</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="461"/>
+        <location filename="../../plugin/plugineditor.cpp" line="597"/>
         <source>invalid %1 index</source>
         <translation>無効な %1 インデックス</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="473"/>
+        <location filename="../../plugin/plugineditor.cpp" line="609"/>
         <source>No soundfont</source>
         <translation>SoundFont なし</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="481"/>
+        <location filename="../../plugin/plugineditor.cpp" line="617"/>
         <source>Loading...</source>
         <translation>読み込み中...</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="486"/>
+        <location filename="../../plugin/plugineditor.cpp" line="622"/>
         <source>Cannot read the soundfont: %1</source>
         <translation>SoundFont を読み込めません: %1</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="493"/>
+        <location filename="../../plugin/plugineditor.cpp" line="629"/>
         <source>Open a soundfont or drop it here</source>
         <translation>SoundFont を開くか、ここにドロップしてください</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="536"/>
+        <location filename="../../plugin/plugineditor.cpp" line="672"/>
         <source>Voices: %1</source>
         <translation>ボイス数: %1</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="537"/>
+        <location filename="../../plugin/plugineditor.cpp" line="673"/>
         <source>CPU: %1 %</source>
         <translation>CPU: %1%</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="551"/>
+        <location filename="../../plugin/plugineditor.cpp" line="687"/>
         <source>Open a soundfont</source>
         <translation>SoundFont を開く</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="565"/>
+        <location filename="../../plugin/plugineditor.cpp" line="701"/>
         <source>No recent soundfont</source>
         <translation>最近の SoundFont はありません</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="614"/>
+        <location filename="../../plugin/plugineditor.cpp" line="750"/>
         <source>%1 voices</source>
         <translation>%1 ボイス</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="619"/>
+        <location filename="../../plugin/plugineditor.cpp" line="755"/>
         <source>Channel %1</source>
         <translation>チャンネル %1</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="626"/>
+        <location filename="../../plugin/plugineditor.cpp" line="762"/>
         <source>System language</source>
         <translation>システムの言語</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="633"/>
+        <location filename="../../plugin/plugineditor.cpp" line="769"/>
         <source>Polyphony</source>
         <translation>同時発音数</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="634"/>
+        <location filename="../../plugin/plugineditor.cpp" line="770"/>
         <source>Keyboard</source>
         <translation>キーボード</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="635"/>
+        <location filename="../../plugin/plugineditor.cpp" line="771"/>
         <source>Language</source>
         <translation>言語</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="640"/>
+        <location filename="../../plugin/plugineditor.cpp" line="773"/>
+        <source>Fixed latency (notes played at their exact position)</source>
+        <translation>固定レイテンシー（ノートを正確な位置で発音）</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="775"/>
+        <source>Clipping to [-1; 1]</source>
+        <translation>[-1; 1] へのクリッピング</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="780"/>
         <source>Store the soundfont in the project (not possible with an sfz file)</source>
         <translation>SoundFont をプロジェクトに保存 (sfz ファイルでは不可)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="641"/>
+        <location filename="../../plugin/plugineditor.cpp" line="781"/>
         <source>Store the soundfont in the project</source>
         <translation>SoundFont をプロジェクトに保存</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="647"/>
+        <location filename="../../plugin/plugineditor.cpp" line="787"/>
         <source>Channels and effects on their own outputs (not possible in the standalone application)</source>
         <translation>チャンネルとエフェクトを個別の出力へ (スタンドアロンアプリでは不可)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="649"/>
+        <location filename="../../plugin/plugineditor.cpp" line="789"/>
         <source>Channels and effects on their own outputs</source>
         <translation>チャンネルとエフェクトを個別の出力へ</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="690"/>
+        <location filename="../../plugin/plugineditor.cpp" line="834"/>
         <source>Synth</source>
         <translation>シンセ</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="690"/>
+        <location filename="../../plugin/plugineditor.cpp" line="834"/>
         <source>Reverb</source>
         <translation>リバーブ</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="691"/>
+        <location filename="../../plugin/plugineditor.cpp" line="835"/>
         <source>Chorus</source>
         <translation>コーラス</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="213"/>
+        <location filename="../../plugin/plugineditor.cpp" line="835"/>
+        <source>Velocity</source>
+        <translation>ベロシティ</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="230"/>
         <source>too many soundfonts are still playing, try again in a moment</source>
         <translation>まだ多くの SoundFont が演奏中です。しばらくしてからもう一度お試しください</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="554"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="610"/>
         <source>file not found</source>
         <translation>ファイルが見つかりません</translation>
     </message>
@@ -6371,7 +6406,7 @@ to display its timbre</source>
 <context>
     <name>PluginJuce</name>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="443"/>
+        <location filename="../../plugin/plugineditor.cpp" line="579"/>
         <location filename="../../plugin/plugintranslator.cpp" line="60"/>
         <source>Options</source>
         <translation>オプション</translation>
@@ -6680,102 +6715,123 @@ to display its timbre</source>
 <context>
     <name>PluginProcessor</name>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="51"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="52"/>
         <source>Main</source>
         <translation>メイン</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="53"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="54"/>
         <source>Channel %1</source>
         <translation>チャンネル %1</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="55"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="56"/>
         <source>Effects</source>
         <translation>エフェクト</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="122"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="126"/>
         <source>Gain</source>
         <translation>ゲイン</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="125"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="129"/>
         <source>Reverb</source>
         <translation>リバーブ</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="125"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="129"/>
         <source>Reverb level</source>
         <translation>リバーブレベル</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="126"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="130"/>
         <source>Reverb size</source>
         <translation>リバーブサイズ</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="126"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="130"/>
         <source>Reverb width</source>
         <translation>リバーブ幅</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="127"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="131"/>
         <source>Reverb damping</source>
         <translation>リバーブダンプ</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="129"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="133"/>
         <source>Chorus</source>
         <translation>コーラス</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="129"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="133"/>
         <source>Chorus level</source>
         <translation>コーラスレベル</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="130"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="134"/>
         <source>Chorus depth</source>
         <translation>コーラスデプス</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="130"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="134"/>
         <source>Chorus frequency</source>
         <translation>コーラス周波数</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="136"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="140"/>
         <source>Tuning</source>
         <translation>チューニング</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="137"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="141"/>
         <source>Transposition</source>
         <translation>トランスポーズ</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="138"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="142"/>
         <source>semitones</source>
         <translation>半音</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="139"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="143"/>
         <source>Reference pitch</source>
         <translation>基準ピッチ</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="142"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="146"/>
         <source>Temperament</source>
         <translation>音律</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="145"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="149"/>
         <source>Temperament key</source>
         <translation>音律の基準キー</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="183"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="154"/>
+        <source>Velocity</source>
+        <translation>ベロシティ</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="155"/>
+        <source>Velocity to filter</source>
+        <translation>フィルターへのベロシティ</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="157"/>
+        <source>Velocity curve</source>
+        <translation>ベロシティカーブ</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="164"/>
+        <source>None</source>
+        <comment>velocity to filter</comment>
+        <translation>なし</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="200"/>
         <source>Equal</source>
         <comment>Equal musical temperament</comment>
         <translation>平均律</translation>
@@ -8214,62 +8270,62 @@ Other soundfont editors might display other units.</source>
     </message>
     <message>
         <location filename="../../editor/timbre/timbremapwidget.cpp" line="196"/>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="590"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="597"/>
         <source>Decisions</source>
         <translation>判定</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="808"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="815"/>
         <source>No sample</source>
         <translation>サンプルなし</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="821"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="828"/>
         <source>Row: %1</source>
         <translation>行: %1</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="821"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="828"/>
         <source>level: %1 dB</source>
         <translation>レベル: %1 dB</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="826"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="833"/>
         <source>Deviation from the reference: %1 dB</source>
         <translation>基準からの偏差: %1 dB</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="829"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="836"/>
         <source>Jump from the previous key: %1 dB</source>
         <translation>前のキーからの段差: %1 dB</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="842"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="849"/>
         <source>Samples: %1</source>
         <translation>サンプル: %1</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="847"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="854"/>
         <source>Root key: %1</source>
         <translation>ルートキー: %1</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="849"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="856"/>
         <source>Root key: %1, outside the key range of its divisions</source>
         <translation>ルートキー: %1（ディビジョンのキー範囲外）</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="851"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="858"/>
         <source>Transposition: %1 semitones</source>
         <translation>トランスポーズ: %1 半音</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="852"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="859"/>
         <source>Duration factor: %1</source>
         <translation>持続時間の倍率: %1</translation>
     </message>
     <message>
-        <location filename="../../editor/timbre/timbremapwidget.cpp" line="853"/>
+        <location filename="../../editor/timbre/timbremapwidget.cpp" line="860"/>
         <source>Level: %1 dB</source>
         <translation>レベル: %1 dB</translation>
     </message>

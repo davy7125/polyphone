@@ -26,6 +26,7 @@
 #include "pluginprocessor.h"
 #include <cmath>
 #include <cstring>
+#include <iterator>
 #include "plugineditor.h"
 #include "synthconstants.h"
 #include "synthsoundfontfile.h"
@@ -33,9 +34,9 @@
 #include "BinaryData.h"
 
 // Parameters, in the order of _parameterValues
-static const char * PARAMETER_IDS[12] = {
+static const char * PARAMETER_IDS[] = {
     "gain", "reverbLevel", "reverbSize", "reverbWidth", "reverbDamping", "chorusLevel", "chorusDepth", "chorusFrequency",
-    "transpose", "tuning", "temperament", "temperamentKey"
+    "transpose", "tuning", "temperament", "temperamentKey", "velocityToFilter", "velocityCurve"
 };
 
 static const int MAX_RECENT_FILES = 10;
@@ -73,11 +74,14 @@ PluginProcessor::PluginProcessor() :
     _isSoundfontStored(false),
     _polyphony(DEFAULT_POLYPHONY),
     _hasMultipleOutputs(false),
+    _hasFixedLatency(false),
+    _isClipping(true),
     _isPrepared(false),
     _sampleRate(48000.0),
     _maxBlockSize(512)
 {
-    for (int i = 0; i < 12; i++)
+    static_assert(std::size(PARAMETER_IDS) == PARAMETER_COUNT, "one identifier for each parameter");
+    for (int i = 0; i < PARAMETER_COUNT; i++)
     {
         _parameterValues[i] = _parameters.getRawParameterValue(PARAMETER_IDS[i]);
         _appliedValues[i] = NAN; // Applied by the first block
@@ -144,7 +148,20 @@ juce::AudioProcessorValueTreeState::ParameterLayout PluginProcessor::createParam
         std::make_unique<juce::AudioParameterChoice>(
             juce::ParameterID("temperamentKey", 1), tr("Temperament key"),
             juce::StringArray { "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" }, 0)));
+
+    // Added in a later version (versions of the parameters for AU), after the others for the hosts using their order
+    layout.add(std::make_unique<juce::AudioProcessorParameterGroup>(
+        "velocity", tr("Velocity"), "|",
+        std::make_unique<juce::AudioParameterChoice>(juce::ParameterID("velocityToFilter", 2), tr("Velocity to filter"),
+                                                     getVelocityToFilterNames(), 1),
+        std::make_unique<juce::AudioParameterInt>(juce::ParameterID("velocityCurve", 2), tr("Velocity curve"), -100,
+                                                  100, 0)));
     return layout;
+}
+
+juce::StringArray PluginProcessor::getVelocityToFilterNames()
+{
+    return { "2.01", "2.04", tr("None", "velocity to filter") };
 }
 
 const std::vector<PluginProcessor::Temperament> &PluginProcessor::getTemperaments()
@@ -293,6 +310,18 @@ void PluginProcessor::setMultipleOutputs(bool hasMultipleOutputs)
     sendChangeMessage();
 }
 
+void PluginProcessor::setFixedLatency(bool hasFixedLatency)
+{
+    _hasFixedLatency = hasFixedLatency;
+    sendChangeMessage();
+}
+
+void PluginProcessor::setClipping(bool isClipping)
+{
+    _isClipping = isClipping;
+    sendChangeMessage();
+}
+
 void PluginProcessor::timerCallback()
 {
     _engine.deleteUnusedSoundfonts();
@@ -332,9 +361,9 @@ bool PluginProcessor::isBusesLayoutSupported(const BusesLayout &layouts) const
 void PluginProcessor::updateConfiguration()
 {
     // Applied only if a parameter changed
-    float values[12];
+    float values[PARAMETER_COUNT];
     bool hasChanged = false;
-    for (int i = 0; i < 12; i++)
+    for (int i = 0; i < PARAMETER_COUNT; i++)
     {
         values[i] = _parameterValues[i]->load(std::memory_order_relaxed);
         if (std::memcmp(&values[i], &_appliedValues[i], sizeof(float)) != 0)
@@ -359,10 +388,26 @@ void PluginProcessor::updateConfiguration()
     for (int i = 0; i < 12; i++)
         configuration.temperament[i] = temperament.fineTunes[i];
     configuration.temperamentRelativeKey = juce::jlimit(0, 11, juce::roundToInt(values[11]));
+    configuration.modulatorVelToFilterType = juce::jlimit(0, 2, juce::roundToInt(values[12])); // Next notes
     _engine.setConfiguration(configuration, juce::roundToInt(values[8]));
+    _engine.setVelocityCurve(juce::roundToInt(values[13]));
 
-    for (int i = 0; i < 12; i++)
+    for (int i = 0; i < PARAMETER_COUNT; i++)
         _appliedValues[i] = values[i];
+}
+
+// Position of the first note started in a block, or of the first message if no note starts (0 if there is none)
+static int getFirstNotePosition(const juce::MidiBuffer &midiMessages)
+{
+    int firstPosition = -1;
+    for (const juce::MidiMessageMetadata metadata : midiMessages)
+    {
+        if (firstPosition < 0)
+            firstPosition = metadata.samplePosition;
+        if (metadata.numBytes >= 3 && (metadata.data[0] & 0xF0) == 0x90 && metadata.data[2] > 0)
+            return juce::jmax(0, metadata.samplePosition);
+    }
+    return juce::jmax(0, firstPosition);
 }
 
 // Stereo output of a bus, false if it is disabled
@@ -430,7 +475,14 @@ void PluginProcessor::processBlock(juce::AudioBuffer<float> &buffer, juce::MidiB
 
     // Settings, requests of the interface, then the MIDI messages at their position in the block
     updateConfiguration();
-    _engine.beginBlock(!isNonRealtime());
+    _engine.setClipping(_isClipping.load(std::memory_order_relaxed));
+    bool isRealTime = !isNonRealtime();
+    _engine.beginBlock(isRealTime);
+
+    // In real time and without a fixed latency, the messages are moved together so that the first note starts at the
+    // beginning of the block: the notes played live (received during the previous block) start sooner on average, and the
+    // durations between the messages of a block are kept (a short note is not lost)
+    int shift = (isRealTime && !_hasFixedLatency.load(std::memory_order_relaxed)) ? getFirstNotePosition(midiMessages) : 0;
     int position = 0;
     auto render = [this, &outputs, &position](int end) {
         SynthCore::Outputs part;
@@ -449,7 +501,7 @@ void PluginProcessor::processBlock(juce::AudioBuffer<float> &buffer, juce::MidiB
     };
     for (const juce::MidiMessageMetadata metadata : midiMessages)
     {
-        int messagePosition = juce::jlimit(0, frameCount, metadata.samplePosition);
+        int messagePosition = juce::jlimit(0, frameCount, metadata.samplePosition - shift);
         if (messagePosition > position)
             render(messagePosition);
         _engine.processMidi(metadata.data, static_cast<size_t>(metadata.numBytes));
@@ -478,6 +530,8 @@ void PluginProcessor::getStateInformation(juce::MemoryBlock &destData)
     state.appendChild(_parameters.copyState(), nullptr);
     state.setProperty("polyphony", _polyphony, nullptr);
     state.setProperty("multipleOutputs", _hasMultipleOutputs.load(), nullptr);
+    state.setProperty("fixedLatency", _hasFixedLatency.load(), nullptr);
+    state.setProperty("clipping", _isClipping.load(), nullptr);
 
     // Presets
     state.setProperty("mode", static_cast<int>(_engine.getMode()), nullptr);
@@ -522,6 +576,8 @@ void PluginProcessor::setStateInformation(const void * data, int sizeInBytes)
         _parameters.replaceState(parameters);
     setPolyphony(state.getProperty("polyphony", DEFAULT_POLYPHONY));
     _hasMultipleOutputs = static_cast<bool>(state.getProperty("multipleOutputs", false));
+    _hasFixedLatency = static_cast<bool>(state.getProperty("fixedLatency", false));
+    _isClipping = static_cast<bool>(state.getProperty("clipping", true));
 
     // Soundfont read now, the host possibly computing the audio just after (a loading in progress is not used)
     _loadingCount++;

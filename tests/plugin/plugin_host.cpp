@@ -78,6 +78,8 @@ struct PluginState
     int program = 0;
     int polyphony = 1024;
     bool hasMultipleOutputs = false;
+    bool hasFixedLatency = false;
+    bool isClipping = true;
     std::map<juce::String, float> parameters;
 
     juce::MemoryBlock write() const
@@ -95,6 +97,8 @@ struct PluginState
         state.appendChild(parameterTree, nullptr);
         state.setProperty("polyphony", polyphony, nullptr);
         state.setProperty("multipleOutputs", hasMultipleOutputs, nullptr);
+        state.setProperty("fixedLatency", hasFixedLatency, nullptr);
+        state.setProperty("clipping", isClipping, nullptr);
         state.setProperty("mode", mode, nullptr);
         state.setProperty("program", program, nullptr);
         state.setProperty("channelPrograms", "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1", nullptr);
@@ -608,6 +612,91 @@ static int runChecks(const juce::String &pluginPath, const juce::String &soundfo
             isShifted = (i < 2 * static_cast<size_t>(1000 + shift)) ? later[i] == 0.0f : later[i] == early[i - 2 * static_cast<size_t>(shift)];
         check(isShifted, "note " + juce::String(shift) + " frames later, blocks of " + juce::String(blockAndShift.first) +
                              " frames: same rendering shifted");
+    }
+
+    // In real time, the messages of a block are moved together so that its first note starts at the beginning of the
+    // block (the first message if no note starts), or are at their frame with a fixed latency
+    {
+        auto renderRealTime = [&pluginPath](const juce::MemoryBlock &instanceState,
+                                            const std::vector<std::pair<int64_t, juce::MidiMessage>> &noteEvents) {
+            std::unique_ptr<juce::AudioPluginInstance> instance = createInstance(pluginPath, instanceState);
+            instance->setNonRealtime(false);
+            return render(*instance, 48000, 512, noteEvents, 1.0);
+        };
+        std::vector<std::pair<int64_t, juce::MidiMessage>> moved = {
+            { 1024, juce::MidiMessage::noteOn(1, 60, static_cast<juce::uint8>(100)) }, // Block starting at 1024
+            { 24576, juce::MidiMessage::noteOff(1, 60) } }; // Block starting at 24576
+        std::vector<float> expected = render(*createInstance(pluginPath, noteData), 48000, 512, moved, 1.0);
+        check(renderRealTime(noteData, noteAt(1037)) == expected,
+              "real time: messages moved to the beginning of their blocks");
+        PluginState fixedState = noteState;
+        fixedState.hasFixedLatency = true;
+        check(renderRealTime(fixedState.write(), noteAt(1037)) ==
+                  render(*createInstance(pluginPath, noteData), 48000, 512, noteAt(1037), 1.0),
+              "real time with a fixed latency: messages at their frame");
+
+        // A note shorter than a block is kept
+        std::vector<std::pair<int64_t, juce::MidiMessage>> shortNote = {
+            { 1100, juce::MidiMessage::noteOn(1, 60, static_cast<juce::uint8>(100)) },
+            { 1300, juce::MidiMessage::noteOff(1, 60) } };
+        std::vector<std::pair<int64_t, juce::MidiMessage>> shortMoved = {
+            { 1024, juce::MidiMessage::noteOn(1, 60, static_cast<juce::uint8>(100)) },
+            { 1224, juce::MidiMessage::noteOff(1, 60) } };
+        std::vector<float> shortData = renderRealTime(noteData, shortNote);
+        check(isValid(shortData, peak) && peak > 0.001f &&
+                  shortData == render(*createInstance(pluginPath, noteData), 48000, 512, shortMoved, 1.0),
+              "real time: short note kept, its duration being the same");
+    }
+
+    // Clipping to [-1; 1] (default) or not, a chord being played with a high gain
+    {
+        PluginState loudState = noteState;
+        loudState.parameters = { { "gain", 30.0f } };
+        std::vector<std::pair<int64_t, juce::MidiMessage>> chord;
+        for (int key : { 48, 52, 55, 60, 64, 67 })
+            chord.push_back({ 100, juce::MidiMessage::noteOn(1, key, static_cast<juce::uint8>(127)) });
+        float clippedPeak, unclippedPeak;
+        bool isClippedValid = isValid(render(*createInstance(pluginPath, loudState.write()), 48000, 512, chord, 0.5),
+                                      clippedPeak);
+        loudState.isClipping = false;
+        bool isUnclippedValid = isValid(render(*createInstance(pluginPath, loudState.write()), 48000, 512, chord, 0.5),
+                                        unclippedPeak);
+        check(isClippedValid && isUnclippedValid && clippedPeak <= 1.0f && unclippedPeak > 1.0f,
+              "clipping: peak " + juce::String(clippedPeak, 2) + ", without clipping: peak " +
+                  juce::String(unclippedPeak, 2));
+    }
+
+    // Velocity: a concave curve makes a note softer, a convex one louder; above the velocity 64 the default modulator to
+    // the filter lowers the cutoff with the version 2.04, not with the version 2.01 (as without modulator)
+    {
+        auto renderWith = [&](int velocity, const juce::String &parameter, float value, float &notePeak) {
+            PluginState velocityState = noteState;
+            velocityState.parameters = { { parameter, value } };
+            std::vector<std::pair<int64_t, juce::MidiMessage>> note = {
+                { 100, juce::MidiMessage::noteOn(1, 60, static_cast<juce::uint8>(velocity)) } };
+            std::vector<float> data = render(*createInstance(pluginPath, velocityState.write()), 48000, 512, note, 0.5);
+            return isValid(data, notePeak) ? data : std::vector<float>();
+        };
+        float linearPeak, concavePeak, convexPeak, filterPeak;
+        std::vector<float> linear = renderWith(40, "velocityCurve", 0.0f, linearPeak);
+        renderWith(40, "velocityCurve", -100.0f, concavePeak);
+        renderWith(40, "velocityCurve", 100.0f, convexPeak);
+        check(!linear.empty() && linearPeak > 0.001f && concavePeak < linearPeak && convexPeak > linearPeak,
+              "velocity curve: peaks " + juce::String(concavePeak, 3) + " < " + juce::String(linearPeak, 3) + " < " +
+                  juce::String(convexPeak, 3));
+        std::vector<float> version201 = renderWith(100, "velocityToFilter", 0.0f, filterPeak);
+        std::vector<float> version204 = renderWith(100, "velocityToFilter", 1.0f, filterPeak);
+        std::vector<float> withoutFilter = renderWith(100, "velocityToFilter", 2.0f, filterPeak);
+        check(!withoutFilter.empty() && version201 == withoutFilter && version204 != withoutFilter,
+              "velocity to filter at the velocity 100: 2.04 differs from none (" +
+                  toText(maxDifference(version204, withoutFilter)) + "), 2.01 does not");
+
+        // Under the velocity 64, both versions lower the cutoff by the same amount: the amount source of the version
+        // 2.01 is a switch equal to 1, the one of the version 2.04 is "no controller", treated as 1
+        std::vector<float> softVersion201 = renderWith(40, "velocityToFilter", 0.0f, filterPeak);
+        check(!softVersion201.empty() && softVersion201 == linear,
+              "velocity to filter at the velocity 40: 2.01 and 2.04 identical (" +
+                  toText(maxDifference(softVersion201, linear)) + ")");
     }
 
     // Multiple outputs, with effects: each channel playing has its own output, the others are silent, and with the one

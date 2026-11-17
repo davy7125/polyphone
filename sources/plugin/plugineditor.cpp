@@ -46,6 +46,8 @@ static const int POLYPHONIES[] = { 64, 128, 256, 512, 1024, 2048, 4096 };
 static const int MENU_CHANNEL = 10000; // + channel
 static const int MENU_STORE_SOUNDFONT = 20000;
 static const int MENU_MULTIPLE_OUTPUTS = 20001;
+static const int MENU_FIXED_LATENCY = 20002;
+static const int MENU_CLIPPING = 20003;
 static const int MENU_SYSTEM_LANGUAGE = 30000;
 static const int MENU_LANGUAGE = 30001; // + index of the language
 
@@ -260,6 +262,92 @@ struct PluginEditor::Knob
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> attachment;
 };
 
+/// Response to the velocity (0 to 127 from left to right): lowering of the filter cutoff by the default modulator, or
+/// velocity played after the curve
+
+class PluginEditor::VelocityGraph: public juce::Component,
+                                   public juce::SettableTooltipClient
+{
+public:
+    enum Type
+    {
+        TYPE_FILTER, // Value: modulator 2.01 (0), 2.04 (1) or none (2), the cutoff being lowered by up to 2 octaves
+        TYPE_CURVE   // Value: curve from -100 to 100 (PluginEngine::getCurvedVelocity)
+    };
+
+    explicit VelocityGraph(Type type) :
+        _type(type),
+        _value(type == TYPE_FILTER ? 1 : 0)
+    {
+        setInterceptsMouseClicks(true, false); // Tooltip
+    }
+
+    void setValue(int value)
+    {
+        if (value != _value)
+        {
+            _value = value;
+            repaint();
+        }
+    }
+
+    void paint(juce::Graphics &g) override
+    {
+        juce::Rectangle<float> box = getLocalBounds().toFloat().reduced(0.5f);
+        g.setColour(LIST_COLOR);
+        g.fillRoundedRectangle(box, 3.0f);
+        g.setColour(OUTLINE_COLOR);
+        g.drawRoundedRectangle(box, 3.0f, 1.0f);
+        juce::Rectangle<float> plot = box.reduced(6.0f, 5.0f);
+        if (plot.getWidth() < 4.0f || plot.getHeight() < 4.0f)
+            return;
+        auto getX = [&plot](int velocity) { return plot.getX() + plot.getWidth() * static_cast<float>(velocity) / 127.0f; };
+        auto getY = [&plot](float level) { return plot.getBottom() - plot.getHeight() * level; };
+
+        // Reference: unchanged velocity, or the middle velocity (jump of the modulator 2.01)
+        const float dashes[2] = { 3.0f, 3.0f };
+        g.setColour(OUTLINE_COLOR);
+        if (_type == TYPE_CURVE)
+            g.drawDashedLine(juce::Line<float>(getX(0), getY(0.0f), getX(127), getY(1.0f)), dashes, 2);
+        else
+            g.drawDashedLine(juce::Line<float>(getX(64), plot.getY(), getX(64), plot.getBottom()), dashes, 2);
+
+        // Response, the jump of the modulator 2.01 being vertical
+        juce::Path path;
+        for (int velocity = 0; velocity <= 127; velocity++)
+        {
+            float x = getX(velocity);
+            float y = getY(getLevel(velocity));
+            if (velocity == 0)
+                path.startNewSubPath(x, y);
+            else
+            {
+                if (_type == TYPE_FILTER && _value == 0 && velocity == 64)
+                    path.lineTo(x, getY(getLevel(63)));
+                path.lineTo(x, y);
+            }
+        }
+        g.setColour(HIGHLIGHT_COLOR);
+        g.strokePath(path, juce::PathStrokeType(1.5f, juce::PathStrokeType::mitered, juce::PathStrokeType::rounded));
+    }
+
+private:
+    // From 0 (bottom) to 1 (top)
+    float getLevel(int velocity) const
+    {
+        if (_type == TYPE_CURVE)
+            return static_cast<float>(PluginEngine::getCurvedVelocity(velocity, _value)) / 127.0f;
+
+        // Linear source (velocity / 128), descending, possibly multiplied by a descending switch (2.01): -2400 cents
+        if (_value == 2 || (_value == 0 && velocity >= 64))
+            return 1.0f;
+        return static_cast<float>(velocity) / 128.0f;
+    }
+
+    Type _type;
+    int _value;
+};
+
 /// Editor
 
 PluginEditor::PluginEditor(PluginProcessor &pluginProcessor) :
@@ -325,6 +413,38 @@ PluginEditor::PluginEditor(PluginProcessor &pluginProcessor) :
     addAndMakeVisible(_temperamentKeyBox);
     _temperamentKeyAttachment.reset(new juce::AudioProcessorValueTreeState::ComboBoxAttachment(
         _processor.getParameterState(), "temperamentKey", _temperamentKeyBox));
+
+    // Velocity, the graphs following the parameters (changed by the interface or by the host)
+    _velocityToFilterLabel.setFont(juce::FontOptions(13.0f));
+    addAndMakeVisible(_velocityToFilterLabel);
+    juce::StringArray velocityToFilterNames = PluginProcessor::getVelocityToFilterNames();
+    for (int i = 0; i < velocityToFilterNames.size(); i++)
+        _velocityToFilterBox.addItem(velocityToFilterNames[i], i + 1);
+    addAndMakeVisible(_velocityToFilterBox);
+    _velocityToFilterGraph.reset(new VelocityGraph(VelocityGraph::TYPE_FILTER));
+    addAndMakeVisible(_velocityToFilterGraph.get());
+    _velocityToFilterBox.onChange = [this] {
+        _velocityToFilterGraph->setValue(_velocityToFilterBox.getSelectedItemIndex());
+    };
+    _velocityToFilterAttachment.reset(new juce::AudioProcessorValueTreeState::ComboBoxAttachment(
+        _processor.getParameterState(), "velocityToFilter", _velocityToFilterBox));
+    _velocityCurveLabel.setFont(juce::FontOptions(13.0f));
+    addAndMakeVisible(_velocityCurveLabel);
+    _velocityCurveSlider.setSliderStyle(juce::Slider::LinearHorizontal);
+    _velocityCurveSlider.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
+    _velocityCurveSlider.setPopupDisplayEnabled(true, false, this); // Value while dragging
+    _velocityCurveSlider.setColour(juce::Slider::trackColourId, LIST_COLOR); // Linear in the middle: no filled part
+    _velocityCurveSlider.setColour(juce::Slider::backgroundColourId, LIST_COLOR);
+    addAndMakeVisible(_velocityCurveSlider);
+    _velocityCurveGraph.reset(new VelocityGraph(VelocityGraph::TYPE_CURVE));
+    addAndMakeVisible(_velocityCurveGraph.get());
+    _velocityCurveSlider.onValueChange = [this] {
+        _velocityCurveGraph->setValue(juce::roundToInt(_velocityCurveSlider.getValue()));
+    };
+    _velocityCurveAttachment.reset(new juce::AudioProcessorValueTreeState::SliderAttachment(
+        _processor.getParameterState(), "velocityCurve", _velocityCurveSlider));
+    _velocityToFilterGraph->setValue(_velocityToFilterBox.getSelectedItemIndex());
+    _velocityCurveGraph->setValue(juce::roundToInt(_velocityCurveSlider.getValue()));
 
     // Keyboard and what is played
     _keyboard.setKeyWidth(14.0f);
@@ -406,6 +526,22 @@ void PluginEditor::updateTexts()
     _temperamentBox.changeItemText(1, PluginProcessor::getTemperamentName(0));
     _temperamentBox.setTooltip(tr("Temperament, its fine tunes being relative to the key chosen on the right"));
     _temperamentKeyBox.setTooltip(tr("Key of reference of the temperament"));
+
+    // Velocity, the tooltips being the same for the label, the control and the graph of a setting
+    _velocityToFilterLabel.setText(tr("Filter"), juce::dontSendNotification);
+    _velocityToFilterBox.changeItemText(3, PluginProcessor::getVelocityToFilterNames()[2]);
+    juce::String velocityToFilterTooltip = tr("Default modulator lowering the filter cutoff according to the velocity "
+                                              "(up to 2 octaves): version 2.04 of the SoundFont format, version 2.01 "
+                                              "for old soundfonts made with its jump at the velocity 64, or none");
+    for (juce::SettableTooltipClient * client : std::initializer_list<juce::SettableTooltipClient *> {
+             &_velocityToFilterLabel, &_velocityToFilterBox, _velocityToFilterGraph.get() })
+        client->setTooltip(velocityToFilterTooltip);
+    _velocityCurveLabel.setText(tr("Curve"), juce::dontSendNotification);
+    juce::String velocityCurveTooltip = tr("Velocity curve: linear in the middle, concave to the left (softer velocity), "
+                                           "convex to the right (velocity rising quickly)");
+    for (juce::SettableTooltipClient * client : std::initializer_list<juce::SettableTooltipClient *> {
+             &_velocityCurveLabel, &_velocityCurveSlider, _velocityCurveGraph.get() })
+        client->setTooltip(velocityCurveTooltip);
 
     _panicButton.setButtonText(tr("Panic"));
     _panicButton.setTooltip(tr("Stop all sounds and reset the controllers"));
@@ -634,6 +770,10 @@ void PluginEditor::showSettings()
     menu.addSubMenu(tr("Keyboard"), channelMenu);
     menu.addSubMenu(tr("Language"), languageMenu);
     menu.addSeparator();
+    menu.addItem(MENU_FIXED_LATENCY, tr("Fixed latency (notes played at their exact position)"), true,
+                 _processor.hasFixedLatency());
+    menu.addItem(MENU_CLIPPING, tr("Clipping to [-1; 1]"), true, _processor.isClipping());
+    menu.addSeparator();
     // An sfz file is not stored: its samples are other files
     bool isSfz = _processor.getSoundfontFile().hasFileExtension("sfz");
     menu.addItem(MENU_STORE_SOUNDFONT,
@@ -653,6 +793,10 @@ void PluginEditor::showSettings()
             _processor.setSoundfontStored(!_processor.isSoundfontStored());
         else if (result == MENU_MULTIPLE_OUTPUTS)
             _processor.setMultipleOutputs(!_processor.hasMultipleOutputs());
+        else if (result == MENU_FIXED_LATENCY)
+            _processor.setFixedLatency(!_processor.hasFixedLatency());
+        else if (result == MENU_CLIPPING)
+            _processor.setClipping(!_processor.isClipping());
         else if (result == MENU_SYSTEM_LANGUAGE ||
                  (result >= MENU_LANGUAGE && result < MENU_LANGUAGE + static_cast<int>(languages.size())))
         {
@@ -688,7 +832,7 @@ void PluginEditor::paint(juce::Graphics &g)
         juce::String title;
     };
     for (const Group &group : { Group { _synthArea, tr("Synth") }, Group { _reverbArea, tr("Reverb") },
-                                Group { _chorusArea, tr("Chorus") } })
+                                Group { _chorusArea, tr("Chorus") }, Group { _velocityArea, tr("Velocity") } })
     {
         g.setColour(HEADER_COLOR);
         g.fillRoundedRectangle(group.area.toFloat(), 6.0f);
@@ -737,9 +881,20 @@ void PluginEditor::resized()
     _statusLabel.setBounds(footer);
     _keyboard.setBounds(area.removeFromBottom(90).reduced(8, 2));
 
-    // Presets on the left
+    // Parameters on the right by group, the presets on the left above the velocity (aligned with the chorus)
     juce::Rectangle<int> body = area.reduced(8, 8);
     juce::Rectangle<int> left = body.removeFromLeft(body.getWidth() * 45 / 100);
+    body.removeFromLeft(10);
+    int groupHeight = (body.getHeight() - 16) / 3;
+    _synthArea = body.removeFromTop(groupHeight);
+    body.removeFromTop(8);
+    _reverbArea = body.removeFromTop(groupHeight);
+    body.removeFromTop(8);
+    _chorusArea = body;
+    _velocityArea = left.removeFromBottom(_chorusArea.getHeight());
+    left.removeFromBottom(8);
+
+    // Presets
     juce::Rectangle<int> modes = left.removeFromTop(28);
     int modeWidth = modes.getWidth();
     _onePresetButton.setBounds(modes.removeFromLeft(modeWidth * 2 / 5));
@@ -756,15 +911,26 @@ void PluginEditor::resized()
     for (int channel = 0; channel < 16; channel++)
         _channelRows[static_cast<size_t>(channel)]->setBounds(0, channel * 28, rowWidth, 28);
 
-    // Parameters on the right, by group
-    body.removeFromLeft(10);
-    int groupHeight = (body.getHeight() - 16) / 3;
-    _synthArea = body.removeFromTop(groupHeight);
-    body.removeFromTop(8);
-    _reverbArea = body.removeFromTop(groupHeight);
-    body.removeFromTop(8);
-    _chorusArea = body;
+    // Velocity: two columns, a graph above a label and its control (the label as wide as its text)
+    juce::Rectangle<int> velocity = _velocityArea.reduced(6, 4);
+    velocity.removeFromTop(18);
+    juce::Rectangle<int> velocityColumns[2] = { velocity.removeFromLeft(velocity.getWidth() / 2), velocity };
+    juce::Label * velocityLabels[2] = { &_velocityToFilterLabel, &_velocityCurveLabel };
+    juce::Component * velocityControls[2] = { &_velocityToFilterBox, &_velocityCurveSlider };
+    VelocityGraph * velocityGraphs[2] = { _velocityToFilterGraph.get(), _velocityCurveGraph.get() };
+    for (int i = 0; i < 2; i++)
+    {
+        juce::Rectangle<int> column = velocityColumns[i].reduced(4, 2);
+        juce::Rectangle<int> row = column.removeFromBottom(24);
+        column.removeFromBottom(4);
+        velocityGraphs[i]->setBounds(column);
+        int labelWidth = juce::GlyphArrangement::getStringWidthInt(velocityLabels[i]->getFont(),
+                                                                   velocityLabels[i]->getText()) + 10;
+        velocityLabels[i]->setBounds(row.removeFromLeft(juce::jmin(labelWidth, row.getWidth() / 2)));
+        velocityControls[i]->setBounds(row);
+    }
 
+    // Parameters
     auto layoutKnobs = [this](juce::Rectangle<int> groupArea, size_t first, size_t count, int slots) {
         juce::Rectangle<int> inside = groupArea.reduced(6, 4);
         inside.removeFromTop(18);

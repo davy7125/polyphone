@@ -108,12 +108,25 @@ public:
     // Settings of the synth, reached progressively (no click), and transposition of the next notes
     void setConfiguration(const SynthCoreConfig &configuration, int transposition);
 
+    // Velocity curve of the next notes, from -100 to 100 (see getCurvedVelocity)
+    void setVelocityCurve(int curve);
+
+    // Outputs clipped to [-1; 1] or not
+    void setClipping(bool isClipping);
+
     // A block: beginBlock (requests of the owner threads), the MIDI messages and the frames in their order, endBlock
     // The frames go to the main output, and possibly to the outputs of the channels and of the effects
     void beginBlock(bool isRealTime);
     void processMidi(const uint8_t * message, size_t length);
     void render(const SynthCore::Outputs &outputs, uint32_t frameCount);
     void endBlock();
+
+    /// Any thread
+
+    // Velocity (1 to 127) of a note played with a curve: linear for 0, concave towards -100 (the velocity rises slowly),
+    // convex towards 100 (it rises quickly). The velocity follows the power 3^(-curve / 100) of its value and stays at
+    // least 1 (a velocity of 0 would release the note).
+    static int getCurvedVelocity(int velocity, int curve);
 
 private:
     struct Command
@@ -147,6 +160,8 @@ private:
     uint32_t _sampleRate;
     uint32_t _blockFrameCount;
     std::chrono::steady_clock::time_point _blockStart;
+    int _velocityCurve;
+    uint8_t _curvedVelocities[128];
 
     // Owner threads
     std::mutex _ownerMutex;

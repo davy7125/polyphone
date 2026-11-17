@@ -248,8 +248,9 @@ double ParameterModulator::getValue(SFModulator sfMod)
         switch (sfMod.Index)
         {
         case GC_noController:
-            // Will be "1"
-            value = 127;
+            // Treated as "1" (SF2 specifications): the end of the range, which the shapes turn into 1 (127 would give
+            // 127 / 128 with a linear shape)
+            value = 128;
             break;
         case GC_noteOnVelocity:
             value = _velForComputation;

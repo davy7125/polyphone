@@ -115,6 +115,10 @@ public:
     // duration of the audio (configuration). Offline (a rendering to a file), the computation time is not limited.
     void setRealTime(bool isRealTime);
 
+    // The outputs are clipped to [-1; 1] (default), or not (a plugin whose host mixes floating-point values), by the
+    // thread computing the audio
+    void setClipping(bool isClipping) { _isClipping = isClipping; }
+
     // Compute len frames in the calling thread, any length: voices, effects and clipping
     // The voices are computed by whole chunks (COMPUTATION_CHUNK): the frames computed and not asked are returned
     // first by the next call, and an event (note, controller...) is heard from the next chunk computed
@@ -168,6 +172,7 @@ private:
     float _channelGains[MAX_CHANNEL + 2]; // From channel -1
     bool _smplIsStereoEnabled;
     bool _smplIsLoopEnabled;
+    bool _isClipping;
     VoiceContext _context; // Read by the voices
 
     // Data replacing the data of samples played alone or by all voices (setSampleData), protected by _voicesMutex

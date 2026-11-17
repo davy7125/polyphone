@@ -23,11 +23,15 @@ LV2, AU (macOS) and a standalone application ("Polyphone Player", not distribute
     zone sends the messages of all its notes: its pitch bend is added to the one of each note, its
     controllers apply to all of them (except the timbre, CC 74). The pitch bend range is 48
     semitones for the notes and 2 for the master channel, changed by the RPN 0.
-- Notes at the frame: a note starts at the frame of its MIDI message, whatever the size of the
-  blocks given by the host. The rendering does not depend on the size of the blocks, except
-  rounding errors (about -140 dBFS) and the parameters automated, applied at the start of a block.
-  The other messages (release, controllers) change a note from the next chunk of 64 frames it
-  computes from its start.
+- Notes at the frame: offline, or in real time with a fixed latency (Settings), a note starts at the
+  frame of its MIDI message, whatever the size of the blocks given by the host. The rendering does
+  not depend on the size of the blocks, except rounding errors (about -140 dBFS) and the parameters
+  automated, applied at the start of a block. The other messages (release, controllers) change a
+  note from the next chunk of 64 frames it computes from its start. In real time without a fixed
+  latency (default), the messages of a block are moved together so that its first note starts at
+  the beginning of the block (the first message if no note starts): the notes played live start
+  half a block sooner on average, as with the players ignoring the positions in the blocks, and
+  the durations between the messages of a block are kept (a short note is not lost).
 - Multiple outputs (Settings, disabled by default): the outputs "Channel 1" to "Channel 16" receive
   the part of the notes of their channel without effect, and the output "Effects" the part sent to
   the reverb and the chorus, after them. A channel goes to the main output if its output is not
@@ -36,12 +40,15 @@ LV2, AU (macOS) and a standalone application ("Polyphone Player", not distribute
   standalone application, which only plays the main output (the player of JUCE).
 - Parameters that the host can automate, with the ranges of the settings of the editor: gain,
   reverb (level, size, width, damping), chorus (level, depth, frequency), transposition (except the
-  percussions), reference pitch and temperament (the ones of the editor).
+  percussions), reference pitch and temperament (the ones of the editor), velocity: default modulator
+  to the filter cutoff (2.01, 2.04 or none, as in the editor) and curve applied to the velocity of
+  the notes (power 3^(-curve / 100), linear by default), both drawn in a graph.
 - A keyboard showing the notes received and played with the mouse, the number of voices, the share of
   the processor taken and a panic button (all sounds stopped, controllers reset).
-- Settings: polyphony, channel of the keyboard, language, and the soundfont stored in the project of
-  the host (the project can then be opened without the file; not possible with an sfz file, whose
-  samples are other files).
+- Settings: polyphony, channel of the keyboard, language, fixed latency (see above), clipping of the
+  outputs to [-1; 1] (enabled by default; disabled, the host receives the higher values and mixes
+  them as floating-point numbers), and the soundfont stored in the project of the host (the project
+  can then be opened without the file; not possible with an sfz file, whose samples are other files).
 - Interface in the languages of the editor: the language of the system by default, or the one chosen
   in Settings > Language (shared by all instances, saved with the recent files). The open windows
   change at once; the names of the parameters and of the outputs given to the host are the ones of
@@ -102,8 +109,9 @@ The version is the one of the editor, read in `sources/version.txt` (its numbers
   is played on the 16 channels by `SynthCore`, `MidiProcessor` and `SynthChannels`. The requests of
   the other threads (soundfont, presets, panic) go through a `SynthQueue` and are applied by the audio
   thread, which never waits: a soundfont replaced is released once no voice reads it anymore
-  (`SynthSoundfontSet`). The MIDI messages are processed at their position in the blocks, the sound
-  being computed at the frame (`SynthCore::renderExact`).
+  (`SynthSoundfontSet`). The MIDI messages are processed at their position in the blocks (possibly
+  moved together, see above), the sound being computed at the frame (`SynthCore::renderExact`). The
+  velocity curve is applied to the notes before the synth.
 - `pluginsoundfont`: the soundfonts read, shared by the instances of the plugin in the process
   (without JUCE).
 

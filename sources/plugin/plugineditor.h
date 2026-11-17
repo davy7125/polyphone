@@ -59,6 +59,7 @@ private:
     class LookAndFeel;
     class PresetList;
     class ChannelRow;
+    class VelocityGraph;
     struct Knob;
 
     void changeListenerCallback(juce::ChangeBroadcaster * source) override;
@@ -106,6 +107,17 @@ private:
     std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> _temperamentAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> _temperamentKeyAttachment;
     juce::Rectangle<int> _synthArea, _reverbArea, _chorusArea;
+
+    // Velocity: default modulator to the filter cutoff and curve, with their graphs
+    juce::Label _velocityToFilterLabel;
+    juce::ComboBox _velocityToFilterBox;
+    std::unique_ptr<VelocityGraph> _velocityToFilterGraph;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> _velocityToFilterAttachment;
+    juce::Label _velocityCurveLabel;
+    juce::Slider _velocityCurveSlider;
+    std::unique_ptr<VelocityGraph> _velocityCurveGraph;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> _velocityCurveAttachment;
+    juce::Rectangle<int> _velocityArea;
 
     // Keyboard and what is played
     juce::MidiKeyboardComponent _keyboard;

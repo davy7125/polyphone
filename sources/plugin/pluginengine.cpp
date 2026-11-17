@@ -25,6 +25,7 @@
 
 #include "pluginengine.h"
 #include <algorithm>
+#include <cmath>
 #include "synthcore.h"
 #include "synthchannels.h"
 #include "midiprocessor.h"
@@ -42,6 +43,7 @@ PluginEngine::PluginEngine() :
     _sf2Index(-1),
     _sampleRate(48000),
     _blockFrameCount(0),
+    _velocityCurve(0),
     _mode(MODE_ONE_PRESET),
     _program(0),
     _programsPending(false),
@@ -54,6 +56,8 @@ PluginEngine::PluginEngine() :
     _channels.reset(new SynthChannels(_core.get(), _soundfonts.get()));
     _midiProcessor->setListener(_channels.get());
     _core->setMidiValues(_midiProcessor.get());
+    for (int velocity = 0; velocity < 128; velocity++)
+        _curvedVelocities[velocity] = static_cast<uint8_t>(velocity);
 
     for (int channel = 0; channel < 16; channel++)
     {
@@ -256,6 +260,21 @@ void PluginEngine::setConfiguration(const SynthCoreConfig &configuration, int tr
     _channels->setTransposition(transposition);
 }
 
+void PluginEngine::setVelocityCurve(int curve)
+{
+    curve = std::clamp(curve, -100, 100);
+    if (curve == _velocityCurve)
+        return;
+    _velocityCurve = curve;
+    for (int velocity = 0; velocity < 128; velocity++)
+        _curvedVelocities[velocity] = static_cast<uint8_t>(getCurvedVelocity(velocity, curve));
+}
+
+void PluginEngine::setClipping(bool isClipping)
+{
+    _core->setClipping(isClipping);
+}
+
 void PluginEngine::beginBlock(bool isRealTime)
 {
     _blockStart = std::chrono::steady_clock::now();
@@ -314,11 +333,31 @@ void PluginEngine::applyPrograms()
 
 void PluginEngine::processMidi(const uint8_t * message, size_t length)
 {
-    if (length >= 3 && (message[0] & 0xF0) == 0x90 && message[2] > 0)
-        _channelActivity[message[0] & 0x0F].fetch_add(1, std::memory_order_relaxed);
     // The values of the controllers sent by a host are absolute (a host may send the same value again and again, which
     // would be taken for relative values coming from a device)
+    if (length >= 3 && (message[0] & 0xF0) == 0x90 && message[2] > 0)
+    {
+        _channelActivity[message[0] & 0x0F].fetch_add(1, std::memory_order_relaxed);
+
+        // Note with the velocity curve
+        if (_velocityCurve != 0)
+        {
+            const uint8_t curved[3] = { message[0], message[1], _curvedVelocities[message[2] & 0x7F] };
+            _midiProcessor->processMidiMessage(curved, 3, false);
+            return;
+        }
+    }
     _midiProcessor->processMidiMessage(message, length, false);
+}
+
+int PluginEngine::getCurvedVelocity(int velocity, int curve)
+{
+    velocity = std::clamp(velocity, 0, 127);
+    if (curve == 0 || velocity == 0)
+        return velocity;
+    double exponent = std::pow(3.0, -0.01 * std::clamp(curve, -100, 100));
+    int curved = static_cast<int>(std::lround(127.0 * std::pow(velocity / 127.0, exponent)));
+    return std::clamp(curved, 1, 127);
 }
 
 void PluginEngine::render(const SynthCore::Outputs &outputs, uint32_t frameCount)
