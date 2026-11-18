@@ -87,6 +87,7 @@ int main(int argc, char ** argv)
         juce::MidiBuffer midi;
         for (int key : { 60, 64, 67 })
             midi.addEvent(juce::MidiMessage::noteOn(1, key, static_cast<juce::uint8>(100)), 0);
+        processor.setNonRealtime(true); // Samples read before the block
         processor.processBlock(buffer, midi);
 
         std::unique_ptr<juce::AudioProcessorEditor> editor(processor.createEditor());

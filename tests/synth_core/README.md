@@ -5,8 +5,9 @@ how its classes behave between the threads of a plugin, where the audio thread m
 
 ## stress_threads
 
-An "interface" thread reads soundfonts with `SynthSoundfontFile` (from the file, or from its content
-in memory every other time) and replaces the soundfont played, while the audio thread plays notes
+An "interface" thread reads soundfonts with `SynthSoundfontFile` (from the file or from its content
+in memory, at once or progressively: played at once, while two threads read their samples as the
+plugin does) and replaces the soundfont played, while the audio thread plays notes
 on the 16 channels (`MidiProcessor`, `SynthChannels`, `SynthCore`). The interface also sends notes
 through a `SynthQueue`, as a virtual keyboard would. A soundfont replaced is removed by the audio
 thread (`SynthSoundfontSet::remove`, its voices released quickly), marked as unused once it has no
@@ -26,11 +27,15 @@ cmake --build build/synth_core_asan
 build/synth_core_asan/stress_threads 20 <soundfont> [<soundfont>...]
 ```
 
+At the end, each soundfont is read progressively again: a sample asked by a note must be read first,
+and the data must be the one read at once.
+
 The first argument is the duration in seconds. Give several soundfonts of different sizes, an sf3
 file among them (for instance the soundfonts of `tests/render`: `polyphone-test.sf2`,
 `VintageDreamsWaves-v2.sf3`, `FluidR3_GM.sf2`). The test prints what happened and `OK`, or `FAILED`
-if a soundfont cannot be read, if the synth computes an invalid value or nothing, or if no soundfont
-could be deleted while playing. The sanitizer reports are printed before.
+if a soundfont cannot be read, if the synth computes an invalid value or nothing, if no soundfont
+could be deleted while playing, or if the progressive reading differs. The sanitizer reports are
+printed before.
 
 ThreadSanitizer may refuse to start on recent kernels ("unexpected memory mapping"): run it with
 `setarch -R` (no address randomization).

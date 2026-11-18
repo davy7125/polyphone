@@ -277,8 +277,9 @@ int SynthCore::playSmpl(int sf2Id, ISynthSample * smpl, int channel, int key, in
                         ISynthInstPrst * inst, ISynthZone * instZone,
                         ISynthInstPrst * prst, ISynthZone * prstZone)
 {
-    // Load the sound
-    smpl->loadData();
+    // Load the sound: not played if its data is not available yet (no voice taken)
+    if (!smpl->loadData())
+        return -1;
 
     int currentToken = _sampleVoiceTokenCounter.fetch_add(1, std::memory_order_relaxed);
 
@@ -639,7 +640,8 @@ void SynthCore::replaceVoiceData(Voice * voice, ISynthSample * smpl, const Repla
     {
         // Sample data
         uint32_t sampleLength;
-        smpl->loadData();
+        if (!smpl->loadData())
+            return;
         smpl->getData(sampleLength, data16, data24, true);
         if (sampleLength != length)
         {

@@ -26,10 +26,12 @@
 #ifndef PLUGINSOUNDFONT_H
 #define PLUGINSOUNDFONT_H
 
+#include <atomic>
 #include <cstddef>
 #include <filesystem>
 #include <memory>
 #include <string>
+#include <thread>
 #include <vector>
 class SynthSoundfontFile;
 
@@ -37,6 +39,8 @@ class SynthSoundfontFile;
 // track for instance) is read once, and stays in memory as long as one of them plays it. A file is read again if it
 // changed (size or modification time). The content of a file stored in the state of an instance is shared in the same
 // way.
+// The structure is read at once, the samples afterwards by threads of this object while the soundfont is played (see
+// SynthSoundfontFile): several threads for the sf3 files, whose data is decompressed. They stop when it is deleted.
 class PluginSoundfont: public std::enable_shared_from_this<PluginSoundfont>
 {
 public:
@@ -52,6 +56,9 @@ public:
     // Soundfont played, sharing the ownership of this object
     std::shared_ptr<SynthSoundfontFile> getSynthSoundfont();
 
+    // Share of the sample data read, 1 when everything is read
+    float getLoadedRatio() const;
+
     // Content read in memory, empty if the soundfont has been read from a file
     const std::vector<char> &getContent() const { return _content; }
 
@@ -60,9 +67,12 @@ public:
 
 private:
     PluginSoundfont();
+    void startLoading(); // Threads reading the samples
 
     std::unique_ptr<SynthSoundfontFile> _soundfont;
-    std::vector<char> _content;
+    std::vector<char> _content; // Read by the threads until all samples are read
+    std::vector<std::thread> _loadingThreads;
+    std::atomic<bool> _isStopping;
 };
 
 #endif // PLUGINSOUNDFONT_H

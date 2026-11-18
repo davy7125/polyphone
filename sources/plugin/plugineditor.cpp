@@ -583,6 +583,40 @@ public:
     }
 };
 
+/// Spinner shown while a soundfont is read
+
+class PluginEditor::LoadingSpinner: public juce::Component,
+                                    public juce::SettableTooltipClient,
+                                    private juce::Timer
+{
+public:
+    void visibilityChanged() override
+    {
+        if (isVisible())
+            startTimerHz(30);
+        else
+            stopTimer();
+    }
+
+    void paint(juce::Graphics &g) override
+    {
+        // An arc turning once per second on a circle
+        juce::Rectangle<float> circle = getLocalBounds().toFloat().withSizeKeepingCentre(14.0f, 14.0f).reduced(1.0f);
+        g.setColour(OUTLINE_COLOR);
+        g.drawEllipse(circle, 2.0f);
+        float angle = juce::MathConstants<float>::twoPi * static_cast<float>(juce::Time::getMillisecondCounter() % 1000) /
+                      1000.0f;
+        juce::Path arc;
+        arc.addCentredArc(circle.getCentreX(), circle.getCentreY(), circle.getWidth() / 2.0f, circle.getHeight() / 2.0f,
+                          angle, 0.0f, 0.5f * juce::MathConstants<float>::pi, true);
+        g.setColour(HIGHLIGHT_COLOR);
+        g.strokePath(arc, juce::PathStrokeType(2.0f, juce::PathStrokeType::curved, juce::PathStrokeType::rounded));
+    }
+
+private:
+    void timerCallback() override { repaint(); }
+};
+
 /// Widths of the groups on the right side
 
 struct PluginEditor::RightWidths
@@ -607,6 +641,8 @@ PluginEditor::PluginEditor(PluginProcessor &pluginProcessor) :
     _logo = juce::ImageCache::getFromMemory(BinaryData::logo_png, BinaryData::logo_pngSize);
 
     // Soundfont
+    _loadingSpinner.reset(new LoadingSpinner());
+    addChildComponent(_loadingSpinner.get());
     _soundfontLabel.setFont(juce::FontOptions(18.0f, juce::Font::bold));
     addAndMakeVisible(_soundfontLabel);
     _messageLabel.setFont(juce::FontOptions(13.0f));
@@ -1028,6 +1064,7 @@ void PluginEditor::refresh()
         _messageLabel.setColour(juce::Label::textColourId, DIM_TEXT_COLOR);
     }
     _soundfontLabel.setTooltip(juce::String::fromUTF8(engine.getSoundfontInfo("ICOP").c_str()));
+    updateLoading();
 
     // Presets played
     _presets = engine.getPresets();
@@ -1050,6 +1087,25 @@ void PluginEditor::refresh()
     updateTuning();
 }
 
+void PluginEditor::updateLoading()
+{
+    // Spinner in front of the name while the soundfont is read, then its samples (the notes of the samples not read
+    // yet being silent)
+    float ratio = _processor.getLoadedRatio();
+    bool isLoading = _processor.isLoading() || ratio < 1.0f;
+    if (isLoading)
+        _loadingSpinner->setTooltip(ratio < 1.0f ?
+                                        PluginTranslator::arg(tr("Loading the sounds: %1 %"),
+                                                              juce::String(static_cast<int>(100.0f * ratio))) + "\n" +
+                                            tr("Some sounds may be missing until the loading is complete.") :
+                                        tr("Loading..."));
+    if (_loadingSpinner->isVisible() != isLoading)
+    {
+        _loadingSpinner->setVisible(isLoading);
+        resized();
+    }
+}
+
 void PluginEditor::setMode(PluginEngine::Mode mode)
 {
     _processor.getEngine().setMode(mode);
@@ -1070,6 +1126,8 @@ void PluginEditor::timerCallback()
     // Switches, temperament and tonality possibly changed by the host
     updateGroups();
     updateTuning();
+
+    updateLoading();
 
     PluginEngine &engine = _processor.getEngine();
     juce::String load(juce::roundToInt(100.0f * engine.getLoad()));
@@ -1278,7 +1336,10 @@ void PluginEditor::resized()
     gain->slider.setBounds(header.removeFromRight(44 + 64));
     gain->label.setBounds(header.removeFromRight(getLabelWidth(gain->label)));
     header.removeFromRight(12);
-    _soundfontLabel.setBounds(header.removeFromTop(24));
+    juce::Rectangle<int> nameArea = header.removeFromTop(24);
+    if (_loadingSpinner->isVisible())
+        _loadingSpinner->setBounds(nameArea.removeFromLeft(20));
+    _soundfontLabel.setBounds(nameArea);
     _messageLabel.setBounds(header);
 
     // Footer: what is played and buttons, then the keyboard

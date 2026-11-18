@@ -65,6 +65,7 @@ private:
     class SwitchButton;
     class FieldSlider;
     class InfoIcon;
+    class LoadingSpinner;
     struct RightWidths;
     struct Knob;
 
@@ -82,6 +83,7 @@ private:
     RightWidths getRightWidths(); // Width needed by the groups on the right side (texts in the current language)
     void updateStandaloneTexts();
     void refresh(); // Soundfont, presets and settings
+    void updateLoading(); // Spinner shown while the soundfont is read
     void openFile();
     void showRecentFiles();
     void showSettings();
@@ -97,6 +99,7 @@ private:
     int _languageVersion;
 
     // Soundfont
+    std::unique_ptr<LoadingSpinner> _loadingSpinner;
     juce::Label _soundfontLabel;
     juce::Label _messageLabel;
     juce::TextButton _openButton;

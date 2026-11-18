@@ -24,8 +24,9 @@
 
 // Threads of a plugin playing soundfonts without making the audio thread wait (see README.md): an "interface" thread
 // reads soundfonts and replaces the one played while the audio thread plays notes, the interface also sending notes
-// through a queue. Built with ThreadSanitizer or AddressSanitizer, it shows the data races and the memory read after
-// being freed (sample data of a soundfont deleted too early).
+// through a queue. Half of the soundfonts are played while their samples are read by other threads. Built with
+// ThreadSanitizer or AddressSanitizer, it shows the data races and the memory read after being freed (sample data of a
+// soundfont deleted too early).
 // Usage: stress_threads <seconds> <soundfont> [<soundfont>...]
 
 #include <atomic>
@@ -33,7 +34,9 @@
 #include <cmath>
 #include <cstdio>
 #include <fstream>
+#include <cstring>
 #include <iterator>
+#include <memory>
 #include <random>
 #include <string>
 #include <thread>
@@ -166,15 +169,92 @@ static void audioThread(SynthSoundfontSet * soundfonts, SynthQueue<Command> * qu
     }
 }
 
-static SynthSoundfontFile * load(const std::string &path, bool fromMemory, std::string &error)
+// Soundfont whose samples are read by two threads while it is played, as the plugin does (PluginSoundfont). The threads
+// stop before the soundfont is deleted.
+struct Loading
 {
-    if (!fromMemory)
-        return SynthSoundfontFile::load(path, error);
+    std::vector<char> content; // Content of a file in memory, read until all samples are read
+    std::atomic<bool> stop { false };
+    std::vector<std::thread> threads;
+};
 
-    // Content of a file kept in memory (a soundfont stored in the project of a host)
+static std::vector<char> readFile(const std::string &path)
+{
     std::ifstream stream(path, std::ios::binary);
-    std::vector<char> data((std::istreambuf_iterator<char>(stream)), std::istreambuf_iterator<char>());
-    return SynthSoundfontFile::load(data.data(), data.size(), error);
+    return std::vector<char>((std::istreambuf_iterator<char>(stream)), std::istreambuf_iterator<char>());
+}
+
+// Soundfont read at once (loading null) or progressively, from the file or from its content kept in memory (a soundfont
+// stored in the project of a host)
+static std::shared_ptr<SynthSoundfontFile> load(const std::string &path, bool fromMemory, bool isProgressive,
+                                                std::string &error)
+{
+    if (!isProgressive)
+    {
+        if (!fromMemory)
+            return std::shared_ptr<SynthSoundfontFile>(SynthSoundfontFile::load(path, error));
+        std::vector<char> data = readFile(path);
+        return std::shared_ptr<SynthSoundfontFile>(SynthSoundfontFile::load(data.data(), data.size(), error));
+    }
+
+    std::shared_ptr<Loading> loading = std::make_shared<Loading>();
+    if (fromMemory)
+        loading->content = readFile(path);
+    SynthSoundfontFile * soundfont = fromMemory ?
+                                         SynthSoundfontFile::open(loading->content.data(), loading->content.size(), error) :
+                                         SynthSoundfontFile::open(path, error);
+    if (soundfont == nullptr)
+        return nullptr;
+    for (int i = 0; i < 2; i++)
+        loading->threads.emplace_back([soundfont, loading = loading.get()] {
+            while (!loading->stop.load() && soundfont->loadNextSample()) {}
+        });
+    return std::shared_ptr<SynthSoundfontFile>(soundfont, [loading](SynthSoundfontFile * file) {
+        loading->stop = true;
+        for (std::thread &thread : loading->threads)
+            thread.join();
+        delete file;
+    });
+}
+
+// A sample asked by a note is read first, and the data read progressively (by two threads, one of them waiting for the
+// other one at the end) is the one read at once
+static bool checkProgressiveReading(const std::string &path)
+{
+    std::string error;
+    std::unique_ptr<SynthSoundfontFile> reference(SynthSoundfontFile::load(path, error));
+    std::unique_ptr<SynthSoundfontFile> soundfont(SynthSoundfontFile::open(path, error));
+    if (reference == nullptr || soundfont == nullptr)
+        return false;
+    int count = 0;
+    while (soundfont->getSynthSample(count) != nullptr)
+        count++;
+    if (count == 0)
+        return true;
+
+    ISynthSample * asked = soundfont->getSynthSample(count / 2);
+    bool isFirst = !soundfont->isLoaded() && !asked->loadData() && soundfont->loadNextSample() && asked->loadData();
+    std::thread other([&soundfont] { while (soundfont->loadNextSample()) {} });
+    soundfont->loadAllSamples();
+    other.join();
+    bool isSame = soundfont->isLoaded() && soundfont->getLoadedRatio() == 1.0f;
+    for (int i = 0; i < count && isSame; i++)
+    {
+        ISynthSample * sample = soundfont->getSynthSample(i);
+        ISynthSample * expected = reference->getSynthSample(i);
+        uint32_t length, expectedLength;
+        int16_t * data16, * expectedData16;
+        uint8_t * data24, * expectedData24;
+        sample->getData(length, data16, data24, false);
+        expected->getData(expectedLength, expectedData16, expectedData24, false);
+        isSame = sample->loadData() && length == expectedLength && sample->getLength() == expected->getLength() &&
+                 sample->getPeak() == expected->getPeak() && (data24 == nullptr) == (expectedData24 == nullptr) &&
+                 (length == 0 || memcmp(data16, expectedData16, length * sizeof(int16_t)) == 0) &&
+                 (data24 == nullptr || memcmp(data24, expectedData24, length) == 0);
+    }
+    printf("%s: sample asked read first: %s, same data as read at once: %s\n", path.c_str(), isFirst ? "yes" : "NO",
+           isSame ? "yes" : "NO");
+    return isFirst && isSame;
 }
 
 int main(int argc, char ** argv)
@@ -202,7 +282,9 @@ int main(int argc, char ** argv)
     while (!failed && std::chrono::duration<double>(std::chrono::steady_clock::now() - start).count() < duration)
     {
         std::string error;
-        SynthSoundfontFile * soundfont = load(paths[loadCount % paths.size()], loadCount % 2 == 1, error);
+        std::shared_ptr<SynthSoundfontFile> shared = load(paths[loadCount % paths.size()], (loadCount / 2) % 2 == 1,
+                                                          loadCount % 2 == 0, error);
+        SynthSoundfontFile * soundfont = shared.get();
         if (soundfont == nullptr)
         {
             printf("Cannot read %s: %s\n", paths[loadCount % paths.size()].c_str(), error.c_str());
@@ -212,7 +294,6 @@ int main(int argc, char ** argv)
         loadCount++;
 
         // All indexes may be used by soundfonts whose voices are not finished
-        std::shared_ptr<ISynthSoundfont> shared(soundfont);
         int index;
         while ((index = soundfonts.add(shared)) < 0)
         {
@@ -237,8 +318,13 @@ int main(int argc, char ** argv)
             if (!queue.push(note))
                 fullQueueCount++;
             if (i % 20 == 0)
+            {
+                // Samples of a preset read first, if they are being read
+                soundfont->prioritizePreset(std::uniform_int_distribution<int>(0, 9)(random));
                 std::this_thread::sleep_for(std::chrono::milliseconds(1));
+            }
         }
+        shared.reset();
         deletionCount += soundfonts.deleteUnused();
     }
 
@@ -251,6 +337,8 @@ int main(int argc, char ** argv)
     printf("Blocks computed: %llu, maximum number of voices: %d, peak: %.3f\n",
            static_cast<unsigned long long>(results.blockCount.load()), results.maxVoiceCount.load(), results.peak.load());
     printf("Waits: set full %d times, queue full %d times\n", fullSetCount, fullQueueCount);
+    for (const std::string &path : paths)
+        failed = !checkProgressiveReading(path) || failed;
 
     if (failed || results.hasInvalidValue || results.blockCount == 0 || results.peak == 0 ||
         (loadCount > 4 && deletionCount == 0))

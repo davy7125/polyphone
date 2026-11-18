@@ -24,6 +24,7 @@
 
 #include "synthsoundfontfile.h"
 #include <algorithm>
+#include <cstdlib>
 #include <cstring>
 #include <new>
 #include "midiprocessor.h"
@@ -37,7 +38,19 @@
 class SynthSoundfontFile::Sample: public ISynthSample
 {
 public:
-    explicit Sample(const Sf2Reader::Sample &sample) :
+    // Where the data is: in the file read (positions of the data of an sf2 or sf3 file, or of the wave of a dls file with
+    // its channel), or in another file (sfz) with its channel
+    struct Position
+    {
+        bool isCompressed = false;
+        uint32_t start16 = 0;
+        uint32_t start24 = 0;
+        uint32_t length = 0; // Number of values, or of bytes of compressed data
+        uint16_t channel = 0;
+        std::string fileName;
+    };
+
+    Sample(const Sf2Reader::Sample &sample, const Position &position, std::atomic<uint32_t> &requestCount) :
         _length(sample.length),
         _sampleRate(sample.sampleRate),
         _loopStart(sample.loopStart),
@@ -46,32 +59,40 @@ public:
         _correction(sample.correction),
         _type(sample.sampleType),
         _link(sample.sampleLink),
+        _position(position),
+        _state(STATE_NOT_READ),
+        _isRequested(false),
+        _requestCount(requestCount),
+        _linkedSample(nullptr),
         _dataLength(0),
         _peak(0)
     {}
 
-    // Data read as the editor does when it needs it: nothing (silence) if it cannot be read
-    void readData(Sf2Reader::Source &source, const Sf2Reader::Sample &sample)
+    const Position &getPosition() const { return _position; }
+
+    // Size of the data to read, for the progression (at least 1)
+    uint64_t getReadSize() const
     {
-        int16_t * data16 = nullptr;
-        uint8_t * data24 = nullptr;
-        if (sample.isCompressed)
-        {
-            std::unique_ptr<char[]> compressedData(Sf2Reader::readCompressedData(source, sample.start16, sample.length));
-            uint32_t length;
-            if (compressedData != nullptr)
-                data16 = Sf2Reader::decompress(compressedData.get(), sample.length, length);
-            if (data16 != nullptr)
-                _length = _dataLength = length;
-        }
-        else
-        {
-            Sf2Reader::readData(source, sample.start16, sample.start24, sample.length, data16, data24);
-            if (data16 != nullptr)
-                _dataLength = sample.length;
-        }
-        setData(data16, data24, _dataLength);
+        uint64_t size = _position.isCompressed ? _position.length : 2 * static_cast<uint64_t>(_position.length);
+        return size > 0 ? size : 1;
     }
+
+    // Other sample of a stereo pair, played only when both are read
+    Sample * getLinkedSample() const { return _linkedSample; }
+    void setLinkedSample(Sample * sample) { _linkedSample = sample; }
+
+    // Data read (by any thread, the data being complete for the threads reading the state STATE_READ)
+    bool isRead() const { return _state.load(std::memory_order_acquire) == STATE_READ; }
+    bool isReady() const { return isRead() && (_linkedSample == nullptr || _linkedSample->isRead()); }
+    bool isRequested() const { return _isRequested.load(std::memory_order_relaxed); }
+    bool take() // With the mutex of the soundfont choosing the samples to read
+    {
+        if (_state.load(std::memory_order_relaxed) != STATE_NOT_READ)
+            return false;
+        _state.store(STATE_READING, std::memory_order_relaxed);
+        return true;
+    }
+    void setRead() { _state.store(STATE_READ, std::memory_order_release); }
 
     // Data (owned from now on) of the length given, which is also the length of the sample if there is data
     void setData(int16_t * data16, uint8_t * data24, uint32_t length)
@@ -96,7 +117,15 @@ public:
     }
 
     // ISynthSample implementation
-    void loadData() override {} // Already read
+    bool loadData() override
+    {
+        // Not read yet: read first (audio thread, without waiting)
+        if (isReady())
+            return true;
+        if (!_isRequested.exchange(true, std::memory_order_relaxed))
+            _requestCount.fetch_add(1, std::memory_order_release);
+        return false;
+    }
     void getData(uint32_t &dataLength, int16_t * &data16, uint8_t * &data24, bool getCopy) override
     {
         dataLength = _dataLength;
@@ -132,6 +161,13 @@ public:
     int getLinkedSampleIndex() override { return _link; }
 
 private:
+    enum State
+    {
+        STATE_NOT_READ,
+        STATE_READING,
+        STATE_READ
+    };
+
     uint32_t _length; // Number of bytes of compressed data until the data is decompressed, as in the editor
     uint32_t _sampleRate;
     uint32_t _loopStart;
@@ -140,6 +176,13 @@ private:
     int32_t _correction;
     SFSampleLink _type;
     int _link;
+
+    // Reading
+    Position _position;
+    std::atomic<int> _state;
+    std::atomic<bool> _isRequested; // By a note
+    std::atomic<uint32_t> &_requestCount; // Of the soundfont
+    Sample * _linkedSample;
 
     // Data: 16 bits, and the 8 least significant bits of a 24-bit sample (otherwise null)
     std::unique_ptr<int16_t[]> _data16;
@@ -452,7 +495,17 @@ private:
 
 /// Soundfont
 
-SynthSoundfontFile::SynthSoundfontFile() {}
+SynthSoundfontFile::SynthSoundfontFile() :
+    _sourceType(SOURCE_SF2),
+    _hasCompressedSamples(false),
+    _hasMemoryError(false),
+    _requestCount(0),
+    _checkedRequestCount(0),
+    _nextInFile(0),
+    _readCount(0),
+    _totalSize(0),
+    _readSize(0)
+{}
 
 SynthSoundfontFile::~SynthSoundfontFile() {}
 
@@ -486,38 +539,70 @@ static std::filesystem::path toPath(const std::string &text)
 #endif
 }
 
+// Key or velocity range of a zone, defaultRange if it is not set (as the synth)
+static RangesType getRange(ISynthZone * zone, AttributeType champ, RangesType defaultRange)
+{
+    return zone->getAttributeSet()[champ] ? zone->getAttributeValues()[champ].rValue : defaultRange;
+}
+
 bool SynthSoundfontFile::isSupported(const std::filesystem::path &filePath)
 {
     std::string extension = getExtension(filePath);
     return extension == ".sf2" || extension == ".sf3" || extension == ".sfz" || extension == ".dls";
 }
 
-SynthSoundfontFile * SynthSoundfontFile::load(const std::filesystem::path &filePath, std::string &error, int velToFilterType)
+SynthSoundfontFile * SynthSoundfontFile::open(const std::filesystem::path &filePath, std::string &error, int velToFilterType)
 {
     std::string extension = getExtension(filePath);
     if (extension == ".sfz")
-        return loadSfz(filePath, error, velToFilterType);
+        return openSfz(filePath, error, velToFilterType);
 
-    Sf2Reader::FileSource source(filePath);
-    if (!source.isOpen())
+    std::unique_ptr<Sf2Reader::FileSource> source(new Sf2Reader::FileSource(filePath));
+    if (!source->isOpen())
     {
         error = "cannot open the file";
         return nullptr;
     }
-    return extension == ".dls" ? loadDls(source, toText(filePath), error) : load(source, error);
+    return extension == ".dls" ? openDls(std::move(source), toText(filePath), error) : openSf2(std::move(source), error);
+}
+
+SynthSoundfontFile * SynthSoundfontFile::open(const char * data, size_t length, std::string &error)
+{
+    std::unique_ptr<Sf2Reader::Source> source(new Sf2Reader::MemorySource(data, length));
+    if (length >= 12 && memcmp(data, "RIFF", 4) == 0 && memcmp(data + 8, "DLS ", 4) == 0)
+        return openDls(std::move(source), "", error);
+    return openSf2(std::move(source), error);
+}
+
+SynthSoundfontFile * SynthSoundfontFile::load(const std::filesystem::path &filePath, std::string &error, int velToFilterType)
+{
+    return loadAll(open(filePath, error, velToFilterType), error);
 }
 
 SynthSoundfontFile * SynthSoundfontFile::load(const char * data, size_t length, std::string &error)
 {
-    Sf2Reader::MemorySource source(data, length);
-    if (length >= 12 && memcmp(data, "RIFF", 4) == 0 && memcmp(data + 8, "DLS ", 4) == 0)
-        return loadDls(source, "", error);
-    return load(source, error);
+    return loadAll(open(data, length, error), error);
 }
 
-SynthSoundfontFile * SynthSoundfontFile::loadSfz(const std::filesystem::path &filePath, std::string &error, int velToFilterType)
+SynthSoundfontFile * SynthSoundfontFile::loadAll(SynthSoundfontFile * soundfont, std::string &error)
+{
+    if (soundfont != nullptr)
+    {
+        soundfont->loadAllSamples();
+        if (soundfont->hasMemoryError())
+        {
+            delete soundfont;
+            error = "not enough memory";
+            return nullptr;
+        }
+    }
+    return soundfont;
+}
+
+SynthSoundfontFile * SynthSoundfontFile::openSfz(const std::filesystem::path &filePath, std::string &error, int velToFilterType)
 {
     std::unique_ptr<SynthSoundfontFile> soundfont(new SynthSoundfontFile());
+    soundfont->_sourceType = SOURCE_FILES;
     try
     {
         Builder builder;
@@ -530,39 +615,44 @@ SynthSoundfontFile * SynthSoundfontFile::loadSfz(const std::filesystem::path &fi
                         "cannot open the file " + reader.getErrorFile();
             return nullptr;
         }
-        soundfont->build(builder, nullptr);
+        soundfont->build(builder);
     }
     catch (const std::bad_alloc &)
     {
         error = "not enough memory";
         return nullptr;
     }
+    soundfont->prepareLoading();
     return soundfont.release();
 }
 
-SynthSoundfontFile * SynthSoundfontFile::loadDls(Sf2Reader::Source &source, const std::string &filePath, std::string &error)
+SynthSoundfontFile * SynthSoundfontFile::openDls(std::unique_ptr<Sf2Reader::Source> source, const std::string &filePath,
+                                                 std::string &error)
 {
     std::unique_ptr<SynthSoundfontFile> soundfont(new SynthSoundfontFile());
+    soundfont->_sourceType = SOURCE_DLS;
     try
     {
         Builder builder;
         DlsReader reader;
-        if (!reader.read(source, filePath, builder))
+        if (!reader.read(*source, filePath, builder))
         {
             error = "this is not a DLS file";
             return nullptr;
         }
-        soundfont->build(builder, &source);
+        soundfont->build(builder);
     }
     catch (const std::bad_alloc &)
     {
         error = "not enough memory";
         return nullptr;
     }
+    soundfont->_source = std::move(source);
+    soundfont->prepareLoading();
     return soundfont.release();
 }
 
-void SynthSoundfontFile::build(Builder &builder, Sf2Reader::Source * dlsSource)
+void SynthSoundfontFile::build(Builder &builder)
 {
     // Texts of the soundfont
     const std::pair<AttributeType, const char *> infos[] = {
@@ -607,7 +697,7 @@ void SynthSoundfontFile::build(Builder &builder, Sf2Reader::Source * dlsSource)
     }
     _controllerSources = builder.controllerSources;
 
-    // Samples, their data being read as the editor does when it plays them
+    // Samples, their data being read afterwards: wave of the dls file, or file of the sfz file
     for (const Builder::Values &model : builder.samples)
     {
         auto value = [&model](AttributeType champ) {
@@ -624,42 +714,19 @@ void SynthSoundfontFile::build(Builder &builder, Sf2Reader::Source * dlsSource)
         properties.correction = value(champ_chPitchCorrection).cValue;
         properties.sampleLink = value(champ_wSampleLink).wValue;
         properties.sampleType = model.values.count(champ_sfSampleType) ? value(champ_sfSampleType).sfLinkValue : monoSample;
-        Sample * sample = new Sample(properties);
-        _samples.emplace_back(sample);
-
-        uint16_t channel = value(champ_wChannel).wValue;
-        int16_t * data16 = nullptr;
-        uint8_t * data24 = nullptr;
-        if (dlsSource != nullptr)
-        {
-            // Wave of the DLS file
-            uint32_t length;
-            if (DlsReader::readWaveData(*dlsSource, value(champ_dwStart16).dwValue, channel, data16, data24, length) ==
-                DlsReader::WAVE_OK)
-                sample->setData(data16, data24, length);
-            else
-            {
-                delete [] data16;
-                delete [] data24;
-            }
-        }
-        else if (std::unique_ptr<SampleFileReader> reader = SampleFileReader::open(toPath(model.fileName)))
-        {
-            // File of an sfz file
-            SampleFileReader::Info info;
-            reader->getInfo(info);
-            data16 = new int16_t[info.length];
-            data24 = new uint8_t[info.length];
-            reader->readChannel(channel, info.length, data16, data24);
-            sample->setData(data16, data24, info.length);
-        }
+        Sample::Position position;
+        position.start16 = value(champ_dwStart16).dwValue;
+        position.length = properties.length;
+        position.channel = value(champ_wChannel).wValue;
+        position.fileName = model.fileName;
+        _samples.emplace_back(new Sample(properties, position, _requestCount));
     }
 }
 
-SynthSoundfontFile * SynthSoundfontFile::load(Sf2Reader::Source &source, std::string &error)
+SynthSoundfontFile * SynthSoundfontFile::openSf2(std::unique_ptr<Sf2Reader::Source> source, std::string &error)
 {
     Sf2Reader reader;
-    if (!reader.read(source))
+    if (!reader.read(*source))
     {
         error = reader.getError();
         return nullptr;
@@ -672,12 +739,16 @@ SynthSoundfontFile * SynthSoundfontFile::load(Sf2Reader::Source &source, std::st
         soundfont->addElements(reader.getInstruments(), false);
         soundfont->addElements(reader.getPresets(), true);
 
-        // All sample data at once
+        // Samples, their data being read afterwards
         for (const Sf2Reader::Sample &sample : reader.getSamples())
         {
-            Sample * synthSample = new Sample(sample);
-            soundfont->_samples.emplace_back(synthSample);
-            synthSample->readData(source, sample);
+            Sample::Position position;
+            position.isCompressed = sample.isCompressed;
+            position.start16 = sample.start16;
+            position.start24 = sample.start24;
+            position.length = sample.length;
+            soundfont->_samples.emplace_back(new Sample(sample, position, soundfont->_requestCount));
+            soundfont->_hasCompressedSamples = soundfont->_hasCompressedSamples || sample.isCompressed;
         }
     }
     catch (const std::bad_alloc &)
@@ -685,7 +756,245 @@ SynthSoundfontFile * SynthSoundfontFile::load(Sf2Reader::Source &source, std::st
         error = "not enough memory";
         return nullptr;
     }
+    soundfont->_source = std::move(source);
+    soundfont->prepareLoading();
     return soundfont.release();
+}
+
+/// Sample data
+
+void SynthSoundfontFile::prepareLoading()
+{
+    // Stereo pairs (as the synth plays them), size of the data
+    int count = static_cast<int>(_samples.size());
+    for (int i = 0; i < count; i++)
+    {
+        Sample * sample = _samples[static_cast<size_t>(i)].get();
+        int link = sample->getLinkedSampleIndex();
+        if (sample->getSampleType() != monoSample && sample->getSampleType() != RomMonoSample &&
+            link >= 0 && link < count && link != i)
+            sample->setLinkedSample(_samples[static_cast<size_t>(link)].get());
+        _totalSize += sample->getReadSize();
+    }
+    if (_samples.empty())
+        _source.reset();
+}
+
+bool SynthSoundfontFile::loadNextSample()
+{
+    Sample * samples[2];
+    int count;
+    {
+        std::lock_guard<std::mutex> lock(_loadingMutex);
+        count = takeNextSamples(samples);
+    }
+    if (count == 0)
+        return false;
+
+    // Read, then played together
+    for (int i = 0; i < count; i++)
+        readData(*samples[i]);
+    for (int i = 0; i < count; i++)
+    {
+        _readSize.fetch_add(samples[i]->getReadSize(), std::memory_order_relaxed);
+        samples[i]->setRead();
+    }
+
+    // Everything read: the source is released (file closed)
+    std::lock_guard<std::mutex> lock(_loadingMutex);
+    _readCount.store(_readCount.load(std::memory_order_relaxed) + static_cast<size_t>(count), std::memory_order_release);
+    if (_readCount.load(std::memory_order_relaxed) == _samples.size())
+    {
+        {
+            std::lock_guard<std::mutex> sourceLock(_sourceMutex);
+            _source.reset();
+        }
+        _loadedCondition.notify_all();
+    }
+    return true;
+}
+
+int SynthSoundfontFile::takeNextSamples(Sample * samples[2])
+{
+    // Samples asked by the notes since the last time
+    uint32_t requestCount = _requestCount.load(std::memory_order_acquire);
+    if (requestCount != _checkedRequestCount)
+    {
+        _checkedRequestCount = requestCount;
+        for (size_t i = 0; i < _samples.size(); i++)
+            if (_samples[i]->isRequested() && !_samples[i]->isReady())
+                _requested.push_back(static_cast<int>(i));
+    }
+
+    for (;;)
+    {
+        // Samples asked by the notes, priorities, then the order of the file
+        int index;
+        if (!_requested.empty())
+        {
+            index = _requested.front();
+            _requested.pop_front();
+        }
+        else if (!_priorities.empty())
+        {
+            index = _priorities.front();
+            _priorities.pop_front();
+        }
+        else if (_nextInFile < _samples.size())
+            index = static_cast<int>(_nextInFile++);
+        else
+            return 0;
+
+        // The sample and the one linked to it, if they are not read or being read
+        Sample * sample = _samples[static_cast<size_t>(index)].get();
+        int count = 0;
+        for (Sample * candidate : { sample, sample->getLinkedSample() })
+            if (candidate != nullptr && candidate->take())
+                samples[count++] = candidate;
+        if (count > 0)
+            return count;
+    }
+}
+
+void SynthSoundfontFile::readData(Sample &sample)
+{
+    // Data read as the editor does when it needs it: nothing (silence) if it cannot be read. The source is read by one
+    // thread at a time, the data of the sf3 files being decompressed outside (by several threads at the same time).
+    const Sample::Position &position = sample.getPosition();
+    int16_t * data16 = nullptr;
+    uint8_t * data24 = nullptr;
+    uint32_t length = 0;
+    try
+    {
+        switch (_sourceType)
+        {
+        case SOURCE_SF2:
+            if (position.isCompressed)
+            {
+                std::unique_ptr<char[]> compressedData;
+                {
+                    std::lock_guard<std::mutex> lock(_sourceMutex);
+                    compressedData.reset(Sf2Reader::readCompressedData(*_source, position.start16, position.length));
+                }
+                if (compressedData != nullptr)
+                    data16 = Sf2Reader::decompress(compressedData.get(), position.length, length);
+            }
+            else
+            {
+                std::lock_guard<std::mutex> lock(_sourceMutex);
+                Sf2Reader::readData(*_source, position.start16, position.start24, position.length, data16, data24);
+                length = position.length;
+            }
+            break;
+        case SOURCE_DLS: {
+            // Wave of the DLS file
+            std::lock_guard<std::mutex> lock(_sourceMutex);
+            if (DlsReader::readWaveData(*_source, position.start16, position.channel, data16, data24, length) !=
+                DlsReader::WAVE_OK)
+            {
+                delete [] data16;
+                delete [] data24;
+                data16 = nullptr;
+                data24 = nullptr;
+            }
+            break;
+        }
+        case SOURCE_FILES: {
+            // File of an sfz file, one at a time
+            std::lock_guard<std::mutex> lock(_sourceMutex);
+            if (std::unique_ptr<SampleFileReader> reader = SampleFileReader::open(toPath(position.fileName)))
+            {
+                SampleFileReader::Info info;
+                reader->getInfo(info);
+                data16 = new int16_t[info.length];
+                data24 = new uint8_t[info.length];
+                length = info.length;
+                reader->readChannel(position.channel, info.length, data16, data24);
+            }
+            break;
+        }
+        }
+    }
+    catch (const std::bad_alloc &)
+    {
+        delete [] data16;
+        delete [] data24;
+        data16 = nullptr;
+        data24 = nullptr;
+        _hasMemoryError = true;
+    }
+    sample.setData(data16, data24, length);
+}
+
+void SynthSoundfontFile::loadAllSamples()
+{
+    while (loadNextSample()) {}
+
+    // Samples read by other threads
+    std::unique_lock<std::mutex> lock(_loadingMutex);
+    _loadedCondition.wait(lock, [this] { return _readCount.load(std::memory_order_relaxed) == _samples.size(); });
+}
+
+void SynthSoundfontFile::prioritizePreset(int presetIndex)
+{
+    if (presetIndex < 0 || presetIndex >= static_cast<int>(_presets.size()) || isLoaded())
+        return;
+
+    // Samples not read of the zones of the preset, with the distance of their keys to the middle of the keyboard (C4)
+    std::vector<std::pair<int, int>> samples; // Distance, index
+    RangesType fullRange;
+    fullRange.byLo = 0;
+    fullRange.byHi = 127;
+    Element * preset = _presets[static_cast<size_t>(presetIndex)].get();
+    RangesType presetDefaultRange = getRange(preset->getGlobalZone(), champ_keyRange, fullRange);
+    for (int i = 0; i < preset->getZoneCount(); i++)
+    {
+        ISynthZone * presetZone = preset->getZone(i);
+        if (!presetZone->isPlayable() || !presetZone->getAttributeSet()[champ_instrument])
+            continue;
+        ISynthInstPrst * instrument = getSynthInstrument(presetZone->getAttributeValues()[champ_instrument].wValue);
+        if (instrument == nullptr)
+            continue;
+        RangesType presetRange = getRange(presetZone, champ_keyRange, presetDefaultRange);
+        RangesType instrumentDefaultRange = getRange(instrument->getGlobalZone(), champ_keyRange, fullRange);
+        for (int j = 0; j < instrument->getZoneCount(); j++)
+        {
+            ISynthZone * zone = instrument->getZone(j);
+            if (!zone->isPlayable() || !zone->getAttributeSet()[champ_sampleID])
+                continue;
+            int index = zone->getAttributeValues()[champ_sampleID].wValue;
+            if (index >= static_cast<int>(_samples.size()) || _samples[static_cast<size_t>(index)]->isReady())
+                continue;
+            RangesType range = getRange(zone, champ_keyRange, instrumentDefaultRange);
+            int low = std::max<int>(range.byLo, presetRange.byLo);
+            int high = std::min<int>(range.byHi, presetRange.byHi);
+            if (low > high)
+                continue; // Not played
+            int distance = (low <= 60 && 60 <= high) ? 0 : std::min(std::abs(low - 60), std::abs(high - 60));
+            samples.emplace_back(distance, index);
+        }
+    }
+    std::stable_sort(samples.begin(), samples.end(), [](const std::pair<int, int> &a, const std::pair<int, int> &b) {
+        return a.first < b.first;
+    });
+
+    // Before the previous priorities
+    std::lock_guard<std::mutex> lock(_loadingMutex);
+    for (auto it = samples.rbegin(); it != samples.rend(); ++it)
+        _priorities.push_front(it->second);
+}
+
+float SynthSoundfontFile::getLoadedRatio() const
+{
+    if (isLoaded() || _totalSize == 0)
+        return 1.0f;
+    return std::min(0.999f, static_cast<float>(static_cast<double>(_readSize.load(std::memory_order_relaxed)) /
+                                               static_cast<double>(_totalSize)));
+}
+
+bool SynthSoundfontFile::isLoaded() const
+{
+    return _readCount.load(std::memory_order_acquire) == _samples.size();
 }
 
 void SynthSoundfontFile::addElements(const std::vector<Sf2Reader::Element> &elements, bool isPreset, bool withControllers)

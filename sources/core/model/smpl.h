@@ -54,7 +54,7 @@ public:
     int indexOfId(int id) override;
 
     // ISynthSample implementation
-    void loadData() override { _sound.loadSample(); }
+    bool loadData() override { _sound.loadSample(); return true; }
     void getData(quint32 &length, qint16 * &data16, quint8 * &data24, bool getCopy) override {
         _sound.getData(length, data16, data24, false, getCopy);
     }

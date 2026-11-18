@@ -93,6 +93,13 @@ public:
     // Delete the soundfonts replaced that are not played anymore, to call regularly
     void deleteUnusedSoundfonts();
 
+    // While the samples are read (see SynthSoundfontFile), the ones of the presets played by the channels are read first:
+    // the presets chosen are given at once, the ones chosen by the program changes by this function, to call regularly
+    void prioritizePlayedPresets();
+
+    // Share of the samples of the soundfont read, 1 when everything is read (or without soundfont)
+    float getLoadedRatio();
+
     /// Any thread: what is played (updated by the audio thread after each block)
 
     int getPlayedProgram(int channel) const; // -1 if the channel plays nothing
@@ -116,6 +123,7 @@ public:
 
     // A block: beginBlock (requests of the owner threads), the MIDI messages and the frames in their order, endBlock
     // The frames go to the main output, and possibly to the outputs of the channels and of the effects
+    // Offline, beginBlock waits for the samples not read yet (helping the threads reading them): nothing is missing
     void beginBlock(bool isRealTime);
     void processMidi(const uint8_t * message, size_t length);
     void render(const SynthCore::Outputs &outputs, uint32_t frameCount);
@@ -146,6 +154,7 @@ private:
     };
 
     void sendPrograms(); // Owner
+    void prioritizeProgram(int program); // Owner
     void applyCommand(const Command &command); // Audio thread
     void applyPrograms(); // Audio thread
 
@@ -156,6 +165,7 @@ private:
     std::unique_ptr<SynthChannels> _channels;
     SynthQueue<Command> _commands;
     int _sf2Index;
+    SynthSoundfontFile * _playedSoundfont;
     int _programs[16]; // Forced program of each channel, -1 for the program changes
     uint32_t _sampleRate;
     uint32_t _blockFrameCount;
@@ -171,6 +181,7 @@ private:
     int _program;
     int _channelPrograms[16];
     bool _programsPending; // Not sent, the queue being full
+    int _prioritizedPrograms[16]; // Played programs whose samples are read first
 
     // What is played
     std::atomic<int> _playedPrograms[16];

@@ -24,6 +24,7 @@
 
 
 #include "pluginsoundfont.h"
+#include <algorithm>
 #include <cstdint>
 #include <cstring>
 #include <functional>
@@ -129,18 +130,27 @@ std::shared_ptr<PluginSoundfont> getOrRead(const std::string &key,
 }
 } // namespace
 
-PluginSoundfont::PluginSoundfont() {}
+PluginSoundfont::PluginSoundfont() :
+    _isStopping(false)
+{}
 
-PluginSoundfont::~PluginSoundfont() {}
+PluginSoundfont::~PluginSoundfont()
+{
+    // The threads stop after the sample they are reading
+    _isStopping = true;
+    for (std::thread &thread : _loadingThreads)
+        thread.join();
+}
 
 std::shared_ptr<PluginSoundfont> PluginSoundfont::load(const std::filesystem::path &filePath, std::string &error)
 {
     return getOrRead(getFileKey(filePath), [&filePath, &error]() -> std::shared_ptr<PluginSoundfont> {
-        SynthSoundfontFile * file = SynthSoundfontFile::load(filePath, error);
+        SynthSoundfontFile * file = SynthSoundfontFile::open(filePath, error);
         if (file == nullptr)
             return nullptr;
         std::shared_ptr<PluginSoundfont> soundfont(new PluginSoundfont());
         soundfont->_soundfont.reset(file);
+        soundfont->startLoading();
         return soundfont;
     }, nullptr);
 }
@@ -148,21 +158,43 @@ std::shared_ptr<PluginSoundfont> PluginSoundfont::load(const std::filesystem::pa
 std::shared_ptr<PluginSoundfont> PluginSoundfont::load(const char * data, size_t length, std::string &error)
 {
     return getOrRead(getContentKey(data, length), [data, length, &error]() -> std::shared_ptr<PluginSoundfont> {
-        SynthSoundfontFile * file = SynthSoundfontFile::load(data, length, error);
+        // The samples are read in the copy kept
+        std::shared_ptr<PluginSoundfont> soundfont(new PluginSoundfont());
+        soundfont->_content.assign(data, data + length);
+        SynthSoundfontFile * file = SynthSoundfontFile::open(soundfont->_content.data(), length, error);
         if (file == nullptr)
             return nullptr;
-        std::shared_ptr<PluginSoundfont> soundfont(new PluginSoundfont());
         soundfont->_soundfont.reset(file);
-        soundfont->_content.assign(data, data + length);
+        soundfont->startLoading();
         return soundfont;
     }, [data, length](const PluginSoundfont &soundfont) {
         return soundfont._content.size() == length && (length == 0 || memcmp(soundfont._content.data(), data, length) == 0);
     });
 }
 
+void PluginSoundfont::startLoading()
+{
+    // The decompression of the sf3 files is shared by several threads (keeping some processors for the audio)
+    if (_soundfont->isLoaded())
+        return;
+    unsigned int threadCount = 1;
+    if (_soundfont->hasCompressedSamples())
+        threadCount = std::max(1u, std::min(4u, std::thread::hardware_concurrency() / 2));
+    SynthSoundfontFile * soundfont = _soundfont.get();
+    for (unsigned int i = 0; i < threadCount; i++)
+        _loadingThreads.emplace_back([this, soundfont] {
+            while (!_isStopping.load(std::memory_order_relaxed) && soundfont->loadNextSample()) {}
+        });
+}
+
 std::shared_ptr<SynthSoundfontFile> PluginSoundfont::getSynthSoundfont()
 {
     return std::shared_ptr<SynthSoundfontFile>(shared_from_this(), _soundfont.get());
+}
+
+float PluginSoundfont::getLoadedRatio() const
+{
+    return _soundfont->getLoadedRatio();
 }
 
 int PluginSoundfont::getCount()
