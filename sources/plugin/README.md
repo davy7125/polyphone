@@ -9,8 +9,14 @@ LV2, AU (macOS) and a standalone application ("Polyphone Player", not distribute
 
 - A soundfont opened with the button, the recent files or a drop on the window: sf2, sf3, sfz (its
   samples being the files it references) or dls. The sfz and dls files are converted as the editor
-  imports them, by the same code. The file is read at once, the samples of an sf3 file being
-  decompressed: nothing is read while playing. The instances
+  imports them, by the same code. The structure of the file is read at once (a few milliseconds):
+  the instruments are shown and can be played. Its samples are read afterwards by other threads
+  (several for an sf3 file, whose samples are decompressed), a spinner being shown in front of its
+  name meanwhile (the share read in its tooltip). A note whose samples are not read yet is silent:
+  the samples of the notes played and of the instruments chosen (from the middle of the keyboard,
+  including the ones chosen by program changes) are read first, then the others in the order of the
+  file. Offline, the rendering waits for all of them. Once everything is read, nothing is read while
+  playing (the file is closed). The instances
   of the plugin playing the same file in a host (one per track for instance) share it: it is read and
   kept in memory once (it is read again if the file changed).
 - Instruments played in three modes (the presets of the soundfont, called instruments in the
@@ -76,8 +82,9 @@ LV2, AU (macOS) and a standalone application ("Polyphone Player", not distribute
 - Offline rendering of the host: the computation time never limits the voices.
 
 The state saved by the host contains the parameters, the instruments played, the polyphony and the path of the
-soundfont (and its content if it is stored). When a project is opened, the soundfont is read before
-the state is restored, so that an offline rendering can start at once.
+soundfont (and its content if it is stored). When a project is opened, the structure of the soundfont
+is read when the state is restored, so that an offline rendering can start at once (waiting for the
+samples not read yet): the host does not wait for the samples.
 
 The controllers received from the host are always absolute values (the editor detects the relative
 values of some MIDI devices).
@@ -127,18 +134,18 @@ The version is the one of the editor, read in `sources/version.txt` (its numbers
   is played on the 16 channels by `SynthCore`, `MidiProcessor` and `SynthChannels`. The requests of
   the other threads (soundfont, presets, panic) go through a `SynthQueue` and are applied by the audio
   thread, which never waits: a soundfont replaced is released once no voice reads it anymore
-  (`SynthSoundfontSet`). The MIDI messages are processed at their position in the blocks (possibly
+  (`SynthSoundfontSet`), and a sample not read yet is not played (`ISynthSample::loadData`). The MIDI messages are processed at their position in the blocks (possibly
   moved together, see above), the sound being computed at the frame (`SynthCore::renderExact`). The
   velocity curve is applied to the notes before the synth.
-- `pluginsoundfont`: the soundfonts read, shared by the instances of the plugin in the process
-  (without JUCE).
+- `pluginsoundfont`: the soundfonts read, shared by the instances of the plugin in the process, and
+  the threads reading their samples (without JUCE).
 
 The files are read by `SynthSoundfontFile` (`sources/synth_core`) with the readers of the editor:
 `Sf2Reader` for sf2 and sf3, `SfzReader` and `DlsReader` for sfz and dls. These two convert a file
 into a soundfont through `ISoundfontBuilder`, written by the editor into its model and by the plugin
 into its own (`SampleFileReader` reading the samples with libsndfile).
-- `pluginprocessor`: the `juce::AudioProcessor` (parameters, state, soundfont read in another thread
-  when it is opened by the interface, in the calling thread when a state is restored).
+- `pluginprocessor`: the `juce::AudioProcessor` (parameters, state, structure of the soundfont read in
+  another thread when it is opened by the interface, in the calling thread when a state is restored).
 - `plugineditor`: the interface, with the colors of the theme "Dark, orange" of the editor.
 - `plugintemperamentkeyboard`: the fine tunes of the 12 notes (as `TemperamentKeyboard` in the editor).
 - `plugintranslator`: the translations, without Qt (see below).

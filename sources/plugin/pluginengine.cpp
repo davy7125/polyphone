@@ -41,6 +41,7 @@ PluginEngine::PluginEngine() :
     _soundfonts(new SynthSoundfontSet(SOUNDFONT_CAPACITY)),
     _commands(COMMAND_CAPACITY),
     _sf2Index(-1),
+    _playedSoundfont(nullptr),
     _sampleRate(48000),
     _blockFrameCount(0),
     _velocityCurve(0),
@@ -63,6 +64,7 @@ PluginEngine::PluginEngine() :
     {
         _programs[channel] = _program;
         _channelPrograms[channel] = -1;
+        _prioritizedPrograms[channel] = -1;
         _playedPrograms[channel].store(-1, std::memory_order_relaxed);
         _channelActivity[channel].store(0, std::memory_order_relaxed);
     }
@@ -131,6 +133,17 @@ bool PluginEngine::setSoundfont(std::shared_ptr<SynthSoundfontFile> soundfont)
         sendPrograms();
     }
 
+    // Samples of the presets chosen read first
+    for (int channel = 0; channel < 16; channel++)
+        _prioritizedPrograms[channel] = -1;
+    if (_mode == MODE_CHANNELS)
+    {
+        for (int channel = 15; channel >= 0; channel--)
+            prioritizeProgram(_channelPrograms[channel]);
+    }
+    else
+        prioritizeProgram(_program);
+
     return true;
 }
 
@@ -170,6 +183,7 @@ void PluginEngine::setProgram(int program)
     std::lock_guard<std::mutex> lock(_ownerMutex);
     _program = program;
     sendPrograms();
+    prioritizeProgram(program);
 }
 
 int PluginEngine::getProgram()
@@ -185,6 +199,7 @@ void PluginEngine::setChannelProgram(int channel, int program)
     std::lock_guard<std::mutex> lock(_ownerMutex);
     _channelPrograms[channel] = program;
     sendPrograms();
+    prioritizeProgram(program);
 }
 
 int PluginEngine::getChannelProgram(int channel)
@@ -220,6 +235,47 @@ void PluginEngine::deleteUnusedSoundfonts()
     _soundfonts->deleteUnused();
     if (_programsPending)
         sendPrograms();
+}
+
+void PluginEngine::prioritizePlayedPresets()
+{
+    // The presets played that changed (program changes)
+    std::lock_guard<std::mutex> lock(_ownerMutex);
+    if (_soundfont == nullptr || _soundfont->isLoaded())
+        return;
+    for (int channel = 0; channel < 16; channel++)
+    {
+        int program = _playedPrograms[channel].load(std::memory_order_relaxed);
+        if (program == _prioritizedPrograms[channel])
+            continue;
+        _prioritizedPrograms[channel] = program;
+        bool isNew = true;
+        for (int other = 0; other < channel; other++)
+            isNew = isNew && _prioritizedPrograms[other] != program;
+        if (isNew)
+            prioritizeProgram(program);
+    }
+}
+
+void PluginEngine::prioritizeProgram(int program)
+{
+    if (program < 0 || _soundfont == nullptr || _soundfont->isLoaded())
+        return;
+    for (int i = 0; i < _soundfont->getPresetCount(); i++)
+    {
+        ISynthInstPrst * preset = _soundfont->getPresetAt(i);
+        if (preset->getBankNumber() * 128 + preset->getPresetNumber() == program)
+        {
+            _soundfont->prioritizePreset(preset->getIndex());
+            return;
+        }
+    }
+}
+
+float PluginEngine::getLoadedRatio()
+{
+    std::lock_guard<std::mutex> lock(_ownerMutex);
+    return _soundfont == nullptr ? 1.0f : _soundfont->getLoadedRatio();
 }
 
 /// Any thread
@@ -277,7 +333,6 @@ void PluginEngine::setClipping(bool isClipping)
 
 void PluginEngine::beginBlock(bool isRealTime)
 {
-    _blockStart = std::chrono::steady_clock::now();
     _blockFrameCount = 0;
     _core->setRealTime(isRealTime);
 
@@ -286,6 +341,11 @@ void PluginEngine::beginBlock(bool isRealTime)
     while (_commands.pop(command))
         applyCommand(command);
     _soundfonts->checkRemoved(*_core);
+
+    // Offline, all samples are played (the soundfont is kept by _soundfonts while it is played)
+    if (!isRealTime && _playedSoundfont != nullptr && !_playedSoundfont->isLoaded())
+        _playedSoundfont->loadAllSamples();
+    _blockStart = std::chrono::steady_clock::now();
 }
 
 void PluginEngine::applyCommand(const Command &command)
@@ -300,6 +360,7 @@ void PluginEngine::applyCommand(const Command &command)
             _core->releaseVoices(_sf2Index, -1, -2, -2, true);
         }
         _sf2Index = command.sf2Index;
+        _playedSoundfont = command.soundfont;
 
         // Default values of the controllers used by its modulators
         _midiProcessor->resetDefaultControllerValues();

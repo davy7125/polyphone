@@ -102,7 +102,7 @@ PluginProcessor::PluginProcessor() :
     _settings.setStorageParameters(getSettingsOptions());
     _settings.getUserSettings();
 
-    // Soundfonts replaced that are not played anymore
+    // Soundfonts replaced that are not played anymore, samples of the presets played read first
     startTimer(500);
 }
 
@@ -416,6 +416,7 @@ void PluginProcessor::setPlayUnusedNotes(bool playUnusedNotes)
 void PluginProcessor::timerCallback()
 {
     _engine.deleteUnusedSoundfonts();
+    _engine.prioritizePlayedPresets();
 }
 
 /// Audio
@@ -716,7 +717,8 @@ void PluginProcessor::setStateInformation(const void * data, int sizeInBytes)
     }
     _tuningVersion++; // Applied by the next block
 
-    // Soundfont read now, the host possibly computing the audio just after (a loading in progress is not used)
+    // Structure of the soundfont read now, the host possibly computing the audio just after (a loading in progress is
+    // not used): its samples are read by other threads, an offline rendering waiting for them
     _loadingCount++;
     juce::ValueTree soundfontState = state.getChildWithName("Soundfont");
     _isSoundfontStored = soundfontState.getProperty("stored", false);

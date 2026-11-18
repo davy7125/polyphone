@@ -35,8 +35,9 @@ class ISynthSample
 public:
     virtual ~ISynthSample() {}
 
-    /// Read the sample data if needed, before getData
-    virtual void loadData() = 0;
+    /// Read the sample data if needed, before getData: false if it is not available yet (being read by another thread,
+    /// the sample being then not played)
+    virtual bool loadData() = 0;
 
     /// Sample data: 16 bits, plus the 8 least significant bits of a 24-bit sample (otherwise null)
     /// If getCopy is true, the arrays are copies that the caller deletes

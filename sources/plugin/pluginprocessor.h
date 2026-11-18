@@ -50,9 +50,12 @@ public:
 
     /// Soundfont
 
-    // Read a file in another thread, the editor being notified when it is played (or when it failed)
+    // Read a file in another thread, the editor being notified when it is played (or when it failed). Its structure is
+    // read first, the soundfont being then played while its samples are read by other threads (see PluginSoundfont):
+    // the notes of the samples not read yet are silent in real time, an offline rendering waits for them.
     void loadSoundfont(const juce::File &file);
     bool isLoading() const { return _isLoading.load(); }
+    float getLoadedRatio() { return _engine.getLoadedRatio(); } // Samples read, 1 when everything is read
 
     // File played (possibly missing if its content was stored in the state), error of the last loading (in English, see
     // PluginEditor::translateError)
