@@ -69,8 +69,9 @@ setarch -R build/plugin_tests_tsan/plugin_threads_artefacts/Release/plugin_threa
 
 ## Interface
 
-`plugin_snapshot <soundfont> <png prefix>` draws the interface of both modes in images, without a
-display. The language is the one chosen in the settings of the plugin, or the one of the system: with
+`plugin_snapshot <soundfont> <png prefix>` draws the interface in images, without a display: one
+instrument, 16 channels, and one instrument with all the groups switched on (Werckmeister III in D,
+reverb and chorus). The language is the one chosen in the settings of the plugin, or the one of the system: with
 a `HOME` without settings, `LANG=de_DE.UTF-8 plugin_snapshot ...` draws it in German.
 
 ## External validators

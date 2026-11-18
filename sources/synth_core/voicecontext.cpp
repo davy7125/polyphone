@@ -30,6 +30,8 @@ VoiceContext::VoiceContext() :
     _midiValues(&_defaultMidiValues),
     _referencePitch(4400),
     _temperamentRelativeKey(0),
+    _temperamentReferenceKey(9),
+    _temperamentUsedKeys(0xFFF),
     _modulatorVelToFilterType(1)
 {
     for (int i = 0; i < 12; i++)
@@ -41,20 +43,35 @@ void VoiceContext::setMidiValues(IMidiValues * midiValues)
     _midiValues.store(midiValues == nullptr ? &_defaultMidiValues : midiValues, std::memory_order_relaxed);
 }
 
-void VoiceContext::setTuning(int referencePitch, const float temperament[12], int relativeKey)
+void VoiceContext::setTuning(int referencePitch, const float temperament[12], const bool used[12], int relativeKey,
+                             int referenceKey)
 {
     _referencePitch.store(referencePitch, std::memory_order_relaxed);
+    int usedKeys = 0;
     for (int i = 0; i < 12; i++)
+    {
         _temperament[i].store(temperament[i], std::memory_order_relaxed);
-    _temperamentRelativeKey.store(relativeKey, std::memory_order_relaxed);
+        if (used[i])
+            usedKeys |= 1 << i;
+    }
+    _temperamentUsedKeys.store(usedKeys, std::memory_order_relaxed);
+    _temperamentRelativeKey.store((relativeKey % 12 + 12) % 12, std::memory_order_relaxed);
+    _temperamentReferenceKey.store((referenceKey % 12 + 12) % 12, std::memory_order_relaxed);
 }
 
 float VoiceContext::getTemperamentFineTune(int key) const
 {
-    // Correction so that the reference pitch (A) is accurate
+    // Correction so that the reference key (A at the reference pitch for instance) is accurate
     int relativeKey = _temperamentRelativeKey.load(std::memory_order_relaxed);
+    int referenceKey = _temperamentReferenceKey.load(std::memory_order_relaxed);
     return _temperament[(key - relativeKey + 12) % 12].load(std::memory_order_relaxed) -
-           _temperament[(21 - relativeKey) % 12].load(std::memory_order_relaxed);
+           _temperament[(referenceKey - relativeKey + 12) % 12].load(std::memory_order_relaxed);
+}
+
+bool VoiceContext::isKeyUsed(int key) const
+{
+    int relativeKey = _temperamentRelativeKey.load(std::memory_order_relaxed);
+    return (_temperamentUsedKeys.load(std::memory_order_relaxed) >> ((key % 12 - relativeKey + 12) % 12)) & 1;
 }
 
 void VoiceContext::setModulatorVelToFilterType(int type)

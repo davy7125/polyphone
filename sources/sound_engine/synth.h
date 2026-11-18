@@ -33,6 +33,8 @@
 #include "imidilistener.h"
 #include "fileplayer.h"
 #include "recorder.h"
+#include <mutex>
+#include <vector>
 
 // The channels 0 to 15 of the MIDI file player are the channels 16 to 31 of the synth, with their own controller values
 #define MIDI_FILE_CHANNEL_OFFSET 16
@@ -49,6 +51,11 @@ public:
 
     // Executed by the main thread (thread 1)
     void configure(const SynthCoreConfig &configuration);
+
+    // Transposition in semitones of the keys played on the channels -1 to 15 (keyboard, MIDI input), except for the
+    // percussions (presets of the bank 128), the MIDI file player having its own: a key is released with the
+    // transposition it had when it started
+    void setTransposition(int semitones) { _transposition.store(semitones, std::memory_order_relaxed); }
     void setIMidiValues(IMidiValues * midiValues); // Not deleted by the synth (null: default values)
     void setMidiFileValues(IMidiValues * midiValues); // Same for the channels of the MIDI file player
     int play(EltID id, int channel, int key, int velocity);
@@ -143,10 +150,28 @@ private:
     void createSoundEngines();
     void appendOutput(quint32 len);
 
+    // Notes started by a key held on the channels -1 to 15: element playing (same filter as the core) and key played
+    struct HeldNote
+    {
+        int sf2Index;
+        int eltIndex;
+        int playedKey;
+    };
+    bool isPercussion(EltID id); // The soundfonts must not change
+    int holdNote(EltID id, int channel, int key); // Key to play, -1 if nothing is played
+    void releaseHeldNotes(EltID id, int channel, int key);
+    void forgetHeldNotes(int sf2Index, int eltIndex, int channel); // Voices released by another way
+
     // Soundfonts and synth
     QRecursiveMutex * _mutexSoundfonts;
+    ISynthSoundfonts * _soundfonts;
     SynthCore _core;
     MidiValues _midiValues;
+
+    // Transposition, notes started by the keys held on the channels -1 to 15
+    std::atomic<int> _transposition;
+    std::vector<HeldNote> _heldNotes[17][128];
+    std::mutex _heldNotesMutex;
 
     // Sound engines computing the voices
     SoundEngine ** _soundEngines;

@@ -41,10 +41,13 @@ public:
     void setMidiValues(IMidiValues * midiValues);
     IMidiValues * getMidiValues() const { return _midiValues.load(std::memory_order_relaxed); }
 
-    // Reference pitch (0.1 Hz) and fine tune in cents of each key from C to B, relative to the key relativeKey
-    void setTuning(int referencePitch, const float temperament[12], int relativeKey);
+    // Reference pitch (0.1 Hz), fine tune in cents and use of each key from C to B relative to the key relativeKey,
+    // the key referenceKey (not relative) keeping its pitch in the equal temperament (see SynthCoreConfig)
+    void setTuning(int referencePitch, const float temperament[12], const bool used[12], int relativeKey,
+                   int referenceKey);
     int getReferencePitch() const { return _referencePitch.load(std::memory_order_relaxed); }
     float getTemperamentFineTune(int key) const;
+    bool isKeyUsed(int key) const;
 
     // Default modulators: the velocity to filter cutoff is the one of the version 2.01 (0), 2.04 (1) or none (2)
     void setModulatorVelToFilterType(int type);
@@ -56,6 +59,8 @@ private:
     std::atomic<int> _referencePitch;
     std::atomic<float> _temperament[12];
     std::atomic<int> _temperamentRelativeKey;
+    std::atomic<int> _temperamentReferenceKey;
+    std::atomic<int> _temperamentUsedKeys; // One bit per key from C to B, relative to the key _temperamentRelativeKey
     std::atomic<int> _modulatorVelToFilterType;
 };
 

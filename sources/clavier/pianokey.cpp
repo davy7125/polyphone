@@ -42,36 +42,15 @@ PianoKey::PianoKey(const QRectF &rect, const bool black, const int note) : QGrap
 
 void PianoKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
-    // Mix between black and gray with the glow color
-    QColor glowColor = Qt::white;
-    const QPen blackPen(mergeColor(Qt::black, glowColor, s_glowEffect), 1);
-    const QPen grayPen(QBrush(mergeColor(Qt::gray, glowColor, s_glowEffect)),
-                       1, Qt::SolidLine,  Qt::RoundCap, Qt::RoundJoin);
+    QBrush brush = _brush;
     if (_pressed)
     {
         if (_selectedBrush.style() != Qt::NoBrush)
-            painter->setBrush(_selectedBrush);
+            brush = _selectedBrush;
         else
-            painter->setBrush(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND));
+            brush = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
     }
-    else
-        painter->setBrush(_brush);
-
-    painter->setPen(blackPen);
-    painter->drawRoundedRect(rect(), 15, 15, Qt::RelativeSize);
-    if (_black)
-        QSvgRenderer(QString(":/vpiano/blkey.svg")).render(painter, rect());
-    else
-    {
-        QPointF points[3] =
-        {
-             QPointF(rect().left() + 1.5, rect().bottom() - 1),
-             QPointF(rect().right() - 1, rect().bottom() - 1),
-             QPointF(rect().right() - 1, rect().top()  +1),
-        };
-        painter->setPen(grayPen);
-        painter->drawPolyline(points, 3);
-    }
+    drawKey(painter, rect(), _black, brush, s_glowEffect);
 
     if (_markerType != PianoKeybd::MARKER_TYPE_NONE)
     {
@@ -87,6 +66,31 @@ void PianoKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidge
         rectMarker.setTop(rectMarker.bottom() - rectMarker.width());
 
         drawMarker(painter, rectMarker, _markerType);
+    }
+}
+
+void PianoKey::drawKey(QPainter * painter, const QRectF &rect, bool black, const QBrush &brush, double glowEffect)
+{
+    // Mix between black and gray with the glow color
+    QColor glowColor = Qt::white;
+    const QPen blackPen(mergeColor(Qt::black, glowColor, glowEffect), 1);
+    const QPen grayPen(QBrush(mergeColor(Qt::gray, glowColor, glowEffect)),
+                       1, Qt::SolidLine,  Qt::RoundCap, Qt::RoundJoin);
+    painter->setBrush(brush);
+    painter->setPen(blackPen);
+    painter->drawRoundedRect(rect, 15, 15, Qt::RelativeSize);
+    if (black)
+        QSvgRenderer(QString(":/vpiano/blkey.svg")).render(painter, rect);
+    else
+    {
+        QPointF points[3] =
+        {
+             QPointF(rect.left() + 1.5, rect.bottom() - 1),
+             QPointF(rect.right() - 1, rect.bottom() - 1),
+             QPointF(rect.right() - 1, rect.top()  +1),
+        };
+        painter->setPen(grayPen);
+        painter->drawPolyline(points, 3);
     }
 }
 

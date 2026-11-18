@@ -89,6 +89,10 @@ bool SynthChannels::processKey(int channel, int key, int vel)
     int presetIndex = soundfont == nullptr ? -1 : SynthMidi::findPreset(soundfont, program / 128, program % 128);
     if (presetIndex >= 0)
     {
+        // A key played again with another transposition first stops its previous note
+        int previousKey = _playedKeys[channel][key];
+        if (previousKey >= 0 && previousKey != playedKey)
+            _core->releaseVoices(-1, -1, channel, previousKey, false);
         _playedKeys[channel][key] = playedKey;
         _core->playPreset(sf2Index, presetIndex, channel, playedKey, vel);
     }

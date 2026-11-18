@@ -33,7 +33,8 @@ class QGridLayout;
 class QCheckBox;
 
 // Menu of the button on the right side of a banner, aligned on the right side of this button. It starts with a grid of
-// settings (labels, checkboxes, sliders) that can be changed without closing it.
+// settings (labels, checkboxes, sliders) that can be changed without closing it. While it is open, it follows the
+// button when the window moves or changes its size (a setting showing or hiding a part of the window).
 class BannerMenu : public QMenu
 {
     Q_OBJECT
@@ -50,10 +51,13 @@ public:
 
 protected:
     void showEvent(QShowEvent * event) override;
+    void hideEvent(QHideEvent * event) override;
     bool eventFilter(QObject * watched, QEvent * event) override;
 
 private:
     QToolButton * _button;
+    QWidget * _window; // Of the button, watched while the menu is open
+    QPoint _buttonPosition; // Global position when the menu has been placed
     QGridLayout * _grid;
     QMap<QObject *, QCheckBox *> _checkBoxes; // By label
 };

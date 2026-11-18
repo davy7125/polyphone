@@ -161,4 +161,5 @@ ContextManager::~ContextManager()
 void ContextManager::updateSynthConfiguration()
 {
     _audio->getSynth()->configure(_configuration->getSynthConfig());
+    _audio->getSynth()->setTransposition(_configuration->getValue(ConfManager::SECTION_SOUND_ENGINE, "transposition", 0).toInt());
 }

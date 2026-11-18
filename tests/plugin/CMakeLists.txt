@@ -67,6 +67,7 @@ target_sources(plugin_snapshot PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/../../sources/plugin/pluginsoundfont.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/../../sources/plugin/pluginprocessor.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/../../sources/plugin/plugineditor.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../sources/plugin/plugintemperamentkeyboard.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/../../sources/plugin/plugintranslator.cpp)
 target_include_directories(plugin_snapshot PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../sources/plugin)
 target_compile_definitions(plugin_snapshot PRIVATE
@@ -88,6 +89,7 @@ target_sources(plugin_threads PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/../../sources/plugin/pluginsoundfont.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/../../sources/plugin/pluginprocessor.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/../../sources/plugin/plugineditor.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../sources/plugin/plugintemperamentkeyboard.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/../../sources/plugin/plugintranslator.cpp)
 target_include_directories(plugin_threads PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../sources/plugin)
 target_compile_definitions(plugin_threads PRIVATE

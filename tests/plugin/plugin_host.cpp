@@ -81,6 +81,7 @@ struct PluginState
     bool hasFixedLatency = false;
     bool isClipping = true;
     std::map<juce::String, float> parameters;
+    std::map<juce::String, juce::var> properties; // Other properties of the state (tuning)
 
     juce::MemoryBlock write() const
     {
@@ -102,6 +103,8 @@ struct PluginState
         state.setProperty("mode", mode, nullptr);
         state.setProperty("program", program, nullptr);
         state.setProperty("channelPrograms", "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1", nullptr);
+        for (const auto &property : properties)
+            state.setProperty(property.first, property.second, nullptr);
         juce::ValueTree soundfontTree("Soundfont");
         soundfontTree.setProperty("path", soundfont, nullptr);
         soundfontTree.setProperty("stored", isStored, nullptr);
@@ -212,7 +215,12 @@ static bool readCase(const juce::File &file, Case &result)
             else if (name == "duration")
                 result.duration = static_cast<double>(words[1].getFloatValue());
             else if (name == "gain")
+            {
+                // Limited to +/-24 dB in the plugin (+/-50 dB in the editor)
                 result.gain = words[1].getFloatValue();
+                if (std::fabs(result.gain) > 24.0f && result.unsupported.isEmpty())
+                    result.unsupported = "gain beyond 24 dB";
+            }
             else if (name == "tuning")
                 result.tuning = words[1].getFloatValue();
             else if (name == "reverb")
@@ -651,7 +659,7 @@ static int runChecks(const juce::String &pluginPath, const juce::String &soundfo
     // Clipping to [-1; 1] (default) or not, a chord being played with a high gain
     {
         PluginState loudState = noteState;
-        loudState.parameters = { { "gain", 30.0f } };
+        loudState.parameters = { { "gain", 24.0f } };
         std::vector<std::pair<int64_t, juce::MidiMessage>> chord;
         for (int key : { 48, 52, 55, 60, 64, 67 })
             chord.push_back({ 100, juce::MidiMessage::noteOn(1, key, static_cast<juce::uint8>(127)) });
@@ -697,6 +705,42 @@ static int runChecks(const juce::String &pluginPath, const juce::String &soundfo
         check(!softVersion201.empty() && softVersion201 == linear,
               "velocity to filter at the velocity 40: 2.01 and 2.04 identical (" +
                   toText(maxDifference(softVersion201, linear)) + ")");
+    }
+
+    // Tuning: fine tune of a note in a custom temperament (last item of the parameter, a value too high being limited
+    // to it), compensated if the note is the one of the reference pitch (all the others being shifted); a note not used
+    // is silent unless the unused notes are played
+    {
+        auto renderWith = [&](int key, const juce::String &customTemperament, int referencePitchKey,
+                              bool playUnusedNotes, float &notePeak) {
+            PluginState tuningState = noteState;
+            if (customTemperament.isNotEmpty())
+                tuningState.parameters = { { "temperament", 10000.0f } };
+            tuningState.properties = { { "customTemperament", customTemperament },
+                                       { "referencePitchKey", referencePitchKey },
+                                       { "playUnusedNotes", playUnusedNotes } };
+            std::vector<std::pair<int64_t, juce::MidiMessage>> note = {
+                { 100, juce::MidiMessage::noteOn(1, key, static_cast<juce::uint8>(100)) } };
+            std::vector<float> data = render(*createInstance(pluginPath, tuningState.write()), 48000, 512, note, 0.5);
+            return isValid(data, notePeak) ? data : std::vector<float>();
+        };
+        const juce::String higherE = "0,0,0,0,30,0,0,0,0,0,0,0"; // E 30 cents higher
+        const juce::String withoutC = "-,0,0,0,0,0,0,0,0,0,0,0";
+        float peak, unusedPeak, playedPeak;
+        std::vector<float> equalE = renderWith(64, "", 9, false, peak);
+        std::vector<float> customE = renderWith(64, higherE, 9, false, peak);
+        std::vector<float> referenceE = renderWith(64, higherE, 4, false, peak);
+        std::vector<float> equalC = renderWith(60, "", 9, false, peak);
+        std::vector<float> referenceC = renderWith(60, higherE, 4, false, peak);
+        check(!equalE.empty() && customE != equalE && referenceE == equalE && !equalC.empty() && referenceC != equalC,
+              "custom temperament: fine tune of E applied (" + toText(maxDifference(customE, equalE)) +
+                  "), compensated if E is the note of the reference pitch (C shifted: " +
+                  toText(maxDifference(referenceC, equalC)) + ")");
+        renderWith(60, withoutC, 9, false, unusedPeak);
+        renderWith(60, withoutC, 9, true, playedPeak);
+        check(unusedPeak < 1e-30f && playedPeak > 0.001f,
+              "note not used by the temperament: silent, played with the option (peak " + juce::String(playedPeak, 3) +
+                  ")");
     }
 
     // Multiple outputs, with effects: each channel playing has its own output, the others are silent, and with the one
@@ -752,7 +796,7 @@ static int runChecks(const juce::String &pluginPath, const juce::String &soundfo
     }
 
     // MPE: pitch bend of a note (member channel) and of its zone (master channel), configuration of the zones,
-    // controllers of the master channel; compared with the same pitches and controllers in the mode "One preset"
+    // controllers of the master channel; compared with the same pitches and controllers in the mode "One instrument"
     {
         PluginState mpeState;
         mpeState.soundfont = soundfont;

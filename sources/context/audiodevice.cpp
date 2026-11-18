@@ -191,6 +191,7 @@ AudioDevice::AudioDevice(ConfManager *configuration) : QObject(nullptr),
 {
     _synth = new Synth(SoundfontManager::getInstance()->getSoundfonts(), SoundfontManager::getInstance()->getMutex());
     _synth->configure(_configuration->getSynthConfig());
+    _synth->setTransposition(_configuration->getValue(ConfManager::SECTION_SOUND_ENGINE, "transposition", 0).toInt());
     initAudio();
 
     // Changes in the audio outputs, grouped since a single change is notified several times

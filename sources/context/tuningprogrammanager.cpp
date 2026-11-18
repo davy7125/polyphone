@@ -24,40 +24,37 @@
 
 #include "tuningprogrammanager.h"
 #include <QFile>
-#include <QTextStream>
+#include <QCoreApplication>
 #include "contextmanager.h"
+#include "temperaments.h"
 
 TuningProgramManager * TuningProgramManager::s_instance = nullptr;
 
 TuningProgram::TuningProgram()
 {
-
-}
-
-bool TuningProgram::parse(QString description)
-{
-    QStringList split = description.split(',');
-    if (split.count() != 13)
-        return false;
-
-    this->_name = split[0];
-    bool ok;
-    for (int i = 1; i <= 12; i++)
+    for (int i = 0; i < 12; i++)
     {
-        _deviations[i - 1] = split[i].toFloat(&ok);
-        if (!ok)
-            return false;
+        _deviations[i] = 0;
+        _used[i] = true;
     }
-
-    return true;
 }
 
-QString TuningProgram::getDescription()
+QString TuningProgram::getConfiguration(int relativeKey) const
+{
+    double fineTunes[12];
+    for (int i = 0; i < 12; i++)
+        fineTunes[i] = static_cast<double>(_deviations[i]);
+    return TuningProgramManager::getConfiguration(_name, fineTunes, _used, relativeKey);
+}
+
+QString TuningProgramManager::getConfiguration(QString name, const double fineTunes[12], const bool used[12],
+                                               int relativeKey)
 {
     QStringList parts;
-    parts << _name;
-    for (float v : _deviations)
-        parts << QString::number(v, 'f', 2);
+    parts << name;
+    for (int i = 0; i < 12; i++)
+        parts << (used[i] ? QString::number(fineTunes[i], 'f', 2) : "-");
+    parts << QString::number(relativeKey);
     return parts.join(",");
 }
 
@@ -78,23 +75,25 @@ void TuningProgramManager::kill()
 }
 
 TuningProgramManager::TuningProgramManager() :
-    _defaultPrograms(true),
-    _updated(true)
+    _defaultPrograms(true)
 {
-    // Load the default tuning programs
-    _tuningPrograms[0].parse(QObject::tr("Equal", "Equal musical temperament") + ",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0");
+    // Equal temperament, then the temperaments and scales of the file (names and categories translated)
+    _tuningPrograms[0]._name = QObject::tr("Equal", "Equal musical temperament");
     QFile file(":/misc/temperaments.csv");
-    int index = 1;
-    if (file.open(QIODevice::ReadOnly | QFile::Text))
+    if (!file.open(QIODevice::ReadOnly))
+        return;
+    std::vector<TemperamentData> temperaments = Temperaments::parse(file.readAll().toStdString());
+    for (size_t i = 0; i < temperaments.size(); i++)
     {
-        QTextStream in(&file);
-        QString line;
-        while (!(line = in.readLine()).isEmpty())
+        const TemperamentData &temperament = temperaments[i];
+        TuningProgram &program = _tuningPrograms[static_cast<int>(i) + 1];
+        program._name = QCoreApplication::translate(Temperaments::TRANSLATION_CONTEXT, temperament.name.c_str());
+        for (const QString &level : QString::fromStdString(temperament.category).split('/', Qt::SkipEmptyParts))
+            program._category << QCoreApplication::translate(Temperaments::TRANSLATION_CONTEXT, level.toUtf8().constData());
+        for (int key = 0; key < 12; key++)
         {
-            if (_tuningPrograms[index].parse(line))
-                index++;
-            else
-                _tuningPrograms.remove(index);
+            program._deviations[key] = temperament.fineTunes[key];
+            program._used[key] = temperament.used[key];
         }
     }
 }
@@ -116,11 +115,12 @@ bool TuningProgramManager::addTuningProgram(int index, QString name, const doubl
         _defaultPrograms = false;
         _settingToRestore = ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "temperament", "").toString();
     }
-    _updated = true;
 
-    _tuningPrograms[index]._name = name.isEmpty() ? QObject::tr("Tuning program %1:%2").arg(index / 128).arg(index % 128) : name;
+    TuningProgram program;
+    program._name = name.isEmpty() ? QObject::tr("Tuning program %1:%2").arg(index / 128).arg(index % 128) : name;
     for (int i = 0; i < 12; i++)
-        _tuningPrograms[index]._deviations[i] = static_cast<float>(deviations[i]);
+        program._deviations[i] = static_cast<float>(deviations[i]);
+    _tuningPrograms[index] = program;
 
     return true;
 }
@@ -134,6 +134,5 @@ TuningProgram * TuningProgramManager::getTuningProgram(int index)
 
 QMap<int, TuningProgram> * TuningProgramManager::getAllPrograms()
 {
-    _updated = false;
     return &_tuningPrograms;
 }

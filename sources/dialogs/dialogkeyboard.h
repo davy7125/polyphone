@@ -76,6 +76,7 @@ private slots:
     void onProcessKeyMainThread(int channel, int key, int vel);
     void on_comboType_currentIndexChanged(int index);
     void onMouseHover(int key, int vel);
+    void onTemperamentToggled(bool checked);
     void onControllersToggled(bool checked);
     void onEffectsToggled(bool checked);
 

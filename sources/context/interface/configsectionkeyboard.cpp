@@ -30,11 +30,14 @@
 #include <QFile>
 #include <QScrollBar>
 #include "tuningprogrammanager.h"
+#include "temperamentcombobox.h"
+#include "temperamentsettings.h"
 
 ConfigSectionKeyboard::ConfigSectionKeyboard(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ConfigSectionKeyboard),
-    _currentTuningBank(0)
+    _currentTuningBank(0),
+    _isSaving(false)
 {
     ui->setupUi(this);
     this->renameComboFirstC();
@@ -51,7 +54,6 @@ ConfigSectionKeyboard::ConfigSectionKeyboard(QWidget *parent) :
     ui->tableKeyboardMap->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
     ui->tableKeyboardMap->setStyleSheet(ContextManager::theme()->getTableTheme());
 
-    ui->spinReferencePitch->setSuffix(" " + tr("Hz", "unit for Herz"));
     ui->pushDefaultReferencePitch->setIcon(ContextManager::theme()->getColoredSvg(":/icons/edit-undo.svg", QSize(14, 14), ThemeManager::BUTTON_TEXT));
     ui->pushDefaultTemperament->setIcon(ContextManager::theme()->getColoredSvg(":/icons/edit-undo.svg", QSize(14, 14), ThemeManager::BUTTON_TEXT));
 
@@ -60,11 +62,33 @@ ConfigSectionKeyboard::ConfigSectionKeyboard(QWidget *parent) :
         for (int i = 0; i < ui->tableKeyboardMap->rowCount(); i++)
             ui->tableKeyboardMap->setCellWidget(i, j, new EditKey(i, static_cast<ConfManager::Key>(j)));
 
-    // Temperament relative keys
+    // Transposition, its label as wide as the one of the tonality so that the lists are aligned
+    ui->comboTransposition->blockSignals(true);
+    for (int semitones = -12; semitones <= 12; semitones++)
+        ui->comboTransposition->addItem(TemperamentSettings::getTranspositionText(semitones), semitones);
+    ui->comboTransposition->blockSignals(false);
+    ui->comboTransposition->setToolTip(TemperamentSettings::getTranspositionToolTip());
+    ui->labelTransposition->setToolTip(TemperamentSettings::getTranspositionToolTip());
+    int labelWidth = qMax(ui->labelTransposition->sizeHint().width(), ui->labelTonality->sizeHint().width());
+    ui->labelTransposition->setMinimumWidth(labelWidth);
+    ui->labelTonality->setMinimumWidth(labelWidth);
+
+    // Tonalities, named as configured
     ui->comboTemperamentRelativeKey->blockSignals(true);
     for (int i = 0; i < 12; i++)
-        ui->comboTemperamentRelativeKey->addItem(ContextManager::keyName()->getKeyName(i, true, false, false, true), QString::number(i));
+        ui->comboTemperamentRelativeKey->addItem("", QString::number(i));
     ui->comboTemperamentRelativeKey->blockSignals(false);
+    updateTonalityNames();
+    connect(ContextManager::configuration(), SIGNAL(interfaceChanged()), this, SLOT(updateTonalityNames()));
+
+    // Fine tunes of the temperament, editable, as high as 2 rows (as in the area of the virtual keyboard)
+    ui->temperamentKeyboard->setFixedHeight(2 * ui->comboTemperament->sizeHint().height() +
+                                            qMax(0, ui->gridLayout->verticalSpacing()));
+    connect(ui->temperamentKeyboard, SIGNAL(edited()), this, SLOT(onTemperamentEdited()));
+    connect(ui->temperamentKeyboard, SIGNAL(tonalityRequested(int)), this, SLOT(onTonalityRequested(int)));
+
+    // The same settings can be changed in the area of the virtual keyboard
+    connect(ContextManager::configuration(), SIGNAL(soundEngineConfigurationChanged()), this, SLOT(onSoundEngineConfigurationChanged()));
 }
 
 ConfigSectionKeyboard::~ConfigSectionKeyboard()
@@ -97,13 +121,10 @@ void ConfigSectionKeyboard::initialize()
     // Octave configuration
     initializeFirstC();
 
-    // Reference pitch
-    ui->spinReferencePitch->blockSignals(true);
-    ui->spinReferencePitch->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "reference_pitch", 4400).toDouble() / 10.0);
-    ui->spinReferencePitch->blockSignals(false);
-
-    // Load the temperaments
-    updateTemperaments();
+    // Reference pitch and temperament
+    ui->referencePitchEditor->updateNames();
+    ui->comboTemperament->fillTemperaments();
+    onSoundEngineConfigurationChanged();
 }
 
 void ConfigSectionKeyboard::adjustTableHeight()
@@ -133,31 +154,59 @@ void ConfigSectionKeyboard::initializeFirstC()
     ui->comboFirstC->blockSignals(false);
 }
 
-void ConfigSectionKeyboard::updateTemperaments()
+void ConfigSectionKeyboard::onSoundEngineConfigurationChanged()
 {
-    if (TuningProgramManager::getInstance()->hasBeenUpdated())
-    {
-        QMap<int, TuningProgram> * programs = TuningProgramManager::getInstance()->getAllPrograms();
-        QStringList currentTemperamentConfig = ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "temperament", "").toString().split(",");
+    // Changes made here are already shown
+    if (_isSaving)
+        return;
 
-        // Add all temperaments
-        ui->comboTemperament->blockSignals(true);
-        for (auto i = programs->cbegin(), end = programs->cend(); i != end; ++i)
-            ui->comboTemperament->addItem(i.value()._name, i.key());
+    ui->comboTransposition->blockSignals(true);
+    ui->comboTransposition->setCurrentIndex(ui->comboTransposition->findData(TemperamentSettings::getTransposition()));
+    ui->comboTransposition->blockSignals(false);
 
-        // Select the current one
-        if (currentTemperamentConfig[0].isEmpty() || ui->comboTemperament->findText(currentTemperamentConfig[0]) == -1)
-            ui->comboTemperament->setCurrentIndex(0); // Equal temperament
-        else
-            ui->comboTemperament->setCurrentText(currentTemperamentConfig[0]);
-        ui->comboTemperament->blockSignals(false);
+    _temperament.load();
+    updateTemperamentWidgets();
+}
 
-        // Relative key combobox
-        ui->comboTemperamentRelativeKey->blockSignals(true);
-        ui->comboTemperamentRelativeKey->setCurrentIndex(currentTemperamentConfig.size() == 14 ? currentTemperamentConfig[13].toInt() : 0);
-        ui->comboTemperamentRelativeKey->setEnabled(ui->comboTemperament->currentIndex() != 0);
-        ui->comboTemperamentRelativeKey->blockSignals(false);
-    }
+void ConfigSectionKeyboard::updateTonalityNames()
+{
+    for (int i = 0; i < 12; i++)
+        ui->comboTemperamentRelativeKey->setItemText(i, ContextManager::keyName()->getKeyName(static_cast<unsigned int>(i), true, false, false, true));
+}
+
+void ConfigSectionKeyboard::updateTemperamentWidgets()
+{
+    ui->comboTemperament->selectProgram(_temperament.getProgram());
+
+    ui->comboTemperamentRelativeKey->blockSignals(true);
+    ui->comboTemperamentRelativeKey->setCurrentIndex(_temperament.getTonality());
+    ui->comboTemperamentRelativeKey->setEnabled(_temperament.isTonalityUsed());
+    ui->labelTonality->setEnabled(_temperament.isTonalityUsed());
+    ui->comboTemperamentRelativeKey->blockSignals(false);
+
+    ui->checkPlayUnusedNotes->blockSignals(true);
+    ui->checkPlayUnusedNotes->setChecked(TemperamentSettings::playsUnusedNotes());
+    ui->checkPlayUnusedNotes->blockSignals(false);
+
+    double fineTunes[12];
+    bool used[12];
+    _temperament.getTemperament(fineTunes, used);
+    ui->temperamentKeyboard->setTemperament(fineTunes, used, _temperament.isTonalityUsed() ? _temperament.getTonality() : -1);
+    ui->temperamentKeyboard->setReferencePitchKey(TemperamentSettings::getReferencePitchKey());
+}
+
+void ConfigSectionKeyboard::saveTemperament()
+{
+    _isSaving = true;
+    _temperament.save();
+    _isSaving = false;
+    updateTemperamentWidgets();
+}
+
+int ConfigSectionKeyboard::lastProgramIndex() const
+{
+    // The custom temperament is at the end
+    return ui->comboTemperament->findData(TemperamentSettings::CUSTOM) - 1;
 }
 
 void ConfigSectionKeyboard::renameComboFirstC()
@@ -172,37 +221,49 @@ void ConfigSectionKeyboard::on_comboFirstC_currentIndexChanged(int index)
     ContextManager::configuration()->setValue(ConfManager::SECTION_KEYBOARD, "octave_offset", index);
 }
 
-void ConfigSectionKeyboard::on_spinReferencePitch_valueChanged(double value)
-{
-    ContextManager::configuration()->setValue(ConfManager::SECTION_SOUND_ENGINE, "reference_pitch", static_cast<int>(value * 10.0 + 0.5));
-}
-
 void ConfigSectionKeyboard::on_pushDefaultReferencePitch_clicked()
 {
-    ui->spinReferencePitch->setValue(440.0);
+    // Reference pitch and transposition (same row)
+    ui->referencePitchEditor->reset();
+    ui->comboTransposition->setCurrentIndex(ui->comboTransposition->findData(0));
 }
 
 void ConfigSectionKeyboard::on_comboTemperament_currentIndexChanged(int index)
 {
-    TuningProgram * program = TuningProgramManager::getInstance()->getTuningProgram(ui->comboTemperament->itemData(index).toInt());
-    if (program == nullptr)
-        return;
-
-    ContextManager::configuration()->setValue(ConfManager::SECTION_SOUND_ENGINE, "temperament",
-                                              program->getDescription() +
-                                              "," + ui->comboTemperamentRelativeKey->currentData().toString());
-    ui->comboTemperamentRelativeKey->setEnabled(index != 0);
+    Q_UNUSED(index)
+    _temperament.selectProgram(ui->comboTemperament->getProgram());
+    saveTemperament();
 }
 
 void ConfigSectionKeyboard::on_comboTemperamentRelativeKey_currentIndexChanged(int index)
 {
-    TuningProgram * program = TuningProgramManager::getInstance()->getTuningProgram(ui->comboTemperament->currentData().toInt());
-    if (program == nullptr)
-        return;
+    _temperament.setTonality(index);
+    saveTemperament();
+}
 
-    ContextManager::configuration()->setValue(ConfManager::SECTION_SOUND_ENGINE, "temperament",
-                                              program->getDescription() +
-                                              "," + ui->comboTemperamentRelativeKey->itemData(index).toString());
+void ConfigSectionKeyboard::onTemperamentEdited()
+{
+    // The temperament shown, including the change, becomes the custom temperament
+    _temperament.setTemperament(ui->temperamentKeyboard->getValues(), ui->temperamentKeyboard->getUsed());
+    saveTemperament();
+}
+
+void ConfigSectionKeyboard::onTonalityRequested(int key)
+{
+    // Transposition, as with the list
+    ui->comboTemperamentRelativeKey->setCurrentIndex(key);
+}
+
+void ConfigSectionKeyboard::on_comboTransposition_currentIndexChanged(int index)
+{
+    _isSaving = true;
+    TemperamentSettings::setTransposition(ui->comboTransposition->itemData(index).toInt());
+    _isSaving = false;
+}
+
+void ConfigSectionKeyboard::on_checkPlayUnusedNotes_toggled(bool checked)
+{
+    TemperamentSettings::setPlayUnusedNotes(checked);
 }
 
 void ConfigSectionKeyboard::on_pushDefaultTemperament_clicked()
@@ -229,15 +290,15 @@ bool ConfigSectionKeyboard::processRPNChanged(int channel, int parameter, int va
             pitchHz = 440.0 * qPow(2.0, semitones / 12.0) + 0.5;
         }
         else if (trigger == 5)
-            pitchHz = ui->spinReferencePitch->value() + 1;
+            pitchHz = ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "reference_pitch", 4400).toDouble() / 10.0 + 1;
         else if (trigger == 6)
-            pitchHz = ui->spinReferencePitch->value() - 1;
+            pitchHz = ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "reference_pitch", 4400).toDouble() / 10.0 - 1;
 
         if (pitchHz < 390)
             pitchHz = 390;
         else if (pitchHz > 470)
             pitchHz = 470;
-        ui->spinReferencePitch->setValue(pitchHz + 0.05);
+        ContextManager::configuration()->setValue(ConfManager::SECTION_SOUND_ENGINE, "reference_pitch", qRound(10.0 * pitchHz + 0.5)); // A4
     }
     else if (parameter == 2 && (trigger == 3 || trigger >= 5))
     {
@@ -248,19 +309,21 @@ bool ConfigSectionKeyboard::processRPNChanged(int channel, int parameter, int va
         // Tuning program
         int tuningProgramIndex = 128 * _currentTuningBank + (value >> 7);
         int newIndex = -1;
+        int currentIndex = ui->comboTemperament->currentIndex();
         if (trigger == 5)
         {
-            if (ui->comboTemperament->currentIndex() < ui->comboTemperament->count() - 1)
-                newIndex = ui->comboTemperament->currentIndex() + 1;
+            // The custom temperament is not reached
+            if (currentIndex < lastProgramIndex())
+                newIndex = currentIndex + 1;
         }
         else if (trigger == 6)
         {
-            if (ui->comboTemperament->currentIndex() > 0)
-                newIndex = ui->comboTemperament->currentIndex() - 1;
+            if (currentIndex > 0)
+                newIndex = qMin(currentIndex - 1, lastProgramIndex());
         }
         else
         {
-            for (int i = 0; i < ui->comboTemperament->count(); i++)
+            for (int i = 0; i <= lastProgramIndex(); i++)
             {
                 if (ui->comboTemperament->itemData(i).toInt() == tuningProgramIndex)
                 {

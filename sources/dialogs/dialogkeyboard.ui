@@ -261,6 +261,25 @@
       <number>0</number>
      </property>
      <item>
+      <widget class="TemperamentArea" name="temperamentArea" native="true"/>
+     </item>
+     <item>
+      <widget class="QFrame" name="lineTemperament">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>1</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>1</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="EffectArea" name="effectArea" native="true"/>
      </item>
      <item>
@@ -346,6 +365,12 @@
    <class>ControllerArea</class>
    <extends>QWidget</extends>
    <header>controllerarea.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>TemperamentArea</class>
+   <extends>QWidget</extends>
+   <header>temperamentarea.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>

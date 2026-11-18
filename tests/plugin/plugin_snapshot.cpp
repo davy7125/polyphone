@@ -26,6 +26,8 @@
 // Interface of the plugin drawn in images without a display, the sources of the plugin being compiled here (see
 // README.md):
 //   plugin_snapshot <soundfont> <output png prefix>
+// Images: one instrument, 16 channels, and one instrument with all the groups switched on (Werckmeister III in D,
+// reverb and chorus) and a gain of -12 dB
 
 #include <juce_audio_processors/juce_audio_processors.h>
 #include <cstdio>
@@ -57,9 +59,28 @@ int main(int argc, char ** argv)
 
     PluginProcessor processor;
     processor.prepareToPlay(48000, 512);
-    for (int mode : { 0, 1 })
+    for (int variant : { 0, 1, 2 })
     {
-        setState(processor, juce::String::fromUTF8(argv[1]), mode);
+        setState(processor, juce::String::fromUTF8(argv[1]), variant == 1 ? 1 : 0);
+        if (variant == 2)
+        {
+            // Werckmeister III in D, reverb and chorus
+            juce::AudioProcessorValueTreeState &parameters = processor.getParameterState();
+            auto set = [&parameters](const char * id, float value) {
+                parameters.getParameter(id)->setValueNotifyingHost(parameters.getParameter(id)->convertTo0to1(value));
+            };
+            for (int i = 0; i <= PluginProcessor::getCustomTemperamentIndex(); i++)
+                if (PluginProcessor::getTemperamentName(static_cast<size_t>(i)) == "Werckmeister III")
+                    set("temperament", static_cast<float>(i));
+            set("temperamentKey", 2.0f);
+            set("gain", -12.0f);
+            set("reverbLevel", 30.0f);
+            set("reverbSize", 60.0f);
+            set("chorusLevel", 20.0f);
+            set("chorusDepth", 40.0f);
+            for (const char * id : { "temperamentEnabled", "reverbEnabled", "chorusEnabled" })
+                set(id, 1.0f);
+        }
 
         // A few notes played, shown by the keyboard
         juce::AudioBuffer<float> buffer(2, 512);
@@ -70,7 +91,8 @@ int main(int argc, char ** argv)
 
         std::unique_ptr<juce::AudioProcessorEditor> editor(processor.createEditor());
         juce::Image image = editor->createComponentSnapshot(editor->getLocalBounds());
-        juce::File file(juce::String::fromUTF8(argv[2]) + (mode == 0 ? "_one_preset.png" : "_channels.png"));
+        const char * const suffixes[] = { "_one_preset.png", "_channels.png", "_expanded.png" };
+        juce::File file(juce::String::fromUTF8(argv[2]) + suffixes[variant]);
         file.deleteFile();
         juce::FileOutputStream output(file);
         juce::PNGImageFormat().writeImageToStream(image, output);

@@ -201,6 +201,8 @@ set(POLYPHONE_APP_FILES
     clavier/pianoscene.h
     clavier/styledslider.cpp
     clavier/styledslider.h
+    clavier/temperamentarea.cpp
+    clavier/temperamentarea.h
     context/audiodevice.cpp
     context/audiodevice.h
     context/audiodevicewatcher.cpp
@@ -237,12 +239,20 @@ set(POLYPHONE_APP_FILES
     context/interface/configtocbutton.h
     context/interface/editkey.cpp
     context/interface/editkey.h
+    context/interface/referencepitcheditor.cpp
+    context/interface/referencepitcheditor.h
+    context/interface/temperamentcombobox.cpp
+    context/interface/temperamentcombobox.h
+    context/interface/temperamentkeyboard.cpp
+    context/interface/temperamentkeyboard.h
     context/keynamemanager.cpp
     context/keynamemanager.h
     context/mididevice.cpp
     context/mididevice.h
     context/recentfilemanager.cpp
     context/recentfilemanager.h
+    context/temperamentsettings.cpp
+    context/temperamentsettings.h
     context/thememanager.cpp
     context/thememanager.h
     context/translationmanager.cpp

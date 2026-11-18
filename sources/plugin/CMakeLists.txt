@@ -154,6 +154,7 @@ target_sources(PolyphonePlugin PRIVATE
     pluginsoundfont.cpp
     pluginprocessor.cpp
     plugineditor.cpp
+    plugintemperamentkeyboard.cpp
     plugintranslator.cpp)
 
 target_compile_definitions(PolyphonePlugin PUBLIC

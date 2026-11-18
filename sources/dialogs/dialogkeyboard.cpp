@@ -31,6 +31,8 @@
 #include "keyboarddisplay.h"
 #include <QApplication>
 #include <QCheckBox>
+#include <QAbstractSpinBox>
+#include <QLineEdit>
 
 DialogKeyboard::DialogKeyboard(QWidget *parent) :
     QDialog(parent, Qt::Tool | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint),
@@ -51,8 +53,11 @@ DialogKeyboard::DialogKeyboard(QWidget *parent) :
     ui->layoutTop->setAlignment(ui->layoutInfo, Qt::AlignVCenter); // Height of the other banners, the content centered
     DialogDecoration::apply(this, ui->frameTop);
 
-    // Bar between the effects and the controllers
-    ui->lineAreas->setStyleSheet("QFrame{border:0;border-top:1px solid " + theme->getColor(ThemeManager::BORDER).name() + "}");
+    // Bars below the temperament (if followed by the effects or the controllers) and between the effects and the
+    // controllers
+    QString lineStyle = "QFrame{border:0;border-top:1px solid " + theme->getColor(ThemeManager::BORDER).name() + "}";
+    ui->lineTemperament->setStyleSheet(lineStyle);
+    ui->lineAreas->setStyleSheet(lineStyle);
 
     // Initialize the keyboard
     int type = ContextManager::configuration()->getValue(ConfManager::SECTION_KEYBOARD, "type", 1).toInt();
@@ -80,15 +85,19 @@ DialogKeyboard::DialogKeyboard(QWidget *parent) :
     connect(ui->keyboard, SIGNAL(mouseOver(int,int)), this, SLOT(onMouseHover(int,int)));
     connect(this, SIGNAL(processKeyMainThread(int,int,int)), this, SLOT(onProcessKeyMainThread(int,int,int)));
 
-    // Menu of the banner showing or hiding the controllers and the effects
+    // Menu of the banner showing or hiding the tuning, the effects and the controllers, in the order of the areas
     ConfManager * configuration = ContextManager::configuration();
     BannerMenu * menu = new BannerMenu(ui->toolButtonSettings, this);
-    QCheckBox * checkControllers = menu->addCheckBox(tr("MIDI controllers"), 0, 2);
-    checkControllers->setChecked(configuration->getValue(ConfManager::SECTION_DISPLAY, "control_area_expanded", false).toBool());
-    connect(checkControllers, SIGNAL(toggled(bool)), this, SLOT(onControllersToggled(bool)));
+    QCheckBox * checkTemperament = menu->addCheckBox(tr("Tuning"), 0, 2);
+    checkTemperament->setChecked(configuration->getValue(ConfManager::SECTION_DISPLAY, "temperament_area_expanded", false).toBool());
+    connect(checkTemperament, SIGNAL(toggled(bool)), this, SLOT(onTemperamentToggled(bool)));
     QCheckBox * checkEffects = menu->addCheckBox(tr("Effects"), 1, 2);
     checkEffects->setChecked(configuration->getValue(ConfManager::SECTION_DISPLAY, "effect_area_expanded", false).toBool());
     connect(checkEffects, SIGNAL(toggled(bool)), this, SLOT(onEffectsToggled(bool)));
+    QCheckBox * checkControllers = menu->addCheckBox(tr("MIDI controllers"), 2, 2);
+    checkControllers->setChecked(configuration->getValue(ConfManager::SECTION_DISPLAY, "control_area_expanded", false).toBool());
+    connect(checkControllers, SIGNAL(toggled(bool)), this, SLOT(onControllersToggled(bool)));
+    connect(ui->temperamentArea, &TemperamentArea::detailsToggled, this, [this]() { updateAreaVisibility(); });
     updateAreaVisibility();
 
     // Navigation among the elements and files
@@ -256,6 +265,12 @@ void DialogKeyboard::displayKeyInfo()
     }
 }
 
+void DialogKeyboard::onTemperamentToggled(bool checked)
+{
+    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "temperament_area_expanded", checked);
+    updateAreaVisibility();
+}
+
 void DialogKeyboard::onControllersToggled(bool checked)
 {
     ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "control_area_expanded", checked);
@@ -271,10 +286,13 @@ void DialogKeyboard::onEffectsToggled(bool checked)
 void DialogKeyboard::updateAreaVisibility()
 {
     int keyboardTop = ui->keyboard->y();
+    bool temperamentVisible = ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "temperament_area_expanded", false).toBool();
     bool controllersVisible = ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "control_area_expanded", false).toBool();
     bool effectsVisible = ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "effect_area_expanded", false).toBool();
+    ui->temperamentArea->setVisible(temperamentVisible);
     ui->controllerArea->setVisible(controllersVisible);
     ui->effectArea->setVisible(effectsVisible);
+    ui->lineTemperament->setVisible(temperamentVisible && (effectsVisible || controllersVisible));
     ui->lineAreas->setVisible(controllersVisible && effectsVisible);
     adjustHeight();
 
@@ -310,9 +328,11 @@ bool DialogKeyboard::eventFilter(QObject * watched, QEvent * event)
             return true;
         }
 
-        // Keys sent to another widget of this window (effect area, combobox, ...) but played by the keyboard
+        // Keys sent to another widget of this window (effect area, combobox, ...) but played by the keyboard, except
+        // for the fields where a value is typed (reference pitch)
+        bool isTextField = qobject_cast<QAbstractSpinBox *>(widget) != nullptr || qobject_cast<QLineEdit *>(widget) != nullptr;
         if (widget != nullptr && widget->window() == this && widget != ui->keyboard && !ui->keyboard->isAncestorOf(widget) &&
-            ui->keyboard->capturesKey(static_cast<QKeyEvent *>(event)))
+            !isTextField && ui->keyboard->capturesKey(static_cast<QKeyEvent *>(event)))
         {
             QCoreApplication::sendEvent(ui->keyboard, event);
             return true;

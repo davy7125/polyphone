@@ -477,6 +477,10 @@ bool MidiFilePlayer::processKey(int channel, int key, int vel)
     int presetIndex = soundfont == nullptr ? -1 : SynthMidi::findPreset(soundfont, program / 128, program % 128);
     if (presetIndex >= 0)
     {
+        // A key played again with another transposition first stops its previous note
+        int previousKey = _playedKeys[channel][key];
+        if (previousKey >= 0 && previousKey != playedKey)
+            _synth->play(EltID(elementPrst), MIDI_FILE_CHANNEL_OFFSET + channel, previousKey, 0);
         _playedKeys[channel][key] = playedKey;
         _synth->play(EltID(elementPrst, sf2Index, presetIndex), MIDI_FILE_CHANNEL_OFFSET + channel, playedKey, vel);
     }

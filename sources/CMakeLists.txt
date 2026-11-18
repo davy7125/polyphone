@@ -273,12 +273,16 @@ if(POLYPHONE_BUILD_EDITOR)
                   /usr/lib/qt${QT_VERSION_MAJOR}/bin)
     endif()
     if(POLYPHONE_LUPDATE)
-        # The texts of the plugin are in the same files (contexts "Plugin...", see plugin/plugintranslator.h)
+        # The texts of the plugin are in the same files (contexts "Plugin...", see plugin/plugintranslator.h), as the
+        # names of the temperaments shared with the editor
         set(POLYPHONE_PLUGIN_TRANSLATED_FILES
+            synth_core/temperaments.cpp
             plugin/plugineditor.cpp
             plugin/plugineditor.h
             plugin/pluginprocessor.cpp
             plugin/pluginprocessor.h
+            plugin/plugintemperamentkeyboard.cpp
+            plugin/plugintemperamentkeyboard.h
             plugin/plugintranslator.cpp
             plugin/plugintranslator.h)
         list(JOIN POLYPHONE_APP_FILES "\n" app_files)

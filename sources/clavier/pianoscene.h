@@ -60,6 +60,9 @@ public:
     // Stop the notes started by the computer keyboard
     void releaseKeys();
 
+    // Horizontal offset of a black key, relative to the width of a white key (0 for a white key)
+    static double getOffsetX(int numKey);
+
 signals:
     void noteOn(int n, int v);
     void noteOff(int n);
@@ -90,7 +93,6 @@ private:
     void triggerNoteOn(const int note, const int vel);
     void triggerNoteOff(const int note);
     static qreal sceneWidth(int startKey, int keys);
-    static double getOffsetX(int numKey);
 
     int m_numKeys;
     int m_startKey;
