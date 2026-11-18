@@ -1141,61 +1141,70 @@
 <context>
     <name>ConfigSectionKeyboard</name>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="81"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="347"/>
         <source>Mapping</source>
         <translation>매핑</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="206"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="197"/>
         <source>Octave #1</source>
         <translation>옥타브 #1</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="211"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="98"/>
+        <source>Transposition</source>
+        <translation>조옮김</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="202"/>
         <source>Octave #2</source>
         <translation>옥타브 #2</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="216"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="207"/>
         <source>Octave #3</source>
         <translation>옥타브 #3</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="221"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="212"/>
         <source>Octave #4</source>
         <translation>옥타브 #4</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="294"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="316"/>
+        <source>Tonality</source>
+        <translation>조성</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="364"/>
+        <source>Also play the unused notes</source>
+        <translation>사용하지 않는 음도 연주</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="36"/>
         <source>Temperament</source>
         <translation>음률</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="69"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="335"/>
         <source>First C</source>
         <translation>초기 C</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="36"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="354"/>
         <source>Reference pitch</source>
         <translation>기준 음높이</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="59"/>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="94"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="26"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="144"/>
         <source>Back to default value</source>
         <translation>기본값으로 돌아가기</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="156"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="131"/>
         <source>Tuning</source>
         <translation>튜닝</translation>
-    </message>
-    <message>
-        <location filename="../../context/interface/configsectionkeyboard.cpp" line="54"/>
-        <source>Hz</source>
-        <comment>unit for Herz</comment>
-        <translation>Hz</translation>
     </message>
 </context>
 <context>
@@ -1996,12 +2005,17 @@ repository</source>
         <translation>표시 옵션</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="86"/>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="91"/>
+        <source>Tuning</source>
+        <translation>튜닝</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="97"/>
         <source>MIDI controllers</source>
         <translation>MIDI 컨트롤러</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="89"/>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="94"/>
         <source>Effects</source>
         <translation>효과</translation>
     </message>
@@ -6060,344 +6074,386 @@ to display its timbre</source>
 <context>
     <name>PluginEditor</name>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="57"/>
+        <location filename="../../plugin/plugineditor.cpp" line="88"/>
         <source>cannot open the file</source>
         <translation>파일을 열 수 없음</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="58"/>
+        <location filename="../../plugin/plugineditor.cpp" line="89"/>
         <source>file recursion (#include)</source>
         <translation>파일 재귀 포함 (#include)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="59"/>
+        <location filename="../../plugin/plugineditor.cpp" line="90"/>
         <source>not enough memory</source>
         <translation>메모리 부족</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="60"/>
+        <location filename="../../plugin/plugineditor.cpp" line="91"/>
         <source>this is not a DLS file</source>
         <translation>DLS 파일이 아님</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="61"/>
+        <location filename="../../plugin/plugineditor.cpp" line="92"/>
         <source>invalid header</source>
         <translation>잘못된 헤더</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="62"/>
+        <location filename="../../plugin/plugineditor.cpp" line="93"/>
         <source>corrupted file (sdta)</source>
         <translation>손상된 파일 (sdta)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="63"/>
+        <location filename="../../plugin/plugineditor.cpp" line="94"/>
         <source>corrupted file (pdta)</source>
         <translation>손상된 파일 (pdta)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="193"/>
-        <source>Preset played by the channel, or the one chosen by the program changes it receives</source>
-        <translation>채널에서 연주되는 프리셋, 또는 수신한 프로그램 체인지로 선택된 프리셋</translation>
+        <location filename="../../plugin/plugineditor.cpp" line="304"/>
+        <source>Instrument played by the channel, or the one chosen by the program changes it receives</source>
+        <translation>채널에서 연주되는 악기, 또는 수신한 프로그램 체인지로 선택된 악기</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="196"/>
+        <location filename="../../plugin/plugineditor.cpp" line="307"/>
         <source>Program change (drums)</source>
         <translation>프로그램 체인지 (드럼)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="196"/>
+        <location filename="../../plugin/plugineditor.cpp" line="307"/>
         <source>Program change</source>
         <translation>프로그램 체인지</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="499"/>
-        <source>(no preset)</source>
-        <translation>(프리셋 없음)</translation>
+        <location filename="../../plugin/plugineditor.cpp" line="761"/>
+        <source>(no instrument)</source>
+        <translation>(악기 없음)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="506"/>
+        <location filename="../../plugin/plugineditor.cpp" line="808"/>
         <source>Open...</source>
         <translation>열기...</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="507"/>
+        <location filename="../../plugin/plugineditor.cpp" line="809"/>
         <source>Open a soundfont (sf2, sf3, sfz or dls), which can also be dropped on the window</source>
         <translation>사운드폰트(sf2, sf3, sfz 또는 dls)를 엽니다. 창에 끌어다 놓을 수도 있습니다</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="508"/>
+        <location filename="../../plugin/plugineditor.cpp" line="810"/>
         <source>Recent soundfonts</source>
         <translation>최근 사운드폰트</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="509"/>
-        <source>One preset</source>
-        <translation>단일 프리셋</translation>
+        <location filename="../../plugin/plugineditor.cpp" line="811"/>
+        <source>One instrument</source>
+        <translation>단일 악기</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="510"/>
-        <source>The same preset is played on all MIDI channels</source>
-        <translation>모든 MIDI 채널에서 같은 프리셋을 연주합니다</translation>
+        <location filename="../../plugin/plugineditor.cpp" line="812"/>
+        <source>The same instrument is played on all MIDI channels</source>
+        <translation>모든 MIDI 채널에서 같은 악기를 연주합니다</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="511"/>
+        <location filename="../../plugin/plugineditor.cpp" line="813"/>
         <source>16 channels</source>
         <translation>16 채널</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="512"/>
-        <source>Each MIDI channel plays its preset, or the one chosen by its program changes (General MIDI)</source>
-        <translation>각 MIDI 채널이 자신의 프리셋 또는 프로그램 체인지로 선택된 프리셋을 연주합니다 (General MIDI)</translation>
+        <location filename="../../plugin/plugineditor.cpp" line="814"/>
+        <source>Each MIDI channel plays its instrument, or the one chosen by its program changes (General MIDI)</source>
+        <translation>각 MIDI 채널이 자신의 악기 또는 프로그램 체인지로 선택된 악기를 연주합니다 (General MIDI)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="514"/>
-        <source>The same preset is played by an MPE controller: each note has its own pitch bend, pressure and timbre (lower zone of 15 channels, or the zones given by the controller)</source>
-        <translation>같은 프리셋을 MPE 컨트롤러로 연주합니다. 각 노트가 고유한 피치 벤드, 압력, 음색을 가집니다 (15채널 하위 존 또는 컨트롤러가 지정한 존)</translation>
+        <location filename="../../plugin/plugineditor.cpp" line="816"/>
+        <source>The same instrument is played by an MPE controller: each note has its own pitch bend, pressure and timbre (lower zone of 15 channels, or the zones given by the controller)</source>
+        <translation>같은 악기를 MPE 컨트롤러로 연주합니다. 각 노트가 고유한 피치 벤드, 압력, 음색을 가집니다 (15채널 하위 존 또는 컨트롤러가 지정한 존)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="519"/>
+        <location filename="../../plugin/plugineditor.cpp" line="822"/>
         <source>Gain</source>
         <translation>게인</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="519"/>
-        <source>Transpose</source>
-        <translation>조옮김</translation>
+        <location filename="../../plugin/plugineditor.cpp" line="844"/>
+        <source>Play all</source>
+        <translation>모두 연주</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="519"/>
+        <location filename="../../plugin/plugineditor.cpp" line="853"/>
+        <source>Default modulator from the velocity to the filter cutoff frequency: the softer the note, the lower the cutoff (up to 2 octaves lower).
+Change this option if notes sound too muffled: SoundFont 2.01 for an old soundfont made with this version (the notes above the velocity 64 are not filtered), Disabled for a soundfont whose samples already sound softer at low velocities (several velocity layers).</source>
+        <translation>벨로시티에서 필터 차단 주파수로 가는 기본 모듈레이터: 음이 약할수록 차단 주파수가 낮아집니다(최대 2옥타브 아래).
+음이 너무 답답하게 들리면 이 옵션을 바꾸세요: 이 버전으로 만든 오래된 사운드폰트에는 SoundFont 2.01(벨로시티 64를 넘는 음은 필터링되지 않음), 낮은 벨로시티에서 이미 부드럽게 들리는 샘플을 가진 사운드폰트(여러 벨로시티 레이어)에는 사용 안 함.</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="1171"/>
         <source>Tuning</source>
         <translation>튜닝</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="520"/>
+        <location filename="../../plugin/plugineditor.cpp" line="823"/>
         <source>Level</source>
         <comment>reverb</comment>
         <translation>레벨</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="520"/>
+        <location filename="../../plugin/plugineditor.cpp" line="823"/>
         <source>Size</source>
         <comment>reverb</comment>
         <translation>크기</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="520"/>
+        <location filename="../../plugin/plugineditor.cpp" line="823"/>
         <source>Width</source>
         <comment>reverb</comment>
         <translation>너비</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="520"/>
+        <location filename="../../plugin/plugineditor.cpp" line="823"/>
         <source>Damping</source>
         <comment>reverb</comment>
         <translation>댐프</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="521"/>
+        <location filename="../../plugin/plugineditor.cpp" line="824"/>
         <source>Level</source>
         <comment>chorus</comment>
         <translation>레벨</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="521"/>
+        <location filename="../../plugin/plugineditor.cpp" line="824"/>
         <source>Depth</source>
         <comment>chorus</comment>
         <translation>깊이</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="521"/>
+        <location filename="../../plugin/plugineditor.cpp" line="824"/>
         <source>Frequency</source>
         <comment>chorus</comment>
         <translation>주파수</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="525"/>
-        <source>Temperament</source>
-        <translation>음률</translation>
+        <location filename="../../plugin/plugineditor.cpp" line="830"/>
+        <source>Reference pitch</source>
+        <translation>기준 음높이</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="527"/>
-        <source>Temperament, its fine tunes being relative to the key chosen on the right</source>
-        <translation>음률. 미세 조정은 오른쪽에서 선택한 기준 키에 대한 값입니다</translation>
+        <location filename="../../plugin/plugineditor.cpp" line="831"/>
+        <source>Note sounding at this frequency, whatever the temperament</source>
+        <translation>음률과 관계없이 이 주파수로 울리는 음</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="528"/>
-        <source>Key of reference of the temperament</source>
-        <translation>음률의 기준 키</translation>
+        <location filename="../../plugin/plugineditor.cpp" line="835"/>
+        <source>Transposition</source>
+        <translation>조옮김</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="531"/>
-        <source>Filter</source>
-        <translation>필터</translation>
+        <location filename="../../plugin/plugineditor.cpp" line="836"/>
+        <source>Transposition in semitones of the notes played, except the drums</source>
+        <translation>연주되는 음의 반음 단위 이조 (드럼 제외)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="533"/>
-        <source>Default modulator lowering the filter cutoff according to the velocity (up to 2 octaves): version 2.04 of the SoundFont format, version 2.01 for old soundfonts made with its jump at the velocity 64, or none</source>
-        <translation>벨로시티에 따라 필터 차단 주파수를 낮추는 기본 모듈레이터(최대 2옥타브): SoundFont 형식의 2.04 버전, 벨로시티 64에서의 급변을 전제로 만든 오래된 사운드폰트용 2.01 버전, 또는 없음</translation>
+        <location filename="../../plugin/plugineditor.cpp" line="842"/>
+        <source>Tonality of the temperament (tonic of a scale)</source>
+        <translation>음률의 조성 (음계의 으뜸음)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="539"/>
+        <location filename="../../plugin/plugineditor.cpp" line="846"/>
+        <source>Temperament or scale applied (equal temperament otherwise)</source>
+        <translation>음률 또는 음계 적용 (사용하지 않으면 평균율)</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="847"/>
+        <source>Reverb enabled</source>
+        <translation>리버브 사용</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="848"/>
+        <source>Chorus enabled</source>
+        <translation>코러스 사용</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="851"/>
+        <source>Filter cutoff</source>
+        <translation>필터 컷오프</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="862"/>
         <source>Curve</source>
         <translation>곡선</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="540"/>
+        <location filename="../../plugin/plugineditor.cpp" line="863"/>
         <source>Velocity curve: linear in the middle, concave to the left (softer velocity), convex to the right (velocity rising quickly)</source>
         <translation>벨로시티 곡선: 가운데는 선형, 왼쪽으로 갈수록 오목(더 부드러운 벨로시티), 오른쪽으로 갈수록 볼록(벨로시티가 빠르게 상승)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="546"/>
+        <location filename="../../plugin/plugineditor.cpp" line="869"/>
         <source>Panic</source>
         <translation>패닉</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="547"/>
+        <location filename="../../plugin/plugineditor.cpp" line="870"/>
         <source>Stop all sounds and reset the controllers</source>
         <translation>모든 소리를 멈추고 컨트롤러를 초기화합니다</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="548"/>
+        <location filename="../../plugin/plugineditor.cpp" line="871"/>
         <source>Settings</source>
         <translation>설정</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="595"/>
+        <location filename="../../plugin/plugineditor.cpp" line="925"/>
         <source>cannot open the file %1</source>
         <translation>%1 파일을 열 수 없음</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="597"/>
+        <location filename="../../plugin/plugineditor.cpp" line="927"/>
         <source>invalid %1 index</source>
         <translation>잘못된 %1 인덱스</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="609"/>
+        <location filename="../../plugin/plugineditor.cpp" line="939"/>
         <source>No soundfont</source>
         <translation>사운드폰트 없음</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="617"/>
+        <location filename="../../plugin/plugineditor.cpp" line="947"/>
         <source>Loading...</source>
         <translation>불러오는 중...</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="622"/>
+        <location filename="../../plugin/plugineditor.cpp" line="952"/>
         <source>Cannot read the soundfont: %1</source>
         <translation>사운드폰트를 읽을 수 없음: %1</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="629"/>
+        <location filename="../../plugin/plugineditor.cpp" line="959"/>
         <source>Open a soundfont or drop it here</source>
         <translation>사운드폰트를 열거나 여기에 끌어다 놓으세요</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="672"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1009"/>
         <source>Voices: %1</source>
         <translation>보이스: %1</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="673"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1010"/>
         <source>CPU: %1 %</source>
         <translation>CPU: %1%</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="687"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1024"/>
         <source>Open a soundfont</source>
         <translation>사운드폰트 열기</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="701"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1038"/>
         <source>No recent soundfont</source>
         <translation>최근 사운드폰트 없음</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="750"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1087"/>
         <source>%1 voices</source>
         <translation>%1 보이스</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="755"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1092"/>
         <source>Channel %1</source>
         <translation>채널 %1</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="762"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1099"/>
         <source>System language</source>
         <translation>시스템 언어</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="769"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1106"/>
         <source>Polyphony</source>
         <translation>동시 발음 수</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="770"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1107"/>
         <source>Keyboard</source>
         <translation>키보드</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="771"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1108"/>
         <source>Language</source>
         <translation>언어</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="773"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1110"/>
         <source>Fixed latency (notes played at their exact position)</source>
         <translation>고정 지연 시간(노트를 정확한 위치에서 재생)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="775"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1112"/>
         <source>Clipping to [-1; 1]</source>
         <translation>[-1; 1]로 클리핑</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="780"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1172"/>
+        <source>Temperaments and scales</source>
+        <translation>음률과 음계</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="845"/>
+        <source>Also play the notes not used by the temperament (scale)</source>
+        <translation>음률(음계)에서 사용하지 않는 음도 연주</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="840"/>
+        <source>Temperament or scale, transposed to the chosen tonality</source>
+        <translation>음률 또는 음계. 선택한 조성으로 이조됩니다</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="841"/>
+        <source>Tonality</source>
+        <translation>조성</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="1117"/>
         <source>Store the soundfont in the project (not possible with an sfz file)</source>
         <translation>사운드폰트를 프로젝트에 저장 (sfz 파일은 불가)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="781"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1118"/>
         <source>Store the soundfont in the project</source>
         <translation>사운드폰트를 프로젝트에 저장</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="787"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1124"/>
         <source>Channels and effects on their own outputs (not possible in the standalone application)</source>
         <translation>채널과 효과를 개별 출력으로 (독립 실행형 앱에서는 불가)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="789"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1126"/>
         <source>Channels and effects on their own outputs</source>
         <translation>채널과 효과를 개별 출력으로</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="834"/>
-        <source>Synth</source>
-        <translation>신스</translation>
-    </message>
-    <message>
-        <location filename="../../plugin/plugineditor.cpp" line="834"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1173"/>
         <source>Reverb</source>
         <translation>리버브</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="835"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1174"/>
         <source>Chorus</source>
         <translation>코러스</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="835"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1173"/>
         <source>Velocity</source>
         <translation>벨로시티</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="230"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="252"/>
         <source>too many soundfonts are still playing, try again in a moment</source>
         <translation>아직 너무 많은 사운드폰트가 재생 중입니다. 잠시 후 다시 시도하세요</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="610"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="746"/>
         <source>file not found</source>
         <translation>파일을 찾을 수 없음</translation>
     </message>
@@ -6405,7 +6461,7 @@ to display its timbre</source>
 <context>
     <name>PluginJuce</name>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="579"/>
+        <location filename="../../plugin/plugineditor.cpp" line="909"/>
         <location filename="../../plugin/plugintranslator.cpp" line="60"/>
         <source>Options</source>
         <translation>옵션</translation>
@@ -6714,126 +6770,543 @@ to display its timbre</source>
 <context>
     <name>PluginProcessor</name>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="52"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="53"/>
         <source>Main</source>
         <translation>메인</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="54"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="55"/>
         <source>Channel %1</source>
         <translation>채널 %1</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="56"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="57"/>
         <source>Effects</source>
         <translation>효과</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="126"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="137"/>
         <source>Gain</source>
         <translation>게인</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="129"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="140"/>
         <source>Reverb</source>
         <translation>리버브</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="129"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="140"/>
         <source>Reverb level</source>
         <translation>리버브 레벨</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="130"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="141"/>
         <source>Reverb size</source>
         <translation>리버브 크기</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="130"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="141"/>
         <source>Reverb width</source>
         <translation>리버브 너비</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="131"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="142"/>
         <source>Reverb damping</source>
         <translation>리버브 댐프</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="133"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="144"/>
         <source>Chorus</source>
         <translation>코러스</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="133"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="144"/>
         <source>Chorus level</source>
         <translation>코러스 레벨</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="134"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="145"/>
         <source>Chorus depth</source>
         <translation>코러스 깊이</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="134"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="145"/>
         <source>Chorus frequency</source>
         <translation>코러스 주파수</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="140"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="151"/>
         <source>Tuning</source>
         <translation>튜닝</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="141"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="152"/>
         <source>Transposition</source>
         <translation>조옮김</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="142"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="153"/>
         <source>semitones</source>
         <translation>반음</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="143"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="154"/>
         <source>Reference pitch</source>
         <translation>기준 음높이</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="146"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="157"/>
         <source>Temperament</source>
         <translation>음률</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="149"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="160"/>
         <source>Temperament key</source>
         <translation>음률 기준 키</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="154"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="165"/>
         <source>Velocity</source>
         <translation>벨로시티</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="155"/>
-        <source>Velocity to filter</source>
-        <translation>벨로시티에서 필터로</translation>
+        <location filename="../../plugin/pluginprocessor.cpp" line="167"/>
+        <source>Velocity to filter cutoff</source>
+        <translation>벨로시티에서 필터 컷오프로</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="157"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="168"/>
         <source>Velocity curve</source>
         <translation>벨로시티 곡선</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="164"/>
-        <source>None</source>
-        <comment>velocity to filter</comment>
-        <translation>없음</translation>
+        <location filename="../../plugin/pluginprocessor.cpp" line="173"/>
+        <source>Temperament enabled</source>
+        <translation>음률 사용</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="200"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="174"/>
+        <source>Reverb enabled</source>
+        <translation>리버브 사용</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="176"/>
+        <source>Chorus enabled</source>
+        <translation>코러스 사용</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="183"/>
+        <source>Disabled</source>
+        <comment>velocity to filter</comment>
+        <translation>사용 안 함</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="206"/>
         <source>Equal</source>
         <comment>Equal musical temperament</comment>
         <translation>평균율</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="208"/>
+        <source>Custom</source>
+        <comment>custom temperament</comment>
+        <translation>사용자 정의</translation>
+    </message>
+</context>
+<context>
+    <name>PluginTemperament</name>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="39"/>
+        <source>Historical temperaments</source>
+        <translation>역사적 음률</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="40"/>
+        <source>Pythagorean</source>
+        <translation>피타고라스 음률</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="41"/>
+        <source>Just intonation</source>
+        <translation>순정률</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="42"/>
+        <source>Meantone</source>
+        <translation>중전음률</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="43"/>
+        <source>Irregular temperaments</source>
+        <translation>불규칙 음률</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="44"/>
+        <source>Historical organs</source>
+        <translation>역사적 오르간</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="45"/>
+        <source>Western scales</source>
+        <translation>서양 음계</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="46"/>
+        <source>Modes</source>
+        <translation>선법</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="47"/>
+        <source>Harmonic and melodic</source>
+        <translation>화성적·선율적 음계</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="48"/>
+        <source>Pentatonic and blues</source>
+        <translation>펜타토닉과 블루스</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="49"/>
+        <source>Symmetric scales</source>
+        <translation>대칭 음계</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="50"/>
+        <source>Jazz</source>
+        <translation>재즈</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="51"/>
+        <source>Just scales</source>
+        <translation>순정 음계</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="52"/>
+        <source>Arabic maqamat</source>
+        <translation>아랍 마캄</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="53"/>
+        <source>Turkish makams</source>
+        <translation>터키 마캄</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="54"/>
+        <source>Persian dastgahs</source>
+        <translation>페르시아 다스트가</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="55"/>
+        <source>Indian thaats</source>
+        <translation>인도 타트</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="56"/>
+        <source>East Asia</source>
+        <translation>동아시아</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="57"/>
+        <source>China</source>
+        <translation>중국</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="58"/>
+        <source>Japan</source>
+        <translation>일본</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="59"/>
+        <source>Korea</source>
+        <translation>한국</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="60"/>
+        <source>Southeast Asia</source>
+        <translation>동남아시아</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="61"/>
+        <source>Africa</source>
+        <translation>아프리카</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="62"/>
+        <source>Eastern Europe and Mediterranean</source>
+        <translation>동유럽과 지중해</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="63"/>
+        <source>Equal divisions of the octave</source>
+        <translation>옥타브 등분할</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="66"/>
+        <source>Ionian (major)</source>
+        <translation>이오니안 (장조)</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="67"/>
+        <source>Dorian</source>
+        <translation>도리안</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="68"/>
+        <source>Phrygian</source>
+        <translation>프리지안</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="69"/>
+        <source>Lydian</source>
+        <translation>리디안</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="70"/>
+        <source>Mixolydian</source>
+        <translation>믹솔리디안</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="71"/>
+        <source>Aeolian (natural minor)</source>
+        <translation>에올리안 (자연 단음계)</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="72"/>
+        <source>Locrian</source>
+        <translation>로크리안</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="73"/>
+        <source>Harmonic minor</source>
+        <translation>화성 단음계</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="74"/>
+        <source>Melodic minor</source>
+        <translation>가락 단음계</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="75"/>
+        <source>Harmonic major</source>
+        <translation>화성 장음계</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="76"/>
+        <source>Major pentatonic</source>
+        <translation>메이저 펜타토닉</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="77"/>
+        <source>Minor pentatonic</source>
+        <translation>마이너 펜타토닉</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="78"/>
+        <source>Blues</source>
+        <translation>블루스</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="79"/>
+        <source>Major blues</source>
+        <translation>메이저 블루스</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="80"/>
+        <source>Whole tone</source>
+        <translation>온음 음계</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="81"/>
+        <source>Diminished (half-whole)</source>
+        <translation>디미니시 (반음-온음)</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="82"/>
+        <source>Diminished (whole-half)</source>
+        <translation>디미니시 (온음-반음)</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="83"/>
+        <source>Augmented</source>
+        <translation>오그멘티드</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="84"/>
+        <source>Bebop dominant</source>
+        <translation>비밥 도미넌트</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="85"/>
+        <source>Lydian dominant</source>
+        <translation>리디안 도미넌트</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="86"/>
+        <source>Altered</source>
+        <translation>얼터드</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="89"/>
+        <source>Pure major</source>
+        <translation>순정 장음계</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="90"/>
+        <source>Pure minor</source>
+        <translation>순정 단음계</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="91"/>
+        <source>Pure pentatonic</source>
+        <translation>순정 펜타토닉</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="92"/>
+        <source>Harmonic series (8 to 15)</source>
+        <translation>배음열 (8~15)</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="95"/>
+        <source>Slendro (5 equal divisions)</source>
+        <translation>슬렌드로 (5 등분)</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="96"/>
+        <source>Thai (7 equal divisions)</source>
+        <translation>타이 (7 등분)</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="97"/>
+        <source>Tizita major</source>
+        <translation>티지타 (장)</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="98"/>
+        <source>Tizita minor</source>
+        <translation>티지타 (단)</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="99"/>
+        <source>Bati major</source>
+        <translation>바티 (장)</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="100"/>
+        <source>Bati minor</source>
+        <translation>바티 (단)</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="101"/>
+        <source>Freygish (Phrygian dominant)</source>
+        <translation>프라이기시 (프리지안 도미넌트)</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="102"/>
+        <source>Ukrainian Dorian</source>
+        <translation>우크라이나 도리안</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="103"/>
+        <source>Hungarian minor</source>
+        <translation>헝가리안 마이너</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="104"/>
+        <source>Double harmonic</source>
+        <translation>더블 하모닉</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="105"/>
+        <source>Neapolitan minor</source>
+        <translation>나폴리 단음계</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="106"/>
+        <source>Neapolitan major</source>
+        <translation>나폴리 장음계</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="107"/>
+        <source>Flamenco mode</source>
+        <translation>플라멩코 선법</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="108"/>
+        <source>Enigmatic</source>
+        <translation>에니그마틱</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="109"/>
+        <source>5 equal divisions</source>
+        <translation>5 등분</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="110"/>
+        <source>7 equal divisions</source>
+        <translation>7 등분</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="111"/>
+        <source>8 equal divisions</source>
+        <translation>8 등분</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="112"/>
+        <source>9 equal divisions</source>
+        <translation>9 등분</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="113"/>
+        <source>10 equal divisions</source>
+        <translation>10 등분</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="114"/>
+        <source>11 equal divisions</source>
+        <translation>11 등분</translation>
+    </message>
+</context>
+<context>
+    <name>PluginTemperamentKeyboard</name>
+    <message>
+        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="416"/>
+        <source>Note used</source>
+        <translation>사용하는 음</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="417"/>
+        <source>Tonality on this note</source>
+        <translation>이 음을 조성으로</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="443"/>
+        <source>%1 is the note of the reference pitch: its fine tune of %2 cents is compensated by shifting all the notes by %3 cents.</source>
+        <translation>%1은(는) 기준 음높이의 음입니다. %2센트의 미세 조정은 모든 음을 %3센트 이동하여 보정됩니다.</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="446"/>
+        <source>Fine tune of each key in cents, compared to the equal temperament.</source>
+        <translation>각 키의 미세 조정 (센트 단위, 평균율 대비).</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="447"/>
+        <source>Mouse wheel or vertical drag: change a value (finer with Ctrl).</source>
+        <translation>마우스 휠 또는 세로 드래그: 값 변경 (Ctrl로 더 세밀하게).</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="448"/>
+        <source>Double click: back to 0.</source>
+        <translation>더블 클릭: 0으로 되돌리기.</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="449"/>
+        <source>Right click: note used or not, tonality.</source>
+        <translation>오른쪽 클릭: 음 사용 여부, 조성.</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="450"/>
+        <source>Dot: tonality.</source>
+        <translation>점: 조성.</translation>
     </message>
 </context>
 <context>
@@ -7188,13 +7661,13 @@ Both divisions must share the same note and velocity ranges.</source>
         <translation>사운드폰트 파일</translation>
     </message>
     <message>
-        <location filename="../../context/tuningprogrammanager.cpp" line="85"/>
+        <location filename="../../context/tuningprogrammanager.cpp" line="81"/>
         <source>Equal</source>
         <comment>Equal musical temperament</comment>
         <translation>평균율</translation>
     </message>
     <message>
-        <location filename="../../context/tuningprogrammanager.cpp" line="121"/>
+        <location filename="../../context/tuningprogrammanager.cpp" line="120"/>
         <source>Tuning program %1:%2</source>
         <translation>튜닝 프로그램 %1:%2</translation>
     </message>
@@ -7335,6 +7808,20 @@ Both divisions must share the same note and velocity ranges.</source>
         <location filename="../../dialogs/recorderhistory.cpp" line="217"/>
         <source>Display a soundfont in the editor for importing the recording</source>
         <translation>녹음을 가져오려면 편집기에서 사운드폰트를 표시하세요</translation>
+    </message>
+</context>
+<context>
+    <name>ReferencePitchEditor</name>
+    <message>
+        <location filename="../../context/interface/referencepitcheditor.cpp" line="38"/>
+        <source>Note sounding at this frequency, whatever the temperament</source>
+        <translation>음률과 관계없이 이 주파수로 울리는 음</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/referencepitcheditor.cpp" line="42"/>
+        <source>Hz</source>
+        <comment>unit for Herz</comment>
+        <translation>Hz</translation>
     </message>
 </context>
 <context>
@@ -8102,6 +8589,106 @@ Other soundfont editors might display other units.</source>
 Other soundfont editors might display other units.</source>
         <translation>이 행의 값은 실제 dB로 표시됩니다.
 다른 사운드폰트 편집기는 다른 단위를 표시할 수 있습니다.</translation>
+    </message>
+</context>
+<context>
+    <name>TemperamentArea</name>
+    <message>
+        <location filename="../../clavier/temperamentarea.cpp" line="59"/>
+        <source>Tonality</source>
+        <translation>조성</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/temperamentarea.cpp" line="66"/>
+        <source>Also play the unused notes</source>
+        <translation>사용하지 않는 음도 연주</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/temperamentarea.cpp" line="79"/>
+        <source>Reference pitch</source>
+        <translation>기준 음높이</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/temperamentarea.cpp" line="82"/>
+        <source>Transposition</source>
+        <translation>조옮김</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/temperamentarea.cpp" line="169"/>
+        <source>Temperaments and scales</source>
+        <translation>음률과 음계</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/temperamentarea.cpp" line="177"/>
+        <source>Hide the temperaments and scales</source>
+        <translation>음률과 음계 숨기기</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/temperamentarea.cpp" line="178"/>
+        <source>Show the temperaments and scales (microtonal tuning)</source>
+        <translation>음률과 음계 표시 (미분음 조율)</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/temperamentarea.cpp" line="54"/>
+        <source>Temperament</source>
+        <translation>음률</translation>
+    </message>
+</context>
+<context>
+    <name>TemperamentKeyboard</name>
+    <message>
+        <location filename="../../context/interface/temperamentkeyboard.cpp" line="84"/>
+        <source>Fine tune of each key in cents, compared to the equal temperament.</source>
+        <translation>각 키의 미세 조정 (센트 단위, 평균율 대비).</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/temperamentkeyboard.cpp" line="85"/>
+        <source>Mouse wheel or vertical drag: change a value (finer with Ctrl).</source>
+        <translation>마우스 휠 또는 세로 드래그: 값 변경 (Ctrl로 더 세밀하게).</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/temperamentkeyboard.cpp" line="86"/>
+        <source>Double click: back to 0.</source>
+        <translation>더블 클릭: 0으로 되돌리기.</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/temperamentkeyboard.cpp" line="87"/>
+        <source>Right click: note used or not, tonality.</source>
+        <translation>오른쪽 클릭: 음 사용 여부, 조성.</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/temperamentkeyboard.cpp" line="88"/>
+        <source>Dot: tonality.</source>
+        <translation>점: 조성.</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/temperamentkeyboard.cpp" line="397"/>
+        <source>Tonality on this note</source>
+        <translation>이 음을 조성으로</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/temperamentkeyboard.cpp" line="455"/>
+        <source>%1 is the note of the reference pitch: its fine tune of %2 cents is compensated by shifting all the notes by %3 cents.</source>
+        <translation>%1은(는) 기준 음높이의 음입니다. %2센트의 미세 조정은 모든 음을 %3센트 이동하여 보정됩니다.</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/temperamentkeyboard.cpp" line="394"/>
+        <source>Note used</source>
+        <translation>사용하는 음</translation>
+    </message>
+</context>
+<context>
+    <name>TemperamentSettings</name>
+    <message>
+        <location filename="../../context/temperamentsettings.cpp" line="32"/>
+        <source>Custom</source>
+        <comment>custom temperament</comment>
+        <translation>사용자 정의</translation>
+    </message>
+    <message>
+        <location filename="../../context/temperamentsettings.cpp" line="226"/>
+        <source>Transposition in semitones of the notes played with the keyboard or a MIDI input</source>
+        <translation>키보드 또는 MIDI 입력으로 연주하는 음의 조옮김 (반음 단위)</translation>
     </message>
 </context>
 <context>

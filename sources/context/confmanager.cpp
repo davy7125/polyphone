@@ -311,13 +311,23 @@ SynthCoreConfig ConfManager::getSynthConfig()
     configuration.masterGain = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "gain", 0).toInt();
     configuration.referencePitch = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "reference_pitch", 4400).toInt();
 
-    // Temperament: a name, 12 fine tunes from C to B, then the relative key (no temperament otherwise)
+    // Note of the reference pitch (A by default), independent of the temperament: it keeps its pitch in the equal
+    // temperament, the fine tunes being shifted by its own fine tune
+    configuration.temperamentReferenceKey = (this->getValue(ConfManager::SECTION_SOUND_ENGINE, "reference_pitch_key", 9).toInt() % 12 + 12) % 12;
+
+    // Temperament: a name, 12 fine tunes from the tonic (C) to B ("-" for a key not used) and the relative key
+    // (tonality), no temperament otherwise (a 15th field written by a development version is ignored)
     QStringList temperament = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "temperament", "").toString().split(",");
-    if (temperament.count() == 14)
+    if (temperament.count() == 14 || temperament.count() == 15)
     {
+        bool playUnusedKeys = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "temperament_play_unused", false).toBool();
         for (int i = 1; i < 13; i++)
-            configuration.temperament[i - 1] = temperament[i].toFloat();
-        configuration.temperamentRelativeKey = temperament[13].toInt() % 12;
+        {
+            bool used = (temperament[i] != "-");
+            configuration.temperament[i - 1] = used ? temperament[i].toFloat() : 0.0f;
+            configuration.temperamentUsed[i - 1] = used || playUnusedKeys;
+        }
+        configuration.temperamentRelativeKey = (temperament[13].toInt() % 12 + 12) % 12;
     }
     configuration.modulatorVelToFilterType = getModulatorVelToFilterType();
     configuration.cpuBudget = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "cpu_budget", DEFAULT_CPU_BUDGET).toInt();

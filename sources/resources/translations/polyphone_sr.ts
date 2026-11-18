@@ -1137,61 +1137,70 @@
 <context>
     <name>ConfigSectionKeyboard</name>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="81"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="347"/>
         <source>Mapping</source>
         <translation>Мапирање</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="206"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="197"/>
         <source>Octave #1</source>
         <translation>1. октава</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="211"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="98"/>
+        <source>Transposition</source>
+        <translation>Транспозиција</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="202"/>
         <source>Octave #2</source>
         <translation>2. октава</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="216"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="207"/>
         <source>Octave #3</source>
         <translation>3. октава</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="221"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="212"/>
         <source>Octave #4</source>
         <translation>4. октава</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="294"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="316"/>
+        <source>Tonality</source>
+        <translation>Тоналитет</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="364"/>
+        <source>Also play the unused notes</source>
+        <translation>Свирај и некоришћене ноте</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="36"/>
         <source>Temperament</source>
         <translation>Темперамент</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="69"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="335"/>
         <source>First C</source>
         <translation>Почетна »До«</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="36"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="354"/>
         <source>Reference pitch</source>
         <translation>Референтни тон</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="59"/>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="94"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="26"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="144"/>
         <source>Back to default value</source>
         <translation>Врати на подразумевану вредност</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="156"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="131"/>
         <source>Tuning</source>
         <translation>Штимовање</translation>
-    </message>
-    <message>
-        <location filename="../../context/interface/configsectionkeyboard.cpp" line="54"/>
-        <source>Hz</source>
-        <comment>unit for Herz</comment>
-        <translation>Hz</translation>
     </message>
 </context>
 <context>
@@ -1989,12 +1998,17 @@ repository</source>
         <translation>Опције приказа</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="86"/>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="91"/>
+        <source>Tuning</source>
+        <translation>Штимовање</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="97"/>
         <source>MIDI controllers</source>
         <translation>MIDI контролери</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="89"/>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="94"/>
         <source>Effects</source>
         <translation>Ефекти</translation>
     </message>
@@ -6083,344 +6097,386 @@ to display its timbre</source>
 <context>
     <name>PluginEditor</name>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="57"/>
+        <location filename="../../plugin/plugineditor.cpp" line="88"/>
         <source>cannot open the file</source>
         <translation>не могу да отворим датотеку</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="58"/>
+        <location filename="../../plugin/plugineditor.cpp" line="89"/>
         <source>file recursion (#include)</source>
         <translation>рекурзивно укључивање датотека (#include)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="59"/>
+        <location filename="../../plugin/plugineditor.cpp" line="90"/>
         <source>not enough memory</source>
         <translation>нема довољно меморије</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="60"/>
+        <location filename="../../plugin/plugineditor.cpp" line="91"/>
         <source>this is not a DLS file</source>
         <translation>ово није DLS датотека</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="61"/>
+        <location filename="../../plugin/plugineditor.cpp" line="92"/>
         <source>invalid header</source>
         <translation>неисправно заглавље</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="62"/>
+        <location filename="../../plugin/plugineditor.cpp" line="93"/>
         <source>corrupted file (sdta)</source>
         <translation>оштећена датотека (sdta)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="63"/>
+        <location filename="../../plugin/plugineditor.cpp" line="94"/>
         <source>corrupted file (pdta)</source>
         <translation>оштећена датотека (pdta)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="193"/>
-        <source>Preset played by the channel, or the one chosen by the program changes it receives</source>
-        <translation>Поставка коју свира канал, или она коју бирају примљене промене програма</translation>
+        <location filename="../../plugin/plugineditor.cpp" line="304"/>
+        <source>Instrument played by the channel, or the one chosen by the program changes it receives</source>
+        <translation>Инструмент који свира канал, или онај који бирају примљене промене програма</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="196"/>
+        <location filename="../../plugin/plugineditor.cpp" line="307"/>
         <source>Program change (drums)</source>
         <translation>Промена програма (бубњеви)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="196"/>
+        <location filename="../../plugin/plugineditor.cpp" line="307"/>
         <source>Program change</source>
         <translation>Промена програма</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="499"/>
-        <source>(no preset)</source>
-        <translation>(нема поставке)</translation>
+        <location filename="../../plugin/plugineditor.cpp" line="761"/>
+        <source>(no instrument)</source>
+        <translation>(нема инструмента)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="506"/>
+        <location filename="../../plugin/plugineditor.cpp" line="808"/>
         <source>Open...</source>
         <translation>Отвори...</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="507"/>
+        <location filename="../../plugin/plugineditor.cpp" line="809"/>
         <source>Open a soundfont (sf2, sf3, sfz or dls), which can also be dropped on the window</source>
         <translation>Отвори звукотеку (sf2, sf3, sfz или dls), која се може и превући на прозор</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="508"/>
+        <location filename="../../plugin/plugineditor.cpp" line="810"/>
         <source>Recent soundfonts</source>
         <translation>Недавне звукотеке</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="509"/>
-        <source>One preset</source>
-        <translation>Једна поставка</translation>
+        <location filename="../../plugin/plugineditor.cpp" line="811"/>
+        <source>One instrument</source>
+        <translation>Један инструмент</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="510"/>
-        <source>The same preset is played on all MIDI channels</source>
-        <translation>Иста поставка се свира на свим MIDI каналима</translation>
+        <location filename="../../plugin/plugineditor.cpp" line="812"/>
+        <source>The same instrument is played on all MIDI channels</source>
+        <translation>Исти инструмент се свира на свим MIDI каналима</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="511"/>
+        <location filename="../../plugin/plugineditor.cpp" line="813"/>
         <source>16 channels</source>
         <translation>16 канала</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="512"/>
-        <source>Each MIDI channel plays its preset, or the one chosen by its program changes (General MIDI)</source>
-        <translation>Сваки MIDI канал свира своју поставку, или ону коју бирају његове промене програма (General MIDI)</translation>
+        <location filename="../../plugin/plugineditor.cpp" line="814"/>
+        <source>Each MIDI channel plays its instrument, or the one chosen by its program changes (General MIDI)</source>
+        <translation>Сваки MIDI канал свира свој инструмент, или онај који бирају његове промене програма (General MIDI)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="514"/>
-        <source>The same preset is played by an MPE controller: each note has its own pitch bend, pressure and timbre (lower zone of 15 channels, or the zones given by the controller)</source>
-        <translation>Исту поставку свира MPE контролер: свака нота има сопствени pitch bend, притисак и боју тона (доња зона од 15 канала, или зоне које задаје контролер)</translation>
+        <location filename="../../plugin/plugineditor.cpp" line="816"/>
+        <source>The same instrument is played by an MPE controller: each note has its own pitch bend, pressure and timbre (lower zone of 15 channels, or the zones given by the controller)</source>
+        <translation>Исти инструмент свира MPE контролер: свака нота има сопствени pitch bend, притисак и боју тона (доња зона од 15 канала, или зоне које задаје контролер)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="519"/>
+        <location filename="../../plugin/plugineditor.cpp" line="822"/>
         <source>Gain</source>
         <translation>Појачање</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="519"/>
-        <source>Transpose</source>
-        <translation>Транспозиција</translation>
+        <location filename="../../plugin/plugineditor.cpp" line="844"/>
+        <source>Play all</source>
+        <translation>Свирај све</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="519"/>
+        <location filename="../../plugin/plugineditor.cpp" line="853"/>
+        <source>Default modulator from the velocity to the filter cutoff frequency: the softer the note, the lower the cutoff (up to 2 octaves lower).
+Change this option if notes sound too muffled: SoundFont 2.01 for an old soundfont made with this version (the notes above the velocity 64 are not filtered), Disabled for a soundfont whose samples already sound softer at low velocities (several velocity layers).</source>
+        <translation>Подразумевани модулатор од јачине удара ка граничној фреквенцији филтера: што је нота тиша, гранична фреквенција је нижа (до 2 октаве ниже).
+Промените ову опцију ако ноте звуче превише пригушено: SoundFont 2.01 за стару звукотеку прављену са овом верзијом (ноте изнад јачине 64 се не филтрирају), Искључено за звукотеку чији узорци већ звуче тише при малој јачини удара (више слојева јачине).</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="1171"/>
         <source>Tuning</source>
         <translation>Штимовање</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="520"/>
+        <location filename="../../plugin/plugineditor.cpp" line="823"/>
         <source>Level</source>
         <comment>reverb</comment>
         <translation>Ниво</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="520"/>
+        <location filename="../../plugin/plugineditor.cpp" line="823"/>
         <source>Size</source>
         <comment>reverb</comment>
         <translation>Величина</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="520"/>
+        <location filename="../../plugin/plugineditor.cpp" line="823"/>
         <source>Width</source>
         <comment>reverb</comment>
         <translation>Ширина</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="520"/>
+        <location filename="../../plugin/plugineditor.cpp" line="823"/>
         <source>Damping</source>
         <comment>reverb</comment>
         <translation>Пригушење</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="521"/>
+        <location filename="../../plugin/plugineditor.cpp" line="824"/>
         <source>Level</source>
         <comment>chorus</comment>
         <translation>Ниво</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="521"/>
+        <location filename="../../plugin/plugineditor.cpp" line="824"/>
         <source>Depth</source>
         <comment>chorus</comment>
         <translation>Дубина</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="521"/>
+        <location filename="../../plugin/plugineditor.cpp" line="824"/>
         <source>Frequency</source>
         <comment>chorus</comment>
         <translation>Учестаност</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="525"/>
-        <source>Temperament</source>
-        <translation>Темперамент</translation>
+        <location filename="../../plugin/plugineditor.cpp" line="830"/>
+        <source>Reference pitch</source>
+        <translation>Референтни тон</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="527"/>
-        <source>Temperament, its fine tunes being relative to the key chosen on the right</source>
-        <translation>Темперамент, чија су фина штимовања у односу на тоналитет изабран десно</translation>
+        <location filename="../../plugin/plugineditor.cpp" line="831"/>
+        <source>Note sounding at this frequency, whatever the temperament</source>
+        <translation>Нота која звучи на овој фреквенцији, без обзира на темперамент</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="528"/>
-        <source>Key of reference of the temperament</source>
-        <translation>Референтни тоналитет темперамента</translation>
+        <location filename="../../plugin/plugineditor.cpp" line="835"/>
+        <source>Transposition</source>
+        <translation>Транспозиција</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="531"/>
-        <source>Filter</source>
-        <translation>Филтар</translation>
+        <location filename="../../plugin/plugineditor.cpp" line="836"/>
+        <source>Transposition in semitones of the notes played, except the drums</source>
+        <translation>Транспоновање одсвираних нота у полустепенима, осим бубњева</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="533"/>
-        <source>Default modulator lowering the filter cutoff according to the velocity (up to 2 octaves): version 2.04 of the SoundFont format, version 2.01 for old soundfonts made with its jump at the velocity 64, or none</source>
-        <translation>Подразумевани модулатор који спушта граничну фреквенцију филтера према јачини удара (до 2 октаве): верзија 2.04 формата SoundFont, верзија 2.01 за старе звукотеке прављене са њеним скоком на јачини 64, или ниједан</translation>
+        <location filename="../../plugin/plugineditor.cpp" line="842"/>
+        <source>Tonality of the temperament (tonic of a scale)</source>
+        <translation>Тоналитет темперамента (тоника лествице)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="539"/>
+        <location filename="../../plugin/plugineditor.cpp" line="846"/>
+        <source>Temperament or scale applied (equal temperament otherwise)</source>
+        <translation>Примењен темперамент или лествица (иначе једнако темперовање)</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="847"/>
+        <source>Reverb enabled</source>
+        <translation>Јека укључена</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="848"/>
+        <source>Chorus enabled</source>
+        <translation>Хорус укључен</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="851"/>
+        <source>Filter cutoff</source>
+        <translation>Фреквенција филтера</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="862"/>
         <source>Curve</source>
         <translation>Крива</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="540"/>
+        <location filename="../../plugin/plugineditor.cpp" line="863"/>
         <source>Velocity curve: linear in the middle, concave to the left (softer velocity), convex to the right (velocity rising quickly)</source>
         <translation>Крива јачине удара: линеарна у средини, конкавна улево (мекша јачина удара), конвексна удесно (јачина удара брзо расте)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="546"/>
+        <location filename="../../plugin/plugineditor.cpp" line="869"/>
         <source>Panic</source>
         <translation>Паника</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="547"/>
+        <location filename="../../plugin/plugineditor.cpp" line="870"/>
         <source>Stop all sounds and reset the controllers</source>
         <translation>Заустави све звукове и врати контролере на почетне вредности</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="548"/>
+        <location filename="../../plugin/plugineditor.cpp" line="871"/>
         <source>Settings</source>
         <translation>Подешавања</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="595"/>
+        <location filename="../../plugin/plugineditor.cpp" line="925"/>
         <source>cannot open the file %1</source>
         <translation>не могу да отворим датотеку %1</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="597"/>
+        <location filename="../../plugin/plugineditor.cpp" line="927"/>
         <source>invalid %1 index</source>
         <translation>неисправан индекс %1</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="609"/>
+        <location filename="../../plugin/plugineditor.cpp" line="939"/>
         <source>No soundfont</source>
         <translation>Нема звукотеке</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="617"/>
+        <location filename="../../plugin/plugineditor.cpp" line="947"/>
         <source>Loading...</source>
         <translation>Учитавање...</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="622"/>
+        <location filename="../../plugin/plugineditor.cpp" line="952"/>
         <source>Cannot read the soundfont: %1</source>
         <translation>Не могу да прочитам звукотеку: %1</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="629"/>
+        <location filename="../../plugin/plugineditor.cpp" line="959"/>
         <source>Open a soundfont or drop it here</source>
         <translation>Отворите звукотеку или је превуците овде</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="672"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1009"/>
         <source>Voices: %1</source>
         <translation>Гласови: %1</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="673"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1010"/>
         <source>CPU: %1 %</source>
         <translation>Процесор: %1 %</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="687"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1024"/>
         <source>Open a soundfont</source>
         <translation>Отвори звукотеку</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="701"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1038"/>
         <source>No recent soundfont</source>
         <translation>Нема недавних звукотека</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="750"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1087"/>
         <source>%1 voices</source>
         <translation>Гласова: %1</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="755"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1092"/>
         <source>Channel %1</source>
         <translation>Канал %1</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="762"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1099"/>
         <source>System language</source>
         <translation>Језик система</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="769"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1106"/>
         <source>Polyphony</source>
         <translation>Полифонија</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="770"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1107"/>
         <source>Keyboard</source>
         <translation>Клавијатура</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="771"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1108"/>
         <source>Language</source>
         <translation>Језик</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="773"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1110"/>
         <source>Fixed latency (notes played at their exact position)</source>
         <translation>Фиксно кашњење (ноте свиране на свом тачном положају)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="775"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1112"/>
         <source>Clipping to [-1; 1]</source>
         <translation>Одсецање на [-1; 1]</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="780"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1172"/>
+        <source>Temperaments and scales</source>
+        <translation>Темпераменти и лествице</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="845"/>
+        <source>Also play the notes not used by the temperament (scale)</source>
+        <translation>Свирај и ноте које темперамент (лествица) не користи</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="840"/>
+        <source>Temperament or scale, transposed to the chosen tonality</source>
+        <translation>Темперамент или лествица, транспоновани у изабрани тоналитет</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="841"/>
+        <source>Tonality</source>
+        <translation>Тоналитет</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="1117"/>
         <source>Store the soundfont in the project (not possible with an sfz file)</source>
         <translation>Сачувај звукотеку у пројекту (није могуће са sfz датотеком)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="781"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1118"/>
         <source>Store the soundfont in the project</source>
         <translation>Сачувај звукотеку у пројекту</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="787"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1124"/>
         <source>Channels and effects on their own outputs (not possible in the standalone application)</source>
         <translation>Канали и ефекти на сопственим излазима (није могуће у самосталној апликацији)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="789"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1126"/>
         <source>Channels and effects on their own outputs</source>
         <translation>Канали и ефекти на сопственим излазима</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="834"/>
-        <source>Synth</source>
-        <translation>Синтисајзер</translation>
-    </message>
-    <message>
-        <location filename="../../plugin/plugineditor.cpp" line="834"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1173"/>
         <source>Reverb</source>
         <translation>Јека</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="835"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1174"/>
         <source>Chorus</source>
         <translation>Хорус</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="835"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1173"/>
         <source>Velocity</source>
         <translation>Јачина удара</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="230"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="252"/>
         <source>too many soundfonts are still playing, try again in a moment</source>
         <translation>још увек свира превише звукотека, покушајте поново за тренутак</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="610"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="746"/>
         <source>file not found</source>
         <translation>датотека није пронађена</translation>
     </message>
@@ -6428,7 +6484,7 @@ to display its timbre</source>
 <context>
     <name>PluginJuce</name>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="579"/>
+        <location filename="../../plugin/plugineditor.cpp" line="909"/>
         <location filename="../../plugin/plugintranslator.cpp" line="60"/>
         <source>Options</source>
         <translation>Опције</translation>
@@ -6737,126 +6793,543 @@ to display its timbre</source>
 <context>
     <name>PluginProcessor</name>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="52"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="53"/>
         <source>Main</source>
         <translation>Главни</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="54"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="55"/>
         <source>Channel %1</source>
         <translation>Канал %1</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="56"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="57"/>
         <source>Effects</source>
         <translation>Ефекти</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="126"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="137"/>
         <source>Gain</source>
         <translation>Појачање</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="129"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="140"/>
         <source>Reverb</source>
         <translation>Јека</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="129"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="140"/>
         <source>Reverb level</source>
         <translation>Ниво јеке</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="130"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="141"/>
         <source>Reverb size</source>
         <translation>Величина јеке</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="130"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="141"/>
         <source>Reverb width</source>
         <translation>Ширина јеке</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="131"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="142"/>
         <source>Reverb damping</source>
         <translation>Пригушење јеке</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="133"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="144"/>
         <source>Chorus</source>
         <translation>Хорус</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="133"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="144"/>
         <source>Chorus level</source>
         <translation>Ниво хоруса</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="134"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="145"/>
         <source>Chorus depth</source>
         <translation>Дубина хоруса</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="134"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="145"/>
         <source>Chorus frequency</source>
         <translation>Учестаност хоруса</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="140"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="151"/>
         <source>Tuning</source>
         <translation>Штимовање</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="141"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="152"/>
         <source>Transposition</source>
         <translation>Транспозиција</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="142"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="153"/>
         <source>semitones</source>
         <translation>полутонова</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="143"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="154"/>
         <source>Reference pitch</source>
         <translation>Референтни тон</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="146"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="157"/>
         <source>Temperament</source>
         <translation>Темперамент</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="149"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="160"/>
         <source>Temperament key</source>
         <translation>Тоналитет темперамента</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="154"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="165"/>
         <source>Velocity</source>
         <translation>Јачина удара</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="155"/>
-        <source>Velocity to filter</source>
-        <translation>Јачина удара ка филтеру</translation>
+        <location filename="../../plugin/pluginprocessor.cpp" line="167"/>
+        <source>Velocity to filter cutoff</source>
+        <translation>Јачина удара ка фреквенцији филтера</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="157"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="168"/>
         <source>Velocity curve</source>
         <translation>Крива јачине удара</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="164"/>
-        <source>None</source>
-        <comment>velocity to filter</comment>
-        <translation>Ниједан</translation>
+        <location filename="../../plugin/pluginprocessor.cpp" line="173"/>
+        <source>Temperament enabled</source>
+        <translation>Темперамент укључен</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="200"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="174"/>
+        <source>Reverb enabled</source>
+        <translation>Јека укључена</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="176"/>
+        <source>Chorus enabled</source>
+        <translation>Хорус укључен</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="183"/>
+        <source>Disabled</source>
+        <comment>velocity to filter</comment>
+        <translation>Искључено</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="206"/>
         <source>Equal</source>
         <comment>Equal musical temperament</comment>
         <translation>Једнако</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="208"/>
+        <source>Custom</source>
+        <comment>custom temperament</comment>
+        <translation>Прилагођено</translation>
+    </message>
+</context>
+<context>
+    <name>PluginTemperament</name>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="39"/>
+        <source>Historical temperaments</source>
+        <translation>Историјски темпераменти</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="40"/>
+        <source>Pythagorean</source>
+        <translation>Питагорејски</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="41"/>
+        <source>Just intonation</source>
+        <translation>Чисто штимовање</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="42"/>
+        <source>Meantone</source>
+        <translation>Средњетонски</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="43"/>
+        <source>Irregular temperaments</source>
+        <translation>Неправилни темпераменти</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="44"/>
+        <source>Historical organs</source>
+        <translation>Историјске оргуље</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="45"/>
+        <source>Western scales</source>
+        <translation>Западне лествице</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="46"/>
+        <source>Modes</source>
+        <translation>Модуси</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="47"/>
+        <source>Harmonic and melodic</source>
+        <translation>Хармонијске и мелодијске</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="48"/>
+        <source>Pentatonic and blues</source>
+        <translation>Пентатонике и блуз</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="49"/>
+        <source>Symmetric scales</source>
+        <translation>Симетричне лествице</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="50"/>
+        <source>Jazz</source>
+        <translation>Џез</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="51"/>
+        <source>Just scales</source>
+        <translation>Чисте лествице</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="52"/>
+        <source>Arabic maqamat</source>
+        <translation>Арапски маками</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="53"/>
+        <source>Turkish makams</source>
+        <translation>Турски маками</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="54"/>
+        <source>Persian dastgahs</source>
+        <translation>Персијски дастгахи</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="55"/>
+        <source>Indian thaats</source>
+        <translation>Индијски тати</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="56"/>
+        <source>East Asia</source>
+        <translation>Источна Азија</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="57"/>
+        <source>China</source>
+        <translation>Кина</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="58"/>
+        <source>Japan</source>
+        <translation>Јапан</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="59"/>
+        <source>Korea</source>
+        <translation>Кореја</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="60"/>
+        <source>Southeast Asia</source>
+        <translation>Југоисточна Азија</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="61"/>
+        <source>Africa</source>
+        <translation>Африка</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="62"/>
+        <source>Eastern Europe and Mediterranean</source>
+        <translation>Источна Европа и Медитеран</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="63"/>
+        <source>Equal divisions of the octave</source>
+        <translation>Једнаке поделе октаве</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="66"/>
+        <source>Ionian (major)</source>
+        <translation>Јонски (дур)</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="67"/>
+        <source>Dorian</source>
+        <translation>Дорски</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="68"/>
+        <source>Phrygian</source>
+        <translation>Фригијски</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="69"/>
+        <source>Lydian</source>
+        <translation>Лидијски</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="70"/>
+        <source>Mixolydian</source>
+        <translation>Миксолидијски</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="71"/>
+        <source>Aeolian (natural minor)</source>
+        <translation>Еолски (природни мол)</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="72"/>
+        <source>Locrian</source>
+        <translation>Локријски</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="73"/>
+        <source>Harmonic minor</source>
+        <translation>Хармонијски мол</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="74"/>
+        <source>Melodic minor</source>
+        <translation>Мелодијски мол</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="75"/>
+        <source>Harmonic major</source>
+        <translation>Хармонијски дур</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="76"/>
+        <source>Major pentatonic</source>
+        <translation>Дурска пентатоника</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="77"/>
+        <source>Minor pentatonic</source>
+        <translation>Молска пентатоника</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="78"/>
+        <source>Blues</source>
+        <translation>Блуз</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="79"/>
+        <source>Major blues</source>
+        <translation>Дурски блуз</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="80"/>
+        <source>Whole tone</source>
+        <translation>Целостепена</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="81"/>
+        <source>Diminished (half-whole)</source>
+        <translation>Умањена (полустепен-степен)</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="82"/>
+        <source>Diminished (whole-half)</source>
+        <translation>Умањена (степен-полустепен)</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="83"/>
+        <source>Augmented</source>
+        <translation>Повећана</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="84"/>
+        <source>Bebop dominant</source>
+        <translation>Бибоп доминантна</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="85"/>
+        <source>Lydian dominant</source>
+        <translation>Лидијска доминантна</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="86"/>
+        <source>Altered</source>
+        <translation>Алтерована</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="89"/>
+        <source>Pure major</source>
+        <translation>Чисти дур</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="90"/>
+        <source>Pure minor</source>
+        <translation>Чисти мол</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="91"/>
+        <source>Pure pentatonic</source>
+        <translation>Чиста пентатоника</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="92"/>
+        <source>Harmonic series (8 to 15)</source>
+        <translation>Хармонијски низ (8 до 15)</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="95"/>
+        <source>Slendro (5 equal divisions)</source>
+        <translation>Слендро (5 једнаких подела)</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="96"/>
+        <source>Thai (7 equal divisions)</source>
+        <translation>Тајландска (7 једнаких подела)</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="97"/>
+        <source>Tizita major</source>
+        <translation>Тизита дур</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="98"/>
+        <source>Tizita minor</source>
+        <translation>Тизита мол</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="99"/>
+        <source>Bati major</source>
+        <translation>Бати дур</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="100"/>
+        <source>Bati minor</source>
+        <translation>Бати мол</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="101"/>
+        <source>Freygish (Phrygian dominant)</source>
+        <translation>Фрејгиш (фригијски доминантни)</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="102"/>
+        <source>Ukrainian Dorian</source>
+        <translation>Украјински дорски</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="103"/>
+        <source>Hungarian minor</source>
+        <translation>Мађарски мол</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="104"/>
+        <source>Double harmonic</source>
+        <translation>Двострука хармонијска</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="105"/>
+        <source>Neapolitan minor</source>
+        <translation>Напуљски мол</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="106"/>
+        <source>Neapolitan major</source>
+        <translation>Напуљски дур</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="107"/>
+        <source>Flamenco mode</source>
+        <translation>Фламенко модус</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="108"/>
+        <source>Enigmatic</source>
+        <translation>Енигматска</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="109"/>
+        <source>5 equal divisions</source>
+        <translation>5 једнаких подела</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="110"/>
+        <source>7 equal divisions</source>
+        <translation>7 једнаких подела</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="111"/>
+        <source>8 equal divisions</source>
+        <translation>8 једнаких подела</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="112"/>
+        <source>9 equal divisions</source>
+        <translation>9 једнаких подела</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="113"/>
+        <source>10 equal divisions</source>
+        <translation>10 једнаких подела</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="114"/>
+        <source>11 equal divisions</source>
+        <translation>11 једнаких подела</translation>
+    </message>
+</context>
+<context>
+    <name>PluginTemperamentKeyboard</name>
+    <message>
+        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="416"/>
+        <source>Note used</source>
+        <translation>Нота коришћена</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="417"/>
+        <source>Tonality on this note</source>
+        <translation>Тоналитет на овој ноти</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="443"/>
+        <source>%1 is the note of the reference pitch: its fine tune of %2 cents is compensated by shifting all the notes by %3 cents.</source>
+        <translation>%1 је нота референтног тона: њено фино штимовање од %2 центи компензује се померањем свих нота за %3 центи.</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="446"/>
+        <source>Fine tune of each key in cents, compared to the equal temperament.</source>
+        <translation>Фино штимовање сваке дирке у центима, у односу на једнако темперовани строј.</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="447"/>
+        <source>Mouse wheel or vertical drag: change a value (finer with Ctrl).</source>
+        <translation>Точкић миша или вертикално превлачење: измена вредности (финије са Ctrl).</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="448"/>
+        <source>Double click: back to 0.</source>
+        <translation>Двоструки клик: враћање на 0.</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="449"/>
+        <source>Right click: note used or not, tonality.</source>
+        <translation>Десни клик: нота коришћена или не, тоналитет.</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="450"/>
+        <source>Dot: tonality.</source>
+        <translation>Тачка: тоналитет.</translation>
     </message>
 </context>
 <context>
@@ -7210,13 +7683,13 @@ Both divisions must share the same note and velocity ranges.</source>
         <translation>Датотеке звукотека</translation>
     </message>
     <message>
-        <location filename="../../context/tuningprogrammanager.cpp" line="85"/>
+        <location filename="../../context/tuningprogrammanager.cpp" line="81"/>
         <source>Equal</source>
         <comment>Equal musical temperament</comment>
         <translation>Једнако</translation>
     </message>
     <message>
-        <location filename="../../context/tuningprogrammanager.cpp" line="121"/>
+        <location filename="../../context/tuningprogrammanager.cpp" line="120"/>
         <source>Tuning program %1:%2</source>
         <translation>Програм за штимовање %1:%2</translation>
     </message>
@@ -7356,6 +7829,20 @@ Both divisions must share the same note and velocity ranges.</source>
         <location filename="../../dialogs/recorderhistory.cpp" line="217"/>
         <source>Display a soundfont in the editor for importing the recording</source>
         <translation>Прикажите звукотеку у уређивачу да бисте увезли снимак</translation>
+    </message>
+</context>
+<context>
+    <name>ReferencePitchEditor</name>
+    <message>
+        <location filename="../../context/interface/referencepitcheditor.cpp" line="38"/>
+        <source>Note sounding at this frequency, whatever the temperament</source>
+        <translation>Нота која звучи на овој фреквенцији, без обзира на темперамент</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/referencepitcheditor.cpp" line="42"/>
+        <source>Hz</source>
+        <comment>unit for Herz</comment>
+        <translation>Hz</translation>
     </message>
 </context>
 <context>
@@ -8123,6 +8610,106 @@ Other soundfont editors might display other units.</source>
 Other soundfont editors might display other units.</source>
         <translation>Вредности у овом реду су изражене у стварним dB.
 Други уређивачи звукотека могу приказивати друге јединице.</translation>
+    </message>
+</context>
+<context>
+    <name>TemperamentArea</name>
+    <message>
+        <location filename="../../clavier/temperamentarea.cpp" line="59"/>
+        <source>Tonality</source>
+        <translation>Тоналитет</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/temperamentarea.cpp" line="66"/>
+        <source>Also play the unused notes</source>
+        <translation>Свирај и некоришћене ноте</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/temperamentarea.cpp" line="79"/>
+        <source>Reference pitch</source>
+        <translation>Референтни тон</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/temperamentarea.cpp" line="82"/>
+        <source>Transposition</source>
+        <translation>Транспозиција</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/temperamentarea.cpp" line="169"/>
+        <source>Temperaments and scales</source>
+        <translation>Темпераменти и лествице</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/temperamentarea.cpp" line="177"/>
+        <source>Hide the temperaments and scales</source>
+        <translation>Сакриј темпераменте и лествице</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/temperamentarea.cpp" line="178"/>
+        <source>Show the temperaments and scales (microtonal tuning)</source>
+        <translation>Прикажи темпераменте и лествице (микротонско штимовање)</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/temperamentarea.cpp" line="54"/>
+        <source>Temperament</source>
+        <translation>Темперамент</translation>
+    </message>
+</context>
+<context>
+    <name>TemperamentKeyboard</name>
+    <message>
+        <location filename="../../context/interface/temperamentkeyboard.cpp" line="84"/>
+        <source>Fine tune of each key in cents, compared to the equal temperament.</source>
+        <translation>Фино штимовање сваке дирке у центима, у односу на једнако темперовани строј.</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/temperamentkeyboard.cpp" line="85"/>
+        <source>Mouse wheel or vertical drag: change a value (finer with Ctrl).</source>
+        <translation>Точкић миша или вертикално превлачење: измена вредности (финије са Ctrl).</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/temperamentkeyboard.cpp" line="86"/>
+        <source>Double click: back to 0.</source>
+        <translation>Двоструки клик: враћање на 0.</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/temperamentkeyboard.cpp" line="87"/>
+        <source>Right click: note used or not, tonality.</source>
+        <translation>Десни клик: нота коришћена или не, тоналитет.</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/temperamentkeyboard.cpp" line="88"/>
+        <source>Dot: tonality.</source>
+        <translation>Тачка: тоналитет.</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/temperamentkeyboard.cpp" line="397"/>
+        <source>Tonality on this note</source>
+        <translation>Тоналитет на овој ноти</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/temperamentkeyboard.cpp" line="455"/>
+        <source>%1 is the note of the reference pitch: its fine tune of %2 cents is compensated by shifting all the notes by %3 cents.</source>
+        <translation>%1 је нота референтног тона: њено фино штимовање од %2 центи компензује се померањем свих нота за %3 центи.</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/temperamentkeyboard.cpp" line="394"/>
+        <source>Note used</source>
+        <translation>Нота коришћена</translation>
+    </message>
+</context>
+<context>
+    <name>TemperamentSettings</name>
+    <message>
+        <location filename="../../context/temperamentsettings.cpp" line="32"/>
+        <source>Custom</source>
+        <comment>custom temperament</comment>
+        <translation>Прилагођено</translation>
+    </message>
+    <message>
+        <location filename="../../context/temperamentsettings.cpp" line="226"/>
+        <source>Transposition in semitones of the notes played with the keyboard or a MIDI input</source>
+        <translation>Транспозиција у полустепенима нота свираних на клавијатури или преко MIDI улаза</translation>
     </message>
 </context>
 <context>

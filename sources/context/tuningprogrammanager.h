@@ -26,17 +26,21 @@
 #define TUNINGPROGRAMMANAGER_H
 
 #include <QString>
+#include <QStringList>
 #include <QMap>
 
 class TuningProgram
 {
 public:
     TuningProgram();
-    bool parse(QString description);
-    QString getDescription();
 
-    QString _name;
-    float _deviations[12];
+    // Configuration of the sound engine for a relative key (tonality, see TuningProgramManager::getConfiguration)
+    QString getConfiguration(int relativeKey) const;
+
+    QString _name; // Translated
+    QStringList _category; // Levels, translated (empty for the equal temperament and the MIDI tuning programs)
+    float _deviations[12]; // From the tonic (C) to B
+    bool _used[12];
 };
 
 class TuningProgramManager
@@ -46,16 +50,18 @@ public:
     static void kill();
     bool addTuningProgram(int index, QString name, const double deviations[12]);
 
+    // Configuration of the sound engine ("temperament"): name, 12 fine tunes from the tonic (C) to B ("-" for a key
+    // not used) and relative key (tonality)
+    static QString getConfiguration(QString name, const double fineTunes[12], const bool used[12], int relativeKey);
+
     TuningProgram * getTuningProgram(int index);
     QMap<int, TuningProgram> * getAllPrograms();
-    bool hasBeenUpdated() { return _updated; }
 
 private:
     TuningProgramManager();
     ~TuningProgramManager();
 
     bool _defaultPrograms;
-    bool _updated;
     QMap<int, TuningProgram> _tuningPrograms;
     QString _settingToRestore;
 

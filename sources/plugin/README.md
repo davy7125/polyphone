@@ -13,11 +13,12 @@ LV2, AU (macOS) and a standalone application ("Polyphone Player", not distribute
   decompressed: nothing is read while playing. The instances
   of the plugin playing the same file in a host (one per track for instance) share it: it is read and
   kept in memory once (it is read again if the file changed).
-- Presets played in three modes:
-  - **One preset**: the same preset on the 16 MIDI channels;
-  - **16 channels**: each channel plays the preset chosen for it, or the one chosen by its program
+- Instruments played in three modes (the presets of the soundfont, called instruments in the
+  interface, the term of the musicians):
+  - **One instrument**: the same instrument on the 16 MIDI channels;
+  - **16 channels**: each channel plays the instrument chosen for it, or the one chosen by its program
     changes (bank select then program change, bank 128 on the channel 10), as a General MIDI synth;
-  - **MPE**: the same preset played by an MPE controller (MIDI Polyphonic Expression), each note
+  - **MPE**: the same instrument played by an MPE controller (MIDI Polyphonic Expression), each note
     having its own channel, thus its own pitch bend, pressure and controllers. A lower zone of 15
     channels is used until the controller sends its configuration (RPN 6). The master channel of a
     zone sends the messages of all its notes: its pitch bend is added to the one of each note, its
@@ -38,13 +39,28 @@ LV2, AU (macOS) and a standalone application ("Polyphone Player", not distribute
   enabled by the host. Without this setting, all is mixed in the main output and the other outputs
   are silent: some formats (LV2) or hosts always enable all outputs. The setting is disabled in the
   standalone application, which only plays the main output (the player of JUCE).
-- Parameters that the host can automate, with the ranges of the settings of the editor: gain,
+- Parameters that the host can automate, with the ranges of the settings of the editor except the
+  gain (+/-24 dB instead of +/-50 dB): gain,
   reverb (level, size, width, damping), chorus (level, depth, frequency), transposition (except the
-  percussions), reference pitch and temperament (the ones of the editor), velocity: default modulator
-  to the filter cutoff (2.01, 2.04 or none, as in the editor) and curve applied to the velocity of
+  percussions), reference pitch (frequency of A4), temperament or scale and its tonality (the ones of
+  the editor, in categories, then a custom temperament; the notes outside a scale are not played),
+  switches of the temperament, of the reverb and of the chorus, velocity: default modulator
+  to the filter cutoff (SoundFont 2.01, SoundFont 2.04 or disabled, as in the editor; its behavior and
+  when to change it explained by an information icon) and curve applied to the velocity of
   the notes (power 3^(-curve / 100), linear by default), both drawn in a graph. A soundfont with its
   own default modulators (DMOD chunk of an sf2 or sf3 file) uses them instead of the ones of the
   sf2 format: the setting of the default modulator has no effect on it.
+- Interface: the gain in the header (its value shown, its arc colored from 0 toward the left or the
+  right), the presets on the left (the room left by the groups); on the right the tuning (reference pitch: note from A#3 to A4
+  = its frequency, the note keeping its pitch whatever the temperament; transposition) beside the
+  velocity, then the temperaments and scales, the reverb and the chorus (side by side if both are
+  enabled, the knobs having the same width). These three groups have a switch, also a parameter: off, the group is collapsed and its
+  temperament or effect is not applied (equal temperament with all the notes, effect level 0), its
+  settings being kept; the switches missing in a state saved before them are on for the effects heard
+  and a temperament other than the equal one. The temperaments and scales: temperament, tonality,
+  notes not used played anyway (disabled by default) and the fine tunes of the 12 notes, editable (the
+  custom temperament). The height of the window follows the groups expanded. The note of the
+  reference pitch and the custom temperament are saved in the state, not as parameters.
 - A keyboard showing the notes received and played with the mouse, the number of voices, the share of
   the processor taken and a panic button (all sounds stopped, controllers reset).
 - Settings: polyphony, channel of the keyboard, language, fixed latency (see above), clipping of the
@@ -59,7 +75,7 @@ LV2, AU (macOS) and a standalone application ("Polyphone Player", not distribute
   JUCE).
 - Offline rendering of the host: the computation time never limits the voices.
 
-The state saved by the host contains the parameters, the presets, the polyphony and the path of the
+The state saved by the host contains the parameters, the instruments played, the polyphony and the path of the
 soundfont (and its content if it is stored). When a project is opened, the soundfont is read before
 the state is restored, so that an offline rendering can start at once.
 
@@ -124,6 +140,7 @@ into its own (`SampleFileReader` reading the samples with libsndfile).
 - `pluginprocessor`: the `juce::AudioProcessor` (parameters, state, soundfont read in another thread
   when it is opened by the interface, in the calling thread when a state is restored).
 - `plugineditor`: the interface, with the colors of the theme "Dark, orange" of the editor.
+- `plugintemperamentkeyboard`: the fine tunes of the 12 notes (as `TemperamentKeyboard` in the editor).
 - `plugintranslator`: the translations, without Qt (see below).
 
 ## Translations

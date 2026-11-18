@@ -47,6 +47,7 @@ add_library(polyphone_synth_core STATIC
     synthmidi.cpp
     synthsoundfontfile.cpp
     synthsoundfontset.cpp
+    temperaments.cpp
     textconversions.cpp
     voice.cpp
     voicecontext.cpp

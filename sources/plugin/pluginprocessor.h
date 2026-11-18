@@ -32,6 +32,7 @@
 #include <atomic>
 #include "pluginengine.h"
 #include "plugintranslator.h"
+#include "temperaments.h"
 class PluginSoundfont;
 
 // Polyphone as a plugin: a soundfont (sf2 or sf3) played by the synth of the editor on the 16 MIDI channels.
@@ -44,13 +45,6 @@ class PluginProcessor: public juce::AudioProcessor,
     Q_DECLARE_TR_FUNCTIONS(PluginProcessor)
 
 public:
-    // A temperament: fine tune in cents of each key from C to B
-    struct Temperament
-    {
-        juce::String name;
-        float fineTunes[12];
-    };
-
     PluginProcessor();
     ~PluginProcessor() override;
 
@@ -91,6 +85,28 @@ public:
     bool hasFixedLatency() const { return _hasFixedLatency.load(); }
     void setFixedLatency(bool hasFixedLatency);
 
+    /// Tuning, completing the parameters "transpose", "tuning" (frequency of A4), "temperamentEnabled" (equal
+    /// temperament otherwise), "temperament" and "temperamentKey" (tonality)
+
+    // Note of the reference pitch as in the editor, from A#3 to A4 (0 = C4, 9 = A4, 10 = A#3, 11 = B3): it sounds at
+    // the frequency given by the parameter "tuning" in the equal temperament, whatever the temperament
+    int getReferencePitchKey() const { return _referencePitchKey.load(); }
+    void setReferencePitchKey(int key);
+    static double getRatioToA4(int key); // Frequency of the note divided by the frequency of A4
+
+    // Custom temperament, last item of the parameter "temperament": fine tunes and use of the notes from its tonic
+    static int getCustomTemperamentIndex();
+    void getCustomTemperament(float fineTunes[12], bool used[12]) const;
+    void setCustomTemperament(const float fineTunes[12], const bool used[12]);
+
+    // Fine tunes and use of the notes from C to B of a temperament (index of the parameter "temperament") transposed to
+    // a tonality
+    void getTemperament(int index, int tonality, float fineTunes[12], bool used[12]) const;
+
+    // Notes not used by the temperament (scale) played anyway
+    bool playsUnusedNotes() const { return _playUnusedNotes.load(); }
+    void setPlayUnusedNotes(bool playUnusedNotes);
+
     // Outputs clipped to [-1; 1] (default) or not
     bool isClipping() const { return _isClipping.load(); }
     void setClipping(bool isClipping);
@@ -98,11 +114,13 @@ public:
     PluginEngine &getEngine() { return _engine; }
     juce::AudioProcessorValueTreeState &getParameterState() { return _parameters; }
     juce::MidiKeyboardState &getKeyboardState() { return _keyboardState; }
-    static const std::vector<Temperament> &getTemperaments();
-    static juce::String getTemperamentName(size_t index); // Translated
+    // Equal temperament, then the temperaments and scales of the editor (resources/misc/temperaments.csv)
+    static const std::vector<TemperamentData> &getTemperaments();
+    static juce::String getTemperamentName(size_t index); // Translated, the custom temperament included
+    static juce::StringArray getTemperamentCategory(size_t index); // Levels, translated (empty: top level)
 
-    // Default modulators of the velocity to the filter cutoff (SynthCoreConfig::modulatorVelToFilterType): 2.01, 2.04
-    // and none (translated)
+    // Default modulators of the velocity to the filter cutoff (SynthCoreConfig::modulatorVelToFilterType): SoundFont
+    // 2.01, SoundFont 2.04 and disabled (translated)
     static juce::StringArray getVelocityToFilterNames();
 
     // Settings shared by all instances (recent files, language)
@@ -158,11 +176,18 @@ private:
     bool _isSoundfontStored;
 
     // Settings of the synth
-    static const int PARAMETER_COUNT = 14;
+    static const int PARAMETER_COUNT = 17;
     int _polyphony;
     std::atomic<bool> _hasMultipleOutputs;
     std::atomic<bool> _hasFixedLatency;
     std::atomic<bool> _isClipping;
+    std::atomic<bool> _playUnusedNotes;
+    bool _appliedPlayUnusedNotes; // Audio thread
+    std::atomic<int> _referencePitchKey;
+    std::atomic<float> _customFineTunes[12];
+    std::atomic<bool> _customUsed[12];
+    std::atomic<int> _tuningVersion; // Reference pitch key or custom temperament changed: applied by the next block
+    int _appliedTuningVersion; // Audio thread
     bool _isPrepared;
     double _sampleRate;
     int _maxBlockSize;

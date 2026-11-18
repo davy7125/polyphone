@@ -35,7 +35,8 @@
 
 BannerMenu::BannerMenu(QToolButton * button, QWidget * parent) :
     QMenu(parent),
-    _button(button)
+    _button(button),
+    _window(nullptr)
 {
     ThemeManager * theme = ContextManager::theme();
     this->setStyleSheet(theme->getMenuTheme());
@@ -77,10 +78,38 @@ void BannerMenu::showEvent(QShowEvent * event)
     if (this->screen() != nullptr)
         position.setX(qMax(position.x(), this->screen()->availableGeometry().left()));
     this->move(position.x(), this->y());
+
+    // Following the button
+    _buttonPosition = _button->mapToGlobal(QPoint(0, 0));
+    _window = _button->window();
+    _window->installEventFilter(this);
+}
+
+void BannerMenu::hideEvent(QHideEvent * event)
+{
+    if (_window != nullptr)
+    {
+        _window->removeEventFilter(this);
+        _window = nullptr;
+    }
+    QMenu::hideEvent(event);
 }
 
 bool BannerMenu::eventFilter(QObject * watched, QEvent * event)
 {
+    // The window moved or changed its size: same move as the button, otherwise the button could be below the menu
+    // (window growing or shrinking from its top), a click on it changing a setting instead of closing the menu
+    if (watched == _window && (event->type() == QEvent::Move || event->type() == QEvent::Resize))
+    {
+        QPoint buttonPosition = _button->mapToGlobal(QPoint(0, 0));
+        if (buttonPosition != _buttonPosition)
+        {
+            this->move(this->pos() + buttonPosition - _buttonPosition);
+            _buttonPosition = buttonPosition;
+        }
+        return QMenu::eventFilter(watched, event);
+    }
+
     if (_checkBoxes.contains(watched) && event->type() == QEvent::MouseButtonRelease &&
         static_cast<QMouseEvent *>(event)->button() == Qt::LeftButton)
     {

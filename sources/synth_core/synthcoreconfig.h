@@ -41,11 +41,15 @@ public:
         masterGain(0),
         referencePitch(4400),
         temperamentRelativeKey(0),
+        temperamentReferenceKey(9),
         modulatorVelToFilterType(1),
         cpuBudget(DEFAULT_CPU_BUDGET)
     {
         for (int i = 0; i < 12; i++)
+        {
             temperament[i] = 0;
+            temperamentUsed[i] = true;
+        }
     }
 
     // Effects, from 0 to 100
@@ -62,9 +66,13 @@ public:
     double masterGain;
     int referencePitch;
 
-    // Fine tune in cents of each key from C to B, relative to the key temperamentRelativeKey
+    // Fine tune in cents and use of each key from C to B, relative to the key temperamentRelativeKey (tonality)
+    // The fine tunes are shifted so that the key temperamentReferenceKey (0 = C, 11 = B, not relative: note of the
+    // reference pitch, A by default) keeps its pitch in the equal temperament. The keys not used are not played.
     float temperament[12];
+    bool temperamentUsed[12];
     int temperamentRelativeKey;
+    int temperamentReferenceKey;
 
     // Velocity to filter cutoff among the default modulators: the one of the version 2.01 (0), 2.04 (1) or none (2)
     int modulatorVelToFilterType;

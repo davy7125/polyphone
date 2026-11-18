@@ -30,7 +30,9 @@
 
 Synth::Synth(ISynthSoundfonts * soundfonts, QRecursiveMutex * mutexSoundfonts) : QObject(nullptr),
     _mutexSoundfonts(mutexSoundfonts),
+    _soundfonts(soundfonts),
     _core(soundfonts, this),
+    _transposition(0),
     _soundEngines(nullptr),
     _soundEngineCount(0),
     _bufferSize(0),
@@ -114,15 +116,32 @@ int Synth::play(EltID id, int channel, int key, int velocity)
 {
     //qWarning() << "PLAY on channel" << channel << "key" << key << "vel" << velocity << id.toString();
 
+    // Keys of the keyboard and of the MIDI input, transposed
+    bool isHeldKey = key >= 0 && key <= 127 && channel >= -1 && channel <= 15;
+
     // Possibly release voices
     if (velocity == 0)
     {
-        _core.releaseVoices(id.indexSf2, id.indexElt, channel, key, false);
+        if (isHeldKey)
+            releaseHeldNotes(id, channel, key);
+        else
+        {
+            if (key == -2)
+                forgetHeldNotes(id.indexSf2, id.indexElt, channel);
+            _core.releaseVoices(id.indexSf2, id.indexElt, channel, key, false);
+        }
         return -1;
     }
 
     // A key is pressed, the soundfonts must not change while the voices are prepared
     QMutexLocker mutexLocker(_mutexSoundfonts);  // Will do nothing if _mutexSoundfonts is null
+    if (isHeldKey)
+    {
+        key = holdNote(id, channel, key);
+        if (key < 0)
+            return -1;
+    }
+
     int playingToken = -1;
     switch (id.typeElement)
     {
@@ -142,18 +161,110 @@ int Synth::play(EltID id, int channel, int key, int velocity)
     return playingToken;
 }
 
+static bool isHeldNoteMatching(int sf2Index, int eltIndex, int filterSf2Index, int filterEltIndex)
+{
+    // Same filters as SynthCore::releaseVoices: -1 for all soundfonts or all elements
+    return (filterSf2Index == -1 || sf2Index == filterSf2Index) && (filterEltIndex == -1 || eltIndex == filterEltIndex);
+}
+
+bool Synth::isPercussion(EltID id)
+{
+    // Preset of the bank 128
+    if ((id.typeElement != elementPrst && id.typeElement != elementPrstInst) || id.indexElt < 0)
+        return false;
+    ISynthSoundfont * soundfont = _soundfonts->getSynthSoundfont(id.indexSf2);
+    ISynthInstPrst * preset = soundfont == nullptr ? nullptr : soundfont->getSynthPreset(id.indexElt);
+    return preset != nullptr && preset->getBankNumber() == 128;
+}
+
+int Synth::holdNote(EltID id, int channel, int key)
+{
+    // Transposition, except for the percussions
+    int playedKey = key;
+    if (!isPercussion(id))
+        playedKey += _transposition.load(std::memory_order_relaxed);
+
+    std::lock_guard<std::mutex> lock(_heldNotesMutex);
+    std::vector<HeldNote> &notes = _heldNotes[channel + 1][key];
+    for (size_t i = 0; i < notes.size(); i++)
+    {
+        if (notes[i].sf2Index == id.indexSf2 && notes[i].eltIndex == id.indexElt)
+        {
+            // Element played again by the same key: its previous note is first stopped if the key played changed
+            if (notes[i].playedKey != playedKey)
+                _core.releaseVoices(id.indexSf2, id.indexElt, channel, notes[i].playedKey, false);
+            notes.erase(notes.begin() + static_cast<std::ptrdiff_t>(i));
+            break;
+        }
+    }
+
+    if (playedKey < 0 || playedKey > 127)
+        return -1;
+    HeldNote note;
+    note.sf2Index = id.indexSf2;
+    note.eltIndex = id.indexElt;
+    note.playedKey = playedKey;
+    notes.push_back(note);
+    return playedKey;
+}
+
+void Synth::releaseHeldNotes(EltID id, int channel, int key)
+{
+    // Notes started by the key, released with the key they played (nothing if the key played nothing)
+    std::lock_guard<std::mutex> lock(_heldNotesMutex);
+    std::vector<HeldNote> &notes = _heldNotes[channel + 1][key];
+    for (size_t i = 0; i < notes.size();)
+    {
+        if (isHeldNoteMatching(notes[i].sf2Index, notes[i].eltIndex, id.indexSf2, id.indexElt))
+        {
+            _core.releaseVoices(id.indexSf2, id.indexElt, channel, notes[i].playedKey, false);
+            notes.erase(notes.begin() + static_cast<std::ptrdiff_t>(i));
+        }
+        else
+            i++;
+    }
+}
+
+void Synth::forgetHeldNotes(int sf2Index, int eltIndex, int channel)
+{
+    // Channel -2 for all channels, as SynthCore::releaseVoices
+    if (channel != -2 && (channel < -1 || channel > 15))
+        return;
+    int firstChannel = (channel == -2 ? -1 : channel);
+    int lastChannel = (channel == -2 ? 15 : channel);
+
+    std::lock_guard<std::mutex> lock(_heldNotesMutex);
+    for (int c = firstChannel; c <= lastChannel; c++)
+    {
+        for (int key = 0; key < 128; key++)
+        {
+            std::vector<HeldNote> &notes = _heldNotes[c + 1][key];
+            for (size_t i = 0; i < notes.size();)
+            {
+                if (isHeldNoteMatching(notes[i].sf2Index, notes[i].eltIndex, sf2Index, eltIndex))
+                    notes.erase(notes.begin() + static_cast<std::ptrdiff_t>(i));
+                else
+                    i++;
+            }
+        }
+    }
+}
+
 void Synth::stop(bool allChannels, bool fast)
 {
+    forgetHeldNotes(-1, -1, allChannels ? -2 : -1);
     _core.stop(allChannels, fast);
 }
 
 void Synth::releaseChannel(int channel, bool fast)
 {
+    forgetHeldNotes(-1, -1, channel);
     _core.releaseVoices(-1, -1, channel, -2, fast);
 }
 
 void Synth::releaseSoundfont(int sf2Index, bool fast)
 {
+    forgetHeldNotes(sf2Index, -1, -2);
     _core.releaseVoices(sf2Index, -1, -2, -2, fast);
 }
 
@@ -281,7 +392,23 @@ bool Synth::processKey(int channel, int key, int vel)
 
 bool Synth::processPolyPressureChanged(int channel, int key, int pressure)
 {
-    _core.processPolyPressureChanged(channel, key, pressure);
+    // Pressure of the keys played by a key held
+    if (key >= 0 && key <= 127 && channel >= -1 && channel <= 15)
+    {
+        std::lock_guard<std::mutex> lock(_heldNotesMutex);
+        const std::vector<HeldNote> &notes = _heldNotes[channel + 1][key];
+        for (size_t i = 0; i < notes.size(); i++)
+        {
+            // Once per key played
+            bool isFirst = true;
+            for (size_t j = 0; j < i && isFirst; j++)
+                isFirst = (notes[j].playedKey != notes[i].playedKey);
+            if (isFirst)
+                _core.processPolyPressureChanged(channel, notes[i].playedKey, pressure);
+        }
+    }
+    else
+        _core.processPolyPressureChanged(channel, key, pressure);
     return false;
 }
 

@@ -36,7 +36,8 @@
 // Parameters, in the order of _parameterValues
 static const char * PARAMETER_IDS[] = {
     "gain", "reverbLevel", "reverbSize", "reverbWidth", "reverbDamping", "chorusLevel", "chorusDepth", "chorusFrequency",
-    "transpose", "tuning", "temperament", "temperamentKey", "velocityToFilter", "velocityCurve"
+    "transpose", "tuning", "temperament", "temperamentKey", "velocityToFilter", "velocityCurve", "temperamentEnabled",
+    "reverbEnabled", "chorusEnabled"
 };
 
 static const int MAX_RECENT_FILES = 10;
@@ -76,11 +77,21 @@ PluginProcessor::PluginProcessor() :
     _hasMultipleOutputs(false),
     _hasFixedLatency(false),
     _isClipping(true),
+    _playUnusedNotes(false),
+    _appliedPlayUnusedNotes(false),
+    _referencePitchKey(9),
+    _tuningVersion(0),
+    _appliedTuningVersion(0),
     _isPrepared(false),
     _sampleRate(48000.0),
     _maxBlockSize(512)
 {
     static_assert(std::size(PARAMETER_IDS) == PARAMETER_COUNT, "one identifier for each parameter");
+    for (int i = 0; i < 12; i++)
+    {
+        _customFineTunes[i] = 0.0f;
+        _customUsed[i] = true;
+    }
     for (int i = 0; i < PARAMETER_COUNT; i++)
     {
         _parameterValues[i] = _parameters.getRawParameterValue(PARAMETER_IDS[i]);
@@ -114,16 +125,17 @@ juce::PropertiesFile::Options PluginProcessor::getSettingsOptions()
 
 juce::AudioProcessorValueTreeState::ParameterLayout PluginProcessor::createParameters()
 {
-    // Same ranges and default values as the settings of the editor. The names are translated in the language of the
-    // moment (the parameters of an instance keep them).
+    // Same ranges and default values as the settings of the editor (except the gain). The names are translated in the
+    // language of the moment (the parameters of an instance keep them).
     auto percentage = [](const char * id, const juce::String &name) {
         return std::make_unique<juce::AudioParameterInt>(juce::ParameterID(id, 1), name, 0, 100, 0,
                                                          juce::AudioParameterIntAttributes().withLabel("%"));
     };
 
     juce::AudioProcessorValueTreeState::ParameterLayout layout;
+    // Gain limited to +/-24 dB (+/-50 dB in the editor), 0 being in the middle
     layout.add(std::make_unique<juce::AudioParameterFloat>(
-        juce::ParameterID("gain", 1), tr("Gain"), juce::NormalisableRange<float>(-50.0f, 50.0f, 0.1f), 0.0f,
+        juce::ParameterID("gain", 1), tr("Gain"), juce::NormalisableRange<float>(-24.0f, 24.0f, 0.1f), 0.0f,
         juce::AudioParameterFloatAttributes().withLabel("dB")));
     layout.add(std::make_unique<juce::AudioProcessorParameterGroup>(
         "reverb", tr("Reverb"), "|", percentage("reverbLevel", tr("Reverb level")),
@@ -134,7 +146,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout PluginProcessor::createParam
         percentage("chorusDepth", tr("Chorus depth")), percentage("chorusFrequency", tr("Chorus frequency"))));
 
     juce::StringArray temperaments;
-    for (size_t i = 0; i < getTemperaments().size(); i++)
+    for (size_t i = 0; i <= getTemperaments().size(); i++) // Custom temperament at the end
         temperaments.add(getTemperamentName(i));
     layout.add(std::make_unique<juce::AudioProcessorParameterGroup>(
         "tuning", tr("Tuning"), "|",
@@ -152,42 +164,37 @@ juce::AudioProcessorValueTreeState::ParameterLayout PluginProcessor::createParam
     // Added in a later version (versions of the parameters for AU), after the others for the hosts using their order
     layout.add(std::make_unique<juce::AudioProcessorParameterGroup>(
         "velocity", tr("Velocity"), "|",
-        std::make_unique<juce::AudioParameterChoice>(juce::ParameterID("velocityToFilter", 2), tr("Velocity to filter"),
-                                                     getVelocityToFilterNames(), 1),
+        std::make_unique<juce::AudioParameterChoice>(juce::ParameterID("velocityToFilter", 2),
+                                                     tr("Velocity to filter cutoff"), getVelocityToFilterNames(), 1),
         std::make_unique<juce::AudioParameterInt>(juce::ParameterID("velocityCurve", 2), tr("Velocity curve"), -100,
                                                   100, 0)));
+
+    // Switches of the temperament (equal temperament otherwise) and of the effects (their settings being kept)
+    layout.add(std::make_unique<juce::AudioParameterBool>(juce::ParameterID("temperamentEnabled", 2),
+                                                          tr("Temperament enabled"), false));
+    layout.add(std::make_unique<juce::AudioParameterBool>(juce::ParameterID("reverbEnabled", 2), tr("Reverb enabled"),
+                                                          false));
+    layout.add(std::make_unique<juce::AudioParameterBool>(juce::ParameterID("chorusEnabled", 2), tr("Chorus enabled"),
+                                                          false));
     return layout;
 }
 
 juce::StringArray PluginProcessor::getVelocityToFilterNames()
 {
-    return { "2.01", "2.04", tr("None", "velocity to filter") };
+    return { "SoundFont 2.01", "SoundFont 2.04", tr("Disabled", "velocity to filter") };
 }
 
-const std::vector<PluginProcessor::Temperament> &PluginProcessor::getTemperaments()
+const std::vector<TemperamentData> &PluginProcessor::getTemperaments()
 {
-    // Equal temperament, then the ones of the editor (name and 12 fine tunes on each line)
-    static const std::vector<Temperament> temperaments = [] {
-        std::vector<Temperament> list;
-        Temperament equal;
+    // Equal temperament, then the ones of the editor (same order, the index being saved)
+    static const std::vector<TemperamentData> temperaments = [] {
+        std::vector<TemperamentData> list;
+        TemperamentData equal;
         equal.name = "Equal";
-        for (float &fineTune : equal.fineTunes)
-            fineTune = 0.0f;
         list.push_back(equal);
-
-        juce::StringArray lines = juce::StringArray::fromLines(
-            juce::String::fromUTF8(BinaryData::temperaments_csv, BinaryData::temperaments_csvSize));
-        for (const juce::String &line : lines)
-        {
-            juce::StringArray parts = juce::StringArray::fromTokens(line, ",", "");
-            if (parts.size() != 13)
-                continue;
-            Temperament temperament;
-            temperament.name = parts[0];
-            for (int i = 0; i < 12; i++)
-                temperament.fineTunes[i] = parts[i + 1].getFloatValue();
+        for (const TemperamentData &temperament : Temperaments::parse(
+                 std::string(BinaryData::temperaments_csv, static_cast<size_t>(BinaryData::temperaments_csvSize))))
             list.push_back(temperament);
-        }
         return list;
     }();
     return temperaments;
@@ -195,10 +202,26 @@ const std::vector<PluginProcessor::Temperament> &PluginProcessor::getTemperament
 
 juce::String PluginProcessor::getTemperamentName(size_t index)
 {
-    // The names of the editor are not translated, except the first one
+    // Generic names translated, proper names unchanged
     if (index == 0)
         return tr("Equal", "Equal musical temperament");
-    return index < getTemperaments().size() ? getTemperaments()[index].name : juce::String();
+    if (index == getTemperaments().size())
+        return tr("Custom", "custom temperament");
+    if (index > getTemperaments().size())
+        return juce::String();
+    return PluginTranslator::translate(Temperaments::TRANSLATION_CONTEXT, getTemperaments()[index].name.c_str());
+}
+
+juce::StringArray PluginProcessor::getTemperamentCategory(size_t index)
+{
+    juce::StringArray levels;
+    if (index >= getTemperaments().size())
+        return levels;
+    for (const juce::String &level : juce::StringArray::fromTokens(
+             juce::String::fromUTF8(getTemperaments()[index].category.c_str()), "/", ""))
+        if (level.isNotEmpty())
+            levels.add(PluginTranslator::translate(Temperaments::TRANSLATION_CONTEXT, level.toRawUTF8()));
+    return levels;
 }
 
 /// Soundfont
@@ -322,6 +345,74 @@ void PluginProcessor::setClipping(bool isClipping)
     sendChangeMessage();
 }
 
+int PluginProcessor::getCustomTemperamentIndex()
+{
+    return static_cast<int>(getTemperaments().size());
+}
+
+double PluginProcessor::getRatioToA4(int key)
+{
+    // Notes from A#3 to A4, so that the step of 0.1 Hz of A4 is not larger for the other notes
+    return std::pow(2.0, ((key <= 9 ? key : key - 12) - 9) / 12.0);
+}
+
+void PluginProcessor::setReferencePitchKey(int key)
+{
+    _referencePitchKey = (key % 12 + 12) % 12;
+    _tuningVersion++; // Applied by the next block
+    sendChangeMessage();
+}
+
+void PluginProcessor::getCustomTemperament(float fineTunes[12], bool used[12]) const
+{
+    for (int i = 0; i < 12; i++)
+    {
+        fineTunes[i] = _customFineTunes[i].load();
+        used[i] = _customUsed[i].load();
+    }
+}
+
+void PluginProcessor::setCustomTemperament(const float fineTunes[12], const bool used[12])
+{
+    for (int i = 0; i < 12; i++)
+    {
+        _customFineTunes[i] = fineTunes[i];
+        _customUsed[i] = used[i];
+    }
+    _tuningVersion++; // Applied by the next block
+}
+
+void PluginProcessor::getTemperament(int index, int tonality, float fineTunes[12], bool used[12]) const
+{
+    // From the tonic, then transposed
+    float tonicFineTunes[12];
+    bool tonicUsed[12];
+    const std::vector<TemperamentData> &temperaments = getTemperaments();
+    index = juce::jlimit(0, getCustomTemperamentIndex(), index);
+    if (index == getCustomTemperamentIndex())
+        getCustomTemperament(tonicFineTunes, tonicUsed);
+    else
+    {
+        for (int i = 0; i < 12; i++)
+        {
+            tonicFineTunes[i] = temperaments[static_cast<size_t>(index)].fineTunes[i];
+            tonicUsed[i] = temperaments[static_cast<size_t>(index)].used[i];
+        }
+    }
+    tonality = (tonality % 12 + 12) % 12;
+    for (int key = 0; key < 12; key++)
+    {
+        fineTunes[key] = tonicFineTunes[(key - tonality + 12) % 12];
+        used[key] = tonicUsed[(key - tonality + 12) % 12];
+    }
+}
+
+void PluginProcessor::setPlayUnusedNotes(bool playUnusedNotes)
+{
+    _playUnusedNotes = playUnusedNotes; // Applied by the next block
+    sendChangeMessage();
+}
+
 void PluginProcessor::timerCallback()
 {
     _engine.deleteUnusedSoundfonts();
@@ -360,9 +451,12 @@ bool PluginProcessor::isBusesLayoutSupported(const BusesLayout &layouts) const
 
 void PluginProcessor::updateConfiguration()
 {
-    // Applied only if a parameter changed
+    // Applied only if a parameter, the option playing the unused notes, the reference pitch key or the custom
+    // temperament changed
     float values[PARAMETER_COUNT];
-    bool hasChanged = false;
+    bool playUnusedNotes = _playUnusedNotes.load(std::memory_order_relaxed);
+    int tuningVersion = _tuningVersion.load();
+    bool hasChanged = (playUnusedNotes != _appliedPlayUnusedNotes) || (tuningVersion != _appliedTuningVersion);
     for (int i = 0; i < PARAMETER_COUNT; i++)
     {
         values[i] = _parameterValues[i]->load(std::memory_order_relaxed);
@@ -372,28 +466,38 @@ void PluginProcessor::updateConfiguration()
     if (!hasChanged)
         return;
 
+    // Effects switched off: level 0, temperament switched off: equal temperament, all the notes being played
+    bool isTemperamentEnabled = values[14] > 0.5f;
+    bool isReverbEnabled = values[15] > 0.5f;
+    bool isChorusEnabled = values[16] > 0.5f;
     SynthCoreConfig configuration;
     configuration.masterGain = values[0];
-    configuration.revLevel = juce::roundToInt(values[1]);
+    configuration.revLevel = isReverbEnabled ? juce::roundToInt(values[1]) : 0;
     configuration.revSize = juce::roundToInt(values[2]);
     configuration.revWidth = juce::roundToInt(values[3]);
     configuration.revDamping = juce::roundToInt(values[4]);
-    configuration.choLevel = juce::roundToInt(values[5]);
+    configuration.choLevel = isChorusEnabled ? juce::roundToInt(values[5]) : 0;
     configuration.choDepth = juce::roundToInt(values[6]);
     configuration.choFrequency = juce::roundToInt(values[7]);
     configuration.referencePitch = juce::roundToInt(values[9] * 10.0f);
-    const std::vector<Temperament> &temperaments = getTemperaments();
-    const Temperament &temperament = temperaments[static_cast<size_t>(
-        juce::jlimit(0, static_cast<int>(temperaments.size()) - 1, juce::roundToInt(values[10])))];
+    float fineTunes[12];
+    bool used[12];
+    getTemperament(isTemperamentEnabled ? juce::roundToInt(values[10]) : 0, 0, fineTunes, used); // From the tonic
     for (int i = 0; i < 12; i++)
-        configuration.temperament[i] = temperament.fineTunes[i];
+    {
+        configuration.temperament[i] = fineTunes[i];
+        configuration.temperamentUsed[i] = used[i] || playUnusedNotes;
+    }
     configuration.temperamentRelativeKey = juce::jlimit(0, 11, juce::roundToInt(values[11]));
+    configuration.temperamentReferenceKey = _referencePitchKey.load(); // Keeps its pitch
     configuration.modulatorVelToFilterType = juce::jlimit(0, 2, juce::roundToInt(values[12])); // Next notes
     _engine.setConfiguration(configuration, juce::roundToInt(values[8]));
     _engine.setVelocityCurve(juce::roundToInt(values[13]));
 
     for (int i = 0; i < PARAMETER_COUNT; i++)
         _appliedValues[i] = values[i];
+    _appliedPlayUnusedNotes = playUnusedNotes;
+    _appliedTuningVersion = tuningVersion;
 }
 
 // Position of the first note started in a block, or of the first message if no note starts (0 if there is none)
@@ -532,6 +636,14 @@ void PluginProcessor::getStateInformation(juce::MemoryBlock &destData)
     state.setProperty("multipleOutputs", _hasMultipleOutputs.load(), nullptr);
     state.setProperty("fixedLatency", _hasFixedLatency.load(), nullptr);
     state.setProperty("clipping", _isClipping.load(), nullptr);
+    state.setProperty("playUnusedNotes", _playUnusedNotes.load(), nullptr);
+
+    // Tuning: note of the reference pitch, custom temperament ("-" for a note not used)
+    state.setProperty("referencePitchKey", _referencePitchKey.load(), nullptr);
+    juce::StringArray customTemperament;
+    for (int i = 0; i < 12; i++)
+        customTemperament.add(_customUsed[i].load() ? juce::String(_customFineTunes[i].load(), 1) : juce::String("-"));
+    state.setProperty("customTemperament", customTemperament.joinIntoString(","), nullptr);
 
     // Presets
     state.setProperty("mode", static_cast<int>(_engine.getMode()), nullptr);
@@ -573,11 +685,36 @@ void PluginProcessor::setStateInformation(const void * data, int sizeInBytes)
 
     juce::ValueTree parameters = state.getChildWithName(_parameters.state.getType());
     if (parameters.isValid())
+    {
+        // States saved before the switches: the effects heard and a temperament other than the equal one are enabled
+        // (the switches missing are found before the state is replaced, which adds them with their default values)
+        const char * const switchIds[] = { "temperamentEnabled", "reverbEnabled", "chorusEnabled" };
+        bool isSwitchMissing[3];
+        for (int i = 0; i < 3; i++)
+            isSwitchMissing[i] = !parameters.getChildWithProperty("id", switchIds[i]).isValid();
         _parameters.replaceState(parameters);
+        bool isEnabled[3] = { juce::roundToInt(_parameters.getRawParameterValue("temperament")->load()) != 0,
+                              _parameters.getRawParameterValue("reverbLevel")->load() > 0.0f,
+                              _parameters.getRawParameterValue("chorusLevel")->load() > 0.0f };
+        for (int i = 0; i < 3; i++)
+            if (isSwitchMissing[i])
+                _parameters.getParameter(switchIds[i])->setValueNotifyingHost(isEnabled[i] ? 1.0f : 0.0f);
+    }
     setPolyphony(state.getProperty("polyphony", DEFAULT_POLYPHONY));
     _hasMultipleOutputs = static_cast<bool>(state.getProperty("multipleOutputs", false));
     _hasFixedLatency = static_cast<bool>(state.getProperty("fixedLatency", false));
     _isClipping = static_cast<bool>(state.getProperty("clipping", true));
+    _playUnusedNotes = static_cast<bool>(state.getProperty("playUnusedNotes", false));
+    _referencePitchKey = (static_cast<int>(state.getProperty("referencePitchKey", 9)) % 12 + 12) % 12;
+    juce::StringArray customTemperament = juce::StringArray::fromTokens(
+        state.getProperty("customTemperament", "").toString(), ",", "");
+    for (int i = 0; i < 12; i++)
+    {
+        juce::String value = i < customTemperament.size() ? customTemperament[i].trim() : juce::String("0");
+        _customUsed[i] = (value != "-");
+        _customFineTunes[i] = _customUsed[i] ? juce::jlimit(-50.0f, 50.0f, value.getFloatValue()) : 0.0f;
+    }
+    _tuningVersion++; // Applied by the next block
 
     // Soundfont read now, the host possibly computing the audio just after (a loading in progress is not used)
     _loadingCount++;

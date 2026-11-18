@@ -1141,61 +1141,70 @@
 <context>
     <name>ConfigSectionKeyboard</name>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="81"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="347"/>
         <source>Mapping</source>
         <translation>Toewijzing</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="206"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="197"/>
         <source>Octave #1</source>
         <translation>Octaaf #1</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="211"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="98"/>
+        <source>Transposition</source>
+        <translation>Transpositie</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="202"/>
         <source>Octave #2</source>
         <translation>Octaaf #2</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="216"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="207"/>
         <source>Octave #3</source>
         <translation>Octaaf #3</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="221"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="212"/>
         <source>Octave #4</source>
         <translation>Octaaf #4</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="294"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="316"/>
+        <source>Tonality</source>
+        <translation>Toonsoort</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="364"/>
+        <source>Also play the unused notes</source>
+        <translation>Ook de ongebruikte noten spelen</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="36"/>
         <source>Temperament</source>
         <translation>Temperament</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="69"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="335"/>
         <source>First C</source>
         <translation>Eerste C</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="36"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="354"/>
         <source>Reference pitch</source>
         <translation>Referentie toonhoogte</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="59"/>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="94"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="26"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="144"/>
         <source>Back to default value</source>
         <translation>Terug naar standaardwaarde</translation>
     </message>
     <message>
-        <location filename="../../context/interface/configsectionkeyboard.ui" line="156"/>
+        <location filename="../../context/interface/configsectionkeyboard.ui" line="131"/>
         <source>Tuning</source>
         <translation>Stemming</translation>
-    </message>
-    <message>
-        <location filename="../../context/interface/configsectionkeyboard.cpp" line="54"/>
-        <source>Hz</source>
-        <comment>unit for Herz</comment>
-        <translation>Hz</translation>
     </message>
 </context>
 <context>
@@ -1996,12 +2005,17 @@ repository</translation>
         <translation>Weergave-opties</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="86"/>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="91"/>
+        <source>Tuning</source>
+        <translation>Stemming</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="97"/>
         <source>MIDI controllers</source>
         <translation>MIDI-controllers</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogkeyboard.cpp" line="89"/>
+        <location filename="../../dialogs/dialogkeyboard.cpp" line="94"/>
         <source>Effects</source>
         <translation>Effecten</translation>
     </message>
@@ -6075,344 +6089,386 @@ om de klankkleur ervan weer te geven</translation>
 <context>
     <name>PluginEditor</name>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="57"/>
+        <location filename="../../plugin/plugineditor.cpp" line="88"/>
         <source>cannot open the file</source>
         <translation>kan het bestand niet openen</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="58"/>
+        <location filename="../../plugin/plugineditor.cpp" line="89"/>
         <source>file recursion (#include)</source>
         <translation>recursieve bestandsinsluiting (#include)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="59"/>
+        <location filename="../../plugin/plugineditor.cpp" line="90"/>
         <source>not enough memory</source>
         <translation>onvoldoende geheugen</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="60"/>
+        <location filename="../../plugin/plugineditor.cpp" line="91"/>
         <source>this is not a DLS file</source>
         <translation>dit is geen DLS-bestand</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="61"/>
+        <location filename="../../plugin/plugineditor.cpp" line="92"/>
         <source>invalid header</source>
         <translation>ongeldige header</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="62"/>
+        <location filename="../../plugin/plugineditor.cpp" line="93"/>
         <source>corrupted file (sdta)</source>
         <translation>beschadigd bestand (sdta)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="63"/>
+        <location filename="../../plugin/plugineditor.cpp" line="94"/>
         <source>corrupted file (pdta)</source>
         <translation>beschadigd bestand (pdta)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="193"/>
-        <source>Preset played by the channel, or the one chosen by the program changes it receives</source>
-        <translation>Preset die door het kanaal wordt gespeeld, of die gekozen door de ontvangen programmawissels</translation>
+        <location filename="../../plugin/plugineditor.cpp" line="304"/>
+        <source>Instrument played by the channel, or the one chosen by the program changes it receives</source>
+        <translation>Instrument dat door het kanaal wordt gespeeld, of het instrument dat door de ontvangen programmawissels wordt gekozen</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="196"/>
+        <location filename="../../plugin/plugineditor.cpp" line="307"/>
         <source>Program change (drums)</source>
         <translation>Programmawissel (drums)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="196"/>
+        <location filename="../../plugin/plugineditor.cpp" line="307"/>
         <source>Program change</source>
         <translation>Programmawissel</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="499"/>
-        <source>(no preset)</source>
-        <translation>(geen preset)</translation>
+        <location filename="../../plugin/plugineditor.cpp" line="761"/>
+        <source>(no instrument)</source>
+        <translation>(geen instrument)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="506"/>
+        <location filename="../../plugin/plugineditor.cpp" line="808"/>
         <source>Open...</source>
         <translation>Openen...</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="507"/>
+        <location filename="../../plugin/plugineditor.cpp" line="809"/>
         <source>Open a soundfont (sf2, sf3, sfz or dls), which can also be dropped on the window</source>
         <translation>Een soundfont openen (sf2, sf3, sfz of dls), die ook op het venster kan worden neergezet</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="508"/>
+        <location filename="../../plugin/plugineditor.cpp" line="810"/>
         <source>Recent soundfonts</source>
         <translation>Recente soundfonts</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="509"/>
-        <source>One preset</source>
-        <translation>Eén preset</translation>
+        <location filename="../../plugin/plugineditor.cpp" line="811"/>
+        <source>One instrument</source>
+        <translation>Eén instrument</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="510"/>
-        <source>The same preset is played on all MIDI channels</source>
-        <translation>Dezelfde preset wordt op alle MIDI-kanalen gespeeld</translation>
+        <location filename="../../plugin/plugineditor.cpp" line="812"/>
+        <source>The same instrument is played on all MIDI channels</source>
+        <translation>Hetzelfde instrument wordt op alle MIDI-kanalen gespeeld</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="511"/>
+        <location filename="../../plugin/plugineditor.cpp" line="813"/>
         <source>16 channels</source>
         <translation>16 kanalen</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="512"/>
-        <source>Each MIDI channel plays its preset, or the one chosen by its program changes (General MIDI)</source>
-        <translation>Elk MIDI-kanaal speelt zijn preset, of die gekozen door zijn programmawissels (General MIDI)</translation>
+        <location filename="../../plugin/plugineditor.cpp" line="814"/>
+        <source>Each MIDI channel plays its instrument, or the one chosen by its program changes (General MIDI)</source>
+        <translation>Elk MIDI-kanaal speelt zijn instrument, of het instrument dat zijn programmawissels kiezen (General MIDI)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="514"/>
-        <source>The same preset is played by an MPE controller: each note has its own pitch bend, pressure and timbre (lower zone of 15 channels, or the zones given by the controller)</source>
-        <translation>Dezelfde preset wordt door een MPE-controller gespeeld: elke noot heeft zijn eigen pitch bend, druk en klankkleur (onderste zone van 15 kanalen, of de zones die de controller opgeeft)</translation>
+        <location filename="../../plugin/plugineditor.cpp" line="816"/>
+        <source>The same instrument is played by an MPE controller: each note has its own pitch bend, pressure and timbre (lower zone of 15 channels, or the zones given by the controller)</source>
+        <translation>Hetzelfde instrument wordt door een MPE-controller gespeeld: elke noot heeft zijn eigen pitch bend, druk en klankkleur (onderste zone van 15 kanalen, of de zones die de controller opgeeft)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="519"/>
+        <location filename="../../plugin/plugineditor.cpp" line="822"/>
         <source>Gain</source>
         <translation>Versterking</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="519"/>
-        <source>Transpose</source>
-        <translation>Transpositie</translation>
+        <location filename="../../plugin/plugineditor.cpp" line="844"/>
+        <source>Play all</source>
+        <translation>Alles spelen</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="519"/>
+        <location filename="../../plugin/plugineditor.cpp" line="853"/>
+        <source>Default modulator from the velocity to the filter cutoff frequency: the softer the note, the lower the cutoff (up to 2 octaves lower).
+Change this option if notes sound too muffled: SoundFont 2.01 for an old soundfont made with this version (the notes above the velocity 64 are not filtered), Disabled for a soundfont whose samples already sound softer at low velocities (several velocity layers).</source>
+        <translation>Standaardmodulator van de snelheid naar de afsnijfrequentie van het filter: hoe zachter de noot, hoe lager de afsnijfrequentie (tot 2 octaven lager).
+Wijzig deze optie als noten te dof klinken: SoundFont 2.01 voor een oude soundfont die met deze versie is gemaakt (noten boven snelheid 64 worden niet gefilterd), Uitgeschakeld voor een soundfont waarvan de samples bij lage snelheden al zachter klinken (meerdere snelheidslagen).</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="1171"/>
         <source>Tuning</source>
         <translation>Stemming</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="520"/>
+        <location filename="../../plugin/plugineditor.cpp" line="823"/>
         <source>Level</source>
         <comment>reverb</comment>
         <translation>Niveau</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="520"/>
+        <location filename="../../plugin/plugineditor.cpp" line="823"/>
         <source>Size</source>
         <comment>reverb</comment>
         <translation>Grootte</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="520"/>
+        <location filename="../../plugin/plugineditor.cpp" line="823"/>
         <source>Width</source>
         <comment>reverb</comment>
         <translation>Breedte</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="520"/>
+        <location filename="../../plugin/plugineditor.cpp" line="823"/>
         <source>Damping</source>
         <comment>reverb</comment>
         <translation>Demping</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="521"/>
+        <location filename="../../plugin/plugineditor.cpp" line="824"/>
         <source>Level</source>
         <comment>chorus</comment>
         <translation>Niveau</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="521"/>
+        <location filename="../../plugin/plugineditor.cpp" line="824"/>
         <source>Depth</source>
         <comment>chorus</comment>
         <translation>Diepte</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="521"/>
+        <location filename="../../plugin/plugineditor.cpp" line="824"/>
         <source>Frequency</source>
         <comment>chorus</comment>
         <translation>Frequentie</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="525"/>
-        <source>Temperament</source>
-        <translation>Temperament</translation>
+        <location filename="../../plugin/plugineditor.cpp" line="830"/>
+        <source>Reference pitch</source>
+        <translation>Referentie toonhoogte</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="527"/>
-        <source>Temperament, its fine tunes being relative to the key chosen on the right</source>
-        <translation>Temperament, waarvan de fijnstemmingen relatief zijn ten opzichte van de rechts gekozen toonsoort</translation>
+        <location filename="../../plugin/plugineditor.cpp" line="831"/>
+        <source>Note sounding at this frequency, whatever the temperament</source>
+        <translation>Noot die op deze frequentie klinkt, ongeacht het temperament</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="528"/>
-        <source>Key of reference of the temperament</source>
-        <translation>Referentietoonsoort van het temperament</translation>
+        <location filename="../../plugin/plugineditor.cpp" line="835"/>
+        <source>Transposition</source>
+        <translation>Transpositie</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="531"/>
-        <source>Filter</source>
-        <translation>Filter</translation>
+        <location filename="../../plugin/plugineditor.cpp" line="836"/>
+        <source>Transposition in semitones of the notes played, except the drums</source>
+        <translation>Transpositie in halve tonen van de gespeelde noten, behalve de drums</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="533"/>
-        <source>Default modulator lowering the filter cutoff according to the velocity (up to 2 octaves): version 2.04 of the SoundFont format, version 2.01 for old soundfonts made with its jump at the velocity 64, or none</source>
-        <translation>Standaardmodulator die de afsnijfrequentie van het filter verlaagt volgens de snelheid (tot 2 octaven): versie 2.04 van het SoundFont-formaat, versie 2.01 voor oude soundfonts die gemaakt zijn met de sprong bij snelheid 64, of geen</translation>
+        <location filename="../../plugin/plugineditor.cpp" line="842"/>
+        <source>Tonality of the temperament (tonic of a scale)</source>
+        <translation>Toonsoort van het temperament (grondtoon van een toonladder)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="539"/>
+        <location filename="../../plugin/plugineditor.cpp" line="846"/>
+        <source>Temperament or scale applied (equal temperament otherwise)</source>
+        <translation>Temperament of toonladder toegepast (anders gelijkzwevende stemming)</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="847"/>
+        <source>Reverb enabled</source>
+        <translation>Reverb ingeschakeld</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="848"/>
+        <source>Chorus enabled</source>
+        <translation>Chorus ingeschakeld</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="851"/>
+        <source>Filter cutoff</source>
+        <translation>Afsnijfrequentie</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="862"/>
         <source>Curve</source>
         <translation>Curve</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="540"/>
+        <location filename="../../plugin/plugineditor.cpp" line="863"/>
         <source>Velocity curve: linear in the middle, concave to the left (softer velocity), convex to the right (velocity rising quickly)</source>
         <translation>Snelheidscurve: lineair in het midden, concaaf naar links (zachtere snelheid), convex naar rechts (snel stijgende snelheid)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="546"/>
+        <location filename="../../plugin/plugineditor.cpp" line="869"/>
         <source>Panic</source>
         <translation>Paniek</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="547"/>
+        <location filename="../../plugin/plugineditor.cpp" line="870"/>
         <source>Stop all sounds and reset the controllers</source>
         <translation>Alle klanken stoppen en de controllers resetten</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="548"/>
+        <location filename="../../plugin/plugineditor.cpp" line="871"/>
         <source>Settings</source>
         <translation>Instellingen</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="595"/>
+        <location filename="../../plugin/plugineditor.cpp" line="925"/>
         <source>cannot open the file %1</source>
         <translation>kan het bestand %1 niet openen</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="597"/>
+        <location filename="../../plugin/plugineditor.cpp" line="927"/>
         <source>invalid %1 index</source>
         <translation>ongeldige %1-index</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="609"/>
+        <location filename="../../plugin/plugineditor.cpp" line="939"/>
         <source>No soundfont</source>
         <translation>Geen soundfont</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="617"/>
+        <location filename="../../plugin/plugineditor.cpp" line="947"/>
         <source>Loading...</source>
         <translation>Laden...</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="622"/>
+        <location filename="../../plugin/plugineditor.cpp" line="952"/>
         <source>Cannot read the soundfont: %1</source>
         <translation>Kan de soundfont niet lezen: %1</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="629"/>
+        <location filename="../../plugin/plugineditor.cpp" line="959"/>
         <source>Open a soundfont or drop it here</source>
         <translation>Open een soundfont of zet hem hier neer</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="672"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1009"/>
         <source>Voices: %1</source>
         <translation>Stemmen: %1</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="673"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1010"/>
         <source>CPU: %1 %</source>
         <translation>CPU: %1%</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="687"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1024"/>
         <source>Open a soundfont</source>
         <translation>Een soundfont openen</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="701"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1038"/>
         <source>No recent soundfont</source>
         <translation>Geen recente soundfont</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="750"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1087"/>
         <source>%1 voices</source>
         <translation>%1 stemmen</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="755"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1092"/>
         <source>Channel %1</source>
         <translation>Kanaal %1</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="762"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1099"/>
         <source>System language</source>
         <translation>Systeemtaal</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="769"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1106"/>
         <source>Polyphony</source>
         <translation>Polyfonie</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="770"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1107"/>
         <source>Keyboard</source>
         <translation>Toetsenbord</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="771"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1108"/>
         <source>Language</source>
         <translation>Taal</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="773"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1110"/>
         <source>Fixed latency (notes played at their exact position)</source>
         <translation>Vaste latentie (noten gespeeld op hun exacte positie)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="775"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1112"/>
         <source>Clipping to [-1; 1]</source>
         <translation>Clipping tot [-1; 1]</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="780"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1172"/>
+        <source>Temperaments and scales</source>
+        <translation>Temperamenten en toonladders</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="845"/>
+        <source>Also play the notes not used by the temperament (scale)</source>
+        <translation>Ook de noten spelen die niet door het temperament (toonladder) worden gebruikt</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="840"/>
+        <source>Temperament or scale, transposed to the chosen tonality</source>
+        <translation>Temperament of toonladder, getransponeerd naar de gekozen toonsoort</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="841"/>
+        <source>Tonality</source>
+        <translation>Toonsoort</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="1117"/>
         <source>Store the soundfont in the project (not possible with an sfz file)</source>
         <translation>De soundfont in het project opslaan (niet mogelijk met een sfz-bestand)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="781"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1118"/>
         <source>Store the soundfont in the project</source>
         <translation>De soundfont in het project opslaan</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="787"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1124"/>
         <source>Channels and effects on their own outputs (not possible in the standalone application)</source>
         <translation>Kanalen en effecten op eigen uitgangen (niet mogelijk in de zelfstandige toepassing)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="789"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1126"/>
         <source>Channels and effects on their own outputs</source>
         <translation>Kanalen en effecten op eigen uitgangen</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="834"/>
-        <source>Synth</source>
-        <translation>Synth</translation>
-    </message>
-    <message>
-        <location filename="../../plugin/plugineditor.cpp" line="834"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1173"/>
         <source>Reverb</source>
         <translation>Reverb</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="835"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1174"/>
         <source>Chorus</source>
         <translation>Chorus</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="835"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1173"/>
         <source>Velocity</source>
         <translation>Snelheid</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="230"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="252"/>
         <source>too many soundfonts are still playing, try again in a moment</source>
         <translation>er spelen nog te veel soundfonts, probeer het zo opnieuw</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="610"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="746"/>
         <source>file not found</source>
         <translation>bestand niet gevonden</translation>
     </message>
@@ -6420,7 +6476,7 @@ om de klankkleur ervan weer te geven</translation>
 <context>
     <name>PluginJuce</name>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="579"/>
+        <location filename="../../plugin/plugineditor.cpp" line="909"/>
         <location filename="../../plugin/plugintranslator.cpp" line="60"/>
         <source>Options</source>
         <translation>Opties</translation>
@@ -6729,126 +6785,543 @@ om de klankkleur ervan weer te geven</translation>
 <context>
     <name>PluginProcessor</name>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="52"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="53"/>
         <source>Main</source>
         <translation>Hoofduitgang</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="54"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="55"/>
         <source>Channel %1</source>
         <translation>Kanaal %1</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="56"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="57"/>
         <source>Effects</source>
         <translation>Effecten</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="126"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="137"/>
         <source>Gain</source>
         <translation>Versterking</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="129"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="140"/>
         <source>Reverb</source>
         <translation>Reverb</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="129"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="140"/>
         <source>Reverb level</source>
         <translation>Reverbniveau</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="130"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="141"/>
         <source>Reverb size</source>
         <translation>Reverbgrootte</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="130"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="141"/>
         <source>Reverb width</source>
         <translation>Reverbbreedte</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="131"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="142"/>
         <source>Reverb damping</source>
         <translation>Reverbdemping</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="133"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="144"/>
         <source>Chorus</source>
         <translation>Chorus</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="133"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="144"/>
         <source>Chorus level</source>
         <translation>Chorusniveau</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="134"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="145"/>
         <source>Chorus depth</source>
         <translation>Chorusdiepte</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="134"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="145"/>
         <source>Chorus frequency</source>
         <translation>Chorusfrequentie</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="140"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="151"/>
         <source>Tuning</source>
         <translation>Stemming</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="141"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="152"/>
         <source>Transposition</source>
         <translation>Transpositie</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="142"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="153"/>
         <source>semitones</source>
         <translation>halve tonen</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="143"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="154"/>
         <source>Reference pitch</source>
         <translation>Referentie toonhoogte</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="146"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="157"/>
         <source>Temperament</source>
         <translation>Temperament</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="149"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="160"/>
         <source>Temperament key</source>
         <translation>Toonsoort van het temperament</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="154"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="165"/>
         <source>Velocity</source>
         <translation>Snelheid</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="155"/>
-        <source>Velocity to filter</source>
-        <translation>Snelheid naar filter</translation>
+        <location filename="../../plugin/pluginprocessor.cpp" line="167"/>
+        <source>Velocity to filter cutoff</source>
+        <translation>Snelheid naar afsnijfrequentie</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="157"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="168"/>
         <source>Velocity curve</source>
         <translation>Snelheidscurve</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="164"/>
-        <source>None</source>
-        <comment>velocity to filter</comment>
-        <translation>Geen</translation>
+        <location filename="../../plugin/pluginprocessor.cpp" line="173"/>
+        <source>Temperament enabled</source>
+        <translation>Temperament ingeschakeld</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="200"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="174"/>
+        <source>Reverb enabled</source>
+        <translation>Reverb ingeschakeld</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="176"/>
+        <source>Chorus enabled</source>
+        <translation>Chorus ingeschakeld</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="183"/>
+        <source>Disabled</source>
+        <comment>velocity to filter</comment>
+        <translation>Uitgeschakeld</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="206"/>
         <source>Equal</source>
         <comment>Equal musical temperament</comment>
         <translation>Gelijkzwevend</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="208"/>
+        <source>Custom</source>
+        <comment>custom temperament</comment>
+        <translation>Aangepast</translation>
+    </message>
+</context>
+<context>
+    <name>PluginTemperament</name>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="39"/>
+        <source>Historical temperaments</source>
+        <translation>Historische temperamenten</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="40"/>
+        <source>Pythagorean</source>
+        <translation>Pythagoreïsch</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="41"/>
+        <source>Just intonation</source>
+        <translation>Reine stemming</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="42"/>
+        <source>Meantone</source>
+        <translation>Middentoon</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="43"/>
+        <source>Irregular temperaments</source>
+        <translation>Onregelmatige temperamenten</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="44"/>
+        <source>Historical organs</source>
+        <translation>Historische orgels</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="45"/>
+        <source>Western scales</source>
+        <translation>Westerse toonladders</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="46"/>
+        <source>Modes</source>
+        <translation>Modi</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="47"/>
+        <source>Harmonic and melodic</source>
+        <translation>Harmonisch en melodisch</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="48"/>
+        <source>Pentatonic and blues</source>
+        <translation>Pentatonisch en blues</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="49"/>
+        <source>Symmetric scales</source>
+        <translation>Symmetrische toonladders</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="50"/>
+        <source>Jazz</source>
+        <translation>Jazz</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="51"/>
+        <source>Just scales</source>
+        <translation>Reine toonladders</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="52"/>
+        <source>Arabic maqamat</source>
+        <translation>Arabische maqamat</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="53"/>
+        <source>Turkish makams</source>
+        <translation>Turkse makams</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="54"/>
+        <source>Persian dastgahs</source>
+        <translation>Perzische dastgahs</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="55"/>
+        <source>Indian thaats</source>
+        <translation>Indiase thaats</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="56"/>
+        <source>East Asia</source>
+        <translation>Oost-Azië</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="57"/>
+        <source>China</source>
+        <translation>China</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="58"/>
+        <source>Japan</source>
+        <translation>Japan</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="59"/>
+        <source>Korea</source>
+        <translation>Korea</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="60"/>
+        <source>Southeast Asia</source>
+        <translation>Zuidoost-Azië</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="61"/>
+        <source>Africa</source>
+        <translation>Afrika</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="62"/>
+        <source>Eastern Europe and Mediterranean</source>
+        <translation>Oost-Europa en Middellandse Zee</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="63"/>
+        <source>Equal divisions of the octave</source>
+        <translation>Gelijke verdelingen van het octaaf</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="66"/>
+        <source>Ionian (major)</source>
+        <translation>Ionisch (majeur)</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="67"/>
+        <source>Dorian</source>
+        <translation>Dorisch</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="68"/>
+        <source>Phrygian</source>
+        <translation>Frygisch</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="69"/>
+        <source>Lydian</source>
+        <translation>Lydisch</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="70"/>
+        <source>Mixolydian</source>
+        <translation>Mixolydisch</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="71"/>
+        <source>Aeolian (natural minor)</source>
+        <translation>Aeolisch (natuurlijk mineur)</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="72"/>
+        <source>Locrian</source>
+        <translation>Locrisch</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="73"/>
+        <source>Harmonic minor</source>
+        <translation>Harmonisch mineur</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="74"/>
+        <source>Melodic minor</source>
+        <translation>Melodisch mineur</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="75"/>
+        <source>Harmonic major</source>
+        <translation>Harmonisch majeur</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="76"/>
+        <source>Major pentatonic</source>
+        <translation>Majeur pentatonisch</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="77"/>
+        <source>Minor pentatonic</source>
+        <translation>Mineur pentatonisch</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="78"/>
+        <source>Blues</source>
+        <translation>Blues</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="79"/>
+        <source>Major blues</source>
+        <translation>Majeur blues</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="80"/>
+        <source>Whole tone</source>
+        <translation>Hele toon</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="81"/>
+        <source>Diminished (half-whole)</source>
+        <translation>Verminderd (halve-hele toon)</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="82"/>
+        <source>Diminished (whole-half)</source>
+        <translation>Verminderd (hele-halve toon)</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="83"/>
+        <source>Augmented</source>
+        <translation>Overmatig</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="84"/>
+        <source>Bebop dominant</source>
+        <translation>Bebop dominant</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="85"/>
+        <source>Lydian dominant</source>
+        <translation>Lydisch dominant</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="86"/>
+        <source>Altered</source>
+        <translation>Gealtereerd</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="89"/>
+        <source>Pure major</source>
+        <translation>Rein majeur</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="90"/>
+        <source>Pure minor</source>
+        <translation>Rein mineur</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="91"/>
+        <source>Pure pentatonic</source>
+        <translation>Rein pentatonisch</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="92"/>
+        <source>Harmonic series (8 to 15)</source>
+        <translation>Boventoonreeks (8 tot 15)</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="95"/>
+        <source>Slendro (5 equal divisions)</source>
+        <translation>Slendro (5 gelijke verdelingen)</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="96"/>
+        <source>Thai (7 equal divisions)</source>
+        <translation>Thais (7 gelijke verdelingen)</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="97"/>
+        <source>Tizita major</source>
+        <translation>Tizita majeur</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="98"/>
+        <source>Tizita minor</source>
+        <translation>Tizita mineur</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="99"/>
+        <source>Bati major</source>
+        <translation>Bati majeur</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="100"/>
+        <source>Bati minor</source>
+        <translation>Bati mineur</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="101"/>
+        <source>Freygish (Phrygian dominant)</source>
+        <translation>Freygish (Frygisch dominant)</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="102"/>
+        <source>Ukrainian Dorian</source>
+        <translation>Oekraïens Dorisch</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="103"/>
+        <source>Hungarian minor</source>
+        <translation>Hongaars mineur</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="104"/>
+        <source>Double harmonic</source>
+        <translation>Dubbel harmonisch</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="105"/>
+        <source>Neapolitan minor</source>
+        <translation>Napolitaans mineur</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="106"/>
+        <source>Neapolitan major</source>
+        <translation>Napolitaans majeur</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="107"/>
+        <source>Flamenco mode</source>
+        <translation>Flamencomodus</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="108"/>
+        <source>Enigmatic</source>
+        <translation>Enigmatisch</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="109"/>
+        <source>5 equal divisions</source>
+        <translation>5 gelijke verdelingen</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="110"/>
+        <source>7 equal divisions</source>
+        <translation>7 gelijke verdelingen</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="111"/>
+        <source>8 equal divisions</source>
+        <translation>8 gelijke verdelingen</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="112"/>
+        <source>9 equal divisions</source>
+        <translation>9 gelijke verdelingen</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="113"/>
+        <source>10 equal divisions</source>
+        <translation>10 gelijke verdelingen</translation>
+    </message>
+    <message>
+        <location filename="../../synth_core/temperaments.cpp" line="114"/>
+        <source>11 equal divisions</source>
+        <translation>11 gelijke verdelingen</translation>
+    </message>
+</context>
+<context>
+    <name>PluginTemperamentKeyboard</name>
+    <message>
+        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="416"/>
+        <source>Note used</source>
+        <translation>Noot gebruikt</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="417"/>
+        <source>Tonality on this note</source>
+        <translation>Toonsoort op deze noot</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="443"/>
+        <source>%1 is the note of the reference pitch: its fine tune of %2 cents is compensated by shifting all the notes by %3 cents.</source>
+        <translation>%1 is de noot van de referentie toonhoogte: haar fijnstemming van %2 centen wordt gecompenseerd door alle noten %3 centen te verschuiven.</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="446"/>
+        <source>Fine tune of each key in cents, compared to the equal temperament.</source>
+        <translation>Fijnstemming van elke toets in centen, ten opzichte van de gelijkzwevende stemming.</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="447"/>
+        <source>Mouse wheel or vertical drag: change a value (finer with Ctrl).</source>
+        <translation>Muiswiel of verticaal slepen: een waarde wijzigen (fijner met Ctrl).</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="448"/>
+        <source>Double click: back to 0.</source>
+        <translation>Dubbelklikken: terug naar 0.</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="449"/>
+        <source>Right click: note used or not, tonality.</source>
+        <translation>Rechtsklik: noot gebruikt of niet, toonsoort.</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="450"/>
+        <source>Dot: tonality.</source>
+        <translation>Punt: toonsoort.</translation>
     </message>
 </context>
 <context>
@@ -7203,13 +7676,13 @@ Beide divisies moeten hetzelfde toonhoogte- en snelheidsbereik delen.</translati
         <translation>Soundfont bestanden</translation>
     </message>
     <message>
-        <location filename="../../context/tuningprogrammanager.cpp" line="85"/>
+        <location filename="../../context/tuningprogrammanager.cpp" line="81"/>
         <source>Equal</source>
         <comment>Equal musical temperament</comment>
         <translation>Gelijkzwevend</translation>
     </message>
     <message>
-        <location filename="../../context/tuningprogrammanager.cpp" line="121"/>
+        <location filename="../../context/tuningprogrammanager.cpp" line="120"/>
         <source>Tuning program %1:%2</source>
         <translation>Stemprogramma %1:%2</translation>
     </message>
@@ -7350,6 +7823,20 @@ Beide divisies moeten hetzelfde toonhoogte- en snelheidsbereik delen.</translati
         <location filename="../../dialogs/recorderhistory.cpp" line="217"/>
         <source>Display a soundfont in the editor for importing the recording</source>
         <translation>Geef een soundfont weer in de editor om de opname te importeren</translation>
+    </message>
+</context>
+<context>
+    <name>ReferencePitchEditor</name>
+    <message>
+        <location filename="../../context/interface/referencepitcheditor.cpp" line="38"/>
+        <source>Note sounding at this frequency, whatever the temperament</source>
+        <translation>Noot die op deze frequentie klinkt, ongeacht het temperament</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/referencepitcheditor.cpp" line="42"/>
+        <source>Hz</source>
+        <comment>unit for Herz</comment>
+        <translation>Hz</translation>
     </message>
 </context>
 <context>
@@ -8117,6 +8604,106 @@ Andere soundfont-editors kunnen andere eenheden weergeven.</translation>
 Other soundfont editors might display other units.</source>
         <translation>Waarden op deze rij zijn uitgedrukt in echte dB.
 Andere soundfont-editors kunnen andere eenheden weergeven.</translation>
+    </message>
+</context>
+<context>
+    <name>TemperamentArea</name>
+    <message>
+        <location filename="../../clavier/temperamentarea.cpp" line="59"/>
+        <source>Tonality</source>
+        <translation>Toonsoort</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/temperamentarea.cpp" line="66"/>
+        <source>Also play the unused notes</source>
+        <translation>Ook de ongebruikte noten spelen</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/temperamentarea.cpp" line="79"/>
+        <source>Reference pitch</source>
+        <translation>Referentie toonhoogte</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/temperamentarea.cpp" line="82"/>
+        <source>Transposition</source>
+        <translation>Transpositie</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/temperamentarea.cpp" line="169"/>
+        <source>Temperaments and scales</source>
+        <translation>Temperamenten en toonladders</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/temperamentarea.cpp" line="177"/>
+        <source>Hide the temperaments and scales</source>
+        <translation>De temperamenten en toonladders verbergen</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/temperamentarea.cpp" line="178"/>
+        <source>Show the temperaments and scales (microtonal tuning)</source>
+        <translation>De temperamenten en toonladders tonen (microtonale stemming)</translation>
+    </message>
+    <message>
+        <location filename="../../clavier/temperamentarea.cpp" line="54"/>
+        <source>Temperament</source>
+        <translation>Temperament</translation>
+    </message>
+</context>
+<context>
+    <name>TemperamentKeyboard</name>
+    <message>
+        <location filename="../../context/interface/temperamentkeyboard.cpp" line="84"/>
+        <source>Fine tune of each key in cents, compared to the equal temperament.</source>
+        <translation>Fijnstemming van elke toets in centen, ten opzichte van de gelijkzwevende stemming.</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/temperamentkeyboard.cpp" line="85"/>
+        <source>Mouse wheel or vertical drag: change a value (finer with Ctrl).</source>
+        <translation>Muiswiel of verticaal slepen: een waarde wijzigen (fijner met Ctrl).</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/temperamentkeyboard.cpp" line="86"/>
+        <source>Double click: back to 0.</source>
+        <translation>Dubbelklikken: terug naar 0.</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/temperamentkeyboard.cpp" line="87"/>
+        <source>Right click: note used or not, tonality.</source>
+        <translation>Rechtsklik: noot gebruikt of niet, toonsoort.</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/temperamentkeyboard.cpp" line="88"/>
+        <source>Dot: tonality.</source>
+        <translation>Punt: toonsoort.</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/temperamentkeyboard.cpp" line="397"/>
+        <source>Tonality on this note</source>
+        <translation>Toonsoort op deze noot</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/temperamentkeyboard.cpp" line="455"/>
+        <source>%1 is the note of the reference pitch: its fine tune of %2 cents is compensated by shifting all the notes by %3 cents.</source>
+        <translation>%1 is de noot van de referentie toonhoogte: haar fijnstemming van %2 centen wordt gecompenseerd door alle noten %3 centen te verschuiven.</translation>
+    </message>
+    <message>
+        <location filename="../../context/interface/temperamentkeyboard.cpp" line="394"/>
+        <source>Note used</source>
+        <translation>Noot gebruikt</translation>
+    </message>
+</context>
+<context>
+    <name>TemperamentSettings</name>
+    <message>
+        <location filename="../../context/temperamentsettings.cpp" line="32"/>
+        <source>Custom</source>
+        <comment>custom temperament</comment>
+        <translation>Aangepast</translation>
+    </message>
+    <message>
+        <location filename="../../context/temperamentsettings.cpp" line="226"/>
+        <source>Transposition in semitones of the notes played with the keyboard or a MIDI input</source>
+        <translation>Transpositie in halve tonen van de noten gespeeld met het toetsenbord of een MIDI-ingang</translation>
     </message>
 </context>
 <context>

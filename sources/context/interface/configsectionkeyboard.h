@@ -26,6 +26,8 @@
 #define CONFIGSECTIONKEYBOARD_H
 
 #include <QWidget>
+#include <QStringList>
+#include "temperamentsettings.h"
 #include "imidilistener.h"
 
 namespace Ui {
@@ -46,19 +48,28 @@ public:
 private slots:
     void on_comboFirstC_currentIndexChanged(int index);
     void initializeFirstC();
-    void on_spinReferencePitch_valueChanged(double value);
     void on_pushDefaultReferencePitch_clicked();
     void on_comboTemperament_currentIndexChanged(int index);
     void on_comboTemperamentRelativeKey_currentIndexChanged(int index);
     void on_pushDefaultTemperament_clicked();
+    void onTemperamentEdited();
+    void onTonalityRequested(int key);
+    void on_comboTransposition_currentIndexChanged(int index);
+    void on_checkPlayUnusedNotes_toggled(bool checked);
+    void onSoundEngineConfigurationChanged();
+    void updateTonalityNames();
 
 private:
     void renameComboFirstC();
     void adjustTableHeight();
-    void updateTemperaments();
+    int lastProgramIndex() const;
+    void saveTemperament();
+    void updateTemperamentWidgets();
 
     Ui::ConfigSectionKeyboard *ui;
     int _currentTuningBank;
+    TemperamentSettings _temperament;
+    bool _isSaving; // The configuration is being changed here
 };
 
 #endif // CONFIGSECTIONKEYBOARD_H

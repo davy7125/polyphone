@@ -40,6 +40,9 @@ public:
     int isBlack() const { return _black; }
     static void setGlowEffect(double glowEffect) { s_glowEffect = glowEffect; }
 
+    // Draw a key as on the virtual keyboard (also used outside a scene)
+    static void drawKey(QPainter * painter, const QRectF &rect, bool black, const QBrush &brush, double glowEffect = 0);
+
     static QBrush PIANO_BLACK_BRUSH;
     static QBrush PIANO_WHITE_BRUSH;
 
@@ -48,7 +51,7 @@ private:
     static QColor getBorderColor(PianoKeybd::MarkerType type);
     static QColor getFillColor(PianoKeybd::MarkerType type);
     void flipPainter(QPainter * painter, QRectF &rect);
-    QColor mergeColor(QColor color1, QColor color2, double fade);
+    static QColor mergeColor(QColor color1, QColor color2, double fade);
 
     bool _pressed;
     QBrush _selectedBrush;

@@ -30,9 +30,11 @@
 #include <juce_audio_utils/juce_audio_utils.h>
 #include <juce_gui_extra/juce_gui_extra.h>
 #include "pluginprocessor.h"
+class PluginTemperamentKeyboard;
 
-// Interface of the plugin: the soundfont (open, recent files, drag and drop), the presets played (one for all channels
-// or one for each channel), the parameters of the synth, a keyboard and what is played
+// Interface of the plugin: the soundfont (open, recent files, drag and drop) and the gain, the presets played (one for
+// all channels or one for each channel) on the left, the tuning and the velocity, the temperaments and scales and the
+// effects on the right, a keyboard and what is played
 class PluginEditor: public juce::AudioProcessorEditor,
                     public juce::FileDragAndDropTarget,
                     private juce::ChangeListener,
@@ -60,11 +62,24 @@ private:
     class PresetList;
     class ChannelRow;
     class VelocityGraph;
+    class SwitchButton;
+    class FieldSlider;
+    class InfoIcon;
+    struct RightWidths;
     struct Knob;
 
     void changeListenerCallback(juce::ChangeBroadcaster * source) override;
     void timerCallback() override;
     void updateTexts(); // In the current language
+    void fillTemperamentBox(); // Temperaments in the submenus of their categories
+    void updateTuning(); // Temperament shown, tonality, note of the reference pitch, temperaments shown or hidden
+    void onTemperamentEdited(); // The fine tunes shown become the custom temperament
+    void updateGroups(); // Groups expanded if they are switched on, the window growing or shrinking
+    void updateResizeLimits();
+    int getGroupHeight(int group) const; // Group with a switch, expanded or not
+    bool areEffectsSideBySide() const; // Both effects expanded
+    int getRequiredHeight() const; // Height of the window needed by the groups on the right side
+    RightWidths getRightWidths(); // Width needed by the groups on the right side (texts in the current language)
     void updateStandaloneTexts();
     void refresh(); // Soundfont, presets and settings
     void openFile();
@@ -99,17 +114,45 @@ private:
     juce::Component _channelContainer;
     std::vector<std::unique_ptr<ChannelRow>> _channelRows;
 
-    // Parameters
+    // Knobs: gain in the header, effects
     std::vector<std::unique_ptr<Knob>> _knobs;
-    juce::Label _temperamentLabel;
+    juce::Rectangle<int> _reverbArea, _chorusArea;
+
+    // Groups with a switch at the right side of their title (temperaments and scales, reverb, chorus), expanded if it
+    // is on (the temperament or the effect being then applied)
+    enum SwitchedGroup
+    {
+        GROUP_TEMPERAMENTS,
+        GROUP_REVERB,
+        GROUP_CHORUS,
+        GROUP_COUNT
+    };
+    std::unique_ptr<SwitchButton> _switches[GROUP_COUNT];
+    std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> _switchAttachments[GROUP_COUNT];
+    bool _isGroupExpanded[GROUP_COUNT];
+
+    // Tuning: reference pitch (note = its frequency, the parameter being the frequency of A4) and transposition, then
+    // the temperaments and scales (temperament, tonality, fine tunes of the 12 notes, notes not used)
+    juce::Label _referencePitchLabel;
+    juce::ComboBox _referencePitchKeyBox;
+    juce::Label _equalLabel;
+    std::unique_ptr<FieldSlider> _referencePitchSlider;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> _referencePitchAttachment;
+    juce::Label _transpositionLabel;
+    juce::ComboBox _transpositionBox;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> _transpositionAttachment;
     juce::ComboBox _temperamentBox;
+    std::unique_ptr<juce::ParameterAttachment> _temperamentAttachment; // By identifier: items in submenus
+    juce::Label _tonalityLabel;
     juce::ComboBox _temperamentKeyBox;
-    std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> _temperamentAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> _temperamentKeyAttachment;
-    juce::Rectangle<int> _synthArea, _reverbArea, _chorusArea;
+    juce::ToggleButton _playUnusedNotesButton;
+    std::unique_ptr<PluginTemperamentKeyboard> _temperamentKeyboard;
+    juce::Rectangle<int> _tuningArea, _temperamentsArea;
 
     // Velocity: default modulator to the filter cutoff and curve, with their graphs
     juce::Label _velocityToFilterLabel;
+    std::unique_ptr<InfoIcon> _velocityToFilterInfo;
     juce::ComboBox _velocityToFilterBox;
     std::unique_ptr<VelocityGraph> _velocityToFilterGraph;
     std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> _velocityToFilterAttachment;

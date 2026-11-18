@@ -132,6 +132,10 @@ void SynthCore::prepareTables()
 
 int SynthCore::playSample(int sf2Id, int sampleIndex, int channel, int key, int velocity)
 {
+    // Keys not used by the temperament (scale) are not played
+    if (key >= 0 && !_context.isKeyUsed(key))
+        return -1;
+
     std::lock_guard<std::recursive_mutex> lock(_voicesMutex);
     _noteId++; // Shared by all voices started here
 
@@ -159,6 +163,10 @@ int SynthCore::playSample(int sf2Id, int sampleIndex, int channel, int key, int 
 
 void SynthCore::playInstrument(int sf2Id, int instrumentIndex, int channel, int key, int velocity)
 {
+    // Keys not used by the temperament (scale) are not played
+    if (key >= 0 && !_context.isKeyUsed(key))
+        return;
+
     std::lock_guard<std::recursive_mutex> lock(_voicesMutex);
     _noteId++; // Shared by all voices started here
 
@@ -180,6 +188,10 @@ void SynthCore::playInstrument(int sf2Id, int instrumentIndex, int channel, int 
 
 void SynthCore::playPreset(int sf2Id, int presetIndex, int channel, int key, int velocity)
 {
+    // Keys not used by the temperament (scale) are not played
+    if (key >= 0 && !_context.isKeyUsed(key))
+        return;
+
     std::lock_guard<std::recursive_mutex> lock(_voicesMutex);
     _noteId++; // Shared by all voices started here
 
@@ -432,7 +444,8 @@ void SynthCore::configure(const SynthCoreConfig &configuration)
     _voices.setCpuBudget(configuration.cpuBudget);
 
     // Settings read by the voices
-    _context.setTuning(configuration.referencePitch, configuration.temperament, configuration.temperamentRelativeKey);
+    _context.setTuning(configuration.referencePitch, configuration.temperament, configuration.temperamentUsed,
+                       configuration.temperamentRelativeKey, configuration.temperamentReferenceKey);
     _context.setModulatorVelToFilterType(configuration.modulatorVelToFilterType);
 
     // The voices playing reach the new gain progressively (linear evolution of the volume on each chunk)
