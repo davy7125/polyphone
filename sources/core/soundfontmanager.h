@@ -115,6 +115,14 @@ public:
     // Set the soundfont version 3.00 (compression allowed, 16 bits) or 2.04 (no compression) if needed
     void setSoundfontVersion(int sf2Index, bool isSf3);
 
+    // Default modulators of a soundfont (elementSf2Mod, saved in a DMOD chunk). A soundfont has its own list once it is
+    // customized, starting with the default modulators of the sf2 format. Otherwise the list is empty and the default
+    // modulators of the sf2 format apply.
+    void customizeDefaultModulators(int sf2Index, bool isCustom);
+
+    // Default modulators applying in a soundfont: its own list or the one of the sf2 format
+    QList<ModulatorData> getDefaultModulators(int sf2Index);
+
     // Find the samples identical to a previous one (configuration and data), stereo samples being compared by pairs
     // Result: index of each duplicated sample => index of the identical sample immediately before
     QMap<int, int> getDuplicateSamples(int sf2Index);

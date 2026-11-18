@@ -99,7 +99,7 @@ void Voice::reserve(uint32_t chunkCount)
     _vibLfoArray = new float[_arrayLength];
 }
 
-void Voice::initialize(int sf2Id, ISynthInstPrst * prst, ISynthZone * prstZone, ISynthInstPrst * inst, ISynthZone * instZone,
+void Voice::initialize(int sf2Id, ISynthZone * defaultModulators, ISynthInstPrst * prst, ISynthZone * prstZone, ISynthInstPrst * inst, ISynthZone * instZone,
                        ISynthSample * smpl, int8_t channel, int8_t key, int8_t vel, int8_t type, uint32_t audioSmplRate, int token,
                        int noteId)
 {
@@ -116,7 +116,7 @@ void Voice::initialize(int sf2Id, ISynthInstPrst * prst, ISynthZone * prstZone, 
         _dataSmpl24 = nullptr;
     }
 
-    _voiceParam->initialize(sf2Id, prst, prstZone, inst, instZone, smpl, channel, key, vel, type);
+    _voiceParam->initialize(sf2Id, defaultModulators, prst, prstZone, inst, instZone, smpl, channel, key, vel, type);
     deleteReplacedData(_replacedData.exchange(nullptr));
     _smpl = smpl;
 

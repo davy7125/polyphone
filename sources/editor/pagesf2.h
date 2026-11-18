@@ -77,6 +77,8 @@ public:
     {
         return elementType == elementSf2;
     }
+    QString getLabel() override { return tr("General"); }
+    QString getIconName() override { return ":/icons/info.svg"; }
 
 private slots:
     void setName();

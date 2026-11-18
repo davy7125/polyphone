@@ -24,6 +24,7 @@
 
 #include "pageselector.h"
 #include "pagesf2.h"
+#include "pagedefaultmod.h"
 #include "pageoverviewsmpl.h"
 #include "pageoverviewinst.h"
 #include "pageoverviewprst.h"
@@ -39,6 +40,7 @@ PageSelector::PageSelector()
 {
     // List of pages (will be deleted with their parent in the Editor object)
     _pages << new PageSf2()
+           << new PageDefaultMod()
            << new PageOverviewSmpl()
            << new PageOverviewInst()
            << new PageOverviewPrst()

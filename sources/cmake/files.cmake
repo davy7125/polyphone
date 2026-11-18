@@ -399,6 +399,9 @@ set(POLYPHONE_APP_FILES
     editor/overview/tablepageoverview.h
     editor/page.cpp
     editor/page.h
+    editor/pagedefaultmod.cpp
+    editor/pagedefaultmod.h
+    editor/pagedefaultmod.ui
     editor/pageenvelope.cpp
     editor/pageenvelope.h
     editor/pageenvelope.ui

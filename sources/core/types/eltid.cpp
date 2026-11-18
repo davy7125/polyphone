@@ -77,6 +77,9 @@ EltID EltID::parent(bool includeRoot)
     case elementPrstInstMod: case elementPrstInstGen:
         idParent.typeElement = elementPrstInst;
         break;
+    case elementSf2Mod:
+        idParent.typeElement = elementSf2;
+        break;
     case elementSf2:
     case elementUnknown:
         idParent.typeElement = elementUnknown;
@@ -93,6 +96,8 @@ bool EltID::operator==(const EltID &other) const
         return false;
     if (typeElement == elementSf2 || typeElement == elementRootSmpl || typeElement == elementRootInst || typeElement == elementRootPrst)
         return true;
+    if (typeElement == elementSf2Mod)
+        return this->indexMod == other.indexMod;
 
     // Check smpl / inst / prst
     if (this->indexElt != other.indexElt)
@@ -144,6 +149,7 @@ QString EltID::toString()
     case elementPrstGen: type = "PrstGen"; break;
     case elementInstSmplGen: type = "InstSmplGen"; break;
     case elementPrstInstGen: type = "PrstInstGen"; break;
+    case elementSf2Mod: type = "SF2Mod"; break;
     case elementUnknown: type = "Unknown"; break;
     }
     return "ID [type=" + type + ", sf2=" + QString::number(indexSf2) +

@@ -43,7 +43,7 @@ VoiceParam::~VoiceParam()
 
 }
 
-void VoiceParam::initialize(int sf2Id, ISynthInstPrst * prst, ISynthZone * prstZone, ISynthInstPrst * inst, ISynthZone * instZone,
+void VoiceParam::initialize(int sf2Id, ISynthZone * defaultModulators, ISynthInstPrst * prst, ISynthZone * prstZone, ISynthInstPrst * inst, ISynthZone * instZone,
                             ISynthSample * smpl, int8_t channel, int8_t key, int8_t vel, int8_t type)
 {
     _channel = channel;
@@ -86,8 +86,8 @@ void VoiceParam::initialize(int sf2Id, ISynthInstPrst * prst, ISynthZone * prstZ
     {
         int keyForComputation = _parameters[champ_keynum].getIntValue();
         int velForComputation = _parameters[champ_velocity].getIntValue();
-        _modulatorGroupInst.initialize(_channel, _key, keyForComputation, velForComputation);
-        _modulatorGroupPrst.initialize(_channel, _key, keyForComputation, velForComputation);
+        _modulatorGroupInst.initialize(_channel, _key, keyForComputation, velForComputation, defaultModulators);
+        _modulatorGroupPrst.initialize(_channel, _key, keyForComputation, velForComputation, defaultModulators);
     }
     else
     {

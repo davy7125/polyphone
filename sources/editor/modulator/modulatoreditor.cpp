@@ -99,6 +99,15 @@ void ModulatorEditor::initialize(bool isPrst)
         on_pushExpand_clicked();
 }
 
+void ModulatorEditor::initializeForDefaultModulators()
+{
+    // Not registered: the expanded state of the other editors does not apply
+    _isPrst = false;
+    ui->pushCollapse->hide();
+    ui->frameCollapsed->hide();
+    ui->frameExpanded->show();
+}
+
 ModulatorEditor::~ModulatorEditor()
 {
     if (_isPrst)
@@ -210,6 +219,9 @@ void ModulatorEditor::updateInterface(QList<AttributeType> attributes, bool keep
     case elementPrstInst:
         modId.typeElement = elementPrstInstMod;
         break;
+    case elementSf2:
+        modId.typeElement = elementSf2Mod;
+        break;
     default:
         modId.typeElement = elementUnknown;
         break;
@@ -276,10 +288,10 @@ void ModulatorEditor::updateInterface(QList<AttributeType> attributes, bool keep
 
 void ModulatorEditor::checkOverrides()
 {
-    // List of default mods
-    int defModCount;
-    const ModulatorData * defaultMods = ModulatorData::getDefaultModulators(
-        ContextManager::configuration()->getModulatorVelToFilterType(), defModCount);
+    // List of default mods, overridden at the instrument level only
+    QList<ModulatorData> defaultMods;
+    if (!_currentId.isPrst() && _currentId.typeElement != elementSf2)
+        defaultMods = SoundfontManager::getInstance()->getDefaultModulators(_currentId.indexSf2);
 
     // Browse all cells
     QList<ModulatorCell*> cells;
@@ -301,16 +313,13 @@ void ModulatorEditor::checkOverrides()
             }
         }
 
-        // Test if the mod is overriding a default mod (instrument level only)
-        if (!_currentId.isPrst())
+        // Test if the mod is overriding a default mod
+        for (int j = 0; j < defaultMods.count(); j++)
         {
-            for (int j = 0; j < defModCount; j++)
+            if (mod == defaultMods[j])
             {
-                if (mod == defaultMods[j])
-                {
-                    cell->setOverridingDefault();
-                    break;
-                }
+                cell->setOverridingDefault();
+                break;
             }
         }
 
@@ -376,6 +385,9 @@ void ModulatorEditor::on_pushAdd_clicked()
     case elementPrstInst:
         modId.typeElement = elementPrstInstMod;
         break;
+    case elementSf2:
+        modId.typeElement = elementSf2Mod;
+        break;
     default:
         return;
     }
@@ -420,6 +432,8 @@ void ModulatorEditor::on_pushCopy_clicked()
         id.typeElement = elementInstSmplMod;
     else if (id.typeElement == elementPrstInst)
         id.typeElement = elementPrstInstMod;
+    else if (id.typeElement == elementSf2)
+        id.typeElement = elementSf2Mod;
     else return;
 
     s_modulatorCopy = getModList(id);
@@ -625,6 +639,8 @@ void ModulatorEditor::pasteMod(EltID id, QList<ModulatorData> modulators)
         id.typeElement = elementInstSmplMod;
     else if (id.typeElement == elementPrstInst)
         id.typeElement = elementPrstInstMod;
+    else if (id.typeElement == elementSf2)
+        id.typeElement = elementSf2Mod;
     else
         return;
 

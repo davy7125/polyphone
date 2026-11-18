@@ -738,15 +738,18 @@ static void addInstrumentTools(QList<McpFunction *> &functions)
         "add_default_modulators",
         "Tool \"Default modulators\": add to the global division of the instruments copies of the default modulators "
         "of the soundfont specification (velocity to attenuation, velocity to filter, modulation wheel to vibrato, "
-        "volume, pan, expression, reverb, chorus, pitch wheel...), to override them or to disable them.",
+        "volume, pan, expression, reverb, chorus, pitch wheel...), to override them or to disable them. If the soundfont "
+        "has its own default modulators, they are used instead.",
         "Instruments", instruments,
-        R"JSON("numbers":{"type":"array","items":{"type":"integer"},"description":"Numbers of the default modulators (1-based, in the order of the specification), all by default"},
+        R"JSON("numbers":{"type":"array","items":{"type":"integer"},"description":"Numbers of the default modulators (1-based, in the order of the specification or of the list of the soundfont), all by default"},
            "disable":{"type":"boolean","description":"true: amounts set to 0 so that the default modulators are disabled (default false)"})JSON",
         {}, []() { return new ToolDefaultMod(); },
         [](const McpArguments &args, AbstractTool *, AbstractToolParameters * parameters) {
-            int number = 0;
-            const ModulatorData * defaults = ModulatorData::getDefaultModulators(
-                ContextManager::configuration()->getModulatorVelToFilterType(), number);
+            IdList ids = args.getIds("elements", { elementInst });
+            if (ids.isEmpty())
+                throw McpException("no instrument specified");
+            QList<ModulatorData> defaults = SoundfontManager::getInstance()->getDefaultModulators(ids[0].indexSf2);
+            int number = defaults.count();
             QList<int> numbers;
             if (args.contains("numbers"))
             {
@@ -766,7 +769,14 @@ static void addInstrumentTools(QList<McpFunction *> &functions)
             bool disable = args.getBool("disable", false);
             foreach (int n, numbers)
             {
+                // A modulator linked to another one cannot be overridden alone
                 ModulatorData data = defaults[n - 1];
+                if (data.destOper >= 32768 || (!data.srcOper.CC && data.srcOper.Index == GC_link))
+                {
+                    if (args.contains("numbers"))
+                        throw McpException(QString("the modulator %1 is linked to another one and cannot be overridden").arg(n));
+                    continue;
+                }
                 data.index = 0;
                 if (disable)
                     data.amount = 0;

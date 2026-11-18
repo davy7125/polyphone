@@ -30,7 +30,8 @@
 Sf2Header::Sf2Header() :
     _isValid(false),
     _size(0),
-    _infoSize(0)
+    _infoSize(0),
+    _hasDefaultModulators(false)
 {
 
 }
@@ -52,6 +53,8 @@ void Sf2Header::prepareBeforeWritingData(Sf2SdtaPart * sdtaPart, Sf2PdtaPart * p
         _infoSize.value += _infoSize.value % 2; // Even size: another zero
     }
     _infoSize.value += 12 * _versions.count();
+    if (_hasDefaultModulators)
+        _infoSize.value += 8 + _defaultModulators.size();
 
     _size = 12 + _infoSize.value +
             sdtaPart->prepareBeforeWritingData(isSf3, qualityValue) +
@@ -116,6 +119,16 @@ QDataStream & operator << (QDataStream &out, Sf2Header &header)
                 return out;
             out.writeRawData("\0", 1);
         }
+    }
+
+    // Default modulators of the soundfont, after the texts
+    if (header._hasDefaultModulators)
+    {
+        out.writeRawData("DMOD", 4);
+        val32Tmp.value = header._defaultModulators.size();
+        out << val32Tmp;
+        if (out.writeRawData(header._defaultModulators.constData(), header._defaultModulators.size()) != header._defaultModulators.size())
+            return out;
     }
 
     header._isValid = true;

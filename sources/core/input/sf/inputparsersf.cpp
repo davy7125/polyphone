@@ -93,6 +93,14 @@ void InputParserSf::fillSf2(const Sf2Reader &reader, int &sf2Index)
     _sm->set(id, champ_wBpsInit, value);
     _sm->set(id, champ_wBpsSave, value);
 
+    // Default modulators of the soundfont
+    if (reader.hasDefaultModulators())
+    {
+        value.wValue = 1;
+        _sm->set(id, champ_customDefaultMods, value);
+        addZone(id, reader.getDefaultModulators(), elementSf2Mod);
+    }
+
     /// Samples
 
     id = EltID(elementSmpl, sf2Index);

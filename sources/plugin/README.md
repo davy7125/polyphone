@@ -42,7 +42,9 @@ LV2, AU (macOS) and a standalone application ("Polyphone Player", not distribute
   reverb (level, size, width, damping), chorus (level, depth, frequency), transposition (except the
   percussions), reference pitch and temperament (the ones of the editor), velocity: default modulator
   to the filter cutoff (2.01, 2.04 or none, as in the editor) and curve applied to the velocity of
-  the notes (power 3^(-curve / 100), linear by default), both drawn in a graph.
+  the notes (power 3^(-curve / 100), linear by default), both drawn in a graph. A soundfont with its
+  own default modulators (DMOD chunk of an sf2 or sf3 file) uses them instead of the ones of the
+  sf2 format: the setting of the default modulator has no effect on it.
 - A keyboard showing the notes received and played with the mouse, the number of voices, the share of
   the processor taken and a panic button (all sounds stopped, controllers reset).
 - Settings: polyphony, channel of the keyboard, language, fixed latency (see above), clipping of the

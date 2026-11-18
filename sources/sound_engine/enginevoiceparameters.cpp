@@ -61,7 +61,7 @@ VoiceParam * EngineVoiceParameters::compute(InstPrst * prst, int prstDivIndex, I
     if (smpl == nullptr)
         return nullptr;
 
-    _param->initialize(_indexSf2, prst, prstDiv, inst, instDiv, smpl, static_cast<int8_t>(prst != nullptr ? 0 : -1),
+    _param->initialize(_indexSf2, _soundfont->getDefaultModulators(), prst, prstDiv, inst, instDiv, smpl, static_cast<int8_t>(prst != nullptr ? 0 : -1),
                        static_cast<int8_t>(key), static_cast<int8_t>(velocity), 0);
     return _param;
 }

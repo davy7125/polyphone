@@ -26,6 +26,7 @@
 #include "modulatedparameter.h"
 #include "parametermodulator.h"
 #include "voicecontext.h"
+#include "isynthsoundfont.h"
 
 ModulatorGroup::ModulatorGroup(ModulatedParameter *parameters, bool isPrst, const VoiceContext * context) :
     _parameters(parameters),
@@ -39,7 +40,7 @@ void ModulatorGroup::clear()
     _numberOfParameterModulators = 0;
 }
 
-void ModulatorGroup::initialize(int channel, int initialKey, int keyForComputation, int velForComputation)
+void ModulatorGroup::initialize(int channel, int initialKey, int keyForComputation, int velForComputation, ISynthZone * defaultModulators)
 {
     _channel = channel;
     _initialKey = initialKey;
@@ -48,15 +49,28 @@ void ModulatorGroup::initialize(int channel, int initialKey, int keyForComputati
 
     // Load default modulators at the instrument level
     _numberOfParameterModulators = 0;
-    if (!_isPrst)
-        loadDefaultModulators();
-}
+    if (_isPrst)
+        return;
 
-void ModulatorGroup::loadDefaultModulators()
-{
-    int number;
-    const ModulatorData * const defaultModData = _context->getDefaultModulators(number);
-    loadModulators(defaultModData, number);
+    if (defaultModulators == nullptr)
+    {
+        // Default modulators of the sf2 format
+        int number;
+        const ModulatorData * const defaultModData = _context->getDefaultModulators(number);
+        loadModulators(defaultModData, number);
+    }
+    else
+    {
+        // The soundfont has its own list, replacing the other one
+        // Loaded at once so that the modulators linked to another one find it
+        ModulatorData modData[MAX_NUMBER_OF_PARAMETER_MODULATORS];
+        int number = 0;
+        ModulatorData * modulatorData;
+        for (int i = 0; i < defaultModulators->getModulatorCount() && number < MAX_NUMBER_OF_PARAMETER_MODULATORS; i++)
+            if ((modulatorData = defaultModulators->getModulatorData(i)) != nullptr)
+                modData[number++] = *modulatorData;
+        loadModulators(modData, number);
+    }
 }
 
 void ModulatorGroup::loadModulators(const ModulatorData * const modData, int modulatorNumber)

@@ -47,7 +47,8 @@ typedef enum
     elementInstGen = 13,
     elementPrstGen = 14,
     elementInstSmplGen = 15,
-    elementPrstInstGen = 16
+    elementPrstInstGen = 16,
+    elementSf2Mod = 17 // Default modulator of a soundfont
 } ElementType;
 
 class EltID

@@ -35,6 +35,7 @@
 #include "indexedelementlist.h"
 #include "utils.h"
 #include "solomanager.h"
+#include "coresettings.h"
 
 SoundfontManager * SoundfontManager::s_instance = nullptr;
 
@@ -152,6 +153,9 @@ bool SoundfontManager::isSet(EltID id, AttributeType champ)
         // Analyse d'un mod d'un instrument lié à un preset
         value = true;
         break;
+    case elementSf2Mod:
+        value = true;
+        break;
     default:
         break;
     }
@@ -185,6 +189,9 @@ AttributeValue SoundfontManager::get(EltID id, AttributeType champ)
             break;
         case champ_wBpsSave:
             value.wValue = tmp->_wBpsSave;
+            break;
+        case champ_customDefaultMods:
+            value.wValue = tmp->hasCustomDefaultModulators() ? 1 : 0;
             break;
         default:
             break;
@@ -295,11 +302,14 @@ AttributeValue SoundfontManager::get(EltID id, AttributeType champ)
             break;
         }
     }break;
-    case elementInstMod: case elementPrstMod: case elementInstSmplMod: case elementPrstInstMod:{
+    case elementInstMod: case elementPrstMod: case elementInstSmplMod: case elementPrstInstMod: case elementSf2Mod:{
         // Analyse d'un mod
         Modulator *tmp = nullptr;
         switch (id.typeElement)
         {
+        case elementSf2Mod:
+            tmp = _soundfonts->getSoundfont(id.indexSf2)->getDefaultModulatorDivision()->getMod(id.indexMod);
+            break;
         case elementInstMod:
             tmp = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getGlobalDivision()->getMod(id.indexMod);
             break;
@@ -571,6 +581,15 @@ QList<int> SoundfontManager::getSiblings(EltID &id)
                 result << elt->_id;
         }
     } break;
+    case elementSf2Mod: {
+        QVectorIterator<Modulator*> i(_soundfonts->getSoundfont(id.indexSf2)->getDefaultModulatorDivision()->getMods().values());
+        while (i.hasNext())
+        {
+            Modulator* elt = i.next();
+            if (!elt->isHidden())
+                result << elt->_id;
+        }
+    } break;
     case elementInstGen: {
         Division * div = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getGlobalDivision();
         for (int i = 0; i < champ_endOper; i++)
@@ -833,11 +852,15 @@ int SoundfontManager::add(EltID id)
         // Add a new instrument in a preset
         i = id.indexElt2 = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->addDivision();
         break;
-    case elementInstMod: case elementPrstMod: case elementInstSmplMod: case elementPrstInstMod:{
+    case elementInstMod: case elementPrstMod: case elementInstSmplMod: case elementPrstInstMod: case elementSf2Mod:{
         // Add a new mod
         Division *bag = nullptr;
         switch (id.typeElement)
         {
+        case elementSf2Mod:
+            // Default modulator of a soundfont
+            bag = _soundfonts->getSoundfont(id.indexSf2)->getDefaultModulatorDivision();
+            break;
         case elementInstMod:
             // For an instrument
             bag = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getGlobalDivision();
@@ -1070,11 +1093,14 @@ int SoundfontManager::remove(EltID id, bool permanently, bool storeAction, int *
         else
             _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getDivision(id.indexElt2)->setHidden(true);
     }break;
-    case elementInstMod: case elementPrstMod: case elementInstSmplMod: case elementPrstInstMod:{
+    case elementInstMod: case elementPrstMod: case elementInstSmplMod: case elementPrstInstMod: case elementSf2Mod:{
         // suppression d'un mod
         Division *bag = nullptr;
         switch (id.typeElement)
         {
+        case elementSf2Mod:
+            bag = _soundfonts->getSoundfont(id.indexSf2)->getDefaultModulatorDivision();
+            break;
         case elementInstMod:
             // d'un instrument
             bag = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getGlobalDivision();
@@ -1202,6 +1228,9 @@ int SoundfontManager::set(EltID id, AttributeType champ, AttributeValue value)
         case champ_wBpsSave:
             oldValue.wValue = tmp->_wBpsSave;
             tmp->_wBpsSave = value.wValue; break;
+        case champ_customDefaultMods:
+            oldValue.wValue = tmp->hasCustomDefaultModulators() ? 1 : 0;
+            tmp->setCustomDefaultModulators(value.wValue != 0); break;
         default:
             break;
         }
@@ -1351,11 +1380,13 @@ int SoundfontManager::set(EltID id, AttributeType champ, AttributeValue value)
                 _parameterForCustomizingKeyboardChanged = true;
         }
     }break;
-    case elementInstMod: case elementPrstMod: case elementInstSmplMod: case elementPrstInstMod:{
+    case elementInstMod: case elementPrstMod: case elementInstSmplMod: case elementPrstInstMod: case elementSf2Mod:{
         // Update a mod
         Modulator *tmp = nullptr;
         switch (id.typeElement)
         {
+        case elementSf2Mod:
+            tmp = _soundfonts->getSoundfont(id.indexSf2)->getDefaultModulatorDivision()->getMod(id.indexMod); break;
         case elementInstMod:
             tmp = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getGlobalDivision()->getMod(id.indexMod); break;
         case elementPrstMod:
@@ -1824,6 +1855,10 @@ int SoundfontManager::display(EltID id)
         Modulator *tmp = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getDivision(id.indexElt2)->getMod(id.indexMod);
         tmp->setHidden(false);
     }break;
+    case elementSf2Mod:{
+        Modulator *tmp = _soundfonts->getSoundfont(id.indexSf2)->getDefaultModulatorDivision()->getMod(id.indexMod);
+        tmp->setHidden(false);
+    }break;
     default:
         break;
     }
@@ -1833,7 +1868,7 @@ int SoundfontManager::display(EltID id)
 bool SoundfontManager::isValid(EltID &id, bool acceptHidden, bool justCheckParentLevel)
 {
     QMutexLocker locker(&_mutex);
-    if (id.typeElement < elementSf2 || id.typeElement > elementPrstInstGen)
+    if (id.typeElement < elementSf2 || id.typeElement > elementSf2Mod)
         return false;
 
     // First level: sf2, rootSmpl, rootInst, rootPrst
@@ -1849,6 +1884,15 @@ bool SoundfontManager::isValid(EltID &id, bool acceptHidden, bool justCheckParen
     if (id.typeElement == elementSf2 || id.typeElement == elementRootSmpl ||
             id.typeElement == elementRootInst || id.typeElement == elementRootPrst)
         return true;
+
+    // Default modulator of the soundfont
+    if (id.typeElement == elementSf2Mod)
+    {
+        if (id.indexMod < 0 || justCheckParentLevel)
+            return true;
+        Modulator * mod = sf2Tmp->getDefaultModulatorDivision()->getMod(id.indexMod);
+        return mod != nullptr && (!mod->isHidden() || acceptHidden);
+    }
 
     // Second level: smpl, inst, prst
     if (id.typeElement == elementSmpl || id.typeElement == elementInst || id.typeElement == elementPrst)
@@ -2095,6 +2139,69 @@ void SoundfontManager::setSoundfontVersion(int sf2Index, bool isSf3)
         value.sfVerValue.wMinor = 4;
         this->set(id, champ_IFIL, value);
     }
+}
+
+void SoundfontManager::customizeDefaultModulators(int sf2Index, bool isCustom)
+{
+    QMutexLocker locker(&_mutex);
+    EltID id(elementSf2, sf2Index);
+    if (!this->isValid(id) || (this->get(id, champ_customDefaultMods).wValue != 0) == isCustom)
+        return;
+
+    // The list is not read by the synth while it changes
+    AttributeValue value;
+    value.wValue = 0;
+    this->set(id, champ_customDefaultMods, value);
+
+    EltID idMod(elementSf2Mod, sf2Index);
+    foreach (int i, this->getSiblings(idMod))
+    {
+        idMod.indexMod = i;
+        this->remove(idMod);
+    }
+    if (!isCustom)
+        return;
+
+    // Start with the default modulators of the sf2 format
+    int number;
+    const ModulatorData * modulators = ModulatorData::getDefaultModulators(CoreSettings::modulatorVelToFilterType(), number);
+    for (int i = 0; i < number; i++)
+    {
+        idMod.indexMod = this->add(idMod);
+        value.sfModValue = modulators[i].srcOper;
+        this->set(idMod, champ_sfModSrcOper, value);
+        value.wValue = modulators[i].destOper;
+        this->set(idMod, champ_sfModDestOper, value);
+        value.shValue = modulators[i].amount;
+        this->set(idMod, champ_modAmount, value);
+        value.sfModValue = modulators[i].amtSrcOper;
+        this->set(idMod, champ_sfModAmtSrcOper, value);
+        value.sfTransValue = modulators[i].transOper;
+        this->set(idMod, champ_sfModTransOper, value);
+    }
+    value.wValue = 1;
+    this->set(id, champ_customDefaultMods, value);
+}
+
+QList<ModulatorData> SoundfontManager::getDefaultModulators(int sf2Index)
+{
+    QMutexLocker locker(&_mutex);
+    QList<ModulatorData> result;
+    EltID id(elementSf2, sf2Index);
+    if (this->isValid(id) && this->get(id, champ_customDefaultMods).wValue != 0)
+    {
+        foreach (Modulator * modulator, _soundfonts->getSoundfont(sf2Index)->getDefaultModulatorDivision()->getMods().values())
+            if (!modulator->isHidden())
+                result << modulator->_data;
+    }
+    else
+    {
+        int number;
+        const ModulatorData * modulators = ModulatorData::getDefaultModulators(CoreSettings::modulatorVelToFilterType(), number);
+        for (int i = 0; i < number; i++)
+            result << modulators[i];
+    }
+    return result;
 }
 
 QMap<int, int> SoundfontManager::getDuplicateSamples(int sf2Index)

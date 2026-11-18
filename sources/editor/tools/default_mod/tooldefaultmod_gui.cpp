@@ -27,6 +27,7 @@
 #include "tooldefaultmod_parameters.h"
 #include "modulatorcell.h"
 #include "contextmanager.h"
+#include "soundfontmanager.h"
 
 ToolDefaultMod_gui::ToolDefaultMod_gui(QWidget *parent) :
     AbstractToolGui(parent),
@@ -50,17 +51,20 @@ ToolDefaultMod_gui::~ToolDefaultMod_gui()
 
 void ToolDefaultMod_gui::updateInterface(AbstractToolParameters * parameters, IdList ids)
 {
-    // The interface does not depend on the parameters or ids
+    // The interface does not depend on the parameters
     Q_UNUSED(parameters)
-    Q_UNUSED(ids)
 
-    // Fill the list with all default modulators
+    // Fill the list with all default modulators of the soundfont
     ui->listWidget->clear();
-    int number;
-    const ModulatorData * const modData = ModulatorData::getDefaultModulators(
-        ContextManager::configuration()->getModulatorVelToFilterType(), number);
-    for (quint16 i = 0; i < number; i++)
+    if (ids.isEmpty())
+        return;
+    QList<ModulatorData> modData = SoundfontManager::getInstance()->getDefaultModulators(ids[0].indexSf2);
+    for (int i = 0; i < modData.count(); i++)
     {
+        // A modulator linked to another one cannot be overridden alone
+        if (modData[i].destOper >= 32768 || (!modData[i].srcOper.CC && modData[i].srcOper.Index == GC_link))
+            continue;
+
         // Add a new cell
         ModulatorCell * cell = new ModulatorCell(modData[i], i);
         QListWidgetItem * item = new QListWidgetItem();

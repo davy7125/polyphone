@@ -4317,14 +4317,14 @@ default mod.</source>
     </message>
     <message>
         <location filename="../../editor/modulator/modulatoreditor.ui" line="202"/>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="153"/>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="257"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="162"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="269"/>
         <source>No modulators</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../editor/modulator/modulatoreditor.ui" line="234"/>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="162"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="171"/>
         <source>Select a single division to display the modulator list</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4334,7 +4334,7 @@ default mod.</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="262"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="274"/>
         <source>%n modulator(s):</source>
         <translation>
             <numerusform>%n modulator:</numerusform>
@@ -4342,43 +4342,43 @@ default mod.</source>
         </translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="346"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="355"/>
         <source>Duplicate the selection toward...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="347"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="356"/>
         <source>Copy the selected modulators</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="352"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="361"/>
         <source>Duplicate modulators toward...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="353"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="362"/>
         <source>Copy all modulators</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="638"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="654"/>
         <source>Forbidden action:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="648"/>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="657"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="664"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="673"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="649"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="665"/>
         <source>offsets cannot be modulated in a preset.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="658"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="674"/>
         <source>%1 cannot be modulated in a preset.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4659,6 +4659,34 @@ default mod.</source>
         <location filename="../../core/output/sf/outputsf.cpp" line="148"/>
         <source>cannot create file &quot;%1&quot;</source>
         <oldsource>Cannot create file &quot;%1&quot;</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PageDefaultMod</name>
+    <message>
+        <location filename="../../editor/pagedefaultmod.ui" line="68"/>
+        <source>Customize</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../editor/pagedefaultmod.ui" line="75"/>
+        <source>Reset to the SoundFont defaults</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../editor/pagedefaultmod.cpp" line="55"/>
+        <source>This soundfont has its own default modulators, applied to every instrument instead of the ones of the SoundFont format. They are saved in the sf2 and sf3 files (DMOD chunk) and need a synthesizer that supports them.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../editor/pagedefaultmod.cpp" line="64"/>
+        <source>This soundfont uses the default modulators of the SoundFont format, applied to every instrument. Customize them to edit, add or remove default modulators in this soundfont.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../editor/pagedefaultmod.h" line="45"/>
+        <source>Default modulators</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5169,6 +5197,11 @@ to display its division ranges</source>
             <numerusform>%1 (unused: %n)</numerusform>
             <numerusform>%1 (unused: %n)</numerusform>
         </translation>
+    </message>
+    <message>
+        <location filename="../../editor/pagesf2.h" line="80"/>
+        <source>General</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6913,22 +6946,22 @@ to display its timbre</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/model/soundfont.cpp" line="44"/>
+        <location filename="../../core/model/soundfont.cpp" line="47"/>
         <source>General</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/model/soundfont.cpp" line="45"/>
+        <location filename="../../core/model/soundfont.cpp" line="48"/>
         <source>Samples</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/model/soundfont.cpp" line="46"/>
+        <location filename="../../core/model/soundfont.cpp" line="49"/>
         <source>Instruments</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/model/soundfont.cpp" line="47"/>
+        <location filename="../../core/model/soundfont.cpp" line="50"/>
         <source>Presets</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8753,19 +8786,19 @@ Other soundfont editors might display other units.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/tools/default_mod/tooldefaultmod_gui.cpp" line="39"/>
+        <location filename="../../editor/tools/default_mod/tooldefaultmod_gui.cpp" line="40"/>
         <source>&amp;Override</source>
         <oldsource>Override</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/tools/default_mod/tooldefaultmod_gui.cpp" line="41"/>
+        <location filename="../../editor/tools/default_mod/tooldefaultmod_gui.cpp" line="42"/>
         <source>&amp;Disable</source>
         <oldsource>Disable</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/tools/default_mod/tooldefaultmod_gui.cpp" line="43"/>
+        <location filename="../../editor/tools/default_mod/tooldefaultmod_gui.cpp" line="44"/>
         <source>&amp;Cancel</source>
         <oldsource>Cancel</oldsource>
         <translation type="unfinished"></translation>

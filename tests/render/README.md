@@ -49,11 +49,16 @@ They are not in the repository. Put them (or links to them) in one directory:
 | `TimGM6mb.sf2` | GPL v2 | package `timgm6mb-soundfont` (`/usr/share/sounds/sf2`) |
 | `VintageDreamsWaves-v2.sf2` and `.sf3` | freeware, see its COPYRIGHT.txt | `sf2/` of the FluidSynth sources |
 | `polyphone-test.sf2` | none (computed) | written by `render.sh` with `make_test_soundfont.py` if it is missing |
+| `polyphone-test-dmod.sf2` | none (computed) | same, with the argument `dmod` |
 
 `polyphone-test.sf2` covers what the others do not: 24-bit samples (one of them almost only in the
 8 least significant bits, played with a gain of 40 dB), a linked stereo pair, the 3 loop modes, an
 exclusive class, velocity layers, a modulator (CC 1 to the filter) and generators at the preset
 level. Its samples are computed, so the file is the same on every machine.
+
+`polyphone-test-dmod.sf2` is the same soundfont with its own default modulators (DMOD chunk), which
+replace the ones of the sf2 format: the velocity lowers the attenuation the wrong way round and CC 1
+raises the pitch. The volume, the expression, the pan and the pitch wheel have no effect anymore.
 
 ## The command
 

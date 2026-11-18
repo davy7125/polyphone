@@ -129,6 +129,7 @@ typedef enum
     champ_wBpsSave = 158,
     champ_wChannel = 159,   // current channel
     champ_wChannels = 160,  // nb canaux total
+    champ_customDefaultMods = 161, // 1 if the soundfont has its own default modulators (sf2)
 
     champ_filenameInitial = 163,   // QString (sf2)
     champ_filenameForData = 164,

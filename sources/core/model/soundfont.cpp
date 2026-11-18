@@ -25,13 +25,16 @@
 #include "soundfont.h"
 #include "smpl.h"
 #include "instprst.h"
+#include "division.h"
 #include "treemodel.h"
 #include "treeitemfirstlevel.h"
 #include "treeitemroot.h"
 
 Soundfont::Soundfont(EltID id) :
     _id(id),
-    _smpl(IndexedElementList<Smpl *>())
+    _smpl(IndexedElementList<Smpl *>()),
+    _defaultModulators(new Division(nullptr, this, nullptr, id)),
+    _customDefaultModulators(false)
 {
     // Prepare the root items and the model
     _rootItem = new TreeItemRoot(EltID(elementUnknown));
@@ -78,6 +81,8 @@ Soundfont::~Soundfont()
         // Delete the temporary file
         QFile::remove(_fileNameForData);
     }
+
+    delete _defaultModulators;
 
     // Delete all presets
     for (int i = _prst.indexCount() - 1; i >= 0; i--)
@@ -285,4 +290,9 @@ bool Soundfont::deletePreset(int index)
     }
 
     return true;
+}
+
+ISynthZone * Soundfont::getDefaultModulators()
+{
+    return _customDefaultModulators ? _defaultModulators : nullptr;
 }

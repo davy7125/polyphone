@@ -25,6 +25,9 @@ mkdir -p "$outputDir" || exit 1
 if [ ! -f "$soundfontDir/polyphone-test.sf2" ]; then
     python3 "$testsDir/make_test_soundfont.py" "$soundfontDir/polyphone-test.sf2" || exit 1
 fi
+if [ ! -f "$soundfontDir/polyphone-test-dmod.sf2" ]; then
+    python3 "$testsDir/make_test_soundfont.py" "$soundfontDir/polyphone-test-dmod.sf2" dmod || exit 1
+fi
 
 # No window is needed, and two CPUs give a single sound engine thread to the synth of the editor:
 # the voices are always added in the same order and a rendering is reproducible bit for bit

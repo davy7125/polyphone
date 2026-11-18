@@ -43,6 +43,9 @@ public:
     ~ModulatorEditor();
 
     void initialize(bool isPrst);
+
+    // Editor of the default modulators of a soundfont (ids of type elementSf2): always expanded
+    void initializeForDefaultModulators();
     void setIds(IdList ids, QList<AttributeType> attributes = QList<AttributeType>());
 
 signals:

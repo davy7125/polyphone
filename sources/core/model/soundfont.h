@@ -32,6 +32,7 @@
 #include "isynthsoundfont.h"
 class Smpl;
 class InstPrst;
+class Division;
 class Soundfonts;
 class QAbstractItemModel;
 class TreeItem;
@@ -61,6 +62,11 @@ public:
     const IndexedElementList<InstPrst *> & getPresets() { return _prst; }
     bool deletePreset(int index);
 
+    // Default modulators of the soundfont, used instead of the ones of the sf2 format if they are customized
+    Division * getDefaultModulatorDivision() { return _defaultModulators; }
+    void setCustomDefaultModulators(bool isCustom) { _customDefaultModulators = isCustom; }
+    bool hasCustomDefaultModulators() { return _customDefaultModulators; }
+
     // Tree model associated to the soundfont
     QAbstractItemModel * getModel() { return _model; }
 
@@ -72,6 +78,7 @@ public:
     ISynthInstPrst * getInstrumentAt(int position) override;
     int getPresetCount() override { return _prst.positionCount(); }
     ISynthInstPrst * getPresetAt(int position) override;
+    ISynthZone * getDefaultModulators() override;
 
     // Doc: "max 255 characters except for "comments", ended by 1 or 2 \0 for an even number of bits"
     SfVersionTag _IFIL; // version of the Sound Font RIFF file     e.g. 2.01                                MANDATORY
@@ -101,6 +108,8 @@ private:
     IndexedElementList<Smpl *> _smpl;
     IndexedElementList<InstPrst *> _inst;
     IndexedElementList<InstPrst *> _prst;
+    Division * _defaultModulators; // Not in the tree, only its modulators are used
+    bool _customDefaultModulators;
 
     QAbstractItemModel * _model;
     TreeItemRoot * _rootItem;
