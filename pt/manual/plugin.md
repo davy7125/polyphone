@@ -48,7 +48,10 @@ Uma soundfont é aberta:
 * soltando um arquivo na janela.
 
 Os arquivos sfz e dls são convertidos da mesma forma que o Polyphone os importa, sendo as amostras de um arquivo sfz os arquivos de áudio que ele referencia.
-A soundfont inteira é lida quando é aberta, e as amostras de um arquivo sf3 são descompactadas: nada é lido no disco durante a reprodução.
+Quando uma soundfont é aberta, sua estrutura é lida imediatamente: os instrumentos são listados e podem ser tocados.
+Suas amostras são então lidas em segundo plano, com um indicador de carregamento antes do seu nome (sua dica mostra o progresso): uma nota cujas amostras ainda não foram lidas fica em silêncio.
+As amostras das notas tocadas e dos instrumentos escolhidos são lidas primeiro, e as amostras de um arquivo sf3 são descompactadas.
+Depois que tudo é lido, nada é lido no disco durante a reprodução; uma exportação offline espera até que todas as amostras sejam lidas.
 Quando várias instâncias do plugin tocam o mesmo arquivo (uma por faixa, por exemplo), o arquivo é lido e mantido na memória uma única vez.
 Se o arquivo tiver mudado, por exemplo depois de ser salvo novamente no Polyphone, ele é lido de novo.
 
@@ -56,20 +59,20 @@ Se o arquivo tiver mudado, por exemplo depois de ser salvo novamente no Polyphon
 ## Modos de reprodução {#doc_modes}
 
 
-Três botões acima da lista de predefinições escolhem como as predefinições são tocadas:
+Três botões acima da lista de instrumentos (as predefinições da soundfont) escolhem como os instrumentos são tocados:
 
-:guilabel:`Uma predefinição`
-: A predefinição selecionada na lista é tocada nos 16 canais MIDI.
-  As predefinições são exibidas com os seus números de banco e de predefinição, por exemplo “000:024 Guitar”.
+:guilabel:`Um instrumento`
+: O instrumento selecionado na lista é tocado nos 16 canais MIDI.
+  Os instrumentos são exibidos com os seus números de banco e de programa, por exemplo “000:024 Guitar”.
 
 :guilabel:`16 canais`
-: Cada canal MIDI toca a sua própria predefinição, escolhida na sua linha.
-  A opção :guilabel:`Mudança de programa` toca a predefinição escolhida pelas mensagens de seleção de banco e de mudança de programa recebidas pelo canal, como faz um sintetizador General MIDI: o banco 128 é então usado no canal 10, para a bateria.
-  A predefinição tocada é exibida à direita de cada linha.
+: Cada canal MIDI toca o seu próprio instrumento, escolhido na sua linha.
+  A opção :guilabel:`Mudança de programa` toca o instrumento escolhido pelas mensagens de seleção de banco e de mudança de programa recebidas pelo canal, como faz um sintetizador General MIDI: o banco 128 é então usado no canal 10, para a bateria.
+  O instrumento tocado é exibido à direita de cada linha.
   Este modo é prático para tocar um arquivo MIDI arranjado para vários instrumentos.
 
 :guilabel:`MPE`
-: A predefinição selecionada é tocada por um controlador MPE (MIDI Polyphonic Expression): cada nota tem o seu próprio canal e, portanto, o seu próprio pitch bend, pressão e timbre (CC 74).
+: O instrumento selecionado é tocado por um controlador MPE (MIDI Polyphonic Expression): cada nota tem o seu próprio canal e, portanto, o seu próprio pitch bend, pressão e timbre (CC 74).
   Uma zona inferior de 15 canais é usada até que o controlador envie a sua configuração (RPN 6).
   O canal mestre de uma zona age sobre todas as suas notas: o seu pitch bend é somado ao de cada nota, e os seus controladores se aplicam a todas elas.
   A extensão do pitch bend é de 48 semitons para as notas e de 2 semitons para o canal mestre, e pode ser alterada pelo controlador (RPN 0).
@@ -81,10 +84,23 @@ Três botões acima da lista de predefinições escolhem como as predefinições
 ## Parâmetros {#doc_parameters}
 
 
-Os parâmetros à direita são os do sintetizador do Polyphone, que podem ser encontrados nas suas configurações de [som](manual/settings.md#doc_sound) e de [teclado](manual/settings.md#doc_keyboard):
+Os parâmetros são os do sintetizador do Polyphone, que podem ser encontrados nas suas configurações de [som](manual/settings.md#doc_sound) e de [teclado](manual/settings.md#doc_keyboard).
+:guilabel:`Ganho` (de -24 a +24 dB) fica no cabeçalho; os outros parâmetros ficam agrupados à direita:
 
-:guilabel:`Sintetizador`
-: :guilabel:`Ganho` (de -50 a +50 dB), :guilabel:`Transposição` (de -24 a +24 semitons, sem transpor a bateria), :guilabel:`Afinação` (altura de referência do lá acima do dó central, de 400 a 480 Hz) e :guilabel:`Temperamento`, cujos ajustes finos são relativos à tonalidade escolhida abaixo da lista.
+:guilabel:`Afinação`
+: :guilabel:`Tom de referência`: uma nota de lá#3 a lá4 e sua frequência (de 400 a 480 Hz para o lá4, 440 Hz por padrão); essa nota soa nessa frequência qualquer que seja o temperamento.
+  :guilabel:`Transposição`: de -24 a +24 semitons, sem transpor a bateria.
+
+:guilabel:`Velocidade`
+: A resposta à velocidade das notas; cada ajuste é representado por um gráfico (velocidade de 0 a 127 da esquerda para a direita):
+  
+  * :guilabel:`Corte do filtro`: modulador padrão que abaixa a frequência de corte do filtro conforme a velocidade, até 2 oitavas, como nas configurações de [som](manual/settings.md#doc_sound) do Polyphone. A versão 2.04 do formato SoundFont (padrão) a abaixa tanto mais quanto menor for a velocidade. A versão 2.01 tinha um salto na velocidade 64, um erro corrigido pela versão 2.04: é um modo de compatibilidade para as soundfonts antigas feitas compensando esse salto. Com :guilabel:`Desativado`, a frequência de corte não depende da velocidade.
+  * :guilabel:`Curva`: curva aplicada à velocidade das notas recebidas, linear no meio (padrão, restaurada com um clique duplo), côncava para a esquerda (velocidade mais suave: as velocidades altas exigem um toque mais forte) e convexa para a direita (a velocidade sobe rapidamente).
+
+:guilabel:`Temperamentos e escalas`
+: Os temperamentos e escalas do Polyphone em suas categorias, e depois o temperamento personalizado, transpostos para a :guilabel:`Tonalidade` escolhida.
+  O teclado à direita mostra o ajuste fino de cada nota em cents e é editado como nas [configurações do teclado](manual/settings.md#doc_keyboard) do Polyphone: roda do mouse ou arraste vertical, clique duplo para voltar a 0, menu de contexto para alterar o uso de uma nota ou colocar nela a tonalidade. Um temperamento editado passa a ser o temperamento personalizado.
+  As notas não utilizadas por uma escala não são tocadas, a menos que :guilabel:`Tocar tudo` esteja marcado.
 
 :guilabel:`Reverberação`
 : :guilabel:`Nível`, :guilabel:`Tamanho`, :guilabel:`Largura` e :guilabel:`Amortecimento`.
@@ -92,7 +108,10 @@ Os parâmetros à direita são os do sintetizador do Polyphone, que podem ser en
 :guilabel:`Chorus`
 : :guilabel:`Nível`, :guilabel:`Profundidade` e :guilabel:`Frequência`.
 
-Todos esses parâmetros podem ser automatizados pelo hospedeiro.
+Os grupos :guilabel:`Temperamentos e escalas`, :guilabel:`Reverberação` e :guilabel:`Chorus` têm um interruptor à direita do título: desligado, o grupo fica recolhido e seu temperamento ou efeito não é aplicado (temperamento igual com todas as notas, nenhum efeito), e seus ajustes são mantidos.
+A altura da janela acompanha os grupos expandidos.
+
+O hospedeiro pode automatizar todos esses parâmetros, exceto a nota do tom de referência (a frequência do lá4 é que é automatizada) e os ajustes finos do temperamento personalizado, que são salvos com o projeto.
 
 
 ## Teclado e estado {#doc_keyboard}
@@ -121,6 +140,15 @@ O botão :guilabel:`Configurações` abre um menu com as seguintes opções:
   Essa escolha é compartilhada por todas as instâncias do plugin.
   Os nomes dos parâmetros e das saídas fornecidos ao hospedeiro são os do idioma usado quando o plugin é carregado (sempre inglês com o LV2).
 
+:guilabel:`Latência fixa (notas tocadas em sua posição exata)`
+: Quando esta opção está desativada (padrão), as mensagens MIDI de um bloco de áudio são adiantadas juntas para que a primeira nota do bloco comece no seu início: as notas tocadas ao vivo soam mais cedo, em média meia duração do buffer, mas a sua latência varia conforme a sua posição no buffer do hospedeiro.
+  Quando ela está ativada, cada mensagem é processada na sua posição exata: a latência das notas tocadas ao vivo é constante.
+  Durante uma exportação offline, as mensagens são sempre processadas na sua posição exata.
+
+:guilabel:`Clipping em [-1; 1]`
+: As saídas são limitadas ao intervalo [-1; 1] (padrão), como no Polyphone.
+  Sem clipping, os valores maiores são passados ao hospedeiro, que os mixa em ponto flutuante: o ganho pode então ser aumentado sem saturação, ajustando o nível antes da saída do hospedeiro.
+
 :guilabel:`Salvar a soundfont no projeto`
 : A soundfont é salva no projeto do hospedeiro, que pode então ser aberto em outro computador sem o arquivo.
   Isso não é possível com um arquivo sfz, cujas amostras são outros arquivos.
@@ -134,8 +162,8 @@ O botão :guilabel:`Configurações` abre um menu com as seguintes opções:
 ## Uso em um projeto {#doc_project}
 
 
-O projeto do hospedeiro salva os parâmetros, as predefinições tocadas, a polifonia e o caminho da soundfont (ou o seu conteúdo, se ela estiver armazenada no projeto).
-Quando um projeto é aberto, a soundfont é lida antes que o restante seja restaurado, para que uma exportação offline possa começar imediatamente.
+O projeto do hospedeiro salva os parâmetros, os instrumentos tocados, a polifonia e o caminho da soundfont (ou o seu conteúdo, se ela estiver armazenada no projeto).
+Quando um projeto é aberto, apenas a estrutura da soundfont é lida antes que o restante seja restaurado: o hospedeiro não espera pelas amostras, e uma exportação offline pode começar imediatamente (ela espera pelas amostras ainda não lidas).
 
-Uma nota começa exatamente na posição da sua mensagem MIDI, qualquer que seja o tamanho do buffer do hospedeiro.
+Uma nota começa exatamente na posição da sua mensagem MIDI, qualquer que seja o tamanho do buffer do hospedeiro, durante uma exportação offline e em tempo real com uma [latência fixa](manual/plugin.md#doc_settings).
 Durante uma exportação offline, as vozes nunca são limitadas pela carga do processador.

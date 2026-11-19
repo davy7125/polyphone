@@ -143,7 +143,7 @@ This window triggers MIDI signals:
 * other MIDI signals if the **MIDI controller part** is expanded.
 
 The banner at the top of the window contains a list for choosing the type of keyboard (5 octaves, 6 octaves, 88 keys or 128 keys), and displays the key, the velocity and the aftertouch of the note being played.
-The menu on the right of the banner shows or hides the [MIDI controllers](#doc_keyboard_controllers) and the [audio effects](#doc_keyboard_effects), displayed above the keyboard.
+The menu on the right of the banner shows or hides the [tuning](#doc_keyboard_tuning), the [audio effects](#doc_keyboard_effects) and the [MIDI controllers](#doc_keyboard_controllers), displayed above the keyboard in this order.
 
 The window keeps the proportions of the keyboard: changing its width changes its height.
 Showing or hiding an area only changes the height of the window, which grows or shrinks from its top so that the keyboard stays at the same place on the screen (this is not possible with Wayland on Linux).
@@ -233,7 +233,7 @@ When the option :guilabel:`MIDI controllers` is checked in the menu on the right
 If you are playing with modulators, it is advised to use these features to test your soundfont.
 
 
-![Virtual keyboard with MIDI controllers](images/virtual_keyboard_2.png "Virtual keyboard with MIDI controllers")
+![Virtual keyboard with the tuning, the effects and the MIDI controllers](images/virtual_keyboard_2.png "Virtual keyboard with the tuning, the effects and the MIDI controllers")
 
 
 This area is made of different buttons:
@@ -264,7 +264,7 @@ All these elements can be synchronized with a MIDI keyboard connected to the com
 ### Audio effects {#doc_keyboard_effects}
 
 
-When the option :guilabel:`Effects` is checked in the menu on the right of the banner, an area is displayed at the top of the window for adjusting the main settings of the synthesizer while playing:
+When the option :guilabel:`Effects` is checked in the menu on the right of the banner, an area is displayed for adjusting the main settings of the synthesizer while playing:
 
 Reverb
 : A led switches the reverb on or off, then 4 knobs change its level, room size, width and damping.
@@ -278,6 +278,15 @@ Volume
 
 These settings are the same as in the [sound settings](manual/settings.md#doc_sound): a change made in one place is displayed in the other one.
 A change is progressive and doesn't interrupt the notes being played.
+
+
+### Tuning {#doc_keyboard_tuning}
+
+
+When the option :guilabel:`Tuning` is checked in the menu on the right of the banner, an area is displayed with the tuning of the synthesizer, the same as in the [keyboard settings](manual/settings.md#doc_keyboard): :guilabel:`Reference pitch`, :guilabel:`Transposition` and the button :guilabel:`Temperaments and scales`.
+This button shows or hides the temperament, its tonality, the option :guilabel:`Also play the unused notes` and the keyboard of the fine tunes, for a microtonal tuning.
+When they are hidden, the button shows the name of the temperament or scale in use (with its tonality), so that it is not forgotten.
+A change made in this area is displayed in the settings, and conversely.
 
 
 ## MIDI player {#doc_midi_player}

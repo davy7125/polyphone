@@ -143,7 +143,7 @@ Dieses Fenster sendet MIDI-Signale:
 * weitere MIDI-Signale, wenn der **Bereich der MIDI-Controller** ausgeklappt ist.
 
 Das Banner oben im Fenster enthält eine Liste zur Auswahl des Tastaturtyps (5 Oktaven, 6 Oktaven, 88 Tasten oder 128 Tasten) und zeigt Taste, Anschlag und Aftertouch der gespielten Note an.
-Das Menü rechts im Banner blendet die [MIDI-Controller](#doc_keyboard_controllers) und die [Audioeffekte](#doc_keyboard_effects) ein oder aus, die oberhalb der Klaviatur angezeigt werden.
+Das Menü rechts im Banner blendet die [Stimmung](#doc_keyboard_tuning), die [Audioeffekte](#doc_keyboard_effects) und die [MIDI-Controller](#doc_keyboard_controllers) ein oder aus, die in dieser Reihenfolge oberhalb der Klaviatur angezeigt werden.
 
 Das Fenster behält die Proportionen der Klaviatur bei: Wird seine Breite geändert, ändert sich seine Höhe.
 Das Ein- oder Ausblenden eines Bereichs ändert nur die Höhe des Fensters, das an seinem oberen Rand wächst oder schrumpft, damit die Klaviatur an derselben Stelle des Bildschirms bleibt (unter Linux mit Wayland nicht möglich).
@@ -233,7 +233,7 @@ Ist die Option :guilabel:`MIDI-Controller` im Menü rechts im Banner angehakt, w
 Wenn Sie mit Modulatoren arbeiten, empfiehlt es sich, diese Funktionen zum Testen Ihres Soundfonts zu verwenden.
 
 
-![Virtuelle Tastatur mit MIDI-Controllern](images/virtual_keyboard_2.png "Virtuelle Tastatur mit MIDI-Controllern")
+![Virtuelle Tastatur mit Stimmung, Effekten und MIDI-Controllern](images/virtual_keyboard_2.png "Virtuelle Tastatur mit Stimmung, Effekten und MIDI-Controllern")
 
 
 Dieser Bereich besteht aus verschiedenen Bedienelementen:
@@ -264,7 +264,7 @@ Alle diese Elemente können mit einer an den Computer angeschlossenen MIDI-Tasta
 ### Audioeffekte {#doc_keyboard_effects}
 
 
-Ist die Option :guilabel:`Effekte` im Menü rechts im Banner angehakt, wird oben im Fenster ein Bereich angezeigt, in dem sich die wichtigsten Einstellungen des Synthesizers während des Spielens anpassen lassen:
+Ist die Option :guilabel:`Effekte` im Menü rechts im Banner angehakt, wird ein Bereich angezeigt, in dem sich die wichtigsten Einstellungen des Synthesizers während des Spielens anpassen lassen:
 
 Halleffekt
 : Eine LED schaltet den Hall ein oder aus, dann ändern 4 Drehregler seine Intensität, Raumgröße, Weite und Dämpfung.
@@ -278,6 +278,15 @@ Lautstärke
 
 Diese Einstellungen sind dieselben wie in den [Sound-Einstellungen](manual/settings.md#doc_sound): Eine Änderung an einer Stelle wird auch an der anderen angezeigt.
 Eine Änderung erfolgt schrittweise und unterbricht die gespielten Noten nicht.
+
+
+### Stimmung {#doc_keyboard_tuning}
+
+
+Ist die Option :guilabel:`Stimmung` im Menü rechts im Banner angehakt, wird ein Bereich mit der Stimmung des Synthesizers angezeigt, derselben wie in den [Tastatureinstellungen](manual/settings.md#doc_keyboard): :guilabel:`Referenztonhöhe`, :guilabel:`Transposition` und die Schaltfläche :guilabel:`Temperaturen und Tonleitern`.
+Diese Schaltfläche blendet die Temperatur, ihre Tonart, die Option :guilabel:`Auch die nicht verwendeten Noten spielen` und die Tastatur der Feinstimmungen für eine mikrotonale Stimmung ein oder aus.
+Sind sie ausgeblendet, zeigt die Schaltfläche den Namen der verwendeten Temperatur oder Tonleiter (mit ihrer Tonart) an, damit sie nicht vergessen wird.
+Eine Änderung in diesem Bereich wird in den Einstellungen angezeigt und umgekehrt.
 
 
 ## MIDI-Player {#doc_midi_player}

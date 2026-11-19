@@ -133,15 +133,27 @@ Como el modulador por defecto que modifica la frecuencia de corte del filtro cam
 Las teclas del teclado del ordenador que se usan para controlar el [teclado virtual](manual/soundfont-editor/toolbar.md#doc_keyboard) se definen en la sección :guilabel:`Teclado`.
 La altura se puede subir o bajar octava a octava con el ajuste :guilabel:`Primer do`.
 
-Para los músicos más avanzados, aquí se puede cambiar la afinación:
+La afinación del sintetizador se ajusta en la parte :guilabel:`Afinación`, que también se muestra en el [teclado virtual](manual/soundfont-editor/toolbar.md#doc_keyboard_tuning):
 
-Diapasón de referencia
-: La frecuencia del la situado por encima del do central (nota 69), entre 390 y 470 Hz (440 Hz por defecto).
+:guilabel:`Diapasón de referencia`
+: Una nota de la#3 a la4 y su frecuencia: esta nota suena a esta frecuencia sea cual sea el temperamento.
+  La frecuencia está entre 390 y 470 Hz para el la4 (440 Hz por defecto), y en las mismas proporciones para las demás notas.
 
-Temperamento
-: Al tocar se puede aplicar un temperamento distinto del temperamento igual.
-  Cuando se selecciona un temperamento, también se puede elegir la nota que sirve de referencia a ese temperamento (su tónica).
+:guilabel:`Transposición`
+: Transposición en semitonos (de -12 a +12) de las notas tocadas con el teclado virtual, el teclado del ordenador o una entrada MIDI.
 
+:guilabel:`Temperamento`
+: Temperamento igual (por defecto), uno de los 226 temperamentos y escalas ordenados por categorías (temperamentos históricos, escalas occidentales, escalas de otras tradiciones musicales, divisiones iguales de la octava…), o el temperamento personalizado.
+  :guilabel:`Tonalidad` transpone el temperamento o la escala para que su tónica sea la nota elegida.
+
+El teclado de debajo muestra el ajuste fino de cada nota en cents respecto al temperamento igual; un punto marca la tonalidad:
+
+* un valor se cambia con la rueda del ratón o arrastrando verticalmente (más fino con :kbd:`Ctrl`) y vuelve a 0 con un doble clic; el temperamento mostrado pasa entonces a ser el temperamento personalizado;
+* el menú contextual de una nota cambia su uso (:guilabel:`Nota utilizada`) y coloca en ella la tonalidad (:guilabel:`Tonalidad en esta nota`);
+* las notas no utilizadas por una escala aparecen en gris: no se tocan, salvo si :guilabel:`Tocar también las notas no utilizadas` está marcado;
+* el valor de la nota del diapasón de referencia es naranja cuando no es 0: esta nota conserva la frecuencia del diapasón de referencia, y todas las notas se desplazan para compensar su ajuste fino.
+
+Los botones de la derecha restablecen los valores por defecto del diapasón de referencia y de la transposición, y del temperamento.
 El diapasón de referencia y el temperamento también se pueden cambiar con mensajes MIDI RPN (master fine tuning, tuning program select y tuning bank select).
 
 

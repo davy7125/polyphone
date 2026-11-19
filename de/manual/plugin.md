@@ -48,7 +48,10 @@ Ein Soundfont wird geöffnet:
 * durch Ablegen einer Datei auf dem Fenster.
 
 sfz- und dls-Dateien werden so umgewandelt, wie Polyphone sie importiert, wobei die Samples einer sfz-Datei die Audiodateien sind, auf die sie verweist.
-Der gesamte Soundfont wird beim Öffnen gelesen, wobei die Samples einer sf3-Datei dekomprimiert werden: Während des Spielens wird nichts von der Festplatte gelesen.
+Beim Öffnen eines Soundfonts wird sofort seine Struktur gelesen: Die Instrumente werden aufgelistet und können gespielt werden.
+Seine Samples werden danach im Hintergrund gelesen, mit einem Ladesymbol vor seinem Namen (sein Tooltip zeigt den Fortschritt): Eine Note, deren Samples noch nicht gelesen sind, bleibt stumm.
+Die Samples der gespielten Noten und der gewählten Instrumente werden zuerst gelesen, wobei die Samples einer sf3-Datei dekomprimiert werden.
+Sobald alles gelesen ist, wird während des Spielens nichts von der Festplatte gelesen; ein Offline-Export wartet, bis alle Samples gelesen sind.
 Spielen mehrere Instanzen des Plugins dieselbe Datei (zum Beispiel eine pro Spur), wird die Datei nur einmal gelesen und im Speicher gehalten.
 Hat sich die Datei geändert, zum Beispiel nachdem sie in Polyphone erneut gespeichert wurde, wird sie erneut gelesen.
 
@@ -56,20 +59,20 @@ Hat sich die Datei geändert, zum Beispiel nachdem sie in Polyphone erneut gespe
 ## Spielmodi {#doc_modes}
 
 
-Drei Schaltflächen über der Liste der Presets legen fest, wie die Presets gespielt werden:
+Drei Schaltflächen über der Liste der Instrumente (die Presets des Soundfonts) legen fest, wie die Instrumente gespielt werden:
 
-:guilabel:`Ein Preset`
-: Das in der Liste ausgewählte Preset wird auf den 16 MIDI-Kanälen gespielt.
-  Die Presets werden mit ihrer Bank- und Presetnummer angezeigt, zum Beispiel „000:024 Guitar“.
+:guilabel:`Ein Instrument`
+: Das in der Liste ausgewählte Instrument wird auf den 16 MIDI-Kanälen gespielt.
+  Die Instrumente werden mit ihrer Bank- und Programmnummer angezeigt, zum Beispiel „000:024 Guitar“.
 
 :guilabel:`16 Kanäle`
-: Jeder MIDI-Kanal spielt sein eigenes Preset, das in seiner Zeile gewählt wird.
-  Die Auswahl :guilabel:`Programmwechsel` spielt das Preset, das durch die vom Kanal empfangenen Bank-Select- und Program-Change-Nachrichten gewählt wird, wie es ein General-MIDI-Synthesizer tut: Auf Kanal 10 wird dann die Bank 128 für das Schlagzeug verwendet.
-  Das gespielte Preset wird rechts in jeder Zeile angezeigt.
+: Jeder MIDI-Kanal spielt sein eigenes Instrument, das in seiner Zeile gewählt wird.
+  Die Auswahl :guilabel:`Programmwechsel` spielt das Instrument, das durch die vom Kanal empfangenen Bank-Select- und Program-Change-Nachrichten gewählt wird, wie es ein General-MIDI-Synthesizer tut: Auf Kanal 10 wird dann die Bank 128 für das Schlagzeug verwendet.
+  Das gespielte Instrument wird rechts in jeder Zeile angezeigt.
   Dieser Modus eignet sich zum Abspielen einer MIDI-Datei, die für mehrere Instrumente arrangiert ist.
 
 :guilabel:`MPE`
-: Das ausgewählte Preset wird von einem MPE-Controller (MIDI Polyphonic Expression) gespielt: Jede Note hat ihren eigenen Kanal und damit ihr eigenes Pitch Bend, ihren eigenen Druck und ihre eigene Klangfarbe (CC 74).
+: Das ausgewählte Instrument wird von einem MPE-Controller (MIDI Polyphonic Expression) gespielt: Jede Note hat ihren eigenen Kanal und damit ihr eigenes Pitch Bend, ihren eigenen Druck und ihre eigene Klangfarbe (CC 74).
   Eine untere Zone mit 15 Kanälen wird verwendet, bis der Controller seine Konfiguration sendet (RPN 6).
   Der Master-Kanal einer Zone wirkt auf alle ihre Noten: Sein Pitch Bend wird zu dem jeder Note addiert, und seine Controller gelten für alle Noten.
   Der Pitch-Bend-Bereich beträgt 48 Halbtöne für die Noten und 2 Halbtöne für den Master-Kanal und kann vom Controller geändert werden (RPN 0).
@@ -81,10 +84,23 @@ Drei Schaltflächen über der Liste der Presets legen fest, wie die Presets gesp
 ## Parameter {#doc_parameters}
 
 
-Die Parameter auf der rechten Seite sind die des Synthesizers von Polyphone, die sich auch in seinen Einstellungen [Sound](manual/settings.md#doc_sound) und [Tastatur](manual/settings.md#doc_keyboard) finden:
+Die Parameter sind die des Synthesizers von Polyphone, die sich auch in seinen Einstellungen [Sound](manual/settings.md#doc_sound) und [Tastatur](manual/settings.md#doc_keyboard) finden.
+:guilabel:`Verstärkung` (von -24 bis +24 dB) befindet sich in der Kopfzeile, die anderen Parameter sind rechts gruppiert:
 
-:guilabel:`Synthesizer`
-: :guilabel:`Verstärkung` (von -50 bis +50 dB), :guilabel:`Transposition` (von -24 bis +24 Halbtönen, wobei das Schlagzeug nicht transponiert wird), :guilabel:`Stimmung` (Referenztonhöhe des A4, von 400 bis 480 Hz) und :guilabel:`Temperatur`, deren Feinstimmungen sich auf die unter der Liste gewählte Tonart beziehen.
+:guilabel:`Stimmung`
+: :guilabel:`Referenztonhöhe`: eine Note von A#3 bis A4 und ihre Frequenz (von 400 bis 480 Hz für A4, standardmäßig 440 Hz); diese Note klingt unabhängig von der Temperatur mit dieser Frequenz.
+  :guilabel:`Transposition`: von -24 bis +24 Halbtönen, wobei das Schlagzeug nicht transponiert wird.
+
+:guilabel:`Anschlag`
+: Die Reaktion auf den Anschlag der Noten, wobei jede Einstellung in einer Grafik dargestellt wird (Anschlag von 0 bis 127 von links nach rechts):
+  
+  * :guilabel:`Filterfrequenz`: Standardmodulator, der die Grenzfrequenz des Filters je nach Anschlag um bis zu 2 Oktaven senkt, wie in den [Sound](manual/settings.md#doc_sound)-Einstellungen von Polyphone. Die Version 2.04 des SoundFont-Formats (Standard) senkt sie umso stärker, je schwächer der Anschlag ist. Die Version 2.01 hatte einen Sprung bei Anschlag 64, einen Fehler, den die Version 2.04 behoben hat: Sie ist ein Kompatibilitätsmodus für alte Soundfonts, die diesen Sprung ausgleichen. Mit :guilabel:`Deaktiviert` hängt die Grenzfrequenz nicht vom Anschlag ab.
+  * :guilabel:`Kurve`: Kurve, die auf den Anschlag der empfangenen Noten angewendet wird, linear in der Mitte (Standard, durch Doppelklick wiederhergestellt), konkav nach links (weicherer Anschlag: hohe Anschlagswerte erfordern einen kräftigeren Anschlag) und konvex nach rechts (der Anschlag steigt schnell).
+
+:guilabel:`Temperaturen und Tonleitern`
+: Die Temperaturen und Tonleitern von Polyphone in ihren Kategorien, dann die benutzerdefinierte Temperatur, transponiert in die gewählte :guilabel:`Tonart`.
+  Die Tastatur rechts zeigt die Feinstimmung jeder Note in Cent und wird wie in den [Tastatureinstellungen](manual/settings.md#doc_keyboard) von Polyphone bearbeitet: Mausrad oder vertikales Ziehen, Doppelklick zum Zurücksetzen auf 0, Kontextmenü zum Ändern der Verwendung einer Note oder zum Legen der Tonart auf sie. Eine bearbeitete Temperatur wird zur benutzerdefinierten Temperatur.
+  Die von einer Tonleiter nicht verwendeten Noten werden nicht gespielt, außer wenn :guilabel:`Alle spielen` aktiviert ist.
 
 :guilabel:`Halleffekt`
 : :guilabel:`Intensität`, :guilabel:`Größe`, :guilabel:`Weite` und :guilabel:`Dämpfung`.
@@ -92,7 +108,10 @@ Die Parameter auf der rechten Seite sind die des Synthesizers von Polyphone, die
 :guilabel:`Chorus`
 : :guilabel:`Intensität`, :guilabel:`Tiefe` und :guilabel:`Frequenz`.
 
-Alle diese Parameter können vom Host automatisiert werden.
+Die Gruppen :guilabel:`Temperaturen und Tonleitern`, :guilabel:`Halleffekt` und :guilabel:`Chorus` haben rechts neben ihrem Titel einen Schalter: Ausgeschaltet ist die Gruppe eingeklappt und ihre Temperatur oder ihr Effekt wird nicht angewendet (gleichstufige Stimmung mit allen Noten, kein Effekt), ihre Einstellungen bleiben erhalten.
+Die Höhe des Fensters folgt den ausgeklappten Gruppen.
+
+Der Host kann alle diese Parameter automatisieren, außer der Note der Referenztonhöhe (automatisiert wird die Frequenz von A4) und den Feinstimmungen der benutzerdefinierten Temperatur, die mit dem Projekt gespeichert werden.
 
 
 ## Klaviatur und Status {#doc_keyboard}
@@ -121,6 +140,15 @@ Die Schaltfläche :guilabel:`Einstellungen` öffnet ein Menü mit folgenden Opti
   Diese Auswahl gilt für alle Instanzen des Plugins.
   Die Namen der Parameter und der Ausgänge, die dem Host übermittelt werden, sind die der Sprache, die beim Laden des Plugins verwendet wird (mit LV2 immer Englisch).
 
+:guilabel:`Feste Latenz (Noten an ihrer genauen Position gespielt)`
+: Ist diese Option deaktiviert (Standard), werden die MIDI-Nachrichten eines Audioblocks gemeinsam vorgezogen, sodass die erste Note des Blocks an seinem Anfang beginnt: Live gespielte Noten erklingen im Durchschnitt um eine halbe Pufferlänge früher, ihre Latenz hängt jedoch von ihrer Position im Puffer des Hosts ab.
+  Ist sie aktiviert, wird jede Nachricht an ihrer genauen Position verarbeitet: Die Latenz der live gespielten Noten ist konstant.
+  Während eines Offline-Exports werden die Nachrichten immer an ihrer genauen Position verarbeitet.
+
+:guilabel:`Clipping auf [-1; 1]`
+: Die Ausgänge werden auf das Intervall [-1; 1] begrenzt (Standard), wie in Polyphone.
+  Ohne Clipping werden größere Werte an den Host übergeben, der sie als Gleitkommazahlen mischt: Die Verstärkung kann dann ohne Übersteuerung erhöht werden, wobei der Pegel vor dem Ausgang des Hosts angepasst wird.
+
 :guilabel:`Soundfont im Projekt speichern`
 : Der Soundfont wird im Projekt des Hosts gespeichert, das dann ohne die Datei auf einem anderen Computer geöffnet werden kann.
   Mit einer sfz-Datei ist dies nicht möglich, da ihre Samples andere Dateien sind.
@@ -134,8 +162,8 @@ Die Schaltfläche :guilabel:`Einstellungen` öffnet ein Menü mit folgenden Opti
 ## Verwendung in einem Projekt {#doc_project}
 
 
-Das Projekt des Hosts speichert die Parameter, die gespielten Presets, die Polyphonie und den Pfad des Soundfonts (oder seinen Inhalt, wenn er im Projekt gespeichert wird).
-Beim Öffnen eines Projekts wird der Soundfont gelesen, bevor der Rest wiederhergestellt wird, sodass ein Offline-Export sofort beginnen kann.
+Das Projekt des Hosts speichert die Parameter, die gespielten Instrumente, die Polyphonie und den Pfad des Soundfonts (oder seinen Inhalt, wenn er im Projekt gespeichert wird).
+Beim Öffnen eines Projekts wird nur die Struktur des Soundfonts gelesen, bevor der Rest wiederhergestellt wird: Der Host wartet nicht auf die Samples, und ein Offline-Export kann sofort beginnen (er wartet auf die noch nicht gelesenen Samples).
 
-Eine Note beginnt genau an der Position ihrer MIDI-Nachricht, unabhängig von der Puffergröße des Hosts.
+Eine Note beginnt genau an der Position ihrer MIDI-Nachricht, unabhängig von der Puffergröße des Hosts, während eines Offline-Exports und in Echtzeit mit [fester Latenz](manual/plugin.md#doc_settings).
 Während eines Offline-Exports werden die Stimmen nie durch die Prozessorlast begrenzt.

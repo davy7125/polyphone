@@ -48,7 +48,10 @@ Une banque de sons s'ouvre&nbsp;:
 * en déposant un fichier sur la fenêtre.
 
 Les fichiers sfz et dls sont convertis comme Polyphone les importe, les échantillons d'un fichier sfz étant les fichiers audio auxquels il fait référence.
-Toute la banque de sons est lue à son ouverture, les échantillons d'un fichier sf3 étant décompressés&nbsp;: rien n'est lu sur le disque pendant que le plugin joue.
+À l'ouverture d'une banque de sons, sa structure est lue immédiatement&nbsp;: les instruments sont listés et peuvent être joués.
+Ses échantillons sont ensuite lus en arrière-plan, avec une icône de chargement devant son nom (son infobulle indique la progression)&nbsp;: une note dont les échantillons ne sont pas encore lus reste muette.
+Les échantillons des notes jouées et des instruments choisis sont lus en premier, ceux d'un fichier sf3 étant décompressés.
+Une fois tout lu, rien n'est lu sur le disque pendant que le plugin joue&nbsp;; un export hors ligne attend que tous les échantillons soient lus.
 Lorsque plusieurs instances du plugin jouent le même fichier (une par piste par exemple), le fichier n'est lu et gardé en mémoire qu'une seule fois.
 Si le fichier a changé, par exemple après avoir été de nouveau enregistré dans Polyphone, il est relu.
 
@@ -56,20 +59,20 @@ Si le fichier a changé, par exemple après avoir été de nouveau enregistré d
 ## Modes de jeu {#doc_modes}
 
 
-Trois boutons au-dessus de la liste des ensembles choisissent la manière dont les ensembles sont joués&nbsp;:
+Trois boutons au-dessus de la liste des instruments (les ensembles de la banque de sons) choisissent la manière dont les instruments sont joués&nbsp;:
 
-:guilabel:`Un ensemble`
-: L'ensemble sélectionné dans la liste est joué sur les 16 canaux MIDI.
-  Les ensembles sont affichés avec leurs numéros de banque et d'ensemble, par exemple «&nbsp;000:024 Guitar&nbsp;».
+:guilabel:`Un instrument`
+: L'instrument sélectionné dans la liste est joué sur les 16 canaux MIDI.
+  Les instruments sont affichés avec leurs numéros de banque et de programme, par exemple «&nbsp;000:024 Guitar&nbsp;».
 
 :guilabel:`16 canaux`
-: Chaque canal MIDI joue son propre ensemble, choisi sur sa ligne.
-  Le choix :guilabel:`Program change` joue l'ensemble désigné par les messages de sélection de banque et de changement de programme reçus par le canal, comme le fait un synthétiseur General MIDI&nbsp;: la banque 128 est alors utilisée sur le canal 10, pour les percussions.
-  L'ensemble joué est affiché à droite de chaque ligne.
+: Chaque canal MIDI joue son propre instrument, choisi sur sa ligne.
+  Le choix :guilabel:`Program change` joue l'instrument désigné par les messages de sélection de banque et de changement de programme reçus par le canal, comme le fait un synthétiseur General MIDI&nbsp;: la banque 128 est alors utilisée sur le canal 10, pour les percussions.
+  L'instrument joué est affiché à droite de chaque ligne.
   Ce mode est pratique pour jouer un fichier MIDI arrangé pour plusieurs instruments.
 
 :guilabel:`MPE`
-: L'ensemble sélectionné est joué par un contrôleur MPE (MIDI Polyphonic Expression)&nbsp;: chaque note a son propre canal, et donc son propre Pitch Bend, sa propre pression et son propre timbre (CC 74).
+: L'instrument sélectionné est joué par un contrôleur MPE (MIDI Polyphonic Expression)&nbsp;: chaque note a son propre canal, et donc son propre Pitch Bend, sa propre pression et son propre timbre (CC 74).
   Une zone inférieure de 15 canaux est utilisée jusqu'à ce que le contrôleur envoie sa configuration (RPN 6).
   Le canal maître d'une zone agit sur toutes ses notes&nbsp;: son Pitch Bend s'ajoute à celui de chaque note et ses contrôleurs s'appliquent à toutes.
   La sensibilité du Pitch Bend est de 48 demi-tons pour les notes et de 2 demi-tons pour le canal maître, et peut être modifiée par le contrôleur (RPN 0).
@@ -81,10 +84,23 @@ Trois boutons au-dessus de la liste des ensembles choisissent la manière dont l
 ## Paramètres {#doc_parameters}
 
 
-Les paramètres à droite sont ceux du synthétiseur de Polyphone, que l'on retrouve dans ses préférences du [son](manual/settings.md#doc_sound) et du [clavier](manual/settings.md#doc_keyboard)&nbsp;:
+Les paramètres sont ceux du synthétiseur de Polyphone, que l'on retrouve dans ses préférences du [son](manual/settings.md#doc_sound) et du [clavier](manual/settings.md#doc_keyboard).
+:guilabel:`Gain` (de -24 à +24&nbsp;dB) se trouve dans l'en-tête, les autres paramètres sont regroupés à droite&nbsp;:
 
-:guilabel:`Synthé`
-: :guilabel:`Gain` (de -50 à +50&nbsp;dB), :guilabel:`Transposition` (de -24 à +24 demi-tons, les percussions n'étant pas transposées), :guilabel:`Accordage` (fréquence du La situé au-dessus du Do central, de 400 à 480&nbsp;Hz) et :guilabel:`Tempérament`, dont les accords fins sont relatifs à la tonalité choisie sous la liste.
+:guilabel:`Accordage`
+: :guilabel:`Diapason`&nbsp;: une note de La#3 à La4 et sa fréquence (de 400 à 480&nbsp;Hz pour le La4, 440&nbsp;Hz par défaut), cette note sonnant à cette fréquence quel que soit le tempérament.
+  :guilabel:`Transposition`&nbsp;: de -24 à +24 demi-tons, les percussions n'étant pas transposées.
+
+:guilabel:`Vélocité`
+: La réponse à la vélocité des notes, chaque réglage étant illustré par un graphique (vélocité de 0 à 127 de gauche à droite)&nbsp;:
+  
+  * :guilabel:`Fréquence de coupure`&nbsp;: modulateur par défaut abaissant la fréquence de coupure du filtre selon la vélocité, jusqu'à 2 octaves, comme dans les préférences du [son](manual/settings.md#doc_sound) de Polyphone. La version 2.04 du format SoundFont (par défaut) l'abaisse d'autant plus que la vélocité est faible. La version 2.01 comportait un saut à la vélocité 64, une erreur corrigée par la version 2.04&nbsp;: c'est un mode de compatibilité pour les anciennes banques de sons faites en compensant ce saut. Avec :guilabel:`Désactivé`, la fréquence de coupure ne dépend pas de la vélocité.
+  * :guilabel:`Courbe`&nbsp;: courbe appliquée à la vélocité des notes reçues, linéaire au milieu (par défaut, rétablie par un double clic), concave vers la gauche (vélocité plus molle&nbsp;: les vélocités élevées demandent un toucher plus appuyé) et convexe vers la droite (la vélocité monte rapidement).
+
+:guilabel:`Tempéraments et gammes`
+: Les tempéraments et gammes de Polyphone dans leurs catégories, puis le tempérament personnalisé, transposés dans la :guilabel:`Tonalité` choisie.
+  Le clavier à droite montre l'accord fin de chaque note en cents et se modifie comme dans les [préférences du clavier](manual/settings.md#doc_keyboard) de Polyphone&nbsp;: molette de la souris ou glissement vertical, double clic pour revenir à 0, menu contextuel pour changer l'utilisation d'une note ou y placer la tonalité. Un tempérament modifié devient le tempérament personnalisé.
+  Les notes inutilisées par une gamme ne sont pas jouées, sauf si :guilabel:`Tout jouer` est coché.
 
 :guilabel:`Réverbération`
 : :guilabel:`Niveau`, :guilabel:`Taille`, :guilabel:`Densité` et :guilabel:`Atténuation`.
@@ -92,7 +108,10 @@ Les paramètres à droite sont ceux du synthétiseur de Polyphone, que l'on retr
 :guilabel:`Chorus`
 : :guilabel:`Niveau`, :guilabel:`Amplitude` et :guilabel:`Fréquence`.
 
-Tous ces paramètres peuvent être automatisés par l'hôte.
+Les groupes :guilabel:`Tempéraments et gammes`, :guilabel:`Réverbération` et :guilabel:`Chorus` ont un interrupteur à droite de leur titre&nbsp;: éteint, le groupe est replié et son tempérament ou son effet n'est pas appliqué (tempérament égal avec toutes les notes, aucun effet), ses réglages étant conservés.
+La hauteur de la fenêtre suit les groupes dépliés.
+
+L'hôte peut automatiser tous ces paramètres, sauf la note du diapason (la fréquence du La4 étant automatisée) et les accords fins du tempérament personnalisé, qui sont enregistrés avec le projet.
 
 
 ## Clavier et barre d'état {#doc_keyboard}
@@ -121,6 +140,15 @@ Le bouton :guilabel:`Préférences` ouvre un menu avec les options suivantes&nbs
   Ce choix est commun à toutes les instances du plugin.
   Les noms des paramètres et des sorties transmis à l'hôte sont ceux de la langue utilisée au chargement du plugin (toujours l'anglais avec LV2).
 
+:guilabel:`Latence fixe (notes jouées à leur position exacte)`
+: Lorsque cette option est désactivée (par défaut), les messages MIDI d'un bloc audio sont avancés ensemble pour que la première note du bloc commence à son début&nbsp;: les notes jouées en direct sonnent plus tôt, d'une demi-durée de tampon en moyenne, mais leur latence varie selon leur position dans le tampon de l'hôte.
+  Lorsqu'elle est activée, chaque message est traité à sa position exacte&nbsp;: la latence des notes jouées en direct est constante.
+  Pendant un export hors ligne, les messages sont toujours traités à leur position exacte.
+
+:guilabel:`Écrêtage à [-1 ; 1]`
+: Les sorties sont limitées à l'intervalle [-1&nbsp;; 1] (par défaut), comme dans Polyphone.
+  Sans écrêtage, les valeurs plus grandes sont transmises à l'hôte, qui les mixe en virgule flottante&nbsp;: le gain peut alors être augmenté sans saturation, le niveau étant ajusté avant la sortie de l'hôte.
+
 :guilabel:`Enregistrer la banque de sons dans le projet`
 : La banque de sons est enregistrée dans le projet de l'hôte, qui peut alors être ouvert sur un autre ordinateur sans le fichier.
   Ce n'est pas possible avec un fichier sfz, dont les échantillons sont d'autres fichiers.
@@ -134,8 +162,8 @@ Le bouton :guilabel:`Préférences` ouvre un menu avec les options suivantes&nbs
 ## Utilisation dans un projet {#doc_project}
 
 
-Le projet de l'hôte enregistre les paramètres, les ensembles joués, la polyphonie et le chemin de la banque de sons (ou son contenu, si elle est enregistrée dans le projet).
-À l'ouverture d'un projet, la banque de sons est lue avant que le reste ne soit restauré, afin qu'un export hors ligne puisse commencer immédiatement.
+Le projet de l'hôte enregistre les paramètres, les instruments joués, la polyphonie et le chemin de la banque de sons (ou son contenu, si elle est enregistrée dans le projet).
+À l'ouverture d'un projet, seule la structure de la banque de sons est lue avant que le reste ne soit restauré&nbsp;: l'hôte n'attend pas les échantillons, et un export hors ligne peut commencer immédiatement (il attend les échantillons pas encore lus).
 
-Une note commence exactement à la position de son message MIDI, quelle que soit la taille du tampon de l'hôte.
+Une note commence exactement à la position de son message MIDI, quelle que soit la taille du tampon de l'hôte, pendant un export hors ligne et en temps réel avec une [latence fixe](manual/plugin.md#doc_settings).
 Pendant un export hors ligne, les voix ne sont jamais limitées par la charge du processeur.

@@ -133,15 +133,27 @@ Da der Standardmodulator, der die Grenzfrequenz des Filters ändert, zwischen de
 Die Tasten der Computertastatur, mit denen die [virtuelle Tastatur](manual/soundfont-editor/toolbar.md#doc_keyboard) gesteuert wird, werden im Bereich :guilabel:`Tastatur` festgelegt.
 Mit der Einstellung :guilabel:`Erstes C` kann die Tonhöhe oktavweise erhöht oder verringert werden.
 
-Für fortgeschrittene Musiker kann hier die Stimmung geändert werden:
+Die Stimmung des Synthesizers wird im Bereich :guilabel:`Stimmung` eingestellt, der auch in der [virtuellen Tastatur](manual/soundfont-editor/toolbar.md#doc_keyboard_tuning) angezeigt wird:
 
-Referenztonhöhe
-: Die Frequenz des A über dem mittleren C (Taste 69), zwischen 390 und 470 Hz (standardmäßig 440 Hz).
+:guilabel:`Referenztonhöhe`
+: Eine Note von A#3 bis A4 und ihre Frequenz: Diese Note klingt unabhängig von der Temperatur mit dieser Frequenz.
+  Die Frequenz liegt für A4 zwischen 390 und 470 Hz (standardmäßig 440 Hz), für die anderen Noten im gleichen Verhältnis.
 
-Temperatur
-: Beim Spielen kann eine andere Temperatur als die gleichstufige Stimmung angewendet werden.
-  Ist eine Temperatur ausgewählt, kann auch die Taste gewählt werden, die als Bezug dieser Temperatur dient (ihr Grundton).
+:guilabel:`Transposition`
+: Transposition in Halbtönen (von -12 bis +12) der Noten, die mit der virtuellen Tastatur, der Computertastatur oder über einen MIDI-Eingang gespielt werden.
 
+:guilabel:`Temperatur`
+: Gleichstufige Stimmung (Standard), eine der 226 nach Kategorien geordneten Temperaturen und Tonleitern (historische Temperaturen, westliche Tonleitern, Tonleitern anderer Musiktraditionen, gleichstufige Teilungen der Oktave…) oder die benutzerdefinierte Temperatur.
+  :guilabel:`Tonart` transponiert die Temperatur oder die Tonleiter, sodass ihr Grundton die gewählte Note ist.
+
+Die Tastatur darunter zeigt die Feinstimmung jeder Note in Cent gegenüber der gleichstufigen Stimmung, ein Punkt markiert die Tonart:
+
+* Ein Wert wird mit dem Mausrad oder durch vertikales Ziehen geändert (feiner mit :kbd:`Ctrl`) und per Doppelklick auf 0 zurückgesetzt; die angezeigte Temperatur wird dann zur benutzerdefinierten Temperatur.
+* Das Kontextmenü einer Note ändert ihre Verwendung (:guilabel:`Note verwendet`) und legt die Tonart auf sie (:guilabel:`Tonart auf diese Note`).
+* Die von einer Tonleiter nicht verwendeten Noten sind grau: Sie werden nicht gespielt, außer wenn :guilabel:`Auch die nicht verwendeten Noten spielen` aktiviert ist.
+* Der Wert der Note der Referenztonhöhe ist orange, wenn er nicht 0 ist: Diese Note behält die Frequenz der Referenztonhöhe, alle Noten werden verschoben, um ihre Feinstimmung auszugleichen.
+
+Die Schaltflächen rechts stellen die Standardwerte der Referenztonhöhe und der Transposition sowie der Temperatur wieder her.
 Referenztonhöhe und Temperatur können auch über MIDI-RPN-Nachrichten geändert werden (Master Fine Tuning, Tuning Program Select und Tuning Bank Select).
 
 

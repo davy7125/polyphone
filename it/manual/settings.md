@@ -133,15 +133,27 @@ Poiché il modulatore predefinito che modifica la frequenza di taglio del filtro
 I tasti della tastiera del computer usati per controllare la [tastiera virtuale](manual/soundfont-editor/toolbar.md#doc_keyboard) sono definiti nella sezione :guilabel:`Tastiera`.
 L'altezza può essere alzata o abbassata di un'ottava alla volta con l'impostazione :guilabel:`Primo Do`.
 
-Per i musicisti più esperti, qui si può cambiare l'accordatura:
+L'accordatura del sintetizzatore si regola nella parte :guilabel:`Accordatura`, mostrata anche nella [tastiera virtuale](manual/soundfont-editor/toolbar.md#doc_keyboard_tuning):
 
-Intonazione di riferimento
-: La frequenza del La situato sopra il Do centrale (nota 69), tra 390 e 470 Hz (440 Hz per impostazione predefinita).
+:guilabel:`Intonazione di riferimento`
+: Una nota da La#3 a La4 e la sua frequenza: questa nota suona a questa frequenza qualunque sia il temperamento.
+  La frequenza è compresa tra 390 e 470 Hz per il La4 (440 Hz per impostazione predefinita), e nelle stesse proporzioni per le altre note.
 
-Temperamento
-: Durante l'esecuzione si può applicare un temperamento diverso dal temperamento equabile.
-  Quando si seleziona un temperamento, si può scegliere anche la nota che ne costituisce il riferimento (la sua tonica).
+:guilabel:`Trasposizione`
+: Trasposizione in semitoni (da -12 a +12) delle note suonate con la tastiera virtuale, la tastiera del computer o un ingresso MIDI.
 
+:guilabel:`Temperamento`
+: Temperamento equabile (predefinito), uno dei 226 temperamenti e scale ordinati per categorie (temperamenti storici, scale occidentali, scale di altre tradizioni musicali, divisioni uguali dell'ottava…), oppure il temperamento personalizzato.
+  :guilabel:`Tonalità` traspone il temperamento o la scala in modo che la sua tonica sia la nota scelta.
+
+La tastiera sottostante mostra l'intonazione fine di ogni nota in cent rispetto al temperamento equabile; un punto indica la tonalità:
+
+* un valore si modifica con la rotella del mouse o trascinando verticalmente (più fine con :kbd:`Ctrl`) e torna a 0 con un doppio clic; il temperamento mostrato diventa allora il temperamento personalizzato;
+* il menu contestuale di una nota cambia il suo utilizzo (:guilabel:`Nota utilizzata`) e vi sposta la tonalità (:guilabel:`Tonalità su questa nota`);
+* le note non utilizzate da una scala sono grigie: non vengono suonate, a meno che :guilabel:`Suona anche le note non utilizzate` sia selezionato;
+* il valore della nota dell'intonazione di riferimento è arancione quando non è 0: questa nota mantiene la frequenza di riferimento, e tutte le note vengono spostate per compensare la sua intonazione fine.
+
+I pulsanti a destra ripristinano i valori predefiniti dell'intonazione di riferimento e della trasposizione, e del temperamento.
 L'intonazione di riferimento e il temperamento possono essere cambiati anche con messaggi MIDI RPN (master fine tuning, tuning program select e tuning bank select).
 
 

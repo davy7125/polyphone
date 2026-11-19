@@ -133,15 +133,27 @@ Le modulateur par défaut modifiant la fréquence de coupure du filtre ayant ét
 Les touches du clavier de l'ordinateur assignées pour contrôler le [clavier virtuel](manual/soundfont-editor/toolbar.md#doc_keyboard) sont définies dans la section :guilabel:`Clavier`.
 Les hauteurs de notes peuvent être augmentées ou diminuées octave par octave grâce au réglage :guilabel:`Premier Do`.
 
-Pour les musiciens plus avancés, l'accordage peut être modifié ici&nbsp;:
+L'accordage du synthétiseur se règle dans la partie :guilabel:`Accordage`, également affichée dans le [clavier virtuel](manual/soundfont-editor/toolbar.md#doc_keyboard_tuning)&nbsp;:
 
-Diapason
-: La fréquence du La situé au-dessus du Do central (note 69), entre 390 et 470 Hz (440 Hz par défaut).
+:guilabel:`Diapason`
+: Une note de La#3 à La4 et sa fréquence&nbsp;: cette note sonne à cette fréquence quel que soit le tempérament.
+  La fréquence est comprise entre 390 et 470&nbsp;Hz pour le La4 (440&nbsp;Hz par défaut), et dans les mêmes proportions pour les autres notes.
 
-Tempérament
-: Un tempérament autre que le tempérament égal peut être appliqué lors du jeu.
-  Lorsqu'un tempérament est sélectionné, la note de référence de ce tempérament (sa tonique) peut aussi être choisie.
+:guilabel:`Transposition`
+: Transposition en demi-tons (de -12 à +12) des notes jouées avec le clavier virtuel, le clavier de l'ordinateur ou une entrée MIDI.
 
+:guilabel:`Tempérament`
+: Tempérament égal (par défaut), l'un des 226 tempéraments et gammes classés par catégories (tempéraments historiques, gammes occidentales, gammes d'autres traditions musicales, divisions égales de l'octave…), ou le tempérament personnalisé.
+  :guilabel:`Tonalité` transpose le tempérament ou la gamme pour que sa tonique soit la note choisie.
+
+Le clavier en dessous montre l'accord fin de chaque note en cents par rapport au tempérament égal, un point marquant la tonalité&nbsp;:
+
+* une valeur se modifie avec la molette de la souris ou un glissement vertical (plus finement avec :kbd:`Ctrl`) et revient à 0 par un double clic, le tempérament affiché devenant alors le tempérament personnalisé&nbsp;;
+* le menu contextuel d'une note change son utilisation (:guilabel:`Note utilisée`) et y place la tonalité (:guilabel:`Tonalité sur cette note`)&nbsp;;
+* les notes inutilisées par une gamme sont grisées&nbsp;: elles ne sont pas jouées, sauf si :guilabel:`Jouer aussi les notes inutilisées` est coché&nbsp;;
+* la valeur de la note du diapason est orange lorsqu'elle n'est pas nulle&nbsp;: cette note garde la fréquence du diapason, toutes les notes étant décalées pour compenser son accord fin.
+
+Les boutons à droite rétablissent les valeurs par défaut du diapason et de la transposition, et du tempérament.
 Le diapason et le tempérament peuvent également être modifiés par des messages MIDI RPN (accord fin général, sélection du programme d'accordage et sélection de la banque d'accordage).
 
 

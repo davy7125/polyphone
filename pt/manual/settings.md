@@ -133,15 +133,27 @@ Como o modulador padrão que modifica a frequência de corte do filtro mudou ent
 As teclas do teclado do computador usadas para controlar o [teclado virtual](manual/soundfont-editor/toolbar.md#doc_keyboard) são definidas na seção :guilabel:`Teclado`.
 A altura pode ser aumentada ou diminuída oitava por oitava com o ajuste :guilabel:`Primeiro Dó`.
 
-Para os músicos mais experientes, a afinação pode ser alterada aqui:
+A afinação do sintetizador é ajustada na parte :guilabel:`Afinação`, também exibida no [teclado virtual](manual/soundfont-editor/toolbar.md#doc_keyboard_tuning):
 
-Tom de referência
-: A frequência do lá localizado acima do dó central (nota 69), entre 390 e 470 Hz (440 Hz por padrão).
+:guilabel:`Tom de referência`
+: Uma nota de lá#3 a lá4 e sua frequência: essa nota soa nessa frequência qualquer que seja o temperamento.
+  A frequência fica entre 390 e 470 Hz para o lá4 (440 Hz por padrão), e nas mesmas proporções para as outras notas.
 
-Temperamento
-: Um temperamento diferente do temperamento igual pode ser aplicado ao tocar.
-  Quando um temperamento é selecionado, a nota que serve de referência para esse temperamento (sua tônica) também pode ser escolhida.
+:guilabel:`Transposição`
+: Transposição em semitons (de -12 a +12) das notas tocadas com o teclado virtual, o teclado do computador ou uma entrada MIDI.
 
+:guilabel:`Temperamento`
+: Temperamento igual (padrão), um dos 226 temperamentos e escalas organizados em categorias (temperamentos históricos, escalas ocidentais, escalas de outras tradições musicais, divisões iguais da oitava…) ou o temperamento personalizado.
+  :guilabel:`Tonalidade` transpõe o temperamento ou a escala para que sua tônica seja a nota escolhida.
+
+O teclado abaixo mostra o ajuste fino de cada nota em cents em relação ao temperamento igual, e um ponto marca a tonalidade:
+
+* um valor é alterado com a roda do mouse ou arrastando verticalmente (mais fino com :kbd:`Ctrl`) e volta a 0 com um clique duplo; o temperamento exibido passa então a ser o temperamento personalizado;
+* o menu de contexto de uma nota altera seu uso (:guilabel:`Nota utilizada`) e coloca nela a tonalidade (:guilabel:`Tonalidade nesta nota`);
+* as notas não utilizadas por uma escala ficam em cinza: elas não são tocadas, a menos que :guilabel:`Tocar também as notas não utilizadas` esteja marcado;
+* o valor da nota do tom de referência fica laranja quando não é 0: essa nota mantém a frequência do tom de referência, e todas as notas são deslocadas para compensar seu ajuste fino.
+
+Os botões à direita restauram os valores padrão do tom de referência e da transposição, e do temperamento.
 O tom de referência e o temperamento também podem ser alterados com mensagens MIDI RPN (master fine tuning, tuning program select e tuning bank select).
 
 

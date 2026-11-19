@@ -143,7 +143,7 @@ Cette fenêtre déclenche des signaux MIDI&nbsp;:
 * d'autres signaux MIDI si la partie **contrôleurs MIDI** est visible.
 
 Le bandeau en haut de la fenêtre contient une liste permettant de choisir le type de clavier (5 octaves, 6 octaves, 88 notes ou 128 notes), et affiche la note, la vélocité et l'aftertouch de la note jouée.
-Le menu à droite du bandeau affiche ou masque, au-dessus du clavier, les [contrôleurs MIDI](#doc_keyboard_controllers) et les [effets audio](#doc_keyboard_effects).
+Le menu à droite du bandeau affiche ou masque, au-dessus du clavier et dans cet ordre, l'[accordage](#doc_keyboard_tuning), les [effets audio](#doc_keyboard_effects) et les [contrôleurs MIDI](#doc_keyboard_controllers).
 
 La fenêtre conserve les proportions du clavier&nbsp;: modifier sa largeur modifie sa hauteur.
 Afficher ou masquer une zone ne modifie que la hauteur de la fenêtre, qui s'agrandit ou se réduit par le haut afin que le clavier reste à la même place à l'écran (ce n'est pas possible avec Wayland sous Linux).
@@ -233,7 +233,7 @@ Lorsque l'option :guilabel:`Contrôleurs MIDI` est cochée dans le menu à droit
 Si vous jouez avec les modulateurs, il est conseillé d'utiliser ces fonctionnalités pour tester votre banque de sons.
 
 
-![Clavier virtuel avec les contrôleurs MIDI](images/virtual_keyboard_2.png "Clavier virtuel avec les contrôleurs MIDI")
+![Clavier virtuel avec l'accordage, les effets et les contrôleurs MIDI](images/virtual_keyboard_2.png "Clavier virtuel avec l'accordage, les effets et les contrôleurs MIDI")
 
 
 Cette zone est composée de plusieurs éléments&nbsp;:
@@ -264,7 +264,7 @@ Tous ces éléments peuvent être synchronisés avec un clavier MIDI raccordé �
 ### Effets audio {#doc_keyboard_effects}
 
 
-Lorsque l'option :guilabel:`Effets` est cochée dans le menu à droite du bandeau, une zone s'affiche en haut de la fenêtre pour régler les principaux paramètres du synthétiseur tout en jouant&nbsp;:
+Lorsque l'option :guilabel:`Effets` est cochée dans le menu à droite du bandeau, une zone s'affiche pour régler les principaux paramètres du synthétiseur tout en jouant&nbsp;:
 
 Réverbération
 : Une led active ou désactive la réverbération, puis 4 potentiomètres modifient son niveau, sa profondeur, sa densité et son atténuation.
@@ -278,6 +278,15 @@ Volume
 
 Ces réglages sont les mêmes que dans les [préférences du son](manual/settings.md#doc_sound)&nbsp;: une modification faite à un endroit est affichée à l'autre.
 Une modification est progressive et n'interrompt pas les notes en cours.
+
+
+### Accordage {#doc_keyboard_tuning}
+
+
+Lorsque l'option :guilabel:`Accordage` est cochée dans le menu à droite du bandeau, une zone s'affiche avec l'accordage du synthétiseur, le même que dans les [préférences du clavier](manual/settings.md#doc_keyboard)&nbsp;: :guilabel:`Diapason`, :guilabel:`Transposition` et le bouton :guilabel:`Tempéraments et gammes`.
+Ce bouton affiche ou masque le tempérament, sa tonalité, l'option :guilabel:`Jouer aussi les notes inutilisées` et le clavier des accords fins, pour un accordage microtonal.
+Lorsqu'ils sont masqués, le bouton indique le nom du tempérament ou de la gamme utilisé (avec sa tonalité), pour qu'il ne soit pas oublié.
+Une modification faite dans cette zone s'affiche dans les préférences, et inversement.
 
 
 ## Lecteur MIDI {#doc_midi_player}

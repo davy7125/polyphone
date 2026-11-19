@@ -143,7 +143,7 @@ Essa janela emite sinais MIDI:
 * outros sinais MIDI se a **parte dos controladores MIDI** estiver expandida.
 
 O banner no topo da janela contém uma lista para escolher o tipo de teclado (5 oitavas, 6 oitavas, 88 teclas ou 128 teclas) e exibe a nota, a velocidade e o aftertouch da nota tocada.
-O menu à direita do banner mostra ou oculta os [controladores MIDI](#doc_keyboard_controllers) e os [efeitos de áudio](#doc_keyboard_effects), exibidos acima do teclado.
+O menu à direita do banner mostra ou oculta a [afinação](#doc_keyboard_tuning), os [efeitos de áudio](#doc_keyboard_effects) e os [controladores MIDI](#doc_keyboard_controllers), exibidos nessa ordem acima do teclado.
 
 A janela mantém as proporções do teclado: alterar sua largura altera sua altura.
 Exibir ou ocultar uma área altera apenas a altura da janela, que cresce ou diminui pelo topo para que o teclado fique no mesmo lugar da tela (isso não é possível com o Wayland no Linux).
@@ -233,7 +233,7 @@ Quando a opção :guilabel:`Controladores MIDI` está marcada no menu à direita
 Se você estiver trabalhando com moduladores, é recomendável usar esses recursos para testar sua soundfont.
 
 
-![Teclado virtual com controladores MIDI](images/virtual_keyboard_2.png "Teclado virtual com controladores MIDI")
+![Teclado virtual com a afinação, os efeitos e os controladores MIDI](images/virtual_keyboard_2.png "Teclado virtual com a afinação, os efeitos e os controladores MIDI")
 
 
 Essa área é composta de diferentes botões:
@@ -264,7 +264,7 @@ Todos esses elementos podem ser sincronizados com um teclado MIDI conectado ao c
 ### Efeitos de áudio {#doc_keyboard_effects}
 
 
-Quando a opção :guilabel:`Efeitos` está marcada no menu à direita do banner, uma área é exibida no topo da janela para ajustar as principais configurações do sintetizador enquanto se toca:
+Quando a opção :guilabel:`Efeitos` está marcada no menu à direita do banner, uma área é exibida para ajustar as principais configurações do sintetizador enquanto se toca:
 
 Reverberação
 : Um LED liga ou desliga a reverberação e, em seguida, 4 botões giratórios alteram seu nível, o tamanho da sala, a largura e o amortecimento.
@@ -278,6 +278,15 @@ Volume
 
 Essas configurações são as mesmas das [configurações de som](manual/settings.md#doc_sound): uma alteração feita em um lugar é exibida no outro.
 Uma alteração é progressiva e não interrompe as notas que estão sendo tocadas.
+
+
+### Afinação {#doc_keyboard_tuning}
+
+
+Quando a opção :guilabel:`Afinação` está marcada no menu à direita do banner, uma área é exibida com a afinação do sintetizador, a mesma das [configurações do teclado](manual/settings.md#doc_keyboard): :guilabel:`Tom de referência`, :guilabel:`Transposição` e o botão :guilabel:`Temperamentos e escalas`.
+Esse botão mostra ou oculta o temperamento, sua tonalidade, a opção :guilabel:`Tocar também as notas não utilizadas` e o teclado dos ajustes finos, para uma afinação microtonal.
+Quando estão ocultos, o botão mostra o nome do temperamento ou da escala em uso (com sua tonalidade), para que não seja esquecido.
+Uma alteração feita nessa área é exibida nas configurações, e vice-versa.
 
 
 ## Reprodutor MIDI {#doc_midi_player}

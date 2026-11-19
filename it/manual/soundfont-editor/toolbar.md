@@ -143,7 +143,7 @@ Questa finestra genera segnali MIDI:
 * altri segnali MIDI se la **sezione dei controller MIDI** è espansa.
 
 Il banner nella parte superiore della finestra contiene un elenco per scegliere il tipo di tastiera (5 ottave, 6 ottave, 88 tasti o 128 tasti) e mostra la nota, la velocità e l'aftertouch della nota suonata.
-Il menu a destra del banner mostra o nasconde i [controller MIDI](#doc_keyboard_controllers) e gli [effetti audio](#doc_keyboard_effects), visualizzati sopra la tastiera.
+Il menu a destra del banner mostra o nasconde l'[accordatura](#doc_keyboard_tuning), gli [effetti audio](#doc_keyboard_effects) e i [controller MIDI](#doc_keyboard_controllers), visualizzati in quest'ordine sopra la tastiera.
 
 La finestra mantiene le proporzioni della tastiera: modificandone la larghezza cambia l'altezza.
 Mostrare o nascondere un'area cambia solo l'altezza della finestra, che si allunga o si accorcia dal lato superiore in modo che la tastiera resti nello stesso punto dello schermo (non è possibile con Wayland su Linux).
@@ -233,7 +233,7 @@ Quando l'opzione :guilabel:`Controller MIDI` è spuntata nel menu a destra del b
 Se lavori con i modulatori, è consigliabile usare queste funzionalità per provare il tuo soundfont.
 
 
-![Tastiera virtuale con controller MIDI](images/virtual_keyboard_2.png "Tastiera virtuale con controller MIDI")
+![Tastiera virtuale con l'accordatura, gli effetti e i controller MIDI](images/virtual_keyboard_2.png "Tastiera virtuale con l'accordatura, gli effetti e i controller MIDI")
 
 
 Quest'area è composta da diversi comandi:
@@ -264,7 +264,7 @@ Tutti questi elementi possono essere sincronizzati con una tastiera MIDI collega
 ### Effetti audio {#doc_keyboard_effects}
 
 
-Quando l'opzione :guilabel:`Effetti` è spuntata nel menu a destra del banner, nella parte superiore della finestra compare un'area per regolare le principali impostazioni del sintetizzatore mentre si suona:
+Quando l'opzione :guilabel:`Effetti` è spuntata nel menu a destra del banner, compare un'area per regolare le principali impostazioni del sintetizzatore mentre si suona:
 
 Riverbero
 : Un LED attiva o disattiva il riverbero, poi 4 manopole ne modificano il livello, la dimensione della stanza, l'ampiezza e lo smorzamento.
@@ -278,6 +278,15 @@ Volume
 
 Queste impostazioni sono le stesse delle [impostazioni del suono](manual/settings.md#doc_sound): una modifica fatta in un punto viene mostrata anche nell'altro.
 Una modifica è progressiva e non interrompe le note in corso.
+
+
+### Accordatura {#doc_keyboard_tuning}
+
+
+Quando l'opzione :guilabel:`Accordatura` è spuntata nel menu a destra del banner, compare un'area con l'accordatura del sintetizzatore, la stessa delle [impostazioni della tastiera](manual/settings.md#doc_keyboard): :guilabel:`Intonazione di riferimento`, :guilabel:`Trasposizione` e il pulsante :guilabel:`Temperamenti e scale`.
+Questo pulsante mostra o nasconde il temperamento, la sua tonalità, l'opzione :guilabel:`Suona anche le note non utilizzate` e la tastiera delle intonazioni fini, per un'accordatura microtonale.
+Quando sono nascosti, il pulsante mostra il nome del temperamento o della scala in uso (con la sua tonalità), per non dimenticarlo.
+Una modifica fatta in quest'area viene mostrata nelle impostazioni, e viceversa.
 
 
 ## Lettore MIDI {#doc_midi_player}

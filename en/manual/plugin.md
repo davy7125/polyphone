@@ -48,7 +48,10 @@ A soundfont is opened:
 * by dropping a file on the window.
 
 The sfz and dls files are converted as Polyphone imports them, the samples of an sfz file being the audio files it references.
-The whole soundfont is read when it is opened, the samples of an sf3 file being decompressed: nothing is read on the disk while playing.
+When a soundfont is opened, its structure is read at once: the instruments are listed and can be played.
+Its samples are then read in the background, with a spinner in front of its name (its tooltip gives the progress): a note whose samples are not read yet is silent.
+The samples of the notes played and of the instruments chosen are read first, the samples of an sf3 file being decompressed.
+Once everything is read, nothing is read on the disk while playing; an offline export waits until all samples are read.
 When several instances of the plugin play the same file (one per track for instance), the file is read and kept in memory only once.
 If the file has changed, for instance after being saved again in Polyphone, it is read again.
 
@@ -56,20 +59,20 @@ If the file has changed, for instance after being saved again in Polyphone, it i
 ## Playing modes {#doc_modes}
 
 
-Three buttons above the list of presets choose how the presets are played:
+Three buttons above the list of instruments (the presets of the soundfont) choose how the instruments are played:
 
-:guilabel:`One preset`
-: The preset selected in the list is played on the 16 MIDI channels.
-  The presets are displayed with their bank and preset numbers, for instance “000:024 Guitar”.
+:guilabel:`One instrument`
+: The instrument selected in the list is played on the 16 MIDI channels.
+  The instruments are displayed with their bank and program numbers, for instance “000:024 Guitar”.
 
 :guilabel:`16 channels`
-: Each MIDI channel plays its own preset, chosen in its row.
-  The choice :guilabel:`Program change` plays the preset chosen by the bank select and program change messages received by the channel, as a General MIDI synthesizer does: the bank 128 is then used on the channel 10, for the drums.
-  The preset played is displayed on the right of each row.
+: Each MIDI channel plays its own instrument, chosen in its row.
+  The choice :guilabel:`Program change` plays the instrument chosen by the bank select and program change messages received by the channel, as a General MIDI synthesizer does: the bank 128 is then used on the channel 10, for the drums.
+  The instrument played is displayed on the right of each row.
   This mode is convenient for playing a MIDI file arranged for several instruments.
 
 :guilabel:`MPE`
-: The selected preset is played by an MPE controller (MIDI Polyphonic Expression): each note has its own channel, and thus its own pitch bend, pressure and timbre (CC 74).
+: The selected instrument is played by an MPE controller (MIDI Polyphonic Expression): each note has its own channel, and thus its own pitch bend, pressure and timbre (CC 74).
   A lower zone of 15 channels is used until the controller sends its configuration (RPN 6).
   The master channel of a zone acts on all its notes: its pitch bend is added to the one of each note and its controllers apply to all of them.
   The pitch bend range is 48 semitones for the notes and 2 semitones for the master channel, and can be changed by the controller (RPN 0).
@@ -81,10 +84,23 @@ Three buttons above the list of presets choose how the presets are played:
 ## Parameters {#doc_parameters}
 
 
-The parameters on the right are the ones of the synthesizer of Polyphone, which can be found in its [sound](manual/settings.md#doc_sound) and [keyboard](manual/settings.md#doc_keyboard) settings:
+The parameters are the ones of the synthesizer of Polyphone, which can be found in its [sound](manual/settings.md#doc_sound) and [keyboard](manual/settings.md#doc_keyboard) settings.
+:guilabel:`Gain` (from -24 to +24 dB) is in the header, the other parameters are grouped on the right:
 
-:guilabel:`Synth`
-: :guilabel:`Gain` (from -50 to +50 dB), :guilabel:`Transpose` (from -24 to +24 semitones, the drums being not transposed), :guilabel:`Tuning` (reference pitch of the A4, from 400 to 480 Hz) and :guilabel:`Temperament`, whose fine tunes are relative to the key chosen below the list.
+:guilabel:`Tuning`
+: :guilabel:`Reference pitch`: a note from A#3 to A4 and its frequency (from 400 to 480 Hz for A4, 440 Hz by default), this note sounding at this frequency whatever the temperament.
+  :guilabel:`Transposition`: from -24 to +24 semitones, the drums being not transposed.
+
+:guilabel:`Velocity`
+: The response to the velocity of the notes, each setting being drawn in a graph (velocity from 0 to 127 from left to right):
+  
+  * :guilabel:`Filter cutoff`: default modulator lowering the filter cutoff according to the velocity, by up to 2 octaves, as in the [sound settings](manual/settings.md#doc_sound) of Polyphone. The version 2.04 of the SoundFont format (default) lowers it all the more as the velocity is low. The version 2.01 had a jump at the velocity 64, an error fixed by the version 2.04: it is a compatibility mode for the old soundfonts made to compensate this jump. With :guilabel:`Disabled`, the cutoff does not depend on the velocity.
+  * :guilabel:`Curve`: curve applied to the velocity of the notes received, linear in the middle (default, restored by a double click), concave to the left (softer velocity: the high velocities need a stronger touch) and convex to the right (the velocity rises quickly).
+
+:guilabel:`Temperaments and scales`
+: The temperaments and scales of Polyphone in their categories, then the custom temperament, transposed to the chosen :guilabel:`Tonality`.
+  The keyboard on the right shows the fine tune of each note in cents and is edited as in the [keyboard settings](manual/settings.md#doc_keyboard) of Polyphone: mouse wheel or vertical drag, double click to set a value back to 0, context menu to change the use of a note or to move the tonality to it. A temperament edited becomes the custom temperament.
+  The notes not used by a scale are not played, unless :guilabel:`Play all` is checked.
 
 :guilabel:`Reverb`
 : :guilabel:`Level`, :guilabel:`Size`, :guilabel:`Width` and :guilabel:`Damping`.
@@ -92,7 +108,10 @@ The parameters on the right are the ones of the synthesizer of Polyphone, which 
 :guilabel:`Chorus`
 : :guilabel:`Level`, :guilabel:`Depth` and :guilabel:`Frequency`.
 
-All these parameters can be automated by the host.
+The groups :guilabel:`Temperaments and scales`, :guilabel:`Reverb` and :guilabel:`Chorus` have a switch on the right of their title: switched off, the group is collapsed and its temperament or effect is not applied (equal temperament with all the notes, no effect), its settings being kept.
+The height of the window follows the groups expanded.
+
+The host can automate all these parameters, except the note of the reference pitch (the frequency of A4 being automated) and the fine tunes of the custom temperament, which are saved with the project.
 
 
 ## Keyboard and status {#doc_keyboard}
@@ -121,6 +140,15 @@ The button :guilabel:`Settings` opens a menu with the following options:
   This choice is shared by all instances of the plugin.
   The names of the parameters and of the outputs given to the host are the ones of the language used when the plugin is loaded (always English with LV2).
 
+:guilabel:`Fixed latency (notes played at their exact position)`
+: When this option is disabled (default), the MIDI messages of an audio block are moved together so that the first note of the block starts at its beginning: the notes played live sound sooner, by half the duration of a buffer on average, but their latency varies with their position in the buffer of the host.
+  When it is enabled, each message is processed at its exact position: the latency of the notes played live is constant.
+  During an offline export, the messages are always processed at their exact position.
+
+:guilabel:`Clipping to [-1; 1]`
+: The outputs are limited to the interval [-1; 1] (default), as in Polyphone.
+  Without clipping, the higher values are given to the host, which mixes them as floating-point numbers: the gain can then be raised without saturation, the level being adjusted before the output of the host.
+
 :guilabel:`Store the soundfont in the project`
 : The soundfont is saved in the project of the host, which can then be opened on another computer without the file.
   This is not possible with an sfz file, whose samples are other files.
@@ -134,8 +162,8 @@ The button :guilabel:`Settings` opens a menu with the following options:
 ## Use in a project {#doc_project}
 
 
-The project of the host saves the parameters, the presets played, the polyphony and the path of the soundfont (or its content, if it is stored in the project).
-When a project is opened, the soundfont is read before the rest is restored, so that an offline export can start at once.
+The project of the host saves the parameters, the instruments played, the polyphony and the path of the soundfont (or its content, if it is stored in the project).
+When a project is opened, only the structure of the soundfont is read before the rest is restored: the host does not wait for the samples, and an offline export can start at once (it waits for the samples not read yet).
 
-A note starts exactly at the position of its MIDI message, whatever the buffer size of the host.
+A note starts exactly at the position of its MIDI message, whatever the buffer size of the host, during an offline export and in real time with a [fixed latency](manual/plugin.md#doc_settings).
 During an offline export, the voices are never limited by the processor load.

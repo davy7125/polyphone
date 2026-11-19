@@ -133,15 +133,27 @@ Since the default modulator modifying the filter cutoff frequency has been chang
 The keys of the computer keyboard used to control the [virtual keyboard](manual/soundfont-editor/toolbar.md#doc_keyboard) are defined in the :guilabel:`Keyboard` section.
 The pitch may be increased or decreased octave by octave with the setting :guilabel:`First C`.
 
-For more advanced musicians, the tuning can be changed here:
+The tuning of the synthesizer is changed in the part :guilabel:`Tuning`, also displayed in the [virtual keyboard](manual/soundfont-editor/toolbar.md#doc_keyboard_tuning):
 
-Reference pitch
-: The frequency of the A located above middle C (key 69), between 390 and 470 Hz (440 Hz by default).
+:guilabel:`Reference pitch`
+: A note from A#3 to A4 and its frequency: this note sounds at this frequency whatever the temperament.
+  The frequency is between 390 and 470 Hz for A4 (440 Hz by default), and in the same proportions for the other notes.
 
-Temperament
-: A temperament other than the equal temperament can be applied when playing.
-  When a temperament is selected, the key that is the reference of this temperament (its tonic) can also be chosen.
+:guilabel:`Transposition`
+: Transposition in semitones (from -12 to +12) of the notes played with the virtual keyboard, the computer keyboard or a MIDI input.
 
+:guilabel:`Temperament`
+: Equal temperament (default), one of the 226 temperaments and scales sorted in categories (historical temperaments, Western scales, scales of other musical traditions, equal divisions of the octave…), or the custom temperament.
+  :guilabel:`Tonality` transposes the temperament or the scale so that its tonic is the chosen note.
+
+The keyboard below shows the fine tune of each note in cents compared to the equal temperament, a dot marking the tonality:
+
+* a value is changed with the mouse wheel or a vertical drag (finer with :kbd:`Ctrl`) and set back to 0 by a double click, the temperament shown then becoming the custom temperament;
+* the context menu of a note changes its use (:guilabel:`Note used`) and moves the tonality to it (:guilabel:`Tonality on this note`);
+* the notes not used by a scale are grayed: they are not played, unless :guilabel:`Also play the unused notes` is checked;
+* the value of the note of the reference pitch is orange when it is not 0: this note keeps the frequency of the reference pitch, all the notes being shifted to compensate its fine tune.
+
+The buttons on the right restore the default values of the reference pitch and the transposition, and of the temperament.
 The reference pitch and the temperament can also be changed with MIDI RPN messages (master fine tuning, tuning program select and tuning bank select).
 
 
