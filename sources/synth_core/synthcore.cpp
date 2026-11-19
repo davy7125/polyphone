@@ -268,14 +268,14 @@ void SynthCore::playInst(int sf2Id, ISynthSoundfont * soundfont, ISynthInstPrst 
             ISynthSample * smpl = soundfont->getSynthSample(getAttribute(instZone, champ_sampleID).wValue);
             if (smpl != nullptr)
                 this->playSmpl(sf2Id, smpl, channel, key, velocity, false,
-                               inst, instZone, prst, prstZone);
+                               inst, instZone, prst, prstZone, soundfont->getDefaultModulators());
         }
     }
 }
 
 int SynthCore::playSmpl(int sf2Id, ISynthSample * smpl, int channel, int key, int velocity, bool other,
                         ISynthInstPrst * inst, ISynthZone * instZone,
-                        ISynthInstPrst * prst, ISynthZone * prstZone)
+                        ISynthInstPrst * prst, ISynthZone * prstZone, ISynthZone * defaultModulators)
 {
     // Load the sound: not played if its data is not available yet (no voice taken)
     if (!smpl->loadData())
@@ -289,7 +289,7 @@ int SynthCore::playSmpl(int sf2Id, ISynthSample * smpl, int channel, int key, in
         return currentToken;
 
     // Configure it
-    voice->initialize(sf2Id, prst, prstZone, inst, instZone, smpl,
+    voice->initialize(sf2Id, defaultModulators, prst, prstZone, inst, instZone, smpl,
                       channel, key, velocity, inst == nullptr ? (other ? 2 : 1) : 0,
                       _sampleRate, currentToken, _noteId);
     configureVoice(voice);

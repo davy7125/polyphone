@@ -47,6 +47,8 @@ public:
     char _INFO[4]; // Should be "INFO"
     QMap<QString, QString> _infos;
     QMap<QString, SfVersionTag> _versions;
+    bool _hasDefaultModulators; // DMOD chunk written
+    QByteArray _defaultModulators; // Records of the DMOD chunk, terminal one included
 };
 
 // Extension methods for QDataStream to serialize

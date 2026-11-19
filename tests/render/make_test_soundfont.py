@@ -1,12 +1,17 @@
 #!/usr/bin/env python3
 """Write polyphone-test.sf2, a small soundfont for the rendering tests.
 
-Usage: make_test_soundfont.py <output file>
+Usage: make_test_soundfont.py <output file> [dmod]
 
 It covers what the other soundfonts of the tests do not: 24-bit samples (sm24 chunk, including a
 sample whose signal is almost only in the 8 least significant bits), a linked stereo pair, the loop
 modes, an exclusive class, velocity layers, a modulator and generators at the preset level. The
 samples are computed, so that the file is the same everywhere and has no license.
+
+With "dmod", the soundfont (polyphone-test-dmod.sf2) also has its own default modulators in a DMOD
+chunk, replacing the ones of the sf2 format: the velocity lowering the attenuation the wrong way
+round (quiet notes are loud) and CC 1 raising the pitch by 2 semitones. Volume, pan, expression and
+pitch wheel thus have no effect.
 """
 
 import math
@@ -17,7 +22,7 @@ import sys
 START_LOOP_OFFSET, PAN, INITIAL_FILTER_FC, INITIAL_FILTER_Q = 2, 17, 8, 9
 ATTACK_VOL_ENV, DECAY_VOL_ENV, SUSTAIN_VOL_ENV, RELEASE_VOL_ENV = 34, 36, 37, 38
 INSTRUMENT, KEY_RANGE, VEL_RANGE, INITIAL_ATTENUATION = 41, 43, 44, 48
-COARSE_TUNE, SAMPLE_ID, SAMPLE_MODES, EXCLUSIVE_CLASS = 51, 53, 54, 57
+COARSE_TUNE, FINE_TUNE, SAMPLE_ID, SAMPLE_MODES, EXCLUSIVE_CLASS = 51, 52, 53, 54, 57
 
 # Sample types
 MONO, RIGHT, LEFT = 1, 2, 4
@@ -123,7 +128,7 @@ def build_instruments(instruments):
     return records, bags, mods, gens
 
 
-def make_soundfont(path):
+def make_soundfont(path, with_default_modulators=False):
     samples = make_samples()
 
     # Sample data: 16 bits in smpl, the 8 least significant bits in sm24, 46 zero points after each sample
@@ -213,6 +218,11 @@ def make_soundfont(path):
 
     info = (chunk(b'ifil', struct.pack('<HH', 2, 4)) + chunk(b'isng', b'EMU8000\0') +
             chunk(b'INAM', b'Polyphone rendering tests\0') + chunk(b'ISFT', b'make_test_soundfont.py\0'))
+    if with_default_modulators:
+        # Source (velocity, concave, not reversed: 0x0402, CC 1, linear: 0x0081), destination, amount, amount source,
+        # transform, then the terminal record
+        info += chunk(b'DMOD', struct.pack('<HHhHH', 0x0402, INITIAL_ATTENUATION, 960, 0, 0) +
+                      struct.pack('<HHhHH', 0x0081, FINE_TUNE, 200, 0, 0) + b'\0' * 10)
     sdta = chunk(b'smpl', bytes(smpl)) + chunk(b'sm24', bytes(sm24))
     pdta = (chunk(b'phdr', phdr) + chunk(b'pbag', pbag) + chunk(b'pmod', pmod) + chunk(b'pgen', pgen) +
             chunk(b'inst', inst) + chunk(b'ibag', ibag) + chunk(b'imod', imod) + chunk(b'igen', igen) +
@@ -223,7 +233,7 @@ def make_soundfont(path):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) != 2:
-        print('Usage: make_test_soundfont.py <output file>')
+    if len(sys.argv) not in (2, 3) or (len(sys.argv) == 3 and sys.argv[2] != 'dmod'):
+        print('Usage: make_test_soundfont.py <output file> [dmod]')
         sys.exit(1)
-    make_soundfont(sys.argv[1])
+    make_soundfont(sys.argv[1], len(sys.argv) == 3)

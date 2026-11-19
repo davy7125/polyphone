@@ -16,9 +16,12 @@ threshold=${6:--100}
 testsDir="$(cd "$(dirname "$0")" && pwd)"
 mkdir -p "$outputDir" || exit 1
 
-# The soundfont of the tests is generated if it is not in the directory
+# The soundfonts of the tests are generated if they are not in the directory
 if [ ! -f "$soundfontDir/polyphone-test.sf2" ]; then
     python3 "$testsDir/../render/make_test_soundfont.py" "$soundfontDir/polyphone-test.sf2" || exit 1
+fi
+if [ ! -f "$soundfontDir/polyphone-test-dmod.sf2" ]; then
+    python3 "$testsDir/../render/make_test_soundfont.py" "$soundfontDir/polyphone-test-dmod.sf2" dmod || exit 1
 fi
 
 list="$outputDir/cases.txt"

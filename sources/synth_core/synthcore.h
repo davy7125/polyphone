@@ -152,7 +152,8 @@ private:
                   ISynthInstPrst * prst = nullptr, ISynthZone * prstZone = nullptr);
     int playSmpl(int sf2Id, ISynthSample * smpl, int channel, int key, int velocity, bool other,
                  ISynthInstPrst * inst = nullptr, ISynthZone * instZone = nullptr,
-                 ISynthInstPrst * prst = nullptr, ISynthZone * prstZone = nullptr);
+                 ISynthInstPrst * prst = nullptr, ISynthZone * prstZone = nullptr,
+                 ISynthZone * defaultModulators = nullptr);
     void configureVoice(Voice * voice);
     void configureVoices();
     struct ReplacedSample;

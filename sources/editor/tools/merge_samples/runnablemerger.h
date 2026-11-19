@@ -46,7 +46,7 @@ public:
 private:
     void playPrst(float * dataR, float * dataL, Soundfont * soundfont, InstPrst * prst);
     void playInst(float * dataR, float * dataL, Soundfont * soundfont, InstPrst * prst, Division * prstDiv, InstPrst * inst);
-    void playSmpl(float * dataR, float * dataL, InstPrst * prst, Division * prstDiv, InstPrst * inst, Division * instDiv, Smpl * smpl);
+    void playSmpl(float * dataR, float * dataL, Soundfont * soundfont, InstPrst * prst, Division * prstDiv, InstPrst * inst, Division * instDiv, Smpl * smpl);
     static quint32 SAMPLE_RATE; // In samples per second
     static quint32 BUFFER_LENGTH;
 

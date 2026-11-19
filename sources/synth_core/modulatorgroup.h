@@ -28,6 +28,7 @@
 #include "attributetypes.h"
 #include "synthconstants.h"
 #include "parametermodulator.h"
+class ISynthZone;
 class ModulatedParameter;
 class VoiceContext;
 
@@ -41,7 +42,8 @@ public:
     void clear();
 
     // Initialize with keys and vel
-    void initialize(int channel, int initialKey, int keyForComputation, int velForComputation);
+    // The default modulators are the ones of the soundfont, or the ones of the context if null
+    void initialize(int channel, int initialKey, int keyForComputation, int velForComputation, ISynthZone * defaultModulators);
 
     // Load modulators from the instrument or preset level
     void loadModulators(const ModulatorData * const modData, int modulatorNumber);
@@ -60,8 +62,6 @@ public:
     void process();
 
 private:
-    void loadDefaultModulators();
-
     ModulatedParameter * _parameters;
     bool _isPrst;
     const VoiceContext * _context;

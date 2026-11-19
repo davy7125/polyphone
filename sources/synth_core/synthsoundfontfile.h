@@ -113,6 +113,7 @@ public:
     ISynthInstPrst * getInstrumentAt(int position) override;
     int getPresetCount() override;
     ISynthInstPrst * getPresetAt(int position) override;
+    ISynthZone * getDefaultModulators() override;
 
 private:
     class Sample;
@@ -135,6 +136,7 @@ private:
     static SynthSoundfontFile * openDls(std::unique_ptr<Sf2Reader::Source> source, const std::string &filePath,
                                         std::string &error);
     void addElements(const std::vector<Sf2Reader::Element> &elements, bool isPreset, bool withControllers = true);
+    void addControllerSources(const Sf2Reader::Zone &zone);
     void build(Builder &builder);
     void prepareLoading();
     int takeNextSamples(Sample * samples[2]); // With _loadingMutex
@@ -144,6 +146,7 @@ private:
     std::vector<std::unique_ptr<Sample>> _samples;
     std::vector<std::unique_ptr<Element>> _instruments;
     std::vector<std::unique_ptr<Element>> _presets;
+    std::unique_ptr<Zone> _defaultModulators; // Null without DMOD chunk
     std::vector<SFModulator> _controllerSources; // In the order of the modulators added by the editor
 
     // Reading of the sample data: the source is read by one thread at a time, and released once everything is read

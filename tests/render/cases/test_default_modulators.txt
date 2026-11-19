@@ -1,0 +1,27 @@
+# soundfont: polyphone-test-dmod.sf2
+# Default modulators of the soundfont (DMOD chunk) replacing the ones of the sf2 format
+samplerate 48000
+duration 5
+
+0     program 0 0 0
+
+# Velocity the wrong way round: the first note is the loudest
+0.00  on 0 60 20
+0.40  off 0 60
+0.60  on 0 60 127
+1.00  off 0 60
+
+# CC 1 raises the pitch
+1.20  on 0 55 20
+1.40  cc 0 1 64
+1.60  cc 0 1 127
+1.80  cc 0 1 0
+2.00  off 0 55
+
+# No effect: pitch wheel, volume, expression, pan
+2.20  on 0 55 20
+2.40  bend 0 1
+2.60  cc 0 7 20
+2.80  cc 0 11 20
+3.00  cc 0 10 0
+3.20  off 0 55

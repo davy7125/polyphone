@@ -49,7 +49,7 @@ public:
     // * 2 for its stereo part
     // * 0 otherwise (instrument / preset)
     // The note id is shared by all voices started by a same key (stereo parts, layers)
-    void initialize(int sf2Id, ISynthInstPrst * prst, ISynthZone * prstZone, ISynthInstPrst * inst, ISynthZone * instZone,
+    void initialize(int sf2Id, ISynthZone * defaultModulators, ISynthInstPrst * prst, ISynthZone * prstZone, ISynthInstPrst * inst, ISynthZone * instZone,
                     ISynthSample * smpl, int8_t channel, int8_t key, int8_t vel, int8_t type, uint32_t audioSmplRate, int token,
                     int noteId);
 

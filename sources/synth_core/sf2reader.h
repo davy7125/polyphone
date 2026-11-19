@@ -135,6 +135,11 @@ public:
     // Version "ifil" or "iver", 0.0 if missing
     SfVersionTag getVersion(const std::string &key) const;
 
+    // Default modulators of the soundfont (DMOD chunk of the INFO list), replacing the ones of the sf2 format
+    // Without the chunk the soundfont has none of its own. A chunk with no modulator means no default modulators.
+    bool hasDefaultModulators() const { return _hasDefaultModulators; }
+    const Zone &getDefaultModulators() const { return _defaultModulators; }
+
     // True if the samples have 24 bits (sm24 chunk)
     bool has24BitSamples() const { return _sm24Offset > 0; }
 
@@ -176,6 +181,8 @@ private:
     uint32_t _infoSize = 0;
     std::map<std::string, std::string> _infos;
     std::map<std::string, SfVersionTag> _versions;
+    bool _hasDefaultModulators = false;
+    Zone _defaultModulators; // Modulators only
     uint32_t _smplOffset = 0; // Position of the 16-bit data from the beginning of sdta
     uint32_t _sm24Offset = 0; // Position of the 24-bit data from the beginning of sdta, 0 if there are none
     std::vector<Sample> _samples;

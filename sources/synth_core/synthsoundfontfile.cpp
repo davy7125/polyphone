@@ -736,6 +736,12 @@ SynthSoundfontFile * SynthSoundfontFile::openSf2(std::unique_ptr<Sf2Reader::Sour
     try
     {
         soundfont->_infos = reader.getInfos();
+        if (reader.hasDefaultModulators())
+        {
+            // Before the elements, as the editor reads them
+            soundfont->_defaultModulators.reset(new Zone(reader.getDefaultModulators()));
+            soundfont->addControllerSources(reader.getDefaultModulators());
+        }
         soundfont->addElements(reader.getInstruments(), false);
         soundfont->addElements(reader.getPresets(), true);
 
@@ -1009,16 +1015,18 @@ void SynthSoundfontFile::addElements(const std::vector<Sf2Reader::Element> &elem
             continue;
         const std::vector<Sf2Reader::Zone> &zones = elements[i].zones;
         for (int z = -1; z < static_cast<int>(zones.size()); z++)
-        {
-            const Sf2Reader::Zone &zone = z < 0 ? elements[i].globalZone : zones[static_cast<size_t>(z)];
-            for (const ModulatorData &modulator : zone.modulators)
-            {
-                if (modulator.srcOper.CC)
-                    _controllerSources.push_back(modulator.srcOper);
-                if (modulator.amtSrcOper.CC)
-                    _controllerSources.push_back(modulator.amtSrcOper);
-            }
-        }
+            addControllerSources(z < 0 ? elements[i].globalZone : zones[static_cast<size_t>(z)]);
+    }
+}
+
+void SynthSoundfontFile::addControllerSources(const Sf2Reader::Zone &zone)
+{
+    for (const ModulatorData &modulator : zone.modulators)
+    {
+        if (modulator.srcOper.CC)
+            _controllerSources.push_back(modulator.srcOper);
+        if (modulator.amtSrcOper.CC)
+            _controllerSources.push_back(modulator.amtSrcOper);
     }
 }
 
@@ -1096,4 +1104,9 @@ int SynthSoundfontFile::getPresetCount()
 ISynthInstPrst * SynthSoundfontFile::getPresetAt(int position)
 {
     return getSynthPreset(position); // Same order
+}
+
+ISynthZone * SynthSoundfontFile::getDefaultModulators()
+{
+    return _defaultModulators.get();
 }

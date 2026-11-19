@@ -111,6 +111,10 @@ public:
     virtual ISynthInstPrst * getInstrumentAt(int position) = 0;
     virtual int getPresetCount() = 0;
     virtual ISynthInstPrst * getPresetAt(int position) = 0;
+
+    /// Zone holding the default modulators of the soundfont (DMOD chunk), replacing the ones of the sf2 format
+    /// Null if the soundfont has none of its own: the default modulators of the sf2 format are used
+    virtual ISynthZone * getDefaultModulators() = 0;
 };
 
 class ISynthSoundfonts

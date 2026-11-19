@@ -274,6 +274,7 @@ struct Sf2Reader::Parts
     static bool readChunk(Cursor &cursor, uint32_t recordSize, std::vector<uint8_t> &data, bool isLast = false);
     static void readBags(const std::vector<uint8_t> &data, std::vector<Bag> &bags);
     static void readModulators(const std::vector<uint8_t> &data, std::vector<Modulator> &modulators);
+    static ModulatorData toModulatorData(const Modulator &modulator, uint16_t index);
     static void readGenerators(const std::vector<uint8_t> &data, std::vector<Generator> &generators);
 };
 
@@ -315,6 +316,27 @@ void Sf2Reader::Parts::readModulators(const std::vector<uint8_t> &data, std::vec
     }
 }
 
+ModulatorData Sf2Reader::Parts::toModulatorData(const Modulator &modulator, uint16_t index)
+{
+    // Sources: index (7 bits) and CC flag in the first byte, direction, polarity and type in the second
+    ModulatorData data;
+    SFModulator * sources[2] = { &data.srcOper, &data.amtSrcOper };
+    const uint8_t * bytes[2] = { modulator.source, modulator.amountSource };
+    for (int s = 0; s < 2; s++)
+    {
+        sources[s]->Type = static_cast<ModType>(bytes[s][1] >> 2);
+        sources[s]->isBipolar = ((bytes[s][1] >> 1) & 0x01) > 0;
+        sources[s]->isDescending = (bytes[s][1] & 0x01) > 0;
+        sources[s]->CC = (bytes[s][0] >> 7) > 0;
+        sources[s]->Index = bytes[s][0] & 0x7F;
+    }
+    data.destOper = modulator.destination;
+    data.amount = modulator.amount;
+    data.transOper = static_cast<SFTransform>(modulator.transform);
+    data.index = index;
+    return data;
+}
+
 void Sf2Reader::Parts::readGenerators(const std::vector<uint8_t> &data, std::vector<Generator> &generators)
 {
     for (size_t i = 0; i < data.size(); i += 4)
@@ -352,6 +374,8 @@ bool Sf2Reader::read(Source &source)
     _instruments.clear();
     _presets.clear();
     _infoSize = _smplOffset = _sm24Offset = 0;
+    _hasDefaultModulators = false;
+    _defaultModulators.modulators.clear();
 
     try
     {
@@ -409,6 +433,23 @@ bool Sf2Reader::readInfo(Cursor &cursor)
             if (!cursor.readU16(major) || !cursor.readU16(minor))
                 return false;
             _versions[key] = { major, minor };
+        }
+        else if (key == "DMOD")
+        {
+            // Default modulators of the soundfont, as in pmod and imod: records of 10 bytes with a terminal one, which is
+            // skipped (a last record that is not empty is kept, the terminal one is missing)
+            std::vector<uint8_t> buffer;
+            if (blockSize > INT32_MAX || !cursor.read(buffer, blockSize))
+                return false;
+            buffer.resize(std::min<size_t>(buffer.size() - buffer.size() % 10, 65536 * 10)); // As many as a zone can have
+            if (buffer.size() >= 10 && std::all_of(buffer.end() - 10, buffer.end(), [](uint8_t byte) { return byte == 0; }))
+                buffer.resize(buffer.size() - 10);
+            std::vector<Parts::Modulator> modulators;
+            Parts::readModulators(buffer, modulators);
+            _hasDefaultModulators = true;
+            _defaultModulators.modulators.clear();
+            for (size_t i = 0; i < modulators.size(); i++)
+                _defaultModulators.modulators.push_back(Parts::toModulatorData(modulators[i], static_cast<uint16_t>(i)));
         }
         else
         {
@@ -679,24 +720,7 @@ bool Sf2Reader::createElements(const Parts &parts, bool isPreset)
                     return false;
                 }
 
-                // Sources: index (7 bits) and CC flag in the first byte, direction, polarity and type in the second
-                const Parts::Modulator &modulator = modulators[k];
-                ModulatorData data;
-                SFModulator * sources[2] = { &data.srcOper, &data.amtSrcOper };
-                const uint8_t * bytes[2] = { modulator.source, modulator.amountSource };
-                for (int s = 0; s < 2; s++)
-                {
-                    sources[s]->Type = static_cast<ModType>(bytes[s][1] >> 2);
-                    sources[s]->isBipolar = ((bytes[s][1] >> 1) & 0x01) > 0;
-                    sources[s]->isDescending = (bytes[s][1] & 0x01) > 0;
-                    sources[s]->CC = (bytes[s][0] >> 7) > 0;
-                    sources[s]->Index = bytes[s][0] & 0x7F;
-                }
-                data.destOper = modulator.destination;
-                data.amount = modulator.amount;
-                data.transOper = static_cast<SFTransform>(modulator.transform);
-                data.index = modulatorIndex++;
-                zone->modulators.push_back(data);
+                zone->modulators.push_back(Parts::toModulatorData(modulators[k], modulatorIndex++));
             }
         }
     }

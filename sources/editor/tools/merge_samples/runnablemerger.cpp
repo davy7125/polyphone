@@ -200,17 +200,17 @@ void RunnableMerger::playInst(float * dataR, float * dataL, Soundfont * soundfon
         {
             Smpl * smpl = soundfont->getSample(instDiv->getGen(champ_sampleID).wValue);
             if (smpl != nullptr)
-                this->playSmpl(dataR, dataL, prst, prstDiv, inst, instDiv, smpl);
+                this->playSmpl(dataR, dataL, soundfont, prst, prstDiv, inst, instDiv, smpl);
         }
     }
 }
 
-void RunnableMerger::playSmpl(float * dataR, float * dataL, InstPrst * prst, Division * prstDiv, InstPrst * inst, Division * instDiv, Smpl * smpl)
+void RunnableMerger::playSmpl(float * dataR, float * dataL, Soundfont * soundfont, InstPrst * prst, Division * prstDiv, InstPrst * inst, Division * instDiv, Smpl * smpl)
 {
     // Initialize a voice
     VoiceParam * voiceParam = new VoiceParam(_context);
     Voice * voice = new Voice(voiceParam);
-    voice->initialize(_idPrst.indexSf2, prst, prstDiv, inst, instDiv, smpl, 0, _key, 127, 0, SAMPLE_RATE, 0, 0);
+    voice->initialize(_idPrst.indexSf2, soundfont->getDefaultModulators(), prst, prstDiv, inst, instDiv, smpl, 0, _key, 127, 0, SAMPLE_RATE, 0, 0);
 
     // Pan coeffs
     float tmp = 0.005f * (voiceParam->getFloat(champ_pan) + 50.f); // Between 0 and 1/2 for [0; PI/2]

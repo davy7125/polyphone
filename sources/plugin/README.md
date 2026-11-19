@@ -53,7 +53,9 @@ LV2, AU (macOS) and a standalone application ("Polyphone Player", not distribute
   switches of the temperament, of the reverb and of the chorus, velocity: default modulator
   to the filter cutoff (SoundFont 2.01, SoundFont 2.04 or disabled, as in the editor; its behavior and
   when to change it explained by an information icon) and curve applied to the velocity of
-  the notes (power 3^(-curve / 100), linear by default), both drawn in a graph.
+  the notes (power 3^(-curve / 100), linear by default), both drawn in a graph. A soundfont with its
+  own default modulators (DMOD chunk of an sf2 or sf3 file) uses them instead of the ones of the
+  sf2 format: the setting of the default modulator has no effect on it.
 - Interface: the gain in the header (its value shown, its arc colored from 0 toward the left or the
   right), the presets on the left (the room left by the groups); on the right the tuning (reference pitch: note from A#3 to A4
   = its frequency, the note keeping its pitch whatever the temperament; transposition) beside the

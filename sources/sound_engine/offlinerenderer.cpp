@@ -89,17 +89,19 @@ bool OfflineRenderer::applyDefaultControllerValues(int sf2Index)
 
 void OfflineRenderer::applyDefaultControllerValues(ISynthSoundfont * soundfont, MidiProcessor &processor)
 {
-    for (int type = 0; type < 2; type++)
+    // Default modulators of the soundfont (type -1), then instruments and presets
+    for (int type = -1; type < 2; type++)
     {
-        int count = type == 0 ? soundfont->getInstrumentCount() : soundfont->getPresetCount();
+        int count = type == -1 ? 1 : (type == 0 ? soundfont->getInstrumentCount() : soundfont->getPresetCount());
         for (int i = 0; i < count; i++)
         {
-            ISynthInstPrst * element = type == 0 ? soundfont->getInstrumentAt(i) : soundfont->getPresetAt(i);
-            if (element == nullptr)
+            ISynthInstPrst * element = type == -1 ? nullptr : (type == 0 ? soundfont->getInstrumentAt(i) : soundfont->getPresetAt(i));
+            if (element == nullptr && type != -1)
                 continue;
-            for (int z = -1; z < element->getZoneCount(); z++)
+            for (int z = -1; z < (element == nullptr ? 0 : element->getZoneCount()); z++)
             {
-                ISynthZone * zone = z < 0 ? element->getGlobalZone() : element->getZone(z);
+                ISynthZone * zone = element == nullptr ? soundfont->getDefaultModulators() :
+                                                         (z < 0 ? element->getGlobalZone() : element->getZone(z));
                 if (zone == nullptr)
                     continue;
                 for (int m = 0; m < zone->getModulatorCount(); m++)

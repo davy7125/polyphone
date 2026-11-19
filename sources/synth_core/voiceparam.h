@@ -41,7 +41,8 @@ public:
     ~VoiceParam();
 
     // Initialize a set of parameters (prst and inst can be unknown)
-    void initialize(int sf2Id, ISynthInstPrst * prst, ISynthZone * prstZone, ISynthInstPrst * inst, ISynthZone * instZone,
+    // defaultModulators: ISynthSoundfont::getDefaultModulators of the soundfont
+    void initialize(int sf2Id, ISynthZone * defaultModulators, ISynthInstPrst * prst, ISynthZone * prstZone, ISynthInstPrst * inst, ISynthZone * instZone,
                     ISynthSample * smpl, int8_t channel, int8_t key, int8_t vel, int8_t type);
 
     void setPan(float val);

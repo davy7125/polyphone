@@ -256,6 +256,19 @@ void OutputSf::fillSf2(int sf2Index, Sf2Header * header, Sf2SdtaPart * sdtaPart,
     if (!strTmp.isEmpty())
         header->_infos["ISFT"] = strTmp.left(255);
 
+    // Default modulators of the soundfont, only if it has its own
+    if (_sm->get(id, champ_customDefaultMods).wValue != 0)
+    {
+        EltID idMod(elementSf2Mod, sf2Index);
+        QVector<Sf2PdtaPart_mod> mods(_sm->getSiblings(idMod).count() + 1); // With the terminal record
+        dwTmp = 0;
+        loadMods(idMod, mods, dwTmp);
+        QDataStream stream(&header->_defaultModulators, QIODevice::WriteOnly);
+        for (int i = 0; i < mods.count(); i++)
+            stream << mods[i];
+        header->_hasDefaultModulators = true;
+    }
+
     ////////////
     /// SDTA ///
     ////////////
