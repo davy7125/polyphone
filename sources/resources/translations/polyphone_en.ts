@@ -1520,12 +1520,12 @@ repository</source>
 <context>
     <name>ConversionDls</name>
     <message>
-        <location filename="../../core/output/dls/conversion_dls.cpp" line="58"/>
+        <location filename="../../core/output/dls/conversion_dls.cpp" line="73"/>
         <source>cannot create file &quot;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/output/dls/conversion_dls.cpp" line="109"/>
+        <location filename="../../core/output/dls/conversion_dls.cpp" line="124"/>
         <source>cannot write file &quot;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3234,7 +3234,7 @@ for a signal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/duplicator.cpp" line="539"/>
+        <location filename="../../core/duplicator.cpp" line="542"/>
         <source>The preset &quot;%1&quot; already exists.&lt;br/&gt;Replace?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6491,12 +6491,12 @@ Change this option if notes sound too muffled: SoundFont 2.01 for an old soundfo
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="253"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="281"/>
         <source>too many soundfonts are still playing, try again in a moment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="749"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="777"/>
         <source>file not found</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6828,129 +6828,129 @@ Change this option if notes sound too muffled: SoundFont 2.01 for an old soundfo
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="138"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="169"/>
         <source>Gain</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="141"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="172"/>
         <source>Reverb</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="141"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="172"/>
         <source>Reverb level</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="142"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="173"/>
         <source>Reverb size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="142"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="173"/>
         <source>Reverb width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="143"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="174"/>
         <source>Reverb damping</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="145"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="176"/>
         <source>Chorus</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="145"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="176"/>
         <source>Chorus level</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="146"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="177"/>
         <source>Chorus depth</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="146"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="177"/>
         <source>Chorus frequency</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="152"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="183"/>
         <source>Tuning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="153"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="184"/>
         <source>Transposition</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="154"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="185"/>
         <source>semitones</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="155"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="186"/>
         <source>Reference pitch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="158"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="189"/>
         <source>Temperament</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="161"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="190"/>
         <source>Temperament key</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="166"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="195"/>
         <source>Velocity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="168"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="196"/>
         <source>Velocity to filter cutoff</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="169"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="197"/>
         <source>Velocity curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="174"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="202"/>
         <source>Temperament enabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="175"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="203"/>
         <source>Reverb enabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="177"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="205"/>
         <source>Chorus enabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="184"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="212"/>
         <source>Disabled</source>
         <comment>velocity to filter</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="207"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="235"/>
         <source>Equal</source>
         <comment>Equal musical temperament</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="209"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="237"/>
         <source>Custom</source>
         <comment>custom temperament</comment>
         <translation type="unfinished"></translation>
@@ -10685,7 +10685,7 @@ Other soundfont editors might display other units.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport.cpp" line="256"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport.cpp" line="258"/>
         <source>Export successful!</source>
         <translation type="unfinished"></translation>
     </message>

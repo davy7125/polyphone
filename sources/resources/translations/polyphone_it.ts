@@ -1525,12 +1525,12 @@ online</translation>
 <context>
     <name>ConversionDls</name>
     <message>
-        <location filename="../../core/output/dls/conversion_dls.cpp" line="58"/>
+        <location filename="../../core/output/dls/conversion_dls.cpp" line="73"/>
         <source>cannot create file &quot;%1&quot;</source>
         <translation>impossibile creare il file &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../../core/output/dls/conversion_dls.cpp" line="109"/>
+        <location filename="../../core/output/dls/conversion_dls.cpp" line="124"/>
         <source>cannot write file &quot;%1&quot;</source>
         <translation>impossibile scrivere il file &quot;%1&quot;</translation>
     </message>
@@ -3242,7 +3242,7 @@ di un segnale</translation>
         <translation>Lo strumento &quot;%1&quot; esiste già.&lt;br /&gt;Sovrascriverlo?</translation>
     </message>
     <message>
-        <location filename="../../core/duplicator.cpp" line="539"/>
+        <location filename="../../core/duplicator.cpp" line="542"/>
         <source>The preset &quot;%1&quot; already exists.&lt;br/&gt;Replace?</source>
         <translation>Il preset &quot;%1&quot; esiste già.&lt;br/&gt;Sovrascriverlo?</translation>
     </message>
@@ -4346,14 +4346,14 @@ mod. predefinito</translation>
     </message>
     <message>
         <location filename="../../editor/modulator/modulatoreditor.ui" line="202"/>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="153"/>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="257"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="162"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="269"/>
         <source>No modulators</source>
         <translation>Nessun modulatore</translation>
     </message>
     <message>
         <location filename="../../editor/modulator/modulatoreditor.ui" line="234"/>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="162"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="171"/>
         <source>Select a single division to display the modulator list</source>
         <translation>Selezionare una singola divisione per visualizzare l&apos;elenco dei modulatori</translation>
     </message>
@@ -4363,7 +4363,7 @@ mod. predefinito</translation>
         <translation>Espandi la sezione dei modulatori</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="262"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="274"/>
         <source>%n modulator(s):</source>
         <translation>
             <numerusform>%n modulatore:</numerusform>
@@ -4371,43 +4371,43 @@ mod. predefinito</translation>
         </translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="346"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="355"/>
         <source>Duplicate the selection toward...</source>
         <translation>Duplica la selezione verso...</translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="347"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="356"/>
         <source>Copy the selected modulators</source>
         <translation>Copia modulatori selezionati</translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="352"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="361"/>
         <source>Duplicate modulators toward...</source>
         <translation>Duplica modulatori verso...</translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="353"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="362"/>
         <source>Copy all modulators</source>
         <translation>Copia tutti i modulatori</translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="638"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="654"/>
         <source>Forbidden action:</source>
         <translation>Azione non consentita:</translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="648"/>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="657"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="664"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="673"/>
         <source>Warning</source>
         <translation>Attenzione</translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="649"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="665"/>
         <source>offsets cannot be modulated in a preset.</source>
         <translation>gli offset non possono essere modulati in un preset.</translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="658"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="674"/>
         <source>%1 cannot be modulated in a preset.</source>
         <translation>%1 non può essere modulato in un preset.</translation>
     </message>
@@ -4683,6 +4683,34 @@ mod. predefinito</translation>
         <location filename="../../core/output/sf/outputsf.cpp" line="148"/>
         <source>cannot create file &quot;%1&quot;</source>
         <translation>impossibile creare il file &quot;%1&quot;</translation>
+    </message>
+</context>
+<context>
+    <name>PageDefaultMod</name>
+    <message>
+        <location filename="../../editor/pagedefaultmod.ui" line="68"/>
+        <source>Customize</source>
+        <translation>Personalizza</translation>
+    </message>
+    <message>
+        <location filename="../../editor/pagedefaultmod.ui" line="75"/>
+        <source>Reset to the SoundFont defaults</source>
+        <translation>Ripristina i valori predefiniti di SoundFont</translation>
+    </message>
+    <message>
+        <location filename="../../editor/pagedefaultmod.cpp" line="55"/>
+        <source>This soundfont has its own default modulators, applied to every instrument instead of the ones of the SoundFont format. They are saved in the sf2 and sf3 files (DMOD chunk) and need a synthesizer that supports them.</source>
+        <translation>Questo soundfont ha i propri modulatori predefiniti, applicati a ogni strumento al posto di quelli del formato SoundFont. Vengono salvati nei file sf2 e sf3 (blocco DMOD) e richiedono un sintetizzatore che li supporti.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/pagedefaultmod.cpp" line="64"/>
+        <source>This soundfont uses the default modulators of the SoundFont format, applied to every instrument. Customize them to edit, add or remove default modulators in this soundfont.</source>
+        <translation>Questo soundfont usa i modulatori predefiniti del formato SoundFont, applicati a ogni strumento. Personalizzali per modificare, aggiungere o rimuovere modulatori predefiniti in questo soundfont.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/pagedefaultmod.h" line="45"/>
+        <source>Default modulators</source>
+        <translation>Modulatori predefiniti</translation>
     </message>
 </context>
 <context>
@@ -5230,6 +5258,11 @@ per visualizzare gli intervalli delle sue divisioni</translation>
             <numerusform>%1 (inutilizzato: %n)</numerusform>
             <numerusform>%1 (inutilizzati: %n)</numerusform>
         </translation>
+    </message>
+    <message>
+        <location filename="../../editor/pagesf2.h" line="80"/>
+        <source>General</source>
+        <translation>Generale</translation>
     </message>
 </context>
 <context>
@@ -6508,12 +6541,12 @@ Cambiare questa opzione se le note suonano troppo smorzate: SoundFont 2.01 per u
         <translation>Velocità</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="253"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="281"/>
         <source>too many soundfonts are still playing, try again in a moment</source>
         <translation>troppi soundfont sono ancora in riproduzione, riprova tra un momento</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="749"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="777"/>
         <source>file not found</source>
         <translation>file non trovato</translation>
     </message>
@@ -6845,129 +6878,129 @@ Cambiare questa opzione se le note suonano troppo smorzate: SoundFont 2.01 per u
         <translation>Effetti</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="138"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="169"/>
         <source>Gain</source>
         <translation>Guadagno</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="141"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="172"/>
         <source>Reverb</source>
         <translation>Riverbero</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="141"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="172"/>
         <source>Reverb level</source>
         <translation>Livello del riverbero</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="142"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="173"/>
         <source>Reverb size</source>
         <translation>Dimensione del riverbero</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="142"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="173"/>
         <source>Reverb width</source>
         <translation>Ampiezza del riverbero</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="143"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="174"/>
         <source>Reverb damping</source>
         <translation>Smorzamento del riverbero</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="145"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="176"/>
         <source>Chorus</source>
         <translation>Chorus</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="145"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="176"/>
         <source>Chorus level</source>
         <translation>Livello del chorus</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="146"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="177"/>
         <source>Chorus depth</source>
         <translation>Profondità del chorus</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="146"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="177"/>
         <source>Chorus frequency</source>
         <translation>Frequenza del chorus</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="152"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="183"/>
         <source>Tuning</source>
         <translation>Accordatura</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="153"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="184"/>
         <source>Transposition</source>
         <translation>Trasposizione</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="154"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="185"/>
         <source>semitones</source>
         <translation>semitoni</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="155"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="186"/>
         <source>Reference pitch</source>
         <translation>Intonazione di riferimento</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="158"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="189"/>
         <source>Temperament</source>
         <translation>Temperamento</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="161"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="190"/>
         <source>Temperament key</source>
         <translation>Tonalità del temperamento</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="166"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="195"/>
         <source>Velocity</source>
         <translation>Velocità</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="168"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="196"/>
         <source>Velocity to filter cutoff</source>
         <translation>Velocità verso taglio del filtro</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="169"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="197"/>
         <source>Velocity curve</source>
         <translation>Curva di velocità</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="174"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="202"/>
         <source>Temperament enabled</source>
         <translation>Temperamento attivato</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="175"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="203"/>
         <source>Reverb enabled</source>
         <translation>Riverbero attivato</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="177"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="205"/>
         <source>Chorus enabled</source>
         <translation>Chorus attivato</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="184"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="212"/>
         <source>Disabled</source>
         <comment>velocity to filter</comment>
         <translation>Disattivato</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="207"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="235"/>
         <source>Equal</source>
         <comment>Equal musical temperament</comment>
         <translation>Equabile</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="209"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="237"/>
         <source>Custom</source>
         <comment>custom temperament</comment>
         <translation>Personalizzato</translation>
@@ -7446,22 +7479,22 @@ Cambiare questa opzione se le note suonano troppo smorzate: SoundFont 2.01 per u
         <translation>I&amp;gnora tutti</translation>
     </message>
     <message>
-        <location filename="../../core/model/soundfont.cpp" line="44"/>
+        <location filename="../../core/model/soundfont.cpp" line="47"/>
         <source>General</source>
         <translation>Generale</translation>
     </message>
     <message>
-        <location filename="../../core/model/soundfont.cpp" line="45"/>
+        <location filename="../../core/model/soundfont.cpp" line="48"/>
         <source>Samples</source>
         <translation>Campioni</translation>
     </message>
     <message>
-        <location filename="../../core/model/soundfont.cpp" line="46"/>
+        <location filename="../../core/model/soundfont.cpp" line="49"/>
         <source>Instruments</source>
         <translation>Strumenti</translation>
     </message>
     <message>
-        <location filename="../../core/model/soundfont.cpp" line="47"/>
+        <location filename="../../core/model/soundfont.cpp" line="50"/>
         <source>Presets</source>
         <translation>Preset</translation>
     </message>
@@ -9407,19 +9440,19 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
         <translation>Ecco l&apos;elenco dei modulatori impostati automaticamente per ogni strumento. Puoi sovrascriverli o disattivarli selezionando i modulatori corrispondenti e l&apos;azione sottostante.</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/default_mod/tooldefaultmod_gui.cpp" line="39"/>
+        <location filename="../../editor/tools/default_mod/tooldefaultmod_gui.cpp" line="40"/>
         <source>&amp;Override</source>
         <oldsource>Override</oldsource>
         <translation>&amp;Sovrascrivi</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/default_mod/tooldefaultmod_gui.cpp" line="41"/>
+        <location filename="../../editor/tools/default_mod/tooldefaultmod_gui.cpp" line="42"/>
         <source>&amp;Disable</source>
         <oldsource>Disable</oldsource>
         <translation>&amp;Disabilita</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/default_mod/tooldefaultmod_gui.cpp" line="43"/>
+        <location filename="../../editor/tools/default_mod/tooldefaultmod_gui.cpp" line="44"/>
         <source>&amp;Cancel</source>
         <oldsource>Cancel</oldsource>
         <translation>&amp;Annulla</translation>
@@ -10709,7 +10742,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
         <translation>Unisci soundfont:</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport.cpp" line="256"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport.cpp" line="258"/>
         <source>Export successful!</source>
         <translation>Esportazione riuscita!</translation>
     </message>

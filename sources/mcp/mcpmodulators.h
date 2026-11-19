@@ -29,17 +29,26 @@
 #include <QJsonArray>
 #include "basetypes.h"
 
-// Modulators of the instruments, presets and divisions in a readable form for the AI
+// Modulators of the instruments, presets, divisions and soundfonts (default modulators) in a readable form for the AI
 class McpModulators
 {
 public:
-    // Modulators of an instrument, preset (global) or division
+    // Modulators of an instrument, preset (global), division or soundfont (own default modulators)
     static QJsonArray getAll(EltID idParent);
 
     // Description of a modulator
     static QJsonObject toJson(EltID idMod);
+    static QJsonObject toJson(const ModulatorData &modulator); // Without identifier
 
-    // Add a modulator to an instrument, preset or division, return its identifier
+    // Default modulators applied in a soundfont: its own list (with the identifiers "sfN/modM") or the one of the
+    // sf2 specification
+    static QJsonObject getDefaults(int indexSf2);
+
+    // Own list of default modulators or not. With an own list, the modulators given replace the current ones (if
+    // there was no own list, it starts with the default modulators of the specification)
+    static void setDefaults(int indexSf2, bool ownList, const QJsonArray * modulators);
+
+    // Add a modulator to an instrument, preset, division or soundfont (own default modulators), return its identifier
     static EltID add(EltID idParent, QJsonObject description);
 
     // Change the specified fields of a modulator

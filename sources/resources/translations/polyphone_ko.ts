@@ -1525,12 +1525,12 @@ repository</source>
 <context>
     <name>ConversionDls</name>
     <message>
-        <location filename="../../core/output/dls/conversion_dls.cpp" line="58"/>
+        <location filename="../../core/output/dls/conversion_dls.cpp" line="73"/>
         <source>cannot create file &quot;%1&quot;</source>
         <translation>&quot;%1&quot; 파일을 생성할 수 없습니다</translation>
     </message>
     <message>
-        <location filename="../../core/output/dls/conversion_dls.cpp" line="109"/>
+        <location filename="../../core/output/dls/conversion_dls.cpp" line="124"/>
         <source>cannot write file &quot;%1&quot;</source>
         <translation>&quot;%1&quot; 파일에 쓸 수 없습니다</translation>
     </message>
@@ -3233,7 +3233,7 @@ for a signal</source>
         <translation>&quot;%1&quot; 악기가 이미 존재합니다.&lt;br /&gt;덮어쓸까요?</translation>
     </message>
     <message>
-        <location filename="../../core/duplicator.cpp" line="539"/>
+        <location filename="../../core/duplicator.cpp" line="542"/>
         <source>The preset &quot;%1&quot; already exists.&lt;br/&gt;Replace?</source>
         <translation>&quot;%1&quot; 프리셋이 이미 존재합니다.&lt;br /&gt;덮어쓸까요?</translation>
     </message>
@@ -4334,14 +4334,14 @@ default mod.</source>
     </message>
     <message>
         <location filename="../../editor/modulator/modulatoreditor.ui" line="202"/>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="153"/>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="257"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="162"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="269"/>
         <source>No modulators</source>
         <translation>모듈레이터 없음</translation>
     </message>
     <message>
         <location filename="../../editor/modulator/modulatoreditor.ui" line="234"/>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="162"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="171"/>
         <source>Select a single division to display the modulator list</source>
         <translation>단일 분할을 선택해 모듈레이터 목록 표시</translation>
     </message>
@@ -4351,50 +4351,50 @@ default mod.</source>
         <translation>모듈레이터 영역 확장</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="262"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="274"/>
         <source>%n modulator(s):</source>
         <translation>
             <numerusform>%n개의 모듈레이터:</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="346"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="355"/>
         <source>Duplicate the selection toward...</source>
         <translation>선택 항목을 다음으로 복제...</translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="347"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="356"/>
         <source>Copy the selected modulators</source>
         <translation>선택된 모듈레이터 복사</translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="352"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="361"/>
         <source>Duplicate modulators toward...</source>
         <translation>모듈레이터를 다음으로 복제...</translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="353"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="362"/>
         <source>Copy all modulators</source>
         <translation>모든 모듈레이터 복사</translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="638"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="654"/>
         <source>Forbidden action:</source>
         <translation>금지된 행동:</translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="648"/>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="657"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="664"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="673"/>
         <source>Warning</source>
         <translation>경고</translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="649"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="665"/>
         <source>offsets cannot be modulated in a preset.</source>
         <translation>프리셋의 오프셋은 변조될 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="658"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="674"/>
         <source>%1 cannot be modulated in a preset.</source>
         <translation>%1은(는) 프리셋에서 변조할 수 없습니다.</translation>
     </message>
@@ -4671,6 +4671,34 @@ default mod.</source>
         <source>cannot create file &quot;%1&quot;</source>
         <oldsource>Cannot create file &quot;%1&quot;</oldsource>
         <translation>&quot;%1&quot; 파일을 생성할 수 없습니다</translation>
+    </message>
+</context>
+<context>
+    <name>PageDefaultMod</name>
+    <message>
+        <location filename="../../editor/pagedefaultmod.ui" line="68"/>
+        <source>Customize</source>
+        <translation>사용자 지정</translation>
+    </message>
+    <message>
+        <location filename="../../editor/pagedefaultmod.ui" line="75"/>
+        <source>Reset to the SoundFont defaults</source>
+        <translation>SoundFont 기본값으로 재설정</translation>
+    </message>
+    <message>
+        <location filename="../../editor/pagedefaultmod.cpp" line="55"/>
+        <source>This soundfont has its own default modulators, applied to every instrument instead of the ones of the SoundFont format. They are saved in the sf2 and sf3 files (DMOD chunk) and need a synthesizer that supports them.</source>
+        <translation>이 사운드폰트에는 자체 기본 모듈레이터가 있으며, SoundFont 형식의 기본 모듈레이터 대신 모든 악기에 적용됩니다. sf2 및 sf3 파일(DMOD 청크)에 저장되며 이를 지원하는 신시사이저가 필요합니다.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/pagedefaultmod.cpp" line="64"/>
+        <source>This soundfont uses the default modulators of the SoundFont format, applied to every instrument. Customize them to edit, add or remove default modulators in this soundfont.</source>
+        <translation>이 사운드폰트는 SoundFont 형식의 기본 모듈레이터를 사용하며, 모든 악기에 적용됩니다. 이 사운드폰트의 기본 모듈레이터를 편집, 추가 또는 제거하려면 사용자 지정하십시오.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/pagedefaultmod.h" line="45"/>
+        <source>Default modulators</source>
+        <translation>기본 모듈레이터</translation>
     </message>
 </context>
 <context>
@@ -5185,6 +5213,11 @@ to display its division ranges</source>
         <translation>
             <numerusform>%1 (사용 안 함: %n개)</numerusform>
         </translation>
+    </message>
+    <message>
+        <location filename="../../editor/pagesf2.h" line="80"/>
+        <source>General</source>
+        <translation>일반</translation>
     </message>
 </context>
 <context>
@@ -6459,12 +6492,12 @@ Change this option if notes sound too muffled: SoundFont 2.01 for an old soundfo
         <translation>벨로시티</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="253"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="281"/>
         <source>too many soundfonts are still playing, try again in a moment</source>
         <translation>아직 너무 많은 사운드폰트가 재생 중입니다. 잠시 후 다시 시도하세요</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="749"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="777"/>
         <source>file not found</source>
         <translation>파일을 찾을 수 없음</translation>
     </message>
@@ -6796,129 +6829,129 @@ Change this option if notes sound too muffled: SoundFont 2.01 for an old soundfo
         <translation>효과</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="138"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="169"/>
         <source>Gain</source>
         <translation>게인</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="141"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="172"/>
         <source>Reverb</source>
         <translation>리버브</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="141"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="172"/>
         <source>Reverb level</source>
         <translation>리버브 레벨</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="142"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="173"/>
         <source>Reverb size</source>
         <translation>리버브 크기</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="142"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="173"/>
         <source>Reverb width</source>
         <translation>리버브 너비</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="143"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="174"/>
         <source>Reverb damping</source>
         <translation>리버브 댐프</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="145"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="176"/>
         <source>Chorus</source>
         <translation>코러스</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="145"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="176"/>
         <source>Chorus level</source>
         <translation>코러스 레벨</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="146"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="177"/>
         <source>Chorus depth</source>
         <translation>코러스 깊이</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="146"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="177"/>
         <source>Chorus frequency</source>
         <translation>코러스 주파수</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="152"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="183"/>
         <source>Tuning</source>
         <translation>튜닝</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="153"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="184"/>
         <source>Transposition</source>
         <translation>조옮김</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="154"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="185"/>
         <source>semitones</source>
         <translation>반음</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="155"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="186"/>
         <source>Reference pitch</source>
         <translation>기준 음높이</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="158"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="189"/>
         <source>Temperament</source>
         <translation>음률</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="161"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="190"/>
         <source>Temperament key</source>
         <translation>음률 기준 키</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="166"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="195"/>
         <source>Velocity</source>
         <translation>벨로시티</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="168"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="196"/>
         <source>Velocity to filter cutoff</source>
         <translation>벨로시티에서 필터 컷오프로</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="169"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="197"/>
         <source>Velocity curve</source>
         <translation>벨로시티 곡선</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="174"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="202"/>
         <source>Temperament enabled</source>
         <translation>음률 사용</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="175"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="203"/>
         <source>Reverb enabled</source>
         <translation>리버브 사용</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="177"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="205"/>
         <source>Chorus enabled</source>
         <translation>코러스 사용</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="184"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="212"/>
         <source>Disabled</source>
         <comment>velocity to filter</comment>
         <translation>사용 안 함</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="207"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="235"/>
         <source>Equal</source>
         <comment>Equal musical temperament</comment>
         <translation>평균율</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="209"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="237"/>
         <source>Custom</source>
         <comment>custom temperament</comment>
         <translation>사용자 정의</translation>
@@ -7397,22 +7430,22 @@ Change this option if notes sound too muffled: SoundFont 2.01 for an old soundfo
         <translation>모두 무시(&amp;G)</translation>
     </message>
     <message>
-        <location filename="../../core/model/soundfont.cpp" line="44"/>
+        <location filename="../../core/model/soundfont.cpp" line="47"/>
         <source>General</source>
         <translation>일반</translation>
     </message>
     <message>
-        <location filename="../../core/model/soundfont.cpp" line="45"/>
+        <location filename="../../core/model/soundfont.cpp" line="48"/>
         <source>Samples</source>
         <translation>샘플들</translation>
     </message>
     <message>
-        <location filename="../../core/model/soundfont.cpp" line="46"/>
+        <location filename="../../core/model/soundfont.cpp" line="49"/>
         <source>Instruments</source>
         <translation>악기들</translation>
     </message>
     <message>
-        <location filename="../../core/model/soundfont.cpp" line="47"/>
+        <location filename="../../core/model/soundfont.cpp" line="50"/>
         <source>Presets</source>
         <translation>프리셋들</translation>
     </message>
@@ -9355,19 +9388,19 @@ Other soundfont editors might display other units.</source>
         <translation>다음은 모든 악기에 대해 자동으로 설정되는 모듈레이터 목록입니다. 아래에서 해당 모듈레이터를 선택하여 이를 무시하거나 비활성화할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/default_mod/tooldefaultmod_gui.cpp" line="39"/>
+        <location filename="../../editor/tools/default_mod/tooldefaultmod_gui.cpp" line="40"/>
         <source>&amp;Override</source>
         <oldsource>Override</oldsource>
         <translation>재정의(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/default_mod/tooldefaultmod_gui.cpp" line="41"/>
+        <location filename="../../editor/tools/default_mod/tooldefaultmod_gui.cpp" line="42"/>
         <source>&amp;Disable</source>
         <oldsource>Disable</oldsource>
         <translation>비활성화(&amp;D)</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/default_mod/tooldefaultmod_gui.cpp" line="43"/>
+        <location filename="../../editor/tools/default_mod/tooldefaultmod_gui.cpp" line="44"/>
         <source>&amp;Cancel</source>
         <oldsource>Cancel</oldsource>
         <translation>취소(&amp;C)</translation>
@@ -10654,7 +10687,7 @@ Other soundfont editors might display other units.</source>
         <translation>사운드폰트 통합:</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport.cpp" line="256"/>
+        <location filename="../../editor/tools/soundfont_export/toolsoundfontexport.cpp" line="258"/>
         <source>Export successful!</source>
         <translation>내보내기를 완료했습니다!</translation>
     </message>

@@ -590,14 +590,16 @@ void McpFunctions::addEditingFunctions(QList<McpFunction *> &functions)
 
     functions << new McpFunction(
         "remove_elements", McpFunction::CATEGORY_EDITING, false,
-        "Remove samples, instruments, presets, divisions or modulators. A sample used by an instrument or an "
-        "instrument used by a preset cannot be removed: remove the divisions using it first.",
+        "Remove samples, instruments, presets, divisions or modulators (default modulators of a soundfont included). "
+        "A sample used by an instrument or an instrument used by a preset cannot be removed: remove the divisions "
+        "using it first.",
         R"JSON({"properties":{
             "elements":{"type":["string","array"],"items":{"type":"string"},"description":"Elements to remove"}},
             "required":["elements"]})JSON",
         [](const McpArguments &args) -> McpResult {
             IdList ids = args.getIds("elements", { elementSmpl, elementInst, elementPrst, elementInstSmpl, elementPrstInst,
-                                                  elementInstMod, elementPrstMod, elementInstSmplMod, elementPrstInstMod });
+                                                  elementInstMod, elementPrstMod, elementInstSmplMod, elementPrstInstMod,
+                                                  elementSf2Mod });
             SoundfontManager * sm = SoundfontManager::getInstance();
             foreach (EltID id, ids)
             {
@@ -634,7 +636,8 @@ void McpFunctions::addEditingFunctions(QList<McpFunction *> &functions)
         "copy_elements", McpFunction::CATEGORY_EDITING, false,
         "Copy samples, instruments or presets into another soundfont (with the elements they use), or link elements "
         "of the same soundfont (a sample into an instrument, an instrument into a preset). Elements having the same "
-        "name as existing ones are duplicated.",
+        "name as existing ones are duplicated. If the default modulators of the two soundfonts differ, modulators are "
+        "added to the global division of the instruments copied so that they sound the same.",
         R"JSON({"properties":{
             "elements":{"type":["string","array"],"items":{"type":"string"},"description":"Elements to copy"},
             "destination":{"type":"string","description":"Destination soundfont, instrument or preset"}},
@@ -660,13 +663,14 @@ void McpFunctions::addEditingFunctions(QList<McpFunction *> &functions)
 
     functions << new McpFunction(
         "add_modulator", McpFunction::CATEGORY_EDITING, false,
-        QString("Add a modulator to an instrument, a preset (global) or a division. ") + McpModulators::FORMAT,
+        QString("Add a modulator to an instrument, a preset (global), a division or to the own default modulators of "
+                "a soundfont (see set_default_modulators). ") + McpModulators::FORMAT,
         R"JSON({"properties":{
-            "element":{"type":"string","description":"Instrument, preset or division"},
+            "element":{"type":"string","description":"Instrument, preset, division or soundfont"},
             "modulator":{"type":"object","description":"Fields source, destination, amount and optionally amount_source, transform"}},
             "required":["element","modulator"]})JSON",
         [](const McpArguments &args) -> McpResult {
-            EltID idParent = args.getId("element", { elementInst, elementPrst, elementInstSmpl, elementPrstInst });
+            EltID idParent = args.getId("element", { elementInst, elementPrst, elementInstSmpl, elementPrstInst, elementSf2 });
             return McpModulators::toJson(McpModulators::add(idParent, args.getObject("modulator")));
         });
 
@@ -674,13 +678,42 @@ void McpFunctions::addEditingFunctions(QList<McpFunction *> &functions)
         "update_modulator", McpFunction::CATEGORY_EDITING, false,
         "Change fields of an existing modulator (same format as add_modulator). Remove it with remove_elements.",
         R"JSON({"properties":{
-            "id":{"type":"string","description":"Modulator identifier, for instance \"sf0/inst2/mod0\""},
+            "id":{"type":"string","description":"Modulator identifier, for instance \"sf0/inst2/mod0\" or \"sf0/mod3\" (default modulator of a soundfont)"},
             "changes":{"type":"object","description":"Fields to change"}},
             "required":["id","changes"]})JSON",
         [](const McpArguments &args) -> McpResult {
-            EltID idMod = args.getId("id", { elementInstMod, elementPrstMod, elementInstSmplMod, elementPrstInstMod });
+            EltID idMod = args.getId("id", { elementInstMod, elementPrstMod, elementInstSmplMod, elementPrstInstMod,
+                                             elementSf2Mod });
             McpModulators::update(idMod, args.getObject("changes"));
             return McpModulators::toJson(idMod);
+        });
+
+    functions << new McpFunction(
+        "set_default_modulators", McpFunction::CATEGORY_EDITING, false,
+        "Default modulators of a soundfont, applied to every instrument before its own modulators (an instrument "
+        "modulator with the same sources, destination and transform replaces a default one). Without its own list, a "
+        "soundfont uses the 10 default modulators of the sf2 specification. Its own list replaces them and is saved "
+        "in the DMOD chunk of the file (read by FluidSynth 2.5 and later, SpessaSynth, Polyphone 2.7 and later; other "
+        "players apply the default modulators of the specification). own_list true without \"modulators\": the list "
+        "starts with the default modulators of the specification, then add_modulator / update_modulator / "
+        "remove_elements edit it (identifiers \"sfN/modM\"). \"modulators\": the whole list is replaced (an empty "
+        "array means no default modulators). own_list false: back to the default modulators of the specification. "
+        "get_soundfont (section info) returns the list applied.",
+        R"JSON({"properties":{
+            "soundfont":{"type":"string","description":"Soundfont identifier"},
+            "own_list":{"type":"boolean","description":"true: own list of default modulators, false: the ones of the sf2 specification"},
+            "modulators":{"type":"array","items":{"type":"object"},"description":"With own_list true: the modulators replacing the current list (format of add_modulator)"}},
+            "required":["soundfont","own_list"]})JSON",
+        [](const McpArguments &args) -> McpResult {
+            EltID idSf2 = args.getId("soundfont", { elementSf2 });
+            bool ownList = args.getBool("own_list", true);
+            if (!ownList && args.contains("modulators"))
+                throw McpException("\"modulators\" needs own_list true");
+            QJsonArray modulators;
+            if (args.contains("modulators"))
+                modulators = args.getArray("modulators");
+            McpModulators::setDefaults(idSf2.indexSf2, ownList, args.contains("modulators") ? &modulators : nullptr);
+            return McpModulators::getDefaults(idSf2.indexSf2);
         });
 
     functions << new McpFunction(

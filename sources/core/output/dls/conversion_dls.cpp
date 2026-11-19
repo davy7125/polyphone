@@ -38,6 +38,21 @@ QString ConversionDls::convert(QString fileName, int sf2Index)
     _waves.clear();
     _listPositions.clear();
 
+    // Default modulators: the ones of the version 2.04, replaced by the ones of the soundfont if it has its own list
+    // (the others being then kept with an amount of 0 so that they disable the connections implied by the DLS format)
+    _defaultModulators.clear();
+    bool isCustom = _sm->get(EltID(elementSf2, sf2Index), champ_customDefaultMods).wValue != 0;
+    int number;
+    const ModulatorData * defaultModulators = ModulatorData::getDefaultModulators(1, number);
+    for (int i = 0; i < number; i++)
+    {
+        _defaultModulators << defaultModulators[i];
+        if (isCustom)
+            _defaultModulators.last().amount = 0;
+    }
+    if (isCustom)
+        overrideModulators(_defaultModulators, _sm->getDefaultModulators(sf2Index));
+
     // All samples are in the wave pool, the parts of samples used by the regions are added later
     EltID idSmpl(elementSmpl, sf2Index);
     foreach (int i, _sm->getSiblings(idSmpl))
@@ -297,11 +312,7 @@ bool ConversionDls::getRegion(EltID idPrstInst, EltID idInstSmpl, Region &region
 QList<ModulatorData> ConversionDls::getModulators(EltID idPrstInst, EltID idInstSmpl)
 {
     // Instrument level: default modulators, overridden by the global modulators and then by the modulators of the division
-    QList<ModulatorData> modulators;
-    int number;
-    const ModulatorData * defaultModulators = ModulatorData::getDefaultModulators(1, number);
-    for (int i = 0; i < number; i++)
-        modulators << defaultModulators[i];
+    QList<ModulatorData> modulators = _defaultModulators;
     EltID idInst = idInstSmpl;
     idInst.typeElement = elementInst;
     overrideModulators(modulators, readModulators(idInst));

@@ -125,6 +125,7 @@ private:
 
     SoundfontManager * _sm;
     int _sf2Index;
+    QList<ModulatorData> _defaultModulators; // Of the soundfont being converted
     QList<Wave> _waves;
     QList<qint64> _listPositions;
 };

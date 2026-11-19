@@ -26,6 +26,7 @@
 #include "pagedefaultmod.h"
 #include "ui_pagedefaultmod.h"
 #include "modulatorcell.h"
+#include "contextmanager.h"
 
 PageDefaultMod::PageDefaultMod(QWidget *parent) :
     Page(parent, "page:defaultmod"),
@@ -33,6 +34,10 @@ PageDefaultMod::PageDefaultMod(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->modulatorEditor->initializeForDefaultModulators();
+
+    // Border under the text, same color as the one separating the buttons of the modulator editor from the modulators
+    ui->frameHeader->setStyleSheet("QFrame#frameHeader{border:0;border-bottom:1px solid " +
+                                   ContextManager::theme()->getColor(ThemeManager::BORDER).name() + ";}");
 }
 
 PageDefaultMod::~PageDefaultMod()

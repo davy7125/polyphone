@@ -226,6 +226,7 @@ static QJsonObject describeSoundfontInfo(int indexSf2)
     result["date"] = sm->getQstr(id, champ_ICRD);
     result["sound_engine"] = sm->getQstr(id, champ_ISNG);
     result["software"] = sm->getQstr(id, champ_ISFT);
+    result["default_modulators"] = McpModulators::getDefaults(indexSf2);
     return result;
 }
 
@@ -453,8 +454,9 @@ void McpFunctions::addBrowsingFunctions(QList<McpFunction *> &functions)
 
     functions << new McpFunction(
         "get_soundfont", McpFunction::CATEGORY_BROWSING, true,
-        "Overview of a soundfont: information fields and the list of its samples (root key, duration, loop, stereo "
-        "link), instruments (number of divisions, key span) and presets (bank, preset number, instruments used).",
+        "Overview of a soundfont: information fields with the default modulators applied (its own list or the one of "
+        "the sf2 specification), and the list of its samples (root key, duration, loop, stereo link), instruments "
+        "(number of divisions, key span) and presets (bank, preset number, instruments used).",
         R"JSON({"properties":{
             "soundfont":{"type":"string","description":"Soundfont identifier, for instance \"sf0\""},
             "sections":{"type":"array","items":{"type":"string","enum":["info","samples","instruments","presets"]},
@@ -511,7 +513,8 @@ void McpFunctions::addBrowsingFunctions(QList<McpFunction *> &functions)
         "Detailed description of an element. Sample: length, sample rate, root key, pitch correction, loop points, "
         "stereo link, instruments using it. Instrument or preset: global parameters, modulators and all divisions "
         "with their sample / instrument, key and velocity ranges, parameters (only the ones explicitly set: a division "
-        "inherits the global parameters it doesn't define, then the default values). Soundfont: information fields.",
+        "inherits the global parameters it doesn't define, then the default values). Soundfont: information fields "
+        "and default modulators. Default modulator of a soundfont (\"sfN/modM\"): its fields.",
         R"JSON({"properties":{
             "id":{"type":"string","description":"Element identifier, for instance \"sf0/inst2\" or \"sf0/smpl5\""}},
             "required":["id"]})JSON",

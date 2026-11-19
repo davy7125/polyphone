@@ -106,6 +106,9 @@ void ModulatorEditor::initializeForDefaultModulators()
     ui->pushCollapse->hide();
     ui->frameCollapsed->hide();
     ui->frameExpanded->show();
+
+    // No other element of the same kind in the soundfont to duplicate toward (copy / paste works between soundfonts)
+    ui->pushClone->hide();
 }
 
 ModulatorEditor::~ModulatorEditor()

@@ -521,7 +521,33 @@ void SfzParamList::loadModulators(SoundfontManager *sf2, EltID id)
         addModulator(modTmp);
     }
 
-    if (id.typeElement == elementInstMod)
+    if (id.typeElement == elementInstMod && sf2->get(EltID(elementSf2, id.indexSf2), champ_customDefaultMods).wValue != 0)
+    {
+        // Default modulators of the soundfont
+        QList<ModulatorData> defaultModulators = sf2->getDefaultModulators(id.indexSf2);
+        foreach (ModulatorData modTmp, defaultModulators)
+            addModulator(modTmp);
+
+        // Without any note on velocity to attenuation, the velocity does not change the volume (amp_veltrack=0 instead
+        // of 100 by default in the sfz format)
+        bool hasVelocityToAttenuation = false;
+        foreach (ModulatorData existingModData, _modulators)
+            if (!existingModData.srcOper.CC && existingModData.srcOper.Index == GeneralController::GC_noteOnVelocity &&
+                !existingModData.amtSrcOper.CC && existingModData.amtSrcOper.Index == GeneralController::GC_noController &&
+                existingModData.destOper == champ_initialAttenuation)
+                hasVelocityToAttenuation = true;
+        if (!hasVelocityToAttenuation)
+        {
+            ModulatorData modTmp;
+            modTmp.srcOper = SFModulator(GeneralController::GC_noteOnVelocity, ModType::typeConcave, true, false);
+            modTmp.destOper = champ_initialAttenuation;
+            modTmp.amount = 0;
+            modTmp.amtSrcOper = SFModulator(GeneralController::GC_noController, ModType::typeLinear, false, false);
+            modTmp.transOper = SFTransform::linear;
+            addModulator(modTmp);
+        }
+    }
+    else if (id.typeElement == elementInstMod)
     {
         // Add default modulator: note on velocity to attenuation
         ModulatorData modTmp;

@@ -49,8 +49,14 @@ EltID McpModulators::getModId(EltID idParent, int indexMod)
     case elementPrst: idMod.typeElement = elementPrstMod; break;
     case elementInstSmpl: idMod.typeElement = elementInstSmplMod; break;
     case elementPrstInst: idMod.typeElement = elementPrstInstMod; break;
+    case elementSf2:
+        if (SoundfontManager::getInstance()->get(idParent, champ_customDefaultMods).wValue == 0)
+            throw McpException("the soundfont uses the default modulators of the sf2 specification: give it its own list "
+                               "first (set_default_modulators)");
+        idMod.typeElement = elementSf2Mod;
+        break;
     default:
-        throw McpException("modulators belong to instruments, presets or divisions");
+        throw McpException("modulators belong to instruments, presets, divisions or soundfonts (default modulators)");
     }
     idMod.indexMod = indexMod;
     return idMod;
@@ -182,12 +188,24 @@ QString McpModulators::nativeUnit(AttributeType champ)
 QJsonObject McpModulators::toJson(EltID idMod)
 {
     SoundfontManager * sm = SoundfontManager::getInstance();
-    QJsonObject result;
-    result["id"] = McpUtils::idToString(idMod);
-    result["source"] = sourceToJson(sm->get(idMod, champ_sfModSrcOper).sfModValue);
-    result["amount_source"] = sourceToJson(sm->get(idMod, champ_sfModAmtSrcOper).sfModValue);
+    ModulatorData modulator;
+    modulator.srcOper = sm->get(idMod, champ_sfModSrcOper).sfModValue;
+    modulator.amtSrcOper = sm->get(idMod, champ_sfModAmtSrcOper).sfModValue;
+    modulator.destOper = sm->get(idMod, champ_sfModDestOper).wValue;
+    modulator.amount = sm->get(idMod, champ_modAmount).shValue;
+    modulator.transOper = sm->get(idMod, champ_sfModTransOper).sfTransValue;
+    QJsonObject result = toJson(modulator);
+    result.insert("id", McpUtils::idToString(idMod));
+    return result;
+}
 
-    quint16 destination = sm->get(idMod, champ_sfModDestOper).wValue;
+QJsonObject McpModulators::toJson(const ModulatorData &modulator)
+{
+    QJsonObject result;
+    result["source"] = sourceToJson(modulator.srcOper);
+    result["amount_source"] = sourceToJson(modulator.amtSrcOper);
+
+    quint16 destination = modulator.destOper;
     if (destination >= 32768)
     {
         result["destination"] = QString("mod%1").arg(destination - 32768);
@@ -199,9 +217,61 @@ QJsonObject McpModulators::toJson(EltID idMod)
         result["destination"] = name.isEmpty() ? QJsonValue(static_cast<int>(destination)) : QJsonValue(name);
         result["amount_unit"] = nativeUnit(static_cast<AttributeType>(destination));
     }
-    result["amount"] = sm->get(idMod, champ_modAmount).shValue;
-    result["transform"] = sm->get(idMod, champ_sfModTransOper).sfTransValue == absolute_value ? "absolute" : "linear";
+    result["amount"] = modulator.amount;
+    result["transform"] = modulator.transOper == absolute_value ? "absolute" : "linear";
     return result;
+}
+
+QJsonObject McpModulators::getDefaults(int indexSf2)
+{
+    SoundfontManager * sm = SoundfontManager::getInstance();
+    QJsonObject result;
+    EltID idSf2(elementSf2, indexSf2);
+    if (sm->get(idSf2, champ_customDefaultMods).wValue != 0)
+    {
+        result["origin"] = "soundfont";
+        result["modulators"] = getAll(idSf2);
+    }
+    else
+    {
+        // Standard list, with the velocity to filter cutoff chosen in the settings
+        result["origin"] = "sf2_specification";
+        QJsonArray modulators;
+        foreach (const ModulatorData &modulator, sm->getDefaultModulators(indexSf2))
+            modulators.append(toJson(modulator));
+        result["modulators"] = modulators;
+    }
+    return result;
+}
+
+void McpModulators::setDefaults(int indexSf2, bool ownList, const QJsonArray * modulators)
+{
+    SoundfontManager * sm = SoundfontManager::getInstance();
+    EltID idSf2(elementSf2, indexSf2);
+    if (!ownList)
+    {
+        sm->customizeDefaultModulators(indexSf2, false);
+        return;
+    }
+
+    // Own list, starting with the default modulators of the specification
+    sm->customizeDefaultModulators(indexSf2, true);
+    if (modulators == nullptr)
+        return;
+
+    // Replaced by the modulators given
+    EltID idMod(elementSf2Mod, indexSf2);
+    foreach (int i, sm->getSiblings(idMod))
+    {
+        idMod.indexMod = i;
+        sm->remove(idMod);
+    }
+    for (int i = 0; i < modulators->count(); i++)
+    {
+        if (!modulators->at(i).isObject())
+            throw McpException(QString("\"modulators\": item %1 is not an object").arg(i));
+        add(idSf2, modulators->at(i).toObject());
+    }
 }
 
 EltID McpModulators::add(EltID idParent, QJsonObject description)

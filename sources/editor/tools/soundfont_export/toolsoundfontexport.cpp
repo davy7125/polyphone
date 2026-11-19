@@ -165,6 +165,8 @@ EltID ToolSoundfontExport::mergeSoundfonts(SoundfontManager * sm, QMap<int,  QLi
 
     // Ajout des presets
     InteractiveDuplicator duplicator;
+    if (presets.size() == 1)
+        duplicator.copyDefaultModulators(presets.keys()[0], idDest.indexSf2); // Kept in the file (DMOD chunk)
     for (int nbBank = 0; nbBank < presets.keys().count(); nbBank++)
     {
         QList<EltID> subList;

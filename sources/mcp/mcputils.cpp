@@ -49,14 +49,14 @@ QString McpUtils::idToString(EltID id)
         id.typeElement == elementInstSmplMod || id.typeElement == elementPrstInstMod)
         text += QString("/div%1").arg(id.indexElt2);
     if (id.typeElement == elementInstMod || id.typeElement == elementPrstMod ||
-        id.typeElement == elementInstSmplMod || id.typeElement == elementPrstInstMod)
+        id.typeElement == elementInstSmplMod || id.typeElement == elementPrstInstMod || id.typeElement == elementSf2Mod)
         text += QString("/mod%1").arg(id.indexMod);
     return text;
 }
 
 EltID McpUtils::readId(QString text, QList<ElementType> allowedTypes)
 {
-    static QRegularExpression regex("^sf(\\d+)(?:/(smpl|inst|prst)(\\d+)(?:/div(\\d+))?(?:/mod(\\d+))?)?$");
+    static QRegularExpression regex("^sf(\\d+)(?:/(smpl|inst|prst)(\\d+)(?:/div(\\d+))?)?(?:/mod(\\d+))?$");
     QRegularExpressionMatch match = regex.match(text.trimmed());
     if (!match.hasMatch())
         throw McpException("invalid element identifier \"" + text + "\" (examples: \"sf0\", \"sf0/smpl3\", \"sf0/inst2/div5\")");
@@ -65,7 +65,13 @@ EltID McpUtils::readId(QString text, QList<ElementType> allowedTypes)
     QString kind = match.captured(2);
     bool hasDivision = !match.captured(4).isEmpty();
     bool hasMod = !match.captured(5).isEmpty();
-    if (!kind.isEmpty())
+    if (kind.isEmpty() && hasMod)
+    {
+        // Default modulator of the soundfont
+        id.typeElement = elementSf2Mod;
+        id.indexMod = match.captured(5).toInt();
+    }
+    else if (!kind.isEmpty())
     {
         id.indexElt = match.captured(3).toInt();
         if (kind == "smpl")
@@ -128,6 +134,7 @@ QString McpUtils::typeName(ElementType type)
     case elementPrstMod: return "preset_modulator";
     case elementInstSmplMod: return "instrument_division_modulator";
     case elementPrstInstMod: return "preset_division_modulator";
+    case elementSf2Mod: return "default_modulator";
     default: return "unknown";
     }
 }
