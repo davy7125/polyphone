@@ -47,13 +47,15 @@ The [Polyphone plugin](#polyphone-plugin) then plays them in your DAW with the s
 - Tables showing all the parameters of samples, instruments and presets, where a value can be changed for several elements at once.
 - Sample editor: waveform with loop points, stereo editing, frequency analysis estimating the pitch and the tuning, 10-band equalizer.
 - Graphical editors for key and velocity ranges and for envelopes, with points that can be dragged with the mouse.
+- Timbre view of the instruments: the level of each harmonic heard on every key, revealing the breaks between samples, with corrections of the timbre or the level, computed notes and the removal of redundant samples.
 - Modulator editor, undo / redo, and a search field to find any sample, instrument or preset.
 
 ### Tools
 
 More than 30 tools automate the repetitive work, for example:
 
-- automatic loop of samples, cross-fade around the loop points, removal of the blank at the start;
+- automatic loop of samples, cross-fade around the loop points, trimming of the blank at the start and of the end after the loop;
+- creation of the missing samples of an instrument from the closest ones;
 - automatic positioning of the samples on the keyboard, transposition, detuning for celeste effects;
 - creation of chords, organ mixtures and natural releases;
 - volume, balance, attenuation, filtering and sound spatialization of many divisions at once;
@@ -62,6 +64,7 @@ More than 30 tools automate the repetitive work, for example:
 ### Playing
 
 - Built-in synthesizer with reverb and chorus, played with the virtual keyboard, a MIDI keyboard or the computer keyboard.
+- Tuning: reference pitch, transposition, and more than 200 historical temperaments and scales in any key or your own tuning note by note, also changed by MIDI messages.
 - Player mode turning Polyphone into a synthesizer that can play several instruments or presets at once.
 - MIDI file player: play a MIDI file with the open soundfonts, choose the soundfont and the preset of each channel, mute or solo channels, change the tempo and the pitch, and export the result to a wav file.
 - Recorder saving what you play to a wav file.
@@ -75,6 +78,7 @@ More than 30 tools automate the repetitive work, for example:
 ### And also
 
 - [Command line](https://www.polyphone.io/documentation/manual/annexes/command-line) for converting files to sf2, sf3, sfz, dls or csv, rendering a MIDI file into a wav file, or starting Polyphone as a synthesizer.
+- AI assistants: once enabled in the settings, a server following the Model Context Protocol (MCP) lets an assistant such as Claude browse, edit and measure the open soundfonts at your request, every change appearing at once in the editor and being undoable (see the [tutorial](https://www.polyphone.io/documentation/tutorials/edit-soundfonts-with-claude)).
 - Interface translated into 16 languages, with light and dark color themes or your own colors.
 
 ## Screenshots
@@ -102,6 +106,12 @@ More than 30 tools automate the repetitive work, for example:
   </tr>
   <tr>
     <td colspan="2">
+      <img src="screenshots/TimbreView.png" alt="Timbre view: the level of each harmonic heard on every key of an instrument">
+      <p align="center">Timbre view</p>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
       <img src="screenshots/MidiPlayer.png" alt="MIDI file player">
       <p align="center">MIDI file player</p>
     </td>
@@ -111,20 +121,22 @@ More than 30 tools automate the repetitive work, for example:
 ## Polyphone plugin
 
 <p align="center">
-  <img src="screenshots/Plugin.png" alt="Polyphone plugin: the presets of a soundfont, the parameters of the synthesizer, the reverb, the chorus and a keyboard" width="600">
+  <img src="screenshots/Plugin.png" alt="Polyphone plugin: the instruments of a soundfont, the tuning, the velocity, a temperament, the reverb, the chorus and a keyboard" width="700">
 </p>
 
 The Polyphone plugin plays soundfonts in DAWs and in any other host of VST3, CLAP, LV2 or AU (macOS) plugins.
 It uses the synthesizer of Polyphone, so a soundfont sounds the same in your projects as in the editor.
 The plugin only plays soundfonts: they are created and edited with Polyphone, then opened in the plugin.
 
-- Opens sf2, sf3, sfz and dls files with a button, from the recent files or by dropping them on the window.
-- Three playing modes: one preset on the 16 MIDI channels; one preset per channel, chosen in the plugin or by program changes like a General MIDI synthesizer (handy for MIDI files); or one preset played by an MPE controller.
+- Opens sf2, sf3, sfz and dls files with a button, from the recent files or by dropping them on the window. A soundfont can be played as soon as it is opened, even a large one: its samples are loaded in the background, those of the instruments chosen and of the notes played first.
+- Three playing modes: one instrument on the 16 MIDI channels; one instrument per channel, chosen in the plugin or by program changes like a General MIDI synthesizer (handy for MIDI files); or one instrument played by an MPE controller.
 - Separate outputs for each MIDI channel and for the effects, to mix them on different tracks.
-- Gain, reverb, chorus, transposition, tuning and temperament, all automatable by the host.
+- Tuning: reference pitch, transposition, and the temperaments and scales of Polyphone in any key or your own tuning note by note.
+- Velocity: a curve for a softer or harder touch, and the velocity-to-filter modulator of SoundFont 2.04, of SoundFont 2.01 (for older soundfonts) or none.
+- Gain, reverb and chorus. The host can automate them, as well as the transposition, the reference pitch, the temperament and the velocity settings.
 - The soundfont can be stored in the project, which then opens on another computer without the file.
-- A soundfont used by several tracks is loaded in memory only once, and nothing is read from the disk while playing.
-- Notes start exactly at the position of their MIDI message whatever the buffer size, and offline rendering is never limited by the processor.
+- A soundfont used by several tracks is loaded in memory only once, and once loaded, nothing is read from the disk while playing.
+- Low latency when playing live, or notes starting exactly at the position of their MIDI message whatever the buffer size (offline, or with a fixed latency); offline rendering is never limited by the processor.
 
 The plugin is currently in beta. Download it from its [page on the website](https://www.polyphone.io/software/plugin), and see its [manual](https://www.polyphone.io/documentation/manual/plugin) for the installation and the settings.
 
