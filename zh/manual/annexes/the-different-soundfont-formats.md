@@ -29,6 +29,8 @@ sf2 文件采用 3 层结构：
 关于音色库的更多信息，可以参考例如 <a href="https://zh.wikipedia.org/wiki/SoundFont" target="_blank">维基百科</a>。
 sf2 规范的 2.01 版可在[这里](files/sf_specifications_v2.01.pdf)获取，2.04 版可在[那里](files/sf_specifications_v2.04.pdf)获取。
 
+音色库的[默认调制器](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod)可以替换为其自己的列表，保存在 DMOD 块中：这项扩展于 <a href="https://github.com/spessasus/soundfont-proposals/blob/main/default_modulators.md" target="_blank">2024 年提出</a>，FluidSynth 2.5 及以上版本、SpessaSynth 以及 Polyphone 2.7 及以上版本可以读取，其他合成器会忽略它。
+
 
 ## sf3 音色库 {#doc_sf3}
 

@@ -123,6 +123,8 @@ Como el modulador por defecto que modifica la frecuencia de corte del filtro cam
 * :guilabel:`SoundFont 2.04` (por defecto): usa la regla «bajar la frecuencia del filtro teniendo en cuenta la velocidad» (ya sin salto);
 * :guilabel:`deshabilitado`: este modulador por defecto no se define.
 
+Este ajuste no tiene efecto en un soundfont que tenga sus propios [moduladores por defecto](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod).
+
 
 ![Preferencias, sonido](images/settings_sound.png "Preferencias, sonido")
 

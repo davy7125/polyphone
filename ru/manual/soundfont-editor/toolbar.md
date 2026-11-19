@@ -49,6 +49,7 @@
 
 * при редактировании инструмента можно переключаться между ![таблица](images/toolbar_table.png "таблица"){.inline} [табличным видом](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), ![диапазоны](images/toolbar_range.png "диапазоны"){.inline} [редактором диапазонов](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range), ![огибающие](images/toolbar_adsr.png "огибающие"){.inline} [редактором огибающих](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope) и ![тембр](images/toolbar_timbre.png "тембр"){.inline} [видом тембра](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_timbre),
 * при редактировании пресета можно переключаться между ![таблица](images/toolbar_table.png "таблица"){.inline} табличным видом и ![диапазоны](images/toolbar_range.png "диапазоны"){.inline} редактором диапазонов,
+* можно переключаться между [общей информацией](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md) и [модуляторами по умолчанию](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod) SoundFont, когда выбран заголовок :guilabel:`Общее`,
 * в остальных случаях ничего не отображается.
 
 Выбранный вид сохраняется при выборе другого инструмента или пресета. Вид, отображаемый для первого инструмента или пресета при открытии SoundFont, можно выбрать параметром :guilabel:`Вид при запуске` в [настройках](manual/settings.md#doc_interface).

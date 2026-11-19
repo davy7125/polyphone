@@ -123,6 +123,8 @@ Da der Standardmodulator, der die Grenzfrequenz des Filters ändert, zwischen de
 * :guilabel:`SoundFont 2.04` (Standard): verwendet die Regel „senke die Filterfrequenz in Abhängigkeit vom Anschlag“ (kein Sprung mehr);
 * :guilabel:`deaktiviert`: dieser Standardmodulator wird nicht gesetzt.
 
+Diese Einstellung hat keine Wirkung auf einen Soundfont mit eigenen [Standardmodulatoren](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod).
+
 
 ![Einstellungen, Sound](images/settings_sound.png "Einstellungen, Sound")
 

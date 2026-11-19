@@ -49,6 +49,7 @@
 
 * インストゥルメントの編集中は、![テーブル](images/toolbar_table.png "テーブル"){.inline} [テーブル表示](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table)、![範囲](images/toolbar_range.png "範囲"){.inline} [範囲エディター](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range)、![エンベロープ](images/toolbar_adsr.png "エンベロープ"){.inline} [エンベロープエディター](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope)、![音色](images/toolbar_timbre.png "音色"){.inline} [音色ビュー](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_timbre)を切り替えられます。
 * プリセットの編集中は、![テーブル](images/toolbar_table.png "テーブル"){.inline} テーブル表示と ![範囲](images/toolbar_range.png "範囲"){.inline} 範囲エディターを切り替えられます。
+* 見出し :guilabel:`一般` を選択しているときは、[一般情報](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md)とSoundFontの[デフォルトモジュレーター](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod)を切り替えられます。
 * それ以外の場合は何も表示されません。
 
 選択した表示は、別のインストゥルメントやプリセットを選択しても維持されます。SoundFontを開いたときに最初のインストゥルメントまたはプリセットで表示される画面は、[設定](manual/settings.md#doc_interface)の :guilabel:`起動時の表示` オプションで選べます。

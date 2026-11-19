@@ -481,4 +481,4 @@
   出力先の下のテキストはモジュレーションの範囲を示します。パラメーターに加算される値（:guilabel:`加算 下限` … :guilabel:`上限`）、またはパラメーターに掛けられる係数（:guilabel:`乗算 下限` … :guilabel:`上限`）です。
 
 モジュレーターがリスト内のそれより上にあるモジュレーターと同一の場合は、:guilabel:`…によって上書き` と表示されます。
-インストゥルメントレベルでは、:guilabel:`デフォルトモジュレーターを上書き` はsf2形式の[デフォルトモジュレーター](manual/soundfont-editor/tools/instrument-tools.md#doc_default_mod)の1つを置き換えるモジュレーターであることを示し、:guilabel:`デフォルトモジュレーターを無効化` はその量が0であること（その結果、デフォルトモジュレーターが無効になること）を示します。
+インストゥルメントレベルでは、:guilabel:`デフォルトモジュレーターを上書き` はsf2形式の[デフォルトモジュレーター](manual/soundfont-editor/tools/instrument-tools.md#doc_default_mod)の1つを置き換えるモジュレーターであることを示し、:guilabel:`デフォルトモジュレーターを無効化` はその量が0であること（その結果、デフォルトモジュレーターが無効になること）を示します。これらのデフォルトモジュレーターはSoundFontのもので、[独自のリスト](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod)の場合もあります。

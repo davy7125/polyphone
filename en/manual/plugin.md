@@ -94,7 +94,7 @@ The parameters are the ones of the synthesizer of Polyphone, which can be found 
 :guilabel:`Velocity`
 : The response to the velocity of the notes, each setting being drawn in a graph (velocity from 0 to 127 from left to right):
   
-  * :guilabel:`Filter cutoff`: default modulator lowering the filter cutoff according to the velocity, by up to 2 octaves, as in the [sound settings](manual/settings.md#doc_sound) of Polyphone. The version 2.04 of the SoundFont format (default) lowers it all the more as the velocity is low. The version 2.01 had a jump at the velocity 64, an error fixed by the version 2.04: it is a compatibility mode for the old soundfonts made to compensate this jump. With :guilabel:`Disabled`, the cutoff does not depend on the velocity.
+  * :guilabel:`Filter cutoff`: default modulator lowering the filter cutoff according to the velocity, by up to 2 octaves, as in the [sound settings](manual/settings.md#doc_sound) of Polyphone. The version 2.04 of the SoundFont format (default) lowers it all the more as the velocity is low. The version 2.01 had a jump at the velocity 64, an error fixed by the version 2.04: it is a compatibility mode for the old soundfonts made to compensate this jump. With :guilabel:`Disabled`, the cutoff does not depend on the velocity. It has no effect on a soundfont having its own [default modulators](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod).
   * :guilabel:`Curve`: curve applied to the velocity of the notes received, linear in the middle (default, restored by a double click), concave to the left (softer velocity: the high velocities need a stronger touch) and convex to the right (the velocity rises quickly).
 
 :guilabel:`Temperaments and scales`

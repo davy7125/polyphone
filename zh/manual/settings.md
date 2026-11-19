@@ -123,6 +123,8 @@ MIDI 输入
 * :guilabel:`SoundFont 2.04`（默认）：使用“根据力度降低滤波器频率”这一规则（不再有跳变）；
 * :guilabel:`已禁用`：不设置该默认调制器。
 
+对于有自己的[默认调制器](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod)的音色库，此设置无效。
+
 
 ![设置：音频](images/settings_sound.png "设置：音频")
 

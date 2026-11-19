@@ -123,6 +123,8 @@ MIDI入力
 * :guilabel:`SoundFont 2.04`（初期設定）：「ベロシティに応じてフィルター周波数を下げる」という規則を使います（段差はなくなります）。
 * :guilabel:`無効`：このデフォルトモジュレーターは設定されません。
 
+独自の[デフォルトモジュレーター](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod)を持つSoundFontには、この設定は影響しません。
+
 
 ![設定：サウンド](images/settings_sound.png "設定：サウンド")
 

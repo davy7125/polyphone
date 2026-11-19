@@ -29,6 +29,8 @@ Du matériel tel que des sampleurs, des cartes son ou encore des synthétiseurs 
 D'autres informations sur les banques de sons peuvent être trouvées par exemple sur <a href="https://fr.wikipedia.org/wiki/SoundFont" target="_blank">Wikipedia</a>.
 Les spécifications sf2 sont disponibles [ici](files/sf_specifications_v2.01.pdf) pour la version 2.01 et [là](files/sf_specifications_v2.04.pdf) pour la version 2.04.
 
+Les [modulateurs par défaut](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod) d'une banque de sons peuvent être remplacés par sa propre liste, enregistrée dans un bloc DMOD&nbsp;: cette extension, <a href="https://github.com/spessasus/soundfont-proposals/blob/main/default_modulators.md" target="_blank">proposée en 2024</a>, est lue par FluidSynth 2.5 et ultérieur, SpessaSynth et Polyphone 2.7 et ultérieur, et ignorée par les autres synthétiseurs.
+
 
 ## Banques de sons sf3 {#doc_sf3}
 

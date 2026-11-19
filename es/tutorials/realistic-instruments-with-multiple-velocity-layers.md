@@ -127,7 +127,7 @@ En el ejemplo, las atenuaciones son de 0, 6, 11 y 16 dB, como se ve en la tabla 
 Comprueba varias teclas a lo largo del teclado: si un registro sigue desequilibrado, la atenuación de las divisiones afectadas se puede afinar en el instrumento de la capa, por ejemplo con la herramienta «[Configuración basada en notas](manual/soundfont-editor/tools/instrument-tools.md#doc_global)».
 
 El rango dinámico global del instrumento, de la nota más suave a la más fuerte, lo da entonces el modulador por defecto.
-Si las notas suaves son demasiado débiles o no lo bastante, este modulador se puede cambiar con la herramienta «[Anular el modulador por defecto](manual/soundfont-editor/tools/instrument-tools.md#doc_default_mod)».
+Si las notas suaves son demasiado débiles o no lo bastante, este modulador se puede cambiar con la herramienta «[Anular el modulador por defecto](manual/soundfont-editor/tools/instrument-tools.md#doc_default_mod)». También se puede cambiar para todos los instrumentos a la vez en los [moduladores por defecto](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod) del soundfont.
 
 Por último, nada mejor que una verdadera pieza musical para probar el resultado: toca el soundfont con un teclado MIDI o con el [reproductor MIDI](manual/soundfont-editor/toolbar.md#doc_midi_player) (ver el tutorial «[Leer un archivo MIDI con un soundfont](tutorials/read-midi-file-with-soundfont.md)»).
 

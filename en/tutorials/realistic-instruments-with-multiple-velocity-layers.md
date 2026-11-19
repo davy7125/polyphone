@@ -127,7 +127,7 @@ In the example, the attenuations are 0, 6, 11 and 16 dB, as shown in the table a
 Check several keys across the keyboard: if a register remains unbalanced, the attenuation of the divisions concerned can be refined in the instrument of the layer, for instance with the tool “[Key-based configuration](manual/soundfont-editor/tools/instrument-tools.md#doc_global)”.
 
 The overall dynamic range of the instrument, from the softest to the loudest note, is then given by the default modulator.
-If the soft notes are too quiet or not quiet enough, this modulator can be changed with the tool “[Override a default modulator](manual/soundfont-editor/tools/instrument-tools.md#doc_default_mod)”.
+If the soft notes are too quiet or not quiet enough, this modulator can be changed with the tool “[Override a default modulator](manual/soundfont-editor/tools/instrument-tools.md#doc_default_mod)”. It can also be changed for all the instruments at once in the [default modulators](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod) of the soundfont.
 
 Finally, nothing beats a real piece of music for testing the result: play the soundfont with a MIDI keyboard or with the [MIDI player](manual/soundfont-editor/toolbar.md#doc_midi_player) (see the tutorial “[Read a MIDI file with a soundfont](tutorials/read-midi-file-with-soundfont.md)”).
 

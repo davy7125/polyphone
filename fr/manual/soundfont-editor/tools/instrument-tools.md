@@ -191,6 +191,9 @@ Cet outil affiche la liste de ces modulateurs et peut créer des modulateurs qui
 
 ![Outil de surcharge des modulateurs par défaut](images/tool_default_mod.png "Outil de surcharge des modulateurs par défaut")
 
+La liste est celle de la banque de sons&nbsp;: ses propres [modulateurs par défaut](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod) si elle en a, sinon ceux du format SoundFont.
+Pour changer un modulateur par défaut pour tous les instruments à la fois, modifiez plutôt les modulateurs par défaut de la banque de sons.
+
 
 ### Enlever les modulateurs {#doc_remove_mod}
 
@@ -199,7 +202,7 @@ Tous les modulateurs de tous les instruments sélectionnés sont enlevés.
 Un message indique combien de modulateurs ont été supprimés.
 
 **Note&nbsp;:** Les modulateurs par défaut s'appliqueront toujours.
-La seule manière de désactiver un modulateur par défaut est de le surcharger avec l'outil «&nbsp;[Surcharger un modulateur par défaut](#doc_default_mod)&nbsp;».
+Pour désactiver un modulateur par défaut, il faut le surcharger avec l'outil «&nbsp;[Surcharger un modulateur par défaut](#doc_default_mod)&nbsp;», ou le retirer des [modulateurs par défaut](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod) de la banque de sons pour tous les instruments à la fois.
 
 
 ## Transformation {#doc_cat_transformation}

@@ -5,6 +5,8 @@ Diese Seite besteht aus drei Arten von Elementen:
 * nicht bearbeitbaren [allgemeinen Informationen](#doc_info),
 * [Statistiken](#doc_stats) zum Soundfont.
 
+Der Button :guilabel:`Standardmodulatoren` der [Werkzeugleiste](manual/soundfont-editor/toolbar.md#doc_view) zeigt die [Standardmodulatoren](#doc_default_mod) des Soundfonts an, der Button :guilabel:`Allgemein` zeigt wieder diese Seite an.
+
 
 ![Seite der allgemeinen Informationen](images/edit_general.png "Seite der allgemeinen Informationen")
 
@@ -83,3 +85,23 @@ Doppelte Samples lassen sich mit dem Werkzeug „[Duplikate bereinigen](manual/s
 
 **Hinweis:** Die Anzahl von 65536 Parametern in den Instrumenten und Presets sollte nicht überschritten werden.
 Manche Synthesizer können sie sonst möglicherweise nicht alle lesen.
+
+
+
+## Standardmodulatoren {#doc_default_mod}
+
+
+Standardmodulatoren werden auf jedes Instrument des Soundfonts angewendet, vor den [Modulatoren](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_modulator) des Instruments: Ein Modulator eines Instruments mit denselben Quellen, demselben Ziel und derselben Transformation ersetzt einen Standardmodulator (Beschriftung :guilabel:`ersetzt StandardMod.`).
+
+Ohne eigene Liste verwendet ein Soundfont die Standardmodulatoren des SoundFont-Formats, die angezeigt, aber nicht bearbeitet werden können: Anschlag auf Dämpfung und auf Filterfrequenz, Kanaldruck und Modulationsrad auf Vibrato, Lautstärke, Panorama, Expression, Hall, Chorus und Pitch-Rad.
+Der Modulator Anschlag auf Filterfrequenz hängt von den [Sound-Einstellungen](manual/settings.md#doc_sound) ab.
+
+Der Button :guilabel:`Anpassen` gibt dem Soundfont eine eigene Liste, die mit diesen Modulatoren beginnt und dann wie die Modulatoren eines Instruments bearbeitet wird (hinzufügen, entfernen, kopieren, einfügen, ändern).
+Diese Liste ersetzt die Standardmodulatoren des SoundFont-Formats: Ein aus der Liste entfernter Modulator gilt für kein Instrument mehr, ein hinzugefügter Modulator gilt für alle.
+Der Button :guilabel:`Auf die SoundFont-Standardwerte zurücksetzen` entfernt die Liste und stellt die Standardmodulatoren des Formats wieder her.
+
+Die Liste wird im DMOD-Chunk der sf2- und sf3-Dateien gespeichert, einer [Erweiterung des Formats](manual/annexes/the-different-soundfont-formats.md#doc_sf2), die von FluidSynth ab Version 2.5, SpessaSynth und Polyphone ab Version 2.7 (einschließlich des [Plugins](manual/plugin.md)) gelesen wird.
+Andere Synthesizer ignorieren sie und wenden die Standardmodulatoren des SoundFont-Formats an.
+
+Wird ein Instrument in einen anderen Soundfont kopiert, dessen Standardmodulatoren abweichen, werden dem Instrument globale Modulatoren hinzugefügt, damit es gleich klingt.
+Der [DLS-Export](manual/annexes/the-different-soundfont-formats.md#doc_dls) konvertiert die Standardmodulatoren des Soundfonts; der sfz-Export behält nur ihre Wirkung des Anschlags auf die Lautstärke und auf die Filterfrequenz.

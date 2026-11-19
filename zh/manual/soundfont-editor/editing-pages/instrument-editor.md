@@ -481,4 +481,4 @@
   目标下方的文字表示调制的范围：加到参数上的值（:guilabel:`相加，从` … :guilabel:`到`）或施加于参数的系数（:guilabel:`相乘，从` … :guilabel:`到`）。
 
 如果某个调制器与列表中位于其上方的调制器完全相同，会显示 :guilabel:`被 … 覆盖` 字样。
-在乐器层级，:guilabel:`覆盖 默认调制器` 表示该调制器取代了 sf2 格式的某个[默认调制器](manual/soundfont-editor/tools/instrument-tools.md#doc_default_mod)，而 :guilabel:`禁用 默认调制器` 表示其调制量为 0（此时该默认调制器被关闭）。
+在乐器层级，:guilabel:`覆盖 默认调制器` 表示该调制器取代了 sf2 格式的某个[默认调制器](manual/soundfont-editor/tools/instrument-tools.md#doc_default_mod)，而 :guilabel:`禁用 默认调制器` 表示其调制量为 0（此时该默认调制器被关闭）。这些默认调制器是音色库的默认调制器，也可能是其[自己的列表](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod)。

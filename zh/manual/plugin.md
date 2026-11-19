@@ -94,7 +94,7 @@ sfz 和 dls 文件会像 Polyphone 导入它们时一样进行转换，sfz 文�
 :guilabel:`力度`
 : 设置对音符力度的响应，每项设置都以图形显示（力度从左到右为 0 到 127）：
   
-  * :guilabel:`滤波器截止`：根据力度将滤波器截止频率降低最多 2 个八度的默认调制器，与 Polyphone 的[音频](manual/settings.md#doc_sound)设置中相同。SoundFont 格式的 2.04 版本（默认）在力度越小时降低得越多。2.01 版本在力度 64 处有一个跳变，这是 2.04 版本修正的错误：它是为补偿该跳变而制作的旧音色库的兼容模式。选择 :guilabel:`禁用` 时，截止频率不随力度变化。
+  * :guilabel:`滤波器截止`：根据力度将滤波器截止频率降低最多 2 个八度的默认调制器，与 Polyphone 的[音频](manual/settings.md#doc_sound)设置中相同。SoundFont 格式的 2.04 版本（默认）在力度越小时降低得越多。2.01 版本在力度 64 处有一个跳变，这是 2.04 版本修正的错误：它是为补偿该跳变而制作的旧音色库的兼容模式。选择 :guilabel:`禁用` 时，截止频率不随力度变化。对于有自己的[默认调制器](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod)的音色库，此设置无效。
   * :guilabel:`曲线`：应用于所接收音符力度的曲线，中间为线性（默认，双击可恢复），向左为凹形（力度更柔和：需要更重的触键才能达到高力度），向右为凸形（力度迅速升高）。
 
 :guilabel:`律制与音阶`

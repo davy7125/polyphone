@@ -191,6 +191,9 @@
 
 ![上書きツール](images/tool_default_mod.png "上書きツール")
 
+このリストはSoundFontのものです：独自の[デフォルトモジュレーター](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod)があればそれ、なければSoundFont形式のものです。
+すべてのインストゥルメントのデフォルトモジュレーターを一度に変更するには、SoundFontのデフォルトモジュレーターを編集してください。
+
 
 ### モジュレーターを削除 {#doc_remove_mod}
 
@@ -199,7 +202,7 @@
 削除されたモジュレーターの数がメッセージで表示されます。
 
 **注意：**デフォルトモジュレーターは引き続き適用されます。
-デフォルトモジュレーターを無効にする唯一の方法は、「[デフォルトモジュレーターを上書き](#doc_default_mod)」ツールで上書きすることです。
+デフォルトモジュレーターを無効にするには、「[デフォルトモジュレーターを上書き](#doc_default_mod)」ツールで上書きするか、SoundFontの[デフォルトモジュレーター](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod)から削除します（すべてのインストゥルメントに一度に適用されます）。
 
 
 ## 変換 {#doc_cat_transformation}

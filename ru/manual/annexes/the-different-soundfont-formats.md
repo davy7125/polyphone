@@ -29,6 +29,8 @@ SoundFont используются программными синтезатор
 Дополнительные сведения о SoundFont можно найти, например, в <a href="https://en.wikipedia.org/wiki/SoundFont" target="_blank">Википедии</a>.
 Спецификации sf2 доступны [здесь](files/sf_specifications_v2.01.pdf) для версии 2.01 и [здесь](files/sf_specifications_v2.04.pdf) для версии 2.04.
 
+[Модуляторы по умолчанию](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod) SoundFont можно заменить собственным списком, сохраняемым в блоке DMOD: это расширение, <a href="https://github.com/spessasus/soundfont-proposals/blob/main/default_modulators.md" target="_blank">предложенное в 2024 году</a>, читают FluidSynth 2.5 и новее, SpessaSynth и Polyphone 2.7 и новее, а другие синтезаторы его игнорируют.
+
 
 ## SoundFont в формате sf3 {#doc_sf3}
 

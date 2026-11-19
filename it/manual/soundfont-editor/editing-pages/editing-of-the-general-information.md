@@ -5,6 +5,8 @@ Questa pagina è composta da tre tipi di elementi:
 * [informazioni generali](#doc_info) non modificabili,
 * [statistiche](#doc_stats) sul soundfont.
 
+Il pulsante :guilabel:`Modulatori predefiniti` della [barra degli strumenti](manual/soundfont-editor/toolbar.md#doc_view) mostra i [modulatori predefiniti](#doc_default_mod) del soundfont, e il pulsante :guilabel:`Generale` mostra di nuovo questa pagina.
+
 
 ![Pagina delle informazioni generali](images/edit_general.png "Pagina delle informazioni generali")
 
@@ -83,3 +85,23 @@ I campioni duplicati possono essere rimossi con la funzione «[Pulisci i duplica
 
 **Nota:** il numero di 65536 parametri negli strumenti e nei preset non dovrebbe essere superato.
 Alcuni sintetizzatori potrebbero non riuscire a leggerli tutti.
+
+
+
+## Modulatori predefiniti {#doc_default_mod}
+
+
+I modulatori predefiniti si applicano a ogni strumento del soundfont, prima dei [modulatori](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_modulator) dello strumento: un modulatore di uno strumento con le stesse sorgenti, la stessa destinazione e la stessa trasformazione sostituisce un modulatore predefinito (etichetta :guilabel:`sostituisce mod. predefinito`).
+
+Senza una lista propria, un soundfont usa i modulatori predefiniti del formato SoundFont, mostrati senza poter essere modificati: velocità verso attenuazione e verso frequenza di taglio, pressione del canale e rotella di modulazione verso vibrato, volume, panoramica, espressione, riverbero, chorus e rotella del pitch.
+Il modulatore velocità verso frequenza di taglio dipende dalle [impostazioni del suono](manual/settings.md#doc_sound).
+
+Il pulsante :guilabel:`Personalizza` dà al soundfont una lista propria, che inizia con questi modulatori e si modifica poi come i modulatori di uno strumento (aggiunta, rimozione, copia, incolla, modifica).
+Questa lista sostituisce i modulatori predefiniti del formato SoundFont: un modulatore rimosso dalla lista non si applica più a nessuno strumento, un modulatore aggiunto si applica a tutti.
+Il pulsante :guilabel:`Ripristina i valori predefiniti di SoundFont` rimuove la lista e ripristina i modulatori predefiniti del formato.
+
+La lista viene salvata nel blocco DMOD dei file sf2 e sf3, un'[estensione del formato](manual/annexes/the-different-soundfont-formats.md#doc_sf2) letta da FluidSynth 2.5 e successivi, SpessaSynth e Polyphone 2.7 e successivi ([plugin](manual/plugin.md) compreso).
+Gli altri sintetizzatori la ignorano e applicano i modulatori predefiniti del formato SoundFont.
+
+Quando uno strumento viene copiato in un altro soundfont i cui modulatori predefiniti sono diversi, vengono aggiunti modulatori globali allo strumento affinché suoni allo stesso modo.
+L'[esportazione DLS](manual/annexes/the-different-soundfont-formats.md#doc_dls) converte i modulatori predefiniti del soundfont; l'esportazione sfz conserva solo il loro effetto della velocità sul volume e sulla frequenza di taglio.

@@ -5,6 +5,8 @@
 * 不可编辑的[一般信息](#doc_info)，
 * 关于音色库的[统计信息](#doc_stats)。
 
+[工具栏](manual/soundfont-editor/toolbar.md#doc_view)中的 :guilabel:`默认调制器` 按钮显示音色库的[默认调制器](#doc_default_mod)，:guilabel:`通用` 按钮则重新显示本页面。
+
 
 ![一般信息页面](images/edit_general.png "一般信息页面")
 
@@ -83,3 +85,23 @@ ROM 名称和版本
 
 **注意：**乐器和预设中的参数数量不应超过 65536 个。
 某些合成器可能无法全部读取。
+
+
+
+## 默认调制器 {#doc_default_mod}
+
+
+默认调制器应用于音色库的每个乐器，并先于乐器自身的[调制器](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_modulator)：乐器中源、目标和变换都相同的调制器会取代默认调制器（标签 :guilabel:`覆盖 默认调制器`）。
+
+没有自己的列表时，音色库使用 SoundFont 格式的默认调制器，它们会显示出来但不能编辑：力度到衰减和到滤波器截止频率、通道压力和调制轮到颤音、音量、声像、表情、混响、合唱以及弯音轮。
+力度到滤波器截止频率的调制器取决于[音频设置](manual/settings.md#doc_sound)。
+
+:guilabel:`自定义` 按钮为音色库创建自己的列表，列表从这些调制器开始，之后可以像乐器的调制器一样编辑（添加、删除、复制、粘贴、修改）。
+该列表取代 SoundFont 格式的默认调制器：从列表中删除的调制器不再应用于任何乐器，添加的调制器则应用于所有乐器。
+:guilabel:`恢复为 SoundFont 默认值` 按钮删除该列表，恢复格式的默认调制器。
+
+该列表保存在 sf2 和 sf3 文件的 DMOD 块中，这是一项[格式扩展](manual/annexes/the-different-soundfont-formats.md#doc_sf2)，FluidSynth 2.5 及以上版本、SpessaSynth 以及 Polyphone 2.7 及以上版本（包括[插件](manual/plugin.md)）可以读取。
+其他合成器会忽略它，并应用 SoundFont 格式的默认调制器。
+
+将乐器复制到默认调制器不同的另一个音色库时，会为该乐器添加全局调制器，使其声音保持不变。
+[DLS 导出](manual/annexes/the-different-soundfont-formats.md#doc_dls)会转换音色库的默认调制器；sfz 导出只保留力度对音量和滤波器截止频率的作用。

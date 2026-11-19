@@ -191,6 +191,9 @@ Esta herramienta muestra la lista de esos moduladores y puede crear moduladores 
 
 ![Herramienta de anulación](images/tool_default_mod.png "Herramienta de anulación")
 
+La lista es la del soundfont: sus propios [moduladores por defecto](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod) si los tiene, si no los del formato SoundFont.
+Para cambiar un modulador por defecto en todos los instrumentos a la vez, es mejor editar los moduladores por defecto del soundfont.
+
 
 ### Eliminar moduladores {#doc_remove_mod}
 
@@ -199,7 +202,7 @@ Se eliminarán todos los moduladores de todos los instrumentos seleccionados.
 Un mensaje indica cuántos moduladores se han eliminado.
 
 **Nota:** los moduladores por defecto seguirán aplicándose.
-La única forma de desactivar un modulador por defecto es anularlo con la herramienta «[Anular el modulador por defecto](#doc_default_mod)».
+Para desactivar un modulador por defecto, hay que anularlo con la herramienta «[Anular el modulador por defecto](#doc_default_mod)» o quitarlo de los [moduladores por defecto](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod) del soundfont, para todos los instrumentos a la vez.
 
 
 ## Transformación {#doc_cat_transformation}

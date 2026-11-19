@@ -127,7 +127,7 @@ C4のキーを、弱い音から強い音まで4回弾いたものを聞いて�
 キーボード全体でいくつかのキーを確認してください。ある音域だけバランスが悪い場合は、そのレイヤーのインストゥルメントで、該当するディビジョンのアッテネーションを細かく調整できます。たとえばツール「[キーベース設定](manual/soundfont-editor/tools/instrument-tools.md#doc_global)」を使います。
 
 こうすると、最も弱いノートから最も強いノートまでの、インストゥルメント全体のダイナミックレンジは、デフォルトモジュレーターによって決まります。
-弱いノートが小さすぎる、または十分に小さくない場合は、ツール「[デフォルトモジュレーターを上書き](manual/soundfont-editor/tools/instrument-tools.md#doc_default_mod)」でこのモジュレーターを変更できます。
+弱いノートが小さすぎる、または十分に小さくない場合は、ツール「[デフォルトモジュレーターを上書き](manual/soundfont-editor/tools/instrument-tools.md#doc_default_mod)」でこのモジュレーターを変更できます。SoundFontの[デフォルトモジュレーター](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod)で、すべてのインストゥルメントに対して一度に変更することもできます。
 
 最後に、結果を確かめるには実際の曲がいちばんです。MIDIキーボードや[MIDIプレーヤー](manual/soundfont-editor/toolbar.md#doc_midi_player)でSoundFontを鳴らしてみてください（チュートリアル「[SoundFontでMIDIファイルを再生する](tutorials/read-midi-file-with-soundfont.md)」を参照）。
 

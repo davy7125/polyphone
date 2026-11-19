@@ -29,6 +29,8 @@ Algunos equipos, como samplers, tarjetas de sonido o incluso sintetizadores, tam
 Se puede encontrar más información sobre los soundfonts, por ejemplo, en <a href="https://es.wikipedia.org/wiki/SoundFont" target="_blank">Wikipedia</a>.
 Las especificaciones sf2 están disponibles [aquí](files/sf_specifications_v2.01.pdf) para la versión 2.01 y [allí](files/sf_specifications_v2.04.pdf) para la versión 2.04.
 
+Los [moduladores por defecto](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod) de un soundfont pueden reemplazarse por su propia lista, guardada en un bloque DMOD: esta extensión, <a href="https://github.com/spessasus/soundfont-proposals/blob/main/default_modulators.md" target="_blank">propuesta en 2024</a>, la leen FluidSynth 2.5 y posteriores, SpessaSynth y Polyphone 2.7 y posteriores, y los demás sintetizadores la ignoran.
+
 
 ## Soundfonts sf3 {#doc_sf3}
 

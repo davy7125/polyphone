@@ -123,6 +123,8 @@ Since the default modulator modifying the filter cutoff frequency has been chang
 * :guilabel:`SoundFont 2.04` (default): use the rule “lower the filter frequency taking into account the velocity” (no more gap);
 * :guilabel:`disabled`: this default modulator is not set.
 
+This setting has no effect on a soundfont having its own [default modulators](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod).
+
 
 ![Settings, sound](images/settings_sound.png "Settings, sound")
 

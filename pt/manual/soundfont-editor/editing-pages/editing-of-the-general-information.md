@@ -5,6 +5,8 @@ Esta página é composta de três tipos de elementos:
 * [informações gerais](#doc_info) não editáveis,
 * [estatísticas](#doc_stats) sobre a soundfont.
 
+O botão :guilabel:`Moduladores padrão` da [barra de ferramentas](manual/soundfont-editor/toolbar.md#doc_view) exibe os [moduladores padrão](#doc_default_mod) da soundfont, e o botão :guilabel:`Geral` exibe esta página novamente.
+
 
 ![Página de informações gerais](images/edit_general.png "Página de informações gerais")
 
@@ -83,3 +85,23 @@ Amostras duplicadas podem ser removidas com a ferramenta “[Limpar duplicatas](
 
 **Observação:** o número de 65536 parâmetros nos instrumentos e nas predefinições não deve ser ultrapassado.
 Alguns sintetizadores podem não conseguir ler todos eles.
+
+
+
+## Moduladores padrão {#doc_default_mod}
+
+
+Os moduladores padrão são aplicados a cada instrumento da soundfont, antes dos [moduladores](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_modulator) do instrumento: um modulador de um instrumento com as mesmas fontes, o mesmo destino e a mesma transformação substitui um modulador padrão (indicação :guilabel:`substitui mod. padrão`).
+
+Sem lista própria, uma soundfont usa os moduladores padrão do formato SoundFont, exibidos sem poder ser editados: velocidade para atenuação e para frequência de corte, pressão do canal e roda de modulação para vibrato, volume, pan, expressão, reverberação, chorus e roda de pitch.
+O modulador velocidade para frequência de corte depende das [configurações de som](manual/settings.md#doc_sound).
+
+O botão :guilabel:`Personalizar` dá à soundfont sua própria lista, que começa com esses moduladores e é depois editada como os moduladores de um instrumento (adicionar, remover, copiar, colar, alterar).
+Essa lista substitui os moduladores padrão do formato SoundFont: um modulador removido da lista deixa de se aplicar a qualquer instrumento, e um modulador adicionado se aplica a todos.
+O botão :guilabel:`Redefinir para os padrões do SoundFont` remove a lista e restaura os moduladores padrão do formato.
+
+A lista é salva no bloco DMOD dos arquivos sf2 e sf3, uma [extensão do formato](manual/annexes/the-different-soundfont-formats.md#doc_sf2) lida pelo FluidSynth 2.5 e posteriores, pelo SpessaSynth e pelo Polyphone 2.7 e posteriores (incluindo o [plugin](manual/plugin.md)).
+Os outros sintetizadores a ignoram e aplicam os moduladores padrão do formato SoundFont.
+
+Quando um instrumento é copiado para outra soundfont cujos moduladores padrão são diferentes, moduladores globais são adicionados ao instrumento para que ele soe igual.
+A [exportação DLS](manual/annexes/the-different-soundfont-formats.md#doc_dls) converte os moduladores padrão da soundfont; a exportação sfz mantém apenas o efeito da velocidade sobre o volume e sobre a frequência de corte.

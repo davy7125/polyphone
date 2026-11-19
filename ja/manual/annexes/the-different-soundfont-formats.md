@@ -29,6 +29,8 @@ SoundFontは、MIDI信号で制御される<a href="http://www.fluidsynth.org/" 
 SoundFontについての詳しい情報は、たとえば<a href="https://ja.wikipedia.org/wiki/SoundFont" target="_blank">Wikipedia</a>で調べられます。
 sf2の仕様書は、バージョン2.01が[こちら](files/sf_specifications_v2.01.pdf)、バージョン2.04が[こちら](files/sf_specifications_v2.04.pdf)から入手できます。
 
+SoundFontの[デフォルトモジュレーター](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod)は、DMODチャンクに保存される独自のリストで置き換えることができます。この拡張は<a href="https://github.com/spessasus/soundfont-proposals/blob/main/default_modulators.md" target="_blank">2024年に提案</a>されたもので、FluidSynth 2.5以降、SpessaSynth、Polyphone 2.7以降が読み込み、その他のシンセサイザーは無視します。
+
 
 ## Sf3形式のSoundFont {#doc_sf3}
 

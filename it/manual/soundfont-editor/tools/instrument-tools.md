@@ -191,6 +191,9 @@ Questa funzione mostra l'elenco di questi modulatori e permette di creare modula
 
 ![Funzione di sovrascrittura](images/tool_default_mod.png "Funzione di sovrascrittura")
 
+La lista è quella del soundfont: i suoi [modulatori predefiniti](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod) se ne ha, altrimenti quelli del formato SoundFont.
+Per cambiare un modulatore predefinito per tutti gli strumenti in una volta, è meglio modificare i modulatori predefiniti del soundfont.
+
 
 ### Rimuovi modulatori {#doc_remove_mod}
 
@@ -199,7 +202,7 @@ Tutti i modulatori di tutti gli strumenti selezionati vengono rimossi.
 Un messaggio indica quanti modulatori sono stati rimossi.
 
 **Nota:** i modulatori predefiniti continuano a essere applicati.
-L'unico modo per disattivarli è sovrascriverli con la funzione «[Sovrascrivi un modulatore predefinito](#doc_default_mod)».
+Per disattivare un modulatore predefinito bisogna sovrascriverlo con la funzione «[Sovrascrivi un modulatore predefinito](#doc_default_mod)» oppure rimuoverlo dai [modulatori predefiniti](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod) del soundfont, per tutti gli strumenti in una volta.
 
 
 ## Trasformazione {#doc_cat_transformation}

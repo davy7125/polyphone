@@ -123,6 +123,8 @@ Poiché il modulatore predefinito che modifica la frequenza di taglio del filtro
 * :guilabel:`SoundFont 2.04` (predefinito): usa la regola «abbassa la frequenza del filtro in base alla velocità» (nessun salto);
 * :guilabel:`disattivato`: questo modulatore predefinito non viene impostato.
 
+Questa impostazione non ha effetto su un soundfont che ha i propri [modulatori predefiniti](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod).
+
 
 ![Impostazioni, suono](images/settings_sound.png "Impostazioni, suono")
 

@@ -49,6 +49,7 @@
 
 * 编辑乐器时，可以在 ![表格](images/toolbar_table.png "表格"){.inline} [表格视图](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table)、![范围](images/toolbar_range.png "范围"){.inline} [范围编辑器](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range)、![包络](images/toolbar_adsr.png "包络"){.inline} [包络编辑器](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope)和 ![音色](images/toolbar_timbre.png "音色"){.inline} [音色视图](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_timbre)之间切换，
 * 编辑预设时，可以在 ![表格](images/toolbar_table.png "表格"){.inline} 表格视图和 ![范围](images/toolbar_range.png "范围"){.inline} 范围编辑器之间切换，
+* 选中 :guilabel:`通用` 标题时，可以在[一般信息](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md)和音色库的[默认调制器](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod)之间切换，
 * 其他情况下不显示任何图标。
 
 选择其他乐器或预设时，所选视图保持不变。打开音色库时第一个乐器或预设显示的视图可以通过[设置](manual/settings.md#doc_interface)中的 :guilabel:`启动视图` 选项选择。

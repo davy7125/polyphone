@@ -481,4 +481,4 @@ Destino
   O texto abaixo do destino indica a amplitude da modulação: os valores somados ao parâmetro (:guilabel:`Somar de` … :guilabel:`Até`) ou os fatores aplicados a ele (:guilabel:`Multiplicar de` … :guilabel:`Até`).
 
 Quando um modulador é idêntico a outro localizado acima na lista, é exibida a indicação :guilabel:`sobrescrito por`.
-No nível do instrumento, a indicação :guilabel:`substitui mod. padrão` indica um modulador que substitui um dos [moduladores padrão](manual/soundfont-editor/tools/instrument-tools.md#doc_default_mod) do formato sf2, e :guilabel:`desativa mod. padrão` indica que sua quantidade é 0 (o modulador padrão fica então desativado).
+No nível do instrumento, a indicação :guilabel:`substitui mod. padrão` indica um modulador que substitui um dos [moduladores padrão](manual/soundfont-editor/tools/instrument-tools.md#doc_default_mod) do formato sf2, e :guilabel:`desativa mod. padrão` indica que sua quantidade é 0 (o modulador padrão fica então desativado). Esses moduladores padrão são os da soundfont, eventualmente [sua própria lista](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod).

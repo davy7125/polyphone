@@ -191,6 +191,9 @@
 
 ![覆盖工具](images/tool_default_mod.png "覆盖工具")
 
+该列表是音色库的列表：如果音色库有自己的[默认调制器](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod)则为这些调制器，否则为 SoundFont 格式的默认调制器。
+若要一次性为所有乐器更改某个默认调制器，最好直接编辑音色库的默认调制器。
+
 
 ### 移除调制器 {#doc_remove_mod}
 
@@ -199,7 +202,7 @@
 会有一条消息提示删除了多少个调制器。
 
 **注意：**默认调制器仍然会生效。
-禁用默认调制器的唯一方法，是用“[覆盖默认调制器](#doc_default_mod)”工具将其覆盖。
+要禁用默认调制器，可以用“[覆盖默认调制器](#doc_default_mod)”工具将其覆盖，或者将其从音色库的[默认调制器](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod)中删除（一次性作用于所有乐器）。
 
 
 ## 变换 {#doc_cat_transformation}

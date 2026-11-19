@@ -191,6 +191,9 @@ This tool displays the list of these modulators and can create modulators that w
 
 ![Overriding tool](images/tool_default_mod.png "Overriding tool")
 
+The list is the one of the soundfont: its own [default modulators](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod) if it has some, otherwise the ones of the SoundFont format.
+To change a default modulator for all the instruments at once, edit the default modulators of the soundfont instead.
+
 
 ### Remove modulators {#doc_remove_mod}
 
@@ -199,7 +202,7 @@ All modulators of all selected instruments will be removed.
 A message indicates how many modulators have been deleted.
 
 **Note:** Default modulators will still apply.
-The only way to disable a default modulator is to override it with the tool “[Override a default modulator](#doc_default_mod)”.
+To disable a default modulator, override it with the tool “[Override a default modulator](#doc_default_mod)”, or remove it from the [default modulators](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod) of the soundfont for all the instruments at once.
 
 
 ## Transformation {#doc_cat_transformation}

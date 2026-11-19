@@ -123,6 +123,8 @@
 * :guilabel:`SoundFont 2.04` (по умолчанию): используется правило «понижать частоту фильтра в зависимости от силы нажатия» (скачка больше нет);
 * :guilabel:`отключено`: этот модулятор по умолчанию не задаётся.
 
+Эта настройка не действует на SoundFont с собственными [модуляторами по умолчанию](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod).
+
 
 ![Настройки, звук](images/settings_sound.png "Настройки, звук")
 

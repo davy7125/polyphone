@@ -127,7 +127,7 @@ Nell'esempio, le attenuazioni sono di 0, 6, 11 e 16 dB, come si vede nella tabel
 Controlla diversi tasti su tutta la tastiera: se un registro resta sbilanciato, l'attenuazione delle divisioni interessate può essere affinata nello strumento del livello, ad esempio con lo strumento «[Configurazione basata su tasti](manual/soundfont-editor/tools/instrument-tools.md#doc_global)».
 
 La gamma dinamica complessiva dello strumento, dalla nota più piano alla più forte, è quindi data dal modulatore predefinito.
-Se le note piano sono troppo deboli o non abbastanza, questo modulatore può essere modificato con lo strumento «[Sovrascrivi un modulatore predefinito](manual/soundfont-editor/tools/instrument-tools.md#doc_default_mod)».
+Se le note piano sono troppo deboli o non abbastanza, questo modulatore può essere modificato con lo strumento «[Sovrascrivi un modulatore predefinito](manual/soundfont-editor/tools/instrument-tools.md#doc_default_mod)». Può anche essere cambiato per tutti gli strumenti in una volta nei [modulatori predefiniti](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod) del soundfont.
 
 Infine, niente di meglio di un vero brano musicale per provare il risultato: suona il soundfont con una tastiera MIDI o con il [lettore MIDI](manual/soundfont-editor/toolbar.md#doc_midi_player) (vedi il tutorial «[Riprodurre un file MIDI con un soundfont](tutorials/read-midi-file-with-soundfont.md)»).
 

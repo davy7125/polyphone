@@ -123,6 +123,8 @@ Como o modulador padrão que modifica a frequência de corte do filtro mudou ent
 * :guilabel:`SoundFont 2.04` (padrão): usa a regra “baixar a frequência do filtro levando em conta a velocidade” (sem lacuna);
 * :guilabel:`desativado`: esse modulador padrão não é definido.
 
+Esta configuração não tem efeito em uma soundfont que tenha seus próprios [moduladores padrão](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod).
+
 
 ![Configurações, som](images/settings_sound.png "Configurações, som")
 

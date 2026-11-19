@@ -127,7 +127,7 @@ No exemplo, as atenuações são de 0, 6, 11 e 16 dB, como mostra a tabela acima
 Verifique várias teclas ao longo do teclado: se um registro continuar desequilibrado, a atenuação das divisões em questão pode ser refinada no instrumento da camada, por exemplo com a ferramenta “[Configuração baseada em notas](manual/soundfont-editor/tools/instrument-tools.md#doc_global)”.
 
 A faixa dinâmica global do instrumento, da nota mais suave à mais forte, é então dada pelo modulador padrão.
-Se as notas suaves estiverem fracas demais ou não o suficiente, esse modulador pode ser alterado com a ferramenta “[Substituir um modulador padrão](manual/soundfont-editor/tools/instrument-tools.md#doc_default_mod)”.
+Se as notas suaves estiverem fracas demais ou não o suficiente, esse modulador pode ser alterado com a ferramenta “[Substituir um modulador padrão](manual/soundfont-editor/tools/instrument-tools.md#doc_default_mod)”. Ele também pode ser alterado para todos os instrumentos de uma vez nos [moduladores padrão](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod) da soundfont.
 
 Por fim, nada melhor do que uma música de verdade para testar o resultado: toque a soundfont com um teclado MIDI ou com o [reprodutor MIDI](manual/soundfont-editor/toolbar.md#doc_midi_player) (veja o tutorial “[Ler um arquivo MIDI com uma soundfont](tutorials/read-midi-file-with-soundfont.md)”).
 

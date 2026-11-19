@@ -49,6 +49,7 @@ En la parte derecha de la barra de herramientas pueden aparecer algunos iconos s
 
 * al editar un instrumento, se puede cambiar entre la ![tabla](images/toolbar_table.png "tabla"){.inline} [vista de tabla](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), el ![rangos](images/toolbar_range.png "rangos"){.inline} [editor de rangos](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range), el ![envolvente](images/toolbar_adsr.png "envolvente"){.inline} [editor de envolventes](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope) y la ![timbre](images/toolbar_timbre.png "timbre"){.inline} [vista de timbre](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_timbre),
 * al editar un conjunto, se puede cambiar entre la ![tabla](images/toolbar_table.png "tabla"){.inline} vista de tabla y el ![rangos](images/toolbar_range.png "rangos"){.inline} editor de rangos,
+* se puede cambiar entre la [información general](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md) y los [moduladores por defecto](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod) del soundfont cuando se selecciona el encabezado :guilabel:`General`,
 * en los demás casos no se muestra nada.
 
 La vista elegida se mantiene al seleccionar otro instrumento o conjunto. La vista que se muestra para el primer instrumento o conjunto al abrir un soundfont se puede elegir con la opción :guilabel:`Vista de inicio` de las [preferencias](manual/settings.md#doc_interface).

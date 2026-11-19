@@ -5,6 +5,8 @@ Cet éditeur est composé de trois types d'éléments&nbsp;:
 * des [informations générales](#doc_info) non éditables,
 * des [statistiques](#doc_stats) sur la banque de sons.
 
+Le bouton :guilabel:`Modulateurs par défaut` de la [barre d'outils](manual/soundfont-editor/toolbar.md#doc_view) affiche les [modulateurs par défaut](#doc_default_mod) de la banque de sons, et le bouton :guilabel:`Général` réaffiche cette page.
+
 
 ![Éditeur des informations générales](images/edit_general.png "Éditeur des informations générales")
 
@@ -83,3 +85,23 @@ Les échantillons en double peuvent être enlevés avec l'outil «&nbsp;[Nettoye
 
 **Note&nbsp;:** Le nombre de 65536 paramètres dans les instruments et les ensembles ne devrait pas être dépassé.
 Certains synthétiseurs pourraient ne pas être en mesure de tous les lire.
+
+
+
+## Modulateurs par défaut {#doc_default_mod}
+
+
+Les modulateurs par défaut s'appliquent à chaque instrument de la banque de sons, avant les [modulateurs](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_modulator) de l'instrument&nbsp;: un modulateur d'instrument ayant les mêmes sources, la même destination et la même transformation remplace un modulateur par défaut (indication :guilabel:`surcharge un mod. par défaut`).
+
+Sans liste propre, une banque de sons utilise les modulateurs par défaut du format SoundFont, affichés sans pouvoir être modifiés&nbsp;: vélocité vers atténuation et vers fréquence de coupure, pression du canal et molette de modulation vers vibrato, volume, panoramique, expression, réverbération, chorus et molette de hauteur.
+Le modulateur vélocité vers fréquence de coupure dépend des [réglages du son](manual/settings.md#doc_sound).
+
+Le bouton :guilabel:`Personnaliser` donne à la banque de sons sa propre liste, qui commence par ces modulateurs et se modifie ensuite comme les modulateurs d'un instrument (ajout, suppression, copie, collage, modification).
+Cette liste remplace les modulateurs par défaut du format SoundFont&nbsp;: un modulateur retiré de la liste ne s'applique plus à aucun instrument, un modulateur ajouté s'applique à tous.
+Le bouton :guilabel:`Revenir aux modulateurs du format SoundFont` supprime la liste et rétablit les modulateurs par défaut du format.
+
+La liste est enregistrée dans le bloc DMOD des fichiers sf2 et sf3, une [extension du format](manual/annexes/the-different-soundfont-formats.md#doc_sf2) lue par FluidSynth 2.5 et ultérieur, SpessaSynth et Polyphone 2.7 et ultérieur (y compris le [plugin](manual/plugin.md)).
+Les autres synthétiseurs l'ignorent et appliquent les modulateurs par défaut du format SoundFont.
+
+Quand un instrument est copié dans une autre banque de sons dont les modulateurs par défaut diffèrent, des modulateurs globaux sont ajoutés à l'instrument pour qu'il sonne de la même façon.
+L'[export DLS](manual/annexes/the-different-soundfont-formats.md#doc_dls) convertit les modulateurs par défaut de la banque de sons&nbsp;; l'export sfz ne garde que leur effet de la vélocité sur le volume et sur la fréquence de coupure.

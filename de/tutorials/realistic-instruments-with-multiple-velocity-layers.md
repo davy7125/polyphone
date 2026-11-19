@@ -127,7 +127,7 @@ Im Beispiel betragen die Dämpfungen 0, 6, 11 und 16 dB, wie in der Tabelle oben
 Prüfen Sie mehrere Tasten über die ganze Tastatur: Bleibt ein Register unausgeglichen, kann die Dämpfung der betroffenen Aufteilungen im Instrument der Ebene verfeinert werden, zum Beispiel mit dem Werkzeug „[Tastenbasierte Konfiguration](manual/soundfont-editor/tools/instrument-tools.md#doc_global)“.
 
 Der gesamte Dynamikumfang des Instruments, von der leisesten bis zur lautesten Note, wird dann durch den Standardmodulator bestimmt.
-Sind die leisen Noten zu leise oder nicht leise genug, kann dieser Modulator mit dem Werkzeug „[Standardmodulator überschreiben](manual/soundfont-editor/tools/instrument-tools.md#doc_default_mod)“ geändert werden.
+Sind die leisen Noten zu leise oder nicht leise genug, kann dieser Modulator mit dem Werkzeug „[Standardmodulator überschreiben](manual/soundfont-editor/tools/instrument-tools.md#doc_default_mod)“ geändert werden. Er kann auch für alle Instrumente auf einmal in den [Standardmodulatoren](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod) des Soundfonts geändert werden.
 
 Zum Testen des Ergebnisses geht schließlich nichts über ein echtes Musikstück: Spielen Sie den Soundfont mit einem MIDI-Keyboard oder mit dem [MIDI-Player](manual/soundfont-editor/toolbar.md#doc_midi_player) (siehe das Tutorial „[Eine MIDI-Datei mit einem Soundfont abspielen](tutorials/read-midi-file-with-soundfont.md)“).
 

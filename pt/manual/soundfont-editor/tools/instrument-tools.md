@@ -191,6 +191,9 @@ Esta ferramenta exibe a lista desses moduladores e pode criar moduladores que v�
 
 ![Ferramenta de substituição](images/tool_default_mod.png "Ferramenta de substituição")
 
+A lista é a da soundfont: seus próprios [moduladores padrão](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod) se ela tiver, senão os do formato SoundFont.
+Para alterar um modulador padrão em todos os instrumentos de uma vez, é melhor editar os moduladores padrão da soundfont.
+
 
 ### Remover moduladores {#doc_remove_mod}
 
@@ -199,7 +202,7 @@ Todos os moduladores de todos os instrumentos selecionados serão removidos.
 Uma mensagem indica quantos moduladores foram excluídos.
 
 **Observação:** os moduladores padrão continuarão sendo aplicados.
-A única maneira de desativar um modulador padrão é substituí-lo com a ferramenta “[Substituir um modulador padrão](#doc_default_mod)”.
+Para desativar um modulador padrão, é preciso substituí-lo com a ferramenta “[Substituir um modulador padrão](#doc_default_mod)” ou removê-lo dos [moduladores padrão](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod) da soundfont, para todos os instrumentos de uma vez.
 
 
 ## Transformação {#doc_cat_transformation}

@@ -5,6 +5,8 @@ This page is made of three kinds of elements:
 * [general information](#doc_info) that is not editable,
 * [statistics](#doc_stats) about the soundfont.
 
+The button :guilabel:`Default modulators` of the [toolbar](manual/soundfont-editor/toolbar.md#doc_view) displays the [default modulators](#doc_default_mod) of the soundfont, and the button :guilabel:`General` displays this page again.
+
 
 ![Global information page](images/edit_general.png "Global information page")
 
@@ -83,3 +85,23 @@ Duplicate samples can be removed with the tool “[Clean duplicates](manual/soun
 
 **Note:** The number of 65536 parameters in the instruments and the presets should not be exceeded.
 Some synthesizers may not be able to read them all.
+
+
+
+## Default modulators {#doc_default_mod}
+
+
+Default modulators are applied to every instrument of the soundfont, before the [modulators](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_modulator) of the instrument: a modulator of an instrument having the same sources, destination and transform replaces a default modulator (label :guilabel:`overriding default mod.`).
+
+Without its own list, a soundfont uses the default modulators of the SoundFont format, displayed without being editable: velocity to attenuation and to filter cutoff, channel pressure and modulation wheel to vibrato, volume, pan, expression, reverb, chorus and pitch wheel.
+The velocity to filter cutoff modulator depends on the [sound settings](manual/settings.md#doc_sound).
+
+The button :guilabel:`Customize` gives the soundfont its own list, starting with these modulators, which is then edited like the modulators of an instrument (add, remove, copy, paste, change).
+This list replaces the default modulators of the SoundFont format: a modulator removed from the list no longer applies to any instrument, a modulator added to the list applies to all of them.
+The button :guilabel:`Reset to the SoundFont defaults` removes the list and restores the default modulators of the format.
+
+The list is saved in the DMOD chunk of the sf2 and sf3 files, an [extension of the format](manual/annexes/the-different-soundfont-formats.md#doc_sf2) read by FluidSynth 2.5 and later, SpessaSynth and Polyphone 2.7 and later (the [plugin](manual/plugin.md) included).
+Other synthesizers ignore it and apply the default modulators of the SoundFont format.
+
+When an instrument is copied into another soundfont whose default modulators differ, global modulators are added to the instrument so that it sounds the same.
+The [DLS export](manual/annexes/the-different-soundfont-formats.md#doc_dls) converts the default modulators of the soundfont; the sfz export only keeps their effect of the velocity on the volume and on the filter cutoff.

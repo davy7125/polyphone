@@ -127,7 +127,7 @@
 请在整个键盘上检查多个琴键：如果某个音区仍然不平衡，可以在该力度层的乐器中细调相关分区的衰减，例如使用工具“[基于音符的配置](manual/soundfont-editor/tools/instrument-tools.md#doc_global)”。
 
 这样，乐器从最弱到最强的整体动态范围就由默认调制器决定。
-如果弱音太弱或不够弱，可以使用工具“[覆盖默认调制器](manual/soundfont-editor/tools/instrument-tools.md#doc_default_mod)”修改这个调制器。
+如果弱音太弱或不够弱，可以使用工具“[覆盖默认调制器](manual/soundfont-editor/tools/instrument-tools.md#doc_default_mod)”修改这个调制器。也可以在音色库的[默认调制器](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod)中一次性为所有乐器更改它。
 
 最后，测试效果的最好方法是真正的乐曲：用 MIDI 键盘或 [MIDI 播放器](manual/soundfont-editor/toolbar.md#doc_midi_player)演奏音色库（参见教程“[用音色库播放 MIDI 文件](tutorials/read-midi-file-with-soundfont.md)”）。
 

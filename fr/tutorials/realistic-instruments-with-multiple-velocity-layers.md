@@ -127,7 +127,7 @@ Dans l'exemple, les atténuations sont de 0, 6, 11 et 16 dB, comme le montre la 
 Vérifiez plusieurs notes sur tout le clavier&nbsp;: si un registre reste déséquilibré, l'atténuation des divisions concernées peut être affinée dans l'instrument de la couche, par exemple avec l'outil «&nbsp;[Paramétrer en fonction des notes](manual/soundfont-editor/tools/instrument-tools.md#doc_global)&nbsp;».
 
 La dynamique globale de l'instrument, de la note la plus douce à la plus forte, est alors donnée par le modulateur par défaut.
-Si les notes douces sont trop faibles ou pas assez, ce modulateur peut être modifié avec l'outil «&nbsp;[Surcharger un modulateur par défaut](manual/soundfont-editor/tools/instrument-tools.md#doc_default_mod)&nbsp;».
+Si les notes douces sont trop faibles ou pas assez, ce modulateur peut être modifié avec l'outil «&nbsp;[Surcharger un modulateur par défaut](manual/soundfont-editor/tools/instrument-tools.md#doc_default_mod)&nbsp;». Il peut aussi être changé pour tous les instruments à la fois dans les [modulateurs par défaut](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod) de la banque de sons.
 
 Enfin, rien ne vaut un vrai morceau de musique pour tester le résultat&nbsp;: jouez la banque de sons avec un clavier MIDI ou avec le [lecteur MIDI](manual/soundfont-editor/toolbar.md#doc_midi_player) (voir le tutoriel «&nbsp;[Lire un fichier MIDI avec une banque de sons](tutorials/read-midi-file-with-soundfont.md)&nbsp;»).
 

@@ -123,6 +123,8 @@ Le modulateur par défaut modifiant la fréquence de coupure du filtre ayant ét
 * :guilabel:`SoundFont 2.04` (par défaut)&nbsp;: utilisation de la règle «&nbsp;abaisser la fréquence du filtre en tenant compte de la vélocité&nbsp;» (plus d'écart)&nbsp;;
 * :guilabel:`désactivé`&nbsp;: ce modulateur par défaut n'est pas défini.
 
+Ce réglage n'a pas d'effet sur une banque de sons ayant ses propres [modulateurs par défaut](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod).
+
 
 ![Préférences, son](images/settings_sound.png "Préférences, son")
 

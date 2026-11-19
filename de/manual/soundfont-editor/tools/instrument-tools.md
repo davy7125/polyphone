@@ -191,6 +191,9 @@ Dieses Werkzeug zeigt die Liste dieser Modulatoren an und ermöglicht es, Modula
 
 ![Werkzeug zum Überschreiben](images/tool_default_mod.png "Werkzeug zum Überschreiben")
 
+Die Liste ist die des Soundfonts: seine eigenen [Standardmodulatoren](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod), falls vorhanden, sonst die des SoundFont-Formats.
+Um einen Standardmodulator für alle Instrumente auf einmal zu ändern, bearbeiten Sie besser die Standardmodulatoren des Soundfonts.
+
 
 ### Modulatoren entfernen {#doc_remove_mod}
 
@@ -199,7 +202,7 @@ Alle Modulatoren aller ausgewählten Instrumente werden entfernt.
 Eine Meldung gibt an, wie viele Modulatoren entfernt wurden.
 
 **Hinweis:** Die Standardmodulatoren werden weiterhin angewendet.
-Die einzige Möglichkeit, sie zu deaktivieren, besteht darin, sie mit dem Werkzeug „[Standardmodulator überschreiben](#doc_default_mod)“ zu überschreiben.
+Um einen Standardmodulator zu deaktivieren, muss er mit dem Werkzeug „[Standardmodulator überschreiben](#doc_default_mod)“ überschrieben oder aus den [Standardmodulatoren](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_default_mod) des Soundfonts entfernt werden (für alle Instrumente auf einmal).
 
 
 ## Transformation {#doc_cat_transformation}
