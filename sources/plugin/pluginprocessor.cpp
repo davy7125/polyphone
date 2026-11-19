@@ -123,6 +123,30 @@ juce::PropertiesFile::Options PluginProcessor::getSettingsOptions()
     return options;
 }
 
+// Index of a choice from its text (-1 if not found, as JUCE by default). The CLAP wrapper (clap-juce-extensions) gives
+// the text of the host with juce::String(const char *), which reads the UTF-8 bytes as Latin-1 characters ("é" arriving
+// as "Ã©"): such a text is decoded again when it is not a choice as it is.
+static int findChoice(const juce::StringArray &choices, const juce::String &text)
+{
+    int index = choices.indexOf(text);
+    if (index >= 0)
+        return index;
+
+    std::string bytes;
+    bool isAscii = true;
+    for (auto character = text.getCharPointer(); !character.isEmpty();)
+    {
+        juce::juce_wchar value = character.getAndAdvance();
+        if (value > 0xFF)
+            return -1;
+        isAscii &= value < 0x80;
+        bytes += static_cast<char>(value);
+    }
+    if (isAscii || !juce::CharPointer_UTF8::isValidString(bytes.c_str(), static_cast<int>(bytes.size())))
+        return -1;
+    return choices.indexOf(juce::String::fromUTF8(bytes.c_str(), static_cast<int>(bytes.size())));
+}
+
 juce::AudioProcessorValueTreeState::ParameterLayout PluginProcessor::createParameters()
 {
     // Same ranges and default values as the settings of the editor (except the gain). The names are translated in the
@@ -130,6 +154,13 @@ juce::AudioProcessorValueTreeState::ParameterLayout PluginProcessor::createParam
     auto percentage = [](const char * id, const juce::String &name) {
         return std::make_unique<juce::AudioParameterInt>(juce::ParameterID(id, 1), name, 0, 100, 0,
                                                          juce::AudioParameterIntAttributes().withLabel("%"));
+    };
+    auto choice = [](const char * id, int version, const juce::String &name, const juce::StringArray &choices,
+                     int defaultIndex) {
+        return std::make_unique<juce::AudioParameterChoice>(
+            juce::ParameterID(id, version), name, choices, defaultIndex,
+            juce::AudioParameterChoiceAttributes().withValueFromStringFunction(
+                [choices](const juce::String &text) { return findChoice(choices, text); }));
     };
 
     juce::AudioProcessorValueTreeState::ParameterLayout layout;
@@ -155,17 +186,14 @@ juce::AudioProcessorValueTreeState::ParameterLayout PluginProcessor::createParam
         std::make_unique<juce::AudioParameterFloat>(juce::ParameterID("tuning", 1), tr("Reference pitch"),
                                                     juce::NormalisableRange<float>(400.0f, 480.0f, 0.1f), 440.0f,
                                                     juce::AudioParameterFloatAttributes().withLabel("Hz")),
-        std::make_unique<juce::AudioParameterChoice>(juce::ParameterID("temperament", 1), tr("Temperament"),
-                                                     temperaments, 0),
-        std::make_unique<juce::AudioParameterChoice>(
-            juce::ParameterID("temperamentKey", 1), tr("Temperament key"),
-            juce::StringArray { "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" }, 0)));
+        choice("temperament", 1, tr("Temperament"), temperaments, 0),
+        choice("temperamentKey", 1, tr("Temperament key"),
+               juce::StringArray { "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" }, 0)));
 
     // Added in a later version (versions of the parameters for AU), after the others for the hosts using their order
     layout.add(std::make_unique<juce::AudioProcessorParameterGroup>(
         "velocity", tr("Velocity"), "|",
-        std::make_unique<juce::AudioParameterChoice>(juce::ParameterID("velocityToFilter", 2),
-                                                     tr("Velocity to filter cutoff"), getVelocityToFilterNames(), 1),
+        choice("velocityToFilter", 2, tr("Velocity to filter cutoff"), getVelocityToFilterNames(), 1),
         std::make_unique<juce::AudioParameterInt>(juce::ParameterID("velocityCurve", 2), tr("Velocity curve"), -100,
                                                   100, 0)));
 
