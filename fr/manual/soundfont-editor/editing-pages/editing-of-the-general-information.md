@@ -100,6 +100,11 @@ Le bouton :guilabel:`Personnaliser` donne à la banque de sons sa propre liste, 
 Cette liste remplace les modulateurs par défaut du format SoundFont&nbsp;: un modulateur retiré de la liste ne s'applique plus à aucun instrument, un modulateur ajouté s'applique à tous.
 Le bouton :guilabel:`Revenir aux modulateurs du format SoundFont` supprime la liste et rétablit les modulateurs par défaut du format.
 
+Deux boutons déplacent des modulateurs entre les instruments et les modulateurs par défaut sans changer le son&nbsp;:
+
+* :guilabel:`Regrouper depuis les instruments`, à côté de :guilabel:`Personnaliser`&nbsp;: les modulateurs ayant la même valeur dans la division globale de tous les instruments deviennent des modulateurs par défaut de la banque de sons et sont retirés des instruments (un modulateur de quantité 0 supprime le modulateur par défaut)&nbsp;;
+* :guilabel:`Déplacer vers les instruments`, à côté de :guilabel:`Revenir aux modulateurs du format SoundFont`&nbsp;: les modulateurs par défaut de la banque de sons sont déplacés dans la division globale de tous les instruments et les modulateurs par défaut du format SoundFont s'appliquent à nouveau, le fichier sonnant alors de la même façon dans les synthétiseurs qui ne lisent pas le bloc DMOD.
+
 La liste est enregistrée dans le bloc DMOD des fichiers sf2 et sf3, une [extension du format](manual/annexes/the-different-soundfont-formats.md#doc_sf2) lue par FluidSynth 2.5 et ultérieur, SpessaSynth et Polyphone 2.7 et ultérieur (y compris le [plugin](manual/plugin.md)).
 Les autres synthétiseurs l'ignorent et appliquent les modulateurs par défaut du format SoundFont.
 

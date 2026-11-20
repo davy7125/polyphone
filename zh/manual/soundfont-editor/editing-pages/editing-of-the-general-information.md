@@ -100,6 +100,11 @@ ROM 名称和版本
 该列表取代 SoundFont 格式的默认调制器：从列表中删除的调制器不再应用于任何乐器，添加的调制器则应用于所有乐器。
 :guilabel:`恢复为 SoundFont 默认值` 按钮删除该列表，恢复格式的默认调制器。
 
+两个按钮可以在乐器和默认调制器之间移动调制器，且不改变声音：
+
+* :guilabel:`自定义` 旁边的 :guilabel:`从乐器中合并`：所有乐器的全局分区中数值相同的调制器成为音色库的默认调制器，并从乐器中移除（调制量为 0 的调制器会删除对应的默认调制器）；
+* :guilabel:`恢复为 SoundFont 默认值` 旁边的 :guilabel:`移至乐器`：音色库的默认调制器被移至所有乐器的全局分区，并重新应用 SoundFont 格式的默认调制器，这样在不读取 DMOD 块的合成器中文件的声音也相同。
+
 该列表保存在 sf2 和 sf3 文件的 DMOD 块中，这是一项[格式扩展](manual/annexes/the-different-soundfont-formats.md#doc_sf2)，FluidSynth 2.5 及以上版本、SpessaSynth 以及 Polyphone 2.7 及以上版本（包括[插件](manual/plugin.md)）可以读取。
 其他合成器会忽略它，并应用 SoundFont 格式的默认调制器。
 

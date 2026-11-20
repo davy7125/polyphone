@@ -100,6 +100,11 @@ The button :guilabel:`Customize` gives the soundfont its own list, starting with
 This list replaces the default modulators of the SoundFont format: a modulator removed from the list no longer applies to any instrument, a modulator added to the list applies to all of them.
 The button :guilabel:`Reset to the SoundFont defaults` removes the list and restores the default modulators of the format.
 
+Two buttons move modulators between the instruments and the default modulators without changing the sound:
+
+* :guilabel:`Group from the instruments`, next to :guilabel:`Customize`: the modulators having the same value in the global division of all instruments become default modulators of the soundfont and are removed from the instruments (a modulator with an amount of 0 removes the default modulator);
+* :guilabel:`Move to the instruments`, next to :guilabel:`Reset to the SoundFont defaults`: the default modulators of the soundfont are moved to the global division of all instruments and the default modulators of the SoundFont format apply again, so that the file plays the same in the synthesizers that do not read the DMOD chunk.
+
 The list is saved in the DMOD chunk of the sf2 and sf3 files, an [extension of the format](manual/annexes/the-different-soundfont-formats.md#doc_sf2) read by FluidSynth 2.5 and later, SpessaSynth and Polyphone 2.7 and later (the [plugin](manual/plugin.md) included).
 Other synthesizers ignore it and apply the default modulators of the SoundFont format.
 

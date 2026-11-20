@@ -100,6 +100,11 @@ O botão :guilabel:`Personalizar` dá à soundfont sua própria lista, que come�
 Essa lista substitui os moduladores padrão do formato SoundFont: um modulador removido da lista deixa de se aplicar a qualquer instrumento, e um modulador adicionado se aplica a todos.
 O botão :guilabel:`Redefinir para os padrões do SoundFont` remove a lista e restaura os moduladores padrão do formato.
 
+Dois botões movem moduladores entre os instrumentos e os moduladores padrão sem mudar o som:
+
+* :guilabel:`Agrupar a partir dos instrumentos`, ao lado de :guilabel:`Personalizar`: os moduladores que têm o mesmo valor na divisão global de todos os instrumentos tornam-se moduladores padrão da soundfont e são removidos dos instrumentos (um modulador com valor 0 remove o modulador padrão);
+* :guilabel:`Mover para os instrumentos`, ao lado de :guilabel:`Redefinir para os padrões do SoundFont`: os moduladores padrão da soundfont são movidos para a divisão global de todos os instrumentos e os moduladores padrão do formato SoundFont voltam a ser aplicados, de modo que o arquivo soa igual nos sintetizadores que não leem o bloco DMOD.
+
 A lista é salva no bloco DMOD dos arquivos sf2 e sf3, uma [extensão do formato](manual/annexes/the-different-soundfont-formats.md#doc_sf2) lida pelo FluidSynth 2.5 e posteriores, pelo SpessaSynth e pelo Polyphone 2.7 e posteriores (incluindo o [plugin](manual/plugin.md)).
 Os outros sintetizadores a ignoram e aplicam os moduladores padrão do formato SoundFont.
 

@@ -100,6 +100,11 @@ Der Button :guilabel:`Anpassen` gibt dem Soundfont eine eigene Liste, die mit di
 Diese Liste ersetzt die Standardmodulatoren des SoundFont-Formats: Ein aus der Liste entfernter Modulator gilt für kein Instrument mehr, ein hinzugefügter Modulator gilt für alle.
 Der Button :guilabel:`Auf die SoundFont-Standardwerte zurücksetzen` entfernt die Liste und stellt die Standardmodulatoren des Formats wieder her.
 
+Zwei Buttons verschieben Modulatoren zwischen den Instrumenten und den Standardmodulatoren, ohne den Klang zu ändern:
+
+* :guilabel:`Aus den Instrumenten zusammenfassen` neben :guilabel:`Anpassen`: Die Modulatoren, die bei allen Instrumenten als globale Modulatoren mit demselben Wert vorhanden sind, werden zu Standardmodulatoren des Soundfonts und aus den Instrumenten entfernt (ein Modulator mit dem Wert 0 entfernt den Standardmodulator);
+* :guilabel:`In die Instrumente verschieben` neben :guilabel:`Auf die SoundFont-Standardwerte zurücksetzen`: Die Standardmodulatoren des Soundfonts werden zu globalen Modulatoren aller Instrumente, und die Standardmodulatoren des SoundFont-Formats gelten wieder, sodass die Datei in Synthesizern, die den DMOD-Chunk nicht lesen, gleich klingt.
+
 Die Liste wird im DMOD-Chunk der sf2- und sf3-Dateien gespeichert, einer [Erweiterung des Formats](manual/annexes/the-different-soundfont-formats.md#doc_sf2), die von FluidSynth ab Version 2.5, SpessaSynth und Polyphone ab Version 2.7 (einschließlich des [Plugins](manual/plugin.md)) gelesen wird.
 Andere Synthesizer ignorieren sie und wenden die Standardmodulatoren des SoundFont-Formats an.
 
