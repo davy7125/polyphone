@@ -4341,14 +4341,14 @@ domyślnego mod.</translation>
     </message>
     <message>
         <location filename="../../editor/modulator/modulatoreditor.ui" line="202"/>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="162"/>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="269"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="165"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="272"/>
         <source>No modulators</source>
         <translation>Brak modulatorów</translation>
     </message>
     <message>
         <location filename="../../editor/modulator/modulatoreditor.ui" line="234"/>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="171"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="174"/>
         <source>Select a single division to display the modulator list</source>
         <translation>Wybierz jeden przedział aby ujrzeć listę modulatorów</translation>
     </message>
@@ -4358,7 +4358,7 @@ domyślnego mod.</translation>
         <translation>Pokaż sekcję modulatorów</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="274"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="277"/>
         <source>%n modulator(s):</source>
         <translation>
             <numerusform>%n modulator:</numerusform>
@@ -4367,43 +4367,43 @@ domyślnego mod.</translation>
         </translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="355"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="358"/>
         <source>Duplicate the selection toward...</source>
         <translation>Duplikuj selekcję do...</translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="356"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="359"/>
         <source>Copy the selected modulators</source>
         <translation>Skopiuj zaznaczone modulatory</translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="361"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="364"/>
         <source>Duplicate modulators toward...</source>
         <translation>Zduplikuj modulatory do...</translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="362"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="365"/>
         <source>Copy all modulators</source>
         <translation>Skopiuj wszystkie modulatory</translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="654"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="657"/>
         <source>Forbidden action:</source>
         <translation>Zabroniona akcja:</translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="664"/>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="673"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="667"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="676"/>
         <source>Warning</source>
         <translation>Uwaga</translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="665"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="668"/>
         <source>offsets cannot be modulated in a preset.</source>
         <translation>przesunięcia nie mogą być modulowane w presecie.</translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="674"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="677"/>
         <source>%1 cannot be modulated in a preset.</source>
         <translation>%1 nie może być modulowany w presecie.</translation>
     </message>
@@ -4684,24 +4684,54 @@ domyślnego mod.</translation>
 <context>
     <name>PageDefaultMod</name>
     <message>
-        <location filename="../../editor/pagedefaultmod.ui" line="68"/>
+        <location filename="../../editor/pagedefaultmod.ui" line="74"/>
         <source>Customize</source>
         <translation>Dostosuj</translation>
     </message>
     <message>
-        <location filename="../../editor/pagedefaultmod.ui" line="75"/>
+        <location filename="../../editor/pagedefaultmod.ui" line="81"/>
+        <source>The modulators having the same value in the global division of all instruments become default modulators of this soundfont and are removed from the instruments. The sound does not change.</source>
+        <translation>Modulatory mające tę samą wartość w globalnym przedziale wszystkich instrumentów stają się domyślnymi modulatorami tego SoundFonta i są usuwane z instrumentów. Brzmienie się nie zmienia.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/pagedefaultmod.ui" line="84"/>
+        <source>Group from the instruments</source>
+        <translation>Zgrupuj z instrumentów</translation>
+    </message>
+    <message>
+        <location filename="../../editor/pagedefaultmod.ui" line="91"/>
         <source>Reset to the SoundFont defaults</source>
         <translation>Przywróć domyślne formatu SoundFont</translation>
     </message>
     <message>
-        <location filename="../../editor/pagedefaultmod.cpp" line="55"/>
+        <location filename="../../editor/pagedefaultmod.ui" line="98"/>
+        <source>The default modulators of this soundfont are moved to the global division of all instruments and the default modulators of the SoundFont format apply again. The sound does not change and the file no longer needs a synthesizer reading the DMOD chunk.</source>
+        <translation>Domyślne modulatory tego SoundFonta są przenoszone do globalnego przedziału wszystkich instrumentów, a domyślne modulatory formatu SoundFont znów obowiązują. Brzmienie się nie zmienia, a plik nie wymaga już syntezatora odczytującego fragment DMOD.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/pagedefaultmod.ui" line="101"/>
+        <source>Move to the instruments</source>
+        <translation>Przenieś do instrumentów</translation>
+    </message>
+    <message>
+        <location filename="../../editor/pagedefaultmod.cpp" line="63"/>
         <source>This soundfont has its own default modulators, applied to every instrument instead of the ones of the SoundFont format. They are saved in the sf2 and sf3 files (DMOD chunk) and need a synthesizer that supports them.</source>
         <translation>Ten SoundFont ma własne domyślne modulatory, stosowane do każdego instrumentu zamiast modulatorów formatu SoundFont. Są zapisywane w plikach sf2 i sf3 (fragment DMOD) i wymagają syntezatora, który je obsługuje.</translation>
     </message>
     <message>
-        <location filename="../../editor/pagedefaultmod.cpp" line="64"/>
+        <location filename="../../editor/pagedefaultmod.cpp" line="72"/>
         <source>This soundfont uses the default modulators of the SoundFont format, applied to every instrument. Customize them to edit, add or remove default modulators in this soundfont.</source>
         <translation>Ten SoundFont używa domyślnych modulatorów formatu SoundFont, stosowanych do każdego instrumentu. Dostosuj je, aby edytować, dodawać lub usuwać domyślne modulatory w tym SoundFoncie.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/pagedefaultmod.cpp" line="103"/>
+        <source>Information</source>
+        <translation>Informacja</translation>
+    </message>
+    <message>
+        <location filename="../../editor/pagedefaultmod.cpp" line="104"/>
+        <source>No modulator has the same value in the global division of all instruments.</source>
+        <translation>Żaden modulator nie ma tej samej wartości w globalnym przedziale wszystkich instrumentów.</translation>
     </message>
     <message>
         <location filename="../../editor/pagedefaultmod.h" line="45"/>

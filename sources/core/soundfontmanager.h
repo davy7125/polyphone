@@ -123,6 +123,28 @@ public:
     // Default modulators applying in a soundfont: its own list or the one of the sf2 format
     QList<ModulatorData> getDefaultModulators(int sf2Index);
 
+    // Own default modulators of a soundfont moved to the global division of all instruments, the default modulators of
+    // the sf2 format applying again. The sound does not change, in every version of the format (velocity to filter
+    // cutoff of the version 2.01, 2.04 or none): the file plays the same without reading the DMOD chunk.
+    void moveDefaultModulatorsToInstruments(int sf2Index);
+
+    // Modulators having the same amount in the global division of all instruments moved to the default modulators of
+    // the soundfont (its own list, created if needed, a modulator with an amount of 0 removing a default modulator).
+    // The sound does not change. Return the number of modulators moved.
+    int groupCommonModulatorsAsDefaults(int sf2Index);
+
+    // Modulators to add to the global division of an instrument moving from a soundfont whose default modulators are
+    // sourceDefaults to a soundfont whose default modulators are destDefaults, so that it sounds the same.
+    // globalModulators: modulators already in its global division
+    static QList<ModulatorData> getDefaultModulatorCompensation(const QList<ModulatorData> &sourceDefaults,
+                                                                const QList<ModulatorData> &destDefaults,
+                                                                const QList<ModulatorData> &globalModulators);
+
+    // Read a modulator, or add one after the others (type elementInstMod, elementPrstMod, elementInstSmplMod,
+    // elementPrstInstMod or elementSf2Mod), returning the index of the new modulator
+    ModulatorData getModulator(EltID idMod);
+    int addModulator(EltID idMod, const ModulatorData &modulator);
+
     // Find the samples identical to a previous one (configuration and data), stereo samples being compared by pairs
     // Result: index of each duplicated sample => index of the identical sample immediately before
     QMap<int, int> getDuplicateSamples(int sf2Index);

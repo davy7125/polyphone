@@ -64,18 +64,45 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushCustomize">
-        <property name="text">
-         <string>Customize</string>
+       <layout class="QVBoxLayout" name="layoutButtons">
+        <property name="spacing">
+         <number>6</number>
         </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushReset">
-        <property name="text">
-         <string>Reset to the SoundFont defaults</string>
-        </property>
-       </widget>
+        <item>
+         <widget class="QPushButton" name="pushCustomize">
+          <property name="text">
+           <string>Customize</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushGroup">
+          <property name="toolTip">
+           <string>The modulators having the same value in the global division of all instruments become default modulators of this soundfont and are removed from the instruments. The sound does not change.</string>
+          </property>
+          <property name="text">
+           <string>Group from the instruments</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushReset">
+          <property name="text">
+           <string>Reset to the SoundFont defaults</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushMove">
+          <property name="toolTip">
+           <string>The default modulators of this soundfont are moved to the global division of all instruments and the default modulators of the SoundFont format apply again. The sound does not change and the file no longer needs a synthesizer reading the DMOD chunk.</string>
+          </property>
+          <property name="text">
+           <string>Move to the instruments</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
      </layout>
     </widget>

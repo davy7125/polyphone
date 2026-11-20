@@ -2204,6 +2204,216 @@ QList<ModulatorData> SoundfontManager::getDefaultModulators(int sf2Index)
     return result;
 }
 
+void SoundfontManager::moveDefaultModulatorsToInstruments(int sf2Index)
+{
+    QMutexLocker locker(&_mutex);
+    EltID idSf2(elementSf2, sf2Index);
+    if (!this->isValid(idSf2) || this->get(idSf2, champ_customDefaultMods).wValue == 0)
+        return;
+
+    // Default modulators of the sf2 format in its 3 versions, so that every synthesizer plays the same
+    QList<ModulatorData> ownList = this->getDefaultModulators(sf2Index);
+    QList<QList<ModulatorData> > formatLists;
+    for (int type = 0; type < 3; type++)
+    {
+        int number;
+        const ModulatorData * modulators = ModulatorData::getDefaultModulators(type, number);
+        QList<ModulatorData> formatList;
+        for (int i = 0; i < number; i++)
+            formatList << modulators[i];
+        formatLists << formatList;
+    }
+
+    // Modulators added to the global division of each instrument
+    EltID idInst(elementInst, sf2Index);
+    foreach (int i, this->getSiblings(idInst))
+    {
+        EltID idMod(elementInstMod, sf2Index, i);
+        QList<ModulatorData> globalModulators;
+        foreach (int j, this->getSiblings(idMod))
+        {
+            idMod.indexMod = j;
+            globalModulators << this->getModulator(idMod);
+        }
+
+        QList<ModulatorData> modulators;
+        foreach (const QList<ModulatorData> &formatList, formatLists)
+            foreach (const ModulatorData &modulator, getDefaultModulatorCompensation(ownList, formatList, globalModulators))
+                if (!modulators.contains(modulator))
+                    modulators << modulator;
+        foreach (const ModulatorData &modulator, modulators)
+            this->addModulator(idMod, modulator);
+    }
+
+    // Back to the default modulators of the sf2 format
+    this->customizeDefaultModulators(sf2Index, false);
+}
+
+int SoundfontManager::groupCommonModulatorsAsDefaults(int sf2Index)
+{
+    QMutexLocker locker(&_mutex);
+    EltID idSf2(elementSf2, sf2Index);
+    EltID idInst(elementInst, sf2Index);
+    if (!this->isValid(idSf2))
+        return 0;
+    QList<int> instruments = this->getSiblings(idInst);
+
+    // Modulators of the global division of each instrument that can be grouped: not linked, not the target of a link
+    // (an identical modulator being then excluded too), the last one being kept if a modulator is repeated (as in the
+    // synth). The common ones have the same sources, destination, transform and amount everywhere.
+    QList<ModulatorData> common;
+    for (int n = 0; n < instruments.count(); n++)
+    {
+        EltID idMod(elementInstMod, sf2Index, instruments[n]);
+        QList<ModulatorData> modulators, excluded;
+        QList<int> targets;
+        foreach (int j, this->getSiblings(idMod))
+        {
+            idMod.indexMod = j;
+            ModulatorData modulator = this->getModulator(idMod);
+            modulators << modulator;
+            if (modulator.destOper >= 32768)
+                targets << modulator.destOper - 32768;
+        }
+        QList<ModulatorData> candidates;
+        foreach (const ModulatorData &modulator, modulators)
+        {
+            if (modulator.destOper >= 32768 || (!modulator.srcOper.CC && modulator.srcOper.Index == GC_link) ||
+                targets.contains(modulator.index))
+                excluded << modulator;
+            int index = candidates.indexOf(modulator);
+            if (index == -1)
+                candidates << modulator;
+            else
+                candidates[index] = modulator;
+        }
+        for (int k = candidates.count() - 1; k >= 0; k--)
+            if (excluded.contains(candidates[k]))
+                candidates.removeAt(k);
+
+        if (n == 0)
+            common = candidates;
+        else
+        {
+            for (int k = common.count() - 1; k >= 0; k--)
+            {
+                int index = candidates.indexOf(common[k]);
+                if (index == -1 || candidates[index].amount != common[k].amount)
+                    common.removeAt(k);
+            }
+        }
+        if (common.isEmpty())
+            return 0;
+    }
+    if (common.isEmpty())
+        return 0;
+
+    // Own list of default modulators (starting with the current ones if it didn't exist), changed by the common
+    // modulators: amount replaced, modulator added, or removed if the common amount is 0
+    this->customizeDefaultModulators(sf2Index, true);
+    AttributeValue value;
+    foreach (const ModulatorData &modulator, common)
+    {
+        bool found = false;
+        EltID idDefault(elementSf2Mod, sf2Index);
+        foreach (int j, this->getSiblings(idDefault))
+        {
+            idDefault.indexMod = j;
+            if (!(this->getModulator(idDefault) == modulator))
+                continue;
+            if (modulator.amount == 0 || found)
+                this->remove(idDefault);
+            else
+            {
+                value.shValue = modulator.amount;
+                this->set(idDefault, champ_modAmount, value);
+            }
+            found = true;
+        }
+        if (!found && modulator.amount != 0)
+            this->addModulator(idDefault, modulator);
+    }
+
+    // Removed from the instruments
+    foreach (int i, instruments)
+    {
+        EltID idMod(elementInstMod, sf2Index, i);
+        foreach (int j, this->getSiblings(idMod))
+        {
+            idMod.indexMod = j;
+            if (common.contains(this->getModulator(idMod)))
+                this->remove(idMod);
+        }
+    }
+
+    return common.count();
+}
+
+QList<ModulatorData> SoundfontManager::getDefaultModulatorCompensation(const QList<ModulatorData> &sourceDefaults,
+                                                                        const QList<ModulatorData> &destDefaults,
+                                                                        const QList<ModulatorData> &globalModulators)
+{
+    // A modulator of the global division replaces an identical default modulator in both soundfonts: nothing to do.
+    // Otherwise, the amount of a default modulator missing in a list is 0. When the amounts differ, a copy of the
+    // modulator with the amount of the source is added (0 disabling a default modulator of the destination).
+    // Linked modulators are not compensated.
+    auto isLinked = [](const ModulatorData &modulator) {
+        return modulator.destOper >= 32768 || (!modulator.srcOper.CC && modulator.srcOper.Index == GC_link);
+    };
+    auto amountIn = [](const QList<ModulatorData> &modulators, const ModulatorData &modulator) {
+        int index = modulators.lastIndexOf(modulator); // The last one wins, as in the synth
+        return index == -1 ? 0 : static_cast<int>(modulators[index].amount);
+    };
+
+    QList<ModulatorData> result;
+    QList<ModulatorData> candidates = sourceDefaults + destDefaults;
+    foreach (ModulatorData modulator, candidates)
+    {
+        if (isLinked(modulator) || globalModulators.contains(modulator) || result.contains(modulator))
+            continue;
+        int sourceAmount = amountIn(sourceDefaults, modulator);
+        if (sourceAmount == amountIn(destDefaults, modulator))
+            continue;
+        modulator.amount = static_cast<qint16>(sourceAmount);
+        modulator.index = 0;
+        result << modulator;
+    }
+    return result;
+}
+
+ModulatorData SoundfontManager::getModulator(EltID idMod)
+{
+    QMutexLocker locker(&_mutex);
+    ModulatorData modulator;
+    modulator.srcOper = this->get(idMod, champ_sfModSrcOper).sfModValue;
+    modulator.amtSrcOper = this->get(idMod, champ_sfModAmtSrcOper).sfModValue;
+    modulator.destOper = this->get(idMod, champ_sfModDestOper).wValue;
+    modulator.transOper = this->get(idMod, champ_sfModTransOper).sfTransValue;
+    modulator.amount = this->get(idMod, champ_modAmount).shValue;
+    modulator.index = static_cast<quint16>(idMod.indexMod);
+    return modulator;
+}
+
+int SoundfontManager::addModulator(EltID idMod, const ModulatorData &modulator)
+{
+    QMutexLocker locker(&_mutex);
+    idMod.indexMod = this->add(idMod);
+    if (idMod.indexMod < 0)
+        return -1;
+    AttributeValue value;
+    value.sfModValue = modulator.srcOper;
+    this->set(idMod, champ_sfModSrcOper, value);
+    value.sfModValue = modulator.amtSrcOper;
+    this->set(idMod, champ_sfModAmtSrcOper, value);
+    value.wValue = modulator.destOper;
+    this->set(idMod, champ_sfModDestOper, value);
+    value.sfTransValue = modulator.transOper;
+    this->set(idMod, champ_sfModTransOper, value);
+    value.shValue = modulator.amount;
+    this->set(idMod, champ_modAmount, value);
+    return idMod.indexMod;
+}
+
 QMap<int, int> SoundfontManager::getDuplicateSamples(int sf2Index)
 {
     QMutexLocker locker(&_mutex);

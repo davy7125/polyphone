@@ -778,76 +778,19 @@ void Duplicator::compensateDefaultModulators(EltID idSource, EltID idDest)
     if (idSource.indexSf2 == idDest.indexSf2)
         return;
 
-    // Modulators to add so that the instrument sounds the same with the default modulators of the destination
+    // Modulators added to the global division so that the instrument sounds the same with the default modulators of
+    // the destination
     idDest.typeElement = elementInstMod;
     QList<ModulatorData> globalModulators;
     foreach (int i, _sm->getSiblings(idDest))
     {
         idDest.indexMod = i;
-        globalModulators << readModulator(idDest);
+        globalModulators << _sm->getModulator(idDest);
     }
-    QList<ModulatorData> modulators = getDefaultModulatorCompensation(
+    QList<ModulatorData> modulators = SoundfontManager::getDefaultModulatorCompensation(
         _sm->getDefaultModulators(idSource.indexSf2), _sm->getDefaultModulators(idDest.indexSf2), globalModulators);
-
-    // Add them to the global division
-    AttributeValue value;
     foreach (const ModulatorData &modulator, modulators)
-    {
-        idDest.indexMod = _sm->add(idDest);
-        value.sfModValue = modulator.srcOper;
-        _sm->set(idDest, champ_sfModSrcOper, value);
-        value.sfModValue = modulator.amtSrcOper;
-        _sm->set(idDest, champ_sfModAmtSrcOper, value);
-        value.wValue = modulator.destOper;
-        _sm->set(idDest, champ_sfModDestOper, value);
-        value.sfTransValue = modulator.transOper;
-        _sm->set(idDest, champ_sfModTransOper, value);
-        value.shValue = modulator.amount;
-        _sm->set(idDest, champ_modAmount, value);
-    }
-}
-
-QList<ModulatorData> Duplicator::getDefaultModulatorCompensation(const QList<ModulatorData> &sourceDefaults,
-                                                                  const QList<ModulatorData> &destDefaults,
-                                                                  const QList<ModulatorData> &globalModulators)
-{
-    // A modulator of the global division replaces an identical default modulator in both soundfonts: nothing to do.
-    // Otherwise, the amount of a default modulator missing in a list is 0. When the amounts differ, a copy of the
-    // modulator with the amount of the source is added (0 disabling a default modulator of the destination).
-    // Linked modulators are not compensated.
-    auto isLinked = [](const ModulatorData &modulator) {
-        return modulator.destOper >= 32768 || (!modulator.srcOper.CC && modulator.srcOper.Index == GC_link);
-    };
-    auto amountIn = [](const QList<ModulatorData> &modulators, const ModulatorData &modulator) {
-        int index = modulators.lastIndexOf(modulator); // The last one wins, as in the synth
-        return index == -1 ? 0 : static_cast<int>(modulators[index].amount);
-    };
-
-    QList<ModulatorData> result;
-    QList<ModulatorData> candidates = sourceDefaults + destDefaults;
-    foreach (ModulatorData modulator, candidates)
-    {
-        if (isLinked(modulator) || globalModulators.contains(modulator) || result.contains(modulator))
-            continue;
-        int sourceAmount = amountIn(sourceDefaults, modulator);
-        if (sourceAmount == amountIn(destDefaults, modulator))
-            continue;
-        modulator.amount = static_cast<qint16>(sourceAmount);
-        modulator.index = 0;
-        result << modulator;
-    }
-    return result;
-}
-
-ModulatorData Duplicator::readModulator(EltID idMod)
-{
-    ModulatorData modulator;
-    modulator.srcOper = _sm->get(idMod, champ_sfModSrcOper).sfModValue;
-    modulator.amtSrcOper = _sm->get(idMod, champ_sfModAmtSrcOper).sfModValue;
-    modulator.destOper = _sm->get(idMod, champ_sfModDestOper).wValue;
-    modulator.transOper = _sm->get(idMod, champ_sfModTransOper).sfTransValue;
-    modulator.amount = _sm->get(idMod, champ_modAmount).shValue;
-    return modulator;
+        _sm->addModulator(idDest, modulator);
 }
 
 // Réinitialisation d'un instrument ou preset

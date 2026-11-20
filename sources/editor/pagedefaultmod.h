@@ -51,6 +51,8 @@ protected:
 private slots:
     void on_pushCustomize_clicked();
     void on_pushReset_clicked();
+    void on_pushGroup_clicked(); // Common modulators of the instruments moved to the default modulators
+    void on_pushMove_clicked(); // Default modulators moved to the instruments
 
 private:
     void setCustom(bool isCustom);

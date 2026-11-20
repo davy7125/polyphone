@@ -4379,14 +4379,14 @@ standardmod.</translation>
     </message>
     <message>
         <location filename="../../editor/modulator/modulatoreditor.ui" line="202"/>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="162"/>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="269"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="165"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="272"/>
         <source>No modulators</source>
         <translation>Ingen modulatorer</translation>
     </message>
     <message>
         <location filename="../../editor/modulator/modulatoreditor.ui" line="234"/>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="171"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="174"/>
         <source>Select a single division to display the modulator list</source>
         <translation>Vælg en enkelt division for at vise modulatorlisten</translation>
     </message>
@@ -4396,7 +4396,7 @@ standardmod.</translation>
         <translation>Udvid modulatorsektionen</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="274"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="277"/>
         <source>%n modulator(s):</source>
         <translation>
             <numerusform>%n modulator:</numerusform>
@@ -4404,43 +4404,43 @@ standardmod.</translation>
         </translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="355"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="358"/>
         <source>Duplicate the selection toward...</source>
         <translation>Kopiér markeringen til...</translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="356"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="359"/>
         <source>Copy the selected modulators</source>
         <translation>Kopier de valgte modulatorer</translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="361"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="364"/>
         <source>Duplicate modulators toward...</source>
         <translation>Kopiér modulatorerne til...</translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="362"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="365"/>
         <source>Copy all modulators</source>
         <translation>Kopiér alle modulatorer</translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="654"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="657"/>
         <source>Forbidden action:</source>
         <translation>Dette er ikke muligt:</translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="664"/>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="673"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="667"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="676"/>
         <source>Warning</source>
         <translation>Advarsel</translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="665"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="668"/>
         <source>offsets cannot be modulated in a preset.</source>
         <translation>offsets kan ikke moduleres i et forvalg.</translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="674"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="677"/>
         <source>%1 cannot be modulated in a preset.</source>
         <translation>%1 kan ikke moduleres i et forvalg.</translation>
     </message>
@@ -4721,24 +4721,54 @@ standardmod.</translation>
 <context>
     <name>PageDefaultMod</name>
     <message>
-        <location filename="../../editor/pagedefaultmod.ui" line="68"/>
+        <location filename="../../editor/pagedefaultmod.ui" line="74"/>
         <source>Customize</source>
         <translation>Tilpas</translation>
     </message>
     <message>
-        <location filename="../../editor/pagedefaultmod.ui" line="75"/>
+        <location filename="../../editor/pagedefaultmod.ui" line="81"/>
+        <source>The modulators having the same value in the global division of all instruments become default modulators of this soundfont and are removed from the instruments. The sound does not change.</source>
+        <translation>Modulatorer med samme værdi i den globale opdeling af alle instrumenter bliver standardmodulatorer for denne soundfont og fjernes fra instrumenterne. Lyden ændres ikke.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/pagedefaultmod.ui" line="84"/>
+        <source>Group from the instruments</source>
+        <translation>Saml fra instrumenterne</translation>
+    </message>
+    <message>
+        <location filename="../../editor/pagedefaultmod.ui" line="91"/>
         <source>Reset to the SoundFont defaults</source>
         <translation>Nulstil til SoundFont-standarderne</translation>
     </message>
     <message>
-        <location filename="../../editor/pagedefaultmod.cpp" line="55"/>
+        <location filename="../../editor/pagedefaultmod.ui" line="98"/>
+        <source>The default modulators of this soundfont are moved to the global division of all instruments and the default modulators of the SoundFont format apply again. The sound does not change and the file no longer needs a synthesizer reading the DMOD chunk.</source>
+        <translation>Denne soundfonts standardmodulatorer flyttes til den globale opdeling af alle instrumenter, og SoundFont-formatets standardmodulatorer gælder igen. Lyden ændres ikke, og filen kræver ikke længere en synthesizer, der læser DMOD-chunken.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/pagedefaultmod.ui" line="101"/>
+        <source>Move to the instruments</source>
+        <translation>Flyt til instrumenterne</translation>
+    </message>
+    <message>
+        <location filename="../../editor/pagedefaultmod.cpp" line="63"/>
         <source>This soundfont has its own default modulators, applied to every instrument instead of the ones of the SoundFont format. They are saved in the sf2 and sf3 files (DMOD chunk) and need a synthesizer that supports them.</source>
         <translation>Denne soundfont har sine egne standardmodulatorer, som anvendes på hvert instrument i stedet for SoundFont-formatets. De gemmes i sf2- og sf3-filerne (DMOD-chunk) og kræver en synthesizer, der understøtter dem.</translation>
     </message>
     <message>
-        <location filename="../../editor/pagedefaultmod.cpp" line="64"/>
+        <location filename="../../editor/pagedefaultmod.cpp" line="72"/>
         <source>This soundfont uses the default modulators of the SoundFont format, applied to every instrument. Customize them to edit, add or remove default modulators in this soundfont.</source>
         <translation>Denne soundfont bruger SoundFont-formatets standardmodulatorer, som anvendes på hvert instrument. Tilpas dem for at redigere, tilføje eller fjerne standardmodulatorer i denne soundfont.</translation>
+    </message>
+    <message>
+        <location filename="../../editor/pagedefaultmod.cpp" line="103"/>
+        <source>Information</source>
+        <translation>Information</translation>
+    </message>
+    <message>
+        <location filename="../../editor/pagedefaultmod.cpp" line="104"/>
+        <source>No modulator has the same value in the global division of all instruments.</source>
+        <translation>Ingen modulator har samme værdi i den globale opdeling af alle instrumenter.</translation>
     </message>
     <message>
         <location filename="../../editor/pagedefaultmod.h" line="45"/>

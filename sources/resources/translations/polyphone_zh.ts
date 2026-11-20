@@ -4311,14 +4311,14 @@ default mod.</source>
     </message>
     <message>
         <location filename="../../editor/modulator/modulatoreditor.ui" line="202"/>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="162"/>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="269"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="165"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="272"/>
         <source>No modulators</source>
         <translation>无调制器</translation>
     </message>
     <message>
         <location filename="../../editor/modulator/modulatoreditor.ui" line="234"/>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="171"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="174"/>
         <source>Select a single division to display the modulator list</source>
         <translation>选择单个分区以显示调制器列表</translation>
     </message>
@@ -4328,50 +4328,50 @@ default mod.</source>
         <translation>展开调制器区域</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="274"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="277"/>
         <source>%n modulator(s):</source>
         <translation>
             <numerusform>%n个调制器：</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="355"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="358"/>
         <source>Duplicate the selection toward...</source>
         <translation>复制选择项到...</translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="356"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="359"/>
         <source>Copy the selected modulators</source>
         <translation>复制选定的调制器</translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="361"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="364"/>
         <source>Duplicate modulators toward...</source>
         <translation>复制调制器到...</translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="362"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="365"/>
         <source>Copy all modulators</source>
         <translation>复制所有调制器</translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="654"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="657"/>
         <source>Forbidden action:</source>
         <translation>禁止操作：</translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="664"/>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="673"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="667"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="676"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="665"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="668"/>
         <source>offsets cannot be modulated in a preset.</source>
         <translation>在预设中偏移量无法被调制。</translation>
     </message>
     <message>
-        <location filename="../../editor/modulator/modulatoreditor.cpp" line="674"/>
+        <location filename="../../editor/modulator/modulatoreditor.cpp" line="677"/>
         <source>%1 cannot be modulated in a preset.</source>
         <translation>%1 无法在预设中被调制。</translation>
     </message>
@@ -4652,24 +4652,54 @@ default mod.</source>
 <context>
     <name>PageDefaultMod</name>
     <message>
-        <location filename="../../editor/pagedefaultmod.ui" line="68"/>
+        <location filename="../../editor/pagedefaultmod.ui" line="74"/>
         <source>Customize</source>
         <translation>自定义</translation>
     </message>
     <message>
-        <location filename="../../editor/pagedefaultmod.ui" line="75"/>
+        <location filename="../../editor/pagedefaultmod.ui" line="81"/>
+        <source>The modulators having the same value in the global division of all instruments become default modulators of this soundfont and are removed from the instruments. The sound does not change.</source>
+        <translation>所有乐器的全局分区中数值相同的调制器将成为此音色库的默认调制器，并从乐器中移除。声音不会改变。</translation>
+    </message>
+    <message>
+        <location filename="../../editor/pagedefaultmod.ui" line="84"/>
+        <source>Group from the instruments</source>
+        <translation>从乐器中合并</translation>
+    </message>
+    <message>
+        <location filename="../../editor/pagedefaultmod.ui" line="91"/>
         <source>Reset to the SoundFont defaults</source>
         <translation>恢复为 SoundFont 默认值</translation>
     </message>
     <message>
-        <location filename="../../editor/pagedefaultmod.cpp" line="55"/>
+        <location filename="../../editor/pagedefaultmod.ui" line="98"/>
+        <source>The default modulators of this soundfont are moved to the global division of all instruments and the default modulators of the SoundFont format apply again. The sound does not change and the file no longer needs a synthesizer reading the DMOD chunk.</source>
+        <translation>此音色库的默认调制器将移至所有乐器的全局分区，并重新应用 SoundFont 格式的默认调制器。声音不会改变，文件也不再需要能读取 DMOD 块的合成器。</translation>
+    </message>
+    <message>
+        <location filename="../../editor/pagedefaultmod.ui" line="101"/>
+        <source>Move to the instruments</source>
+        <translation>移至乐器</translation>
+    </message>
+    <message>
+        <location filename="../../editor/pagedefaultmod.cpp" line="63"/>
         <source>This soundfont has its own default modulators, applied to every instrument instead of the ones of the SoundFont format. They are saved in the sf2 and sf3 files (DMOD chunk) and need a synthesizer that supports them.</source>
         <translation>此音色库有自己的默认调制器，将代替 SoundFont 格式的默认调制器应用于每个乐器。它们保存在 sf2 和 sf3 文件中（DMOD 块），需要支持它们的合成器。</translation>
     </message>
     <message>
-        <location filename="../../editor/pagedefaultmod.cpp" line="64"/>
+        <location filename="../../editor/pagedefaultmod.cpp" line="72"/>
         <source>This soundfont uses the default modulators of the SoundFont format, applied to every instrument. Customize them to edit, add or remove default modulators in this soundfont.</source>
         <translation>此音色库使用 SoundFont 格式的默认调制器，应用于每个乐器。自定义后即可在此音色库中编辑、添加或删除默认调制器。</translation>
+    </message>
+    <message>
+        <location filename="../../editor/pagedefaultmod.cpp" line="103"/>
+        <source>Information</source>
+        <translation>信息</translation>
+    </message>
+    <message>
+        <location filename="../../editor/pagedefaultmod.cpp" line="104"/>
+        <source>No modulator has the same value in the global division of all instruments.</source>
+        <translation>没有任何调制器在所有乐器的全局分区中具有相同的数值。</translation>
     </message>
     <message>
         <location filename="../../editor/pagedefaultmod.h" line="45"/>

@@ -58,13 +58,6 @@ public:
     // format): the instruments copied afterwards then need no compensation
     void copyDefaultModulators(int sf2Source, int sf2Dest);
 
-    // Modulators to add to the global division of an instrument moving from a soundfont whose default modulators are
-    // sourceDefaults to a soundfont whose default modulators are destDefaults, so that it sounds the same.
-    // globalModulators: modulators already in its global division
-    static QList<ModulatorData> getDefaultModulatorCompensation(const QList<ModulatorData> &sourceDefaults,
-                                                                const QList<ModulatorData> &destDefaults,
-                                                                const QList<ModulatorData> &globalModulators);
-
 protected:
     enum EtatMessage
     {
@@ -111,7 +104,6 @@ private:
     void copyGen(EltID idSource, EltID idDest);
     void copyMod(EltID idSource, EltID idDest);
     void compensateDefaultModulators(EltID idSource, EltID idDest); // Instruments of different soundfonts
-    ModulatorData readModulator(EltID idMod);
     void reset(EltID idDest);
     bool isGlobalEmpty(EltID id);
     QString adaptName(QString name, EltID idDest);

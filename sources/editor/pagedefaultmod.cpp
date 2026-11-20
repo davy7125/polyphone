@@ -27,6 +27,7 @@
 #include "ui_pagedefaultmod.h"
 #include "modulatorcell.h"
 #include "contextmanager.h"
+#include <QMessageBox>
 
 PageDefaultMod::PageDefaultMod(QWidget *parent) :
     Page(parent, "page:defaultmod"),
@@ -54,7 +55,9 @@ void PageDefaultMod::updateInterface(QString editingSource)
     int sf2Index = _currentIds[0].indexSf2;
     bool isCustom = _sf2->get(EltID(elementSf2, sf2Index), champ_customDefaultMods).wValue != 0;
     ui->pushCustomize->setVisible(!isCustom);
+    ui->pushGroup->setVisible(!isCustom);
     ui->pushReset->setVisible(isCustom);
+    ui->pushMove->setVisible(isCustom);
     if (isCustom)
     {
         ui->label->setText(tr("This soundfont has its own default modulators, applied to every instrument instead of the ones "
@@ -89,6 +92,29 @@ void PageDefaultMod::on_pushCustomize_clicked()
 void PageDefaultMod::on_pushReset_clicked()
 {
     setCustom(false);
+}
+
+void PageDefaultMod::on_pushGroup_clicked()
+{
+    if (_currentIds.isEmpty())
+        return;
+    if (_sf2->groupCommonModulatorsAsDefaults(_currentIds[0].indexSf2) == 0)
+    {
+        QMessageBox::information(this, tr("Information"),
+                                 tr("No modulator has the same value in the global division of all instruments."));
+        return;
+    }
+    _sf2->endEditing(_editingSource);
+    updateInterface(_editingSource);
+}
+
+void PageDefaultMod::on_pushMove_clicked()
+{
+    if (_currentIds.isEmpty())
+        return;
+    _sf2->moveDefaultModulatorsToInstruments(_currentIds[0].indexSf2);
+    _sf2->endEditing(_editingSource);
+    updateInterface(_editingSource);
 }
 
 void PageDefaultMod::setCustom(bool isCustom)
