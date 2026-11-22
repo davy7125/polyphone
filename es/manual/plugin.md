@@ -103,13 +103,16 @@ Los parámetros son los del sintetizador de Polyphone, que también se encuentra
   El teclado de la derecha muestra el ajuste fino de cada nota en cents y se edita como en las [preferencias del teclado](manual/settings.md#doc_keyboard) de Polyphone: rueda del ratón o arrastre vertical, doble clic para volver a 0, menú contextual para cambiar el uso de una nota o colocar en ella la tonalidad. Un temperamento editado pasa a ser el temperamento personalizado.
   Las notas no utilizadas por una escala no se tocan, salvo si :guilabel:`Tocar todo` está marcado.
 
+:guilabel:`Envolvente`
+: El ataque, el decaimiento, el sostenido y la liberación de los instrumentos, modificados (:guilabel:`Relativo`) o reemplazados (:guilabel:`Fijo`); véase la [envolvente](manual/plugin.md#doc_envelope).
+
 :guilabel:`Reverberación`
 : :guilabel:`Nivel`, :guilabel:`Tamaño`, :guilabel:`Anchura` y :guilabel:`Amortiguación`.
 
 :guilabel:`Coro`
 : :guilabel:`Nivel`, :guilabel:`Profundidad` y :guilabel:`Frecuencia`.
 
-Los grupos :guilabel:`Temperamentos y escalas`, :guilabel:`Reverberación` y :guilabel:`Coro` tienen un interruptor a la derecha de su título: apagado, el grupo se pliega y su temperamento o su efecto no se aplica (temperamento igual con todas las notas, sin efecto); sus ajustes se conservan.
+Los grupos :guilabel:`Temperamentos y escalas`, :guilabel:`Envolvente`, :guilabel:`Reverberación` y :guilabel:`Coro` tienen un interruptor a la derecha de su título: apagado, el grupo se pliega y su temperamento, su envolvente o su efecto no se aplica (temperamento igual con todas las notas, envolventes del soundfont, sin efecto); sus ajustes se conservan.
 La altura de la ventana sigue a los grupos desplegados.
 
 El anfitrión puede automatizar todos estos parámetros, salvo la nota del diapasón de referencia (se automatiza la frecuencia del la4) y los ajustes finos del temperamento personalizado, que se guardan con el proyecto.
@@ -136,6 +139,32 @@ La lista de la primera fila del grupo :guilabel:`Nota` elige cómo se tocan las 
 Entre paréntesis figura la tecla que se oye cuando se mantienen varias teclas: la última, la más aguda o la más grave.
 Cuando se suelta la tecla que se oye mientras otras siguen mantenidas, se vuelve a oír la nota de la que tiene la prioridad: mantener re y repetir mi toca un trino, deslizado en legato.
 La percusión (banco 128) y el modo :guilabel:`MPE` siguen siendo polifónicos.
+
+
+## Envolvente {#doc_envelope}
+
+
+El grupo :guilabel:`Envolvente` modifica la envolvente de volumen de todos los instrumentos tocados, excepto la percusión (banco 128), sin editar el soundfont.
+Su modo se elige a la izquierda de su interruptor, y cada modo conserva sus propios valores:
+
+:guilabel:`Relativo`
+: Se modifica la envolvente de cada sonido del soundfont (por defecto): :guilabel:`Ataque`, :guilabel:`Decaimiento` y :guilabel:`Liberación` multiplican sus duraciones, de ×0,10 a ×10, y :guilabel:`Sostenido` sube o baja su nivel de sostenido, de -20 a +20 dB (hasta el nivel máximo).
+  Cada sonido conserva la forma de su envolvente: una liberación que varía según las teclas o las capas de velocidad sigue variando.
+  Las duraciones de la envolvente de modulación (filtro y altura) cambian en las mismas proporciones, de modo que el timbre de un sonido cuyo filtro se abre con su ataque sigue al nuevo ataque.
+  Un factor de ×1,00 y un cambio de 0 dB conservan el soundfont.
+
+:guilabel:`Fijo`
+: Los valores reemplazan los del soundfont: :guilabel:`Ataque` de 1 ms a 10 s, :guilabel:`Decaimiento` y :guilabel:`Liberación` de 1 ms a 20 s, :guilabel:`Sostenido` de -96 a 0 dB.
+  Un mando girado del todo a la izquierda (:guilabel:`Origen`) conserva el valor del soundfont, para reemplazar solo la liberación, por ejemplo.
+  La envolvente de modulación no se modifica.
+
+El gráfico de la derecha dibuja la envolvente, con las duraciones comprimidas para que se vean las etapas cortas y las largas.
+En el modo :guilabel:`Relativo`, un ejemplo de envolvente de un soundfont se dibuja con guiones bajo la envolvente tocada; en el modo :guilabel:`Fijo`, las etapas que conservan el soundfont se dibujan con guiones.
+
+Una muestra sin bucle (un piano, por ejemplo) se detiene al final, sea cual sea su envolvente: un decaimiento más largo o un sostenido más alto no pueden hacerla durar más.
+Los moduladores del soundfont se siguen aplicando (una velocidad que acorta el ataque, por ejemplo).
+Los cambios se aplican de inmediato a las notas que suenan, de modo que la envolvente se puede automatizar: una nota mantenida toma el nuevo nivel de sostenido y se libera con la liberación ajustada en ese momento.
+Un doble clic en un mando restablece su valor por defecto (el soundfont).
 
 
 ## Teclado y estado {#doc_keyboard}

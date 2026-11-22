@@ -103,13 +103,16 @@ Os parâmetros são os do sintetizador do Polyphone, que podem ser encontrados n
   O teclado à direita mostra o ajuste fino de cada nota em cents e é editado como nas [configurações do teclado](manual/settings.md#doc_keyboard) do Polyphone: roda do mouse ou arraste vertical, clique duplo para voltar a 0, menu de contexto para alterar o uso de uma nota ou colocar nela a tonalidade. Um temperamento editado passa a ser o temperamento personalizado.
   As notas não utilizadas por uma escala não são tocadas, a menos que :guilabel:`Tocar tudo` esteja marcado.
 
+:guilabel:`Envelope`
+: Attack, decay, sustain e release dos instrumentos, modificados (:guilabel:`Relativo`) ou substituídos (:guilabel:`Fixo`); veja o [envelope](manual/plugin.md#doc_envelope).
+
 :guilabel:`Reverberação`
 : :guilabel:`Nível`, :guilabel:`Tamanho`, :guilabel:`Largura` e :guilabel:`Amortecimento`.
 
 :guilabel:`Chorus`
 : :guilabel:`Nível`, :guilabel:`Profundidade` e :guilabel:`Frequência`.
 
-Os grupos :guilabel:`Temperamentos e escalas`, :guilabel:`Reverberação` e :guilabel:`Chorus` têm um interruptor à direita do título: desligado, o grupo fica recolhido e seu temperamento ou efeito não é aplicado (temperamento igual com todas as notas, nenhum efeito), e seus ajustes são mantidos.
+Os grupos :guilabel:`Temperamentos e escalas`, :guilabel:`Envelope`, :guilabel:`Reverberação` e :guilabel:`Chorus` têm um interruptor à direita do título: desligado, o grupo fica recolhido e seu temperamento, envelope ou efeito não é aplicado (temperamento igual com todas as notas, envelopes da soundfont, nenhum efeito), e seus ajustes são mantidos.
 A altura da janela acompanha os grupos expandidos.
 
 O hospedeiro pode automatizar todos esses parâmetros, exceto a nota do tom de referência (a frequência do lá4 é que é automatizada) e os ajustes finos do temperamento personalizado, que são salvos com o projeto.
@@ -136,6 +139,32 @@ A lista da primeira linha do grupo :guilabel:`Nota` escolhe como as notas de cad
 Entre parênteses fica a tecla ouvida quando várias teclas são mantidas: a última, a mais aguda ou a mais grave.
 Quando a tecla ouvida é solta enquanto outras ainda estão mantidas, a nota da que tem a prioridade volta a ser ouvida: manter ré e repetir mi toca um trinado, deslizado em legato.
 A bateria (banco 128) e o modo :guilabel:`MPE` continuam polifônicos.
+
+
+## Envelope {#doc_envelope}
+
+
+O grupo :guilabel:`Envelope` modifica o envelope de volume de todos os instrumentos tocados, exceto a bateria (banco 128), sem editar a soundfont.
+Seu modo é escolhido à esquerda do interruptor, e cada modo mantém seus próprios valores:
+
+:guilabel:`Relativo`
+: O envelope de cada som da soundfont é modificado (padrão): :guilabel:`Attack`, :guilabel:`Decay` e :guilabel:`Release` multiplicam suas durações, de ×0,10 a ×10, e :guilabel:`Sustain` eleva ou reduz seu nível de sustain, de -20 a +20 dB (até o nível máximo).
+  Cada som mantém a forma do seu envelope: um release que varia conforme as teclas ou as camadas de velocity continua variando.
+  As durações do envelope de modulação (filtro e altura) mudam nas mesmas proporções, de modo que o timbre de um som cujo filtro se abre com o attack acompanha o novo attack.
+  Um fator de ×1,00 e uma variação de 0 dB mantêm a soundfont.
+
+:guilabel:`Fixo`
+: Os valores substituem os da soundfont: :guilabel:`Attack` de 1 ms a 10 s, :guilabel:`Decay` e :guilabel:`Release` de 1 ms a 20 s, :guilabel:`Sustain` de -96 a 0 dB.
+  Um botão girado totalmente para a esquerda (:guilabel:`Origem`) mantém o valor da soundfont, para substituir apenas o release, por exemplo.
+  O envelope de modulação não é modificado.
+
+O gráfico à direita desenha o envelope, com as durações comprimidas para que as etapas curtas e longas fiquem visíveis.
+No modo :guilabel:`Relativo`, um exemplo de envelope de uma soundfont é desenhado tracejado sob o envelope tocado; no modo :guilabel:`Fixo`, as etapas que mantêm a soundfont são desenhadas tracejadas.
+
+Uma amostra sem loop (um piano, por exemplo) para no seu fim, qualquer que seja o seu envelope: um decay mais longo ou um sustain mais alto não podem fazê-la durar mais.
+Os moduladores da soundfont continuam sendo aplicados (uma velocity que encurta o attack, por exemplo).
+As alterações se aplicam imediatamente às notas que estão tocando, de modo que o envelope pode ser automatizado: uma nota mantida assume o novo nível de sustain e é solta com o release ajustado naquele momento.
+Um clique duplo em um botão restaura seu valor padrão (a soundfont).
 
 
 ## Teclado e estado {#doc_keyboard}

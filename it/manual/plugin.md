@@ -103,13 +103,16 @@ I parametri sono quelli del sintetizzatore di Polyphone, che si ritrovano nelle 
   La tastiera a destra mostra l'intonazione fine di ogni nota in cent e si modifica come nelle [impostazioni della tastiera](manual/settings.md#doc_keyboard) di Polyphone: rotella del mouse o trascinamento verticale, doppio clic per tornare a 0, menu contestuale per cambiare l'utilizzo di una nota o spostarvi la tonalità. Un temperamento modificato diventa il temperamento personalizzato.
   Le note non utilizzate da una scala non vengono suonate, a meno che :guilabel:`Suona tutto` sia selezionato.
 
+:guilabel:`Inviluppo`
+: Attack, decay, sustain e release degli strumenti, modificati (:guilabel:`Relativo`) o sostituiti (:guilabel:`Fisso`); vedere l'[inviluppo](manual/plugin.md#doc_envelope).
+
 :guilabel:`Riverbero`
 : :guilabel:`Livello`, :guilabel:`Dimensione`, :guilabel:`Ampiezza` e :guilabel:`Smorzamento`.
 
 :guilabel:`Chorus`
 : :guilabel:`Livello`, :guilabel:`Profondità` e :guilabel:`Frequenza`.
 
-I gruppi :guilabel:`Temperamenti e scale`, :guilabel:`Riverbero` e :guilabel:`Chorus` hanno un interruttore a destra del titolo: spento, il gruppo è compresso e il suo temperamento o il suo effetto non viene applicato (temperamento equabile con tutte le note, nessun effetto); le sue impostazioni vengono conservate.
+I gruppi :guilabel:`Temperamenti e scale`, :guilabel:`Inviluppo`, :guilabel:`Riverbero` e :guilabel:`Chorus` hanno un interruttore a destra del titolo: spento, il gruppo è compresso e il suo temperamento, il suo inviluppo o il suo effetto non viene applicato (temperamento equabile con tutte le note, inviluppi del soundfont, nessun effetto); le sue impostazioni vengono conservate.
 L'altezza della finestra segue i gruppi espansi.
 
 L'host può automatizzare tutti questi parametri, tranne la nota dell'intonazione di riferimento (viene automatizzata la frequenza del La4) e le intonazioni fini del temperamento personalizzato, che vengono salvate con il progetto.
@@ -136,6 +139,32 @@ L'elenco della prima riga del gruppo :guilabel:`Nota` sceglie come vengono suona
 Tra parentesi figura il tasto che si sente quando più tasti sono tenuti: l'ultimo, il più acuto o il più grave.
 Quando il tasto che si sente viene rilasciato mentre altri sono ancora tenuti, si sente di nuovo la nota di quello che ha la priorità: tenere Re e ripetere Mi suona un trillo, con portamento in legato.
 La batteria (banco 128) e la modalità :guilabel:`MPE` restano polifoniche.
+
+
+## Inviluppo {#doc_envelope}
+
+
+Il gruppo :guilabel:`Inviluppo` modifica l'inviluppo del volume di tutti gli strumenti suonati, tranne la batteria (banco 128), senza modificare il soundfont.
+La sua modalità si sceglie a sinistra del suo interruttore, e ogni modalità conserva i propri valori:
+
+:guilabel:`Relativo`
+: L'inviluppo di ogni suono del soundfont viene modificato (predefinita): :guilabel:`Attack`, :guilabel:`Decay` e :guilabel:`Release` moltiplicano le sue durate, da ×0,10 a ×10, e :guilabel:`Sustain` alza o abbassa il suo livello di sustain, da -20 a +20 dB (fino al livello massimo).
+  Ogni suono conserva la forma del suo inviluppo: un release che varia secondo i tasti o gli strati di velocity continua a variare.
+  Le durate dell'inviluppo di modulazione (filtro e altezza) cambiano nelle stesse proporzioni, così il timbro di un suono il cui filtro si apre con l'attack segue il nuovo attack.
+  Un fattore di ×1,00 e una variazione di 0 dB conservano il soundfont.
+
+:guilabel:`Fisso`
+: I valori sostituiscono quelli del soundfont: :guilabel:`Attack` da 1 ms a 10 s, :guilabel:`Decay` e :guilabel:`Release` da 1 ms a 20 s, :guilabel:`Sustain` da -96 a 0 dB.
+  Una manopola girata completamente a sinistra (:guilabel:`Origine`) conserva il valore del soundfont, per sostituire solo il release, per esempio.
+  L'inviluppo di modulazione non viene modificato.
+
+Il grafico a destra disegna l'inviluppo, con le durate compresse in modo che le fasi brevi e lunghe siano visibili.
+In modalità :guilabel:`Relativo`, un esempio di inviluppo di un soundfont è tratteggiato sotto l'inviluppo suonato; in modalità :guilabel:`Fisso`, le fasi che conservano il soundfont sono tratteggiate.
+
+Un campione senza loop (un pianoforte, per esempio) si ferma alla sua fine qualunque sia il suo inviluppo: un decay più lungo o un sustain più alto non possono farlo durare di più.
+I modulatori del soundfont continuano ad applicarsi (una velocity che accorcia l'attack, per esempio).
+Le modifiche si applicano subito alle note in corso, quindi l'inviluppo può essere automatizzato: una nota tenuta prende il nuovo livello di sustain e viene rilasciata con il release impostato in quel momento.
+Un doppio clic su una manopola ripristina il suo valore predefinito (il soundfont).
 
 
 ## Tastiera e stato {#doc_keyboard}

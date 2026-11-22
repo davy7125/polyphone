@@ -103,13 +103,16 @@ Les paramètres sont ceux du synthétiseur de Polyphone, que l'on retrouve dans 
   Le clavier à droite montre l'accord fin de chaque note en cents et se modifie comme dans les [préférences du clavier](manual/settings.md#doc_keyboard) de Polyphone&nbsp;: molette de la souris ou glissement vertical, double clic pour revenir à 0, menu contextuel pour changer l'utilisation d'une note ou y placer la tonalité. Un tempérament modifié devient le tempérament personnalisé.
   Les notes inutilisées par une gamme ne sont pas jouées, sauf si :guilabel:`Tout jouer` est coché.
 
+:guilabel:`Enveloppe`
+: L'attaque, le déclin, le soutien et la relâche des instruments, modifiés (:guilabel:`Relatif`) ou remplacés (:guilabel:`Fixe`), voir l'[enveloppe](manual/plugin.md#doc_envelope).
+
 :guilabel:`Réverbération`
 : :guilabel:`Niveau`, :guilabel:`Taille`, :guilabel:`Densité` et :guilabel:`Atténuation`.
 
 :guilabel:`Chorus`
 : :guilabel:`Niveau`, :guilabel:`Amplitude` et :guilabel:`Fréquence`.
 
-Les groupes :guilabel:`Tempéraments et gammes`, :guilabel:`Réverbération` et :guilabel:`Chorus` ont un interrupteur à droite de leur titre&nbsp;: éteint, le groupe est replié et son tempérament ou son effet n'est pas appliqué (tempérament égal avec toutes les notes, aucun effet), ses réglages étant conservés.
+Les groupes :guilabel:`Tempéraments et gammes`, :guilabel:`Enveloppe`, :guilabel:`Réverbération` et :guilabel:`Chorus` ont un interrupteur à droite de leur titre&nbsp;: éteint, le groupe est replié et son tempérament, son enveloppe ou son effet n'est pas appliqué (tempérament égal avec toutes les notes, enveloppes de la banque de sons, aucun effet), ses réglages étant conservés.
 La hauteur de la fenêtre suit les groupes dépliés.
 
 L'hôte peut automatiser tous ces paramètres, sauf la note du diapason (la fréquence du La4 étant automatisée) et les accords fins du tempérament personnalisé, qui sont enregistrés avec le projet.
@@ -136,6 +139,32 @@ La liste de la première ligne du groupe :guilabel:`Note` choisit la façon de j
 Entre parenthèses figure la touche entendue lorsque plusieurs touches sont tenues&nbsp;: la dernière, la plus haute ou la plus basse.
 Lorsque la touche entendue est relâchée alors que d'autres sont encore tenues, la note de celle qui a la priorité est de nouveau entendue&nbsp;: tenir Ré et répéter Mi joue un trille, glissé en legato.
 Les percussions (banque 128) et le mode :guilabel:`MPE` restent polyphoniques.
+
+
+## Enveloppe {#doc_envelope}
+
+
+Le groupe :guilabel:`Enveloppe` modifie l'enveloppe de volume de tous les instruments joués, sauf les percussions (banque 128), sans modifier la banque de sons.
+Son mode est choisi à gauche de son interrupteur, chaque mode conservant ses propres valeurs&nbsp;:
+
+:guilabel:`Relatif`
+: L'enveloppe de chaque son de la banque de sons est modifiée (par défaut)&nbsp;: :guilabel:`Attaque`, :guilabel:`Déclin` et :guilabel:`Relâche` multiplient ses durées, de ×0,10 à ×10, et :guilabel:`Soutien` relève ou abaisse son niveau de soutien, de -20 à +20 dB (jusqu'au niveau maximal).
+  Chaque son garde la forme de son enveloppe&nbsp;: une relâche qui varie selon les touches ou les couches de vélocité varie toujours.
+  Les durées de l'enveloppe de modulation (filtre et hauteur) changent dans les mêmes proportions, de sorte que le timbre d'un son dont le filtre s'ouvre avec l'attaque suit la nouvelle attaque.
+  Un facteur de ×1,00 et une variation de 0 dB conservent la banque de sons.
+
+:guilabel:`Fixe`
+: Les valeurs remplacent celles de la banque de sons&nbsp;: :guilabel:`Attaque` de 1 ms à 10 s, :guilabel:`Déclin` et :guilabel:`Relâche` de 1 ms à 20 s, :guilabel:`Soutien` de -96 à 0 dB.
+  Un bouton tourné complètement à gauche (:guilabel:`Origine`) conserve la valeur de la banque de sons, pour ne remplacer que la relâche par exemple.
+  L'enveloppe de modulation n'est pas modifiée.
+
+Le graphique à droite trace l'enveloppe, ses durées étant compressées pour que les étapes courtes et longues soient visibles.
+En mode :guilabel:`Relatif`, un exemple d'enveloppe d'une banque de sons est tracé en pointillés sous l'enveloppe jouée&nbsp;; en mode :guilabel:`Fixe`, les étapes conservant la banque de sons sont tracées en pointillés.
+
+Un échantillon sans boucle (un piano par exemple) s'arrête à sa fin quelle que soit son enveloppe&nbsp;: un déclin plus long ou un soutien plus haut ne peut pas le faire durer plus longtemps.
+Les modulateurs de la banque de sons s'appliquent toujours (une vélocité raccourcissant l'attaque, par exemple).
+Les changements s'appliquent aussitôt aux notes en cours, l'enveloppe pouvant ainsi être automatisée&nbsp;: une note tenue prend le nouveau niveau de soutien et est relâchée avec la relâche réglée à ce moment.
+Un double clic sur un bouton rétablit sa valeur par défaut (la banque de sons).
 
 
 ## Clavier et barre d'état {#doc_keyboard}

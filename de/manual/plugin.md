@@ -103,13 +103,16 @@ Die Parameter sind die des Synthesizers von Polyphone, die sich auch in seinen E
   Die Tastatur rechts zeigt die Feinstimmung jeder Note in Cent und wird wie in den [Tastatureinstellungen](manual/settings.md#doc_keyboard) von Polyphone bearbeitet: Mausrad oder vertikales Ziehen, Doppelklick zum Zurücksetzen auf 0, Kontextmenü zum Ändern der Verwendung einer Note oder zum Legen der Tonart auf sie. Eine bearbeitete Temperatur wird zur benutzerdefinierten Temperatur.
   Die von einer Tonleiter nicht verwendeten Noten werden nicht gespielt, außer wenn :guilabel:`Alle spielen` aktiviert ist.
 
+:guilabel:`Hüllkurve`
+: Attack, Decay, Sustain und Release der Instrumente, verändert (:guilabel:`Relativ`) oder ersetzt (:guilabel:`Fest`), siehe die [Hüllkurve](manual/plugin.md#doc_envelope).
+
 :guilabel:`Halleffekt`
 : :guilabel:`Intensität`, :guilabel:`Größe`, :guilabel:`Weite` und :guilabel:`Dämpfung`.
 
 :guilabel:`Chorus`
 : :guilabel:`Intensität`, :guilabel:`Tiefe` und :guilabel:`Frequenz`.
 
-Die Gruppen :guilabel:`Temperaturen und Tonleitern`, :guilabel:`Halleffekt` und :guilabel:`Chorus` haben rechts neben ihrem Titel einen Schalter: Ausgeschaltet ist die Gruppe eingeklappt und ihre Temperatur oder ihr Effekt wird nicht angewendet (gleichstufige Stimmung mit allen Noten, kein Effekt), ihre Einstellungen bleiben erhalten.
+Die Gruppen :guilabel:`Temperaturen und Tonleitern`, :guilabel:`Hüllkurve`, :guilabel:`Halleffekt` und :guilabel:`Chorus` haben rechts neben ihrem Titel einen Schalter: Ausgeschaltet ist die Gruppe eingeklappt und ihre Temperatur, ihre Hüllkurve oder ihr Effekt wird nicht angewendet (gleichstufige Stimmung mit allen Noten, Hüllkurven des Soundfonts, kein Effekt), ihre Einstellungen bleiben erhalten.
 Die Höhe des Fensters folgt den ausgeklappten Gruppen.
 
 Der Host kann alle diese Parameter automatisieren, außer der Note der Referenztonhöhe (automatisiert wird die Frequenz von A4) und den Feinstimmungen der benutzerdefinierten Temperatur, die mit dem Projekt gespeichert werden.
@@ -136,6 +139,32 @@ Die Liste in der ersten Zeile der Gruppe :guilabel:`Note` legt fest, wie die Not
 In Klammern steht die Taste, die erklingt, wenn mehrere Tasten gehalten werden: die letzte, die höchste oder die tiefste.
 Wird die erklingende Taste losgelassen, während andere noch gehalten werden, erklingt wieder die Note derjenigen, die Vorrang hat: D halten und E wiederholen spielt einen Triller, im Legato gleitend.
 Das Schlagzeug (Bank 128) und der Modus :guilabel:`MPE` bleiben polyphon.
+
+
+## Hüllkurve {#doc_envelope}
+
+
+Die Gruppe :guilabel:`Hüllkurve` verändert die Lautstärkehüllkurve aller gespielten Instrumente außer dem Schlagzeug (Bank 128), ohne den Soundfont zu bearbeiten.
+Ihr Modus wird links neben ihrem Schalter gewählt, wobei jeder Modus seine eigenen Werte behält:
+
+:guilabel:`Relativ`
+: Die Hüllkurve jedes Klangs des Soundfonts wird verändert (Standard): :guilabel:`Attack`, :guilabel:`Decay` und :guilabel:`Release` multiplizieren ihre Zeiten mit ×0,10 bis ×10, und :guilabel:`Sustain` ändert ihren Sustain-Pegel um -20 bis +20 dB (bis zum Höchstpegel).
+  Jeder Klang behält die Form seiner Hüllkurve: Ein Release, das sich mit den Tasten oder den Velocity-Layern ändert, ändert sich weiterhin.
+  Die Zeiten der Modulationshüllkurve (Filter und Tonhöhe) ändern sich im gleichen Verhältnis, sodass die Klangfarbe eines Klangs, dessen Filter sich mit dem Attack öffnet, dem neuen Attack folgt.
+  Ein Faktor von ×1,00 und eine Änderung von 0 dB behalten den Soundfont bei.
+
+:guilabel:`Fest`
+: Die Werte ersetzen die des Soundfonts: :guilabel:`Attack` von 1 ms bis 10 s, :guilabel:`Decay` und :guilabel:`Release` von 1 ms bis 20 s, :guilabel:`Sustain` von -96 bis 0 dB.
+  Ein ganz nach links gedrehter Regler (:guilabel:`Soundfont`) behält den Wert des Soundfonts bei, um zum Beispiel nur das Release zu ersetzen.
+  Die Modulationshüllkurve wird nicht verändert.
+
+Die Grafik rechts zeichnet die Hüllkurve, wobei die Zeiten gestaucht sind, damit kurze und lange Phasen sichtbar sind.
+Im Modus :guilabel:`Relativ` wird unter der gespielten Hüllkurve ein Beispiel einer Hüllkurve eines Soundfonts gestrichelt gezeichnet; im Modus :guilabel:`Fest` werden die Phasen, die den Soundfont beibehalten, gestrichelt gezeichnet.
+
+Ein Sample ohne Loop (zum Beispiel ein Klavier) endet an seinem Ende, unabhängig von seiner Hüllkurve: Ein längeres Decay oder ein höheres Sustain kann es nicht länger klingen lassen.
+Die Modulatoren des Soundfonts wirken weiterhin (zum Beispiel eine Velocity, die den Attack verkürzt).
+Die Änderungen wirken sofort auf die klingenden Noten, sodass die Hüllkurve automatisiert werden kann: Eine gehaltene Note übernimmt den neuen Sustain-Pegel und wird mit dem zu diesem Zeitpunkt eingestellten Release losgelassen.
+Ein Doppelklick auf einen Regler stellt seinen Standardwert wieder her (den Soundfont).
 
 
 ## Klaviatur und Status {#doc_keyboard}

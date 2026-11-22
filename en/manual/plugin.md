@@ -103,13 +103,16 @@ The parameters are the ones of the synthesizer of Polyphone, which can be found 
   The keyboard on the right shows the fine tune of each note in cents and is edited as in the [keyboard settings](manual/settings.md#doc_keyboard) of Polyphone: mouse wheel or vertical drag, double click to set a value back to 0, context menu to change the use of a note or to move the tonality to it. A temperament edited becomes the custom temperament.
   The notes not used by a scale are not played, unless :guilabel:`Play all` is checked.
 
+:guilabel:`Envelope`
+: The attack, the decay, the sustain and the release of the instruments, changed (:guilabel:`Relative`) or replaced (:guilabel:`Fixed`), see the [envelope](manual/plugin.md#doc_envelope).
+
 :guilabel:`Reverb`
 : :guilabel:`Level`, :guilabel:`Size`, :guilabel:`Width` and :guilabel:`Damping`.
 
 :guilabel:`Chorus`
 : :guilabel:`Level`, :guilabel:`Depth` and :guilabel:`Frequency`.
 
-The groups :guilabel:`Temperaments and scales`, :guilabel:`Reverb` and :guilabel:`Chorus` have a switch on the right of their title: switched off, the group is collapsed and its temperament or effect is not applied (equal temperament with all the notes, no effect), its settings being kept.
+The groups :guilabel:`Temperaments and scales`, :guilabel:`Envelope`, :guilabel:`Reverb` and :guilabel:`Chorus` have a switch on the right of their title: switched off, the group is collapsed and its temperament, envelope or effect is not applied (equal temperament with all the notes, envelopes of the soundfont, no effect), its settings being kept.
 The height of the window follows the groups expanded.
 
 The host can automate all these parameters, except the note of the reference pitch (the frequency of A4 being automated) and the fine tunes of the custom temperament, which are saved with the project.
@@ -136,6 +139,32 @@ The list in the first row of the group :guilabel:`Note` chooses how the notes of
 In parentheses, the key heard when several keys are held: the latest one, the highest or the lowest.
 When the key heard is released while other keys are still held, the note of the one having the priority is heard again: holding D and repeating E plays a trill, glided in legato.
 The drums (bank 128) and the mode :guilabel:`MPE` stay polyphonic.
+
+
+## Envelope {#doc_envelope}
+
+
+The group :guilabel:`Envelope` changes the volume envelope of all the instruments played, except the drums (bank 128), without editing the soundfont.
+Its mode is chosen on the left of its switch, each mode keeping its own values:
+
+:guilabel:`Relative`
+: The envelope of each sound of the soundfont is changed (default): :guilabel:`Attack`, :guilabel:`Decay` and :guilabel:`Release` multiply its durations, from ×0.10 to ×10, and :guilabel:`Sustain` raises or lowers its sustain level, from -20 to +20 dB (up to the maximum level).
+  Each sound keeps the shape of its envelope: a release that varies with the keys or with the velocity layers still varies.
+  The durations of the modulation envelope (filter and pitch) change in the same proportions, so that the timbre of a sound whose filter opens with its attack follows the new attack.
+  A factor of ×1.00 and a change of 0 dB keep the soundfont.
+
+:guilabel:`Fixed`
+: The values replace the ones of the soundfont: :guilabel:`Attack` from 1 ms to 10 s, :guilabel:`Decay` and :guilabel:`Release` from 1 ms to 20 s, :guilabel:`Sustain` from -96 to 0 dB.
+  A knob turned fully to the left (:guilabel:`Soundfont`) keeps the value of the soundfont, to replace only the release for instance.
+  The modulation envelope is not changed.
+
+The graph on the right draws the envelope, its durations being compressed so that the short and the long stages can be seen.
+In the mode :guilabel:`Relative`, an example of envelope of a soundfont is drawn with dashes below the envelope played; in the mode :guilabel:`Fixed`, the stages keeping the soundfont are drawn with dashes.
+
+A sample without loop (a piano for instance) stops at its end whatever its envelope: a longer decay or a higher sustain cannot make it last longer.
+The modulators of the soundfont still apply (a velocity shortening the attack, for instance).
+The changes apply at once to the notes playing, so that the envelope can be automated: a held note takes the new sustain level, and is released with the release set at that time.
+A double click on a knob restores its default value (the soundfont).
 
 
 ## Keyboard and status {#doc_keyboard}
