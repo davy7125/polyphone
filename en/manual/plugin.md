@@ -87,8 +87,9 @@ Three buttons above the list of instruments (the presets of the soundfont) choos
 The parameters are the ones of the synthesizer of Polyphone, which can be found in its [sound](manual/settings.md#doc_sound) and [keyboard](manual/settings.md#doc_keyboard) settings.
 :guilabel:`Gain` (from -24 to +24 dB) is in the header, the other parameters are grouped on the right:
 
-:guilabel:`Tuning`
-: :guilabel:`Reference pitch`: a note from A#3 to A4 and its frequency (from 400 to 480 Hz for A4, 440 Hz by default), this note sounding at this frequency whatever the temperament.
+:guilabel:`Note`
+: The play mode, in the list of the first row (see the [play modes](manual/plugin.md#doc_play_modes)): :guilabel:`Poly` (default), :guilabel:`Mono` or :guilabel:`Legato`, the glide of the legato being set on its right.
+  :guilabel:`Reference pitch`: a note from A#3 to A4 and its frequency (from 400 to 480 Hz for A4, 440 Hz by default), this note sounding at this frequency whatever the temperament.
   :guilabel:`Transposition`: from -24 to +24 semitones, the drums being not transposed.
 
 :guilabel:`Velocity`
@@ -112,6 +113,29 @@ The groups :guilabel:`Temperaments and scales`, :guilabel:`Reverb` and :guilabel
 The height of the window follows the groups expanded.
 
 The host can automate all these parameters, except the note of the reference pitch (the frequency of A4 being automated) and the fine tunes of the custom temperament, which are saved with the project.
+
+
+## Play modes {#doc_play_modes}
+
+
+The list in the first row of the group :guilabel:`Note` chooses how the notes of each MIDI channel are played:
+
+:guilabel:`Poly`
+: The notes are played together (default).
+
+:guilabel:`Mono`
+: One note at a time: a note starts with its attack, the previous one stopping quickly.
+
+:guilabel:`Legato`
+: One note at a time: a note played before the previous one is released continues it, without a new attack.
+  If a division playing the previous note also contains the new key, its voice continues with the same sample, only its pitch changing.
+  The other samples of the new key start from the beginning of their loop (from their beginning if they have no loop), with a crossfade.
+  The bar on the right of the list sets the glide: :guilabel:`Off` (default, the pitch changing at once) or the duration of the pitch glide from the previous note, up to 5 s.
+  A note played after the previous one is released starts with its attack, as in the mode :guilabel:`Mono`.
+
+In parentheses, the key heard when several keys are held: the latest one, the highest or the lowest.
+When the key heard is released while other keys are still held, the note of the one having the priority is heard again: holding D and repeating E plays a trill, glided in legato.
+The drums (bank 128) and the mode :guilabel:`MPE` stay polyphonic.
 
 
 ## Keyboard and status {#doc_keyboard}

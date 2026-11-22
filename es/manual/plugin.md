@@ -87,8 +87,9 @@ Tres botones encima de la lista de instrumentos (los conjuntos del soundfont) el
 Los parámetros son los del sintetizador de Polyphone, que también se encuentran en sus preferencias de [sonido](manual/settings.md#doc_sound) y de [teclado](manual/settings.md#doc_keyboard).
 :guilabel:`Ganancia` (de -24 a +24 dB) está en la cabecera; los demás parámetros se agrupan a la derecha:
 
-:guilabel:`Afinación`
-: :guilabel:`Diapasón de referencia`: una nota de la#3 a la4 y su frecuencia (de 400 a 480 Hz para el la4, 440 Hz por defecto); esta nota suena a esta frecuencia sea cual sea el temperamento.
+:guilabel:`Nota`
+: El modo de ejecución, en la lista de la primera fila (véanse los [modos de ejecución](manual/plugin.md#doc_play_modes)): :guilabel:`Poli` (por defecto), :guilabel:`Mono` o :guilabel:`Legato`; el deslizamiento del legato se ajusta a su derecha.
+  :guilabel:`Diapasón de referencia`: una nota de la#3 a la4 y su frecuencia (de 400 a 480 Hz para el la4, 440 Hz por defecto); esta nota suena a esta frecuencia sea cual sea el temperamento.
   :guilabel:`Transposición`: de -24 a +24 semitonos; la percusión no se transpone.
 
 :guilabel:`Velocidad`
@@ -112,6 +113,29 @@ Los grupos :guilabel:`Temperamentos y escalas`, :guilabel:`Reverberación` y :gu
 La altura de la ventana sigue a los grupos desplegados.
 
 El anfitrión puede automatizar todos estos parámetros, salvo la nota del diapasón de referencia (se automatiza la frecuencia del la4) y los ajustes finos del temperamento personalizado, que se guardan con el proyecto.
+
+
+## Modos de ejecución {#doc_play_modes}
+
+
+La lista de la primera fila del grupo :guilabel:`Nota` elige cómo se tocan las notas de cada canal MIDI:
+
+:guilabel:`Poli`
+: Las notas se tocan juntas (por defecto).
+
+:guilabel:`Mono`
+: Una nota a la vez: una nota empieza con su ataque y la anterior se detiene rápidamente.
+
+:guilabel:`Legato`
+: Una nota a la vez: una nota tocada antes de soltar la anterior la continúa, sin un nuevo ataque.
+  Si una división que toca la nota anterior también contiene la nueva tecla, su voz continúa con la misma muestra y solo cambia su altura.
+  Las demás muestras de la nueva tecla empiezan al inicio de su bucle (en su inicio si no tienen bucle), con un fundido cruzado.
+  La barra a la derecha de la lista ajusta el deslizamiento: :guilabel:`Ninguno` (por defecto, la altura cambia de inmediato) o la duración del deslizamiento de la altura desde la nota anterior, hasta 5 s.
+  Una nota tocada después de soltar la anterior empieza con su ataque, como en el modo :guilabel:`Mono`.
+
+Entre paréntesis figura la tecla que se oye cuando se mantienen varias teclas: la última, la más aguda o la más grave.
+Cuando se suelta la tecla que se oye mientras otras siguen mantenidas, se vuelve a oír la nota de la que tiene la prioridad: mantener re y repetir mi toca un trino, deslizado en legato.
+La percusión (banco 128) y el modo :guilabel:`MPE` siguen siendo polifónicos.
 
 
 ## Teclado y estado {#doc_keyboard}

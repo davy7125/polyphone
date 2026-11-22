@@ -87,8 +87,9 @@ Trois boutons au-dessus de la liste des instruments (les ensembles de la banque 
 Les paramètres sont ceux du synthétiseur de Polyphone, que l'on retrouve dans ses préférences du [son](manual/settings.md#doc_sound) et du [clavier](manual/settings.md#doc_keyboard).
 :guilabel:`Gain` (de -24 à +24&nbsp;dB) se trouve dans l'en-tête, les autres paramètres sont regroupés à droite&nbsp;:
 
-:guilabel:`Accordage`
-: :guilabel:`Diapason`&nbsp;: une note de La#3 à La4 et sa fréquence (de 400 à 480&nbsp;Hz pour le La4, 440&nbsp;Hz par défaut), cette note sonnant à cette fréquence quel que soit le tempérament.
+:guilabel:`Note`
+: Le mode de jeu, dans la liste de la première ligne (voir les [modes de jeu](manual/plugin.md#doc_play_modes))&nbsp;: :guilabel:`Poly` (par défaut), :guilabel:`Mono` ou :guilabel:`Legato`, le glissement du legato se réglant à sa droite.
+  :guilabel:`Diapason`&nbsp;: une note de La#3 à La4 et sa fréquence (de 400 à 480&nbsp;Hz pour le La4, 440&nbsp;Hz par défaut), cette note sonnant à cette fréquence quel que soit le tempérament.
   :guilabel:`Transposition`&nbsp;: de -24 à +24 demi-tons, les percussions n'étant pas transposées.
 
 :guilabel:`Vélocité`
@@ -112,6 +113,29 @@ Les groupes :guilabel:`Tempéraments et gammes`, :guilabel:`Réverbération` et 
 La hauteur de la fenêtre suit les groupes dépliés.
 
 L'hôte peut automatiser tous ces paramètres, sauf la note du diapason (la fréquence du La4 étant automatisée) et les accords fins du tempérament personnalisé, qui sont enregistrés avec le projet.
+
+
+## Modes de jeu {#doc_play_modes}
+
+
+La liste de la première ligne du groupe :guilabel:`Note` choisit la façon de jouer les notes de chaque canal MIDI&nbsp;:
+
+:guilabel:`Poly`
+: Les notes sont jouées ensemble (par défaut).
+
+:guilabel:`Mono`
+: Une note à la fois&nbsp;: une note commence par son attaque, la précédente s'arrêtant rapidement.
+
+:guilabel:`Legato`
+: Une note à la fois&nbsp;: une note jouée avant le relâchement de la précédente la prolonge, sans nouvelle attaque.
+  Si une division jouant la note précédente contient aussi la nouvelle touche, sa voix continue avec le même échantillon, seule sa hauteur changeant.
+  Les autres échantillons de la nouvelle touche démarrent au début de leur boucle (à leur début s'ils n'ont pas de boucle), avec un fondu enchaîné.
+  La barre à droite de la liste règle le glissement&nbsp;: :guilabel:`Aucun` (par défaut, la hauteur changeant immédiatement) ou la durée du glissement de hauteur depuis la note précédente, jusqu'à 5&nbsp;s.
+  Une note jouée après le relâchement de la précédente commence par son attaque, comme dans le mode :guilabel:`Mono`.
+
+Entre parenthèses figure la touche entendue lorsque plusieurs touches sont tenues&nbsp;: la dernière, la plus haute ou la plus basse.
+Lorsque la touche entendue est relâchée alors que d'autres sont encore tenues, la note de celle qui a la priorité est de nouveau entendue&nbsp;: tenir Ré et répéter Mi joue un trille, glissé en legato.
+Les percussions (banque 128) et le mode :guilabel:`MPE` restent polyphoniques.
 
 
 ## Clavier et barre d'état {#doc_keyboard}

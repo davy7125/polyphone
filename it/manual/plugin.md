@@ -87,8 +87,9 @@ Tre pulsanti sopra l'elenco degli strumenti (i preset del soundfont) scelgono il
 I parametri sono quelli del sintetizzatore di Polyphone, che si ritrovano nelle sue impostazioni [Suono](manual/settings.md#doc_sound) e [Tastiera](manual/settings.md#doc_keyboard).
 :guilabel:`Guadagno` (da -24 a +24 dB) si trova nell'intestazione, gli altri parametri sono raggruppati a destra:
 
-:guilabel:`Accordatura`
-: :guilabel:`Intonazione di riferimento`: una nota da La#3 a La4 e la sua frequenza (da 400 a 480 Hz per il La4, 440 Hz per impostazione predefinita); questa nota suona a questa frequenza qualunque sia il temperamento.
+:guilabel:`Nota`
+: La modalità di esecuzione, nell'elenco della prima riga (vedere le [modalità di esecuzione](manual/plugin.md#doc_play_modes)): :guilabel:`Poli` (predefinita), :guilabel:`Mono` o :guilabel:`Legato`, il portamento del legato essendo regolato alla sua destra.
+  :guilabel:`Intonazione di riferimento`: una nota da La#3 a La4 e la sua frequenza (da 400 a 480 Hz per il La4, 440 Hz per impostazione predefinita); questa nota suona a questa frequenza qualunque sia il temperamento.
   :guilabel:`Trasposizione`: da -24 a +24 semitoni, la batteria non viene trasposta.
 
 :guilabel:`Velocità`
@@ -112,6 +113,29 @@ I gruppi :guilabel:`Temperamenti e scale`, :guilabel:`Riverbero` e :guilabel:`Ch
 L'altezza della finestra segue i gruppi espansi.
 
 L'host può automatizzare tutti questi parametri, tranne la nota dell'intonazione di riferimento (viene automatizzata la frequenza del La4) e le intonazioni fini del temperamento personalizzato, che vengono salvate con il progetto.
+
+
+## Modalità di esecuzione {#doc_play_modes}
+
+
+L'elenco della prima riga del gruppo :guilabel:`Nota` sceglie come vengono suonate le note di ogni canale MIDI:
+
+:guilabel:`Poli`
+: Le note sono suonate insieme (predefinita).
+
+:guilabel:`Mono`
+: Una nota alla volta: una nota inizia con il suo attacco, la precedente si ferma rapidamente.
+
+:guilabel:`Legato`
+: Una nota alla volta: una nota suonata prima del rilascio della precedente la prosegue, senza un nuovo attacco.
+  Se una divisione che suona la nota precedente contiene anche il nuovo tasto, la sua voce prosegue con lo stesso campione, cambiando solo la sua altezza.
+  Gli altri campioni del nuovo tasto partono dall'inizio del loro loop (dal loro inizio se non hanno un loop), con una dissolvenza incrociata.
+  La barra a destra dell'elenco regola il portamento: :guilabel:`Nessuno` (predefinito, l'altezza cambia subito) o la durata del portamento dalla nota precedente, fino a 5 s.
+  Una nota suonata dopo il rilascio della precedente inizia con il suo attacco, come nella modalità :guilabel:`Mono`.
+
+Tra parentesi figura il tasto che si sente quando più tasti sono tenuti: l'ultimo, il più acuto o il più grave.
+Quando il tasto che si sente viene rilasciato mentre altri sono ancora tenuti, si sente di nuovo la nota di quello che ha la priorità: tenere Re e ripetere Mi suona un trillo, con portamento in legato.
+La batteria (banco 128) e la modalità :guilabel:`MPE` restano polifoniche.
 
 
 ## Tastiera e stato {#doc_keyboard}

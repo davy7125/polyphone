@@ -87,8 +87,9 @@ Drei Schaltflächen über der Liste der Instrumente (die Presets des Soundfonts)
 Die Parameter sind die des Synthesizers von Polyphone, die sich auch in seinen Einstellungen [Sound](manual/settings.md#doc_sound) und [Tastatur](manual/settings.md#doc_keyboard) finden.
 :guilabel:`Verstärkung` (von -24 bis +24 dB) befindet sich in der Kopfzeile, die anderen Parameter sind rechts gruppiert:
 
-:guilabel:`Stimmung`
-: :guilabel:`Referenztonhöhe`: eine Note von A#3 bis A4 und ihre Frequenz (von 400 bis 480 Hz für A4, standardmäßig 440 Hz); diese Note klingt unabhängig von der Temperatur mit dieser Frequenz.
+:guilabel:`Note`
+: Der Spielmodus, in der Liste der ersten Zeile (siehe die [Spielmodi](manual/plugin.md#doc_play_modes)): :guilabel:`Poly` (Standard), :guilabel:`Mono` oder :guilabel:`Legato`, wobei das Gleiten des Legato rechts davon eingestellt wird.
+  :guilabel:`Referenztonhöhe`: eine Note von A#3 bis A4 und ihre Frequenz (von 400 bis 480 Hz für A4, standardmäßig 440 Hz); diese Note klingt unabhängig von der Temperatur mit dieser Frequenz.
   :guilabel:`Transposition`: von -24 bis +24 Halbtönen, wobei das Schlagzeug nicht transponiert wird.
 
 :guilabel:`Anschlag`
@@ -112,6 +113,29 @@ Die Gruppen :guilabel:`Temperaturen und Tonleitern`, :guilabel:`Halleffekt` und 
 Die Höhe des Fensters folgt den ausgeklappten Gruppen.
 
 Der Host kann alle diese Parameter automatisieren, außer der Note der Referenztonhöhe (automatisiert wird die Frequenz von A4) und den Feinstimmungen der benutzerdefinierten Temperatur, die mit dem Projekt gespeichert werden.
+
+
+## Spielmodi {#doc_play_modes}
+
+
+Die Liste in der ersten Zeile der Gruppe :guilabel:`Note` legt fest, wie die Noten jedes MIDI-Kanals gespielt werden:
+
+:guilabel:`Poly`
+: Die Noten werden zusammen gespielt (Standard).
+
+:guilabel:`Mono`
+: Eine Note nach der anderen: Eine Note beginnt mit ihrem Attack, die vorherige endet schnell.
+
+:guilabel:`Legato`
+: Eine Note nach der anderen: Eine Note, die vor dem Loslassen der vorherigen gespielt wird, setzt diese ohne neuen Attack fort.
+  Enthält eine Aufteilung, die die vorherige Note spielt, auch die neue Taste, spielt ihre Stimme mit demselben Sample weiter, nur die Tonhöhe ändert sich.
+  Die anderen Samples der neuen Taste beginnen am Anfang ihres Loops (an ihrem Anfang, wenn sie keinen Loop haben), mit einer Überblendung.
+  Der Balken rechts von der Liste stellt das Gleiten ein: :guilabel:`Aus` (Standard, die Tonhöhe ändert sich sofort) oder die Dauer des Gleitens der Tonhöhe von der vorherigen Note aus, bis zu 5 s.
+  Eine Note, die nach dem Loslassen der vorherigen gespielt wird, beginnt wie im Modus :guilabel:`Mono` mit ihrem Attack.
+
+In Klammern steht die Taste, die erklingt, wenn mehrere Tasten gehalten werden: die letzte, die höchste oder die tiefste.
+Wird die erklingende Taste losgelassen, während andere noch gehalten werden, erklingt wieder die Note derjenigen, die Vorrang hat: D halten und E wiederholen spielt einen Triller, im Legato gleitend.
+Das Schlagzeug (Bank 128) und der Modus :guilabel:`MPE` bleiben polyphon.
 
 
 ## Klaviatur und Status {#doc_keyboard}
