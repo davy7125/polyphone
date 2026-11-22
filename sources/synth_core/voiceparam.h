@@ -98,6 +98,10 @@ public:
     void processBendChanged(float value);
     void processBendSensitivityChanged(float semitones);
 
+    // The settings of the context changing the parameters (global envelope) changed: the modulations are computed again
+    // by the thread computing the voice
+    void processContextChanged() { _modulationsChanged.store(1, std::memory_order_release); }
+
     // Compute the modulations again if an input changed, by the thread computing the voice
     void updateModulations()
     {
@@ -118,6 +122,7 @@ private:
     int _sf2Id;
     int _presetId;
     int32_t _wPresetNumber;
+    bool _isGlobalEnvelopeApplied; // Zone of a preset, except the drums
 
     // All parameters
     ModulatedParameter _parameters[champ_endOper];
@@ -133,6 +138,7 @@ private:
     void readZoneAttributes(ISynthZone * globalZone, ISynthZone * zone, bool isPrst);
     void readZoneModulators(ISynthZone * globalZone, ISynthZone * zone, bool isPrst);
     void computeModulations();
+    void applyGlobalEnvelope(); // After the modulators
 };
 
 #endif // VOICEPARAM_H

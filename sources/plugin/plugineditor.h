@@ -34,7 +34,7 @@ class PluginTemperamentKeyboard;
 
 // Interface of the plugin: the soundfont (open, recent files, drag and drop) and the gain, the presets played (one for
 // all channels or one for each channel) on the left, the note (play mode, tuning) and the velocity, the temperaments
-// and scales and the effects on the right, a keyboard and what is played
+// and scales, the envelope and the effects on the right, a keyboard and what is played
 class PluginEditor: public juce::AudioProcessorEditor,
                     public juce::FileDragAndDropTarget,
                     private juce::ChangeListener,
@@ -62,6 +62,7 @@ private:
     class PresetList;
     class ChannelRow;
     class VelocityGraph;
+    class EnvelopeGraph;
     class SwitchButton;
     class FieldSlider;
     class BarSlider;
@@ -86,13 +87,15 @@ private:
     void fillTemperamentBox(); // Temperaments in the submenus of their categories
     void updateTuning(); // Temperament shown, tonality, note of the reference pitch, temperaments shown or hidden
     void updatePlayMode(); // Glide shown with the legato, play mode enabled except with the MPE
+    void updateEnvelope(); // Knobs of the mode (relative or fixed) shown, graph following the values
+    int getEnvelopeModeButtonWidth(int mode);
     int getPlayModeBoxWidth(); // Longest play mode
     int getGlideTextWidth(); // Longest text of the glide
     void onTemperamentEdited(); // The fine tunes shown become the custom temperament
     void updateGroups(); // Groups expanded if they are switched on, the window growing or shrinking
     void updateResizeLimits();
     int getGroupHeight(int group) const; // Group with a switch, expanded or not
-    bool areEffectsSideBySide() const; // Both effects expanded
+    bool areEffectsSideBySide() const; // Both effects expanded or both collapsed
     int getRequiredHeight() const; // Height of the window needed by the groups on the right side
     RightWidths getRightWidths(); // Width needed by the groups on the right side (texts in the current language)
     void updateStandaloneTexts();
@@ -131,15 +134,16 @@ private:
     juce::Component _channelContainer;
     std::vector<std::unique_ptr<ChannelRow>> _channelRows;
 
-    // Knobs: gain in the header, effects
+    // Knobs: gain in the header, effects, envelope (relative mode, then fixed mode)
     std::vector<std::unique_ptr<Knob>> _knobs;
     juce::Rectangle<int> _reverbArea, _chorusArea;
 
-    // Groups with a switch at the right side of their title (temperaments and scales, reverb, chorus), expanded if it
-    // is on (the temperament or the effect being then applied)
+    // Groups with a switch at the right side of their title (temperaments and scales, envelope, reverb, chorus),
+    // expanded if it is on (the temperament, the envelope or the effect being then applied)
     enum SwitchedGroup
     {
         GROUP_TEMPERAMENTS,
+        GROUP_ENVELOPE,
         GROUP_REVERB,
         GROUP_CHORUS,
         GROUP_COUNT
@@ -162,7 +166,7 @@ private:
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> _referencePitchAttachment;
     juce::Label _transpositionLabel;
     WheelComboBox _transpositionBox;
-    std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> _transpositionAttachment;
+    std::unique_ptr<juce::ParameterAttachment> _transpositionAttachment; // By identifier: highest at the top
     WheelComboBox _temperamentBox;
     std::unique_ptr<juce::ParameterAttachment> _temperamentAttachment; // By identifier: items in submenus
     juce::Label _tonalityLabel;
@@ -171,6 +175,14 @@ private:
     juce::ToggleButton _playUnusedNotesButton;
     std::unique_ptr<PluginTemperamentKeyboard> _temperamentKeyboard;
     juce::Rectangle<int> _tuningArea, _temperamentsArea;
+
+    // Envelope: mode (relative or fixed) on the left side of the switch, attack, decay, sustain and release of the mode,
+    // graph of the envelope
+    juce::TextButton _envelopeModeButtons[2];
+    std::unique_ptr<juce::ParameterAttachment> _envelopeModeAttachment;
+    bool _isEnvelopeFixed;
+    std::unique_ptr<EnvelopeGraph> _envelopeGraph;
+    juce::Rectangle<int> _envelopeArea;
 
     // Velocity: default modulator to the filter cutoff and curve, with their graphs
     juce::Label _velocityToFilterLabel;

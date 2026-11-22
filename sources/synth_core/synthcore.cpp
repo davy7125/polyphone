@@ -554,6 +554,17 @@ void SynthCore::configure(const SynthCoreConfig &configuration)
     // The voices playing reach the new gain progressively (linear evolution of the volume on each chunk)
     if (gainChanged)
         configureVoices();
+
+    // The voices playing follow the global envelope (durations and sustain level read again by their envelopes)
+    if (_context.setEnvelope(configuration.envelopeChanges, configuration.envelopeValues))
+    {
+        std::lock_guard<std::recursive_mutex> lock(_voicesMutex);
+        Voice ** voices1, ** voices2;
+        int count1, count2;
+        _voices.getVoices(voices1, count1, voices2, count2);
+        for (int i = 0; i < count1 + count2; ++i)
+            (i < count1 ? voices1[i] : voices2[i - count1])->getParam()->processContextChanged();
+    }
 }
 
 void SynthCore::updateEffects(const SynthCoreConfig &configuration)

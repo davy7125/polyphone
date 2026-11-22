@@ -36,6 +36,11 @@ VoiceContext::VoiceContext() :
 {
     for (int i = 0; i < 12; i++)
         _temperament[i].store(0.0f, std::memory_order_relaxed);
+    for (int i = 0; i < ENVELOPE_STAGE_COUNT; i++)
+    {
+        _envelopeChanges[i].store(ENVELOPE_UNCHANGED, std::memory_order_relaxed);
+        _envelopeValues[i].store(0, std::memory_order_relaxed);
+    }
 }
 
 void VoiceContext::setMidiValues(IMidiValues * midiValues)
@@ -77,6 +82,21 @@ bool VoiceContext::isKeyUsed(int key) const
 void VoiceContext::setModulatorVelToFilterType(int type)
 {
     _modulatorVelToFilterType.store(type, std::memory_order_relaxed);
+}
+
+bool VoiceContext::setEnvelope(const int changes[ENVELOPE_STAGE_COUNT], const int values[ENVELOPE_STAGE_COUNT])
+{
+    bool hasChanged = false;
+    for (int i = 0; i < ENVELOPE_STAGE_COUNT; i++)
+    {
+        // No value without a change
+        int value = (changes[i] == ENVELOPE_UNCHANGED) ? 0 : values[i];
+        if (_envelopeChanges[i].exchange(changes[i], std::memory_order_relaxed) != changes[i])
+            hasChanged = true;
+        if (_envelopeValues[i].exchange(value, std::memory_order_relaxed) != value)
+            hasChanged = true;
+    }
+    return hasChanged;
 }
 
 const ModulatorData * VoiceContext::getDefaultModulators(int &number) const

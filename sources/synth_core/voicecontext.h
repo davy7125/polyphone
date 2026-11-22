@@ -28,6 +28,7 @@
 
 #include <atomic>
 #include "imidivalues.h"
+#include "synthcoreconfig.h"
 class ModulatorData;
 
 // Settings of a synth read by its voices: tuning, values of the MIDI controllers and default modulators
@@ -53,6 +54,15 @@ public:
     void setModulatorVelToFilterType(int type);
     const ModulatorData * getDefaultModulators(int &number) const;
 
+    // Global envelope: change (EnvelopeChange) and value of each EnvelopeStage (see SynthCoreConfig), true being
+    // returned if something changed
+    bool setEnvelope(const int changes[ENVELOPE_STAGE_COUNT], const int values[ENVELOPE_STAGE_COUNT]);
+    int getEnvelopeChange(int stage, int &value) const
+    {
+        value = _envelopeValues[stage].load(std::memory_order_relaxed);
+        return _envelopeChanges[stage].load(std::memory_order_relaxed);
+    }
+
 private:
     DummyMidiDevice _defaultMidiValues;
     std::atomic<IMidiValues *> _midiValues;
@@ -62,6 +72,8 @@ private:
     std::atomic<int> _temperamentReferenceKey;
     std::atomic<int> _temperamentUsedKeys; // One bit per key from C to B, relative to the key _temperamentRelativeKey
     std::atomic<int> _modulatorVelToFilterType;
+    std::atomic<int> _envelopeChanges[ENVELOPE_STAGE_COUNT];
+    std::atomic<int> _envelopeValues[ENVELOPE_STAGE_COUNT];
 };
 
 #endif // VOICECONTEXT_H

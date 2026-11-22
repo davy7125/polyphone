@@ -27,6 +27,25 @@
 
 #include "synthconstants.h"
 
+// Stages of the global envelope (SynthCoreConfig::envelopeChanges)
+enum EnvelopeStage
+{
+    ENVELOPE_ATTACK,
+    ENVELOPE_DECAY,
+    ENVELOPE_SUSTAIN,
+    ENVELOPE_RELEASE,
+    ENVELOPE_STAGE_COUNT
+};
+
+// Change of a stage by the global envelope: none, relative (a value added) or fixed (a value replacing the one of the
+// soundfont)
+enum EnvelopeChange
+{
+    ENVELOPE_UNCHANGED,
+    ENVELOPE_RELATIVE,
+    ENVELOPE_FIXED
+};
+
 class SynthCoreConfig
 {
 public:
@@ -49,6 +68,11 @@ public:
         {
             temperament[i] = 0;
             temperamentUsed[i] = true;
+        }
+        for (int i = 0; i < ENVELOPE_STAGE_COUNT; i++)
+        {
+            envelopeChanges[i] = ENVELOPE_UNCHANGED;
+            envelopeValues[i] = 0;
         }
     }
 
@@ -76,6 +100,15 @@ public:
 
     // Velocity to filter cutoff among the default modulators: the one of the version 2.01 (0), 2.04 (1) or none (2)
     int modulatorVelToFilterType;
+
+    // Global envelope (plugin), applied to the zones of the presets except the drums (bank 128) after their own values
+    // and before their modulators, for each EnvelopeStage (EnvelopeChange, value):
+    // * attack, decay and release: timecents added to the durations of the volume and modulation envelopes (relative),
+    //   or duration of the volume envelope in timecents (fixed);
+    // * sustain of the volume envelope: centibels added to its attenuation (relative), or its attenuation in centibels
+    //   (fixed).
+    int envelopeChanges[ENVELOPE_STAGE_COUNT];
+    int envelopeValues[ENVELOPE_STAGE_COUNT];
 
     // Share of the duration of the audio (%) that computing the voices can take in real time, above which the quietest
     // notes fade out

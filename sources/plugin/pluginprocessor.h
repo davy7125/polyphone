@@ -133,6 +133,18 @@ public:
     static bool isLegatoPlayMode(int index) { return index >= 4; }
     static juce::String getGlideTimeText(float milliseconds);
 
+    // Envelope (parameters "envelopeEnabled" and "envelopeMode", translated names of its modes): relative to the
+    // soundfont (durations multiplied by "attackFactor", "decayFactor" and "releaseFactor", sustain level changed by
+    // "sustainOffset" in dB) or fixed ("attackTime", "decayTime" and "releaseTime" in ms, "sustainLevel" in dB), the
+    // values of the soundfont being kept with a factor of 1, a change of 0 dB, or the beginning of the ranges of the
+    // fixed values (written "Soundfont"). The drums are not changed.
+    static juce::StringArray getEnvelopeModeNames();
+    static juce::String getEnvelopeFactorText(float factor);
+    static juce::String getSustainOffsetText(float decibels);
+    static juce::String getEnvelopeDurationText(float milliseconds);
+    static juce::String getSustainLevelText(float decibels);
+    static bool isSoundfontEnvelopeValue(int stage, bool isFixed, float value); // stage: EnvelopeStage
+
     // Settings shared by all instances (recent files, language)
     static juce::PropertiesFile::Options getSettingsOptions();
 
@@ -186,7 +198,7 @@ private:
     bool _isSoundfontStored;
 
     // Settings of the synth
-    static const int PARAMETER_COUNT = 19;
+    static const int PARAMETER_COUNT = 29;
     int _polyphony;
     std::atomic<bool> _hasMultipleOutputs;
     std::atomic<bool> _hasFixedLatency;

@@ -6186,161 +6186,189 @@ pro zobrazení jeho barvy zvuku</translation>
 <context>
     <name>PluginEditor</name>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="89"/>
+        <location filename="../../plugin/plugineditor.cpp" line="95"/>
         <source>cannot open the file</source>
         <translation>soubor nelze otevřít</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="90"/>
+        <location filename="../../plugin/plugineditor.cpp" line="96"/>
         <source>file recursion (#include)</source>
         <translation>rekurze souborů (#include)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="91"/>
+        <location filename="../../plugin/plugineditor.cpp" line="97"/>
         <source>not enough memory</source>
         <translation>nedostatek paměti</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="92"/>
+        <location filename="../../plugin/plugineditor.cpp" line="98"/>
         <source>this is not a DLS file</source>
         <translation>nejde o soubor DLS</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="93"/>
+        <location filename="../../plugin/plugineditor.cpp" line="99"/>
         <source>invalid header</source>
         <translation>neplatná hlavička</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="94"/>
+        <location filename="../../plugin/plugineditor.cpp" line="100"/>
         <source>corrupted file (sdta)</source>
         <translation>poškozený soubor (sdta)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="95"/>
+        <location filename="../../plugin/plugineditor.cpp" line="101"/>
         <source>corrupted file (pdta)</source>
         <translation>poškozený soubor (pdta)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="349"/>
+        <location filename="../../plugin/plugineditor.cpp" line="360"/>
         <source>Instrument played by the channel, or the one chosen by the program changes it receives</source>
         <translation>Nástroj hraný kanálem, nebo ten, který zvolí přijaté změny programu</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="352"/>
+        <location filename="../../plugin/plugineditor.cpp" line="363"/>
         <source>Program change (drums)</source>
         <translation>Změna programu (bicí)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="352"/>
+        <location filename="../../plugin/plugineditor.cpp" line="363"/>
         <source>Program change</source>
         <translation>Změna programu</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="935"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1137"/>
         <source>(no instrument)</source>
         <translation>(žádný nástroj)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="982"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1184"/>
         <source>Open...</source>
         <translation>Otevřít...</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="983"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1185"/>
         <source>Open a soundfont (sf2, sf3, sfz or dls), which can also be dropped on the window</source>
         <translation>Otevřít zvukovou banku (sf2, sf3, sfz nebo dls), kterou lze také přetáhnout do okna</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="984"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1186"/>
         <source>Recent soundfonts</source>
         <translation>Nedávné zvukové banky</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="985"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1187"/>
         <source>One instrument</source>
         <translation>Jeden nástroj</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="986"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1188"/>
         <source>The same instrument is played on all MIDI channels</source>
         <translation>Na všech kanálech MIDI se hraje stejný nástroj</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="987"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1189"/>
         <source>16 channels</source>
         <translation>16 kanálů</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="988"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1190"/>
         <source>Each MIDI channel plays its instrument, or the one chosen by its program changes (General MIDI)</source>
         <translation>Každý kanál MIDI hraje svůj nástroj, nebo ten, který zvolí jeho změny programu (General MIDI)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="990"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1192"/>
         <source>The same instrument is played by an MPE controller: each note has its own pitch bend, pressure and timbre (lower zone of 15 channels, or the zones given by the controller)</source>
         <translation>Stejný nástroj hraje ovladač MPE: každá nota má vlastní ohyb výšky tónu, tlak a barvu (dolní zóna 15 kanálů, nebo zóny určené ovladačem)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="996"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1198"/>
         <source>Gain</source>
         <translation>Zesílení</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1030"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1234"/>
         <source>Play all</source>
         <translation>Hrát vše</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1039"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1245"/>
         <source>Default modulator from the velocity to the filter cutoff frequency: the softer the note, the lower the cutoff (up to 2 octaves lower).
 Change this option if notes sound too muffled: SoundFont 2.01 for an old soundfont made with this version (the notes above the velocity 64 are not filtered), Disabled for a soundfont whose samples already sound softer at low velocities (several velocity layers).</source>
         <translation>Výchozí modulátor z dynamiky na mezní frekvenci filtru: čím slabší tón, tím nižší mezní frekvence (až o 2 oktávy níže).
 Změňte tuto volbu, pokud tóny znějí příliš tlumeně: SoundFont 2.01 pro starou zvukovou banku vytvořenou s touto verzí (tóny nad dynamikou 64 se nefiltrují), Vypnuto pro zvukovou banku, jejíž vzorky již při nízké dynamice znějí slaběji (více dynamických vrstev).</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="997"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1199"/>
         <source>Level</source>
         <comment>reverb</comment>
         <translation>Hladina</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="997"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1199"/>
         <source>Size</source>
         <comment>reverb</comment>
         <translation>Velikost</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="997"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1199"/>
         <source>Width</source>
         <comment>reverb</comment>
         <translation>Šířka</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="997"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1199"/>
         <source>Damping</source>
         <comment>reverb</comment>
         <translation>Ztlumení</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="998"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1200"/>
         <source>Level</source>
         <comment>chorus</comment>
         <translation>Hladina</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="998"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1200"/>
         <source>Depth</source>
         <comment>chorus</comment>
         <translation>Rozkmit</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="998"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1200"/>
         <source>Frequency</source>
         <comment>chorus</comment>
         <translation>Kmitočet</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1007"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1201"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1202"/>
+        <source>Attack</source>
+        <comment>envelope</comment>
+        <translation>Náběh</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="1201"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1202"/>
+        <source>Decay</source>
+        <comment>envelope</comment>
+        <translation>Pokles</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="1201"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1202"/>
+        <source>Sustain</source>
+        <comment>envelope</comment>
+        <translation>Držení tónu</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="1201"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1202"/>
+        <source>Release</source>
+        <comment>envelope</comment>
+        <translation>Uvolnění</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="1211"/>
         <source>Poly: the notes are played together.
 Mono: one note at a time, each one starting with its attack.
 Legato: one note at a time, a note played before the previous one is released continuing it without a new attack.
@@ -6351,248 +6379,279 @@ Legato: jedna nota najednou; nota zahraná před uvolněním předchozí na ni n
 Při držení více kláves zní poslední, nejvyšší nebo nejnižší z nich. Bicí a režim MPE jsou vždy polyfonní.</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1012"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1216"/>
         <source>Duration of the pitch glide between two notes played legato</source>
         <translation>Doba plynulého přechodu výšky tónu mezi dvěma notami hranými legato</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1016"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1220"/>
         <source>Reference pitch</source>
         <translation>Referenční výška tónu</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1017"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1221"/>
         <source>Note sounding at this frequency, whatever the temperament</source>
         <translation>Tón znějící na této frekvenci bez ohledu na temperament</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1021"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1225"/>
         <source>Transposition</source>
         <translation>Transpozice</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1022"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1226"/>
         <source>Transposition in semitones of the notes played, except the drums</source>
         <translation>Transpozice hraných tónů v půltónech, kromě bicích</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1028"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1232"/>
         <source>Tonality of the temperament (tonic of a scale)</source>
         <translation>Tónina temperamentu (tónika stupnice)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1032"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1236"/>
         <source>Temperament or scale applied (equal temperament otherwise)</source>
         <translation>Použitý temperament nebo stupnice (jinak rovnoměrně temperované ladění)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1033"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1237"/>
+        <source>Envelope applied to all instruments except the drums (envelopes of the soundfont otherwise)</source>
+        <translation>Obálka použitá pro všechny nástroje kromě bicích (jinak obálky zvukové banky)</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="1239"/>
         <source>Reverb enabled</source>
         <translation>Dozvuk zapnut</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1034"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1240"/>
         <source>Chorus enabled</source>
         <translation>Sbor (chorus) zapnut</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1037"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1243"/>
         <source>Filter cutoff</source>
         <translation>Frekvence filtru</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1048"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1254"/>
         <source>Curve</source>
         <translation>Křivka</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1049"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1255"/>
         <source>Velocity curve: linear in the middle, concave to the left (softer velocity), convex to the right (velocity rising quickly)</source>
         <translation>Křivka dynamiky: lineární uprostřed, konkávní doleva (měkčí dynamika), konvexní doprava (dynamika rychle stoupá)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1055"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1265"/>
+        <source>Durations of the soundfont multiplied and sustain levels raised or lowered: each sound keeps the shape of its envelope. A factor of 1 or a change of 0 dB keeps the soundfont.</source>
+        <translation>Doby zvukové banky vynásobené a úrovně držení tónu zvýšené nebo snížené: každý zvuk si zachová tvar své obálky. Činitel 1 nebo změna 0 dB zachová zvukovou banku.</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="1268"/>
+        <source>Durations and sustain level replacing the ones of the soundfont. A knob turned fully to the left keeps the soundfont.</source>
+        <translation>Doby a úroveň držení tónu nahrazující hodnoty zvukové banky. Knoflík otočený úplně doleva zachová zvukovou banku.</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="1272"/>
         <source>Panic</source>
         <translation>Panika</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1056"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1273"/>
         <source>Stop all sounds and reset the controllers</source>
         <translation>Zastavit všechny zvuky a obnovit ovladače</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1057"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1274"/>
         <source>Settings</source>
         <translation>Nastavení</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1111"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1328"/>
         <source>cannot open the file %1</source>
         <translation>soubor %1 nelze otevřít</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1113"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1330"/>
         <source>invalid %1 index</source>
         <translation>neplatný index %1</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1125"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1342"/>
         <source>No soundfont</source>
         <translation>Žádná zvuková banka</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1133"/>
-        <location filename="../../plugin/plugineditor.cpp" line="1185"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1350"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1402"/>
         <source>Loading...</source>
         <translation>Načítání...</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1138"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1355"/>
         <source>Cannot read the soundfont: %1</source>
         <translation>Zvukovou banku nelze přečíst: %1</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1145"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1362"/>
         <source>Open a soundfont or drop it here</source>
         <translation>Otevřete zvukovou banku nebo ji sem přetáhněte</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1182"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1399"/>
         <source>Loading the sounds: %1 %</source>
         <translation>Načítání zvuků: %1 %</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1184"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1401"/>
         <source>Some sounds may be missing until the loading is complete.</source>
         <translation>Do dokončení načítání mohou některé zvuky chybět.</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1248"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1444"/>
+        <source>Envelope played, the parts keeping the soundfont being drawn with dashes (as an example). The durations are compressed.</source>
+        <translation>Přehrávaná obálka, části zachovávající zvukovou banku jsou kresleny čárkovaně (jako příklad). Doby jsou zobrazeny zhuštěně.</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="1446"/>
+        <source>Envelope played (in color) and an example of envelope of the soundfont (dashes). The durations are compressed.</source>
+        <translation>Přehrávaná obálka (barevně) a příklad obálky zvukové banky (čárkovaně). Doby jsou zobrazeny zhuštěně.</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="1498"/>
         <source>Voices: %1</source>
         <translation>Hlasy: %1</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1249"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1499"/>
         <source>CPU: %1 %</source>
         <translation>CPU: %1 %</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1263"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1513"/>
         <source>Open a soundfont</source>
         <translation>Otevřít zvukovou banku</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1277"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1527"/>
         <source>No recent soundfont</source>
         <translation>Žádná nedávná zvuková banka</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1326"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1576"/>
         <source>%1 voices</source>
         <translation>%1 hlasů</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1331"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1581"/>
         <source>Channel %1</source>
         <translation>Kanál %1</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1338"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1588"/>
         <source>System language</source>
         <translation>Jazyk systému</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1345"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1595"/>
         <source>Polyphony</source>
         <translation>Polyfonie</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1346"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1596"/>
         <source>Keyboard</source>
         <translation>Klávesnice</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1347"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1597"/>
         <source>Language</source>
         <translation>Jazyk</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1349"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1599"/>
         <source>Fixed latency (notes played at their exact position)</source>
         <translation>Pevná latence (noty hrané na své přesné pozici)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1351"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1601"/>
         <source>Clipping to [-1; 1]</source>
         <translation>Ořezání na [-1; 1]</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1410"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1660"/>
         <source>Note</source>
         <translation>Nota</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1411"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1661"/>
         <source>Temperaments and scales</source>
         <translation>Temperamenty a stupnice</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1031"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1235"/>
         <source>Also play the notes not used by the temperament (scale)</source>
         <translation>Hrát i tóny, které temperament (stupnice) nepoužívá</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1026"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1230"/>
         <source>Temperament or scale, transposed to the chosen tonality</source>
         <translation>Temperament nebo stupnice, transponované do zvolené tóniny</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1027"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1231"/>
         <source>Tonality</source>
         <translation>Tónina</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1356"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1606"/>
         <source>Store the soundfont in the project (not possible with an sfz file)</source>
         <translation>Uložit zvukovou banku do projektu (u souboru sfz není možné)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1357"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1607"/>
         <source>Store the soundfont in the project</source>
         <translation>Uložit zvukovou banku do projektu</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1363"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1613"/>
         <source>Channels and effects on their own outputs (not possible in the standalone application)</source>
         <translation>Kanály a efekty na vlastních výstupech (v samostatné aplikaci není možné)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1365"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1615"/>
         <source>Channels and effects on their own outputs</source>
         <translation>Kanály a efekty na vlastních výstupech</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1412"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1662"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1917"/>
+        <source>Envelope</source>
+        <translation>Obálka</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="1663"/>
         <source>Reverb</source>
         <translation>Dozvuk</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1413"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1664"/>
         <source>Chorus</source>
         <translation>Sbor (chorus)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1412"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1663"/>
         <source>Velocity</source>
         <translation>Dynamika</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="318"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="475"/>
         <source>too many soundfonts are still playing, try again in a moment</source>
         <translation>stále hraje příliš mnoho zvukových bank, zkuste to znovu za chvíli</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="819"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="996"/>
         <source>file not found</source>
         <translation>soubor nebyl nalezen</translation>
     </message>
@@ -6600,7 +6659,7 @@ Při držení více kláves zní poslední, nejvyšší nebo nejnižší z nich.
 <context>
     <name>PluginJuce</name>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1095"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1312"/>
         <location filename="../../plugin/plugintranslator.cpp" line="60"/>
         <source>Options</source>
         <translation>Volby</translation>
@@ -6909,200 +6968,274 @@ Při držení více kláves zní poslední, nejvyšší nebo nejnižší z nich.
 <context>
     <name>PluginProcessor</name>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="57"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="71"/>
         <source>Main</source>
         <translation>Hlavní</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="59"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="73"/>
         <source>Channel %1</source>
         <translation>Kanál %1</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="61"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="75"/>
         <source>Effects</source>
         <translation>Efekty</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="173"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="187"/>
         <source>Gain</source>
         <translation>Zesílení</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="176"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="190"/>
         <source>Reverb</source>
         <translation>Dozvuk</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="176"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="190"/>
         <source>Reverb level</source>
         <translation>Hladina dozvuku</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="177"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="191"/>
         <source>Reverb size</source>
         <translation>Velikost dozvuku</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="177"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="191"/>
         <source>Reverb width</source>
         <translation>Šířka dozvuku</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="178"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="192"/>
         <source>Reverb damping</source>
         <translation>Ztlumení dozvuku</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="180"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="194"/>
         <source>Chorus</source>
         <translation>Sbor (chorus)</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="180"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="194"/>
         <source>Chorus level</source>
         <translation>Hladina sboru</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="181"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="195"/>
         <source>Chorus depth</source>
         <translation>Rozkmit sboru</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="181"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="195"/>
         <source>Chorus frequency</source>
         <translation>Kmitočet sboru</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="187"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="201"/>
         <source>Tuning</source>
         <translation>Ladění</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="188"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="202"/>
         <source>Transposition</source>
         <translation>Transpozice</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="189"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="203"/>
         <source>semitones</source>
         <translation>půltónů</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="190"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="204"/>
         <source>Reference pitch</source>
         <translation>Referenční výška tónu</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="193"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="207"/>
         <source>Temperament</source>
         <translation>Temperament</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="194"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="208"/>
         <source>Temperament key</source>
         <translation>Tónina temperamentu</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="199"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="213"/>
         <source>Velocity</source>
         <translation>Dynamika</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="200"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="214"/>
         <source>Velocity to filter cutoff</source>
         <translation>Dynamika na frekvenci filtru</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="201"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="215"/>
         <source>Velocity curve</source>
         <translation>Křivka dynamiky</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="206"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="220"/>
         <source>Temperament enabled</source>
         <translation>Temperament zapnut</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="207"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="221"/>
         <source>Reverb enabled</source>
         <translation>Dozvuk zapnut</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="209"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="223"/>
         <source>Chorus enabled</source>
         <translation>Sbor (chorus) zapnut</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="216"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="230"/>
         <source>Note</source>
         <translation>Nota</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="216"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="230"/>
         <source>Play mode</source>
         <translation>Režim hry</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="218"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="232"/>
         <source>Glide time</source>
         <translation>Doba portamenta</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="233"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="318"/>
+        <source>Envelope</source>
+        <translation>Obálka</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="319"/>
+        <source>Envelope enabled</source>
+        <translation>Obálka zapnuta</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="320"/>
+        <source>Envelope mode</source>
+        <translation>Režim obálky</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="321"/>
+        <source>Attack factor</source>
+        <translation>Činitel náběhu</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="321"/>
+        <source>Decay factor</source>
+        <translation>Činitel poklesu</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="323"/>
+        <source>Sustain change</source>
+        <translation>Změna držení tónu</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="330"/>
+        <source>Release factor</source>
+        <translation>Činitel uvolnění</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="331"/>
+        <source>Attack time</source>
+        <translation>Doba náběhu</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="332"/>
+        <source>Decay time</source>
+        <translation>Doba poklesu</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="334"/>
+        <source>Sustain level</source>
+        <translation>Úroveň držení tónu</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="343"/>
+        <source>Release time</source>
+        <translation>Doba uvolnění</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="349"/>
         <source>Disabled</source>
         <comment>velocity to filter</comment>
         <translation>Vypnuto</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="238"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="354"/>
         <source>Poly</source>
         <translation>Poly</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="238"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="354"/>
         <source>Mono (latest)</source>
         <translation>Mono (poslední)</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="238"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="354"/>
         <source>Mono (highest)</source>
         <translation>Mono (nejvyšší)</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="238"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="354"/>
         <source>Mono (lowest)</source>
         <translation>Mono (nejnižší)</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="238"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="354"/>
         <source>Legato (latest)</source>
         <translation>Legato (poslední)</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="239"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="355"/>
         <source>Legato (highest)</source>
         <translation>Legato (nejvyšší)</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="239"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="355"/>
         <source>Legato (lowest)</source>
         <translation>Legato (nejnižší)</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="246"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="360"/>
+        <source>Relative</source>
+        <comment>envelope</comment>
+        <translation>Relativní</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="360"/>
+        <source>Fixed</source>
+        <comment>envelope</comment>
+        <translation>Pevný</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="377"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="386"/>
+        <source>Soundfont</source>
+        <comment>envelope value kept</comment>
+        <translation>Původ</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="403"/>
         <source>Off</source>
         <comment>glide</comment>
         <translation>Vypnuto</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="272"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="429"/>
         <source>Equal</source>
         <comment>Equal musical temperament</comment>
         <translation>Temperované</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="274"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="431"/>
         <source>Custom</source>
         <comment>custom temperament</comment>
         <translation>Vlastní</translation>

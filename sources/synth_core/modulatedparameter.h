@@ -44,6 +44,9 @@ public:
     void addInstModulation(float value);
     void addPrstModulation(float value);
 
+    // Sum of the values of the instrument and preset levels, without the modulations
+    int32_t getBaseValue() { return _instValue.getStoredValue().shValue + _prstValue.getStoredValue().shValue; }
+
     // Get the resulting value as an integer or a float (a conversion might occur)
     int32_t getIntValue();
     float getRealValue();

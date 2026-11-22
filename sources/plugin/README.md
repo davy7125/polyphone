@@ -57,22 +57,33 @@ LV2, AU (macOS) and a standalone application ("Polyphone Player", not distribute
   own default modulators (DMOD chunk of an sf2 or sf3 file) uses them instead of the ones of the
   sf2 format: the setting of the default modulator has no effect on it. Play mode: poly (default),
   mono or legato with the priority of the latest, the highest or the lowest key held, and the glide of
-  the legato (Off, then up to 5 s). The drums (bank 128) and the MPE mode stay polyphonic.
+  the legato (Off, then up to 5 s). The drums (bank 128) and the MPE mode stay polyphonic. Envelope
+  (switch, mode, then the values of each mode): relative (attack, decay and release multiplied from
+  x0.1 to x10, logarithmic, also for the modulation envelope; sustain level raised or lowered by up
+  to 20 dB) or fixed (attack from 1 ms to 10 s, decay and release from 1 ms to 20 s, sustain from -96
+  to 0 dB, the volume envelope only), the soundfont being kept with x1 and 0 dB or at the beginning of
+  the ranges of the fixed mode ("Soundfont"); the drums are not changed.
 - Interface: the gain in the header (its value shown, its arc colored from 0 toward the left or the
   right), the presets on the left (the room left by the groups); on the right the note (play mode,
   with the glide on its right for the legato; reference pitch: note from A#3 to A4
   = its frequency, the note keeping its pitch whatever the temperament; transposition) beside the
-  velocity, then the temperaments and scales, the reverb and the chorus (side by side if both are
-  enabled, the knobs having the same width). These three groups have a switch, also a parameter: off, the group is collapsed and its
-  temperament or effect is not applied (equal temperament with all the notes, effect level 0), its
-  settings being kept; the switches missing in a state saved before them are on for the effects heard
-  and a temperament other than the equal one. The temperaments and scales: temperament, tonality,
+  velocity, then the temperaments and scales, the envelope (mode on the left side of the switch, the
+  knobs of the mode, a graph of the envelope with the durations compressed: an example of envelope of
+  a soundfont and the one played in relative mode, the stages keeping the soundfont dashed in fixed
+  mode), the reverb and the chorus (side by side if both are enabled or both disabled, the knobs
+  having the same width). These four groups have a switch, also a parameter: off, the group is
+  collapsed and its temperament, envelope or effect is not applied (equal temperament with all the
+  notes, envelopes of the soundfont, effect level 0), its settings being kept; the switches missing in
+  a state saved before them are on for the effects heard and a temperament other than the equal one.
+  The temperaments and scales: temperament, tonality,
   notes not used played anyway (disabled by default) and the fine tunes of the 12 notes, editable (the
   custom temperament). The height of the window follows the groups expanded. The note of the
   reference pitch and the custom temperament are saved in the state, not as parameters. The lists on
   the right (play mode, temperament, tonality, note of the reference pitch, transposition, default modulator)
-  change with the mouse wheel, one item per notch; not the lists of the 16 channels, the wheel
-  scrolling them.
+  change with the mouse wheel, one item per notch (the notes of the reference pitch and the transpositions
+  listed from the highest, the wheel going up raising them); not the lists of the 16 channels, the wheel
+  scrolling them. The wheel over the frequency of the reference pitch changes it by 0.1 Hz (for A4). The
+  velocity curve is filled from its middle (linear) to the value chosen.
 - A keyboard showing the notes received and played with the mouse, the number of voices, the share of
   the processor taken and a panic button (all sounds stopped, controllers reset).
 - Settings: polyphony, channel of the keyboard, language, fixed latency (see above), clipping of the
@@ -147,7 +158,9 @@ The version is the one of the editor, read in `sources/version.txt` (its numbers
   note starts with its attack (the notes of the channel stopping quickly), a legato note continues the
   previous one (`SynthCore::playPresetLegato`): the voices whose zones also play the new key change
   their pitch (with the glide), the other zones start from their loop without attack, crossfading
-  with the previous voices.
+  with the previous voices. The envelope is given to the synth in its configuration
+  (`SynthCoreConfig::envelopeChanges`): `VoiceParam` adds it to the zones of the presets except the
+  drums, with the modulators, so that the voices playing follow it.
 - `pluginsoundfont`: the soundfonts read, shared by the instances of the plugin in the process, and
   the threads reading their samples (without JUCE).
 

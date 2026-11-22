@@ -27,9 +27,11 @@
 #include <initializer_list>
 #include <cstdio>
 #include "synthmath.h"
+#include "voicecontext.h"
 
 VoiceParam::VoiceParam(const VoiceContext * context) :
     _context(context),
+    _isGlobalEnvelopeApplied(false),
     _version(1), // The parameters have no value in cache (version 0)
     _modulationsChanged(0),
     _modulatorGroupInst(_parameters, false, context),
@@ -53,6 +55,7 @@ void VoiceParam::initialize(int sf2Id, ISynthZone * defaultModulators, ISynthIns
     _sf2Id = sf2Id;
     _presetId = (prst != nullptr ? prst->getIndex() : -1);
     _wPresetNumber = (prst != nullptr ? prst->getPresetNumber() : -1);
+    _isGlobalEnvelopeApplied = (type == 0 && prst != nullptr && prst->getBankNumber() != 128);
 
     // Reset the parameters
     for (int i = 0; i < champ_endOper; i++)
@@ -402,9 +405,34 @@ void VoiceParam::computeModulations()
     // Process modulators
     _modulatorGroupInst.process();
     _modulatorGroupPrst.process();
+    if (_isGlobalEnvelopeApplied)
+        applyGlobalEnvelope();
 
     // The values are computed again by the thread computing the voice
     _version.fetch_add(1, std::memory_order_release);
+}
+
+void VoiceParam::applyGlobalEnvelope()
+{
+    // Durations of both envelopes with an offset added (relative), or durations of the volume envelope replaced (fixed:
+    // the soundfont often keeps the default durations of the volume envelope, the modulation envelope being changed in
+    // the same proportion would make no sense). Sustain of the volume envelope. The modulators are still applied.
+    static const AttributeType volumeTypes[ENVELOPE_STAGE_COUNT] = {
+        champ_attackVolEnv, champ_decayVolEnv, champ_sustainVolEnv, champ_releaseVolEnv };
+    static const AttributeType modulationTypes[ENVELOPE_STAGE_COUNT] = {
+        champ_attackModEnv, champ_decayModEnv, champ_unknown, champ_releaseModEnv };
+    for (int stage = 0; stage < ENVELOPE_STAGE_COUNT; stage++)
+    {
+        int value;
+        int change = _context->getEnvelopeChange(stage, value);
+        if (change == ENVELOPE_UNCHANGED)
+            continue;
+        ModulatedParameter &volumeParameter = _parameters[volumeTypes[stage]];
+        int32_t offset = (change == ENVELOPE_FIXED) ? value - volumeParameter.getBaseValue() : value;
+        volumeParameter.addPrstModulation(static_cast<float>(offset));
+        if (change == ENVELOPE_RELATIVE && modulationTypes[stage] != champ_unknown)
+            _parameters[modulationTypes[stage]].addPrstModulation(static_cast<float>(offset));
+    }
 }
 
 // The modulators of both groups store the new value: none of them must be skipped

@@ -37,12 +37,26 @@
 static const char * PARAMETER_IDS[] = {
     "gain", "reverbLevel", "reverbSize", "reverbWidth", "reverbDamping", "chorusLevel", "chorusDepth", "chorusFrequency",
     "transpose", "tuning", "temperament", "temperamentKey", "velocityToFilter", "velocityCurve", "temperamentEnabled",
-    "reverbEnabled", "chorusEnabled", "playMode", "glideTime"
+    "reverbEnabled", "chorusEnabled", "playMode", "glideTime", "envelopeEnabled", "envelopeMode", "attackFactor",
+    "decayFactor", "sustainOffset", "releaseFactor", "attackTime", "decayTime", "sustainLevel", "releaseTime"
 };
+static const int FIRST_ENVELOPE_PARAMETER = 19; // Switch, mode, values of the relative mode then of the fixed mode
 
 // Longest glide of the legato (ms), the middle of its range being shorter (most useful durations)
 static const float MAX_GLIDE_TIME = 5000.0f;
 static const float CENTRE_GLIDE_TIME = 300.0f;
+
+// Envelope: factors of the durations (relative mode), the soundfont being followed with 1 in the middle, change of the
+// sustain level in dB (relative mode), longest durations in ms and lowest sustain level in dB (fixed mode, the values of
+// the soundfont being kept at the beginning of the ranges: 0 ms and SOUNDFONT_SUSTAIN_LEVEL)
+static const float MIN_ENVELOPE_FACTOR = 0.1f;
+static const float MAX_ENVELOPE_FACTOR = 10.0f;
+static const float MAX_SUSTAIN_OFFSET = 20.0f;
+static const float MAX_ATTACK_TIME = 10000.0f;
+static const float MAX_DECAY_RELEASE_TIME = 20000.0f;
+static const float MIN_SUSTAIN_LEVEL = -96.0f;
+static const float SOUNDFONT_SUSTAIN_LEVEL = -100.0f;
+static const float SOUNDFONT_PROPORTION = 0.02f; // Beginning of the ranges of the fixed mode keeping the soundfont
 
 static const int MAX_RECENT_FILES = 10;
 
@@ -225,6 +239,116 @@ juce::AudioProcessorValueTreeState::ParameterLayout PluginProcessor::createParam
                         value *= 1000.0;
                     return static_cast<float>(juce::jlimit(0.0, static_cast<double>(MAX_GLIDE_TIME), value));
                 }))));
+
+    // Envelope: switch and mode, then the durations multiplied (from 1/10 to 10, logarithmic) and the sustain raised or
+    // lowered (relative mode), then the durations (logarithmic) and the sustain level (fixed mode), the values of the
+    // soundfont being kept at the beginning of these ranges
+    juce::NormalisableRange<float> factorRange(
+        MIN_ENVELOPE_FACTOR, MAX_ENVELOPE_FACTOR,
+        [](float start, float end, float proportion) { return start * std::pow(end / start, proportion); },
+        [](float start, float end, float value) {
+            return juce::jlimit(0.0f, 1.0f, std::log(value / start) / std::log(end / start));
+        },
+        [](float start, float end, float value) {
+            return juce::jlimit(start, end, std::round(value * 100.0f) / 100.0f);
+        });
+    auto factor = [&factorRange](const char * id, const juce::String &name) {
+        return std::make_unique<juce::AudioParameterFloat>(
+            juce::ParameterID(id, 4), name, factorRange, 1.0f,
+            juce::AudioParameterFloatAttributes()
+                .withStringFromValueFunction([](float value, int) { return getEnvelopeFactorText(value); })
+                .withValueFromStringFunction([](const juce::String &text) {
+                    // A factor, possibly after "×" or "x", the soundfont being followed otherwise
+                    if (!text.containsAnyOf("0123456789"))
+                        return 1.0f;
+                    double value = text.trimCharactersAtStart(juce::String::fromUTF8("\xc3\x97xX* ")).getDoubleValue();
+                    return static_cast<float>(juce::jlimit(static_cast<double>(MIN_ENVELOPE_FACTOR),
+                                                           static_cast<double>(MAX_ENVELOPE_FACTOR), value));
+                }));
+    };
+    auto duration = [](const char * id, const juce::String &name, float maximum) {
+        juce::NormalisableRange<float> range(
+            0.0f, maximum,
+            [](float, float end, float proportion) {
+                if (proportion < 0.5f * SOUNDFONT_PROPORTION)
+                    return 0.0f;
+                float position = juce::jmax(0.0f, proportion - SOUNDFONT_PROPORTION) / (1.0f - SOUNDFONT_PROPORTION);
+                return std::pow(end, position); // From 1 ms
+            },
+            [](float, float end, float value) {
+                if (value < 0.5f)
+                    return 0.0f;
+                float position = juce::jlimit(0.0f, 1.0f, std::log(juce::jmax(1.0f, value)) / std::log(end));
+                return SOUNDFONT_PROPORTION + (1.0f - SOUNDFONT_PROPORTION) * position;
+            },
+            [](float, float end, float value) {
+                if (value < 0.5f)
+                    return 0.0f;
+                value = juce::jlimit(1.0f, end, value);
+                return value < 1000.0f ? std::round(value) : 10.0f * std::round(value / 10.0f);
+            });
+        return std::make_unique<juce::AudioParameterFloat>(
+            juce::ParameterID(id, 4), name, range, 0.0f,
+            juce::AudioParameterFloatAttributes()
+                .withStringFromValueFunction([](float value, int) { return getEnvelopeDurationText(value); })
+                .withValueFromStringFunction([maximum](const juce::String &text) {
+                    // A duration in ms or in s (with its unit), 0 otherwise (soundfont)
+                    double value = text.getDoubleValue();
+                    if (text.trim().endsWithIgnoreCase("s") && !text.trim().endsWithIgnoreCase("ms"))
+                        value *= 1000.0;
+                    if (value < 0.5)
+                        return 0.0f;
+                    return static_cast<float>(juce::jlimit(1.0, static_cast<double>(maximum), value));
+                }));
+    };
+    juce::NormalisableRange<float> sustainLevelRange(
+        SOUNDFONT_SUSTAIN_LEVEL, 0.0f,
+        [](float, float, float proportion) {
+            if (proportion < 0.5f * SOUNDFONT_PROPORTION)
+                return SOUNDFONT_SUSTAIN_LEVEL;
+            float position = juce::jmax(0.0f, proportion - SOUNDFONT_PROPORTION) / (1.0f - SOUNDFONT_PROPORTION);
+            return MIN_SUSTAIN_LEVEL * (1.0f - position) * (1.0f - position); // More room for the high levels
+        },
+        [](float, float, float value) {
+            if (value < MIN_SUSTAIN_LEVEL - 0.05f)
+                return 0.0f;
+            return SOUNDFONT_PROPORTION + (1.0f - SOUNDFONT_PROPORTION) *
+                                              (1.0f - std::sqrt(juce::jlimit(0.0f, 1.0f, value / MIN_SUSTAIN_LEVEL)));
+        },
+        [](float, float, float value) {
+            if (value < MIN_SUSTAIN_LEVEL - 0.05f)
+                return SOUNDFONT_SUSTAIN_LEVEL;
+            return juce::jlimit(MIN_SUSTAIN_LEVEL, 0.0f, std::round(value * 10.0f) / 10.0f);
+        });
+    layout.add(std::make_unique<juce::AudioProcessorParameterGroup>(
+        "envelope", tr("Envelope"), "|",
+        std::make_unique<juce::AudioParameterBool>(juce::ParameterID("envelopeEnabled", 4), tr("Envelope enabled"),
+                                                   false),
+        choice("envelopeMode", 4, tr("Envelope mode"), getEnvelopeModeNames(), 0),
+        factor("attackFactor", tr("Attack factor")), factor("decayFactor", tr("Decay factor")),
+        std::make_unique<juce::AudioParameterFloat>(
+            juce::ParameterID("sustainOffset", 4), tr("Sustain change"),
+            juce::NormalisableRange<float>(-MAX_SUSTAIN_OFFSET, MAX_SUSTAIN_OFFSET, 0.1f), 0.0f,
+            juce::AudioParameterFloatAttributes()
+                .withStringFromValueFunction([](float value, int) { return getSustainOffsetText(value); })
+                .withValueFromStringFunction([](const juce::String &text) {
+                    float value = static_cast<float>(text.getDoubleValue());
+                    return juce::jlimit(-MAX_SUSTAIN_OFFSET, MAX_SUSTAIN_OFFSET, value);
+                })),
+        factor("releaseFactor", tr("Release factor")),
+        duration("attackTime", tr("Attack time"), MAX_ATTACK_TIME),
+        duration("decayTime", tr("Decay time"), MAX_DECAY_RELEASE_TIME),
+        std::make_unique<juce::AudioParameterFloat>(
+            juce::ParameterID("sustainLevel", 4), tr("Sustain level"), sustainLevelRange, SOUNDFONT_SUSTAIN_LEVEL,
+            juce::AudioParameterFloatAttributes()
+                .withStringFromValueFunction([](float value, int) { return getSustainLevelText(value); })
+                .withValueFromStringFunction([](const juce::String &text) {
+                    // A level in dB, the soundfont otherwise
+                    if (!text.containsAnyOf("0123456789"))
+                        return SOUNDFONT_SUSTAIN_LEVEL;
+                    return juce::jlimit(MIN_SUSTAIN_LEVEL, 0.0f, static_cast<float>(text.getDoubleValue()));
+                })),
+        duration("releaseTime", tr("Release time"), MAX_DECAY_RELEASE_TIME)));
     return layout;
 }
 
@@ -237,6 +361,47 @@ juce::StringArray PluginProcessor::getPlayModeNames()
 {
     return { tr("Poly"), tr("Mono (latest)"), tr("Mono (highest)"), tr("Mono (lowest)"), tr("Legato (latest)"),
              tr("Legato (highest)"), tr("Legato (lowest)") };
+}
+
+juce::StringArray PluginProcessor::getEnvelopeModeNames()
+{
+    return { tr("Relative", "envelope"), tr("Fixed", "envelope") };
+}
+
+juce::String PluginProcessor::getEnvelopeFactorText(float factor)
+{
+    return juce::String::fromUTF8("\xc3\x97") + juce::String(factor, 2);
+}
+
+juce::String PluginProcessor::getSustainOffsetText(float decibels)
+{
+    int tenths = juce::roundToInt(10.0f * decibels);
+    return (tenths > 0 ? "+" : "") + juce::String(0.1 * tenths, 1) + " dB";
+}
+
+juce::String PluginProcessor::getEnvelopeDurationText(float milliseconds)
+{
+    if (milliseconds < 0.5f)
+        return tr("Soundfont", "envelope value kept");
+    if (milliseconds < 999.5f)
+        return juce::String(juce::roundToInt(milliseconds)) + " ms";
+    return juce::String(milliseconds / 1000.0f, 2) + " s";
+}
+
+juce::String PluginProcessor::getSustainLevelText(float decibels)
+{
+    if (decibels < MIN_SUSTAIN_LEVEL - 0.05f)
+        return tr("Soundfont", "envelope value kept");
+    int tenths = juce::roundToInt(10.0f * decibels);
+    return juce::String(tenths == 0 ? 0.0 : 0.1 * tenths, 1) + " dB";
+}
+
+bool PluginProcessor::isSoundfontEnvelopeValue(int stage, bool isFixed, float value)
+{
+    if (!isFixed)
+        return stage == ENVELOPE_SUSTAIN ? juce::roundToInt(10.0f * value) == 0 :
+                                           juce::roundToInt(1200.0 * std::log2(juce::jmax(0.01f, value))) == 0;
+    return stage == ENVELOPE_SUSTAIN ? value < MIN_SUSTAIN_LEVEL - 0.05f : value < 0.5f;
 }
 
 juce::String PluginProcessor::getGlideTimeText(float milliseconds)
@@ -557,6 +722,26 @@ void PluginProcessor::updateConfiguration()
     configuration.temperamentRelativeKey = juce::jlimit(0, 11, juce::roundToInt(values[11]));
     configuration.temperamentReferenceKey = _referencePitchKey.load(); // Keeps its pitch
     configuration.modulatorVelToFilterType = juce::jlimit(0, 2, juce::roundToInt(values[12])); // Next notes
+
+    // Envelope, switched on: durations multiplied (timecents added) and sustain raised or lowered (attenuation in
+    // centibels lowered or raised), or durations and sustain level replacing the ones of the soundfont (fixed)
+    if (values[FIRST_ENVELOPE_PARAMETER] > 0.5f)
+    {
+        bool isFixed = juce::roundToInt(values[FIRST_ENVELOPE_PARAMETER + 1]) == 1;
+        for (int stage = 0; stage < ENVELOPE_STAGE_COUNT; stage++)
+        {
+            float value = values[FIRST_ENVELOPE_PARAMETER + (isFixed ? 6 : 2) + stage];
+            if (isSoundfontEnvelopeValue(stage, isFixed, value))
+                continue;
+            configuration.envelopeChanges[stage] = isFixed ? ENVELOPE_FIXED : ENVELOPE_RELATIVE;
+            if (stage == ENVELOPE_SUSTAIN)
+                configuration.envelopeValues[stage] = juce::roundToInt(-10.0f * value);
+            else if (isFixed)
+                configuration.envelopeValues[stage] = juce::roundToInt(1200.0 * std::log2(0.001 * value));
+            else
+                configuration.envelopeValues[stage] = juce::roundToInt(1200.0 * std::log2(value));
+        }
+    }
     _engine.setConfiguration(configuration, juce::roundToInt(values[8]));
     _engine.setVelocityCurve(juce::roundToInt(values[13]));
 

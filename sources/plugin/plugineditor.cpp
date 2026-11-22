@@ -71,7 +71,14 @@ static const int EFFECT_CONTENT_HEIGHT = CONTENT_MARGIN + KNOBS_HEIGHT;
 static const float TOGGLE_FONT_SIZE = 14.0f;
 
 // Parameters of the switches of the groups (PluginEditor::SwitchedGroup)
-static const char * const SWITCH_IDS[] = { "temperamentEnabled", "reverbEnabled", "chorusEnabled" };
+static const char * const SWITCH_IDS[] = { "temperamentEnabled", "envelopeEnabled", "reverbEnabled", "chorusEnabled" };
+
+// Knobs after the gain (PluginEditor::_knobs): reverb, chorus, envelope with the relative mode (attack, decay, sustain,
+// release) then with the fixed mode (same order)
+static const size_t FIRST_CHORUS_KNOB = 5;
+static const size_t FIRST_ENVELOPE_KNOB = 8;
+static const char * const ENVELOPE_PARAMETER_IDS[] = { "attackFactor", "decayFactor", "sustainOffset", "releaseFactor",
+                                                      "attackTime", "decayTime", "sustainLevel", "releaseTime" };
 
 // Identifiers of the items of the settings menu
 static const int MENU_CHANNEL = 10000; // + channel
@@ -93,6 +100,16 @@ static const char * const ERRORS[] = {
     QT_TRANSLATE_NOOP("PluginEditor", "corrupted file (sdta)"),
     QT_TRANSLATE_NOOP("PluginEditor", "corrupted file (pdta)")
 };
+
+// Tooltip of a slider, also given to its text box and its buttons (JUCE gives it to them only when they are created,
+// the text box covering the whole bar of a BarSlider)
+static void setSliderTooltip(juce::Slider &slider, const juce::String &tooltip)
+{
+    slider.setTooltip(tooltip);
+    for (juce::Component * child : slider.getChildren())
+        if (juce::SettableTooltipClient * client = dynamic_cast<juce::SettableTooltipClient *>(child))
+            client->setTooltip(tooltip);
+}
 
 static int getLabelWidth(const juce::Label &label)
 {
@@ -149,23 +166,28 @@ public:
                          juce::Justification::centredRight, 1);
     }
 
-    // Knob whose value arc starts from its middle (property "bipolar": the gain, toward the left for an attenuation and
-    // toward the right for an amplification), larger in its room (header) with a smaller thumb, otherwise as
-    // LookAndFeel_V4
+    // Knob whose value arc starts from a neutral value: the gain (property "bipolar", 0 dB in the middle, toward the left
+    // for an attenuation and toward the right for an amplification), larger in its room (header) with a smaller thumb,
+    // or the knobs of the relative envelope (property "neutral": its value, the soundfont being followed). Otherwise as
+    // LookAndFeel_V4.
     void drawRotarySlider(juce::Graphics &g, int x, int y, int width, int height, float sliderPos,
                           const float rotaryStartAngle, const float rotaryEndAngle, juce::Slider &slider) override
     {
-        if (!static_cast<bool>(slider.getProperties()["bipolar"]))
+        bool isGain = static_cast<bool>(slider.getProperties()["bipolar"]);
+        const juce::var &neutral = slider.getProperties()["neutral"];
+        if (!isGain && neutral.isVoid())
         {
             juce::LookAndFeel_V4::drawRotarySlider(g, x, y, width, height, sliderPos, rotaryStartAngle, rotaryEndAngle,
                                                    slider);
             return;
         }
 
-        juce::Rectangle<float> bounds = juce::Rectangle<int>(x, y, width, height).toFloat().reduced(3);
+        juce::Rectangle<float> bounds = juce::Rectangle<int>(x, y, width, height).toFloat()
+                                            .reduced(isGain ? 3.0f : 10.0f);
         float radius = juce::jmin(bounds.getWidth(), bounds.getHeight()) / 2.0f;
         float toAngle = rotaryStartAngle + sliderPos * (rotaryEndAngle - rotaryStartAngle);
-        float middleAngle = rotaryStartAngle + static_cast<float>(slider.valueToProportionOfLength(0.0)) *
+        double neutralValue = isGain ? 0.0 : static_cast<double>(neutral);
+        float middleAngle = rotaryStartAngle + static_cast<float>(slider.valueToProportionOfLength(neutralValue)) *
                                                    (rotaryEndAngle - rotaryStartAngle);
         float lineWidth = juce::jmin(8.0f, radius * 0.5f);
         float arcRadius = radius - lineWidth * 0.5f;
@@ -187,8 +209,46 @@ public:
 
         juce::Point<float> thumbPoint(bounds.getCentreX() + arcRadius * std::cos(toAngle - juce::MathConstants<float>::halfPi),
                                       bounds.getCentreY() + arcRadius * std::sin(toAngle - juce::MathConstants<float>::halfPi));
+        float thumbWidth = (isGain ? 1.4f : 2.0f) * lineWidth;
         g.setColour(slider.findColour(juce::Slider::thumbColourId));
-        g.fillEllipse(juce::Rectangle<float>(1.4f * lineWidth, 1.4f * lineWidth).withCentre(thumbPoint));
+        g.fillEllipse(juce::Rectangle<float>(thumbWidth, thumbWidth).withCentre(thumbPoint));
+    }
+
+    // Horizontal slider filled from a neutral value (property "neutral": the linear velocity curve in the middle) to its
+    // value, otherwise as LookAndFeel_V4
+    void drawLinearSlider(juce::Graphics &g, int x, int y, int width, int height, float sliderPos, float minSliderPos,
+                          float maxSliderPos, const juce::Slider::SliderStyle style, juce::Slider &slider) override
+    {
+        const juce::var &neutral = slider.getProperties()["neutral"];
+        if (neutral.isVoid() || style != juce::Slider::LinearHorizontal)
+        {
+            juce::LookAndFeel_V4::drawLinearSlider(g, x, y, width, height, sliderPos, minSliderPos, maxSliderPos, style,
+                                                   slider);
+            return;
+        }
+
+        // Track, filled part and thumb as LookAndFeel_V4
+        float trackWidth = juce::jmin(6.0f, static_cast<float>(height) * 0.25f);
+        float centreY = static_cast<float>(y) + static_cast<float>(height) * 0.5f;
+        juce::PathStrokeType stroke(trackWidth, juce::PathStrokeType::curved, juce::PathStrokeType::rounded);
+        juce::Path track;
+        track.startNewSubPath(static_cast<float>(x), centreY);
+        track.lineTo(static_cast<float>(x + width), centreY);
+        g.setColour(slider.findColour(juce::Slider::backgroundColourId));
+        g.strokePath(track, stroke);
+        float neutralPos = static_cast<float>(x) + static_cast<float>(width) *
+                                                       static_cast<float>(slider.valueToProportionOfLength(neutral));
+        if (slider.isEnabled() && std::abs(sliderPos - neutralPos) > 0.5f)
+        {
+            juce::Path filled;
+            filled.startNewSubPath(neutralPos, centreY);
+            filled.lineTo(sliderPos, centreY);
+            g.setColour(slider.findColour(juce::Slider::trackColourId));
+            g.strokePath(filled, stroke);
+        }
+        float thumbWidth = static_cast<float>(getSliderThumbRadius(slider));
+        g.setColour(slider.findColour(juce::Slider::thumbColourId));
+        g.fillEllipse(juce::Rectangle<float>(thumbWidth, thumbWidth).withCentre({ sliderPos, centreY }));
     }
 
     // Lists of the combo boxes shown inside the window of the plugin rather than in their own windows: a long list
@@ -523,6 +583,171 @@ private:
     int _value;
 };
 
+/// Shape of the envelope, the durations being compressed (square root) so that the short and the long stages can be
+/// seen. Relative mode: envelope of an example of sound (dashed) and envelope played (colored). Fixed mode: envelope
+/// played, the stages keeping the values of the soundfont being the ones of the example (dashed).
+
+class PluginEditor::EnvelopeGraph: public juce::Component,
+                                   public juce::SettableTooltipClient
+{
+public:
+    EnvelopeGraph() :
+        _isFixed(false)
+    {
+        setInterceptsMouseClicks(true, false); // Tooltip
+        for (float &value : _values)
+            value = NAN;
+    }
+
+    // Values of the parameters of a mode, in the order of the stages (EnvelopeStage)
+    void setValues(bool isFixed, const float values[ENVELOPE_STAGE_COUNT])
+    {
+        bool hasChanged = (isFixed != _isFixed);
+        for (int stage = 0; stage < ENVELOPE_STAGE_COUNT; stage++)
+            hasChanged = hasChanged || std::memcmp(&values[stage], &_values[stage], sizeof(float)) != 0;
+        if (!hasChanged)
+            return;
+        _isFixed = isFixed;
+        for (int stage = 0; stage < ENVELOPE_STAGE_COUNT; stage++)
+            _values[stage] = values[stage];
+        repaint();
+    }
+
+    void paint(juce::Graphics &g) override
+    {
+        juce::Rectangle<float> box = getLocalBounds().toFloat().reduced(0.5f);
+        g.setColour(LIST_COLOR);
+        g.fillRoundedRectangle(box, 3.0f);
+        g.setColour(OUTLINE_COLOR);
+        g.drawRoundedRectangle(box, 3.0f, 1.0f);
+        juce::Rectangle<float> plot = box.reduced(6.0f, 6.0f);
+        if (plot.getWidth() < 8.0f || plot.getHeight() < 8.0f)
+            return;
+
+        // Example and envelope played (the values of the example being kept for the stages following the soundfont)
+        Envelope example;
+        Envelope played = example;
+        for (int stage = 0; stage < ENVELOPE_STAGE_COUNT; stage++)
+        {
+            float value = _values[stage];
+            if (std::isnan(value) || PluginProcessor::isSoundfontEnvelopeValue(stage, _isFixed, value))
+            {
+                played.isExample[stage] = true;
+                continue;
+            }
+            if (stage == ENVELOPE_SUSTAIN)
+                played.durations[stage] = _isFixed ? value : juce::jmin(0.0f, example.durations[stage] + value);
+            else
+                played.durations[stage] = _isFixed ? 0.001f * value : example.durations[stage] * value;
+        }
+
+        // Same time scale for both envelopes
+        float width = played.getWidth();
+        if (!_isFixed)
+            width = juce::jmax(width, example.getWidth());
+        float scale = plot.getWidth() / width;
+
+        const float dashes[2] = { 3.0f, 3.0f };
+        auto stroke = [&g, &dashes](const juce::Path &path, bool isExample) {
+            juce::PathStrokeType type(isExample ? 1.0f : 1.5f, juce::PathStrokeType::curved,
+                                      juce::PathStrokeType::rounded);
+            if (isExample)
+            {
+                juce::Path dashed;
+                type.createDashedStroke(dashed, path, dashes, 2);
+                g.setColour(OUTLINE_COLOR.brighter(0.3f));
+                g.fillPath(dashed);
+            }
+            else
+            {
+                g.setColour(HIGHLIGHT_COLOR);
+                g.strokePath(path, type);
+            }
+        };
+        if (!_isFixed)
+        {
+            juce::Path paths[ENVELOPE_STAGE_COUNT];
+            juce::Path path;
+            example.getPaths(plot, scale, paths);
+            for (const juce::Path &stagePath : paths)
+                path.addPath(stagePath);
+            stroke(path, true);
+        }
+        juce::Path paths[ENVELOPE_STAGE_COUNT];
+        played.getPaths(plot, scale, paths);
+        for (int stage = 0; stage < ENVELOPE_STAGE_COUNT; stage++)
+            if (_isFixed && played.isExample[stage])
+                stroke(paths[stage], true);
+        for (int stage = 0; stage < ENVELOPE_STAGE_COUNT; stage++)
+            if (!_isFixed || !played.isExample[stage])
+                stroke(paths[stage], false);
+    }
+
+private:
+    // Durations of the attack, the decay and the release in s, sustain level in dB (index ENVELOPE_SUSTAIN), the
+    // sustain being drawn with the duration SUSTAIN_DURATION
+    struct Envelope
+    {
+        float durations[ENVELOPE_STAGE_COUNT] = { 0.1f, 0.4f, -6.0f, 0.4f };
+        bool isExample[ENVELOPE_STAGE_COUNT] = { false, false, false, false };
+
+        static constexpr float SUSTAIN_DURATION = 0.4f;
+
+        float getStageWidth(int stage) const
+        {
+            return std::sqrt(stage == ENVELOPE_SUSTAIN ? SUSTAIN_DURATION : juce::jmax(0.0f, durations[stage]));
+        }
+
+        float getWidth() const
+        {
+            float width = 0.0f;
+            for (int stage = 0; stage < ENVELOPE_STAGE_COUNT; stage++)
+                width += getStageWidth(stage);
+            return width;
+        }
+
+        // A path for each stage: linear attack, decay and release reaching their levels exponentially
+        void getPaths(juce::Rectangle<float> plot, float scale, juce::Path paths[ENVELOPE_STAGE_COUNT]) const
+        {
+            float sustain = std::pow(10.0f, 0.05f * durations[ENVELOPE_SUSTAIN]);
+            auto getY = [&plot](float level) { return plot.getBottom() - plot.getHeight() * level; };
+            auto getCurve = [](float position) { // From 1 to 0
+                return (std::exp(-5.0f * position) - std::exp(-5.0f)) / (1.0f - std::exp(-5.0f));
+            };
+            float x = plot.getX();
+            for (int stage = 0; stage < ENVELOPE_STAGE_COUNT; stage++)
+            {
+                float stageWidth = scale * getStageWidth(stage);
+                juce::Path &path = paths[stage];
+                if (stage == ENVELOPE_ATTACK || stage == ENVELOPE_SUSTAIN)
+                {
+                    path.startNewSubPath(x, getY(stage == ENVELOPE_ATTACK ? 0.0f : sustain));
+                    path.lineTo(x + stageWidth, getY(stage == ENVELOPE_ATTACK ? 1.0f : sustain));
+                }
+                else
+                {
+                    const int pointCount = 24;
+                    for (int i = 0; i <= pointCount; i++)
+                    {
+                        float position = static_cast<float>(i) / pointCount;
+                        float level = (stage == ENVELOPE_DECAY) ? sustain + (1.0f - sustain) * getCurve(position) :
+                                                                  sustain * getCurve(position);
+                        juce::Point<float> point(x + stageWidth * position, getY(level));
+                        if (i == 0)
+                            path.startNewSubPath(point);
+                        else
+                            path.lineTo(point);
+                    }
+                }
+                x += stageWidth;
+            }
+        }
+    };
+
+    bool _isFixed;
+    float _values[ENVELOPE_STAGE_COUNT];
+};
+
 /// Switch on the right side of the title of a group: a track with a thumb on the right, colored, if it is on
 
 class PluginEditor::SwitchButton: public juce::Button
@@ -554,6 +779,10 @@ public:
 
 void PluginEditor::WheelComboBox::mouseWheelMove(const juce::MouseEvent &event, const juce::MouseWheelDetails &wheel)
 {
+    // Over the text, the event comes twice: given by the label to its parent, and to the combo box listening to the
+    // label (event of the label, ignored as ComboBox does)
+    if (event.eventComponent != this)
+        return;
     if (isPopupActive() || !isEnabled())
     {
         juce::ComboBox::mouseWheelMove(event, wheel); // Given to the parent
@@ -582,6 +811,16 @@ void PluginEditor::WheelComboBox::mouseWheelMove(const juce::MouseEvent &event, 
 class PluginEditor::FieldSlider: public juce::Slider
 {
 public:
+    FieldSlider()
+    {
+        addMouseListener(&_textWheel, true);
+    }
+
+    ~FieldSlider() override
+    {
+        removeMouseListener(&_textWheel);
+    }
+
     void paint(juce::Graphics &g) override
     {
         juce::Rectangle<float> box = getLocalBounds().toFloat();
@@ -592,6 +831,19 @@ public:
         float x = static_cast<float>(getTextBoxWidth()) + 0.5f;
         g.drawLine(x, 4.0f, x, box.getBottom() - 4.0f, 1.0f);
     }
+
+private:
+    // The wheel over the text also changes the value by steps of the interval (the text box of JUCE ignores it)
+    struct TextWheel: public juce::MouseListener
+    {
+        void mouseWheelMove(const juce::MouseEvent &event, const juce::MouseWheelDetails &wheel) override
+        {
+            juce::Slider * slider = dynamic_cast<juce::Slider *>(event.eventComponent->getParentComponent());
+            if (slider != nullptr && dynamic_cast<juce::Label *>(event.eventComponent) != nullptr)
+                slider->mouseWheelMove(event.getEventRelativeTo(slider), wheel);
+        }
+    };
+    TextWheel _textWheel;
 };
 
 /// Slider drawn as a field (as a combo box) filled from its left side up to its value, its text in the middle
@@ -691,6 +943,7 @@ PluginEditor::PluginEditor(PluginProcessor &pluginProcessor) :
     _lookAndFeel(new LookAndFeel()),
     _languageVersion(-1),
     _isDragging(false),
+    _isEnvelopeFixed(false),
     _keyboard(pluginProcessor.getKeyboardState(), juce::MidiKeyboardComponent::horizontalKeyboard)
 {
     setLookAndFeel(_lookAndFeel.get());
@@ -735,10 +988,17 @@ PluginEditor::PluginEditor(PluginProcessor &pluginProcessor) :
     _channelViewport.setScrollBarsShown(true, false);
     addChildComponent(_channelViewport);
 
-    // Gain in the header, its value shown when the mouse is over it, knobs of the effects (names in updateTexts)
+    // Gain in the header, its value shown when the mouse is over it, knobs of the effects and of the envelope (names in
+    // updateTexts), the arcs of the relative envelope starting from the values following the soundfont
     for (const char * parameterId : { "gain", "reverbLevel", "reverbSize", "reverbWidth", "reverbDamping",
                                       "chorusLevel", "chorusDepth", "chorusFrequency" })
         addKnob(parameterId);
+    for (size_t i = 0; i < std::size(ENVELOPE_PARAMETER_IDS); i++)
+    {
+        Knob * knob = addKnob(ENVELOPE_PARAMETER_IDS[i]);
+        if (i < ENVELOPE_STAGE_COUNT)
+            knob->slider.getProperties().set("neutral", i == ENVELOPE_SUSTAIN ? 0.0 : 1.0);
+    }
     Knob::Slider &gainSlider = _knobs[0]->slider;
     gainSlider.step = 0.5;
     gainSlider.setTextBoxStyle(juce::Slider::TextBoxRight, false, 64, 20);
@@ -770,7 +1030,7 @@ PluginEditor::PluginEditor(PluginProcessor &pluginProcessor) :
         label->setFont(juce::FontOptions(13.0f));
         addAndMakeVisible(label);
     }
-    for (int key : { 10, 11, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }) // A#3 to A4, C4 = 60 as the keyboard
+    for (int key : { 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 11, 10 }) // A4 to A#3 (highest at the top), C4 = 60
         _referencePitchKeyBox.addItem(juce::MidiMessage::getMidiNoteName(key <= 9 ? 60 + key : 48 + key, true, true, 4),
                                       key + 1);
     _referencePitchKeyBox.onChange = [this] {
@@ -803,12 +1063,19 @@ PluginEditor::PluginEditor(PluginProcessor &pluginProcessor) :
     };
     _referencePitchSlider->updateText();
 
-    // Transposition
-    for (int semitones = -24; semitones <= 24; semitones++)
+    // Transposition, the highest at the top (attached by identifier: the attachment of JUCE uses the indexes)
+    for (int semitones = 24; semitones >= -24; semitones--)
         _transpositionBox.addItem((semitones > 0 ? "+" : "") + juce::String(semitones), semitones + 25);
     addAndMakeVisible(_transpositionBox);
-    _transpositionAttachment.reset(new juce::AudioProcessorValueTreeState::ComboBoxAttachment(
-        _processor.getParameterState(), "transpose", _transpositionBox));
+    _transpositionAttachment.reset(new juce::ParameterAttachment(
+        *_processor.getParameterState().getParameter("transpose"), [this](float semitones) {
+            _transpositionBox.setSelectedId(juce::roundToInt(semitones) + 25, juce::dontSendNotification);
+        }));
+    _transpositionBox.onChange = [this] {
+        if (_transpositionBox.getSelectedId() > 0)
+            _transpositionAttachment->setValueAsCompleteGesture(static_cast<float>(_transpositionBox.getSelectedId() - 25));
+    };
+    _transpositionAttachment->sendInitialUpdate();
 
     // Switches of the groups that can be collapsed
     for (int group = 0; group < GROUP_COUNT; group++)
@@ -867,7 +1134,8 @@ PluginEditor::PluginEditor(PluginProcessor &pluginProcessor) :
     _velocityCurveSlider.setSliderStyle(juce::Slider::LinearHorizontal);
     _velocityCurveSlider.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
     _velocityCurveSlider.setPopupDisplayEnabled(true, false, this); // Value while dragging
-    _velocityCurveSlider.setColour(juce::Slider::trackColourId, LIST_COLOR); // Linear in the middle: no filled part
+    _velocityCurveSlider.getProperties().set("neutral", 0.0); // Filled from the middle (linear) to the curve chosen
+    _velocityCurveSlider.setColour(juce::Slider::trackColourId, HIGHLIGHT_COLOR);
     _velocityCurveSlider.setColour(juce::Slider::backgroundColourId, LIST_COLOR);
     addAndMakeVisible(_velocityCurveSlider);
     _velocityCurveGraph.reset(new VelocityGraph(VelocityGraph::TYPE_CURVE));
@@ -879,6 +1147,25 @@ PluginEditor::PluginEditor(PluginProcessor &pluginProcessor) :
         _processor.getParameterState(), "velocityCurve", _velocityCurveSlider));
     _velocityToFilterGraph->setValue(_velocityToFilterBox.getSelectedItemIndex());
     _velocityCurveGraph->setValue(juce::roundToInt(_velocityCurveSlider.getValue()));
+
+    // Envelope: mode (relative or fixed, the knobs shown following it) and graph following the knobs (after
+    // the other groups: updateGroups shows or hides their contents)
+    for (int mode = 0; mode < 2; mode++)
+    {
+        _envelopeModeButtons[mode].onClick = [this, mode] {
+            _envelopeModeAttachment->setValueAsCompleteGesture(static_cast<float>(mode));
+        };
+        addChildComponent(_envelopeModeButtons[mode]);
+    }
+    _envelopeModeButtons[0].setConnectedEdges(juce::Button::ConnectedOnRight);
+    _envelopeModeButtons[1].setConnectedEdges(juce::Button::ConnectedOnLeft);
+    _envelopeGraph.reset(new EnvelopeGraph());
+    addChildComponent(_envelopeGraph.get());
+    for (size_t knob = FIRST_ENVELOPE_KNOB; knob < _knobs.size(); knob++)
+        _knobs[knob]->slider.onValueChange = [this] { updateEnvelope(); };
+    _envelopeModeAttachment.reset(new juce::ParameterAttachment(
+        *_processor.getParameterState().getParameter("envelopeMode"), [this](float) { updateEnvelope(); }));
+    _envelopeModeAttachment->sendInitialUpdate();
 
     // Keyboard and what is played
     _keyboard.setKeyWidth(14.0f);
@@ -994,7 +1281,9 @@ void PluginEditor::updateTexts()
     const juce::String knobNames[] = {
         tr("Gain"),
         tr("Level", "reverb"), tr("Size", "reverb"), tr("Width", "reverb"), tr("Damping", "reverb"),
-        tr("Level", "chorus"), tr("Depth", "chorus"), tr("Frequency", "chorus")
+        tr("Level", "chorus"), tr("Depth", "chorus"), tr("Frequency", "chorus"),
+        tr("Attack", "envelope"), tr("Decay", "envelope"), tr("Sustain", "envelope"), tr("Release", "envelope"),
+        tr("Attack", "envelope"), tr("Decay", "envelope"), tr("Sustain", "envelope"), tr("Release", "envelope")
     };
     for (size_t i = 0; i < _knobs.size() && i < std::size(knobNames); i++)
         _knobs[i]->label.setText(knobNames[i], juce::dontSendNotification);
@@ -1008,15 +1297,16 @@ void PluginEditor::updateTexts()
                                "released continuing it without a new attack.\nWhen several keys are held, the latest, "
                                "the highest or the lowest one is heard. The drums and the MPE mode are always "
                                "polyphonic."));
-    _glideSlider->setTooltip(tr("Duration of the pitch glide between two notes played legato"));
+    setSliderTooltip(*_glideSlider, tr("Duration of the pitch glide between two notes played legato"));
     _glideSlider->updateText();
 
     // Tuning, the tooltips being the same for a label and its control
     _referencePitchLabel.setText(tr("Reference pitch"), juce::dontSendNotification);
     juce::String referencePitchTooltip = tr("Note sounding at this frequency, whatever the temperament");
     for (juce::SettableTooltipClient * client : std::initializer_list<juce::SettableTooltipClient *> {
-             &_referencePitchLabel, &_referencePitchKeyBox, _referencePitchSlider.get() })
+             &_referencePitchLabel, &_referencePitchKeyBox })
         client->setTooltip(referencePitchTooltip);
+    setSliderTooltip(*_referencePitchSlider, referencePitchTooltip);
     _transpositionLabel.setText(tr("Transposition"), juce::dontSendNotification);
     juce::String transpositionTooltip = tr("Transposition in semitones of the notes played, except the drums");
     _transpositionLabel.setTooltip(transpositionTooltip);
@@ -1029,6 +1319,8 @@ void PluginEditor::updateTexts()
     _playUnusedNotesButton.setButtonText(tr("Play all"));
     _playUnusedNotesButton.setTooltip(tr("Also play the notes not used by the temperament (scale)"));
     _switches[GROUP_TEMPERAMENTS]->setTooltip(tr("Temperament or scale applied (equal temperament otherwise)"));
+    _switches[GROUP_ENVELOPE]->setTooltip(tr("Envelope applied to all instruments except the drums (envelopes of the "
+                                             "soundfont otherwise)"));
     _switches[GROUP_REVERB]->setTooltip(tr("Reverb enabled"));
     _switches[GROUP_CHORUS]->setTooltip(tr("Chorus enabled"));
 
@@ -1050,6 +1342,17 @@ void PluginEditor::updateTexts()
     for (juce::SettableTooltipClient * client : std::initializer_list<juce::SettableTooltipClient *> {
              &_velocityCurveLabel, &_velocityCurveSlider, _velocityCurveGraph.get() })
         client->setTooltip(velocityCurveTooltip);
+
+    // Envelope
+    juce::StringArray envelopeModeNames = PluginProcessor::getEnvelopeModeNames();
+    for (int mode = 0; mode < 2; mode++)
+        _envelopeModeButtons[mode].setButtonText(envelopeModeNames[mode]);
+    _envelopeModeButtons[0].setTooltip(tr("Durations of the soundfont multiplied and sustain levels raised or lowered: "
+                                          "each sound keeps the shape of its envelope. A factor of 1 or a change of 0 dB "
+                                          "keeps the soundfont."));
+    _envelopeModeButtons[1].setTooltip(tr("Durations and sustain level replacing the ones of the soundfont. A knob "
+                                          "turned fully to the left keeps the soundfont."));
+    updateEnvelope();
 
     _panicButton.setButtonText(tr("Panic"));
     _panicButton.setTooltip(tr("Stop all sounds and reset the controllers"));
@@ -1201,7 +1504,54 @@ void PluginEditor::updatePlayMode()
     bool isMpe = _processor.getEngine().getMode() == PluginEngine::MODE_MPE;
     _playModeBox.setEnabled(!isMpe);
     _glideSlider->setEnabled(!isMpe);
-    _glideSlider->setVisible(PluginProcessor::isLegatoPlayMode(_playModeBox.getSelectedItemIndex()));
+
+    // Glide of the legato on the right side of the list, which takes the whole row otherwise
+    bool isLegato = PluginProcessor::isLegatoPlayMode(_playModeBox.getSelectedItemIndex());
+    if (isLegato != _glideSlider->isVisible())
+    {
+        _glideSlider->setVisible(isLegato);
+        if (getWidth() > 0) // Not while the editor is created
+            resized();
+    }
+}
+
+void PluginEditor::updateEnvelope()
+{
+    // Values read from the parameters: their raw values are updated after the attachments (the listeners of a parameter
+    // being called in the reverse order of their addition), the attachment of the mode calling this function
+    juce::AudioProcessorValueTreeState &parameters = _processor.getParameterState();
+    auto getValue = [&parameters](const char * id) {
+        juce::RangedAudioParameter * parameter = parameters.getParameter(id);
+        return parameter->convertFrom0to1(parameter->getValue());
+    };
+
+    // Mode, the knobs shown being the ones of the mode
+    bool isFixed = juce::roundToInt(getValue("envelopeMode")) == 1;
+    for (int mode = 0; mode < 2; mode++)
+        _envelopeModeButtons[mode].setToggleState(mode == (isFixed ? 1 : 0), juce::dontSendNotification);
+    if (isFixed != _isEnvelopeFixed)
+    {
+        _isEnvelopeFixed = isFixed;
+        updateGroups();
+    }
+
+    // Graph of the values of the mode
+    float values[ENVELOPE_STAGE_COUNT];
+    for (int stage = 0; stage < ENVELOPE_STAGE_COUNT; stage++)
+        values[stage] = getValue(ENVELOPE_PARAMETER_IDS[(isFixed ? ENVELOPE_STAGE_COUNT : 0) + stage]);
+    _envelopeGraph->setValues(isFixed, values);
+    _envelopeGraph->setTooltip(isFixed ? tr("Envelope played, the parts keeping the soundfont being drawn with dashes (as "
+                                            "an example). The durations are compressed.") :
+                                         tr("Envelope played (in color) and an example of envelope of the soundfont "
+                                            "(dashes). The durations are compressed."));
+}
+
+int PluginEditor::getEnvelopeModeButtonWidth(int mode)
+{
+    // As wide as its text, at least
+    juce::TextButton &button = _envelopeModeButtons[mode];
+    return juce::jmax(48, juce::GlyphArrangement::getStringWidthInt(getLookAndFeel().getTextButtonFont(button, 20),
+                                                                     button.getButtonText()) + 16);
 }
 
 int PluginEditor::getPlayModeBoxWidth()
@@ -1408,6 +1758,7 @@ void PluginEditor::paint(juce::Graphics &g)
     };
     for (const Group &group : { Group { _tuningArea, tr("Note") },
                                 Group { _temperamentsArea, tr("Temperaments and scales") },
+                                Group { _envelopeArea, tr("Envelope") },
                                 Group { _velocityArea, tr("Velocity") }, Group { _reverbArea, tr("Reverb") },
                                 Group { _chorusArea, tr("Chorus") } })
     {
@@ -1464,19 +1815,19 @@ void PluginEditor::resized()
     _statusLabel.setBounds(footer);
     _keyboard.setBounds(area.removeFromBottom(90).reduced(8, 2));
 
-    // Presets on the left, groups on the right from the bottom: effects (side by side if both are expanded),
-    // temperaments and scales, then the tuning and the velocity side by side in the room left
+    // Presets on the left, groups on the right from the bottom: effects (side by side if both are expanded or both
+    // collapsed), envelope, temperaments and scales, then the tuning and the velocity side by side in the room left
     RightWidths widths = getRightWidths();
     juce::Rectangle<int> body = area.reduced(8, 8);
     juce::Rectangle<int> left = body.removeFromLeft(juce::jmax(PRESETS_MINIMUM_WIDTH,
                                                                body.getWidth() - 10 - widths.column));
     body.removeFromLeft(10);
+    int knobWidth = (body.getWidth() - GROUP_SPACING - 24) / 7; // Effects side by side: 7 knobs of the same width
     bool areEffectsSideBySide = this->areEffectsSideBySide();
     if (areEffectsSideBySide)
     {
         // Knobs of the same width: the chorus (3 knobs) narrower than the reverb (4 knobs)
         juce::Rectangle<int> effects = body.removeFromBottom(getGroupHeight(GROUP_REVERB));
-        int knobWidth = (effects.getWidth() - GROUP_SPACING - 24) / 7;
         _reverbArea = effects.removeFromLeft(4 * knobWidth + 12);
         effects.removeFromLeft(GROUP_SPACING);
         _chorusArea = effects;
@@ -1488,6 +1839,8 @@ void PluginEditor::resized()
         _reverbArea = body.removeFromBottom(getGroupHeight(GROUP_REVERB));
     }
     body.removeFromBottom(GROUP_SPACING);
+    _envelopeArea = body.removeFromBottom(getGroupHeight(GROUP_ENVELOPE));
+    body.removeFromBottom(GROUP_SPACING);
     _temperamentsArea = body.removeFromBottom(getGroupHeight(GROUP_TEMPERAMENTS));
     body.removeFromBottom(GROUP_SPACING);
     _tuningArea = body.removeFromLeft(widths.tuning);
@@ -1495,19 +1848,24 @@ void PluginEditor::resized()
     _velocityArea = body;
 
     // Switches on the right side of the titles
-    juce::Rectangle<int> switchedAreas[GROUP_COUNT] = { _temperamentsArea, _reverbArea, _chorusArea };
+    juce::Rectangle<int> switchedAreas[GROUP_COUNT] = { _temperamentsArea, _envelopeArea, _reverbArea, _chorusArea };
     for (int group = 0; group < GROUP_COUNT; group++)
         _switches[group]->setBounds(switchedAreas[group].getRight() - 42, switchedAreas[group].getY() + 3, 34, 20);
 
-    // Note: play mode with the glide on its right, reference pitch (note narrower than the frequency), then the
-    // transposition
+    // Note: play mode (with the glide on its right in legato), reference pitch (note narrower than the frequency),
+    // then the transposition
     int labelWidth = juce::jmax(getLabelWidth(_referencePitchLabel), getLabelWidth(_transpositionLabel));
     juce::Rectangle<int> tuning = _tuningArea.reduced(10, 0).withTrimmedTop(4 + GROUP_TITLE_HEIGHT + CONTENT_MARGIN);
     juce::Rectangle<int> row = tuning.removeFromTop(TUNING_ROW_HEIGHT);
-    _playModeBox.setBounds(row.removeFromLeft(juce::jmin(getPlayModeBoxWidth(),
-                                                         row.getWidth() - 8 - GLIDE_BAR_MARGIN - getGlideTextWidth())));
-    row.removeFromLeft(8);
-    _glideSlider->setBounds(row);
+    if (_glideSlider->isVisible())
+    {
+        _playModeBox.setBounds(row.removeFromLeft(juce::jmin(getPlayModeBoxWidth(),
+                                                             row.getWidth() - 8 - GLIDE_BAR_MARGIN - getGlideTextWidth())));
+        row.removeFromLeft(8);
+        _glideSlider->setBounds(row);
+    }
+    else
+        _playModeBox.setBounds(row);
     tuning.removeFromTop(TUNING_ROW_SPACING);
     row = tuning.removeFromTop(TUNING_ROW_HEIGHT);
     _referencePitchLabel.setBounds(row.removeFromLeft(labelWidth));
@@ -1537,6 +1895,27 @@ void PluginEditor::resized()
     row.removeFromLeft(8);
     _playUnusedNotesButton.setBounds(row.removeFromRight(
         juce::jmin(row.getWidth(), LookAndFeel::getToggleButtonWidth(_playUnusedNotesButton))));
+
+    // Envelope: mode on the left side of the switch, knobs aligned with the ones of the reverb when the effects are side
+    // by side, then the graph (aligned with the chorus)
+    juce::Rectangle<int> envelopeModes(_envelopeArea.getX(), _envelopeArea.getY() + 3, _envelopeArea.getWidth() - 48,
+                                       20);
+    for (int mode = 1; mode >= 0; mode--)
+        _envelopeModeButtons[mode].setBounds(envelopeModes.removeFromRight(getEnvelopeModeButtonWidth(mode)));
+    juce::Rectangle<int> envelope = _envelopeArea.reduced(6, 4);
+    envelope.removeFromTop(GROUP_TITLE_HEIGHT + CONTENT_MARGIN);
+    for (size_t stage = 0; stage < ENVELOPE_STAGE_COUNT; stage++)
+    {
+        juce::Rectangle<int> cell = envelope.removeFromLeft(knobWidth);
+        for (size_t knob : { FIRST_ENVELOPE_KNOB + stage, FIRST_ENVELOPE_KNOB + ENVELOPE_STAGE_COUNT + stage })
+        {
+            juce::Rectangle<int> knobCell = cell;
+            _knobs[knob]->label.setBounds(knobCell.removeFromBottom(16));
+            _knobs[knob]->slider.setBounds(knobCell.reduced(2, 0));
+        }
+    }
+    envelope.removeFromLeft(12 + GROUP_SPACING);
+    _envelopeGraph->setBounds(envelope.withTrimmedRight(4).withTrimmedBottom(2));
 
     // Presets
     juce::Rectangle<int> modes = left.removeFromTop(28);
@@ -1590,7 +1969,7 @@ void PluginEditor::resized()
         }
     };
     layoutKnobs(_reverbArea, 1, 4, 4);
-    layoutKnobs(_chorusArea, 5, 3, areEffectsSideBySide ? 3 : 4);
+    layoutKnobs(_chorusArea, FIRST_CHORUS_KNOB, 3, areEffectsSideBySide ? 3 : 4);
 }
 
 /// Groups that can be collapsed, tuning
@@ -1605,14 +1984,14 @@ int PluginEditor::getGroupHeight(int group) const
 
 bool PluginEditor::areEffectsSideBySide() const
 {
-    return _isGroupExpanded[GROUP_REVERB] && _isGroupExpanded[GROUP_CHORUS];
+    return _isGroupExpanded[GROUP_REVERB] == _isGroupExpanded[GROUP_CHORUS];
 }
 
 int PluginEditor::getRequiredHeight() const
 {
-    // Tuning and velocity, temperaments and scales, effects (one height if they are side by side)
+    // Tuning and velocity, temperaments and scales, envelope, effects (one height if they are side by side)
     int height = TOP_ROW_HEIGHT + GROUP_SPACING + getGroupHeight(GROUP_TEMPERAMENTS) + GROUP_SPACING +
-                 getGroupHeight(GROUP_REVERB);
+                 getGroupHeight(GROUP_ENVELOPE) + GROUP_SPACING + getGroupHeight(GROUP_REVERB);
     if (!areEffectsSideBySide())
         height += GROUP_SPACING + getGroupHeight(GROUP_CHORUS);
     return FIXED_HEIGHT + height;
@@ -1633,13 +2012,17 @@ PluginEditor::RightWidths PluginEditor::getRightWidths()
         widths.velocityFilter = juce::jmax(widths.velocityFilter, juce::GlyphArrangement::getStringWidthInt(
                                                                       boxFont, _velocityToFilterBox.getItemText(item)) + 40);
 
-    // Widest row: tuning and velocity, temperaments and scales, effects side by side
+    // Widest row: tuning and velocity, temperaments and scales, title of the envelope with its modes, effects side by
+    // side (as wide as the knobs and the graph of the envelope)
     int topRow = widths.tuning + GROUP_SPACING + 20 + widths.velocityCurve + widths.velocityFilter;
     int temperaments = 20 + _temperamentKeyboard->getIdealWidth() + 12 +
                        juce::jmax(160, getLabelWidth(_tonalityLabel) + 60 + 8 +
                                            LookAndFeel::getToggleButtonWidth(_playUnusedNotesButton));
+    juce::Font titleFont(juce::FontOptions(13.0f, juce::Font::bold));
+    int envelopeTitle = 10 + juce::GlyphArrangement::getStringWidthInt(titleFont, tr("Envelope")) + 16 +
+                        getEnvelopeModeButtonWidth(0) + getEnvelopeModeButtonWidth(1) + 48;
     int effects = 7 * KNOB_WIDTH + 24 + GROUP_SPACING;
-    widths.column = juce::jmax(topRow, temperaments, effects);
+    widths.column = juce::jmax(topRow, temperaments, envelopeTitle, effects);
     return widths;
 }
 
@@ -1666,10 +2049,19 @@ void PluginEditor::updateGroups()
         component->setVisible(_isGroupExpanded[GROUP_TEMPERAMENTS]);
     for (size_t knob = 1; knob < _knobs.size(); knob++)
     {
-        bool isVisible = _isGroupExpanded[knob <= 4 ? GROUP_REVERB : GROUP_CHORUS];
+        // Knobs of the envelope: the ones of its mode
+        bool isVisible;
+        if (knob >= FIRST_ENVELOPE_KNOB)
+            isVisible = _isGroupExpanded[GROUP_ENVELOPE] &&
+                        (knob >= FIRST_ENVELOPE_KNOB + ENVELOPE_STAGE_COUNT) == _isEnvelopeFixed;
+        else
+            isVisible = _isGroupExpanded[knob < FIRST_CHORUS_KNOB ? GROUP_REVERB : GROUP_CHORUS];
         _knobs[knob]->slider.setVisible(isVisible);
         _knobs[knob]->label.setVisible(isVisible);
     }
+    for (juce::Component * component : std::initializer_list<juce::Component *> {
+             &_envelopeModeButtons[0], &_envelopeModeButtons[1], _envelopeGraph.get() })
+        component->setVisible(_isGroupExpanded[GROUP_ENVELOPE]);
 
     if (!hasChanged)
         return;
