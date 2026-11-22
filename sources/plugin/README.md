@@ -66,7 +66,10 @@ LV2, AU (macOS) and a standalone application ("Polyphone Player", not distribute
   and a temperament other than the equal one. The temperaments and scales: temperament, tonality,
   notes not used played anyway (disabled by default) and the fine tunes of the 12 notes, editable (the
   custom temperament). The height of the window follows the groups expanded. The note of the
-  reference pitch and the custom temperament are saved in the state, not as parameters.
+  reference pitch and the custom temperament are saved in the state, not as parameters. The lists on
+  the right (temperament, tonality, note of the reference pitch, transposition, default modulator)
+  change with the mouse wheel, one item per notch; not the lists of the 16 channels, the wheel
+  scrolling them.
 - A keyboard showing the notes received and played with the mouse, the number of voices, the share of
   the processor taken and a panic button (all sounds stopped, controllers reset).
 - Settings: polyphony, channel of the keyboard, language, fixed latency (see above), clipping of the

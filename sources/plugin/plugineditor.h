@@ -69,6 +69,16 @@ private:
     struct RightWidths;
     struct Knob;
 
+    // List whose item is changed by the mouse wheel, one item per notch
+    class WheelComboBox: public juce::ComboBox
+    {
+    public:
+        void mouseWheelMove(const juce::MouseEvent &event, const juce::MouseWheelDetails &wheel) override;
+
+    private:
+        float _wheelDelta = 0.0f; // Remainder of the movements of a smooth wheel (trackpad)
+    };
+
     void changeListenerCallback(juce::ChangeBroadcaster * source) override;
     void timerCallback() override;
     void updateTexts(); // In the current language
@@ -137,17 +147,17 @@ private:
     // Tuning: reference pitch (note = its frequency, the parameter being the frequency of A4) and transposition, then
     // the temperaments and scales (temperament, tonality, fine tunes of the 12 notes, notes not used)
     juce::Label _referencePitchLabel;
-    juce::ComboBox _referencePitchKeyBox;
+    WheelComboBox _referencePitchKeyBox;
     juce::Label _equalLabel;
     std::unique_ptr<FieldSlider> _referencePitchSlider;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> _referencePitchAttachment;
     juce::Label _transpositionLabel;
-    juce::ComboBox _transpositionBox;
+    WheelComboBox _transpositionBox;
     std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> _transpositionAttachment;
-    juce::ComboBox _temperamentBox;
+    WheelComboBox _temperamentBox;
     std::unique_ptr<juce::ParameterAttachment> _temperamentAttachment; // By identifier: items in submenus
     juce::Label _tonalityLabel;
-    juce::ComboBox _temperamentKeyBox;
+    WheelComboBox _temperamentKeyBox;
     std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> _temperamentKeyAttachment;
     juce::ToggleButton _playUnusedNotesButton;
     std::unique_ptr<PluginTemperamentKeyboard> _temperamentKeyboard;
@@ -156,7 +166,7 @@ private:
     // Velocity: default modulator to the filter cutoff and curve, with their graphs
     juce::Label _velocityToFilterLabel;
     std::unique_ptr<InfoIcon> _velocityToFilterInfo;
-    juce::ComboBox _velocityToFilterBox;
+    WheelComboBox _velocityToFilterBox;
     std::unique_ptr<VelocityGraph> _velocityToFilterGraph;
     std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> _velocityToFilterAttachment;
     juce::Label _velocityCurveLabel;

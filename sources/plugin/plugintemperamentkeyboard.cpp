@@ -392,22 +392,28 @@ void PluginTemperamentKeyboard::mouseWheelMove(const juce::MouseEvent &event, co
         return;
     }
 
-    // One step per notch of a wheel, the movements of a trackpad being accumulated
-    float delta = (wheel.isReversed ? -1.0f : 1.0f) * (juce::exactlyEqual(wheel.deltaY, 0.0f) ? -wheel.deltaX : wheel.deltaY);
-    int steps = 0;
-    if (wheel.isSmooth)
-    {
-        _wheelDelta += delta;
-        steps = static_cast<int>(_wheelDelta / 0.1f);
-        _wheelDelta -= 0.1f * static_cast<float>(steps);
-    }
-    else if (delta > 0.0f || delta < 0.0f)
-        steps = delta > 0.0f ? 1 : -1;
+    int steps = getWheelSteps(wheel, _wheelDelta);
     if (steps != 0)
     {
         float step = event.mods.isCommandDown() ? WHEEL_STEP * FINE_RATIO : WHEEL_STEP;
         editValue(key, _values[key] + static_cast<float>(steps) * step);
     }
+}
+
+int PluginTemperamentKeyboard::getWheelSteps(const juce::MouseWheelDetails &wheel, float &remainder)
+{
+    // One step per notch of a wheel, the movements of a trackpad being accumulated
+    float delta = (wheel.isReversed ? -1.0f : 1.0f) * (juce::exactlyEqual(wheel.deltaY, 0.0f) ? -wheel.deltaX : wheel.deltaY);
+    int steps = 0;
+    if (wheel.isSmooth)
+    {
+        remainder += delta;
+        steps = static_cast<int>(remainder / 0.1f);
+        remainder -= 0.1f * static_cast<float>(steps);
+    }
+    else if (delta > 0.0f || delta < 0.0f)
+        steps = delta > 0.0f ? 1 : -1;
+    return steps;
 }
 
 void PluginTemperamentKeyboard::showContextMenu(int key)

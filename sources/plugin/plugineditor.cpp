@@ -549,6 +549,33 @@ public:
     }
 };
 
+/// List whose item is changed by the mouse wheel: one item per notch, the wheel going up selecting the item above, the
+/// disabled items being skipped (as with the arrow keys)
+
+void PluginEditor::WheelComboBox::mouseWheelMove(const juce::MouseEvent &event, const juce::MouseWheelDetails &wheel)
+{
+    if (isPopupActive() || !isEnabled())
+    {
+        juce::ComboBox::mouseWheelMove(event, wheel); // Given to the parent
+        return;
+    }
+
+    int steps = PluginTemperamentKeyboard::getWheelSteps(wheel, _wheelDelta);
+    int direction = steps > 0 ? -1 : 1;
+    int index = getSelectedItemIndex();
+    int itemCount = getNumItems();
+    for (int i = index + direction; steps != 0 && i >= 0 && i < itemCount; i += direction)
+    {
+        if (isItemEnabled(getItemId(i)))
+        {
+            index = i;
+            steps += direction;
+        }
+    }
+    if (index != getSelectedItemIndex())
+        setSelectedItemIndex(index);
+}
+
 /// Slider with increment and decrement buttons drawn as a field (as a combo box): its text and its buttons in a frame,
 /// separated by a line
 

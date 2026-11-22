@@ -59,6 +59,10 @@ public:
     std::function<void()> onEdit;
     std::function<void(int key)> onTonalityRequested;
 
+    // Steps of a wheel movement (positive upward): one per notch of a wheel, the movements of a trackpad being
+    // accumulated in remainder. Also used by the lists of the editor.
+    static int getWheelSteps(const juce::MouseWheelDetails &wheel, float &remainder);
+
     static constexpr float MIN_VALUE = -50.0f;
     static constexpr float MAX_VALUE = 50.0f;
 
