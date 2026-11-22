@@ -50,6 +50,11 @@ public:
         return processKey(channel, key, vel);
     }
 
+    // Several keys released at once (pedal released, all notes off) between these calls: the keys still held are known
+    // at the end (monophonic play mode)
+    virtual void beginKeyBatch(int channel) { (void)channel; }
+    virtual void endKeyBatch(int channel) { (void)channel; }
+
     virtual bool processPolyPressureChanged(int channel, int key, int pressure)
     {
         (void)channel;

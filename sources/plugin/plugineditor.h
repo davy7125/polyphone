@@ -33,8 +33,8 @@
 class PluginTemperamentKeyboard;
 
 // Interface of the plugin: the soundfont (open, recent files, drag and drop) and the gain, the presets played (one for
-// all channels or one for each channel) on the left, the tuning and the velocity, the temperaments and scales and the
-// effects on the right, a keyboard and what is played
+// all channels or one for each channel) on the left, the note (play mode, tuning) and the velocity, the temperaments
+// and scales and the effects on the right, a keyboard and what is played
 class PluginEditor: public juce::AudioProcessorEditor,
                     public juce::FileDragAndDropTarget,
                     private juce::ChangeListener,
@@ -64,6 +64,7 @@ private:
     class VelocityGraph;
     class SwitchButton;
     class FieldSlider;
+    class BarSlider;
     class InfoIcon;
     class LoadingSpinner;
     struct RightWidths;
@@ -84,6 +85,9 @@ private:
     void updateTexts(); // In the current language
     void fillTemperamentBox(); // Temperaments in the submenus of their categories
     void updateTuning(); // Temperament shown, tonality, note of the reference pitch, temperaments shown or hidden
+    void updatePlayMode(); // Glide shown with the legato, play mode enabled except with the MPE
+    int getPlayModeBoxWidth(); // Longest play mode
+    int getGlideTextWidth(); // Longest text of the glide
     void onTemperamentEdited(); // The fine tunes shown become the custom temperament
     void updateGroups(); // Groups expanded if they are switched on, the window growing or shrinking
     void updateResizeLimits();
@@ -144,8 +148,13 @@ private:
     std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> _switchAttachments[GROUP_COUNT];
     bool _isGroupExpanded[GROUP_COUNT];
 
-    // Tuning: reference pitch (note = its frequency, the parameter being the frequency of A4) and transposition, then
-    // the temperaments and scales (temperament, tonality, fine tunes of the 12 notes, notes not used)
+    // Note: play mode (polyphonic, monophonic or legato with a priority) with the glide of the legato on its right,
+    // reference pitch (note = its frequency, the parameter being the frequency of A4) and transposition, then the
+    // temperaments and scales (temperament, tonality, fine tunes of the 12 notes, notes not used)
+    WheelComboBox _playModeBox;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> _playModeAttachment;
+    std::unique_ptr<BarSlider> _glideSlider;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> _glideAttachment;
     juce::Label _referencePitchLabel;
     WheelComboBox _referencePitchKeyBox;
     juce::Label _equalLabel;

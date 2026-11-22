@@ -37,8 +37,12 @@
 static const char * PARAMETER_IDS[] = {
     "gain", "reverbLevel", "reverbSize", "reverbWidth", "reverbDamping", "chorusLevel", "chorusDepth", "chorusFrequency",
     "transpose", "tuning", "temperament", "temperamentKey", "velocityToFilter", "velocityCurve", "temperamentEnabled",
-    "reverbEnabled", "chorusEnabled"
+    "reverbEnabled", "chorusEnabled", "playMode", "glideTime"
 };
+
+// Longest glide of the legato (ms), the middle of its range being shorter (most useful durations)
+static const float MAX_GLIDE_TIME = 5000.0f;
+static const float CENTRE_GLIDE_TIME = 300.0f;
 
 static const int MAX_RECENT_FILES = 10;
 
@@ -204,12 +208,45 @@ juce::AudioProcessorValueTreeState::ParameterLayout PluginProcessor::createParam
                                                           false));
     layout.add(std::make_unique<juce::AudioParameterBool>(juce::ParameterID("chorusEnabled", 2), tr("Chorus enabled"),
                                                           false));
+
+    // Play mode and glide of the legato, "Off" at the beginning of the range
+    juce::NormalisableRange<float> glideRange(0.0f, MAX_GLIDE_TIME, 1.0f);
+    glideRange.setSkewForCentre(CENTRE_GLIDE_TIME);
+    layout.add(std::make_unique<juce::AudioProcessorParameterGroup>(
+        "note", tr("Note"), "|", choice("playMode", 3, tr("Play mode"), getPlayModeNames(), 0),
+        std::make_unique<juce::AudioParameterFloat>(
+            juce::ParameterID("glideTime", 3), tr("Glide time"), glideRange, 0.0f,
+            juce::AudioParameterFloatAttributes()
+                .withStringFromValueFunction([](float value, int) { return getGlideTimeText(value); })
+                .withValueFromStringFunction([](const juce::String &text) {
+                    // A duration in ms or in s (with its unit), 0 otherwise ("Off")
+                    double value = text.getDoubleValue();
+                    if (text.trim().endsWithIgnoreCase("s") && !text.trim().endsWithIgnoreCase("ms"))
+                        value *= 1000.0;
+                    return static_cast<float>(juce::jlimit(0.0, static_cast<double>(MAX_GLIDE_TIME), value));
+                }))));
     return layout;
 }
 
 juce::StringArray PluginProcessor::getVelocityToFilterNames()
 {
     return { "SoundFont 2.01", "SoundFont 2.04", tr("Disabled", "velocity to filter") };
+}
+
+juce::StringArray PluginProcessor::getPlayModeNames()
+{
+    return { tr("Poly"), tr("Mono (latest)"), tr("Mono (highest)"), tr("Mono (lowest)"), tr("Legato (latest)"),
+             tr("Legato (highest)"), tr("Legato (lowest)") };
+}
+
+juce::String PluginProcessor::getGlideTimeText(float milliseconds)
+{
+    int rounded = juce::roundToInt(milliseconds);
+    if (rounded <= 0)
+        return tr("Off", "glide");
+    if (rounded < 1000)
+        return juce::String(rounded) + " ms";
+    return juce::String(milliseconds / 1000.0f, 2) + " s";
 }
 
 const std::vector<TemperamentData> &PluginProcessor::getTemperaments()
@@ -522,6 +559,11 @@ void PluginProcessor::updateConfiguration()
     configuration.modulatorVelToFilterType = juce::jlimit(0, 2, juce::roundToInt(values[12])); // Next notes
     _engine.setConfiguration(configuration, juce::roundToInt(values[8]));
     _engine.setVelocityCurve(juce::roundToInt(values[13]));
+
+    // Play mode: polyphonic, monophonic or legato with a priority (latest, highest, lowest), glide of the legato
+    int playMode = juce::jlimit(0, 6, juce::roundToInt(values[17]));
+    _engine.setPlayMode(playMode == 0 ? 0 : (isLegatoPlayMode(playMode) ? 2 : 1), (playMode + 2) % 3,
+                        0.001f * juce::jmax(0.0f, values[18]));
 
     for (int i = 0; i < PARAMETER_COUNT; i++)
         _appliedValues[i] = values[i];

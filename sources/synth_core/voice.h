@@ -57,6 +57,26 @@ public:
     VoiceParam * getParam() { return _voiceParam; }
     int getNoteId() { return _noteId; }
 
+    // Zones read (null for a sample played alone)
+    ISynthZone * getPrstZone() { return _prstZone; }
+    ISynthZone * getInstZone() { return _instZone; }
+
+    // Note played legato (monophonic play mode), by the thread computing the voices when they are not computed:
+    // - changeKey: the voice plays another key, its pitch gliding during glideChunks chunks (0: no glide) from the one
+    //   heard;
+    // - startLegato: the voice continues a note played by other voices, with the key heard and the levels of their
+    //   envelopes (no attack), from the beginning of the loop (if the sample is looped), with a fade-in during fadeChunks
+    //   chunks, the pitch gliding to its key;
+    // - crossfadeOut: the voice fades out during fadeChunks chunks, the pitch gliding to a key.
+    // The key heard (getHeardKey) is the key of the voice with the glide, the pitch of a key forced by a zone (keynum)
+    // never changing.
+    void changeKey(int8_t key, uint32_t glideChunks);
+    void startLegato(float heardKey, float volumeLevel, float modLevel, uint32_t glideChunks, uint32_t fadeChunks);
+    void crossfadeOut(int8_t key, uint32_t glideChunks, uint32_t fadeChunks);
+    float getHeardKey() { return static_cast<float>(_voiceParam->getKey()) + _glideOffset; }
+    float getVolumeLevel() { return _volEnvelope.getLevel(); }
+    float getModLevel() { return _modEnvelope.getLevel(); }
+
     // Sample read, and the length of its data when the voice started
     ISynthSample * getSample() { return _smpl; }
     uint32_t getDataLength() { return _dataSmplLength; }
@@ -73,7 +93,11 @@ public:
     // only one modifying the envelopes
     void release(bool quick = false);
     void finish();
-    bool isInRelease() { return _release || _loopMode == 2 || _releaseRequest.load(std::memory_order_relaxed) != 0; }
+    bool isInRelease()
+    {
+        return _release || _loopMode == 2 || _releaseRequest.load(std::memory_order_relaxed) != 0 ||
+               (_crossfadeLength > 0 && !_isCrossfadeIn);
+    }
     bool isFinished() { return _isFinished; }
 
     // Stop the voice with a linear fade (FADE_OUT_DURATION) whatever its state, to free the polyphony or the processor
@@ -115,6 +139,8 @@ private:
     EnveloppeVol _volEnvelope, _modEnvelope;
 
     // Sound data and parameters
+    ISynthZone * _prstZone;
+    ISynthZone * _instZone;
     ISynthSample * _smpl;
     int16_t * _dataSmpl16;
     uint8_t * _dataSmpl24;
@@ -146,6 +172,15 @@ private:
     uint32_t _computedChunks, _youngChunkCount;
     uint32_t _fadeOutLength, _fadeOutPosition, _fadeOutChunkCount; // Chunks
     unsigned char _sampleRootKey;
+
+    // Legato: glide (offset in keys from the key played, going to its target by a step at each chunk), crossfade (fade-in
+    // or fade-out, in chunks) and start at the beginning of the loop
+    float _glideOffset, _glideTarget, _glideStep;
+    uint32_t _crossfadeLength, _crossfadePosition;
+    bool _isCrossfadeIn;
+    bool _startsAtLoop;
+    void setGlide(float offset, uint32_t glideChunks); // From an offset to _glideTarget
+    float getGlideCents(int playedNote, int32_t scaleTuning); // Pitch of the current offset, from the key played
     uint32_t _currentSmplPos, _elapsedSmplPos;
     double _time;
     float (*_sincWindow)[RESAMPLING_ORDER];

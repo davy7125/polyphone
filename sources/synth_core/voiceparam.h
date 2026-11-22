@@ -79,6 +79,11 @@ public:
     // Identification
     int8_t getChannel() { return _channel; }
     int8_t getKey() { return _key; }
+
+    // Key of a note continuing with another key (legato), by the thread computing the voice or when it is not computed.
+    // The key played changes too, except if a zone forces it (keynum): false is then returned.
+    bool setKey(int8_t key);
+    bool isKeyForced() { return _isKeyForced; }
     int8_t getType() { return _type; }
     int getSf2Id() { return _sf2Id; }
     int getPresetId() { return _presetId; }
@@ -108,6 +113,7 @@ private:
     // Identification
     int8_t _channel;
     int8_t _key;
+    bool _isKeyForced;
     int8_t _type;
     int _sf2Id;
     int _presetId;

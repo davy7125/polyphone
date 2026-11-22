@@ -6186,397 +6186,413 @@ para exibir seu timbre</translation>
 <context>
     <name>PluginEditor</name>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="88"/>
+        <location filename="../../plugin/plugineditor.cpp" line="89"/>
         <source>cannot open the file</source>
         <translation>não é possível abrir o arquivo</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="89"/>
+        <location filename="../../plugin/plugineditor.cpp" line="90"/>
         <source>file recursion (#include)</source>
         <translation>recursão de arquivos (#include)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="90"/>
+        <location filename="../../plugin/plugineditor.cpp" line="91"/>
         <source>not enough memory</source>
         <translation>memória insuficiente</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="91"/>
+        <location filename="../../plugin/plugineditor.cpp" line="92"/>
         <source>this is not a DLS file</source>
         <translation>não é um arquivo DLS</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="92"/>
+        <location filename="../../plugin/plugineditor.cpp" line="93"/>
         <source>invalid header</source>
         <translation>cabeçalho inválido</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="93"/>
+        <location filename="../../plugin/plugineditor.cpp" line="94"/>
         <source>corrupted file (sdta)</source>
         <translation>arquivo corrompido (sdta)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="94"/>
+        <location filename="../../plugin/plugineditor.cpp" line="95"/>
         <source>corrupted file (pdta)</source>
         <translation>arquivo corrompido (pdta)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="348"/>
+        <location filename="../../plugin/plugineditor.cpp" line="349"/>
         <source>Instrument played by the channel, or the one chosen by the program changes it receives</source>
         <translation>Instrumento tocado pelo canal, ou o escolhido pelas mudanças de programa que ele recebe</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="351"/>
+        <location filename="../../plugin/plugineditor.cpp" line="352"/>
         <source>Program change (drums)</source>
         <translation>Mudança de programa (bateria)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="351"/>
+        <location filename="../../plugin/plugineditor.cpp" line="352"/>
         <source>Program change</source>
         <translation>Mudança de programa</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="864"/>
+        <location filename="../../plugin/plugineditor.cpp" line="935"/>
         <source>(no instrument)</source>
         <translation>(nenhum instrumento)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="911"/>
+        <location filename="../../plugin/plugineditor.cpp" line="982"/>
         <source>Open...</source>
         <translation>Abrir...</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="912"/>
+        <location filename="../../plugin/plugineditor.cpp" line="983"/>
         <source>Open a soundfont (sf2, sf3, sfz or dls), which can also be dropped on the window</source>
         <translation>Abrir uma soundfont (sf2, sf3, sfz ou dls), que também pode ser solta na janela</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="913"/>
+        <location filename="../../plugin/plugineditor.cpp" line="984"/>
         <source>Recent soundfonts</source>
         <translation>Soundfonts recentes</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="914"/>
+        <location filename="../../plugin/plugineditor.cpp" line="985"/>
         <source>One instrument</source>
         <translation>Um instrumento</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="915"/>
+        <location filename="../../plugin/plugineditor.cpp" line="986"/>
         <source>The same instrument is played on all MIDI channels</source>
         <translation>O mesmo instrumento é tocado em todos os canais MIDI</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="916"/>
+        <location filename="../../plugin/plugineditor.cpp" line="987"/>
         <source>16 channels</source>
         <translation>16 canais</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="917"/>
+        <location filename="../../plugin/plugineditor.cpp" line="988"/>
         <source>Each MIDI channel plays its instrument, or the one chosen by its program changes (General MIDI)</source>
         <translation>Cada canal MIDI toca o seu instrumento, ou o escolhido pelas suas mudanças de programa (General MIDI)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="919"/>
+        <location filename="../../plugin/plugineditor.cpp" line="990"/>
         <source>The same instrument is played by an MPE controller: each note has its own pitch bend, pressure and timbre (lower zone of 15 channels, or the zones given by the controller)</source>
         <translation>O mesmo instrumento é tocado por um controlador MPE: cada nota tem o seu próprio pitch bend, pressão e timbre (zona inferior de 15 canais, ou as zonas indicadas pelo controlador)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="925"/>
+        <location filename="../../plugin/plugineditor.cpp" line="996"/>
         <source>Gain</source>
         <translation>Ganho</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="947"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1030"/>
         <source>Play all</source>
         <translation>Tocar tudo</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="956"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1039"/>
         <source>Default modulator from the velocity to the filter cutoff frequency: the softer the note, the lower the cutoff (up to 2 octaves lower).
 Change this option if notes sound too muffled: SoundFont 2.01 for an old soundfont made with this version (the notes above the velocity 64 are not filtered), Disabled for a soundfont whose samples already sound softer at low velocities (several velocity layers).</source>
         <translation>Modulador padrão da velocidade para a frequência de corte do filtro: quanto mais suave a nota, mais baixa a frequência de corte (até 2 oitavas abaixo).
 Altere esta opção se as notas soarem abafadas demais: SoundFont 2.01 para uma soundfont antiga feita com esta versão (as notas acima da velocidade 64 não são filtradas), Desativado para uma soundfont cujas amostras já soam mais suaves em velocidades baixas (várias camadas de velocidade).</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1296"/>
-        <source>Tuning</source>
-        <translation>Afinação</translation>
-    </message>
-    <message>
-        <location filename="../../plugin/plugineditor.cpp" line="926"/>
+        <location filename="../../plugin/plugineditor.cpp" line="997"/>
         <source>Level</source>
         <comment>reverb</comment>
         <translation>Nível</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="926"/>
+        <location filename="../../plugin/plugineditor.cpp" line="997"/>
         <source>Size</source>
         <comment>reverb</comment>
         <translation>Tamanho</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="926"/>
+        <location filename="../../plugin/plugineditor.cpp" line="997"/>
         <source>Width</source>
         <comment>reverb</comment>
         <translation>Largura</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="926"/>
+        <location filename="../../plugin/plugineditor.cpp" line="997"/>
         <source>Damping</source>
         <comment>reverb</comment>
         <translation>Amortecimento</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="927"/>
+        <location filename="../../plugin/plugineditor.cpp" line="998"/>
         <source>Level</source>
         <comment>chorus</comment>
         <translation>Nível</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="927"/>
+        <location filename="../../plugin/plugineditor.cpp" line="998"/>
         <source>Depth</source>
         <comment>chorus</comment>
         <translation>Profundidade</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="927"/>
+        <location filename="../../plugin/plugineditor.cpp" line="998"/>
         <source>Frequency</source>
         <comment>chorus</comment>
         <translation>Frequência</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="933"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1007"/>
+        <source>Poly: the notes are played together.
+Mono: one note at a time, each one starting with its attack.
+Legato: one note at a time, a note played before the previous one is released continuing it without a new attack.
+When several keys are held, the latest, the highest or the lowest one is heard. The drums and the MPE mode are always polyphonic.</source>
+        <translation>Poli: as notas são tocadas juntas.
+Mono: uma nota por vez, cada uma começando com seu ataque.
+Legato: uma nota por vez; uma nota tocada antes de soltar a anterior a continua sem um novo ataque.
+Quando várias teclas são mantidas, ouve-se a última, a mais aguda ou a mais grave. A bateria e o modo MPE são sempre polifônicos.</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="1012"/>
+        <source>Duration of the pitch glide between two notes played legato</source>
+        <translation>Duração do deslize da altura entre duas notas tocadas em legato</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="1016"/>
         <source>Reference pitch</source>
         <translation>Tom de referência</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="934"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1017"/>
         <source>Note sounding at this frequency, whatever the temperament</source>
         <translation>Nota que soa nesta frequência, qualquer que seja o temperamento</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="938"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1021"/>
         <source>Transposition</source>
         <translation>Transposição</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="939"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1022"/>
         <source>Transposition in semitones of the notes played, except the drums</source>
         <translation>Transposição em semitons das notas tocadas, exceto a bateria</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="945"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1028"/>
         <source>Tonality of the temperament (tonic of a scale)</source>
         <translation>Tonalidade do temperamento (tônica de uma escala)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="949"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1032"/>
         <source>Temperament or scale applied (equal temperament otherwise)</source>
         <translation>Temperamento ou escala aplicado (caso contrário, temperamento igual)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="950"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1033"/>
         <source>Reverb enabled</source>
         <translation>Reverberação ativada</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="951"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1034"/>
         <source>Chorus enabled</source>
         <translation>Chorus ativado</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="954"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1037"/>
         <source>Filter cutoff</source>
         <translation>Corte do filtro</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="965"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1048"/>
         <source>Curve</source>
         <translation>Curva</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="966"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1049"/>
         <source>Velocity curve: linear in the middle, concave to the left (softer velocity), convex to the right (velocity rising quickly)</source>
         <translation>Curva de velocidade: linear no meio, côncava para a esquerda (velocidade mais suave), convexa para a direita (velocidade que sobe rapidamente)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="972"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1055"/>
         <source>Panic</source>
         <translation>Pânico</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="973"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1056"/>
         <source>Stop all sounds and reset the controllers</source>
         <translation>Parar todos os sons e redefinir os controladores</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="974"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1057"/>
         <source>Settings</source>
         <translation>Configurações</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1028"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1111"/>
         <source>cannot open the file %1</source>
         <translation>não é possível abrir o arquivo %1</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1030"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1113"/>
         <source>invalid %1 index</source>
         <translation>índice %1 inválido</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1042"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1125"/>
         <source>No soundfont</source>
         <translation>Nenhuma soundfont</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1050"/>
-        <location filename="../../plugin/plugineditor.cpp" line="1101"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1133"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1185"/>
         <source>Loading...</source>
         <translation>Carregando...</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1055"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1138"/>
         <source>Cannot read the soundfont: %1</source>
         <translation>Não é possível ler a soundfont: %1</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1062"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1145"/>
         <source>Open a soundfont or drop it here</source>
         <translation>Abra uma soundfont ou solte-a aqui</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1098"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1182"/>
         <source>Loading the sounds: %1 %</source>
         <translation>Carregando os sons: %1%</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1100"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1184"/>
         <source>Some sounds may be missing until the loading is complete.</source>
         <translation>Alguns sons podem faltar até o fim do carregamento.</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1134"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1248"/>
         <source>Voices: %1</source>
         <translation>Vozes: %1</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1135"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1249"/>
         <source>CPU: %1 %</source>
         <translation>CPU: %1%</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1149"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1263"/>
         <source>Open a soundfont</source>
         <translation>Abrir uma soundfont</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1163"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1277"/>
         <source>No recent soundfont</source>
         <translation>Nenhuma soundfont recente</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1212"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1326"/>
         <source>%1 voices</source>
         <translation>%1 vozes</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1217"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1331"/>
         <source>Channel %1</source>
         <translation>Canal %1</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1224"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1338"/>
         <source>System language</source>
         <translation>Idioma do sistema</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1231"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1345"/>
         <source>Polyphony</source>
         <translation>Polifonia</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1232"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1346"/>
         <source>Keyboard</source>
         <translation>Teclado</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1233"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1347"/>
         <source>Language</source>
         <translation>Idioma</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1235"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1349"/>
         <source>Fixed latency (notes played at their exact position)</source>
         <translation>Latência fixa (notas tocadas em sua posição exata)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1237"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1351"/>
         <source>Clipping to [-1; 1]</source>
         <translation>Clipping em [-1; 1]</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1297"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1410"/>
+        <source>Note</source>
+        <translation>Nota</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="1411"/>
         <source>Temperaments and scales</source>
         <translation>Temperamentos e escalas</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="948"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1031"/>
         <source>Also play the notes not used by the temperament (scale)</source>
         <translation>Tocar também as notas não utilizadas pelo temperamento (escala)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="943"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1026"/>
         <source>Temperament or scale, transposed to the chosen tonality</source>
         <translation>Temperamento ou escala, transposto para a tonalidade escolhida</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="944"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1027"/>
         <source>Tonality</source>
         <translation>Tonalidade</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1242"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1356"/>
         <source>Store the soundfont in the project (not possible with an sfz file)</source>
         <translation>Salvar a soundfont no projeto (não é possível com um arquivo sfz)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1243"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1357"/>
         <source>Store the soundfont in the project</source>
         <translation>Salvar a soundfont no projeto</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1249"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1363"/>
         <source>Channels and effects on their own outputs (not possible in the standalone application)</source>
         <translation>Canais e efeitos em suas próprias saídas (não é possível no aplicativo autônomo)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1251"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1365"/>
         <source>Channels and effects on their own outputs</source>
         <translation>Canais e efeitos em suas próprias saídas</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1298"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1412"/>
         <source>Reverb</source>
         <translation>Reverberação</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1299"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1413"/>
         <source>Chorus</source>
         <translation>Chorus</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1298"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1412"/>
         <source>Velocity</source>
         <translation>Velocidade</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="281"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="318"/>
         <source>too many soundfonts are still playing, try again in a moment</source>
         <translation>ainda há soundfonts demais tocando, tente novamente em instantes</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="777"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="819"/>
         <source>file not found</source>
         <translation>arquivo não encontrado</translation>
     </message>
@@ -6584,7 +6600,7 @@ Altere esta opção se as notas soarem abafadas demais: SoundFont 2.01 para uma 
 <context>
     <name>PluginJuce</name>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1012"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1095"/>
         <location filename="../../plugin/plugintranslator.cpp" line="60"/>
         <source>Options</source>
         <translation>Opções</translation>
@@ -6893,144 +6909,200 @@ Altere esta opção se as notas soarem abafadas demais: SoundFont 2.01 para uma 
 <context>
     <name>PluginProcessor</name>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="53"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="57"/>
         <source>Main</source>
         <translation>Principal</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="55"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="59"/>
         <source>Channel %1</source>
         <translation>Canal %1</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="57"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="61"/>
         <source>Effects</source>
         <translation>Efeitos</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="169"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="173"/>
         <source>Gain</source>
         <translation>Ganho</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="172"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="176"/>
         <source>Reverb</source>
         <translation>Reverberação</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="172"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="176"/>
         <source>Reverb level</source>
         <translation>Nível da reverberação</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="173"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="177"/>
         <source>Reverb size</source>
         <translation>Tamanho da reverberação</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="173"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="177"/>
         <source>Reverb width</source>
         <translation>Largura da reverberação</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="174"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="178"/>
         <source>Reverb damping</source>
         <translation>Amortecimento da reverberação</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="176"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="180"/>
         <source>Chorus</source>
         <translation>Chorus</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="176"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="180"/>
         <source>Chorus level</source>
         <translation>Nível do chorus</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="177"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="181"/>
         <source>Chorus depth</source>
         <translation>Profundidade do chorus</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="177"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="181"/>
         <source>Chorus frequency</source>
         <translation>Frequência do chorus</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="183"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="187"/>
         <source>Tuning</source>
         <translation>Afinação</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="184"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="188"/>
         <source>Transposition</source>
         <translation>Transposição</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="185"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="189"/>
         <source>semitones</source>
         <translation>semitons</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="186"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="190"/>
         <source>Reference pitch</source>
         <translation>Tom de referência</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="189"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="193"/>
         <source>Temperament</source>
         <translation>Temperamento</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="190"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="194"/>
         <source>Temperament key</source>
         <translation>Tonalidade do temperamento</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="195"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="199"/>
         <source>Velocity</source>
         <translation>Velocidade</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="196"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="200"/>
         <source>Velocity to filter cutoff</source>
         <translation>Velocidade para corte do filtro</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="197"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="201"/>
         <source>Velocity curve</source>
         <translation>Curva de velocidade</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="202"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="206"/>
         <source>Temperament enabled</source>
         <translation>Temperamento ativado</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="203"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="207"/>
         <source>Reverb enabled</source>
         <translation>Reverberação ativada</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="205"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="209"/>
         <source>Chorus enabled</source>
         <translation>Chorus ativado</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="212"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="216"/>
+        <source>Note</source>
+        <translation>Nota</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="216"/>
+        <source>Play mode</source>
+        <translation>Modo de execução</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="218"/>
+        <source>Glide time</source>
+        <translation>Tempo de portamento</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="233"/>
         <source>Disabled</source>
         <comment>velocity to filter</comment>
         <translation>Desativado</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="235"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="238"/>
+        <source>Poly</source>
+        <translation>Poli</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="238"/>
+        <source>Mono (latest)</source>
+        <translation>Mono (última)</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="238"/>
+        <source>Mono (highest)</source>
+        <translation>Mono (mais aguda)</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="238"/>
+        <source>Mono (lowest)</source>
+        <translation>Mono (mais grave)</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="238"/>
+        <source>Legato (latest)</source>
+        <translation>Legato (última)</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="239"/>
+        <source>Legato (highest)</source>
+        <translation>Legato (mais aguda)</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="239"/>
+        <source>Legato (lowest)</source>
+        <translation>Legato (mais grave)</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="246"/>
+        <source>Off</source>
+        <comment>glide</comment>
+        <translation>Nenhum</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="272"/>
         <source>Equal</source>
         <comment>Equal musical temperament</comment>
         <translation>Igual</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="237"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="274"/>
         <source>Custom</source>
         <comment>custom temperament</comment>
         <translation>Personalizado</translation>
@@ -7392,42 +7464,42 @@ Altere esta opção se as notas soarem abafadas demais: SoundFont 2.01 para uma 
 <context>
     <name>PluginTemperamentKeyboard</name>
     <message>
-        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="416"/>
+        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="422"/>
         <source>Note used</source>
         <translation>Nota utilizada</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="417"/>
+        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="423"/>
         <source>Tonality on this note</source>
         <translation>Tonalidade nesta nota</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="443"/>
+        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="449"/>
         <source>%1 is the note of the reference pitch: its fine tune of %2 cents is compensated by shifting all the notes by %3 cents.</source>
         <translation>%1 é a nota do tom de referência: seu ajuste fino de %2 cents é compensado deslocando todas as notas em %3 cents.</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="446"/>
+        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="452"/>
         <source>Fine tune of each key in cents, compared to the equal temperament.</source>
         <translation>Ajuste fino de cada tecla em cents, em relação ao temperamento igual.</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="447"/>
+        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="453"/>
         <source>Mouse wheel or vertical drag: change a value (finer with Ctrl).</source>
         <translation>Roda do mouse ou arrasto vertical: alterar um valor (mais fino com Ctrl).</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="448"/>
+        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="454"/>
         <source>Double click: back to 0.</source>
         <translation>Clique duplo: voltar a 0.</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="449"/>
+        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="455"/>
         <source>Right click: note used or not, tonality.</source>
         <translation>Clique direito: nota utilizada ou não, tonalidade.</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="450"/>
+        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="456"/>
         <source>Dot: tonality.</source>
         <translation>Ponto: tonalidade.</translation>
     </message>

@@ -211,6 +211,87 @@ void SynthCore::playPreset(int sf2Id, int presetIndex, int channel, int key, int
     _voices.addPreparedVoices();
 }
 
+void SynthCore::playPresetLegato(int sf2Id, int presetIndex, int channel, int previousKey, int key, int velocity,
+                                 float glideSeconds)
+{
+    std::lock_guard<std::recursive_mutex> lock(_voicesMutex);
+    Voice ** voices1, ** voices2;
+    int count1, count2;
+    _voices.getVoices(voices1, count1, voices2, count2);
+
+    // Voices of the previous key that are still held (not released, not fading out)
+    auto isPrevious = [sf2Id, channel, previousKey](Voice * voice) {
+        VoiceParam * voiceParam = voice->getParam();
+        return voiceParam->getChannel() == channel && voiceParam->getSf2Id() == sf2Id &&
+               voiceParam->getKey() == previousKey && voiceParam->getType() == 0 && !voice->isInRelease() &&
+               !voice->isFinished() && !voice->isFadingOut();
+    };
+    _legato.voiceCount = 0;
+    Voice * reference = nullptr; // Loudest one
+    float heardKey = static_cast<float>(previousKey);
+    bool isHeardKeyKnown = false;
+    for (int i = 0; i < count1 + count2; ++i)
+    {
+        Voice * voice = i < count1 ? voices1[i] : voices2[i - count1];
+        if (!isPrevious(voice))
+            continue;
+        if (_legato.voiceCount < MAX_LEGATO_VOICES)
+            _legato.voices[_legato.voiceCount++] = voice;
+        if (reference == nullptr || voice->getVolumeLevel() > reference->getVolumeLevel())
+            reference = voice;
+        if (!isHeardKeyKnown && !voice->getParam()->isKeyForced())
+        {
+            // Pitch of the note, possibly during a glide
+            heardKey = voice->getHeardKey();
+            isHeardKeyKnown = true;
+        }
+    }
+    if (reference == nullptr)
+    {
+        // Nothing to continue
+        playPreset(sf2Id, presetIndex, channel, key, velocity);
+        return;
+    }
+
+    // The previous voices fade out if the new key is not played (scale)
+    uint32_t glideChunks = static_cast<uint32_t>(glideSeconds * static_cast<float>(_sampleRate) * COMPUTATION_CHUNK_INVERT + 0.5f);
+    uint32_t fadeChunks = static_cast<uint32_t>(LEGATO_CROSSFADE_DURATION * static_cast<float>(_sampleRate) * COMPUTATION_CHUNK_INVERT + 0.5f);
+    ISynthSoundfont * soundfont = _soundfonts->getSynthSoundfont(sf2Id);
+    if (soundfont != nullptr && (key < 0 || _context.isKeyUsed(key)))
+    {
+        // New voices with the note id of the previous ones (one note: no exclusive class between them, kept or stopped
+        // together), and the voices continuing with the new key (playSmpl)
+        int noteId = _noteId;
+        _noteId = reference->getNoteId();
+        _legato.isActive = true;
+        _legato.heardKey = heardKey;
+        _legato.volumeLevel = reference->getVolumeLevel();
+        _legato.modLevel = reference->getModLevel();
+        _legato.glideChunks = glideChunks;
+        _legato.fadeChunks = fadeChunks;
+        for (int i = 0; i < soundfont->getPresetCount(); ++i)
+        {
+            ISynthInstPrst * prst = soundfont->getPresetAt(i);
+            if (prst->isAlwaysPlayed() || prst->getIndex() == presetIndex)
+                playPrst(sf2Id, soundfont, prst, channel, key, velocity);
+        }
+        _legato.isActive = false;
+        _noteId = noteId;
+    }
+
+    // The other previous voices fade out, their pitch also gliding
+    _voices.getVoices(voices1, count1, voices2, count2);
+    for (int i = 0; i < count1 + count2; ++i)
+    {
+        Voice * voice = i < count1 ? voices1[i] : voices2[i - count1];
+        if (isPrevious(voice))
+            voice->crossfadeOut(static_cast<int8_t>(key), glideChunks, fadeChunks);
+    }
+
+    // Prepared voices are now ready to be computed
+    _voices.addPreparedVoices();
+}
+
 void SynthCore::playPrst(int sf2Id, ISynthSoundfont * soundfont, ISynthInstPrst * prst, int channel, int key, int velocity)
 {
     // Default preset ranges
@@ -277,6 +358,22 @@ int SynthCore::playSmpl(int sf2Id, ISynthSample * smpl, int channel, int key, in
                         ISynthInstPrst * inst, ISynthZone * instZone,
                         ISynthInstPrst * prst, ISynthZone * prstZone, ISynthZone * defaultModulators)
 {
+    // Legato: a voice of the previous key playing the same zones continues with this key
+    if (_legato.isActive && instZone != nullptr)
+    {
+        for (int i = 0; i < _legato.voiceCount; i++)
+        {
+            Voice * previous = _legato.voices[i];
+            if (previous != nullptr && previous->getInstZone() == instZone && previous->getPrstZone() == prstZone &&
+                previous->getSample() == smpl)
+            {
+                previous->changeKey(static_cast<int8_t>(key), _legato.glideChunks);
+                _legato.voices[i] = nullptr;
+                return -1;
+            }
+        }
+    }
+
     // Load the sound: not played if its data is not available yet (no voice taken)
     if (!smpl->loadData())
         return -1;
@@ -298,6 +395,11 @@ int SynthCore::playSmpl(int sf2Id, ISynthSample * smpl, int channel, int key, in
     for (const ReplacedSample &replacement : _replacedSamples)
         if (replacement.sf2Id == sf2Id && replacement.smpl == smpl && (inst == nullptr || replacement.allVoices))
             replaceVoiceData(voice, smpl, &replacement);
+
+    // Legato: continuation of the previous note
+    if (_legato.isActive && inst != nullptr)
+        voice->startLegato(_legato.heardKey, _legato.volumeLevel, _legato.modLevel, _legato.glideChunks,
+                           _legato.fadeChunks);
 
     return currentToken;
 }

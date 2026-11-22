@@ -296,6 +296,7 @@ void VoiceList::prepareComputation()
                     _closeCommands[i].exclusiveClass == exclusiveClass)
                 {
                     _closeCommands[i].voice->finish();
+                    _closeCommands[i].noteId = voice->getNoteId();
                     _closeCommands[i].voice = voice;
                     exclusiveClass = 0; // Cancel the following lines
                     break;
@@ -309,6 +310,7 @@ void VoiceList::prepareComputation()
                 _closeCommands[_closeCommandNumber].numPreset = voiceParam->getPresetId();
                 _closeCommands[_closeCommandNumber].key = voiceParam->getKey();
                 _closeCommands[_closeCommandNumber].exclusiveClass = exclusiveClass;
+                _closeCommands[_closeCommandNumber].noteId = voice->getNoteId();
                 _closeCommands[_closeCommandNumber].voice = voice;
                 _closeCommandNumber++;
             }
@@ -316,7 +318,7 @@ void VoiceList::prepareComputation()
     }
 
     // Remove the finished voices (once their frames are all mixed), and quickly release the ones having the exclusive
-    // class of a new voice
+    // class of a new voice, except the ones of its note (continued legato, SynthCore::playPresetLegato)
     for (int index = first; index != last; index = (index + 1) & _indexMask)
     {
         voice = _voices[index];
@@ -335,7 +337,8 @@ void VoiceList::prepareComputation()
             if (_closeCommands[i].channel == voiceParam->getChannel() &&
                 _closeCommands[i].sf2Id == voiceParam->getSf2Id() &&
                 _closeCommands[i].numPreset == voiceParam->getPresetId() &&
-                _closeCommands[i].exclusiveClass == voiceParam->getCurrentInteger(champ_exclusiveClass))
+                _closeCommands[i].exclusiveClass == voiceParam->getCurrentInteger(champ_exclusiveClass) &&
+                _closeCommands[i].noteId != voice->getNoteId())
             {
                 voice->release(true);
                 break;

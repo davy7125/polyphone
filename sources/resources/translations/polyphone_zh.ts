@@ -6102,397 +6102,413 @@ to display its timbre</source>
 <context>
     <name>PluginEditor</name>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="88"/>
+        <location filename="../../plugin/plugineditor.cpp" line="89"/>
         <source>cannot open the file</source>
         <translation>无法打开文件</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="89"/>
+        <location filename="../../plugin/plugineditor.cpp" line="90"/>
         <source>file recursion (#include)</source>
         <translation>文件递归包含 (#include)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="90"/>
+        <location filename="../../plugin/plugineditor.cpp" line="91"/>
         <source>not enough memory</source>
         <translation>内存不足</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="91"/>
+        <location filename="../../plugin/plugineditor.cpp" line="92"/>
         <source>this is not a DLS file</source>
         <translation>不是 DLS 文件</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="92"/>
+        <location filename="../../plugin/plugineditor.cpp" line="93"/>
         <source>invalid header</source>
         <translation>无效的文件头</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="93"/>
+        <location filename="../../plugin/plugineditor.cpp" line="94"/>
         <source>corrupted file (sdta)</source>
         <translation>文件已损坏 (sdta)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="94"/>
+        <location filename="../../plugin/plugineditor.cpp" line="95"/>
         <source>corrupted file (pdta)</source>
         <translation>文件已损坏 (pdta)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="348"/>
+        <location filename="../../plugin/plugineditor.cpp" line="349"/>
         <source>Instrument played by the channel, or the one chosen by the program changes it receives</source>
         <translation>该通道演奏的乐器，或由其接收的程序变更选择的乐器</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="351"/>
+        <location filename="../../plugin/plugineditor.cpp" line="352"/>
         <source>Program change (drums)</source>
         <translation>程序变更 (鼓)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="351"/>
+        <location filename="../../plugin/plugineditor.cpp" line="352"/>
         <source>Program change</source>
         <translation>程序变更</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="864"/>
+        <location filename="../../plugin/plugineditor.cpp" line="935"/>
         <source>(no instrument)</source>
         <translation>(无乐器)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="911"/>
+        <location filename="../../plugin/plugineditor.cpp" line="982"/>
         <source>Open...</source>
         <translation>打开...</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="912"/>
+        <location filename="../../plugin/plugineditor.cpp" line="983"/>
         <source>Open a soundfont (sf2, sf3, sfz or dls), which can also be dropped on the window</source>
         <translation>打开音色库 (sf2、sf3、sfz 或 dls)，也可以将其拖放到窗口中</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="913"/>
+        <location filename="../../plugin/plugineditor.cpp" line="984"/>
         <source>Recent soundfonts</source>
         <translation>最近的音色库</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="914"/>
+        <location filename="../../plugin/plugineditor.cpp" line="985"/>
         <source>One instrument</source>
         <translation>单一乐器</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="915"/>
+        <location filename="../../plugin/plugineditor.cpp" line="986"/>
         <source>The same instrument is played on all MIDI channels</source>
         <translation>所有 MIDI 通道演奏同一个乐器</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="916"/>
+        <location filename="../../plugin/plugineditor.cpp" line="987"/>
         <source>16 channels</source>
         <translation>16 通道</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="917"/>
+        <location filename="../../plugin/plugineditor.cpp" line="988"/>
         <source>Each MIDI channel plays its instrument, or the one chosen by its program changes (General MIDI)</source>
         <translation>每个 MIDI 通道演奏各自的乐器，或由其程序变更选择的乐器 (General MIDI)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="919"/>
+        <location filename="../../plugin/plugineditor.cpp" line="990"/>
         <source>The same instrument is played by an MPE controller: each note has its own pitch bend, pressure and timbre (lower zone of 15 channels, or the zones given by the controller)</source>
         <translation>由 MPE 控制器演奏同一个乐器：每个音符都有各自的弯音、压力和音色 (15 个通道的下部区域，或由控制器指定的区域)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="925"/>
+        <location filename="../../plugin/plugineditor.cpp" line="996"/>
         <source>Gain</source>
         <translation>增益</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="947"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1030"/>
         <source>Play all</source>
         <translation>全部演奏</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="956"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1039"/>
         <source>Default modulator from the velocity to the filter cutoff frequency: the softer the note, the lower the cutoff (up to 2 octaves lower).
 Change this option if notes sound too muffled: SoundFont 2.01 for an old soundfont made with this version (the notes above the velocity 64 are not filtered), Disabled for a soundfont whose samples already sound softer at low velocities (several velocity layers).</source>
         <translation>力度到滤波器截止频率的默认调制器：音符越轻，截止频率越低（最多低 2 个八度）。
 如果音符听起来过于沉闷，请更改此选项：用此版本制作的旧音色库选择 SoundFont 2.01（力度 64 以上的音符不被滤波），采样在低力度时已经较柔和的音色库（多个力度层）选择禁用。</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1296"/>
-        <source>Tuning</source>
-        <translation>调音</translation>
-    </message>
-    <message>
-        <location filename="../../plugin/plugineditor.cpp" line="926"/>
+        <location filename="../../plugin/plugineditor.cpp" line="997"/>
         <source>Level</source>
         <comment>reverb</comment>
         <translation>电平</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="926"/>
+        <location filename="../../plugin/plugineditor.cpp" line="997"/>
         <source>Size</source>
         <comment>reverb</comment>
         <translation>大小</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="926"/>
+        <location filename="../../plugin/plugineditor.cpp" line="997"/>
         <source>Width</source>
         <comment>reverb</comment>
         <translation>宽度</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="926"/>
+        <location filename="../../plugin/plugineditor.cpp" line="997"/>
         <source>Damping</source>
         <comment>reverb</comment>
         <translation>阻尼</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="927"/>
+        <location filename="../../plugin/plugineditor.cpp" line="998"/>
         <source>Level</source>
         <comment>chorus</comment>
         <translation>电平</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="927"/>
+        <location filename="../../plugin/plugineditor.cpp" line="998"/>
         <source>Depth</source>
         <comment>chorus</comment>
         <translation>深度</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="927"/>
+        <location filename="../../plugin/plugineditor.cpp" line="998"/>
         <source>Frequency</source>
         <comment>chorus</comment>
         <translation>频率</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="933"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1007"/>
+        <source>Poly: the notes are played together.
+Mono: one note at a time, each one starting with its attack.
+Legato: one note at a time, a note played before the previous one is released continuing it without a new attack.
+When several keys are held, the latest, the highest or the lowest one is heard. The drums and the MPE mode are always polyphonic.</source>
+        <translation>复音：多个音同时演奏。
+单音：一次只演奏一个音，每个音都从起音开始。
+连奏：一次只演奏一个音，在松开前一个音之前弹奏的音会延续前一个音，不重新起音。
+按住多个键时，发声的是最后按下的、最高的或最低的键。鼓和 MPE 模式始终为复音。</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="1012"/>
+        <source>Duration of the pitch glide between two notes played legato</source>
+        <translation>以连奏方式演奏的两个音符之间音高滑动的时长</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="1016"/>
         <source>Reference pitch</source>
         <translation>参考音高</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="934"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1017"/>
         <source>Note sounding at this frequency, whatever the temperament</source>
         <translation>无论律制如何都以此频率发声的音</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="938"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1021"/>
         <source>Transposition</source>
         <translation>移调</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="939"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1022"/>
         <source>Transposition in semitones of the notes played, except the drums</source>
         <translation>以半音为单位移调所演奏的音（鼓除外）</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="945"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1028"/>
         <source>Tonality of the temperament (tonic of a scale)</source>
         <translation>律制的调（音阶的主音）</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="949"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1032"/>
         <source>Temperament or scale applied (equal temperament otherwise)</source>
         <translation>应用律制或音阶（否则为平均律）</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="950"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1033"/>
         <source>Reverb enabled</source>
         <translation>启用混响</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="951"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1034"/>
         <source>Chorus enabled</source>
         <translation>启用合唱</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="954"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1037"/>
         <source>Filter cutoff</source>
         <translation>滤波器截止</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="965"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1048"/>
         <source>Curve</source>
         <translation>曲线</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="966"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1049"/>
         <source>Velocity curve: linear in the middle, concave to the left (softer velocity), convex to the right (velocity rising quickly)</source>
         <translation>力度曲线：中间为线性，向左为凹形（力度更柔和），向右为凸形（力度迅速升高）</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="972"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1055"/>
         <source>Panic</source>
         <translation>紧急停止</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="973"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1056"/>
         <source>Stop all sounds and reset the controllers</source>
         <translation>停止所有声音并重置控制器</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="974"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1057"/>
         <source>Settings</source>
         <translation>设置</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1028"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1111"/>
         <source>cannot open the file %1</source>
         <translation>无法打开文件 %1</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1030"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1113"/>
         <source>invalid %1 index</source>
         <translation>无效的 %1 索引</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1042"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1125"/>
         <source>No soundfont</source>
         <translation>无音色库</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1050"/>
-        <location filename="../../plugin/plugineditor.cpp" line="1101"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1133"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1185"/>
         <source>Loading...</source>
         <translation>正在加载...</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1055"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1138"/>
         <source>Cannot read the soundfont: %1</source>
         <translation>无法读取音色库：%1</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1062"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1145"/>
         <source>Open a soundfont or drop it here</source>
         <translation>打开音色库或将其拖放到此处</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1098"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1182"/>
         <source>Loading the sounds: %1 %</source>
         <translation>正在加载声音：%1%</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1100"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1184"/>
         <source>Some sounds may be missing until the loading is complete.</source>
         <translation>加载完成前，部分声音可能无法播放。</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1134"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1248"/>
         <source>Voices: %1</source>
         <translation>复音：%1</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1135"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1249"/>
         <source>CPU: %1 %</source>
         <translation>CPU：%1%</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1149"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1263"/>
         <source>Open a soundfont</source>
         <translation>打开音色库</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1163"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1277"/>
         <source>No recent soundfont</source>
         <translation>没有最近的音色库</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1212"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1326"/>
         <source>%1 voices</source>
         <translation>%1 个复音</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1217"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1331"/>
         <source>Channel %1</source>
         <translation>通道 %1</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1224"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1338"/>
         <source>System language</source>
         <translation>系统语言</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1231"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1345"/>
         <source>Polyphony</source>
         <translation>复音数</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1232"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1346"/>
         <source>Keyboard</source>
         <translation>键盘</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1233"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1347"/>
         <source>Language</source>
         <translation>语言</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1235"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1349"/>
         <source>Fixed latency (notes played at their exact position)</source>
         <translation>固定延迟（音符在其准确位置播放）</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1237"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1351"/>
         <source>Clipping to [-1; 1]</source>
         <translation>削波到 [-1; 1]</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1297"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1410"/>
+        <source>Note</source>
+        <translation>音符</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/plugineditor.cpp" line="1411"/>
         <source>Temperaments and scales</source>
         <translation>律制与音阶</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="948"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1031"/>
         <source>Also play the notes not used by the temperament (scale)</source>
         <translation>也演奏律制（音阶）未使用的音</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="943"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1026"/>
         <source>Temperament or scale, transposed to the chosen tonality</source>
         <translation>律制或音阶，移调到所选的调</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="944"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1027"/>
         <source>Tonality</source>
         <translation>调性</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1242"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1356"/>
         <source>Store the soundfont in the project (not possible with an sfz file)</source>
         <translation>将音色库存储在工程中 (sfz 文件不可用)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1243"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1357"/>
         <source>Store the soundfont in the project</source>
         <translation>将音色库存储在工程中</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1249"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1363"/>
         <source>Channels and effects on their own outputs (not possible in the standalone application)</source>
         <translation>通道和效果使用各自的输出 (独立应用中不可用)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1251"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1365"/>
         <source>Channels and effects on their own outputs</source>
         <translation>通道和效果使用各自的输出</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1298"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1412"/>
         <source>Reverb</source>
         <translation>混响</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1299"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1413"/>
         <source>Chorus</source>
         <translation>合唱</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1298"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1412"/>
         <source>Velocity</source>
         <translation>力度</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="281"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="318"/>
         <source>too many soundfonts are still playing, try again in a moment</source>
         <translation>仍有过多音色库正在播放，请稍后再试</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="777"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="819"/>
         <source>file not found</source>
         <translation>找不到文件</translation>
     </message>
@@ -6500,7 +6516,7 @@ Change this option if notes sound too muffled: SoundFont 2.01 for an old soundfo
 <context>
     <name>PluginJuce</name>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1012"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1095"/>
         <location filename="../../plugin/plugintranslator.cpp" line="60"/>
         <source>Options</source>
         <translation>选项</translation>
@@ -6809,144 +6825,200 @@ Change this option if notes sound too muffled: SoundFont 2.01 for an old soundfo
 <context>
     <name>PluginProcessor</name>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="53"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="57"/>
         <source>Main</source>
         <translation>主输出</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="55"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="59"/>
         <source>Channel %1</source>
         <translation>通道 %1</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="57"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="61"/>
         <source>Effects</source>
         <translation>效果</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="169"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="173"/>
         <source>Gain</source>
         <translation>增益</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="172"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="176"/>
         <source>Reverb</source>
         <translation>混响</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="172"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="176"/>
         <source>Reverb level</source>
         <translation>混响电平</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="173"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="177"/>
         <source>Reverb size</source>
         <translation>混响大小</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="173"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="177"/>
         <source>Reverb width</source>
         <translation>混响宽度</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="174"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="178"/>
         <source>Reverb damping</source>
         <translation>混响阻尼</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="176"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="180"/>
         <source>Chorus</source>
         <translation>合唱</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="176"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="180"/>
         <source>Chorus level</source>
         <translation>合唱电平</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="177"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="181"/>
         <source>Chorus depth</source>
         <translation>合唱深度</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="177"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="181"/>
         <source>Chorus frequency</source>
         <translation>合唱频率</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="183"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="187"/>
         <source>Tuning</source>
         <translation>调音</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="184"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="188"/>
         <source>Transposition</source>
         <translation>移调</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="185"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="189"/>
         <source>semitones</source>
         <translation>半音</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="186"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="190"/>
         <source>Reference pitch</source>
         <translation>参考音高</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="189"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="193"/>
         <source>Temperament</source>
         <translation>律制</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="190"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="194"/>
         <source>Temperament key</source>
         <translation>律制基准调</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="195"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="199"/>
         <source>Velocity</source>
         <translation>力度</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="196"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="200"/>
         <source>Velocity to filter cutoff</source>
         <translation>力度到滤波器截止</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="197"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="201"/>
         <source>Velocity curve</source>
         <translation>力度曲线</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="202"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="206"/>
         <source>Temperament enabled</source>
         <translation>启用律制</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="203"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="207"/>
         <source>Reverb enabled</source>
         <translation>启用混响</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="205"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="209"/>
         <source>Chorus enabled</source>
         <translation>启用合唱</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="212"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="216"/>
+        <source>Note</source>
+        <translation>音符</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="216"/>
+        <source>Play mode</source>
+        <translation>演奏模式</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="218"/>
+        <source>Glide time</source>
+        <translation>滑音时间</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="233"/>
         <source>Disabled</source>
         <comment>velocity to filter</comment>
         <translation>禁用</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="235"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="238"/>
+        <source>Poly</source>
+        <translation>复音</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="238"/>
+        <source>Mono (latest)</source>
+        <translation>单音（最后）</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="238"/>
+        <source>Mono (highest)</source>
+        <translation>单音（最高）</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="238"/>
+        <source>Mono (lowest)</source>
+        <translation>单音（最低）</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="238"/>
+        <source>Legato (latest)</source>
+        <translation>连奏（最后）</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="239"/>
+        <source>Legato (highest)</source>
+        <translation>连奏（最高）</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="239"/>
+        <source>Legato (lowest)</source>
+        <translation>连奏（最低）</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="246"/>
+        <source>Off</source>
+        <comment>glide</comment>
+        <translation>关</translation>
+    </message>
+    <message>
+        <location filename="../../plugin/pluginprocessor.cpp" line="272"/>
         <source>Equal</source>
         <comment>Equal musical temperament</comment>
         <translation>平均律</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="237"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="274"/>
         <source>Custom</source>
         <comment>custom temperament</comment>
         <translation>自定义</translation>
@@ -7308,42 +7380,42 @@ Change this option if notes sound too muffled: SoundFont 2.01 for an old soundfo
 <context>
     <name>PluginTemperamentKeyboard</name>
     <message>
-        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="416"/>
+        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="422"/>
         <source>Note used</source>
         <translation>使用的音</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="417"/>
+        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="423"/>
         <source>Tonality on this note</source>
         <translation>以此音为调</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="443"/>
+        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="449"/>
         <source>%1 is the note of the reference pitch: its fine tune of %2 cents is compensated by shifting all the notes by %3 cents.</source>
         <translation>%1 是参考音高的音：其 %2 音分的微调通过将所有音移动 %3 音分来补偿。</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="446"/>
+        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="452"/>
         <source>Fine tune of each key in cents, compared to the equal temperament.</source>
         <translation>每个键的微调（音分），相对于平均律。</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="447"/>
+        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="453"/>
         <source>Mouse wheel or vertical drag: change a value (finer with Ctrl).</source>
         <translation>鼠标滚轮或上下拖动：修改数值（按住 Ctrl 更精细）。</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="448"/>
+        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="454"/>
         <source>Double click: back to 0.</source>
         <translation>双击：恢复为 0。</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="449"/>
+        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="455"/>
         <source>Right click: note used or not, tonality.</source>
         <translation>右键：音是否使用、调。</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="450"/>
+        <location filename="../../plugin/plugintemperamentkeyboard.cpp" line="456"/>
         <source>Dot: tonality.</source>
         <translation>点：调。</translation>
     </message>

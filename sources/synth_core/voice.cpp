@@ -47,6 +47,8 @@ void Voice::prepareTables()
 Voice::Voice(VoiceParam * voiceParam, ISynthListener * listener) :
     _listener(listener),
     _context(voiceParam->getContext()),
+    _prstZone(nullptr),
+    _instZone(nullptr),
     _smpl(nullptr),
     _dataSmpl16(nullptr),
     _dataSmpl24(nullptr),
@@ -55,6 +57,10 @@ Voice::Voice(VoiceParam * voiceParam, ISynthListener * listener) :
 {
     _pendingFrames.position = 0;
     _pendingFrames.length = 0;
+    _glideOffset = _glideTarget = _glideStep = 0.0f;
+    _crossfadeLength = _crossfadePosition = 0;
+    _isCrossfadeIn = false;
+    _startsAtLoop = false;
 
     // Array initialization
     _arrayLength = 0;
@@ -118,6 +124,8 @@ void Voice::initialize(int sf2Id, ISynthZone * defaultModulators, ISynthInstPrst
 
     _voiceParam->initialize(sf2Id, defaultModulators, prst, prstZone, inst, instZone, smpl, channel, key, vel, type);
     deleteReplacedData(_replacedData.exchange(nullptr));
+    _prstZone = prstZone;
+    _instZone = instZone;
     _smpl = smpl;
 
     // The 8 least significant bits are missing for 16-bit samples (_dataSmpl24 is then null)
@@ -163,6 +171,12 @@ void Voice::initialize(int sf2Id, ISynthZone * defaultModulators, ISynthInstPrst
     if (_fadeOutChunkCount < 1)
         _fadeOutChunkCount = 1;
 
+    // No legato
+    _glideOffset = _glideTarget = _glideStep = 0.0f;
+    _crossfadeLength = _crossfadePosition = 0;
+    _isCrossfadeIn = false;
+    _startsAtLoop = false;
+
     // Resampling initialization
     memset(_srcData16, 0, sizeof(_srcData16));
     memset(_srcData24, 0, sizeof(_srcData24));
@@ -180,6 +194,14 @@ bool Voice::generateData(float * data, uint32_t len)
     {
         _currentSmplPos = _voiceParam->getPosition(champ_dwStart16);
         _loopMode = (char)_voiceParam->getInteger(champ_sampleModes);
+
+        // Note continuing another one (legato): from the beginning of the loop, if any
+        if (_startsAtLoop && (_loopMode == 1 || _loopMode == 3))
+        {
+            uint32_t loopStart = _voiceParam->getPosition(champ_dwStartLoop);
+            if (loopStart > _currentSmplPos && loopStart < _voiceParam->getPosition(champ_dwEndLoop))
+                _currentSmplPos = loopStart;
+        }
     }
 
     // Data replaced by another thread (a load first: no write in the usual case)
@@ -296,6 +318,16 @@ bool Voice::generateData(float * data, uint32_t len)
 
             // Distance between the points, fixed point with 32 bits for the fraction
             float pitchModulation = v_modEnvToPitch * _dataModArray[chunk] + v_modLfoToPitch * _modLfoArray[chunk] + v_vibLfoToPitch * _vibLfoArray[chunk];
+
+            // Glide of a note played legato, the offset reaching its target
+            if (_glideOffset != 0.0f || _glideTarget != 0.0f)
+            {
+                pitchModulation += getGlideCents(playedNote, v_scaleTune);
+                if (_glideOffset < _glideTarget)
+                    _glideOffset = _glideOffset + _glideStep < _glideTarget ? _glideOffset + _glideStep : _glideTarget;
+                else if (_glideOffset > _glideTarget)
+                    _glideOffset = _glideOffset - _glideStep > _glideTarget ? _glideOffset - _glideStep : _glideTarget;
+            }
             double ratio = pitchModulation == 0.0f ? fixedRatio :
                                fixedRatio * FastMaths::fastPow2(pitchModulation * 0.000833333f /* 1:1200 */);
 
@@ -319,6 +351,23 @@ bool Voice::generateData(float * data, uint32_t len)
             float targetCoeff = s_floatConversionCoef24 *
                                 _dataVolArray[chunk] *
                                 FastMaths::fastPow10(0.05f * v_modLfoToVolume * _modLfoArray[chunk]);
+
+            // Possibly a crossfade with another note (legato), equal power: a voice fading out is finished after its
+            // last chunk
+            if (_crossfadeLength > 0)
+            {
+                if (_crossfadePosition < _crossfadeLength)
+                    _crossfadePosition++;
+                float progress = 0.5f * static_cast<float>(_crossfadePosition) / static_cast<float>(_crossfadeLength);
+                targetCoeff *= _isCrossfadeIn ? FastMaths::fastSin(progress) : FastMaths::fastCos(progress);
+                if (_crossfadePosition >= _crossfadeLength)
+                {
+                    if (_isCrossfadeIn)
+                        _crossfadeLength = 0;
+                    else
+                        _isFinished = true;
+                }
+            }
 
             // Possibly a linear fade until 0, the voice being finished after the last chunk of the fade
             if (_fadeOutLength > 0)
@@ -656,6 +705,83 @@ bool Voice::biQuadCoefficients(float * coeffs, float freq, float inv_Q)
     return true;
 }
 
+
+void Voice::changeKey(int8_t key, uint32_t glideChunks)
+{
+    // The pitch glides from the key heard to the new one (sinc window chosen again for its pitch)
+    float heardKey = getHeardKey();
+    _sincWindow = nullptr;
+    _glideTarget = 0.0f;
+    if (_voiceParam->setKey(key))
+        setGlide(heardKey - static_cast<float>(key), glideChunks);
+    else
+        _glideOffset = 0.0f; // Pitch forced by a zone
+}
+
+void Voice::startLegato(float heardKey, float volumeLevel, float modLevel, uint32_t glideChunks, uint32_t fadeChunks)
+{
+    // The pitch glides from the key heard
+    int8_t key = _voiceParam->getKey();
+    _glideTarget = 0.0f;
+    if (!_voiceParam->isKeyForced() && key >= 0)
+        setGlide(heardKey - static_cast<float>(key), glideChunks);
+
+    // No attack: envelopes from the levels of the note continued, fade-in from the beginning of the loop
+    _volEnvelope.startFrom(volumeLevel);
+    _modEnvelope.startFrom(modLevel);
+    _crossfadeLength = fadeChunks > 0 ? fadeChunks : 1;
+    _crossfadePosition = 0;
+    _isCrossfadeIn = true;
+    _startsAtLoop = true;
+}
+
+void Voice::crossfadeOut(int8_t key, uint32_t glideChunks, uint32_t fadeChunks)
+{
+    // The pitch glides to the new key, its own key being kept (without glide, the pitch does not change)
+    int8_t ownKey = _voiceParam->getKey();
+    if (glideChunks > 0 && !_voiceParam->isKeyForced() && ownKey >= 0)
+    {
+        _glideTarget = static_cast<float>(key - ownKey);
+        setGlide(_glideOffset, glideChunks);
+    }
+
+    // Fade-out from the current level (a fade-in not finished being reversed)
+    uint32_t length = fadeChunks > 0 ? fadeChunks : 1;
+    uint32_t position = 0;
+    if (_crossfadeLength > 0 && _isCrossfadeIn)
+        position = length - SynthMath::min(length, _crossfadePosition * length / _crossfadeLength);
+    _crossfadeLength = length;
+    _crossfadePosition = position;
+    _isCrossfadeIn = false;
+}
+
+void Voice::setGlide(float offset, uint32_t glideChunks)
+{
+    if (glideChunks == 0)
+    {
+        _glideOffset = _glideTarget;
+        return;
+    }
+    _glideOffset = offset;
+    _glideStep = (offset > _glideTarget ? offset - _glideTarget : _glideTarget - offset) / static_cast<float>(glideChunks);
+}
+
+float Voice::getGlideCents(int playedNote, int32_t scaleTuning)
+{
+    // Scale tuning for the keys, and the fine tunes of the temperament interpolated between the keys
+    float cents = _glideOffset * static_cast<float>(scaleTuning);
+    if (_voiceParam->getKey() >= 0)
+    {
+        float heardKey = static_cast<float>(playedNote) + _glideOffset;
+        if (heardKey < 0.0f)
+            heardKey = 0.0f;
+        int lowKey = static_cast<int>(heardKey);
+        float fraction = heardKey - static_cast<float>(lowKey);
+        cents += (1.0f - fraction) * _context->getTemperamentFineTune(lowKey) +
+                 fraction * _context->getTemperamentFineTune(lowKey + 1) - _context->getTemperamentFineTune(playedNote);
+    }
+    return cents;
+}
 
 void Voice::fadeOut()
 {

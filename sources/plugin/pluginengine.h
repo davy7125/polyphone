@@ -118,6 +118,9 @@ public:
     // Velocity curve of the next notes, from -100 to 100 (see getCurvedVelocity)
     void setVelocityCurve(int curve);
 
+    // Play mode of the channels (SynthChannels::PlayMode and NotePriority), polyphonic in the MPE mode
+    void setPlayMode(int mode, int priority, float glideSeconds);
+
     // Outputs clipped to [-1; 1] or not
     void setClipping(bool isClipping);
 
@@ -157,6 +160,7 @@ private:
     void prioritizeProgram(int program); // Owner
     void applyCommand(const Command &command); // Audio thread
     void applyPrograms(); // Audio thread
+    void applyPlayMode(); // Audio thread
 
     // Synth, used by the audio thread (the soundfonts are declared first: deleted after the voices reading them)
     std::unique_ptr<SynthSoundfontSet> _soundfonts;
@@ -172,6 +176,8 @@ private:
     std::chrono::steady_clock::time_point _blockStart;
     int _velocityCurve;
     uint8_t _curvedVelocities[128];
+    int _playMode, _notePriority;
+    float _glideSeconds;
 
     // Owner threads
     std::mutex _ownerMutex;

@@ -63,6 +63,15 @@ public:
     void playInstrument(int sf2Id, int instrumentIndex, int channel, int key, int velocity);
     void playPreset(int sf2Id, int presetIndex, int channel, int key, int velocity);
 
+    // Note continuing the note of another key on a channel (legato, monophonic play mode), by the thread computing the
+    // voices when they are not computed (plugin, MIDI file renderer). The voices of the previous key (not released)
+    // whose zones also play the new key continue with it. The zones of the new key that were not played start from the
+    // beginning of their loop, without attack (levels of the envelopes of the previous voices), with a crossfade
+    // (LEGATO_CROSSFADE_DURATION) with the other voices of the previous key, which fade out. The pitch glides from the one
+    // heard during glideSeconds (0: no glide). Without voice of the previous key, the note is played as playPreset does.
+    void playPresetLegato(int sf2Id, int presetIndex, int channel, int previousKey, int key, int velocity,
+                          float glideSeconds);
+
     // sf2Id: -1 (no filter) or specific sf2 id
     // presetId: -1 (no filter) or specific preset id
     // channel: -2 (all channels), -1 (GUI channel) or [0 - 15] (MIDI channel)
@@ -194,6 +203,22 @@ private:
     std::atomic<int> _sampleVoiceTokenCounter;
     std::recursive_mutex _voicesMutex;
     int _noteId; // Shared by the voices started by a key
+
+    // Note played legato (playPresetLegato): voices of the previous key that can continue with the new one (null once
+    // they continue), what the new voices take from them
+    static const int MAX_LEGATO_VOICES = 64;
+    struct Legato
+    {
+        bool isActive = false;
+        Voice * voices[MAX_LEGATO_VOICES];
+        int voiceCount = 0;
+        float heardKey = 0.0f;
+        float volumeLevel = 0.0f;
+        float modLevel = 0.0f;
+        uint32_t glideChunks = 0;
+        uint32_t fadeChunks = 0;
+    };
+    Legato _legato;
 
     // Result of the last chunks computed, aligned as the buses
     float * _outputL, * _outputR;

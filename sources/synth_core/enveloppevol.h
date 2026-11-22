@@ -45,6 +45,13 @@ public:
     // Call a quick attack, just before the release (sample mode "release")
     void quickAttack();
 
+    // Start without delay, attack and hold, the decay starting from a level (between 0 and 1): note continuing another
+    // one played legato, which had this level
+    void startFrom(float level);
+
+    // Current level, between 0 and 1 (without the gain)
+    float getLevel() const { return _lastValue; }
+
     // True during the release, while the envelope only decreases
     bool isReleasing() { return _currentPhase == phase6release; }
 

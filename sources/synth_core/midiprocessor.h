@@ -95,6 +95,10 @@ public:
     int getPolyPressure(int channel, int key) override;
 
 private:
+    // Several keys released at once (IMidiListener)
+    void beginKeyBatch(int channel);
+    void endKeyBatch(int channel);
+
     // MPE zone: lower (master channel 0) or upper (master channel 15), ranges in hundredths of semitone
     struct MpeZone
     {

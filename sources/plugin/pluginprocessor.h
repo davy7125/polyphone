@@ -126,6 +126,13 @@ public:
     // 2.01, SoundFont 2.04 and disabled (translated)
     static juce::StringArray getVelocityToFilterNames();
 
+    // Play modes (parameter "playMode", translated): polyphonic, then monophonic and legato with the priority of the
+    // latest, the highest and the lowest key (SynthChannels). The glide of the legato (parameter "glideTime", in ms, 0
+    // for none) is written "Off" or as a duration.
+    static juce::StringArray getPlayModeNames();
+    static bool isLegatoPlayMode(int index) { return index >= 4; }
+    static juce::String getGlideTimeText(float milliseconds);
+
     // Settings shared by all instances (recent files, language)
     static juce::PropertiesFile::Options getSettingsOptions();
 
@@ -179,7 +186,7 @@ private:
     bool _isSoundfontStored;
 
     // Settings of the synth
-    static const int PARAMETER_COUNT = 17;
+    static const int PARAMETER_COUNT = 19;
     int _polyphony;
     std::atomic<bool> _hasMultipleOutputs;
     std::atomic<bool> _hasFixedLatency;

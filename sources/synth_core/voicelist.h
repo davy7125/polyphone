@@ -87,6 +87,7 @@ private:
         short numPreset;
         short key;
         int exclusiveClass;
+        int noteId;
         Voice * voice;
     };
 

@@ -43,10 +43,9 @@ static const juce::Colour ERROR_COLOR(0xffff5050);
 
 static const int POLYPHONIES[] = { 64, 128, 256, 512, 1024, 2048, 4096 };
 
-// Size of the window: its height follows the groups on the right side (the room left going to the tuning and the
-// velocity), with a little more by default for the presets; its width is the one needed by these groups, the room left
-// going to the presets
-static const int DEFAULT_EXTRA_HEIGHT = 40;
+// Size of the window: its height follows the groups on the right side (the room left going to the note and the
+// velocity, both as high as the rows of the note by default); its width is the one needed by these groups, the room
+// left going to the presets
 static const int PRESETS_DEFAULT_WIDTH = 290;
 static const int PRESETS_MINIMUM_WIDTH = 240;
 static const int MAXIMUM_WIDTH = 1800;
@@ -54,7 +53,7 @@ static const int MAXIMUM_HEIGHT = 1400;
 static const int FIXED_HEIGHT = 60 + 36 + 90 + 16; // Header, footer, keyboard, margins of the body
 
 // Groups: margin and title (with a switch on its right side for the groups that can be collapsed, their content being
-// a bit lower), then their content: rows of the tuning, temperaments (2 rows on the left, the 12 notes on the right),
+// a bit lower), then their content: rows of the note, temperaments (2 rows on the left, the 12 notes on the right),
 // knobs of an effect
 static const int GROUP_TITLE_HEIGHT = 18;
 static const int COLLAPSED_GROUP_HEIGHT = 4 + GROUP_TITLE_HEIGHT + 4;
@@ -62,7 +61,8 @@ static const int CONTENT_MARGIN = 6;
 static const int GROUP_SPACING = 8;
 static const int TUNING_ROW_HEIGHT = 24;
 static const int TUNING_ROW_SPACING = 4;
-static const int TOP_ROW_HEIGHT = 110; // Tuning and velocity, at least
+static const int TOP_ROW_HEIGHT = 114; // Note (3 rows) and velocity, at least
+static const int GLIDE_BAR_MARGIN = 30; // Around its text, at least
 static const int TEMPERAMENT_KEYBOARD_HEIGHT = 2 * TUNING_ROW_HEIGHT + TUNING_ROW_SPACING;
 static const int TEMPERAMENTS_CONTENT_HEIGHT = CONTENT_MARGIN + TEMPERAMENT_KEYBOARD_HEIGHT + 4;
 static const int KNOBS_HEIGHT = 90;
@@ -594,6 +594,35 @@ public:
     }
 };
 
+/// Slider drawn as a field (as a combo box) filled from its left side up to its value, its text in the middle
+
+class PluginEditor::BarSlider: public juce::Slider
+{
+public:
+    BarSlider() :
+        juce::Slider(juce::Slider::LinearBar, juce::Slider::TextBoxLeft) // Text box over the bar
+    {
+        setColour(juce::Slider::textBoxBackgroundColourId, juce::Colours::transparentBlack);
+    }
+
+    void paint(juce::Graphics &g) override
+    {
+        juce::Rectangle<float> box = getLocalBounds().toFloat();
+        g.setColour(BUTTON_COLOR);
+        g.fillRoundedRectangle(box, 3.0f);
+        float proportion = static_cast<float>(valueToProportionOfLength(getValue()));
+        if (proportion > 0.0f)
+        {
+            juce::Graphics::ScopedSaveState state(g);
+            g.reduceClipRegion(box.withWidth(box.getWidth() * proportion).toNearestInt());
+            g.setColour(HIGHLIGHT_COLOR.withAlpha(isEnabled() ? 0.5f : 0.2f));
+            g.fillRoundedRectangle(box, 3.0f);
+        }
+        g.setColour(OUTLINE_COLOR);
+        g.drawRoundedRectangle(box.reduced(0.5f), 3.0f, 1.0f);
+    }
+};
+
 /// Information shown by the tooltip of a small "i" in a circle
 
 class PluginEditor::InfoIcon: public juce::Component,
@@ -720,6 +749,20 @@ PluginEditor::PluginEditor(PluginProcessor &pluginProcessor) :
     gainSlider.valueFromTextFunction = [](const juce::String &text) { return text.getDoubleValue(); };
     gainSlider.updateText();
     _knobs[0]->label.setJustificationType(juce::Justification::centredRight);
+
+    // Play mode, the glide being shown with the legato (created first: the attachment of the play mode updates it)
+    _glideSlider.reset(new BarSlider());
+    addChildComponent(_glideSlider.get());
+    _glideAttachment.reset(new juce::AudioProcessorValueTreeState::SliderAttachment(
+        _processor.getParameterState(), "glideTime", *_glideSlider)); // Texts of the parameter ("Off", durations)
+    juce::StringArray playModeNames = PluginProcessor::getPlayModeNames();
+    for (int i = 0; i < playModeNames.size(); i++)
+        _playModeBox.addItem(playModeNames[i], i + 1);
+    addAndMakeVisible(_playModeBox);
+    _playModeBox.onChange = [this] { updatePlayMode(); };
+    _playModeAttachment.reset(new juce::AudioProcessorValueTreeState::ComboBoxAttachment(
+        _processor.getParameterState(), "playMode", _playModeBox));
+    updatePlayMode();
 
     // Tuning: note of the reference pitch and its frequency, the parameter being the frequency of A4
     for (juce::Label * label : { &_referencePitchLabel, &_transpositionLabel, &_tonalityLabel })
@@ -854,7 +897,7 @@ PluginEditor::PluginEditor(PluginProcessor &pluginProcessor) :
 
     setResizable(true, true);
     updateResizeLimits();
-    setSize(getRightWidths().column + PRESETS_DEFAULT_WIDTH + 26, getRequiredHeight() + DEFAULT_EXTRA_HEIGHT);
+    setSize(getRightWidths().column + PRESETS_DEFAULT_WIDTH + 26, getRequiredHeight());
     updateGroups(); // Content of the groups collapsed hidden
     startTimerHz(20);
 }
@@ -955,6 +998,18 @@ void PluginEditor::updateTexts()
     };
     for (size_t i = 0; i < _knobs.size() && i < std::size(knobNames); i++)
         _knobs[i]->label.setText(knobNames[i], juce::dontSendNotification);
+
+    // Play mode and glide
+    juce::StringArray playModeNames = PluginProcessor::getPlayModeNames();
+    for (int i = 0; i < playModeNames.size(); i++)
+        _playModeBox.changeItemText(i + 1, playModeNames[i]);
+    _playModeBox.setTooltip(tr("Poly: the notes are played together.\nMono: one note at a time, each one starting with "
+                               "its attack.\nLegato: one note at a time, a note played before the previous one is "
+                               "released continuing it without a new attack.\nWhen several keys are held, the latest, "
+                               "the highest or the lowest one is heard. The drums and the MPE mode are always "
+                               "polyphonic."));
+    _glideSlider->setTooltip(tr("Duration of the pitch glide between two notes played legato"));
+    _glideSlider->updateText();
 
     // Tuning, the tooltips being the same for a label and its control
     _referencePitchLabel.setText(tr("Reference pitch"), juce::dontSendNotification);
@@ -1110,7 +1165,8 @@ void PluginEditor::refresh()
         row->update(*this, engine.getPlayedProgram(channel), engine.getChannelActivity(channel));
     }
 
-    // Tuning
+    // Note
+    updatePlayMode();
     updateTuning();
 }
 
@@ -1137,6 +1193,36 @@ void PluginEditor::setMode(PluginEngine::Mode mode)
 {
     _processor.getEngine().setMode(mode);
     refresh();
+}
+
+void PluginEditor::updatePlayMode()
+{
+    // Each note has its own channel with the MPE: always polyphonic
+    bool isMpe = _processor.getEngine().getMode() == PluginEngine::MODE_MPE;
+    _playModeBox.setEnabled(!isMpe);
+    _glideSlider->setEnabled(!isMpe);
+    _glideSlider->setVisible(PluginProcessor::isLegatoPlayMode(_playModeBox.getSelectedItemIndex()));
+}
+
+int PluginEditor::getPlayModeBoxWidth()
+{
+    // Longest play mode, and the arrow
+    juce::Font font = getLookAndFeel().getComboBoxFont(_playModeBox);
+    int width = 0;
+    for (int item = 0; item < _playModeBox.getNumItems(); item++)
+        width = juce::jmax(width, juce::GlyphArrangement::getStringWidthInt(font, _playModeBox.getItemText(item)));
+    return width + 36;
+}
+
+int PluginEditor::getGlideTextWidth()
+{
+    // Longest text of the glide: "Off" or a duration (default font of the text box of a slider)
+    juce::Font font(juce::FontOptions(15.0f));
+    int width = 0;
+    for (float milliseconds : { 0.0f, 888.0f, 4888.0f })
+        width = juce::jmax(width, juce::GlyphArrangement::getStringWidthInt(
+                                      font, PluginProcessor::getGlideTimeText(milliseconds)));
+    return width + 10;
 }
 
 void PluginEditor::changeListenerCallback(juce::ChangeBroadcaster *)
@@ -1320,7 +1406,7 @@ void PluginEditor::paint(juce::Graphics &g)
         juce::Rectangle<int> area;
         juce::String title;
     };
-    for (const Group &group : { Group { _tuningArea, tr("Tuning") },
+    for (const Group &group : { Group { _tuningArea, tr("Note") },
                                 Group { _temperamentsArea, tr("Temperaments and scales") },
                                 Group { _velocityArea, tr("Velocity") }, Group { _reverbArea, tr("Reverb") },
                                 Group { _chorusArea, tr("Chorus") } })
@@ -1413,10 +1499,17 @@ void PluginEditor::resized()
     for (int group = 0; group < GROUP_COUNT; group++)
         _switches[group]->setBounds(switchedAreas[group].getRight() - 42, switchedAreas[group].getY() + 3, 34, 20);
 
-    // Tuning: reference pitch (note narrower than the frequency), then the transposition
+    // Note: play mode with the glide on its right, reference pitch (note narrower than the frequency), then the
+    // transposition
     int labelWidth = juce::jmax(getLabelWidth(_referencePitchLabel), getLabelWidth(_transpositionLabel));
     juce::Rectangle<int> tuning = _tuningArea.reduced(10, 0).withTrimmedTop(4 + GROUP_TITLE_HEIGHT + CONTENT_MARGIN);
     juce::Rectangle<int> row = tuning.removeFromTop(TUNING_ROW_HEIGHT);
+    _playModeBox.setBounds(row.removeFromLeft(juce::jmin(getPlayModeBoxWidth(),
+                                                         row.getWidth() - 8 - GLIDE_BAR_MARGIN - getGlideTextWidth())));
+    row.removeFromLeft(8);
+    _glideSlider->setBounds(row);
+    tuning.removeFromTop(TUNING_ROW_SPACING);
+    row = tuning.removeFromTop(TUNING_ROW_HEIGHT);
     _referencePitchLabel.setBounds(row.removeFromLeft(labelWidth));
     int noteWidth = juce::jmin(70, (row.getWidth() - 16) * 2 / 5);
     _referencePitchKeyBox.setBounds(row.removeFromLeft(noteWidth));
@@ -1530,6 +1623,7 @@ PluginEditor::RightWidths PluginEditor::getRightWidths()
     // Tuning: labels, note, "=" and frequency
     RightWidths widths;
     widths.tuning = 20 + juce::jmax(getLabelWidth(_referencePitchLabel), getLabelWidth(_transpositionLabel)) + 50 + 16 + 96;
+    widths.tuning = juce::jmax(widths.tuning, 20 + getPlayModeBoxWidth() + 8 + GLIDE_BAR_MARGIN + getGlideTextWidth());
 
     // Velocity: curve, then the filter (longest item of its list, or its label and its information)
     widths.velocityCurve = juce::jmax(90, getLabelWidth(_velocityCurveLabel));

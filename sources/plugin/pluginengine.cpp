@@ -45,6 +45,9 @@ PluginEngine::PluginEngine() :
     _sampleRate(48000),
     _blockFrameCount(0),
     _velocityCurve(0),
+    _playMode(SynthChannels::PLAY_MODE_POLY),
+    _notePriority(SynthChannels::PRIORITY_LATEST),
+    _glideSeconds(0.0f),
     _mode(MODE_ONE_PRESET),
     _program(0),
     _programsPending(false),
@@ -326,6 +329,24 @@ void PluginEngine::setVelocityCurve(int curve)
         _curvedVelocities[velocity] = static_cast<uint8_t>(getCurvedVelocity(velocity, curve));
 }
 
+void PluginEngine::setPlayMode(int mode, int priority, float glideSeconds)
+{
+    _playMode = std::clamp(mode, static_cast<int>(SynthChannels::PLAY_MODE_POLY),
+                           static_cast<int>(SynthChannels::PLAY_MODE_LEGATO));
+    _notePriority = std::clamp(priority, static_cast<int>(SynthChannels::PRIORITY_LATEST),
+                               static_cast<int>(SynthChannels::PRIORITY_LOWEST));
+    _glideSeconds = glideSeconds;
+    applyPlayMode();
+}
+
+void PluginEngine::applyPlayMode()
+{
+    // Each note has its own channel in the MPE mode
+    _channels->setPlayMode(_midiProcessor->isMpeEnabled() ? SynthChannels::PLAY_MODE_POLY :
+                                                            static_cast<SynthChannels::PlayMode>(_playMode),
+                           static_cast<SynthChannels::NotePriority>(_notePriority), _glideSeconds);
+}
+
 void PluginEngine::setClipping(bool isClipping)
 {
     _core->setClipping(isClipping);
@@ -373,7 +394,9 @@ void PluginEngine::applyCommand(const Command &command)
         if (command.isMpe != _midiProcessor->isMpeEnabled())
         {
             _core->releaseVoices(-1, -1, -2, -2, true);
+            _channels->forgetKeys();
             _midiProcessor->setMpeEnabled(command.isMpe);
+            applyPlayMode();
         }
         for (int channel = 0; channel < 16; channel++)
             _programs[channel] = command.programs[channel];
@@ -381,6 +404,7 @@ void PluginEngine::applyCommand(const Command &command)
         break;
     case Command::COMMAND_PANIC:
         _core->releaseVoices(-1, -1, -2, -2, true);
+        _channels->forgetKeys();
         _midiProcessor->resetChannels();
         break;
     }

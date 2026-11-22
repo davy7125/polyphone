@@ -55,9 +55,12 @@ LV2, AU (macOS) and a standalone application ("Polyphone Player", not distribute
   when to change it explained by an information icon) and curve applied to the velocity of
   the notes (power 3^(-curve / 100), linear by default), both drawn in a graph. A soundfont with its
   own default modulators (DMOD chunk of an sf2 or sf3 file) uses them instead of the ones of the
-  sf2 format: the setting of the default modulator has no effect on it.
+  sf2 format: the setting of the default modulator has no effect on it. Play mode: poly (default),
+  mono or legato with the priority of the latest, the highest or the lowest key held, and the glide of
+  the legato (Off, then up to 5 s). The drums (bank 128) and the MPE mode stay polyphonic.
 - Interface: the gain in the header (its value shown, its arc colored from 0 toward the left or the
-  right), the presets on the left (the room left by the groups); on the right the tuning (reference pitch: note from A#3 to A4
+  right), the presets on the left (the room left by the groups); on the right the note (play mode,
+  with the glide on its right for the legato; reference pitch: note from A#3 to A4
   = its frequency, the note keeping its pitch whatever the temperament; transposition) beside the
   velocity, then the temperaments and scales, the reverb and the chorus (side by side if both are
   enabled, the knobs having the same width). These three groups have a switch, also a parameter: off, the group is collapsed and its
@@ -67,7 +70,7 @@ LV2, AU (macOS) and a standalone application ("Polyphone Player", not distribute
   notes not used played anyway (disabled by default) and the fine tunes of the 12 notes, editable (the
   custom temperament). The height of the window follows the groups expanded. The note of the
   reference pitch and the custom temperament are saved in the state, not as parameters. The lists on
-  the right (temperament, tonality, note of the reference pitch, transposition, default modulator)
+  the right (play mode, temperament, tonality, note of the reference pitch, transposition, default modulator)
   change with the mouse wheel, one item per notch; not the lists of the 16 channels, the wheel
   scrolling them.
 - A keyboard showing the notes received and played with the mouse, the number of voices, the share of
@@ -139,7 +142,12 @@ The version is the one of the editor, read in `sources/version.txt` (its numbers
   thread, which never waits: a soundfont replaced is released once no voice reads it anymore
   (`SynthSoundfontSet`), and a sample not read yet is not played (`ISynthSample::loadData`). The MIDI messages are processed at their position in the blocks (possibly
   moved together, see above), the sound being computed at the frame (`SynthCore::renderExact`). The
-  velocity curve is applied to the notes before the synth.
+  velocity curve is applied to the notes before the synth. In the mono and legato modes,
+  `SynthChannels` keeps the keys held on each channel and plays the one having the priority: a mono
+  note starts with its attack (the notes of the channel stopping quickly), a legato note continues the
+  previous one (`SynthCore::playPresetLegato`): the voices whose zones also play the new key change
+  their pitch (with the glide), the other zones start from their loop without attack, crossfading
+  with the previous voices.
 - `pluginsoundfont`: the soundfonts read, shared by the instances of the plugin in the process, and
   the threads reading their samples (without JUCE).
 

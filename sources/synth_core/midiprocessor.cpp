@@ -394,6 +394,7 @@ void MidiProcessor::processControllerChanged(bool external, int channel, int num
             sustainState->_isSustainOn = false;
 
             // Remove all keys that have been previously sustained
+            beginKeyBatch(channel);
             for (int key = 0; key < 128; key++)
             {
                 if (sustainState->_sustainedKeys[key])
@@ -405,6 +406,7 @@ void MidiProcessor::processControllerChanged(bool external, int channel, int num
                         processKeyOff(channel, key);
                 }
             }
+            endKeyBatch(channel);
         }
     }
     else if (numController == 66)
@@ -423,6 +425,7 @@ void MidiProcessor::processControllerChanged(bool external, int channel, int num
             sustainState->_isSostenutoOn = false;
 
             // Remove all keys that have been held by the sostenuto pedal
+            beginKeyBatch(channel);
             for (int key = 0; key < 128; key++)
             {
                 if (sustainState->_sostenutoMemoryKeys[key])
@@ -434,6 +437,7 @@ void MidiProcessor::processControllerChanged(bool external, int channel, int num
                         processKeyOff(channel, key);
                 }
             }
+            endKeyBatch(channel);
         }
     }
     else if (numController == 120)
@@ -453,17 +457,21 @@ void MidiProcessor::processControllerChanged(bool external, int channel, int num
     if (numController == 120)
     {
         // All sound off: clear the sustain state and stop all notes
+        beginKeyBatch(channel);
         for (int key = 0; key < 128; key++)
             processKeyOff(channel, key);
+        endKeyBatch(channel);
     }
     else if (numController == 123)
     {
         // All notes off: stop all keys that are not held by the sustain or sostenuto pedal
+        beginKeyBatch(channel);
         for (int key = 0; key < 128; key++)
         {
             if (!sustainState->_sostenutoMemoryKeys[key] && !sustainState->_sustainedKeys[key])
                 processKeyOff(channel, key);
         }
+        endKeyBatch(channel);
     }
 
     // MPE: a controller of a master channel is repeated on its member channels, except the timbre (a dimension of each
@@ -505,6 +513,18 @@ void MidiProcessor::processKeyOn(int channel, int key, int vel)
     // And possibly update channel -1 if the change has not been consumed
     if (channel != -1 && !consumed)
         processKeyOn(-1, key, vel);
+}
+
+void MidiProcessor::beginKeyBatch(int channel)
+{
+    if (_listener != nullptr)
+        _listener->beginKeyBatch(channel);
+}
+
+void MidiProcessor::endKeyBatch(int channel)
+{
+    if (_listener != nullptr)
+        _listener->endKeyBatch(channel);
 }
 
 void MidiProcessor::processKeyOff(int channel, int key)

@@ -24,6 +24,7 @@
 
 #include "voiceparam.h"
 #include <cmath>
+#include <initializer_list>
 #include <cstdio>
 #include "synthmath.h"
 
@@ -80,6 +81,12 @@ void VoiceParam::initialize(int sf2Id, ISynthZone * defaultModulators, ISynthIns
     ISynthZone * prstGlobalZone = (prst != nullptr ? prst->getGlobalZone() : nullptr);
     if (prstZone)
         readZoneAttributes(prstGlobalZone, prstZone, true);
+
+    // Key played forced by a zone (keynum)
+    _isKeyForced = false;
+    for (ISynthZone * zone : { instGlobalZone, instZone, prstGlobalZone, prstZone })
+        if (zone != nullptr && zone->getAttributeSet()[champ_keynum])
+            _isKeyForced = true;
 
     // Initialize the modulator groups
     if (instZone)
@@ -272,6 +279,19 @@ void VoiceParam::setPan(float val)
     value.shValue = static_cast<int16_t>(SynthMath::round(val * 10.));
     _parameters[champ_pan].initValue(value, false);
     _version.fetch_add(1, std::memory_order_release);
+}
+
+bool VoiceParam::setKey(int8_t key)
+{
+    _key = key;
+    if (_isKeyForced || key < 0)
+        return false;
+
+    AttributeValue value;
+    value.wValue = static_cast<uint16_t>(key);
+    _parameters[champ_keynum].initValue(value, false);
+    _version.fetch_add(1, std::memory_order_release);
+    return true;
 }
 
 void VoiceParam::setLoopMode(uint16_t val)

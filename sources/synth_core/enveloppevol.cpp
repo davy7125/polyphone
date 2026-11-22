@@ -332,6 +332,14 @@ void EnveloppeVol::quickRelease()
     _currentChunk = 0;
 }
 
+void EnveloppeVol::startFrom(float level)
+{
+    // The decay goes from this level to the sustain (rising if the level is under it)
+    _currentPhase = phase4decay;
+    _currentChunk = 0;
+    _lastValue = level < 0.0f ? 0.0f : (level > 1.0f ? 1.0f : level);
+}
+
 void EnveloppeVol::quickAttack()
 {
     // Start of a sample in mode "release"

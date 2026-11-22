@@ -27,7 +27,7 @@
 // README.md):
 //   plugin_snapshot <soundfont> <output png prefix>
 // Images: one instrument, 16 channels, and one instrument with all the groups switched on (Werckmeister III in D,
-// reverb and chorus) and a gain of -12 dB
+// reverb and chorus), a gain of -12 dB and the legato with a glide of 120 ms
 
 #include <juce_audio_processors/juce_audio_processors.h>
 #include <cstdio>
@@ -64,7 +64,7 @@ int main(int argc, char ** argv)
         setState(processor, juce::String::fromUTF8(argv[1]), variant == 1 ? 1 : 0);
         if (variant == 2)
         {
-            // Werckmeister III in D, reverb and chorus
+            // Werckmeister III in D, reverb and chorus, legato with a glide
             juce::AudioProcessorValueTreeState &parameters = processor.getParameterState();
             auto set = [&parameters](const char * id, float value) {
                 parameters.getParameter(id)->setValueNotifyingHost(parameters.getParameter(id)->convertTo0to1(value));
@@ -80,6 +80,8 @@ int main(int argc, char ** argv)
             set("chorusDepth", 40.0f);
             for (const char * id : { "temperamentEnabled", "reverbEnabled", "chorusEnabled" })
                 set(id, 1.0f);
+            set("playMode", 4.0f); // Legato (latest)
+            set("glideTime", 120.0f);
         }
 
         // A few notes played, shown by the keyboard

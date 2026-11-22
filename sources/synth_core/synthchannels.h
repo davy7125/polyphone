@@ -47,6 +47,31 @@ public:
     // Transposition in semitones of the next notes
     void setTransposition(int semitones) { _transposition = semitones; }
 
+    // Play mode of the channels, the percussions (bank 128) being always polyphonic: polyphonic (default), or one note at
+    // a time, heard among the keys held according to a priority (the latest key pressed, the highest or the lowest one).
+    // When the key heard is released, the key held that has the priority is heard again.
+    // - Monophonic: each note starts with its attack, the notes of the channel stopping quickly.
+    // - Legato: a note following another one that is still held continues it (SynthCore::playPresetLegato), its pitch
+    //   gliding from the previous one during glideSeconds (0: no glide). A note following no other one starts with its
+    //   attack, as in the monophonic mode.
+    // The keys held are forgotten when the mode changes (the notes heard are released as in the polyphonic mode).
+    enum PlayMode
+    {
+        PLAY_MODE_POLY,
+        PLAY_MODE_MONO,
+        PLAY_MODE_LEGATO
+    };
+    enum NotePriority
+    {
+        PRIORITY_LATEST,
+        PRIORITY_HIGHEST,
+        PRIORITY_LOWEST
+    };
+    void setPlayMode(PlayMode mode, NotePriority priority, float glideSeconds);
+
+    // Forget the keys held (all sounds stopped)
+    void forgetKeys();
+
     // Program of a channel before its first program change
     static int getDefaultProgram(int channel) { return channel == 9 ? 128 * 128 : 0; }
 
@@ -55,6 +80,9 @@ public:
 
     // IMidiListener implementation
     bool processKey(int channel, int key, int vel) override;
+    bool processKeyRestarted(int channel, int key, int vel) override;
+    void beginKeyBatch(int channel) override;
+    void endKeyBatch(int channel) override;
     bool processPolyPressureChanged(int channel, int key, int pressure) override;
     bool processMonoPressureChanged(int channel, int value) override;
     bool processControllerChanged(int channel, int num, int value) override;
@@ -63,6 +91,14 @@ public:
     bool processRPNChanged(int channel, int parameter, int value, bool isRegistered, int trigger) override;
 
 private:
+    // Soundfont, preset and key (transposed) played by a key of a channel, false if nothing can be played
+    bool getPreset(int channel, int key, int &sf2Index, int &presetIndex, int &playedKey);
+
+    // Monophonic play mode: key heard after a key is pressed (pressedKey, possibly the key heard pressed again) or released
+    // (pressedKey -1)
+    bool isMonophonic(int channel) const;
+    void updateMonoNote(int channel, int pressedKey);
+
     SynthCore * _core;
     ISynthSoundfonts * _soundfonts;
     int _sf2Indexes[16];
@@ -70,6 +106,21 @@ private:
     int _programs[16]; // Chosen by the program changes
     int _playedKeys[16][128]; // Key played (transposed) by each key held, -1 if none
     int _transposition;
+
+    // Monophonic play mode
+    PlayMode _playMode;
+    NotePriority _notePriority;
+    float _glideSeconds;
+    struct MonoChannel
+    {
+        uint32_t keyOrders[128]; // 0 if the key is not held, otherwise the order in which it was pressed
+        uint8_t velocities[128];
+        uint32_t lastOrder;
+        int heardKey; // Key whose note is heard, -1 if none
+        int heardSf2Index, heardPresetIndex;
+        int batchDepth; // Keys released at once
+    };
+    MonoChannel _monoChannels[16];
 };
 
 #endif // SYNTHCHANNELS_H
