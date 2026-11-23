@@ -258,10 +258,11 @@ juce::AudioProcessorValueTreeState::ParameterLayout PluginProcessor::createParam
             juce::AudioParameterFloatAttributes()
                 .withStringFromValueFunction([](float value, int) { return getEnvelopeFactorText(value); })
                 .withValueFromStringFunction([](const juce::String &text) {
-                    // A factor, possibly after "×" or "x", the soundfont being followed otherwise
+                    // A factor, possibly after "×", "x" or "*", the soundfont being followed otherwise. The number is read
+                    // from its first digit: the CLAP wrapper gives "×" as the Latin-1 characters of its UTF-8 bytes.
                     if (!text.containsAnyOf("0123456789"))
                         return 1.0f;
-                    double value = text.trimCharactersAtStart(juce::String::fromUTF8("\xc3\x97xX* ")).getDoubleValue();
+                    double value = text.substring(text.indexOfAnyOf(".0123456789")).getDoubleValue();
                     return static_cast<float>(juce::jlimit(static_cast<double>(MIN_ENVELOPE_FACTOR),
                                                            static_cast<double>(MAX_ENVELOPE_FACTOR), value));
                 }));
