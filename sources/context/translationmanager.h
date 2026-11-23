@@ -27,6 +27,7 @@
 
 #include <QString>
 #include <QMap>
+#include <QAtomicInt>
 class QApplication;
 class QTranslator;
 class ConfManager;
@@ -37,6 +38,21 @@ public:
     enum TranslationType
     {
         TRANSLATION_STEREO_EDITING_HELP
+    };
+
+    /// While an object of this class exists, the texts translated with tr() are the source texts (English), in all
+    /// threads: for the messages read by an AI whatever the language of the interface. To be used only around the code
+    /// producing these messages, an interface created meanwhile would stay in English.
+    class SourceLanguage
+    {
+    public:
+        SourceLanguage() { s_count.ref(); }
+        ~SourceLanguage() { s_count.deref(); }
+        static bool isActive() { return s_count.loadRelaxed() > 0; }
+
+    private:
+        Q_DISABLE_COPY(SourceLanguage)
+        static QAtomicInt s_count;
     };
 
     TranslationManager(ConfManager *configuration);

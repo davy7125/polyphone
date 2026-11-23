@@ -608,6 +608,8 @@ void McpFunctions::addBrowsingFunctions(QList<McpFunction *> &functions)
             EltID id = args.getId("id");
             if (McpEditor::getInstance() == nullptr || !McpEditor::getInstance()->showElement(id))
                 throw McpException("the soundfont is not displayed in an editor");
-            return QString("Element displayed.");
+            QJsonObject result;
+            result["displayed"] = McpUtils::idToString(id);
+            return result;
         });
 }

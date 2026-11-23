@@ -59,6 +59,7 @@ class TabManagerMcpEditor: public McpEditor
 public:
     int openNewSoundfont() override { return TabManager::getInstance()->openNewSoundfont(false); }
     void openSoundfont(QString filePath) override { TabManager::getInstance()->openSoundfont(filePath, nullptr, false); }
+    bool closeSoundfont(int indexSf2) override { return TabManager::getInstance()->closeSoundfont(indexSf2); }
     bool showElement(EltID id) override { return TabManager::getInstance()->showElement(id); }
     int getCurrentSoundfont() override { return TabManager::getInstance()->getCurrentSf2(); }
     IdList getCurrentSelection() override { return TabManager::getInstance()->getCurrentSelection(); }
@@ -392,46 +393,7 @@ void TabManager::onTabCloseRequested(QWidget * widget)
             break;
         }
 
-        // Delete the tab
-        _soundfontTabs.removeAll(soundfontTab);
-        _stackedWidget->removeWidgetWithTab(soundfontTab);
-        delete soundfontTab;
-
-        // Delete the model linked to the soundfont if no other tabs use it, otherwise mute all sounds it produces
-        if (id.indexSf2 >= 0)
-        {
-            bool used = false;
-            foreach (SoundfontTab * otherTab, _soundfontTabs)
-            {
-                if (otherTab == soundfontTab)
-                    continue;
-
-                if (otherTab->getSf2Index() == id.indexSf2)
-                {
-                    used = true;
-                    break;
-                }
-            }
-            if (used)
-                ContextManager::audio()->getSynth()->play(id, -2, -2, 0);
-            else
-                removeSoundfont(id.indexSf2);
-        }
-
-        if (_soundfontTabs.empty())
-        {
-            // Save the state of the keyboard, recorder and MIDI player windows
-            saveWindowState();
-
-            // Close them (unless they are still used by the soundfont explorers)
-            if (!isExplorerPlaying())
-            {
-                emit keyboardDisplayChanged(false, false);
-                emit recorderDisplayChanged(false, false);
-            }
-            if (_dirBrowserTabs.empty())
-                emit midiPlayerDisplayChanged(false, false);
-        }
+        closeSoundfontTab(soundfontTab);
     }
     else if (widget == dynamic_cast<QWidget*>(_configTab))
     {
@@ -480,6 +442,69 @@ void TabManager::onTabCloseRequested(QWidget * widget)
             emit midiPlayerDisplayChanged(false, false);
         }
     }
+}
+
+void TabManager::closeSoundfontTab(SoundfontTab * soundfontTab)
+{
+    // Delete the tab
+    EltID id(elementSf2, soundfontTab->getSf2Index());
+    _soundfontTabs.removeAll(soundfontTab);
+    _stackedWidget->removeWidgetWithTab(soundfontTab);
+    delete soundfontTab;
+
+    // Delete the model linked to the soundfont if no other tabs use it, otherwise mute all sounds it produces
+    if (id.indexSf2 >= 0)
+    {
+        bool used = false;
+        foreach (SoundfontTab * otherTab, _soundfontTabs)
+        {
+            if (otherTab->getSf2Index() == id.indexSf2)
+            {
+                used = true;
+                break;
+            }
+        }
+        if (used)
+            ContextManager::audio()->getSynth()->play(id, -2, -2, 0);
+        else
+            removeSoundfont(id.indexSf2);
+    }
+
+    if (_soundfontTabs.empty())
+    {
+        // Save the state of the keyboard, recorder and MIDI player windows
+        saveWindowState();
+
+        // Close them (unless they are still used by the soundfont explorers)
+        if (!isExplorerPlaying())
+        {
+            emit keyboardDisplayChanged(false, false);
+            emit recorderDisplayChanged(false, false);
+        }
+        if (_dirBrowserTabs.empty())
+            emit midiPlayerDisplayChanged(false, false);
+    }
+}
+
+bool TabManager::closeSoundfont(int sf2Index)
+{
+    SoundfontManager * sm = SoundfontManager::getInstance();
+    EltID idSf2(elementSf2, sf2Index);
+    if (sf2Index < 0 || !sm->isValid(idSf2))
+        return false;
+
+    // Tabs displaying the soundfont, the last one removes it
+    QList<SoundfontTab *> tabs;
+    foreach (SoundfontTab * tab, _soundfontTabs)
+        if (tab->getSf2Index() == sf2Index)
+            tabs << tab;
+    foreach (SoundfontTab * tab, tabs)
+        closeSoundfontTab(tab);
+
+    // Soundfont without tab
+    if (sm->isValid(idSf2))
+        removeSoundfont(sf2Index);
+    return !sm->isValid(idSf2);
 }
 
 void TabManager::removeSoundfont(int sf2Index)

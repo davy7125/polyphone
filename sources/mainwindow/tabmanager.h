@@ -106,6 +106,10 @@ public slots:
     /// Close the current tab
     void closeCurrentTab();
 
+    /// Close the tabs of a soundfont and remove it, without asking to save the changes (return false if the soundfont
+    /// doesn't exist)
+    bool closeSoundfont(int sf2Index);
+
 signals:
     /// Emitted when the visibility of the keyboard, recorder or MIDI player changes
     void keyboardDisplayChanged(bool isDisplayed, bool propagate = true);
@@ -141,6 +145,7 @@ private:
     explicit TabManager(DialogKeyboard * dialogKeyboard, MainStackedWidget * stackedWidget);
     ~TabManager();
     void saveWindowState();
+    void closeSoundfontTab(SoundfontTab * soundfontTab); // Without asking to save the changes
     void removeSoundfont(int sf2Index);
     bool isExplorerPlaying(); // A soundfont explorer uses the keyboard and recorder windows
 

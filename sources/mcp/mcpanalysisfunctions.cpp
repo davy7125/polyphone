@@ -29,6 +29,7 @@
 #include "soundanalyzer.h"
 #include "sampleutils.h"
 #include "offlinerenderer.h"
+#include "translationmanager.h"
 #include "utils.h"
 #include <QBuffer>
 #include <QFileInfo>
@@ -362,6 +363,7 @@ static void addNotes(QStringList &lines, const IdList &elements, const QMap<int,
 static quint32 renderLines(int indexSf2, const QStringList &lines, QVector<float> &left, QVector<float> &right, QString wavFile)
 {
     // Default values of the controllers as in the editor (the soundfont was loaded before the renderer was created)
+    TranslationManager::SourceLanguage sourceLanguage; // Possible error in English
     OfflineRenderer renderer;
     QVector<float> data;
     quint32 frameCount;
@@ -766,7 +768,9 @@ void McpFunctions::addAnalysisFunctions(QList<McpFunction *> &functions)
         "a single key also the fundamental (common period of what is heard, searched over the whole range), the "
         "harmonics and the pitch every 20 ms during the whole rendering, release included, whatever produces its "
         "changes (envelopes, LFOs, modulators, the samples themselves). With solo, each element is also rendered "
-        "alone and the ensemble without it. Optionally writes the rendering in a wav file for the user.",
+        "alone and the ensemble without it. Optionally writes the rendering in a wav file for the user. To measure "
+        "several keys one after the other (pitch or level along the keyboard), use render_keyboard: one call instead "
+        "of one per key.",
         R"JSON({"properties":{
             "elements":{"type":["string","array"],"items":{"type":"string"},"description":"Presets, instruments or samples played together"},
             "element":{"type":"string","description":"A single element (same as elements)"},

@@ -33,10 +33,24 @@
 const QString TranslationManager::DEFAULT_LANGUAGE = "en"; // English is the default language;
 const QString TranslationManager::RESOURCE_PATH = ":/i18n";
 const QString TranslationManager::TRANSLATION_DIRECTORY = "translations";
+QAtomicInt TranslationManager::SourceLanguage::s_count = 0;
+
+// Translator of the application, without translation while a TranslationManager::SourceLanguage object exists
+class ApplicationTranslator : public QTranslator
+{
+public:
+    QString translate(const char * context, const char * sourceText, const char * disambiguation, int n) const override
+    {
+        // A null string: Qt uses the source text
+        if (TranslationManager::SourceLanguage::isActive())
+            return QString();
+        return QTranslator::translate(context, sourceText, disambiguation, n);
+    }
+};
 
 TranslationManager::TranslationManager(ConfManager * configuration) :
     _configuration(configuration),
-    _translator(new QTranslator())
+    _translator(new ApplicationTranslator())
 {
     // Native language
     _languages["en"] = getNativeLanguageName("en");

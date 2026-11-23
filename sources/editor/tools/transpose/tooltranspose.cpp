@@ -36,6 +36,7 @@ void ToolTranspose::beforeProcess(IdList ids)
 {
     Q_UNUSED(ids)
     _elementsInError.clear();
+    _clampedDivisions = 0;
 }
 
 void ToolTranspose::process(SoundfontManager * sm, EltID id, AbstractToolParameters *parameters)
@@ -66,6 +67,7 @@ void ToolTranspose::process(SoundfontManager * sm, EltID id, AbstractToolParamet
         {
             divId.indexElt2 = i;
             AttributeValue valeur;
+            bool clamped = false;
 
             // Update keyrange?
             if (params->getAdaptKeyRanges())
@@ -78,6 +80,7 @@ void ToolTranspose::process(SoundfontManager * sm, EltID id, AbstractToolParamet
                 noteSup -= semiTones;
 
                 // Ajustement
+                clamped = noteInf < 0 || noteInf > 127 || noteSup < 0 || noteSup > 127;
                 if (noteInf < 0)
                     noteInf = 0;
                 else if (noteInf > 127)
@@ -105,6 +108,8 @@ void ToolTranspose::process(SoundfontManager * sm, EltID id, AbstractToolParamet
 
             // Modification rootkey et enregistrement
             rootKey -= semiTones;
+            if (clamped || rootKey < 0 || rootKey > 127)
+                _clampedDivisions.ref();
             if (rootKey < 0)
                 rootKey = 0;
             else if (rootKey > 127)

@@ -27,6 +27,7 @@
 #include "mcpattributes.h"
 #include "soundfontmanager.h"
 #include "contextmanager.h"
+#include "translationmanager.h"
 #include "soundanalyzer.h"
 #include "sampleutils.h"
 #include "utils.h"
@@ -126,11 +127,14 @@ static McpFunction * toolFunction(QString name, QString description, QString ele
 
     return new McpFunction(name, McpFunction::CATEGORY_TOOLS, false, description, schema.toUtf8().constData(),
         [name, types, create, setter, filler, beforeRun](const McpArguments &args) -> McpResult {
+            // Messages of the tool in English, whatever the language of the interface
+            TranslationManager::SourceLanguage sourceLanguage;
+
             IdList ids = args.getIds("elements", types);
             AbstractTool * tool = getTool(name, create);
             if (beforeRun)
                 beforeRun(args, tool);
-            QString message;
+            QString warning, confirmation;
             QString error = tool->runWithoutDialog(ids, [&](AbstractToolParameters * parameters) -> QString {
                 if (setter)
                 {
@@ -144,16 +148,19 @@ static McpFunction * toolFunction(QString name, QString description, QString ele
                     }
                 }
                 return QString();
-            }, message);
+            }, warning, confirmation);
             if (!error.isEmpty())
                 throw McpException(cleanMessage(error));
 
+            // Counts and details given by the tool, then its messages
             QJsonObject result;
             result["done"] = true;
-            if (!message.isEmpty())
-                result["message"] = cleanMessage(message);
             if (filler)
                 filler(tool, result);
+            if (!warning.isEmpty())
+                result["warning"] = cleanMessage(warning);
+            if (!confirmation.isEmpty())
+                result["message"] = cleanMessage(confirmation);
             return result;
         });
 }
@@ -531,9 +538,11 @@ static void addInstrumentTools(QList<McpFunction *> &functions)
 
     functions << toolFunction(
         "detune",
-        "Tool \"Detune\" (celeste): set the fine tuning of each division to produce beats with an instrument tuned "
-        "normally, as an organ celeste stop. The number of beats per second is given at key 60 and changes by the "
-        "coefficient at each octave.",
+        "Tool \"Detune\" (celeste): replace the fine tuning of each division so that the instrument beats with the same "
+        "instrument tuned normally, as an organ celeste stop (the previous fine tuning of the divisions is lost). The "
+        "number of beats per second is given at key 60 and divided by the coefficient at each octave above "
+        "(multiplied below). Each division gets 1 to 50 cents, in the direction of the sign. Check the result with "
+        "render_keyboard (beats with the normal instrument) or get_parameter_map (fine_tune).",
         "Instruments", instruments,
         R"JSON("beats_per_second":{"type":"number","minimum":-10,"maximum":10,"description":"Beats per second at key 60, the sign giving the direction (default 4)"},
            "coefficient":{"type":"number","minimum":0.5,"maximum":2,"description":"Division of the beats for each octave above (default 1)"})JSON",
@@ -706,26 +715,44 @@ static void addInstrumentTools(QList<McpFunction *> &functions)
 
     functions << toolFunction(
         "transpose_instruments",
-        "Tool \"Transpose\" of instruments: shift the pitch of the instruments (root keys and tuning of the divisions), "
-        "the key ranges being possibly shifted so that each key keeps playing the same samples.",
+        "Tool \"Transpose\" of instruments: every key plays \"semitones\" higher (lower if negative), by changing the "
+        "root keys and the fine tuning of the divisions (the decimals are rounded to the cent). With adapt_key_ranges "
+        "true (default), the key ranges move by the opposite shift so that each sample keeps its playback speed: the "
+        "key k then plays the sample that the key k + semitones played before, without resampling (the timbre of "
+        "each sample is kept, as when an organ rank is moved on the keyboard: -12 turns a rank 2' 2/3 into a rank "
+        "5' 1/3, each key playing the pipe of the key one octave below). With adapt_key_ranges false, each key keeps "
+        "its samples, played transposed (resampled). Key ranges and root keys are limited to 0 - 127: the result "
+        "gives the number of divisions limited (clamped_divisions). Check the pitch with render_keyboard.",
         "Instruments", instruments,
-        R"JSON("semitones":{"type":"number","minimum":-120,"maximum":120,"description":"Shift in semitones (decimals = cents)"},
-           "adapt_key_ranges":{"type":"boolean","description":"Shift the key ranges (default true)"})JSON",
+        R"JSON("semitones":{"type":"number","minimum":-120,"maximum":120,"description":"Pitch change in semitones, the decimals being cents (rounded to the cent)"},
+           "adapt_key_ranges":{"type":"boolean","description":"true (default): the samples move on the keyboard and keep their playback speed; false: the keys keep their samples, resampled"})JSON",
         { "semitones" }, []() { return new ToolTranspose(); },
         [](const McpArguments &args, AbstractTool *, AbstractToolParameters * parameters) {
             ToolTranspose_parameters * params = dynamic_cast<ToolTranspose_parameters *>(parameters);
             params->setSemiTones(args.getDouble("semitones", -120, 120));
             params->setAdaptKeyRanges(args.getBool("adapt_key_ranges", true));
+        },
+        [](AbstractTool * tool, QJsonObject &result) {
+            result["clamped_divisions"] = dynamic_cast<ToolTranspose *>(tool)->getClampedDivisionCount();
         });
 
     functions << toolFunction(
         "natural_release",
         "Tool \"Natural release\": set the release duration of each division according to its key, the duration "
-        "decreasing with the pitch as for acoustic instruments, and optionally a pitch drop during the release.",
+        "decreasing with the pitch as for acoustic instruments, and optionally a pitch change during the release "
+        "(detune_semitones: negative = the pitch drops, as a pipe or a string whose excitation stops; positive = it "
+        "rises). The pitch change uses the modulation envelope: mod_env_to_pitch = -100 x detune_semitones cents and "
+        "mod_env_release = the release duration, compensated by the coarse / fine tuning so that the sustained pitch "
+        "is unchanged (with a modulation envelope at its full level while the key is held, as by default). The "
+        "compensation is added to the current tuning of the divisions, so that a tuning set before (temperament, "
+        "celeste, pure intervals...) is kept and the pitch change comes on top of it. Running the tool again sets "
+        "mod_env_to_pitch to the new value and adds the compensation again: to change the pitch change of an "
+        "instrument, undo the previous run first. detune_semitones 0 leaves the pitch settings unchanged. Check with "
+        "render_note (pitch during the release).",
         "Instruments", instruments,
         R"JSON("duration_at_c2":{"type":"number","minimum":0.001,"maximum":10,"description":"Release duration in seconds at key 36 (default 0.3)"},
            "division_per_octave":{"type":"number","minimum":1,"maximum":10,"description":"The duration is divided by this number at each octave above (default 2)"},
-           "detune_semitones":{"type":"number","minimum":-12,"maximum":12,"description":"Pitch change during the release (default 0)"})JSON",
+           "detune_semitones":{"type":"number","minimum":-12,"maximum":12,"description":"Pitch reached at the end of the release, relative to the sustained pitch: negative = drop, positive = rise (default 0: no change of pitch)"})JSON",
         {}, []() { return new ToolRelease(); },
         [](const McpArguments &args, AbstractTool *, AbstractToolParameters * parameters) {
             ToolRelease_parameters * params = dynamic_cast<ToolRelease_parameters *>(parameters);
@@ -793,12 +820,17 @@ static void addInstrumentPresetTools(QList<McpFunction *> &functions)
     functions << toolFunction(
         "change_attenuation",
         "Tool \"Change attenuation\": add a value to the attenuation of instruments or presets (global and divisions), "
-        "changing their volume while keeping the balance between divisions.",
+        "changing their volume while keeping the balance between divisions. The attenuations are limited to 0 - 57.6 dB "
+        "in an instrument (an instrument cannot be made louder than an attenuation of 0) and to -57.6 - 57.6 dB in a "
+        "preset: the result gives the number of values limited (clamped_values), whose balance changed.",
         "Instruments or presets (same type)", instPrst,
         R"JSON("offset_db":{"type":"number","minimum":-57.6,"maximum":57.6,"description":"dB added to the attenuation (positive = quieter)"})JSON",
         { "offset_db" }, []() { return new ToolChangeAttenuation(); },
         [](const McpArguments &args, AbstractTool *, AbstractToolParameters * parameters) {
             dynamic_cast<ToolChangeAttenuation_parameters *>(parameters)->setValue(args.getDouble("offset_db", -57.6, 57.6));
+        },
+        [](AbstractTool * tool, QJsonObject &result) {
+            result["clamped_values"] = dynamic_cast<ToolChangeAttenuation *>(tool)->getClampedValueCount();
         });
 
     functions << toolFunction(
@@ -1033,7 +1065,10 @@ static void addInstrumentPresetTools(QList<McpFunction *> &functions)
         "Tool \"Remove modulators\": remove all modulators of instruments, presets (global and divisions) or of all "
         "instruments and presets of soundfonts.",
         "Instruments, presets or soundfonts (same type)", { elementInst, elementPrst, elementSf2 }, "", {},
-        []() { return new ToolRemoveMods(); });
+        []() { return new ToolRemoveMods(); }, ParameterSetter(),
+        [](AbstractTool * tool, QJsonObject &result) {
+            result["removed_modulators"] = dynamic_cast<ToolRemoveMods *>(tool)->getRemovedModulatorCount();
+        });
 }
 
 static void addPresetAndSoundfontTools(QList<McpFunction *> &functions)
@@ -1064,13 +1099,22 @@ static void addPresetAndSoundfontTools(QList<McpFunction *> &functions)
         "remove_unused_elements",
         "Tool \"Remove unused elements\": remove the instruments used by no presets, then the samples used by no "
         "instruments.",
-        "Soundfonts", { elementSf2 }, "", {}, []() { return new ToolCleanUnused(); });
+        "Soundfonts", { elementSf2 }, "", {}, []() { return new ToolCleanUnused(); }, ParameterSetter(),
+        [](AbstractTool * tool, QJsonObject &result) {
+            ToolCleanUnused * cleanTool = dynamic_cast<ToolCleanUnused *>(tool);
+            result["removed_instruments"] = cleanTool->getRemovedInstrumentCount();
+            result["removed_samples"] = cleanTool->getRemovedSampleCount();
+        });
 
     functions << toolFunction(
         "remove_duplicate_samples",
         "Tool \"Remove duplicate samples\": find identical samples (data and settings), make the instruments use only "
-        "one of them and remove the others.",
-        "Soundfonts", { elementSf2 }, "", {}, []() { return new ToolCleanDuplicates(); });
+        "one of them and remove the others. Useful after copy_elements, which duplicates the samples having the name "
+        "of existing ones even if their data are the same.",
+        "Soundfonts", { elementSf2 }, "", {}, []() { return new ToolCleanDuplicates(); }, ParameterSetter(),
+        [](AbstractTool * tool, QJsonObject &result) {
+            result["removed_samples"] = dynamic_cast<ToolCleanDuplicates *>(tool)->getRemovedSampleCount();
+        });
 
     functions << toolFunction(
         "export_soundfonts",

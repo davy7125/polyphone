@@ -34,6 +34,7 @@
 #include "sampleloader.h"
 #include "duplicator.h"
 #include "contextmanager.h"
+#include "translationmanager.h"
 #include "auto_distribution/toolautodistribution.h"
 #include <QFileInfo>
 
@@ -225,17 +226,56 @@ void McpFunctions::addEditingFunctions(QList<McpFunction *> &functions)
                 throw McpException("the directory of \"" + file + "\" doesn't exist");
             sm->setSoundfontVersion(idSf2.indexSf2, suffix == "sf3");
 
-            AbstractOutput * output = OutputFactory::getOutput(file);
-            QString quality = args.getString("sf3_quality", "medium");
-            output->setOption("quality", quality == "low" ? 0 : (quality == "high" ? 2 : 1));
-            output->process(idSf2.indexSf2, false);
-            bool success = output->isSuccess();
-            QString error = output->getError();
-            delete output;
+            bool success;
+            QString error;
+            {
+                // Possible error in English
+                TranslationManager::SourceLanguage sourceLanguage;
+                AbstractOutput * output = OutputFactory::getOutput(file);
+                QString quality = args.getString("sf3_quality", "medium");
+                output->setOption("quality", quality == "low" ? 0 : (quality == "high" ? 2 : 1));
+                output->process(idSf2.indexSf2, false);
+                success = output->isSuccess();
+                error = output->getError();
+                delete output;
+            }
             if (!success)
                 throw McpException("the file couldn't be saved: " + error);
             ContextManager::recentFile()->addRecentFile(RecentFileManager::FILE_TYPE_SOUNDFONT, file);
-            return QString("Saved in \"" + file + "\".");
+
+            QJsonObject result = McpUtils::brief(idSf2);
+            result["file"] = file;
+            result["format"] = suffix;
+            result["size_bytes"] = static_cast<double>(QFileInfo(file).size());
+            return result;
+        });
+
+    functions << new McpFunction(
+        "close_soundfont", McpFunction::CATEGORY_EDITING, false,
+        "Close a soundfont: its tabs are closed and it is removed from Polyphone, which frees its memory (useful after "
+        "copying elements from a large soundfont). Its identifier and the identifiers of its elements are then no "
+        "longer valid; those of the other soundfonts don't change. A soundfont with unsaved changes is not closed, "
+        "unless discard_changes is true: the changes are then lost. Closing cannot be undone. list_soundfonts gives "
+        "the soundfonts open and their unsaved changes.",
+        R"JSON({"properties":{
+            "soundfont":{"type":"string","description":"Soundfont identifier"},
+            "discard_changes":{"type":"boolean","description":"Close even if the soundfont has unsaved changes, which are lost (default false)"}},
+            "required":["soundfont"]})JSON",
+        [](const McpArguments &args) -> McpResult {
+            EltID idSf2 = args.getId("soundfont", { elementSf2 });
+            if (McpEditor::getInstance() == nullptr)
+                throw McpException("the editor is not available");
+            bool unsavedChanges = SoundfontManager::getInstance()->isEdited(idSf2.indexSf2);
+            if (unsavedChanges && !args.getBool("discard_changes", false))
+                throw McpException("the soundfont has unsaved changes: save it with save_soundfont, or close it with "
+                                   "\"discard_changes\": true to lose them");
+
+            QJsonObject result = McpUtils::brief(idSf2);
+            if (!McpEditor::getInstance()->closeSoundfont(idSf2.indexSf2))
+                throw McpException("the soundfont couldn't be closed");
+            result["closed"] = true;
+            result["discarded_changes"] = unsavedChanges;
+            return result;
         });
 
     functions << new McpFunction(
@@ -253,18 +293,20 @@ void McpFunctions::addEditingFunctions(QList<McpFunction *> &functions)
                 { "name", champ_name }, { "author", champ_IENG }, { "copyright", champ_ICOP }, { "comment", champ_ICMT },
                 { "product", champ_IPRD }, { "date", champ_ICRD }, { "sound_engine", champ_ISNG } };
             SoundfontManager * sm = SoundfontManager::getInstance();
-            int count = 0;
+            QJsonArray changed;
             for (int i = 0; i < fields.count(); i++)
             {
                 if (args.contains(fields[i].first))
                 {
                     sm->set(idSf2, fields[i].second, args.getString(fields[i].first));
-                    count++;
+                    changed.append(fields[i].first);
                 }
             }
-            if (count == 0)
+            if (changed.isEmpty())
                 throw McpException("no fields to change");
-            return QString("Information changed.");
+            QJsonObject result = McpUtils::brief(idSf2);
+            result["changed_fields"] = changed;
+            return result;
         });
 
     functions << new McpFunction(
@@ -287,9 +329,10 @@ void McpFunctions::addEditingFunctions(QList<McpFunction *> &functions)
             for (const QJsonValue value : files)
             {
                 QString path = QFileInfo(value.toString()).absoluteFilePath();
-                Sound sound;
                 if (!QFileInfo(path).isFile())
                     throw McpException("file \"" + path + "\" doesn't exist");
+                TranslationManager::SourceLanguage sourceLanguage; // Possible error in English
+                Sound sound;
                 if (!sound.setFileName(path, false))
                     throw McpException("cannot read \"" + path + "\": " + sound.getError());
                 paths << path;
@@ -460,16 +503,51 @@ void McpFunctions::addEditingFunctions(QList<McpFunction *> &functions)
                 for (QJsonObject::const_iterator it = changes[i].second.constBegin(); it != changes[i].second.constEnd(); ++it)
                     McpAttributes::setValue(changes[i].first, it.key(), it.value());
 
-            // New values
-            QJsonObject result;
+            // Values stored (rounded to the resolution of the soundfont format), per element up to MAX_LISTED elements,
+            // otherwise the range of each parameter
+            const int MAX_LISTED = 10;
+            QJsonObject values;
+            QMap<QString, QPair<double, double> > ranges;
+            QMap<QString, int> counts;
             for (int i = 0; i < changes.count(); i++)
             {
                 QString key = McpUtils::idToString(changes[i].first);
-                QJsonObject values = result.value(key).toObject();
+                QJsonObject elementValues = values.value(key).toObject();
                 for (QJsonObject::const_iterator it = changes[i].second.constBegin(); it != changes[i].second.constEnd(); ++it)
-                    values[it.key()] = McpAttributes::getValue(changes[i].first, it.key());
-                result[key] = values;
+                {
+                    QJsonValue value = McpAttributes::getValue(changes[i].first, it.key());
+                    elementValues[it.key()] = value;
+                    counts[it.key()]++;
+                    if (value.isDouble())
+                    {
+                        double number = value.toDouble();
+                        if (!ranges.contains(it.key()))
+                            ranges[it.key()] = QPair<double, double>(number, number);
+                        else
+                            ranges[it.key()] = QPair<double, double>(qMin(ranges[it.key()].first, number),
+                                                                     qMax(ranges[it.key()].second, number));
+                    }
+                }
+                values[key] = elementValues;
             }
+
+            QJsonObject result;
+            result["changed_elements"] = values.count();
+            QJsonObject parameters;
+            foreach (QString name, counts.keys())
+            {
+                QJsonObject parameter;
+                parameter["elements"] = counts[name];
+                if (ranges.contains(name))
+                    parameter["stored_range"] = QJsonArray({ ranges[name].first, ranges[name].second });
+                parameters[name] = parameter;
+            }
+            result["parameters"] = parameters;
+            if (values.count() <= MAX_LISTED)
+                result["stored_values"] = values;
+            else
+                result["note"] = QString("stored values not listed for more than %1 elements: see get_parameter_map")
+                                     .arg(MAX_LISTED);
             return result;
         });
 
@@ -585,7 +663,10 @@ void McpFunctions::addEditingFunctions(QList<McpFunction *> &functions)
             sm->set(id, champ_wBank, val);
             val.wValue = static_cast<quint16>(number);
             sm->set(id, champ_wPreset, val);
-            return QString("Preset number changed.");
+            QJsonObject result = McpUtils::brief(id);
+            result["bank"] = bank;
+            result["preset"] = number;
+            return result;
         });
 
     functions << new McpFunction(
@@ -601,10 +682,14 @@ void McpFunctions::addEditingFunctions(QList<McpFunction *> &functions)
                                                   elementInstMod, elementPrstMod, elementInstSmplMod, elementPrstInstMod,
                                                   elementSf2Mod });
             SoundfontManager * sm = SoundfontManager::getInstance();
+            QJsonArray removed, removedWithParent;
             foreach (EltID id, ids)
             {
                 if (!sm->isValid(id))
-                    continue; // Already removed with its parent
+                {
+                    removedWithParent.append(McpUtils::idToString(id)); // Already removed with its parent
+                    continue;
+                }
                 int message = 1;
                 sm->remove(id, &message);
                 if (sm->isValid(id))
@@ -613,8 +698,13 @@ void McpFunctions::addEditingFunctions(QList<McpFunction *> &functions)
                                          ((message % 3 == 0) ? "the instrument is used by a preset" : "unknown reason");
                     throw McpException("cannot remove " + McpUtils::idToString(id) + ": " + reason + " (nothing removed)");
                 }
+                removed.append(McpUtils::idToString(id));
             }
-            return QString("%1 element(s) removed.").arg(ids.count());
+            QJsonObject result;
+            result["removed"] = removed;
+            if (!removedWithParent.isEmpty())
+                result["removed_with_their_parent"] = removedWithParent;
+            return result;
         });
 
     functions << new McpFunction(
@@ -636,8 +726,10 @@ void McpFunctions::addEditingFunctions(QList<McpFunction *> &functions)
         "copy_elements", McpFunction::CATEGORY_EDITING, false,
         "Copy samples, instruments or presets into another soundfont (with the elements they use), or link elements "
         "of the same soundfont (a sample into an instrument, an instrument into a preset). Elements having the same "
-        "name as existing ones are duplicated. If the default modulators of the two soundfonts differ, modulators are "
-        "added to the global division of the instruments copied so that they sound the same.",
+        "name as existing ones are duplicated (suffix \"-1\"), even samples whose data are identical: "
+        "remove_duplicate_samples merges them afterwards. If the default modulators of the two soundfonts differ, "
+        "modulators are added to the global division of the instruments copied so that they sound the same. The "
+        "source soundfont is not changed and can then be closed with close_soundfont.",
         R"JSON({"properties":{
             "elements":{"type":["string","array"],"items":{"type":"string"},"description":"Elements to copy"},
             "destination":{"type":"string","description":"Destination soundfont, instrument or preset"}},
@@ -728,7 +820,11 @@ void McpFunctions::addEditingFunctions(QList<McpFunction *> &functions)
             if (!sm->isUndoable(idSf2.indexSf2))
                 throw McpException("nothing to undo");
             sm->undo(idSf2.indexSf2);
-            return QString("Undone.");
+            QJsonObject result = McpUtils::brief(idSf2);
+            result["undone"] = true;
+            result["can_undo"] = sm->isUndoable(idSf2.indexSf2);
+            result["can_redo"] = sm->isRedoable(idSf2.indexSf2);
+            return result;
         });
 
     functions << new McpFunction(
@@ -743,6 +839,10 @@ void McpFunctions::addEditingFunctions(QList<McpFunction *> &functions)
             if (!sm->isRedoable(idSf2.indexSf2))
                 throw McpException("nothing to redo");
             sm->redo(idSf2.indexSf2);
-            return QString("Redone.");
+            QJsonObject result = McpUtils::brief(idSf2);
+            result["redone"] = true;
+            result["can_undo"] = sm->isUndoable(idSf2.indexSf2);
+            result["can_redo"] = sm->isRedoable(idSf2.indexSf2);
+            return result;
         });
 }

@@ -62,9 +62,11 @@ public:
 
     /// Run the tool synchronously on a list of ids, without dialog (automation): the parameters are first loaded from
     /// the configuration then given to "setParameters", which returns an error if they cannot be set
-    /// Return an error if the tool has not been run, otherwise "message" receives the possible warning and confirmation
+    /// Return an error if the tool has not been run, otherwise "warning" and "confirmation" receive the possible
+    /// messages displayed after the tool is run
     /// The editing is not ended (endEditing is to be called)
-    QString runWithoutDialog(IdList ids, std::function<QString(AbstractToolParameters *)> setParameters, QString &message);
+    QString runWithoutDialog(IdList ids, std::function<QString(AbstractToolParameters *)> setParameters,
+                             QString &warning, QString &confirmation);
 
 signals:
     void finished(bool updateNeeded);

@@ -26,6 +26,7 @@
 #define TOOLTRANSPOSE_H
 
 #include "abstracttooliterating.h"
+#include <QAtomicInt>
 
 class ToolTranspose: public AbstractToolIterating
 {
@@ -57,6 +58,9 @@ public:
     /// Process an element
     void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
 
+    /// Number of divisions whose key range or root key was limited to 0 - 127 during the last run
+    int getClampedDivisionCount() const { return _clampedDivisions.loadRelaxed(); }
+
 protected:
     QString getLabelInternal() const override
     {
@@ -68,6 +72,7 @@ protected:
 
 private:
     QStringList _elementsInError;
+    QAtomicInt _clampedDivisions;
     QMutex _mutex;
 };
 

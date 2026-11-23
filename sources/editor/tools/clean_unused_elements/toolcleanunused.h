@@ -60,6 +60,10 @@ public:
     /// Process an element
     void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
 
+    /// Elements removed during the last run
+    int getRemovedSampleCount() const { return _unusedSmpl; }
+    int getRemovedInstrumentCount() const { return _unusedInst; }
+
 protected:
     QString getLabelInternal() const override
     {

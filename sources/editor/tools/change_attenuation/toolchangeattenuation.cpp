@@ -38,6 +38,7 @@ ToolChangeAttenuation::ToolChangeAttenuation() : AbstractToolIterating(QList<Ele
 void ToolChangeAttenuation::beforeProcess(IdList ids)
 {
     _isInst = (ids.count() == 0 || ids[0].typeElement == elementInst || ids[0].typeElement == elementInstSmpl);
+    _clampedValues = 0;
 }
 
 void ToolChangeAttenuation::process(SoundfontManager * sm, EltID id, AbstractToolParameters *parameters)
@@ -70,11 +71,14 @@ void ToolChangeAttenuation::process(SoundfontManager * sm, EltID id, AbstractToo
 
 int ToolChangeAttenuation::limitOffset(int offset)
 {
+    int limited = offset;
     if (offset > 1440)
-        return 1440;
-    if (_isInst && offset < 0)
-        return 0;
-    if (!_isInst && offset < -1440)
-        return -1440;
-    return offset;
+        limited = 1440;
+    else if (_isInst && offset < 0)
+        limited = 0;
+    else if (!_isInst && offset < -1440)
+        limited = -1440;
+    if (limited != offset)
+        _clampedValues.ref();
+    return limited;
 }

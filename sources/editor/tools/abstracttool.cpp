@@ -162,9 +162,11 @@ void AbstractTool::onFinished(bool updateNeeded)
         s_sm->endEditing("tool:" + getIdentifier(false));
 }
 
-QString AbstractTool::runWithoutDialog(IdList ids, std::function<QString(AbstractToolParameters *)> setParameters, QString &message)
+QString AbstractTool::runWithoutDialog(IdList ids, std::function<QString(AbstractToolParameters *)> setParameters,
+                                      QString &warning, QString &confirmation)
 {
-    message.clear();
+    warning.clear();
+    confirmation.clear();
     if (s_sm == nullptr)
         s_sm = SoundfontManager::getInstance();
     if (!setIds(ids) && !canRunWithoutIds())
@@ -202,14 +204,8 @@ QString AbstractTool::runWithoutDialog(IdList ids, std::function<QString(Abstrac
         disconnect(connection);
     }
 
-    QStringList messages;
-    QString warning = getWarning();
-    if (!warning.isEmpty())
-        messages << warning;
-    QString confirmation = getConfirmation();
-    if (!confirmation.isEmpty())
-        messages << confirmation;
-    message = messages.join("\n");
+    warning = getWarning();
+    confirmation = getConfirmation();
     return "";
 }
 

@@ -57,6 +57,9 @@ public:
     /// Process an element
     void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
 
+    /// Modulators removed during the last run
+    int getRemovedModulatorCount() const { return _count; }
+
 protected:
     QString getLabelInternal() const override
     {

@@ -44,6 +44,10 @@ public:
     /// Open a file in a new tab (the errors are displayed by the editor)
     virtual void openSoundfont(QString filePath) = 0;
 
+    /// Close the tabs of a soundfont and remove it, without asking to save the changes; return false if the
+    /// soundfont doesn't exist
+    virtual bool closeSoundfont(int indexSf2) = 0;
+
     /// Show an element in its tab, return false if this is not possible
     virtual bool showElement(EltID id) = 0;
 

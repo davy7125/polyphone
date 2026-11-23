@@ -27,6 +27,7 @@
 
 #include "abstracttooliterating.h"
 #include <QObject>
+#include <QAtomicInt>
 
 class ToolChangeAttenuation: public AbstractToolIterating
 {
@@ -58,6 +59,10 @@ public:
     /// Process an element
     void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
 
+    /// Number of attenuations limited to their range (0 to 57.6 dB in an instrument, -57.6 to 57.6 dB in a preset)
+    /// during the last run
+    int getClampedValueCount() const { return _clampedValues.loadRelaxed(); }
+
 protected:
     QString getLabelInternal() const override
     {
@@ -67,6 +72,7 @@ protected:
 private:
     int limitOffset(int offset);
     bool _isInst;
+    QAtomicInt _clampedValues;
 };
 
 #endif // TOOLCHANGEATTENUATION_H
