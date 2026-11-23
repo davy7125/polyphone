@@ -173,6 +173,8 @@ Polyphone is written in C++ with Qt. Building instructions are available for [Wi
 
 The plugin is made with [JUCE](https://juce.com) and built with CMake on its own: see [sources/plugin/README.md](sources/plugin/README.md).
 
+In VS Code, run **Terminal > Run Build Task** (or press **Ctrl+Shift+B** on Windows/Linux, **Cmd+Shift+B** on macOS) and choose **Polyphone: Build editor** or **Polyphone: Build plugin**. Each task configures and builds only that component; the editor is output to `build/polyphone/bin`, and the plugin to `build/plugin/PolyphonePlugin_artefacts/Release`. The tasks need CMake, a C++17 compiler and that component's dependencies; the plugin's first configuration also downloads JUCE and therefore needs an internet connection. See [the plugin build requirements](sources/plugin/README.md#build) and the platform-specific instructions above for dependencies.
+
 ## Contributing
 
 Bug reports, feature requests, pull requests and translations are welcome: see the [contributing guide](CONTRIBUTING.md).

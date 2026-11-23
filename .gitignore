@@ -10,4 +10,5 @@
 .DS_Store
 /sources/.qtcreator
 __pycache__/
-.vscode
+.vscode/*
+!.vscode/tasks.json

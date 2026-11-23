@@ -1,0 +1,39 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Polyphone: Build editor",
+            "detail": "build/polyphone/bin/polyphone (Release, Qt 6.10.1 in ~/Qt)",
+            "type": "shell",
+            "command": "( [ -f build/polyphone/build.ninja ] || cmake -S sources -B build/polyphone -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=\"$HOME/Qt/6.10.1/gcc_64\" ) && cmake --build build/polyphone",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": "build",
+            "presentation": {
+                "clear": true
+            },
+            "problemMatcher": {
+                "base": "$gcc",
+                "fileLocation": ["autoDetect", "${workspaceFolder}"]
+            }
+        },
+        {
+            "label": "Polyphone: Build plugin",
+            "detail": "build/plugin/PolyphonePlugin_artefacts/Release (VST3, CLAP, LV2, Standalone)",
+            "type": "shell",
+            "command": "( [ -f build/plugin/build.ninja ] || cmake -S sources/plugin -B build/plugin -G Ninja -DCMAKE_BUILD_TYPE=Release ) && cmake --build build/plugin",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": "build",
+            "presentation": {
+                "clear": true
+            },
+            "problemMatcher": {
+                "base": "$gcc",
+                "fileLocation": ["autoDetect", "${workspaceFolder}"]
+            }
+        }
+    ]
+}
