@@ -4381,7 +4381,7 @@ static const char* getAsioErrorString( ASIOError result )
 
 #ifdef _MSC_VER
   #pragma comment( lib, "ksuser" )
-  #pragma comment( lib, "mfplat.lib" )
+  // Polyphone: no mfplat.lib, see WasapiMediaFoundation
   #pragma comment( lib, "mfuuid.lib" )
   #pragma comment( lib, "wmcodecdspuuid" )
 #endif
@@ -4572,11 +4572,77 @@ private:
 
 //-----------------------------------------------------------------------------
 
+// Polyphone: the functions of Media Foundation used by WasapiResampler, found at run time instead of being imported
+// from mfplat.dll. The N editions of Windows have no Media Foundation without the Media Feature Pack, and a program
+// importing mfplat.dll does not start there. Media Foundation is now only needed to convert a sample rate.
+// See ../README.md.
+#ifndef LOAD_LIBRARY_SEARCH_SYSTEM32
+  #define LOAD_LIBRARY_SEARCH_SYSTEM32 0x00000800
+#endif
+
+struct WasapiMediaFoundation
+{
+  typedef HRESULT ( STDAPICALLTYPE *StartupFunction )( ULONG, DWORD );
+  typedef HRESULT ( STDAPICALLTYPE *ShutdownFunction )();
+  typedef HRESULT ( STDAPICALLTYPE *CreateMediaTypeFunction )( IMFMediaType** );
+  typedef HRESULT ( STDAPICALLTYPE *CreateMemoryBufferFunction )( DWORD, IMFMediaBuffer** );
+  typedef HRESULT ( STDAPICALLTYPE *CreateSampleFunction )( IMFSample** );
+
+  StartupFunction startup;
+  ShutdownFunction shutdown;
+  CreateMediaTypeFunction createMediaType;
+  CreateMemoryBufferFunction createMemoryBuffer;
+  CreateSampleFunction createSample;
+
+  bool isLoaded() const
+  {
+    return startup && shutdown && createMediaType && createMemoryBuffer && createSample;
+  }
+
+  // Loaded once, from the directory of the system only, and never unloaded
+  static const WasapiMediaFoundation& get()
+  {
+    static const WasapiMediaFoundation functions = load();
+    return functions;
+  }
+
+  static WasapiMediaFoundation load()
+  {
+    WasapiMediaFoundation functions = { NULL, NULL, NULL, NULL, NULL };
+    HMODULE library = LoadLibraryExW( L"mfplat.dll", NULL, LOAD_LIBRARY_SEARCH_SYSTEM32 );
+    if ( library ) {
+      functions.startup = symbol<StartupFunction>( library, "MFStartup" );
+      functions.shutdown = symbol<ShutdownFunction>( library, "MFShutdown" );
+      functions.createMediaType = symbol<CreateMediaTypeFunction>( library, "MFCreateMediaType" );
+      functions.createMemoryBuffer = symbol<CreateMemoryBufferFunction>( library, "MFCreateMemoryBuffer" );
+      functions.createSample = symbol<CreateSampleFunction>( library, "MFCreateSample" );
+    }
+    return functions;
+  }
+
+  template <typename Function>
+  static Function symbol( HMODULE library, const char* name )
+  {
+    // Through void (*)(), which converts to any function type without a warning
+    return reinterpret_cast<Function>( reinterpret_cast<void ( * )()>( GetProcAddress( library, name ) ) );
+  }
+};
+
+//-----------------------------------------------------------------------------
+
 // In order to satisfy WASAPI's buffer requirements, we need a means of converting sample rate
 // between HW and the user. The WasapiResampler class is used to perform this conversion between
 // HwIn->UserIn and UserOut->HwOut during the stream callback loop.
 class WasapiResampler
 {
+  // Polyphone: these names of Media Foundation, called below, are the functions found by WasapiMediaFoundation, only
+  // called when it has them all (isValid())
+  static HRESULT MFStartup( ULONG version, DWORD flags ) { return WasapiMediaFoundation::get().startup( version, flags ); }
+  static HRESULT MFShutdown() { return WasapiMediaFoundation::get().shutdown(); }
+  static HRESULT MFCreateMediaType( IMFMediaType** type ) { return WasapiMediaFoundation::get().createMediaType( type ); }
+  static HRESULT MFCreateMemoryBuffer( DWORD maxLength, IMFMediaBuffer** buffer ) { return WasapiMediaFoundation::get().createMemoryBuffer( maxLength, buffer ); }
+  static HRESULT MFCreateSample( IMFSample** sample ) { return WasapiMediaFoundation::get().createSample( sample ); }
+
 public:
   WasapiResampler( bool isFloat, unsigned int bitsPerSample, unsigned int channelCount,
                    unsigned int inSampleRate, unsigned int outSampleRate )
@@ -4592,17 +4658,33 @@ public:
     #ifdef __IWMResamplerProps_FWD_DEFINED__
       , _resamplerProps( NULL )
     #endif
+    , _isStarted( false )
+    , _isValid( false )
   {
+    // Polyphone: nothing to set up without conversion (Convert copies the samples), and no conversion without Media
+    // Foundation and its resampler (isValid() is then false, instead of a crash)
+    if ( inSampleRate == outSampleRate ) {
+      _isValid = true;
+      return;
+    }
+    if ( !WasapiMediaFoundation::get().isLoaded() ) {
+      return;
+    }
+
     // 1. Initialization
 
-    MFStartup( MF_VERSION, MFSTARTUP_NOSOCKET );
+    if ( FAILED( MFStartup( MF_VERSION, MFSTARTUP_NOSOCKET ) ) ) {
+      return;
+    }
+    _isStarted = true;
 
     // 2. Create Resampler Transform Object
 
-    CoCreateInstance( CLSID_CResamplerMediaObject, NULL, CLSCTX_INPROC_SERVER,
-                      IID_IUnknown, ( void** ) &_transformUnk );
-
-    _transformUnk->QueryInterface( IID_PPV_ARGS( &_transform ) );
+    if ( FAILED( CoCreateInstance( CLSID_CResamplerMediaObject, NULL, CLSCTX_INPROC_SERVER,
+                                   IID_IUnknown, ( void** ) &_transformUnk ) ) ||
+         FAILED( _transformUnk->QueryInterface( IID_PPV_ARGS( &_transform ) ) ) ) {
+      return;
+    }
 
     #ifdef __IWMResamplerProps_FWD_DEFINED__
       _transformUnk->QueryInterface( IID_PPV_ARGS( &_resamplerProps ) );
@@ -4639,18 +4721,24 @@ public:
     _transform->ProcessMessage( MFT_MESSAGE_COMMAND_FLUSH, 0 );
     _transform->ProcessMessage( MFT_MESSAGE_NOTIFY_BEGIN_STREAMING, 0 );
     _transform->ProcessMessage( MFT_MESSAGE_NOTIFY_START_OF_STREAM, 0 );
+
+    _isValid = true; // Polyphone
   }
 
   ~WasapiResampler()
   {
     // 8. Send stream stop messages to Resampler
 
-    _transform->ProcessMessage( MFT_MESSAGE_NOTIFY_END_OF_STREAM, 0 );
-    _transform->ProcessMessage( MFT_MESSAGE_NOTIFY_END_STREAMING, 0 );
+    if ( _transform ) { // Polyphone: only created for a conversion
+      _transform->ProcessMessage( MFT_MESSAGE_NOTIFY_END_OF_STREAM, 0 );
+      _transform->ProcessMessage( MFT_MESSAGE_NOTIFY_END_STREAMING, 0 );
+    }
 
     // 9. Cleanup
 
-    MFShutdown();
+    if ( _isStarted ) { // Polyphone
+      MFShutdown();
+    }
 
     SAFE_RELEASE( _transformUnk );
     SAFE_RELEASE( _transform );
@@ -4768,6 +4856,12 @@ private:
   #ifdef __IWMResamplerProps_FWD_DEFINED__
     IWMResamplerProps* _resamplerProps;
   #endif
+
+  bool _isStarted; // Polyphone: MFStartup succeeded
+  bool _isValid; // Polyphone: Convert can be called
+
+public:
+  bool isValid() const { return _isValid; } // Polyphone
 };
 
 //-----------------------------------------------------------------------------
@@ -5689,6 +5783,10 @@ void RtApiWasapi::wasapiThread()
     captureResampler = new WasapiResampler( stream_.deviceFormat[INPUT] == RTAUDIO_FLOAT32 || stream_.deviceFormat[INPUT] == RTAUDIO_FLOAT64,
                                             formatBytes( stream_.deviceFormat[INPUT] ) * 8, stream_.nDeviceChannels[INPUT],
                                             captureFormat->nSamplesPerSec, stream_.sampleRate );
+    if ( !captureResampler->isValid() ) { // Polyphone
+      errorText = "RtApiWasapi::wasapiThread: Media Foundation is needed to convert the sample rate (Media Feature Pack on the N editions of Windows).";
+      goto Exit;
+    }
 
     captureSrRatio = ( ( float ) captureFormat->nSamplesPerSec / stream_.sampleRate );
 
@@ -5801,6 +5899,10 @@ void RtApiWasapi::wasapiThread()
     renderResampler = new WasapiResampler( stream_.deviceFormat[OUTPUT] == RTAUDIO_FLOAT32 || stream_.deviceFormat[OUTPUT] == RTAUDIO_FLOAT64,
                                            formatBytes( stream_.deviceFormat[OUTPUT] ) * 8, stream_.nDeviceChannels[OUTPUT],
                                            stream_.sampleRate, renderFormat->nSamplesPerSec );
+    if ( !renderResampler->isValid() ) { // Polyphone
+      errorText = "RtApiWasapi::wasapiThread: Media Foundation is needed to convert the sample rate (Media Feature Pack on the N editions of Windows).";
+      goto Exit;
+    }
 
     renderSrRatio = ( ( float ) renderFormat->nSamplesPerSec / stream_.sampleRate );
 

@@ -131,6 +131,8 @@ Requirements:
   then `-DCMAKE_TOOLCHAIN_FILE=<vcpkg>/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=<triplet>
   -DVCPKG_OVERLAY_TRIPLETS=packaging/vcpkg-triplets -DVCPKG_MANIFEST_MODE=OFF`, the triplets being
   `x64-windows-polyphone` (with `-T ClangCL`), `arm64-osx-polyphone` and `x64-osx-polyphone`;
+- on Windows, the runtime of Visual C++ is linked in the plugin (`/MT`, no Visual C++ Redistributable needed):
+  libraries given by another way than these must be built with it too, or the link fails;
 - on Linux, the packages needed by JUCE: ALSA, freetype, fontconfig and the X11 libraries
   (Fedora: `alsa-lib-devel freetype-devel fontconfig-devel libX11-devel libXcomposite-devel
   libXcursor-devel libXext-devel libXinerama-devel libXi-devel libXrandr-devel libXrender-devel

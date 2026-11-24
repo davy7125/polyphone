@@ -94,6 +94,7 @@ private:
     int findDevice(QString &deviceName, std::vector<unsigned int> &sampleRates);
     int findInputDevice(QString deviceName, RtAudio::DeviceInfo &deviceInfo);
     void openConnection(unsigned int deviceNumber, quint32 bufferSize, quint32 sampleRate);
+    static std::vector<unsigned int> getSampleRates(RtAudio * rtAudio, const RtAudio::DeviceInfo &deviceInfo);
     static quint32 getClosestSampleRate(const std::vector<unsigned int> &sampleRates);
 
     RtAudio * _rtAudio;

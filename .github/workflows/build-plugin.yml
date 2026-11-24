@@ -3,7 +3,8 @@ name: Build Polyphone plugin
 # Plugin (VST3, CLAP, LV2, AU on macOS) built from sources/plugin for each platform, checked by pluginval (and auval
 # on macOS), archived with packaging/plugin/README.txt. The standalone application of JUCE ("Polyphone Player") is not
 # distributed: the editor plays the soundfonts.
-# Libraries: those of the system on Linux; built by vcpkg on macOS and Windows (static, triplets in
+# Libraries: those of the system on Linux, built in Debian 12 as the AppImage of the editor (the oldest system
+# supported: glibc 2.36, job build-plugin-linux); built by vcpkg on macOS and Windows (static, triplets in
 # packaging/vcpkg-triplets), libsndfile then reading the samples of the sfz files in flac, ogg, opus and mp3.
 # Windows: built with clang-cl (the synth core uses builtins of GCC and Clang). The archive is signed by SignPath
 # (artifact configuration windows-plugin: the 3 libraries of the plugin with the product name "Polyphone" and the
@@ -34,14 +35,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - name: linux-x64
-            os: ubuntu-24.04
-            suffix: linux_x64
-            pluginval: pluginval_Linux.zip
-          - name: linux-aarch64
-            os: ubuntu-24.04-arm
-            suffix: linux_aarch64
-            pluginval: '' # No build of pluginval for this platform
           - name: macos-aarch64
             os: macos-15
             suffix: macOS_12
@@ -73,11 +66,7 @@ jobs:
       - name: Set the version
         run: python packaging/set_version.py "${{ inputs.tag }}"
 
-      - name: Install dependencies (Linux)
-        if: runner.os == 'Linux'
-        run: tests/ci/install_dependencies.sh plugin
-
-      - name: Get vcpkg (macOS, Windows)
+      - name: Get vcpkg
         if: matrix.vcpkg_triplet != ''
         shell: bash
         run: |
@@ -96,7 +85,7 @@ jobs:
           path: ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
           key: vcpkg-${{ matrix.vcpkg_triplet }}-${{ env.VCPKG_TAG }}-${{ hashFiles('packaging/vcpkg-triplets/**') }}
 
-      - name: Build the libraries with vcpkg (macOS, Windows)
+      - name: Build the libraries with vcpkg
         if: matrix.vcpkg_triplet != ''
         shell: bash
         run: |
@@ -118,6 +107,16 @@ jobs:
       - name: Build
         run: cmake --build build/plugin --config Release --parallel 4
 
+      - name: Check the libraries imported (Windows)
+        # Runtime of Visual C++ linked in the plugin (sources/plugin/CMakeLists.txt): no Visual C++ Redistributable
+        # needed, which pluginval cannot see since the runner has it
+        if: runner.os == 'Windows'
+        shell: bash
+        run: |
+          artefacts=build/plugin/PolyphonePlugin_artefacts/Release
+          python packaging/windows/pe_imports.py --forbid '^(msvcp|vcruntime|concrt|vcomp)' \
+            $(find "$artefacts/VST3" "$artefacts/CLAP" "$artefacts/LV2" -type f \( -name '*.vst3' -o -name '*.clap' -o -name '*.dll' \))
+
       - name: Validate with pluginval
         if: matrix.pluginval != ''
         shell: bash
@@ -126,14 +125,10 @@ jobs:
           unzip -q pluginval.zip -d pluginval
           artefacts=build/plugin/PolyphonePlugin_artefacts/Release
           case "$RUNNER_OS" in
-            Linux)   pluginval="xvfb-run -a pluginval/pluginval" ;;
             macOS)   pluginval=pluginval/pluginval.app/Contents/MacOS/pluginval ;;
             Windows) pluginval=pluginval/pluginval.exe ;;
           esac
           $pluginval --strictness-level 5 --skip-gui-tests --validate "$artefacts/VST3/Polyphone.vst3"
-          if [ "$RUNNER_OS" = Linux ]; then
-            $pluginval --strictness-level 5 --skip-gui-tests --validate "$artefacts/LV2/Polyphone.lv2"
-          fi
 
       - name: Validate with auval (macOS)
         if: runner.os == 'macOS'
@@ -157,9 +152,6 @@ jobs:
           done
           cp packaging/plugin/README.txt "dist/$name/"
           case "$RUNNER_OS" in
-            Linux)
-              tar -C dist -czf "$name.tar.gz" "$name"
-              ;;
             macOS)
               # Ad hoc signature, as the editor (no notarization)
               for bundle in "dist/$name"/*.vst3 "dist/$name"/*.clap "dist/$name"/*.component; do
@@ -209,5 +201,75 @@ jobs:
         with:
           name: polyphone-plugin-${{ matrix.name }}
           path: signed/*.zip
+          retention-days: 7
+          if-no-files-found: error
+
+  build-plugin-linux:
+    name: Plugin ${{ matrix.name }}
+    environment: production
+    runs-on: ${{ matrix.os }}
+    # The oldest system supported, as the AppImage of the editor (packaging/linux/build_appimage.sh): built on Ubuntu
+    # 24.04 until 2.7.3, the plugin needed glibc 2.38
+    container: debian:12
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: linux-x64
+            os: ubuntu-24.04
+            suffix: linux_x64
+            pluginval: pluginval_Linux.zip
+          - name: linux-aarch64
+            os: ubuntu-24.04-arm
+            suffix: linux_aarch64
+            pluginval: '' # No build of pluginval for this platform
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Install dependencies
+        run: bash tests/ci/install_dependencies.sh plugin container
+
+      - name: Set the version
+        run: python3 packaging/set_version.py "${{ inputs.tag }}"
+
+      - name: Configure
+        run: cmake -S sources/plugin -B build/plugin -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build
+        run: cmake --build build/plugin --config Release --parallel 4
+
+      - name: Validate with pluginval
+        if: matrix.pluginval != ''
+        run: |
+          curl -sSfL --retry 3 -o pluginval.zip "https://github.com/Tracktion/pluginval/releases/download/v1.0.4/${{ matrix.pluginval }}"
+          unzip -q pluginval.zip -d pluginval
+          artefacts=build/plugin/PolyphonePlugin_artefacts/Release
+          for plugin in VST3/Polyphone.vst3 LV2/Polyphone.lv2; do
+            xvfb-run -a pluginval/pluginval --strictness-level 5 --skip-gui-tests --validate "$artefacts/$plugin"
+          done
+
+      - name: Package
+        run: |
+          artefacts=build/plugin/PolyphonePlugin_artefacts/Release
+          name="Polyphone-plugin_${{ inputs.tag }}-${{ matrix.suffix }}"
+          mkdir -p "dist/$name"
+          for plugin in VST3/Polyphone.vst3 CLAP/Polyphone.clap LV2/Polyphone.lv2; do
+            cp -R "$artefacts/$plugin" "dist/$name/"
+          done
+          cp packaging/plugin/README.txt "dist/$name/"
+          tar -C dist -czf "$name.tar.gz" "$name"
+          echo "Most recent versions of glibc and libstdc++ needed:"
+          { find "dist/$name" -type f \( -name '*.so' -o -name '*.clap' \) -exec readelf -V {} + 2>/dev/null || true; } |
+            grep -oE '(GLIBC|GLIBCXX)_[0-9.]+' | sort -u -t_ -k1,1 -k2,2V |
+            awk -F_ '{last[$1] = $0} END {for (name in last) print "  " last[name]}' || true
+          ls -l Polyphone-plugin_*
+
+      - name: Upload the archive
+        uses: actions/upload-artifact@v7
+        with:
+          name: polyphone-plugin-${{ matrix.name }}
+          path: Polyphone-plugin_*
           retention-days: 7
           if-no-files-found: error

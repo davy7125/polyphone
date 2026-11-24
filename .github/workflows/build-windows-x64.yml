@@ -87,28 +87,88 @@ jobs:
             --no-opengl-sw ^
             deploy\polyphone.exe
 
-      - name: Copy MSYS2 dependencies
+      - name: Copy the libraries of MSYS2
+        # The libraries of MSYS2 imported by a file of deploy (read in its import table), then the ones they import, until
+        # nothing is added. No name is written here: they change with the packages of MSYS2 (zlib 1.4 links libz-1.dll
+        # instead of zlib1.dll and OpenSSL 4 is libcrypto-4-x64.dll, both missing in 2.7.3, issue #405). The runtime of
+        # GCC, which built polyphone.exe, replaces the older one that windeployqt copied from the MinGW of Qt.
         shell: msys2 {0}
         run: |
-          MINGW_BIN="/mingw64/bin"
-          cp "$MINGW_BIN"/libgcc_s_seh-1.dll deploy/
-          cp "$MINGW_BIN"/libstdc++-6.dll deploy/
-          cp "$MINGW_BIN"/libwinpthread-1.dll deploy/
-          cp "$MINGW_BIN"/libsndfile-1.dll deploy/
-          cp "$MINGW_BIN"/libFLAC.dll deploy/
-          cp "$MINGW_BIN"/libogg-0.dll deploy/
-          cp "$MINGW_BIN"/libvorbis-0.dll deploy/
-          cp "$MINGW_BIN"/libvorbisenc-2.dll deploy/
-          cp "$MINGW_BIN"/libvorbisfile-3.dll deploy/
-          cp "$MINGW_BIN"/libopus-0.dll deploy/ 2>/dev/null || true
-          cp "$MINGW_BIN"/libmp3lame-0.dll deploy/ 2>/dev/null || true
-          cp "$MINGW_BIN"/libmpg123-0.dll deploy/ 2>/dev/null || true
-          cp "$MINGW_BIN"/libcrypto-3-x64.dll deploy/ 2>/dev/null || \
-          cp "$MINGW_BIN"/libcrypto-1_1-x64.dll deploy/ 2>/dev/null || true
-          cp "$MINGW_BIN"/libssl-3-x64.dll deploy/ 2>/dev/null || \
-          cp "$MINGW_BIN"/libssl-1_1-x64.dll deploy/ 2>/dev/null || true
-          cp "$MINGW_BIN"/zlib1.dll deploy/
-          cp "$MINGW_BIN"/libssp-0.dll deploy/ 2>/dev/null || true
+          set -euo pipefail
+          MINGW_BIN=/mingw64/bin
+          imports() {
+            find deploy -type f \( -iname '*.exe' -o -iname '*.dll' \) -exec objdump -p {} + |
+              awk '/DLL Name:/ {print $3}' | sort -fu
+          }
+          cp "$MINGW_BIN"/libgcc_s_seh-1.dll "$MINGW_BIN"/libstdc++-6.dll "$MINGW_BIN"/libwinpthread-1.dll deploy/
+          while true; do
+            added=0
+            for dll in $(imports); do
+              if [ ! -e "deploy/$dll" ] && [ -e "$MINGW_BIN/$dll" ]; then
+                cp "$MINGW_BIN/$dll" deploy/
+                echo "Copied $dll"
+                added=1
+              fi
+            done
+            if [ "$added" -eq 0 ]; then
+              break
+            fi
+          done
+
+      - name: Check the libraries
+        # Every library imported by a file of deploy is in deploy, or comes with Windows. One that MSYS2 or Qt has but
+        # deploy does not stops the build; one found nowhere is reported (a DLL of Windows unknown to this server).
+        shell: msys2 {0}
+        run: |
+          set -euo pipefail
+          QT_BIN=$(cygpath -u "$QT_ROOT_DIR/bin")
+          SYSTEM_DIR=$(cygpath -u -S)
+          missing=()
+          for dll in $(find deploy -type f \( -iname '*.exe' -o -iname '*.dll' \) -exec objdump -p {} + |
+                       awk '/DLL Name:/ {print $3}' | sort -fu); do
+            if [ -e "deploy/$dll" ]; then
+              continue
+            fi
+            if [ -e "/mingw64/bin/$dll" ] || [ -e "$QT_BIN/$dll" ]; then
+              missing+=("$dll")
+            elif [[ "${dll,,}" != api-ms-win-* && "${dll,,}" != ext-ms-* && ! -e "$SYSTEM_DIR/$dll" ]]; then
+              echo "::warning::$dll is imported but neither in deploy nor in $SYSTEM_DIR"
+            fi
+          done
+          if [ ${#missing[@]} -gt 0 ]; then
+            echo "::error::Libraries imported but not in deploy: ${missing[*]}"
+            exit 1
+          fi
+          echo "Libraries in deploy:"
+          ls deploy/*.dll
+
+      - name: Check that Media Foundation is not imported
+        # The N editions of Windows have no Media Foundation without the Media Feature Pack: RtAudio loads it at run
+        # time, only to convert a sample rate (sources/lib/_option_rtaudio/README.md). Fails if an update brings back
+        # the import of MFPlat.DLL, with which Polyphone would not start there.
+        shell: bash
+        run: python packaging/windows/pe_imports.py --forbid '^mfplat\.dll$' $(find deploy -type f \( -iname '*.exe' -o -iname '*.dll' \))
+
+      - name: Check that the program starts
+        # polyphone.exe --version from deploy alone: no folder of MSYS2, Qt or Git in PATH (Git for Windows has its own
+        # libcrypto and zlib) and no QT_PLUGIN_PATH, so that a library missing or of another version stops it here.
+        # Windows Server has no Media Foundation, as the N editions of Windows: Polyphone must start without it.
+        shell: powershell
+        run: |
+          $env:PATH = "$env:SystemRoot\System32;$env:SystemRoot;$env:SystemRoot\System32\Wbem"
+          Remove-Item Env:QT_PLUGIN_PATH, Env:QML2_IMPORT_PATH -ErrorAction SilentlyContinue
+          # A library not found ends the process with an error code instead of showing a dialog box
+          Add-Type -Namespace Win32 -Name ErrorMode -MemberDefinition '[DllImport("kernel32.dll")] public static extern uint SetErrorMode(uint mode);'
+          [Win32.ErrorMode]::SetErrorMode(0x8003) | Out-Null
+          $process = Start-Process -FilePath (Resolve-Path deploy\polyphone.exe).Path -ArgumentList '--version' -NoNewWindow -PassThru
+          $null = $process.Handle # Needed to read the exit code afterwards
+          if (-not $process.WaitForExit(60000)) {
+            $process.Kill()
+            throw "polyphone.exe --version did not end within 60 s"
+          }
+          if ($process.ExitCode -ne 0) {
+            throw ("polyphone.exe --version failed with the code 0x{0:X8} (0xC0000135: library not found, 0xC0000139: function not found in a library)" -f $process.ExitCode)
+          }
 
       - name: Copy installer resources
         shell: cmd

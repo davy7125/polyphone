@@ -1,11 +1,13 @@
 #!/bin/bash
-# Ubuntu packages needed by the GitHub workflows.
+# Ubuntu or Debian packages needed by the GitHub workflows (Ubuntu runners, Debian 12 containers of the releases).
 # Usage: install_dependencies.sh <group>...
 #   editor      build of the editor with the Qt 6 of the system (and its execution without display)
 #   qt5         build of the editor with the Qt 5 of the system
 #   synth_core  build of the synth core alone (tests/synth_core)
 #   plugin      build of the plugin and of its test host (JUCE), execution without display
 #   tests       soundfonts of the rendering tests
+#   container   tools of the GitHub runners missing in a Debian image (git for the FetchContent of the plugin, curl,
+#               unzip, xauth for xvfb-run, file, python3)
 
 set -e
 if [ $# -eq 0 ]; then
@@ -35,6 +37,9 @@ for group in "$@"; do
         tests)
             packages+=(fluid-soundfont-gm timgm6mb-soundfont python3)
             ;;
+        container)
+            packages+=(git curl unzip xauth file python3 ca-certificates)
+            ;;
         *)
             echo "Unknown group: $group"
             exit 1
@@ -42,5 +47,11 @@ for group in "$@"; do
     esac
 done
 
-sudo apt-get update
-sudo apt-get install -y "${packages[@]}"
+# No sudo as root (containers)
+sudo=()
+if [ "$(id -u)" -ne 0 ]; then
+    sudo=(sudo)
+fi
+export DEBIAN_FRONTEND=noninteractive
+"${sudo[@]}" apt-get update
+"${sudo[@]}" apt-get install -y "${packages[@]}"

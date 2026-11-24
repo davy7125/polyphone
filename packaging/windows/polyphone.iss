@@ -52,11 +52,9 @@ Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}";
 
 [Files]
-Source: "{#SourceDir}\polyphone.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#SourceDir}\*.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#SourceDir}\platforms\*.dll"; DestDir: "{app}\platforms"; Flags: ignoreversion
-Source: "{#SourceDir}\styles\*.dll"; DestDir: "{app}\styles"; Flags: ignoreversion
-Source: "{#SourceDir}\tls\*.dll"; DestDir: "{app}\tls"; Flags: ignoreversion
+; The whole deployment folder, as in the portable archive: the plugins of Qt that windeployqt adds are never left out
+; (imageformats and iconengines were missing: no SVG in the style sheets and the forms, no JPEG or GIF in the repository)
+Source: "{#SourceDir}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
 Name: "{group}\Polyphone"; Filename: "{app}\polyphone.exe"

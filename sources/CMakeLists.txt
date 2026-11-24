@@ -84,7 +84,7 @@ if(POLYPHONE_BUILD_EDITOR)
     if(WIN32)
         target_link_libraries(polyphone_dependencies INTERFACE
             z winmm ogg vorbis vorbisfile vorbisenc crypto FLAC sndfile
-            ole32 ksuser mfplat mfuuid wmcodecdspuuid) # The last ones for RtAudio
+            ole32 ksuser mfuuid wmcodecdspuuid) # The last ones for RtAudio (not mfplat: loaded at run time, see lib/_option_rtaudio)
     elseif(APPLE)
         target_include_directories(polyphone_dependencies INTERFACE
             ${CMAKE_CURRENT_SOURCE_DIR}/../macos/include /opt/homebrew/include /usr/local/include)

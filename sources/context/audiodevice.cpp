@@ -282,6 +282,16 @@ void AudioDevice::initAudio()
     openConnection(selectedDevice, bufferSize, getClosestSampleRate(sampleRates));
 }
 
+std::vector<unsigned int> AudioDevice::getSampleRates(RtAudio * rtAudio, const RtAudio::DeviceInfo &deviceInfo)
+{
+    // WASAPI: the rate of the device only. RtAudio lists every rate there, converting the others with Media Foundation,
+    // which the N editions of Windows may not have (RtAudio loads it only for a conversion: lib/_option_rtaudio). Like
+    // the audio applications, Polyphone plays at the rate of the device, without conversion.
+    if (rtAudio->getCurrentApi() == RtAudio::WINDOWS_WASAPI && deviceInfo.preferredSampleRate > 0)
+        return std::vector<unsigned int>(1, deviceInfo.preferredSampleRate);
+    return deviceInfo.sampleRates;
+}
+
 quint32 AudioDevice::getClosestSampleRate(const std::vector<unsigned int> &sampleRates)
 {
     quint32 closestSampleRate = 0;
@@ -318,13 +328,13 @@ int AudioDevice::findDevice(QString &deviceName, std::vector<unsigned int> &samp
             if (QString::fromStdString(deviceInfo.name.c_str()) == _currentDeviceName)
             {
                 deviceName = _currentDeviceName;
-                sampleRates = deviceInfo.sampleRates;
+                sampleRates = getSampleRates(_rtAudio, deviceInfo);
                 return i;
             }
             if (deviceInfo.isDefaultOutput)
             {
                 deviceName = QString::fromStdString(deviceInfo.name.c_str());
-                sampleRates = deviceInfo.sampleRates;
+                sampleRates = getSampleRates(_rtAudio, deviceInfo);
                 if (_currentDeviceName == "")
                     return i;
                 defaultDevice = i;
@@ -434,7 +444,7 @@ bool AudioDevice::openInput()
 
     // Mono or stereo, depending on the device
     _inputChannelCount = qMin(static_cast<int>(deviceInfo.inputChannels), 2);
-    _inputSampleRate = getClosestSampleRate(deviceInfo.sampleRates);
+    _inputSampleRate = getClosestSampleRate(getSampleRates(_rtAudioInput, deviceInfo));
     RtAudio::StreamParameters inParam;
     inParam.deviceId = static_cast<unsigned int>(selectedDevice);
     inParam.nChannels = static_cast<unsigned int>(_inputChannelCount);

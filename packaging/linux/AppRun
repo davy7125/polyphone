@@ -1,0 +1,14 @@
+#!/bin/sh
+# Start of the AppImage of Polyphone (packaging/linux/build_appimage.sh)
+
+here=${APPDIR:-$(dirname "$(readlink -f "$0")")}
+
+# polyphone needs libjack.so.0 to start. The one of the system goes with its server (JACK or PipeWire) and is never
+# replaced; the copy in usr/lib/jack is only used when the system has none: there is no server then, and Polyphone
+# plays through ALSA.
+if ! { ldconfig -p || /sbin/ldconfig -p; } 2>/dev/null | grep -q 'libjack\.so\.0 '; then
+    LD_LIBRARY_PATH="$here/usr/lib/jack${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+    export LD_LIBRARY_PATH
+fi
+
+exec "$here/usr/bin/polyphone" "$@"

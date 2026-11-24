@@ -21,6 +21,15 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
     set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
 endif()
 
+# Windows: runtime of Visual C++ linked in the plugin (/MT), for every target including JUCE and the libraries built
+# here (and by vcpkg: packaging/vcpkg-triplets/x64-windows-polyphone.cmake). The plugin needs no Visual C++
+# Redistributable, and never uses an older msvcp140.dll already loaded by the host: since Visual Studio 2022 17.10,
+# std::mutex built with the new headers crashes with an older one.
+if(MSVC)
+    set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+    set(CMAKE_POLICY_DEFAULT_CMP0091 NEW) # Also read by the projects asking for CMake < 3.15 (ogg, vorbis)
+endif()
+
 set(POLYPHONE_JUCE_DIR "" CACHE PATH "Local copy of JUCE (downloaded otherwise)")
 set(POLYPHONE_CLAP_JUCE_EXTENSIONS_DIR "" CACHE PATH "Local copy of clap-juce-extensions (downloaded otherwise)")
 option(POLYPHONE_FETCH_VORBIS "Download and build libogg and libvorbis (if they are not installed, Windows and macOS)" OFF)

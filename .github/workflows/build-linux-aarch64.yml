@@ -1,5 +1,8 @@
 name: Build Polyphone for Linux aarch64
 
+# AppImage built in Debian 12, the oldest system supported (packaging/linux/build_appimage.sh), then started on several
+# distributions with nothing but what a desktop has (packaging/linux/check_appimage.sh): the release waits for both.
+
 on:
   workflow_call:
     inputs:
@@ -12,87 +15,19 @@ on:
         required: true
         default: '0.0.0'
         type: string
-      
+
 jobs:
   build-linux-aarch64:
     environment: production
     runs-on: ubuntu-24.04-arm
-    
+    container: debian:12
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v7
 
-      - name: Set up Python
-        uses: actions/setup-python@v7
-        with:
-          python-version: '3.x'
-
-      - name: Set the version
-        run: python packaging/set_version.py "${{ inputs.tag }}"
-
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y \
-            build-essential \
-            cmake \
-            qt6-base-dev \
-            qt6-svg-dev \
-            qt6-tools-dev \
-            qt6-tools-dev-tools \
-            qt6-l10n-tools \
-            libasound2-dev \
-            libjack-jackd2-dev \
-            libsndfile1-dev \
-            libogg-dev \
-            libvorbis-dev \
-            libflac-dev \
-            zlib1g-dev \
-            libssl-dev \
-            librtaudio-dev \
-            librtmidi-dev \
-            ca-certificates
-            
-      - name: Configure with CMake
-        run: |
-          cmake -S sources -B build \
-            -DCMAKE_BUILD_TYPE=Release \
-            -DCMAKE_INSTALL_PREFIX=/usr \
-            -DPOLYPHONE_LOCAL_RTAUDIO=ON \
-            -DPOLYPHONE_OFFICIAL_BUILD=ON
-
-      - name: Build Polyphone
-        run: cmake --build build --parallel $(nproc)
-
-      - name: Create AppImage
-        env:
-          OUTPUT: Polyphone_${{ inputs.tag }}-linux_aarch64.AppImage
-        run: |
-          # Install linuxdeploy
-          wget https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-aarch64.AppImage
-          wget https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-aarch64.AppImage
-          chmod +x linuxdeploy*.AppImage
-          
-          # Create AppDir structure
-          mkdir -p AppDir/usr/bin
-          mkdir -p AppDir/usr/lib
-          mkdir -p AppDir/usr/share/applications
-          mkdir -p AppDir/usr/share/icons/hicolor/512x512/apps
-          mkdir -p AppDir/etc
-          mkdir -p AppDir/etc/ssl
-          
-          cp build/bin/polyphone AppDir/usr/bin/
-          cp packaging/io.polyphone.polyphone.desktop AppDir/usr/share/applications/
-          cp sources/resources/polyphone.png AppDir/usr/share/icons/hicolor/512x512/apps/
-          
-          # SSL
-          cp /usr/lib/aarch64-linux-gnu/libssl.so.3 AppDir/usr/lib/
-          cp /usr/lib/aarch64-linux-gnu/libcrypto.so.3 AppDir/usr/lib/
-          cp -r /etc/ssl/certs AppDir/etc/ssl/
-          cp /etc/ssl/openssl.cnf AppDir/etc/ssl/ || true
-          
-          # Generate the AppImage
-          ./linuxdeploy-aarch64.AppImage --appdir AppDir --plugin qt --output appimage
+      - name: Build the AppImage
+        run: bash packaging/linux/build_appimage.sh "${{ inputs.tag }}"
 
       - name: Upload artifact
         id: upload-artifact
@@ -102,3 +37,36 @@ jobs:
           path: Polyphone*.AppImage
           retention-days: 7
           if-no-files-found: error
+
+  check-linux-aarch64:
+    name: Start on ${{ matrix.image }}
+    needs: build-linux-aarch64
+    runs-on: ubuntu-24.04-arm
+    container: ${{ matrix.image }}
+    continue-on-error: ${{ matrix.optional }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # No image of Arch Linux for aarch64
+          - image: debian:12
+            optional: false
+          - image: ubuntu:24.04
+            optional: false
+          - image: fedora:latest
+            optional: false
+          # glibc 2.35, one version before Debian 12: reported, without stopping the release
+          - image: ubuntu:22.04
+            optional: true
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Download the AppImage
+        uses: actions/download-artifact@v8
+        with:
+          name: polyphone-linux-aarch64-appimage
+
+      - name: Start the AppImage
+        run: bash packaging/linux/check_appimage.sh Polyphone*.AppImage
