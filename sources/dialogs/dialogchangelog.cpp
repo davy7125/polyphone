@@ -27,6 +27,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QDesktopServices>
+#include <QPushButton>
 #include "contextmanager.h"
 
 DialogChangeLog::DialogChangeLog(QWidget *parent) :

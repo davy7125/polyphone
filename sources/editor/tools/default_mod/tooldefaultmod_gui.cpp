@@ -28,6 +28,7 @@
 #include "modulatorcell.h"
 #include "contextmanager.h"
 #include "soundfontmanager.h"
+#include <QPushButton>
 
 ToolDefaultMod_gui::ToolDefaultMod_gui(QWidget *parent) :
     AbstractToolGui(parent),

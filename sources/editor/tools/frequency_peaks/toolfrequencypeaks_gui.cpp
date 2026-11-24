@@ -30,6 +30,7 @@
 #include "utils.h"
 #include "scrollbarcornerfiller.h"
 #include <QFileDialog>
+#include <QPushButton>
 
 class RunnableTask: public QRunnable
 {

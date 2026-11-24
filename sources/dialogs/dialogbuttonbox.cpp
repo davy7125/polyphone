@@ -23,6 +23,7 @@
 ***************************************************************************/
 
 #include "dialogbuttonbox.h"
+#include <QAbstractButton>
 #include <QShortcut>
 #include <QKeyEvent>
 
