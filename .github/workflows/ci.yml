@@ -2,7 +2,8 @@ name: CI
 
 # Builds and tests of each change (Linux), also run before a release (release-on-tag.yml):
 # - dependencies between the parts of the sources (tests/ci/check_dependencies.py);
-# - editor built with Qt 6, and with Qt 5 (compilation only);
+# - editor built with Qt 6, and with Qt 5 (compilation only, without the precompiled headers so that a missing include
+#   is detected);
 # - synth core alone, with ThreadSanitizer and AddressSanitizer (tests/synth_core);
 # - plugin built, checked by pluginval, clap-validator and the test host (tests/plugin);
 # - renderings of tests/render: modes of the editor and formats of the plugin compared with the synth core of the
@@ -84,7 +85,9 @@ jobs:
           restore-keys: ccache-editor-qt5-
 
       - name: Build
-        run: tests/ci/build_editor.sh . build/editor-qt5 -DPOLYPHONE_QT_VERSION=5 && ccache -s
+        run: |
+          tests/ci/build_editor.sh . build/editor-qt5 -DPOLYPHONE_QT_VERSION=5 -DCMAKE_DISABLE_PRECOMPILE_HEADERS=ON
+          ccache -s
 
   synth-core:
     name: Synth core (${{ matrix.sanitizer }} sanitizer)
