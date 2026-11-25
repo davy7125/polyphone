@@ -541,11 +541,15 @@ static void addInstrumentTools(QList<McpFunction *> &functions)
         "Tool \"Detune\" (celeste): replace the fine tuning of each division so that the instrument beats with the same "
         "instrument tuned normally, as an organ celeste stop (the previous fine tuning of the divisions is lost). The "
         "number of beats per second is given at key 60 and divided by the coefficient at each octave above "
-        "(multiplied below). Each division gets 1 to 50 cents, in the direction of the sign. Check the result with "
-        "render_keyboard (beats with the normal instrument) or get_parameter_map (fine_tune).",
+        "(multiplied below), 1 giving the same number of beats on the whole keyboard. Each division gets "
+        "1200 * log2(1 + beats / f) cents, f being the frequency heard at the middle of its key range (root key, "
+        "scale tuning and coarse tuning included), rounded to whole cents and bounded to 1..99 cents in the direction "
+        "of the sign: the number of beats is lower where more than 99 cents would be needed (low keys) and approximate "
+        "where one cent is worth several beats (high keys). Check the result with render_keyboard (beats with the "
+        "normal instrument) or get_parameter_map (fine_tune).",
         "Instruments", instruments,
         R"JSON("beats_per_second":{"type":"number","minimum":-10,"maximum":10,"description":"Beats per second at key 60, the sign giving the direction (default 4)"},
-           "coefficient":{"type":"number","minimum":0.5,"maximum":2,"description":"Division of the beats for each octave above (default 1)"})JSON",
+           "coefficient":{"type":"number","minimum":0.5,"maximum":2,"description":"Division of the beats for each octave above, 1 = constant (default 1)"})JSON",
         {}, []() { return new ToolCelesteTuning(); },
         [](const McpArguments &args, AbstractTool *, AbstractToolParameters * parameters) {
             ToolCelesteTuning_parameters * params = dynamic_cast<ToolCelesteTuning_parameters *>(parameters);

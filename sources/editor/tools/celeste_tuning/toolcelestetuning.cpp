@@ -26,6 +26,8 @@
 #include "toolcelestetuning_gui.h"
 #include "toolcelestetuning_parameters.h"
 #include "soundfontmanager.h"
+#include "attribute.h"
+#include <qmath.h>
 
 ToolCelesteTuning::ToolCelesteTuning() : AbstractToolIterating(elementInst, new ToolCelesteTuning_parameters(), new ToolCelesteTuning_gui())
 {
@@ -35,6 +37,16 @@ ToolCelesteTuning::ToolCelesteTuning() : AbstractToolIterating(elementInst, new 
 void ToolCelesteTuning::process(SoundfontManager * sm, EltID id, AbstractToolParameters *parameters)
 {
     ToolCelesteTuning_parameters * params = dynamic_cast<ToolCelesteTuning_parameters *>(parameters);
+    EltID idInst = id;
+
+    // Value of a division, or of the global division if not set
+    auto effective = [&](EltID idDiv, AttributeType champ) -> AttributeValue {
+        if (sm->isSet(idDiv, champ))
+            return sm->get(idDiv, champ);
+        if (sm->isSet(idInst, champ))
+            return sm->get(idInst, champ);
+        return AttributeBase::getDefaultStoredValue(champ, false);
+    };
 
     // For each linked element
     id.typeElement = elementInstSmpl;
@@ -42,81 +54,47 @@ void ToolCelesteTuning::process(SoundfontManager * sm, EltID id, AbstractToolPar
     {
         id.indexElt2 = i;
 
-        // Find the corresponding sample
-        EltID idSmpl = id;
-        idSmpl.typeElement = elementSmpl;
-        idSmpl.indexElt = sm->get(id, champ_sampleID).wValue;
-
-        // Root key of the sample
-        int numNoteSmpl = sm->get(idSmpl, champ_byOriginalPitch).bValue;
-
-        // Corresponding key on the keyboard
-        int numBase = numNoteSmpl;
-        if (sm->isSet(id, champ_overridingRootKey))
-            numBase = sm->get(id, champ_overridingRootKey).wValue;
-
-        // Key range on the keyboard
-        int numBas = 0;
-        int numHaut = 0;
-        if (sm->isSet(id, champ_keynum))
-        {
-            numBas = numNoteSmpl + sm->get(id, champ_keynum).wValue - numBase;
-            numHaut = numBas;
-        }
+        // Middle of the key range on the keyboard
+        double keyMid;
+        int keynum = effective(id, champ_keynum).shValue;
+        if (keynum >= 0)
+            keyMid = keynum;
         else
         {
-            numBas = numNoteSmpl + sm->get(id, champ_keyRange).rValue.byLo - numBase;
-            numHaut = numNoteSmpl + sm->get(id, champ_keyRange).rValue.byHi - numBase;
+            RangesType keyRange = effective(id, champ_keyRange).rValue;
+            keyMid = 0.5 * (keyRange.byLo + keyRange.byHi);
         }
 
-        // Compute beating frequency
-        double keyMoy = (double)(sm->get(id, champ_keyRange).rValue.byHi +
-                                 sm->get(id, champ_keyRange).rValue.byLo) / 2.;
-        double bps = params->getBaseFrequency() * qPow(params->getCoefficient(), (60. - keyMoy) / 12.);
+        // Note heard at this key
+        EltID idSmpl(elementSmpl, id.indexSf2, sm->get(id, champ_sampleID).wValue);
+        int samplePitch = sm->get(idSmpl, champ_byOriginalPitch).bValue;
+        int rootKey = effective(id, champ_overridingRootKey).shValue;
+        if (rootKey < 0)
+            rootKey = samplePitch;
+        double noteMid = samplePitch + 0.01 * effective(id, champ_scaleTuning).shValue * (keyMid - rootKey) +
+                         effective(id, champ_coarseTune).shValue;
+        double frequency = 440. * qPow(2., (noteMid - 69.) / 12.);
+
+        // Number of beats per second with an instrument tuned normally, the coefficient dividing it at each octave above
+        double bps = params->getBaseFrequency() * qPow(params->getCoefficient(), (60. - keyMid) / 12.);
         if (bps < -30)
             bps = -30;
         else if (bps > 30)
             bps = 30;
 
-        // Middle key in the range
-        double noteMoy = (double)(numBas + numHaut) / 2;
-
-        // Calcul du désaccordage, passage en frequence
-        double freqMoy = qPow(2., (noteMoy + 36.3763) / 12);
-
-        // Ajout du désaccordage
-        // - octave ondulante : division par 2 de bps
-        // - diminution désaccordage vers les graves
-        // - accentuation désaccordage vers les aigus
-        double freqMod = freqMoy + 1.2 * qPow(2., (noteMoy - 60)/30) * bps / 2;
-
-        // Retour en pitch
-        double noteMod = 12 * qLn(freqMod) / 0.69314718056 - 36.3763;
-
-        // Décalage
-        int decalage = ceil(100 * (noteMod - noteMoy) - 0.5);
+        // The fundamentals beat at the frequency difference: f + bps
+        int fineTune = 0;
         if (bps > 0)
-        {
-            if (decalage < 1)
-                decalage = 1;
-            else if (decalage > 50)
-                decalage = 50;
-        }
+            fineTune = qBound(1, qRound(1200. * qLn(1. + bps / frequency) / qLn(2.)), 99);
         else if (bps < 0)
-        {
-            if (decalage < -50)
-                decalage = -50;
-            else if (decalage > -1)
-                decalage = -1;
-        }
+            fineTune = (frequency + bps > 0) ? qBound(-99, qRound(1200. * qLn(1. + bps / frequency) / qLn(2.)), -1) : -99;
 
         // Modification instSmpl
-        if (sm->get(id, champ_fineTune).shValue != decalage)
+        if (sm->get(id, champ_fineTune).shValue != fineTune)
         {
             AttributeValue val;
-            val.shValue = decalage;
+            val.shValue = fineTune;
             sm->set(id, champ_fineTune, val);
         }
     }
 }
-
