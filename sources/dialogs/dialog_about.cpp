@@ -26,6 +26,7 @@
 #include "ui_dialog_about.h"
 #include "contextmanager.h"
 #include <QDate>
+#include <QPushButton>
 
 DialogAbout::DialogAbout(QWidget *parent) :
     QDialog(parent),

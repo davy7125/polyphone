@@ -27,6 +27,7 @@
 #include "toolpresetlist_parameters.h"
 #include "contextmanager.h"
 #include <QClipboard>
+#include <QPushButton>
 #include "soundfontmanager.h"
 
 ToolPresetList_gui::ToolPresetList_gui(QWidget *parent) :
