@@ -232,9 +232,11 @@ if [ -f "$mime" ] && [ -f "$desktop" ] && has gio && has update-mime-database; t
         detected=$(gio info -a standard::content-type "$file" 2>/dev/null | sed -n 's/^ *standard::content-type: //p')
         if [ "$detected" = "$type" ]; then pass "$file: $type"; else fail "$file: '$detected' instead of $type"; fi
     done
+    # GLib ignores a desktop file whose TryExec / Exec program is not in PATH: the executable of the package is put
+    # first, otherwise the result would depend on Polyphone being installed on this system
     unregistered=()
     for type in $desktop_types; do
-        output=$(gio mime "$type" 2>/dev/null)
+        output=$(PATH="$tree/usr/bin:$PATH" gio mime "$type" 2>/dev/null)
         [[ $output == *io.polyphone.polyphone.desktop* ]] || unregistered+=("$type")
     done
     if [ ${#unregistered[@]} -eq 0 ]; then pass "Polyphone registered for each type"; else fail "Polyphone not registered for: ${unregistered[*]}"; fi
