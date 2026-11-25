@@ -15,7 +15,8 @@ Name:           polyphone
 Version:        %{polyphone_version}
 Release:        1%{?dist}
 Summary:        Soundfont editor
-# Polyphone: GPL-3.0-or-later, copies of RtAudio and RtMidi: MIT, QtSingleApplication: BSD-3-Clause
+# Polyphone and sfArkLib: GPL-3.0-or-later, copy of RtAudio: MIT (RtMidi of the system), QtSingleApplication:
+# BSD-3-Clause
 License:        GPL-3.0-or-later AND MIT AND BSD-3-Clause
 URL:            https://www.polyphone.io
 Source0:        https://github.com/davy7125/polyphone/archive/%{polyphone_tag}/%{name}-%{polyphone_tag}.tar.gz

@@ -50,7 +50,9 @@ case $package in
         (cd "$tree" && rpm2cpio "$package" | cpio -idm --quiet)
         version=$(rpm -qp --qf '%{VERSION}' "$package")
         license="usr/share/licenses/polyphone*/LICENSE.txt" # "polyphone-<version>" if %_docdir_fmt is not Fedora's
-        lint=(rpmlint)
+        # Filters of packaging/fedora (words of the domain), not reported when unused (no spelling check without
+        # the dictionaries)
+        lint=(rpmlint --ignore-unused-rpmlintrc -r "$root/packaging/fedora/polyphone.rpmlintrc")
         ;;
     *)
         echo "Error: .deb or .rpm package expected"

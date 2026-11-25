@@ -85,8 +85,9 @@ for line in sys.stdin:
                         break_long_words=False, break_on_hyphens=False))
 ' | sed 's/%/%%/g' >> "$spec"
 
-# Binary package only, without the package of debug symbols
-options=(--define "_topdir $work/rpmbuild" --define "polyphone_tag $tag" --define "debug_package %{nil}")
+# Binary package only: the packages of debug symbols made by find-debuginfo are not kept. find-debuginfo is not
+# disabled: it is the step that strips the executable (brp-strip alone removes the debug information, not the symbols)
+options=(--define "_topdir $work/rpmbuild" --define "polyphone_tag $tag")
 if [ -n "${JOBS:-}" ]; then
     options+=(--define "_smp_build_ncpus $JOBS")
 fi

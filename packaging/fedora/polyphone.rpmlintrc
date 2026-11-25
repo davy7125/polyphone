@@ -1,0 +1,3 @@
+# Filters of rpmlint for the package of the editor, used by packaging/linux/check_package.sh
+# Words of the summary and of the description that are not in the English dictionary
+addFilter(r"spelling-error \('([Ss]oundfonts?|sfz|sfArk|wav)'")
