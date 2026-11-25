@@ -36,7 +36,7 @@
         <translation>信息</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/abstracttool.cpp" line="171"/>
+        <location filename="../../editor/tools/abstracttool.cpp" line="173"/>
         <source>The tool cannot be used with these elements.</source>
         <translation>此工具不能用于这些元素。</translation>
     </message>
@@ -1653,154 +1653,154 @@ repository</source>
         <translation>关于</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="35"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="36"/>
         <source>Credit</source>
         <translation>制作人员</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="38"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="39"/>
         <source>Close</source>
         <translation>关闭</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="40"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="41"/>
         <source>Polyphone</source>
         <translation>Polyphone</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="53"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="54"/>
         <source>Copyright</source>
         <translation>版权</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="57"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="58"/>
         <source>Polyphone website</source>
         <translation>Polyphone 官方网站</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="61"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="62"/>
         <source>Donate</source>
         <translation>捐赠</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="65"/>
-        <location filename="../../dialogs/dialog_about.cpp" line="79"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="66"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="80"/>
         <source>Davy Triponney</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Davy Triponney</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="67"/>
-        <location filename="../../dialogs/dialog_about.cpp" line="76"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="68"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="77"/>
         <source>Andrea Celani</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Andrea Celani</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="68"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="69"/>
         <source>Kinwie</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Kinwie</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="69"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="70"/>
         <source>Michael Schyllberg</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Michael Schyllberg</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="70"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="71"/>
         <source>mirabilos</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>mirabilos</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="71"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="72"/>
         <source>Paul Stratman</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Paul Stratman</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="72"/>
-        <location filename="../../dialogs/dialog_about.cpp" line="88"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="73"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="89"/>
         <source>Steve Clarke</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Steve Clarke</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="74"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="75"/>
         <source>Aleksey Bobylev</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Aleksey Bobylev</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="75"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="76"/>
         <source>Alejandro Moctezuma</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>亚历杭德罗·莫克特苏马</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="78"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="79"/>
         <source>David Surroca</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>David Surroca</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="80"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="81"/>
         <source>F.J. Martínez Murcia</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>F.J. Martínez Murcia</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="81"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="82"/>
         <source>Georg Gergull</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Georg Gergull</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="82"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="83"/>
         <source>Jay Alexander Fleming</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Jay Alexander Fleming</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="83"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="84"/>
         <source>Joel Gomes</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Joel Gomes</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="84"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="85"/>
         <source>JuliusLC</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>JuliusLC</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="85"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="86"/>
         <source>Magson</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Magson</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="86"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="87"/>
         <source>Pavel Fric</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Pavel Fric</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="87"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="88"/>
         <source>Spessasus</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>斯佩萨苏斯</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="77"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="78"/>
         <source>Chris Hansen</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Chris Hansen</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="54"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="55"/>
         <source>Davy Triponney</source>
         <translation>Davy Triponney</translation>
     </message>
@@ -1813,37 +1813,37 @@ repository</source>
         <translation>欢迎</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogchangelog.cpp" line="37"/>
+        <location filename="../../dialogs/dialogchangelog.cpp" line="38"/>
         <source>&amp;Donate</source>
         <translation>捐赠(&amp;D)</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogchangelog.cpp" line="39"/>
+        <location filename="../../dialogs/dialogchangelog.cpp" line="40"/>
         <source>&amp;Ok</source>
         <translation>确定(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogchangelog.cpp" line="51"/>
+        <location filename="../../dialogs/dialogchangelog.cpp" line="52"/>
         <source>Thank you for having installed</source>
         <translation>感谢您安装了</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogchangelog.cpp" line="52"/>
+        <location filename="../../dialogs/dialogchangelog.cpp" line="53"/>
         <source>Polyphone</source>
         <translation>Polyphone</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogchangelog.cpp" line="97"/>
+        <location filename="../../dialogs/dialogchangelog.cpp" line="98"/>
         <source>What is new</source>
         <translation>新变化</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogchangelog.cpp" line="100"/>
+        <location filename="../../dialogs/dialogchangelog.cpp" line="101"/>
         <source>What has improved</source>
         <translation>改进部分</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialogchangelog.cpp" line="103"/>
+        <location filename="../../dialogs/dialogchangelog.cpp" line="104"/>
         <source>What is fixed</source>
         <translation>修复问题</translation>
     </message>
@@ -4627,26 +4627,66 @@ default mod.</source>
 <context>
     <name>OutputSf</name>
     <message>
-        <location filename="../../core/output/sf/outputsf.cpp" line="62"/>
+        <location filename="../../core/output/sf/outputsf.cpp" line="63"/>
         <source>please close the file before overriding it</source>
         <translation>覆盖文件前请关闭文件</translation>
     </message>
     <message>
-        <location filename="../../core/output/sf/outputsf.cpp" line="91"/>
+        <location filename="../../core/output/sf/outputsf.cpp" line="92"/>
         <location filename="../../main.cpp" line="234"/>
         <source>cannot delete file &quot;%1&quot;</source>
         <translation>无法删除文件 &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../../core/output/sf/outputsf.cpp" line="101"/>
+        <location filename="../../core/output/sf/outputsf.cpp" line="102"/>
         <location filename="../../main.cpp" line="239"/>
         <source>cannot rename file &quot;%1&quot;</source>
         <translation>无法重命名文件 &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../../core/output/sf/outputsf.cpp" line="148"/>
+        <location filename="../../core/output/sf/outputsf.cpp" line="160"/>
         <source>cannot create file &quot;%1&quot;</source>
         <translation>无法创建文件 &quot;%1&quot;</translation>
+    </message>
+    <message>
+        <location filename="../../core/output/sf/outputsf.cpp" line="555"/>
+        <source>%1 preset divisions, global divisions included (maximum: %2)</source>
+        <translation>预设分区 %1 个，含全局分区（最多 %2 个）</translation>
+    </message>
+    <message>
+        <location filename="../../core/output/sf/outputsf.cpp" line="557"/>
+        <source>%1 preset parameters (maximum: %2)</source>
+        <translation>预设参数 %1 个（最多 %2 个）</translation>
+    </message>
+    <message>
+        <location filename="../../core/output/sf/outputsf.cpp" line="559"/>
+        <source>%1 preset modulators (maximum: %2)</source>
+        <translation>预设调制器 %1 个（最多 %2 个）</translation>
+    </message>
+    <message>
+        <location filename="../../core/output/sf/outputsf.cpp" line="561"/>
+        <source>%1 instrument divisions, global divisions included (maximum: %2)</source>
+        <translation>乐器分区 %1 个，含全局分区（最多 %2 个）</translation>
+    </message>
+    <message>
+        <location filename="../../core/output/sf/outputsf.cpp" line="563"/>
+        <source>%1 instrument parameters (maximum: %2)</source>
+        <translation>乐器参数 %1 个（最多 %2 个）</translation>
+    </message>
+    <message>
+        <location filename="../../core/output/sf/outputsf.cpp" line="565"/>
+        <source>%1 instrument modulators (maximum: %2)</source>
+        <translation>乐器调制器 %1 个（最多 %2 个）</translation>
+    </message>
+    <message>
+        <location filename="../../core/output/sf/outputsf.cpp" line="569"/>
+        <source>%1 samples (maximum: %2)</source>
+        <translation>采样 %1 个（最多 %2 个）</translation>
+    </message>
+    <message>
+        <location filename="../../core/output/sf/outputsf.cpp" line="573"/>
+        <source>the soundfont exceeds the limits of the sf2 format: %1</source>
+        <translation>音色库超出了 sf2 格式的限制：%1</translation>
     </message>
 </context>
 <context>
@@ -6137,154 +6177,154 @@ to display its timbre</source>
         <translation>文件已损坏 (pdta)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="360"/>
+        <location filename="../../plugin/plugineditor.cpp" line="408"/>
         <source>Instrument played by the channel, or the one chosen by the program changes it receives</source>
         <translation>该通道演奏的乐器，或由其接收的程序变更选择的乐器</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="363"/>
+        <location filename="../../plugin/plugineditor.cpp" line="411"/>
         <source>Program change (drums)</source>
         <translation>程序变更 (鼓)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="363"/>
+        <location filename="../../plugin/plugineditor.cpp" line="411"/>
         <source>Program change</source>
         <translation>程序变更</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1137"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1221"/>
         <source>(no instrument)</source>
         <translation>(无乐器)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1184"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1268"/>
         <source>Open...</source>
         <translation>打开...</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1185"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1269"/>
         <source>Open a soundfont (sf2, sf3, sfz or dls), which can also be dropped on the window</source>
         <translation>打开音色库 (sf2、sf3、sfz 或 dls)，也可以将其拖放到窗口中</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1186"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1270"/>
         <source>Recent soundfonts</source>
         <translation>最近的音色库</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1187"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1271"/>
         <source>One instrument</source>
         <translation>单一乐器</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1188"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1272"/>
         <source>The same instrument is played on all MIDI channels</source>
         <translation>所有 MIDI 通道演奏同一个乐器</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1189"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1273"/>
         <source>16 channels</source>
         <translation>16 通道</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1190"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1274"/>
         <source>Each MIDI channel plays its instrument, or the one chosen by its program changes (General MIDI)</source>
         <translation>每个 MIDI 通道演奏各自的乐器，或由其程序变更选择的乐器 (General MIDI)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1192"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1276"/>
         <source>The same instrument is played by an MPE controller: each note has its own pitch bend, pressure and timbre (lower zone of 15 channels, or the zones given by the controller)</source>
         <translation>由 MPE 控制器演奏同一个乐器：每个音符都有各自的弯音、压力和音色 (15 个通道的下部区域，或由控制器指定的区域)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1198"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1282"/>
         <source>Gain</source>
         <translation>增益</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1234"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1319"/>
         <source>Play all</source>
         <translation>全部演奏</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1245"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1330"/>
         <source>Default modulator from the velocity to the filter cutoff frequency: the softer the note, the lower the cutoff (up to 2 octaves lower).
 Change this option if notes sound too muffled: SoundFont 2.01 for an old soundfont made with this version (the notes above the velocity 64 are not filtered), Disabled for a soundfont whose samples already sound softer at low velocities (several velocity layers).</source>
         <translation>力度到滤波器截止频率的默认调制器：音符越轻，截止频率越低（最多低 2 个八度）。
 如果音符听起来过于沉闷，请更改此选项：用此版本制作的旧音色库选择 SoundFont 2.01（力度 64 以上的音符不被滤波），采样在低力度时已经较柔和的音色库（多个力度层）选择禁用。</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1199"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1283"/>
         <source>Level</source>
         <comment>reverb</comment>
         <translation>电平</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1199"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1283"/>
         <source>Size</source>
         <comment>reverb</comment>
         <translation>大小</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1199"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1283"/>
         <source>Width</source>
         <comment>reverb</comment>
         <translation>宽度</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1199"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1283"/>
         <source>Damping</source>
         <comment>reverb</comment>
         <translation>阻尼</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1200"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1284"/>
         <source>Level</source>
         <comment>chorus</comment>
         <translation>电平</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1200"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1284"/>
         <source>Depth</source>
         <comment>chorus</comment>
         <translation>深度</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1200"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1284"/>
         <source>Frequency</source>
         <comment>chorus</comment>
         <translation>频率</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1201"/>
-        <location filename="../../plugin/plugineditor.cpp" line="1202"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1285"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1286"/>
         <source>Attack</source>
         <comment>envelope</comment>
         <translation>起音</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1201"/>
-        <location filename="../../plugin/plugineditor.cpp" line="1202"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1285"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1286"/>
         <source>Decay</source>
         <comment>envelope</comment>
         <translation>衰减</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1201"/>
-        <location filename="../../plugin/plugineditor.cpp" line="1202"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1285"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1286"/>
         <source>Sustain</source>
         <comment>envelope</comment>
         <translation>延音</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1201"/>
-        <location filename="../../plugin/plugineditor.cpp" line="1202"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1285"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1286"/>
         <source>Release</source>
         <comment>envelope</comment>
         <translation>释音</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1211"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1295"/>
         <source>Poly: the notes are played together.
 Mono: one note at a time, each one starting with its attack.
 Legato: one note at a time, a note played before the previous one is released continuing it without a new attack.
@@ -6295,279 +6335,279 @@ When several keys are held, the latest, the highest or the lowest one is heard. 
 按住多个键时，发声的是最后按下的、最高的或最低的键。鼓和 MPE 模式始终为复音。</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1216"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1300"/>
         <source>Duration of the pitch glide between two notes played legato</source>
         <translation>以连奏方式演奏的两个音符之间音高滑动的时长</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1220"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1304"/>
         <source>Reference pitch</source>
         <translation>参考音高</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1221"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1305"/>
         <source>Note sounding at this frequency, whatever the temperament</source>
         <translation>无论律制如何都以此频率发声的音</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1225"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1310"/>
         <source>Transposition</source>
         <translation>移调</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1226"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1311"/>
         <source>Transposition in semitones of the notes played, except the drums</source>
         <translation>以半音为单位移调所演奏的音（鼓除外）</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1232"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1317"/>
         <source>Tonality of the temperament (tonic of a scale)</source>
         <translation>律制的调（音阶的主音）</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1236"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1321"/>
         <source>Temperament or scale applied (equal temperament otherwise)</source>
         <translation>应用律制或音阶（否则为平均律）</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1237"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1322"/>
         <source>Envelope applied to all instruments except the drums (envelopes of the soundfont otherwise)</source>
         <translation>包络应用于除鼓以外的所有乐器（否则为音色库的包络）</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1239"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1324"/>
         <source>Reverb enabled</source>
         <translation>启用混响</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1240"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1325"/>
         <source>Chorus enabled</source>
         <translation>启用合唱</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1243"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1328"/>
         <source>Filter cutoff</source>
         <translation>滤波器截止</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1254"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1339"/>
         <source>Curve</source>
         <translation>曲线</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1255"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1340"/>
         <source>Velocity curve: linear in the middle, concave to the left (softer velocity), convex to the right (velocity rising quickly)</source>
         <translation>力度曲线：中间为线性，向左为凹形（力度更柔和），向右为凸形（力度迅速升高）</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1265"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1350"/>
         <source>Durations of the soundfont multiplied and sustain levels raised or lowered: each sound keeps the shape of its envelope. A factor of 1 or a change of 0 dB keeps the soundfont.</source>
         <translation>音色库的时长按倍数缩放，延音电平升高或降低：每个声音保持其包络的形状。倍数为 1 或变化为 0 dB 时保持音色库的设置。</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1268"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1353"/>
         <source>Durations and sustain level replacing the ones of the soundfont. A knob turned fully to the left keeps the soundfont.</source>
         <translation>时长和延音电平取代音色库的值。旋钮完全转到最左侧时保持音色库的值。</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1272"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1357"/>
         <source>Panic</source>
         <translation>紧急停止</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1273"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1358"/>
         <source>Stop all sounds and reset the controllers</source>
         <translation>停止所有声音并重置控制器</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1274"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1359"/>
         <source>Settings</source>
         <translation>设置</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1328"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1413"/>
         <source>cannot open the file %1</source>
         <translation>无法打开文件 %1</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1330"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1415"/>
         <source>invalid %1 index</source>
         <translation>无效的 %1 索引</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1342"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1427"/>
         <source>No soundfont</source>
         <translation>无音色库</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1350"/>
-        <location filename="../../plugin/plugineditor.cpp" line="1402"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1435"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1487"/>
         <source>Loading...</source>
         <translation>正在加载...</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1355"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1440"/>
         <source>Cannot read the soundfont: %1</source>
         <translation>无法读取音色库：%1</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1362"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1447"/>
         <source>Open a soundfont or drop it here</source>
         <translation>打开音色库或将其拖放到此处</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1399"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1484"/>
         <source>Loading the sounds: %1 %</source>
         <translation>正在加载声音：%1%</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1401"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1486"/>
         <source>Some sounds may be missing until the loading is complete.</source>
         <translation>加载完成前，部分声音可能无法播放。</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1444"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1543"/>
         <source>Envelope played, the parts keeping the soundfont being drawn with dashes (as an example). The durations are compressed.</source>
         <translation>播放的包络，保持音色库设置的部分以虚线绘制（作为示例）。时长经过压缩。</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1446"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1545"/>
         <source>Envelope played (in color) and an example of envelope of the soundfont (dashes). The durations are compressed.</source>
         <translation>播放的包络（彩色）以及音色库包络的示例（虚线）。时长经过压缩。</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1498"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1597"/>
         <source>Voices: %1</source>
         <translation>复音：%1</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1499"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1598"/>
         <source>CPU: %1 %</source>
         <translation>CPU：%1%</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1513"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1612"/>
         <source>Open a soundfont</source>
         <translation>打开音色库</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1527"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1626"/>
         <source>No recent soundfont</source>
         <translation>没有最近的音色库</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1576"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1675"/>
         <source>%1 voices</source>
         <translation>%1 个复音</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1581"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1680"/>
         <source>Channel %1</source>
         <translation>通道 %1</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1588"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1687"/>
         <source>System language</source>
         <translation>系统语言</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1595"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1694"/>
         <source>Polyphony</source>
         <translation>复音数</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1596"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1695"/>
         <source>Keyboard</source>
         <translation>键盘</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1597"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1696"/>
         <source>Language</source>
         <translation>语言</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1599"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1698"/>
         <source>Fixed latency (notes played at their exact position)</source>
         <translation>固定延迟（音符在其准确位置播放）</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1601"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1700"/>
         <source>Clipping to [-1; 1]</source>
         <translation>削波到 [-1; 1]</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1660"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1759"/>
         <source>Note</source>
         <translation>音符</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1661"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1760"/>
         <source>Temperaments and scales</source>
         <translation>律制与音阶</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1235"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1320"/>
         <source>Also play the notes not used by the temperament (scale)</source>
         <translation>也演奏律制（音阶）未使用的音</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1230"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1315"/>
         <source>Temperament or scale, transposed to the chosen tonality</source>
         <translation>律制或音阶，移调到所选的调</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1231"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1316"/>
         <source>Tonality</source>
         <translation>调性</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1606"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1705"/>
         <source>Store the soundfont in the project (not possible with an sfz file)</source>
         <translation>将音色库存储在工程中 (sfz 文件不可用)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1607"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1706"/>
         <source>Store the soundfont in the project</source>
         <translation>将音色库存储在工程中</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1613"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1712"/>
         <source>Channels and effects on their own outputs (not possible in the standalone application)</source>
         <translation>通道和效果使用各自的输出 (独立应用中不可用)</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1615"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1714"/>
         <source>Channels and effects on their own outputs</source>
         <translation>通道和效果使用各自的输出</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1662"/>
-        <location filename="../../plugin/plugineditor.cpp" line="1917"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1761"/>
+        <location filename="../../plugin/plugineditor.cpp" line="2022"/>
         <source>Envelope</source>
         <translation>包络</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1663"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1762"/>
         <source>Reverb</source>
         <translation>混响</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1664"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1763"/>
         <source>Chorus</source>
         <translation>合唱</translation>
     </message>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1663"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1762"/>
         <source>Velocity</source>
         <translation>力度</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="475"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="484"/>
         <source>too many soundfonts are still playing, try again in a moment</source>
         <translation>仍有过多音色库正在播放，请稍后再试</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="996"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="1005"/>
         <source>file not found</source>
         <translation>找不到文件</translation>
     </message>
@@ -6575,7 +6615,7 @@ When several keys are held, the latest, the highest or the lowest one is heard. 
 <context>
     <name>PluginJuce</name>
     <message>
-        <location filename="../../plugin/plugineditor.cpp" line="1312"/>
+        <location filename="../../plugin/plugineditor.cpp" line="1397"/>
         <location filename="../../plugin/plugintranslator.cpp" line="60"/>
         <source>Options</source>
         <translation>选项</translation>
@@ -7024,134 +7064,134 @@ When several keys are held, the latest, the highest or the lowest one is heard. 
         <translation>滑音时间</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="318"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="325"/>
         <source>Envelope</source>
         <translation>包络</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="319"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="326"/>
         <source>Envelope enabled</source>
         <translation>启用包络</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="320"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="328"/>
         <source>Envelope mode</source>
         <translation>包络模式</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="321"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="329"/>
         <source>Attack factor</source>
         <translation>起音倍数</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="321"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="329"/>
         <source>Decay factor</source>
         <translation>衰减倍数</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="323"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="331"/>
         <source>Sustain change</source>
         <translation>延音变化</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="330"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="339"/>
         <source>Release factor</source>
         <translation>释音倍数</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="331"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="340"/>
         <source>Attack time</source>
         <translation>起音时间</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="332"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="341"/>
         <source>Decay time</source>
         <translation>衰减时间</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="334"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="343"/>
         <source>Sustain level</source>
         <translation>延音电平</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="343"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="352"/>
         <source>Release time</source>
         <translation>释音时间</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="349"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="358"/>
         <source>Disabled</source>
         <comment>velocity to filter</comment>
         <translation>禁用</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="354"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="363"/>
         <source>Poly</source>
         <translation>复音</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="354"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="363"/>
         <source>Mono (latest)</source>
         <translation>单音（最后）</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="354"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="363"/>
         <source>Mono (highest)</source>
         <translation>单音（最高）</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="354"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="363"/>
         <source>Mono (lowest)</source>
         <translation>单音（最低）</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="354"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="363"/>
         <source>Legato (latest)</source>
         <translation>连奏（最后）</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="355"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="364"/>
         <source>Legato (highest)</source>
         <translation>连奏（最高）</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="355"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="364"/>
         <source>Legato (lowest)</source>
         <translation>连奏（最低）</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="360"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="369"/>
         <source>Relative</source>
         <comment>envelope</comment>
         <translation>相对</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="360"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="369"/>
         <source>Fixed</source>
         <comment>envelope</comment>
         <translation>固定</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="377"/>
         <location filename="../../plugin/pluginprocessor.cpp" line="386"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="395"/>
         <source>Soundfont</source>
         <comment>envelope value kept</comment>
         <translation>音色库</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="403"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="412"/>
         <source>Off</source>
         <comment>glide</comment>
         <translation>关</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="429"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="438"/>
         <source>Equal</source>
         <comment>Equal musical temperament</comment>
         <translation>平均律</translation>
     </message>
     <message>
-        <location filename="../../plugin/pluginprocessor.cpp" line="431"/>
+        <location filename="../../plugin/pluginprocessor.cpp" line="440"/>
         <source>Custom</source>
         <comment>custom temperament</comment>
         <translation>自定义</translation>
@@ -7682,22 +7722,22 @@ When several keys are held, the latest, the highest or the lowest one is heard. 
         <translation>力度范围：</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="131"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="132"/>
         <source>Created by</source>
         <translation>作者</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="132"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="133"/>
         <source>Contributors</source>
         <translation>贡献者</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="133"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="134"/>
         <source>Translated by</source>
         <translation>翻译者</translation>
     </message>
     <message>
-        <location filename="../../dialogs/dialog_about.cpp" line="175"/>
+        <location filename="../../dialogs/dialog_about.cpp" line="176"/>
         <source>Icons</source>
         <translation>图标</translation>
     </message>
@@ -7888,7 +7928,7 @@ When several keys are held, the latest, the highest or the lowest one is heard. 
         <translation>SFZ 文件</translation>
     </message>
     <message>
-        <location filename="../../context/translationmanager.cpp" line="117"/>
+        <location filename="../../context/translationmanager.cpp" line="131"/>
         <source>When editing one side of a stereo sample, the other side is automatically edited the same.
 This rule applies at the sample level and also when editing a division of an instrument:
 the division corresponding to the other channel, if any, is edited the same.
@@ -8729,58 +8769,58 @@ download content</source>
 <context>
     <name>TabManager</name>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="132"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="133"/>
         <source>Settings</source>
         <translation>设置</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="161"/>
-        <location filename="../../mainwindow/tabmanager.cpp" line="370"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="162"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="371"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="162"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="163"/>
         <source>Cannot open file &quot;%1&quot;</source>
         <translation>无法打开文件 &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="319"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="320"/>
         <source>Online repository</source>
         <translation>在线仓库</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="365"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="366"/>
         <source>Save before exiting?</source>
         <translation>退出前是否保存文件？</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="368"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="369"/>
         <source>untitled</source>
         <translation>未命名</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="369"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="370"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>文件 &quot;%1&quot; 已被修改。</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="372"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="373"/>
         <source>&amp;Save</source>
         <translation>保存(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="373"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="374"/>
         <source>&amp;Cancel</source>
         <translation>取消(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="374"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="375"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>不保存(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow/tabmanager.cpp" line="641"/>
+        <location filename="../../mainwindow/tabmanager.cpp" line="666"/>
         <source>User area</source>
         <translation>用户区</translation>
     </message>
@@ -9266,12 +9306,12 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ToolChangeAttenuation</name>
     <message>
-        <location filename="../../editor/tools/change_attenuation/toolchangeattenuation.h" line="46"/>
+        <location filename="../../editor/tools/change_attenuation/toolchangeattenuation.h" line="47"/>
         <source>Fast editing</source>
         <translation>快速编辑</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/change_attenuation/toolchangeattenuation.h" line="64"/>
+        <location filename="../../editor/tools/change_attenuation/toolchangeattenuation.h" line="69"/>
         <source>Change attenuations</source>
         <translation>更改衰减</translation>
     </message>
@@ -9525,7 +9565,7 @@ Other soundfont editors might display other units.</source>
         <translation>清理</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/clean_duplicates/toolcleanduplicates.h" line="66"/>
+        <location filename="../../editor/tools/clean_duplicates/toolcleanduplicates.h" line="69"/>
         <source>Clean duplicates</source>
         <translation>清理重复项</translation>
     </message>
@@ -9559,7 +9599,7 @@ Other soundfont editors might display other units.</source>
         <translation>清理</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/clean_unused_elements/toolcleanunused.h" line="66"/>
+        <location filename="../../editor/tools/clean_unused_elements/toolcleanunused.h" line="70"/>
         <source>Remove unused elements</source>
         <translation>移除未使用的元素</translation>
     </message>
@@ -9585,17 +9625,17 @@ Other soundfont editors might display other units.</source>
         <translation>以下是为每个乐器自动设置的调制器列表。您可以通过选择相应的调制器并点击下面的操作来覆盖或禁用它们。</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/default_mod/tooldefaultmod_gui.cpp" line="40"/>
+        <location filename="../../editor/tools/default_mod/tooldefaultmod_gui.cpp" line="41"/>
         <source>&amp;Override</source>
         <translation>覆盖(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/default_mod/tooldefaultmod_gui.cpp" line="42"/>
+        <location filename="../../editor/tools/default_mod/tooldefaultmod_gui.cpp" line="43"/>
         <source>&amp;Disable</source>
         <translation>禁用(&amp;D)</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/default_mod/tooldefaultmod_gui.cpp" line="44"/>
+        <location filename="../../editor/tools/default_mod/tooldefaultmod_gui.cpp" line="45"/>
         <source>&amp;Cancel</source>
         <translation>取消(&amp;C)</translation>
     </message>
@@ -9882,58 +9922,58 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ToolFrequencyPeaks_gui</name>
     <message>
-        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="75"/>
+        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="76"/>
         <source>&amp;Export</source>
         <translation>导出(&amp;E)</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="76"/>
+        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="77"/>
         <source>&amp;Close</source>
         <translation>关闭(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="81"/>
+        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="82"/>
         <source>Sample</source>
         <translation>采样</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="82"/>
+        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="83"/>
         <source>Peak</source>
         <translation>峰值</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="83"/>
+        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="84"/>
         <source>Intensity</source>
         <translation>强度</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="84"/>
+        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="85"/>
         <source>Frequency</source>
         <translation>频率</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="85"/>
+        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="86"/>
         <source>Key</source>
         <translation>音符</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="86"/>
+        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="87"/>
         <source>Correction</source>
         <translation>校正</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="149"/>
+        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="150"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
         <translation>赫兹</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="173"/>
+        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="174"/>
         <source>Export peak frequency</source>
         <translation>导出峰值频率</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="174"/>
+        <location filename="../../editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="175"/>
         <source>Csv file</source>
         <translation>CSV 文件</translation>
     </message>
@@ -10674,7 +10714,7 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ToolPresetList_gui</name>
     <message>
-        <location filename="../../editor/tools/preset_list/toolpresetlist_gui.cpp" line="37"/>
+        <location filename="../../editor/tools/preset_list/toolpresetlist_gui.cpp" line="38"/>
         <source>Copy</source>
         <translation>复制</translation>
     </message>
@@ -10694,7 +10734,7 @@ Other soundfont editors might display other units.</source>
         <translation>HTML 表格</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/preset_list/toolpresetlist_gui.cpp" line="39"/>
+        <location filename="../../editor/tools/preset_list/toolpresetlist_gui.cpp" line="40"/>
         <source>Close</source>
         <translation>关闭</translation>
     </message>
@@ -10760,7 +10800,7 @@ Other soundfont editors might display other units.</source>
         <translation>调制器</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/remove_mods/toolremovemods.h" line="63"/>
+        <location filename="../../editor/tools/remove_mods/toolremovemods.h" line="66"/>
         <source>Remove modulators</source>
         <translation>移除调制器</translation>
     </message>
@@ -11023,17 +11063,17 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ToolTranspose</name>
     <message>
-        <location filename="../../editor/tools/transpose/tooltranspose.cpp" line="159"/>
+        <location filename="../../editor/tools/transpose/tooltranspose.cpp" line="164"/>
         <source>An instrument comprising no samples is not compatible with this tool:</source>
         <translation>不含采样的乐器与此工具不兼容：</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/transpose/tooltranspose.h" line="45"/>
+        <location filename="../../editor/tools/transpose/tooltranspose.h" line="46"/>
         <source>Fast editing</source>
         <translation>快速编辑</translation>
     </message>
     <message>
-        <location filename="../../editor/tools/transpose/tooltranspose.h" line="63"/>
+        <location filename="../../editor/tools/transpose/tooltranspose.h" line="67"/>
         <source>Transpose</source>
         <translation>移调</translation>
     </message>

@@ -27,6 +27,7 @@
 #include "soundfontmanager.h"
 #include <QFile>
 #include <QFileInfo>
+#include <QStringList>
 #include "utils.h"
 #include "../../input/sf/sf2header.h"
 #include "../../input/sf/sf2sdtapart.h"
@@ -119,6 +120,8 @@ void OutputSf::processInternal(QString fileName, SoundfontManager * sm, bool &su
     {
         // Just save the file
         this->save(fileName, success, error, sf2Index, qualityValue);
+        if (!success)
+            return; // Not marked as saved: the changes must not be lost when closing
     }
 
     _sm->clearNewEditing();
@@ -138,6 +141,15 @@ void OutputSf::save(QString fileName, bool &success, QString &error, int sf2Inde
     Sf2SdtaPart sdtaPart;
     Sf2PdtaPart pdtaPart;
     fillSf2(sf2Index, &header, &sdtaPart, &pdtaPart);
+
+    // Beyond the 16-bit indexes of the format, divisions would get the parameters of other divisions
+    error = checkFormatLimits(&pdtaPart);
+    if (!error.isEmpty())
+    {
+        success = false;
+        return;
+    }
+
     header.prepareBeforeWritingData(&sdtaPart, &pdtaPart, isSf3, qualityValue);
 
     // Write everything
@@ -531,6 +543,34 @@ void OutputSf::fillSf2(int sf2Index, Sf2Header * header, Sf2SdtaPart * sdtaPart,
         pdtaPart->_shdrs[i]._sfSampleType = _sm->get(id, champ_sfSampleType).sfLinkValue;
     }
     pdtaPart->_shdrs[indexes.count()]._name = "EOS";
+}
+
+QString OutputSf::checkFormatLimits(const Sf2PdtaPart * pdtaPart)
+{
+    // Bags, generators and modulators are referenced by 16-bit indexes, up to the terminal record that follows the
+    // last one: there can be at most 65535 of each (global divisions included for the bags)
+    const int maxIndex = 0xFFFF;
+    QStringList exceeded;
+    if (pdtaPart->_pbags.count() - 1 > maxIndex)
+        exceeded << tr("%1 preset divisions, global divisions included (maximum: %2)").arg(pdtaPart->_pbags.count() - 1).arg(maxIndex);
+    if (pdtaPart->_pgens.count() - 1 > maxIndex)
+        exceeded << tr("%1 preset parameters (maximum: %2)").arg(pdtaPart->_pgens.count() - 1).arg(maxIndex);
+    if (pdtaPart->_pmods.count() - 1 > maxIndex)
+        exceeded << tr("%1 preset modulators (maximum: %2)").arg(pdtaPart->_pmods.count() - 1).arg(maxIndex);
+    if (pdtaPart->_ibags.count() - 1 > maxIndex)
+        exceeded << tr("%1 instrument divisions, global divisions included (maximum: %2)").arg(pdtaPart->_ibags.count() - 1).arg(maxIndex);
+    if (pdtaPart->_igens.count() - 1 > maxIndex)
+        exceeded << tr("%1 instrument parameters (maximum: %2)").arg(pdtaPart->_igens.count() - 1).arg(maxIndex);
+    if (pdtaPart->_imods.count() - 1 > maxIndex)
+        exceeded << tr("%1 instrument modulators (maximum: %2)").arg(pdtaPart->_imods.count() - 1).arg(maxIndex);
+
+    // Samples are referenced by a 16-bit index (the instruments too, but they are fewer than their divisions)
+    if (pdtaPart->_shdrs.count() - 1 > maxIndex + 1)
+        exceeded << tr("%1 samples (maximum: %2)").arg(pdtaPart->_shdrs.count() - 1).arg(maxIndex + 1);
+
+    if (exceeded.isEmpty())
+        return "";
+    return tr("the soundfont exceeds the limits of the sf2 format: %1").arg(exceeded.join("; "));
 }
 
 void OutputSf::loadMods(EltID idMod, QVector<Sf2PdtaPart_mod> &mods, quint32 &index)

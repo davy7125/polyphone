@@ -50,6 +50,7 @@ private:
 
     void save(QString fileName, bool &success, QString &error, int sf2Index, double qualityValue);
     void fillSf2(int sf2Index, Sf2Header * header, Sf2SdtaPart * sdtaPart, Sf2PdtaPart * pdtaPart);
+    QString checkFormatLimits(const Sf2PdtaPart * pdtaPart);
     void loadMods(EltID idMod, QVector<Sf2PdtaPart_mod> &mods, quint32 &index);
     void loadGens(EltID idGen, EltID idDiv, QVector<Sf2PdtaPart_gen> &gens, quint32 &index, SfIndexConverter &indexConverter);
     static void convertTo16bit(QVector<float> dataSrc, QByteArray &dataDest);
