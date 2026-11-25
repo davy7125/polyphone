@@ -129,7 +129,10 @@ if(POLYPHONE_BUILD_EDITOR)
         target_compile_options(polyphone_definitions INTERFACE -Wall -Wextra)
     endif()
     if(WIN32)
-        target_compile_definitions(polyphone_definitions INTERFACE __WINDOWS_MM__ __WINDOWS_WASAPI__ __WINDOWS_ASIO__)
+        # _USE_MATH_DEFINES: M_PI and the other constants of <cmath>, hidden by MSVC and by MinGW in strict mode
+        # (-std=c++17), without relying on the precompiled header (qmath.h)
+        target_compile_definitions(polyphone_definitions INTERFACE
+            __WINDOWS_MM__ __WINDOWS_WASAPI__ __WINDOWS_ASIO__ _USE_MATH_DEFINES)
     elseif(APPLE)
         target_compile_definitions(polyphone_definitions INTERFACE __MACOSX_CORE__ TARGET_OS_IPHONE=0)
     else()

@@ -27,6 +27,8 @@ concurrency:
 env:
   CCACHE_DIR: ${{ github.workspace }}/.ccache
   CCACHE_MAXSIZE: 500M
+  # Without these, ccache caches no compilation using a precompiled header ("Could not use precompiled header")
+  CCACHE_SLOPPINESS: pch_defines,time_macros
 
 jobs:
   sources:

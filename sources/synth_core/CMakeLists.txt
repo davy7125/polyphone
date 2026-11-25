@@ -94,7 +94,7 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang" AND NOT MSVC)
 endif()
 
 # Windows: M_PI_2 and the other constants of <cmath>, hidden by MSVC and clang-cl (plugin) and by MinGW in strict mode
-# (-std=c++17). The editor sources have them through the precompiled header (qmath.h)
+# (-std=c++17). The editor sources have the same definition (polyphone_definitions)
 if(WIN32)
     target_compile_definitions(polyphone_synth_core PRIVATE _USE_MATH_DEFINES)
 endif()
