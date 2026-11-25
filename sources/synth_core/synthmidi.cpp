@@ -38,8 +38,9 @@ int SynthMidi::findPreset(ISynthSoundfont * soundfont, int bank, int preset)
 {
     for (int i = 0; i < soundfont->getPresetCount(); i++)
     {
+        // A deleted preset (kept hidden by the editor for undoing) may have the same numbers as a new one
         ISynthInstPrst * prst = soundfont->getPresetAt(i);
-        if (prst->getBankNumber() == bank && prst->getPresetNumber() == preset)
+        if (prst->isPlayable() && prst->getBankNumber() == bank && prst->getPresetNumber() == preset)
             return prst->getIndex();
     }
     return -1;

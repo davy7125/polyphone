@@ -230,6 +230,7 @@ public:
 
     // ISynthInstPrst implementation
     int getIndex() override { return _index; }
+    bool isPlayable() override { return true; }
     int getPresetNumber() override { return _presetNumber; }
     int getBankNumber() override { return _bankNumber; }
     bool isAlwaysPlayed() override { return _isAlwaysPlayed; }

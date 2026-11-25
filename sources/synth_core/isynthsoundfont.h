@@ -83,6 +83,10 @@ public:
     /// Index of the element in its soundfont
     virtual int getIndex() = 0;
 
+    /// False if the element has been deleted (the editor keeps it hidden for undoing): a preset found by its numbers
+    /// must not be this one, another preset may now have them
+    virtual bool isPlayable() = 0;
+
     /// Preset and bank numbers (for presets only)
     virtual int getPresetNumber() = 0;
     virtual int getBankNumber() = 0;

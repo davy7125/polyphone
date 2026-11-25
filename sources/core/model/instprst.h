@@ -65,6 +65,7 @@ public:
 
     // ISynthInstPrst implementation (and isAlwaysPlayed above)
     int getIndex() override { return _id.indexElt; }
+    bool isPlayable() override { return !isHidden(); }
     int getPresetNumber() override { return getExtraField(champ_wPreset); }
     int getBankNumber() override { return getExtraField(champ_wBank); }
     ISynthZone * getGlobalZone() override { return _globalDivision; }
