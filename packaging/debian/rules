@@ -1,15 +1,18 @@
 #!/usr/bin/make -f
+# Used by packaging/build_debian_package.sh: the source of the package is the whole repository (the CMake project in
+# sources/ installs files of packaging/ and the README of the root)
 
-DPKG_EXPORT_BUILDFLAGS = 1
-include /usr/share/dpkg/buildflags.mk
+# No link-time optimization (default of Ubuntu): built as the other official builds
+export DEB_BUILD_MAINT_OPTIONS = optimize=-lto
 
 %:
-	dh $@ --parallel --buildsystem=cmake
+	dh $@ --buildsystem=cmake --sourcedirectory=sources
 
 # Official package: the notifications of a new version are shown. Release: optimized as the other official builds
-# (-O3 after the flags of dpkg)
+# (-O3 of CMake after the flags of dpkg), with the copy of RtAudio in sources/lib (no dependency on the version of
+# librtaudio of the system)
 override_dh_auto_configure:
-	dh_auto_configure -- -DCMAKE_BUILD_TYPE=Release -DPOLYPHONE_OFFICIAL_BUILD=ON
+	dh_auto_configure -- -DCMAKE_BUILD_TYPE=Release -DPOLYPHONE_OFFICIAL_BUILD=ON -DPOLYPHONE_LOCAL_RTAUDIO=ON
 
 override_dh_shlibdeps:
 	dh_shlibdeps --dpkg-shlibdeps-params=--ignore-missing-info

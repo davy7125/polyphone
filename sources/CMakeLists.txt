@@ -304,6 +304,28 @@ if(POLYPHONE_BUILD_EDITOR)
         include(GNUInstallDirs)
         install(TARGETS polyphone RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
         install(FILES resources/polyphone.png DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolor/512x512/apps)
+
+        # Icons of the file types: PNG images of the Windows icons (packaging/windows/file_*.ico), named after the MIME
+        # types of polyphone.xml. Extracted when building, by Python without any module.
+        find_package(Python3 COMPONENTS Interpreter)
+        if(Python3_Interpreter_FOUND)
+            set(POLYPHONE_MIME_ICONS ${CMAKE_CURRENT_BINARY_DIR}/mime_icons)
+            file(GLOB POLYPHONE_ICO_FILES ${CMAKE_CURRENT_SOURCE_DIR}/../packaging/windows/file_*.ico)
+            add_custom_command(OUTPUT ${POLYPHONE_MIME_ICONS}/stamp
+                COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../packaging/linux/mime_icons.py
+                        ${CMAKE_CURRENT_SOURCE_DIR}/../packaging/polyphone.xml
+                        ${CMAKE_CURRENT_SOURCE_DIR}/../packaging/windows ${POLYPHONE_MIME_ICONS}
+                COMMAND ${CMAKE_COMMAND} -E touch ${POLYPHONE_MIME_ICONS}/stamp
+                DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/../packaging/linux/mime_icons.py
+                        ${CMAKE_CURRENT_SOURCE_DIR}/../packaging/polyphone.xml ${POLYPHONE_ICO_FILES}
+                COMMENT "Extracting the icons of the file types"
+                VERBATIM)
+            add_custom_target(polyphone_mime_icons ALL DEPENDS ${POLYPHONE_MIME_ICONS}/stamp)
+            install(DIRECTORY ${POLYPHONE_MIME_ICONS}/hicolor DESTINATION ${CMAKE_INSTALL_DATADIR}/icons)
+        else()
+            message(WARNING "Python 3 not found: the icons of the file types will not be installed")
+        endif()
+
         install(FILES ../packaging/io.polyphone.polyphone.desktop DESTINATION ${CMAKE_INSTALL_DATADIR}/applications)
         install(FILES ../packaging/io.polyphone.polyphone.metainfo.xml DESTINATION ${CMAKE_INSTALL_DATADIR}/metainfo)
         install(FILES ../packaging/polyphone.xml DESTINATION ${CMAKE_INSTALL_DATADIR}/mime/packages)

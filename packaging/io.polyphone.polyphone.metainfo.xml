@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<component type="desktop">
+<component type="desktop-application">
  <id>io.polyphone.polyphone</id>
- <metadata_license>CC0</metadata_license>
- <project_license>GPL-3.0+</project_license>
+ <metadata_license>CC0-1.0</metadata_license>
+ <project_license>GPL-3.0-or-later</project_license>
  <name>Polyphone</name>
  <summary>Turn any sound into a musical instrument</summary>
  <developer id="io.polyphone">
@@ -10,32 +10,77 @@
  </developer>
  <description>
    <p>
-     Polyphone is a soundfont editor for quickly designing musical instruments.
+     Polyphone is a soundfont editor. A soundfont is a single file holding everything a synthesizer needs to play an
+     instrument: the recorded samples, how they are spread across the keyboard and the velocities, and how they are
+     shaped by envelopes, filters and modulators.
    </p>
+   <p>
+     Polyphone creates soundfonts from your own recordings, refines existing ones, converts them to other formats and
+     plays them right away with its built-in synthesizer.
+   </p>
+   <ul>
+     <li>sf2 (versions 2.01 and 2.04, 24-bit samples) and sf3 files opened and saved, sfz and DLS imported and exported,
+       sfArk archives and GrandOrgue organs imported</li>
+     <li>Parameters of many samples, instruments or presets edited at once, graphical editors for the key and velocity
+       ranges and for the envelopes</li>
+     <li>Sample editor with loop points, pitch and tuning estimation and an equalizer, timbre view showing the level of
+       each harmonic on every key</li>
+     <li>More than 30 tools: automatic loop, creation of missing samples, transposition, chords, organ mixtures,
+       conversion of stereo samples to mono</li>
+     <li>Built-in synthesizer with reverb and chorus, played with the virtual keyboard, a MIDI keyboard or the computer
+       keyboard, in more than 200 temperaments and scales</li>
+     <li>MIDI file player with an export to wav, recorder of the sound (wav) or of what is played (MIDI)</li>
+     <li>Soundfont explorer for browsing a directory, online repository of the soundfonts shared on polyphone.io</li>
+     <li>Command line for converting files and rendering MIDI files, MCP server letting an AI assistant browse and edit
+       the open soundfonts</li>
+     <li>Interface translated into 16 languages</li>
+   </ul>
  </description>
+ <launchable type="desktop-id">io.polyphone.polyphone.desktop</launchable>
+ <provides>
+   <binary>polyphone</binary>
+   <mediatype>audio/x-soundfont</mediatype>
+   <mediatype>audio/x-sf2</mediatype>
+   <mediatype>audio/x-sf3</mediatype>
+   <mediatype>audio/x-sfz</mediatype>
+   <mediatype>audio/x-sfark</mediatype>
+   <mediatype>audio/x-organ</mediatype>
+   <mediatype>audio/dls</mediatype>
+ </provides>
  <screenshots>
   <screenshot type="default">
-   <image>https://github.com/davy7125/polyphone/raw/master/screenshots/Home.png</image>
-   <caption>Polyphone Main Window</caption>
-  </screenshot>
-  <screenshot>
    <image>https://github.com/davy7125/polyphone/raw/master/screenshots/InstrumentEditing.png</image>
-   <caption>Instrument Editor</caption>
+   <caption>Instrument editor</caption>
   </screenshot>
   <screenshot>
    <image>https://github.com/davy7125/polyphone/raw/master/screenshots/SampleConfiguration.png</image>
-   <caption>Sample Configuration</caption>
+   <caption>Sample editor, with the loop points and the tuning analysis</caption>
+  </screenshot>
+  <screenshot>
+   <image>https://github.com/davy7125/polyphone/raw/master/screenshots/TimbreView.png</image>
+   <caption>Timbre view: the level of each harmonic heard on every key</caption>
+  </screenshot>
+  <screenshot>
+   <image>https://github.com/davy7125/polyphone/raw/master/screenshots/SoundfontExplorer.png</image>
+   <caption>Soundfont explorer</caption>
   </screenshot>
   <screenshot>
    <image>https://github.com/davy7125/polyphone/raw/master/screenshots/SoundfontBrowser.png</image>
-   <caption>Soundfont Browser</caption>
+   <caption>Online repository</caption>
+  </screenshot>
+  <screenshot>
+   <image>https://github.com/davy7125/polyphone/raw/master/screenshots/MidiPlayer.png</image>
+   <caption>MIDI player</caption>
   </screenshot>
  </screenshots>
  <translation type="qt">polyphone</translation>
  <content_rating type="oars-1.1" />
- ​<launchable type="desktop-id">io.polyphone.polyphone.desktop</launchable>
  <url type="homepage">https://www.polyphone.io/</url>
+ <url type="help">https://www.polyphone.io/documentation</url>
+ <url type="bugtracker">https://github.com/davy7125/polyphone/issues</url>
+ <url type="vcs-browser">https://github.com/davy7125/polyphone</url>
  <releases>
+   <release type="stable" version="2.7.3" date="2026-11-24" />
    <release type="stable" version="2.6" date="2026-05-25" />
    <release type="stable" version="2.5.1" date="2025-01-19" />
    <release type="stable" version="2.5" date="2024-12-22">

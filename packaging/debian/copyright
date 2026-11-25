@@ -1,55 +1,39 @@
-Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: polyphone
 Upstream-Contact: Davy Triponney <contact@polyphone.io>
-Source: https://www.polyphone.io/
+Source: https://github.com/davy7125/polyphone
 
 Files:      *
 Copyright:  2012-2026 Davy Triponney, <contact@polyphone.io>
 License:    GPL-3+
 
-Files:      clavier/*
+Files:      sources/clavier/*
 Copyright:  2008-2014 Pedro Lopez-Cabanillas, <plcl@users.sf.net>
-            2013-2024 Davy Triponney, <contact@polyphone.io>
+            2013-2026 Davy Triponney, <contact@polyphone.io>
 License:    GPL-3+
 
-Files:      core/input/sfark/*
+Files:      sources/core/input/sfark/*
 Copyright:  Jeff Glatt
-            2017 Davy Triponney <contact@polyphone.io>
+            2014-2026 Davy Triponney <contact@polyphone.io>
 License:    GPL-3+
 
-Files:      lib/sf3/*
-Copyright:  2010 Werner Schweer and others
-License:    GPL-2
-
-Files:      lib/sfarklib/*
+Files:      sources/lib/_option_sfarklib/*
 Copyright:  1998-2000 Andy Inman
 License:    GPL-3+
 
-Files:      lib/qtsingleapplication/*
+Files:      sources/lib/_option_rtaudio/*
+            sources/lib/_option_rtmidi/*
+Copyright:  2001-2023 Gary P. Scavone
+License:    RtAudio
+
+Files:      sources/lib/qtsingleapplication/*
 Copyright:  2013 Digia Plc and/or its subsidiary(-ies)
 License:    BSD
 
-Files:      deployment/debian/*
-Copyright:  2012-2024  Davy Triponney, <contact@polyphone.io>
-            2016-2018  Olivier Humbert <trebmuh@tuxfamily.org>
+Files:      debian/*
+Copyright:  2012-2026 Davy Triponney, <contact@polyphone.io>
+            2016-2018 Olivier Humbert <trebmuh@tuxfamily.org>
 License:    GPL-3+
-
-License: GPL-2
- This program is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License version 2.
- .
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
- .
- You should have received a copy of the GNU General Public License
- along with this program; if not, write to the Free Software
- Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
- .
- On Debian systems, the full text of the GNU General Public
- License version 3 can be found in the file
- `/usr/share/common-licenses/GPL-2'.
 
 License: GPL-3+
  This package is free software: you can redistribute it and/or modify
@@ -98,3 +82,27 @@ License: BSD
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
 
+License: RtAudio
+ Permission is hereby granted, free of charge, to any person
+ obtaining a copy of this software and associated documentation files
+ (the "Software"), to deal in the Software without restriction,
+ including without limitation the rights to use, copy, modify, merge,
+ publish, distribute, sublicense, and/or sell copies of the Software,
+ and to permit persons to whom the Software is furnished to do so,
+ subject to the following conditions:
+ .
+ The above copyright notice and this permission notice shall be
+ included in all copies or substantial portions of the Software.
+ .
+ Any person wishing to distribute modifications to the Software is
+ asked to send the modifications to the original developer so that
+ they can be incorporated into the canonical version.  This is,
+ however, not a binding provision of this license.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
+ ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

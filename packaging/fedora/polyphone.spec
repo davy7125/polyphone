@@ -1,93 +1,123 @@
-%global source_date_epoch_from_changelog 0
+# RPM package of the editor for Fedora, built by packaging/build_fedora_package.sh (which gives polyphone_tag and adds
+# the changelog). The source is the whole repository: the CMake project in sources/ installs files of packaging/ and
+# the README of the root. Build dependencies: sudo dnf builddep packaging/fedora/polyphone.spec
+
+# Tag built ("2.7.3", "2.8.0-beta"), the version of the package being "2.8.0~beta" (before 2.8.0)
+%{!?polyphone_tag:%global polyphone_tag 0}
+%global polyphone_version %{lua: print((rpm.expand("%{polyphone_tag}"):gsub("[-]", "~", 1)))}
+
+# No link-time optimization (default of Fedora): built as the other official builds
+%global _lto_cflags %{nil}
+# CMake project in sources/
+%global _vpath_srcdir sources
+
 Name:           polyphone
-Version:        2.6
-Release:        0%{?dist}
+Version:        %{polyphone_version}
+Release:        1%{?dist}
 Summary:        Soundfont editor
-License:        GPLv3+
+# Polyphone: GPL-3.0-or-later, copies of RtAudio and RtMidi: MIT, QtSingleApplication: BSD-3-Clause
+License:        GPL-3.0-or-later AND MIT AND BSD-3-Clause
 URL:            https://www.polyphone.io
-Group:          Applications/Multimedia
-BuildRequires:  alsa-lib-devel rtaudio-devel zlib-devel libogg-devel flac-devel libvorbis-devel glib2-devel openssl-devel rtmidi-devel libsndfile-devel
-Requires:       alsa-utils rtaudio zlib libogg flac libvorbis glib2 openssl rtmidi qt6-qtbase qt6-qtsvg libsndfile
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Packager:       Davy Triponney
+Source0:        https://github.com/davy7125/polyphone/archive/%{polyphone_tag}/%{name}-%{polyphone_tag}.tar.gz
+
+BuildRequires:  cmake >= 3.16
+BuildRequires:  gcc-c++
+BuildRequires:  pkgconfig
+BuildRequires:  python3
+BuildRequires:  qt6-qtbase-devel
+BuildRequires:  qt6-qtsvg-devel
+BuildRequires:  qt6-linguist
+BuildRequires:  pkgconfig(alsa)
+BuildRequires:  pkgconfig(jack)
+BuildRequires:  pkgconfig(rtmidi)
+BuildRequires:  pkgconfig(sndfile)
+BuildRequires:  pkgconfig(ogg)
+BuildRequires:  pkgconfig(vorbis)
+BuildRequires:  pkgconfig(vorbisfile)
+BuildRequires:  pkgconfig(vorbisenc)
+BuildRequires:  pkgconfig(openssl)
+BuildRequires:  pkgconfig(zlib)
+BuildRequires:  desktop-file-utils
+BuildRequires:  libappstream-glib
+# Plugins of Qt SVG: the style sheets and the icons use SVG images
+Requires:       qt6-qtsvg%{?_isa}
+Requires:       hicolor-icon-theme
+Requires:       shared-mime-info
 
 %description
-Turn any sound into a playable instrument with the help of SoundFonts.
-These files contain a multitude of audio samples put together and
-configured so as to form musical instruments that can be used by
-synthesizers such as fluidsynth and played using a MIDI keyboard.
-The goal of Polyphone is to provide:
- - a simple and efficient interface for creating and editing soundfonts,
-available on Linux, Windows and Mac OS X,
- - tools to facilitate and automate the setting of different parameters,
-making it possible to handle a large amount of data.
- 
+Polyphone turns any sound into a musical instrument. A soundfont is a single
+file holding everything a synthesizer needs to play an instrument: the
+recorded samples, how they are spread across the keyboard and the
+velocities, and how they are shaped by envelopes, filters and modulators.
+Polyphone creates soundfonts from recordings, refines existing ones, converts
+them to other formats and plays them with its built-in synthesizer.
+
 Main features:
- - import from sf2, sfz, dls, sfArk, sf3, grandOrgue
- - export as sf2, sfz, sf3, dls,
- - support of sf2 format v2.01 and v2.04 (with 24-bit samples),
- - support for jack and ASIO audio servers,
- - simultaneous editing of parameters,
- - specific tools for musical instrument creation,
- - automatic detection of the sample pitch and correction,
- - automatic loop of samples,
- - a recorder, for the record of what is played in a .wav file,
- - built-in synthesizer, using a virtual keyboard or MIDI signals,
- - user manual, forum and online soundfont repository,
- - available in several languages.
+ - sf2 (versions 2.01 and 2.04, 24-bit samples) and sf3 files opened and
+   saved, sfz and DLS imported and exported, sfArk archives and GrandOrgue
+   organs imported,
+ - parameters of many samples, instruments or presets edited at once,
+   graphical editors for the key and velocity ranges and the envelopes,
+ - sample editor with loop points, pitch and tuning estimation and an
+   equalizer, timbre view showing the level of each harmonic on every key,
+ - more than 30 tools such as the automatic loop, the creation of missing
+   samples, transposition, chords, organ mixtures,
+ - built-in synthesizer with reverb and chorus, played with the virtual
+   keyboard, a MIDI keyboard or the computer keyboard, in more than 200
+   temperaments and scales, audio output through ALSA or JACK,
+ - MIDI file player with an export to wav, recorder of the sound (wav) or of
+   what is played (MIDI),
+ - soundfont explorer for browsing a directory, online repository of the
+   soundfonts shared on polyphone.io,
+ - command line for converting files and rendering MIDI files,
+ - MCP server letting an AI assistant browse and edit the open soundfonts,
+ - interface translated into 16 languages.
+
+The Polyphone plugin (VST3, CLAP, LV2), playing soundfonts in a DAW with the
+same synthesizer, is distributed separately.
 
 %prep
-rm *.rpm || true
-rm -r x86_64 || true
+%autosetup -n %{name}-%{polyphone_tag}
+# Version written in sources/version.txt and in the metainfo, as for the other official builds
+python3 packaging/set_version.py %{polyphone_tag}
 
 %build
-
-%clean
-rm -rf $RPM_BUILD_ROOT
+# Official package: the notifications of a new version are shown. Release optimized as the other official builds
+# (the macro sets the flags of the release type to -DNDEBUG alone, -O3 added), with the copy of RtAudio in
+# sources/lib (no dependency on the version of RtAudio of the system)
+%cmake \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_C_FLAGS_RELEASE:STRING="-O3 -DNDEBUG" \
+    -DCMAKE_CXX_FLAGS_RELEASE:STRING="-O3 -DNDEBUG" \
+    -DPOLYPHONE_OFFICIAL_BUILD=ON \
+    -DPOLYPHONE_LOCAL_RTAUDIO=ON
+%cmake_build
 
 %install
-rm -rf $RPM_BUILD_ROOT
-mkdir -p %{buildroot}%{_bindir}
-mkdir -p %{buildroot}%{_datadir}/icons
-mkdir -p %{buildroot}%{_datadir}/mime/packages
-mkdir -p %{buildroot}%{_docdir}/%{name}
-install -p -m 755 ../polyphone %{buildroot}%{_bindir}
-install -p -m 644 ../polyphone.png %{buildroot}%{_datadir}/icons
-install -p -m 644 ../../polyphone.xml %{buildroot}%{_datadir}/mime/packages/polyphone.xml
-install -p -m 644 ../../../sources/changelog %{buildroot}%{_docdir}/%{name}
-# Manual pages: English in man1, translations in <language>/man1
-mkdir -p %{buildroot}%{_mandir}
-cp -r ../../man/. %{buildroot}%{_mandir}/
-desktop-file-install --vendor="" --dir=%{buildroot}%{_datadir}/applications/ ../../io.polyphone.polyphone.desktop
+%cmake_install
 
-%post
-# icons
-touch --no-create %{_datadir}/icons/hicolor
-if [ -x %{_bindir}/gtk-update-icon-cache ]; then
-  %{_bindir}/gtk-update-icon-cache -q %{_datadir}/icons/hicolor;
-fi
-update-mime-database %{_datadir}/mime &> /dev/null || :
-update-desktop-database &> /dev/null || :
-
-# Mime types
-update-desktop-database
-
-%postun
-# icons
-touch --no-create %{_datadir}/icons/hicolor
-if [ -x %{_bindir}/gtk-update-icon-cache ]; then
-  %{_bindir}/gtk-update-icon-cache -q %{_datadir}/icons/hicolor;
-fi
-update-mime-database %{_datadir}/mime &> /dev/null || :
-update-desktop-database &> /dev/null || :
+%check
+desktop-file-validate %{buildroot}%{_datadir}/applications/io.polyphone.polyphone.desktop
+appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/io.polyphone.polyphone.metainfo.xml
 
 %files
-%license ../../../sources/LICENSE.txt
-%{_mandir}/man1/polyphone.1*
-%{_mandir}/*/man1/polyphone.1*
+%license LICENSE.txt
+# README and changelog installed by CMake
+%doc %{_docdir}/%{name}
 %{_bindir}/%{name}
-%{_docdir}/%{name}
 %{_datadir}/applications/io.polyphone.polyphone.desktop
-%{_datadir}/icons/polyphone.png
-%{_datadir}/mime/packages/polyphone.xml
+%{_datadir}/metainfo/io.polyphone.polyphone.metainfo.xml
+%{_datadir}/mime/packages/%{name}.xml
+%{_datadir}/icons/hicolor/512x512/apps/%{name}.png
+%{_datadir}/icons/hicolor/*/mimetypes/audio-*.png
+%{_mandir}/man1/%{name}.1*
+%lang(de) %{_mandir}/de/man1/%{name}.1*
+%lang(es) %{_mandir}/es/man1/%{name}.1*
+%lang(fr) %{_mandir}/fr/man1/%{name}.1*
+%lang(it) %{_mandir}/it/man1/%{name}.1*
+%lang(ja) %{_mandir}/ja/man1/%{name}.1*
+%lang(pt_BR) %{_mandir}/pt_BR/man1/%{name}.1*
+%lang(ru) %{_mandir}/ru/man1/%{name}.1*
+%lang(zh_CN) %{_mandir}/zh_CN/man1/%{name}.1*
 
+%changelog
